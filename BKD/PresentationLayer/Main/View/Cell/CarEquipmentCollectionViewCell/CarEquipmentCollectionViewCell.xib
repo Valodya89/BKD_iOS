@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CarEquipmentCollectionViewCell" id="gTV-IL-0wX" customClass="CarEquipmentCollectionViewCell" customModule="BKD" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="153" height="37"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="153" height="37"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Koi-6S-cTg">
+                        <rect key="frame" x="0.0" y="0.0" width="153" height="37"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selected_tow_bar" translatesAutoresizingMaskIntoConstraints="NO" id="eiL-jf-Ah7">
+                                <rect key="frame" x="6" y="0.0" width="49" height="37"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" name="exterior_img"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tetshfcbvfhj aa" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sUc-Iy-F2X">
+                                <rect key="frame" x="55" y="9" width="105.5" height="19"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                <color key="textColor" name="filter_fields"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="eiL-jf-Ah7" firstAttribute="height" secondItem="Koi-6S-cTg" secondAttribute="height" id="FCW-L1-dE9"/>
+                            <constraint firstItem="eiL-jf-Ah7" firstAttribute="width" secondItem="Koi-6S-cTg" secondAttribute="width" multiplier="0.320261" id="Hc6-4w-lQ9"/>
+                            <constraint firstItem="sUc-Iy-F2X" firstAttribute="leading" secondItem="eiL-jf-Ah7" secondAttribute="trailing" id="MPo-aO-cFQ"/>
+                            <constraint firstItem="sUc-Iy-F2X" firstAttribute="centerY" secondItem="Koi-6S-cTg" secondAttribute="centerY" id="MRz-CP-LhA"/>
+                            <constraint firstItem="eiL-jf-Ah7" firstAttribute="centerY" secondItem="Koi-6S-cTg" secondAttribute="centerY" id="OLf-hm-OIx"/>
+                            <constraint firstItem="sUc-Iy-F2X" firstAttribute="height" secondItem="Koi-6S-cTg" secondAttribute="height" multiplier="0.513514" id="gdE-Ld-iBQ"/>
+                            <constraint firstItem="sUc-Iy-F2X" firstAttribute="width" relation="greaterThanOrEqual" secondItem="Koi-6S-cTg" secondAttribute="width" multiplier="0.5" id="lEc-tB-syR"/>
+                            <constraint firstItem="eiL-jf-Ah7" firstAttribute="centerX" secondItem="Koi-6S-cTg" secondAttribute="centerX" multiplier="0.4" id="paX-Ah-3yD"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Koi-6S-cTg" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="KRl-9M-fga"/>
+                <constraint firstItem="Koi-6S-cTg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="WhO-7U-4YM"/>
+                <constraint firstItem="Koi-6S-cTg" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="hXZ-Vo-0lS"/>
+                <constraint firstItem="Koi-6S-cTg" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="wny-UL-uAA"/>
+            </constraints>
+            <connections>
+                <outlet property="mImageV" destination="eiL-jf-Ah7" id="3FL-6h-ujK"/>
+                <outlet property="mTitleLb" destination="sUc-Iy-F2X" id="j4Y-ka-Nfq"/>
+            </connections>
+            <point key="canvasLocation" x="-25" y="90"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="selected_tow_bar" width="29" height="23"/>
+        <namedColor name="exterior_img">
+            <color red="0.53725490196078429" green="0.59607843137254901" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="filter_fields">
+            <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

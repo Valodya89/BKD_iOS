@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CarouselCellView" customModule="BKD" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iRY-77-CrB" id="BUe-6w-CT8"/>
+                <outlet property="mCategoryImg" destination="eZ9-sM-BiI" id="2lk-nM-ZUS"/>
+                <outlet property="mCategoryLb" destination="HZQ-yi-1mh" id="VNb-c0-ft4"/>
+                <outlet property="mImgHeight" destination="LdB-7E-Bta" id="xfm-Vt-v9B"/>
+                <outlet property="mimgWidth" destination="q4Y-dg-tQf" id="uz0-mV-cFe"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iRY-77-CrB">
+            <rect key="frame" x="0.0" y="0.0" width="101" height="155"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C36-F3-CH4">
+                    <rect key="frame" x="0.0" y="44" width="101" height="111"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="car.png" translatesAutoresizingMaskIntoConstraints="NO" id="eZ9-sM-BiI">
+                            <rect key="frame" x="25.5" y="15.5" width="50" height="30"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Car name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HZQ-yi-1mh">
+                            <rect key="frame" x="5" y="83.5" width="91" height="16.5"/>
+                            <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
+                            <color key="textColor" red="0.86758053300000004" green="0.87751591210000002" blue="0.90697890520000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="HZQ-yi-1mh" firstAttribute="centerY" secondItem="C36-F3-CH4" secondAttribute="centerY" multiplier="1.65" id="17N-d0-cnZ"/>
+                        <constraint firstItem="eZ9-sM-BiI" firstAttribute="centerX" secondItem="C36-F3-CH4" secondAttribute="centerX" id="D7A-Wd-bm3"/>
+                        <constraint firstItem="eZ9-sM-BiI" firstAttribute="height" secondItem="C36-F3-CH4" secondAttribute="height" multiplier="0.27" id="LdB-7E-Bta"/>
+                        <constraint firstItem="HZQ-yi-1mh" firstAttribute="width" secondItem="C36-F3-CH4" secondAttribute="width" multiplier="0.9" id="UtG-6H-auE"/>
+                        <constraint firstItem="HZQ-yi-1mh" firstAttribute="height" secondItem="C36-F3-CH4" secondAttribute="height" multiplier="0.15" id="fsK-Yh-zLw"/>
+                        <constraint firstItem="HZQ-yi-1mh" firstAttribute="centerX" secondItem="C36-F3-CH4" secondAttribute="centerX" id="k44-wJ-EXN"/>
+                        <constraint firstItem="eZ9-sM-BiI" firstAttribute="width" secondItem="C36-F3-CH4" secondAttribute="width" multiplier="0.49505" id="q4Y-dg-tQf"/>
+                        <constraint firstItem="eZ9-sM-BiI" firstAttribute="centerY" secondItem="C36-F3-CH4" secondAttribute="centerY" multiplier="0.55" id="qt9-Mj-xn2"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="rqT-46-cXc"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="C36-F3-CH4" firstAttribute="width" secondItem="rqT-46-cXc" secondAttribute="width" id="F2n-N7-x0t"/>
+                <constraint firstItem="C36-F3-CH4" firstAttribute="centerY" secondItem="rqT-46-cXc" secondAttribute="centerY" id="JYc-ix-vKh"/>
+                <constraint firstItem="C36-F3-CH4" firstAttribute="centerX" secondItem="rqT-46-cXc" secondAttribute="centerX" id="iGL-dW-Zib"/>
+                <constraint firstItem="C36-F3-CH4" firstAttribute="height" secondItem="rqT-46-cXc" secondAttribute="height" id="lRv-A5-1rL"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="680" y="85"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="car.png" width="184" height="140"/>
+    </resources>
+</document>

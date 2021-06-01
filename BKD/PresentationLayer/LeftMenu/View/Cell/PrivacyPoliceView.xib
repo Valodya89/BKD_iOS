@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Mulish-Light.ttf">
+            <string>Mulish-Light</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PrivacyPoliceView" customModule="BKD" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="250" height="65"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVp-pR-EQD">
+                    <rect key="frame" x="0.0" y="0.0" width="250" height="19"/>
+                    <fontDescription key="fontDescription" name="Mulish-Light" family="Mulish" pointSize="11"/>
+                    <color key="textColor" name="privacy_policy"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms of Use" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0sW-Nr-4LU">
+                    <rect key="frame" x="0.0" y="19" width="250" height="19"/>
+                    <fontDescription key="fontDescription" name="Mulish-Light" family="Mulish" pointSize="12"/>
+                    <color key="textColor" name="privacy_policy"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2021 All rights reserved  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zOZ-94-4GZ">
+                    <rect key="frame" x="0.0" y="46" width="250" height="19"/>
+                    <fontDescription key="fontDescription" name="Mulish-Light" family="Mulish" pointSize="12"/>
+                    <color key="textColor" name="privacy_policy"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="zOZ-94-4GZ" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="1kK-MC-NXp"/>
+                <constraint firstItem="0sW-Nr-4LU" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="2PW-ct-4zL"/>
+                <constraint firstItem="zOZ-94-4GZ" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.292308" id="E4e-ZL-VnS"/>
+                <constraint firstItem="tVp-pR-EQD" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="LV9-CW-ho8"/>
+                <constraint firstItem="0sW-Nr-4LU" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" constant="-26" id="O2t-dB-fob"/>
+                <constraint firstItem="tVp-pR-EQD" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.292308" id="S1o-68-be9"/>
+                <constraint firstItem="0sW-Nr-4LU" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="SNs-xt-9QC"/>
+                <constraint firstItem="tVp-pR-EQD" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="Wqj-tX-AWx"/>
+                <constraint firstItem="tVp-pR-EQD" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" constant="-45" id="bYp-lq-V6g"/>
+                <constraint firstItem="zOZ-94-4GZ" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" constant="1" id="dT6-WV-vyv"/>
+                <constraint firstItem="0sW-Nr-4LU" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.292308" id="g8h-YF-bA5"/>
+                <constraint firstItem="zOZ-94-4GZ" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="oaH-cY-wc0"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-17.39130434782609" y="65.959821428571431"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="privacy_policy">
+            <color red="0.53725490196078429" green="0.59607843137254901" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
