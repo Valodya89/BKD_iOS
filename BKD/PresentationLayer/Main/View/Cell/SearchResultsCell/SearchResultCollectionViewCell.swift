@@ -101,25 +101,28 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     @IBAction func details(_ sender: UIButton) {
         if isFlipView {
             UIView.transition(with: mFlipInfoV, duration: 0.5, options: [.transitionFlipFromRight], animations: nil) { [self]_ in
-                self.mInfoV.isHidden = !self.mInfoV.isHidden
-                self.mFlipInfoV.isHidden = !self.mFlipInfoV.isHidden
-            }
-            UIView.animate(withDuration: 0.5) {
-                self.mCarImageViewCenterY.constant = 0
-                self.layoutIfNeeded()
+                UIView.animate(withDuration: 0.5) {
+                    self.mInfoV.isHidden = !self.mInfoV.isHidden
+                    self.mFlipInfoV.isHidden = !self.mFlipInfoV.isHidden
+                    self.mInfoV.alpha = 1
+                    self.mFlipInfoV.alpha = 0
+                    self.mCarImageViewCenterY.constant = 0
+                    self.layoutIfNeeded()
+                }
+                
             }
         } else {
             UIView.transition(with: mInfoV, duration: 0.5, options: [.transitionFlipFromLeft], animations: nil) { [self]_ in
-                self.mInfoV.isHidden = !self.mInfoV.isHidden
-                self.mFlipInfoV.isHidden = !self.mFlipInfoV.isHidden
-                self.mCarImageViewCenterY.constant = -20
-            }
-            UIView.animate(withDuration: 0.5) {
-                self.mCarImageViewCenterY.constant = -20
-                self.layoutIfNeeded()
+                UIView.animate(withDuration: 0.5) {
+                    self.mInfoV.isHidden = !self.mInfoV.isHidden
+                    self.mFlipInfoV.isHidden = !self.mFlipInfoV.isHidden
+                    self.mFlipInfoV.alpha = 1
+                    self.mInfoV.alpha = 0
+                    self.mCarImageViewCenterY.constant = -20
+                    self.layoutIfNeeded()
+                }
             }
         }
-       
         isFlipView = !isFlipView
        
     }

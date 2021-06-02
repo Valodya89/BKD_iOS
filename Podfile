@@ -9,6 +9,7 @@ target 'BKD' do
   # Pods for BKD
  	pod 'GoogleMaps', '4.2.0'
   	pod 'GooglePlaces', '4.2.0'
+	pod 'MessageKit'
   	pod 'iCarousel'
 
 

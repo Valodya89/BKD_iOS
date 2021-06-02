@@ -12,6 +12,7 @@ struct Constant {
         static let seeMap = "SeeMap"
         static let customLocation = "CustomLocation"
         static let searchCustomLocation = "SearchCustomLocation"
+        static let onlineChat = "OnlineChat"
 
     }
     struct NibNames {
@@ -25,7 +26,8 @@ struct Constant {
     struct Identifiers {
         static let seeMap = "SeeMapViewController"
         static let customLocation = "CustomLocationViewController"
-        
+        static let onlineChat = "OnlineChatViewController"
+
     }
     
     struct FontNames {

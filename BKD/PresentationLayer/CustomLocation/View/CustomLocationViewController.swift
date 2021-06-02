@@ -93,8 +93,6 @@ class CustomLocationViewController: UIViewController {
     /// configure map view
     private func configureMapView() {
         mMapV.isMyLocationEnabled = true
-        mMapV.settings.compassButton = true
-        mMapV.settings.myLocationButton = true
         addInactiveCoordinates()
         moveCameraPosition(cord2D: CLLocationCoordinate2D(latitude: (InactiveLocationRangeData.inactiveLocationRangeModel)[0].latitude, longitude: InactiveLocationRangeData.inactiveLocationRangeModel[0].longitude))
         //  placesClient = GMSPlacesClient.shared()
@@ -189,7 +187,6 @@ class CustomLocationViewController: UIViewController {
     }
     
     func showCurrentLocation() {
-        mMapV!.settings.myLocationButton = true
         let locationObj = locationManager.location!
         let coord = locationObj.coordinate
         let lattitude = coord.latitude

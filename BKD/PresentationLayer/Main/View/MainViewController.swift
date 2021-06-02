@@ -19,12 +19,13 @@ class MainViewController: BaseViewController {
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
     let mainViewModel: MainViewModel = MainViewModel()
     var menu: SideMenuNavigationController?
+    var searchHeaderV: SearchHeaderView?
+    var searchResultV: SearchResultView?
     let datePicker = UIDatePicker()
     let backgroundV =  UIView()
     var responderTxtFl = UITextField()
-    var searchHeaderV: SearchHeaderView?
-    var searchResultV: SearchResultView?
 
+    private var collactionViewTop: CGFloat = 0.0
     private var searchHeaderHeight: CGFloat = 0.0
     private var searchResultHeight: CGFloat = 0.0
     private var searchHeaderEditHeight: CGFloat = 0.0
@@ -97,7 +98,7 @@ class MainViewController: BaseViewController {
         //add top views
         searchHeaderV = SearchHeaderView()
         searchHeaderHeight = view.frame.height * 0.5928
-
+        collactionViewTop = searchHeaderHeight
         searchHeaderV!.frame = CGRect(x: 0, y: top_searchResult, width: self.view.bounds.width, height: searchHeaderHeight)
         self.view.addSubview(searchHeaderV!)
         
@@ -123,7 +124,7 @@ class MainViewController: BaseViewController {
                 self.searchHeaderV?.frame = CGRect(x: 0, y: -900, width: self.searchHeaderV!.bounds.width, height: self.searchHeaderV!.bounds.height)
                 self.searchResultV!.frame = CGRect(x: 0, y: top_searchResult, width: self.searchResultV!.bounds.width, height: searchResultHeight)
                 self.setCollationViewPosittion(top: searchResultHeight + top_searchResult)
-
+                self.searchHeaderV?.alpha = 0
             }, completion: { [self] _ in
                 self.searchHeaderV?.isHidden = true
             })
@@ -139,10 +140,17 @@ class MainViewController: BaseViewController {
                     self.searchResultV?.mFilterImgV.image = img_unselected_filter
                     self.mCarCollectionV.reloadData()
                 }
+                if self.isPressedEdit == true {
+                    collactionViewTop = (view.frame.height * 0.5928) + 70
+                    self.setCollationViewPosittion(top: collactionViewTop)
+                } else {
+                    collactionViewTop = view.frame.height * 0.5928
+                    self.setCollationViewPosittion(top: searchHeaderHeight)
+                }
                 self.searchHeaderV?.isHidden = false
                 self.searchHeaderV?.frame = CGRect(x: 0, y: top_searchResult, width: self.searchHeaderV!.bounds.width, height: searchHeaderHeight)
-                self.setCollationViewPosittion(top: searchHeaderHeight)
                 self.searchResultV!.frame = CGRect(x: 0, y: -200, width: self.searchResultV!.bounds.width, height: searchResultHeight)
+                self.searchHeaderV?.alpha = 1.0
                 
             }, completion: { _ in
                 
@@ -436,8 +444,11 @@ class MainViewController: BaseViewController {
          }
             if textFl.tag > 1 {
                 self?.datePicker.datePickerMode = .time
+                self?.datePicker.minimumDate = nil
             } else {
                 self?.datePicker.datePickerMode = .date
+                self?.datePicker.minimumDate =  Date()
+
                 self?.datePicker.locale = Locale(identifier: "en")
             }
         }
@@ -597,7 +608,7 @@ extension MainViewController: UIScrollViewDelegate {
         //  searchHeaderV?.frame.origin.y = scrollView.contentOffset.y
         
         if (searchHeaderV?.frame.origin.y)! <= 12 {
-            searchHeaderV!.frame.origin.y = -abs(searchHeaderHeight + scrollView.contentOffset.y) + 12
+            searchHeaderV!.frame.origin.y = -abs(collactionViewTop + scrollView.contentOffset.y) + 12
             
         }
         

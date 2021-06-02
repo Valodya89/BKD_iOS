@@ -13,7 +13,7 @@ class DropDownTableViewCell: UITableViewCell {
     static func nib() -> UINib {
             return UINib(nibName: identifier, bundle: nil)
         }
-   
+   //MARK: Outlet
     @IBOutlet weak var mLocationNameLb: EdgeInsetLabel!
     @IBOutlet weak var mMapImgV: UIImageView!
     @IBOutlet weak var mSeeMapBtn: UIButton!
@@ -24,6 +24,7 @@ class DropDownTableViewCell: UITableViewCell {
         self.setUpView()
         
     }
+    
     func setUpView() {
         mSeeMapBtn.addBorder(color: UIColor(named:"see_map")!, width: 1.0)
         mSeeMapBtn.layer.cornerRadius = 10

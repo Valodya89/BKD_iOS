@@ -21,9 +21,7 @@ class AddressNameViewController: UIViewController, StoryboardInitializable {
     @IBOutlet weak var mRouteBtn: UIButton!
     @IBOutlet weak var mOkBtn: UIButton!
     @IBOutlet weak var mBackgroundV: UIView!
-//    var didPressOk:(() -> Void)?
-//    var didPressRoute:(() -> Void)?
-//    var didPressUserLocation:(() -> Void)?
+
     //MARK: Variables
     weak var delegate: AddressNameViewControllerDelegate?
     

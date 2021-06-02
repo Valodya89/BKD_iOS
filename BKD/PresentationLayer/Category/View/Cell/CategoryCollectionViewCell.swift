@@ -26,6 +26,11 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         setUpView()
     }
+    
+    override func prepareForReuse() {
+        mBlurBackgV.isHidden = true
+    }
+    
     func setUpView() {
         mInfoBckgV.layer.cornerRadius = 16
         mBlurBackgV.layer.cornerRadius = 16

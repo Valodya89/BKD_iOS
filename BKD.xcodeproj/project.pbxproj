@@ -22,6 +22,9 @@
 		560252E72665368E00FB204C /* SearchPlacesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560252E62665368E00FB204C /* SearchPlacesResult.swift */; };
 		560252EF2665919A00FB204C /* CustomLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560252EE2665919A00FB204C /* CustomLocationModel.swift */; };
 		560252F42665950700FB204C /* CustomLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560252F32665950700FB204C /* CustomLocationViewModel.swift */; };
+		5602532C26670A0100FB204C /* OnlineChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602532B26670A0100FB204C /* OnlineChatViewController.swift */; };
+		5602533126670A1000FB204C /* OnlineChat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5602533026670A1000FB204C /* OnlineChat.storyboard */; };
+		560253442667331A00FB204C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560253432667331A00FB204C /* ChatViewController.swift */; };
 		5618872D2645D99600BDDB33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5618872C2645D99600BDDB33 /* Assets.xcassets */; };
 		561887472645EE2A00BDDB33 /* UIButton+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561887462645EE2A00BDDB33 /* UIButton+Border.swift */; };
 		56188889264A61ED00BDDB33 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56188888264A61ED00BDDB33 /* TextField.swift */; };
@@ -130,6 +133,9 @@
 		560252E62665368E00FB204C /* SearchPlacesResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPlacesResult.swift; sourceTree = "<group>"; };
 		560252EE2665919A00FB204C /* CustomLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLocationModel.swift; sourceTree = "<group>"; };
 		560252F32665950700FB204C /* CustomLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLocationViewModel.swift; sourceTree = "<group>"; };
+		5602532B26670A0100FB204C /* OnlineChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineChatViewController.swift; sourceTree = "<group>"; };
+		5602533026670A1000FB204C /* OnlineChat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OnlineChat.storyboard; sourceTree = "<group>"; };
+		560253432667331A00FB204C /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		5618872C2645D99600BDDB33 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		561887462645EE2A00BDDB33 /* UIButton+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Border.swift"; sourceTree = "<group>"; };
 		56188888264A61ED00BDDB33 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
@@ -272,9 +278,52 @@
 		560252DF266535AB00FB204C /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				568E704C26446E73000CB6A9 /* BaseViewController.swift */,
 				560252E1266535CF00FB204C /* Result.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		560253262667098C00FB204C /* OnlineChat */ = {
+			isa = PBXGroup;
+			children = (
+				56025329266709B900FB204C /* ViewModel */,
+				56025328266709B100FB204C /* Model */,
+				56025327266709A400FB204C /* View */,
+			);
+			path = OnlineChat;
+			sourceTree = "<group>";
+		};
+		56025327266709A400FB204C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5602532A266709CE00FB204C /* UI */,
+				5602532B26670A0100FB204C /* OnlineChatViewController.swift */,
+				5602533026670A1000FB204C /* OnlineChat.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		56025328266709B100FB204C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		56025329266709B900FB204C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		5602532A266709CE00FB204C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				560253432667331A00FB204C /* ChatViewController.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		561887342645E5A100BDDB33 /* UI */ = {
@@ -493,16 +542,8 @@
 		565A7ADE26555E6A006C63D0 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				565A7ADF26555E72006C63D0 /* CategoryCollectionView */,
 			);
 			path = UI;
-			sourceTree = "<group>";
-		};
-		565A7ADF26555E72006C63D0 /* CategoryCollectionView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CategoryCollectionView;
 			sourceTree = "<group>";
 		};
 		565A7AE026555ECD006C63D0 /* CategoryCell */ = {
@@ -577,6 +618,7 @@
 		568E70942644BD2D000CB6A9 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				560253262667098C00FB204C /* OnlineChat */,
 				560252DF266535AB00FB204C /* Base */,
 				5691A605265C50390008081D /* CustomLocation */,
 				564E12C4264C9F22008CE884 /* SeeMap */,
@@ -636,7 +678,6 @@
 			children = (
 				561887342645E5A100BDDB33 /* UI */,
 				568E70C726455250000CB6A9 /* Cell */,
-				568E704C26446E73000CB6A9 /* BaseViewController.swift */,
 				568E701126438C08000CB6A9 /* MainViewController.swift */,
 				568E6F572642FC4B000CB6A9 /* Main.storyboard */,
 			);
@@ -1093,6 +1134,7 @@
 				561888A3264ABDFC00BDDB33 /* DropDownTableViewCell.xib in Resources */,
 				564E136A2652F0CF008CE884 /* PrivacyPoliceView.xib in Resources */,
 				5656323C265841BE00B78562 /* FilterSearchResultCell.xib in Resources */,
+				5602533126670A1000FB204C /* OnlineChat.storyboard in Resources */,
 				560251DB2661074200FB204C /* Carousel.xib in Resources */,
 				568E6F5E2642FC50000CB6A9 /* LaunchScreen.storyboard in Resources */,
 				565A7AD72654C49B006C63D0 /* CategoryCollectionViewCell.xib in Resources */,
@@ -1266,6 +1308,7 @@
 			files = (
 				564E131F264F0319008CE884 /* CarouselView.swift in Sources */,
 				565632522658B11E00B78562 /* EquipmentModel.swift in Sources */,
+				5602532C26670A0100FB204C /* OnlineChatViewController.swift in Sources */,
 				568E703B264440C2000CB6A9 /* MyBKDViewController.swift in Sources */,
 				565BD3602659AED1001923F5 /* AppDelegate.swift in Sources */,
 				5691A639265D53140008081D /* UIImageViewExtention.swift in Sources */,
@@ -1273,6 +1316,7 @@
 				56188889264A61ED00BDDB33 /* TextField.swift in Sources */,
 				5640952D264AE529001DC92D /* DropDownModel.swift in Sources */,
 				5691A5FC265C28860008081D /* AddressNameViewController.swift in Sources */,
+				560253442667331A00FB204C /* ChatViewController.swift in Sources */,
 				568E706E264481B0000CB6A9 /* LeftTableViewCell.swift in Sources */,
 				564E12E1264D787A008CE884 /* MenuModel.swift in Sources */,
 				560251E02661089C00FB204C /* CarouselCellView.swift in Sources */,

@@ -65,7 +65,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" id="hgO-ot-Ek2">
-                                <rect key="frame" x="0.0" y="-5" width="415" height="22"/>
+                                <rect key="frame" x="0.0" y="0.0" width="415" height="34.5"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" name="background"/>
                             </view>
@@ -174,6 +174,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="5Gh-LO-yAF" kind="relationship" relationship="viewControllers" id="CEh-wv-ZB6"/>
+                        <segue destination="oLC-7L-hXX" kind="relationship" relationship="viewControllers" id="xC7-Wk-DJE"/>
                         <segue destination="H2U-Nt-4W3" kind="relationship" relationship="viewControllers" id="LV9-Ln-A4Y"/>
                         <segue destination="C5f-mn-uGM" kind="relationship" relationship="viewControllers" id="fiQ-DV-ZuG"/>
                         <segue destination="2tV-oT-Rt3" kind="relationship" relationship="viewControllers" id="fyh-AU-0Pa"/>
@@ -214,7 +215,11 @@
                                 <action selector="back:" destination="baS-Zk-gBJ" id="RHU-Sc-E8m"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="chat" id="IBB-QK-vhj"/>
+                        <barButtonItem key="rightBarButtonItem" image="chat" id="IBB-QK-vhj">
+                            <connections>
+                                <action selector="chat:" destination="baS-Zk-gBJ" id="3iy-iz-dqs"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="mCategoryTableV" destination="ilV-lK-Jwv" id="cyi-ec-pLj"/>
@@ -222,7 +227,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i93-d8-bgb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-478.26086956521743" y="612.72321428571422"/>
+            <point key="canvasLocation" x="1399" y="638"/>
         </scene>
         <!--Notifications View Controller-->
         <scene sceneID="WGX-km-U7w">
@@ -247,7 +252,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ut1-rp-hQv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1373.913043478261" y="612.72321428571422"/>
+            <point key="canvasLocation" x="-491" y="1408"/>
         </scene>
         <!--Category-->
         <scene sceneID="ZYS-CM-wq8">
@@ -279,7 +284,7 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="-1388.4057971014495" y="612.72321428571422"/>
+            <point key="canvasLocation" x="488" y="638"/>
         </scene>
         <!--MyBKD View Controller-->
         <scene sceneID="QB8-3o-95k">
@@ -289,23 +294,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hTI-C4-TzN">
-                                <rect key="frame" x="0.0" y="166" width="101" height="111"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aUz-Rk-ztl">
+                                <rect key="frame" x="87" y="98" width="240" height="172"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="du2-Ca-fh4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="hTI-C4-TzN" firstAttribute="height" secondItem="foA-r9-fCl" secondAttribute="height" multiplier="0.137376" id="Z4c-4i-Km2"/>
-                            <constraint firstItem="hTI-C4-TzN" firstAttribute="width" secondItem="foA-r9-fCl" secondAttribute="width" multiplier="0.243961" id="sDK-YB-NoO"/>
+                            <constraint firstItem="aUz-Rk-ztl" firstAttribute="height" secondItem="foA-r9-fCl" secondAttribute="height" multiplier="0.212871" id="ePE-gg-tEH"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bri-BO-hIq"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jFI-WA-0rb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-478.26086956521743" y="1453.7946428571429"/>
+            <point key="canvasLocation" x="1399" y="1408"/>
         </scene>
         <!--Notifications-->
         <scene sceneID="a71-cK-LJo">
@@ -325,7 +329,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YGQ-Lt-Xv8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="463.768115942029" y="612.72321428571422"/>
+            <point key="canvasLocation" x="-1388" y="1408"/>
         </scene>
         <!--My BKD-->
         <scene sceneID="FeE-Yo-ooI">
@@ -345,7 +349,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9da-qe-hSC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1388.4057971014495" y="1453.7946428571429"/>
+            <point key="canvasLocation" x="491" y="1408"/>
         </scene>
         <!--About Us View Controller-->
         <scene sceneID="Oaw-pw-7hm">
@@ -393,7 +397,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sTd-HO-yt5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-491" y="2835"/>
+            <point key="canvasLocation" x="-491" y="638"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7aB-Sz-qa8">
@@ -414,10 +418,11 @@
             </objects>
             <point key="canvasLocation" x="-1401.449275362319" y="2155.5803571428569"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--My Reservations-->
         <scene sceneID="OrA-d3-Whw">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oLC-7L-hXX" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="My Reservations" image="my_reservations" id="1zX-SA-S2b"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="1SJ-yF-oJX">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -431,7 +436,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U11-Ph-g1A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1401" y="2835"/>
+            <point key="canvasLocation" x="-1388" y="638"/>
         </scene>
     </scenes>
     <color key="tintColor" name="menu"/>
@@ -445,6 +450,7 @@
         <image name="home_selected" width="24" height="24"/>
         <image name="menu" width="16" height="14"/>
         <image name="my_bkd" width="24" height="24.5"/>
+        <image name="my_reservations" width="22" height="24"/>
         <image name="notifications" width="21" height="24.5"/>
         <namedColor name="background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
