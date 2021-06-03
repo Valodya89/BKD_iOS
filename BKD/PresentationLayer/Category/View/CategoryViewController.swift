@@ -78,10 +78,10 @@ class CategoryViewController: UIViewController {
     }
     
     @IBAction func chat(_ sender: UIBarButtonItem) {
-//        let onlineChat = UIStoryboard(name: Constant.Storyboards.onlineChat, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.onlineChat) as! OnlineChatViewController
-//        self.present(onlineChat, animated: true, completion: nil)
-        let chatVC = ChatViewController()
-        self.present(chatVC, animated: true, completion: nil)
+        let onlineChat = UIStoryboard(name: Constant.Storyboards.onlineChat, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.onlineChat) as! OnlineChatViewController
+        self.navigationController?.pushViewController(onlineChat, animated: true) 
+//        let chatVC = ChatViewController()
+//        self.present(chatVC, animated: true, completion: nil)
     }
 }
 

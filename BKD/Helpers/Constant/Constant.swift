@@ -95,7 +95,7 @@ let color_alert_txt = UIColor(named: "alert_txt")
 let color_gradient_start = UIColor(named: "gradient_start")
 let color_gradient_end = UIColor(named: "gradient_end")
 let color_map_circle = UIColor(named: "map_circle")
-
+let color_chat_placeholder = UIColor(named:"chat_placeholder")
 
 
 
@@ -107,6 +107,7 @@ let font_alert_cancel = UIFont(name: "SFProDisplay-Regular", size: 17)
 let font_category_name = UIFont(name: "SFProDisplay-Regular", size: 12)
 let font_alert_agree = UIFont(name: "SFProDisplay-Semibold", size: 17)
 let font_search_cell = UIFont(name: "SFProDisplay-Light", size: 16)
+let font_chat_placeholder = UIFont(name: "SFProDisplay-Light", size: 12)
 
 let font_alert_title = UIFont(name: "SFProDisplay-Semibold", size: 13)
 // Images

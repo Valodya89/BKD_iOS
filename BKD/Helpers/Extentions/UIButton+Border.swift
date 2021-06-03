@@ -18,7 +18,7 @@ extension UIButton {
         self.layer.borderColor = color.cgColor
     }
     
-    public func addBorderBySide(side: BorderSide, color: UIColor, width: CGFloat) {
+    public func addBorderBySide(sides: [BorderSide], color: UIColor, width: CGFloat) {
         let border = UIView()
         border.translatesAutoresizingMaskIntoConstraints = false
         border.backgroundColor = color
@@ -31,17 +31,19 @@ extension UIButton {
         let heightConstraint = border.heightAnchor.constraint(equalToConstant: width)
         let widthConstraint = border.widthAnchor.constraint(equalToConstant: width)
 
-
-        switch side {
-        case .top:
-            NSLayoutConstraint.activate([leftConstraint, topConstraint, rightConstraint, heightConstraint])
-        case .right:
-            NSLayoutConstraint.activate([topConstraint, rightConstraint, bottomConstraint, widthConstraint])
-        case .bottom:
-            NSLayoutConstraint.activate([rightConstraint, bottomConstraint, leftConstraint, heightConstraint])
-        case .left:
-            NSLayoutConstraint.activate([bottomConstraint, leftConstraint, topConstraint, widthConstraint])
+        for side in sides {
+            switch side {
+            case .top:
+                NSLayoutConstraint.activate([leftConstraint, topConstraint, rightConstraint, heightConstraint])
+            case .right:
+                NSLayoutConstraint.activate([topConstraint, rightConstraint, bottomConstraint, widthConstraint])
+            case .bottom:
+                NSLayoutConstraint.activate([rightConstraint, bottomConstraint, leftConstraint, heightConstraint])
+            case .left:
+                NSLayoutConstraint.activate([bottomConstraint, leftConstraint, topConstraint, widthConstraint])
+            }
         }
+        
     }
     
    

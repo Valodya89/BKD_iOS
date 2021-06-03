@@ -65,7 +65,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" id="hgO-ot-Ek2">
-                                <rect key="frame" x="0.0" y="0.0" width="415" height="34.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="415" height="34"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" name="background"/>
                             </view>
@@ -295,14 +295,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aUz-Rk-ztl">
-                                <rect key="frame" x="87" y="98" width="240" height="172"/>
+                                <rect key="frame" x="87" y="98" width="240" height="27"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="du2-Ca-fh4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="aUz-Rk-ztl" firstAttribute="height" secondItem="foA-r9-fCl" secondAttribute="height" multiplier="0.212871" id="ePE-gg-tEH"/>
+                            <constraint firstItem="aUz-Rk-ztl" firstAttribute="height" secondItem="foA-r9-fCl" secondAttribute="height" multiplier="0.0334158" id="UN8-SB-H6m"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bri-BO-hIq"/>

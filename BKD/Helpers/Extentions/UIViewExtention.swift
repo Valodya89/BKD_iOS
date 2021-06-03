@@ -66,6 +66,37 @@ extension UIView {
         self.layer.borderColor = color.cgColor
     }
     
+    func roundCorners(corners:UIRectCorner, radius: CGFloat) {
+            let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+            let mask = CAShapeLayer()
+            mask.path = path.cgPath
+            self.layer.mask = mask
+    }
+    
+    // Apply round corner and border. An extension method of UIView.
+
+    func roundCornersWithBorder(corners:UIRectCorner, radius: CGFloat, borderColor: UIColor, borderWidth: CGFloat) {
+
+        let path = UIBezierPath.init(roundedRect: self.bounds,
+                                     byRoundingCorners: corners,
+                                     cornerRadii: CGSize(width: radius,
+                                                         height: radius))
+
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        self.layer.mask = mask
+
+        let borderPath = UIBezierPath.init(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let borderLayer = CAShapeLayer()
+        borderLayer.path = borderPath.cgPath
+        borderLayer.lineWidth = borderWidth
+        borderLayer.strokeColor = borderColor.cgColor
+        borderLayer.fillColor = UIColor.clear.cgColor
+        borderLayer.frame = self.bounds
+        self.layer.addSublayer(borderLayer)
+        
+    }
+    
     func showFlip(){
                 if self.isHidden{
                     UIView.transition(with: self, duration: 1, options: [.transitionFlipFromRight,.allowUserInteraction], animations: nil, completion: nil)
@@ -80,6 +111,34 @@ extension UIView {
             }
     }
     
+    public func setBorderBySide(sides: [BorderSide], color: UIColor, width: CGFloat) {
+        let border = UIView()
+        border.translatesAutoresizingMaskIntoConstraints = false
+        border.backgroundColor = color
+        self.addSubview(border)
+
+        let topConstraint = topAnchor.constraint(equalTo: border.topAnchor)
+        let rightConstraint = trailingAnchor.constraint(equalTo: border.trailingAnchor)
+        let bottomConstraint = bottomAnchor.constraint(equalTo: border.bottomAnchor)
+        let leftConstraint = leadingAnchor.constraint(equalTo: border.leadingAnchor)
+        let heightConstraint = border.heightAnchor.constraint(equalToConstant: width)
+        let widthConstraint = border.widthAnchor.constraint(equalToConstant: width)
+
+        for side in sides {
+            switch side {
+            case .top:
+                NSLayoutConstraint.activate([leftConstraint, topConstraint, rightConstraint, heightConstraint])
+            case .right:
+                NSLayoutConstraint.activate([topConstraint, rightConstraint, bottomConstraint, widthConstraint])
+            case .bottom:
+                NSLayoutConstraint.activate([rightConstraint, bottomConstraint, leftConstraint, heightConstraint])
+            case .left:
+                NSLayoutConstraint.activate([bottomConstraint, leftConstraint, topConstraint, widthConstraint])
+            }
+        }
+        
+    }
+
     
    
 }
