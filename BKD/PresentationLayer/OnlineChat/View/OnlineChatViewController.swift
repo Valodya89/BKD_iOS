@@ -53,7 +53,12 @@ class OnlineChatViewController: MessagesViewController, StoryboardInitializable,
             self.navigationController?.setNavigationBarHidden(true, animated: true)
         }
    }
-
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isOffline {
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -284,6 +289,7 @@ extension OnlineChatViewController: InputBarAccessoryViewDelegate {
 
 extension OnlineChatViewController: OfflineViewControllerDelegate {
     func dismiss()  {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.popViewController(animated: true)
 
     }

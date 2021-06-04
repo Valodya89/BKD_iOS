@@ -40,6 +40,10 @@ class MainViewController: BaseViewController {
         super.viewDidLoad()
         setupView()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+   }
     
     func setupView() {
         UserDefaults.standard.removeObject(forKey: key_pickUpDate)
