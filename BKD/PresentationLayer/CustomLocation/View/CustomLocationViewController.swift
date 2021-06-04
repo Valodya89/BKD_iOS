@@ -8,6 +8,7 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import Mapbox
 
 class CustomLocationViewController: UIViewController {
     //MARK: - Outlets
@@ -22,6 +23,8 @@ class CustomLocationViewController: UIViewController {
     let customLocationViewModel = CustomLocationViewModel()
     let searchTbV = UITableView()
     let marker = GMSMarker()
+    var mapBoxView: MGLMapView! =  MGLMapView()
+
     // The currently selected place.
     var selectedPlace: GMSPlace?
     var currentMarker: GMSMarker?
@@ -66,9 +69,9 @@ class CustomLocationViewController: UIViewController {
             }, completion: nil)
             
         }
-    
-        
-        // y: mMarkerInfoBckgV.frame.origin.y + (mMarkerInfoBckgV.bounds.height - (view.frame.size.height * 0.05445)),
+        if UIScreen.main.nativeBounds.height <= 1334 {
+            self.markerInfoVC.mSearchBottom.constant = -15
+        }
     }
     func setUpView() {
         mRightBarBtn.image = UIImage(named:"bkd")?.withRenderingMode(.alwaysOriginal)
@@ -87,6 +90,7 @@ class CustomLocationViewController: UIViewController {
         mMapV.delegate = self
        searchTbV.delegate = self
        searchTbV.dataSource = self
+        mapBoxView.delegate = self
         
     }
     
@@ -155,6 +159,8 @@ class CustomLocationViewController: UIViewController {
     }
     
     private func  deleteMarker() {
+       // self.markerInfoVC.mPriceBckVCenterVertical.constant = 0
+        self.view.layoutIfNeeded()
         currentMarker?.map = nil
     }
     
@@ -172,18 +178,29 @@ class CustomLocationViewController: UIViewController {
     }
     
     private func showMarkerInfo() {
+        showAddressNameByGeocoder()
         mUserLocationBckgV.isHidden = true
         markerInfoVC.mDeleteAddressBtn.isHidden = false
         self.markerInfoVC.mErrorLb.isHidden = true
-        markerInfoVC.mUserAddressLb.text = "New Address Name"
         markerInfoVC.mUserAddressLb.textColor = color_navigationBar
         markerInfoVC.mSearchBackgV.isUserInteractionEnabled = true
         markerInfoVC.mSearchBackgV.alpha = 1.0
         UIView.animate(withDuration: 0.3, animations: { [self] in
             mMarkInfoBackgBottom.constant = 0
             self.view.layoutIfNeeded()
-        })
+        })        
+    }
+    
+    private func showAddressNameByGeocoder() {
         
+        let geocoder = GMSGeocoder()
+        geocoder.reverseGeocodeCoordinate(mapViewCenterCoordinate) { response, _ in
+            guard let address1 = response?.firstResult()?.lines?.first else {
+                self.markerInfoVC.mUserAddressLb.text = "Can't detect address"
+                return
+            }
+            self.markerInfoVC.mUserAddressLb.text = address1
+       }
     }
     
     func showCurrentLocation() {
@@ -294,6 +311,7 @@ extension CustomLocationViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         
         self.addMarker(longitude: coordinate.longitude, latitude: coordinate.latitude, marker: marker)
+        mapViewCenterCoordinate = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
         showMarkerInfo()
         for inactiveLocation in InactiveLocationRangeData.inactiveLocationRangeModel {
             var finish = false
@@ -335,3 +353,14 @@ extension CustomLocationViewController: CLLocationManagerDelegate {
 }
 
 
+extension CustomLocationViewController: MGLMapViewDelegate {
+   
+    func mapView(_ mapView: MGLMapView, regionDidChangeAnimated animated: Bool) {
+
+        mapViewCenterCoordinate = mapView.centerCoordinate
+    }
+    
+    func mapView(_ mapView: MGLMapView, regionWillChangeAnimated animated: Bool) {
+        //self.addressLbl.text = "checking.."
+    }
+}

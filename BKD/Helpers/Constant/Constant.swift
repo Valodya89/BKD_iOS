@@ -12,7 +12,7 @@ struct Constant {
         static let seeMap = "SeeMap"
         static let customLocation = "CustomLocation"
         static let searchCustomLocation = "SearchCustomLocation"
-        static let onlineChat = "OnlineChat"
+        static let chat = "Chat"
 
     }
     struct NibNames {

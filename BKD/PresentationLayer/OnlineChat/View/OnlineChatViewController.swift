@@ -35,27 +35,52 @@ class OnlineChatViewController: MessagesViewController, StoryboardInitializable,
     //MARK: Outlets
     @IBOutlet weak var mDismissBtn: UIBarButtonItem!
     @IBOutlet weak var mOnline: UIBarButtonItem!
-    @IBOutlet weak var mChatTbV: UITableView!
+
     //MARK: Variables
     weak var delegate: OnlineChatViewControllerDelegate?
+    
+    private lazy  var offlineVC = OfflineViewController.initFromStoryboard(name: Constant.Storyboards.chat)
+    
     let currentUser = Sender(senderId: "self", displayName: "IOS Academy")
     let otherUser = Sender(senderId: "other", displayName: "BKD")
     var messages = [MessageType]()
+    var isOffline = true
     
     //MARK: - Life cycles
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if isOffline {
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+        }
+   }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        
+
     }
-    
+   
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        if isOffline {
+            offlineVC.view.frame = CGRect(x: 0,
+                                          y: 0,
+                                          width: self.view.bounds.width,
+                                          height: self.view.bounds.height)
+        }
     }
+   
     func setupView() {
-        configureDelegate()
-        configureMessagesViewController()
-        addMessages()
+        if !isOffline {
+            configureDelegate()
+            configureMessagesViewController()
+            addMessages()
+        } else {
+           addChildView()
+        }
+            
+       
     }
     
     private func configureDelegate(){
@@ -69,6 +94,7 @@ class OnlineChatViewController: MessagesViewController, StoryboardInitializable,
     }
     
     private func configureMessagesViewController(){
+        
         messagesCollectionView.backgroundColor = color_background
         self.messageInputBar.backgroundView.backgroundColor = color_background
         self.messageInputBar.inputTextView.font = font_search_cell
@@ -93,7 +119,11 @@ class OnlineChatViewController: MessagesViewController, StoryboardInitializable,
                     layout.attributedTextMessageSizeCalculator.avatarLeadingTrailingPadding = .zero
                 }
     }
-    
+    private func addChildView(){
+        addChild(offlineVC)
+        self.view.addSubview(offlineVC.view)
+        offlineVC.delegate = self
+    }
     private func addMessages(){
         messages.append(Message(sender: currentUser,
                                 messageId: "1",
@@ -151,6 +181,11 @@ extension OnlineChatViewController: MessagesLayoutDelegate, MessagesDataSource, 
         return (self.view.bounds.height * 0.0334)/2
 
     }
+    
+//    func textCellSizeCalculator(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CellSizeCalculator? {
+//        return cellSizeCalculatorForItem(at: indexPath)
+//       
+//    }
 //    func headerViewSize(for section: Int, in messagesCollectionView: MessagesCollectionView) -> CGSize {
 //        return CGSize(width: self.view.bounds.width, height: 50)
 //    }
@@ -244,4 +279,12 @@ extension OnlineChatViewController: InputBarAccessoryViewDelegate {
         // will send message by request
     }
    
+}
+
+
+extension OnlineChatViewController: OfflineViewControllerDelegate {
+    func dismiss()  {
+        self.navigationController?.popViewController(animated: true)
+
+    }
 }

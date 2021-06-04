@@ -10,6 +10,9 @@ PODS:
   - InputBarAccessoryView (5.3.1):
     - InputBarAccessoryView/Core (= 5.3.1)
   - InputBarAccessoryView/Core (5.3.1)
+  - Mapbox-iOS-SDK (5.9.0):
+    - MapboxMobileEvents (= 0.10.2)
+  - MapboxMobileEvents (0.10.2)
   - MessageKit (3.6.1):
     - InputBarAccessoryView (~> 5.3.1)
 
@@ -17,6 +20,7 @@ DEPENDENCIES:
   - GoogleMaps (= 4.2.0)
   - GooglePlaces (= 4.2.0)
   - iCarousel
+  - Mapbox-iOS-SDK (~> 5.9)
   - MessageKit
 
 SPEC REPOS:
@@ -25,6 +29,8 @@ SPEC REPOS:
     - GooglePlaces
     - iCarousel
     - InputBarAccessoryView
+    - Mapbox-iOS-SDK
+    - MapboxMobileEvents
     - MessageKit
 
 SPEC CHECKSUMS:
@@ -32,8 +38,10 @@ SPEC CHECKSUMS:
   GooglePlaces: 196a9dd88580dcb3f3df46f415057703d0d2a310
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   InputBarAccessoryView: 1f75d8c9f75e5e57f3ffac36ed58635a8005e0bc
+  Mapbox-iOS-SDK: a5915700ec84bc1a7f8b3e746d474789e35b7956
+  MapboxMobileEvents: 2bc0ca2eedb627b73cf403258dce2b2fa98074a6
   MessageKit: d153fbbbcb12f3f4045a1ba8874298924dacfb62
 
-PODFILE CHECKSUM: dbdfbbe202176bbd1a6ef645b11e0c2ca5c29d70
+PODFILE CHECKSUM: 05864cd9e8b543232a8f0b5bcb391fd083c18992
 
 COCOAPODS: 1.10.1

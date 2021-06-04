@@ -7,6 +7,7 @@
 
 import UIKit
 import GoogleMaps
+import Mapbox
 import SideMenu
 
 class SeeMapViewController: BaseViewController, GMSMapViewDelegate {
@@ -21,7 +22,9 @@ class SeeMapViewController: BaseViewController, GMSMapViewDelegate {
     let marker = GMSMarker()
     var locationManager = CLLocationManager()
     var mapView: GMSMapView?
-   private lazy  var addressVC = AddressNameViewController.initFromStoryboard(name: Constant.Storyboards.seeMap)
+    var mapViewCenterCoordinate = CLLocationCoordinate2D(latitude: 0.0 , longitude: 0.0)
+
+    private lazy  var addressVC = AddressNameViewController.initFromStoryboard(name: Constant.Storyboards.seeMap)
 
     //MARK: - Life cycles
     override func viewDidLoad() {
@@ -35,10 +38,9 @@ class SeeMapViewController: BaseViewController, GMSMapViewDelegate {
                                        y:  mAddreassBckgV.frame.origin.y,
                                        width: mAddreassBckgV.bounds.size.width,
                                        height: mAddreassBckgV.bounds.size.height)
-        guard let _ = marker.snippet, let _  = marker.title else {
-            return }
-        addressVC.mAddressNameLb.text = marker.snippet! + ", " + marker.title!
     }
+    
+    
     func setUpView() {
         configureNavigationBar()
         configureMapView()
@@ -66,8 +68,6 @@ class SeeMapViewController: BaseViewController, GMSMapViewDelegate {
         self.view.addSubview(mapView!)
         addMarker(longitude: -33.86, latitude: 151.20, marker: marker)
         mapView!.isMyLocationEnabled = true
-        mapView!.settings.compassButton = true
-        mapView!.settings.myLocationButton = true
     }
     
     func  configureLocation()  {
@@ -97,30 +97,34 @@ class SeeMapViewController: BaseViewController, GMSMapViewDelegate {
     private func addMarker(longitude: Double, latitude: Double , marker: GMSMarker) {
         // Creates a marker in the center of the map.
         marker.position = CLLocationCoordinate2D(latitude: longitude, longitude: latitude)
-        marker.title = "Sydney"
-        marker.snippet = "Australia"
         marker.map = mapView
         marker.icon = img_map_marker
+        showAddressNameByGeocoder(mapViewCenterCoordinate: marker.position)
+    }
+    
+    private func showAddressNameByGeocoder(mapViewCenterCoordinate: CLLocationCoordinate2D) {
+        
+        let geocoder = GMSGeocoder()
+        geocoder.reverseGeocodeCoordinate(mapViewCenterCoordinate) { response, _ in
+            guard let address = response?.firstResult()?.lines?.first else {
+                self.addressVC.mAddressNameLb.text = "Can't detect address"
+                return
+            }
+            self.addressVC.mAddressNameLb.text = address
+       }
     }
     
     func showCurrentLocation() {
-        mapView!.settings.myLocationButton = true
         let locationObj = locationManager.location!
         let coord = locationObj.coordinate
         let lattitude = coord.latitude
         let longitude = coord.longitude
-        print(" lat in  updating \(lattitude) ")
-        print(" long in  updating \(longitude)")
-
         let center = CLLocationCoordinate2D(latitude: locationObj.coordinate.latitude, longitude: locationObj.coordinate.longitude)
-//        let marker = GMSMarker()
-//        marker.position = center
-//        marker.title = "current location"
-//        marker.map = mapView
-//        marker.icon = img_map_marker
+       // showAddressNameByGeocoder(mapViewCenterCoordinate: center)
         let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: lattitude, longitude: longitude, zoom: zoom)
         self.mapView!.animate(to: camera)
     }
+    
     
     //MARK: Action
     @IBAction func menu(_ sender: UIBarButtonItem) {
@@ -152,9 +156,7 @@ extension SeeMapViewController: CLLocationManagerDelegate {
     private func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status == .authorizedWhenInUse {
               // locationManager.startUpdatingLocation()
-
             mapView!.isMyLocationEnabled = true
-            mapView!.settings.myLocationButton = true
            }
        }
 
@@ -162,41 +164,7 @@ extension SeeMapViewController: CLLocationManagerDelegate {
            if let location = locations.first {
             mapView!.camera = GMSCameraPosition(target: location.coordinate, zoom: zoom, bearing: 0, viewingAngle: 0)
                locationManager.stopUpdatingLocation()
-
            }
        }
-   // @available(iOS 14.0, *)
-
-//    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-//        switch manager.authorizationStatus {
-//        case .authorizedAlways:
-//            return
-//        case .authorizedWhenInUse:
-//            return
-//        case .denied:
-//            return
-//        case .restricted:
-//            locationManager.requestWhenInUseAuthorization()
-//        case .notDetermined:
-//            locationManager.requestWhenInUseAuthorization()
-//        default:
-//            locationManager.requestWhenInUseAuthorization()
-//        }
-//    }
-//    //Location Manager delegates
-//    @available(iOS 12.0, *)
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        let newLocation = locations.last // find your device location
-//        mapView!.camera = GMSCameraPosition.camera(withTarget: newLocation!.coordinate, zoom: 14.0) // show your device location on map
-//        mapView!.settings.myLocationButton = true // show current location button
-//        let lat = (newLocation?.coordinate.latitude)! // get current location latitude
-//        let long = (newLocation?.coordinate.longitude)! //get current location longitude
-//
-//        marker.position = CLLocationCoordinate2DMake(lat,long)
-//        marker.map = mapView
-//        print("Current Lat Long - " ,lat, long )
-//        locationManager.stopUpdatingLocation()
-//
-//    }
 }
   

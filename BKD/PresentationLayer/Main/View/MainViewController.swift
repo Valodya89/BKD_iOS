@@ -541,7 +541,8 @@ class MainViewController: BaseViewController {
     @IBAction func rightBar(_ sender: UIBarButtonItem) {
     }
     @IBAction func chatWithUs(_ sender: UIButton) {
-        
+        let onlineChat = UIStoryboard(name: Constant.Storyboards.chat, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.onlineChat) as! OnlineChatViewController
+        self.navigationController?.pushViewController(onlineChat, animated: true) 
     }
     
         

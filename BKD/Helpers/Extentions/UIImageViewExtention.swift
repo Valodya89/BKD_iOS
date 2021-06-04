@@ -14,3 +14,10 @@ extension UIImageView {
     }
 }
 
+extension UITextField {
+    func setPadding() {
+        let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 20))
+        self.leftView = paddingView
+        self.leftViewMode = .always
+    }
+}

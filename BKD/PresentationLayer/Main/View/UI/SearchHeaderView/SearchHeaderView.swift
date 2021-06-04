@@ -133,6 +133,8 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
             if self?.mErrorMessageLb.isHidden == false{
               let _ = self?.checkFieldsFilled()
             }
+            self?.pickUPDropisClose = true
+            self?.returnDropisClose = true
         }
     }
     

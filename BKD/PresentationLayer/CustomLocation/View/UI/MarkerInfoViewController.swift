@@ -29,6 +29,7 @@ class MarkerInfoViewController: UIViewController, StoryboardInitializable {
     @IBOutlet weak var mLeftContinueBtn: UIButton!
     @IBOutlet weak var mRightContinueBtn: UIButton!
     @IBOutlet weak var mSearchBackgV: UIView!
+    @IBOutlet weak var mSearchBottom: NSLayoutConstraint!
     
     //MARK: Variables
     weak var delegate: MarkerInfoViewControllerDelegate?

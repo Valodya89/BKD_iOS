@@ -125,11 +125,8 @@ class BKDAlert: NSObject {
             buttonCancel!.setTitle(cancelTitle, for: .normal)
             buttonCancel!.setTitleColor(color_btn_alert, for: .normal)
             buttonCancel!.titleLabel?.font = font_alert_cancel
-            buttonCancel!.addBorderBySide(sides: [.top, .right],
-                                          color: color_btn_border!,
-                                          width: 1)
-//            buttonCancel!.addBorderBySide(side: .top, color: color_btn_border!, width: 1)
-//            buttonCancel!.addBorderBySide(side: .right, color: color_btn_border!, width: 1)
+            buttonCancel!.addBorderBySide(sides: [.top], color: color_btn_border!, width: 1)
+           buttonCancel!.addBorderBySide(sides: [.right], color: color_btn_border!, width: 1)
             if #available(iOS 14.0, *) {
                 buttonCancel!.addAction(UIAction(title: "", handler: { [self] _ in
                     alertView.removeFromSuperview()

@@ -15,7 +15,8 @@ class CategoryViewController: UIViewController {
 
     //MARK: Variables
     var searchResultV: SearchResultView?
-    private lazy  var onlineChatVC = OnlineChatViewController.initFromStoryboard(name: Constant.Storyboards.onlineChat)
+    private lazy  var onlineChatVC = OnlineChatViewController.initFromStoryboard(name: Constant.Storyboards.chat)
+    private lazy  var offlineVC = SearchCustomLocationUIViewController.initFromStoryboard(name: Constant.Storyboards.chat)
     
     //MARK: Life Cycles
     override func viewDidLoad() {
@@ -78,7 +79,7 @@ class CategoryViewController: UIViewController {
     }
     
     @IBAction func chat(_ sender: UIBarButtonItem) {
-        let onlineChat = UIStoryboard(name: Constant.Storyboards.onlineChat, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.onlineChat) as! OnlineChatViewController
+        let onlineChat = UIStoryboard(name: Constant.Storyboards.chat, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.onlineChat) as! OnlineChatViewController
         self.navigationController?.pushViewController(onlineChat, animated: true) 
 //        let chatVC = ChatViewController()
 //        self.present(chatVC, animated: true, completion: nil)
