@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 extension UIView {
     
     func setGradient(startColor: UIColor, endColor: UIColor) {
@@ -32,6 +33,7 @@ extension UIView {
         gradientLayer.masksToBounds = true
         self.layer.insertSublayer(gradientLayer, at: 0)
     }
+   
     
     func setShadow(color: UIColor) {
         self.layer.masksToBounds = false
@@ -50,14 +52,16 @@ extension UIView {
         self.addSubview(blurEffectView)
     }
     func setShadowByBezierPath(color: UIColor) {
-        self.layer.masksToBounds = false
-        self.layer.shadowColor = color.cgColor
-        self.layer.shadowOffset = CGSize(width: 3, height: 3)
-        self.layer.shadowOpacity = 0.7
-        self.layer.shadowRadius = 2.0
-        self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
-        self.layer.shouldRasterize = true
-        self.layer.rasterizationScale = UIScreen.main.scale
+        let shadowSize: CGFloat = 1.0
+            let shadowPath = UIBezierPath(rect: CGRect(x: -shadowSize / 2,
+                                                       y: -shadowSize / 2,
+                                                       width: self.frame.size.width + shadowSize,
+                                                       height: 35))
+            self.layer.masksToBounds = false
+            self.layer.shadowColor = UIColor.black.cgColor
+            self.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+            self.layer.shadowOpacity = 0.2
+            self.layer.shadowPath = shadowPath.cgPath
     }
     
     
@@ -139,6 +143,21 @@ extension UIView {
         
     }
 
+    func popupAnimation() {
+        self.alpha = 1
+        self.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: [],  animations: {
+            self.transform = .identity
+        })
+    }
     
+    func popOutAnimation() {
+        self.isHidden = false
+        self.transform = CGAffineTransform(scaleX: 0, y: 0)
+        UIView.animate(withDuration: 1, delay: 0, options: .curveLinear, animations: {
+                self.alpha = 1.0;
+                self.transform = .identity
+        }, completion: nil)
+    }
    
 }

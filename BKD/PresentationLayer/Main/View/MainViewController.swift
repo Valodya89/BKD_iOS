@@ -34,7 +34,8 @@ class MainViewController: BaseViewController {
     private var isSearchResultPage: Bool = false
     private var isPressedFilter: Bool = false
     private var isPressedEdit: Bool = false
-    
+    private var isOnline: Bool = false
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -544,9 +545,16 @@ class MainViewController: BaseViewController {
     
     @IBAction func rightBar(_ sender: UIBarButtonItem) {
     }
+    
     @IBAction func chatWithUs(_ sender: UIButton) {
-        let onlineChat = UIStoryboard(name: Constant.Storyboards.chat, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.onlineChat) as! OnlineChatViewController
-        self.navigationController?.pushViewController(onlineChat, animated: true) 
+        if isOnline {
+            let onlineChat = UIStoryboard(name: Constant.Storyboards.chat, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.onlineChat) as! OnlineChatViewController
+            self.navigationController?.pushViewController(onlineChat, animated: true)
+        } else {
+            let offlineChat = UIStoryboard(name: Constant.Storyboards.chat, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.offlineChat) as! OfflineChatViewController
+            self.navigationController?.pushViewController(offlineChat, animated: true)
+        }
+        
     }
     
         

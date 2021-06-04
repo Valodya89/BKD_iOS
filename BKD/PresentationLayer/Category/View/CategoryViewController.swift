@@ -15,7 +15,7 @@ class CategoryViewController: UIViewController {
 
     //MARK: Variables
     var searchResultV: SearchResultView?
-    private lazy  var onlineChatVC = OnlineChatViewController.initFromStoryboard(name: Constant.Storyboards.chat)
+//    private lazy  var onlineChatVC = OnlineChatViewController.initFromStoryboard(name: Constant.Storyboards.chat)
     private lazy  var offlineVC = SearchCustomLocationUIViewController.initFromStoryboard(name: Constant.Storyboards.chat)
     
     //MARK: Life Cycles

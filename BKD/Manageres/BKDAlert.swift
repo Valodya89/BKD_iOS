@@ -204,34 +204,3 @@ class BKDAlert: NSObject {
 }
 
 
-extension UIView {
-    func popupAnimation() {
-        self.alpha = 1
-        self.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
-        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: [],  animations: {
-            self.transform = .identity
-        })
-    }
-    
-    func popOutAnimation() {
-        self.isHidden = false
-        self.transform = CGAffineTransform(scaleX: 0, y: 0)
-        UIView.animate(withDuration: 1, delay: 0, options: .curveLinear, animations: {
-                self.alpha = 1.0;
-                self.transform = .identity
-        }, completion: nil)
-    }
-}
-
-extension UILabel {
-    func requiredHeight(labelText:String, width: CGFloat, font: UIFont) -> CGFloat {
-
-        self.frame =  CGRect(x: 0, y: 0, width: width, height: .greatestFiniteMagnitude)
-        self.numberOfLines = 0
-        self.lineBreakMode = .byWordWrapping
-        self.font = font
-        self.text = labelText
-        self.sizeToFit()
-        return self.frame.height
-    }
-}

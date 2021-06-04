@@ -27,6 +27,7 @@ struct Constant {
         static let seeMap = "SeeMapViewController"
         static let customLocation = "CustomLocationViewController"
         static let onlineChat = "OnlineChatViewController"
+        static let offlineChat = "OfflineChatViewController"
 
     }
     
@@ -96,7 +97,7 @@ let color_gradient_start = UIColor(named: "gradient_start")
 let color_gradient_end = UIColor(named: "gradient_end")
 let color_map_circle = UIColor(named: "map_circle")
 let color_chat_placeholder = UIColor(named:"chat_placeholder")
-
+let color_Offline_bckg = UIColor(named: "gradient_blur_end")
 
 
 

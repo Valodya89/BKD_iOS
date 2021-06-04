@@ -21,3 +21,17 @@ extension UITextField {
         self.leftViewMode = .always
     }
 }
+
+
+extension UILabel {
+    func requiredHeight(labelText:String, width: CGFloat, font: UIFont) -> CGFloat {
+
+        self.frame =  CGRect(x: 0, y: 0, width: width, height: .greatestFiniteMagnitude)
+        self.numberOfLines = 0
+        self.lineBreakMode = .byWordWrapping
+        self.font = font
+        self.text = labelText
+        self.sizeToFit()
+        return self.frame.height
+    }
+}
