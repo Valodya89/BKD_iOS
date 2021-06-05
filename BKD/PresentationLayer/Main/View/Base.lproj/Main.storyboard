@@ -10,8 +10,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Mulish-SemiBold.ttf">
-            <string>Mulish-SemiBold</string>
+        <array key="Mulish-Bold.ttf">
+            <string>Mulish-Bold</string>
         </array>
     </customFonts>
     <scenes>
@@ -39,15 +39,15 @@
                                 </collectionReusableView>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nOJ-Gd-nKd">
-                                <rect key="frame" x="347" y="616.5" width="70" height="34"/>
+                                <rect key="frame" x="351" y="616.5" width="65" height="34"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uBi-RC-Pej">
-                                        <rect key="frame" x="0.0" y="0.0" width="70" height="34"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="65" height="34"/>
                                         <color key="backgroundColor" name="gradient_start"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eI-UP-HPX">
-                                        <rect key="frame" x="1.5" y="2" width="66.5" height="30"/>
-                                        <fontDescription key="fontDescription" name="Mulish-SemiBold" family="Mulish" pointSize="9"/>
+                                        <rect key="frame" x="6" y="2" width="53" height="30"/>
+                                        <fontDescription key="fontDescription" name="Mulish-Bold" family="Mulish" pointSize="9"/>
                                         <state key="normal" title="Chat with us!">
                                             <color key="titleColor" name="navigationBar"/>
                                         </state>
@@ -61,11 +61,12 @@
                                 <constraints>
                                     <constraint firstItem="uBi-RC-Pej" firstAttribute="centerY" secondItem="nOJ-Gd-nKd" secondAttribute="centerY" id="0g7-dp-UWI"/>
                                     <constraint firstItem="9eI-UP-HPX" firstAttribute="centerY" secondItem="uBi-RC-Pej" secondAttribute="centerY" id="3Ol-di-PlM"/>
+                                    <constraint firstItem="9eI-UP-HPX" firstAttribute="trailing" secondItem="uBi-RC-Pej" secondAttribute="trailing" constant="-6" id="BJS-ko-dOF"/>
                                     <constraint firstItem="uBi-RC-Pej" firstAttribute="height" secondItem="nOJ-Gd-nKd" secondAttribute="height" id="CDA-4x-hfq"/>
+                                    <constraint firstItem="9eI-UP-HPX" firstAttribute="leading" secondItem="uBi-RC-Pej" secondAttribute="leading" constant="6" id="SKe-Oh-wtq"/>
                                     <constraint firstItem="9eI-UP-HPX" firstAttribute="centerX" secondItem="uBi-RC-Pej" secondAttribute="centerX" id="VT4-ZP-M9e"/>
                                     <constraint firstItem="uBi-RC-Pej" firstAttribute="width" secondItem="nOJ-Gd-nKd" secondAttribute="width" id="VYd-Jv-Q48"/>
                                     <constraint firstItem="9eI-UP-HPX" firstAttribute="height" secondItem="uBi-RC-Pej" secondAttribute="height" multiplier="0.882353" id="iVs-d8-53P"/>
-                                    <constraint firstItem="9eI-UP-HPX" firstAttribute="width" secondItem="uBi-RC-Pej" secondAttribute="width" multiplier="0.95" id="pHZ-vD-uOb"/>
                                     <constraint firstItem="uBi-RC-Pej" firstAttribute="centerX" secondItem="nOJ-Gd-nKd" secondAttribute="centerX" id="sHO-Pb-XAQ"/>
                                 </constraints>
                             </view>
@@ -78,10 +79,9 @@
                         <viewLayoutGuide key="safeArea" id="aZo-0j-S7r"/>
                         <color key="backgroundColor" name="background"/>
                         <constraints>
-                            <constraint firstItem="nOJ-Gd-nKd" firstAttribute="centerX" secondItem="aZo-0j-S7r" secondAttribute="centerX" multiplier="1.845" id="0Xu-cJ-nIb"/>
                             <constraint firstItem="Igf-W7-Esb" firstAttribute="leading" secondItem="aZo-0j-S7r" secondAttribute="leading" id="8Bn-hK-mED"/>
+                            <constraint firstItem="nOJ-Gd-nKd" firstAttribute="trailing" secondItem="aZo-0j-S7r" secondAttribute="trailing" constant="2" id="NY3-DR-asi"/>
                             <constraint firstItem="aZo-0j-S7r" firstAttribute="bottom" secondItem="Igf-W7-Esb" secondAttribute="bottom" id="Q9k-KO-AjL"/>
-                            <constraint firstItem="nOJ-Gd-nKd" firstAttribute="width" secondItem="VrM-PG-bE9" secondAttribute="width" multiplier="0.169082" id="T6z-rB-yd8"/>
                             <constraint firstItem="nOJ-Gd-nKd" firstAttribute="centerY" secondItem="aZo-0j-S7r" secondAttribute="centerY" multiplier="1.748" id="Zhk-Aa-B6p"/>
                             <constraint firstItem="Igf-W7-Esb" firstAttribute="top" secondItem="aZo-0j-S7r" secondAttribute="top" id="gxK-Qw-OZd"/>
                             <constraint firstItem="aZo-0j-S7r" firstAttribute="trailing" secondItem="Igf-W7-Esb" secondAttribute="trailing" id="nrY-MN-FcR"/>

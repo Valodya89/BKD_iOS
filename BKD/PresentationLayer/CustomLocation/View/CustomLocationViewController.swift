@@ -98,7 +98,7 @@ class CustomLocationViewController: UIViewController {
     private func configureMapView() {
         mMapV.isMyLocationEnabled = true
         addInactiveCoordinates()
-        moveCameraPosition(cord2D: CLLocationCoordinate2D(latitude: (InactiveLocationRangeData.inactiveLocationRangeModel)[0].latitude, longitude: InactiveLocationRangeData.inactiveLocationRangeModel[0].longitude))
+        moveCameraPosition(cord2D: CLLocationCoordinate2D(latitude:40.220485, longitude:  44.486114))
         //  placesClient = GMSPlacesClient.shared()
         
     }

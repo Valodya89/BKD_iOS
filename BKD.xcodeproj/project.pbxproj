@@ -72,6 +72,7 @@
 		565A7AE426555EFF006C63D0 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565A7AE226555EFF006C63D0 /* CategoryTableViewCell.xib */; };
 		565A7AEA2655C5AE006C63D0 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565A7AE92655C5AE006C63D0 /* CategoryModel.swift */; };
 		565BD3602659AED1001923F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565BD35F2659AED1001923F5 /* AppDelegate.swift */; };
+		5660F7F2266C21980082F038 /* Mulish-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5660F7F1266C217F0082F038 /* Mulish-Bold.ttf */; };
 		568E6F592642FC4B000CB6A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568E6F572642FC4B000CB6A9 /* Main.storyboard */; };
 		568E6F5E2642FC50000CB6A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568E6F5C2642FC50000CB6A9 /* LaunchScreen.storyboard */; };
 		568E6F692642FC50000CB6A9 /* BKDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E6F682642FC50000CB6A9 /* BKDTests.swift */; };
@@ -185,6 +186,7 @@
 		565A7AE226555EFF006C63D0 /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
 		565A7AE92655C5AE006C63D0 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		565BD35F2659AED1001923F5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5660F7F1266C217F0082F038 /* Mulish-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mulish-Bold.ttf"; sourceTree = "<group>"; };
 		568E6F4E2642FC4B000CB6A9 /* BKD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BKD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		568E6F582642FC4B000CB6A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		568E6F5D2642FC50000CB6A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -502,6 +504,7 @@
 		564E134E265211D1008CE884 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				5660F7F1266C217F0082F038 /* Mulish-Bold.ttf */,
 				560252942664372300FB204C /* Mulish-Regular.ttf */,
 				564E137926531F71008CE884 /* Mulish-SemiBold.ttf */,
 				564E1353265211F1008CE884 /* SFProDisplay-Semibold.ttf */,
@@ -1157,6 +1160,7 @@
 			files = (
 				560252952664376900FB204C /* Mulish-Regular.ttf in Resources */,
 				564E137A26531F8F008CE884 /* Mulish-SemiBold.ttf in Resources */,
+				5660F7F2266C21980082F038 /* Mulish-Bold.ttf in Resources */,
 				564E1354265211FF008CE884 /* SFProDisplay-Semibold.ttf in Resources */,
 				564E137226530208008CE884 /* SearchResultCollectionViewCell.xib in Resources */,
 				564E1355265211FF008CE884 /* SongMyung-Regular.ttf in Resources */,
