@@ -25,11 +25,11 @@ class MarkerInfoViewController: UIViewController, StoryboardInitializable {
     @IBOutlet weak var mEuroLb: UILabel!
     @IBOutlet weak var mPriceLb: UILabel!
     @IBOutlet weak var mValueBackgV: UIView!
+    @IBOutlet weak var mContinueBtn: UIButton!
     
-    @IBOutlet weak var mLeftContinueBtn: UIButton!
-    @IBOutlet weak var mRightContinueBtn: UIButton!
-    @IBOutlet weak var mSearchBackgV: UIView!
-    @IBOutlet weak var mSearchBottom: NSLayoutConstraint!
+    @IBOutlet weak var mContinueLeading: NSLayoutConstraint!
+    @IBOutlet weak var mContinueBackgV: UIView!
+    @IBOutlet weak var mContinueBottom: NSLayoutConstraint!
     
     //MARK: Variables
     weak var delegate: MarkerInfoViewControllerDelegate?
@@ -42,14 +42,20 @@ class MarkerInfoViewController: UIViewController, StoryboardInitializable {
     
     func setupView()  {
         mBackgroundV.layer.cornerRadius = 20
-        mLeftContinueBtn.layer.cornerRadius = 7
-        mRightContinueBtn.layer.cornerRadius = 7
-        mLeftContinueBtn.setBorder(color: color_navigationBar!, width: 1)
-        mRightContinueBtn.setBorder(color: color_navigationBar!, width: 1)
+        mContinueBtn.layer.cornerRadius = 7
+        mContinueBtn.setBorder(color: color_navigationBar!, width: 1)
+    
 //        mValueBackgV.setGradient(startColor:color_gradient_end!, endColor: color_gradient_start!)
         
     }
-
+    private func clickContinue() {
+        UIView.animate(withDuration: 0.5) { [self] in
+            self.mContinueLeading.constant = self.mContinueBackgV.bounds.width - self.mContinueBtn.frame.size.width
+            self.view.layoutIfNeeded()
+        } completion: { _ in
+           // self.didSelectContune!()
+        }
+    }
   
     // MARK: - ACTIONS
 
@@ -63,18 +69,17 @@ class MarkerInfoViewController: UIViewController, StoryboardInitializable {
         mErrorLb.isHidden = true
         mUserAddressLb.text = ""        
         mUserAddressLb.textColor = color_navigationBar
-        mSearchBackgV.isUserInteractionEnabled = false
-        mSearchBackgV.alpha = 0.8
+        mContinueBackgV.isUserInteractionEnabled = false
+        mContinueBackgV.alpha = 0.8
         delegate?.didPressDeleteLocation()
 
     }
     
-    @IBAction func leftContinue(_ sender: UIButton) {
-        sender.isHidden = true
-        mRightContinueBtn.isHidden = false
+    @IBAction func clickContinue(_ sender: UIButton) {
+        clickContinue()
     }
-    @IBAction func rightContinue(_ sender: UIButton) {
-        sender.isHidden = true
-        mLeftContinueBtn.isHidden = false
+
+    @IBAction func continueSwipe(_ sender: UISwipeGestureRecognizer) {
+        clickContinue()
     }
 }

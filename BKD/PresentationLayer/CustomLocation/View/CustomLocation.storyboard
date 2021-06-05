@@ -29,7 +29,7 @@
             <objects>
                 <viewController storyboardIdentifier="CustomLocationViewController" id="i55-z6-QwB" customClass="CustomLocationViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Zk8-T5-g6d">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUg-xF-wG3" customClass="GMSMapView">
@@ -261,16 +261,16 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V7f-Pa-RYd">
-                                                <rect key="frame" x="280.5" y="3" width="87" height="26"/>
+                                                <rect key="frame" x="280.5" y="3" width="87" height="26.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gtl-nW-o3P">
-                                                        <rect key="frame" x="0.0" y="0.0" width="13.5" height="26"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="13.5" height="26.5"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="22"/>
                                                         <color key="textColor" name="navigationBar_64%"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="59,9" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exq-Tc-iUy">
-                                                        <rect key="frame" x="17.5" y="0.0" width="60.5" height="26"/>
+                                                        <rect key="frame" x="17.5" y="0.0" width="60.5" height="26.5"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="22"/>
                                                         <color key="textColor" name="navigationBar"/>
                                                         <nil key="highlightedColor"/>
@@ -316,31 +316,33 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cr8-Pb-Fh3">
                                                         <rect key="frame" x="0.0" y="0.0" width="81" height="42.5"/>
                                                         <subviews>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_left" translatesAutoresizingMaskIntoConstraints="NO" id="xnk-ux-VKB">
-                                                                <rect key="frame" x="32" y="16" width="17" height="10.5"/>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_left" translatesAutoresizingMaskIntoConstraints="NO" id="kFr-KX-PJe">
+                                                                <rect key="frame" x="32" y="15" width="17" height="12"/>
                                                             </imageView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLi-WA-GDb">
                                                                 <rect key="frame" x="0.0" y="0.0" width="81" height="42.5"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <gestureRecognizers/>
                                                                 <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="12"/>
                                                                 <state key="normal" title="Continue">
                                                                     <color key="titleColor" name="navigationBar"/>
                                                                 </state>
                                                                 <connections>
-                                                                    <action selector="leftContinue:" destination="Rx0-bb-MMv" eventType="touchUpInside" id="brR-uQ-wfE"/>
+                                                                    <action selector="clickContinue:" destination="Rx0-bb-MMv" eventType="touchUpInside" id="CuL-Dh-EhA"/>
+                                                                    <outletCollection property="gestureRecognizers" destination="n8l-oe-IxZ" appends="YES" id="FuR-az-kQ1"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
+                                                            <constraint firstItem="kFr-KX-PJe" firstAttribute="width" secondItem="Cr8-Pb-Fh3" secondAttribute="width" multiplier="0.209877" id="2IY-pS-DQI"/>
                                                             <constraint firstItem="NLi-WA-GDb" firstAttribute="width" secondItem="Cr8-Pb-Fh3" secondAttribute="width" id="7Sl-AE-MKb"/>
+                                                            <constraint firstItem="kFr-KX-PJe" firstAttribute="height" secondItem="Cr8-Pb-Fh3" secondAttribute="height" multiplier="0.282353" id="DYA-NW-dxk"/>
                                                             <constraint firstItem="NLi-WA-GDb" firstAttribute="centerY" secondItem="Cr8-Pb-Fh3" secondAttribute="centerY" id="LT5-eb-tLQ"/>
                                                             <constraint firstItem="NLi-WA-GDb" firstAttribute="height" secondItem="Cr8-Pb-Fh3" secondAttribute="height" id="NoS-uH-zlX"/>
-                                                            <constraint firstItem="xnk-ux-VKB" firstAttribute="centerY" secondItem="NLi-WA-GDb" secondAttribute="centerY" id="UcK-qo-fg0"/>
-                                                            <constraint firstItem="xnk-ux-VKB" firstAttribute="centerX" secondItem="NLi-WA-GDb" secondAttribute="centerX" id="WUj-wM-xgW"/>
                                                             <constraint firstItem="NLi-WA-GDb" firstAttribute="leading" secondItem="Cr8-Pb-Fh3" secondAttribute="leading" id="iIF-7e-tce"/>
-                                                            <constraint firstItem="xnk-ux-VKB" firstAttribute="height" secondItem="NLi-WA-GDb" secondAttribute="height" multiplier="0.25" id="kri-Om-bDr"/>
-                                                            <constraint firstItem="xnk-ux-VKB" firstAttribute="width" secondItem="NLi-WA-GDb" secondAttribute="width" multiplier="0.209877" id="nbY-Xq-jdg"/>
+                                                            <constraint firstItem="kFr-KX-PJe" firstAttribute="centerX" secondItem="Cr8-Pb-Fh3" secondAttribute="centerX" id="v2c-VX-ylV"/>
+                                                            <constraint firstItem="kFr-KX-PJe" firstAttribute="centerY" secondItem="Cr8-Pb-Fh3" secondAttribute="centerY" id="zLn-ys-2Lr"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wCS-qp-tjG">
@@ -349,28 +351,13 @@
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_right" translatesAutoresizingMaskIntoConstraints="NO" id="3jl-96-nki">
                                                                 <rect key="frame" x="32" y="15" width="17" height="12.5"/>
                                                             </imageView>
-                                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Qk-gF-IBa">
-                                                                <rect key="frame" x="0.0" y="0.0" width="81" height="42.5"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="12"/>
-                                                                <state key="normal" title="Continue">
-                                                                    <color key="titleColor" name="navigationBar"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="rightContinue:" destination="Rx0-bb-MMv" eventType="touchUpInside" id="wVt-Rr-Vch"/>
-                                                                </connections>
-                                                            </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstItem="3jl-96-nki" firstAttribute="width" secondItem="6Qk-gF-IBa" secondAttribute="width" multiplier="0.209877" id="2Rw-13-zh9"/>
-                                                            <constraint firstAttribute="trailing" secondItem="6Qk-gF-IBa" secondAttribute="trailing" id="EQK-an-MR7"/>
-                                                            <constraint firstItem="3jl-96-nki" firstAttribute="centerY" secondItem="6Qk-gF-IBa" secondAttribute="centerY" id="M7g-J1-o91"/>
-                                                            <constraint firstItem="3jl-96-nki" firstAttribute="centerX" secondItem="6Qk-gF-IBa" secondAttribute="centerX" id="Vz5-1s-f2V"/>
-                                                            <constraint firstItem="6Qk-gF-IBa" firstAttribute="width" secondItem="wCS-qp-tjG" secondAttribute="width" id="h3Y-vc-xZp"/>
-                                                            <constraint firstItem="6Qk-gF-IBa" firstAttribute="centerY" secondItem="wCS-qp-tjG" secondAttribute="centerY" id="h7A-fx-ED0"/>
-                                                            <constraint firstItem="6Qk-gF-IBa" firstAttribute="height" secondItem="wCS-qp-tjG" secondAttribute="height" id="kzl-gb-1X7"/>
-                                                            <constraint firstItem="3jl-96-nki" firstAttribute="height" secondItem="6Qk-gF-IBa" secondAttribute="height" multiplier="0.297619" id="tE6-Ly-S4m"/>
+                                                            <constraint firstItem="3jl-96-nki" firstAttribute="centerX" secondItem="wCS-qp-tjG" secondAttribute="centerX" id="9sB-ea-2iA"/>
+                                                            <constraint firstItem="3jl-96-nki" firstAttribute="height" secondItem="wCS-qp-tjG" secondAttribute="height" multiplier="0.294118" id="H1w-wY-liR"/>
+                                                            <constraint firstItem="3jl-96-nki" firstAttribute="width" secondItem="wCS-qp-tjG" secondAttribute="width" multiplier="0.209877" id="RIj-cp-Tf1"/>
+                                                            <constraint firstItem="3jl-96-nki" firstAttribute="centerY" secondItem="wCS-qp-tjG" secondAttribute="centerY" id="lt9-xh-9NX"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -425,15 +412,15 @@
                     <size key="freeformSize" width="414" height="283"/>
                     <connections>
                         <outlet property="mBackgroundV" destination="nVK-kp-aOc" id="wkw-HR-CdW"/>
+                        <outlet property="mContinueBackgV" destination="Frl-pV-YBF" id="lc3-ur-Cqb"/>
+                        <outlet property="mContinueBottom" destination="LSX-ZA-fS5" id="UpO-vY-XJG"/>
+                        <outlet property="mContinueBtn" destination="NLi-WA-GDb" id="stL-Dw-2d3"/>
+                        <outlet property="mContinueLeading" destination="iIF-7e-tce" id="MzO-s3-uxh"/>
                         <outlet property="mDeleteAddressBtn" destination="1WM-5r-ynC" id="KKD-5e-OaJ"/>
                         <outlet property="mErrorLb" destination="Go1-2a-yjv" id="il9-Kx-vmL"/>
                         <outlet property="mEuroLb" destination="Gtl-nW-o3P" id="y03-JB-UAe"/>
-                        <outlet property="mLeftContinueBtn" destination="NLi-WA-GDb" id="zCq-rC-d3A"/>
                         <outlet property="mPriceLb" destination="exq-Tc-iUy" id="hBE-cJ-gAh"/>
                         <outlet property="mRentalAddres" destination="tWj-Oo-afb" id="vex-uY-qOg"/>
-                        <outlet property="mRightContinueBtn" destination="6Qk-gF-IBa" id="8eZ-iX-pfG"/>
-                        <outlet property="mSearchBackgV" destination="Frl-pV-YBF" id="XbY-lN-I5d"/>
-                        <outlet property="mSearchBottom" destination="LSX-ZA-fS5" id="TKP-Zm-Xg3"/>
                         <outlet property="mServiceFeeLb" destination="3we-5p-b07" id="HWZ-6Q-bRd"/>
                         <outlet property="mUserAddressLb" destination="A9D-fr-1L5" id="GfN-0m-ocY"/>
                         <outlet property="mUserLocationBtn" destination="TO6-kN-wF2" id="31I-PQ-ugx"/>
@@ -441,6 +428,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TMb-no-BpS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="n8l-oe-IxZ">
+                    <connections>
+                        <action selector="continueSwipe:" destination="Rx0-bb-MMv" id="mjN-F5-svG"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="945" y="655"/>
         </scene>

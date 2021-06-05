@@ -53,9 +53,9 @@
                 <outlet property="mReturnTimeImgV" destination="6hM-fa-dqy" id="6pt-qh-6q3"/>
                 <outlet property="mReturnTimeTxtFl" destination="2Kx-02-0qs" id="jCX-1P-fZg"/>
                 <outlet property="mSearchBckgV" destination="pj2-Si-dhr" id="o6T-g6-T0X"/>
-                <outlet property="mSearchLeftBtn" destination="SUP-z7-4wd" id="wSi-kz-XzS"/>
+                <outlet property="mSearchBtn" destination="SUP-z7-4wd" id="02o-MQ-t94"/>
+                <outlet property="mSearchLeading" destination="vuP-Us-0FO" id="BI6-5p-y5Z"/>
                 <outlet property="mSearchLeftImgV" destination="XyK-w6-B5e" id="1aT-kY-4Vl"/>
-                <outlet property="mSearchRightBtn" destination="QWa-bJ-reN" id="sSm-26-Wbd"/>
                 <outlet property="mSearchRightImgV" destination="Zpw-ab-59r" id="3YW-mP-IVq"/>
                 <outlet property="mTimeLb" destination="C50-5g-WJ9" id="vzo-yk-sXI"/>
             </connections>
@@ -480,16 +480,19 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SUP-z7-4wd">
                                                             <rect key="frame" x="0.0" y="0.0" width="79.5" height="42.5"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <gestureRecognizers/>
                                                             <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="12"/>
                                                             <state key="normal" title="Search">
                                                                 <color key="titleColor" name="navigationBar"/>
                                                             </state>
                                                             <connections>
-                                                                <action selector="searchLeft:" destination="-1" eventType="touchUpInside" id="rLU-y8-x3S"/>
+                                                                <action selector="search:" destination="-1" eventType="touchUpInside" id="wk7-e4-bfC"/>
+                                                                <outletCollection property="gestureRecognizers" destination="cyM-cI-ClJ" appends="YES" id="hhu-uh-qdv"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstItem="XyK-w6-B5e" firstAttribute="centerX" secondItem="SUP-z7-4wd" secondAttribute="centerX" id="5dH-vW-1g6"/>
                                                         <constraint firstItem="XyK-w6-B5e" firstAttribute="height" secondItem="SUP-z7-4wd" secondAttribute="height" multiplier="0.25" id="8ka-mG-c1u"/>
@@ -507,28 +510,13 @@
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_right" translatesAutoresizingMaskIntoConstraints="NO" id="Zpw-ab-59r">
                                                             <rect key="frame" x="31.5" y="15" width="16.5" height="12.5"/>
                                                         </imageView>
-                                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QWa-bJ-reN">
-                                                            <rect key="frame" x="0.0" y="0.0" width="79.5" height="42.5"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="12"/>
-                                                            <state key="normal" title="Search">
-                                                                <color key="titleColor" name="navigationBar"/>
-                                                            </state>
-                                                            <connections>
-                                                                <action selector="searchRight:" destination="-1" eventType="touchUpInside" id="y2b-Dh-wCI"/>
-                                                            </connections>
-                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="QWa-bJ-reN" firstAttribute="width" secondItem="cyU-P4-QpW" secondAttribute="width" id="7y6-X2-rLr"/>
-                                                        <constraint firstItem="Zpw-ab-59r" firstAttribute="centerX" secondItem="QWa-bJ-reN" secondAttribute="centerX" id="DFq-kM-IgL"/>
-                                                        <constraint firstItem="Zpw-ab-59r" firstAttribute="width" secondItem="QWa-bJ-reN" secondAttribute="width" multiplier="0.209877" id="KiX-9T-1dL"/>
-                                                        <constraint firstItem="QWa-bJ-reN" firstAttribute="centerY" secondItem="cyU-P4-QpW" secondAttribute="centerY" id="Km1-5U-Zhx"/>
-                                                        <constraint firstAttribute="trailing" secondItem="QWa-bJ-reN" secondAttribute="trailing" id="Q8h-vq-nVD"/>
-                                                        <constraint firstItem="QWa-bJ-reN" firstAttribute="height" secondItem="cyU-P4-QpW" secondAttribute="height" id="Wl9-4T-XMN"/>
-                                                        <constraint firstItem="Zpw-ab-59r" firstAttribute="centerY" secondItem="QWa-bJ-reN" secondAttribute="centerY" id="xPa-2V-GIb"/>
-                                                        <constraint firstItem="Zpw-ab-59r" firstAttribute="height" secondItem="QWa-bJ-reN" secondAttribute="height" multiplier="0.297619" id="yBg-MG-fzb"/>
+                                                        <constraint firstItem="Zpw-ab-59r" firstAttribute="width" secondItem="cyU-P4-QpW" secondAttribute="width" multiplier="0.207547" id="1wG-Cz-KO5"/>
+                                                        <constraint firstItem="Zpw-ab-59r" firstAttribute="centerX" secondItem="cyU-P4-QpW" secondAttribute="centerX" id="bSb-at-26Y"/>
+                                                        <constraint firstItem="Zpw-ab-59r" firstAttribute="centerY" secondItem="cyU-P4-QpW" secondAttribute="centerY" id="t9e-mF-gCH"/>
+                                                        <constraint firstItem="Zpw-ab-59r" firstAttribute="height" secondItem="cyU-P4-QpW" secondAttribute="height" multiplier="0.294118" id="u7w-l1-J3t"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -610,6 +598,11 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="34.782608695652179" y="84.709821428571431"/>
         </view>
+        <swipeGestureRecognizer direction="right" id="cyM-cI-ClJ">
+            <connections>
+                <action selector="searchLeftSwipe:" destination="-1" id="qXd-5G-6kc"/>
+            </connections>
+        </swipeGestureRecognizer>
     </objects>
     <resources>
         <image name="dropDown_blue" width="17" height="9"/>

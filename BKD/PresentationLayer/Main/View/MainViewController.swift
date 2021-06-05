@@ -365,8 +365,8 @@ class MainViewController: BaseViewController {
             self?.searchHeaderV?.mArrowBtn.isHidden = false
             self?.searchHeaderV?.mSearchBckgV.isUserInteractionEnabled = false
             self?.searchHeaderV?.mSearchBckgV.alpha = 0.8
-            self?.searchHeaderV?.mSearchLeftBtn.isHidden = false
-            self?.searchHeaderV?.mSearchRightBtn.isHidden = true
+            self?.searchHeaderV?.mSearchLeading.constant = 0
+            self?.searchHeaderV?.layoutIfNeeded()
         }
     }
     

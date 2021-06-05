@@ -40,12 +40,14 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     
     @IBOutlet weak var mPickUpLocationBtn: UIButton!
     @IBOutlet weak var mReturnLocationBtn: UIButton!
-    @IBOutlet weak var mSearchLeftBtn: UIButton!
+    @IBOutlet weak var mSearchBtn: UIButton!
     
     @IBOutlet weak var mSearchBckgV: UIView!
     @IBOutlet weak var mSearchRightImgV: UIImageView!
     @IBOutlet weak var mSearchLeftImgV: UIImageView!
-    @IBOutlet weak var mSearchRightBtn: UIButton!
+    @IBOutlet weak var mSearchLeading: NSLayoutConstraint!
+    
+   
     @IBOutlet weak var mDateLb: UILabel!
     @IBOutlet weak var mTimeLb: UILabel!
     @IBOutlet weak var mLocationLb: UILabel!
@@ -109,8 +111,7 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
 
         
         mSearchBckgV.layer.cornerRadius = 8
-        mSearchLeftBtn.layer.cornerRadius = 8
-        mSearchRightBtn.layer.cornerRadius = 8
+        mSearchBtn.layer.cornerRadius = 8
         // border
         mLocationDropDownView.clipsToBounds = true
         mLocationDropDownView.layer.borderWidth = 0.3
@@ -145,8 +146,7 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         //botton border
         mPickUpLocationBtn.addBorder(color: color_navigationBar!, width: 1.0)
         mReturnLocationBtn.addBorder(color: color_navigationBar!, width: 1.0)
-        mSearchLeftBtn.addBorder(color:color_navigationBar!, width: 1.0)
-        mSearchRightBtn.addBorder(color: color_navigationBar!, width: 1.0)
+        mSearchBtn.addBorder(color:color_navigationBar!, width: 1.0)
     }
     
     func setTextFieldBorder(leftTextField: UITextField, rightTextField: UITextField, color: UIColor) {
@@ -170,9 +170,20 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         UIView.animate(withDuration: 0.3, animations: { [self] in
             self.mLocationDropDownView.mheightLayoutConst.constant = 0.0
             self.mLocationLb.textColor = color_search_placeholder
-            pickUPDropisClose = true
+           // pickUPDropisClose = true
             self.layoutIfNeeded()
         })
+    }
+    
+    private func searchClicked(){
+        if checkFieldsFilled() {
+            UIView.animate(withDuration: 0.5) { [self] in
+                self.mSearchLeading.constant = self.mSearchBckgV.bounds.width - self.mSearchBtn.frame.size.width
+                self.layoutIfNeeded()
+            } completion: { _ in
+                self.didSelectSearch!()
+            }
+        }
     }
 //MARK: VALIDATIONS
 //MARK: ------------------
@@ -209,21 +220,14 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     //MARK: SEARCH
     //MARK: ------------------
 
-      @IBAction func searchLeft(_ sender: UIButton) {
-        if checkFieldsFilled() {
-            sender.isHidden = true
-            mSearchRightBtn.isHidden = false
-            didSelectSearch!()
-        }
+      @IBAction func search(_ sender: UIButton) {
+        searchClicked()
       }
     
-    @IBAction func searchRight(_ sender: UIButton) {
-        sender.isHidden = true
-        mSearchLeftBtn.isHidden = false
-        mErrorMessageLb.isHidden = true
-        setBorder()
-
+    @IBAction func searchLeftSwipe(_ sender: UISwipeGestureRecognizer) {
+        searchClicked()
     }
+
     @IBAction func pickUpLocation(_ sender: UIButton) {
         mLocationDropDownView.mPickUpLocationTableView.reloadData()
         mReturnDropImgV.image = UIImage(named: "dropDown_blue")

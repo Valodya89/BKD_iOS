@@ -70,7 +70,7 @@ class CustomLocationViewController: UIViewController {
             
         }
         if UIScreen.main.nativeBounds.height <= 1334 {
-            self.markerInfoVC.mSearchBottom.constant = -15
+            self.markerInfoVC.mContinueBottom.constant = -15
         }
     }
     func setUpView() {
@@ -183,8 +183,8 @@ class CustomLocationViewController: UIViewController {
         markerInfoVC.mDeleteAddressBtn.isHidden = false
         self.markerInfoVC.mErrorLb.isHidden = true
         markerInfoVC.mUserAddressLb.textColor = color_navigationBar
-        markerInfoVC.mSearchBackgV.isUserInteractionEnabled = true
-        markerInfoVC.mSearchBackgV.alpha = 1.0
+        markerInfoVC.mContinueBackgV.isUserInteractionEnabled = true
+        markerInfoVC.mContinueBackgV.alpha = 1.0
         UIView.animate(withDuration: 0.3, animations: { [self] in
             mMarkInfoBackgBottom.constant = 0
             self.view.layoutIfNeeded()
@@ -321,8 +321,8 @@ extension CustomLocationViewController: GMSMapViewDelegate {
                 if isInCoordinate == true {
                     self.markerInfoVC.mErrorLb.isHidden = false
                     self.markerInfoVC.mUserAddressLb.textColor = color_error
-                    self.markerInfoVC.mSearchBackgV.isUserInteractionEnabled = false
-                    self.markerInfoVC.mSearchBackgV.alpha = 0.8
+                    self.markerInfoVC.mContinueBackgV.isUserInteractionEnabled = false
+                    self.markerInfoVC.mContinueBackgV.alpha = 0.8
                     finish = true
                 }
             }
