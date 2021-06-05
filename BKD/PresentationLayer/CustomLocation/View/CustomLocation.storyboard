@@ -29,7 +29,7 @@
             <objects>
                 <viewController storyboardIdentifier="CustomLocationViewController" id="i55-z6-QwB" customClass="CustomLocationViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Zk8-T5-g6d">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUg-xF-wG3" customClass="GMSMapView">
@@ -261,16 +261,16 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V7f-Pa-RYd">
-                                                <rect key="frame" x="280.5" y="3" width="87" height="26.5"/>
+                                                <rect key="frame" x="280.5" y="3" width="87" height="26"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gtl-nW-o3P">
-                                                        <rect key="frame" x="0.0" y="0.0" width="13.5" height="26.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="13.5" height="26"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="22"/>
                                                         <color key="textColor" name="navigationBar_64%"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="59,9" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exq-Tc-iUy">
-                                                        <rect key="frame" x="17.5" y="0.0" width="60.5" height="26.5"/>
+                                                        <rect key="frame" x="17.5" y="0.0" width="60.5" height="26"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="22"/>
                                                         <color key="textColor" name="navigationBar"/>
                                                         <nil key="highlightedColor"/>

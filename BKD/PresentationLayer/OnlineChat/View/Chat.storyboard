@@ -134,7 +134,8 @@
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YHz-F2-kD4">
                                         <rect key="frame" x="16" y="28.5" width="382" height="47"/>
-                                        <color key="backgroundColor" name="privacy_policy"/>
+                                        <color key="backgroundColor" name="email"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -156,8 +157,9 @@
                                                 <rect key="frame" x="371.5" y="23" width="24" height="23.5"/>
                                             </imageView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Type your message" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="QfS-ja-Lvd">
-                                                <rect key="frame" x="18" y="18.5" width="348" height="33"/>
+                                                <rect key="frame" x="18" y="17.5" width="348" height="35"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="scrollIndicatorInsets" minX="348" minY="0.0" maxX="34" maxY="0.0"/>
                                                 <color key="textColor" name="chat_placeholder"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="12"/>
@@ -170,7 +172,7 @@
                                             <constraint firstItem="kb0-jV-J1E" firstAttribute="width" secondItem="x9a-4h-Pnr" secondAttribute="width" multiplier="0.0845411" id="ATl-Ca-m4F"/>
                                             <constraint firstItem="wiC-A6-H4L" firstAttribute="width" secondItem="kb0-jV-J1E" secondAttribute="width" multiplier="0.685714" id="ESN-qW-NbN"/>
                                             <constraint firstItem="QfS-ja-Lvd" firstAttribute="centerX" secondItem="x9a-4h-Pnr" secondAttribute="centerX" multiplier="0.927" id="F9i-KI-7SS"/>
-                                            <constraint firstItem="QfS-ja-Lvd" firstAttribute="height" secondItem="x9a-4h-Pnr" secondAttribute="height" multiplier="0.47" id="Hzy-co-UmA"/>
+                                            <constraint firstItem="QfS-ja-Lvd" firstAttribute="height" secondItem="x9a-4h-Pnr" secondAttribute="height" multiplier="0.5" id="Hzy-co-UmA"/>
                                             <constraint firstItem="QfS-ja-Lvd" firstAttribute="centerY" secondItem="x9a-4h-Pnr" secondAttribute="centerY" id="MEK-NX-Uds"/>
                                             <constraint firstItem="EPK-wd-h3r" firstAttribute="leading" secondItem="x9a-4h-Pnr" secondAttribute="leading" id="OLQ-XV-oTz"/>
                                             <constraint firstItem="QfS-ja-Lvd" firstAttribute="trailing" secondItem="kb0-jV-J1E" secondAttribute="leading" id="TK3-hI-DEr"/>
@@ -269,7 +271,7 @@
                         <outlet property="mEmailErrorLb" destination="QyE-Kz-q87" id="3QK-km-a5F"/>
                         <outlet property="mEmailTextFl" destination="YHz-F2-kD4" id="0nD-im-MkA"/>
                         <outlet property="mInputBackV" destination="x9a-4h-Pnr" id="t9F-gP-xPP"/>
-                        <outlet property="mInputVBottom" destination="wKx-jV-dWF" id="otr-TG-8Ro"/>
+                        <outlet property="mInputVBottom" destination="a4x-wK-nZc" id="Dgj-es-qip"/>
                         <outlet property="mMessaeStatusLb" destination="9c2-KY-7y8" id="kvn-cU-xOJ"/>
                         <outlet property="mMessageTxtV" destination="QfS-ja-Lvd" id="kEe-Mx-RHf"/>
                         <outlet property="mNavigationBarV" destination="xWO-wq-fqX" id="zMm-qd-tcm"/>
@@ -321,6 +323,9 @@
         <namedColor name="chat_placeholder">
             <color red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="email">
+            <color red="0.53725490196078429" green="0.59607843137254901" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="gradient_blur_end">
             <color red="0.13725490196078433" green="0.22745098039215686" blue="0.39215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -332,9 +337,6 @@
         </namedColor>
         <namedColor name="offert_red">
             <color red="1" green="0.29411764705882354" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="privacy_policy">
-            <color red="0.53725490196078429" green="0.59607843137254901" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

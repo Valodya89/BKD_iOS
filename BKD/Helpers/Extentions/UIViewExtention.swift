@@ -56,7 +56,7 @@ extension UIView {
             let shadowPath = UIBezierPath(rect: CGRect(x: -shadowSize / 2,
                                                        y: -shadowSize / 2,
                                                        width: self.frame.size.width + shadowSize,
-                                                       height: 35))
+                                                       height: self.frame.size.height + 3))
             self.layer.masksToBounds = false
             self.layer.shadowColor = UIColor.black.cgColor
             self.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)

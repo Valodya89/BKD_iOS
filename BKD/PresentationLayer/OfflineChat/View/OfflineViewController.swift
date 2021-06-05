@@ -86,6 +86,7 @@ class OfflineViewController: UIViewController, StoryboardInitializable  {
         }
         
     private func configureView(){
+        mSendBtn.isEnabled = false
         mDateLb.text = Date().getDateByFormat()
         mNoticeLb.setMargins()
         mNavigationBarV.setShadowByBezierPath(color: .black)
@@ -97,6 +98,7 @@ class OfflineViewController: UIViewController, StoryboardInitializable  {
     }
     private func configureMessageTextView(isPlaceholder: Bool) {
         if !isPlaceholder {
+            mMessageTxtV.tintColor = .white
             mMessageTxtV.textColor = .white
             mMessageTxtV.font = font_search_cell
             mMessageTxtV.text = ""
@@ -107,43 +109,48 @@ class OfflineViewController: UIViewController, StoryboardInitializable  {
         }
     }
     
+    private func configureEmailTextFiled(isBecomeFirstResponder: Bool) {
+        if isBecomeFirstResponder {
+            mEmailTextFl.text = ""
+            mEmailTextFl.tintColor = .black
+            mEmailTextFl.textColor = .black
+        } else  {
+            mEmailTextFl.text = "E-mail"
+            mEmailTextFl.textColor = .white
+        }
+    }
+    
     private func configureDelegate(){
         mEmailTextFl.delegate = self
         mMessageTxtV.delegate = self
-        
     }
         
     private func sendOffleinMessage(){
             // will sent by request (email, text)
             showOfflineMessageStatus()
         }
-        
-       
+    
+    
     private func showOfflineMessageStatus() {
-            mSuccessBckgV.isHidden = false
-            mSuccessBckgV.popupAnimation()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
-                //            UIView.animate(withDuration: 1, delay: 0, options:  [.curveEaseOut], animations: { [self] in
-                //                self.offlineVC.mSuccessBckgV.alpha = 0
-                //            }, completion: {_ in
-                //                self.offlineVC.mSuccessBckgV.isHidden = true
-                //                self.offlineVC.mSuccessBckgV.alpha = 1
-                //            })
-                
-                UIView.animate(withDuration: 0.5) {
-                    self.mSuccessBckgV.alpha = 0
-                } completion: { _ in
-                    self.mSuccessBckgV.isHidden = true
-                    self.mSuccessBckgV.alpha = 1
-                }
+        dismissKeyboard()
+        mSuccessBckgV.isHidden = false
+        mSuccessBckgV.popupAnimation()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
+            UIView.animate(withDuration: 0.5) {
+                self.mSuccessBckgV.alpha = 0
+            } completion: { _ in
+                self.mSuccessBckgV.isHidden = true
+                self.mSuccessBckgV.alpha = 1
             }
-            
         }
         
+    }
+    
     private func dismissKeyboard(){
-            mMessageTxtV.resignFirstResponder()
-            self.mMessageTxtV.text = ""
-        }
+        mEmailTextFl.resignFirstResponder()
+        mMessageTxtV.resignFirstResponder()
+        configureMessageTextView(isPlaceholder: true)
+    }
         
        
     private func isFilledInEmail(email: String?) -> Bool{
@@ -161,32 +168,38 @@ class OfflineViewController: UIViewController, StoryboardInitializable  {
                 self.mEmailTextFl.textColor = color_chat_placeholder
                 self.mEmailBottom.constant = -(self.mEmailErrorLb.frame.height)
             }
-            
         }
+    private func hideEmailError() {
+        UIView.animate(withDuration: 0.5) {
+            self.mEmailTextFl.textColor = .black
+            self.mEmailTextFl.backgroundColor = color_email
+            self.mEmailTextFl.layer.borderWidth = 0
+            self.mEmailBottom.constant = 0
+        }
+    }
         
     @objc func keyboardWillShow(notification: NSNotification) {
-            if let keyboardSize =  (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-               
-               // if mEmailTextFl.text == "E-mail" && mMessageTxtV.text == "Type your message" {
-                if !isOpenKeyboard {
-                    isOpenKeyboard = true
-                    self.mSendMessageBottomBckgV.frame.origin.y -= keyboardSize.height
+           if let keyboardSize =  (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey]
+            var bottomPadding:CGFloat = 0.0
+            if #available(iOS 13.0, *) {
+                let window = UIApplication.shared.windows[0]
+                bottomPadding = window.safeAreaInsets.bottom
+            }
+            self.mInputVBottom.constant = keyboardSize.height - bottomPadding
+                UIView.animate(withDuration: duration as! TimeInterval) {
+                    self.view.layoutIfNeeded()
                 }
             }
         }
         
     @objc func keyboardWillHide(notification: NSNotification) {
-            // if self.view.frame.origin.y != 0 {
-            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-
-                if isOpenKeyboard {
-                    isOpenKeyboard = false
-                    self.mSendMessageBottomBckgV.frame.origin.y += keyboardSize.height
-                }
-
-            }
-
+        let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey]
+        self.mInputVBottom.constant = 0
+        UIView.animate(withDuration: duration as! TimeInterval) {
+            self.view.layoutIfNeeded()
         }
+    }
     
     
     // MARK: ACTIONS
@@ -208,24 +221,33 @@ class OfflineViewController: UIViewController, StoryboardInitializable  {
 }
 
 
+//MARK: UITextFieldDelegate
+// -----------------------------
 extension OfflineViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        configureEmailTextFiled(isBecomeFirstResponder: false)
         textField.resignFirstResponder()
         return false
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.becomeFirstResponder()
+        configureEmailTextFiled(isBecomeFirstResponder: true)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
         guard let text = textField.text else { return false }
         let fullString = NSString(string: text).replacingCharacters(in: range, with: string)
+        if self.mEmailBottom.constant < 0 && fullString.count > 0  {
+            hideEmailError()
+        }
+            
         return true
     }
 }
 
+//MARK: UITextViewDelegate
+// -----------------------------
 extension OfflineViewController: UITextViewDelegate {
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         configureMessageTextView(isPlaceholder: false)
@@ -234,13 +256,15 @@ extension OfflineViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         textView.resignFirstResponder()
-        configureMessageTextView(isPlaceholder: true)
+        //configureMessageTextView(isPlaceholder: true)
 
     }
     func textViewDidChange(_ textView: UITextView) {
         if textView.text.count > 0 {
+            mSendBtn.isEnabled = true
             mSendImgV.image = #imageLiteral(resourceName: "offline_send")
         } else if textView.text == "" {
+            mSendBtn.isEnabled = false
             mSendImgV.image = #imageLiteral(resourceName: "send_active")
         }
     }
@@ -255,12 +279,4 @@ extension OfflineViewController: UITextViewDelegate {
               return true
           }
     }
-//    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-//        if text == "\n"  // Recognizes enter key in keyboard
-//        {
-//            textView.resignFirstResponder()
-//            return false
-//        }
-//        return true
-//    }
-//}
+

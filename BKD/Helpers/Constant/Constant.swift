@@ -98,7 +98,7 @@ let color_gradient_end = UIColor(named: "gradient_end")
 let color_map_circle = UIColor(named: "map_circle")
 let color_chat_placeholder = UIColor(named:"chat_placeholder")
 let color_Offline_bckg = UIColor(named: "gradient_blur_end")
-
+let color_email = UIColor(named: "email")
 
 
 //Fonts
