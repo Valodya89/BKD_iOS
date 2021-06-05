@@ -40,6 +40,12 @@ extension Date {
         return forrmater.string(from: self)
         
     }
+    func getDateByFormat() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = NSLocale(localeIdentifier: "en") as Locale
+        dateFormatter.dateFormat = "d MMM, YYYY"
+        return dateFormatter.string(from: self)
+    }
     func getString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"

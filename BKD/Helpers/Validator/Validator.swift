@@ -125,4 +125,14 @@ class Validator: NSObject {
         let distanceInMeters = fromCoordinate.distance(from: toCoordinate)
         return distanceInMeters
     }
+    
+    //MARK: CHAT PAGE  CHECKING
+    //MARK: ------------------------
+    
+    ///Is filled in email address
+    func isFilledInEmail(email: String) -> Bool {
+        return true
+        
+    }
+    
 }

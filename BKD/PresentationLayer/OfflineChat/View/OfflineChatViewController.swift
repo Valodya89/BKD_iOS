@@ -13,17 +13,20 @@ class OfflineChatViewController: MessagesViewController {
     
     //MARK: Variables
     private lazy  var offlineVC = OfflineViewController.initFromStoryboard(name: Constant.Storyboards.chat)
-    
+    private var emailBottom: CGFloat = 0.0
+    private var emailY: CGFloat = 0.0
+
     
     //MARK: - Life cycles
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
             self.navigationController?.setNavigationBarHidden(true, animated: true)
-            NotificationCenter.default.addObserver(self,
-                                                   selector: #selector(keyboardWillShow),
-                                                   name: UIResponder.keyboardWillShowNotification,
-                                                   object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+
+        
+        
                NotificationCenter.default.addObserver(self,
                                                       selector: #selector(keyboardWillHide),
                                                       name: UIResponder.keyboardWillHideNotification,
@@ -42,6 +45,8 @@ class OfflineChatViewController: MessagesViewController {
                                           y: 0,
                                           width: self.view.bounds.width,
                                           height: self.view.bounds.height)
+        emailBottom = offlineVC.mEmailBottom.constant
+        emailY = offlineVC.mEmailTextFl.frame.origin.y
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,12 +90,19 @@ class OfflineChatViewController: MessagesViewController {
         offlineVC.mSuccessBckgV.isHidden = false
         offlineVC.mSuccessBckgV.popupAnimation()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
-            UIView.animate(withDuration: 1, delay: 0, options:  [.curveEaseOut], animations: { [self] in
+//            UIView.animate(withDuration: 1, delay: 0, options:  [.curveEaseOut], animations: { [self] in
+//                self.offlineVC.mSuccessBckgV.alpha = 0
+//            }, completion: {_ in
+//                self.offlineVC.mSuccessBckgV.isHidden = true
+//                self.offlineVC.mSuccessBckgV.alpha = 1
+//            })
+            
+            UIView.animate(withDuration: 0.5) {
                 self.offlineVC.mSuccessBckgV.alpha = 0
-            }, completion: {_ in
+            } completion: { _ in
                 self.offlineVC.mSuccessBckgV.isHidden = true
                 self.offlineVC.mSuccessBckgV.alpha = 1
-            })
+            }
         }
        
 }
@@ -99,10 +111,26 @@ class OfflineChatViewController: MessagesViewController {
         self.messageInputBar.inputTextView.text = ""
     }
     
+    private func isFilledInEmail(email: String?) -> Bool{
+        guard let _ = email else {
+            return false
+        }
+        return true
+    }
+    
+    private func showEmailError(){
+        UIView.animate(withDuration: 0.5) {
+            self.offlineVC.mEmailBottom.constant = self.offlineVC.mEmailErrorLb.frame.height + 3
+        }
+
+    }
+    
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0 {
+            if messageInputBar.frame.origin.y == 0 {
                 self.offlineVC.mEmailTextFl.frame.origin.y -= keyboardSize.height
+               // offlineVC.mEmailBottom.constant = keyboardSize.height + self.offlineVC.mEmailTextFl.frame.height + 20
+
             }
             
            // UIView.animate(withDuration: 1, animations: { [self] in
@@ -112,9 +140,13 @@ class OfflineChatViewController: MessagesViewController {
     }
 
     @objc func keyboardWillHide(notification: NSNotification) {
-        if self.view.frame.origin.y != 0 {
-            self.offlineVC.mEmailTextFl.frame.origin.y = 0
-        }
+       // if self.view.frame.origin.y != 0 {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+          //  self.offlineVC.mEmailTextFl.frame.origin.y += keyboardSize.height
+            }
+           // offlineVC.mEmailBottom.constant = emailBottom
+       // self.offlineVC.view.layoutIfNeeded()
+       // }
     }
 }
 
@@ -122,8 +154,14 @@ class OfflineChatViewController: MessagesViewController {
 ////MARK: MessageInputBarDelegate
 extension OfflineChatViewController: InputBarAccessoryViewDelegate {
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
+        if isFilledInEmail(email: offlineVC.mEmailTextFl.text) {
             dismissKeyboard()
             sendOffleinMessage()
+        } else {
+            
+        }
+            
+            
     }
     func inputBar(_ inputBar: InputBarAccessoryView, textViewTextDidChangeTo text: String) {
         if  text.count > 0  {

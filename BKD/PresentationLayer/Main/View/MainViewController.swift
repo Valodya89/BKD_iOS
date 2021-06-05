@@ -341,7 +341,6 @@ class MainViewController: BaseViewController {
                              }, okAction: { [self] in
                                 if self.isPressedEdit {
                                     self.checkAnyFieldsHaveBeenEdited()
-
                                 }
                              })
     }
@@ -368,7 +367,6 @@ class MainViewController: BaseViewController {
             self?.searchHeaderV?.mSearchBckgV.alpha = 0.8
             self?.searchHeaderV?.mSearchLeftBtn.isHidden = false
             self?.searchHeaderV?.mSearchRightBtn.isHidden = true
-
         }
     }
     
@@ -377,6 +375,7 @@ class MainViewController: BaseViewController {
             self.animateSearchResult()
         }
     }
+    
     func  showFilter()  {
         searchResultV?.didPressFilter = { [weak self] isShowFilter in
             self?.isPressedFilter = isShowFilter
@@ -551,14 +550,12 @@ class MainViewController: BaseViewController {
             let onlineChat = UIStoryboard(name: Constant.Storyboards.chat, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.onlineChat) as! OnlineChatViewController
             self.navigationController?.pushViewController(onlineChat, animated: true)
         } else {
-            let offlineChat = UIStoryboard(name: Constant.Storyboards.chat, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.offlineChat) as! OfflineChatViewController
+            let offlineChat = UIStoryboard(name: Constant.Storyboards.chat, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.offlineChat) as! OfflineViewController
             self.navigationController?.pushViewController(offlineChat, animated: true)
         }
         
     }
-    
-        
- 
+
 }
 
 

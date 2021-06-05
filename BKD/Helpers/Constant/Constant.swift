@@ -27,7 +27,7 @@ struct Constant {
         static let seeMap = "SeeMapViewController"
         static let customLocation = "CustomLocationViewController"
         static let onlineChat = "OnlineChatViewController"
-        static let offlineChat = "OfflineChatViewController"
+        static let offlineChat = "OfflineViewController"
 
     }
     
