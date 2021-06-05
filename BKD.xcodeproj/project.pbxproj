@@ -23,8 +23,11 @@
 		560252EF2665919A00FB204C /* CustomLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560252EE2665919A00FB204C /* CustomLocationModel.swift */; };
 		560252F42665950700FB204C /* CustomLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560252F32665950700FB204C /* CustomLocationViewModel.swift */; };
 		5602532C26670A0100FB204C /* OnlineChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602532B26670A0100FB204C /* OnlineChatViewController.swift */; };
-		5602533126670A1000FB204C /* OnlineChat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5602533026670A1000FB204C /* OnlineChat.storyboard */; };
-		560253442667331A00FB204C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560253432667331A00FB204C /* ChatViewController.swift */; };
+		5602533126670A1000FB204C /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5602533026670A1000FB204C /* Chat.storyboard */; };
+		5602534C2667413A00FB204C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602534B2667413A00FB204C /* BaseViewController.swift */; };
+		5602536F2669AE1C00FB204C /* OfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602536E2669AE1B00FB204C /* OfflineViewController.swift */; };
+		560253AE266A828B00FB204C /* OfflineChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560253AD266A828B00FB204C /* OfflineChatViewController.swift */; };
+		560253C0266AB69100FB204C /* OfflineChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560253BF266AB69000FB204C /* OfflineChatViewModel.swift */; };
 		5618872D2645D99600BDDB33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5618872C2645D99600BDDB33 /* Assets.xcassets */; };
 		561887472645EE2A00BDDB33 /* UIButton+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561887462645EE2A00BDDB33 /* UIButton+Border.swift */; };
 		56188889264A61ED00BDDB33 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56188888264A61ED00BDDB33 /* TextField.swift */; };
@@ -34,7 +37,7 @@
 		5640952D264AE529001DC92D /* DropDownModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5640952C264AE529001DC92D /* DropDownModel.swift */; };
 		56409533264AE5A8001DC92D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56409532264AE5A8001DC92D /* Data.swift */; };
 		56409539264B24D8001DC92D /* BKDAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56409538264B24D8001DC92D /* BKDAlert.swift */; };
-		564E12AB264BEF94008CE884 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E12AA264BEF94008CE884 /* Date.swift */; };
+		564E12AB264BEF94008CE884 /* DateExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E12AA264BEF94008CE884 /* DateExtention.swift */; };
 		564E12D0264D72E2008CE884 /* SeeMap.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 564E12CF264D72E2008CE884 /* SeeMap.storyboard */; };
 		564E12D9264D7617008CE884 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E12D8264D7617008CE884 /* Constant.swift */; };
 		564E12E1264D787A008CE884 /* MenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E12E0264D787A008CE884 /* MenuModel.swift */; };
@@ -81,7 +84,6 @@
 		568E703B264440C2000CB6A9 /* MyBKDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E703A264440C2000CB6A9 /* MyBKDViewController.swift */; };
 		568E704026446136000CB6A9 /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E703F26446136000CB6A9 /* AboutUsViewController.swift */; };
 		568E704826446E2D000CB6A9 /* MyReservationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E704726446E2D000CB6A9 /* MyReservationsViewController.swift */; };
-		568E704D26446E73000CB6A9 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E704C26446E73000CB6A9 /* BaseViewController.swift */; };
 		568E706E264481B0000CB6A9 /* LeftTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E706C264481B0000CB6A9 /* LeftTableViewCell.swift */; };
 		568E706F264481B0000CB6A9 /* LeftTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 568E706D264481B0000CB6A9 /* LeftTableViewCell.xib */; };
 		568E70C326454DB1000CB6A9 /* AboutUs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568E70C226454DB1000CB6A9 /* AboutUs.storyboard */; };
@@ -92,7 +94,7 @@
 		5691A614265C50F20008081D /* CustomLocation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5691A613265C50F10008081D /* CustomLocation.storyboard */; };
 		5691A61B265C71EC0008081D /* ExteriorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5691A619265C71EC0008081D /* ExteriorCollectionViewCell.swift */; };
 		5691A61C265C71EC0008081D /* ExteriorCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5691A61A265C71EC0008081D /* ExteriorCollectionViewCell.xib */; };
-		5691A639265D53140008081D /* UIImageViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5691A638265D53140008081D /* UIImageViewExtention.swift */; };
+		5691A639265D53140008081D /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5691A638265D53140008081D /* Extentions.swift */; };
 		5691A641265D97550008081D /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5691A640265D97550008081D /* MainViewModel.swift */; };
 		5691A64E265DB6300008081D /* SearchHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5691A64D265DB6300008081D /* SearchHeaderViewModel.swift */; };
 		9893B8799BB3CC6B4B697417 /* Pods_BKD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3819EEF98357A5E10F4D7C /* Pods_BKD.framework */; };
@@ -134,8 +136,11 @@
 		560252EE2665919A00FB204C /* CustomLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLocationModel.swift; sourceTree = "<group>"; };
 		560252F32665950700FB204C /* CustomLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLocationViewModel.swift; sourceTree = "<group>"; };
 		5602532B26670A0100FB204C /* OnlineChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineChatViewController.swift; sourceTree = "<group>"; };
-		5602533026670A1000FB204C /* OnlineChat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OnlineChat.storyboard; sourceTree = "<group>"; };
-		560253432667331A00FB204C /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		5602533026670A1000FB204C /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
+		5602534B2667413A00FB204C /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		5602536E2669AE1B00FB204C /* OfflineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineViewController.swift; sourceTree = "<group>"; };
+		560253AD266A828B00FB204C /* OfflineChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineChatViewController.swift; sourceTree = "<group>"; };
+		560253BF266AB69000FB204C /* OfflineChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineChatViewModel.swift; sourceTree = "<group>"; };
 		5618872C2645D99600BDDB33 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		561887462645EE2A00BDDB33 /* UIButton+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Border.swift"; sourceTree = "<group>"; };
 		56188888264A61ED00BDDB33 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
@@ -145,7 +150,7 @@
 		5640952C264AE529001DC92D /* DropDownModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownModel.swift; sourceTree = "<group>"; };
 		56409532264AE5A8001DC92D /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		56409538264B24D8001DC92D /* BKDAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BKDAlert.swift; sourceTree = "<group>"; };
-		564E12AA264BEF94008CE884 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		564E12AA264BEF94008CE884 /* DateExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtention.swift; sourceTree = "<group>"; };
 		564E12CF264D72E2008CE884 /* SeeMap.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SeeMap.storyboard; sourceTree = "<group>"; };
 		564E12D8264D7617008CE884 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		564E12E0264D787A008CE884 /* MenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuModel.swift; sourceTree = "<group>"; };
@@ -197,7 +202,6 @@
 		568E703A264440C2000CB6A9 /* MyBKDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBKDViewController.swift; sourceTree = "<group>"; };
 		568E703F26446136000CB6A9 /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		568E704726446E2D000CB6A9 /* MyReservationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReservationsViewController.swift; sourceTree = "<group>"; };
-		568E704C26446E73000CB6A9 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		568E706C264481B0000CB6A9 /* LeftTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftTableViewCell.swift; sourceTree = "<group>"; };
 		568E706D264481B0000CB6A9 /* LeftTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeftTableViewCell.xib; sourceTree = "<group>"; };
 		568E70C226454DB1000CB6A9 /* AboutUs.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AboutUs.storyboard; sourceTree = "<group>"; };
@@ -208,7 +212,7 @@
 		5691A613265C50F10008081D /* CustomLocation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomLocation.storyboard; sourceTree = "<group>"; };
 		5691A619265C71EC0008081D /* ExteriorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExteriorCollectionViewCell.swift; sourceTree = "<group>"; };
 		5691A61A265C71EC0008081D /* ExteriorCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExteriorCollectionViewCell.xib; sourceTree = "<group>"; };
-		5691A638265D53140008081D /* UIImageViewExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtention.swift; sourceTree = "<group>"; };
+		5691A638265D53140008081D /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		5691A640265D97550008081D /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		5691A64D265DB6300008081D /* SearchHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderViewModel.swift; sourceTree = "<group>"; };
 		67BF4D2EBC1BB75BC66937A7 /* Pods-BKD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BKD.debug.xcconfig"; path = "Target Support Files/Pods-BKD/Pods-BKD.debug.xcconfig"; sourceTree = "<group>"; };
@@ -278,8 +282,8 @@
 		560252DF266535AB00FB204C /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				568E704C26446E73000CB6A9 /* BaseViewController.swift */,
 				560252E1266535CF00FB204C /* Result.swift */,
+				5602534B2667413A00FB204C /* BaseViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -299,7 +303,7 @@
 			children = (
 				5602532A266709CE00FB204C /* UI */,
 				5602532B26670A0100FB204C /* OnlineChatViewController.swift */,
-				5602533026670A1000FB204C /* OnlineChat.storyboard */,
+				5602533026670A1000FB204C /* Chat.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -321,9 +325,42 @@
 		5602532A266709CE00FB204C /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				560253432667331A00FB204C /* ChatViewController.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		560253A9266A824100FB204C /* OfflineChat */ = {
+			isa = PBXGroup;
+			children = (
+				560253AC266A825A00FB204C /* ViewModel */,
+				560253AB266A825200FB204C /* Model */,
+				560253AA266A824C00FB204C /* View */,
+			);
+			path = OfflineChat;
+			sourceTree = "<group>";
+		};
+		560253AA266A824C00FB204C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5602536E2669AE1B00FB204C /* OfflineViewController.swift */,
+				560253AD266A828B00FB204C /* OfflineChatViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		560253AB266A825200FB204C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		560253AC266A825A00FB204C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				560253BF266AB69000FB204C /* OfflineChatViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		561887342645E5A100BDDB33 /* UI */ = {
@@ -354,9 +391,9 @@
 			isa = PBXGroup;
 			children = (
 				561887462645EE2A00BDDB33 /* UIButton+Border.swift */,
-				564E12AA264BEF94008CE884 /* Date.swift */,
+				564E12AA264BEF94008CE884 /* DateExtention.swift */,
 				564E1305264EE294008CE884 /* UIViewExtention.swift */,
-				5691A638265D53140008081D /* UIImageViewExtention.swift */,
+				5691A638265D53140008081D /* Extentions.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -618,6 +655,7 @@
 		568E70942644BD2D000CB6A9 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				560253A9266A824100FB204C /* OfflineChat */,
 				560253262667098C00FB204C /* OnlineChat */,
 				560252DF266535AB00FB204C /* Base */,
 				5691A605265C50390008081D /* CustomLocation */,
@@ -1134,7 +1172,7 @@
 				561888A3264ABDFC00BDDB33 /* DropDownTableViewCell.xib in Resources */,
 				564E136A2652F0CF008CE884 /* PrivacyPoliceView.xib in Resources */,
 				5656323C265841BE00B78562 /* FilterSearchResultCell.xib in Resources */,
-				5602533126670A1000FB204C /* OnlineChat.storyboard in Resources */,
+				5602533126670A1000FB204C /* Chat.storyboard in Resources */,
 				560251DB2661074200FB204C /* Carousel.xib in Resources */,
 				568E6F5E2642FC50000CB6A9 /* LaunchScreen.storyboard in Resources */,
 				565A7AD72654C49B006C63D0 /* CategoryCollectionViewCell.xib in Resources */,
@@ -1308,15 +1346,18 @@
 			files = (
 				564E131F264F0319008CE884 /* CarouselView.swift in Sources */,
 				565632522658B11E00B78562 /* EquipmentModel.swift in Sources */,
+				560253AE266A828B00FB204C /* OfflineChatViewController.swift in Sources */,
 				5602532C26670A0100FB204C /* OnlineChatViewController.swift in Sources */,
 				568E703B264440C2000CB6A9 /* MyBKDViewController.swift in Sources */,
 				565BD3602659AED1001923F5 /* AppDelegate.swift in Sources */,
-				5691A639265D53140008081D /* UIImageViewExtention.swift in Sources */,
+				560253C0266AB69100FB204C /* OfflineChatViewModel.swift in Sources */,
+				5602534C2667413A00FB204C /* BaseViewController.swift in Sources */,
+				5691A639265D53140008081D /* Extentions.swift in Sources */,
 				568E704826446E2D000CB6A9 /* MyReservationsViewController.swift in Sources */,
+				5602536F2669AE1C00FB204C /* OfflineViewController.swift in Sources */,
 				56188889264A61ED00BDDB33 /* TextField.swift in Sources */,
 				5640952D264AE529001DC92D /* DropDownModel.swift in Sources */,
 				5691A5FC265C28860008081D /* AddressNameViewController.swift in Sources */,
-				560253442667331A00FB204C /* ChatViewController.swift in Sources */,
 				568E706E264481B0000CB6A9 /* LeftTableViewCell.swift in Sources */,
 				564E12E1264D787A008CE884 /* MenuModel.swift in Sources */,
 				560251E02661089C00FB204C /* CarouselCellView.swift in Sources */,
@@ -1337,7 +1378,6 @@
 				565A7AD62654C49B006C63D0 /* CategoryCollectionViewCell.swift in Sources */,
 				5691A64E265DB6300008081D /* SearchHeaderViewModel.swift in Sources */,
 				564E12D9264D7617008CE884 /* Constant.swift in Sources */,
-				568E704D26446E73000CB6A9 /* BaseViewController.swift in Sources */,
 				560252F42665950700FB204C /* CustomLocationViewModel.swift in Sources */,
 				5656323B265841BE00B78562 /* FilterSearchResultCell.swift in Sources */,
 				568E70CA26455286000CB6A9 /* MainCollectionViewCell.swift in Sources */,
@@ -1354,7 +1394,7 @@
 				561887472645EE2A00BDDB33 /* UIButton+Border.swift in Sources */,
 				565A7AC726548009006C63D0 /* SearchResultView.swift in Sources */,
 				568E703626444033000CB6A9 /* NotificationsViewController.swift in Sources */,
-				564E12AB264BEF94008CE884 /* Date.swift in Sources */,
+				564E12AB264BEF94008CE884 /* DateExtention.swift in Sources */,
 				560252E72665368E00FB204C /* SearchPlacesResult.swift in Sources */,
 				5602526726616C8700FB204C /* Storyboardinitializable.swift in Sources */,
 				5691A61B265C71EC0008081D /* ExteriorCollectionViewCell.swift in Sources */,

@@ -20,7 +20,7 @@
             <objects>
                 <viewController id="YSm-xS-VSB" customClass="MainViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VrM-PG-bE9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Igf-W7-Esb">
@@ -70,7 +70,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" id="hgO-ot-Ek2">
-                                <rect key="frame" x="0.0" y="0.0" width="415" height="31"/>
+                                <rect key="frame" x="0.0" y="0.0" width="415" height="34"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" name="background"/>
                             </view>
@@ -194,7 +194,7 @@
             <objects>
                 <viewController id="baS-Zk-gBJ" customClass="CategoryViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kYK-fv-ZhM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ilV-lK-Jwv">
@@ -239,7 +239,7 @@
             <objects>
                 <viewController id="ceI-lw-dx8" customClass="NotificationsViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A1I-cU-SsK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xd4-CU-VYz">
@@ -296,7 +296,7 @@
             <objects>
                 <viewController id="E7g-TO-7Y0" customClass="MyBKDViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="foA-r9-fCl">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aUz-Rk-ztl">
@@ -361,7 +361,7 @@
             <objects>
                 <viewController storyboardIdentifier="AboutUsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gSa-Xv-Ipy" customClass="AboutUsViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tUP-iC-jNn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="nDl-gS-wXU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -386,7 +386,7 @@
             <objects>
                 <viewController storyboardIdentifier="MyReservationsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4kt-qQ-nUS" customClass="MyReservationsViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="j4K-5k-2Pn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="KTz-7d-pnZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
