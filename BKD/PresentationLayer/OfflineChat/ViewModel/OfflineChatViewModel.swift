@@ -12,7 +12,8 @@ class OfflineChatViewModel: NSObject {
     let validator = Validator()
 
     //MARK: VALIDATION
-    func isFillEmail(email: String, didResult: @escaping (Bool) -> ()) {
-        
+    func isValidEmail(email: String, didResult: @escaping (Bool) -> ()) {
+        didResult( validator.isValidEmail(email))
+       
     }
 }

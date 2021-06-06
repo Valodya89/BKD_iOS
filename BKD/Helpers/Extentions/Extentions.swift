@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+//MARK: UIImageView extension
 extension UIImageView {
     func setTintColor(color:UIColor) {
         self.image = self.image?.withRenderingMode(.alwaysTemplate)
@@ -14,6 +16,8 @@ extension UIImageView {
     }
 }
 
+
+//MARK: UITextField extension
 extension UITextField {
     func setPadding() {
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 20))
@@ -22,7 +26,29 @@ extension UITextField {
     }
 }
 
+//MARK: UITextView extension
+extension UITextView {
+    // Note: This will trigger a text rendering!
+    func calculateViewHeightWithCurrentWidth() -> CGFloat {
+        let textWidth = self.frame.width -
+            self.textContainerInset.left -
+            self.textContainerInset.right -
+            self.textContainer.lineFragmentPadding * 2.0 -
+            self.contentInset.left -
+            self.contentInset.right
+        
+        let maxSize = CGSize(width: textWidth, height: CGFloat.greatestFiniteMagnitude)
+        var calculatedSize = self.attributedText.boundingRect(with: maxSize,
+                                                              options: [.usesLineFragmentOrigin, .usesFontLeading],
+                                                                      context: nil).size
+        calculatedSize.height += self.textContainerInset.top
+        calculatedSize.height += self.textContainerInset.bottom
+        
+        return ceil(calculatedSize.height)
+    }
+}
 
+//MARK: UILabel extension
 extension UILabel {
     func requiredHeight(labelText:String, width: CGFloat, font: UIFont) -> CGFloat {
 

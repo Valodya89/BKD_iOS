@@ -35,10 +35,13 @@ class OfflineViewController: UIViewController, StoryboardInitializable  {
     @IBOutlet weak var mDateLb: UILabel!
     @IBOutlet weak var mEmailBottom: NSLayoutConstraint!
     @IBOutlet weak var mInputVBottom: NSLayoutConstraint!
+    @IBOutlet weak var mMessageTextVHeight: NSLayoutConstraint!
     //MARK: Variables
     weak var delegate: OfflineViewControllerDelegate?
-    private var emailBottom: CGFloat = 0.0
-    private var emailY: CGFloat = 0.0
+    let offlineChatViewModel: OfflineChatViewModel = OfflineChatViewModel()
+
+    private var textViewMinHeight: CGFloat = 36
+    private var textViewMaxHeight: CGFloat = 129
     private var isOpenKeyboard: Bool = false
     
     //MARK: - Life cycles
@@ -47,7 +50,7 @@ class OfflineViewController: UIViewController, StoryboardInitializable  {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.tabBarController?.tabBar.isHidden = true
-
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         
@@ -62,14 +65,12 @@ class OfflineViewController: UIViewController, StoryboardInitializable  {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.tabBarController?.tabBar.isHidden = false
-
+        
         NotificationCenter.default.removeObserver(self)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        emailBottom = mEmailBottom.constant
-        emailY = mEmailTextFl.frame.origin.y
     }
     
     override func viewDidLoad() {
@@ -77,26 +78,25 @@ class OfflineViewController: UIViewController, StoryboardInitializable  {
         setupView()
     }
     
-  
-
+    
     func setupView() {
-            configureView()
+        configureView()
         configureDelegate()
-            // mSuccessBckgV.setBorder(color: .white, width: 2)
-        }
-        
+    }
+    
     private func configureView(){
         mSendBtn.isEnabled = false
+        mMessageTxtV.tintColor = .white
+        mEmailTextFl.tintColor = .black
         mDateLb.text = Date().getDateByFormat()
         mNoticeLb.setMargins()
         mNavigationBarV.setShadowByBezierPath(color: .black)
         mEmailTextFl.setPadding()
-        mSuccessBckgV.roundCornersWithBorder(corners: [.topLeft, .bottomRight, .topRight, .bottomLeft],
-                                             radius: 10,
-                                             borderColor: .white,
-                                             borderWidth: 2.0)
+//        mSuccessBckgV.makeBorderWithCornerRadius(radius: 10, borderColor: .white, borderWidth: 2.0)
+        
     }
     private func configureMessageTextView(isPlaceholder: Bool) {
+        
         if !isPlaceholder {
             mMessageTxtV.tintColor = .white
             mMessageTxtV.textColor = .white
@@ -105,17 +105,17 @@ class OfflineViewController: UIViewController, StoryboardInitializable  {
         } else if isPlaceholder {
             mMessageTxtV.textColor = color_chat_placeholder
             mMessageTxtV.font = font_chat_placeholder
-            mMessageTxtV.text = "Type your message"
+            mMessageTxtV.text = Constant.Texts.messagePlaceholder
         }
     }
     
     private func configureEmailTextFiled(isBecomeFirstResponder: Bool) {
-        if isBecomeFirstResponder {
+        if isBecomeFirstResponder && mEmailTextFl.text == key_email {
             mEmailTextFl.text = ""
             mEmailTextFl.tintColor = .black
             mEmailTextFl.textColor = .black
-        } else  {
-            mEmailTextFl.text = "E-mail"
+        } else if mEmailTextFl.text?.count == 0 {
+            mEmailTextFl.text = key_email
             mEmailTextFl.textColor = .white
         }
     }
@@ -124,15 +124,17 @@ class OfflineViewController: UIViewController, StoryboardInitializable  {
         mEmailTextFl.delegate = self
         mMessageTxtV.delegate = self
     }
-        
+    
     private func sendOffleinMessage(){
-            // will sent by request (email, text)
-            showOfflineMessageStatus()
-        }
+        // will sent by request (email, text)
+        showOfflineMessageStatus()
+    }
     
     
     private func showOfflineMessageStatus() {
         dismissKeyboard()
+        mSendImgV.image = #imageLiteral(resourceName: "send_active")
+        mSendBtn.isEnabled = false
         mSuccessBckgV.isHidden = false
         mSuccessBckgV.popupAnimation()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
@@ -151,24 +153,25 @@ class OfflineViewController: UIViewController, StoryboardInitializable  {
         mMessageTxtV.resignFirstResponder()
         configureMessageTextView(isPlaceholder: true)
     }
-        
-       
+    
+    
     private func isFilledInEmail(email: String?) -> Bool{
-        if email?.count == 0 || email == "E-mail" {
-                return false
-            }
-            return true
+        if email?.count == 0 || email == key_email {
+            return false
         }
-        
-       
-    private func showEmailError(){
-            UIView.animate(withDuration: 0.5) {
-                self.mEmailTextFl.backgroundColor = .clear
-                self.mEmailTextFl.setBorder(color: color_error!, width: 1)
-                self.mEmailTextFl.textColor = color_chat_placeholder
-                self.mEmailBottom.constant = -(self.mEmailErrorLb.frame.height)
-            }
+        return true
+    }
+    
+    
+    private func showEmailError(errorText: String){
+        UIView.animate(withDuration: 0.5) {
+            self.mEmailErrorLb.text = errorText
+            self.mEmailTextFl.backgroundColor = .clear
+            self.mEmailTextFl.setBorder(color: color_error!, width: 1)
+            self.mEmailTextFl.textColor = color_chat_placeholder
+            self.mEmailBottom.constant = -(self.mEmailErrorLb.frame.height)
         }
+    }
     private func hideEmailError() {
         UIView.animate(withDuration: 0.5) {
             self.mEmailTextFl.textColor = .black
@@ -177,22 +180,23 @@ class OfflineViewController: UIViewController, StoryboardInitializable  {
             self.mEmailBottom.constant = 0
         }
     }
-        
+    
+    //MARK: Keyboard Notification funcs
     @objc func keyboardWillShow(notification: NSNotification) {
-           if let keyboardSize =  (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-                let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey]
+        if let keyboardSize =  (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey]
             var bottomPadding:CGFloat = 0.0
             if #available(iOS 13.0, *) {
                 let window = UIApplication.shared.windows[0]
                 bottomPadding = window.safeAreaInsets.bottom
             }
             self.mInputVBottom.constant = keyboardSize.height - bottomPadding
-                UIView.animate(withDuration: duration as! TimeInterval) {
-                    self.view.layoutIfNeeded()
-                }
+            UIView.animate(withDuration: duration as! TimeInterval) {
+                self.view.layoutIfNeeded()
             }
         }
-        
+    }
+    
     @objc func keyboardWillHide(notification: NSNotification) {
         let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey]
         self.mInputVBottom.constant = 0
@@ -208,14 +212,20 @@ class OfflineViewController: UIViewController, StoryboardInitializable  {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.popViewController(animated: true)
         mMessageTxtV.resignFirstResponder()
-
+        
     }
     
     @IBAction func sendMessage(_ sender: UIButton) {
-        if isFilledInEmail(email: mEmailTextFl.text) {
-            showOfflineMessageStatus()
-        } else {
-            showEmailError()
+        if !isFilledInEmail(email: mEmailTextFl.text) {
+            showEmailError(errorText: Constant.Texts.errorEmail)
+        } else  {
+            offlineChatViewModel.isValidEmail(email: mEmailTextFl.text!) { [self] (isValid) in
+                if isValid { // we should send request
+                    self.showOfflineMessageStatus()
+                } else {
+                    showEmailError(errorText: Constant.Texts.errorIncorrectEmail)
+                }
+            }
         }
     }
 }
@@ -229,7 +239,7 @@ extension OfflineViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return false
     }
-
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.becomeFirstResponder()
         configureEmailTextFiled(isBecomeFirstResponder: true)
@@ -241,7 +251,7 @@ extension OfflineViewController: UITextFieldDelegate {
         if self.mEmailBottom.constant < 0 && fullString.count > 0  {
             hideEmailError()
         }
-            
+        
         return true
     }
 }
@@ -255,11 +265,27 @@ extension OfflineViewController: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.count == 0 {
+            configureMessageTextView(isPlaceholder: true)
+        }
+        if mEmailTextFl.text?.count == 0 {
+            configureEmailTextFiled(isBecomeFirstResponder: false)
+        }
         textView.resignFirstResponder()
-        //configureMessageTextView(isPlaceholder: true)
-
     }
+    
     func textViewDidChange(_ textView: UITextView) {
+        // textView height will increase depend of lines
+        let textHeight = textView.calculateViewHeightWithCurrentWidth()
+        if textView.text != "" {
+            if textHeight > textViewMinHeight && textHeight <= textViewMaxHeight {
+                mMessageTextVHeight.constant = textHeight/2
+            }
+        } else {
+            mMessageTextVHeight.constant = 0
+        }
+        self.view.layoutIfNeeded()
+         //send button will enabled or disabled dependent of typing
         if textView.text.count > 0 {
             mSendBtn.isEnabled = true
             mSendImgV.image = #imageLiteral(resourceName: "offline_send")
@@ -270,13 +296,16 @@ extension OfflineViewController: UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-       
-        if text == "\n"  // Recognizes enter key in keyboard
-              {
-                  textView.resignFirstResponder()
-                  return false
-              }
-              return true
-          }
+                
+        if text == "\n" { //this will return keyboard
+            textView.resignFirstResponder()
+            return false
+        } else if text == "" { // this will permit remove the text
+            return true
+        }
+        //this will check maximum range of lines
+        let textHeight = textView.calculateViewHeightWithCurrentWidth()
+        return textHeight < textViewMaxHeight
     }
+}
 

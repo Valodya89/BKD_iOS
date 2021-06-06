@@ -54,6 +54,9 @@ struct Constant {
         static let agree = "Agree"
         static let startWorkingHour = "07:30"
         static let endWorkingHour = "18:30"
+        static let errorEmail = "Write your email address, so that we answer the message once it's reviewed"
+        static let errorIncorrectEmail = "Incorrect E-mail address"
+        static let messagePlaceholder = "Type your message"
 
     }
 }
@@ -72,6 +75,8 @@ let key_pickUpTime = "pickUpTime"
 let key_returnTime = "returnTime"
 let key_pickUpLocation = "pickUpLocation"
 let key_returnLocation = "returnLocation"
+let key_email = "E-mail"
+
 
 //Colors
 let color_background = UIColor(named: "background")

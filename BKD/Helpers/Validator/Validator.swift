@@ -128,11 +128,13 @@ class Validator: NSObject {
     
     //MARK: CHAT PAGE  CHECKING
     //MARK: ------------------------
-    
-    ///Is filled in email address
-    func isFilledInEmail(email: String) -> Bool {
-        return true
-        
+   
+    ///Is valid  email address
+    func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
     }
     
 }

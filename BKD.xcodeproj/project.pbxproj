@@ -26,7 +26,6 @@
 		5602533126670A1000FB204C /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5602533026670A1000FB204C /* Chat.storyboard */; };
 		5602534C2667413A00FB204C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602534B2667413A00FB204C /* BaseViewController.swift */; };
 		5602536F2669AE1C00FB204C /* OfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602536E2669AE1B00FB204C /* OfflineViewController.swift */; };
-		560253AE266A828B00FB204C /* OfflineChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560253AD266A828B00FB204C /* OfflineChatViewController.swift */; };
 		560253C0266AB69100FB204C /* OfflineChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560253BF266AB69000FB204C /* OfflineChatViewModel.swift */; };
 		5618872D2645D99600BDDB33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5618872C2645D99600BDDB33 /* Assets.xcassets */; };
 		561887472645EE2A00BDDB33 /* UIButton+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561887462645EE2A00BDDB33 /* UIButton+Border.swift */; };
@@ -140,7 +139,6 @@
 		5602533026670A1000FB204C /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		5602534B2667413A00FB204C /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		5602536E2669AE1B00FB204C /* OfflineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineViewController.swift; sourceTree = "<group>"; };
-		560253AD266A828B00FB204C /* OfflineChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineChatViewController.swift; sourceTree = "<group>"; };
 		560253BF266AB69000FB204C /* OfflineChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineChatViewModel.swift; sourceTree = "<group>"; };
 		5618872C2645D99600BDDB33 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		561887462645EE2A00BDDB33 /* UIButton+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Border.swift"; sourceTree = "<group>"; };
@@ -345,7 +343,6 @@
 			isa = PBXGroup;
 			children = (
 				5602536E2669AE1B00FB204C /* OfflineViewController.swift */,
-				560253AD266A828B00FB204C /* OfflineChatViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1350,7 +1347,6 @@
 			files = (
 				564E131F264F0319008CE884 /* CarouselView.swift in Sources */,
 				565632522658B11E00B78562 /* EquipmentModel.swift in Sources */,
-				560253AE266A828B00FB204C /* OfflineChatViewController.swift in Sources */,
 				5602532C26670A0100FB204C /* OnlineChatViewController.swift in Sources */,
 				568E703B264440C2000CB6A9 /* MyBKDViewController.swift in Sources */,
 				565BD3602659AED1001923F5 /* AppDelegate.swift in Sources */,

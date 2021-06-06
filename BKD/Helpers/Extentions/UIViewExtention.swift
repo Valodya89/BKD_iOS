@@ -9,7 +9,7 @@ import UIKit
 
 
 extension UIView {
-    
+    //MARK: GRADIENTS
     func setGradient(startColor: UIColor, endColor: UIColor) {
         //gradient
         let gradientLayer = CAGradientLayer()
@@ -35,6 +35,7 @@ extension UIView {
     }
    
     
+    //MARK: SHADOWS
     func setShadow(color: UIColor) {
         self.layer.masksToBounds = false
         self.layer.shadowColor = color.cgColor
@@ -44,13 +45,6 @@ extension UIView {
         
     }
     
-    func setBlur() {
-        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = self.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.addSubview(blurEffectView)
-    }
     func setShadowByBezierPath(color: UIColor) {
         let shadowSize: CGFloat = 1.0
             let shadowPath = UIBezierPath(rect: CGRect(x: -shadowSize / 2,
@@ -64,12 +58,51 @@ extension UIView {
             self.layer.shadowPath = shadowPath.cgPath
     }
     
-    
+    //MARK:BORDERS
     public func setBorder(color: UIColor, width: CGFloat) {
         self.layer.borderWidth = width
         self.layer.borderColor = color.cgColor
     }
     
+    public func setBorderBySide(sides: [BorderSide], color: UIColor, width: CGFloat) {
+        let border = UIView()
+        border.translatesAutoresizingMaskIntoConstraints = false
+        border.backgroundColor = color
+        self.addSubview(border)
+
+        let topConstraint = topAnchor.constraint(equalTo: border.topAnchor)
+        let rightConstraint = trailingAnchor.constraint(equalTo: border.trailingAnchor)
+        let bottomConstraint = bottomAnchor.constraint(equalTo: border.bottomAnchor)
+        let leftConstraint = leadingAnchor.constraint(equalTo: border.leadingAnchor)
+        let heightConstraint = border.heightAnchor.constraint(equalToConstant: width)
+        let widthConstraint = border.widthAnchor.constraint(equalToConstant: width)
+
+        for side in sides {
+            switch side {
+            case .top:
+                NSLayoutConstraint.activate([leftConstraint, topConstraint, rightConstraint, heightConstraint])
+            case .right:
+                NSLayoutConstraint.activate([topConstraint, rightConstraint, bottomConstraint, widthConstraint])
+            case .bottom:
+                NSLayoutConstraint.activate([rightConstraint, bottomConstraint, leftConstraint, heightConstraint])
+            case .left:
+                NSLayoutConstraint.activate([bottomConstraint, leftConstraint, topConstraint, widthConstraint])
+            }
+        }
+        
+    }
+    
+    //MARK: BLUR
+    func setBlur() {
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.addSubview(blurEffectView)
+    }
+    
+    
+   //MARK:ROUNSCORNER
     func roundCorners(corners:UIRectCorner, radius: CGFloat) {
             let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
             let mask = CAShapeLayer()
@@ -101,6 +134,44 @@ extension UIView {
         
     }
     
+   
+    func makeBorderWithCornerRadius(radius: CGFloat,
+                                    borderColor: UIColor,
+                                    borderWidth: CGFloat) {
+            let rect = self.bounds
+
+            let maskPath = UIBezierPath(roundedRect: rect,
+                                        byRoundingCorners: .allCorners,
+                                        cornerRadii: CGSize(width: radius, height: radius))
+
+            // Create the shape layer and set its path
+            let maskLayer = CAShapeLayer()
+            maskLayer.frame = rect
+            maskLayer.path  = maskPath.cgPath
+
+            // Set the newly created shape layer as the mask for the view's layer
+            self.layer.mask = maskLayer
+
+            // Create path for border
+            let borderPath = UIBezierPath(roundedRect: rect,
+                                          byRoundingCorners: .allCorners,
+                                          cornerRadii: CGSize(width: radius, height: radius))
+
+            // Create the shape layer and set its path
+            let borderLayer = CAShapeLayer()
+
+            borderLayer.frame       = rect
+            borderLayer.path        = borderPath.cgPath
+            borderLayer.strokeColor = borderColor.cgColor
+            borderLayer.fillColor   = UIColor.clear.cgColor
+            borderLayer.lineWidth   = borderWidth * UIScreen.main.scale
+
+            //Add this layer to give border.
+            self.layer.addSublayer(borderLayer)
+        }
+
+
+    //MARK: ANIMATIONs
     func showFlip(){
                 if self.isHidden{
                     UIView.transition(with: self, duration: 1, options: [.transitionFlipFromRight,.allowUserInteraction], animations: nil, completion: nil)
@@ -115,34 +186,6 @@ extension UIView {
             }
     }
     
-    public func setBorderBySide(sides: [BorderSide], color: UIColor, width: CGFloat) {
-        let border = UIView()
-        border.translatesAutoresizingMaskIntoConstraints = false
-        border.backgroundColor = color
-        self.addSubview(border)
-
-        let topConstraint = topAnchor.constraint(equalTo: border.topAnchor)
-        let rightConstraint = trailingAnchor.constraint(equalTo: border.trailingAnchor)
-        let bottomConstraint = bottomAnchor.constraint(equalTo: border.bottomAnchor)
-        let leftConstraint = leadingAnchor.constraint(equalTo: border.leadingAnchor)
-        let heightConstraint = border.heightAnchor.constraint(equalToConstant: width)
-        let widthConstraint = border.widthAnchor.constraint(equalToConstant: width)
-
-        for side in sides {
-            switch side {
-            case .top:
-                NSLayoutConstraint.activate([leftConstraint, topConstraint, rightConstraint, heightConstraint])
-            case .right:
-                NSLayoutConstraint.activate([topConstraint, rightConstraint, bottomConstraint, widthConstraint])
-            case .bottom:
-                NSLayoutConstraint.activate([rightConstraint, bottomConstraint, leftConstraint, heightConstraint])
-            case .left:
-                NSLayoutConstraint.activate([bottomConstraint, leftConstraint, topConstraint, widthConstraint])
-            }
-        }
-        
-    }
-
     func popupAnimation() {
         self.alpha = 1
         self.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
