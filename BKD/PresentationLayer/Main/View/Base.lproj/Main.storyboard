@@ -20,7 +20,7 @@
             <objects>
                 <viewController id="YSm-xS-VSB" customClass="MainViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VrM-PG-bE9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Igf-W7-Esb">
@@ -39,14 +39,14 @@
                                 </collectionReusableView>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nOJ-Gd-nKd">
-                                <rect key="frame" x="351" y="616.5" width="65" height="34"/>
+                                <rect key="frame" x="347" y="616.5" width="69" height="34"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uBi-RC-Pej">
-                                        <rect key="frame" x="0.0" y="0.0" width="65" height="34"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="69" height="34"/>
                                         <color key="backgroundColor" name="gradient_start"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eI-UP-HPX">
-                                        <rect key="frame" x="6" y="2" width="53" height="30"/>
+                                        <rect key="frame" x="6" y="2" width="57" height="30"/>
                                         <fontDescription key="fontDescription" name="Mulish-Bold" family="Mulish" pointSize="9"/>
                                         <state key="normal" title="Chat with us!">
                                             <color key="titleColor" name="navigationBar"/>
@@ -71,7 +71,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" id="hgO-ot-Ek2">
-                                <rect key="frame" x="0.0" y="0.0" width="415" height="34"/>
+                                <rect key="frame" x="-1" y="-1" width="415" height="31"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" name="background"/>
                             </view>
@@ -194,7 +194,7 @@
             <objects>
                 <viewController id="baS-Zk-gBJ" customClass="CategoryViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kYK-fv-ZhM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ilV-lK-Jwv">
@@ -239,7 +239,7 @@
             <objects>
                 <viewController id="ceI-lw-dx8" customClass="NotificationsViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A1I-cU-SsK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xd4-CU-VYz">
@@ -296,7 +296,7 @@
             <objects>
                 <viewController id="E7g-TO-7Y0" customClass="MyBKDViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="foA-r9-fCl">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aUz-Rk-ztl">
@@ -320,7 +320,7 @@
         <scene sceneID="a71-cK-LJo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="C5f-mn-uGM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Notifications" image="notifications" id="6p5-Ax-m4u"/>
+                    <tabBarItem key="tabBarItem" title="Notifications" image="notifications" selectedImage="notifications_selected" id="6p5-Ax-m4u"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="JF6-Id-AS1">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -340,7 +340,7 @@
         <scene sceneID="FeE-Yo-ooI">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2tV-oT-Rt3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="My BKD" image="my_bkd" id="dy4-qu-ITB"/>
+                    <tabBarItem key="tabBarItem" title="My BKD" image="my_bkd" selectedImage="my_bkd_selected" id="dy4-qu-ITB"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Jnj-fP-kl4">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -361,7 +361,7 @@
             <objects>
                 <viewController storyboardIdentifier="AboutUsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gSa-Xv-Ipy" customClass="AboutUsViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tUP-iC-jNn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="nDl-gS-wXU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -386,7 +386,7 @@
             <objects>
                 <viewController storyboardIdentifier="MyReservationsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4kt-qQ-nUS" customClass="MyReservationsViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="j4K-5k-2Pn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="KTz-7d-pnZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -427,7 +427,7 @@
         <scene sceneID="OrA-d3-Whw">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oLC-7L-hXX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="My Reservations" image="my_reservations" id="1zX-SA-S2b"/>
+                    <tabBarItem key="tabBarItem" title="My Reservations" image="my_reservations" selectedImage="my_reservations_selected" id="1zX-SA-S2b"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="1SJ-yF-oJX">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -455,8 +455,11 @@
         <image name="home_selected" width="24" height="24"/>
         <image name="menu" width="16" height="14"/>
         <image name="my_bkd" width="24" height="24.5"/>
+        <image name="my_bkd_selected" width="24" height="24"/>
         <image name="my_reservations" width="22" height="24"/>
+        <image name="my_reservations_selected" width="22" height="24"/>
         <image name="notifications" width="21" height="24.5"/>
+        <image name="notifications_selected" width="21" height="24"/>
         <namedColor name="background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
