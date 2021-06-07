@@ -36,7 +36,7 @@ class MainViewController: BaseViewController {
     private var isPressedEdit: Bool = false
     private var isOnline: Bool = false
 
-
+    //MARK: - Life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -44,7 +44,9 @@ class MainViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
    }
+    
     
     func setupView() {
         UserDefaults.standard.removeObject(forKey: key_pickUpDate)
@@ -486,6 +488,7 @@ class MainViewController: BaseViewController {
         searchHeaderV!.didSelectSearch = { [weak self]  in
             self?.isSearchResultPage = true
             self?.isPressedEdit = false
+            self?.searchHeaderV?.layer.shadowOpacity = 1.0
             self?.navigationController!.navigationBar.topItem?.title = "Search Results"
             self?.mLeftBarBtn.image = img_back
             self?.mRightBarBtn.image = img_chat
@@ -497,11 +500,18 @@ class MainViewController: BaseViewController {
     
     func selectedBack() {
         isSearchResultPage = false
+        isPressedEdit = true
+        
         navigationController!.navigationBar.topItem?.title = ""
         mLeftBarBtn.image = img_menu
         mRightBarBtn.image = img_bkd
         mChatWithUsBckgV.isHidden = isSearchResultPage
-
+        searchHeaderV?.mSearchBckgV.isUserInteractionEnabled = true
+        searchHeaderV?.mSearchBckgV.alpha = 1.0
+        searchHeaderV?.mArrowBtn.isHidden = true
+        searchHeaderV?.layer.shadowOpacity = 0.0
+        searchHeaderV?.mSearchLeading.constant = 0
+        self.view.layoutIfNeeded()
         mCarCollectionV.reloadData()
         animateSearchHeader()
     }
