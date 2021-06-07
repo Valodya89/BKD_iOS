@@ -179,9 +179,9 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         if checkFieldsFilled() {
             UIView.animate(withDuration: 0.5) { [self] in
                 self.mSearchLeading.constant = self.mSearchBckgV.bounds.width - self.mSearchBtn.frame.size.width
-                self.layoutIfNeeded()
             } completion: { _ in
                 self.didSelectSearch!()
+                self.layoutIfNeeded()
             }
         }
     }
