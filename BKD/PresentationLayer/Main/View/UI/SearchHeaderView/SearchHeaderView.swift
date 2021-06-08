@@ -100,10 +100,10 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         
         mDayPickUpBtn.isHidden = true
         mMonthPickUpBtn.isHidden = true
-        mPickUpDataTxtFl.text = "Pick Up Date"
+        mPickUpDataTxtFl.text = Constant.Texts.pickUpDate
         mDayReturnDateBtn.isHidden = true
         mMonthReturnDateBtn.isHidden = true
-        mReturnDateTxtFl.text = "Return Date"
+        mReturnDateTxtFl.text =  Constant.Texts.returnDate
         mReturnTimeTxtFl.textColor = UIColor(named: "choose_date")
         mPickUpTimeTxtFl.textColor = UIColor(named: "choose_date")
         mPickUpLocationBtn.tintColor = UIColor(named: "choose_date")
@@ -116,27 +116,9 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         mLocationDropDownView.clipsToBounds = true
         mLocationDropDownView.layer.borderWidth = 0.3
         mLocationDropDownView.layer.borderColor = UIColor(named: "gradient_end")?.cgColor
-      
         
-        mLocationDropDownView.hiddenLocationList = { [weak self] in
-            self?.hiddenLocationList()
-            self?.mLocationDropDownView.layer.shadowOpacity = 0;
-
-        }
-        
-        mLocationDropDownView.didSelectLocation = { [weak self] txt in
-            self?.didSelectLocation?(txt, (self?.currLocationBtn.tag)!)
-            self?.currLocationBtn.setTitle(txt, for: .normal)
-            self?.currLocationBtn.titleLabel!.font = font_selected_filter
-            self?.currLocationBtn.setTitleColor(color_entered_date, for: .normal)
-            self?.currLocationDropImgV.image = UIImage(named: "dropDown_blue")
-            self?.currLocationBtn.tag == 4 ?  UserDefaults.standard.set(self?.currLocationBtn.title(for: .normal), forKey: key_pickUpLocation) :  UserDefaults.standard.set(self?.currLocationBtn.title(for: .normal), forKey: key_returnLocation)
-            if self?.mErrorMessageLb.isHidden == false{
-              let _ = self?.checkFieldsFilled()
-            }
-            self?.pickUPDropisClose = true
-            self?.returnDropisClose = true
-        }
+        didSelectLocationFromList()
+        didHideLocationList()
     }
     
     func setBorder() {
@@ -170,19 +152,52 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         UIView.animate(withDuration: 0.3, animations: { [self] in
             self.mLocationDropDownView.mheightLayoutConst.constant = 0.0
             self.mLocationLb.textColor = color_search_placeholder
-           // pickUPDropisClose = true
             self.layoutIfNeeded()
         })
     }
     
+    private func didSelectLocationFromList () {
+        mLocationDropDownView.didSelectLocation = { [weak self] txt in
+            self?.didSelectLocation?(txt, (self?.currLocationBtn.tag)!)
+            self?.currLocationBtn.setTitle(txt, for: .normal)
+            self?.currLocationBtn.titleLabel!.font = font_selected_filter
+            self?.currLocationBtn.setTitleColor(color_entered_date, for: .normal)
+            self?.animateArrow(arrowImgV: self!.currLocationDropImgV, rotationAngle: CGFloat(Double.pi * -2))
+
+            self?.currLocationBtn.tag == 4 ?  UserDefaults.standard.set(self?.currLocationBtn.title(for: .normal), forKey: key_pickUpLocation) :  UserDefaults.standard.set(self?.currLocationBtn.title(for: .normal), forKey: key_returnLocation)
+            if self?.mErrorMessageLb.isHidden == false{
+              let _ = self?.checkFieldsFilled()
+            }
+            self?.pickUPDropisClose = true
+            self?.returnDropisClose = true
+        }
+    }
+   
+    private func didHideLocationList () {
+        mLocationDropDownView.hiddenLocationList = { [weak self] in
+            self?.hiddenLocationList()
+            self?.mLocationDropDownView.layer.shadowOpacity = 0;
+
+        }
+    }
+   
     private func searchClicked(){
         if checkFieldsFilled() {
             UIView.animate(withDuration: 0.5) { [self] in
                 self.mSearchLeading.constant = self.mSearchBckgV.bounds.width - self.mSearchBtn.frame.size.width
+                self.mSearchBckgV.layoutIfNeeded()
+
             } completion: { _ in
                 self.didSelectSearch!()
-                self.layoutIfNeeded()
+
             }
+
+        }
+    }
+    
+    private func animateArrow (arrowImgV:UIImageView, rotationAngle: CGFloat) {
+        UIView.animate(withDuration: 0.5) {
+            arrowImgV.transform = CGAffineTransform(rotationAngle: rotationAngle)
         }
     }
 //MARK: VALIDATIONS
@@ -230,16 +245,19 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
 
     @IBAction func pickUpLocation(_ sender: UIButton) {
         mLocationDropDownView.mPickUpLocationTableView.reloadData()
-        mReturnDropImgV.image = UIImage(named: "dropDown_blue")
-       returnDropisClose = true
         currLocationBtn = sender
         currLocationDropImgV = mPickUpTimeDropImgV
+        
+        if !returnDropisClose {
+            animateArrow(arrowImgV: mReturnDropImgV, rotationAngle: CGFloat(Double.pi * -2))
+            returnDropisClose = true
+        }
 
         if pickUPDropisClose {
-            mPickUpTimeDropImgV.image = UIImage(named: "dropUp_blue")
+            animateArrow(arrowImgV: mPickUpTimeDropImgV, rotationAngle: CGFloat(Double.pi))
             showLocationList()
         } else {
-            mPickUpTimeDropImgV.image = UIImage(named: "dropDown_blue")
+            animateArrow(arrowImgV: mPickUpTimeDropImgV, rotationAngle: CGFloat(Double.pi * -2))
             hiddenLocationList()
         }
         pickUPDropisClose = !pickUPDropisClose
@@ -247,16 +265,19 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     
     @IBAction func returnLocation(_ sender: UIButton) {
        mLocationDropDownView.mPickUpLocationTableView.reloadData()
-
-        mPickUpTimeDropImgV.image = UIImage(named: "dropDown_blue")
-        pickUPDropisClose = true
         currLocationBtn = sender
         currLocationDropImgV = mReturnDropImgV
+        
+        if !pickUPDropisClose {
+            animateArrow(arrowImgV: mPickUpTimeDropImgV, rotationAngle: CGFloat(Double.pi * -2))
+            pickUPDropisClose = true
+        }
+       
         if returnDropisClose {
-            mReturnDropImgV.image = UIImage(named: "dropUp_blue")
+            animateArrow(arrowImgV: mReturnDropImgV, rotationAngle: CGFloat(Double.pi))
             showLocationList()
         } else {
-            mReturnDropImgV.image = UIImage(named: "dropDown_blue")
+            animateArrow(arrowImgV: mReturnDropImgV, rotationAngle: CGFloat(Double.pi * -2))
             hiddenLocationList()
         }
         returnDropisClose = !returnDropisClose

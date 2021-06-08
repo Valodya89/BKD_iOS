@@ -35,6 +35,8 @@ class MainViewController: BaseViewController {
     private var isPressedFilter: Bool = false
     private var isPressedEdit: Bool = false
     private var isOnline: Bool = false
+    
+    private lazy  var avalableCategoriesVC = AvalableCategoriesViewController.initFromStoryboard(name: Constant.Storyboards.avalableCategories)
 
     //MARK: - Life cycles
     override func viewDidLoad() {
@@ -49,23 +51,19 @@ class MainViewController: BaseViewController {
     
     
     func setupView() {
-        UserDefaults.standard.removeObject(forKey: key_pickUpDate)
-        UserDefaults.standard.removeObject(forKey: key_returnDate)
-        UserDefaults.standard.removeObject(forKey: key_pickUpTime)
-        UserDefaults.standard.removeObject(forKey: key_returnTime)
-        UserDefaults.standard.removeObject(forKey: key_pickUpLocation)
-        UserDefaults.standard.removeObject(forKey: key_returnLocation)
+        
         backgroundV.frame = self.view.bounds
         backgroundV.backgroundColor = .black
         backgroundV.alpha = 0.6
         mChatWithUsAlphaV.layer.cornerRadius = 8
         mChatWithUsAlphaV.backgroundColor = mChatWithUsAlphaV.backgroundColor?.withAlphaComponent(0.8)
+        
         // menu
         menu = SideMenuNavigationController(rootViewController: LeftViewController())
         self.setmenu(menu: menu)
         mRightBarBtn.image = UIImage(named:"bkd")?.withRenderingMode(.alwaysOriginal)
-        
 
+        removeUserDefaultObjs()
         addHeaderViews()
         registrCollectionView()
         self.selectedDatePicker()
@@ -79,6 +77,16 @@ class MainViewController: BaseViewController {
         self.updateCategory()
         
     }
+    
+    private func removeUserDefaultObjs () {
+    UserDefaults.standard.removeObject(forKey: key_pickUpDate)
+    UserDefaults.standard.removeObject(forKey: key_returnDate)
+    UserDefaults.standard.removeObject(forKey: key_pickUpTime)
+    UserDefaults.standard.removeObject(forKey: key_returnTime)
+    UserDefaults.standard.removeObject(forKey: key_pickUpLocation)
+    UserDefaults.standard.removeObject(forKey: key_returnLocation)
+    }
+    
     private func initTimeTextField(txtFl: UITextField, txt: String) {
         txtFl.font =  UIFont.init(name: (responderTxtFl.font?.fontName)!, size: 10.0)
         txtFl.text = txt
@@ -101,6 +109,13 @@ class MainViewController: BaseViewController {
         self.mCarCollectionV.register(SearchResultCollectionViewCell.nib(), forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
         self.mCarCollectionV.register(FilterSearchResultCell.nib(), forCellWithReuseIdentifier: FilterSearchResultCell.identifier)
     }
+    
+    private func addAvalableCategoriesView() {
+        addChild(avalableCategoriesVC)
+        self.view.addSubview(avalableCategoriesVC.view)
+        avalableCategoriesVC.view.frame = self.view.frame
+    }
+    
     private func addHeaderViews() {
         //add top views
         searchHeaderV = SearchHeaderView()
@@ -131,6 +146,21 @@ class MainViewController: BaseViewController {
                 self.searchHeaderV?.frame = CGRect(x: 0, y: -900, width: self.searchHeaderV!.bounds.width, height: self.searchHeaderV!.bounds.height)
                 self.searchResultV!.frame = CGRect(x: 0, y: top_searchResult, width: self.searchResultV!.bounds.width, height: searchResultHeight)
                 self.setCollationViewPosittion(top: searchResultHeight + top_searchResult)
+                self.searchHeaderV?.alpha = 0
+            }, completion: { [self] _ in
+                self.searchHeaderV?.isHidden = true
+            })
+        }
+    }
+    
+    /// will be show avalable categories
+    private func animateAvalableCategoriesResult(){
+        self.updateSearchResultFields()
+        addAvalableCategoriesView()
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseOut], animations: { [self] in
+                self.searchHeaderV?.frame = CGRect(x: 0, y: -900, width: self.searchHeaderV!.bounds.width, height: self.searchHeaderV!.bounds.height)
+                self.searchResultV!.frame = CGRect(x: 0, y: top_searchResult, width: self.searchResultV!.bounds.width, height: searchResultHeight)
                 self.searchHeaderV?.alpha = 0
             }, completion: { [self] _ in
                 self.searchHeaderV?.isHidden = true
@@ -494,6 +524,10 @@ class MainViewController: BaseViewController {
             self?.mRightBarBtn.image = img_chat
             self?.mChatWithUsBckgV.isHidden = true
             self?.mCarCollectionV.reloadData()
+            
+            // If will not  found result
+            //self?.animateAvalableCategoriesResult()
+            // else
             self?.animateSearchResult()
         }
     }
@@ -541,7 +575,17 @@ class MainViewController: BaseViewController {
         }
     }
     
-
+    private func openChatPage () {
+        if isOnline {
+            let onlineChat = UIStoryboard(name: Constant.Storyboards.chat, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.onlineChat) as! OnlineChatViewController
+            self.navigationController?.pushViewController(onlineChat, animated: true)
+        } else {
+            let offlineChat = UIStoryboard(name: Constant.Storyboards.chat, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.offlineChat) as! OfflineViewController
+            self.navigationController?.pushViewController(offlineChat, animated: true)
+        }
+    }
+    
+    
     //MARK: ACTIONS
     @IBAction func menu(_ sender: UIBarButtonItem) {
         if isSearchResultPage {
@@ -553,17 +597,11 @@ class MainViewController: BaseViewController {
     }
     
     @IBAction func rightBar(_ sender: UIBarButtonItem) {
+        openChatPage ()
     }
     
     @IBAction func chatWithUs(_ sender: UIButton) {
-        if isOnline {
-            let onlineChat = UIStoryboard(name: Constant.Storyboards.chat, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.onlineChat) as! OnlineChatViewController
-            self.navigationController?.pushViewController(onlineChat, animated: true)
-        } else {
-            let offlineChat = UIStoryboard(name: Constant.Storyboards.chat, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.offlineChat) as! OfflineViewController
-            self.navigationController?.pushViewController(offlineChat, animated: true)
-        }
-        
+        openChatPage ()
     }
 
 }

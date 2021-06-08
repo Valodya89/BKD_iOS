@@ -34,6 +34,7 @@ class CustomLocationViewController: UIViewController {
     private var isChangeTableHeight = false
     private var searchTableHeight: CGFloat = 0.0
     private var searchTableData: String = String()
+    
     private lazy  var searchCustomLocationCV = SearchCustomLocationUIViewController.initFromStoryboard(name: Constant.Storyboards.customLocation)
     private lazy  var markerInfoVC = MarkerInfoViewController.initFromStoryboard(name: Constant.Storyboards.customLocation)
     

@@ -61,6 +61,8 @@
 		5656324626585FFF00B78562 /* CarEquipmentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656324426585FFF00B78562 /* CarEquipmentCollectionViewCell.swift */; };
 		5656324726585FFF00B78562 /* CarEquipmentCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5656324526585FFF00B78562 /* CarEquipmentCollectionViewCell.xib */; };
 		565632522658B11E00B78562 /* EquipmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565632512658B11D00B78562 /* EquipmentModel.swift */; };
+		5659C48C266F079300009D99 /* AvalableCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659C48B266F079300009D99 /* AvalableCategoriesViewController.swift */; };
+		5659C49F266F080000009D99 /* AvalableCategories.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5659C49E266F080000009D99 /* AvalableCategories.storyboard */; };
 		565A7AB02653FE26006C63D0 /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565A7AAE2653FE26006C63D0 /* SearchHeaderView.swift */; };
 		565A7AB12653FE26006C63D0 /* SearchHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565A7AAF2653FE26006C63D0 /* SearchHeaderView.xib */; };
 		565A7AC726548009006C63D0 /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565A7AC626548009006C63D0 /* SearchResultView.swift */; };
@@ -174,6 +176,8 @@
 		5656324426585FFF00B78562 /* CarEquipmentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarEquipmentCollectionViewCell.swift; sourceTree = "<group>"; };
 		5656324526585FFF00B78562 /* CarEquipmentCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarEquipmentCollectionViewCell.xib; sourceTree = "<group>"; };
 		565632512658B11D00B78562 /* EquipmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentModel.swift; sourceTree = "<group>"; };
+		5659C48B266F079300009D99 /* AvalableCategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvalableCategoriesViewController.swift; sourceTree = "<group>"; };
+		5659C49E266F080000009D99 /* AvalableCategories.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AvalableCategories.storyboard; sourceTree = "<group>"; };
 		565A7AAE2653FE26006C63D0 /* SearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderView.swift; sourceTree = "<group>"; };
 		565A7AAF2653FE26006C63D0 /* SearchHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchHeaderView.xib; sourceTree = "<group>"; };
 		565A7AC626548009006C63D0 /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = "<group>"; };
@@ -365,6 +369,7 @@
 		561887342645E5A100BDDB33 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				5659C48A266F073700009D99 /* AvalableCategorys */,
 				565A7AC526547FD0006C63D0 /* SearchResult */,
 				565A7AAD2653FDCB006C63D0 /* SearchHeaderView */,
 				564E131D264F02F0008CE884 /* CarouselView */,
@@ -546,6 +551,15 @@
 				5656324526585FFF00B78562 /* CarEquipmentCollectionViewCell.xib */,
 			);
 			path = CarEquipmentCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		5659C48A266F073700009D99 /* AvalableCategorys */ = {
+			isa = PBXGroup;
+			children = (
+				5659C48B266F079300009D99 /* AvalableCategoriesViewController.swift */,
+				5659C49E266F080000009D99 /* AvalableCategories.storyboard */,
+			);
+			path = AvalableCategorys;
 			sourceTree = "<group>";
 		};
 		565A7AAD2653FDCB006C63D0 /* SearchHeaderView */ = {
@@ -1163,6 +1177,7 @@
 				564E1355265211FF008CE884 /* SongMyung-Regular.ttf in Resources */,
 				564E1356265211FF008CE884 /* SFProDisplay-Regular.ttf in Resources */,
 				564E1357265211FF008CE884 /* SFProDisplay-Light.ttf in Resources */,
+				5659C49F266F080000009D99 /* AvalableCategories.storyboard in Resources */,
 				5691A61C265C71EC0008081D /* ExteriorCollectionViewCell.xib in Resources */,
 				564E1358265211FF008CE884 /* Mulish-Light.ttf in Resources */,
 				568E70C326454DB1000CB6A9 /* AboutUs.storyboard in Resources */,
@@ -1378,6 +1393,7 @@
 				565A7AD62654C49B006C63D0 /* CategoryCollectionViewCell.swift in Sources */,
 				5691A64E265DB6300008081D /* SearchHeaderViewModel.swift in Sources */,
 				564E12D9264D7617008CE884 /* Constant.swift in Sources */,
+				5659C48C266F079300009D99 /* AvalableCategoriesViewController.swift in Sources */,
 				560252F42665950700FB204C /* CustomLocationViewModel.swift in Sources */,
 				5656323B265841BE00B78562 /* FilterSearchResultCell.swift in Sources */,
 				568E70CA26455286000CB6A9 /* MainCollectionViewCell.swift in Sources */,

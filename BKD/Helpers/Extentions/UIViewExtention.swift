@@ -202,5 +202,14 @@ extension UIView {
                 self.transform = .identity
         }, completion: nil)
     }
+    
+    func rotate() {
+            let rotation : CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+            rotation.toValue = NSNumber(value: Double.pi)
+            rotation.duration = 1
+            rotation.isCumulative = true
+            rotation.repeatCount = 1
+            self.layer.add(rotation, forKey: "rotationAnimation")
+        }
    
 }

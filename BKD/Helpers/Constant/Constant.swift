@@ -9,13 +9,17 @@
 struct Constant {
     
     struct Storyboards {
+        static let main = "Main"
         static let seeMap = "SeeMap"
         static let customLocation = "CustomLocation"
         static let searchCustomLocation = "SearchCustomLocation"
         static let chat = "Chat"
+        static let avalableCategories = "AvalableCategories"
+         
 
     }
     struct NibNames {
+        
         static let SearchCustomLocation = "SearchCustomLocation"
         static let AddressName = "AddressName"
         static let SearchResult = "SearchResult"
@@ -24,11 +28,13 @@ struct Constant {
     }
     
     struct Identifiers {
+        static let main = "MainViewController"
+        static let aboutUs = "AboutUsViewController"
         static let seeMap = "SeeMapViewController"
         static let customLocation = "CustomLocationViewController"
         static let onlineChat = "OnlineChatViewController"
         static let offlineChat = "OfflineViewController"
-
+        static let AvalableCategories = "AvalableCategoriesViewController"
     }
     
     struct FontNames {

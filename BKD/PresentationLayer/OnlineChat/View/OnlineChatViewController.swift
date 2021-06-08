@@ -37,6 +37,7 @@ class OnlineChatViewController: MessagesViewController, MessageCellDelegate {
     let otherUser = Sender(senderId: "other", displayName: "BKD")
     var messages = [MessageType]()
     
+    
     //MARK: - Life cycles
     
     override func viewDidLoad() {
@@ -57,9 +58,6 @@ class OnlineChatViewController: MessagesViewController, MessageCellDelegate {
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
-        
-        // messagesCollectionView.messageCellDelegate = self
-        
     }
     
     private func configureMessagesViewController() {
@@ -67,12 +65,15 @@ class OnlineChatViewController: MessagesViewController, MessageCellDelegate {
         self.messageInputBar.inputTextView.font = font_search_cell
         self.messageInputBar.inputTextView.placeholderTextColor = color_chat_placeholder
         self.messageInputBar.inputTextView.placeholderLabel.font = font_chat_placeholder
-        self.messageInputBar.inputTextView.placeholder = "Type your message"
+        self.messageInputBar.inputTextView.placeholder = Constant.Texts.messagePlaceholder
         self.messageInputBar.sendButton.title = ""
-        messagesCollectionView.backgroundColor = color_background
         self.messageInputBar.backgroundView.backgroundColor = color_background
         self.messageInputBar.inputTextView.textColor = color_navigationBar
         self.messageInputBar.sendButton.setImage(#imageLiteral(resourceName: "send"), for: .normal)
+        self.messageInputBar.sendButton.isUserInteractionEnabled = false
+        
+        messagesCollectionView.backgroundColor = color_background
+        messagesCollectionView.showsVerticalScrollIndicator = false
         deletAvatarPadding()
         
     }
@@ -91,7 +92,7 @@ class OnlineChatViewController: MessagesViewController, MessageCellDelegate {
     private func addMessages(){
         messages.append(Message(sender: currentUser,
                                 messageId: "1",
-                                sentDate: Date().addingTimeInterval(-86400),
+                                sentDate: Date().addingTimeInterval(-186400),
                                 kind: .text("Hello Word")))
         messages.append(Message(sender: otherUser,
                                 messageId: "2",
@@ -117,6 +118,7 @@ class OnlineChatViewController: MessagesViewController, MessageCellDelegate {
     
     
     //MARK: - Action
+    //MARK:-------------------------------
     @IBAction func dismiss(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -124,7 +126,8 @@ class OnlineChatViewController: MessagesViewController, MessageCellDelegate {
 
 extension OnlineChatViewController: MessagesLayoutDelegate, MessagesDataSource, MessagesDisplayDelegate {
     
-    //MARK: MessagesDataSource
+//MARK: MessagesDataSource
+//MARK: -----------------------------
     func currentSender() -> SenderType {
         return currentUser
     }
@@ -137,39 +140,29 @@ extension OnlineChatViewController: MessagesLayoutDelegate, MessagesDataSource, 
         return messages.count
     }
     
-    //MARK: MessagesLayoutDelegate
-    func messageTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
-        return (self.view.bounds.height * 0.0334)/2
-    }
-    func messageBottomLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
-        print("messageBottomLabelHeight called - section: \(indexPath.section)")
-        return (self.view.bounds.height * 0.0334)/2
-        
-    }
+    func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+        let sentDate = message.sentDate
+        let sentDateString = MessageKitDateFormatter.shared.string(from: sentDate)
+        let timeLabelFont: UIFont = font_search_cell!
+        let timeLabelColor: UIColor = .white
+        return NSAttributedString(string: sentDateString, attributes: [NSAttributedString.Key.font: timeLabelFont, NSAttributedString.Key.foregroundColor: timeLabelColor])
+     }
     
-    //    func textCellSizeCalculator(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CellSizeCalculator? {
-    //        return cellSizeCalculatorForItem(at: indexPath)
-    //
-    //    }
-    //    func headerViewSize(for section: Int, in messagesCollectionView: MessagesCollectionView) -> CGSize {
-    //        return CGSize(width: self.view.bounds.width, height: 50)
-    //    }
-    //MARK: MessagesDisplayDelegate
+    
+//MARK: MessagesDisplayDelegate
+//MARK: -----------------------------
     func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
         
         
         let closure = { [self] (view: MessageContainerView) in
             if self.isFromCurrentSender(message: message) {
-                //                view.layer.borderWidth = 1
-                //                view.layer.borderColor = color_navigationBar!.cgColor
-                view.roundCornersWithBorder(corners: [.topLeft, .bottomRight, .topRight],
-                                            radius: 10,
-                                            borderColor: color_navigationBar!,
-                                            borderWidth: 1.0)
-                
+                view.style = .bubbleTailOutline(color_navigationBar!, .bottomRight, .pointedEdge)
+                view.backgroundColor = .clear
+
             } else {
                 view.roundCorners(corners: [.topLeft, .bottomLeft, .topRight], radius: 10)
                 view.layer.borderColor = color_menu?.cgColor
+                view.backgroundColor = color_menu!
             }
             
         }
@@ -181,52 +174,25 @@ extension OnlineChatViewController: MessagesLayoutDelegate, MessagesDataSource, 
         
     }
     
-    func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        return isFromCurrentSender(message: message) ? color_background! : color_menu!
-    }
-    
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         avatarView.isHidden = true
     }
     
     
-    func messageTimestampLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-        let messageDate = message.sentDate
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        let dateString = formatter.string(from: messageDate)
-        return
-            NSAttributedString(string: dateString, attributes: [.font: UIFont.systemFont(ofSize: 12)])
+//MARK: MessagesLayoutDelegate
+//MARK:-------------------------------
+    func cellTopLabelHeight(for message: MessageKit.MessageType, at indexPath: IndexPath, in messagesCollectionView:
+                                MessageKit.MessagesCollectionView) -> CGFloat {
+        return 40
     }
-    
-    //    func cellBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-    //
-    //        let formatter = DateFormatter()
-    //        formatter.locale = NSLocale(localeIdentifier: "en") as Locale
-    //        formatter.dateFormat = "d MMM, YYYY"
-    //        let dateString = formatter.string(from: message.sentDate)//message.createdDate//formatter.string(from: message.sentDate)
-    //        let paragraphStyle = NSMutableParagraphStyle()
-    //            paragraphStyle.alignment = NSTextAlignment.center
-    //
-    //        return NSAttributedString(string: dateString, attributes: [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption2), NSAttributedString.Key.paragraphStyle:paragraphStyle])
-    //    }
-    //    func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-    //        let name = message.sentDate
-    //    return NSAttributedString(
-    //      string: name,
-    //      attributes: [
-    //        .font: UIFont.preferredFont(forTextStyle: .caption1),
-    //        .foregroundColor: UIColor(white: 0.3, alpha: 1)
-    //      ]
-    //    )
-    //     }
     
 }
 
 
 
 
-////MARK: MessageInputBarDelegate
+//MARK: MessageInputBarDelegate
+//MARK:-------------------------------
 extension OnlineChatViewController: InputBarAccessoryViewDelegate {
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         

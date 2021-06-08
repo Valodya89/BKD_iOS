@@ -36,6 +36,7 @@ class OfflineViewController: UIViewController, StoryboardInitializable  {
     @IBOutlet weak var mEmailBottom: NSLayoutConstraint!
     @IBOutlet weak var mInputVBottom: NSLayoutConstraint!
     @IBOutlet weak var mMessageTextVHeight: NSLayoutConstraint!
+    
     //MARK: Variables
     weak var delegate: OfflineViewControllerDelegate?
     let offlineChatViewModel: OfflineChatViewModel = OfflineChatViewModel()
@@ -97,7 +98,7 @@ class OfflineViewController: UIViewController, StoryboardInitializable  {
     }
     private func configureMessageTextView(isPlaceholder: Bool) {
         
-        if !isPlaceholder {
+        if !isPlaceholder && mMessageTxtV.text == Constant.Texts.messagePlaceholder  {
             mMessageTxtV.tintColor = .white
             mMessageTxtV.textColor = .white
             mMessageTxtV.font = font_search_cell
@@ -260,6 +261,7 @@ extension OfflineViewController: UITextFieldDelegate {
 // -----------------------------
 extension OfflineViewController: UITextViewDelegate {
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        configureEmailTextFiled(isBecomeFirstResponder: false)
         configureMessageTextView(isPlaceholder: false)
         return true
     }

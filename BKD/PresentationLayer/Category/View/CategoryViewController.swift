@@ -15,8 +15,6 @@ class CategoryViewController: UIViewController {
 
     //MARK: Variables
     var searchResultV: SearchResultView?
-//    private lazy  var onlineChatVC = OnlineChatViewController.initFromStoryboard(name: Constant.Storyboards.chat)
-    private lazy  var offlineVC = SearchCustomLocationUIViewController.initFromStoryboard(name: Constant.Storyboards.chat)
     
     //MARK: Life Cycles
     override func viewDidLoad() {
@@ -26,11 +24,6 @@ class CategoryViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-//        onlineChatVC.view.frame = CGRect(x: 0,
-//                                         y: 0,
-//                                         width: self.view.bounds.size.width,
-//                                         height: self.view.bounds.size.height)
-       
     }
     
     func setUpView() {
@@ -38,26 +31,21 @@ class CategoryViewController: UIViewController {
         mCategoryTableV.register(CategoryTableViewCell.nib(),
                                           forCellReuseIdentifier: CategoryTableViewCell.identifier)
         mCategoryTableV.separatorStyle = .none
-        //addOnlineChat()
+//        addHeaderView()
+//        animateSearchResult()
     }
+    
+    private func addHeaderView() {
+        //add top views
+        searchResultV = SearchResultView()
+        searchResultHeight = view.frame.height * 0.123762
+        searchResultV!.frame = CGRect(x: 0, y: -200, width: self.view.bounds.width, height: searchResultHeight)
+        searchResultV?.mNoticeLb.isHidden = false
+        searchResultV?.mFilterV.isHidden = true
+        self.view.addSubview(searchResultV!)
+        self.setCollationViewPosittion(top: searchResultHeight + top_searchResult)
 
-//    private func addOnlineChat() {
-//        addChild(onlineChatVC)
-//        view.addSubview(onlineChatVC.view)
-//    }
-    
-    
-//    private func addHeaderView() {
-//        //add top views
-//        searchResultV = SearchResultView()
-//        searchResultHeight = view.frame.height * 0.123762
-//        searchResultV!.frame = CGRect(x: 0, y: -200, width: self.view.bounds.width, height: searchResultHeight)
-//        searchResultV?.mNoticeLb.isHidden = false
-//        searchResultV?.mFilterV.isHidden = true
-//        self.view.addSubview(searchResultV!)
-//        self.setCollationViewPosittion(top: searchResultHeight + top_searchResult)
-//
-//    }
+    }
     
     private func animateSearchResult(){
         DispatchQueue.main.async {
@@ -81,8 +69,6 @@ class CategoryViewController: UIViewController {
     @IBAction func chat(_ sender: UIBarButtonItem) {
         let onlineChat = UIStoryboard(name: Constant.Storyboards.chat, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.onlineChat) as! OnlineChatViewController
         self.navigationController?.pushViewController(onlineChat, animated: true) 
-//        let chatVC = ChatViewController()
-//        self.present(chatVC, animated: true, completion: nil)
     }
 }
 

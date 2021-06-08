@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "dropUp.png",
+      "filename" : "user_chat_boarder.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "dropUp@2x.png",
+      "filename" : "user_chat_boarder@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "dropUp@3x.png",
+      "filename" : "user_chat_boarder@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

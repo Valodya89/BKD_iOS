@@ -46,7 +46,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="er1-11-4Ts">
                             <rect key="frame" x="0.0" y="0.0" width="328" height="50"/>
                             <subviews>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bUA-YW-vOU" customClass="TextField" customModule="BKD" customModuleProvider="target">
+                                <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bUA-YW-vOU" customClass="TextField" customModule="BKD" customModuleProvider="target">
                                     <rect key="frame" x="-4" y="0.0" width="168" height="50"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -102,7 +102,7 @@
                                         <color key="titleColor" name="entered_date"/>
                                     </state>
                                 </button>
-                                <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HWS-X4-Fgw" customClass="TextField" customModule="BKD" customModuleProvider="target">
+                                <textField hidden="YES" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HWS-X4-Fgw" customClass="TextField" customModule="BKD" customModuleProvider="target">
                                     <rect key="frame" x="164" y="0.0" width="164" height="50"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

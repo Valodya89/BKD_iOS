@@ -8,16 +8,27 @@
 import UIKit
 
 class LeftViewController: UITableViewController {
-
-        var currentCelIndexPathRow : Int?
     
+    //MARK: Variables
+        var currentCelIndexPathRow : Int?
+        var isLanguageListOpen:Bool = false
+    
+    //MARK: Life cycles
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        configureTableView()
+        addPrivacyPolice()
+  
+    }
+    
+    private func configureTableView () {
         tableView.register(LeftTableViewCell.nib(), forCellReuseIdentifier: LeftTableViewCell.identifier)
         tableView.backgroundColor = UIColor(named: "background_menu")
         tableView.separatorStyle = .none
-        
+    }
+  
+    private func addPrivacyPolice () {
         //Add Privacy Policy
         let privacyV = PrivacyPoliceView()
         self.addChild(privacyV)
@@ -26,12 +37,25 @@ class LeftViewController: UITableViewController {
         let window = UIApplication.shared.windows[0]
         let bottomPadding = window.safeAreaInsets.bottom
         privacyV.view.frame = CGRect(x: 17, y: self.view.bounds.height - 90 - bottomPadding , width: 200, height: 60)
-        
     }
     
+    private func animateArrow (arrowImgV:UIImageView, rotationAngle: CGFloat) {
+        UIView.animate(withDuration: 0.5) {
+            arrowImgV.transform = CGAffineTransform(rotationAngle: rotationAngle)
+        }
+    }
     
-    // MARK: - Table view data source
-    
+    func hiddeDropDown(subCell: UIView) {
+        isLanguageListOpen = false
+        let seconds = 0.20
+        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+            subCell.isHidden = true
+        }
+    }
+  
+
+    //MARK: UITableViewDataSource
+    //MARK: ------------------------------
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -48,7 +72,7 @@ class LeftViewController: UITableViewController {
             let menuModel: MenuModel =  MenuData.menuModel[indexPath.row - 1 ]
             cell.img?.image = UIImage(named: menuModel.imageName)
             cell.lbl?.text =  menuModel.title
-            cell.dropDownBtn.setImage(UIImage(named: "dropDown"), for: .normal)
+            cell.dropDownBtn.setImage(#imageLiteral(resourceName: "dropDown"), for: .normal)
             cell.backgroundColor = UIColor(named: "background_menu")
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             if indexPath.row == 2  {
@@ -65,7 +89,7 @@ class LeftViewController: UITableViewController {
         let customV = UIView()
         customV.backgroundColor = UIColor(named: "background_menu")
         
-        let profileImg = UIImageView(image: UIImage(named: "profile"))
+        let profileImg = UIImageView(image:#imageLiteral(resourceName: "profile"))
         profileImg.frame =  CGRect(x: tableView.frame.size.width/2 - profileImg.frame.size.width/2 , y: 20, width: profileImg.frame.size.width, height: profileImg.frame.size.height)
         
         let userLb = UILabel()
@@ -81,7 +105,7 @@ class LeftViewController: UITableViewController {
         
         customV.addSubview(profileImg)
         customV.addSubview(userLb)
-        customV.addSubview(lineV)       
+        customV.addSubview(lineV)
         
         return customV
     }
@@ -90,30 +114,42 @@ class LeftViewController: UITableViewController {
         return 120.0
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if currentCelIndexPathRow == indexPath.row &&  indexPath.row == 2 {
+            currentCelIndexPathRow = nil
+            return 186
+        }
+        return 50
+
+    }
+    
+    //MARK: UITableViewDelegate
+    //MARK: ------------------------------
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let viewController:UIViewController?
         let dropDownCell:LeftTableViewCell = tableView.cellForRow(at: indexPath) as! LeftTableViewCell
         switch indexPath.row {
         case 1:
-            viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AboutUsViewController") as! AboutUsViewController
+            viewController = UIStoryboard(name: Constant.Storyboards.main, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.aboutUs) as! AboutUsViewController
             navigationController?.pushViewController(viewController!, animated: true)
             
             break
         case 2:
             let cell:LeftTableViewCell = tableView.cellForRow(at: indexPath) as! LeftTableViewCell
-            if self.isDropDown(yourButton: cell.dropDownBtn) {
+            
+            if isLanguageListOpen {
                 currentCelIndexPathRow = nil
-                cell.dropDownBtn.setImage(UIImage(named: "dropDown"), for: .normal)
+                animateArrow(arrowImgV: cell.dropDownBtn.imageView!, rotationAngle: CGFloat(Double.pi * -2))
                 hiddeDropDown(subCell: cell.mSettingsV)
-                
-                
             } else {
                 currentCelIndexPathRow = indexPath.row
-                cell.dropDownBtn.setImage(UIImage(named: "dropUp"), for: .normal)
+                animateArrow(arrowImgV: cell.dropDownBtn.imageView!, rotationAngle: CGFloat(Double.pi))
                 cell.mSettingsV.isHidden = false
-                
-                
+                isLanguageListOpen = true
             }
+            
             tableView .beginUpdates()
             tableView.endUpdates()
             
@@ -131,40 +167,11 @@ class LeftViewController: UITableViewController {
             // Log out
             break
         default:
-            viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+            viewController = UIStoryboard(name: Constant.Storyboards.main, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.main) as! MainViewController
             break
-            
-
         }
-        
-      
-
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if currentCelIndexPathRow == indexPath.row &&  indexPath.row == 2 {
-            currentCelIndexPathRow = nil
-            return 186
-        }
-        return 50
-
-    }
     
-    func isDropDown(yourButton: UIButton) -> Bool {
-        if yourButton.currentImage == UIImage(named: "dropUp") {
-           return true
-        }
-        return false
         
-    }
-    
-    func hiddeDropDown(subCell: UIView) {
-
-        let seconds = 0.20
-        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-            subCell.isHidden = true
-        }
-    }
-  
 }
