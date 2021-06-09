@@ -81,4 +81,14 @@ struct CategoryData {
                                                   
                                             
     ]
+    
+    static let avalableCategoryModel: [CategoryModel] = [CategoryModel(categoryName: "Double Cabs",
+                                                                       data: [ CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: true)]),
+                                                  CategoryModel(categoryName: "Box Trucks",
+                                                                data: [ CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true)]),
+                                                  CategoryModel(categoryName: "Trucks",
+                                                                data: [ CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true)])
+                                                  
+                                            
+    ]
 }

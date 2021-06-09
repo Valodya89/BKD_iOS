@@ -100,7 +100,7 @@ class CustomLocationViewController: UIViewController {
         mMapV.isMyLocationEnabled = true
         addInactiveCoordinates()
         moveCameraPosition(cord2D: CLLocationCoordinate2D(latitude:40.220485, longitude:  44.486114))
-        //  placesClient = GMSPlacesClient.shared()
+          placesClient = GMSPlacesClient.shared()
         
     }
     
@@ -234,10 +234,13 @@ extension CustomLocationViewController: SearchCustomLocationUIViewControllerDele
         searchTableHeight = tableHeight
         searchTbV.reloadData()
         self.view.setNeedsLayout()
+       // goToPlaces()
     }
     
     func goToPlaces()  {
-        
+        let acControllers = GMSAutocompleteViewController()
+        acControllers.delegate = self
+        present(acControllers, animated: true, completion: nil)
     }
 }
 
@@ -277,32 +280,33 @@ extension CustomLocationViewController: UITableViewDelegate, UITableViewDataSour
 
 //MARK: GMSAutocompleteViewControllerDelegate
 //MARK ---------------------
-//extension CustomLocationViewController: GMSAutocompleteViewControllerDelegate {
-//
-//    func viewController(_ vcontroller: GMSAutocompleteViewController,
-//                        didAutocompleteWith place: GMSPlace ) {
-//        dismiss(animated: true, completion: nil)
-//
-//        self.mMapV.clear()
-//        self.searchCustomLocationCV.mSearchTxtFl.text = place.name
-//        mapViewCenterCoordinate = CLLocationCoordinate2D(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
-//        self.addPlace(longitude: place.coordinate.longitude,
-//                      latitude: place.coordinate.latitude,
-//                      place: place)
-//        self.mMapV.camera = GMSCameraPosition.camera(withTarget: mapViewCenterCoordinate, zoom: zoom)
-//
-//    }
-//
-//    func viewController(_ vcontroller: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error ) {
-//
-//        print(error.localizedDescription)
-//    }
-//
-//    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
-//
-//    }
-//
-//}
+extension CustomLocationViewController: GMSAutocompleteViewControllerDelegate {
+
+    func viewController(_ vcontroller: GMSAutocompleteViewController,
+                        didAutocompleteWith place: GMSPlace ) {
+        dismiss(animated: true, completion: nil)
+
+        self.mMapV.clear()
+        self.searchCustomLocationCV.mSearchTxtFl.text = place.name
+        mapViewCenterCoordinate = CLLocationCoordinate2D(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+        
+        self.addPlace(longitude: place.coordinate.longitude,
+                      latitude: place.coordinate.latitude,
+                      place: place)
+        self.mMapV.camera = GMSCameraPosition.camera(withTarget: mapViewCenterCoordinate, zoom: zoom)
+
+    }
+
+    func viewController(_ vcontroller: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error ) {
+
+        print(error.localizedDescription)
+    }
+
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+
+    }
+
+}
 
 
 //MARK: GMSMapViewDelegate
@@ -365,3 +369,5 @@ extension CustomLocationViewController: MGLMapViewDelegate {
         //self.addressLbl.text = "checking.."
     }
 }
+
+

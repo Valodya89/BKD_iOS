@@ -20,9 +20,13 @@
             <objects>
                 <viewController id="YSm-xS-VSB" customClass="MainViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VrM-PG-bE9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <tableView hidden="YES" clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xfv-Qt-jYJ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                                <color key="backgroundColor" name="background"/>
+                            </tableView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Igf-W7-Esb">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                                 <color key="backgroundColor" name="background"/>
@@ -39,14 +43,14 @@
                                 </collectionReusableView>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nOJ-Gd-nKd">
-                                <rect key="frame" x="347" y="616.5" width="69" height="34"/>
+                                <rect key="frame" x="351" y="616.5" width="65" height="34"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uBi-RC-Pej">
-                                        <rect key="frame" x="0.0" y="0.0" width="69" height="34"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="65" height="34"/>
                                         <color key="backgroundColor" name="gradient_start"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eI-UP-HPX">
-                                        <rect key="frame" x="6" y="2" width="57" height="30"/>
+                                        <rect key="frame" x="6" y="2" width="53" height="30"/>
                                         <fontDescription key="fontDescription" name="Mulish-Bold" family="Mulish" pointSize="9"/>
                                         <state key="normal" title="Chat with us!">
                                             <color key="titleColor" name="navigationBar"/>
@@ -71,7 +75,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" id="hgO-ot-Ek2">
-                                <rect key="frame" x="0.0" y="-5" width="414" height="35"/>
+                                <rect key="frame" x="0.0" y="-5" width="414" height="37"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" name="background"/>
                             </view>
@@ -80,9 +84,13 @@
                         <color key="backgroundColor" name="background"/>
                         <constraints>
                             <constraint firstItem="Igf-W7-Esb" firstAttribute="leading" secondItem="aZo-0j-S7r" secondAttribute="leading" id="8Bn-hK-mED"/>
+                            <constraint firstItem="aZo-0j-S7r" firstAttribute="bottom" secondItem="xfv-Qt-jYJ" secondAttribute="bottom" id="EmL-RN-z5c"/>
+                            <constraint firstItem="xfv-Qt-jYJ" firstAttribute="leading" secondItem="aZo-0j-S7r" secondAttribute="leading" id="F8o-Ql-LbU"/>
                             <constraint firstItem="nOJ-Gd-nKd" firstAttribute="trailing" secondItem="aZo-0j-S7r" secondAttribute="trailing" constant="2" id="NY3-DR-asi"/>
                             <constraint firstItem="aZo-0j-S7r" firstAttribute="bottom" secondItem="Igf-W7-Esb" secondAttribute="bottom" id="Q9k-KO-AjL"/>
+                            <constraint firstItem="aZo-0j-S7r" firstAttribute="trailing" secondItem="xfv-Qt-jYJ" secondAttribute="trailing" id="Sbr-C5-I1r"/>
                             <constraint firstItem="nOJ-Gd-nKd" firstAttribute="centerY" secondItem="aZo-0j-S7r" secondAttribute="centerY" multiplier="1.748" id="Zhk-Aa-B6p"/>
+                            <constraint firstItem="xfv-Qt-jYJ" firstAttribute="top" secondItem="aZo-0j-S7r" secondAttribute="top" id="a0x-kv-iDd"/>
                             <constraint firstItem="Igf-W7-Esb" firstAttribute="top" secondItem="aZo-0j-S7r" secondAttribute="top" id="gxK-Qw-OZd"/>
                             <constraint firstItem="aZo-0j-S7r" firstAttribute="trailing" secondItem="Igf-W7-Esb" secondAttribute="trailing" id="nrY-MN-FcR"/>
                             <constraint firstItem="nOJ-Gd-nKd" firstAttribute="height" secondItem="VrM-PG-bE9" secondAttribute="height" multiplier="0.0420792" id="wQ4-SB-jh2"/>
@@ -102,6 +110,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="mAvalableCategoriesTbV" destination="xfv-Qt-jYJ" id="I7X-OK-pIZ"/>
                         <outlet property="mCarCollectionV" destination="Igf-W7-Esb" id="0Vf-6H-j0S"/>
                         <outlet property="mChatWithUsAlphaV" destination="uBi-RC-Pej" id="fRC-d9-BUE"/>
                         <outlet property="mChatWithUsBckgV" destination="nOJ-Gd-nKd" id="GCF-uM-es4"/>
@@ -194,7 +203,7 @@
             <objects>
                 <viewController id="baS-Zk-gBJ" customClass="CategoryViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kYK-fv-ZhM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ilV-lK-Jwv">
@@ -239,7 +248,7 @@
             <objects>
                 <viewController id="ceI-lw-dx8" customClass="NotificationsViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A1I-cU-SsK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xd4-CU-VYz">
@@ -296,7 +305,7 @@
             <objects>
                 <viewController id="E7g-TO-7Y0" customClass="MyBKDViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="foA-r9-fCl">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aUz-Rk-ztl">
@@ -361,7 +370,7 @@
             <objects>
                 <viewController storyboardIdentifier="AboutUsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gSa-Xv-Ipy" customClass="AboutUsViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tUP-iC-jNn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="nDl-gS-wXU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -386,7 +395,7 @@
             <objects>
                 <viewController storyboardIdentifier="MyReservationsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4kt-qQ-nUS" customClass="MyReservationsViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="j4K-5k-2Pn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="KTz-7d-pnZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

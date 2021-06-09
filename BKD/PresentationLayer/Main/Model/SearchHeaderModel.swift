@@ -14,6 +14,8 @@ struct SearchModel {
     public var returnTime: Date?
     public var pickUpLocation: String?
     public var returnLocation: String?
+    public var category: Int?
+
 //    public var pickUpCustomLocation:  String?
 //    public var picreturnCustomLocation:  String?
 
@@ -26,6 +28,7 @@ struct SearchDateModel {
     public var returnTime: String?
     public var pickUpLocation: String?
     public var returnLocation: String?
+
 }
 
 struct CategoryCarouselModel {

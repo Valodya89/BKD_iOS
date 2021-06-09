@@ -100,8 +100,10 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
  
     @IBAction func details(_ sender: UIButton) {
         if isFlipView {
-            UIView.transition(with: mFlipInfoV, duration: 0.5, options: [.transitionFlipFromRight], animations: nil) { [self]_ in
-                UIView.animate(withDuration: 0.5) {
+            UIView.transition(with: mFlipInfoV, duration: 0.5, options: [.transitionFlipFromRight], animations: {
+                
+            }) { [self]_ in
+                UIView.animate(withDuration: 0.7) {
                     self.mInfoV.isHidden = !self.mInfoV.isHidden
                     self.mFlipInfoV.isHidden = !self.mFlipInfoV.isHidden
                     self.mInfoV.alpha = 1
@@ -112,8 +114,8 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
                 
             }
         } else {
-            UIView.transition(with: mInfoV, duration: 0.5, options: [.transitionFlipFromLeft], animations: nil) { [self]_ in
-                UIView.animate(withDuration: 0.5) {
+            UIView.transition(with: mInfoV, duration: 0.5 , options: [.transitionFlipFromLeft], animations: nil) { [self]_ in
+                UIView.animate(withDuration: 0.7) {
                     self.mInfoV.isHidden = !self.mInfoV.isHidden
                     self.mFlipInfoV.isHidden = !self.mFlipInfoV.isHidden
                     self.mFlipInfoV.alpha = 1

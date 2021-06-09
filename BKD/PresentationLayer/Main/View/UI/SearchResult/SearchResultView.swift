@@ -23,6 +23,7 @@ class SearchResultView: UIView {
     @IBOutlet weak var mFilterImgV: UIImageView!
     @IBOutlet weak var mFilterV: UIView!
     @IBOutlet weak var mFilterBtn: UIButton!
+    @IBOutlet weak var mFilterBckgV: UIView!
     @IBOutlet weak var mNoticeLb: UILabel!
     @IBOutlet var contentView: UIView!
     

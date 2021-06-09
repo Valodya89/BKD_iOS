@@ -50,6 +50,7 @@ struct Constant {
         static let returnTime = "Return time"
         static let pickUpLocation = "Pick up Location"
         static let returnLocation = "Return Location"
+        static let searchResult = "Search Results"
         static let messageMoreThanMonth = "All the BKD vehicles are taken to technical check up once a month. You should return the vehicle to the BKD office after a month, and have it checked or be offered a new vehicle of the same type."
         static let messageWorkingTime = "Time is selected outside of BKD working hours to make a reservation (07:30 - 18:30)."
         static let titleWorkingTime = "Additional service fee is     € 59,99"
@@ -68,6 +69,7 @@ struct Constant {
 }
 
 let top_searchResult: CGFloat = 12.0
+let top_avalableCategoryTbv: CGFloat = 30.0
 let cornerRadius_equipment: CGFloat = 15.0
 let zoom: Float = 12.0
 
@@ -81,6 +83,7 @@ let key_pickUpTime = "pickUpTime"
 let key_returnTime = "returnTime"
 let key_pickUpLocation = "pickUpLocation"
 let key_returnLocation = "returnLocation"
+let key_category = "category"
 let key_email = "E-mail"
 
 

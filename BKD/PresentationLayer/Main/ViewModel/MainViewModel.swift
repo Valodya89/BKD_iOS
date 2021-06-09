@@ -20,12 +20,14 @@ class MainViewModel: NSObject {
                          returnTime: Date?,
                          pickUpLocation: String?,
                          returnLocation: String?,
+                         category: Int?,
                          oldPickUpDate: Date?,
                          oldReturnDate: Date?,
                          oldPickUpTime: Date?,
                          oldReturnTime: Date?,
                          oldPickUpLocation: String?,
                          oldReturnLocation: String?,
+                         oldCategory: Int?,
                          didResult: @escaping (Bool) -> ()) {
         
        let searchModel = SearchModel (pickUpDate: pickUpDate,
@@ -33,13 +35,15 @@ class MainViewModel: NSObject {
                                       pickUpTime: pickUpTime,
                                       returnTime: returnTime,
                                       pickUpLocation: pickUpLocation,
-                                      returnLocation: returnLocation)
+                                      returnLocation: returnLocation,
+                                      category: category )
         let oldSearchModel = SearchModel (pickUpDate: oldPickUpDate,
                                           returnDate: oldReturnDate,
                                           pickUpTime: oldPickUpTime,
                                           returnTime: returnTime,
                                           pickUpLocation: oldPickUpLocation,
-                                          returnLocation: oldReturnLocation)
+                                          returnLocation: oldReturnLocation,
+                                          category: oldCategory)
         didResult(validator.searchDatasHasBeenEdited(searchParams: searchModel, oldSearchParam: oldSearchModel))
     }
 

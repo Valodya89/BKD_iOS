@@ -11,6 +11,7 @@ import SideMenu
 
 class MainViewController: BaseViewController {
         
+    @IBOutlet weak var mAvalableCategoriesTbV: UITableView!
     @IBOutlet weak var mCarCollectionV: UICollectionView!
     @IBOutlet weak var mChatWithUsBckgV: UIView!
     @IBOutlet weak var mChatWithUsAlphaV: UIView!
@@ -34,9 +35,9 @@ class MainViewController: BaseViewController {
     private var isSearchResultPage: Bool = false
     private var isPressedFilter: Bool = false
     private var isPressedEdit: Bool = false
+    private var isNoSearchResult: Bool = false
     private var isOnline: Bool = false
-    
-    private lazy  var avalableCategoriesVC = AvalableCategoriesViewController.initFromStoryboard(name: Constant.Storyboards.avalableCategories)
+
 
     //MARK: - Life cycles
     override func viewDidLoad() {
@@ -64,16 +65,18 @@ class MainViewController: BaseViewController {
         mRightBarBtn.image = UIImage(named:"bkd")?.withRenderingMode(.alwaysOriginal)
 
         removeUserDefaultObjs()
-        addHeaderViews()
-        registrCollectionView()
+       addHeaderViews()
+        configureCarsCollectionView()
+        configureAvalableCategoriesTableView()
+        configureDelegates()
         self.selectedDatePicker()
         self.selectedSearch()
         self.selectedLocation()
         self.selectedCustomLocation()
+        self.selectedEdit()
         self.showLocation()
         self.showFilter()
-        self.showEdit()
-        self.hideEdit()
+        self.selectedArrow()
         self.updateCategory()
         
     }
@@ -85,9 +88,32 @@ class MainViewController: BaseViewController {
     UserDefaults.standard.removeObject(forKey: key_returnTime)
     UserDefaults.standard.removeObject(forKey: key_pickUpLocation)
     UserDefaults.standard.removeObject(forKey: key_returnLocation)
+    UserDefaults.standard.removeObject(forKey: key_category)
+
     }
     
-    private func initTimeTextField(txtFl: UITextField, txt: String) {
+    private func configureDelegates() {
+        mCarCollectionV.delegate = self
+        mCarCollectionV.dataSource = self
+        mAvalableCategoriesTbV.delegate = self
+        mAvalableCategoriesTbV.dataSource = self
+    }
+    
+    private func configureCarsCollectionView() {
+        self.mCarCollectionV.contentInset = UIEdgeInsets(top: (searchHeaderV?.frame.size.height)!, left: 0, bottom: 0, right: 0)
+        self.mCarCollectionV.register(MainCollectionViewCell.nib(), forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
+        self.mCarCollectionV.register(SearchResultCollectionViewCell.nib(), forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
+        self.mCarCollectionV.register(FilterSearchResultCell.nib(), forCellWithReuseIdentifier: FilterSearchResultCell.identifier)
+    }
+    
+    private func configureAvalableCategoriesTableView () {
+        mAvalableCategoriesTbV.register(CategoryTableViewCell.nib(),
+                                             forCellReuseIdentifier: CategoryTableViewCell.identifier)
+        mAvalableCategoriesTbV.separatorStyle = .none
+        UserDefaults.standard.set(searchHeaderV?.carouselBackgV.categoryCarousel.currentItemIndex, forKey: key_category)
+    }
+    
+    private func configureTimeTextField(txtFl: UITextField, txt: String) {
         txtFl.font =  UIFont.init(name: (responderTxtFl.font?.fontName)!, size: 10.0)
         txtFl.text = txt
         txtFl.textColor = color_choose_date
@@ -95,27 +121,25 @@ class MainViewController: BaseViewController {
         UserDefaults.standard.removeObject(forKey: key_returnTime)
         searchHeaderV?.mTimeLb.textColor = .clear
     }
+    
     private func setCollationViewPosittion(top: CGFloat) {
         self.mCarCollectionV.contentInset = .init(top: top, left: 0, bottom: 0, right: 0)
         self.mCarCollectionV.setContentOffset(.init(x: 0, y: -top), animated: false)
     }
     
-    private func registrCollectionView() {
-        //CollectionView
-        self.mCarCollectionV.delegate = self
-        self.mCarCollectionV.dataSource = self
-        self.mCarCollectionV.contentInset = UIEdgeInsets(top: (searchHeaderV?.frame.size.height)!, left: 0, bottom: 0, right: 0)
-        self.mCarCollectionV.register(MainCollectionViewCell.nib(), forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
-        self.mCarCollectionV.register(SearchResultCollectionViewCell.nib(), forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
-        self.mCarCollectionV.register(FilterSearchResultCell.nib(), forCellWithReuseIdentifier: FilterSearchResultCell.identifier)
+    private func setTableViewPosittion(top: CGFloat) {
+        self.mAvalableCategoriesTbV.contentInset = .init(top: top, left: 0, bottom: 0, right: 0)
+        self.mAvalableCategoriesTbV.setContentOffset(.init(x: 0, y: -top), animated: false)
     }
     
-    private func addAvalableCategoriesView() {
-        addChild(avalableCategoriesVC)
-        self.view.addSubview(avalableCategoriesVC.view)
-        avalableCategoriesVC.view.frame = self.view.frame
-    }
+   
     
+//    private func addAvalableCategoriesView() {
+//        addChild(avalableCategoriesVC)
+//        self.view.addSubview(avalableCategoriesVC.view)
+//        avalableCategoriesVC.view.frame = self.view.frame
+//    }
+//
     private func addHeaderViews() {
         //add top views
         searchHeaderV = SearchHeaderView()
@@ -138,9 +162,11 @@ class MainViewController: BaseViewController {
     }
     
     //MARK: ANIMATIONS
+    //MARK: -----------------------------
     //Will be hide search header and  show search result
     private func animateSearchResult(){
         self.updateSearchResultFields()
+        animateSearchResultContainer(isThereResult: !isNoSearchResult)
         DispatchQueue.main.async {
             UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseOut], animations: { [self] in
                 self.searchHeaderV?.frame = CGRect(x: 0, y: -900, width: self.searchHeaderV!.bounds.width, height: self.searchHeaderV!.bounds.height)
@@ -155,12 +181,15 @@ class MainViewController: BaseViewController {
     
     /// will be show avalable categories
     private func animateAvalableCategoriesResult(){
+        
         self.updateSearchResultFields()
-        addAvalableCategoriesView()
+        animateSearchResultContainer(isThereResult: !isNoSearchResult)
+        
         DispatchQueue.main.async {
             UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseOut], animations: { [self] in
                 self.searchHeaderV?.frame = CGRect(x: 0, y: -900, width: self.searchHeaderV!.bounds.width, height: self.searchHeaderV!.bounds.height)
                 self.searchResultV!.frame = CGRect(x: 0, y: top_searchResult, width: self.searchResultV!.bounds.width, height: searchResultHeight)
+                self.setTableViewPosittion(top: searchResultHeight + top_searchResult + top_avalableCategoryTbv)
                 self.searchHeaderV?.alpha = 0
             }, completion: { [self] _ in
                 self.searchHeaderV?.isHidden = true
@@ -195,46 +224,34 @@ class MainViewController: BaseViewController {
         }
     }
     
-    @objc func donePressed() {
-        responderTxtFl.resignFirstResponder()
-        DispatchQueue.main.async() {
-            self.backgroundV.removeFromSuperview()
-        }
-        checkMonthReservation()
-        if isPressedEdit {
-            checkAnyFieldsHaveBeenEdited()
-        }
-        if responderTxtFl.tag == 0 { // PickUpDate
-            UserDefaults.standard.set(datePicker.date, forKey: key_pickUpDate)
-            hiddeDateInfo(dayBtn: searchHeaderV!.mDayPickUpBtn,
-                          monthBtn: searchHeaderV!.mMonthPickUpBtn,
-                          hidden: false, txtFl: responderTxtFl)
-            showSelectedDate(dayBtn: searchHeaderV!.mDayPickUpBtn,
-                             monthBtn: searchHeaderV!.mMonthPickUpBtn)
-            
-        } else if responderTxtFl.tag == 1 { // ReturnDate
-            UserDefaults.standard.set(datePicker.date, forKey: key_returnDate)
-            hiddeDateInfo(dayBtn: searchHeaderV!.mDayReturnDateBtn,
-                          monthBtn: searchHeaderV!.mMonthReturnDateBtn,
-                          hidden: false, txtFl: responderTxtFl)
-            showSelectedDate(dayBtn: searchHeaderV!.mDayReturnDateBtn,
-                             monthBtn: searchHeaderV!.mMonthReturnDateBtn)
-            
-        } else {
-            checkReservetionTime()
-            responderTxtFl.tag == 2 ? UserDefaults.standard.set(datePicker.date, forKey: key_pickUpTime) : UserDefaults.standard.set(datePicker.date, forKey: key_returnTime)
-            showSelectedDate(dayBtn: nil, monthBtn: nil)
-            
-        }
+    /// if there is any search result it will show car CollectionView else it will show avalable categories TableView
+    private func animateSearchResultContainer (isThereResult : Bool) {
+        searchResultV?.mFilterV.isHidden = !isThereResult
+        searchResultV?.mNoticeLb.isHidden = isThereResult
         
-        //Checking the filling of any fields and removing the error color from the field
-        if searchHeaderV!.mErrorMessageLb.isHidden == false {
-            let _ = searchHeaderV!.checkFieldsFilled()
+        if isThereResult { // will show avalable cars
+            self.mCarCollectionV.isHidden = false
+            UIView.animate(withDuration: 1.0) { [weak self] in
+                self?.mAvalableCategoriesTbV.alpha = 0.0
+            } completion: { [self] _ in
+                self.mCarCollectionV.alpha = 1.0
+                self.mAvalableCategoriesTbV.isHidden = true
+            }
+
+        } else { // will show avalable categories
+            self.mAvalableCategoriesTbV.isHidden = false
+            UIView.animate(withDuration: 0.7) { [weak self] in
+                self?.mAvalableCategoriesTbV.alpha = 1.0
+            } completion: { [self] _ in
+                self.mCarCollectionV.alpha = 0.0
+            }
+            self.mCarCollectionV.isHidden = true
         }
     }
-        
+    
   
    //MARK: CHECKINGS
+    //MARK: -----------------------------
     ///check if reservation date more than a month
     func checkMonthReservation() {
         if responderTxtFl.tag == 0 { //pick up date
@@ -284,7 +301,8 @@ class MainViewController: BaseViewController {
                                   pickupTime: UserDefaults.standard.object(forKey: key_pickUpTime) as? Date,
                                   returnTime: UserDefaults.standard.object(forKey: key_returnTime) as? Date,
                                   pickUpLocation: UserDefaults.standard.object(forKey: key_pickUpLocation) as? String,
-                                  returnLocation: UserDefaults.standard.object(forKey: key_returnLocation) as? String)
+                                  returnLocation: UserDefaults.standard.object(forKey: key_returnLocation) as? String,
+                                  categoryIndex: UserDefaults.standard.object(forKey: key_category) as? Int)
 
             case 1:
                 checkFieldsEdited(pickupDate: UserDefaults.standard.object(forKey: key_pickUpDate) as? Date,
@@ -292,7 +310,8 @@ class MainViewController: BaseViewController {
                                   pickupTime:  UserDefaults.standard.object(forKey: key_pickUpTime) as? Date,
                                   returnTime: UserDefaults.standard.object(forKey: key_returnTime) as? Date,
                                   pickUpLocation: UserDefaults.standard.object(forKey: key_pickUpLocation) as? String,
-                                  returnLocation: UserDefaults.standard.object(forKey: key_returnLocation) as? String)
+                                  returnLocation: UserDefaults.standard.object(forKey: key_returnLocation) as? String,
+                                  categoryIndex: UserDefaults.standard.object(forKey: key_category) as? Int)
 
             case 2:
                 checkFieldsEdited(pickupDate: UserDefaults.standard.object(forKey: key_pickUpDate) as? Date,
@@ -300,7 +319,8 @@ class MainViewController: BaseViewController {
                                   pickupTime:  datePicker.date,
                                   returnTime: UserDefaults.standard.object(forKey: key_returnTime) as? Date,
                                   pickUpLocation: UserDefaults.standard.object(forKey: key_pickUpLocation) as? String,
-                                  returnLocation: UserDefaults.standard.object(forKey: key_returnLocation) as? String)
+                                  returnLocation: UserDefaults.standard.object(forKey: key_returnLocation) as? String,
+                                  categoryIndex: UserDefaults.standard.object(forKey: key_category) as? Int)
 
             case 3:
                 checkFieldsEdited(pickupDate: UserDefaults.standard.object(forKey: key_pickUpDate) as? Date,
@@ -308,7 +328,8 @@ class MainViewController: BaseViewController {
                                   pickupTime:  UserDefaults.standard.object(forKey: key_pickUpTime) as? Date,
                                   returnTime: datePicker.date,
                                   pickUpLocation: UserDefaults.standard.object(forKey: key_pickUpLocation) as? String,
-                                  returnLocation: UserDefaults.standard.object(forKey: key_returnLocation) as? String)
+                                  returnLocation: UserDefaults.standard.object(forKey: key_returnLocation) as? String,
+                                  categoryIndex: UserDefaults.standard.object(forKey: key_category) as? Int)
                 
             default: break
                 
@@ -319,26 +340,27 @@ class MainViewController: BaseViewController {
                            pickupTime: Date?,
                            returnTime: Date?,
                            pickUpLocation: String?,
-                           returnLocation:String?){
+                           returnLocation:String?,
+                           categoryIndex: Int?){
         mainViewModel.isFieldsEdited(pickUpDate: pickupDate,
                                              returnDate: returnDate,
                                              pickUpTime: pickupTime,
                                              returnTime: returnTime,
                                              pickUpLocation: pickUpLocation,
                                              returnLocation: returnLocation,
+                                             category: categoryIndex,
                                              oldPickUpDate: UserDefaults.standard.object(forKey: key_pickUpDate) as? Date,
                                              oldReturnDate: UserDefaults.standard.object(forKey: key_returnDate) as? Date,
                                              oldPickUpTime: UserDefaults.standard.object(forKey: key_pickUpTime) as? Date,
                                              oldReturnTime: UserDefaults.standard.object(forKey: key_returnTime) as? Date,
                                              oldPickUpLocation: UserDefaults.standard.object(forKey: key_pickUpLocation) as? String,
-                                             oldReturnLocation: UserDefaults.standard.object(forKey: key_returnLocation) as? String) { [self] (edit) in
+                                             oldReturnLocation: UserDefaults.standard.object(forKey: key_returnLocation) as? String,
+                                             oldCategory: UserDefaults.standard.object(forKey: key_category) as? Int ) { [self] (edit) in
             if edit {
                 searchHeaderV!.mSearchBckgV.isUserInteractionEnabled = true
                 searchHeaderV!.mSearchBckgV.alpha = 1.0
             }
-            
         }
-        
     }
     
     /// Returns the amount of months from another date
@@ -346,6 +368,7 @@ class MainViewController: BaseViewController {
             return Calendar.current.dateComponents([.month], from: date, to: toDate).month ?? 0
         }
     //MARK: SHOW FUNCS
+    //MARK: ---------------------------
     func showAlertMoreThanMonth() {
         BKDAlert().showAlert(on: self,
                              title: nil,
@@ -368,8 +391,8 @@ class MainViewController: BaseViewController {
                              messageSecond: nil,
                              cancelTitle: Constant.Texts.cancel,
                              okTitle: Constant.Texts.agree,cancelAction: { [self] in
-                                self.initTimeTextField(txtFl: (self.searchHeaderV?.mPickUpTimeTxtFl)!, txt: Constant.Texts.pickUpTime)
-                                self.initTimeTextField(txtFl: (self.searchHeaderV?.mReturnTimeTxtFl)!, txt: Constant.Texts.returnTime)
+                                self.configureTimeTextField(txtFl: (self.searchHeaderV?.mPickUpTimeTxtFl)!, txt: Constant.Texts.pickUpTime)
+                                self.configureTimeTextField(txtFl: (self.searchHeaderV?.mReturnTimeTxtFl)!, txt: Constant.Texts.returnTime)
                              }, okAction: { [self] in
                                 if self.isPressedEdit {
                                     self.checkAnyFieldsHaveBeenEdited()
@@ -389,24 +412,7 @@ class MainViewController: BaseViewController {
                                 self.showCustomLocationMap()
                              })
     }
-    func showEdit() {
-        searchResultV?.didPressEdit = { [weak self] in
-            self?.isPressedEdit = true
-            self?.animateSearchHeader()
-            self?.searchHeaderV?.setShadow(color: .lightGray)
-            self?.searchHeaderV?.mArrowBtn.isHidden = false
-            self?.searchHeaderV?.mSearchBckgV.isUserInteractionEnabled = false
-            self?.searchHeaderV?.mSearchBckgV.alpha = 0.8
-            self?.searchHeaderV?.mSearchLeading.constant = 0
-            self?.searchHeaderV?.layoutIfNeeded()
-        }
-    }
     
-    func hideEdit()  {
-        searchHeaderV?.hideEditView = { [self] in
-            self.animateSearchResult()
-        }
-    }
     
     func  showFilter()  {
         searchResultV?.didPressFilter = { [weak self] isShowFilter in
@@ -449,7 +455,11 @@ class MainViewController: BaseViewController {
         let customLocationContr = UIStoryboard(name: Constant.Storyboards.customLocation, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.customLocation) as! CustomLocationViewController
         self.navigationController?.pushViewController(customLocationContr, animated: true)
     }
+    
+  //MARK: SELECTED CLOSURES
+    //MARK ------------------------------
     func selectedCustomLocation() {
+       // self.showCustomLocationMap()
         searchHeaderV!.didSelectCustomLocation = { [weak self] checkedBtn, willShowAlert in
             willShowAlert ? self!.showAlertCustomLocation(checkedBtn: checkedBtn) : self!.showCustomLocationMap()
         }
@@ -500,14 +510,16 @@ class MainViewController: BaseViewController {
                                             pickupTime: UserDefaults.standard.object(forKey: key_pickUpTime) as? Date,
                                             returnTime: UserDefaults.standard.object(forKey: key_returnTime) as? Date,
                                             pickUpLocation: locationStr,
-                                            returnLocation: UserDefaults.standard.object(forKey: key_returnLocation) as? String)
+                                            returnLocation: UserDefaults.standard.object(forKey: key_returnLocation) as? String,
+                                            categoryIndex: UserDefaults.standard.object(forKey: key_category) as? Int)
                 } else {
                     self?.checkFieldsEdited(pickupDate: UserDefaults.standard.object(forKey: key_pickUpDate) as? Date,
                                             returnDate: UserDefaults.standard.object(forKey: key_returnDate) as? Date,
                                             pickupTime: UserDefaults.standard.object(forKey: key_pickUpTime) as? Date,
                                             returnTime: UserDefaults.standard.object(forKey: key_returnTime) as? Date,
                                             pickUpLocation: UserDefaults.standard.object(forKey: key_pickUpLocation) as? String,
-                                            returnLocation: locationStr)
+                                            returnLocation: locationStr,
+                                            categoryIndex: UserDefaults.standard.object(forKey: key_category) as? Int)
                     
                 }
             }
@@ -519,23 +531,63 @@ class MainViewController: BaseViewController {
             self?.isSearchResultPage = true
             self?.isPressedEdit = false
             self?.searchHeaderV?.layer.shadowOpacity = 1.0
-            self?.navigationController!.navigationBar.topItem?.title = "Search Results"
+            
             self?.mLeftBarBtn.image = img_back
             self?.mRightBarBtn.image = img_chat
             self?.mChatWithUsBckgV.isHidden = true
             self?.mCarCollectionV.reloadData()
             
             // If will not  found result
-            //self?.animateAvalableCategoriesResult()
-            // else
-            self?.animateSearchResult()
+            // must be change by api result
+            if self?.searchHeaderV?.carouselBackgV.categoryCarousel.currentItemIndex == 2 {
+                self?.isNoSearchResult = true
+                self?.navigationController!.navigationBar.topItem?.title = ""
+                self?.animateAvalableCategoriesResult()
+            } else {
+                self?.navigationController!.navigationBar.topItem?.title = Constant.Texts.searchResult
+                self?.isNoSearchResult = false
+                self?.animateSearchResult()
+            }
         }
     }
     
-    func selectedBack() {
+    func selectedEdit() {
+        searchResultV?.didPressEdit = { [weak self] in
+            self?.isPressedEdit = true
+            self?.animateSearchHeader()
+            self?.searchHeaderV?.setShadow(color: .lightGray)
+            self?.searchHeaderV?.mArrowBtn.isHidden = false
+            self?.searchHeaderV?.mSearchBckgV.isUserInteractionEnabled = false
+            self?.searchHeaderV?.mSearchBckgV.alpha = 0.8
+            self?.searchHeaderV?.mSearchLeading.constant = 0
+            self?.searchHeaderV?.layoutIfNeeded()
+            if self!.isNoSearchResult {
+                self?.isSearchResultPage = false
+                self?.mCarCollectionV.reloadData()
+                self?.animateSearchResultContainer(isThereResult: self!.isNoSearchResult)
+                self?.navigationController!.navigationBar.topItem?.title = ""
+            }
+        }
+    }
+    
+    func selectedArrow()  {
+        searchHeaderV?.hideEditView = { [weak self] in
+            if !self!.isNoSearchResult {
+                self?.navigationController!.navigationBar.topItem?.title = Constant.Texts.searchResult
+                self?.animateSearchResult()
+            } else {
+                self?.navigationController!.navigationBar.topItem?.title = ""
+                self?.animateAvalableCategoriesResult()
+            }
+        }
+    }
+    
+    func selectedBack(isBackFromResult: Bool) {
         isSearchResultPage = false
         isPressedEdit = true
+        isNoSearchResult = false
         
+        animateSearchResultContainer(isThereResult: isBackFromResult)
         navigationController!.navigationBar.topItem?.title = ""
         mLeftBarBtn.image = img_menu
         mRightBarBtn.image = img_bkd
@@ -549,10 +601,21 @@ class MainViewController: BaseViewController {
         mCarCollectionV.reloadData()
         animateSearchHeader()
     }
-    
+
     func updateCategory() {
-//        searchHeaderV?.carouselBackgV.didChangeCategory = { [self] categoryIndex in
-//            let category: Categorys = Categorys.init(rawValue: categoryIndex)!
+        searchHeaderV?.carouselBackgV.didChangeCategory = { [weak self] categoryIndex in
+           // let category: Categorys = Categorys.init(rawValue: categoryIndex)!
+            self?.checkFieldsEdited(pickupDate: UserDefaults.standard.object(forKey: key_pickUpDate) as? Date,
+                                    returnDate: UserDefaults.standard.object(forKey: key_returnDate) as? Date,
+                                    pickupTime: UserDefaults.standard.object(forKey: key_pickUpTime) as? Date,
+                                    returnTime: UserDefaults.standard.object(forKey: key_returnTime) as? Date,
+                                    pickUpLocation:  UserDefaults.standard.object(forKey: key_pickUpLocation) as? String,
+                                    returnLocation: UserDefaults.standard.object(forKey: key_returnLocation) as? String,
+                                    categoryIndex: categoryIndex)
+            UserDefaults.standard.set(categoryIndex, forKey: key_category)
+
+            
+        
 //            switch category {
 //            case .trucs: break
 //            case .frigoVans: break
@@ -562,12 +625,12 @@ class MainViewController: BaseViewController {
 //            default:
 //                break
 //            }
-//            mCarCollectionV.reloadData()
-//
-//        }
+           // mCarCollectionV.reloadData()
+
+        }
     }
     
-    func hiddeDateInfo(dayBtn : UIButton, monthBtn: UIButton, hidden: Bool, txtFl: UITextField)  {
+    func hideDateInfo(dayBtn : UIButton, monthBtn: UIButton, hidden: Bool, txtFl: UITextField)  {
         dayBtn.isHidden = hidden
         monthBtn.isHidden = hidden
         if hidden == false {
@@ -587,9 +650,10 @@ class MainViewController: BaseViewController {
     
     
     //MARK: ACTIONS
+    //MARK: ----------------------------
     @IBAction func menu(_ sender: UIBarButtonItem) {
-        if isSearchResultPage {
-            selectedBack()
+        if isSearchResultPage || isNoSearchResult  {
+            selectedBack(isBackFromResult: true)
         } else {
             present(menu!, animated: true, completion: nil)
             
@@ -603,14 +667,54 @@ class MainViewController: BaseViewController {
     @IBAction func chatWithUs(_ sender: UIButton) {
         openChatPage ()
     }
+    
+    @objc func donePressed() {
+        responderTxtFl.resignFirstResponder()
+        DispatchQueue.main.async() {
+            self.backgroundV.removeFromSuperview()
+        }
+        checkMonthReservation()
+        if isPressedEdit {
+            checkAnyFieldsHaveBeenEdited()
+        }
+        if responderTxtFl.tag == 0 { // PickUpDate
+            UserDefaults.standard.set(datePicker.date, forKey: key_pickUpDate)
+            hideDateInfo(dayBtn: searchHeaderV!.mDayPickUpBtn,
+                          monthBtn: searchHeaderV!.mMonthPickUpBtn,
+                          hidden: false, txtFl: responderTxtFl)
+            showSelectedDate(dayBtn: searchHeaderV!.mDayPickUpBtn,
+                             monthBtn: searchHeaderV!.mMonthPickUpBtn)
+            
+        } else if responderTxtFl.tag == 1 { // ReturnDate
+            UserDefaults.standard.set(datePicker.date, forKey: key_returnDate)
+            hideDateInfo(dayBtn: searchHeaderV!.mDayReturnDateBtn,
+                          monthBtn: searchHeaderV!.mMonthReturnDateBtn,
+                          hidden: false, txtFl: responderTxtFl)
+            showSelectedDate(dayBtn: searchHeaderV!.mDayReturnDateBtn,
+                             monthBtn: searchHeaderV!.mMonthReturnDateBtn)
+            
+        } else {
+            checkReservetionTime()
+            responderTxtFl.tag == 2 ? UserDefaults.standard.set(datePicker.date, forKey: key_pickUpTime) : UserDefaults.standard.set(datePicker.date, forKey: key_returnTime)
+            showSelectedDate(dayBtn: nil, monthBtn: nil)
+            
+        }
+        
+        //Checking the filling of any fields and removing the error color from the field
+        if searchHeaderV!.mErrorMessageLb.isHidden == false {
+            let _ = searchHeaderV!.checkFieldsFilled()
+        }
+    }
+        
 
 }
 
 
-
+//MARK:UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
+//MARK: -----------------------
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     //MARK: UICollectionViewDataSource
-
+    //MARK: -------------------------------
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if isPressedFilter {
             return 5 + 1
@@ -642,11 +746,14 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
 
     //MARK: UICollectionViewDelegate
+    //MARK: -------------------------------
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
     }
 
     //MARK: UICollectionViewDelegateFlowLayout
+    //MARK: -------------------------------
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -658,8 +765,39 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
 }
 
 
-// MARK: - UIScrollView Delegate
+//MARK: UITableViewDataSource
+//MARK: -----------------------------
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    
+   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       return CategoryData.avalableCategoryModel.count
+   }
 
+   
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTableViewCell.identifier) as! CategoryTableViewCell
+
+       let categoryModel: CategoryModel = CategoryData.avalableCategoryModel[indexPath.row]
+       cell.mCategoryNameLb.text = categoryModel.categoryName
+       cell.collectionData = CategoryData.avalableCategoryModel[indexPath.row]
+       return cell
+   }
+   
+   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+       return self.view.frame.size.height * 0.222772;
+   }
+   
+   //MARK: UITableViewDelegate
+    //MARK: -------------------------------
+   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      
+   }
+
+}
+
+
+// MARK: - UIScrollView Delegate
+//MARK: -----------------------------------
 extension MainViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         /// Change top view position and alpha
@@ -673,3 +811,4 @@ extension MainViewController: UIScrollViewDelegate {
     }
    
 }
+

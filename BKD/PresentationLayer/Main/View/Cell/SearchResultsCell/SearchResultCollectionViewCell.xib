@@ -292,7 +292,7 @@
                                     <constraint firstItem="bHh-s3-LqB" firstAttribute="width" relation="greaterThanOrEqual" secondItem="l8r-WE-WOv" secondAttribute="width" multiplier="0.515707" id="x29-PO-Rqz"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Sl-Bb-XkN">
+                            <view hidden="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Sl-Bb-XkN">
                                 <rect key="frame" x="16" y="73" width="382" height="250"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S9z-Y8-g0f">

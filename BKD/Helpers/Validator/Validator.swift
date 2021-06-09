@@ -64,6 +64,9 @@ class Validator: NSObject {
         if searchParams.returnLocation != oldSearchParam.returnLocation {
             return true
         }
+        if searchParams.category != oldSearchParam.category {
+            return true
+        }
         return false
         
     }
