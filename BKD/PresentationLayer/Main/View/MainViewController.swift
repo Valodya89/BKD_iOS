@@ -661,11 +661,20 @@ class MainViewController: BaseViewController {
     }
     
     @IBAction func rightBar(_ sender: UIBarButtonItem) {
-        openChatPage ()
+        if isSearchResultPage {
+            openChatPage ()
+        }
     }
     
     @IBAction func chatWithUs(_ sender: UIButton) {
-        openChatPage ()
+       // openChatPage ()
+        let detailsVC = UIStoryboard(name: Constant.Storyboards.details, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.details) as! DetailsViewController
+        self.navigationController?.pushViewController(detailsVC, animated: true)
+    }
+    
+    @objc func moreInfoPressed(sender: UIButton) {
+        let detailsVC = UIStoryboard(name: Constant.Storyboards.details, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.details) as! DetailsViewController
+        self.navigationController?.pushViewController(detailsVC, animated: true)
     }
     
     @objc func donePressed() {
@@ -735,10 +744,15 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
                 } else {
                     // will show search result cell
                     cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell
+                    
                 }
             } else {
                 // will show search result cell
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell
+                (cell as! SearchResultCollectionViewCell).mMoreInfoBtn.tag = indexPath.row
+                (cell as! SearchResultCollectionViewCell).mFlipMoreInfoBtn.tag = indexPath.row
+                (cell as! SearchResultCollectionViewCell).mMoreInfoBtn.addTarget(self, action: #selector(moreInfoPressed(sender:)), for: .touchUpInside)
+                (cell as! SearchResultCollectionViewCell).mFlipMoreInfoBtn.addTarget(self, action: #selector(moreInfoPressed(sender:)), for: .touchUpInside)
             }
 
         }

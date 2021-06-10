@@ -241,7 +241,7 @@
                                                     <color key="titleColor" name="navigationBar"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="moreInfo:" destination="yMH-ep-coZ" eventType="touchUpInside" id="1tu-q0-Uqe"/>
+                                                    <action selector="moreInfo:" destination="yMH-ep-coZ" eventType="touchUpInside" id="cxe-dz-iXR"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cXa-qj-XS9">
@@ -393,7 +393,7 @@
                                                     <color key="titleColor" name="navigationBar"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="moreInfo:" destination="yMH-ep-coZ" eventType="touchUpInside" id="EeI-w4-PEm"/>
+                                                    <action selector="moreInfo:" destination="yMH-ep-coZ" eventType="touchUpInside" id="Yfa-02-qdv"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHg-k3-oWF">

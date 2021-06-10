@@ -43,7 +43,16 @@ class OnlineChatViewController: MessagesViewController, MessageCellDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
     
     
@@ -74,6 +83,9 @@ class OnlineChatViewController: MessagesViewController, MessageCellDelegate {
         
         messagesCollectionView.backgroundColor = color_background
         messagesCollectionView.showsVerticalScrollIndicator = false
+
+//        messagesCollectionView.contentInset.bottom = 20
+
         deletAvatarPadding()
         
     }
@@ -114,6 +126,7 @@ class OnlineChatViewController: MessagesViewController, MessageCellDelegate {
                                 messageId: "6",
                                 sentDate: Date().addingTimeInterval(-36400),
                                 kind: .text("This is last message")))
+
     }
     
     
@@ -122,6 +135,22 @@ class OnlineChatViewController: MessagesViewController, MessageCellDelegate {
     @IBAction func dismiss(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+//    //MARK: Keyboard Notification
+//    //MARK:-------------------------------
+//
+//    @objc func keyboardWillShow(notification: NSNotification) {
+//        if let keyboardSize =  (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+//            if keyboardSize.height > 100 {
+//                let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey]
+//            UIView.animate(withDuration: duration as! TimeInterval) {
+//                    self.messagesCollectionView.scrollToLastItem()
+//                }
+//            }
+//
+//        }
+//    }
+    
 }
 
 extension OnlineChatViewController: MessagesLayoutDelegate, MessagesDataSource, MessagesDisplayDelegate {
@@ -144,7 +173,7 @@ extension OnlineChatViewController: MessagesLayoutDelegate, MessagesDataSource, 
         let sentDate = message.sentDate
         let sentDateString = MessageKitDateFormatter.shared.string(from: sentDate)
         let timeLabelFont: UIFont = font_search_cell!
-        let timeLabelColor: UIColor = .white
+        let timeLabelColor: UIColor = color_filter_fields!
         return NSAttributedString(string: sentDateString, attributes: [NSAttributedString.Key.font: timeLabelFont, NSAttributedString.Key.foregroundColor: timeLabelColor])
      }
     
@@ -165,6 +194,9 @@ extension OnlineChatViewController: MessagesLayoutDelegate, MessagesDataSource, 
                 view.backgroundColor = color_menu!
             }
             
+        }
+        if indexPath.section == messages.count - 1 {
+            messagesCollectionView.scrollToItem(at: indexPath, at: MessagesCollectionView.ScrollPosition.bottom, animated: true)
         }
         return .custom(closure)
     }
@@ -210,3 +242,5 @@ extension OnlineChatViewController: InputBarAccessoryViewDelegate {
         }
     }
 }
+
+

@@ -58,6 +58,14 @@ struct InactiveLocationRangeData {
                                                                            InactiveLocationRangeModel(latitude: 40.098976432681816, longitude: 44.52054139226675, radius: 3000 ), InactiveLocationRangeModel(latitude:40.27347513165386, longitude: 44.50302891433239, radius: 1500 )]
 }
 
+struct CarsData {
+    static let carModel:[CarModel] = [CarModel(carImage: #imageLiteral(resourceName: "fiat_telento")),
+                                      CarModel(carImage: #imageLiteral(resourceName: "vans")),
+                                      CarModel(carImage: #imageLiteral(resourceName: "fiat_telento")),
+                                      CarModel(carImage: #imageLiteral(resourceName: "fiat_ducato")),
+                                      CarModel(carImage: #imageLiteral(resourceName: "fiat_telento")),]
+}
+
 struct CategoryCarouselData  {
     static let categoryCarouselModel: [CategoryCarouselModel] = [ CategoryCarouselModel(categoryName: "Trucks", CategoryImg: UIImage(named: "trucks_category")),
                                                                   CategoryCarouselModel(categoryName: "Frigo Vans", CategoryImg: UIImage(named: "frigo_vans_category")),

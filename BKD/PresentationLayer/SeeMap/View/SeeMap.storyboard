@@ -26,9 +26,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yi5-vl-a3v" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VFT-xP-4PH">
+                                <rect key="frame" x="0.0" y="0.0" width="30" height="725"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s1Q-Xi-1sp">
                                 <rect key="frame" x="0.0" y="475" width="414" height="250"/>
@@ -38,14 +39,14 @@
                         <viewLayoutGuide key="safeArea" id="40y-86-aH2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="40y-86-aH2" firstAttribute="trailing" secondItem="yi5-vl-a3v" secondAttribute="trailing" id="084-sb-8q2"/>
                             <constraint firstItem="40y-86-aH2" firstAttribute="bottom" secondItem="s1Q-Xi-1sp" secondAttribute="bottom" id="9Ct-6c-Sky"/>
+                            <constraint firstItem="VFT-xP-4PH" firstAttribute="top" secondItem="40y-86-aH2" secondAttribute="top" id="GDm-Zt-XsU"/>
+                            <constraint firstItem="VFT-xP-4PH" firstAttribute="leading" secondItem="40y-86-aH2" secondAttribute="leading" id="GIO-xk-aBe"/>
+                            <constraint firstItem="40y-86-aH2" firstAttribute="bottom" secondItem="VFT-xP-4PH" secondAttribute="bottom" id="KlK-D7-6im"/>
                             <constraint firstItem="s1Q-Xi-1sp" firstAttribute="centerX" secondItem="40y-86-aH2" secondAttribute="centerX" id="L1q-D2-ZOe"/>
+                            <constraint firstItem="VFT-xP-4PH" firstAttribute="width" secondItem="N4K-X4-MMo" secondAttribute="width" multiplier="0.0724638" id="LoG-h5-grW"/>
                             <constraint firstItem="s1Q-Xi-1sp" firstAttribute="width" secondItem="N4K-X4-MMo" secondAttribute="width" id="Unr-LW-r0y"/>
-                            <constraint firstItem="yi5-vl-a3v" firstAttribute="top" secondItem="40y-86-aH2" secondAttribute="top" id="ZDH-nW-fwy"/>
-                            <constraint firstItem="yi5-vl-a3v" firstAttribute="leading" secondItem="40y-86-aH2" secondAttribute="leading" id="ZZk-h7-xbH"/>
-                            <constraint firstItem="s1Q-Xi-1sp" firstAttribute="height" secondItem="yi5-vl-a3v" secondAttribute="height" multiplier="0.345" id="fRB-F0-Oxg"/>
-                            <constraint firstItem="40y-86-aH2" firstAttribute="bottom" secondItem="yi5-vl-a3v" secondAttribute="bottom" id="x1X-fv-sJb"/>
+                            <constraint firstItem="s1Q-Xi-1sp" firstAttribute="height" secondItem="N4K-X4-MMo" secondAttribute="height" multiplier="0.309406" id="nsA-dX-qAB"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -63,6 +64,7 @@
                     <connections>
                         <outlet property="mAddreassBckgV" destination="s1Q-Xi-1sp" id="CvU-8o-ruH"/>
                         <outlet property="mRightBarBtn" destination="v1q-Wh-JqE" id="EsF-FV-8aT"/>
+                        <outlet property="mSwipeGestureBckgV" destination="VFT-xP-4PH" id="tyF-27-S8T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jNY-0P-kon" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

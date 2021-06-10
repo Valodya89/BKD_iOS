@@ -36,6 +36,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eKc-nQ-p2H">
+                                <rect key="frame" x="0.0" y="0.0" width="30" height="774"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="5Bw-Gi-775" appends="YES" id="Xpz-1u-Gpi"/>
+                                </connections>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QEk-wK-I1i">
                                 <rect key="frame" x="0.0" y="891" width="414" height="283"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -66,10 +74,14 @@
                             <constraint firstItem="fUg-xF-wG3" firstAttribute="centerY" secondItem="Rf7-IU-SaY" secondAttribute="centerY" id="22I-Ol-Pc4"/>
                             <constraint firstItem="QEk-wK-I1i" firstAttribute="centerX" secondItem="Zk8-T5-g6d" secondAttribute="centerX" id="9fS-uK-5nR"/>
                             <constraint firstItem="fUg-xF-wG3" firstAttribute="height" secondItem="Rf7-IU-SaY" secondAttribute="height" id="9p3-oL-LsX"/>
+                            <constraint firstItem="eKc-nQ-p2H" firstAttribute="width" secondItem="Zk8-T5-g6d" secondAttribute="width" multiplier="0.0724638" id="Ego-EO-04G"/>
                             <constraint firstItem="fUg-xF-wG3" firstAttribute="centerX" secondItem="Rf7-IU-SaY" secondAttribute="centerX" id="HPa-kZ-EyK"/>
                             <constraint firstItem="Rf7-IU-SaY" firstAttribute="bottom" secondItem="QEk-wK-I1i" secondAttribute="bottom" constant="-400" id="IEu-4d-kk5"/>
+                            <constraint firstItem="eKc-nQ-p2H" firstAttribute="top" secondItem="Rf7-IU-SaY" secondAttribute="top" id="JUy-9Z-dmL"/>
                             <constraint firstItem="QEk-wK-I1i" firstAttribute="height" secondItem="Zk8-T5-g6d" secondAttribute="height" multiplier="0.350248" id="MBK-m8-lfW"/>
                             <constraint firstItem="QEk-wK-I1i" firstAttribute="width" secondItem="Zk8-T5-g6d" secondAttribute="width" id="OAJ-ux-6HG"/>
+                            <constraint firstItem="eKc-nQ-p2H" firstAttribute="leading" secondItem="Rf7-IU-SaY" secondAttribute="leading" id="SiC-Hq-QD7"/>
+                            <constraint firstItem="Rf7-IU-SaY" firstAttribute="bottom" secondItem="eKc-nQ-p2H" secondAttribute="bottom" id="ezg-9M-V1z"/>
                             <constraint firstItem="fUg-xF-wG3" firstAttribute="width" secondItem="Rf7-IU-SaY" secondAttribute="width" id="gej-PR-lWj"/>
                             <constraint firstItem="t1l-T9-dVR" firstAttribute="height" secondItem="Zk8-T5-g6d" secondAttribute="height" multiplier="0.0365099" id="oLw-QV-vCX"/>
                             <constraint firstItem="t1l-T9-dVR" firstAttribute="centerX" secondItem="Zk8-T5-g6d" secondAttribute="centerX" multiplier="1.75" id="uSC-MA-Ut9"/>
@@ -91,10 +103,16 @@
                         <outlet property="mMarkInfoBackgBottom" destination="IEu-4d-kk5" id="3hk-Dk-eGf"/>
                         <outlet property="mMarkerInfoBckgV" destination="QEk-wK-I1i" id="cgo-z2-Wpr"/>
                         <outlet property="mRightBarBtn" destination="2dw-IC-4eY" id="WVC-hl-93k"/>
+                        <outlet property="mSwipeGestureBckgV" destination="eKc-nQ-p2H" id="iMv-uv-foM"/>
                         <outlet property="mUserLocationBckgV" destination="t1l-T9-dVR" id="H9Y-1A-iZh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cD4-yn-2Pw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="5Bw-Gi-775">
+                    <connections>
+                        <action selector="backSwipe:" destination="i55-z6-QwB" id="CdO-9f-Uax"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="997.10144927536237" y="82.366071428571431"/>
         </scene>

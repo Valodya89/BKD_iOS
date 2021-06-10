@@ -17,6 +17,7 @@ class CustomLocationViewController: UIViewController {
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mMarkerInfoBckgV: UIView!
     @IBOutlet weak var mUserLocationBckgV: UIView!
+    @IBOutlet weak var mSwipeGestureBckgV: UIView!
     @IBOutlet weak var mMarkInfoBackgBottom: NSLayoutConstraint!
     
     //MARK: - Variables
@@ -81,6 +82,7 @@ class CustomLocationViewController: UIViewController {
         configureDelegates()
         configureMapView()
         configureTableView()
+        
     }
     
     /// configure Delegates
@@ -101,7 +103,7 @@ class CustomLocationViewController: UIViewController {
         addInactiveCoordinates()
         moveCameraPosition(cord2D: CLLocationCoordinate2D(latitude:40.220485, longitude:  44.486114))
           placesClient = GMSPlacesClient.shared()
-        
+        self.view.bringSubviewToFront(mSwipeGestureBckgV)
     }
     
     /// configure table view
@@ -223,6 +225,9 @@ class CustomLocationViewController: UIViewController {
         showCurrentLocation()
     }
     
+    @IBAction func backSwipe(_ sender: UISwipeGestureRecognizer) {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 

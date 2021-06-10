@@ -134,6 +134,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         mFlipMoreInfoBtn.backgroundColor = color_btn_pressed
         mReserveBtn.backgroundColor = .clear
         mFlipReserveBtn.backgroundColor = .clear
+        
 
     }
     

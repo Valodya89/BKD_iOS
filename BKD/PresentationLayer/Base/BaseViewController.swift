@@ -17,7 +17,7 @@ class BaseViewController: UIViewController {
     
     func setmenu(menu: SideMenuNavigationController?) {
         menu?.leftSide = true
-       // SideMenuManager.default.addPanGestureToPresent(toView: view)
+        SideMenuManager.default.addPanGestureToPresent(toView: view)
         SideMenuManager.default.leftMenuNavigationController = menu
         menu?.setNavigationBarHidden(true, animated: true)
         menu?.menuWidth = 310

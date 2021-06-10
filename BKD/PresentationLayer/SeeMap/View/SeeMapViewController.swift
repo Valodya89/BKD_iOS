@@ -10,12 +10,13 @@ import GoogleMaps
 import Mapbox
 import SideMenu
 
-class SeeMapViewController: BaseViewController, GMSMapViewDelegate {
+class SeeMapViewController: BaseViewController {
     
     //MARK: - Outlets
 
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mAddreassBckgV: UIView!
+    @IBOutlet weak var mSwipeGestureBckgV: UIView!
     
     //MARK: - Variables
     var menu: SideMenuNavigationController?
@@ -54,9 +55,11 @@ class SeeMapViewController: BaseViewController, GMSMapViewDelegate {
         menu = SideMenuNavigationController(rootViewController: LeftViewController())
         self.setmenu(menu: menu)
         mRightBarBtn.image = UIImage(named:"bkd")?.withRenderingMode(.alwaysOriginal)
+
     }
     /// configure Delegates
     private func configureDelegates() {
+        mapView?.delegate = self
         locationManager.delegate = self
         addressVC.delegate = self
 
@@ -68,6 +71,7 @@ class SeeMapViewController: BaseViewController, GMSMapViewDelegate {
         self.view.addSubview(mapView!)
         addMarker(longitude: -33.86, latitude: 151.20, marker: marker)
         mapView!.isMyLocationEnabled = true
+        self.view.bringSubviewToFront(mSwipeGestureBckgV)
     }
     
     func  configureLocation()  {
@@ -168,3 +172,21 @@ extension SeeMapViewController: CLLocationManagerDelegate {
        }
 }
   
+extension SeeMapViewController: GMSMapViewDelegate {
+    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+        print("willMove")
+    //
+    }
+
+    // Touch drag and lift
+    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+        print("idleAt position \(position)")
+
+    //
+    }
+
+    // Touch and lift
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+        print("yes")
+    }
+}

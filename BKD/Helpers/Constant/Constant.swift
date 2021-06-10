@@ -15,6 +15,7 @@ struct Constant {
         static let searchCustomLocation = "SearchCustomLocation"
         static let chat = "Chat"
         static let avalableCategories = "AvalableCategories"
+        static let details = "Details"
          
 
     }
@@ -35,6 +36,7 @@ struct Constant {
         static let onlineChat = "OnlineChatViewController"
         static let offlineChat = "OfflineViewController"
         static let AvalableCategories = "AvalableCategoriesViewController"
+        static let details = "DetailsViewController"
     }
     
     struct FontNames {
@@ -113,6 +115,7 @@ let color_map_circle = UIColor(named: "map_circle")
 let color_chat_placeholder = UIColor(named:"chat_placeholder")
 let color_Offline_bckg = UIColor(named: "gradient_blur_end")
 let color_email = UIColor(named: "email")
+let color_shadow = UIColor(named: "shadow")
 
 
 //Fonts
