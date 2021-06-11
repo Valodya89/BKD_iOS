@@ -61,6 +61,15 @@
 		5656324626585FFF00B78562 /* CarEquipmentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656324426585FFF00B78562 /* CarEquipmentCollectionViewCell.swift */; };
 		5656324726585FFF00B78562 /* CarEquipmentCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5656324526585FFF00B78562 /* CarEquipmentCollectionViewCell.xib */; };
 		565632522658B11E00B78562 /* EquipmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565632512658B11D00B78562 /* EquipmentModel.swift */; };
+		565731CC26724F720012ADD0 /* CarInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565731CB26724F720012ADD0 /* CarInfoView.swift */; };
+		565731D126725FBD0012ADD0 /* DetailsAndTailLiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565731D026725FBD0012ADD0 /* DetailsAndTailLiftView.swift */; };
+		565731D92672DE810012ADD0 /* UINavigationControllerExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565731D82672DE810012ADD0 /* UINavigationControllerExtention.swift */; };
+		565731DE2672FDC80012ADD0 /* DetailsAndTailLiftModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565731DD2672FDC80012ADD0 /* DetailsAndTailLiftModel.swift */; };
+		565731EE26730F270012ADD0 /* DetailsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565731ED26730F270012ADD0 /* DetailsTableView.swift */; };
+		565731F32673188F0012ADD0 /* TailLiftTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565731F22673188F0012ADD0 /* TailLiftTableView.swift */; };
+		565731F8267332620012ADD0 /* TariffSlideCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565731F7267332620012ADD0 /* TariffSlideCollectionViewController.swift */; };
+		565731FD267332B10012ADD0 /* TariffSlideModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565731FC267332B10012ADD0 /* TariffSlideModel.swift */; };
+		56573202267339B50012ADD0 /* FontsFree-Net-SFProDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 56573201267339B50012ADD0 /* FontsFree-Net-SFProDisplay-Medium.ttf */; };
 		5657E840267108A300788D62 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5657E83F267108A300788D62 /* DetailsViewController.swift */; };
 		5657E848267108B500788D62 /* Details.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5657E847267108B500788D62 /* Details.storyboard */; };
 		5657E84E26711AE800788D62 /* CarPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5657E84D26711AE800788D62 /* CarPhotosView.swift */; };
@@ -178,6 +187,15 @@
 		5656324426585FFF00B78562 /* CarEquipmentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarEquipmentCollectionViewCell.swift; sourceTree = "<group>"; };
 		5656324526585FFF00B78562 /* CarEquipmentCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarEquipmentCollectionViewCell.xib; sourceTree = "<group>"; };
 		565632512658B11D00B78562 /* EquipmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentModel.swift; sourceTree = "<group>"; };
+		565731CB26724F720012ADD0 /* CarInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarInfoView.swift; sourceTree = "<group>"; };
+		565731D026725FBD0012ADD0 /* DetailsAndTailLiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsAndTailLiftView.swift; sourceTree = "<group>"; };
+		565731D82672DE810012ADD0 /* UINavigationControllerExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtention.swift; sourceTree = "<group>"; };
+		565731DD2672FDC80012ADD0 /* DetailsAndTailLiftModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsAndTailLiftModel.swift; sourceTree = "<group>"; };
+		565731ED26730F270012ADD0 /* DetailsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableView.swift; sourceTree = "<group>"; };
+		565731F22673188F0012ADD0 /* TailLiftTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TailLiftTableView.swift; sourceTree = "<group>"; };
+		565731F7267332620012ADD0 /* TariffSlideCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffSlideCollectionViewController.swift; sourceTree = "<group>"; };
+		565731FC267332B10012ADD0 /* TariffSlideModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffSlideModel.swift; sourceTree = "<group>"; };
+		56573201267339B50012ADD0 /* FontsFree-Net-SFProDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FontsFree-Net-SFProDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		5657E83F267108A300788D62 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		5657E847267108B500788D62 /* Details.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Details.storyboard; sourceTree = "<group>"; };
 		5657E84D26711AE800788D62 /* CarPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPhotosView.swift; sourceTree = "<group>"; };
@@ -401,6 +419,7 @@
 				564E12AA264BEF94008CE884 /* DateExtention.swift */,
 				564E1305264EE294008CE884 /* UIViewExtention.swift */,
 				5691A638265D53140008081D /* Extentions.swift */,
+				565731D82672DE810012ADD0 /* UINavigationControllerExtention.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -509,6 +528,7 @@
 		564E134E265211D1008CE884 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				56573201267339B50012ADD0 /* FontsFree-Net-SFProDisplay-Medium.ttf */,
 				5660F7F1266C217F0082F038 /* Mulish-Bold.ttf */,
 				560252942664372300FB204C /* Mulish-Regular.ttf */,
 				564E137926531F71008CE884 /* Mulish-SemiBold.ttf */,
@@ -581,6 +601,8 @@
 			isa = PBXGroup;
 			children = (
 				5657E85226713BD400788D62 /* DetailsModel.swift */,
+				565731DD2672FDC80012ADD0 /* DetailsAndTailLiftModel.swift */,
+				565731FC267332B10012ADD0 /* TariffSlideModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -596,6 +618,11 @@
 			isa = PBXGroup;
 			children = (
 				5657E84D26711AE800788D62 /* CarPhotosView.swift */,
+				565731CB26724F720012ADD0 /* CarInfoView.swift */,
+				565731D026725FBD0012ADD0 /* DetailsAndTailLiftView.swift */,
+				565731ED26730F270012ADD0 /* DetailsTableView.swift */,
+				565731F22673188F0012ADD0 /* TailLiftTableView.swift */,
+				565731F7267332620012ADD0 /* TariffSlideCollectionViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1227,6 +1254,7 @@
 				564E1358265211FF008CE884 /* Mulish-Light.ttf in Resources */,
 				568E70C326454DB1000CB6A9 /* AboutUs.storyboard in Resources */,
 				568E70CB26455286000CB6A9 /* MainCollectionViewCell.xib in Resources */,
+				56573202267339B50012ADD0 /* FontsFree-Net-SFProDisplay-Medium.ttf in Resources */,
 				5656324726585FFF00B78562 /* CarEquipmentCollectionViewCell.xib in Resources */,
 				568E706F264481B0000CB6A9 /* LeftTableViewCell.xib in Resources */,
 				565A7AE426555EFF006C63D0 /* CategoryTableViewCell.xib in Resources */,
@@ -1409,8 +1437,11 @@
 				564E131F264F0319008CE884 /* CarouselView.swift in Sources */,
 				565632522658B11E00B78562 /* EquipmentModel.swift in Sources */,
 				5602532C26670A0100FB204C /* OnlineChatViewController.swift in Sources */,
+				565731CC26724F720012ADD0 /* CarInfoView.swift in Sources */,
+				565731D126725FBD0012ADD0 /* DetailsAndTailLiftView.swift in Sources */,
 				568E703B264440C2000CB6A9 /* MyBKDViewController.swift in Sources */,
 				565BD3602659AED1001923F5 /* AppDelegate.swift in Sources */,
+				565731EE26730F270012ADD0 /* DetailsTableView.swift in Sources */,
 				560253C0266AB69100FB204C /* OfflineChatViewModel.swift in Sources */,
 				5602534C2667413A00FB204C /* BaseViewController.swift in Sources */,
 				5691A639265D53140008081D /* Extentions.swift in Sources */,
@@ -1421,6 +1452,7 @@
 				5691A5FC265C28860008081D /* AddressNameViewController.swift in Sources */,
 				568E706E264481B0000CB6A9 /* LeftTableViewCell.swift in Sources */,
 				564E12E1264D787A008CE884 /* MenuModel.swift in Sources */,
+				565731D92672DE810012ADD0 /* UINavigationControllerExtention.swift in Sources */,
 				560251E02661089C00FB204C /* CarouselCellView.swift in Sources */,
 				565A7AB02653FE26006C63D0 /* SearchHeaderView.swift in Sources */,
 				564E12FE264EAF04008CE884 /* PaddingUILable.swift in Sources */,
@@ -1430,6 +1462,7 @@
 				564E137126530208008CE884 /* SearchResultCollectionViewCell.swift in Sources */,
 				56563214265683A000B78562 /* Validator.swift in Sources */,
 				560252EF2665919A00FB204C /* CustomLocationModel.swift in Sources */,
+				565731DE2672FDC80012ADD0 /* DetailsAndTailLiftModel.swift in Sources */,
 				568E703126443D90000CB6A9 /* CategoryViewController.swift in Sources */,
 				564E13A726535D98008CE884 /* SeeMapViewController.swift in Sources */,
 				56409539264B24D8001DC92D /* BKDAlert.swift in Sources */,
@@ -1453,14 +1486,17 @@
 				5656321C26568C0D00B78562 /* SearchHeaderModel.swift in Sources */,
 				5691A641265D97550008081D /* MainViewModel.swift in Sources */,
 				5657E84E26711AE800788D62 /* CarPhotosView.swift in Sources */,
+				565731F32673188F0012ADD0 /* TailLiftTableView.swift in Sources */,
 				5602529C2664465200FB204C /* MarkerInfoViewController.swift in Sources */,
 				568E704026446136000CB6A9 /* AboutUsViewController.swift in Sources */,
+				565731FD267332B10012ADD0 /* TariffSlideModel.swift in Sources */,
 				561887472645EE2A00BDDB33 /* UIButton+Border.swift in Sources */,
 				565A7AC726548009006C63D0 /* SearchResultView.swift in Sources */,
 				568E703626444033000CB6A9 /* NotificationsViewController.swift in Sources */,
 				564E12AB264BEF94008CE884 /* DateExtention.swift in Sources */,
 				560252E72665368E00FB204C /* SearchPlacesResult.swift in Sources */,
 				5602526726616C8700FB204C /* Storyboardinitializable.swift in Sources */,
+				565731F8267332620012ADD0 /* TariffSlideCollectionViewController.swift in Sources */,
 				5691A61B265C71EC0008081D /* ExteriorCollectionViewCell.swift in Sources */,
 				5618888F264A63CA00BDDB33 /* LocationDropDownView.swift in Sources */,
 				560252E2266535CF00FB204C /* Result.swift in Sources */,

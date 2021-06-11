@@ -25,7 +25,7 @@ struct DropDownData {
 }
 
 struct MenuData {
-
+    
     static let menuModel: [MenuModel] = [
         MenuModel(title: "About Us", imageName: "aboutUs"),
         MenuModel(title: "Language", imageName:"dutch" ),
@@ -46,10 +46,63 @@ struct EquipmentData {
 
 struct ExteriorData {
     static let exteriorModel: [ExteriorModel] = [ ExteriorModel(exterior: "5.91 x 2.42 x 2.82 m"),
-                                                 ExteriorModel(exterior: "5.91 x 2.42 x 2.82 m"),
-                                                 ExteriorModel(exterior: "5.91 x 2.42 x 2.82 m")]
+                                                  ExteriorModel(exterior: "5.91 x 2.42 x 2.82 m"),
+                                                  ExteriorModel(exterior: "5.91 x 2.42 x 2.82 m")]
 }
 
+struct DetailsData {
+    static let detailsModel: [DetailsModel] = [ DetailsModel (image: #imageLiteral(resourceName: "1"), title: "3"),
+                                                DetailsModel (image: #imageLiteral(resourceName: "2"), title: "Diesel"),
+                                                DetailsModel (image: #imageLiteral(resourceName: "3"), title: "Manual"),
+                                                DetailsModel (image: #imageLiteral(resourceName: "4"), title: "95 Kw / 130 Pk"),
+                                                DetailsModel (image: #imageLiteral(resourceName: "5"), title: "7"),
+                                                DetailsModel (image: #imageLiteral(resourceName: "6"), title: "5.91 x 2.42 x 2.82 m"),
+                                                DetailsModel (image: #imageLiteral(resourceName: "7"), title: "1.20 m"),
+                                                DetailsModel (image: #imageLiteral(resourceName: "air_conditioning"), title: "Conditioning"),
+                                                DetailsModel (image: #imageLiteral(resourceName: "gps_navigator"), title: "GPS"),
+                                                DetailsModel (image: #imageLiteral(resourceName: "10"), title: "Tow Bar"),
+                                                DetailsModel (image: #imageLiteral(resourceName: "11"), title: "Slide door")
+    ]
+}
+
+struct TailLiftData {
+    static let tailLiftModel: [TailLiftModel] = [ TailLiftModel(value: "300 kg", title: "Tail lift lifting capacity"),
+                                                  TailLiftModel(value: "190 cm", title: "Tail lift length"),
+                                                  TailLiftModel(value: "68 cm", title: "Loading floor height")]
+    
+    
+    
+}
+
+
+struct TariffSlideData {
+    static let tariffSlideModel: [TariffSlideModel] = [TariffSlideModel (title: "Hourly",
+                                                                         bckgColor: UIColor(rgb: 0x7E88BA),
+                                                                         
+                                                                         details:[TariffSlideDetailsModel(title: "2 days", value: "€ 25,5", bckgColor: .yellow),
+    TariffSlideDetailsModel(title: "3 days", value: "€ 35,5", bckgColor: .yellow),
+    TariffSlideDetailsModel(title: "4 days", value: "€ 45,5", bckgColor: .yellow),
+    TariffSlideDetailsModel(title: "5 days", value: "€ 55,5", bckgColor: .yellow),
+    TariffSlideDetailsModel(title: "6 days", value: "€ 65,5", bckgColor: .yellow),
+    TariffSlideDetailsModel(title: "7 days", value: "€ 75,5", bckgColor: .yellow)]),
+                                                       TariffSlideModel (title: "Daily",
+                                                                                     bckgColor: UIColor(rgb: 0xE9C96B),
+                                                                                     details:[TariffSlideDetailsModel(title: "2 days", value: "€ 25,5", bckgColor: .gray),
+                TariffSlideDetailsModel(title: "3 days", value: "€ 35,5", bckgColor: .gray),
+                TariffSlideDetailsModel(title: "4 days", value: "€ 45,5", bckgColor: .gray),
+                TariffSlideDetailsModel(title: "5 days", value: "€ 55,5", bckgColor: .gray),
+                TariffSlideDetailsModel(title: "6 days", value: "€ 65,5", bckgColor: .gray),
+                TariffSlideDetailsModel(title: "7 days", value: "€ 75,5", bckgColor: .gray)]),
+                                                       TariffSlideModel (title: "Weekly",
+                                                                                     bckgColor: UIColor(rgb: 0x8998AA),
+                                                                                     details:[TariffSlideDetailsModel(title: "2 days", value: "€ 25,5", bckgColor: .red),
+                TariffSlideDetailsModel(title: "3 days", value: "€ 35,5", bckgColor: .red),
+                TariffSlideDetailsModel(title: "4 days", value: "€ 45,5", bckgColor: .red),
+                TariffSlideDetailsModel(title: "5 days", value: "€ 55,5", bckgColor: .red),
+                TariffSlideDetailsModel(title: "6 days", value: "€ 65,5", bckgColor: .red),
+                TariffSlideDetailsModel(title: "7 days", value: "€ 75,5", bckgColor: .red)])
+                ]
+}
 
 struct InactiveLocationRangeData {
     static let inactiveLocationRangeModel: [InactiveLocationRangeModel] = [InactiveLocationRangeModel(latitude: 40.177200, longitude: 44.503490, radius: 2000 ),
@@ -77,26 +130,26 @@ struct CategoryCarouselData  {
 
 
 struct CategoryData {
-
+    
     static let categoryModel: [CategoryModel] = [ CategoryModel(categoryName: "Vans",
                                                                 data: [ CategoryCollectionData(carName: "Fiat Doblo L1H1", carImg: UIImage(named: "vans")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Doblo L1H1", carImg: UIImage(named: "vans")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Doblo L1H1", carImg: UIImage(named: "vans")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Doblo L1H1", carImg: UIImage(named: "vans")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Doblo L1H1", carImg: UIImage(named: "vans")!, isCarExist: true)]),
                                                   CategoryModel(categoryName: "Double Cabs",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    data: [ CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: true)]),
+                                                                data: [ CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: true)]),
                                                   CategoryModel(categoryName: "Box Trucks",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    data: [ CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true)]),
+                                                                data: [ CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true)]),
                                                   CategoryModel(categoryName: "Trucks",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    data: [ CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true)])
+                                                                data: [ CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true)])
                                                   
-                                            
+                                                  
     ]
     
     static let avalableCategoryModel: [CategoryModel] = [CategoryModel(categoryName: "Double Cabs",
                                                                        data: [ CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: true)]),
-                                                  CategoryModel(categoryName: "Box Trucks",
-                                                                data: [ CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true)]),
-                                                  CategoryModel(categoryName: "Trucks",
-                                                                data: [ CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true)])
-                                                  
-                                            
+                                                         CategoryModel(categoryName: "Box Trucks",
+                                                                       data: [ CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true)]),
+                                                         CategoryModel(categoryName: "Trucks",
+                                                                       data: [ CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Ducato met Laadklep", carImg: UIImage(named: "fiat_ducato")!, isCarExist: true)])
+                                                         
+                                                         
     ]
 }

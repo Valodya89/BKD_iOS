@@ -126,8 +126,8 @@ let font_category_name = UIFont(name: "SFProDisplay-Regular", size: 12)
 let font_alert_agree = UIFont(name: "SFProDisplay-Semibold", size: 17)
 let font_search_cell = UIFont(name: "SFProDisplay-Light", size: 16)
 let font_chat_placeholder = UIFont(name: "SFProDisplay-Light", size: 12)
-
 let font_alert_title = UIFont(name: "SFProDisplay-Semibold", size: 13)
+let font_details_title = UIFont(name: "SFProDisplay-Regular", size: 13)
 // Images
 let img_bkd = UIImage(named:"bkd")?.withRenderingMode(.alwaysOriginal)
 let img_back = UIImage(named: "back")

@@ -27,7 +27,7 @@ class CarPhotosView: UIView {
     
     func setupView()  {
         mCarImagesBckgV.setShadow(color: color_shadow!)
-        mCarImagesBckgV.setBorder(color: color_shadow!, width: 0.5)
+        mCarImagesBckgV.setBorder(color: color_shadow!, width: 0.25)
         mCarImagesBckgV.layer.cornerRadius = 3
         configureDelegates()
         configureCollectionViews()

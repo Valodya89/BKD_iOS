@@ -162,8 +162,7 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
             self?.currLocationBtn.setTitle(txt, for: .normal)
             self?.currLocationBtn.titleLabel!.font = font_selected_filter
             self?.currLocationBtn.setTitleColor(color_entered_date, for: .normal)
-            self?.animateArrow(arrowImgV: self!.currLocationDropImgV, rotationAngle: CGFloat(Double.pi * -2))
-
+            self!.currLocationDropImgV.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
             self?.currLocationBtn.tag == 4 ?  UserDefaults.standard.set(self?.currLocationBtn.title(for: .normal), forKey: key_pickUpLocation) :  UserDefaults.standard.set(self?.currLocationBtn.title(for: .normal), forKey: key_returnLocation)
             if self?.mErrorMessageLb.isHidden == false{
               let _ = self?.checkFieldsFilled()
@@ -195,11 +194,6 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         }
     }
     
-    private func animateArrow (arrowImgV:UIImageView, rotationAngle: CGFloat) {
-        UIView.animate(withDuration: 0.5) {
-            arrowImgV.transform = CGAffineTransform(rotationAngle: rotationAngle)
-        }
-    }
 //MARK: VALIDATIONS
 //MARK: ------------------
     
@@ -249,15 +243,15 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         currLocationDropImgV = mPickUpTimeDropImgV
         
         if !returnDropisClose {
-            animateArrow(arrowImgV: mReturnDropImgV, rotationAngle: CGFloat(Double.pi * -2))
+            mReturnDropImgV.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
             returnDropisClose = true
         }
 
         if pickUPDropisClose {
-            animateArrow(arrowImgV: mPickUpTimeDropImgV, rotationAngle: CGFloat(Double.pi))
+            mPickUpTimeDropImgV.rotateImage(rotationAngle: CGFloat(Double.pi))
             showLocationList()
         } else {
-            animateArrow(arrowImgV: mPickUpTimeDropImgV, rotationAngle: CGFloat(Double.pi * -2))
+            mPickUpTimeDropImgV.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
             hiddenLocationList()
         }
         pickUPDropisClose = !pickUPDropisClose
@@ -269,15 +263,15 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         currLocationDropImgV = mReturnDropImgV
         
         if !pickUPDropisClose {
-            animateArrow(arrowImgV: mPickUpTimeDropImgV, rotationAngle: CGFloat(Double.pi * -2))
+            mPickUpTimeDropImgV.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
             pickUPDropisClose = true
         }
        
         if returnDropisClose {
-            animateArrow(arrowImgV: mReturnDropImgV, rotationAngle: CGFloat(Double.pi))
+            mReturnDropImgV.rotateImage(rotationAngle: CGFloat(Double.pi))
             showLocationList()
         } else {
-            animateArrow(arrowImgV: mReturnDropImgV, rotationAngle: CGFloat(Double.pi * -2))
+            mReturnDropImgV.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
             hiddenLocationList()
         }
         returnDropisClose = !returnDropisClose

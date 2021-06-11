@@ -38,12 +38,7 @@ class LeftViewController: UITableViewController {
         let bottomPadding = window.safeAreaInsets.bottom
         privacyV.view.frame = CGRect(x: 17, y: self.view.bounds.height - 90 - bottomPadding , width: 200, height: 60)
     }
-    
-    private func animateArrow (arrowImgV:UIImageView, rotationAngle: CGFloat) {
-        UIView.animate(withDuration: 0.5) {
-            arrowImgV.transform = CGAffineTransform(rotationAngle: rotationAngle)
-        }
-    }
+
     
     func hiddeDropDown(subCell: UIView) {
         isLanguageListOpen = false
@@ -141,11 +136,11 @@ class LeftViewController: UITableViewController {
             
             if isLanguageListOpen {
                 currentCelIndexPathRow = nil
-                animateArrow(arrowImgV: cell.dropDownBtn.imageView!, rotationAngle: CGFloat(Double.pi * -2))
+                cell.dropDownBtn.imageView!.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
                 hiddeDropDown(subCell: cell.mSettingsV)
             } else {
                 currentCelIndexPathRow = indexPath.row
-                animateArrow(arrowImgV: cell.dropDownBtn.imageView!, rotationAngle: CGFloat(Double.pi))
+                cell.dropDownBtn.imageView!.rotateImage(rotationAngle: CGFloat(Double.pi))
                 cell.mSettingsV.isHidden = false
                 isLanguageListOpen = true
             }
