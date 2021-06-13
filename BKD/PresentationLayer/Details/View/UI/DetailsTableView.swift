@@ -38,5 +38,7 @@ class DetailsTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
         cell.textLabel?.font = font_details_title
         return cell
     }
-
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return detail_cell_height
+    }
 }

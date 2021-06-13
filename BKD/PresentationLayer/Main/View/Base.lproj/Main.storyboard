@@ -75,7 +75,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" id="hgO-ot-Ek2">
-                                <rect key="frame" x="0.0" y="-5" width="414" height="37"/>
+                                <rect key="frame" x="0.0" y="-5" width="414" height="36.5"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" name="background"/>
                             </view>
@@ -309,14 +309,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aUz-Rk-ztl">
-                                <rect key="frame" x="87" y="98" width="240" height="21"/>
+                                <rect key="frame" x="0.0" y="98" width="195" height="230"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="du2-Ca-fh4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="aUz-Rk-ztl" firstAttribute="height" secondItem="foA-r9-fCl" secondAttribute="height" multiplier="0.0259901" id="g0f-V8-A1E"/>
+                            <constraint firstItem="aUz-Rk-ztl" firstAttribute="height" secondItem="foA-r9-fCl" secondAttribute="height" multiplier="0.284653" id="8XU-zS-erv"/>
+                            <constraint firstItem="aUz-Rk-ztl" firstAttribute="width" secondItem="foA-r9-fCl" secondAttribute="width" multiplier="0.471014" id="ZtY-j3-rSX"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bri-BO-hIq"/>

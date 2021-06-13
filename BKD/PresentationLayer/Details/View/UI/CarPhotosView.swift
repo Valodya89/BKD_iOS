@@ -43,13 +43,13 @@ class CarPhotosView: UIView {
     private func configureCollectionViews() {
         mImagePagingCollectionV.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         mImagesBottomCollectionV.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-
     }
     
     private func scrollToIndex(index:Int) {
         let rect = mImagePagingCollectionV.layoutAttributesForItem(at:IndexPath(row: index, section: 0))?.frame
         mImagePagingCollectionV.scrollRectToVisible(rect!, animated: true)
     }
+    
     private func showOrHideScrollButtons () {
         if currentCarPhotoItem == 0 {
             mScrollLeftBtn.isHidden = true

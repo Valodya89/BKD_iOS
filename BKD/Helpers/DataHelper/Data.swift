@@ -75,34 +75,49 @@ struct TailLiftData {
 }
 
 
-struct TariffSlideData {
-    static let tariffSlideModel: [TariffSlideModel] = [TariffSlideModel (title: "Hourly",
-                                                                         bckgColor: UIColor(rgb: 0x7E88BA),
-                                                                         
-                                                                         details:[TariffSlideDetailsModel(title: "2 days", value: "€ 25,5", bckgColor: .yellow),
-    TariffSlideDetailsModel(title: "3 days", value: "€ 35,5", bckgColor: .yellow),
-    TariffSlideDetailsModel(title: "4 days", value: "€ 45,5", bckgColor: .yellow),
-    TariffSlideDetailsModel(title: "5 days", value: "€ 55,5", bckgColor: .yellow),
-    TariffSlideDetailsModel(title: "6 days", value: "€ 65,5", bckgColor: .yellow),
-    TariffSlideDetailsModel(title: "7 days", value: "€ 75,5", bckgColor: .yellow)]),
-                                                       TariffSlideModel (title: "Daily",
-                                                                                     bckgColor: UIColor(rgb: 0xE9C96B),
-                                                                                     details:[TariffSlideDetailsModel(title: "2 days", value: "€ 25,5", bckgColor: .gray),
-                TariffSlideDetailsModel(title: "3 days", value: "€ 35,5", bckgColor: .gray),
-                TariffSlideDetailsModel(title: "4 days", value: "€ 45,5", bckgColor: .gray),
-                TariffSlideDetailsModel(title: "5 days", value: "€ 55,5", bckgColor: .gray),
-                TariffSlideDetailsModel(title: "6 days", value: "€ 65,5", bckgColor: .gray),
-                TariffSlideDetailsModel(title: "7 days", value: "€ 75,5", bckgColor: .gray)]),
-                                                       TariffSlideModel (title: "Weekly",
-                                                                                     bckgColor: UIColor(rgb: 0x8998AA),
-                                                                                     details:[TariffSlideDetailsModel(title: "2 days", value: "€ 25,5", bckgColor: .red),
-                TariffSlideDetailsModel(title: "3 days", value: "€ 35,5", bckgColor: .red),
-                TariffSlideDetailsModel(title: "4 days", value: "€ 45,5", bckgColor: .red),
-                TariffSlideDetailsModel(title: "5 days", value: "€ 55,5", bckgColor: .red),
-                TariffSlideDetailsModel(title: "6 days", value: "€ 65,5", bckgColor: .red),
-                TariffSlideDetailsModel(title: "7 days", value: "€ 75,5", bckgColor: .red)])
-                ]
-}
+//struct TariffSlideData {
+//    static var tariffSlideModel: [TariffSlideModel] = [TariffSlideModel (title: "Hourly",
+//                                                                         bckgColor: UIColor(rgb: 0x7E88BA),
+//                                                                         details:[TariffSlideDetailsModel(title: "2 days", value: "€ 25,5", bckgColor: .yellow),
+//    TariffSlideDetailsModel(title: "3 days", value: "€ 35,5", bckgColor: .yellow),
+//    TariffSlideDetailsModel(title: "4 days", value: "€ 45,5", bckgColor: .yellow),
+//    TariffSlideDetailsModel(title: "5 days", value: "€ 55,5", bckgColor: .yellow),
+//    TariffSlideDetailsModel(title: "6 days", value: "€ 65,5", bckgColor: .yellow),
+//    TariffSlideDetailsModel(title: "7 days", value: "€ 75,5", bckgColor: .yellow)]),
+//                                                       TariffSlideModel (title: "Daily",
+//                                                                         bckgColor: UIColor(rgb: 0xE9C96B),
+//                                                                                                              details:[TariffSlideDetailsModel(title: "2 days", value: "€ 25,5", bckgColor: .gray),
+//                TariffSlideDetailsModel(title: "3 days", value: "€ 35,5", bckgColor: .gray),
+//                TariffSlideDetailsModel(title: "4 days", value: "€ 45,5", bckgColor: .gray),
+//                TariffSlideDetailsModel(title: "5 days", value: "€ 55,5", bckgColor: .gray),
+//                TariffSlideDetailsModel(title: "6 days", value: "€ 65,5", bckgColor: .gray),
+//                TariffSlideDetailsModel(title: "7 days", value: "€ 75,5", bckgColor: .gray)]),
+//                                                                               TariffSlideModel (title: "Weekly",
+//                                                                         bckgColor: UIColor(rgb: 0x8998AA),
+//                                                                          details:[TariffSlideDetailsModel(title: "2 days", value: "€ 25,5", bckgColor: .red),
+//                TariffSlideDetailsModel(title: "3 days", value: "€ 35,5", bckgColor: .red),
+//                TariffSlideDetailsModel(title: "4 days", value: "€ 45,5", bckgColor: .red),
+//                TariffSlideDetailsModel(title: "5 days", value: "€ 55,5", bckgColor: .red),
+//                TariffSlideDetailsModel(title: "6 days", value: "€ 65,5", bckgColor: .red),
+//                TariffSlideDetailsModel(title: "7 days", value: "€ 75,5", bckgColor: .red)]),
+//                                                                               TariffSlideModel (title: "Monthly",
+//                                                                         bckgColor: UIColor(rgb: 0x80CBC4),
+//                                                                          details:[TariffSlideDetailsModel(title: "2 days", value: "€ 25,5", bckgColor: .red),
+//                TariffSlideDetailsModel(title: "3 days", value: "€ 35,5", bckgColor: .red),
+//                TariffSlideDetailsModel(title: "4 days", value: "€ 45,5", bckgColor: .red),
+//                TariffSlideDetailsModel(title: "5 days", value: "€ 55,5", bckgColor: .red),
+//                TariffSlideDetailsModel(title: "6 days", value: "€ 65,5", bckgColor: .red),
+//                TariffSlideDetailsModel(title: "7 days", value: "€ 75,5", bckgColor: .red)] ),
+//                                                                               TariffSlideModel (title: "Flexible",
+//                                                                         bckgColor: UIColor(rgb: 0x4A5CC7),
+//                                                                           details:[TariffSlideDetailsModel(title: "2 days", value: "€ 25,5", bckgColor: .red),
+//                TariffSlideDetailsModel(title: "3 days", value: "€ 35,5", bckgColor: .red),
+//                TariffSlideDetailsModel(title: "4 days", value: "€ 45,5", bckgColor: .red),
+//                TariffSlideDetailsModel(title: "5 days", value: "€ 55,5", bckgColor: .red),
+//                TariffSlideDetailsModel(title: "6 days", value: "€ 65,5", bckgColor: .red),
+//                TariffSlideDetailsModel(title: "7 days", value: "€ 75,5", bckgColor: .red)] ),               
+//                ]
+//}
 
 struct InactiveLocationRangeData {
     static let inactiveLocationRangeModel: [InactiveLocationRangeModel] = [InactiveLocationRangeModel(latitude: 40.177200, longitude: 44.503490, radius: 2000 ),
@@ -152,4 +167,50 @@ struct CategoryData {
                                                          
                                                          
     ]
+}
+
+
+
+struct TariffSlideData {
+    static var tariffSlideModel: [TariffSlideModel] = [TariffSlideModel (title: "Hourly",
+                                                                         bckgColor: UIColor(rgb: 0x7E88BA),
+                                                                         details:[TariffSlideModel(title: "2 days", bckgColor: .yellow, value: "€ 25,5"),
+                                                                                  TariffSlideModel(title: "3 days", bckgColor: .yellow, value: "€ 35,5"),
+                                                                                  TariffSlideModel(title: "4 days", bckgColor: .yellow, value: "€ 45,5"),
+                                                                                  TariffSlideModel(title: "5 days", bckgColor: .yellow, value: "€ 55,5"),
+                                                                                  TariffSlideModel(title: "6 days", bckgColor: .yellow, value: "€ 65,5"),
+                                                                                  TariffSlideModel(title: "7 days", bckgColor: .yellow, value: "€ 75,5")]),
+                                                       TariffSlideModel (title: "Daily",
+                                                                         bckgColor: UIColor(rgb: 0xE9C96B),
+                                                                         details:[TariffSlideModel(title: "2 days", bckgColor: .gray, value: "€ 25,5"),
+                                                                                                                       TariffSlideModel(title: "3 days", bckgColor: .gray, value: "€ 35,5"),
+                                                                                                                       TariffSlideModel(title: "4 days", bckgColor: .gray, value: "€ 45,5"),
+                                                                                                                       TariffSlideModel(title: "5 days", bckgColor: .gray, value: "€ 55,5"),
+                                                                                                                       TariffSlideModel(title: "6 days", bckgColor: .gray, value: "€ 65,5"),
+                                                                                                                       TariffSlideModel(title: "7 days", bckgColor: .gray, value: "€ 75,5")]),
+                                                                               TariffSlideModel (title: "Weekly",
+                                                                         bckgColor: UIColor(rgb: 0x8998AA),
+                                                                         details:[TariffSlideModel(title: "2 days", bckgColor: .red, value: "€ 25,5"),
+                                                                                   TariffSlideModel(title: "3 days", bckgColor: .red, value: "€ 35,5"),
+                                                                                   TariffSlideModel(title: "4 days", bckgColor: .red, value: "€ 45,5"),
+                                                                                   TariffSlideModel(title: "5 days", bckgColor: .red, value: "€ 55,5"),
+                                                                                   TariffSlideModel(title: "6 days", bckgColor: .red, value: "€ 65,5"),
+                                                                                   TariffSlideModel(title: "7 days", bckgColor: .red, value: "€ 75,5")]),
+                                                                               TariffSlideModel (title: "Monthly",
+                                                                         bckgColor: UIColor(rgb: 0x80CBC4),
+                                                                         details:[TariffSlideModel(title: "2 days", bckgColor: .red, value: "€ 25,5"),
+                                                                                   TariffSlideModel(title: "3 days", bckgColor: .red, value: "€ 35,5"),
+                                                                                   TariffSlideModel(title: "4 days", bckgColor: .red, value: "€ 45,5"),
+                                                                                   TariffSlideModel(title: "5 days", bckgColor: .red, value: "€ 55,5"),
+                                                                                   TariffSlideModel(title: "6 days", bckgColor: .red, value: "€ 65,5"),
+                                                                                   TariffSlideModel(title: "7 days", bckgColor: .red, value: "€ 75,5")] ),
+                                                                               TariffSlideModel (title: "Flexible",
+                                                                         bckgColor: UIColor(rgb: 0x4A5CC7),
+                                                                         details:[TariffSlideModel(title: "2 days", bckgColor: .red, value: "€ 25,5"),
+                                                                                    TariffSlideModel(title: "3 days", bckgColor: .red, value: "€ 35,5"),
+                                                                                    TariffSlideModel(title: "4 days", bckgColor: .red, value: "€ 45,5"),
+                                                                                    TariffSlideModel(title: "5 days", bckgColor: .red, value: "€ 55,5"),
+                                                                                    TariffSlideModel(title: "6 days", bckgColor: .red, value: "€ 65,5"),
+                                                                                    TariffSlideModel(title: "7 days", bckgColor: .red, value: "€ 75,5")] ),
+                ]
 }

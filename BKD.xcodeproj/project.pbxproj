@@ -67,7 +67,7 @@
 		565731DE2672FDC80012ADD0 /* DetailsAndTailLiftModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565731DD2672FDC80012ADD0 /* DetailsAndTailLiftModel.swift */; };
 		565731EE26730F270012ADD0 /* DetailsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565731ED26730F270012ADD0 /* DetailsTableView.swift */; };
 		565731F32673188F0012ADD0 /* TailLiftTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565731F22673188F0012ADD0 /* TailLiftTableView.swift */; };
-		565731F8267332620012ADD0 /* TariffSlideCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565731F7267332620012ADD0 /* TariffSlideCollectionViewController.swift */; };
+		565731F8267332620012ADD0 /* TariffSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565731F7267332620012ADD0 /* TariffSlideViewController.swift */; };
 		565731FD267332B10012ADD0 /* TariffSlideModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565731FC267332B10012ADD0 /* TariffSlideModel.swift */; };
 		56573202267339B50012ADD0 /* FontsFree-Net-SFProDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 56573201267339B50012ADD0 /* FontsFree-Net-SFProDisplay-Medium.ttf */; };
 		5657E840267108A300788D62 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5657E83F267108A300788D62 /* DetailsViewController.swift */; };
@@ -85,6 +85,11 @@
 		565A7AEA2655C5AE006C63D0 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565A7AE92655C5AE006C63D0 /* CategoryModel.swift */; };
 		565BD3602659AED1001923F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565BD35F2659AED1001923F5 /* AppDelegate.swift */; };
 		5660F7F2266C21980082F038 /* Mulish-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5660F7F1266C217F0082F038 /* Mulish-Bold.ttf */; };
+		5665400C2673A0A5008ACD31 /* TariffSlideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5665400A2673A0A5008ACD31 /* TariffSlideCollectionViewCell.swift */; };
+		5665400D2673A0A5008ACD31 /* TariffSlideCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5665400B2673A0A5008ACD31 /* TariffSlideCollectionViewCell.xib */; };
+		5665403526759D3E008ACD31 /* TariffCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5665403426759D3D008ACD31 /* TariffCarouselView.swift */; };
+		5665403B26759E06008ACD31 /* TariffCarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5665403A26759E06008ACD31 /* TariffCarouselCell.swift */; };
+		5665404826759E79008ACD31 /* TariffCarouselCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5665404726759E79008ACD31 /* TariffCarouselCell.xib */; };
 		568E6F592642FC4B000CB6A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568E6F572642FC4B000CB6A9 /* Main.storyboard */; };
 		568E6F5E2642FC50000CB6A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568E6F5C2642FC50000CB6A9 /* LaunchScreen.storyboard */; };
 		568E6F692642FC50000CB6A9 /* BKDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E6F682642FC50000CB6A9 /* BKDTests.swift */; };
@@ -193,7 +198,7 @@
 		565731DD2672FDC80012ADD0 /* DetailsAndTailLiftModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsAndTailLiftModel.swift; sourceTree = "<group>"; };
 		565731ED26730F270012ADD0 /* DetailsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableView.swift; sourceTree = "<group>"; };
 		565731F22673188F0012ADD0 /* TailLiftTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TailLiftTableView.swift; sourceTree = "<group>"; };
-		565731F7267332620012ADD0 /* TariffSlideCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffSlideCollectionViewController.swift; sourceTree = "<group>"; };
+		565731F7267332620012ADD0 /* TariffSlideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffSlideViewController.swift; sourceTree = "<group>"; };
 		565731FC267332B10012ADD0 /* TariffSlideModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffSlideModel.swift; sourceTree = "<group>"; };
 		56573201267339B50012ADD0 /* FontsFree-Net-SFProDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FontsFree-Net-SFProDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		5657E83F267108A300788D62 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
@@ -211,6 +216,11 @@
 		565A7AE92655C5AE006C63D0 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		565BD35F2659AED1001923F5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5660F7F1266C217F0082F038 /* Mulish-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mulish-Bold.ttf"; sourceTree = "<group>"; };
+		5665400A2673A0A5008ACD31 /* TariffSlideCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffSlideCollectionViewCell.swift; sourceTree = "<group>"; };
+		5665400B2673A0A5008ACD31 /* TariffSlideCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TariffSlideCollectionViewCell.xib; sourceTree = "<group>"; };
+		5665403426759D3D008ACD31 /* TariffCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffCarouselView.swift; sourceTree = "<group>"; };
+		5665403A26759E06008ACD31 /* TariffCarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffCarouselCell.swift; sourceTree = "<group>"; };
+		5665404726759E79008ACD31 /* TariffCarouselCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TariffCarouselCell.xib; sourceTree = "<group>"; };
 		568E6F4E2642FC4B000CB6A9 /* BKD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BKD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		568E6F582642FC4B000CB6A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		568E6F5D2642FC50000CB6A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -622,7 +632,8 @@
 				565731D026725FBD0012ADD0 /* DetailsAndTailLiftView.swift */,
 				565731ED26730F270012ADD0 /* DetailsTableView.swift */,
 				565731F22673188F0012ADD0 /* TailLiftTableView.swift */,
-				565731F7267332620012ADD0 /* TariffSlideCollectionViewController.swift */,
+				565731F7267332620012ADD0 /* TariffSlideViewController.swift */,
+				5665403426759D3D008ACD31 /* TariffCarouselView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -630,6 +641,8 @@
 		5657E87E2671A90A00788D62 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				5665403926759DDA008ACD31 /* TariffCarouselCell */,
+				566540092673A077008ACD31 /* TariffSlideCell */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -684,6 +697,24 @@
 				56409532264AE5A8001DC92D /* Data.swift */,
 			);
 			path = DataHelper;
+			sourceTree = "<group>";
+		};
+		566540092673A077008ACD31 /* TariffSlideCell */ = {
+			isa = PBXGroup;
+			children = (
+				5665400A2673A0A5008ACD31 /* TariffSlideCollectionViewCell.swift */,
+				5665400B2673A0A5008ACD31 /* TariffSlideCollectionViewCell.xib */,
+			);
+			path = TariffSlideCell;
+			sourceTree = "<group>";
+		};
+		5665403926759DDA008ACD31 /* TariffCarouselCell */ = {
+			isa = PBXGroup;
+			children = (
+				5665403A26759E06008ACD31 /* TariffCarouselCell.swift */,
+				5665404726759E79008ACD31 /* TariffCarouselCell.xib */,
+			);
+			path = TariffCarouselCell;
 			sourceTree = "<group>";
 		};
 		568E6F452642FC4B000CB6A9 = {
@@ -1260,6 +1291,8 @@
 				565A7AE426555EFF006C63D0 /* CategoryTableViewCell.xib in Resources */,
 				561888A3264ABDFC00BDDB33 /* DropDownTableViewCell.xib in Resources */,
 				564E136A2652F0CF008CE884 /* PrivacyPoliceView.xib in Resources */,
+				5665400D2673A0A5008ACD31 /* TariffSlideCollectionViewCell.xib in Resources */,
+				5665404826759E79008ACD31 /* TariffCarouselCell.xib in Resources */,
 				5656323C265841BE00B78562 /* FilterSearchResultCell.xib in Resources */,
 				5602533126670A1000FB204C /* Chat.storyboard in Resources */,
 				560251DB2661074200FB204C /* Carousel.xib in Resources */,
@@ -1464,9 +1497,11 @@
 				560252EF2665919A00FB204C /* CustomLocationModel.swift in Sources */,
 				565731DE2672FDC80012ADD0 /* DetailsAndTailLiftModel.swift in Sources */,
 				568E703126443D90000CB6A9 /* CategoryViewController.swift in Sources */,
+				5665403526759D3E008ACD31 /* TariffCarouselView.swift in Sources */,
 				564E13A726535D98008CE884 /* SeeMapViewController.swift in Sources */,
 				56409539264B24D8001DC92D /* BKDAlert.swift in Sources */,
 				5691A60B265C508C0008081D /* CustomLocationViewController.swift in Sources */,
+				5665403B26759E06008ACD31 /* TariffCarouselCell.swift in Sources */,
 				5657E85326713BD400788D62 /* DetailsModel.swift in Sources */,
 				56409533264AE5A8001DC92D /* Data.swift in Sources */,
 				561888A2264ABDFC00BDDB33 /* DropDownTableViewCell.swift in Sources */,
@@ -1487,6 +1522,7 @@
 				5691A641265D97550008081D /* MainViewModel.swift in Sources */,
 				5657E84E26711AE800788D62 /* CarPhotosView.swift in Sources */,
 				565731F32673188F0012ADD0 /* TailLiftTableView.swift in Sources */,
+				5665400C2673A0A5008ACD31 /* TariffSlideCollectionViewCell.swift in Sources */,
 				5602529C2664465200FB204C /* MarkerInfoViewController.swift in Sources */,
 				568E704026446136000CB6A9 /* AboutUsViewController.swift in Sources */,
 				565731FD267332B10012ADD0 /* TariffSlideModel.swift in Sources */,
@@ -1496,7 +1532,7 @@
 				564E12AB264BEF94008CE884 /* DateExtention.swift in Sources */,
 				560252E72665368E00FB204C /* SearchPlacesResult.swift in Sources */,
 				5602526726616C8700FB204C /* Storyboardinitializable.swift in Sources */,
-				565731F8267332620012ADD0 /* TariffSlideCollectionViewController.swift in Sources */,
+				565731F8267332620012ADD0 /* TariffSlideViewController.swift in Sources */,
 				5691A61B265C71EC0008081D /* ExteriorCollectionViewCell.swift in Sources */,
 				5618888F264A63CA00BDDB33 /* LocationDropDownView.swift in Sources */,
 				560252E2266535CF00FB204C /* Result.swift in Sources */,

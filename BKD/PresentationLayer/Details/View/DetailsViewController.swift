@@ -25,9 +25,17 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var mTailLiftTbVHeight: NSLayoutConstraint!
     
     @IBOutlet weak var mAccessoriesBtn: UIButton!
+    @IBOutlet weak var mScrollV: UIScrollView!
     @IBOutlet weak var mAdditionalDriverBtn: UIButton!
     
     @IBOutlet weak var mReserveLb: UILabel!
+    
+    //MARK: Varables
+    private lazy  var tariffSlideVC = TariffSlideViewController.initFromStoryboard(name: Constant.Storyboards.details)
+    private  var tariffSlideY: CGFloat = 0
+    private var lastContentOffset: CGFloat = 0
+    private var isScrolled = false
+
     
     //MARK: Life cycle
     override func viewDidLoad() {
@@ -37,22 +45,42 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        if DetailsData.detailsModel.count > 5 {
-            mDetailsTbVHeight.constant = 330
+        if DetailsData.detailsModel.count > 10{
+            mDetailsTbVHeight.constant = 400
         } else {
-            mDetailsTbVHeight.constant = CGFloat(DetailsData.detailsModel.count * 44)
+            mDetailsTbVHeight.constant = CGFloat(DetailsData.detailsModel.count) * detail_cell_height
         }
-        if TailLiftData.tailLiftModel.count > 5 {
-            mTailLiftTbVHeight.constant = 310
+        if TailLiftData.tailLiftModel.count > 10 {
+            mTailLiftTbVHeight.constant = 400
         } else {
-            mTailLiftTbVHeight.constant = CGFloat(TailLiftData.tailLiftModel.count * 44)
+            mTailLiftTbVHeight.constant = CGFloat(TailLiftData.tailLiftModel.count) * tailLift_cell_height
         }
+        var bottomPadding:CGFloat  = 0
+        let tariffSlideHeight = self.view.bounds.height * 0.08168
+        if #available(iOS 13.0, *) {
+            let window = UIApplication.shared.windows[0]
+            bottomPadding = window.safeAreaInsets.bottom
+        }
+        if UIScreen.main.nativeBounds.height <= 1334 {
+            bottomPadding = 22
+        }
+        if !isScrolled {
+            tariffSlideY = (self.view.bounds.height * 0.742574) - bottomPadding
+            tariffSlideVC.view.frame = CGRect(x: 0,
+                                              y: tariffSlideY,
+                                              width: self.view.bounds.width,
+                                              height: tariffSlideHeight)
+        }
+        
+      // mScrollV.contentSize = CGSize(width: self.view.frame.width, height: 1300)
+
     }
     
     func setupView() {
         mRightBarBtn.image = #imageLiteral(resourceName: "bkd").withRenderingMode(.alwaysOriginal)
         configureViews()
         configureDelegates()
+        addTariffSliedView()
     }
     private func configureViews () {
         mDetailsTableBckgV.setShadow(color: color_shadow!)
@@ -65,6 +93,12 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     }
     func configureDelegates() {
         mDetailsAndTailLiftV.delegate = self
+        mScrollV.delegate = self
+    }
+    
+    func addTariffSliedView() {
+        addChild(tariffSlideVC)
+        self.view.addSubview(tariffSlideVC.view)
     }
     //MARK: ACTIONS
     //MARK: --------------------
@@ -134,5 +168,47 @@ extension DetailsViewController: DetailsAndTailLiftViewDelegate {
         }
     }
     
+    
+}
+
+//MARK: UIScrollViewDelegate
+//MARK: ----------------------------
+extension DetailsViewController: UIScrollViewDelegate {
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        /// Change top view position and alpha
+//
+//        if tariffSlideVC.view.frame.origin.y <= tariffSlideY {
+//            isScrolled = true
+//            tariffSlideVC.view.frame.origin.y = -abs(tariffSlideY + scrollView.contentOffset.y)
+////                CGRect(x: tariffSlideVC.view.frame.origin.x,
+////                                              y: self.view.frame.height + 300,
+////                                              width: tariffSlideVC.view.frame.width,
+////                                              height: tariffSlideVC.view.frame.height)
+////           tariffSlideVC.view.layoutIfNeeded()
+//                //
+//
+//        } else {
+//
+//        }
+//
+//    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+       // if (self.lastContentOffset > scrollView.contentOffset.y) {
+            // move up
+            isScrolled = true
+            tariffSlideVC.view.frame.origin.y = abs(tariffSlideY + scrollView.contentOffset.y)
+            print("move up")
+      //  }
+//        else if (self.lastContentOffset < scrollView.contentOffset.y) {
+//            // move down
+//
+//            print("move down")
+//            tariffSlideVC.view.frame.origin.y = -abs(tariffSlideVC.view.frame.origin.y  - scrollView.contentOffset.y)
+//        }
+
+        // update the new position acquired
+        self.lastContentOffset = scrollView.contentOffset.y
+    }
     
 }

@@ -44,7 +44,6 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     
     @IBOutlet weak var mSearchBckgV: UIView!
     @IBOutlet weak var mSearchRightImgV: UIImageView!
-    @IBOutlet weak var mSearchLeftImgV: UIImageView!
     @IBOutlet weak var mSearchLeading: NSLayoutConstraint!
     
    

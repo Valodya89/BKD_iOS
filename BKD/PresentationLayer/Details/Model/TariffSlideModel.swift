@@ -11,14 +11,15 @@ import UIKit
 struct TariffSlideModel {
     public var title: String
     public var bckgColor: UIColor
-    public var details: [TariffSlideDetailsModel]
-
+    public var value: String?
+    public var isOpenDetails: Bool = false
+    public var details: [TariffSlideModel]?
 }
 
-struct TariffSlideDetailsModel {
-    public var title: String
-    public var value: String
-    public var bckgColor: UIColor
-
-
-}
+//struct TariffSlideDetailsModel {
+//    public var title: String
+//    public var value: String
+//    public var bckgColor: UIColor
+//
+//
+//}

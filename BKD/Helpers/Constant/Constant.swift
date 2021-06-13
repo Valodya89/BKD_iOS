@@ -16,7 +16,7 @@ struct Constant {
         static let chat = "Chat"
         static let avalableCategories = "AvalableCategories"
         static let details = "Details"
-         
+
 
     }
     struct NibNames {
@@ -26,6 +26,7 @@ struct Constant {
         static let SearchResult = "SearchResult"
         static let SearchHeaderView = "SearchHeaderView"
         static let Carousel = "Carousel"
+        static let tariffCarousel = "TariffCarouselCell"
     }
     
     struct Identifiers {
@@ -37,6 +38,8 @@ struct Constant {
         static let offlineChat = "OfflineViewController"
         static let AvalableCategories = "AvalableCategoriesViewController"
         static let details = "DetailsViewController"
+        static let tariffSlide = "TariffSlideViewController"
+
     }
     
     struct FontNames {
@@ -74,6 +77,8 @@ let top_searchResult: CGFloat = 12.0
 let top_avalableCategoryTbv: CGFloat = 30.0
 let cornerRadius_equipment: CGFloat = 15.0
 let zoom: Float = 12.0
+let detail_cell_height: CGFloat = 28
+let tailLift_cell_height: CGFloat = 40
 
 //h* 16 /37
 
