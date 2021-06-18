@@ -16,8 +16,10 @@ struct Constant {
         static let chat = "Chat"
         static let avalableCategories = "AvalableCategories"
         static let details = "Details"
-
-
+        static let more = "More"
+        static let accessories = "Accessories"
+        static let myDrivers = "MyDrivers"
+        static let reserve = "Reserve"
     }
     struct NibNames {
         
@@ -39,7 +41,10 @@ struct Constant {
         static let AvalableCategories = "AvalableCategoriesViewController"
         static let details = "DetailsViewController"
         static let tariffSlide = "TariffSlideViewController"
-
+        static let more = "MoreViewController"
+        static let accessories = "AccessoriesUIViewController"
+        static let myDrivers = "MyDriversViewController"
+        static let reserve = "ReserveViewController"
     }
     
     struct FontNames {
@@ -69,6 +74,8 @@ struct Constant {
         static let errorEmail = "Write your email address, so that we answer the message once it's reviewed"
         static let errorIncorrectEmail = "Incorrect E-mail address"
         static let messagePlaceholder = "Type your message"
+        static let rentalConditions = "Rental conditions"
+        static let bkdAdvantages = "BKD Advantages"
 
     }
 }
@@ -94,7 +101,9 @@ let key_category = "category"
 let key_email = "E-mail"
 
 
+
 //Colors
+let color_main = UIColor(named: "main")
 let color_background = UIColor(named: "background")
 let color_search_placeholder = UIColor(named: "date_lb")
 let color_entered_date = UIColor(named: "entered_date")
@@ -121,6 +130,9 @@ let color_chat_placeholder = UIColor(named:"chat_placeholder")
 let color_Offline_bckg = UIColor(named: "gradient_blur_end")
 let color_email = UIColor(named: "email")
 let color_shadow = UIColor(named: "shadow")
+let color_weekly = UIColor(named: "weekly_title")
+let color_more = UIColor(named: "more")
+let color_segment_separator = UIColor(named: "segment_separator")
 
 
 //Fonts
@@ -133,6 +145,8 @@ let font_search_cell = UIFont(name: "SFProDisplay-Light", size: 16)
 let font_chat_placeholder = UIFont(name: "SFProDisplay-Light", size: 12)
 let font_alert_title = UIFont(name: "SFProDisplay-Semibold", size: 13)
 let font_details_title = UIFont(name: "SFProDisplay-Regular", size: 13)
+let font_more_header = UIFont(name: "SFProDisplay-Semibold", size: 14)
+
 // Images
 let img_bkd = UIImage(named:"bkd")?.withRenderingMode(.alwaysOriginal)
 let img_back = UIImage(named: "back")

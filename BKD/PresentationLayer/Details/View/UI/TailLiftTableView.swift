@@ -43,7 +43,7 @@ class TailLiftTableView: UITableView, UITableViewDelegate, UITableViewDataSource
         label.font = font_unselected_filter
         label.textAlignment = .center
         cell.accessoryView = label
-        
+        cell.backgroundColor = .clear
         
         return cell
     }

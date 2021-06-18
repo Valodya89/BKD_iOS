@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Light.ttf">
+            <string>SFProDisplay-Light</string>
+        </array>
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RentalConditionsTableViewCell" rowHeight="51" id="KGk-i7-Jjw" customClass="RentalConditionsTableViewCell" customModule="BKD" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="323" height="51"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="323" height="51"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="deposit" translatesAutoresizingMaskIntoConstraints="NO" id="svj-R3-6sc">
+                        <rect key="frame" x="20" y="0.0" width="16.5" height="25.5"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit amount from  kjnkjnkjnkjjk" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="190" translatesAutoresizingMaskIntoConstraints="NO" id="s5r-rv-OLd">
+                        <rect key="frame" x="52.5" y="0.0" width="194" height="37.5"/>
+                        <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
+                        <color key="textColor" name="navigationBar"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YcD-Ai-HyU">
+                        <rect key="frame" x="246.5" y="0.0" width="60.5" height="29"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFI-iU-wcc">
+                                <rect key="frame" x="8.5" y="0.0" width="11" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="11" id="kq5-4R-Owl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
+                                <color key="textColor" name="navigationBar"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="350" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8J7-JF-MhF">
+                                <rect key="frame" x="33.5" y="5" width="27" height="19"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                <color key="textColor" name="navigationBar"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="8J7-JF-MhF" firstAttribute="centerY" secondItem="YcD-Ai-HyU" secondAttribute="centerY" id="BL1-5Z-pz2"/>
+                            <constraint firstItem="8J7-JF-MhF" firstAttribute="height" relation="greaterThanOrEqual" secondItem="YcD-Ai-HyU" secondAttribute="height" multiplier="0.6" id="KFF-0h-4OD"/>
+                            <constraint firstItem="uFI-iU-wcc" firstAttribute="height" secondItem="YcD-Ai-HyU" secondAttribute="height" id="LGk-HH-L96"/>
+                            <constraint firstItem="uFI-iU-wcc" firstAttribute="trailing" secondItem="8J7-JF-MhF" secondAttribute="leading" multiplier="0.59" id="ZFR-TX-yDd"/>
+                            <constraint firstItem="uFI-iU-wcc" firstAttribute="centerY" secondItem="YcD-Ai-HyU" secondAttribute="centerY" id="eol-13-dKi"/>
+                            <constraint firstAttribute="trailing" secondItem="8J7-JF-MhF" secondAttribute="trailing" id="qr5-w1-296"/>
+                        </constraints>
+                    </view>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="le4-YC-J2M">
+                        <rect key="frame" x="20" y="47" width="226.5" height="1"/>
+                        <color key="backgroundColor" systemColor="systemGray5Color"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="bdW-n0-SsP"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="le4-YC-J2M" secondAttribute="bottom" constant="5" id="1xs-XG-skn"/>
+                    <constraint firstItem="s5r-rv-OLd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" multiplier="0.5" id="9wO-Id-sP3"/>
+                    <constraint firstItem="svj-R3-6sc" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.05" id="Iz2-XU-HiW"/>
+                    <constraint firstItem="s5r-rv-OLd" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.6" id="MJb-GU-3MZ"/>
+                    <constraint firstItem="le4-YC-J2M" firstAttribute="top" secondItem="s5r-rv-OLd" secondAttribute="bottom" multiplier="1.25" id="PIN-uX-aj0"/>
+                    <constraint firstItem="svj-R3-6sc" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" multiplier="0.175" id="RYe-uJ-eWL"/>
+                    <constraint firstItem="le4-YC-J2M" firstAttribute="leading" secondItem="svj-R3-6sc" secondAttribute="leading" id="RhV-cB-CYw"/>
+                    <constraint firstItem="svj-R3-6sc" firstAttribute="top" secondItem="s5r-rv-OLd" secondAttribute="top" id="UBI-wk-PRm"/>
+                    <constraint firstItem="YcD-Ai-HyU" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.564516" id="UPr-83-daf"/>
+                    <constraint firstItem="svj-R3-6sc" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.5" id="aK1-nL-4DD"/>
+                    <constraint firstItem="YcD-Ai-HyU" firstAttribute="leading" secondItem="s5r-rv-OLd" secondAttribute="trailing" id="bR0-ht-BmU"/>
+                    <constraint firstItem="s5r-rv-OLd" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" multiplier="0.925" id="gzJ-Qw-Wga"/>
+                    <constraint firstItem="le4-YC-J2M" firstAttribute="trailing" secondItem="YcD-Ai-HyU" secondAttribute="leading" id="hUh-4D-QD8"/>
+                    <constraint firstItem="YcD-Ai-HyU" firstAttribute="top" secondItem="s5r-rv-OLd" secondAttribute="top" id="hnM-Ln-5YJ"/>
+                    <constraint firstAttribute="trailing" secondItem="YcD-Ai-HyU" secondAttribute="trailing" multiplier="1.052" id="xmM-x2-2Qi"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="mEuroLb" destination="uFI-iU-wcc" id="gHt-Io-s6O"/>
+                <outlet property="mImgV" destination="svj-R3-6sc" id="TVi-BX-75b"/>
+                <outlet property="mSeparatorV" destination="le4-YC-J2M" id="5Tu-Ju-4M8"/>
+                <outlet property="mTitleLb" destination="s5r-rv-OLd" id="7HA-5y-u2u"/>
+                <outlet property="mValueBckgV" destination="YcD-Ai-HyU" id="tHO-sZ-ooH"/>
+                <outlet property="mValueLb" destination="8J7-JF-MhF" id="iAT-lM-3qe"/>
+            </connections>
+            <point key="canvasLocation" x="47.10144927536232" y="134.26339285714286"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="deposit" width="13" height="17"/>
+        <namedColor name="navigationBar">
+            <color red="0.10980391502380371" green="0.20000001788139343" blue="0.37254902720451355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

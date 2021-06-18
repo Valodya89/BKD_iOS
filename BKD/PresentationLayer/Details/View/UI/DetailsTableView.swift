@@ -36,6 +36,7 @@ class DetailsTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
         cell.textLabel?.text = DetailsData.detailsModel[indexPath.row].title
         cell.textLabel?.textColor = color_navigationBar
         cell.textLabel?.font = font_details_title
+        cell.backgroundColor = .clear
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

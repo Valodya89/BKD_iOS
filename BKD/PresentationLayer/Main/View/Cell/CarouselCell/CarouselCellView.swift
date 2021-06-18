@@ -32,7 +32,7 @@ class CarouselCellView: UIView {
         setUpView()
     }
     func setUpView() {
-        self.setShadow(color: .lightGray)
+        self.setShadow(color:  color_shadow!)
         self.layer.cornerRadius = 2.0
         
     }

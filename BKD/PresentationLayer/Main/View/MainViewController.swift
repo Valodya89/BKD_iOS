@@ -555,7 +555,7 @@ class MainViewController: BaseViewController {
         searchResultV?.didPressEdit = { [weak self] in
             self?.isPressedEdit = true
             self?.animateSearchHeader()
-            self?.searchHeaderV?.setShadow(color: .lightGray)
+            self?.searchHeaderV?.setShadow(color:  color_shadow!)
             self?.searchHeaderV?.mArrowBtn.isHidden = false
             self?.searchHeaderV?.mSearchBckgV.isUserInteractionEnabled = false
             self?.searchHeaderV?.mSearchBckgV.alpha = 0.8

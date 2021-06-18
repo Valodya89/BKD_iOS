@@ -22,6 +22,20 @@ extension UIImageView {
     }
 }
 
+//MARK: UIImage
+extension UIImage {
+
+    func colored(with color: UIColor, size: CGSize) -> UIImage {
+        UIGraphicsBeginImageContext(size)
+        let context = UIGraphicsGetCurrentContext()
+        context!.setFillColor(color.cgColor);
+        let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
+        context!.fill(rect);
+        let image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return image!
+    }
+}
 
 //MARK: UITextField extension
 extension UITextField {
@@ -78,6 +92,14 @@ extension UILabel {
                 attributedText = attributedString
             }
         }
+    
+    func formattToNumber() -> NSNumber {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.numberStyle = .decimal
+        return formatter.number(from: self.text!) ?? 0
+        
+    }
 }
 
 

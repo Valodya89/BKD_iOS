@@ -173,7 +173,7 @@ struct CategoryData {
 
 struct TariffSlideData {
     static var tariffSlideModel: [TariffSlideModel] = [TariffSlideModel (title: "Hourly",
-                                                                         bckgColor: UIColor(rgb: 0x7E88BA),
+                                                                         bckgColor: UIColor(named: "tariff_hourly")!,
                                                                          details:[TariffSlideModel(title: "2 days", bckgColor: .yellow, value: "€ 25,5"),
                                                                                   TariffSlideModel(title: "3 days", bckgColor: .yellow, value: "€ 35,5"),
                                                                                   TariffSlideModel(title: "4 days", bckgColor: .yellow, value: "€ 45,5"),
@@ -181,7 +181,7 @@ struct TariffSlideData {
                                                                                   TariffSlideModel(title: "6 days", bckgColor: .yellow, value: "€ 65,5"),
                                                                                   TariffSlideModel(title: "7 days", bckgColor: .yellow, value: "€ 75,5")]),
                                                        TariffSlideModel (title: "Daily",
-                                                                         bckgColor: UIColor(rgb: 0xE9C96B),
+                                                                         bckgColor: UIColor(named: "tariff_days")!,
                                                                          details:[TariffSlideModel(title: "2 days", bckgColor: .gray, value: "€ 25,5"),
                                                                                                                        TariffSlideModel(title: "3 days", bckgColor: .gray, value: "€ 35,5"),
                                                                                                                        TariffSlideModel(title: "4 days", bckgColor: .gray, value: "€ 45,5"),
@@ -189,7 +189,7 @@ struct TariffSlideData {
                                                                                                                        TariffSlideModel(title: "6 days", bckgColor: .gray, value: "€ 65,5"),
                                                                                                                        TariffSlideModel(title: "7 days", bckgColor: .gray, value: "€ 75,5")]),
                                                                                TariffSlideModel (title: "Weekly",
-                                                                         bckgColor: UIColor(rgb: 0x8998AA),
+                                                                         bckgColor: UIColor(named: "tariff_weekly")!,
                                                                          details:[TariffSlideModel(title: "2 days", bckgColor: .red, value: "€ 25,5"),
                                                                                    TariffSlideModel(title: "3 days", bckgColor: .red, value: "€ 35,5"),
                                                                                    TariffSlideModel(title: "4 days", bckgColor: .red, value: "€ 45,5"),
@@ -197,7 +197,7 @@ struct TariffSlideData {
                                                                                    TariffSlideModel(title: "6 days", bckgColor: .red, value: "€ 65,5"),
                                                                                    TariffSlideModel(title: "7 days", bckgColor: .red, value: "€ 75,5")]),
                                                                                TariffSlideModel (title: "Monthly",
-                                                                         bckgColor: UIColor(rgb: 0x80CBC4),
+                                                                         bckgColor: UIColor(named: "tariff_montly")!,
                                                                          details:[TariffSlideModel(title: "2 days", bckgColor: .red, value: "€ 25,5"),
                                                                                    TariffSlideModel(title: "3 days", bckgColor: .red, value: "€ 35,5"),
                                                                                    TariffSlideModel(title: "4 days", bckgColor: .red, value: "€ 45,5"),
@@ -205,7 +205,7 @@ struct TariffSlideData {
                                                                                    TariffSlideModel(title: "6 days", bckgColor: .red, value: "€ 65,5"),
                                                                                    TariffSlideModel(title: "7 days", bckgColor: .red, value: "€ 75,5")] ),
                                                                                TariffSlideModel (title: "Flexible",
-                                                                         bckgColor: UIColor(rgb: 0x4A5CC7),
+                                                                         bckgColor: UIColor(named: "tariff_flexible")!,
                                                                          details:[TariffSlideModel(title: "2 days", bckgColor: .red, value: "€ 25,5"),
                                                                                     TariffSlideModel(title: "3 days", bckgColor: .red, value: "€ 35,5"),
                                                                                     TariffSlideModel(title: "4 days", bckgColor: .red, value: "€ 45,5"),
@@ -213,4 +213,20 @@ struct TariffSlideData {
                                                                                     TariffSlideModel(title: "6 days", bckgColor: .red, value: "€ 65,5"),
                                                                                     TariffSlideModel(title: "7 days", bckgColor: .red, value: "€ 75,5")] ),
                 ]
+}
+
+struct RentalConditionsData {
+    static let rentalConditionsModel: [RentalConditionsModel] = [
+        RentalConditionsModel(img: #imageLiteral(resourceName: "deposit"), title: "Deposit amount from", value: "350"),
+        RentalConditionsModel(img: #imageLiteral(resourceName: "2"), title: "Fuel consumption is included in the rental price"),
+        RentalConditionsModel(img: #imageLiteral(resourceName: "min_age"), title: "Minimum driver age ", value: "23 years"),
+        RentalConditionsModel(img: #imageLiteral(resourceName: "max_age"), title: "Maximum driver age", value: "70 years"),
+        RentalConditionsModel(img: #imageLiteral(resourceName: "card"), title: "Minimum Belgian driving license active period:", value: "2 years")]
+}
+
+struct BkdAdvantagesData {
+    static let bkdAdvantagesModel: [BkdAdvantagesModel] = [BkdAdvantagesModel(title1: "Available 24/7",
+                                                                              title2: "Personalized approach",
+                                                                              title3: "Your case our challenge",
+                                                                              title4: "Fast & safe" ) ]
 }

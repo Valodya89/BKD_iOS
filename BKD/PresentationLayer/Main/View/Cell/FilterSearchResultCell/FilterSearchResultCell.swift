@@ -47,7 +47,7 @@ class FilterSearchResultCell: UICollectionViewCell {
         registerCollectionViews()
         // set the corner radius
        
-        self.setShadow(color: .lightGray)
+        self.setShadow(color:  color_shadow!)
         //Border
         mCarSizeLb.layer.borderWidth = 1.0
         mCarSizeLb.layer.borderColor = color_navigationBar?.cgColor

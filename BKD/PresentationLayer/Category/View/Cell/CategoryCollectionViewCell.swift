@@ -36,8 +36,8 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         mBlurBackgV.layer.cornerRadius = 16
 
 
-        mInfoBckgV.setShadow(color: UIColor.lightGray)
-        mBlurBackgV.setShadow(color: UIColor.lightGray)
+        mInfoBckgV.setShadow(color:  color_shadow!)
+        mBlurBackgV.setShadow(color:  color_shadow!)
         
         mBlurBackgV.setGradientWithCornerRadius(cornerRadius: 16, startColor: UIColor(named: "gradient_blur_start")!, endColor: UIColor(named: "gradient_blur_end")!)
     mBlurBackgV.alpha = 0.7

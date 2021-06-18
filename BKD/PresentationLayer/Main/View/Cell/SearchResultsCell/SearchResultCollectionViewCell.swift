@@ -79,8 +79,8 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         mFlipInfoV.layer.borderColor = UIColor.lightGray.cgColor
 
         // shadow
-        mInfoV.setShadow(color: UIColor.lightGray)
-        mFlipInfoV.setShadow(color: UIColor.lightGray)
+        mInfoV.setShadow(color:  color_shadow!)
+        mFlipInfoV.setShadow(color:  color_shadow!)
 
         //gradient
        // mGradientV.setGradient(startColor: UIColor(named:"gradient_start")!, endColor: UIColor(named:"gradient_end")!)

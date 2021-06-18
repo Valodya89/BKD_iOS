@@ -57,7 +57,7 @@ static let identifier = "MainCollectionViewCell"
         mInfoBckV.layer.borderColor = UIColor.lightGray.cgColor
 
         // shadow
-        mInfoBckV.setShadow(color:UIColor.lightGray)
+        mInfoBckV.setShadow(color: color_shadow!)
         
         //gradient
         mValueBckV.setGradient(startColor: UIColor(named:"gradient_start")!, endColor: UIColor(named:"gradient_end")!)

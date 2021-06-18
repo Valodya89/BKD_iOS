@@ -309,15 +309,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aUz-Rk-ztl">
-                                <rect key="frame" x="0.0" y="98" width="195" height="230"/>
+                                <rect key="frame" x="0.0" y="98" width="382" height="124"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="du2-Ca-fh4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="aUz-Rk-ztl" firstAttribute="height" secondItem="foA-r9-fCl" secondAttribute="height" multiplier="0.284653" id="8XU-zS-erv"/>
-                            <constraint firstItem="aUz-Rk-ztl" firstAttribute="width" secondItem="foA-r9-fCl" secondAttribute="width" multiplier="0.471014" id="ZtY-j3-rSX"/>
+                            <constraint firstItem="aUz-Rk-ztl" firstAttribute="height" secondItem="foA-r9-fCl" secondAttribute="height" multiplier="0.153465" id="ig7-Tk-qWB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bri-BO-hIq"/>
@@ -480,7 +479,7 @@
             <color red="0.79400002956390381" green="0.81800001859664917" blue="0.86000001430511475" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="menu">
-            <color red="0.9137254901960784" green="0.78823529411764703" blue="0.41960784313725491" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.91399997472763062" green="0.78799998760223389" blue="0.41999998688697815" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="navigationBar">
             <color red="0.10980391502380371" green="0.20000001788139343" blue="0.37254902720451355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

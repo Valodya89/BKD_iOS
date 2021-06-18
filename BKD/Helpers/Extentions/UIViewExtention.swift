@@ -13,10 +13,10 @@ extension UIView {
     func setGradient(startColor: UIColor, endColor: UIColor) {
         //gradient
         let gradientLayer = CAGradientLayer()
-        gradientLayer.frame =  self.bounds
         gradientLayer.colors = [startColor.cgColor as Any, endColor.cgColor as Any]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+        gradientLayer.frame =  self.bounds
         self.layer.insertSublayer(gradientLayer, at: 0)
         
     }
@@ -36,13 +36,20 @@ extension UIView {
    
     
     //MARK: SHADOWS
+    /// add to view shadow 4 sides
     func setShadow(color: UIColor) {
+        self.layer.shadowColor = color.cgColor
+        self.layer.shadowOpacity = 0.5
+        self.layer.shadowRadius = 2.0
+        self.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+        self.layer.masksToBounds = false
+    }
+    func setShadowBottomSide(color: UIColor) {
         self.layer.masksToBounds = false
         self.layer.shadowColor = color.cgColor
         self.layer.shadowOffset = CGSize(width: 3, height: 3)
         self.layer.shadowOpacity = 0.7
         self.layer.shadowRadius = 2.0
-        
     }
     
     func setShadowByBezierPath(color: UIColor) {
@@ -109,7 +116,27 @@ extension UIView {
             mask.path = path.cgPath
             self.layer.mask = mask
     }
-    
+    func roundCornersWithShadow(corners:UIRectCorner, radius: CGFloat, color: UIColor) {
+            let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+            let mask = CAShapeLayer()
+            mask.path = path.cgPath
+            self.layer.mask = mask
+        // shadow
+        let shadowSize: CGFloat = 1.0
+            let shadowPath = UIBezierPath(rect: CGRect(x: -shadowSize / 2,
+                                                       y: -shadowSize / 2,
+                                                       width:5,
+                                                       height: 5))
+        let shadow = CAShapeLayer()
+        shadow.path = shadowPath.cgPath
+        shadow.masksToBounds = false
+        shadow.shadowColor = UIColor.black.cgColor
+        shadow.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        shadow.shadowOpacity = 0.2
+        shadow.shadowPath = shadowPath.cgPath
+        self.layer.addSublayer(shadow)
+
+    }
     // Apply round corner and border. An extension method of UIView.
 
     func roundCornersWithBorder(corners:UIRectCorner, radius: CGFloat, borderColor: UIColor, borderWidth: CGFloat) {
@@ -129,7 +156,7 @@ extension UIView {
         borderLayer.lineWidth = borderWidth
         borderLayer.strokeColor = borderColor.cgColor
         borderLayer.fillColor = UIColor.clear.cgColor
-        borderLayer.frame = self.bounds
+       // borderLayer.frame = self.bounds
         self.layer.addSublayer(borderLayer)
         
     }

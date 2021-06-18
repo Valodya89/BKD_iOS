@@ -76,7 +76,7 @@ class CustomLocationViewController: UIViewController {
         }
     }
     func setUpView() {
-        mRightBarBtn.image = UIImage(named:"bkd")?.withRenderingMode(.alwaysOriginal)
+        mRightBarBtn.image = img_bkd
         addChildView()
         addMarkerInfoView()
         configureDelegates()

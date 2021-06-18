@@ -69,7 +69,7 @@ extension TariffSlideViewController: UICollectionViewDelegate, UICollectionViewD
             cell.mTitleLb.text = model.title
             cell.containerV.backgroundColor = model.bckgColor
             cell.isUserInteractionEnabled = true
-            cell.mTitleLb.textColor = (indexPath.item % 2 == 1) ? .white : color_navigationBar
+            cell.mTitleLb.textColor = (indexPath.item % 2 == 1) ? .white : color_main
         }
         return cell
     }
@@ -121,8 +121,7 @@ extension TariffSlideViewController: UICollectionViewDelegate, UICollectionViewD
     //MARK: UICollectionViewDelegateFlowLayout
     //MARK: -------------------------------------
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-           //CGSize(width: self.view.bounds.width * 0.173913,
-       // height: self.view.bounds.height)
+        
         return CGSize(width: self.view.bounds.width * 0.173913,
                        height: self.view.bounds.height)
         

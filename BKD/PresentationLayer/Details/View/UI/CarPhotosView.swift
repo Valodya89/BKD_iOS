@@ -17,6 +17,8 @@ class CarPhotosView: UIView {
 
     @IBOutlet weak var mImagePagingCollectionV: UICollectionView!
     @IBOutlet weak var mImagesBottomCollectionV: UICollectionView!
+    
+    
     //MARK: Variables
     var currentCarPhotoItem: Int = 0
 
@@ -45,11 +47,31 @@ class CarPhotosView: UIView {
         mImagesBottomCollectionV.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     }
     
+    private func setImageCellInfo (cell: UICollectionViewCell, item: CarModel) {
+        removeOldImageFromCell(cell: cell)
+        var imgV = UIImageView()
+        imgV = UIImageView(frame: CGRect(x: mImagePagingCollectionV.bounds.width * 0.166,
+                                         y: mImagePagingCollectionV.bounds.height * 0.057,
+                                         width: mImagePagingCollectionV.bounds.width * 0.55/*0.4951*/,
+                                         height: mImagePagingCollectionV.bounds.height - 15))
+        imgV.contentMode = .scaleAspectFit
+        imgV.image = item.carImage
+        cell.contentView.addSubview(imgV)
+    }
+    
+    private func removeOldImageFromCell(cell: UICollectionViewCell) {
+        for view in cell.contentView.subviews {
+            if view.isKind(of: UIImageView.self) {
+                view.removeFromSuperview()
+            }
+        }
+    }
     private func scrollToIndex(index:Int) {
         let rect = mImagePagingCollectionV.layoutAttributesForItem(at:IndexPath(row: index, section: 0))?.frame
         mImagePagingCollectionV.scrollRectToVisible(rect!, animated: true)
     }
     
+    ///Will show or hide previous and next arrow buttons
     private func showOrHideScrollButtons () {
         if currentCarPhotoItem == 0 {
             mScrollLeftBtn.isHidden = true
@@ -61,7 +83,8 @@ class CarPhotosView: UIView {
         }
     }
     
-    private func movetoPossitionBottomCollectionView() {
+    ///collection view will move to current position
+    private func movetoPositionBottomCollectionView() {
         mImagesBottomCollectionV.reloadData()
         mImagesBottomCollectionV.scrollToItem(at:NSIndexPath(item: currentCarPhotoItem, section: 0) as IndexPath , at: .centeredHorizontally, animated: true)
     }
@@ -75,7 +98,7 @@ class CarPhotosView: UIView {
             currentCarPhotoItem -= 1
         }
         showOrHideScrollButtons()
-        movetoPossitionBottomCollectionView()
+        movetoPositionBottomCollectionView()
     }
     
     @IBAction func scrollRight(_ sender: UIButton) {
@@ -85,7 +108,7 @@ class CarPhotosView: UIView {
             currentCarPhotoItem += 1
         }
         showOrHideScrollButtons()
-        movetoPossitionBottomCollectionView()
+        movetoPositionBottomCollectionView()
     }
 }
 
@@ -95,37 +118,55 @@ extension CarPhotosView: UICollectionViewDelegate,  UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        for view in cell.contentView.subviews {
-            if view.isKind(of: UIImageView.self) {
-                view.removeFromSuperview()
-            }
-        }
         
-        var imgV = UIImageView()
+        
         if collectionView == mImagePagingCollectionV {
-            imgV = UIImageView(frame: CGRect(x: collectionView.bounds.width * 0.166,
-                                             y: collectionView.bounds.height * 0.057,
-                                             width: collectionView.bounds.width * 0.55/*0.4951*/,
-                                             height: collectionView.bounds.height - 15))
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+            setImageCellInfo(cell: cell, item: CarsData.carModel[indexPath.row])
+            return cell
         } else {
-            imgV = UIImageView(frame: CGRect(x: 0,
-                                             y: 0,
-                                             width: self.bounds.width * 0.227053 ,
-                                             height: self.bounds.height * 0.264))
-            imgV.backgroundColor = color_background!
-            imgV.layer.cornerRadius = 3
-            imgV.setShadowByBezierPath(color: color_shadow!)
-            //imgV.setShadow(color: color_shadow!)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImagesBottomCollectionViewCell.identifier, for: indexPath) as! ImagesBottomCollectionViewCell
+
+            cell.setCellInfo(item: CarsData.carModel[indexPath.row])
+                        
+            if  currentCarPhotoItem == indexPath.item {
+                cell.mShadowBckgV.makeBorderWithCornerRadius(radius: 3, borderColor: color_navigationBar!, borderWidth: 0.5)
+            }
+            return cell
         }
         
-        imgV.contentMode = .scaleAspectFit
-        imgV.image = CarsData.carModel[indexPath.row].carImage
-        cell.contentView.addSubview(imgV)
-        if collectionView == mImagesBottomCollectionV && currentCarPhotoItem == indexPath.item {
-                cell.contentView.makeBorderWithCornerRadius(radius: 3, borderColor: color_navigationBar!, borderWidth: 0.5)
-        }
-        return cell
+       
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+//        for view in cell.contentView.subviews {
+//            if view.isKind(of: UIImageView.self) {
+//                view.removeFromSuperview()
+//            }
+//        }
+//
+//        var imgV = UIImageView()
+//        if collectionView == mImagePagingCollectionV {
+//            imgV = UIImageView(frame: CGRect(x: collectionView.bounds.width * 0.166,
+//                                             y: collectionView.bounds.height * 0.057,
+//                                             width: collectionView.bounds.width * 0.55/*0.4951*/,
+//                                             height: collectionView.bounds.height - 15))
+//        } else {
+//            imgV = UIImageView(frame: CGRect(x: 0,
+//                                             y: 0,
+//                                             width: self.bounds.width * 0.15942,
+//                                             height: self.bounds.height * 0.0581683))
+//            imgV.backgroundColor = color_background!
+//            imgV.layer.cornerRadius = 3
+//            imgV.setShadowByBezierPath(color: color_shadow!)
+//            //imgV.setShadow(color: color_shadow!)
+//        }
+//
+//        imgV.contentMode = .scaleAspectFit
+//        imgV.image = CarsData.carModel[indexPath.row].carImage
+//        cell.contentView.addSubview(imgV)
+//        if collectionView == mImagesBottomCollectionV && currentCarPhotoItem == indexPath.item {
+//                cell.contentView.makeBorderWithCornerRadius(radius: 3, borderColor: color_navigationBar!, borderWidth: 0.5)
+//        }
+//        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -133,8 +174,10 @@ extension CarPhotosView: UICollectionViewDelegate,  UICollectionViewDataSource, 
             return CGSize(width: collectionView.frame.width,
                           height: collectionView.frame.height)
         }
-       return CGSize(width: self.bounds.width * 0.227053,
-                     height: self.bounds.height * 0.264)
+        return CGSize(width: self.bounds.width * 0.227053,
+                      height: self.bounds.height * 0.264)
+//       return CGSize(width: self.bounds.width * 0.227053,
+//                     height: self.bounds.height * 0.264)
         
     }
     
@@ -161,7 +204,7 @@ extension CarPhotosView: UIScrollViewDelegate {
             let pageWidth = scrollView.frame.size.width
             currentCarPhotoItem = Int(floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1)
             showOrHideScrollButtons()
-            movetoPossitionBottomCollectionView()
+            movetoPositionBottomCollectionView()
 
         }
     }

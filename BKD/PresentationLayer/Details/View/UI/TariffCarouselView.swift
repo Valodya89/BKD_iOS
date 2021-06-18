@@ -8,15 +8,18 @@
 import UIKit
 import iCarousel
 
+protocol TariffCarouselViewDelegate: AnyObject {
+    func didPressMore()
+}
 class TariffCarouselView: UIView,  iCarouselDataSource, iCarouselDelegate {
     var didChangeCategory: ((Int) -> Void)?
 
     var tariffCarouselCellV: TariffCarouselCell?
+    weak var delegate: TariffCarouselViewDelegate?
 
     let tariffCarousel:iCarousel =  {
         let view = iCarousel()
         view.type = .invertedTimeMachine
-       // view.bounceDistance = 10
         view.backgroundColor = .clear
 
         return view
@@ -39,9 +42,10 @@ class TariffCarouselView: UIView,  iCarouselDataSource, iCarouselDelegate {
         carouselCell.frame = CGRect(x: 0, y: 0, width: carouselCellVWidth, height: carouselCellVHeight)
         return carouselCell
     }
+    
+    
     //MARK iCarouselDataSource
     //MARK: -----------------------
-
     func numberOfItems(in carousel: iCarousel) -> Int {
         return TariffSlideData.tariffSlideModel.count
     }
@@ -49,29 +53,15 @@ class TariffCarouselView: UIView,  iCarouselDataSource, iCarouselDelegate {
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         let carouselModel = TariffSlideData.tariffSlideModel[index]
         let view: TariffCarouselCell = carouselCellView()
-        
+        view.delegate = self
         if index != carousel.currentItemIndex {
-            view.mUnselectedBckgV.isHidden = false
-            view.mUnselectedBckgV.backgroundColor = carouselModel.bckgColor
-            view.mUnselectedTitleLb.text = carouselModel.title
-            if index % 2 == 2 {
-                view.mUnselectedTitleLb.textColor = .white
-            } else {
-                view.mUnselectedTitleLb.textColor = color_navigationBar!
-            }
-          //  view.mUnselectedTitleLb.textColor = index % 2 == 2 ? .white : color_navigationBar
+            view.setUnselectedCellsInfo(item: carouselModel, index: index)
         } else {
-            view.mUnselectedBckgV.isHidden = true
-            view.mTitleLb.text = carouselModel.title
-            view.mPriceLb.text = "99,9"
-            view.backgroundColor = carouselModel.bckgColor
-            view.mTitleLb.textColor = index % 2 == 2 ? .white : color_navigationBar
-
+            view.setSelectedCellInfo(item: carouselModel, index: index)
         }
         return view
     }
-
-
+    
     func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
         switch (option) {
         case .spacing: return 0.15//0.5
@@ -88,4 +78,13 @@ class TariffCarouselView: UIView,  iCarouselDataSource, iCarouselDelegate {
         carousel.reloadData()
     }
 
+}
+
+
+//MARK: TariffCarouselCellDelegate
+//MARK: ----------------------------
+extension TariffCarouselView: TariffCarouselCellDelegate {
+    func didPressMore() {
+        delegate?.didPressMore()
+    }
 }

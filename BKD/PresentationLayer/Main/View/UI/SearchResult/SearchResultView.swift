@@ -52,7 +52,7 @@ class SearchResultView: UIView {
     }
     func setUpView() {
        // mSearchResultStackV.setShadowByBezierPath(color: UIColor.lightGray)
-        mSearchResultStackV.setShadow(color: UIColor.lightGray)
+        mSearchResultStackV.setShadow(color:  color_shadow!)
     }
     
     //MARK: ACTIONS
