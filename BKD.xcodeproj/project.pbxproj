@@ -110,7 +110,7 @@
 		568E6F5E2642FC50000CB6A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568E6F5C2642FC50000CB6A9 /* LaunchScreen.storyboard */; };
 		568E6F692642FC50000CB6A9 /* BKDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E6F682642FC50000CB6A9 /* BKDTests.swift */; };
 		568E6F742642FC50000CB6A9 /* BKDUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E6F732642FC50000CB6A9 /* BKDUITests.swift */; };
-		568E700D26437897000CB6A9 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 568E700C26437897000CB6A9 /* SideMenu */; };
+		568E700D26437897000CB6A9 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 568E700C26437897000CB6A9 /* SwiftPackageProductDependency */; };
 		568E701226438C08000CB6A9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E701126438C08000CB6A9 /* MainViewController.swift */; };
 		568E70172643919B000CB6A9 /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E70162643919B000CB6A9 /* LeftViewController.swift */; };
 		568E703126443D90000CB6A9 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E703026443D90000CB6A9 /* CategoryViewController.swift */; };
@@ -133,6 +133,8 @@
 		5691A64E265DB6300008081D /* SearchHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5691A64D265DB6300008081D /* SearchHeaderViewModel.swift */; };
 		56C8E172267C1D100061890C /* ReserveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C8E170267C1D100061890C /* ReserveTableViewCell.swift */; };
 		56C8E173267C1D100061890C /* ReserveTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56C8E171267C1D100061890C /* ReserveTableViewCell.xib */; };
+		56CD830B267CF45600B2799F /* ReserveTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CD830A267CF45600B2799F /* ReserveTableView.swift */; };
+		56CD8313267CF56800B2799F /* ReserveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CD8312267CF56800B2799F /* ReserveModel.swift */; };
 		9893B8799BB3CC6B4B697417 /* Pods_BKD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3819EEF98357A5E10F4D7C /* Pods_BKD.framework */; };
 		E10B7A2EF4D54A3C929EA266 /* Pods_BKD_BKDUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9E56E46535541B3D2E4A8F /* Pods_BKD_BKDUITests.framework */; };
 /* End PBXBuildFile section */
@@ -287,6 +289,8 @@
 		5691A64D265DB6300008081D /* SearchHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderViewModel.swift; sourceTree = "<group>"; };
 		56C8E170267C1D100061890C /* ReserveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveTableViewCell.swift; sourceTree = "<group>"; };
 		56C8E171267C1D100061890C /* ReserveTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReserveTableViewCell.xib; sourceTree = "<group>"; };
+		56CD830A267CF45600B2799F /* ReserveTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveTableView.swift; sourceTree = "<group>"; };
+		56CD8312267CF56800B2799F /* ReserveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveModel.swift; sourceTree = "<group>"; };
 		67BF4D2EBC1BB75BC66937A7 /* Pods-BKD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BKD.debug.xcconfig"; path = "Target Support Files/Pods-BKD/Pods-BKD.debug.xcconfig"; sourceTree = "<group>"; };
 		6C6352D2E10F4AC68B5B06ED /* Pods-BKD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BKD.release.xcconfig"; path = "Target Support Files/Pods-BKD/Pods-BKD.release.xcconfig"; sourceTree = "<group>"; };
 		767846430166189C964DC0D8 /* Pods-BKDTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BKDTests.release.xcconfig"; path = "Target Support Files/Pods-BKDTests/Pods-BKDTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -301,7 +305,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				568E700D26437897000CB6A9 /* SideMenu in Frameworks */,
+				568E700D26437897000CB6A9 /* BuildFile in Frameworks */,
 				9893B8799BB3CC6B4B697417 /* Pods_BKD.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -447,6 +451,7 @@
 		560FE639267BE7620068BC85 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				56CD8312267CF56800B2799F /* ReserveModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -454,6 +459,7 @@
 		560FE63A267BE7670068BC85 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				56CD8309267CF42500B2799F /* UI */,
 				56C8E16E267C1CAD0061890C /* Cell */,
 				560FE63C267BE7960068BC85 /* ReserveViewController.swift */,
 				560FE649267BE7BE0068BC85 /* Reserve.storyboard */,
@@ -1399,6 +1405,14 @@
 			path = ReserveTableViewCell;
 			sourceTree = "<group>";
 		};
+		56CD8309267CF42500B2799F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				56CD830A267CF45600B2799F /* ReserveTableView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		79EA95EE3154B9F726477F0A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1433,8 +1447,8 @@
 				568E6F4A2642FC4B000CB6A9 /* Sources */,
 				568E6F4B2642FC4B000CB6A9 /* Frameworks */,
 				568E6F4C2642FC4B000CB6A9 /* Resources */,
-				50061A6CB91CAF9361E82060 /* [CP] Copy Pods Resources */,
 				B0A73BFE2DC6DAE6AEE73A95 /* [CP] Embed Pods Frameworks */,
+				15F31569E1F0832B69B3951A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1442,7 +1456,7 @@
 			);
 			name = BKD;
 			packageProductDependencies = (
-				568E700C26437897000CB6A9 /* SideMenu */,
+				568E700C26437897000CB6A9 /* SwiftPackageProductDependency */,
 			);
 			productName = BKD;
 			productReference = 568E6F4E2642FC4B000CB6A9 /* BKD.app */;
@@ -1475,8 +1489,8 @@
 				568E6F6B2642FC50000CB6A9 /* Sources */,
 				568E6F6C2642FC50000CB6A9 /* Frameworks */,
 				568E6F6D2642FC50000CB6A9 /* Resources */,
-				5A657DE403CDE025BBE41793 /* [CP] Copy Pods Resources */,
 				7897DF83A809C449209CCB7A /* [CP] Embed Pods Frameworks */,
+				D603BE192ACDFBF53C7ADC66 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1525,7 +1539,7 @@
 			);
 			mainGroup = 568E6F452642FC4B000CB6A9;
 			packageReferences = (
-				568E700B26437897000CB6A9 /* XCRemoteSwiftPackageReference "SideMenu" */,
+				568E700B26437897000CB6A9 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 568E6F4F2642FC4B000CB6A9 /* Products */;
 			projectDirPath = "";
@@ -1625,6 +1639,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		15F31569E1F0832B69B3951A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4525182532719CAC56B9F543 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1647,23 +1678,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		50061A6CB91CAF9361E82060 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		582A9DE15597688B0E549D03 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1684,23 +1698,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5A657DE403CDE025BBE41793 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD-BKDUITests/Pods-BKD-BKDUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD-BKDUITests/Pods-BKD-BKDUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD-BKDUITests/Pods-BKD-BKDUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7897DF83A809C449209CCB7A /* [CP] Embed Pods Frameworks */ = {
@@ -1737,6 +1734,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D603BE192ACDFBF53C7ADC66 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BKD-BKDUITests/Pods-BKD-BKDUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BKD-BKDUITests/Pods-BKD-BKDUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD-BKDUITests/Pods-BKD-BKDUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1766,6 +1780,7 @@
 				56188889264A61ED00BDDB33 /* TextField.swift in Sources */,
 				5640952D264AE529001DC92D /* DropDownModel.swift in Sources */,
 				5691A5FC265C28860008081D /* AddressNameViewController.swift in Sources */,
+				56CD830B267CF45600B2799F /* ReserveTableView.swift in Sources */,
 				568E706E264481B0000CB6A9 /* LeftTableViewCell.swift in Sources */,
 				56533EFF267954560012BF4A /* AccessoriesCollectionViewCell.swift in Sources */,
 				564E12E1264D787A008CE884 /* MenuModel.swift in Sources */,
@@ -1817,6 +1832,7 @@
 				568E703626444033000CB6A9 /* NotificationsViewController.swift in Sources */,
 				564E12AB264BEF94008CE884 /* DateExtention.swift in Sources */,
 				56533ED62678BF3A0012BF4A /* BkdAdvantagesTableViewCell.swift in Sources */,
+				56CD8313267CF56800B2799F /* ReserveModel.swift in Sources */,
 				560252E72665368E00FB204C /* SearchPlacesResult.swift in Sources */,
 				5602526726616C8700FB204C /* Storyboardinitializable.swift in Sources */,
 				5656081A2678541B009578FA /* ImagesBottomCollectionViewCell.swift in Sources */,
@@ -2179,7 +2195,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		568E700B26437897000CB6A9 /* XCRemoteSwiftPackageReference "SideMenu" */ = {
+		568E700B26437897000CB6A9 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jonkykong/SideMenu.git";
 			requirement = {
@@ -2190,9 +2206,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		568E700C26437897000CB6A9 /* SideMenu */ = {
+		568E700C26437897000CB6A9 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 568E700B26437897000CB6A9 /* XCRemoteSwiftPackageReference "SideMenu" */;
+			package = 568E700B26437897000CB6A9 /* RemoteSwiftPackageReference */;
 			productName = SideMenu;
 		};
 /* End XCSwiftPackageProductDependency section */

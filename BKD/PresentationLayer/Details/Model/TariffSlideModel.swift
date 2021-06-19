@@ -11,6 +11,7 @@ import UIKit
 struct TariffSlideModel {
     public var title: String
     public var bckgColor: UIColor
+    public var titleColor: UIColor
     public var value: String?
     public var isOpenDetails: Bool = false
     public var details: [TariffSlideModel]?

@@ -52,6 +52,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     }
     
     func setupView() {
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!]
         mRightBarBtn.image = #imageLiteral(resourceName: "bkd").withRenderingMode(.alwaysOriginal)
         configureViews()
         configureDelegates()

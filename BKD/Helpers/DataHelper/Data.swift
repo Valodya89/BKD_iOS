@@ -7,6 +7,8 @@
 
 import UIKit
 
+//MARK: DropDownData
+//MARK: --------------------
 struct DropDownData {
     static let dropDownModel: [DropDownModel] = [
         DropDownModel(locationName: "BKD Office", seeMap: "See Map"),
@@ -24,6 +26,8 @@ struct DropDownData {
     ]
 }
 
+//MARK: MenuData
+//MARK: --------------------
 struct MenuData {
     
     static let menuModel: [MenuModel] = [
@@ -36,6 +40,8 @@ struct MenuData {
     ]
 }
 
+//MARK: EquipmentData
+//MARK: --------------------
 struct EquipmentData {
     static let equipmentModel: [EquipmentModel] = [ EquipmentModel(equipmentImg: UIImage(named: "selected_tow_bar")!, equipmentName: "Tow Bar", didSelect: true),
                                                     EquipmentModel(equipmentImg: UIImage(named: "double_cabin")!, equipmentName: "Double cabin", didSelect: false),
@@ -44,12 +50,17 @@ struct EquipmentData {
                                                     EquipmentModel(equipmentImg: UIImage(named: "air_conditioning")!, equipmentName: "Air conditioning", didSelect: false)]
 }
 
+
+//MARK: ExteriorData
+//MARK: --------------------
 struct ExteriorData {
     static let exteriorModel: [ExteriorModel] = [ ExteriorModel(exterior: "5.91 x 2.42 x 2.82 m"),
                                                   ExteriorModel(exterior: "5.91 x 2.42 x 2.82 m"),
                                                   ExteriorModel(exterior: "5.91 x 2.42 x 2.82 m")]
 }
 
+//MARK: DetailsData
+//MARK: --------------------
 struct DetailsData {
     static let detailsModel: [DetailsModel] = [ DetailsModel (image: #imageLiteral(resourceName: "1"), title: "3"),
                                                 DetailsModel (image: #imageLiteral(resourceName: "2"), title: "Diesel"),
@@ -58,13 +69,16 @@ struct DetailsData {
                                                 DetailsModel (image: #imageLiteral(resourceName: "5"), title: "7"),
                                                 DetailsModel (image: #imageLiteral(resourceName: "6"), title: "5.91 x 2.42 x 2.82 m"),
                                                 DetailsModel (image: #imageLiteral(resourceName: "7"), title: "1.20 m"),
-                                                DetailsModel (image: #imageLiteral(resourceName: "air_conditioning"), title: "Conditioning"),
+                                                DetailsModel (image: #imageLiteral(resourceName: "8"), title: "Conditioning"),
                                                 DetailsModel (image: #imageLiteral(resourceName: "gps_navigator"), title: "GPS"),
                                                 DetailsModel (image: #imageLiteral(resourceName: "10"), title: "Tow Bar"),
                                                 DetailsModel (image: #imageLiteral(resourceName: "11"), title: "Slide door")
     ]
 }
 
+
+//MARK: TailLiftData
+//MARK: --------------------
 struct TailLiftData {
     static let tailLiftModel: [TailLiftModel] = [ TailLiftModel(value: "300 kg", title: "Tail lift lifting capacity"),
                                                   TailLiftModel(value: "190 cm", title: "Tail lift length"),
@@ -74,51 +88,8 @@ struct TailLiftData {
     
 }
 
-
-//struct TariffSlideData {
-//    static var tariffSlideModel: [TariffSlideModel] = [TariffSlideModel (title: "Hourly",
-//                                                                         bckgColor: UIColor(rgb: 0x7E88BA),
-//                                                                         details:[TariffSlideDetailsModel(title: "2 days", value: "€ 25,5", bckgColor: .yellow),
-//    TariffSlideDetailsModel(title: "3 days", value: "€ 35,5", bckgColor: .yellow),
-//    TariffSlideDetailsModel(title: "4 days", value: "€ 45,5", bckgColor: .yellow),
-//    TariffSlideDetailsModel(title: "5 days", value: "€ 55,5", bckgColor: .yellow),
-//    TariffSlideDetailsModel(title: "6 days", value: "€ 65,5", bckgColor: .yellow),
-//    TariffSlideDetailsModel(title: "7 days", value: "€ 75,5", bckgColor: .yellow)]),
-//                                                       TariffSlideModel (title: "Daily",
-//                                                                         bckgColor: UIColor(rgb: 0xE9C96B),
-//                                                                                                              details:[TariffSlideDetailsModel(title: "2 days", value: "€ 25,5", bckgColor: .gray),
-//                TariffSlideDetailsModel(title: "3 days", value: "€ 35,5", bckgColor: .gray),
-//                TariffSlideDetailsModel(title: "4 days", value: "€ 45,5", bckgColor: .gray),
-//                TariffSlideDetailsModel(title: "5 days", value: "€ 55,5", bckgColor: .gray),
-//                TariffSlideDetailsModel(title: "6 days", value: "€ 65,5", bckgColor: .gray),
-//                TariffSlideDetailsModel(title: "7 days", value: "€ 75,5", bckgColor: .gray)]),
-//                                                                               TariffSlideModel (title: "Weekly",
-//                                                                         bckgColor: UIColor(rgb: 0x8998AA),
-//                                                                          details:[TariffSlideDetailsModel(title: "2 days", value: "€ 25,5", bckgColor: .red),
-//                TariffSlideDetailsModel(title: "3 days", value: "€ 35,5", bckgColor: .red),
-//                TariffSlideDetailsModel(title: "4 days", value: "€ 45,5", bckgColor: .red),
-//                TariffSlideDetailsModel(title: "5 days", value: "€ 55,5", bckgColor: .red),
-//                TariffSlideDetailsModel(title: "6 days", value: "€ 65,5", bckgColor: .red),
-//                TariffSlideDetailsModel(title: "7 days", value: "€ 75,5", bckgColor: .red)]),
-//                                                                               TariffSlideModel (title: "Monthly",
-//                                                                         bckgColor: UIColor(rgb: 0x80CBC4),
-//                                                                          details:[TariffSlideDetailsModel(title: "2 days", value: "€ 25,5", bckgColor: .red),
-//                TariffSlideDetailsModel(title: "3 days", value: "€ 35,5", bckgColor: .red),
-//                TariffSlideDetailsModel(title: "4 days", value: "€ 45,5", bckgColor: .red),
-//                TariffSlideDetailsModel(title: "5 days", value: "€ 55,5", bckgColor: .red),
-//                TariffSlideDetailsModel(title: "6 days", value: "€ 65,5", bckgColor: .red),
-//                TariffSlideDetailsModel(title: "7 days", value: "€ 75,5", bckgColor: .red)] ),
-//                                                                               TariffSlideModel (title: "Flexible",
-//                                                                         bckgColor: UIColor(rgb: 0x4A5CC7),
-//                                                                           details:[TariffSlideDetailsModel(title: "2 days", value: "€ 25,5", bckgColor: .red),
-//                TariffSlideDetailsModel(title: "3 days", value: "€ 35,5", bckgColor: .red),
-//                TariffSlideDetailsModel(title: "4 days", value: "€ 45,5", bckgColor: .red),
-//                TariffSlideDetailsModel(title: "5 days", value: "€ 55,5", bckgColor: .red),
-//                TariffSlideDetailsModel(title: "6 days", value: "€ 65,5", bckgColor: .red),
-//                TariffSlideDetailsModel(title: "7 days", value: "€ 75,5", bckgColor: .red)] ),               
-//                ]
-//}
-
+//MARK: InactiveLocationRangeData
+//MARK: --------------------
 struct InactiveLocationRangeData {
     static let inactiveLocationRangeModel: [InactiveLocationRangeModel] = [InactiveLocationRangeModel(latitude: 40.177200, longitude: 44.503490, radius: 2000 ),
                                                                            InactiveLocationRangeModel(latitude: 40.226096280004306, longitude: 44.4105064496398, radius: 700 ),
@@ -126,6 +97,9 @@ struct InactiveLocationRangeData {
                                                                            InactiveLocationRangeModel(latitude: 40.098976432681816, longitude: 44.52054139226675, radius: 3000 ), InactiveLocationRangeModel(latitude:40.27347513165386, longitude: 44.50302891433239, radius: 1500 )]
 }
 
+
+//MARK: CarsData
+//MARK: --------------------
 struct CarsData {
     static let carModel:[CarModel] = [CarModel(carImage: #imageLiteral(resourceName: "fiat_telento")),
                                       CarModel(carImage: #imageLiteral(resourceName: "vans")),
@@ -134,6 +108,9 @@ struct CarsData {
                                       CarModel(carImage: #imageLiteral(resourceName: "fiat_telento")),]
 }
 
+
+//MARK: CategoryCarouselData
+//MARK: --------------------
 struct CategoryCarouselData  {
     static let categoryCarouselModel: [CategoryCarouselModel] = [ CategoryCarouselModel(categoryName: "Trucks", CategoryImg: UIImage(named: "trucks_category")),
                                                                   CategoryCarouselModel(categoryName: "Frigo Vans", CategoryImg: UIImage(named: "frigo_vans_category")),
@@ -143,7 +120,8 @@ struct CategoryCarouselData  {
     
 }
 
-
+//MARK: CategoryData
+//MARK: --------------------
 struct CategoryData {
     
     static let categoryModel: [CategoryModel] = [ CategoryModel(categoryName: "Vans",
@@ -157,6 +135,7 @@ struct CategoryData {
                                                   
                                                   
     ]
+   
     
     static let avalableCategoryModel: [CategoryModel] = [CategoryModel(categoryName: "Double Cabs",
                                                                        data: [ CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: true), CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: false), CategoryCollectionData(carName: "Fiat Talento L1H1", carImg: UIImage(named: "fiat_telento")!, isCarExist: true)]),
@@ -170,51 +149,44 @@ struct CategoryData {
 }
 
 
-
+//MARK: TariffSlideData
+//MARK: --------------------
 struct TariffSlideData {
     static var tariffSlideModel: [TariffSlideModel] = [TariffSlideModel (title: "Hourly",
-                                                                         bckgColor: UIColor(named: "tariff_hourly")!,
-                                                                         details:[TariffSlideModel(title: "2 days", bckgColor: .yellow, value: "€ 25,5"),
-                                                                                  TariffSlideModel(title: "3 days", bckgColor: .yellow, value: "€ 35,5"),
-                                                                                  TariffSlideModel(title: "4 days", bckgColor: .yellow, value: "€ 45,5"),
-                                                                                  TariffSlideModel(title: "5 days", bckgColor: .yellow, value: "€ 55,5"),
-                                                                                  TariffSlideModel(title: "6 days", bckgColor: .yellow, value: "€ 65,5"),
-                                                                                  TariffSlideModel(title: "7 days", bckgColor: .yellow, value: "€ 75,5")]),
+                                                                         bckgColor: color_hourly!,
+                                                                         titleColor: color_main!,
+                                                                         details:[TariffSlideModel(title: "2 hours",
+                                                                                                   bckgColor: color_hourly!,
+                                                                                                   titleColor: color_main!, value: "€ 25,5"),
+                                                                                  TariffSlideModel(title: "3 hours", bckgColor: color_hourly!,titleColor: color_main!, value: "€ 35,5"),
+                                                                                  TariffSlideModel(title: "4 hours", bckgColor: color_hourly!,titleColor: color_main!, value: "€ 45,5"),
+                                                                                  TariffSlideModel(title: "5 hours", bckgColor: color_hourly!,titleColor: color_main!, value: "€ 55,5"),
+                                                                                  TariffSlideModel(title: "6 hours", bckgColor: color_hourly!,titleColor: color_main!, value: "€ 65,5"),
+                                                                                  TariffSlideModel(title: "10 hours", bckgColor: color_hourly!, titleColor: color_main!, value: "€ 75,5")]),
                                                        TariffSlideModel (title: "Daily",
-                                                                         bckgColor: UIColor(named: "tariff_days")!,
-                                                                         details:[TariffSlideModel(title: "2 days", bckgColor: .gray, value: "€ 25,5"),
-                                                                                                                       TariffSlideModel(title: "3 days", bckgColor: .gray, value: "€ 35,5"),
-                                                                                                                       TariffSlideModel(title: "4 days", bckgColor: .gray, value: "€ 45,5"),
-                                                                                                                       TariffSlideModel(title: "5 days", bckgColor: .gray, value: "€ 55,5"),
-                                                                                                                       TariffSlideModel(title: "6 days", bckgColor: .gray, value: "€ 65,5"),
-                                                                                                                       TariffSlideModel(title: "7 days", bckgColor: .gray, value: "€ 75,5")]),
+                                                                         bckgColor: color_days!,titleColor: .white,
+                                                                         details:[TariffSlideModel(title: "2 days", bckgColor: color_days!,titleColor: .white, value: "€ 25,5"),
+                                                                                                                       TariffSlideModel(title: "3 days", bckgColor: color_days!,titleColor: .white, value: "€ 35,5"),
+                                                                                                                       TariffSlideModel(title: "4 days", bckgColor: color_days!,titleColor: .white, value: "€ 45,5"),
+                                                                                                                       TariffSlideModel(title: "5 days", bckgColor: color_days!,titleColor: .white, value: "€ 55,5"),
+                                                                                                                       TariffSlideModel(title: "6 days", bckgColor: color_days!,titleColor: .white, value: "€ 65,5")]),
                                                                                TariffSlideModel (title: "Weekly",
-                                                                         bckgColor: UIColor(named: "tariff_weekly")!,
-                                                                         details:[TariffSlideModel(title: "2 days", bckgColor: .red, value: "€ 25,5"),
-                                                                                   TariffSlideModel(title: "3 days", bckgColor: .red, value: "€ 35,5"),
-                                                                                   TariffSlideModel(title: "4 days", bckgColor: .red, value: "€ 45,5"),
-                                                                                   TariffSlideModel(title: "5 days", bckgColor: .red, value: "€ 55,5"),
-                                                                                   TariffSlideModel(title: "6 days", bckgColor: .red, value: "€ 65,5"),
-                                                                                   TariffSlideModel(title: "7 days", bckgColor: .red, value: "€ 75,5")]),
+                                                                         bckgColor: color_weeks!,titleColor: color_main!,
+                                                                         details:[TariffSlideModel(title: "1 weeak", bckgColor: color_weeks!,titleColor: color_main!, value: "€ 25,5"),
+                                                                                   TariffSlideModel(title: "2 weeks", bckgColor: color_weeks!,titleColor: color_main!, value: "€ 35,5"),
+                                                                                   TariffSlideModel(title: "3 weeks", bckgColor: color_weeks!,titleColor: color_main!, value: "€ 45,5")]),
                                                                                TariffSlideModel (title: "Monthly",
-                                                                         bckgColor: UIColor(named: "tariff_montly")!,
-                                                                         details:[TariffSlideModel(title: "2 days", bckgColor: .red, value: "€ 25,5"),
-                                                                                   TariffSlideModel(title: "3 days", bckgColor: .red, value: "€ 35,5"),
-                                                                                   TariffSlideModel(title: "4 days", bckgColor: .red, value: "€ 45,5"),
-                                                                                   TariffSlideModel(title: "5 days", bckgColor: .red, value: "€ 55,5"),
-                                                                                   TariffSlideModel(title: "6 days", bckgColor: .red, value: "€ 65,5"),
-                                                                                   TariffSlideModel(title: "7 days", bckgColor: .red, value: "€ 75,5")] ),
+                                                                                                 bckgColor:color_monthly!, titleColor: .white,
+                                                                         details:[TariffSlideModel(title: "1 month", bckgColor: color_monthly!,titleColor: .white, value: "€ 25,5")]),
                                                                                TariffSlideModel (title: "Flexible",
-                                                                         bckgColor: UIColor(named: "tariff_flexible")!,
-                                                                         details:[TariffSlideModel(title: "2 days", bckgColor: .red, value: "€ 25,5"),
-                                                                                    TariffSlideModel(title: "3 days", bckgColor: .red, value: "€ 35,5"),
-                                                                                    TariffSlideModel(title: "4 days", bckgColor: .red, value: "€ 45,5"),
-                                                                                    TariffSlideModel(title: "5 days", bckgColor: .red, value: "€ 55,5"),
-                                                                                    TariffSlideModel(title: "6 days", bckgColor: .red, value: "€ 65,5"),
-                                                                                    TariffSlideModel(title: "7 days", bckgColor: .red, value: "€ 75,5")] ),
+                                                                                                 bckgColor:color_flexible!, titleColor: color_main!,
+                                                                         details:[TariffSlideModel(title: "2 days", bckgColor: color_flexible!, titleColor: color_main!, value: "€ 25,5")] )
                 ]
 }
 
+
+//MARK: RentalConditionsData
+//MARK: --------------------
 struct RentalConditionsData {
     static let rentalConditionsModel: [RentalConditionsModel] = [
         RentalConditionsModel(img: #imageLiteral(resourceName: "deposit"), title: "Deposit amount from", value: "350"),
@@ -224,9 +196,24 @@ struct RentalConditionsData {
         RentalConditionsModel(img: #imageLiteral(resourceName: "card"), title: "Minimum Belgian driving license active period:", value: "2 years")]
 }
 
+//MARK: BkdAdvantagesData
+//MARK: --------------------
 struct BkdAdvantagesData {
     static let bkdAdvantagesModel: [BkdAdvantagesModel] = [BkdAdvantagesModel(title1: "Available 24/7",
                                                                               title2: "Personalized approach",
                                                                               title3: "Your case our challenge",
                                                                               title4: "Fast & safe" ) ]
+}
+
+
+struct ReserveData {
+    static let reserveModel: [ReserveModel] = [ReserveModel(headerTitle: "Additional driver",
+                                                            fullName: "Name Surname"),
+                                               ReserveModel(headerTitle: "Accessories",
+                                                            accessorieTitle: "Tape dispenser for sale",
+                                                            accessorieImg: #imageLiteral(resourceName: "tape_dispenser")),
+                                               ReserveModel( accessorieTitle: "tension straps for rent",
+                                                             accessorieCount: "x2",
+                                                             accessorieImg: #imageLiteral(resourceName: "straps"))
+    ]
 }

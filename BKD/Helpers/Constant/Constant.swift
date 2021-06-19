@@ -133,6 +133,12 @@ let color_shadow = UIColor(named: "shadow")
 let color_weekly = UIColor(named: "weekly_title")
 let color_more = UIColor(named: "more")
 let color_segment_separator = UIColor(named: "segment_separator")
+let color_hourly = UIColor(named: "tariff_hourly")
+let color_days = UIColor(named: "tariff_days")
+let color_weeks = UIColor(named: "tariff_weekly")
+let color_monthly = UIColor(named: "tariff_montly")
+let color_flexible = UIColor(named: "tariff_flexible")
+
 
 
 //Fonts
@@ -146,6 +152,7 @@ let font_chat_placeholder = UIFont(name: "SFProDisplay-Light", size: 12)
 let font_alert_title = UIFont(name: "SFProDisplay-Semibold", size: 13)
 let font_details_title = UIFont(name: "SFProDisplay-Regular", size: 13)
 let font_more_header = UIFont(name: "SFProDisplay-Semibold", size: 14)
+let font_search_title = UIFont(name: "SFProDisplay-Light", size: 18)
 
 // Images
 let img_bkd = UIImage(named:"bkd")?.withRenderingMode(.alwaysOriginal)

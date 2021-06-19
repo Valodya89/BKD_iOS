@@ -24,6 +24,7 @@ class AccessoriesUIViewController: UIViewController {
         setupView()
     }
     func setupView() {
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!]
         mRightBarBtn.image = img_bkd
         mTotalPriceBckgV.setShadow(color: color_shadow!)
         configureDelegates()

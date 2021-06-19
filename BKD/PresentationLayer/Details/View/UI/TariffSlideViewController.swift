@@ -55,21 +55,11 @@ extension TariffSlideViewController: UICollectionViewDelegate, UICollectionViewD
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TariffSlideCollectionViewCell.identifier, for: indexPath) as! TariffSlideCollectionViewCell
         
-        let model: TariffSlideModel = tariffSlideArr[indexPath.item]//TariffSlideData.tariffSlideModel[indexPath.item]
-
-        if model.value != nil {
-            cell.mDetailsBckgV.isHidden = false
-            cell.mDetailTitleLb.text = model.title
-            cell.mDetailValueLb.text = model.value
-            cell.mDetailsBckgV.backgroundColor = color_menu
-            cell.isUserInteractionEnabled = false
-           
+        let model: TariffSlideModel = tariffSlideArr[indexPath.item]
+        if model.value == nil {
+            cell.setTariffSlideCellInfo(item: model, index: indexPath.item)
         } else {
-            cell.mDetailsBckgV.isHidden = true
-            cell.mTitleLb.text = model.title
-            cell.containerV.backgroundColor = model.bckgColor
-            cell.isUserInteractionEnabled = true
-            cell.mTitleLb.textColor = (indexPath.item % 2 == 1) ? .white : color_main
+            cell.setOptionsTariffSlideCellInfo(item: model, index:indexPath.item )
         }
         return cell
     }
@@ -94,7 +84,7 @@ extension TariffSlideViewController: UICollectionViewDelegate, UICollectionViewD
             for i in (0..<details.count) {
                 insertIndexPathsArr.append(IndexPath(item: indexPath.item + i + 1, section: 0))
                 tariffSlideArr.insert(TariffSlideModel(title: details[i].title,
-                                                                         bckgColor: details[i].bckgColor,
+                                                       bckgColor: details[i].bckgColor, titleColor: details[i].titleColor,
                                                                          value: details[i].value),
                                                         at: indexPath.item + i + 1)
             }

@@ -27,6 +27,7 @@ class MyDriversViewController: UIViewController {
     }
     
     func setupView() {
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!]
         mRightBarBtn.image = img_bkd
         mTotalPriceBckgV.setShadow(color: color_shadow!)
         mAddDriverBckgV.layer.cornerRadius = mAddDriverBckgV.frame.height/2

@@ -52,7 +52,7 @@ class MainViewController: BaseViewController {
     
     
     func setupView() {
-        
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_search_title!]
         backgroundV.frame = self.view.bounds
         backgroundV.backgroundColor = .black
         backgroundV.alpha = 0.6

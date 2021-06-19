@@ -205,7 +205,6 @@ extension CarPhotosView: UIScrollViewDelegate {
             currentCarPhotoItem = Int(floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1)
             showOrHideScrollButtons()
             movetoPositionBottomCollectionView()
-
         }
     }
     

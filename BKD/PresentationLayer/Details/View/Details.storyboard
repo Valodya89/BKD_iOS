@@ -30,10 +30,10 @@
             <objects>
                 <viewController storyboardIdentifier="DetailsViewController" id="DBc-z5-met" customClass="DetailsViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XlO-an-gdp">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0jG-3f-cf4">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jG-3f-cf4">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yXl-YX-ZL5" userLabel="Content View">
@@ -104,15 +104,15 @@
                                                                 </cells>
                                                             </collectionView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xjl-5L-cfi">
-                                                                <rect key="frame" x="315.5" y="111" width="58.5" height="50.5"/>
+                                                                <rect key="frame" x="318.5" y="111" width="52.5" height="50.5"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7aZ-8c-UhH">
-                                                                        <rect key="frame" x="11.5" y="8.5" width="35.5" height="25"/>
+                                                                        <rect key="frame" x="10.5" y="8.5" width="31.5" height="25"/>
                                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                         <state key="normal" image="tow_bar"/>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tow Bar " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dsb-FD-Ey6">
-                                                                        <rect key="frame" x="4" y="33.5" width="51" height="17"/>
+                                                                        <rect key="frame" x="3.5" y="33.5" width="46" height="17"/>
                                                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="13"/>
                                                                         <color key="textColor" name="navigationBar"/>
                                                                         <nil key="highlightedColor"/>
@@ -184,7 +184,7 @@
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iSc-dy-ecr">
                                                                             <rect key="frame" x="2" y="2" width="90" height="62"/>
-                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                            <color key="backgroundColor" name="background"/>
                                                                         </view>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fiat_telento" translatesAutoresizingMaskIntoConstraints="NO" id="ewZ-3L-ANJ">
                                                                             <rect key="frame" x="14" y="6.5" width="66" height="46.5"/>
