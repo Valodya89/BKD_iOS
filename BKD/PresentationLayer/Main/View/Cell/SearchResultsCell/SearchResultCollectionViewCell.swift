@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol SearchResultCellDelegate: AnyObject {
+    func didPressMore()
+    func didPressReserve()
+}
+
 class SearchResultCollectionViewCell: UICollectionViewCell {
     static let identifier = "SearchResultCollectionViewCell"
         
@@ -60,6 +65,8 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var containerV: UIView!
     @IBOutlet weak var mCarImageViewCenterY: NSLayoutConstraint!
     
+    weak var delegate:SearchResultCellDelegate?
+    
     private var isFlipView: Bool = false
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -98,6 +105,23 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         btn.layer.cornerRadius = 8
     }
  
+    func setSearchResultCellInfo(index: Int) {
+        mMoreInfoBtn.tag = index
+    mFlipMoreInfoBtn.tag = index
+      mMoreInfoBtn.addTarget(self, action: #selector(moreInfoPressed(sender:)), for: .touchUpInside)
+       mFlipMoreInfoBtn.addTarget(self, action: #selector(moreInfoPressed(sender:)), for: .touchUpInside)
+        mReserveBtn.addTarget(self, action: #selector(reservePressed), for: .touchUpInside)
+    }
+    
+    @objc func moreInfoPressed(sender: UIButton) {
+        delegate?.didPressMore()
+    }
+    
+    @objc func reservePressed () {
+        delegate?.didPressReserve()
+    }
+    
+    //MARK: ACTIONS
     @IBAction func details(_ sender: UIButton) {
         if isFlipView {
             UIView.transition(with: mFlipInfoV, duration: 0.5, options: [.transitionFlipFromRight], animations: {

@@ -110,7 +110,7 @@
 		568E6F5E2642FC50000CB6A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568E6F5C2642FC50000CB6A9 /* LaunchScreen.storyboard */; };
 		568E6F692642FC50000CB6A9 /* BKDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E6F682642FC50000CB6A9 /* BKDTests.swift */; };
 		568E6F742642FC50000CB6A9 /* BKDUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E6F732642FC50000CB6A9 /* BKDUITests.swift */; };
-		568E700D26437897000CB6A9 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 568E700C26437897000CB6A9 /* SwiftPackageProductDependency */; };
+		568E700D26437897000CB6A9 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 568E700C26437897000CB6A9 /* SideMenu */; };
 		568E701226438C08000CB6A9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E701126438C08000CB6A9 /* MainViewController.swift */; };
 		568E70172643919B000CB6A9 /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E70162643919B000CB6A9 /* LeftViewController.swift */; };
 		568E703126443D90000CB6A9 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E703026443D90000CB6A9 /* CategoryViewController.swift */; };
@@ -131,6 +131,10 @@
 		5691A639265D53140008081D /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5691A638265D53140008081D /* Extentions.swift */; };
 		5691A641265D97550008081D /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5691A640265D97550008081D /* MainViewModel.swift */; };
 		5691A64E265DB6300008081D /* SearchHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5691A64D265DB6300008081D /* SearchHeaderViewModel.swift */; };
+		56B9F2D5267E8CEE003449AD /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F2D4267E8CEE003449AD /* SearchView.swift */; };
+		56B9F2E326805021003449AD /* SearchWithValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F2E226805020003449AD /* SearchWithValueView.swift */; };
+		56B9F2ED26806488003449AD /* SearchResultModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F2EC26806488003449AD /* SearchResultModelView.swift */; };
+		56B9F31326806A2E003449AD /* SearchEditModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F31226806A2E003449AD /* SearchEditModel.swift */; };
 		56C8E172267C1D100061890C /* ReserveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C8E170267C1D100061890C /* ReserveTableViewCell.swift */; };
 		56C8E173267C1D100061890C /* ReserveTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56C8E171267C1D100061890C /* ReserveTableViewCell.xib */; };
 		56CD830B267CF45600B2799F /* ReserveTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CD830A267CF45600B2799F /* ReserveTableView.swift */; };
@@ -287,6 +291,10 @@
 		5691A638265D53140008081D /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		5691A640265D97550008081D /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		5691A64D265DB6300008081D /* SearchHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderViewModel.swift; sourceTree = "<group>"; };
+		56B9F2D4267E8CEE003449AD /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		56B9F2E226805020003449AD /* SearchWithValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWithValueView.swift; sourceTree = "<group>"; };
+		56B9F2EC26806488003449AD /* SearchResultModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultModelView.swift; sourceTree = "<group>"; };
+		56B9F31226806A2E003449AD /* SearchEditModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEditModel.swift; sourceTree = "<group>"; };
 		56C8E170267C1D100061890C /* ReserveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveTableViewCell.swift; sourceTree = "<group>"; };
 		56C8E171267C1D100061890C /* ReserveTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReserveTableViewCell.xib; sourceTree = "<group>"; };
 		56CD830A267CF45600B2799F /* ReserveTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveTableView.swift; sourceTree = "<group>"; };
@@ -305,7 +313,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				568E700D26437897000CB6A9 /* BuildFile in Frameworks */,
+				568E700D26437897000CB6A9 /* SideMenu in Frameworks */,
 				9893B8799BB3CC6B4B697417 /* Pods_BKD.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -888,6 +896,8 @@
 				565731F22673188F0012ADD0 /* TailLiftTableView.swift */,
 				565731F7267332620012ADD0 /* TariffSlideViewController.swift */,
 				5665403426759D3D008ACD31 /* TariffCarouselView.swift */,
+				56B9F2D4267E8CEE003449AD /* SearchView.swift */,
+				56B9F2E226805020003449AD /* SearchWithValueView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1084,6 +1094,7 @@
 				5640952C264AE529001DC92D /* DropDownModel.swift */,
 				5656321B26568C0D00B78562 /* SearchHeaderModel.swift */,
 				565632512658B11D00B78562 /* EquipmentModel.swift */,
+				56B9F31226806A2E003449AD /* SearchEditModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1104,6 +1115,7 @@
 			children = (
 				5691A640265D97550008081D /* MainViewModel.swift */,
 				5691A64D265DB6300008081D /* SearchHeaderViewModel.swift */,
+				56B9F2EC26806488003449AD /* SearchResultModelView.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1456,7 +1468,7 @@
 			);
 			name = BKD;
 			packageProductDependencies = (
-				568E700C26437897000CB6A9 /* SwiftPackageProductDependency */,
+				568E700C26437897000CB6A9 /* SideMenu */,
 			);
 			productName = BKD;
 			productReference = 568E6F4E2642FC4B000CB6A9 /* BKD.app */;
@@ -1539,7 +1551,7 @@
 			);
 			mainGroup = 568E6F452642FC4B000CB6A9;
 			packageReferences = (
-				568E700B26437897000CB6A9 /* RemoteSwiftPackageReference */,
+				568E700B26437897000CB6A9 /* XCRemoteSwiftPackageReference "SideMenu" */,
 			);
 			productRefGroup = 568E6F4F2642FC4B000CB6A9 /* Products */;
 			projectDirPath = "";
@@ -1780,12 +1792,14 @@
 				56188889264A61ED00BDDB33 /* TextField.swift in Sources */,
 				5640952D264AE529001DC92D /* DropDownModel.swift in Sources */,
 				5691A5FC265C28860008081D /* AddressNameViewController.swift in Sources */,
+				56B9F2ED26806488003449AD /* SearchResultModelView.swift in Sources */,
 				56CD830B267CF45600B2799F /* ReserveTableView.swift in Sources */,
 				568E706E264481B0000CB6A9 /* LeftTableViewCell.swift in Sources */,
 				56533EFF267954560012BF4A /* AccessoriesCollectionViewCell.swift in Sources */,
 				564E12E1264D787A008CE884 /* MenuModel.swift in Sources */,
 				565731D92672DE810012ADD0 /* UINavigationControllerExtention.swift in Sources */,
 				560251E02661089C00FB204C /* CarouselCellView.swift in Sources */,
+				56B9F31326806A2E003449AD /* SearchEditModel.swift in Sources */,
 				56316316267A822200ED2144 /* MyDriverCollectionViewCell.swift in Sources */,
 				565A7AB02653FE26006C63D0 /* SearchHeaderView.swift in Sources */,
 				564E12FE264EAF04008CE884 /* PaddingUILable.swift in Sources */,
@@ -1798,6 +1812,7 @@
 				560252EF2665919A00FB204C /* CustomLocationModel.swift in Sources */,
 				565731DE2672FDC80012ADD0 /* DetailsAndTailLiftModel.swift in Sources */,
 				568E703126443D90000CB6A9 /* CategoryViewController.swift in Sources */,
+				56B9F2D5267E8CEE003449AD /* SearchView.swift in Sources */,
 				5665403526759D3E008ACD31 /* TariffCarouselView.swift in Sources */,
 				564E13A726535D98008CE884 /* SeeMapViewController.swift in Sources */,
 				56409539264B24D8001DC92D /* BKDAlert.swift in Sources */,
@@ -1825,6 +1840,7 @@
 				565731F32673188F0012ADD0 /* TailLiftTableView.swift in Sources */,
 				5665400C2673A0A5008ACD31 /* TariffSlideCollectionViewCell.swift in Sources */,
 				5602529C2664465200FB204C /* MarkerInfoViewController.swift in Sources */,
+				56B9F2E326805021003449AD /* SearchWithValueView.swift in Sources */,
 				568E704026446136000CB6A9 /* AboutUsViewController.swift in Sources */,
 				565731FD267332B10012ADD0 /* TariffSlideModel.swift in Sources */,
 				561887472645EE2A00BDDB33 /* UIButton+Border.swift in Sources */,
@@ -2195,7 +2211,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		568E700B26437897000CB6A9 /* RemoteSwiftPackageReference */ = {
+		568E700B26437897000CB6A9 /* XCRemoteSwiftPackageReference "SideMenu" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jonkykong/SideMenu.git";
 			requirement = {
@@ -2206,9 +2222,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		568E700C26437897000CB6A9 /* SwiftPackageProductDependency */ = {
+		568E700C26437897000CB6A9 /* SideMenu */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 568E700B26437897000CB6A9 /* RemoteSwiftPackageReference */;
+			package = 568E700B26437897000CB6A9 /* XCRemoteSwiftPackageReference "SideMenu" */;
 			productName = SideMenu;
 		};
 /* End XCSwiftPackageProductDependency section */

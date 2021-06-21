@@ -29,15 +29,25 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var mScrollV: UIScrollView!
     @IBOutlet weak var mAdditionalDriverBtn: UIButton!
     
+    @IBOutlet weak var mSearchWithValueStackV: SearchWithValueView!
+    @IBOutlet weak var mSearchV: SearchView!
     @IBOutlet weak var mReserveBckgV: UIView!
-    
     @IBOutlet weak var mReserveBtn: UIButton!
+    
     //MARK: Varables
     private lazy  var tariffSlideVC = TariffSlideViewController.initFromStoryboard(name: Constant.Storyboards.details)
+    
+    let datePicker = UIDatePicker()
+    let backgroundV =  UIView()
+    var responderTxtFl = UITextField()
+    
+    private let scrollPadding: CGFloat = 60
     private  var tariffSlideY: CGFloat = 0
     private var lastContentOffset: CGFloat = 0
+    private var previousContentPosition: CGPoint?
+    private var scrollContentHeight: CGFloat = 0.0
     private var isScrolled = false
-
+    private var isFromSerach = true
     
     //MARK: Life cycle
     override func viewDidLoad() {
@@ -47,18 +57,33 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        if scrollContentHeight == 0.0 {
+            
+            scrollContentHeight = isFromSerach ? mScrollV.bounds.height + mTariffCarouselV.bounds.height + mSearchWithValueStackV.bounds.height : mScrollV.bounds.height + mTariffCarouselV.bounds.height 
+            
+        }
+        mScrollV.contentSize.height = scrollContentHeight
         setTableViewsHeight()
         setTariffSlideViewFrame()
     }
     
     func setupView() {
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = #imageLiteral(resourceName: "bkd").withRenderingMode(.alwaysOriginal)
         configureViews()
+        configureTransparentView()
         configureDelegates()
         addTariffSliedView()
+        showLocation()
+        didPressEdit()
+            
     }
     
+    private func configureTransparentView()  {
+        backgroundV.frame = self.view.bounds
+        backgroundV.backgroundColor = .black
+        backgroundV.alpha = 0.6
+    }
     /// set height to details or tailLift tableView
     func  setTableViewsHeight() {
         if DetailsData.detailsModel.count > 11{
@@ -108,7 +133,9 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     func configureDelegates() {
         mDetailsAndTailLiftV.delegate = self
         mTariffCarouselV.delegate = self
+        mSearchV.delegate = self
         mScrollV.delegate = self
+        
     }
     
     /// Add child view
@@ -121,10 +148,125 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     }
     
     /// ScrollView will scroll to bottom
-    private func scrollToBottom() {
-        let bottomOffset = CGPoint(x: 0, y: mScrollV.contentSize.height - mScrollV.bounds.height + mScrollV.contentInset.bottom)
-        mScrollV.setContentOffset(bottomOffset, animated: true)
+    private func scrollToBottom(distance: CGFloat) {
+        let y = mScrollV.contentSize.height - mScrollV.bounds.height + mScrollV.contentInset.bottom + distance
+        previousContentPosition = mScrollV.contentOffset
+        scrollContentHeight = mScrollV.contentSize.height
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: { [self] in
+                self.mScrollV.contentOffset.y = y
+            }, completion: nil)
+        }
     }
+    private func scrollToBack() {
+//scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height + mSearchV.bounds.height
+        mScrollV.setContentOffset(previousContentPosition ?? CGPoint.zero, animated: true)
+    }
+
+    /// will be hidden search view
+    private func hideSearchView() {
+        UIView.animate(withDuration: 1) { [self] in
+            self.mSearchV.alpha = 0.0
+        } completion: { [self]  _ in
+            self.mSearchV.isHidden = true
+        }
+    }
+   
+    //MARK: METHODS
+    //MARK: ---------------
+    func didPressEdit() {
+        mSearchWithValueStackV.didPressEdit = {
+            UIView.animate(withDuration: 1.0) { [self] in
+                self.mSearchWithValueStackV.alpha = 0.0
+                showSearchView(isSelect: true)
+            } completion: {[self] _ in
+                self.mSearchWithValueStackV.isHidden = true
+            }
+
+        }
+    }
+    func hideDateInfo(dayBtn : UIButton,
+                      monthBtn: UIButton,
+                      hidden: Bool,
+                      txtFl: UITextField)  {
+        dayBtn.isHidden = hidden
+        monthBtn.isHidden = hidden
+        if hidden == false {
+            responderTxtFl.text = ""
+        }
+    }
+    
+    ///Will put new values from pickerDate
+    func showSelectedDate(dayBtn : UIButton?, monthBtn: UIButton?) {
+        if responderTxtFl.tag > 1 {
+            responderTxtFl.font =  UIFont.init(name: (responderTxtFl.font?.fontName)!, size: 18.0)
+
+            responderTxtFl.text = datePicker.date.getHour()
+            responderTxtFl.textColor = color_entered_date
+
+        } else {
+            dayBtn?.setTitle(String(datePicker.date.get(.day)), for: .normal)
+            monthBtn?.setTitle(datePicker.date.getMonthAndWeek(lng: "en"), for: .normal)
+        }
+    }
+    
+    
+    ///will be show the selected location to map from the list of tables
+    func showLocation() {
+        mSearchV!.mLocationDropDownView.didSelectSeeMap = { [weak self]  in
+            let seeMapContr = UIStoryboard(name: Constant.Storyboards.seeMap, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.seeMap) as! SeeMapViewController
+            self?.navigationController?.pushViewController(seeMapContr, animated: true)
+        }
+    }
+    ///will be show the custom location map controller
+    func showCustomLocationMap() {
+        let customLocationContr = UIStoryboard(name: Constant.Storyboards.customLocation, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.customLocation) as! CustomLocationViewController
+        self.navigationController?.pushViewController(customLocationContr, animated: true)
+    }
+    
+    func showAlertCustomLocation(checkedBtn: UIButton) {
+        BKDAlert().showAlert(on: self,
+                             title:Constant.Texts.titleCustomLocation,
+                             message: Constant.Texts.messageCustomLocation,
+                             messageSecond: Constant.Texts.messageCustomLocation2,
+                             cancelTitle: Constant.Texts.cancel,
+                             okTitle: Constant.Texts.agree,cancelAction: {
+                                checkedBtn.setImage(img_uncheck_box, for: .normal)
+                             }, okAction: { [self] in
+                                self.showCustomLocationMap()
+                             })
+    }
+    
+    @objc func donePressed() {
+        responderTxtFl.resignFirstResponder()
+        scrollToBack()
+        DispatchQueue.main.async() {
+            self.backgroundV.removeFromSuperview()
+        }
+    
+        if responderTxtFl.tag == 0 { // PickUpDate
+        
+            hideDateInfo(dayBtn: mSearchV!.mDayPickUpBtn,
+                          monthBtn: mSearchV!.mMonthPickUpBtn,
+                          hidden: false, txtFl: responderTxtFl)
+            showSelectedDate(dayBtn: mSearchV!.mDayPickUpBtn,
+                             monthBtn: mSearchV!.mMonthPickUpBtn)
+            
+        } else if responderTxtFl.tag == 1 { // ReturnDate
+            hideDateInfo(dayBtn: mSearchV!.mDayReturnDateBtn,
+                          monthBtn: mSearchV!.mMonthReturnDateBtn,
+                          hidden: false, txtFl: responderTxtFl)
+            showSelectedDate(dayBtn: mSearchV!.mDayReturnDateBtn,
+                             monthBtn: mSearchV!.mMonthReturnDateBtn)
+            
+        } else {
+            showSelectedDate(dayBtn: nil, monthBtn: nil)
+            
+        }
+    }
+    
+    
+    
     //MARK: ACTIONS
     //MARK: --------------------
 
@@ -155,7 +297,7 @@ extension DetailsViewController: DetailsAndTailLiftViewDelegate {
     
     func didPressDetails(willOpen: Bool) {
         if willOpen  {
-            scrollToBottom()
+            scrollToBottom(distance: 0.0)
             if self.mTailLiftTableBckgV.alpha == 1 {
                 // will show Details tableView and close TailLift tableView
                     UIView.transition(with: mTailLiftTableBckgV, duration: 1, options: [.transitionCurlUp,.allowUserInteraction], animations: { [self] in
@@ -192,7 +334,7 @@ extension DetailsViewController: DetailsAndTailLiftViewDelegate {
     }
     
     func didPressTailLift(willOpen: Bool) {
-        scrollToBottom()
+        scrollToBottom(distance: 0.0)
 
         // will show TailLift tableView
         if willOpen {
@@ -215,11 +357,72 @@ extension DetailsViewController: DetailsAndTailLiftViewDelegate {
 //MARK: TariffCarouselViewDelegate
 //MARK: ----------------------------
 extension DetailsViewController: TariffCarouselViewDelegate {
+    func showSearchView(isSelect: Bool) {
+        if mSearchV.isHidden  {
+            mSearchV.isHidden = false
+            UIView.animate(withDuration: 1.5) { [self] in
+                mScrollV.contentSize.height = mScrollV.contentSize.height + mSearchV.bounds.height
+                self.scrollToBottom(distance: 0.0)
+                self.mSearchV.alpha = 1
+            }
+        }
+    }
+    
     func didPressMore() {
         let moreVC = UIStoryboard(name: Constant.Storyboards.more, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.more) as! MoreViewController
         self.navigationController?.pushViewController(moreVC, animated: true)
     }
+    
 }
+
+//MARK: SearchViewDelegate
+//MARK: --------------------
+extension DetailsViewController: SearchViewDelegate {
+    func didSelectPickUp(textFl: UITextField) {
+       
+        self.view.addSubview(self.backgroundV)
+        print("didSelectPickUp")
+        //toolBAr
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        //bar Button
+        let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(self.donePressed))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolBar.setItems([flexibleSpace, done], animated: false)
+  
+        textFl.inputView = self.datePicker
+        textFl.inputAccessoryView = toolBar
+        self.responderTxtFl = textFl
+        scrollToBottom(distance: mSearchV.bounds.height)
+
+          if #available(iOS 14.0, *) {
+            self.datePicker.preferredDatePickerStyle = .wheels
+     } else {
+         // Fallback on earlier versions
+     }
+        if textFl.tag > 1 {
+            self.datePicker.datePickerMode = .time
+            self.datePicker.minimumDate = nil
+        } else {
+            self.datePicker.datePickerMode = .date
+            self.datePicker.minimumDate =  Date()
+
+            self.datePicker.locale = Locale(identifier: "en")
+        }
+    }
+    
+    func didSelectLocation(_ text: String, _ tag: Int) {
+        
+        
+    }
+    
+    func didSelectCustomLocation(_ btn: UIButton, _ isShowAlert: Bool) {
+        isShowAlert ? self.showAlertCustomLocation(checkedBtn: btn) : self.showCustomLocationMap()
+    }
+    
+}
+
 //MARK: UIScrollViewDelegate
 //MARK: ----------------------------
 extension DetailsViewController: UIScrollViewDelegate {
@@ -232,9 +435,12 @@ extension DetailsViewController: UIScrollViewDelegate {
                 UIView.animate(withDuration: 1.0) { [self] in
                     self.tariffSlideVC.view.frame.origin.y -= 500
                     mTariffCarouselV.alpha = 0.0
+                    mSearchV.alpha = 0.0
                     self.tariffSlideVC.view.layoutIfNeeded()
                 } completion: { [self]_ in
                     self.mTariffCarouselV.isHidden = true
+                    mSearchV.isHidden = true
+                    scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height
                 }
             }
         } else if (scrollView.contentOffset.y > 0) {

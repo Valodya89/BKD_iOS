@@ -69,13 +69,8 @@ static let identifier = "MainCollectionViewCell"
         amountText.setAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14),
                                   NSAttributedString.Key.foregroundColor: UIColor(named: "value") as Any],
                                      range: NSMakeRange(0, 1))
-        // if you want, you can add more attributes for different ranges calling .setAttributes many times
-        // set the attributed string to the UILabel object
-
-        // set the attributed string to the UILabel object
+       
         mValueLb.attributedText = amountText
-        
-
     }
 
 }

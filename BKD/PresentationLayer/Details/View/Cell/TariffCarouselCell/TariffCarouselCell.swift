@@ -8,6 +8,7 @@
 import UIKit
 protocol TariffCarouselCellDelegate: AnyObject {
     func didPressMore()
+    func showSearchView(isSelect: Bool)
 }
 
 class TariffCarouselCell: UIView {
@@ -198,6 +199,10 @@ class TariffCarouselCell: UIView {
     }
     
     @IBAction func confirm(_ sender: UIButton) {
+         sender.title(for: .normal) == Constant.Texts.select ?
+            delegate?.showSearchView(isSelect: true) : delegate?.showSearchView(isSelect: false)
+        
+            
     }
     
     @IBAction func hours(_ sender: UISegmentedControl) {

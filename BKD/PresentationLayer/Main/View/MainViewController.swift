@@ -52,7 +52,7 @@ class MainViewController: BaseViewController {
     
     
     func setupView() {
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_search_title!]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_search_title!, NSAttributedString.Key.foregroundColor: UIColor.white]
         backgroundV.frame = self.view.bounds
         backgroundV.backgroundColor = .black
         backgroundV.alpha = 0.6
@@ -159,6 +159,9 @@ class MainViewController: BaseViewController {
         self.searchResultV?.mPickUpMonthBtn.setTitle(self.searchHeaderV?.mMonthPickUpBtn.title(for: .normal), for: .normal)
         self.searchResultV?.mReturnDayBtn.setTitle(self.searchHeaderV?.mDayReturnDateBtn.title(for: .normal), for: .normal)
         self.searchResultV?.mReturnMonthBtn.setTitle(self.searchHeaderV?.mMonthReturnDateBtn.title(for: .normal), for: .normal)
+        self.searchResultV?.mPickUpLocationLb.text = self.searchHeaderV?.mPickUpLocationBtn.title(for: .normal)
+        self.searchResultV?.mReturnLocationLb.text = self.searchHeaderV?.mReturnLocationBtn.title(for: .normal)
+
     }
     
     //MARK: ANIMATIONS
@@ -667,15 +670,10 @@ class MainViewController: BaseViewController {
     }
     
     @IBAction func chatWithUs(_ sender: UIButton) {
-       // openChatPage ()
-        let detailsVC = UIStoryboard(name: Constant.Storyboards.details, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.details) as! DetailsViewController
-        self.navigationController?.pushViewController(detailsVC, animated: true)
+        openChatPage ()
+       
     }
     
-    @objc func moreInfoPressed(sender: UIButton) {
-        let detailsVC = UIStoryboard(name: Constant.Storyboards.details, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.details) as! DetailsViewController
-        self.navigationController?.pushViewController(detailsVC, animated: true)
-    }
     
     @objc func donePressed() {
         responderTxtFl.resignFirstResponder()
@@ -749,10 +747,8 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             } else {
                 // will show search result cell
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell
-                (cell as! SearchResultCollectionViewCell).mMoreInfoBtn.tag = indexPath.row
-                (cell as! SearchResultCollectionViewCell).mFlipMoreInfoBtn.tag = indexPath.row
-                (cell as! SearchResultCollectionViewCell).mMoreInfoBtn.addTarget(self, action: #selector(moreInfoPressed(sender:)), for: .touchUpInside)
-                (cell as! SearchResultCollectionViewCell).mFlipMoreInfoBtn.addTarget(self, action: #selector(moreInfoPressed(sender:)), for: .touchUpInside)
+                (cell as! SearchResultCollectionViewCell).setSearchResultCellInfo(index: indexPath.row)
+                (cell as! SearchResultCollectionViewCell).delegate = self
             }
 
         }
@@ -762,6 +758,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     //MARK: UICollectionViewDelegate
     //MARK: -------------------------------
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
 
     }
 
@@ -778,6 +775,21 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
 }
 
+extension MainViewController: SearchResultCellDelegate {
+    
+    func didPressMore() {
+        let detailsVC = UIStoryboard(name: Constant.Storyboards.details, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.details) as! DetailsViewController
+        self.navigationController?.pushViewController(detailsVC, animated: true)
+    }
+    
+    func didPressReserve() {
+        let detailsVC = UIStoryboard(name: Constant.Storyboards.details, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.details) as! DetailsViewController
+        
+        self.navigationController?.pushViewController(detailsVC, animated: true)
+    }
+    
+    
+}
 
 //MARK: UITableViewDataSource
 //MARK: -----------------------------

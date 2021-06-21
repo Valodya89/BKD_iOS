@@ -76,6 +76,7 @@ struct Constant {
         static let messagePlaceholder = "Type your message"
         static let rentalConditions = "Rental conditions"
         static let bkdAdvantages = "BKD Advantages"
+        static let select = "Select"
 
     }
 }

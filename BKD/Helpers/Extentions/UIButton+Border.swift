@@ -51,6 +51,11 @@ extension UIButton {
 
 
 extension UITextField {
+    
+    public func addBorder(color: UIColor, width: CGFloat) {
+        self.layer.borderWidth = width
+        self.layer.borderColor = color.cgColor
+    }
     public func addBorder(side: BorderSide, color: UIColor, width: CGFloat) {
         let border = UIView()
         border.translatesAutoresizingMaskIntoConstraints = false

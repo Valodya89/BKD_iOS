@@ -10,6 +10,7 @@ import iCarousel
 
 protocol TariffCarouselViewDelegate: AnyObject {
     func didPressMore()
+    func showSearchView(isSelect: Bool)
 }
 class TariffCarouselView: UIView,  iCarouselDataSource, iCarouselDelegate {
     var didChangeCategory: ((Int) -> Void)?
@@ -84,7 +85,13 @@ class TariffCarouselView: UIView,  iCarouselDataSource, iCarouselDelegate {
 //MARK: TariffCarouselCellDelegate
 //MARK: ----------------------------
 extension TariffCarouselView: TariffCarouselCellDelegate {
+    func showSearchView(isSelect: Bool) {
+        delegate?.showSearchView(isSelect: isSelect)
+
+    }
+    
     func didPressMore() {
         delegate?.didPressMore()
     }
+
 }

@@ -97,7 +97,7 @@ class ReserveViewController: UIViewController {
         mRentInfoBckgV.setShadow(color: color_shadow!)
         mCarImgBckgV.layer.cornerRadius = 16
         mCarImgBckgV.setShadow(color: color_shadow!)
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
         mScrollV.delegate = self
     }
     
