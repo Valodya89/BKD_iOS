@@ -59,16 +59,6 @@ extension Date {
         return date
     }
     
-    func dateIsInsideRange(fromTime: Date?, toTime: Date?) -> Bool {
-        guard let fromTime = fromTime, let toTime = toTime  else {
-            return true
-        }
-        if dateIsInRange(time: fromTime) && dateIsInRange(time: toTime) {
-            return true
-        }
-        return false
-    }
-    
     func dateIsInRange(time: Date?) -> Bool {
         let now = NSDate()
         let calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
@@ -88,4 +78,36 @@ extension Date {
         }
     }
     
+    func  addDays(_ day: Int) -> Date {
+        var dayComponent    = DateComponents()
+        dayComponent.day    = day // For removing one day (yesterday): -1
+        let theCalendar = Calendar.current
+        let nextDate = theCalendar.date(byAdding: dayComponent, to: self)
+        return nextDate!
+    }
+    
+     func addHours(_ hours: Int) -> Date {
+           var comps = DateComponents()
+        comps.hour = hours
+           let calendar = Calendar.current
+           let result = calendar.date(byAdding: comps, to: self)
+        return result!
+       }
+    
+    func addWeeks(_ weeks: Int) -> Date {
+          var comps = DateComponents()
+        comps.day = 7 * weeks
+          let calendar = Calendar.current
+          let result = calendar.date(byAdding: comps, to: self)
+        return result!
+      }
+    
+    func addMonths(_ months: Int) -> Date {
+          var comps = DateComponents()
+        comps.month = months
+          let calendar = Calendar.current
+          let result = calendar.date(byAdding: comps, to: self)
+        return result!
+      }
+
 }

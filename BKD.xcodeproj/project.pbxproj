@@ -135,6 +135,8 @@
 		56B9F2E326805021003449AD /* SearchWithValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F2E226805020003449AD /* SearchWithValueView.swift */; };
 		56B9F2ED26806488003449AD /* SearchResultModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F2EC26806488003449AD /* SearchResultModelView.swift */; };
 		56B9F31326806A2E003449AD /* SearchEditModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F31226806A2E003449AD /* SearchEditModel.swift */; };
+		56B9F33D26825FF0003449AD /* TariffSlideViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F33C26825FF0003449AD /* TariffSlideViewModel.swift */; };
+		56B9F34226826DE1003449AD /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F34126826DE1003449AD /* DetailsViewModel.swift */; };
 		56C8E172267C1D100061890C /* ReserveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C8E170267C1D100061890C /* ReserveTableViewCell.swift */; };
 		56C8E173267C1D100061890C /* ReserveTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56C8E171267C1D100061890C /* ReserveTableViewCell.xib */; };
 		56CD830B267CF45600B2799F /* ReserveTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CD830A267CF45600B2799F /* ReserveTableView.swift */; };
@@ -295,6 +297,8 @@
 		56B9F2E226805020003449AD /* SearchWithValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWithValueView.swift; sourceTree = "<group>"; };
 		56B9F2EC26806488003449AD /* SearchResultModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultModelView.swift; sourceTree = "<group>"; };
 		56B9F31226806A2E003449AD /* SearchEditModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEditModel.swift; sourceTree = "<group>"; };
+		56B9F33C26825FF0003449AD /* TariffSlideViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffSlideViewModel.swift; sourceTree = "<group>"; };
+		56B9F34126826DE1003449AD /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
 		56C8E170267C1D100061890C /* ReserveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveTableViewCell.swift; sourceTree = "<group>"; };
 		56C8E171267C1D100061890C /* ReserveTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReserveTableViewCell.xib; sourceTree = "<group>"; };
 		56CD830A267CF45600B2799F /* ReserveTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveTableView.swift; sourceTree = "<group>"; };
@@ -882,6 +886,8 @@
 		5657E83E2671088800788D62 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				56B9F33C26825FF0003449AD /* TariffSlideViewModel.swift */,
+				56B9F34126826DE1003449AD /* DetailsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1787,9 +1793,11 @@
 				5691A639265D53140008081D /* Extentions.swift in Sources */,
 				5656082626785C32009578FA /* MoreViewController.swift in Sources */,
 				568E704826446E2D000CB6A9 /* MyReservationsViewController.swift in Sources */,
+				56B9F34226826DE1003449AD /* DetailsViewModel.swift in Sources */,
 				5656083926785E2C009578FA /* RentalConditionsTableViewCell.swift in Sources */,
 				5602536F2669AE1C00FB204C /* OfflineViewController.swift in Sources */,
 				56188889264A61ED00BDDB33 /* TextField.swift in Sources */,
+				56B9F33D26825FF0003449AD /* TariffSlideViewModel.swift in Sources */,
 				5640952D264AE529001DC92D /* DropDownModel.swift in Sources */,
 				5691A5FC265C28860008081D /* AddressNameViewController.swift in Sources */,
 				56B9F2ED26806488003449AD /* SearchResultModelView.swift in Sources */,

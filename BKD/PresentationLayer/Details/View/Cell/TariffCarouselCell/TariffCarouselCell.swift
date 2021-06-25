@@ -8,7 +8,9 @@
 import UIKit
 protocol TariffCarouselCellDelegate: AnyObject {
     func didPressMore()
-    func showSearchView(isSelect: Bool)
+    func showSearchView(isSelect: Bool, optionIndex: Int)
+    func willChangeOption(optionIndex: Int)
+
 }
 
 class TariffCarouselCell: UIView {
@@ -45,10 +47,12 @@ class TariffCarouselCell: UIView {
     
     //NSLayoutConstraints
     @IBOutlet weak var mPriceCenterX: NSLayoutConstraint!
-    @IBOutlet weak var mdetailsCenterY: NSLayoutConstraint!
+    @IBOutlet weak var mDetailsCenterY: NSLayoutConstraint!
     @IBOutlet weak var mPriceCenterY: NSLayoutConstraint!
     
     //MARK: Variable
+    var selectedSegmentIndex = 0
+    var isConfirm = false
     weak var delegate: TariffCarouselCellDelegate?
 
     
@@ -80,10 +84,24 @@ class TariffCarouselCell: UIView {
 
     }
     
+    ///Set segments to segment control
+    func setSegmentControlSegment(index: Int, segmentC: UISegmentedControl) {
+        let currOptions = tariffOptionsArr[index]
+        if currOptions.count > 0  {
+            for i in (0..<Int(currOptions.count)) {
+                segmentC.setTitle(currOptions[i], forSegmentAt: i)
+            }
+            segmentC.selectedSegmentIndex = selectedSegmentIndex
+            segmentC.addTarget(self, action: #selector(didChangeSegment(sender:)), for: .allEvents)
+        }
+    }
+    
+    
     ///set info to close cells
     func setUnselectedCellsInfo(item:TariffSlideModel, index: Int) {
         mUnselectedBckgV.isHidden = false
-        mUnselectedBckgV.backgroundColor = item.bckgColor
+        mSelectedBckgV.isHidden = true
+        mUnselectedBckgV.backgroundColor = item.bckgColor.withAlphaComponent(0.6)
         mUnselectedTitleLb.text = item.title
         mUnselectedTitleLb.textColor = index % 2 == 1 ? color_main : .white
     }
@@ -91,6 +109,7 @@ class TariffCarouselCell: UIView {
     /// set info to open cell 
     func setSelectedCellInfo(item:TariffSlideModel, index: Int)  {
         mUnselectedBckgV.isHidden = true
+        mSelectedBckgV.isHidden = false
         mTitleLb.text = item.title
         mPriceLb.text = "99,9"
         mSelectedBckgV.backgroundColor = item.bckgColor
@@ -119,7 +138,9 @@ class TariffCarouselCell: UIView {
             mConfirmBckgV.backgroundColor =  UIColor(ciColor: .white).withAlphaComponent(0.25)
             mConfirmBtn.setTitleColor(color_main!, for: .normal)
         }
+        setSegmentControlSegment(index: 0, segmentC: mHoursSegmentC)
         mHoursSegmentC.backgroundColor = color_main!.withAlphaComponent(0.26)
+//        mHoursSegmentC.addTarget(self, action: #selector(didChangeSegment(sender:)), for: .allEvents)
         mMoreBtn.setTitleColor(.white, for: .normal)
         
         UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
@@ -138,7 +159,7 @@ class TariffCarouselCell: UIView {
         mHoursSegmentC.isHidden = true
         mPriceCenterX.constant = 45
         mPriceCenterY.constant = 20
-        mdetailsCenterY.constant = 52
+        mDetailsCenterY.constant = 52
 
     }
     
@@ -160,6 +181,8 @@ class TariffCarouselCell: UIView {
         mMoreBtn.layer.borderColor = index == 2 ? color_weekly!.cgColor : color_main!.cgColor
         
         //segmentControll
+    
+        setSegmentControlSegment(index: index, segmentC: mHoursSegmentC)
         mHoursSegmentC.backgroundColor = UIColor(ciColor: .white).withAlphaComponent(0.49)
         mHoursSegmentC.setBorder(color: index == 1 ? .white : .clear, width: 0.5)
         if #available(iOS 13.0, *) {
@@ -173,14 +196,18 @@ class TariffCarouselCell: UIView {
         UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: index == 2 ? .white : color_main!], for: .selected)
         mHoursSegmentC.setDividerImage(UIImage().colored(with: color_segment_separator!, size: CGSize(width: 1, height: 15)), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
         
-        mWeeklySegmentC.isHidden = index == 2 ? false : true
-        mHoursSegmentC.isHidden = index == 2 ? true : false
-        if index == 3 {
-            mMonthlyBtn.isHidden = false
-            mWeeklySegmentC.isHidden = true
-            mHoursSegmentC.isHidden = true
-        }
+    mWeeklySegmentC.isHidden = index == 2 ? false : true
+    mHoursSegmentC.isHidden = index == 2 ? true : false
+    if index == 2 {
+        setSegmentControlSegment(index: index, segmentC: mWeeklySegmentC)
     }
+    
+    if index == 3 {
+        mMonthlyBtn.isHidden = false
+        mWeeklySegmentC.isHidden = true
+        mHoursSegmentC.isHidden = true
+    }
+   }
     
     func setHourlyAndFlexibleCellsCommonInfo(index: Int) {
         mPriceLb.textColor = .white
@@ -191,7 +218,17 @@ class TariffCarouselCell: UIView {
         mHoursSegmentC.setDividerImage(UIImage().colored(with: .clear, size: CGSize(width: 1, height: 15)), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
         if index == 4 { // Flexible
             setFlexibleCellInfo()
-        }    }
+        }
+        
+    }
+    
+    @objc func didChangeSegment(sender: UISegmentedControl) {
+        selectedSegmentIndex = sender.selectedSegmentIndex
+        if isConfirm {
+            delegate?.willChangeOption(optionIndex: selectedSegmentIndex)
+        }
+    }
+    
     //MARK: ACTIONS
     //MARK: --------------------
     @IBAction func more(_ sender: UIButton) {
@@ -199,10 +236,10 @@ class TariffCarouselCell: UIView {
     }
     
     @IBAction func confirm(_ sender: UIButton) {
-         sender.title(for: .normal) == Constant.Texts.select ?
-            delegate?.showSearchView(isSelect: true) : delegate?.showSearchView(isSelect: false)
-        
-            
+        isConfirm = true
+        sender.setTitleColor(color_menu, for: .normal)
+        sender.title(for: .normal) == Constant.Texts.select ?
+            delegate?.showSearchView(isSelect: true, optionIndex: selectedSegmentIndex) : delegate?.showSearchView(isSelect: false, optionIndex: selectedSegmentIndex)
     }
     
     @IBAction func hours(_ sender: UISegmentedControl) {

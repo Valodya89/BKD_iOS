@@ -10,7 +10,8 @@ import SideMenu
 
 
 class MainViewController: BaseViewController {
-        
+    
+    //MARK: Outlets
     @IBOutlet weak var mAvalableCategoriesTbV: UITableView!
     @IBOutlet weak var mCarCollectionV: UICollectionView!
     @IBOutlet weak var mChatWithUsBckgV: UIView!
@@ -18,7 +19,10 @@ class MainViewController: BaseViewController {
     @IBOutlet weak var mChatWithUsBtn: UIButton!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
+    
+    //MARK: Variables
     let mainViewModel: MainViewModel = MainViewModel()
+    lazy var searchModel: SearchModel = SearchModel()
     var menu: SideMenuNavigationController?
     var searchHeaderV: SearchHeaderView?
     var searchResultV: SearchResultView?
@@ -69,16 +73,21 @@ class MainViewController: BaseViewController {
         configureCarsCollectionView()
         configureAvalableCategoriesTableView()
         configureDelegates()
-        self.selectedDatePicker()
-        self.selectedSearch()
-        self.selectedLocation()
-        self.selectedCustomLocation()
         self.selectedEdit()
         self.showLocation()
         self.showFilter()
-        self.selectedArrow()
         self.updateCategory()
         
+    }
+    
+    // set info to setSearchEdit model
+    private func setSearchModel(){
+        searchModel.pickUpDate = UserDefaults.standard.object(forKey: key_pickUpDate) as? Date
+        searchModel.returnDate = UserDefaults.standard.object(forKey: key_returnDate) as? Date
+        searchModel.pickUpTime = UserDefaults.standard.object(forKey: key_pickUpTime) as? Date
+        searchModel.returnTime = UserDefaults.standard.object(forKey: key_returnTime) as? Date
+        searchModel.pickUpLocation = UserDefaults.standard.object(forKey: key_pickUpLocation) as? String
+        searchModel.returnLocation = UserDefaults.standard.object(forKey: key_returnLocation) as? String
     }
     
     private func removeUserDefaultObjs () {
@@ -97,6 +106,7 @@ class MainViewController: BaseViewController {
         mCarCollectionV.dataSource = self
         mAvalableCategoriesTbV.delegate = self
         mAvalableCategoriesTbV.dataSource = self
+        searchHeaderV?.delegate = self
     }
     
     private func configureCarsCollectionView() {
@@ -132,7 +142,17 @@ class MainViewController: BaseViewController {
         self.mAvalableCategoriesTbV.setContentOffset(.init(x: 0, y: -top), animated: false)
     }
     
-   
+    ///creat tool bar
+    func creatToolBar() -> UIToolbar {
+        //toolBAr
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        //bar Button
+        let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(self.donePressed))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolBar.setItems([flexibleSpace, done], animated: false)
+        return toolBar
+    }
     
 //    private func addAvalableCategoriesView() {
 //        addChild(avalableCategoriesVC)
@@ -274,25 +294,15 @@ class MainViewController: BaseViewController {
             }
         }
     }
-    
+   
+    /// check if reservetion time in range
     func checkReservetionTime() {
-        if responderTxtFl.tag == 2 { //pick up time
-            mainViewModel.isReservetionInWorkingHours(pickUpTime: datePicker.date,
-                                                      returnTime: UserDefaults.standard.object(forKey: key_returnTime) as? Date) { [self] (result) in
-                if !result {
-                    self.showAlertWorkingHours()
-                }
-            }
-            
-        } else if responderTxtFl.tag == 3 { //return time
-            mainViewModel.isReservetionInWorkingHours(pickUpTime: UserDefaults.standard.object(forKey: key_pickUpTime) as? Date,
-                                                      returnTime: datePicker.date) { (result) in
-                if !result {
-                    self.showAlertWorkingHours()
-                }
-                
+        mainViewModel.isReservetionInWorkingHours(time: datePicker.date ) { [self] (result) in
+            if !result {
+                self.showAlertWorkingHours()
             }
         }
+        
     }
     
     ///check if any fields have been edited
@@ -456,103 +466,13 @@ class MainViewController: BaseViewController {
     ///will be show the custom location map controller
     func showCustomLocationMap() {
         let customLocationContr = UIStoryboard(name: Constant.Storyboards.customLocation, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.customLocation) as! CustomLocationViewController
+        customLocationContr.delegate = self
         self.navigationController?.pushViewController(customLocationContr, animated: true)
     }
     
   //MARK: SELECTED CLOSURES
     //MARK ------------------------------
-    func selectedCustomLocation() {
-       // self.showCustomLocationMap()
-        searchHeaderV!.didSelectCustomLocation = { [weak self] checkedBtn, willShowAlert in
-            willShowAlert ? self!.showAlertCustomLocation(checkedBtn: checkedBtn) : self!.showCustomLocationMap()
-        }
-    }
-    
-    
-    func selectedDatePicker() {
-        searchHeaderV!.didSelectPickUp = { [weak self] textFl in
-            self?.view.addSubview(self!.backgroundV)
-            print("didSelectPickUp")
-            //toolBAr
-            let toolBar = UIToolbar()
-            toolBar.sizeToFit()
-            
-            //bar Button
-            let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(self?.donePressed))
-            let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-            toolBar.setItems([flexibleSpace, done], animated: false)
-      
-            textFl.inputView = self?.datePicker
-            textFl.inputAccessoryView = toolBar
-            self?.responderTxtFl = textFl
 
-              if #available(iOS 14.0, *) {
-                self?.datePicker.preferredDatePickerStyle = .wheels
-         } else {
-             // Fallback on earlier versions
-         }
-            if textFl.tag > 1 {
-                self?.datePicker.datePickerMode = .time
-                self?.datePicker.minimumDate = nil
-            } else {
-                self?.datePicker.datePickerMode = .date
-                self?.datePicker.minimumDate =  Date()
-
-                self?.datePicker.locale = Locale(identifier: "en")
-            }
-        }
-
-    }
-
-    func selectedLocation() {
-        searchHeaderV!.didSelectLocation = { [weak self] (locationStr, buttonTag) in
-            if ((self?.isPressedEdit) == true) {
-                if  buttonTag == 4 {
-                    self?.checkFieldsEdited(pickupDate:UserDefaults.standard.object(forKey: key_pickUpDate) as? Date,
-                                            returnDate: UserDefaults.standard.object(forKey: key_returnDate) as? Date,
-                                            pickupTime: UserDefaults.standard.object(forKey: key_pickUpTime) as? Date,
-                                            returnTime: UserDefaults.standard.object(forKey: key_returnTime) as? Date,
-                                            pickUpLocation: locationStr,
-                                            returnLocation: UserDefaults.standard.object(forKey: key_returnLocation) as? String,
-                                            categoryIndex: UserDefaults.standard.object(forKey: key_category) as? Int)
-                } else {
-                    self?.checkFieldsEdited(pickupDate: UserDefaults.standard.object(forKey: key_pickUpDate) as? Date,
-                                            returnDate: UserDefaults.standard.object(forKey: key_returnDate) as? Date,
-                                            pickupTime: UserDefaults.standard.object(forKey: key_pickUpTime) as? Date,
-                                            returnTime: UserDefaults.standard.object(forKey: key_returnTime) as? Date,
-                                            pickUpLocation: UserDefaults.standard.object(forKey: key_pickUpLocation) as? String,
-                                            returnLocation: locationStr,
-                                            categoryIndex: UserDefaults.standard.object(forKey: key_category) as? Int)
-                    
-                }
-            }
-        }
-    }
-    
-    func selectedSearch() {
-        searchHeaderV!.didSelectSearch = { [weak self]  in
-            self?.isSearchResultPage = true
-            self?.isPressedEdit = false
-            self?.searchHeaderV?.layer.shadowOpacity = 1.0
-            
-            self?.mLeftBarBtn.image = img_back
-            self?.mRightBarBtn.image = img_chat
-            self?.mChatWithUsBckgV.isHidden = true
-            self?.mCarCollectionV.reloadData()
-            
-            // If will not  found result
-            // must be change by api result
-            if self?.searchHeaderV?.carouselBackgV.categoryCarousel.currentItemIndex == 2 {
-                self?.isNoSearchResult = true
-                self?.navigationController!.navigationBar.topItem?.title = ""
-                self?.animateAvalableCategoriesResult()
-            } else {
-                self?.navigationController!.navigationBar.topItem?.title = Constant.Texts.searchResult
-                self?.isNoSearchResult = false
-                self?.animateSearchResult()
-            }
-        }
-    }
     
     func selectedEdit() {
         searchResultV?.didPressEdit = { [weak self] in
@@ -573,17 +493,6 @@ class MainViewController: BaseViewController {
         }
     }
     
-    func selectedArrow()  {
-        searchHeaderV?.hideEditView = { [weak self] in
-            if !self!.isNoSearchResult {
-                self?.navigationController!.navigationBar.topItem?.title = Constant.Texts.searchResult
-                self?.animateSearchResult()
-            } else {
-                self?.navigationController!.navigationBar.topItem?.title = ""
-                self?.animateAvalableCategoriesResult()
-            }
-        }
-    }
     
     func selectedBack(isBackFromResult: Bool) {
         isSearchResultPage = false
@@ -670,7 +579,10 @@ class MainViewController: BaseViewController {
     }
     
     @IBAction func chatWithUs(_ sender: UIButton) {
-        openChatPage ()
+       // openChatPage ()
+        let detailsVC = UIStoryboard(name: Constant.Storyboards.details, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.details) as! DetailsViewController
+        
+        self.navigationController?.pushViewController(detailsVC, animated: true)
        
     }
     
@@ -775,6 +687,9 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
 }
 
+
+//MARK: SearchResultCellDelegate
+//MARK: ----------------------------
 extension MainViewController: SearchResultCellDelegate {
     
     func didPressMore() {
@@ -784,12 +699,107 @@ extension MainViewController: SearchResultCellDelegate {
     
     func didPressReserve() {
         let detailsVC = UIStoryboard(name: Constant.Storyboards.details, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.details) as! DetailsViewController
-        
+        setSearchModel()
+        detailsVC.searchModel = searchModel
+        detailsVC.isSearchEdit = true
         self.navigationController?.pushViewController(detailsVC, animated: true)
+    }
+}
+
+//MARK: SearchHeaderViewDelegate
+//MARK: ----------------------------
+extension MainViewController: SearchHeaderViewDelegate {
+    func hideEditView() {
+        if !isNoSearchResult {
+            navigationController!.navigationBar.topItem?.title = Constant.Texts.searchResult
+            animateSearchResult()
+        } else {
+            navigationController!.navigationBar.topItem?.title = ""
+            animateAvalableCategoriesResult()
+        }
+    }
+    
+    func didSelectSearch() {
+        isSearchResultPage = true
+        isPressedEdit = false
+        searchHeaderV?.layer.shadowOpacity = 1.0
+        
+        mLeftBarBtn.image = img_back
+        mRightBarBtn.image = img_chat
+        mChatWithUsBckgV.isHidden = true
+        mCarCollectionV.reloadData()
+        
+        // If will not  found result
+        // must be change by api result
+        if searchHeaderV?.carouselBackgV.categoryCarousel.currentItemIndex == 2 {
+            isNoSearchResult = true
+            navigationController!.navigationBar.topItem?.title = ""
+            animateAvalableCategoriesResult()
+        } else {
+            navigationController!.navigationBar.topItem?.title = Constant.Texts.searchResult
+            isNoSearchResult = false
+            animateSearchResult()
+        }
+    }
+    
+    func didSelectLocation(_ locationStr: String, _ btnTag: Int) {
+        if ((isPressedEdit) == true) {
+            if  btnTag == 4 {
+                checkFieldsEdited(pickupDate:UserDefaults.standard.object(forKey: key_pickUpDate) as? Date,
+                                        returnDate: UserDefaults.standard.object(forKey: key_returnDate) as? Date,
+                                        pickupTime: UserDefaults.standard.object(forKey: key_pickUpTime) as? Date,
+                                        returnTime: UserDefaults.standard.object(forKey: key_returnTime) as? Date,
+                                        pickUpLocation: locationStr,
+                                        returnLocation: UserDefaults.standard.object(forKey: key_returnLocation) as? String,
+                                        categoryIndex: UserDefaults.standard.object(forKey: key_category) as? Int)
+            } else {
+                checkFieldsEdited(pickupDate: UserDefaults.standard.object(forKey: key_pickUpDate) as? Date,
+                                        returnDate: UserDefaults.standard.object(forKey: key_returnDate) as? Date,
+                                        pickupTime: UserDefaults.standard.object(forKey: key_pickUpTime) as? Date,
+                                        returnTime: UserDefaults.standard.object(forKey: key_returnTime) as? Date,
+                                        pickUpLocation: UserDefaults.standard.object(forKey: key_pickUpLocation) as? String,
+                                        returnLocation: locationStr,
+                                        categoryIndex: UserDefaults.standard.object(forKey: key_category) as? Int)
+                
+            }
+        }
+    }
+    
+    func willOpenPicker(textFl: UITextField) {
+        self.view.addSubview(self.backgroundV)
+        textFl.inputView = self.datePicker
+        textFl.inputAccessoryView = creatToolBar()
+        responderTxtFl = textFl
+        
+        if #available(iOS 14.0, *) {
+            self.datePicker.preferredDatePickerStyle = .wheels
+        } else {
+            // Fallback on earlier versions
+        }
+        if textFl.tag > 1 { // time
+            self.datePicker.datePickerMode = .time
+            self.datePicker.minimumDate = nil
+        } else { // date
+            self.datePicker.datePickerMode = .date
+            self.datePicker.minimumDate =  Date()
+            self.datePicker.locale = Locale(identifier: "en")
+        }
+    }
+    
+    func didSelectCustomLocation(_ btn: UIButton, location: Location) {
+        self.showAlertCustomLocation(checkedBtn: btn)
     }
     
     
 }
+//MARK: CustomLocationUIViewControllerDelegate
+//MARK: ----------------------------
+extension MainViewController: CustomLocationViewControllerDelegate {
+    func getCustomLocation(_ locationPlace: String) {
+        searchHeaderV?.updateLocationFields(place: locationPlace)
+    }
+}
+
 
 //MARK: UITableViewDataSource
 //MARK: -----------------------------

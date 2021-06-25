@@ -77,10 +77,20 @@ struct Constant {
         static let rentalConditions = "Rental conditions"
         static let bkdAdvantages = "BKD Advantages"
         static let select = "Select"
+        static let hourly = "Hourly"
+        static let daily = "Daily"
+        static let weekly = "Weekly"
+        static let monthly = "Monthly"
+        static let flexible = "Flexible"
+
 
     }
 }
 
+let tariffOptionsArr =  [["2h", "3h", "4h", "5h", "6h", "10h"],
+                         ["1d", "2d", "3d", "4d", "5d", "6d"],
+                         ["1w", "2w", "3w"],
+                         ["1m"], []]
 let top_searchResult: CGFloat = 12.0
 let top_avalableCategoryTbv: CGFloat = 30.0
 let cornerRadius_equipment: CGFloat = 15.0
@@ -139,6 +149,7 @@ let color_days = UIColor(named: "tariff_days")
 let color_weeks = UIColor(named: "tariff_weekly")
 let color_monthly = UIColor(named: "tariff_montly")
 let color_flexible = UIColor(named: "tariff_flexible")
+let color_search_passive = UIColor(named: "search_passive")
 
 
 
@@ -154,6 +165,7 @@ let font_alert_title = UIFont(name: "SFProDisplay-Semibold", size: 13)
 let font_details_title = UIFont(name: "SFProDisplay-Regular", size: 13)
 let font_more_header = UIFont(name: "SFProDisplay-Semibold", size: 14)
 let font_search_title = UIFont(name: "SFProDisplay-Light", size: 18)
+let font_placeholder = UIFont(name: "SFProDisplay-Light", size: 10)
 
 // Images
 let img_bkd = UIImage(named:"bkd")?.withRenderingMode(.alwaysOriginal)

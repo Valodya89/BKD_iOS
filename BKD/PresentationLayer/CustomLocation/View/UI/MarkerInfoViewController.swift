@@ -9,6 +9,7 @@ import UIKit
 protocol MarkerInfoViewControllerDelegate: AnyObject {
     func didPressUserLocation()
     func didPressDeleteLocation()
+    func didPressContinue(place: String)
 
 }
 class MarkerInfoViewController: UIViewController, StoryboardInitializable {
@@ -52,8 +53,8 @@ class MarkerInfoViewController: UIViewController, StoryboardInitializable {
         UIView.animate(withDuration: 0.5) { [self] in
             self.mContinueLeading.constant = self.mContinueBackgV.bounds.width - self.mContinueBtn.frame.size.width
             self.view.layoutIfNeeded()
-        } completion: { _ in
-           // self.didSelectContune!()
+        } completion: { [self] _ in
+            self.delegate?.didPressContinue(place: mUserAddressLb.text ?? "")
         }
     }
   
@@ -71,9 +72,12 @@ class MarkerInfoViewController: UIViewController, StoryboardInitializable {
         mUserAddressLb.textColor = color_navigationBar
         mContinueBackgV.isUserInteractionEnabled = false
         mContinueBackgV.alpha = 0.8
-        delegate?.didPressDeleteLocation()
-
+        UIView.animate(withDuration: 0.5) { [self] in
+            self.mContinueLeading.constant = 0.0
+            self.view.layoutIfNeeded()
     }
+        delegate?.didPressDeleteLocation()
+}
     
     @IBAction func clickContinue(_ sender: UIButton) {
         clickContinue()

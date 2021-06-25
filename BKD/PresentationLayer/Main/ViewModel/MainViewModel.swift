@@ -53,9 +53,8 @@ class MainViewModel: NSObject {
         didResult(validator.checkReservationMonth(pickupDate: pickUpDate, returnDate: returnDate))
     }
     
-    func  isReservetionInWorkingHours(pickUpTime: Date?,
-                                     returnTime: Date?,
+    func  isReservetionInWorkingHours(time: Date?,
                                      didResult: @escaping (Bool) -> ()) {
-        didResult(validator.checkReservationTimes(pickupTime: pickUpTime, returntime: returnTime))
+        didResult(validator.checkReservationTime(time: time))
     }
 }

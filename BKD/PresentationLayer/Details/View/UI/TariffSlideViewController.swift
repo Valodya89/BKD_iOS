@@ -7,7 +7,17 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+enum Tariff: String, CaseIterable {
+    case hourly = "Hourly"
+    case daily = "Daily"
+    case weekly = "Weekly"
+    case monthly = "Monthly"
+    case flexible = "Flexible"
+}
+
+protocol TariffSlideViewControllerDelegate: AnyObject {
+    func didPressTariffOption(tariff: Tariff, optionIndex:Int)
+}
 
 class TariffSlideViewController: UIViewController, StoryboardInitializable {
     //MARK: Outlet
@@ -18,6 +28,8 @@ class TariffSlideViewController: UIViewController, StoryboardInitializable {
     var isOpenDetails = false
     var tariffSlideArr:[TariffSlideModel] = TariffSlideData.tariffSlideModel
     
+    let tariffSlideViewModel: TariffSlideViewModel = TariffSlideViewModel()
+    weak var delegate: TariffSlideViewControllerDelegate?
     
     
     //MARK: Life cycle
@@ -26,10 +38,10 @@ class TariffSlideViewController: UIViewController, StoryboardInitializable {
         configureCollectionView()
         
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-    
+        
     }
     
     private func configureCollectionView(){
@@ -38,21 +50,56 @@ class TariffSlideViewController: UIViewController, StoryboardInitializable {
         //delegates
         mTariffSlideCollectionV.delegate = self
         mTariffSlideCollectionV.dataSource = self
-       
+        
     }
-     
+    
+    /// will open tariff options from cell
+    private func openTariffOptions (options: [TariffSlideModel], index: Int) {
+        
+        var insertIndexPathsArr:[IndexPath] = []
+        for i in (0..<options.count) {
+            insertIndexPathsArr.append(IndexPath(item: index + i + 1, section: 0))
+            tariffSlideArr.insert(TariffSlideModel(title: options[i].title,
+                                                   option:options[i].option,
+                                                   bckgColor:options[i].bckgColor,
+                                                   titleColor: options[i].titleColor,
+                                                   value: options[i].value, isItOption: true),
+                                  at: index + i + 1)
+        }
+        
+        mTariffSlideCollectionV.insertItems(at: insertIndexPathsArr)
+    }
+    
+    /// will close options from cell
+    private func closeTariffOptions(options: [TariffSlideModel], index: Int) {
+        
+        var deleteIndexPathsArr:[IndexPath] = []
+        for i in ((index + 1)..<((index + 1) + options.count - 1)) {
+            deleteIndexPathsArr.append(IndexPath(item: i, section: 0))
+        }
+        let range = (index + 1)...((index + 1) + options.count - 1)
+        tariffSlideArr.removeSubrange(range)
+        mTariffSlideCollectionV.deleteItems(at: deleteIndexPathsArr)
+    }
+    
+    /// will selecte tariff option cell
+    private func selectTariffOption(model: TariffSlideModel) {
+        let optionIndex = tariffSlideViewModel.getCurrentOption(model: model, tariff: Tariff(rawValue: model.title)!)
+        
+        delegate?.didPressTariffOption(tariff: Tariff(rawValue: model.title)!, optionIndex: optionIndex)
+    }
 }
 
- 
+
 extension TariffSlideViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     // MARK: UICollectionViewDataSource
     //MARK: -------------------------------
-     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tariffSlideArr.count//TariffSlideData.tariffSlideModel.count
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return tariffSlideArr.count
     }
-
-     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TariffSlideCollectionViewCell.identifier, for: indexPath) as! TariffSlideCollectionViewCell
         
         let model: TariffSlideModel = tariffSlideArr[indexPath.item]
@@ -63,49 +110,32 @@ extension TariffSlideViewController: UICollectionViewDelegate, UICollectionViewD
         }
         return cell
     }
-
+    
     // MARK: UICollectionViewDelegate
     //MARK: ------------------------------------
     
-     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//       // if there is some slide open it will close
-//        if (tariffSlideArr.count > TariffSlideData.tariffSlideModel.count) && !tariffSlideArr[indexPath.item].isOpenDetails {
-//            tariffSlideArr = TariffSlideData.tariffSlideModel
-//            collectionView.reloadData()
-//        }
-//        
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let currModel = tariffSlideArr[indexPath.item]
-        let details = tariffSlideArr[indexPath.item].details!
+        guard let options =  currModel.options else {
+            //select tariff option
+            selectTariffOption(model: currModel)
+            return
+        }
         
-        if  !currModel.isOpenDetails {
-            // will open details cells
-            var insertIndexPathsArr:[IndexPath] = []
-            for i in (0..<details.count) {
-                insertIndexPathsArr.append(IndexPath(item: indexPath.item + i + 1, section: 0))
-                tariffSlideArr.insert(TariffSlideModel(title: details[i].title,
-                                                       bckgColor: details[i].bckgColor, titleColor: details[i].titleColor,
-                                                                         value: details[i].value),
-                                                        at: indexPath.item + i + 1)
-            }
-           
-            collectionView.insertItems(at: insertIndexPathsArr)
-        } else {
-            // will close details cells
-            var deleteIndexPathsArr:[IndexPath] = []
-
-            for i in ((indexPath.item + 1)..<((indexPath.item + 1) + details.count - 1)) {
-                deleteIndexPathsArr.append(IndexPath(item: i, section: 0))
-            }
-            let range = (indexPath.item + 1)...((indexPath.item + 1) + details.count - 1)
-            tariffSlideArr.removeSubrange(range)
-            collectionView.deleteItems(at: deleteIndexPathsArr)
+        if  !currModel.isOpenOptions {// open tariff options
+            openTariffOptions(options: options, index: indexPath.item)
+            
+        } else { // clode tariff options
+            closeTariffOptions(options: options, index: indexPath.item)
         }
         collectionView.scrollToItem(at: indexPath,
                                     at: [.left],
                                     animated: true)
-        tariffSlideArr[indexPath.item].isOpenDetails =  !currModel.isOpenDetails
-}
+        tariffSlideArr[indexPath.item].isOpenOptions =  !currModel.isOpenOptions
+        
+        
+    }
     
     
     //MARK: UICollectionViewDelegateFlowLayout
@@ -113,13 +143,13 @@ extension TariffSlideViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return CGSize(width: self.view.bounds.width * 0.173913,
-                       height: self.view.bounds.height)
+                      height: self.view.bounds.height)
         
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return cellSpace
     }
-
-
+    
+    
 }

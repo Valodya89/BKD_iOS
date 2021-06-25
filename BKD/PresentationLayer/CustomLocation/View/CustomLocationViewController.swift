@@ -10,6 +10,10 @@ import GoogleMaps
 import GooglePlaces
 import Mapbox
 
+protocol CustomLocationViewControllerDelegate: AnyObject {
+    func getCustomLocation(_ locationPlace: String)
+}
+
 class CustomLocationViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var mMapV: GMSMapView!
@@ -38,6 +42,7 @@ class CustomLocationViewController: UIViewController {
     
     private lazy  var searchCustomLocationCV = SearchCustomLocationUIViewController.initFromStoryboard(name: Constant.Storyboards.customLocation)
     private lazy  var markerInfoVC = MarkerInfoViewController.initFromStoryboard(name: Constant.Storyboards.customLocation)
+    weak var delegate: CustomLocationViewControllerDelegate?
     
     //MARK: - Life cycles
     //MARK ---------------------
@@ -252,6 +257,11 @@ extension CustomLocationViewController: SearchCustomLocationUIViewControllerDele
 //MARK: MarkerInfoViewControllerDelegate
 //MARK ---------------------
 extension CustomLocationViewController: MarkerInfoViewControllerDelegate {
+    func didPressContinue(place: String) {
+        self.delegate?.getCustomLocation(place)
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     func didPressUserLocation()  {
         showCurrentLocation()
     }
@@ -259,6 +269,7 @@ extension CustomLocationViewController: MarkerInfoViewControllerDelegate {
     func didPressDeleteLocation() {
         deleteMarker()
     }
+    
 }
 
 ////MARK: UITableViewDelegate

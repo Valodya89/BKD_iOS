@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -53,15 +53,15 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wd5-xk-ilp">
                                                     <rect key="frame" x="17" y="5.5" width="380" height="124"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add" translatesAutoresizingMaskIntoConstraints="NO" id="8hm-uU-QDj">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add" translatesAutoresizingMaskIntoConstraints="NO" id="8hm-uU-QDj">
                                                             <rect key="frame" x="284" y="0.0" width="96" height="124"/>
                                                         </imageView>
-                                                        <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t5V-Uw-Mlh">
+                                                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t5V-Uw-Mlh">
                                                             <rect key="frame" x="299" y="0.0" width="81" height="124"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="16"/>
                                                             <state key="normal" title="Add">
-                                                                <color key="titleColor" name="navigationBar"/>
+                                                                <color key="titleColor" name="entered_date"/>
                                                             </state>
                                                         </button>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1hE-3q-2Gg">
@@ -122,7 +122,7 @@
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
-                                                            <color key="backgroundColor" name="background"/>
+                                                            <color key="backgroundColor" name="subview_background"/>
                                                             <constraints>
                                                                 <constraint firstItem="EKL-so-LyA" firstAttribute="top" secondItem="cZd-1N-1Wp" secondAttribute="top" multiplier="2.1" id="17T-Bx-Ydc"/>
                                                                 <constraint firstItem="Iz7-d9-Um6" firstAttribute="height" secondItem="1hE-3q-2Gg" secondAttribute="height" multiplier="0.169355" id="1bQ-z9-5Rd"/>
@@ -302,7 +302,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="add" width="97.5" height="124.5"/>
+        <image name="add" width="113" height="136"/>
         <image name="back" width="12" height="21"/>
         <image name="bkd" width="76" height="23.5"/>
         <image name="minus" width="24" height="24"/>
@@ -310,6 +310,9 @@
         <image name="straps" width="117" height="102"/>
         <namedColor name="background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="entered_date">
+            <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="menu">
             <color red="0.91399997472763062" green="0.78799998760223389" blue="0.41999998688697815" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -319,6 +322,9 @@
         </namedColor>
         <namedColor name="navigation_bar">
             <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="subview_background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

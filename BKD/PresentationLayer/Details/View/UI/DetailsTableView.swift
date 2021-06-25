@@ -37,6 +37,7 @@ class DetailsTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
         cell.textLabel?.textColor = color_navigationBar
         cell.textLabel?.font = font_details_title
         cell.backgroundColor = .clear
+        cell.imageView?.setTintColor(color: color_email!)
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

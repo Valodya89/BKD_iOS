@@ -10,17 +10,17 @@ import UIKit
 
 struct TariffSlideModel {
     public var title: String
+    public var option: String?
     public var bckgColor: UIColor
     public var titleColor: UIColor
     public var value: String?
-    public var isOpenDetails: Bool = false
-    public var details: [TariffSlideModel]?
+    public var isOpenOptions: Bool = false
+    public var isItOption: Bool = false
+    public var options: [TariffSlideModel]?
 }
 
-//struct TariffSlideDetailsModel {
-//    public var title: String
-//    public var value: String
-//    public var bckgColor: UIColor
+//struct TariffSlideOptionsModel {
+//    public var tariffOptionsArr: [String]?
 //
 //
 //}

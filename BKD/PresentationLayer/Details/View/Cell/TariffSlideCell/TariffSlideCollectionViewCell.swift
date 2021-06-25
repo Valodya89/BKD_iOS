@@ -40,11 +40,8 @@ class TariffSlideCollectionViewCell: UICollectionViewCell {
     /// set info for open slide
     func setOptionsTariffSlideCellInfo(item: TariffSlideModel, index: Int) {
         mDetailsBckgV.isHidden = false
-        isUserInteractionEnabled = false
-
-        mDetailTitleLb.text = item.title
+        mDetailTitleLb.text = item.option
         mDetailValueLb.text = item.value
-
         mDetailValueLb.textColor = item.titleColor
         mDetailTitleLb.textColor = item.titleColor
         mDetailsBckgV.backgroundColor = item.bckgColor

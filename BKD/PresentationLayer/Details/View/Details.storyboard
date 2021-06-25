@@ -472,7 +472,7 @@
                                             </stackView>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EBU-7z-cw1" customClass="TariffCarouselView" customModule="BKD" customModuleProvider="target">
                                                 <rect key="frame" x="-67" y="584.5" width="382" height="230"/>
-                                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="230" id="cDe-0l-eYs"/>
                                                 </constraints>
@@ -541,7 +541,7 @@
                                                                         <rect key="frame" x="201" y="0.0" width="181" height="39"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <color key="textColor" name="email"/>
+                                                                        <color key="textColor" name="choose_date"/>
                                                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="10"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                     </textField>
@@ -772,8 +772,8 @@
                                                                     <action selector="pickupCustomLocation:" destination="lTX-qV-DSn" eventType="touchUpInside" id="xRR-Q9-SqB"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c0E-XK-1SW">
-                                                                <rect key="frame" x="227.5" y="0.0" width="134.5" height="29"/>
+                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c0E-XK-1SW">
+                                                                <rect key="frame" x="259" y="0.0" width="103" height="29"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="14"/>
                                                                 <state key="normal" title="Custom location">
                                                                     <color key="titleColor" name="entered_date"/>
@@ -782,8 +782,8 @@
                                                                     <action selector="returnCustomLocation:" destination="lTX-qV-DSn" eventType="touchUpInside" id="ZIs-wT-5Z5"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gEj-kr-2ki">
-                                                                <rect key="frame" x="191" y="0.0" width="29.5" height="29"/>
+                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gEj-kr-2ki">
+                                                                <rect key="frame" x="222.5" y="0.0" width="29.5" height="29"/>
                                                                 <state key="normal" image="uncheck_box"/>
                                                                 <connections>
                                                                     <action selector="checkBoxReturnCustomLOcation:" destination="lTX-qV-DSn" eventType="touchUpInside" id="NjD-ps-dwZ"/>
@@ -845,7 +845,7 @@
                                                     <outlet property="mReturnTimeTxtFl" destination="Gay-is-bgR" id="GdL-xC-aTf"/>
                                                 </connections>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="h0G-ic-ldI" customClass="SearchWithValueView" customModule="BKD" customModuleProvider="target">
+                                            <stackView hidden="YES" opaque="NO" alpha="0.0" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="h0G-ic-ldI" customClass="SearchWithValueView" customModule="BKD" customModuleProvider="target">
                                                 <rect key="frame" x="16" y="843" width="382" height="50"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QMC-5Z-Aua">
@@ -981,6 +981,7 @@
                                                     <outlet property="mPickupDayBtn" destination="ZCs-1r-ZzW" id="EhQ-yl-roo"/>
                                                     <outlet property="mPickupLocationLb" destination="auX-W1-Mxg" id="oY5-Gz-wbU"/>
                                                     <outlet property="mReturnDateBtn" destination="kU8-Zf-KHa" id="Quq-Am-zPH"/>
+                                                    <outlet property="mReturnDayBtn" destination="8Md-vh-xvP" id="QNd-bH-4BO"/>
                                                     <outlet property="mReturnLocationLb" destination="2zZ-hF-N8g" id="E1h-cl-o19"/>
                                                 </connections>
                                             </stackView>
@@ -1040,7 +1041,7 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" name="car_param"/>
+                                        <color key="backgroundColor" name="background"/>
                                         <constraints>
                                             <constraint firstItem="EBU-7z-cw1" firstAttribute="top" secondItem="W6S-sP-DFk" secondAttribute="bottom" multiplier="1.055" id="26G-nN-LlJ"/>
                                             <constraint firstItem="xro-9k-UXd" firstAttribute="top" secondItem="Rkc-pZ-qaf" secondAttribute="bottom" id="2fV-93-xoK"/>
@@ -1058,6 +1059,7 @@
                                             <constraint firstItem="W6S-sP-DFk" firstAttribute="width" secondItem="yXl-YX-ZL5" secondAttribute="width" multiplier="0.845411" id="QRD-BD-4Ew"/>
                                             <constraint firstItem="r84-Se-m90" firstAttribute="top" secondItem="Okr-s1-AZr" secondAttribute="bottom" multiplier="1.03" id="QSr-YC-y48"/>
                                             <constraint firstAttribute="trailing" secondItem="lTX-qV-DSn" secondAttribute="trailing" id="QWR-39-hLZ"/>
+                                            <constraint firstItem="h0G-ic-ldI" firstAttribute="leading" secondItem="yXl-YX-ZL5" secondAttribute="leading" constant="16" id="RHx-Sp-5TE"/>
                                             <constraint firstItem="r84-Se-m90" firstAttribute="width" secondItem="yXl-YX-ZL5" secondAttribute="width" multiplier="0.923913" id="SBg-fn-6zR"/>
                                             <constraint firstItem="xro-9k-UXd" firstAttribute="trailing" secondItem="Rkc-pZ-qaf" secondAttribute="trailing" id="TK6-EJ-t6z"/>
                                             <constraint firstItem="W6S-sP-DFk" firstAttribute="centerX" secondItem="yXl-YX-ZL5" secondAttribute="centerX" id="UBw-2t-upo"/>
@@ -1072,13 +1074,14 @@
                                             <constraint firstItem="h0G-ic-ldI" firstAttribute="centerX" secondItem="yXl-YX-ZL5" secondAttribute="centerX" id="huO-N8-kU6"/>
                                             <constraint firstItem="3ev-Ww-Owb" firstAttribute="top" secondItem="yXl-YX-ZL5" secondAttribute="top" constant="4" id="k0h-8z-Kf2"/>
                                             <constraint firstItem="lTX-qV-DSn" firstAttribute="leading" secondItem="yXl-YX-ZL5" secondAttribute="leading" id="kwv-ta-9NW"/>
+                                            <constraint firstAttribute="trailing" secondItem="h0G-ic-ldI" secondAttribute="trailing" constant="16" id="qo0-9E-RWT"/>
                                             <constraint firstItem="Okr-s1-AZr" firstAttribute="top" secondItem="3ev-Ww-Owb" secondAttribute="bottom" multiplier="0.89" id="qvy-0c-6Gp"/>
                                             <constraint firstItem="wnn-gI-Uj7" firstAttribute="centerX" secondItem="qgI-kZ-ytz" secondAttribute="centerX" id="sah-kM-rPv"/>
                                             <constraint firstItem="EBU-7z-cw1" firstAttribute="centerX" secondItem="yXl-YX-ZL5" secondAttribute="centerX" multiplier="0.6" id="xiZ-Nh-ada"/>
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.91426187749999999" green="0.78907972569999996" blue="0.41917234660000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="yXl-YX-ZL5" firstAttribute="leading" secondItem="2dE-sj-eQk" secondAttribute="leading" id="KYC-tc-lQc"/>
                                     <constraint firstItem="yXl-YX-ZL5" firstAttribute="top" secondItem="2dE-sj-eQk" secondAttribute="top" id="NoD-Zt-yg1"/>
@@ -1120,7 +1123,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="E9x-7g-Xbn"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="background"/>
                         <constraints>
                             <constraint firstItem="E9x-7g-Xbn" firstAttribute="trailing" secondItem="BfL-pG-VHs" secondAttribute="trailing" multiplier="1.45" id="2he-hv-1tH"/>
                             <constraint firstItem="3ev-Ww-Owb" firstAttribute="height" secondItem="XlO-an-gdp" secondAttribute="height" multiplier="0.058" id="5Nb-s9-2Uv"/>
@@ -1260,9 +1263,6 @@
         <namedColor name="background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="car_param">
-            <color red="0.35686274509803922" green="0.41960784313725491" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="choose_date">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -1281,14 +1281,8 @@
         <namedColor name="navigation_bar">
             <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

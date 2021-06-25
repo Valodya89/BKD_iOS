@@ -7,6 +7,14 @@
 
 import UIKit
 
+protocol SearchHeaderViewDelegate: AnyObject {
+    func willOpenPicker (textFl: UITextField)
+    func didSelectLocation (_ locationStr: String, _ btnTag: Int)
+    func didSelectCustomLocation(_ btn:UIButton, location: Location)
+    func didSelectSearch()
+    func hideEditView()
+}
+
 class SearchHeaderView: UIView, UITextFieldDelegate {
 
     static let identifier = "SearchHeaderView"
@@ -59,15 +67,10 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     var returnDropisClose: Bool = true
     var currLocationBtn = UIButton()
     var currLocationDropImgV = UIImageView()
-    
-    let searchHeaderViewModel: SearchHeaderViewModel = SearchHeaderViewModel()
-    
+    var location:Location?
 
-    var didSelectPickUp: ((UITextField) -> Void)?
-    var didSelectSearch: (() -> Void)?
-    var didSelectLocation: ((String, Int) -> Void)?
-    var didSelectCustomLocation: ((UIButton, Bool) -> Void)?
-    var hideEditView: (() -> Void)?
+    let searchHeaderViewModel: SearchHeaderViewModel = SearchHeaderViewModel()
+    weak var delegate: SearchHeaderViewDelegate?
 
     
     override init(frame: CGRect) {
@@ -108,7 +111,6 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         mPickUpLocationBtn.tintColor = UIColor(named: "choose_date")
         mReturnLocationBtn.tintColor = UIColor(named: "choose_date")
 
-        
         mSearchBckgV.layer.cornerRadius = 8
         mSearchBtn.layer.cornerRadius = 8
         // border
@@ -116,6 +118,11 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         mLocationDropDownView.layer.borderWidth = 0.3
         mLocationDropDownView.layer.borderColor = UIColor(named: "gradient_end")?.cgColor
         
+        // set padding
+        mPickUpLocationBtn.titleEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0,
+                                                          bottom: 0.0, right: 25.0)
+        mReturnLocationBtn.titleEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0,
+                                                          bottom: 0.0,right: 25.0)
         didSelectLocationFromList()
         didHideLocationList()
     }
@@ -138,6 +145,45 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         rightTextField.addBorder(side: .right, color: color, width: 1.0)
         rightTextField.addBorder(side: .top, color: color, width: 1.0)
     }
+    /// Set pick up location info
+    func setPickUpLocationInfo(searchModel: SearchModel) {
+        mPickUpLocationBtn.setTitleColor(color_entered_date!, for: .normal)
+        mPickUpLocationBtn.titleLabel?.font = font_search_title
+        mPickUpLocationBtn.setTitle(searchModel.pickUpLocation, for: .normal)
+        if searchModel.isPickUpCustomLocation {
+            mCheckBoxPickUpCustomLocBtn.setImage(#imageLiteral(resourceName: "check"), for: .normal)
+        }
+    }
+    
+    /// Set return location info
+    func setReturnLocationInfo(searchModel: SearchModel) {
+        mReturnLocationBtn.setTitleColor(color_entered_date!, for: .normal)
+        mReturnLocationBtn.titleLabel?.font = font_search_title
+        mReturnLocationBtn.setTitle(searchModel.returnLocation, for: .normal)
+        if searchModel.isRetuCustomLocation {
+            mCheckBoxReturnCustomLocBtn.setImage(#imageLiteral(resourceName: "check"), for: .normal)
+        }
+    }
+    ///update Location Fields
+    func updateLocationFields(place: String) {
+       var searchModel = SearchModel()
+        switch location {
+        case .pickUpLocation: break
+        case .returnLocation: break
+        case .pickUpCustomLocation:
+            searchModel.pickUpLocation = place
+            searchModel.isPickUpCustomLocation = true
+            setPickUpLocationInfo(searchModel: searchModel)
+            break
+        case .returnCustomLocation:
+            searchModel.returnLocation = place
+            searchModel.isRetuCustomLocation = true
+            setReturnLocationInfo(searchModel: searchModel)
+            break
+        default:
+            break
+        }
+    }
     
     func showLocationList() {
         UIView.animate(withDuration: 0.3, animations: { [self] in
@@ -157,13 +203,25 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     
     private func didSelectLocationFromList () {
         mLocationDropDownView.didSelectLocation = { [weak self] txt in
-            self?.didSelectLocation?(txt, (self?.currLocationBtn.tag)!)
+            self?.delegate?.didSelectLocation(txt, (self?.currLocationBtn.tag)!)
             self?.currLocationBtn.setTitle(txt, for: .normal)
             self?.currLocationBtn.titleLabel!.font = font_selected_filter
             self?.currLocationBtn.setTitleColor(color_entered_date, for: .normal)
             self!.currLocationDropImgV.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
-            self?.currLocationBtn.tag == 4 ?  UserDefaults.standard.set(self?.currLocationBtn.title(for: .normal), forKey: key_pickUpLocation) :  UserDefaults.standard.set(self?.currLocationBtn.title(for: .normal), forKey: key_returnLocation)
+            
+            if self?.currLocationBtn.tag == 4 { //pick up location
+                self?.location = .pickUpLocation
+                UserDefaults.standard.set(self?.currLocationBtn.title(for: .normal), forKey: key_pickUpLocation)
+                self?.mCheckBoxPickUpCustomLocBtn.setImage(#imageLiteral(resourceName: "uncheck_box"), for: .normal)
+
+            } else { // return location
+                self?.location = .returnLocation
+                UserDefaults.standard.set(self?.currLocationBtn.title(for: .normal), forKey: key_returnLocation)
+                self?.mCheckBoxReturnCustomLocBtn.setImage(#imageLiteral(resourceName: "uncheck_box"), for: .normal)
+            }
+
             if self?.mErrorMessageLb.isHidden == false{
+                
               let _ = self?.checkFieldsFilled()
             }
             self?.pickUPDropisClose = true
@@ -185,8 +243,8 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
                 self.mSearchLeading.constant = self.mSearchBckgV.bounds.width - self.mSearchBtn.frame.size.width
                 self.mSearchBckgV.layoutIfNeeded()
 
-            } completion: { _ in
-                self.didSelectSearch!()
+            } completion: { [self] _ in
+                self.delegate?.didSelectSearch()
 
             }
 
@@ -281,26 +339,32 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
 
     @IBAction func checkBoxPickUpCustomLocation(_ sender: UIButton) {
         if sender.image(for: .normal) ==  img_check_box { sender.setImage(img_uncheck_box, for: .normal)
+            mPickUpLocationBtn.setTitle(Constant.Texts.pickUpLocation, for: .normal)
+            mPickUpLocationBtn.setTitleColor(color_choose_date!, for: .normal)
+            mPickUpLocationBtn.titleLabel?.font = font_placeholder
         } else {
-            sender.setImage(img_check_box, for: .normal)
-            let willShowLocationAlert: Bool = (mCheckBoxReturnCustomLocBtn.image(for: .normal) ==  img_check_box) ? false : true
-                
-            didSelectCustomLocation?(mCheckBoxPickUpCustomLocBtn, willShowLocationAlert)
+           // sender.setImage(img_check_box, for: .normal)
+            location = .pickUpCustomLocation
+            delegate?.didSelectCustomLocation(mCheckBoxPickUpCustomLocBtn,
+                                              location: location!)
 
         }
-       
     }
     @IBAction func pickUpCustomLocation(_ sender: UIButton) {
        
         
     }
     @IBAction func checkBoxReturnCustomLocation(_ sender: UIButton) {
-        if sender.image(for: .normal) ==  img_check_box { sender.setImage(img_uncheck_box, for: .normal)
+        if sender.image(for: .normal) ==  img_check_box {
+            mReturnLocationBtn.setTitle(Constant.Texts.returnLocation, for: .normal)
+            mReturnLocationBtn.setTitleColor(color_choose_date!, for: .normal)
+            mReturnLocationBtn.titleLabel?.font = font_placeholder
+            sender.setImage(img_uncheck_box, for: .normal)
         } else {
-            sender.setImage(img_check_box, for: .normal)
-            let willShowLocationAlert: Bool = (mCheckBoxPickUpCustomLocBtn.image(for: .normal) ==  img_check_box) ? false : true
-                
-            didSelectCustomLocation?(mCheckBoxReturnCustomLocBtn, willShowLocationAlert)
+           // sender.setImage(img_check_box, for: .normal)
+            location = .returnCustomLocation
+            delegate?.didSelectCustomLocation(mCheckBoxReturnCustomLocBtn,
+                                              location: location!)
         }
     }
     
@@ -319,11 +383,10 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     }
     
     @IBAction func arrow(_ sender: UIButton) {
-        hideEditView?()
+        delegate?.hideEditView()
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        didSelectPickUp?(textField)
-        
+        delegate?.willOpenPicker(textFl: textField)
     }
 
 }

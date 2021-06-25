@@ -10,11 +10,13 @@ import iCarousel
 
 protocol TariffCarouselViewDelegate: AnyObject {
     func didPressMore()
-    func showSearchView(isSelect: Bool)
+    func didPressConfirm(isSelect: Bool, tariff: Tariff, optionIndex: Int)
+    func willChangeTariffOption(optionIndex: Int)
 }
 class TariffCarouselView: UIView,  iCarouselDataSource, iCarouselDelegate {
     var didChangeCategory: ((Int) -> Void)?
 
+    var selectedSegmentIndex: Int?
     var tariffCarouselCellV: TariffCarouselCell?
     weak var delegate: TariffCarouselViewDelegate?
 
@@ -33,9 +35,14 @@ class TariffCarouselView: UIView,  iCarouselDataSource, iCarouselDelegate {
         tariffCarousel.delegate = self
         tariffCarousel.dataSource = self
         tariffCarousel.frame = self.bounds
-        tariffCarousel.currentItemIndex = 0
+        setUpView()
 
        }
+    func setUpView() {
+        tariffCarousel.currentItemIndex = 0
+
+    }
+    
     func carouselCellView() -> TariffCarouselCell {
        let carouselCell = TariffCarouselCell()
        let carouselCellVHeight = 230//self.frame.height *  0.284653
@@ -58,6 +65,7 @@ class TariffCarouselView: UIView,  iCarouselDataSource, iCarouselDelegate {
         if index != carousel.currentItemIndex {
             view.setUnselectedCellsInfo(item: carouselModel, index: index)
         } else {
+            view.selectedSegmentIndex = selectedSegmentIndex ?? 0
             view.setSelectedCellInfo(item: carouselModel, index: index)
         }
         return view
@@ -85,8 +93,14 @@ class TariffCarouselView: UIView,  iCarouselDataSource, iCarouselDelegate {
 //MARK: TariffCarouselCellDelegate
 //MARK: ----------------------------
 extension TariffCarouselView: TariffCarouselCellDelegate {
-    func showSearchView(isSelect: Bool) {
-        delegate?.showSearchView(isSelect: isSelect)
+    func willChangeOption(optionIndex: Int) {
+        delegate?.willChangeTariffOption(optionIndex: optionIndex)
+    }
+    
+    func showSearchView(isSelect: Bool, optionIndex: Int) {
+        delegate?.didPressConfirm(isSelect: isSelect,
+                                  tariff: Tariff.allCases[tariffCarousel.currentItemIndex],
+                                  optionIndex: optionIndex)
 
     }
     

@@ -98,10 +98,11 @@ class Validator: NSObject {
         return Date().getComponentsMonth(fromDate: pickupDate, toDate: returnDate)
     }
     
+
     /// if the booking time during working hours
-    func checkReservationTimes(pickupTime: Date?, returntime: Date?) -> Bool {
+    func checkReservationTime(time: Date?) -> Bool {
         
-        return Date().dateIsInsideRange(fromTime: pickupTime, toTime: returntime)
+        return Date().dateIsInRange(time: time)
     }
     
     //MARK: CUSTOM LOCATION PAGE  CHECKING
