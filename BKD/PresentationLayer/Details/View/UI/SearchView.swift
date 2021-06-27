@@ -18,6 +18,7 @@ protocol SearchViewDelegate: AnyObject {
     func willOpenPicker (textFl: UITextField)
     func didSelectLocation (_ text:String, _ tag:Int)
     func didSelectCustomLocation(_ btn:UIButton, location: Location)
+    func didDeselectCustomLocation(tag: Int)
 }
 
 class SearchView: UIView, UITextFieldDelegate {
@@ -141,9 +142,9 @@ class SearchView: UIView, UITextFieldDelegate {
     }
     
     /// Set return time info
-    func setReturnTimeInfo(searchModel: SearchModel) {
+    func setReturnTimeInfo(searchModel: SearchModel, tariff: Tariff) {
         mReturnTimeTxtFl.font =  UIFont.init(name: (mReturnTimeTxtFl.font?.fontName)!, size: 18.0)
-        mReturnTimeTxtFl.textColor = color_entered_date
+        mReturnTimeTxtFl.textColor = (tariff == .flexible) ? color_entered_date : color_search_passive
        mReturnTimeTxtFl.text = searchModel.returnTime!.getHour()
     }
     
@@ -256,18 +257,18 @@ class SearchView: UIView, UITextFieldDelegate {
     }
     
     ///Update search fields
-    func updateSearchFields(searchModel:SearchModel){
+    func updateSearchFields(searchModel:SearchModel, tariff: Tariff){
         setPickUpDateInfo(searchModel: searchModel)
         setReturnDateInfo(searchModel: searchModel)
         setPickUpTimeInfo(searchModel: searchModel)
-        setReturnTimeInfo(searchModel: searchModel)
+        setReturnTimeInfo(searchModel: searchModel, tariff: tariff)
         setPickUpLocationInfo(searchModel: searchModel)
         setReturnLocationInfo(searchModel: searchModel)
     }
     
     /// will update time fields depend on tariff option
-    func updateSearchTimes(searchModel:SearchModel) {
-            setReturnTimeInfo(searchModel: searchModel)
+    func updateSearchTimes(searchModel:SearchModel, tariff:Tariff) {
+        setReturnTimeInfo(searchModel: searchModel, tariff: tariff)
             
             if let _ = searchModel.returnDate {
                 showDateInfoViews(dayBtn: mDayReturnDateBtn,
@@ -293,7 +294,7 @@ class SearchView: UIView, UITextFieldDelegate {
                                   searchModel:SearchModel){
         
         if tariff == .hourly &&  searchModel.pickUpTime != nil {
-            updateSearchTimes(searchModel: searchModel)
+            updateSearchTimes(searchModel: searchModel, tariff:tariff)
         } else if searchModel.pickUpDate != nil {
             updateSearchDate(searchModel: searchModel)
         }
@@ -383,11 +384,13 @@ class SearchView: UIView, UITextFieldDelegate {
     
     @IBAction func checkBoxPickupCustomLocation(_ sender: UIButton) {
         if sender.image(for: .normal) ==  img_check_box { sender.setImage(img_uncheck_box, for: .normal)
+  
             mPickUpLocationBtn.setTitle(Constant.Texts.pickUpLocation, for: .normal)
             mPickUpLocationBtn.setTitleColor(color_choose_date!, for: .normal)
             mPickUpLocationBtn.titleLabel?.font = font_placeholder
+            
+            delegate?.didDeselectCustomLocation(tag: sender.tag)
         } else {
-           // sender.setImage(img_check_box, for: .normal)
             location = .pickUpCustomLocation
             delegate?.didSelectCustomLocation(mCheckBoxPickUpCustomLocBtn,
                                               location: location!)
@@ -397,10 +400,14 @@ class SearchView: UIView, UITextFieldDelegate {
     
     @IBAction func checkBoxReturnCustomLOcation(_ sender: UIButton) {
         if sender.image(for: .normal) ==  img_check_box {
+
             mReturnLocationBtn.setTitle(Constant.Texts.returnLocation, for: .normal)
             mReturnLocationBtn.setTitleColor(color_choose_date!, for: .normal)
             mReturnLocationBtn.titleLabel?.font = font_placeholder
             sender.setImage(img_uncheck_box, for: .normal)
+            
+            delegate?.didDeselectCustomLocation(tag: sender.tag)
+
         } else {
            // sender.setImage(img_check_box, for: .normal)
             location = .returnCustomLocation

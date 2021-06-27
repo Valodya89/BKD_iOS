@@ -16,8 +16,10 @@ enum Search {
 
 class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
-    
     //MARK: Outlet
+    
+    @IBOutlet weak var mCarNameLb: UILabel!
+    @IBOutlet weak var mCarDetailLb: UILabel!
     @IBOutlet weak var carPhotosView: CarPhotosView!
     @IBOutlet weak var mCarInfoV: CarInfoView!
     @IBOutlet weak var mDetailsAndTailLiftV: DetailsAndTailLiftView!
@@ -30,9 +32,11 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var mTailLiftTbV: TailLiftTableView!
     @IBOutlet weak var mTailLiftTableBckgV: UIView!
     
+    @IBOutlet weak var mTailLiftBckgV: UIView!
     @IBOutlet weak var mDetailsTbVHeight: NSLayoutConstraint!
     @IBOutlet weak var mTailLiftTbVHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var mTailLiftBottom: NSLayoutConstraint!
     @IBOutlet weak var mAccessoriesBtn: UIButton!
     @IBOutlet weak var mScrollV: UIScrollView!
     @IBOutlet weak var mAdditionalDriverBtn: UIButton!
@@ -41,21 +45,28 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var mSearchV: SearchView!
     @IBOutlet weak var mReserveBckgV: UIView!
     @IBOutlet weak var mReserveBtn: UIButton!
+    @IBOutlet weak var mReserveLeading: NSLayoutConstraint!
+    
     
     //MARK: Varables
     private lazy  var tariffSlideVC = TariffSlideViewController.initFromStoryboard(name: Constant.Storyboards.details)
+    
     let detailsViewModel:DetailsViewModel = DetailsViewModel()
     var searchModel:SearchModel = SearchModel()
+    var vehicleModel:VehicleModel?
+    
     var isSearchEdit = false
     var currentTariff: Tariff = .hourly
     var search: Search = .date
     var currentTariffOptionIndex: Int = 0
     
-    let datePicker = UIDatePicker()
+    var datePicker = UIDatePicker()
     let backgroundV =  UIView()
     var responderTxtFl = UITextField()
     
     private let scrollPadding: CGFloat = 60
+    private let tableAnimationDuration = 0.5
+
     private  var tariffSlideY: CGFloat = 0
     private var lastContentOffset: CGFloat = 0
     private var previousContentPosition: CGPoint?
@@ -73,6 +84,14 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         setScrollVoiewHeight()
         setTableViewsHeight()
         setTariffSlideViewFrame()
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        mReserveLeading.constant = 0.0
+        mReserveBckgV.roundCorners(corners: [.topRight], radius: 20)
+
     }
     
     func setupView() {
@@ -86,18 +105,12 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             currentTariff = .flexible
         }
         configureViews()
+        setDetailDatas()
         configureTransparentView()
         configureDelegates()
         addTariffSliedView()
-        showLocation()
+        goToLocationController()
         
-    }
-    
-    
-    private func configureTransparentView()  {
-        backgroundV.frame = self.view.bounds
-        backgroundV.backgroundColor = .black
-        backgroundV.alpha = 0.6
     }
     
     /// set height of scroll view
@@ -106,7 +119,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             // will show only tariff cards
             scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height
         }
-        if self.isSearchEdit && self.mSearchV.isHidden  {// will show tariff cards and search edit view
+        if isSearchEdit && self.mSearchV.isHidden  {// will show tariff cards and search edit view
             scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height + mSearchWithValueStackV.bounds.height
         } else if !self.mSearchV.isHidden { // will show tariff cards and search view
             scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height + mSearchV.bounds.height
@@ -151,6 +164,31 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    ///Set full Detail datas
+    func setDetailDatas()  {
+
+        mCarNameLb.text = vehicleModel?.vehicleName
+        mCarDetailLb.text = vehicleModel?.vehicleDesctiption
+        carPhotosView.mTowBarBckgV.isHidden = !vehicleModel!.ifHasTowBar
+        mCarInfoV.mCardLb.text = vehicleModel?.drivingLicense
+        mCarInfoV.mKgLb.text = vehicleModel?.vehicleWeight
+        mCarInfoV.mMeterCubeLb.text = vehicleModel?.vehicleCube
+        mCarInfoV.mSizeLb.text = vehicleModel?.vehicleSize
+        mAccessoriesBtn.alpha = vehicleModel!.ifHasAccessories ? 1.0 : 0.67
+        mAdditionalDriverBtn.alpha = vehicleModel!.ifHasAditionalDriver ? 1.0 : 0.67
+//        mDetailsAndTailLiftV.mTailLiftBckgV.isHidden = !vehicleModel!.ifTailLift
+//        mTailLiftBottom.constant = vehicleModel!.ifTailLift ? 0.0 : -mDetailsAndTailLiftV.mTailLiftBtn.bounds.height
+//        mDetailsAndTailLiftV.layoutIfNeeded()
+                
+    }
+    
+    private func configureTransparentView()  {
+        backgroundV.frame = self.view.bounds
+        backgroundV.backgroundColor = .black
+        backgroundV.alpha = 0.6
+    }
+        
+   
     ///configure Views
     private func configureViews () {
         mDetailsTbV.setShadow(color: color_shadow!)
@@ -159,10 +197,19 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         mTailLiftTableBckgV.layer.cornerRadius = 3
         mAccessoriesBtn.layer.cornerRadius = 8
         mAdditionalDriverBtn.layer.cornerRadius = 8
-        mReserveBckgV.setGradientWithCornerRadius(cornerRadius: 0.0, startColor:color_Offline_bckg!, endColor:color_Offline_bckg!.withAlphaComponent(0.85) )
-        mReserveBckgV.roundCorners(corners: [.topRight], radius: 20)
-        
+        configureReserveView(isActive: isSearchEdit)
     }
+    
+    ///configure reserve view
+    private func configureReserveView(isActive: Bool) {
+        mReserveBckgV.setGradientWithCornerRadius(cornerRadius: 0.0, startColor:isActive ? color_reserve_start! : color_reserve_inactive_start!,
+                                                  endColor:isActive ? color_reserve_end!: color_reserve_inactive_end! )
+        mReserveBckgV.roundCorners(corners: [.topRight], radius: 20)
+        mReserveBckgV.isUserInteractionEnabled = isActive
+    }
+    
+    
+    
     ///configure Delegates
     func configureDelegates() {
         mDetailsAndTailLiftV.delegate = self
@@ -171,7 +218,6 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         mScrollV.delegate = self
         mSearchWithValueStackV.delegate = self
         tariffSlideVC.delegate = self
-        
     }
     
     /// Add child view
@@ -209,58 +255,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         mScrollV.setContentOffset(previousContentPosition ?? CGPoint.zero, animated: true)
     }
     
-    
-    ///will show or hide SearchEdit view with animation
-    func animateSearchEdit(isShow: Bool) {
-        let alphaValue = isShow ? 1.0 : 0.0
-        if isShow {
-            self.mSearchWithValueStackV.isHidden = !isShow
-        }
-        UIView.animate(withDuration: 0.5) { [self] in
-            self.mSearchWithValueStackV.alpha = CGFloat(alphaValue)
-        } completion: {[self] _ in
-            if !isShow {
-                self.mSearchWithValueStackV.isHidden = !isShow
-            }
-        }
-    }
-    
-    /// will be hidden search view
-    private func hideSearchView() {
-        UIView.animate(withDuration: 1) { [self] in
-            self.mSearchV.alpha = 0.0
-        } completion: { [self]  _ in
-            self.mSearchV.isHidden = true
-        }
-    }
-    
-    ///will show tariff cards
-    private func showTariffCards () {
-        mTariffCarouselV.isHidden = false
-        UIView.animate(withDuration: 1.0) { [self] in
-            self.mTariffCarouselV.alpha = 1
-            self.tariffSlideVC.view.frame.origin.y += 500
-            self.tariffSlideVC.view.layoutIfNeeded()
-        } completion: { [self] _ in
-            if isSearchEdit {
-                self.animateSearchEdit(isShow: true)
-            }
-        }
-    }
    
-    /// will hide tariff cards
-    private func hideTariffCards() {
-        UIView.animate(withDuration: 1.0) { [self] in
-            self.tariffSlideVC.view.frame.origin.y -= 500
-            mTariffCarouselV.alpha = 0.0
-            mSearchV.alpha = 0.0
-            self.tariffSlideVC.view.layoutIfNeeded()
-        } completion: { [self]_ in
-            self.mTariffCarouselV.isHidden = true
-            mSearchV.isHidden = true
-            scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height
-        }
-    }
     ///Will put new values from pickerDate
     func showSelectedDate(dayBtn : UIButton?, monthBtn: UIButton?) {
         if responderTxtFl.tag > 1 { //Time
@@ -275,6 +270,8 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             monthBtn?.setTitle(datePicker.date.getMonthAndWeek(lng: "en"), for: .normal)
             updateSearchDates()
         }
+        isActiveReserve()
+
     }
     
     
@@ -295,7 +292,6 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     /// will update time fields depend on tariff option
     func updateSearchTimes() {
         if currentTariff != .flexible {
-            
             search = .time
             searchModel.pickUpTime = datePicker.date
             mSearchV.mReturnTimeTxtFl.font =  UIFont.init(name: (responderTxtFl.font?.fontName)!, size: 18.0)
@@ -305,25 +301,113 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
                                                                     currentTariff,
                                                                    search: search,
                                                                    optionIndex: currentTariffOptionIndex, currSearchModel: searchModel)
-            mSearchV.updateSearchTimes(searchModel: newSearchModel)
+            mSearchV.updateSearchTimes(searchModel: newSearchModel,
+                                       tariff: currentTariff)
             searchModel = newSearchModel
         }
     }
     
-    ///will be show the selected location to map from the list of tables
-    func showLocation() {
+    ///will open  location controller
+    func goToLocationController() {
         mSearchV!.mLocationDropDownView.didSelectSeeMap = { [weak self]  in
             let seeMapContr = UIStoryboard(name: Constant.Storyboards.seeMap, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.seeMap) as! SeeMapViewController
             self?.navigationController?.pushViewController(seeMapContr, animated: true)
         }
     }
-    ///will be show the custom location map controller
-    func showCustomLocationMap() {
+    
+    ///will open custom location map controller
+    func goToCustomLocationMapController () {
         let customLocationContr = UIStoryboard(name: Constant.Storyboards.customLocation, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.customLocation) as! CustomLocationViewController
         customLocationContr.delegate = self
         self.navigationController?.pushViewController(customLocationContr, animated: true)
     }
     
+    ///will open  custom location map controller
+    func goToReserveController() {
+        let reserve = UIStoryboard(name: Constant.Storyboards.reserve, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.reserve) as! ReserveViewController
+        self.navigationController?.pushViewController(reserve, animated: true)
+    }
+    
+    
+    private func isActiveReserve() {
+        detailsViewModel.isReserveActive(searchModel: searchModel) { [self] (isActive) in
+            //remove CAGradientLayer
+            self.mReserveBckgV.layer.sublayers?.filter{ $0 is CAGradientLayer }.forEach{ $0.removeFromSuperlayer() }
+            self.mReserveBckgV.layer.sublayers?.filter{ $0 is CAGradientLayer }.forEach{ $0.removeFromSuperlayer() }
+            configureReserveView(isActive: isActive)
+        }
+    }
+    
+    ///MARK: ANTIMATION METHODS
+    ///
+    ///Will animate reserve
+    func animationReserve() {
+        self.mReserveLeading.constant = self.view.bounds.width - self.mReserveBckgV.bounds.width
+        self.view.setNeedsLayout()
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
+        } completion: { _ in
+            self.mReserveBckgV.roundCorners(corners: [.topLeft], radius: 20)
+        }
+    }
+    
+    ///will show or hide SearchEdit view with animation
+    func animateSearchEdit(isShow: Bool) {
+        let alphaValue = isShow ? 1.0 : 0.0
+        if isShow {
+            self.mSearchWithValueStackV.isHidden = !isShow
+        }
+        UIView.animate(withDuration: 0.5) { [self] in
+            self.mSearchWithValueStackV.alpha = CGFloat(alphaValue)
+        } completion: {[self] _ in
+            if !isShow {
+                self.mSearchWithValueStackV.isHidden = !isShow
+            }
+        }
+    }
+    
+    /// will be hidden search view
+    private func hideSearchView() {
+        UIView.animate(withDuration: 0.7) { [self] in
+            self.mSearchV.alpha = 0.0
+        } completion: { [self]  _ in
+            self.mSearchV.isHidden = true
+        }
+    }
+    
+    ///will show tariff cards
+    private func showTariffCards () {
+       mTariffCarouselV.tariffCarousel.reloadData()
+        self.tariffSlideVC.tariffSlideArr = TariffSlideData.tariffSlideModel
+        self.tariffSlideVC.mTariffSlideCollectionV.reloadData()
+        mTariffCarouselV.isHidden = false
+        UIView.animate(withDuration: 0.7) { [self] in
+            self.mTariffCarouselV.alpha = 1
+            self.tariffSlideVC.view.frame.origin.y += 500
+            self.tariffSlideVC.view.layoutIfNeeded()
+        } completion: { [self] _ in
+            if isSearchEdit && currentTariff == .flexible {
+                self.animateSearchEdit(isShow: true)
+            }
+        }
+    }
+   
+    /// will hide tariff cards
+    private func hideTariffCards() {
+        UIView.animate(withDuration: 0.7) { [self] in
+            self.tariffSlideVC.view.frame.origin.y -= 500
+            mTariffCarouselV.alpha = 0.0
+            mSearchV.alpha = 0.0
+            self.tariffSlideVC.view.layoutIfNeeded()
+        } completion: { [self]_ in
+            self.mTariffCarouselV.isHidden = true
+            mSearchV.isHidden = true
+            scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height
+        }
+    }
+    
+    //MARK: ALERT
+    //MARK: -------------------
     func showAlertCustomLocation(checkedBtn: UIButton) {
         BKDAlert().showAlert(on: self,
                              title:Constant.Texts.titleCustomLocation,
@@ -333,7 +417,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
                              okTitle: Constant.Texts.agree,cancelAction: {
                                 checkedBtn.setImage(img_uncheck_box, for: .normal)
                              }, okAction: { [self] in
-                                self.showCustomLocationMap()
+                                self.goToCustomLocationMapController()
                              })
     }
     
@@ -349,6 +433,65 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
                                 showSelectedDate(dayBtn: nil, monthBtn: nil)
 
                              })
+    }
+    func showAlertMoreThanMonth(optionIndex: Int) {
+        BKDAlert().showAlert(on: self,
+                             title: nil,
+                             message: Constant.Texts.messageMoreThanMonth,
+                             messageSecond: nil,
+                             cancelTitle: Constant.Texts.cancel,
+                             okTitle: Constant.Texts.agree,
+                             cancelAction: { [self] in
+                                mTariffCarouselV.tariffCarousel.reloadData()
+
+                             }, okAction: { [self] in
+                                if isSearchEdit {
+                                    isSearchEdit = false
+                                }
+                                self.confirmPressed(optionIndex: optionIndex)
+                             })
+        
+    }
+    func showAlertChangeTariff(optionIndex: Int, option: String)  {
+        BKDAlert().showAlert(on: self,
+                             title: Constant.Texts.titleChangeTariff,
+                             message: Constant.Texts.messageChangeTariff + option + " ? " + Constant.Texts.messageChangeTariffSeconst,
+                             messageSecond: nil,
+                             cancelTitle: Constant.Texts.cancel,
+                             okTitle: Constant.Texts.change,
+                             cancelAction: { [self] in
+                                mTariffCarouselV.tariffCarousel.reloadData()
+
+                             }, okAction: { [self] in
+                                if currentTariff == .monthly {
+                                    showAlertMoreThanMonth(optionIndex: 0)
+                                } else {
+                                    self.confirmPressed(optionIndex: optionIndex)
+                                    isSearchEdit = false
+                                }
+                             })
+    }
+    
+    
+    //MARK: METODES PRESSES
+    /// Confirm button pressed
+    private func confirmPressed(optionIndex: Int) {
+        currentTariffOptionIndex = optionIndex
+        updateSearchFields(optionIndex: optionIndex)
+        mSearchV.configureSearchPassiveFields(tariff: currentTariff)
+        if isSearchEdit {
+            animateSearchEdit(isShow: !isSearchEdit)
+        }  else {
+            isSearchEdit = false
+        }
+        if mSearchV.isHidden  {
+            mSearchV.isHidden = false
+            mScrollV.contentSize.height = mScrollV.contentSize.height + mSearchV.bounds.height
+            UIView.animate(withDuration: 0.7) { [self] in
+                self.scrollToBottom(distance: 0.0)
+                self.mSearchV.alpha = 1
+            }
+        }
     }
     
     @objc func donePressed() {
@@ -405,10 +548,18 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func reserve(_ sender: UIButton) {
-        let recerve = UIStoryboard(name: Constant.Storyboards.reserve, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.reserve) as! ReserveViewController
-        self.navigationController?.pushViewController(recerve, animated: true)
+        animationReserve()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [self] in
+            self.goToReserveController()
+        }
     }
+    
 }
+
+
+
+
+
 
 
 //MARK: DetailsAndTailLiftViewDelegate
@@ -420,31 +571,20 @@ extension DetailsViewController: DetailsAndTailLiftViewDelegate {
             scrollToBottom(distance: 0.0)
             if self.mTailLiftTableBckgV.alpha == 1 {
                 // will show Details tableView and close TailLift tableView
-                UIView.transition(with: mTailLiftTableBckgV, duration: 1, options: [.transitionCurlUp,.allowUserInteraction], animations: { [self] in
-                    
+                UIView.transition(with: mTailLiftTableBckgV, duration: tableAnimationDuration, options: [.transitionCurlUp,.allowUserInteraction], animations: { [self] in
                     self.mDetailsAndTailLiftV.mTailLiftDropDownImgV.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
                     self.mTailLiftTableBckgV.alpha = 0
                 }, completion: { [self]_ in
                     self.mTailLiftTableBckgV.isHidden = true
-                    UIView.transition(with: self.mDetailsTbV, duration: 1, options: [.transitionCurlDown,.allowUserInteraction], animations: { [self] in
-                        self.mDetailsAndTailLiftV.mDetailsDropDownImgV.rotateImage(rotationAngle: CGFloat(Double.pi))
-                        self.mDetailsTbV.alpha = 1
-                        self.mDetailsTbV.isHidden = false
-                    }, completion: nil)
+                    animateDetailTableView()
                 })
                 
             } else { // will show Details tableView
-                
-                UIView.transition(with: mDetailsTableBckgV, duration: 1, options: [.transitionCurlDown,.allowUserInteraction], animations: { [self] in
-                    self.mDetailsAndTailLiftV.mDetailsDropDownImgV.rotateImage(rotationAngle: CGFloat(Double.pi))
-                    self.mDetailsTableBckgV.alpha = 1
-                    self.mDetailsTableBckgV.isHidden = false
-                }, completion: nil)
+                animateDetailTableView()
             }
-            
         } else if !willOpen { // will hide Details tableView
             
-            UIView.transition(with: mDetailsTableBckgV, duration: 1, options: [.transitionCurlUp,.allowUserInteraction], animations: { [self] in
+            UIView.transition(with: mDetailsTableBckgV, duration: tableAnimationDuration, options: [.transitionCurlUp,.allowUserInteraction], animations: { [self] in
                 self.mDetailsAndTailLiftV.mDetailsDropDownImgV.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
                 self.mDetailsTableBckgV.alpha = 0
             }, completion: {_ in
@@ -455,20 +595,32 @@ extension DetailsViewController: DetailsAndTailLiftViewDelegate {
     
     func didPressTailLift(willOpen: Bool) {
         scrollToBottom(distance: 0.0)
-        
         // will show TailLift tableView
         if willOpen {
-            UIView.transition(with: mTailLiftTableBckgV, duration: 1, options: [.transitionCurlDown,.allowUserInteraction], animations: { [self] in
+            UIView.transition(with: mTailLiftTableBckgV, duration: tableAnimationDuration, options: [.transitionCurlDown,.allowUserInteraction], animations: { [self] in
                 self.mTailLiftTableBckgV.alpha = 1
                 self.mTailLiftTableBckgV.isHidden = false
             }, completion: nil)
         } else if !willOpen { // will hide TailLift tableView
-            UIView.transition(with: mTailLiftTableBckgV, duration: 1, options: [.transitionCurlUp,.allowUserInteraction], animations: { [self] in
-                self.mTailLiftTableBckgV.alpha = 0
-            }, completion: {_ in
-                self.mTailLiftTableBckgV.isHidden = true
-            })
+            hideTailLiftTableView()
         }
+    }
+    
+    private func animateDetailTableView() {
+        UIView.transition(with: mDetailsTableBckgV, duration: tableAnimationDuration, options: [.transitionCurlDown,.allowUserInteraction], animations: { [self] in
+            self.mDetailsAndTailLiftV.mDetailsDropDownImgV.rotateImage(rotationAngle: CGFloat(Double.pi))
+            self.mDetailsTableBckgV.alpha = 1
+            self.mDetailsTableBckgV.isHidden = false
+        }, completion: nil)
+    }
+    
+    
+    private func hideTailLiftTableView() {
+        UIView.transition(with: mTailLiftTableBckgV, duration: tableAnimationDuration, options: [.transitionCurlUp,.allowUserInteraction], animations: { [self] in
+            self.mTailLiftTableBckgV.alpha = 0
+        }, completion: {_ in
+            self.mTailLiftTableBckgV.isHidden = true
+        })
     }
     
 }
@@ -478,8 +630,14 @@ extension DetailsViewController: DetailsAndTailLiftViewDelegate {
 extension DetailsViewController: TariffSlideViewControllerDelegate {
     
     func didPressTariffOption(tariff: Tariff, optionIndex: Int) {
+        
+        //scrollContentHeight = 0.0
+        setScrollVoiewHeight()
         scrollToBottom(distance: 0.0)
         currentTariff = tariff
+        if isSearchEdit {
+            animateSearchEdit(isShow: true)
+        }
         switch tariff {
         case .hourly:
             mTariffCarouselV.tariffCarousel.currentItemIndex = 0
@@ -500,33 +658,28 @@ extension DetailsViewController: TariffSlideViewControllerDelegate {
         mTariffCarouselV.selectedSegmentIndex = optionIndex
         mTariffCarouselV.tariffCarousel.reloadData()
     }
-
-    
 }
 
 //MARK: TariffCarouselViewDelegate
 //MARK: ----------------------------
 extension DetailsViewController: TariffCarouselViewDelegate {
     
-    func didPressConfirm(isSelect: Bool,  tariff: Tariff, optionIndex: Int) {
+    func didPressConfirm(tariff: Tariff, optionIndex: Int, optionstr: String) {
         currentTariff = tariff
-        currentTariffOptionIndex = optionIndex
-        updateSearchFields(optionIndex: optionIndex)
-        mSearchV.configureSearchPassiveFields(tariff: currentTariff)
-        if isSearchEdit {
-            animateSearchEdit(isShow: !isSearchEdit)
-        }
-        if mSearchV.isHidden  {
-            mSearchV.isHidden = false
-            mScrollV.contentSize.height = mScrollV.contentSize.height + mSearchV.bounds.height
-            UIView.animate(withDuration: 1.5) { [self] in
-                self.scrollToBottom(distance: 0.0)
-                self.mSearchV.alpha = 1
+        if isSearchEdit && tariff != .flexible {
+            showAlertChangeTariff(optionIndex: optionIndex, option: optionstr)
+        } else {
+            if tariff == .monthly {
+                showAlertMoreThanMonth(optionIndex: optionIndex)
+            } else {
+                confirmPressed(optionIndex: optionIndex)
             }
         }
     }
     
-    func willChangeTariffOption(optionIndex: Int) {
+    
+    func willChangeTariffOption(tariff: Tariff, optionIndex: Int) {
+        search = (tariff == .hourly) ? .time : .date
        updateSearchFields(optionIndex: optionIndex)
     }
 
@@ -550,10 +703,11 @@ extension DetailsViewController: TariffCarouselViewDelegate {
 //MARK: SearchViewDelegate
 //MARK: --------------------
 extension DetailsViewController: SearchViewDelegate {
-    
+
     func willOpenPicker(textFl: UITextField) {
         
         self.view.addSubview(self.backgroundV)
+        self.datePicker = UIDatePicker()
         textFl.inputView = self.datePicker
         textFl.inputAccessoryView = creatToolBar()
         self.responderTxtFl = textFl
@@ -578,17 +732,28 @@ extension DetailsViewController: SearchViewDelegate {
     
     
     func didSelectLocation(_ text: String, _ tag: Int) {
-        if tag == 0 { //pick up location
+        if tag == 4 { //pick up location
+            searchModel.pickUpLocation = text
         } else {// return location
-           
+            searchModel.returnLocation = text
         }
-            
+        isActiveReserve()
     }
     
     func didSelectCustomLocation(_ btn: UIButton, location: Location) {
         self.showAlertCustomLocation(checkedBtn: btn)
     }
     
+    func didDeselectCustomLocation(tag: Int) {
+        if tag == 6 { //pick up custom location
+            searchModel.isPickUpCustomLocation = false
+            searchModel.pickUpLocation = nil
+        } else {//return custom location
+            searchModel.isRetuCustomLocation = false
+            searchModel.returnLocation = nil
+        }
+        isActiveReserve()
+    }
 }
 
 //MARK: CustomLocationUIViewControllerDelegate
@@ -607,10 +772,10 @@ extension DetailsViewController: SearchWithValueViewDelegate {
         mSearchV.searchModel = searchModel
         mSearchV.setUpView()
         mSearchV.configureSearchPassiveFields(tariff: currentTariff)
-        mSearchV.updateSearchFields(searchModel: searchModel)
+        mSearchV.updateSearchFields(searchModel: searchModel, tariff: currentTariff)
         
         self.mSearchV.isHidden = false
-        UIView.animate(withDuration: 1.0) { [self] in
+        UIView.animate(withDuration: 0.7) { [self] in
             self.scrollToBottom(distance: self.mSearchV.bounds.height - self.mSearchWithValueStackV.bounds.height)
             self.mSearchV.alpha = 1
             self.mSearchWithValueStackV.alpha = 0.0
@@ -631,7 +796,7 @@ extension DetailsViewController: UIScrollViewDelegate {
             // move up
             if isScrolled {
                 isScrolled = !isScrolled
-                if isSearchEdit {
+                if isSearchEdit && currentTariff == .flexible {
                     self.animateSearchEdit(isShow: false)
                 }
                 hideTariffCards()

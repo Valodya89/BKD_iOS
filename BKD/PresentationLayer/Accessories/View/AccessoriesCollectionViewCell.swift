@@ -7,7 +7,7 @@
 
 import UIKit
 protocol AccessoriesCollectionViewCellDelegate: AnyObject {
-    func didPressAdd(addValue: Double, isIncrease: Bool)
+    func didPressAdd(accessories:  AccessoriesModel, isIncrease: Bool)
 }
 class AccessoriesCollectionViewCell: UICollectionViewCell {
     static let identifier = "AccessoriesCollectionViewCell"
@@ -21,10 +21,12 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mTitleLb: UILabel!
     @IBOutlet weak var mAccessoriesInfoBckgV: UIView!
     @IBOutlet weak var mAccessorieCountLb: UILabel!
+    @IBOutlet weak var mAccessoriesBackgImgV: UIImageView!
     @IBOutlet weak var mPriceLb: UILabel!
     
     @IBOutlet weak var mAddImgV: UIImageView!
     weak var delegate: AccessoriesCollectionViewCellDelegate?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,59 +36,72 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
     
     func setupView() {
        // mAddBtn.setBorder(color: color_navigationBar!, width: 1)
-//        mAccessoriesInfoBckgV.setBorder(color: color_shadow!.withAlphaComponent(0.1), width: 0.5)
 
-        mAccessoriesInfoBckgV.roundCorners(corners: .bottomRight, radius: 32)
-        mAccessoriesInfoBckgV.setShadow(color: color_shadow!)
+       // mAccessoriesInfoBckgV.roundCorners(corners: .bottomRight, radius: 32)
+        
+//        mAccessoriesInfoBckgV.roundCorners(corners: [.bottomRight], radius: 50)
 
+        mAccessoriesBackgImgV.setShadow(color: color_shadow!)
     }
     
-    func setCellInfo() {
+    func setCellInfo(item: AccessoriesModel) {
+        mAccessorieImgV.image = item.accessoryImg
+        mTitleLb.text = item.accessoryName
+        mPriceLb.text = String(item.accessoryPrice!)
         mAddBtn.addTarget(self, action: #selector(add), for: .touchUpInside)
-        mIncreaseBtn.addTarget(self, action: #selector(increase), for: .touchUpInside)
-        mDecreaseBtn.addTarget(self, action: #selector(decrease), for: .touchUpInside)
+        mIncreaseBtn.addTarget(self, action: #selector(increase(sender:)), for: .touchUpInside)
+        mDecreaseBtn.addTarget(self, action: #selector(decrease(sender:)), for: .touchUpInside)
         
     }
     
     
     @objc func add(sender: UIButton) {
-        let count = mAccessorieCountLb.formattToNumber()
-        let price = mPriceLb.formattToNumber()
-        let addValue: Double = Double(truncating: count) * Double(truncating: price)
+        let count = Int(mAccessorieCountLb.text ?? "0")
+        let price = Double(mPriceLb.text ?? "0")
+        var accessoriesModel: AccessoriesModel = AccessoriesModel(accessoryImg: mAccessorieImgV.image!,
+                                                                  accessoryName: mTitleLb.text!,
+                                                                  accessoryPrice:Double(count!) * price!, accessoryCount: count)
         
-        if sender.titleColor(for: .normal) == color_navigationBar! { //select
-            mAddImgV.image = #imageLiteral(resourceName: "added")
+        if sender.titleColor(for: .normal) == color_alert_txt { //select
+            mAddImgV.image = img_add
             sender.setTitleColor(color_menu, for: .normal)
-            delegate?.didPressAdd(addValue: addValue, isIncrease: true)
+            delegate?.didPressAdd(accessories: accessoriesModel, isIncrease: true)
         } else {// unselect
             mAddImgV.image = #imageLiteral(resourceName: "add")
-            sender.setTitleColor(color_navigationBar!, for: .normal)
-            delegate?.didPressAdd(addValue: addValue, isIncrease: false)
+            sender.setTitleColor(color_alert_txt!, for: .normal)
+            delegate?.didPressAdd(accessories: AccessoriesModel(accessoryPrice:Double(count!) * price!, accessoryCount: count), isIncrease: false)
         }
     }
-    @objc func increase() {
-        let count = mAccessorieCountLb.formattToNumber()
-        let price = mPriceLb.formattToNumber()
-        let addValue: Double = Double(truncating: price)
+    @objc func increase(sender: UIButton) {
+       
+        setButtonClickImage(sender: sender, image: #imageLiteral(resourceName: "selected_plus"))
+        let count = Int(mAccessorieCountLb.text ?? "0" )
+        let price = Double(mPriceLb.text ?? "0" )
     
-        mAccessorieCountLb.text = String(Int(truncating: count) + 1)
+        mAccessorieCountLb.text = String(count! + 1)
         if mAddBtn.titleColor(for: .normal) == color_menu!  {
-            delegate?.didPressAdd(addValue: addValue, isIncrease: true)
+            delegate?.didPressAdd(accessories: AccessoriesModel(accessoryPrice:price!), isIncrease: true)
         }
     }
-    @objc func decrease() {
-        let count = mAccessorieCountLb.formattToNumber()
-        let price = mPriceLb.formattToNumber()
-        let addValue: Double = Double(truncating: price)
+    @objc func decrease(sender: UIButton) {
+        let count = Int(mAccessorieCountLb.text ?? "0" )
+        let price = Double(mPriceLb.text ?? "0" )
         
-        if Int(truncating: count)  > 1  {
-            mAccessorieCountLb.text = String(Int(truncating: count) - 1)
+        if count! > 1  {
+            mAccessorieCountLb.text = String(count! - 1)
             if mAddBtn.titleColor(for: .normal) == color_menu! {
-                delegate?.didPressAdd(addValue: addValue, isIncrease: false)
+                delegate?.didPressAdd(accessories: AccessoriesModel(accessoryPrice:price!), isIncrease: false)
             }
         }
-        
        
+    }
+    
+    private func setButtonClickImage (sender: UIButton, image: UIImage) {
+        let oldImg = sender.image(for: .normal)
+        sender.setImage(image, for: .normal)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4 ) {
+            sender.setImage(oldImg, for: .normal)
+         }
     }
 
 }

@@ -14,10 +14,10 @@ class AccessoriesUIViewController: UIViewController {
     @IBOutlet weak var mTotalPriceBckgV: UIView!
     @IBOutlet weak var mTotalPriceLb: UILabel!
     @IBOutlet weak var mPriceLb: UILabel!
-    
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
-    
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
+    
+    var usersAccessories: [AccessoriesModel] = []
     //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +31,7 @@ class AccessoriesUIViewController: UIViewController {
     }
     
   
-    
+   ///configure Delegates
     private func configureDelegates() {
         mAccessoriesCollectionV.delegate = self
         mAccessoriesCollectionV.dataSource = self
@@ -50,12 +50,12 @@ class AccessoriesUIViewController: UIViewController {
 //MARK: -----------------
 extension AccessoriesUIViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return AccessoriesData.accessoriesModel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AccessoriesCollectionViewCell.identifier, for: indexPath) as!  AccessoriesCollectionViewCell
-        cell.setCellInfo()
+        cell.setCellInfo(item: AccessoriesData.accessoriesModel[indexPath.row])
         cell.delegate = self
         return cell
     }
@@ -71,15 +71,16 @@ extension AccessoriesUIViewController: UICollectionViewDelegate, UICollectionVie
 //MARK: AccessoriesCollectionViewCellDelegate
 //MARK: ------------------------
 extension AccessoriesUIViewController: AccessoriesCollectionViewCellDelegate {
-    func didPressAdd(addValue: Double, isIncrease: Bool) {
+    func didPressAdd(accessories: AccessoriesModel, isIncrease: Bool) {
         var value: Double = 0.0
         if isIncrease {
-            value = Double(truncating: mPriceLb.formattToNumber()) + addValue
+            value = Double(truncating: mPriceLb.formattToNumber()) + accessories.accessoryPrice!
         } else {
-            value = Double(truncating: mPriceLb.formattToNumber()) - addValue
+            value = Double(truncating: mPriceLb.formattToNumber()) - accessories.accessoryPrice!
         }
         let newValue = String(value).replacingOccurrences(of: ".", with: ",")
         mPriceLb.text = newValue
+        usersAccessories.append(accessories)
     }
     
     

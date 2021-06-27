@@ -19,8 +19,4 @@ struct TariffSlideModel {
     public var options: [TariffSlideModel]?
 }
 
-//struct TariffSlideOptionsModel {
-//    public var tariffOptionsArr: [String]?
-//
-//
-//}
+

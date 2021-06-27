@@ -9,7 +9,7 @@ import UIKit
 
 protocol SearchResultCellDelegate: AnyObject {
     func didPressMore()
-    func didPressReserve()
+    func didPressReserve(tag: Int)
 }
 
 class SearchResultCollectionViewCell: UICollectionViewCell {
@@ -104,10 +104,30 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         btn.addBorder(color: color_btn_pressed!, width: 1.0)
         btn.layer.cornerRadius = 8
     }
+    
+    ///Set  values to vehicle model
+     func setVehicleModel() -> VehicleModel {
+        var vehicleModel = VehicleModel()
+        vehicleModel.vehicleName = mCarNameLb.text
+        vehicleModel.ifHasTowBar = true
+        vehicleModel.vehicleDesctiption = "Double cabin"
+        vehicleModel.vehicleImg = mCarImgV.image
+        vehicleModel.drivingLicense = mCardLb.text
+        vehicleModel.vehicleCube = mCubeLb.text
+        vehicleModel.vehicleWeight = mKgLb.text
+        vehicleModel.vehicleSize = mMetrLb.text
+        vehicleModel.ifTailLift = false
+        vehicleModel.ifHasAccessories = false
+        vehicleModel.ifHasAditionalDriver = false
+        let price: Double = mGradientV.isHidden ? (mOffertValueLB.text!  as NSString).doubleValue : (mValueLb.text!  as NSString).doubleValue
+        vehicleModel.vehicleValue = price
+        return vehicleModel
+    }
  
     func setSearchResultCellInfo(index: Int) {
         mMoreInfoBtn.tag = index
     mFlipMoreInfoBtn.tag = index
+        mReserveBtn.tag = index
       mMoreInfoBtn.addTarget(self, action: #selector(moreInfoPressed(sender:)), for: .touchUpInside)
        mFlipMoreInfoBtn.addTarget(self, action: #selector(moreInfoPressed(sender:)), for: .touchUpInside)
         mReserveBtn.addTarget(self, action: #selector(reservePressed), for: .touchUpInside)
@@ -117,8 +137,8 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         delegate?.didPressMore()
     }
     
-    @objc func reservePressed () {
-        delegate?.didPressReserve()
+    @objc func reservePressed (sender: UIButton) {
+        delegate?.didPressReserve(tag: sender.tag)
     }
     
     //MARK: ACTIONS

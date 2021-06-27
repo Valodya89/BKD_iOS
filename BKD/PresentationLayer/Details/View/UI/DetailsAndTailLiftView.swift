@@ -23,7 +23,7 @@ class DetailsAndTailLiftView: UIView {
     @IBOutlet weak var mTailLiftBtn: UIButton!
     @IBOutlet weak var mDetailsDropDownImgV: UIImageView!
     @IBOutlet weak var mTailLiftDropDownImgV: UIImageView!
-
+    @IBOutlet weak var mTailLiftBckgV: UIView!
     //MARK: Variables
     var currentOpenList: CurrentOpenList?
     weak var delegate: DetailsAndTailLiftViewDelegate?

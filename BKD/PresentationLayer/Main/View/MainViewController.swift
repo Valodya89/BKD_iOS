@@ -26,7 +26,7 @@ class MainViewController: BaseViewController {
     var menu: SideMenuNavigationController?
     var searchHeaderV: SearchHeaderView?
     var searchResultV: SearchResultView?
-    let datePicker = UIDatePicker()
+    var datePicker = UIDatePicker()
     let backgroundV =  UIView()
     var responderTxtFl = UITextField()
 
@@ -89,6 +89,7 @@ class MainViewController: BaseViewController {
         searchModel.pickUpLocation = UserDefaults.standard.object(forKey: key_pickUpLocation) as? String
         searchModel.returnLocation = UserDefaults.standard.object(forKey: key_returnLocation) as? String
     }
+    
     
     private func removeUserDefaultObjs () {
     UserDefaults.standard.removeObject(forKey: key_pickUpDate)
@@ -182,6 +183,20 @@ class MainViewController: BaseViewController {
         self.searchResultV?.mPickUpLocationLb.text = self.searchHeaderV?.mPickUpLocationBtn.title(for: .normal)
         self.searchResultV?.mReturnLocationLb.text = self.searchHeaderV?.mReturnLocationBtn.title(for: .normal)
 
+    }
+    
+    ///will open detail controller
+    private func goToDetailPage(vehicleModel: VehicleModel,         isSearchEdit: Bool) {
+        
+        let detailsVC = UIStoryboard(name: Constant.Storyboards.details, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.details) as! DetailsViewController
+        if isSearchEdit {
+            setSearchModel()
+            detailsVC.searchModel = searchModel
+        }
+        detailsVC.isSearchEdit = isSearchEdit
+        detailsVC.vehicleModel = vehicleModel
+        
+        self.navigationController?.pushViewController(detailsVC, animated: true)
     }
     
     //MARK: ANIMATIONS
@@ -579,10 +594,10 @@ class MainViewController: BaseViewController {
     }
     
     @IBAction func chatWithUs(_ sender: UIButton) {
-       // openChatPage ()
-        let detailsVC = UIStoryboard(name: Constant.Storyboards.details, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.details) as! DetailsViewController
-        
-        self.navigationController?.pushViewController(detailsVC, animated: true)
+        openChatPage ()
+//        let detailsVC = UIStoryboard(name: Constant.Storyboards.details, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.details) as! DetailsViewController
+//
+//        self.navigationController?.pushViewController(detailsVC, animated: true)
        
     }
     
@@ -612,7 +627,7 @@ class MainViewController: BaseViewController {
             showSelectedDate(dayBtn: searchHeaderV!.mDayReturnDateBtn,
                              monthBtn: searchHeaderV!.mMonthReturnDateBtn)
             
-        } else {
+        } else { //Time
             checkReservetionTime()
             responderTxtFl.tag == 2 ? UserDefaults.standard.set(datePicker.date, forKey: key_pickUpTime) : UserDefaults.standard.set(datePicker.date, forKey: key_returnTime)
             showSelectedDate(dayBtn: nil, monthBtn: nil)
@@ -671,7 +686,17 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     //MARK: -------------------------------
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-
+        if !isSearchResultPage {
+            let cell = collectionView.cellForItem(at: indexPath) as! MainCollectionViewCell
+            let vehicleModel =  cell.setVehicleModel()
+            goToDetailPage(vehicleModel: vehicleModel,
+                           isSearchEdit: false)
+        } else {
+            let cell = collectionView.cellForItem(at: indexPath) as! SearchResultCollectionViewCell
+            let vehicleModel =  cell.setVehicleModel()
+            goToDetailPage(vehicleModel: vehicleModel,
+                           isSearchEdit: true)
+        }
     }
 
     //MARK: UICollectionViewDelegateFlowLayout
@@ -697,12 +722,11 @@ extension MainViewController: SearchResultCellDelegate {
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }
     
-    func didPressReserve() {
-        let detailsVC = UIStoryboard(name: Constant.Storyboards.details, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.details) as! DetailsViewController
-        setSearchModel()
-        detailsVC.searchModel = searchModel
-        detailsVC.isSearchEdit = true
-        self.navigationController?.pushViewController(detailsVC, animated: true)
+    func didPressReserve(tag: Int) {
+        let cell = mCarCollectionV.cellForItem(at: IndexPath(item: tag, section: 0)) as! SearchResultCollectionViewCell
+        let vehicleModel =  cell.setVehicleModel()
+        goToDetailPage(vehicleModel: vehicleModel,
+                       isSearchEdit: true)
     }
 }
 
@@ -767,6 +791,7 @@ extension MainViewController: SearchHeaderViewDelegate {
     
     func willOpenPicker(textFl: UITextField) {
         self.view.addSubview(self.backgroundV)
+        self.datePicker = UIDatePicker()
         textFl.inputView = self.datePicker
         textFl.inputAccessoryView = creatToolBar()
         responderTxtFl = textFl

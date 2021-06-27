@@ -217,3 +217,11 @@ struct ReserveData {
                                                              accessorieImg: #imageLiteral(resourceName: "straps"))
     ]
 }
+
+
+struct AccessoriesData {
+    static let accessoriesModel: [AccessoriesModel] = [
+        AccessoriesModel(accessoryImg: #imageLiteral(resourceName: "straps"), accessoryName: "Tension straps for rent", accessoryPrice: 6.25),
+        AccessoriesModel(accessoryImg: #imageLiteral(resourceName: "tape_dispenser"), accessoryName: "Tape dispenser for sale", accessoryPrice: 5.25)
+    ]
+}

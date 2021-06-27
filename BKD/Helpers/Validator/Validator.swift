@@ -93,19 +93,33 @@ class Validator: NSObject {
         return result
     }
     
-    /// if Reservation date more than one month
-    func checkReservationMonth(pickupDate: Date?, returnDate: Date?) -> Bool {        
-        return Date().getComponentsMonth(fromDate: pickupDate, toDate: returnDate)
-    }
-    
-
-    /// if the booking time during working hours
-    func checkReservationTime(time: Date?) -> Bool {
+    ///check if will active reserve
+    func checkReserve(searchModel: SearchModel) -> Bool{
         
-        return Date().dateIsInRange(time: time)
-    }
+        guard let _ = searchModel.pickUpDate,
+              let _ = searchModel.returnDate,
+              let _ = searchModel.pickUpTime,
+              let _ = searchModel.returnTime,
+              let _ = searchModel.pickUpLocation,
+              let _ = searchModel.returnLocation else {
+            return false
+        }
+        return true
+}
+
+/// if Reservation date more than one month
+func checkReservationMonth(pickupDate: Date?, returnDate: Date?) -> Bool {
+    return Date().getComponentsMonth(fromDate: pickupDate, toDate: returnDate)
+}
+
+
+/// if the booking time during working hours
+func checkReservationTime(time: Date?) -> Bool {
     
-    //MARK: CUSTOM LOCATION PAGE  CHECKING
+    return Date().dateIsInRange(time: time)
+}
+
+//MARK: CUSTOM LOCATION PAGE  CHECKING
     //MARK: ------------------------
     
     ///if new marker position in Inactive Coordinate

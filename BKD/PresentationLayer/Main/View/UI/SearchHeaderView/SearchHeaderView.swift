@@ -118,11 +118,6 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         mLocationDropDownView.layer.borderWidth = 0.3
         mLocationDropDownView.layer.borderColor = UIColor(named: "gradient_end")?.cgColor
         
-        // set padding
-        mPickUpLocationBtn.titleEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0,
-                                                          bottom: 0.0, right: 25.0)
-        mReturnLocationBtn.titleEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0,
-                                                          bottom: 0.0,right: 25.0)
         didSelectLocationFromList()
         didHideLocationList()
     }

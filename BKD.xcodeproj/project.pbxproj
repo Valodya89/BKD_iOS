@@ -39,6 +39,8 @@
 		5640952D264AE529001DC92D /* DropDownModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5640952C264AE529001DC92D /* DropDownModel.swift */; };
 		56409533264AE5A8001DC92D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56409532264AE5A8001DC92D /* Data.swift */; };
 		56409539264B24D8001DC92D /* BKDAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56409538264B24D8001DC92D /* BKDAlert.swift */; };
+		5648C5B6268803F7000B4E2A /* AccessoriesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648C5B5268803F6000B4E2A /* AccessoriesModel.swift */; };
+		5648C5C8268842D9000B4E2A /* AccessoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648C5C7268842D9000B4E2A /* AccessoriesViewModel.swift */; };
 		564E12AB264BEF94008CE884 /* DateExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E12AA264BEF94008CE884 /* DateExtention.swift */; };
 		564E12D0264D72E2008CE884 /* SeeMap.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 564E12CF264D72E2008CE884 /* SeeMap.storyboard */; };
 		564E12D9264D7617008CE884 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E12D8264D7617008CE884 /* Constant.swift */; };
@@ -196,6 +198,8 @@
 		5640952C264AE529001DC92D /* DropDownModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownModel.swift; sourceTree = "<group>"; };
 		56409532264AE5A8001DC92D /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		56409538264B24D8001DC92D /* BKDAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BKDAlert.swift; sourceTree = "<group>"; };
+		5648C5B5268803F6000B4E2A /* AccessoriesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoriesModel.swift; sourceTree = "<group>"; };
+		5648C5C7268842D9000B4E2A /* AccessoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoriesViewModel.swift; sourceTree = "<group>"; };
 		564E12AA264BEF94008CE884 /* DateExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtention.swift; sourceTree = "<group>"; };
 		564E12CF264D72E2008CE884 /* SeeMap.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SeeMap.storyboard; sourceTree = "<group>"; };
 		564E12D8264D7617008CE884 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -681,6 +685,7 @@
 		56533EE0267925C80012BF4A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5648C5B5268803F6000B4E2A /* AccessoriesModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -688,6 +693,7 @@
 		56533EE1267925D30012BF4A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				5648C5C7268842D9000B4E2A /* AccessoriesViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1844,6 +1850,7 @@
 				568E701226438C08000CB6A9 /* MainViewController.swift in Sources */,
 				5656321C26568C0D00B78562 /* SearchHeaderModel.swift in Sources */,
 				5691A641265D97550008081D /* MainViewModel.swift in Sources */,
+				5648C5B6268803F7000B4E2A /* AccessoriesModel.swift in Sources */,
 				5657E84E26711AE800788D62 /* CarPhotosView.swift in Sources */,
 				565731F32673188F0012ADD0 /* TailLiftTableView.swift in Sources */,
 				5665400C2673A0A5008ACD31 /* TariffSlideCollectionViewCell.swift in Sources */,
@@ -1860,6 +1867,7 @@
 				560252E72665368E00FB204C /* SearchPlacesResult.swift in Sources */,
 				5602526726616C8700FB204C /* Storyboardinitializable.swift in Sources */,
 				5656081A2678541B009578FA /* ImagesBottomCollectionViewCell.swift in Sources */,
+				5648C5C8268842D9000B4E2A /* AccessoriesViewModel.swift in Sources */,
 				565731F8267332620012ADD0 /* TariffSlideViewController.swift in Sources */,
 				5691A61B265C71EC0008081D /* ExteriorCollectionViewCell.swift in Sources */,
 				5618888F264A63CA00BDDB33 /* LocationDropDownView.swift in Sources */,

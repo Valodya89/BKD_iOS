@@ -145,7 +145,16 @@ extension SeeMapViewController: AddressNameViewControllerDelegate {
     }
     
     func didPressRoute() {
-        
+                                    var url = "yandexnavi://build_route_on_map?lat_to=\(mapViewCenterCoordinate.latitude)&lon_to=\(mapViewCenterCoordinate.longitude)"
+                                    if UIApplication.shared.canOpenURL(URL(string: url)!) {
+                                        UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
+                                    } else {
+                                        url = "https://itunes.apple.com/ru/app/yandex.navigator/id474500851"
+                                        if UIApplication.shared.canOpenURL(URL(string: url)!) {
+                                            UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
+                                        }
+                                    }
+
     }
     
     func didPressUserLocation() {

@@ -223,6 +223,43 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U1B-8u-jK9">
                                         <rect key="frame" x="0.0" y="166" width="382" height="58"/>
                                         <subviews>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PKC-gk-7Gr">
+                                                <rect key="frame" x="259.5" y="14.5" width="102" height="29"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€ " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qwi-rY-Vuc">
+                                                        <rect key="frame" x="0.0" y="0.5" width="12.5" height="28.5"/>
+                                                        <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
+                                                        <color key="textColor" name="navigationBar"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyc-b6-DSl">
+                                                        <rect key="frame" x="12.5" y="0.0" width="47" height="29"/>
+                                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
+                                                        <color key="textColor" name="navigationBar"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bqo-Xi-o7T">
+                                                        <rect key="frame" x="59.5" y="0.0" width="35.5" height="29"/>
+                                                        <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
+                                                        <color key="textColor" name="navigationBar"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="Bqo-Xi-o7T" firstAttribute="height" relation="greaterThanOrEqual" secondItem="hyc-b6-DSl" secondAttribute="height" id="1Pq-u4-OcT"/>
+                                                    <constraint firstItem="Qwi-rY-Vuc" firstAttribute="leading" secondItem="PKC-gk-7Gr" secondAttribute="leading" id="8yz-XP-gDL"/>
+                                                    <constraint firstItem="Bqo-Xi-o7T" firstAttribute="centerY" secondItem="hyc-b6-DSl" secondAttribute="centerY" id="G7F-01-o7X"/>
+                                                    <constraint firstItem="hyc-b6-DSl" firstAttribute="width" relation="greaterThanOrEqual" secondItem="PKC-gk-7Gr" secondAttribute="width" multiplier="0.461832" id="Rfl-r0-EKu"/>
+                                                    <constraint firstItem="Qwi-rY-Vuc" firstAttribute="height" secondItem="PKC-gk-7Gr" secondAttribute="height" multiplier="0.979" id="UUH-2D-9Dq"/>
+                                                    <constraint firstItem="hyc-b6-DSl" firstAttribute="leading" secondItem="Qwi-rY-Vuc" secondAttribute="trailing" id="WTe-K5-YzL"/>
+                                                    <constraint firstItem="Bqo-Xi-o7T" firstAttribute="leading" secondItem="hyc-b6-DSl" secondAttribute="trailing" id="a2L-5S-hV1"/>
+                                                    <constraint firstItem="Qwi-rY-Vuc" firstAttribute="centerY" secondItem="PKC-gk-7Gr" secondAttribute="centerY" id="fHm-9y-FPJ"/>
+                                                    <constraint firstItem="hyc-b6-DSl" firstAttribute="height" secondItem="PKC-gk-7Gr" secondAttribute="height" id="g1F-4u-C7A"/>
+                                                    <constraint firstItem="Qwi-rY-Vuc" firstAttribute="width" secondItem="PKC-gk-7Gr" secondAttribute="width" multiplier="0.121951" id="rcB-gS-Kqq"/>
+                                                    <constraint firstItem="hyc-b6-DSl" firstAttribute="centerY" secondItem="PKC-gk-7Gr" secondAttribute="centerY" id="wiG-jR-s3F"/>
+                                                </constraints>
+                                            </view>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tow_bar" translatesAutoresizingMaskIntoConstraints="NO" id="8us-ba-OdA">
                                                 <rect key="frame" x="21" y="11.5" width="20" height="16"/>
                                             </imageView>
@@ -268,9 +305,13 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="secondaryLabelColor"/>
                                         <constraints>
+                                            <constraint firstItem="aaN-2M-j9V" firstAttribute="leading" secondItem="PKC-gk-7Gr" secondAttribute="leading" id="2Jx-so-ejb"/>
                                             <constraint firstItem="8us-ba-OdA" firstAttribute="height" secondItem="U1B-8u-jK9" secondAttribute="height" multiplier="0.275862" id="6Ow-AI-Fqz"/>
+                                            <constraint firstItem="aaN-2M-j9V" firstAttribute="bottom" secondItem="PKC-gk-7Gr" secondAttribute="bottom" id="7S4-c5-eWV"/>
+                                            <constraint firstItem="aaN-2M-j9V" firstAttribute="top" secondItem="PKC-gk-7Gr" secondAttribute="top" id="Cub-ol-nN3"/>
                                             <constraint firstItem="lCS-6g-tNz" firstAttribute="centerX" secondItem="U1B-8u-jK9" secondAttribute="centerX" multiplier="0.43" id="GFH-53-5Ed"/>
                                             <constraint firstItem="8us-ba-OdA" firstAttribute="centerX" secondItem="IKL-gR-02p" secondAttribute="centerX" id="OEA-bl-EfP"/>
+                                            <constraint firstItem="aaN-2M-j9V" firstAttribute="trailing" secondItem="PKC-gk-7Gr" secondAttribute="trailing" id="Q2Y-nu-UIL"/>
                                             <constraint firstItem="lCS-6g-tNz" firstAttribute="centerY" secondItem="U1B-8u-jK9" secondAttribute="centerY" id="Qk2-je-sDy"/>
                                             <constraint firstItem="aaN-2M-j9V" firstAttribute="height" secondItem="U1B-8u-jK9" secondAttribute="height" multiplier="0.5" id="RPO-iM-DY1"/>
                                             <constraint firstItem="IKL-gR-02p" firstAttribute="height" secondItem="U1B-8u-jK9" secondAttribute="height" multiplier="0.172414" id="S6i-ua-Yng"/>
@@ -350,13 +391,14 @@
             <connections>
                 <outlet property="mCarImgV" destination="ycG-nF-3VA" id="TxD-sz-N5b"/>
                 <outlet property="mCarNameLb" destination="sns-pR-Vkg" id="Y1P-7A-Q2l"/>
-                <outlet property="mCarUseImgV" destination="5X3-DB-YNF" id="UOc-Uy-CUE"/>
-                <outlet property="mCarUseLb" destination="VNo-V3-WiR" id="7zy-jA-RCF"/>
+                <outlet property="mCarSizeImgV" destination="5X3-DB-YNF" id="Iu3-N5-YiM"/>
+                <outlet property="mCarSizeLb" destination="VNo-V3-WiR" id="zQ3-BP-gtu"/>
                 <outlet property="mCardImgV" destination="7Sh-ad-4VV" id="IOY-dA-Hcv"/>
                 <outlet property="mCardLb" destination="ER0-gf-YNu" id="tnm-w0-TEY"/>
                 <outlet property="mCubeImgV" destination="imq-0S-60S" id="CNC-Se-1fn"/>
                 <outlet property="mCubeLb" destination="BxO-yr-6ze" id="8pu-Pf-BtH"/>
                 <outlet property="mFiatImgV" destination="rpR-HU-Exf" id="LZY-EL-eaS"/>
+                <outlet property="mIgnorValueLb" destination="hxh-SI-dxX" id="w19-Dp-nh7"/>
                 <outlet property="mInfoBckV" destination="0O5-R3-1ws" id="tdP-QY-6N7"/>
                 <outlet property="mKgImgV" destination="Sbh-K1-I1V" id="2rC-aj-c0H"/>
                 <outlet property="mKgLb" destination="dB7-8a-qg3" id="D9p-07-a7D"/>
@@ -366,7 +408,9 @@
                 <outlet property="mTowBarIngV" destination="8us-ba-OdA" id="xw4-Sa-btD"/>
                 <outlet property="mTowBarLb" destination="IKL-gR-02p" id="MlB-qH-LMS"/>
                 <outlet property="mValueBckV" destination="U1B-8u-jK9" id="rX5-2Q-mxc"/>
-                <outlet property="mValueLb" destination="hxh-SI-dxX" id="uCs-G2-End"/>
+                <outlet property="mValueBckgV" destination="PKC-gk-7Gr" id="UKk-cj-H87"/>
+                <outlet property="mValueDayLb" destination="Bqo-Xi-o7T" id="SXm-Ya-x1T"/>
+                <outlet property="mValueLb" destination="hyc-b6-DSl" id="4tN-M2-qde"/>
             </connections>
             <point key="canvasLocation" x="-101.44927536231884" y="78.348214285714278"/>
         </collectionViewCell>

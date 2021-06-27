@@ -125,5 +125,11 @@ class DetailsViewModel: NSObject {
                                      didResult: @escaping (Bool) -> ()) {
         didResult(validator.checkReservationTime(time:time))
     }
+    
+    /// Check if reserve will  be acteve
+    func isReserveActive(searchModel:SearchModel, didResult: @escaping (Bool) -> ())  {
+        didResult(validator.checkReserve(searchModel: searchModel))
+
+    }
    
 }

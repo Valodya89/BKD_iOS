@@ -62,6 +62,10 @@ struct Constant {
         static let returnLocation = "Return Location"
         static let searchResult = "Search Results"
         static let messageMoreThanMonth = "All the BKD vehicles are taken to technical check up once a month. You should return the vehicle to the BKD office after a month, and have it checked or be offered a new vehicle of the same type."
+        static let messageChangeTariff = "Are you sure you want to Reserve for "
+        static let messageChangeTariffSeconst = "Since your selection was for"
+        static let titleChangeTariff = "Pick up date/time  Return date/time"
+        
         static let messageWorkingTime = "Time is selected outside of BKD working hours to make a reservation (07:30 - 18:30)."
         static let titleWorkingTime = "Additional service fee is     € 59,99"
         static let messageCustomLocation  = "You choose a location, BKD vehicle is there. Depending on the location, service fee may vary."
@@ -69,6 +73,7 @@ struct Constant {
         static let titleCustomLocation = "Starting from € XX.00 (incl. VAT)"
         static let cancel = "Cancel"
         static let agree = "Agree"
+        static let change = "Yes, Change"
         static let startWorkingHour = "07:30"
         static let endWorkingHour = "18:30"
         static let errorEmail = "Write your email address, so that we answer the message once it's reviewed"
@@ -82,6 +87,11 @@ struct Constant {
         static let weekly = "Weekly"
         static let monthly = "Monthly"
         static let flexible = "Flexible"
+        static let hours = "hours"
+        static let days = "days"
+        static let weeks = "weeks"
+        static let month = "month"
+
 
 
     }
@@ -150,7 +160,10 @@ let color_weeks = UIColor(named: "tariff_weekly")
 let color_monthly = UIColor(named: "tariff_montly")
 let color_flexible = UIColor(named: "tariff_flexible")
 let color_search_passive = UIColor(named: "search_passive")
-
+let color_reserve_start = UIColor(named: "reserve_gradient_start")
+let color_reserve_end = UIColor(named: "reserve_gradient_end")
+let color_reserve_inactive_start = UIColor(named: "reserve_gradient_inactive_start")
+let color_reserve_inactive_end = UIColor(named: "reserve_gradient_inactive_end")
 
 
 //Fonts
@@ -176,4 +189,5 @@ let img_unselected_filter = UIImage(named: "show_car_param")
 let img_map_marker = UIImage(named: "marker")
 let img_check_box = UIImage(named: "check")
 let img_uncheck_box = UIImage(named: "uncheck_box")
+let img_add = #imageLiteral(resourceName: "add")
 

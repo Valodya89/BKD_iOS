@@ -14,7 +14,7 @@ class CarPhotosView: UIView {
     @IBOutlet weak var mScrollRightBtn: UIButton!
     @IBOutlet weak var mTowBarBtn: UIButton!
     @IBOutlet weak var mTowBarLB: UILabel!
-
+    @IBOutlet weak var mTowBarBckgV: UIView!
     @IBOutlet weak var mImagePagingCollectionV: UICollectionView!
     @IBOutlet weak var mImagesBottomCollectionV: UICollectionView!
     

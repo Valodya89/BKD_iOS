@@ -302,11 +302,12 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y97-hQ-SNq">
                                             <rect key="frame" x="0.0" y="125.5" width="375" height="42.5"/>
                                             <subviews>
-                                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Lg-08-1AB">
+                                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Lg-08-1AB">
                                                     <rect key="frame" x="0.0" y="0.0" width="177.5" height="42.5"/>
                                                     <color key="backgroundColor" name="background"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="10"/>
                                                     <inset key="contentEdgeInsets" minX="11" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="25" maxY="0.0"/>
                                                     <state key="normal" title="Pick up Location">
                                                         <color key="titleColor" name="choose_date"/>
                                                     </state>
@@ -318,11 +319,12 @@
                                                     <rect key="frame" x="149.5" y="18" width="12" height="6"/>
                                                     <color key="backgroundColor" name="background"/>
                                                 </imageView>
-                                                <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gSd-Mj-GeT">
+                                                <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gSd-Mj-GeT">
                                                     <rect key="frame" x="197.5" y="0.0" width="177.5" height="42.5"/>
                                                     <color key="backgroundColor" name="background"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="10"/>
                                                     <inset key="contentEdgeInsets" minX="11" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="25" maxY="0.0"/>
                                                     <state key="normal" title="Return Location">
                                                         <color key="titleColor" name="choose_date"/>
                                                     </state>
