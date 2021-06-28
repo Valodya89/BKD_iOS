@@ -91,6 +91,7 @@ class ReserveViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         mReserveTableHeight.constant = mReserveInfoTableV.contentSize.height
+       
 
     }
     
@@ -120,7 +121,9 @@ class ReserveViewController: UIViewController {
     }
     
     func configureView() {
-        mCarImgV.image = vehicleModel?.vehicleImg
+        
+        mCarImgV.image = vehicleModel?.vehicleImg?.resizeImage(targetSize: CGSize(width:self.view.bounds.width * 0.729, height:self.view.bounds.height * 0.173))
+
         mCarDescriptionlb.text = vehicleModel?.vehicleDesctiption
         mTowBarBckgV.isHidden = !((vehicleModel?.ifHasTowBar) == true)
         mPickUpParkingLb.text = vehicleModel?.searchModel?.pickUpLocation

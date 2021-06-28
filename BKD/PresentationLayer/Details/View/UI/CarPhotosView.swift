@@ -38,6 +38,8 @@ class CarPhotosView: UIView {
         mCarImagesBckgV.layer.cornerRadius = 3
         configureDelegates()
         configureCollectionViews()
+        
+
     }
     
     private func configureDelegates() {
@@ -74,6 +76,7 @@ class CarPhotosView: UIView {
     private func scrollToIndex(index:Int) {
         let rect = mImagePagingCollectionV.layoutAttributesForItem(at:IndexPath(row: index, section: 0))?.frame
         mImagePagingCollectionV.scrollRectToVisible(rect!, animated: true)
+        delegate?.didChangeCarImage(CarsData.carModel[index].carImage)
     }
     
     ///Will show or hide previous and next arrow buttons
@@ -87,6 +90,7 @@ class CarPhotosView: UIView {
             mScrollRightBtn.isHidden = false
         }
     }
+    
     
     ///collection view will move to current position
     private func movetoPositionBottomCollectionView() {
@@ -133,47 +137,12 @@ extension CarPhotosView: UICollectionViewDelegate,  UICollectionViewDataSource, 
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImagesBottomCollectionViewCell.identifier, for: indexPath) as! ImagesBottomCollectionViewCell
 
-            cell.setCellInfo(item: CarsData.carModel[indexPath.row])
+            cell.setCellInfo(item: CarsData.carModel[indexPath.row], currentImageIndex: currentCarPhotoItem, index: indexPath.row)
                         
-            if  currentCarPhotoItem == indexPath.item {
-                cell.mShadowBckgV.makeBorderWithCornerRadius(radius: 3, borderColor: color_navigationBar!, borderWidth: 0.5)
-            }
             return cell
         }
-        
-       
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-//        for view in cell.contentView.subviews {
-//            if view.isKind(of: UIImageView.self) {
-//                view.removeFromSuperview()
-//            }
-//        }
-//
-//        var imgV = UIImageView()
-//        if collectionView == mImagePagingCollectionV {
-//            imgV = UIImageView(frame: CGRect(x: collectionView.bounds.width * 0.166,
-//                                             y: collectionView.bounds.height * 0.057,
-//                                             width: collectionView.bounds.width * 0.55/*0.4951*/,
-//                                             height: collectionView.bounds.height - 15))
-//        } else {
-//            imgV = UIImageView(frame: CGRect(x: 0,
-//                                             y: 0,
-//                                             width: self.bounds.width * 0.15942,
-//                                             height: self.bounds.height * 0.0581683))
-//            imgV.backgroundColor = color_background!
-//            imgV.layer.cornerRadius = 3
-//            imgV.setShadowByBezierPath(color: color_shadow!)
-//            //imgV.setShadow(color: color_shadow!)
-//        }
-//
-//        imgV.contentMode = .scaleAspectFit
-//        imgV.image = CarsData.carModel[indexPath.row].carImage
-//        cell.contentView.addSubview(imgV)
-//        if collectionView == mImagesBottomCollectionV && currentCarPhotoItem == indexPath.item {
-//                cell.contentView.makeBorderWithCornerRadius(radius: 3, borderColor: color_navigationBar!, borderWidth: 0.5)
-//        }
-//        return cell
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == mImagePagingCollectionV {

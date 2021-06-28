@@ -92,9 +92,7 @@ class OfflineViewController: UIViewController, StoryboardInitializable  {
         mDateLb.text = Date().getDateByFormat()
         mNoticeLb.setMargins()
         mNavigationBarV.setShadowByBezierPath(color: .black)
-        mEmailTextFl.setPadding()
-//        mSuccessBckgV.makeBorderWithCornerRadius(radius: 10, borderColor: .white, borderWidth: 2.0)
-        
+        mEmailTextFl.setPadding()        
     }
     private func configureMessageTextView(isPlaceholder: Bool) {
         
