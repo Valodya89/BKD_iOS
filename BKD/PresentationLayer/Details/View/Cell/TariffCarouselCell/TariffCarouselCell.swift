@@ -238,7 +238,7 @@ class TariffCarouselCell: UIView {
     @IBAction func confirm(_ sender: UIButton) {
         if !isConfirm {
             isConfirm = true
-            sender.setTitleColor(color_menu, for: .normal)
+            sender.setTitleColor(mTitleLb.text == Constant.Texts.daily ? .white : color_menu, for: .normal)
             delegate?.showSearchView(optionIndex: selectedSegmentIndex)
         }
     }

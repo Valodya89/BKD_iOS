@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol CarPhotosViewDeleagte: AnyObject {
+    func didChangeCarImage(_ img: UIImage)
+}
+
 class CarPhotosView: UIView {
     //MARK: Outlet
     @IBOutlet weak var mCarImagesBckgV: UIView!
@@ -18,6 +22,7 @@ class CarPhotosView: UIView {
     @IBOutlet weak var mImagePagingCollectionV: UICollectionView!
     @IBOutlet weak var mImagesBottomCollectionV: UICollectionView!
     
+    weak var delegate: CarPhotosViewDeleagte?
     
     //MARK: Variables
     var currentCarPhotoItem: Int = 0
@@ -87,6 +92,7 @@ class CarPhotosView: UIView {
     private func movetoPositionBottomCollectionView() {
         mImagesBottomCollectionV.reloadData()
         mImagesBottomCollectionV.scrollToItem(at:NSIndexPath(item: currentCarPhotoItem, section: 0) as IndexPath , at: .centeredHorizontally, animated: true)
+        delegate?.didChangeCarImage(CarsData.carModel[currentCarPhotoItem].carImage)
     }
     //MARK: ACTIONS
     //MARK: -----------------
@@ -176,8 +182,6 @@ extension CarPhotosView: UICollectionViewDelegate,  UICollectionViewDataSource, 
         }
         return CGSize(width: self.bounds.width * 0.227053,
                       height: self.bounds.height * 0.264)
-//       return CGSize(width: self.bounds.width * 0.227053,
-//                     height: self.bounds.height * 0.264)
         
     }
     

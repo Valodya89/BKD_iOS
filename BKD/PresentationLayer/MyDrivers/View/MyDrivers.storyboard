@@ -77,7 +77,7 @@
                                                             </state>
                                                         </button>
                                                     </subviews>
-                                                    <color key="backgroundColor" name="background"/>
+                                                    <color key="backgroundColor" name="subview_background"/>
                                                     <constraints>
                                                         <constraint firstItem="57r-Fu-qcy" firstAttribute="centerX" secondItem="pQR-eq-dym" secondAttribute="centerX" multiplier="0.73" id="1Cm-R0-KG1"/>
                                                         <constraint firstItem="57r-Fu-qcy" firstAttribute="centerY" secondItem="pQR-eq-dym" secondAttribute="centerY" multiplier="0.56" id="1Fc-AG-0wF"/>
@@ -95,13 +95,16 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="pQR-eq-dym" secondAttribute="trailing" constant="17" id="R1X-9x-rBW"/>
                                                 <constraint firstItem="pQR-eq-dym" firstAttribute="centerY" secondItem="bUi-dN-2Ti" secondAttribute="centerY" id="RhS-ey-SMn"/>
+                                                <constraint firstItem="pQR-eq-dym" firstAttribute="leading" secondItem="bUi-dN-2Ti" secondAttribute="leading" constant="17" id="XKS-bl-mXz"/>
                                                 <constraint firstItem="pQR-eq-dym" firstAttribute="centerX" secondItem="bUi-dN-2Ti" secondAttribute="centerX" id="cLX-G4-Tja"/>
                                                 <constraint firstItem="pQR-eq-dym" firstAttribute="width" secondItem="bUi-dN-2Ti" secondAttribute="width" multiplier="0.917874" id="dPo-7h-zS2"/>
                                                 <constraint firstItem="pQR-eq-dym" firstAttribute="height" secondItem="bUi-dN-2Ti" secondAttribute="height" multiplier="0.79" id="ua0-fD-HIh"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <size key="customSize" width="414" height="66"/>
                                         <connections>
                                             <outlet property="mFullNameLb" destination="57r-Fu-qcy" id="8Bu-5k-3It"/>
                                             <outlet property="mLicenseLb" destination="SpY-bZ-mir" id="ybA-LV-22v"/>
@@ -121,7 +124,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vi1-y0-7L0">
-                                        <rect key="frame" x="285" y="10" width="69" height="31.5"/>
+                                        <rect key="frame" x="297.5" y="10" width="56.5" height="31.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcT-wR-qi8">
                                                 <rect key="frame" x="7.5" y="0.0" width="11" height="31.5"/>
@@ -132,8 +135,8 @@
                                                 <color key="textColor" name="navigationBar"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XX,X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0FT-2e-CQG">
-                                                <rect key="frame" x="31" y="0.0" width="38" height="31.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0FT-2e-CQG">
+                                                <rect key="frame" x="31" y="0.0" width="25.5" height="31.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                 <color key="textColor" name="navigationBar"/>
                                                 <nil key="highlightedColor"/>
@@ -151,7 +154,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" name="background"/>
+                                <color key="backgroundColor" name="subview_background"/>
                                 <constraints>
                                     <constraint firstItem="hK1-Qw-rgW" firstAttribute="centerY" secondItem="hIw-9t-jym" secondAttribute="centerY" id="1bh-0E-Geg"/>
                                     <constraint firstItem="vi1-y0-7L0" firstAttribute="centerY" secondItem="hIw-9t-jym" secondAttribute="centerY" id="6dV-14-kg0"/>
@@ -166,13 +169,13 @@
                                 <rect key="frame" x="17" y="19" width="159" height="38"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Driver" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iEE-BH-Sdk">
-                                        <rect key="frame" x="15" y="0.0" width="102" height="38"/>
+                                        <rect key="frame" x="10.5" y="0.0" width="111.5" height="38"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
                                         <color key="textColor" name="navigationBar"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXQ-OT-ic7">
-                                        <rect key="frame" x="117" y="0.0" width="42" height="38"/>
+                                        <rect key="frame" x="122" y="1" width="36" height="36"/>
                                         <color key="backgroundColor" name="navigationBar"/>
                                         <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="30"/>
                                         <state key="normal" title="+"/>
@@ -183,13 +186,14 @@
                                 </subviews>
                                 <color key="backgroundColor" name="menu"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="yXQ-OT-ic7" secondAttribute="trailing" id="DME-fp-iq9"/>
-                                    <constraint firstItem="yXQ-OT-ic7" firstAttribute="top" secondItem="Zqf-CP-KJC" secondAttribute="top" id="EQN-EE-q0S"/>
-                                    <constraint firstItem="yXQ-OT-ic7" firstAttribute="width" secondItem="Zqf-CP-KJC" secondAttribute="width" multiplier="0.262" id="Hx1-VE-05M"/>
+                                    <constraint firstAttribute="trailing" secondItem="yXQ-OT-ic7" secondAttribute="trailing" constant="1" id="DME-fp-iq9"/>
+                                    <constraint firstItem="yXQ-OT-ic7" firstAttribute="top" secondItem="Zqf-CP-KJC" secondAttribute="top" constant="1" id="EQN-EE-q0S"/>
                                     <constraint firstItem="iEE-BH-Sdk" firstAttribute="trailing" secondItem="yXQ-OT-ic7" secondAttribute="leading" id="Jbx-if-fVR"/>
                                     <constraint firstItem="iEE-BH-Sdk" firstAttribute="centerX" secondItem="Zqf-CP-KJC" secondAttribute="centerX" multiplier="0.835" id="V6b-f0-Lu5"/>
-                                    <constraint firstAttribute="bottom" secondItem="yXQ-OT-ic7" secondAttribute="bottom" id="X9s-bd-Wdy"/>
+                                    <constraint firstAttribute="bottom" secondItem="yXQ-OT-ic7" secondAttribute="bottom" constant="1" id="X9s-bd-Wdy"/>
+                                    <constraint firstAttribute="height" constant="38" id="Xkc-v0-0CB"/>
                                     <constraint firstItem="iEE-BH-Sdk" firstAttribute="height" secondItem="Zqf-CP-KJC" secondAttribute="height" id="ZWt-bg-RPf"/>
+                                    <constraint firstItem="yXQ-OT-ic7" firstAttribute="width" secondItem="Zqf-CP-KJC" secondAttribute="width" multiplier="0.225" id="eyv-CE-JRz"/>
                                     <constraint firstItem="iEE-BH-Sdk" firstAttribute="centerY" secondItem="Zqf-CP-KJC" secondAttribute="centerY" id="rNH-76-9U6"/>
                                 </constraints>
                             </view>
@@ -200,7 +204,6 @@
                             <constraint firstItem="D7d-26-dsF" firstAttribute="bottom" secondItem="hIw-9t-jym" secondAttribute="bottom" multiplier="1.042" id="1rM-Sj-iDm"/>
                             <constraint firstItem="Zqf-CP-KJC" firstAttribute="centerX" secondItem="D7d-26-dsF" secondAttribute="centerX" multiplier="0.465" id="497-vP-W0G"/>
                             <constraint firstItem="uQa-jQ-Lx1" firstAttribute="top" secondItem="Zqf-CP-KJC" secondAttribute="bottom" multiplier="1.23" id="4Em-b9-TNb"/>
-                            <constraint firstItem="Zqf-CP-KJC" firstAttribute="height" secondItem="Ozp-6Z-TjH" secondAttribute="height" multiplier="0.047" id="7yD-Vm-Ada"/>
                             <constraint firstItem="Zqf-CP-KJC" firstAttribute="centerY" secondItem="D7d-26-dsF" secondAttribute="centerY" multiplier="0.098" id="CGO-bv-tSk"/>
                             <constraint firstItem="hIw-9t-jym" firstAttribute="height" secondItem="Ozp-6Z-TjH" secondAttribute="height" multiplier="0.0643564" id="ETm-OI-dSd"/>
                             <constraint firstAttribute="trailing" secondItem="uQa-jQ-Lx1" secondAttribute="trailing" id="Fzx-hn-H1V"/>
@@ -274,6 +277,9 @@
         </namedColor>
         <namedColor name="navigation_bar">
             <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="subview_background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

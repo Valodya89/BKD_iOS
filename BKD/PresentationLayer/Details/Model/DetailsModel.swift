@@ -28,6 +28,15 @@ struct VehicleModel {
     public var ifTailLift: Bool = false
     public var ifHasAccessories: Bool = false
     public var ifHasAditionalDriver: Bool = false
+    
+    public var accessoriesTotalPrice: Double? = 0.0
+    public var driversTotalPrice: Double? = 0.0
+    public var customLocationTotalPrice: Double? = 0.0
+    public var mountlyTotalPrice: Double? = 0.0
+    public var noWorkingTimeTotalPrice: Double? = 0.0
 
+    public var searchModel: SearchModel?
+    public var additionalAccessories: [AccessoriesModel]?
+    public var additionalDrivers: [MyDriversModel]?
 }
 

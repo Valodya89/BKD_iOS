@@ -25,6 +25,15 @@ extension Date {
         let day = formatter.string(from: self)
         return month + " " + day
     }
+    
+    func getMonth(lng: String) -> String {
+        let formatter = DateFormatter()
+        formatter.locale = NSLocale(localeIdentifier: lng) as Locale
+        formatter.dateFormat = "MMM"
+        let month = formatter.string(from: self)
+        return month
+    }
+    
     func getComponentsMonth(fromDate: Date?, toDate: Date?) -> Bool {
         guard let fromDate = fromDate, let toDate = toDate else {
             return false

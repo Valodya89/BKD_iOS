@@ -79,6 +79,8 @@
 		5656324626585FFF00B78562 /* CarEquipmentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656324426585FFF00B78562 /* CarEquipmentCollectionViewCell.swift */; };
 		5656324726585FFF00B78562 /* CarEquipmentCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5656324526585FFF00B78562 /* CarEquipmentCollectionViewCell.xib */; };
 		565632522658B11E00B78562 /* EquipmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565632512658B11D00B78562 /* EquipmentModel.swift */; };
+		5656F196268936E000E70BAB /* MyDriversModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656F195268936E000E70BAB /* MyDriversModel.swift */; };
+		5656F1A82689650600E70BAB /* ReserveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656F1A72689650600E70BAB /* ReserveViewModel.swift */; };
 		565731CC26724F720012ADD0 /* CarInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565731CB26724F720012ADD0 /* CarInfoView.swift */; };
 		565731D126725FBD0012ADD0 /* DetailsAndTailLiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565731D026725FBD0012ADD0 /* DetailsAndTailLiftView.swift */; };
 		565731D92672DE810012ADD0 /* UINavigationControllerExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565731D82672DE810012ADD0 /* UINavigationControllerExtention.swift */; };
@@ -238,6 +240,8 @@
 		5656324426585FFF00B78562 /* CarEquipmentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarEquipmentCollectionViewCell.swift; sourceTree = "<group>"; };
 		5656324526585FFF00B78562 /* CarEquipmentCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarEquipmentCollectionViewCell.xib; sourceTree = "<group>"; };
 		565632512658B11D00B78562 /* EquipmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentModel.swift; sourceTree = "<group>"; };
+		5656F195268936E000E70BAB /* MyDriversModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDriversModel.swift; sourceTree = "<group>"; };
+		5656F1A72689650600E70BAB /* ReserveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveViewModel.swift; sourceTree = "<group>"; };
 		565731CB26724F720012ADD0 /* CarInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarInfoView.swift; sourceTree = "<group>"; };
 		565731D026725FBD0012ADD0 /* DetailsAndTailLiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsAndTailLiftView.swift; sourceTree = "<group>"; };
 		565731D82672DE810012ADD0 /* UINavigationControllerExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtention.swift; sourceTree = "<group>"; };
@@ -486,6 +490,7 @@
 		560FE63B267BE76E0068BC85 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				5656F1A72689650600E70BAB /* ReserveViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -744,6 +749,7 @@
 		56533F062679BD960012BF4A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5656F195268936E000E70BAB /* MyDriversModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1845,7 +1851,9 @@
 				568E70172643919B000CB6A9 /* LeftViewController.swift in Sources */,
 				560252D62665298200FB204C /* NetworkManager.swift in Sources */,
 				5602521126612A6300FB204C /* SearchTableViewCell.swift in Sources */,
+				5656F1A82689650600E70BAB /* ReserveViewModel.swift in Sources */,
 				565A7AEA2655C5AE006C63D0 /* CategoryModel.swift in Sources */,
+				5656F196268936E000E70BAB /* MyDriversModel.swift in Sources */,
 				565A7AE326555EFF006C63D0 /* CategoryTableViewCell.swift in Sources */,
 				568E701226438C08000CB6A9 /* MainViewController.swift in Sources */,
 				5656321C26568C0D00B78562 /* SearchHeaderModel.swift in Sources */,

@@ -7,6 +7,10 @@
 
 import UIKit
 
+
+protocol AccessoriesUIViewControllerDelegate: AnyObject {
+    func addedAccessories(_ isAdd: Bool, totalPrice: Double)
+}
 class AccessoriesUIViewController: UIViewController {
     
     //MARK: Outlets
@@ -17,7 +21,9 @@ class AccessoriesUIViewController: UIViewController {
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
     
-    var usersAccessories: [AccessoriesModel] = []
+    let accessoriesViewModel = AccessoriesViewModel()
+    var totalPrice:Double = 0
+    weak var delegate:AccessoriesUIViewControllerDelegate?
     //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,9 +45,10 @@ class AccessoriesUIViewController: UIViewController {
     
     //MARK: ACTION
     @IBAction func back(_ sender: Any) {
+        
+        self.delegate?.addedAccessories(self.mPriceLb.text == "0.0" ? false : true , totalPrice: totalPrice)
         self.navigationController?.popViewController(animated: true)
     }
-    
 
 }
 
@@ -50,12 +57,19 @@ class AccessoriesUIViewController: UIViewController {
 //MARK: -----------------
 extension AccessoriesUIViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return AccessoriesData.accessoriesModel.count
+        return additionalAccessories.count//AccessoriesData.accessoriesModel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AccessoriesCollectionViewCell.identifier, for: indexPath) as!  AccessoriesCollectionViewCell
-        cell.setCellInfo(item: AccessoriesData.accessoriesModel[indexPath.row])
+        let item = additionalAccessories[indexPath.row]
+        cell.setCellInfo(item: item,index: indexPath.row)
+        
+        if item.isAdded {
+            totalPrice += Double(item.accessoryCount!) * item.accessoryPrice!
+            self.mPriceLb.text = String(totalPrice)
+
+        }
         cell.delegate = self
         return cell
     }
@@ -71,17 +85,26 @@ extension AccessoriesUIViewController: UICollectionViewDelegate, UICollectionVie
 //MARK: AccessoriesCollectionViewCellDelegate
 //MARK: ------------------------
 extension AccessoriesUIViewController: AccessoriesCollectionViewCellDelegate {
-    func didPressAdd(accessories: AccessoriesModel, isIncrease: Bool) {
-        var value: Double = 0.0
-        if isIncrease {
-            value = Double(truncating: mPriceLb.formattToNumber()) + accessories.accessoryPrice!
-        } else {
-            value = Double(truncating: mPriceLb.formattToNumber()) - accessories.accessoryPrice!
+    
+    func didChangeCount(cellIndex: Int, count: Int) {
+        additionalAccessories[cellIndex].accessoryCount = count
+    }
+
+    func didPressAdd(isAdd: Bool, cellIndex: Int) {
+        additionalAccessories[cellIndex].isAdded = isAdd
+    }
+    
+    
+    ///increase or decrease Accessory
+    func increaseOrDecreaseAccessory(accessoryPrice: Double,
+                     isIncrease: Bool) {
+        totalPrice = (mPriceLb.text! as NSString).doubleValue
+        
+        accessoriesViewModel.getTotalAccesories(accessoryPrice: accessoryPrice, totalPrice: totalPrice, isIncrease: isIncrease) { (totalValue) in
+            self.mPriceLb.text = totalValue
         }
-        let newValue = String(value).replacingOccurrences(of: ".", with: ",")
-        mPriceLb.text = newValue
-        usersAccessories.append(accessories)
     }
     
     
 }
+

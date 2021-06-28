@@ -8,18 +8,38 @@
 import UIKit
 
 class AccessoriesViewModel: NSObject {
-static let shared = AccessoriesModel()
     
-    func countTotalAccesories(accessories: AccessoriesModel, isIncrease: Bool, price: Double,
+    func getTotalAccesories(accessoryPrice: Double,
+                              totalPrice: Double,
+                              isIncrease: Bool,
                               didResult: @escaping (String) -> ()) {
         var value: Double = 0.0
         if isIncrease {
-            value = price + accessories.accessoryPrice!
+            value = totalPrice + accessoryPrice
         } else {
-            value = price - accessories.accessoryPrice!
+            value = totalPrice - accessoryPrice
         }
-        let newValue = String(value).replacingOccurrences(of: ".", with: ",")
-        
-        didResult(newValue)        
+       // let newValue = String(value).replacingOccurrences(of: ".", with: ",")
+
+        didResult(String(value))
     }
+    
+//    func countTotalAccesories(accessoryImg:UIImage,
+//                              accessoryName:String,
+//                              accessoryPrice:Double,
+//                              accessoryCount:Int,
+//                              totalPrice: Double,
+//                              isIncrease: Bool,
+//                              index: Int,
+//                              didResult: @escaping (String) -> ()) {
+//        var value: Double = 0.0
+//        if isIncrease {
+//            value = totalPrice + accessoryPrice
+//        } else {
+//            value = totalPrice - accessoryPrice
+//        }
+//        // let newValue = String(value).replacingOccurrences(of: ".", with: ",")
+//
+//        didResult(String(value))
+//    }
 }

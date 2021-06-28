@@ -8,7 +8,7 @@
 import UIKit
 
 class OfflineChatViewModel: NSObject {
-    static let shared = OfflineChatViewModel()
+    //static let shared = OfflineChatViewModel()
     let validator = Validator()
 
     //MARK: VALIDATION

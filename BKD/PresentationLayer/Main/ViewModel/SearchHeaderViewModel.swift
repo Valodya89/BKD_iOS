@@ -8,7 +8,7 @@
 import UIKit
 
 class SearchHeaderViewModel: NSObject {
-    static let shared = MainViewModel()
+    //static let shared = MainViewModel()
     var searchDateModel = SearchDateModel()
 
     let validator = Validator()

@@ -91,6 +91,8 @@ struct Constant {
         static let days = "days"
         static let weeks = "weeks"
         static let month = "month"
+        static let additionalDriver = "Additional driver"
+        static let accessories = "Accessories"
 
 
 
@@ -126,6 +128,7 @@ let key_email = "E-mail"
 //Colors
 let color_main = UIColor(named: "main")
 let color_background = UIColor(named: "background")
+let color_subbackground = UIColor(named: "subview_background")
 let color_search_placeholder = UIColor(named: "date_lb")
 let color_entered_date = UIColor(named: "entered_date")
 let color_choose_date = UIColor(named: "choose_date")
@@ -189,5 +192,5 @@ let img_unselected_filter = UIImage(named: "show_car_param")
 let img_map_marker = UIImage(named: "marker")
 let img_check_box = UIImage(named: "check")
 let img_uncheck_box = UIImage(named: "uncheck_box")
-let img_add = #imageLiteral(resourceName: "add")
-
+let img_add_unselece = UIImage(named: "add")
+let img_add_selecte = UIImage(named: "added")

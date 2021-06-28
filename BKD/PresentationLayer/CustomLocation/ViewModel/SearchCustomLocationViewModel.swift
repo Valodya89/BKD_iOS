@@ -8,7 +8,7 @@
 import UIKit
 
 class SearchCustomLocationViewModel: NSObject {
-    static let shared = SearchCustomLocationViewModel()
+   // static let shared = SearchCustomLocationViewModel()
     
     func getGooglePlaces(place: String, didResult: @escaping (Any?) -> () /*@escaping (State<SearchPlacesResult>) -> ()*/) {
         NetworkManager.searchGooglePlase(place: place) { (response, success) in

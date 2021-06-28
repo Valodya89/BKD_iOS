@@ -8,7 +8,7 @@
 import UIKit
 
 class TariffSlideViewModel: NSObject {
-static let shared = TariffSlideViewModel()
+//static let shared = TariffSlideViewModel()
     
 /// get current option index
 func getCurrentOption(model: TariffSlideModel, tariff: Tariff) -> Int {

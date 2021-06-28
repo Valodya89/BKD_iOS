@@ -221,7 +221,20 @@ struct ReserveData {
 
 struct AccessoriesData {
     static let accessoriesModel: [AccessoriesModel] = [
-        AccessoriesModel(accessoryImg: #imageLiteral(resourceName: "straps"), accessoryName: "Tension straps for rent", accessoryPrice: 6.25),
-        AccessoriesModel(accessoryImg: #imageLiteral(resourceName: "tape_dispenser"), accessoryName: "Tape dispenser for sale", accessoryPrice: 5.25)
+        AccessoriesModel(accessoryImg: #imageLiteral(resourceName: "straps"), accessoryName: "Tension straps for rent", accessoryPrice: 6.25, accessoryCount: 1),
+        AccessoriesModel(accessoryImg: #imageLiteral(resourceName: "tape_dispenser"), accessoryName: "Tape dispenser for sale", accessoryPrice: 5.25, accessoryCount: 1)
+    ]
+}
+
+struct MyDriversData {
+    static let myDriversModel : [MyDriversModel] = [ MyDriversModel(fullname: "Jon Smit",
+                  licenciNumber: "Driving license number 5345",
+                          price: 30.5),
+        MyDriversModel(fullname: "Anjel Cavieres",
+                  licenciNumber: "Driving license number 5346",
+                          price: 25.75),
+        MyDriversModel(fullname: "Marcel Aliaga",
+                  licenciNumber: "Driving license number 5335",
+                       price: 50.25),
     ]
 }

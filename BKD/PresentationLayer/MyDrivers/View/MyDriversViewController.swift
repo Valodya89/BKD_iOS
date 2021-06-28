@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol MyDriversViewControllerDelegate: AnyObject {
+    func selectedDrivers(_ isSelecte: Bool, totalPrice: Double)
+}
+
 class MyDriversViewController: UIViewController {
 //MARK: Outlets
     @IBOutlet weak var mMyDriverCollectionV: UICollectionView!
@@ -19,7 +23,9 @@ class MyDriversViewController: UIViewController {
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     
-    
+    weak var delegate: MyDriversViewControllerDelegate?
+    var totalPrice:Double = 0
+
     //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +37,7 @@ class MyDriversViewController: UIViewController {
         mRightBarBtn.image = img_bkd
         mTotalPriceBckgV.setShadow(color: color_shadow!)
         mAddDriverBckgV.layer.cornerRadius = mAddDriverBckgV.frame.height/2
-        mAddBtn.layer.cornerRadius =  mAddBtn.frame.height/2
+        mAddBtn.layer.cornerRadius =  15
         configureDelegates()
     }
      
@@ -46,6 +52,7 @@ class MyDriversViewController: UIViewController {
     }
     
     @IBAction func back(_ sender: UIBarButtonItem) {
+        self.delegate?.selectedDrivers(totalPrice > 0.0 ? true : false , totalPrice: totalPrice)
         self.navigationController?.popViewController(animated: true)
     }
 }
@@ -55,12 +62,18 @@ class MyDriversViewController: UIViewController {
 //MARK: -----------------
 extension MyDriversViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return additionalDrivers.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyDriverCollectionViewCell.identifier, for: indexPath) as!  MyDriverCollectionViewCell
-        cell.setCellInfo()
+        let item = additionalDrivers[indexPath.item]
+        cell.setCellInfo(item:item, index: indexPath.item)
+        if item.isSelected {
+            totalPrice += item.price
+            self.mPriceLb.text = String(totalPrice)
+
+        }
         cell.delegate = self
         return cell
     }
@@ -75,9 +88,20 @@ extension MyDriversViewController: UICollectionViewDelegate, UICollectionViewDat
 }
 
 
+//MARK: MyDriverCollectionViewCellDelegate
 extension MyDriversViewController: MyDriverCollectionViewCellDelegate {
-    func didPressSelect() {
-        
+    
+    func didPressSelect(isSelected: Bool, cellIndex: Int) {
+        let driverPrice = additionalDrivers[cellIndex].price
+        if isSelected {
+            totalPrice += driverPrice
+        } else {
+            totalPrice -= driverPrice
+        }
+        mPriceLb.text = String(totalPrice)
+        additionalDrivers[cellIndex].isSelected = isSelected
+        additionalDrivers[cellIndex].totalPrice = totalPrice
     }
+    
     
 }

@@ -25,35 +25,51 @@ class ReserveTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    func setCellInfo(item: ReserveModel) {
-        if item.headerTitle != nil {
-            mHeadreLb.text = item.headerTitle
-        } else {
-            mHeadreLb.isHidden = true
-        }
-        if item.fullName != nil {
-            mFullNameLb.text = item.fullName
-        }else {
-            mFullNameLb.isHidden = true
-        }
+//    func setCellInfo(item: ReserveModel) {
+//        if item.headerTitle != nil {
+//            mHeadreLb.text = item.headerTitle
+//        } else {
+//            mHeadreLb.isHidden = true
+//        }
+//        if item.fullName != nil {
+//            mFullNameLb.text = item.fullName
+//        }else {
+//            mFullNameLb.isHidden = true
+//        }
+//
+//        if item.accessorieTitle != nil {
+//            mAccessoriesNameLb.text = item.accessorieTitle
+//        }else {
+//            mAccessorieTitleBckgV.isHidden = true
+//        }
+//
+//        if item.accessorieCount != nil {
+//            mAccessoriesCountLb.text = item.accessorieCount
+//        }else {
+//            mAccessoriesCountLb.isHidden = true
+//        }
+//
+//        if item.accessorieImg != nil {
+//            mAccessoriesImgV.image = item.accessorieImg
+//        }else {
+//            mAccessoriesImgV.isHidden = true
+//        }
+//    }
+    
+    
+    func setDriversCell(item: MyDriversModel, index: Int)  {
+        mFullNameLb.text = item.fullname
+        mAccessorieTitleBckgV.isHidden = true
+        mAccessoriesImgV.isHidden = true
         
-        if item.accessorieTitle != nil {
-            mAccessoriesNameLb.text = item.accessorieTitle
-        }else {
-            mAccessorieTitleBckgV.isHidden = true
-        }
+    }
+    
+    func setAccessoriesCell(item: AccessoriesModel, index: Int)  {
+        mFullNameLb.isHidden = true
+        mAccessoriesNameLb.text = item.accessoryName
+        mAccessoriesCountLb.text = "x" + String(item.accessoryCount!)
+        mAccessoriesImgV.image = item.accessoryImg
         
-        if item.accessorieCount != nil {
-            mAccessoriesCountLb.text = item.accessorieCount
-        }else {
-            mAccessoriesCountLb.isHidden = true
-        }
-        
-        if item.accessorieImg != nil {
-            mAccessoriesImgV.image = item.accessorieImg
-        }else {
-            mAccessoriesImgV.isHidden = true
-        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

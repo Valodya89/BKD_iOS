@@ -306,14 +306,14 @@
                                                                 <color key="textColor" name="navigationBar"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xx,x" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jx1-5n-bOv">
-                                                                <rect key="frame" x="349" y="0.0" width="33" height="32"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jx1-5n-bOv">
+                                                                <rect key="frame" x="356.5" y="0.0" width="25.5" height="32"/>
                                                                 <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="18"/>
                                                                 <color key="textColor" name="navigationBar"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBY-IX-Luc">
-                                                                <rect key="frame" x="322" y="0.0" width="10.5" height="32"/>
+                                                                <rect key="frame" x="329" y="0.0" width="10.5" height="32"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
                                                                 <color key="textColor" name="navigationBar"/>
                                                                 <nil key="highlightedColor"/>
@@ -343,7 +343,7 @@
                                                                 <color key="textColor" name="offert_red"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xx,x" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RiI-2X-N3Z">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RiI-2X-N3Z">
                                                                 <rect key="frame" x="344" y="0.0" width="37.5" height="32"/>
                                                                 <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="18"/>
                                                                 <color key="textColor" name="offert_red"/>
@@ -372,7 +372,7 @@
                                                             <constraint firstAttribute="bottom" secondItem="RiI-2X-N3Z" secondAttribute="bottom" id="yov-Zb-7iL"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-XX%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rYV-m0-6Fs">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-00%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rYV-m0-6Fs">
                                                         <rect key="frame" x="0.0" y="64" width="382" height="14"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="12"/>
@@ -388,7 +388,7 @@
                                                                 <color key="textColor" name="navigationBar"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xx,x" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GFz-cW-2Mo">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GFz-cW-2Mo">
                                                                 <rect key="frame" x="344" y="0.0" width="37.5" height="32"/>
                                                                 <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="18"/>
                                                                 <color key="textColor" name="navigationBar"/>
@@ -426,7 +426,7 @@
                                                                 <color key="textColor" name="navigationBar"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xx,x" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRO-3V-IVS">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRO-3V-IVS">
                                                                 <rect key="frame" x="344" y="0.0" width="37.5" height="32"/>
                                                                 <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="18"/>
                                                                 <color key="textColor" name="navigationBar"/>
@@ -464,7 +464,7 @@
                                                                 <color key="textColor" name="navigationBar"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xx,x" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmL-Wv-OK3">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmL-Wv-OK3">
                                                                 <rect key="frame" x="344" y="0.0" width="37.5" height="32"/>
                                                                 <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="18"/>
                                                                 <color key="textColor" name="navigationBar"/>
@@ -506,7 +506,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EcT-BT-937">
-                                                        <rect key="frame" x="285" y="6.5" width="69" height="19"/>
+                                                        <rect key="frame" x="297.5" y="6.5" width="56.5" height="19"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yap-l2-YT0">
                                                                 <rect key="frame" x="7.5" y="0.0" width="11" height="19"/>
@@ -517,8 +517,8 @@
                                                                 <color key="textColor" name="navigationBar"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XX,X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AL8-bn-7kp">
-                                                                <rect key="frame" x="31" y="-1" width="38" height="21"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AL8-bn-7kp">
+                                                                <rect key="frame" x="31" y="-1" width="25.5" height="21"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                                 <color key="textColor" name="navigationBar"/>
                                                                 <nil key="highlightedColor"/>
@@ -748,6 +748,7 @@
                         <outlet property="mTotalPriceBackgV" destination="kWy-xA-q1m" id="B61-Fg-Xxm"/>
                         <outlet property="mTotalPriceLb" destination="t8P-Af-75M" id="4GP-JY-DCK"/>
                         <outlet property="mTotalPriceValueLb" destination="AL8-bn-7kp" id="H8P-Jp-J9x"/>
+                        <outlet property="mTowBarBckgV" destination="540-J2-y0O" id="7qr-lD-1fd"/>
                         <outlet property="mTowBarBtn" destination="NiB-Ul-MCn" id="hlJ-kp-B04"/>
                         <outlet property="mTowBarLb" destination="XE4-La-JRr" id="Qhu-TZ-GhT"/>
                     </connections>

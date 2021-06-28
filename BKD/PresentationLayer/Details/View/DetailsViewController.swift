@@ -14,6 +14,8 @@ enum Search {
     case customLocation
 }
 
+var additionalAccessories: [AccessoriesModel] = AccessoriesData.accessoriesModel
+var additionalDrivers: [MyDriversModel] = MyDriversData.myDriversModel
 class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     //MARK: Outlet
@@ -89,8 +91,8 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        mReserveLeading.constant = 0.0
-        mReserveBckgV.roundCorners(corners: [.topRight], radius: 20)
+        mReserveLeading.constant = -50.0
+        mReserveBckgV.roundCorners(corners: [.topRight, .topLeft], radius: 20)
 
     }
     
@@ -182,6 +184,25 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
                 
     }
     
+    
+    ///Set  values to vehicle model
+     func setVehicleModel(){
+        //var vehicleModel = VehicleModel()
+        vehicleModel?.vehicleName = mCarNameLb.text
+        vehicleModel?.ifHasTowBar = true
+        vehicleModel?.vehicleDesctiption = "Double cabin"
+        vehicleModel?.ifTailLift = false
+        //vehicleModel?.ifHasAccessories = false
+        //vehicleModel?.ifHasAditionalDriver = false
+       // vehicleModel.vehicleValue = price
+        //vehicleModel.vehicleImg = mCarImgV.image
+        vehicleModel?.additionalAccessories = additionalAccessories
+        vehicleModel?.additionalDrivers = additionalDrivers
+        searchModel.pickUpLocation = mSearchV.mPickUpLocationBtn.title(for: .normal)
+        searchModel.returnLocation = mSearchV.mReturnLocationBtn.title(for: .normal)
+        vehicleModel?.searchModel = searchModel
+    }
+    
     private func configureTransparentView()  {
         backgroundV.frame = self.view.bounds
         backgroundV.backgroundColor = .black
@@ -204,7 +225,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     private func configureReserveView(isActive: Bool) {
         mReserveBckgV.setGradientWithCornerRadius(cornerRadius: 0.0, startColor:isActive ? color_reserve_start! : color_reserve_inactive_start!,
                                                   endColor:isActive ? color_reserve_end!: color_reserve_inactive_end! )
-        mReserveBckgV.roundCorners(corners: [.topRight], radius: 20)
+        //mReserveBckgV.roundCorners(corners: [.topRight], radius: 20)
         mReserveBckgV.isUserInteractionEnabled = isActive
     }
     
@@ -216,6 +237,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         mTariffCarouselV.delegate = self
         mSearchV.delegate = self
         mScrollV.delegate = self
+        carPhotosView.delegate = self
         mSearchWithValueStackV.delegate = self
         tariffSlideVC.delegate = self
     }
@@ -325,6 +347,8 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     ///will open  custom location map controller
     func goToReserveController() {
         let reserve = UIStoryboard(name: Constant.Storyboards.reserve, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.reserve) as! ReserveViewController
+        setVehicleModel()
+        reserve.vehicleModel = vehicleModel
         self.navigationController?.pushViewController(reserve, animated: true)
     }
     
@@ -342,12 +366,12 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     ///
     ///Will animate reserve
     func animationReserve() {
-        self.mReserveLeading.constant = self.view.bounds.width - self.mReserveBckgV.bounds.width
+        self.mReserveLeading.constant = self.view.bounds.width - self.mReserveBckgV.bounds.width + 25
         self.view.setNeedsLayout()
         UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded()
         } completion: { _ in
-            self.mReserveBckgV.roundCorners(corners: [.topLeft], radius: 20)
+           // self.mReserveBckgV.roundCorners(corners: [.topLeft], radius: 20)
         }
     }
     
@@ -535,15 +559,21 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     ///Navigation controller will back to pravius controller
     @IBAction func back(_ sender: UIBarButtonItem) {
+        additionalAccessories = AccessoriesData.accessoriesModel
+        additionalDrivers = MyDriversData.myDriversModel
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func accessories(_ sender: UIButton) {
         let accessoriesVC = UIStoryboard(name: Constant.Storyboards.accessories, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.accessories) as! AccessoriesUIViewController
+        accessoriesVC.delegate = self
         self.navigationController?.pushViewController(accessoriesVC, animated: true)
     }
+    
+    
     @IBAction func additionalDriver(_ sender: UIButton) {
         let myDriverVC = UIStoryboard(name: Constant.Storyboards.myDrivers, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.myDrivers) as! MyDriversViewController
+        myDriverVC.delegate = self
         self.navigationController?.pushViewController(myDriverVC, animated: true)
     }
     
@@ -761,6 +791,7 @@ extension DetailsViewController: SearchViewDelegate {
 extension DetailsViewController: CustomLocationViewControllerDelegate {
     func getCustomLocation(_ locationPlace: String) {
         mSearchV.updateLocationFields(place: locationPlace)
+    
     }
 }
 
@@ -785,6 +816,36 @@ extension DetailsViewController: SearchWithValueViewDelegate {
         }
     }
     
+}
+
+
+//MARK: AccessoriesUIViewControllerDelegate
+//MARK: ----------------------------
+extension DetailsViewController: MyDriversViewControllerDelegate {
+    func selectedDrivers(_ isSelecte: Bool, totalPrice: Double) {
+        mAdditionalDriverBtn.alpha = isSelecte ? 1.0 : 0.67
+        vehicleModel?.ifHasAditionalDriver = isSelecte
+        vehicleModel?.driversTotalPrice = totalPrice
+
+    }
+}
+
+//MARK: AccessoriesUIViewControllerDelegate
+//MARK: ----------------------------
+extension DetailsViewController: AccessoriesUIViewControllerDelegate {
+    func addedAccessories(_ isAdd: Bool, totalPrice: Double) {
+        mAccessoriesBtn.alpha = isAdd ? 1.0 : 0.67
+        vehicleModel?.ifHasAccessories = isAdd
+        vehicleModel?.accessoriesTotalPrice = totalPrice
+    }
+}
+
+//MARK: CarPhotosViewDeleagte
+//MARK: ----------------------------
+extension DetailsViewController: CarPhotosViewDeleagte {
+    func didChangeCarImage(_ img: UIImage) {
+        vehicleModel?.vehicleImg = img
+    }
 }
 
 //MARK: UIScrollViewDelegate

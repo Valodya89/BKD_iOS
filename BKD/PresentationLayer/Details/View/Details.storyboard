@@ -775,7 +775,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" tag="7" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c0E-XK-1SW">
-                                                                <rect key="frame" x="227.5" y="0.0" width="134.5" height="29"/>
+                                                                <rect key="frame" x="259" y="0.0" width="103" height="29"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="14"/>
                                                                 <state key="normal" title="Custom location">
                                                                     <color key="titleColor" name="entered_date"/>
@@ -785,7 +785,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gEj-kr-2ki">
-                                                                <rect key="frame" x="191" y="0.0" width="29.5" height="29"/>
+                                                                <rect key="frame" x="222.5" y="0.0" width="29.5" height="29"/>
                                                                 <state key="normal" image="uncheck_box"/>
                                                                 <connections>
                                                                     <action selector="checkBoxReturnCustomLOcation:" destination="lTX-qV-DSn" eventType="touchUpInside" id="NjD-ps-dwZ"/>
@@ -964,7 +964,7 @@
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iUv-zc-cuA">
-                                                        <rect key="frame" x="328" y="0.0" width="54" height="50"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="50"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <state key="normal" image="edit"/>
                                                         <connections>
@@ -1095,13 +1095,13 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="dId-g3-nh7"/>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BfL-pG-VHs">
-                                <rect key="frame" x="0.0" y="724.5" width="285.5" height="49.5"/>
+                                <rect key="frame" x="-50" y="724.5" width="335.5" height="49.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_right" translatesAutoresizingMaskIntoConstraints="NO" id="zo5-PU-82l">
-                                        <rect key="frame" x="220.5" y="18" width="27.5" height="13"/>
+                                        <rect key="frame" x="259" y="18" width="32" height="13"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Kb-cY-NAO">
-                                        <rect key="frame" x="20" y="0.0" width="257" height="49.5"/>
+                                        <rect key="frame" x="71.5" y="0.0" width="264.5" height="49.5"/>
                                         <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="20"/>
                                         <state key="normal" title="Reserve">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1114,9 +1114,9 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="zo5-PU-82l" firstAttribute="height" secondItem="BfL-pG-VHs" secondAttribute="height" multiplier="0.26" id="3Xc-rd-jPk"/>
-                                    <constraint firstItem="8Kb-cY-NAO" firstAttribute="width" secondItem="BfL-pG-VHs" secondAttribute="width" multiplier="0.9" id="IXk-JT-rm6"/>
+                                    <constraint firstItem="8Kb-cY-NAO" firstAttribute="width" secondItem="BfL-pG-VHs" secondAttribute="width" multiplier="0.79" id="IXk-JT-rm6"/>
                                     <constraint firstItem="8Kb-cY-NAO" firstAttribute="height" secondItem="BfL-pG-VHs" secondAttribute="height" id="Rzb-My-goj"/>
-                                    <constraint firstItem="8Kb-cY-NAO" firstAttribute="centerX" secondItem="BfL-pG-VHs" secondAttribute="centerX" multiplier="1.04" id="aQN-SH-zKa"/>
+                                    <constraint firstItem="8Kb-cY-NAO" firstAttribute="centerX" secondItem="BfL-pG-VHs" secondAttribute="centerX" multiplier="1.215" id="aQN-SH-zKa"/>
                                     <constraint firstItem="8Kb-cY-NAO" firstAttribute="centerY" secondItem="BfL-pG-VHs" secondAttribute="centerY" id="g7F-3Y-ZIj"/>
                                     <constraint firstAttribute="trailing" secondItem="zo5-PU-82l" secondAttribute="trailing" multiplier="1.153" id="heK-5C-oQt"/>
                                     <constraint firstItem="zo5-PU-82l" firstAttribute="width" secondItem="BfL-pG-VHs" secondAttribute="width" multiplier="0.0947368" id="nel-Nt-cB7"/>
@@ -1131,8 +1131,8 @@
                             <constraint firstItem="W6S-sP-DFk" firstAttribute="height" secondItem="XlO-an-gdp" secondAttribute="height" multiplier="0.0519802" id="91i-i8-JlB"/>
                             <constraint firstItem="0jG-3f-cf4" firstAttribute="leading" secondItem="E9x-7g-Xbn" secondAttribute="leading" id="EPu-hX-Kt2"/>
                             <constraint firstItem="0jG-3f-cf4" firstAttribute="bottom" secondItem="E9x-7g-Xbn" secondAttribute="bottom" id="Ess-lf-cRz"/>
-                            <constraint firstItem="BfL-pG-VHs" firstAttribute="leading" secondItem="XlO-an-gdp" secondAttribute="leading" id="KCY-ff-xTP"/>
-                            <constraint firstItem="BfL-pG-VHs" firstAttribute="width" secondItem="XlO-an-gdp" secondAttribute="width" multiplier="0.69" id="Rdy-zt-RZL"/>
+                            <constraint firstItem="BfL-pG-VHs" firstAttribute="leading" secondItem="XlO-an-gdp" secondAttribute="leading" constant="-50" id="KCY-ff-xTP"/>
+                            <constraint firstItem="BfL-pG-VHs" firstAttribute="width" secondItem="XlO-an-gdp" secondAttribute="width" multiplier="0.81" id="Rdy-zt-RZL"/>
                             <constraint firstItem="r84-Se-m90" firstAttribute="height" secondItem="XlO-an-gdp" secondAttribute="height" multiplier="0.0767327" id="S7n-BK-TeJ"/>
                             <constraint firstItem="E9x-7g-Xbn" firstAttribute="trailing" secondItem="0jG-3f-cf4" secondAttribute="trailing" id="UuO-Fi-6Gf"/>
                             <constraint firstItem="BfL-pG-VHs" firstAttribute="height" secondItem="XlO-an-gdp" secondAttribute="height" multiplier="0.0615" id="cjW-u6-v80"/>

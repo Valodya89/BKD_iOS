@@ -11,6 +11,7 @@ class ReserveViewController: UIViewController {
     //MARK: Outlet
     //Car
     @IBOutlet weak var mCarBckgV: UIView!
+    @IBOutlet weak var mTowBarBckgV: UIView!
     @IBOutlet weak var mTowBarLb: UILabel!
     @IBOutlet weak var mTowBarBtn: UIButton!
     @IBOutlet weak var mCarImgV: UIImageView!
@@ -76,7 +77,12 @@ class ReserveViewController: UIViewController {
     @IBOutlet weak var mReserveInfoTableV: ReserveTableView!
     @IBOutlet weak var mReserveTableHeight: NSLayoutConstraint!
     
+    var reserveViewModel = ReserveViewModel()
+    public var vehicleModel: VehicleModel?
     var lastContentOffset:CGFloat = 0.0
+    var totalPrice: Double = 0.0
+    
+    
     //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,6 +105,8 @@ class ReserveViewController: UIViewController {
         mCarImgBckgV.setShadow(color: color_shadow!)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
         mScrollV.delegate = self
+        
+        configureView()
     }
     
     func clickConfirm() {
@@ -110,6 +118,35 @@ class ReserveViewController: UIViewController {
 
         }
     }
+    
+    func configureView() {
+        mCarImgV.image = vehicleModel?.vehicleImg
+        mCarDescriptionlb.text = vehicleModel?.vehicleDesctiption
+        mTowBarBckgV.isHidden = !((vehicleModel?.ifHasTowBar) == true)
+        mPickUpParkingLb.text = vehicleModel?.searchModel?.pickUpLocation
+        mReturnParkingLb.text = vehicleModel?.searchModel?.returnLocation
+        mPickUpDateLb.text = String((vehicleModel?.searchModel?.pickUpDate?.get(.day))!)
+        mReturnDateLb.text = String((vehicleModel?.searchModel?.returnDate?.get(.day))!)
+        mPickUpMonthLb.text = String((vehicleModel?.searchModel?.pickUpDate?.getMonth(lng: "en"))!)
+        mReturnMonthLb.text = String((vehicleModel?.searchModel?.returnDate?.getMonth(lng: "en"))!)
+        mPickUpTimeLb.text = vehicleModel?.searchModel?.pickUpTime?.getHour()
+        mReturnTimeLb.text = vehicleModel?.searchModel?.returnTime?.getHour()
+        
+        mPriceValueLb.text = String(vehicleModel?.vehicleValue ?? 0.0 )
+        mAccessoriecValueLb.text = String((vehicleModel?.accessoriesTotalPrice) ?? 0.0)
+        mAdditionalDriverValueLb.text = String((vehicleModel?.driversTotalPrice)  ?? 0.0)
+        
+        self.mReserveInfoTableV.accessories = reserveViewModel.getAdditionalAccessories(vehicleModel: vehicleModel!) as? [AccessoriesModel]
+        self.mReserveInfoTableV.drivers = reserveViewModel.getAdditionalDrivers(vehicleModel: vehicleModel!) as? [MyDriversModel]
+        mReserveInfoTableV.reloadData()
+        
+        totalPrice = (vehicleModel?.driversTotalPrice)! + (vehicleModel?.accessoriesTotalPrice)! + (vehicleModel?.vehicleValue)!
+        mTotalPriceValueLb.text = String(format: "%.2f",totalPrice)
+        
+    }
+    
+    
+    
 //MARK: ACTIONS
 //MARK: ----------
     

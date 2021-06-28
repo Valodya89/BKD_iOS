@@ -8,7 +8,7 @@
 import UIKit
 
 class DetailsViewModel: NSObject {
- static let shared = DetailsViewModel()
+ //static let shared = DetailsViewModel()
     
     let validator = Validator()
 
