@@ -105,6 +105,8 @@
 		565A7AEA2655C5AE006C63D0 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565A7AE92655C5AE006C63D0 /* CategoryModel.swift */; };
 		565BD3602659AED1001923F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565BD35F2659AED1001923F5 /* AppDelegate.swift */; };
 		5660F7F2266C21980082F038 /* Mulish-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5660F7F1266C217F0082F038 /* Mulish-Bold.ttf */; };
+		566354EB268AF8EF0003E2EB /* PriceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566354E9268AF8EF0003E2EB /* PriceTableViewCell.swift */; };
+		566354EC268AF8EF0003E2EB /* PriceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 566354EA268AF8EF0003E2EB /* PriceTableViewCell.xib */; };
 		5665400C2673A0A5008ACD31 /* TariffSlideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5665400A2673A0A5008ACD31 /* TariffSlideCollectionViewCell.swift */; };
 		5665400D2673A0A5008ACD31 /* TariffSlideCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5665400B2673A0A5008ACD31 /* TariffSlideCollectionViewCell.xib */; };
 		5665403526759D3E008ACD31 /* TariffCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5665403426759D3D008ACD31 /* TariffCarouselView.swift */; };
@@ -266,6 +268,8 @@
 		565A7AE92655C5AE006C63D0 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		565BD35F2659AED1001923F5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5660F7F1266C217F0082F038 /* Mulish-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mulish-Bold.ttf"; sourceTree = "<group>"; };
+		566354E9268AF8EF0003E2EB /* PriceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTableViewCell.swift; sourceTree = "<group>"; };
+		566354EA268AF8EF0003E2EB /* PriceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriceTableViewCell.xib; sourceTree = "<group>"; };
 		5665400A2673A0A5008ACD31 /* TariffSlideCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffSlideCollectionViewCell.swift; sourceTree = "<group>"; };
 		5665400B2673A0A5008ACD31 /* TariffSlideCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TariffSlideCollectionViewCell.xib; sourceTree = "<group>"; };
 		5665403426759D3D008ACD31 /* TariffCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffCarouselView.swift; sourceTree = "<group>"; };
@@ -982,6 +986,15 @@
 			path = DataHelper;
 			sourceTree = "<group>";
 		};
+		566354E8268AF8890003E2EB /* PriceTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				566354E9268AF8EF0003E2EB /* PriceTableViewCell.swift */,
+				566354EA268AF8EF0003E2EB /* PriceTableViewCell.xib */,
+			);
+			path = PriceTableViewCell;
+			sourceTree = "<group>";
+		};
 		566540092673A077008ACD31 /* TariffSlideCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1421,6 +1434,7 @@
 		56C8E16E267C1CAD0061890C /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				566354E8268AF8890003E2EB /* PriceTableViewCell */,
 				56C8E16F267C1CC40061890C /* ReserveTableViewCell */,
 			);
 			path = Cell;
@@ -1604,6 +1618,7 @@
 				56573202267339B50012ADD0 /* FontsFree-Net-SFProDisplay-Medium.ttf in Resources */,
 				5656324726585FFF00B78562 /* CarEquipmentCollectionViewCell.xib in Resources */,
 				568E706F264481B0000CB6A9 /* LeftTableViewCell.xib in Resources */,
+				566354EC268AF8EF0003E2EB /* PriceTableViewCell.xib in Resources */,
 				565A7AE426555EFF006C63D0 /* CategoryTableViewCell.xib in Resources */,
 				561888A3264ABDFC00BDDB33 /* DropDownTableViewCell.xib in Resources */,
 				564E136A2652F0CF008CE884 /* PrivacyPoliceView.xib in Resources */,
@@ -1816,6 +1831,7 @@
 				56CD830B267CF45600B2799F /* ReserveTableView.swift in Sources */,
 				568E706E264481B0000CB6A9 /* LeftTableViewCell.swift in Sources */,
 				56533EFF267954560012BF4A /* AccessoriesCollectionViewCell.swift in Sources */,
+				566354EB268AF8EF0003E2EB /* PriceTableViewCell.swift in Sources */,
 				564E12E1264D787A008CE884 /* MenuModel.swift in Sources */,
 				565731D92672DE810012ADD0 /* UINavigationControllerExtention.swift in Sources */,
 				560251E02661089C00FB204C /* CarouselCellView.swift in Sources */,

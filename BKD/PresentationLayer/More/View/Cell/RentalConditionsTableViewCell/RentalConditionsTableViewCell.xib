@@ -73,6 +73,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="le4-YC-J2M" secondAttribute="bottom" constant="5" id="1xs-XG-skn"/>
                     <constraint firstItem="s5r-rv-OLd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" multiplier="0.5" id="9wO-Id-sP3"/>
@@ -92,6 +93,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" name="background"/>
             <connections>
                 <outlet property="mEuroLb" destination="uFI-iU-wcc" id="gHt-Io-s6O"/>
                 <outlet property="mImgV" destination="svj-R3-6sc" id="TVi-BX-75b"/>
@@ -105,6 +107,9 @@
     </objects>
     <resources>
         <image name="deposit" width="13" height="17"/>
+        <namedColor name="background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="navigationBar">
             <color red="0.10980391502380371" green="0.20000001788139343" blue="0.37254902720451355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

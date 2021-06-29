@@ -108,6 +108,7 @@ let top_avalableCategoryTbv: CGFloat = 30.0
 let cornerRadius_equipment: CGFloat = 15.0
 let zoom: Float = 12.0
 let detail_cell_height: CGFloat = 28
+let mydriver_cell_height: CGFloat = 66
 let tailLift_cell_height: CGFloat = 40
 
 //h* 16 /37

@@ -28,9 +28,7 @@ override func awakeFromNib() {
 }
 
 func setupView() {
-    mSelectBtn.makeBorderWithCornerRadius(radius: 36,
-                                          borderColor: color_navigationBar!,
-                                          borderWidth: 1)
+    mSelectBtn.roundCornersWithBorder(corners: .allCorners, radius: 36, borderColor: color_navigationBar!, borderWidth: 1)
     mShadowBckgV.setShadow(color: color_shadow!)
 }
 

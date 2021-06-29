@@ -37,7 +37,8 @@ class MyDriversViewController: UIViewController {
         mRightBarBtn.image = img_bkd
         mTotalPriceBckgV.setShadow(color: color_shadow!)
         mAddDriverBckgV.layer.cornerRadius = mAddDriverBckgV.frame.height/2
-        mAddBtn.layer.cornerRadius =  15
+        mAddBtn.layer.cornerRadius = mAddBtn.frame.size.width/2
+        mAddBtn.clipsToBounds = true
         configureDelegates()
     }
      
@@ -80,10 +81,10 @@ extension MyDriversViewController: UICollectionViewDelegate, UICollectionViewDat
     
     //MARK: UICollectionViewDelegateFlowLayout
     //MARK: -------------------------------------
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: self.view.bounds.width,
-//                      height: self.view.bounds.height * 0.0816832)
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: self.view.bounds.width,
+                      height: mydriver_cell_height)
+    }
     
 }
 

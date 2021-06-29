@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -69,8 +69,11 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFC-8e-RwX">
-                                                            <rect key="frame" x="276" y="7" width="94" height="38"/>
+                                                            <rect key="frame" x="275" y="7" width="94" height="38"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="94" id="yw8-GM-E2G"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="18"/>
                                                             <state key="normal" title="Select">
                                                                 <color key="titleColor" name="navigationBar"/>
@@ -81,14 +84,13 @@
                                                     <constraints>
                                                         <constraint firstItem="57r-Fu-qcy" firstAttribute="centerX" secondItem="pQR-eq-dym" secondAttribute="centerX" multiplier="0.73" id="1Cm-R0-KG1"/>
                                                         <constraint firstItem="57r-Fu-qcy" firstAttribute="centerY" secondItem="pQR-eq-dym" secondAttribute="centerY" multiplier="0.56" id="1Fc-AG-0wF"/>
-                                                        <constraint firstItem="bFC-8e-RwX" firstAttribute="height" secondItem="pQR-eq-dym" secondAttribute="height" multiplier="0.730769" id="2Xb-6a-NOz"/>
+                                                        <constraint firstItem="bFC-8e-RwX" firstAttribute="height" relation="greaterThanOrEqual" secondItem="pQR-eq-dym" secondAttribute="height" multiplier="0.730769" id="2Xb-6a-NOz"/>
                                                         <constraint firstItem="57r-Fu-qcy" firstAttribute="width" secondItem="pQR-eq-dym" secondAttribute="width" multiplier="0.68" id="62z-IA-Wrf"/>
                                                         <constraint firstItem="SpY-bZ-mir" firstAttribute="trailing" secondItem="57r-Fu-qcy" secondAttribute="trailing" id="LRR-mj-crz"/>
                                                         <constraint firstItem="SpY-bZ-mir" firstAttribute="top" secondItem="57r-Fu-qcy" secondAttribute="bottom" multiplier="1.14" id="Mb6-bG-Py8"/>
-                                                        <constraint firstItem="bFC-8e-RwX" firstAttribute="width" secondItem="pQR-eq-dym" secondAttribute="width" multiplier="0.247368" id="OQ2-5R-J6S"/>
                                                         <constraint firstItem="SpY-bZ-mir" firstAttribute="leading" secondItem="57r-Fu-qcy" secondAttribute="leading" id="P3i-Nm-rPz"/>
                                                         <constraint firstItem="SpY-bZ-mir" firstAttribute="height" secondItem="pQR-eq-dym" secondAttribute="height" multiplier="0.315789" id="aC5-Mr-cou"/>
-                                                        <constraint firstItem="bFC-8e-RwX" firstAttribute="centerX" secondItem="pQR-eq-dym" secondAttribute="centerX" multiplier="1.7" id="cS0-nN-cDk"/>
+                                                        <constraint firstAttribute="trailing" secondItem="bFC-8e-RwX" secondAttribute="trailing" multiplier="1.03" id="eST-Eh-z0W"/>
                                                         <constraint firstItem="57r-Fu-qcy" firstAttribute="height" secondItem="pQR-eq-dym" secondAttribute="height" multiplier="0.423077" id="ifj-vJ-H26"/>
                                                         <constraint firstItem="bFC-8e-RwX" firstAttribute="centerY" secondItem="pQR-eq-dym" secondAttribute="centerY" id="koT-pD-OaX"/>
                                                     </constraints>
@@ -193,6 +195,7 @@
                                     <constraint firstAttribute="bottom" secondItem="yXQ-OT-ic7" secondAttribute="bottom" constant="1" id="X9s-bd-Wdy"/>
                                     <constraint firstAttribute="height" constant="38" id="Xkc-v0-0CB"/>
                                     <constraint firstItem="iEE-BH-Sdk" firstAttribute="height" secondItem="Zqf-CP-KJC" secondAttribute="height" id="ZWt-bg-RPf"/>
+                                    <constraint firstAttribute="width" constant="159" id="e8M-hB-b17"/>
                                     <constraint firstItem="yXQ-OT-ic7" firstAttribute="width" secondItem="Zqf-CP-KJC" secondAttribute="width" multiplier="0.225" id="eyv-CE-JRz"/>
                                     <constraint firstItem="iEE-BH-Sdk" firstAttribute="centerY" secondItem="Zqf-CP-KJC" secondAttribute="centerY" id="rNH-76-9U6"/>
                                 </constraints>
@@ -207,7 +210,6 @@
                             <constraint firstItem="Zqf-CP-KJC" firstAttribute="centerY" secondItem="D7d-26-dsF" secondAttribute="centerY" multiplier="0.098" id="CGO-bv-tSk"/>
                             <constraint firstItem="hIw-9t-jym" firstAttribute="height" secondItem="Ozp-6Z-TjH" secondAttribute="height" multiplier="0.0643564" id="ETm-OI-dSd"/>
                             <constraint firstAttribute="trailing" secondItem="uQa-jQ-Lx1" secondAttribute="trailing" id="Fzx-hn-H1V"/>
-                            <constraint firstItem="Zqf-CP-KJC" firstAttribute="width" secondItem="Ozp-6Z-TjH" secondAttribute="width" multiplier="0.384058" id="UuL-qh-Zn0"/>
                             <constraint firstItem="hIw-9t-jym" firstAttribute="width" secondItem="Ozp-6Z-TjH" secondAttribute="width" multiplier="0.917874" id="lNR-yA-5by"/>
                             <constraint firstItem="hIw-9t-jym" firstAttribute="centerX" secondItem="D7d-26-dsF" secondAttribute="centerX" id="reO-Dh-hnS"/>
                             <constraint firstItem="D7d-26-dsF" firstAttribute="bottom" secondItem="uQa-jQ-Lx1" secondAttribute="bottom" id="rw5-kL-X1d"/>

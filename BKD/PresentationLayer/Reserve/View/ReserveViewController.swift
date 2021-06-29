@@ -91,8 +91,6 @@ class ReserveViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         mReserveTableHeight.constant = mReserveInfoTableV.contentSize.height
-       
-
     }
     
     func setupView() {

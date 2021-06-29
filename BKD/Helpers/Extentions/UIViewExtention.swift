@@ -39,7 +39,7 @@ extension UIView {
     /// add to view shadow 4 sides
     func setShadow(color: UIColor) {
         self.layer.shadowColor = color.cgColor
-        self.layer.shadowOpacity = 0.5
+        self.layer.shadowOpacity = 0.7
         self.layer.shadowRadius = 2.0
         self.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
         self.layer.masksToBounds = false

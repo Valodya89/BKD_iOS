@@ -225,7 +225,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     private func configureReserveView(isActive: Bool) {
         mReserveBckgV.setGradientWithCornerRadius(cornerRadius: 0.0, startColor:isActive ? color_reserve_start! : color_reserve_inactive_start!,
                                                   endColor:isActive ? color_reserve_end!: color_reserve_inactive_end! )
-        //mReserveBckgV.roundCorners(corners: [.topRight], radius: 20)
+        mReserveBckgV.roundCorners(corners: [.topRight, .topLeft], radius: 20)
         mReserveBckgV.isUserInteractionEnabled = isActive
     }
     
@@ -270,6 +270,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
                 self.mScrollV.contentOffset.y = y
             }, completion: nil)
         }
+        showTariffCardWithDelay()
     }
     
     ///Scroll view will back to previous position
@@ -293,10 +294,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             updateSearchDates()
         }
         isActiveReserve()
-
     }
-    
-    
     
     /// will update date fields depend on tariff option
         func updateSearchDates() {
@@ -317,7 +315,6 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             search = .time
             searchModel.pickUpTime = datePicker.date
             mSearchV.mReturnTimeTxtFl.font =  UIFont.init(name: (responderTxtFl.font?.fontName)!, size: 18.0)
-
             
             let newSearchModel = detailsViewModel.updateSearchInfo(tariff:
                                                                     currentTariff,
@@ -356,7 +353,6 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     private func isActiveReserve() {
         detailsViewModel.isReserveActive(searchModel: searchModel) { [self] (isActive) in
             //remove CAGradientLayer
-            self.mReserveBckgV.layer.sublayers?.filter{ $0 is CAGradientLayer }.forEach{ $0.removeFromSuperlayer() }
             self.mReserveBckgV.layer.sublayers?.filter{ $0 is CAGradientLayer }.forEach{ $0.removeFromSuperlayer() }
             configureReserveView(isActive: isActive)
         }
@@ -401,37 +397,80 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     ///will show tariff cards
     private func showTariffCards () {
-       mTariffCarouselV.tariffCarousel.reloadData()
-        self.tariffSlideVC.tariffSlideArr = TariffSlideData.tariffSlideModel
-        self.tariffSlideVC.mTariffSlideCollectionV.reloadData()
-        mTariffCarouselV.isHidden = false
-        UIView.animate(withDuration: 0.7) { [self] in
-            self.mTariffCarouselV.alpha = 1
-            self.tariffSlideVC.view.frame.origin.y += 500
-            self.tariffSlideVC.view.layoutIfNeeded()
-        } completion: { [self] _ in
-            if isSearchEdit && currentTariff == .flexible {
-                self.animateSearchEdit(isShow: true)
+            self.mTariffCarouselV.tariffCarousel.reloadData()
+            self.tariffSlideVC.tariffSlideArr = TariffSlideData.tariffSlideModel
+            self.tariffSlideVC.mTariffSlideCollectionV.reloadData()
+            UIView.animate(withDuration: 0.5) { [self] in
+                self.tariffSlideVC.view.frame.origin.y += 500
+                self.tariffSlideVC.view.layoutIfNeeded()
+            } completion: { [self] _ in
+                if isSearchEdit && currentTariff == .flexible {
+                    self.animateSearchEdit(isShow: true)
+                }
+            }
+        showTariffCardWithDelay()
+        
+    }
+   
+    private func showTariffCardWithDelay() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            self.mTariffCarouselV.isHidden = false
+            UIView.animate(withDuration: 0.5) { [self] in
+                self.mTariffCarouselV.alpha = 1.0
             }
         }
     }
-   
+    
     /// will hide tariff cards
     private func hideTariffCards() {
-        UIView.animate(withDuration: 0.7) { [self] in
-            self.tariffSlideVC.view.frame.origin.y -= 500
-            mTariffCarouselV.alpha = 0.0
-            mSearchV.alpha = 0.0
-            self.tariffSlideVC.view.layoutIfNeeded()
-        } completion: { [self]_ in
-            self.mTariffCarouselV.isHidden = true
-            mSearchV.isHidden = true
-            scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height
-        }
+            UIView.animate(withDuration: 0.5) { [self] in
+                self.tariffSlideVC.view.frame.origin.y -= 500
+                mTariffCarouselV.alpha = 0.0
+                mSearchV.alpha = 0.0
+                self.tariffSlideVC.view.layoutIfNeeded()
+            } completion: { [self]_ in
+                self.mTariffCarouselV.isHidden = true
+                mSearchV.isHidden = true
+                scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height
+            }
     }
+    
+    /// show Tarif lift or Detail tableView
+    private func showTableView(view: UIView, imgRotate: UIImageView?) {
+            UIView.transition(with: view, duration: tableAnimationDuration, options: [.transitionCurlDown,.allowUserInteraction], animations: {
+                if let _ = imgRotate {
+                    imgRotate!.rotateImage(rotationAngle: CGFloat(Double.pi))
+                }
+                view.alpha = 1
+                view.isHidden = false
+            }, completion: nil)
+    }
+    
+    /// close Tarif lift or Detail tableView
+    private func hideTableView(view: UIView, imgRotate: UIImageView?) {
+        UIView.transition(with: view, duration: tableAnimationDuration, options: [.transitionCurlUp,.allowUserInteraction], animations: {
+            if let _ = imgRotate {
+                imgRotate!.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
+            }
+            view.alpha = 0
+        }, completion: {_ in
+            view.isHidden = true
+        })
+    }
+    
+//    ///hide detail or tail lift if it open
+//    func hideTableViewIfOpen() {
+//        if mDetailsTableBckgV.alpha == 1 {
+//            hideTableView(view: mDetailsTableBckgV, imgRotate: self.mDetailsAndTailLiftV.mDetailsDropDownImgV)
+//        }
+//        if mTailLiftTableBckgV.alpha == 1 {
+//            hideTableView(view: mTailLiftTableBckgV, imgRotate: self.mDetailsAndTailLiftV.mTailLiftDropDownImgV)
+//        }
+//    }
     
     //MARK: ALERT
     //MARK: -------------------
+    
     func showAlertCustomLocation(checkedBtn: UIButton) {
         BKDAlert().showAlert(on: self,
                              title:Constant.Texts.titleCustomLocation,
@@ -600,26 +639,15 @@ extension DetailsViewController: DetailsAndTailLiftViewDelegate {
         if willOpen  {
             scrollToBottom(distance: 0.0)
             if self.mTailLiftTableBckgV.alpha == 1 {
+                hideTableView(view: mTailLiftTableBckgV, imgRotate: self.mDetailsAndTailLiftV.mTailLiftDropDownImgV)
                 // will show Details tableView and close TailLift tableView
-                UIView.transition(with: mTailLiftTableBckgV, duration: tableAnimationDuration, options: [.transitionCurlUp,.allowUserInteraction], animations: { [self] in
-                    self.mDetailsAndTailLiftV.mTailLiftDropDownImgV.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
-                    self.mTailLiftTableBckgV.alpha = 0
-                }, completion: { [self]_ in
-                    self.mTailLiftTableBckgV.isHidden = true
-                    animateDetailTableView()
-                })
-                
+                showTableView(view: mDetailsTableBckgV, imgRotate: self.mDetailsAndTailLiftV.mDetailsDropDownImgV)
+
             } else { // will show Details tableView
-                animateDetailTableView()
+                showTableView(view: mDetailsTableBckgV, imgRotate: self.mDetailsAndTailLiftV.mDetailsDropDownImgV)
             }
         } else if !willOpen { // will hide Details tableView
-            
-            UIView.transition(with: mDetailsTableBckgV, duration: tableAnimationDuration, options: [.transitionCurlUp,.allowUserInteraction], animations: { [self] in
-                self.mDetailsAndTailLiftV.mDetailsDropDownImgV.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
-                self.mDetailsTableBckgV.alpha = 0
-            }, completion: {_ in
-                self.mDetailsTableBckgV.isHidden = true
-            })
+            hideTableView(view: mDetailsTableBckgV, imgRotate: self.mDetailsAndTailLiftV.mDetailsDropDownImgV)
         }
     }
     
@@ -627,32 +655,11 @@ extension DetailsViewController: DetailsAndTailLiftViewDelegate {
         scrollToBottom(distance: 0.0)
         // will show TailLift tableView
         if willOpen {
-            UIView.transition(with: mTailLiftTableBckgV, duration: tableAnimationDuration, options: [.transitionCurlDown,.allowUserInteraction], animations: { [self] in
-                self.mTailLiftTableBckgV.alpha = 1
-                self.mTailLiftTableBckgV.isHidden = false
-            }, completion: nil)
+            showTableView(view: mTailLiftTableBckgV, imgRotate: nil)
         } else if !willOpen { // will hide TailLift tableView
-            hideTailLiftTableView()
+            hideTableView(view: mTailLiftTableBckgV, imgRotate: nil)
         }
     }
-    
-    private func animateDetailTableView() {
-        UIView.transition(with: mDetailsTableBckgV, duration: tableAnimationDuration, options: [.transitionCurlDown,.allowUserInteraction], animations: { [self] in
-            self.mDetailsAndTailLiftV.mDetailsDropDownImgV.rotateImage(rotationAngle: CGFloat(Double.pi))
-            self.mDetailsTableBckgV.alpha = 1
-            self.mDetailsTableBckgV.isHidden = false
-        }, completion: nil)
-    }
-    
-    
-    private func hideTailLiftTableView() {
-        UIView.transition(with: mTailLiftTableBckgV, duration: tableAnimationDuration, options: [.transitionCurlUp,.allowUserInteraction], animations: { [self] in
-            self.mTailLiftTableBckgV.alpha = 0
-        }, completion: {_ in
-            self.mTailLiftTableBckgV.isHidden = true
-        })
-    }
-    
 }
 
 //MARK: TariffSlideViewControllerDelegate
@@ -852,7 +859,7 @@ extension DetailsViewController: CarPhotosViewDeleagte {
 //MARK: ----------------------------
 extension DetailsViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
+        print(scrollView.contentOffset.y)
         if ( scrollView.contentOffset.y == 0) {
             // move up
             if isScrolled {
@@ -860,6 +867,7 @@ extension DetailsViewController: UIScrollViewDelegate {
                 if isSearchEdit && currentTariff == .flexible {
                     self.animateSearchEdit(isShow: false)
                 }
+               // hideTableViewIfOpen()
                 hideTariffCards()
             }
         } else if (scrollView.contentOffset.y > 0) {

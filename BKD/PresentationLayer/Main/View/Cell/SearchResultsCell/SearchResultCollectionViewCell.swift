@@ -80,10 +80,10 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         mFlipInfoV.layer.cornerRadius = 10
 
         // border
-        mInfoV.layer.borderWidth = 0.2
-        mInfoV.layer.borderColor = UIColor.lightGray.cgColor
-        mFlipInfoV.layer.borderWidth = 0.2
-        mFlipInfoV.layer.borderColor = UIColor.lightGray.cgColor
+//        mInfoV.layer.borderWidth = 0.2
+//        mInfoV.layer.borderColor = UIColor.lightGray.cgColor
+//        mFlipInfoV.layer.borderWidth = 0.2
+//        mFlipInfoV.layer.borderColor = UIColor.lightGray.cgColor
 
         // shadow
         mInfoV.setShadow(color:  color_shadow!)

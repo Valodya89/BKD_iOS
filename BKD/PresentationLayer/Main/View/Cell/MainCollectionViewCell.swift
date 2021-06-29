@@ -58,8 +58,8 @@ static let identifier = "MainCollectionViewCell"
         mValueBckV.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
 
         // border
-        mInfoBckV.layer.borderWidth = 0.2
-        mInfoBckV.layer.borderColor = UIColor.lightGray.cgColor
+//        mInfoBckV.layer.borderWidth = 0.2
+//        mInfoBckV.layer.borderColor = UIColor.lightGray.cgColor
 
         // shadow
         mInfoBckV.setShadow(color: color_shadow!)
