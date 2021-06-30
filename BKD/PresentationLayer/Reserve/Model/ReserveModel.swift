@@ -14,3 +14,10 @@ struct ReserveModel {
     public var accessorieCount: String?
     public var accessorieImg: UIImage?
 }
+
+struct PriceModel {
+    public var priceTitle: String
+    public var price: Double?
+    public var offertPrice: Double?
+    public var discountPrecent: Double?
+}

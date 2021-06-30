@@ -67,10 +67,10 @@ struct Constant {
         static let titleChangeTariff = "Pick up date/time  Return date/time"
         
         static let messageWorkingTime = "Time is selected outside of BKD working hours to make a reservation (07:30 - 18:30)."
-        static let titleWorkingTime = "Additional service fee is     € 59,99"
+        static let titleWorkingTime = "Additional service fee is     € %.2f"
         static let messageCustomLocation  = "You choose a location, BKD vehicle is there. Depending on the location, service fee may vary."
         static let messageCustomLocation2  = "Please, select a location by clicking on the Maps and we will check the availability."
-        static let titleCustomLocation = "Starting from € XX.00 (incl. VAT)"
+        static let titleCustomLocation = "Starting from € %.2f (incl. VAT)"
         static let cancel = "Cancel"
         static let agree = "Agree"
         static let change = "Yes, Change"

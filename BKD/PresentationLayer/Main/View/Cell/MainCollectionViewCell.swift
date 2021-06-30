@@ -94,6 +94,7 @@ static let identifier = "MainCollectionViewCell"
         vehicleModel.ifHasAditionalDriver = false
         let price: Double = mOffertBackgV.isHidden ? (mValueLb.text!  as NSString).doubleValue : (mOffertPriceLb.text!  as NSString).doubleValue
         vehicleModel.vehicleValue = price
+
         return vehicleModel
     }
 

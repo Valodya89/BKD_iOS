@@ -129,7 +129,17 @@ class DetailsViewModel: NSObject {
     /// Check if reserve will  be acteve
     func isReserveActive(searchModel:SearchModel, didResult: @escaping (Bool) -> ())  {
         didResult(validator.checkReserve(searchModel: searchModel))
-
+    }
+    
+    func getCustomLocationTotalPrice(searchV: SearchView) -> Double {
+        var total: Double = 0.0
+        if LocationPickUp.pickUpCustomLocation == searchV.locationPickUp {
+            total += customLocationPrice
+         }
+         if LocationReturn.returnCustomLocation == searchV.locationReturn {
+            total += customLocationPrice
+          }
+        return total
     }
    
 }

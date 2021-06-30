@@ -10,7 +10,7 @@ import UIKit
 protocol SearchHeaderViewDelegate: AnyObject {
     func willOpenPicker (textFl: UITextField)
     func didSelectLocation (_ locationStr: String, _ btnTag: Int)
-    func didSelectCustomLocation(_ btn:UIButton, location: Location)
+    func didSelectCustomLocation(_ btn:UIButton)
     func didSelectSearch()
     func hideEditView()
 }
@@ -67,7 +67,8 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     var returnDropisClose: Bool = true
     var currLocationBtn = UIButton()
     var currLocationDropImgV = UIImageView()
-    var location:Location?
+    var locationPickUp:LocationPickUp?
+    var locationReturn:LocationReturn?
 
     let searchHeaderViewModel: SearchHeaderViewModel = SearchHeaderViewModel()
     weak var delegate: SearchHeaderViewDelegate?
@@ -160,24 +161,39 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         }
     }
     ///update Location Fields
-    func updateLocationFields(place: String) {
+    func updateCustomLocationFields(place: String, didResult: @escaping (Bool) -> ()) {
+        
        var searchModel = SearchModel()
-        switch location {
-        case .pickUpLocation: break
-        case .returnLocation: break
-        case .pickUpCustomLocation:
+       var isPickUpLocation = true
+
+        if locationPickUp == LocationPickUp.pickUpCustomLocation {
             searchModel.pickUpLocation = place
             searchModel.isPickUpCustomLocation = true
             setPickUpLocationInfo(searchModel: searchModel)
-            break
-        case .returnCustomLocation:
+        } else if locationReturn == LocationReturn.returnCustomLocation {
             searchModel.returnLocation = place
-            searchModel.isRetuCustomLocation = true
-            setReturnLocationInfo(searchModel: searchModel)
-            break
-        default:
-            break
+                        searchModel.isRetuCustomLocation = true
+                        setReturnLocationInfo(searchModel: searchModel)
+            isPickUpLocation = false
         }
+        didResult(isPickUpLocation)
+
+//        switch location {
+//        case .pickUpLocation: break
+//        case .returnLocation: break
+//        case .pickUpCustomLocation:
+//            searchModel.pickUpLocation = place
+//            searchModel.isPickUpCustomLocation = true
+//            setPickUpLocationInfo(searchModel: searchModel)
+//            break
+//        case .returnCustomLocation:
+//            searchModel.returnLocation = place
+//            searchModel.isRetuCustomLocation = true
+//            setReturnLocationInfo(searchModel: searchModel)
+//            break
+//        default:
+//            break
+//        }
     }
     
     func showLocationList() {
@@ -205,12 +221,12 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
             self!.currLocationDropImgV.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
             
             if self?.currLocationBtn.tag == 4 { //pick up location
-                self?.location = .pickUpLocation
+                self?.locationPickUp = .pickUpLocation
                 UserDefaults.standard.set(self?.currLocationBtn.title(for: .normal), forKey: key_pickUpLocation)
                 self?.mCheckBoxPickUpCustomLocBtn.setImage(#imageLiteral(resourceName: "uncheck_box"), for: .normal)
 
             } else { // return location
-                self?.location = .returnLocation
+                self?.locationReturn = .returnLocation
                 UserDefaults.standard.set(self?.currLocationBtn.title(for: .normal), forKey: key_returnLocation)
                 self?.mCheckBoxReturnCustomLocBtn.setImage(#imageLiteral(resourceName: "uncheck_box"), for: .normal)
             }
@@ -337,11 +353,11 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
             mPickUpLocationBtn.setTitle(Constant.Texts.pickUpLocation, for: .normal)
             mPickUpLocationBtn.setTitleColor(color_choose_date!, for: .normal)
             mPickUpLocationBtn.titleLabel?.font = font_placeholder
+            locationPickUp = .none
         } else {
            // sender.setImage(img_check_box, for: .normal)
-            location = .pickUpCustomLocation
-            delegate?.didSelectCustomLocation(mCheckBoxPickUpCustomLocBtn,
-                                              location: location!)
+            locationPickUp = .pickUpCustomLocation
+            delegate?.didSelectCustomLocation(mCheckBoxPickUpCustomLocBtn)
 
         }
     }
@@ -355,11 +371,11 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
             mReturnLocationBtn.setTitleColor(color_choose_date!, for: .normal)
             mReturnLocationBtn.titleLabel?.font = font_placeholder
             sender.setImage(img_uncheck_box, for: .normal)
+            locationReturn = .none
         } else {
            // sender.setImage(img_check_box, for: .normal)
-            location = .returnCustomLocation
-            delegate?.didSelectCustomLocation(mCheckBoxReturnCustomLocBtn,
-                                              location: location!)
+            locationReturn = .returnCustomLocation
+            delegate?.didSelectCustomLocation(mCheckBoxReturnCustomLocBtn)
         }
     }
     

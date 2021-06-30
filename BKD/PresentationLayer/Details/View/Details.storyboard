@@ -847,7 +847,7 @@
                                                     <outlet property="mReturnTimeTxtFl" destination="Gay-is-bgR" id="GdL-xC-aTf"/>
                                                 </connections>
                                             </view>
-                                            <stackView hidden="YES" opaque="NO" alpha="0.0" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="h0G-ic-ldI" customClass="SearchWithValueView" customModule="BKD" customModuleProvider="target">
+                                            <stackView opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="h0G-ic-ldI" customClass="SearchWithValueView" customModule="BKD" customModuleProvider="target">
                                                 <rect key="frame" x="16" y="843" width="382" height="50"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QMC-5Z-Aua">
@@ -882,8 +882,8 @@
                                                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
                                                             </button>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="auX-W1-Mxg">
-                                                                <rect key="frame" x="11" y="4" width="66.5" height="12"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="auX-W1-Mxg">
+                                                                <rect key="frame" x="11" y="-2" width="147.5" height="24"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="10"/>
                                                                 <color key="textColor" name="entered_date"/>
                                                                 <nil key="highlightedColor"/>
@@ -917,8 +917,8 @@
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="10"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zZ-hF-N8g">
-                                                                <rect key="frame" x="175" y="4" width="66.5" height="12"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zZ-hF-N8g">
+                                                                <rect key="frame" x="175" y="-2" width="147.5" height="24"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="10"/>
                                                                 <color key="textColor" name="entered_date"/>
                                                                 <nil key="highlightedColor"/>
@@ -934,14 +934,14 @@
                                                         <color key="backgroundColor" name="background"/>
                                                         <constraints>
                                                             <constraint firstItem="8Md-vh-xvP" firstAttribute="leading" secondItem="JAx-xC-Tu1" secondAttribute="leading" constant="11" id="0Kf-xN-wJG"/>
-                                                            <constraint firstItem="auX-W1-Mxg" firstAttribute="height" secondItem="QMC-5Z-Aua" secondAttribute="height" multiplier="0.24" id="0rs-5Z-7Uv"/>
+                                                            <constraint firstItem="auX-W1-Mxg" firstAttribute="height" secondItem="QMC-5Z-Aua" secondAttribute="height" multiplier="0.475" id="0rs-5Z-7Uv"/>
                                                             <constraint firstItem="yP6-d0-Xqg" firstAttribute="leading" secondItem="QMC-5Z-Aua" secondAttribute="leading" constant="-4" id="1qI-d9-Shh"/>
                                                             <constraint firstItem="yP6-d0-Xqg" firstAttribute="trailing" secondItem="QMC-5Z-Aua" secondAttribute="centerX" id="3Wi-JN-gob"/>
                                                             <constraint firstItem="yP6-d0-Xqg" firstAttribute="top" secondItem="QMC-5Z-Aua" secondAttribute="top" id="B0M-6h-PMC"/>
-                                                            <constraint firstItem="auX-W1-Mxg" firstAttribute="width" relation="greaterThanOrEqual" secondItem="QMC-5Z-Aua" secondAttribute="width" multiplier="0.189024" id="Bot-gq-621"/>
+                                                            <constraint firstItem="auX-W1-Mxg" firstAttribute="width" secondItem="QMC-5Z-Aua" secondAttribute="width" multiplier="0.45" id="Bot-gq-621"/>
                                                             <constraint firstItem="kU8-Zf-KHa" firstAttribute="bottom" secondItem="uwG-HU-W69" secondAttribute="bottom" multiplier="0.85" id="DTQ-gb-SRU"/>
                                                             <constraint firstItem="Hdd-T4-rgj" firstAttribute="centerX" secondItem="QMC-5Z-Aua" secondAttribute="centerX" id="FRb-PD-AFs"/>
-                                                            <constraint firstItem="2zZ-hF-N8g" firstAttribute="width" relation="greaterThanOrEqual" secondItem="QMC-5Z-Aua" secondAttribute="width" multiplier="0.189024" id="Gui-Ij-F08"/>
+                                                            <constraint firstItem="2zZ-hF-N8g" firstAttribute="width" secondItem="QMC-5Z-Aua" secondAttribute="width" multiplier="0.45" id="Gui-Ij-F08"/>
                                                             <constraint firstItem="uwG-HU-W69" firstAttribute="leading" secondItem="ZCs-1r-ZzW" secondAttribute="trailing" constant="8" id="Hja-96-kQU"/>
                                                             <constraint firstItem="Hdd-T4-rgj" firstAttribute="centerY" secondItem="QMC-5Z-Aua" secondAttribute="centerY" constant="-1" id="URP-Jz-QYj"/>
                                                             <constraint firstItem="auX-W1-Mxg" firstAttribute="centerY" secondItem="QMC-5Z-Aua" secondAttribute="centerY" multiplier="0.4" id="Y7c-tb-gkE"/>
@@ -955,7 +955,7 @@
                                                             <constraint firstItem="ZCs-1r-ZzW" firstAttribute="centerY" secondItem="QMC-5Z-Aua" secondAttribute="centerY" multiplier="1.17" id="pkB-dt-aZq"/>
                                                             <constraint firstItem="2zZ-hF-N8g" firstAttribute="centerY" secondItem="auX-W1-Mxg" secondAttribute="centerY" id="pmH-rJ-DHH"/>
                                                             <constraint firstItem="uwG-HU-W69" firstAttribute="centerY" secondItem="ZCs-1r-ZzW" secondAttribute="centerY" multiplier="1.2" id="qB8-je-OH7"/>
-                                                            <constraint firstItem="2zZ-hF-N8g" firstAttribute="height" secondItem="QMC-5Z-Aua" secondAttribute="height" multiplier="0.24" id="sQg-CN-FGq"/>
+                                                            <constraint firstItem="2zZ-hF-N8g" firstAttribute="height" secondItem="QMC-5Z-Aua" secondAttribute="height" multiplier="0.475" id="sQg-CN-FGq"/>
                                                             <constraint firstItem="Hdd-T4-rgj" firstAttribute="height" secondItem="QMC-5Z-Aua" secondAttribute="height" multiplier="0.9" constant="-6" id="uLq-BC-j3A"/>
                                                             <constraint firstItem="8Md-vh-xvP" firstAttribute="centerY" secondItem="ZCs-1r-ZzW" secondAttribute="centerY" id="uU8-A0-DSp"/>
                                                             <constraint firstItem="kU8-Zf-KHa" firstAttribute="height" secondItem="uwG-HU-W69" secondAttribute="height" id="vSl-XC-CIj"/>

@@ -41,4 +41,37 @@ class ReserveViewModel: NSObject {
         }
         return drivers
     }
+    
+    func getPrices(vehicleModel:VehicleModel) -> Array<Any>? {
+        var prices:[PriceModel] = []
+       
+        if vehicleModel.vehicleValue > 0.0 {
+            prices.append(PriceModel(priceTitle: "Price", price: vehicleModel.vehicleValue))
+        }
+        if vehicleModel.vehicleOffertValue > 0.0 {
+            prices.append(PriceModel(priceTitle: "Special offer", price: vehicleModel.vehicleOffertValue, discountPrecent: vehicleModel.vehicleDiscountValue))
+        }
+        if vehicleModel.noWorkingTimeTotalPrice > 0.0 {
+            prices.append(PriceModel(priceTitle: "Additional service", price: vehicleModel.noWorkingTimeTotalPrice))
+        }
+        if vehicleModel.customLocationTotalPrice > 0.0 {
+            prices.append(PriceModel(priceTitle: "Custom location", price: vehicleModel.customLocationTotalPrice))
+        }
+        if vehicleModel.accessoriesTotalPrice > 0.0 {
+            prices.append(PriceModel(priceTitle: "Accessories", price: vehicleModel.accessoriesTotalPrice))
+        }
+        if vehicleModel.driversTotalPrice > 0.0 {
+            prices.append(PriceModel(priceTitle: "Additional driver", price: vehicleModel.driversTotalPrice))
+        }
+        return prices
+    }
+    
+    func getTotalPrice(totalPrices:[PriceModel]) -> Double {
+        var total: Double = 0
+        for item  in totalPrices {
+            let item = item as PriceModel
+            total += item.price!
+        }
+     return total
+    }
 }

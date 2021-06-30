@@ -201,7 +201,11 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         searchModel.pickUpLocation = mSearchV.mPickUpLocationBtn.title(for: .normal)
         searchModel.returnLocation = mSearchV.mReturnLocationBtn.title(for: .normal)
         vehicleModel?.searchModel = searchModel
-    }
+        if !isSearchEdit {
+            vehicleModel?.customLocationTotalPrice = detailsViewModel.getCustomLocationTotalPrice(searchV: mSearchV)
+        }
+        
+     }
     
     private func configureTransparentView()  {
         backgroundV.frame = self.view.bounds
@@ -473,7 +477,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     func showAlertCustomLocation(checkedBtn: UIButton) {
         BKDAlert().showAlert(on: self,
-                             title:Constant.Texts.titleCustomLocation,
+                             title: String(format: Constant.Texts.titleCustomLocation, customLocationPrice),
                              message: Constant.Texts.messageCustomLocation,
                              messageSecond: Constant.Texts.messageCustomLocation2,
                              cancelTitle: Constant.Texts.cancel,
@@ -486,7 +490,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     func showAlertWorkingHours() {
         BKDAlert().showAlert(on: self,
-                             title:Constant.Texts.titleWorkingTime,
+                             title:String(format: Constant.Texts.titleWorkingTime, timePrice),
                              message: Constant.Texts.messageWorkingTime,
                              messageSecond: nil,
                              cancelTitle: Constant.Texts.cancel,
@@ -777,7 +781,7 @@ extension DetailsViewController: SearchViewDelegate {
         isActiveReserve()
     }
     
-    func didSelectCustomLocation(_ btn: UIButton, location: Location) {
+    func didSelectCustomLocation(_ btn: UIButton) {
         self.showAlertCustomLocation(checkedBtn: btn)
     }
     
@@ -797,8 +801,17 @@ extension DetailsViewController: SearchViewDelegate {
 //MARK: ----------------------------
 extension DetailsViewController: CustomLocationViewControllerDelegate {
     func getCustomLocation(_ locationPlace: String) {
-        mSearchV.updateLocationFields(place: locationPlace)
-    
+         mSearchV.updateCustomLocationFields(place: locationPlace, didResult: { [weak self] (isPickUpLocation) in
+            if isPickUpLocation {
+                self?.searchModel.isPickUpCustomLocation = true
+                self?.searchModel.pickUpLocation = locationPlace
+            } else {
+                self?.searchModel.isRetuCustomLocation = true
+                self?.searchModel.returnLocation = locationPlace
+            }
+            self?.isActiveReserve()
+
+        })
     }
 }
 

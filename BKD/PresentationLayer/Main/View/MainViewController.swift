@@ -9,6 +9,10 @@ import UIKit
 import SideMenu
 
 
+let timePrice: Double = 59.99
+let customLocationPrice: Double = 42.99
+
+
 class MainViewController: BaseViewController {
     
     //MARK: Outlets
@@ -80,14 +84,14 @@ class MainViewController: BaseViewController {
         
     }
     
-    // set info to setSearchEdit model
+    // set info to setSearch model
     private func setSearchModel(){
         searchModel.pickUpDate = UserDefaults.standard.object(forKey: key_pickUpDate) as? Date
         searchModel.returnDate = UserDefaults.standard.object(forKey: key_returnDate) as? Date
         searchModel.pickUpTime = UserDefaults.standard.object(forKey: key_pickUpTime) as? Date
         searchModel.returnTime = UserDefaults.standard.object(forKey: key_returnTime) as? Date
-        searchModel.pickUpLocation = UserDefaults.standard.object(forKey: key_pickUpLocation) as? String
-        searchModel.returnLocation = UserDefaults.standard.object(forKey: key_returnLocation) as? String
+        searchModel.pickUpLocation = searchResultV?.mPickUpLocationLb.text
+        searchModel.returnLocation = searchResultV?.mReturnLocationLb.text
     }
     
     
@@ -195,7 +199,6 @@ class MainViewController: BaseViewController {
         }
         detailsVC.isSearchEdit = isSearchEdit
         detailsVC.vehicleModel = vehicleModel
-        
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }
     
@@ -414,7 +417,7 @@ class MainViewController: BaseViewController {
     
     func showAlertWorkingHours() {
         BKDAlert().showAlert(on: self,
-                             title:Constant.Texts.titleWorkingTime,
+                             title:String(format: Constant.Texts.titleWorkingTime, timePrice),
                              message: Constant.Texts.messageWorkingTime,
                              messageSecond: nil,
                              cancelTitle: Constant.Texts.cancel,
@@ -430,7 +433,7 @@ class MainViewController: BaseViewController {
     
     func showAlertCustomLocation(checkedBtn: UIButton) {
         BKDAlert().showAlert(on: self,
-                             title:Constant.Texts.titleCustomLocation,
+                             title:String(format: Constant.Texts.titleCustomLocation, customLocationPrice),
                              message: Constant.Texts.messageCustomLocation,
                              messageSecond: Constant.Texts.messageCustomLocation2,
                              cancelTitle: Constant.Texts.cancel,
@@ -693,7 +696,8 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
                            isSearchEdit: false)
         } else {
             let cell = collectionView.cellForItem(at: indexPath) as! SearchResultCollectionViewCell
-            let vehicleModel =  cell.setVehicleModel()
+            var vehicleModel =  cell.setVehicleModel()
+            vehicleModel.customLocationTotalPrice = SearchHeaderViewModel().getCustomLocationTotalPrice(searchV:searchHeaderV!)
             goToDetailPage(vehicleModel: vehicleModel,
                            isSearchEdit: true)
         }
@@ -724,7 +728,8 @@ extension MainViewController: SearchResultCellDelegate {
     
     func didPressReserve(tag: Int) {
         let cell = mCarCollectionV.cellForItem(at: IndexPath(item: tag, section: 0)) as! SearchResultCollectionViewCell
-        let vehicleModel =  cell.setVehicleModel()
+        var vehicleModel =  cell.setVehicleModel()
+        vehicleModel.customLocationTotalPrice = SearchHeaderViewModel().getCustomLocationTotalPrice(searchV:searchHeaderV!)
         goToDetailPage(vehicleModel: vehicleModel,
                        isSearchEdit: true)
     }
@@ -811,7 +816,7 @@ extension MainViewController: SearchHeaderViewDelegate {
         }
     }
     
-    func didSelectCustomLocation(_ btn: UIButton, location: Location) {
+    func didSelectCustomLocation(_ btn: UIButton) {
         self.showAlertCustomLocation(checkedBtn: btn)
     }
     
@@ -821,7 +826,16 @@ extension MainViewController: SearchHeaderViewDelegate {
 //MARK: ----------------------------
 extension MainViewController: CustomLocationViewControllerDelegate {
     func getCustomLocation(_ locationPlace: String) {
-        searchHeaderV?.updateLocationFields(place: locationPlace)
+        searchHeaderV?.updateCustomLocationFields(place: locationPlace, didResult: { [weak self] (isPickUpLocation) in
+            if isPickUpLocation {
+                self?.searchModel.isPickUpCustomLocation = true
+                self?.searchModel.pickUpLocation = locationPlace
+            } else {
+                self?.searchModel.isRetuCustomLocation = true
+                self?.searchModel.returnLocation = locationPlace
+            }
+            self?.checkAnyFieldsHaveBeenEdited()
+        })
     }
 }
 
@@ -853,12 +867,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       
    }
-
 }
 
 
 // MARK: - UIScrollView Delegate
-//MARK: -----------------------------------
+//MARK:-----------------------
 extension MainViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         /// Change top view position and alpha

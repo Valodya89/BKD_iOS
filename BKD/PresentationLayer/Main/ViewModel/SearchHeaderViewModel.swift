@@ -33,5 +33,14 @@ class SearchHeaderViewModel: NSObject {
         didResult(validator.checkSearchDatas(searchDateModel: searchDateModel))
     }
     
-
+    func getCustomLocationTotalPrice(searchV: SearchHeaderView) -> Double {
+        var total: Double = 0.0
+        if LocationPickUp.pickUpCustomLocation == searchV.locationPickUp {
+            total += customLocationPrice
+         }
+         if LocationReturn.returnCustomLocation == searchV.locationReturn {
+            total += customLocationPrice
+          }
+        return total
+    }
 }

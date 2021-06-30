@@ -17,8 +17,10 @@ struct VehicleModel {
     public var vehicleDesctiption: String?
     public var vehicleImg: UIImage?
     public var ifHasTowBar: Bool = false
-    public var vehicleValue: Double?
-    
+    public var vehicleValue: Double = 0.0
+    public var vehicleOffertValue: Double = 0.0
+    public var vehicleDiscountValue: Double = 0.0
+
     //Vehicle general short info
     public var drivingLicense: String?
     public var vehicleCube: String?
@@ -29,11 +31,10 @@ struct VehicleModel {
     public var ifHasAccessories: Bool = false
     public var ifHasAditionalDriver: Bool = false
     
-    public var accessoriesTotalPrice: Double? = 0.0
-    public var driversTotalPrice: Double? = 0.0
-    public var customLocationTotalPrice: Double? = 0.0
-    public var mountlyTotalPrice: Double? = 0.0
-    public var noWorkingTimeTotalPrice: Double? = 0.0
+    public var accessoriesTotalPrice: Double = 0.0
+    public var driversTotalPrice: Double = 0.0
+    public var customLocationTotalPrice: Double = 0.0
+    public var noWorkingTimeTotalPrice: Double = 0.0
 
     public var searchModel: SearchModel?
     public var additionalAccessories: [AccessoriesModel]?

@@ -43,19 +43,6 @@ class ReserveViewController: UIViewController {
     @IBOutlet weak var mReturnDateLb: UILabel!
     @IBOutlet weak var mReturnMonthLb: UILabel!
     @IBOutlet weak var mReturnTimeLb: UILabel!
-        
-    //price list
-    @IBOutlet weak var mPriceLb: UILabel!
-    @IBOutlet weak var mPriceValueLb: UILabel!
-    @IBOutlet weak var mSpecialOfferValueLb: UILabel!
-    @IBOutlet weak var mSpecialOfferLb: UILabel!
-        @IBOutlet weak var mDisacountValueLb: UILabel!
-    @IBOutlet weak var mCustomLocationLb: UILabel!
-    @IBOutlet weak var mCustomLocationValueLb: UILabel!
-    @IBOutlet weak var mAccessoriesLb: UILabel!
-    @IBOutlet weak var mAccessoriecValueLb: UILabel!
-    @IBOutlet weak var mAdditionalDriverLb: UILabel!
-    @IBOutlet weak var mAdditionalDriverValueLb: UILabel!
     
    //Total Price
     @IBOutlet weak var mTotalPriceBackgV: UIView!
@@ -76,7 +63,9 @@ class ReserveViewController: UIViewController {
     @IBOutlet weak var mScrollV: UIScrollView!
     @IBOutlet weak var mReserveInfoTableV: ReserveTableView!
     @IBOutlet weak var mReserveTableHeight: NSLayoutConstraint!
+    @IBOutlet weak var mPriceTableV: PriceTableView!
     
+    @IBOutlet weak var mPriceTableHeight: NSLayoutConstraint!
     var reserveViewModel = ReserveViewModel()
     public var vehicleModel: VehicleModel?
     var lastContentOffset:CGFloat = 0.0
@@ -91,6 +80,7 @@ class ReserveViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         mReserveTableHeight.constant = mReserveInfoTableV.contentSize.height
+        mPriceTableHeight.constant = mPriceTableV.contentSize.height
     }
     
     func setupView() {
@@ -133,15 +123,15 @@ class ReserveViewController: UIViewController {
         mPickUpTimeLb.text = vehicleModel?.searchModel?.pickUpTime?.getHour()
         mReturnTimeLb.text = vehicleModel?.searchModel?.returnTime?.getHour()
         
-        mPriceValueLb.text = String(vehicleModel?.vehicleValue ?? 0.0 )
-        mAccessoriecValueLb.text = String((vehicleModel?.accessoriesTotalPrice) ?? 0.0)
-        mAdditionalDriverValueLb.text = String((vehicleModel?.driversTotalPrice)  ?? 0.0)
-        
         self.mReserveInfoTableV.accessories = reserveViewModel.getAdditionalAccessories(vehicleModel: vehicleModel!) as? [AccessoriesModel]
         self.mReserveInfoTableV.drivers = reserveViewModel.getAdditionalDrivers(vehicleModel: vehicleModel!) as? [MyDriversModel]
         mReserveInfoTableV.reloadData()
         
-        totalPrice = (vehicleModel?.driversTotalPrice)! + (vehicleModel?.accessoriesTotalPrice)! + (vehicleModel?.vehicleValue)!
+        mPriceTableV.pricesArr = reserveViewModel.getPrices(vehicleModel: vehicleModel!) as! [PriceModel]
+        mPriceTableV.reloadData()
+
+        
+        totalPrice = reserveViewModel.getTotalPrice(totalPrices: mPriceTableV.pricesArr)
         mTotalPriceValueLb.text = String(format: "%.2f",totalPrice)
         
     }

@@ -75,8 +75,8 @@
                                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdc-9o-cUN">
-                                    <rect key="frame" x="11" y="4" width="66.5" height="12"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location name knlsdknvgldfnbvldfbnlfdgbnñlfdkg jjbkhjb" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdc-9o-cUN">
+                                    <rect key="frame" x="11" y="-1.5" width="147.5" height="23.5"/>
                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="10"/>
                                     <color key="textColor" name="entered_date"/>
                                     <nil key="highlightedColor"/>
@@ -93,7 +93,7 @@
                                     </state>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="CWd-vD-ktZ">
-                                    <rect key="frame" x="208" y="16.5" width="22" height="24"/>
+                                    <rect key="frame" x="208" y="17.5" width="22" height="24"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="22" id="cKT-LG-CUj"/>
                                     </constraints>
@@ -110,8 +110,8 @@
                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="10"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fhD-6N-NWA">
-                                    <rect key="frame" x="175" y="4" width="66.5" height="12"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location name jkfbgkdfjbgkfdjbvkfdjbvkfdj" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fhD-6N-NWA">
+                                    <rect key="frame" x="175" y="-1.5" width="147.5" height="23.5"/>
                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="10"/>
                                     <color key="textColor" name="entered_date"/>
                                     <nil key="highlightedColor"/>
@@ -132,26 +132,26 @@
                                 <constraint firstItem="HWS-X4-Fgw" firstAttribute="height" secondItem="bUA-YW-vOU" secondAttribute="height" id="Gs0-sf-A9k"/>
                                 <constraint firstAttribute="bottom" secondItem="HWS-X4-Fgw" secondAttribute="bottom" id="JSj-U9-BLl"/>
                                 <constraint firstItem="e20-wj-0aP" firstAttribute="centerY" secondItem="er1-11-4Ts" secondAttribute="centerY" constant="-1" id="Lz7-Lg-Ej6"/>
-                                <constraint firstItem="CWd-vD-ktZ" firstAttribute="bottom" secondItem="udk-EM-2U7" secondAttribute="bottom" multiplier="0.85" id="MHJ-Gr-DLX"/>
                                 <constraint firstItem="vk9-4b-MpC" firstAttribute="leading" secondItem="er1-11-4Ts" secondAttribute="leading" constant="11" id="TgW-lA-lRe"/>
-                                <constraint firstItem="pdc-9o-cUN" firstAttribute="width" relation="greaterThanOrEqual" secondItem="er1-11-4Ts" secondAttribute="width" multiplier="0.189024" id="VTL-06-7lK"/>
-                                <constraint firstItem="pdc-9o-cUN" firstAttribute="height" secondItem="er1-11-4Ts" secondAttribute="height" multiplier="0.24" id="Wlq-Uo-Xwg"/>
+                                <constraint firstItem="pdc-9o-cUN" firstAttribute="width" secondItem="er1-11-4Ts" secondAttribute="width" multiplier="0.45" id="VTL-06-7lK"/>
+                                <constraint firstItem="pdc-9o-cUN" firstAttribute="height" relation="greaterThanOrEqual" secondItem="er1-11-4Ts" secondAttribute="height" multiplier="0.24" id="Wlq-Uo-Xwg"/>
                                 <constraint firstItem="e20-wj-0aP" firstAttribute="height" secondItem="er1-11-4Ts" secondAttribute="height" multiplier="0.9" constant="-6" id="YtG-gO-rxF"/>
                                 <constraint firstItem="udk-EM-2U7" firstAttribute="leading" secondItem="vk9-4b-MpC" secondAttribute="trailing" constant="8" id="ZHn-JW-bLa"/>
                                 <constraint firstItem="CWd-vD-ktZ" firstAttribute="height" secondItem="udk-EM-2U7" secondAttribute="height" id="ePn-gx-N8r"/>
                                 <constraint firstItem="bUA-YW-vOU" firstAttribute="trailing" secondItem="er1-11-4Ts" secondAttribute="centerX" id="gXQ-Ok-d5z"/>
                                 <constraint firstItem="vk9-4b-MpC" firstAttribute="centerY" secondItem="er1-11-4Ts" secondAttribute="centerY" multiplier="1.17" id="hGY-Zu-6Sd"/>
-                                <constraint firstItem="fhD-6N-NWA" firstAttribute="width" relation="greaterThanOrEqual" secondItem="er1-11-4Ts" secondAttribute="width" multiplier="0.189024" id="hsw-Bs-dmQ"/>
+                                <constraint firstItem="fhD-6N-NWA" firstAttribute="width" secondItem="er1-11-4Ts" secondAttribute="width" multiplier="0.45" id="hsw-Bs-dmQ"/>
                                 <constraint firstItem="bUA-YW-vOU" firstAttribute="leading" secondItem="er1-11-4Ts" secondAttribute="leading" constant="-4" id="iQK-cW-HPd"/>
                                 <constraint firstItem="HWS-X4-Fgw" firstAttribute="leading" secondItem="er1-11-4Ts" secondAttribute="centerX" id="ljX-jP-cdY"/>
                                 <constraint firstItem="bUA-YW-vOU" firstAttribute="top" secondItem="er1-11-4Ts" secondAttribute="top" id="ltm-wU-mYP"/>
                                 <constraint firstItem="pdc-9o-cUN" firstAttribute="centerY" secondItem="er1-11-4Ts" secondAttribute="centerY" multiplier="0.4" id="nxN-VH-L3f"/>
+                                <constraint firstItem="CWd-vD-ktZ" firstAttribute="centerY" secondItem="BC3-hj-TEG" secondAttribute="centerY" id="pym-Cc-2UY"/>
                                 <constraint firstItem="e20-wj-0aP" firstAttribute="centerX" secondItem="er1-11-4Ts" secondAttribute="centerX" id="sCD-Vj-kZ9"/>
                                 <constraint firstItem="CWd-vD-ktZ" firstAttribute="leading" secondItem="BC3-hj-TEG" secondAttribute="trailing" constant="8" id="ufa-gk-Nsr"/>
                                 <constraint firstItem="BC3-hj-TEG" firstAttribute="centerY" secondItem="vk9-4b-MpC" secondAttribute="centerY" id="w5m-bf-Zwg"/>
                                 <constraint firstItem="udk-EM-2U7" firstAttribute="centerY" secondItem="vk9-4b-MpC" secondAttribute="centerY" multiplier="1.2" id="xhU-qF-8FU"/>
                                 <constraint firstItem="fhD-6N-NWA" firstAttribute="leading" secondItem="BC3-hj-TEG" secondAttribute="leading" id="y0P-7T-2S7"/>
-                                <constraint firstItem="fhD-6N-NWA" firstAttribute="height" secondItem="er1-11-4Ts" secondAttribute="height" multiplier="0.24" id="zNz-81-pbk"/>
+                                <constraint firstItem="fhD-6N-NWA" firstAttribute="height" relation="greaterThanOrEqual" secondItem="er1-11-4Ts" secondAttribute="height" multiplier="0.24" id="zNz-81-pbk"/>
                                 <constraint firstItem="fhD-6N-NWA" firstAttribute="centerY" secondItem="pdc-9o-cUN" secondAttribute="centerY" id="zOu-if-vKw"/>
                                 <constraint firstAttribute="trailing" secondItem="HWS-X4-Fgw" secondAttribute="trailing" id="zpB-Xz-3P7"/>
                             </constraints>

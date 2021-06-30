@@ -102,6 +102,7 @@ extension AccessoriesUIViewController: AccessoriesCollectionViewCellDelegate {
         
         accessoriesViewModel.getTotalAccesories(accessoryPrice: accessoryPrice, totalPrice: totalPrice, isIncrease: isIncrease) { (totalValue) in
             self.mPriceLb.text = totalValue
+            self.totalPrice = (totalValue as NSString).doubleValue
         }
     }
     

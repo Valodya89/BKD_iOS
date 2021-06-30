@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -23,80 +22,89 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="47" id="KGk-i7-Jjw" customClass="PriceTableViewCell" customModule="BKD" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PriceTableViewCell" id="KGk-i7-Jjw" customClass="PriceTableViewCell" customModule="BKD" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="47"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="414" height="47"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yjb-tz-69q">
-                        <rect key="frame" x="16" y="0.0" width="382" height="32"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rGF-D5-JAJ">
+                        <rect key="frame" x="16" y="0.0" width="382" height="50"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDZ-gL-mDH">
-                                <rect key="frame" x="0.0" y="0.0" width="271.5" height="32"/>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
-                                <color key="textColor" name="navigationBar"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9W2-WS-jNf">
-                                <rect key="frame" x="356" y="0.0" width="26" height="32"/>
-                                <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="18"/>
-                                <color key="textColor" name="navigationBar"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcv-9G-DF0">
-                                <rect key="frame" x="328" y="0.0" width="11" height="32"/>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
-                                <color key="textColor" name="navigationBar"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yjb-tz-69q">
+                                <rect key="frame" x="0.0" y="0.0" width="382" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDZ-gL-mDH">
+                                        <rect key="frame" x="0.0" y="0.0" width="271.5" height="50"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
+                                        <color key="textColor" name="navigationBar"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9W2-WS-jNf">
+                                        <rect key="frame" x="356.5" y="0.0" width="25.5" height="50"/>
+                                        <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="18"/>
+                                        <color key="textColor" name="navigationBar"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcv-9G-DF0">
+                                        <rect key="frame" x="329" y="0.0" width="10.5" height="50"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
+                                        <color key="textColor" name="navigationBar"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="9W2-WS-jNf" firstAttribute="top" secondItem="Yjb-tz-69q" secondAttribute="top" id="12i-hb-c6c"/>
+                                    <constraint firstItem="9W2-WS-jNf" firstAttribute="height" secondItem="kcv-9G-DF0" secondAttribute="height" id="3uu-KN-7Lg"/>
+                                    <constraint firstItem="9W2-WS-jNf" firstAttribute="leading" secondItem="kcv-9G-DF0" secondAttribute="trailing" multiplier="1.05" id="9F7-Qy-txc"/>
+                                    <constraint firstAttribute="height" constant="32" id="GQy-vK-av0"/>
+                                    <constraint firstAttribute="bottom" secondItem="hDZ-gL-mDH" secondAttribute="bottom" id="IGF-Ub-AcX"/>
+                                    <constraint firstAttribute="bottom" secondItem="9W2-WS-jNf" secondAttribute="bottom" id="bQW-Ld-5fq"/>
+                                    <constraint firstItem="kcv-9G-DF0" firstAttribute="baseline" secondItem="hDZ-gL-mDH" secondAttribute="baseline" id="ddJ-eI-tRC"/>
+                                    <constraint firstItem="hDZ-gL-mDH" firstAttribute="leading" secondItem="Yjb-tz-69q" secondAttribute="leading" id="jbf-oD-kpk"/>
+                                    <constraint firstItem="hDZ-gL-mDH" firstAttribute="width" secondItem="Yjb-tz-69q" secondAttribute="width" multiplier="0.7107" id="qHA-KF-oAF"/>
+                                    <constraint firstItem="hDZ-gL-mDH" firstAttribute="top" secondItem="Yjb-tz-69q" secondAttribute="top" id="veb-bt-WYb"/>
+                                    <constraint firstAttribute="trailing" secondItem="9W2-WS-jNf" secondAttribute="trailing" id="xRf-jc-Jfb"/>
+                                </constraints>
+                            </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-00%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="382" translatesAutoresizingMaskIntoConstraints="NO" id="PlN-hn-Grz">
+                                <rect key="frame" x="0.0" y="0.0" width="382" height="0.0"/>
+                                <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="13"/>
+                                <color key="textColor" name="offert_red"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemYellowColor"/>
-                        <constraints>
-                            <constraint firstItem="9W2-WS-jNf" firstAttribute="top" secondItem="Yjb-tz-69q" secondAttribute="top" id="12i-hb-c6c"/>
-                            <constraint firstItem="9W2-WS-jNf" firstAttribute="height" secondItem="kcv-9G-DF0" secondAttribute="height" id="3uu-KN-7Lg"/>
-                            <constraint firstItem="9W2-WS-jNf" firstAttribute="leading" secondItem="kcv-9G-DF0" secondAttribute="trailing" multiplier="1.05" id="9F7-Qy-txc"/>
-                            <constraint firstAttribute="height" constant="32" id="GQy-vK-av0"/>
-                            <constraint firstAttribute="bottom" secondItem="hDZ-gL-mDH" secondAttribute="bottom" id="IGF-Ub-AcX"/>
-                            <constraint firstAttribute="bottom" secondItem="9W2-WS-jNf" secondAttribute="bottom" id="bQW-Ld-5fq"/>
-                            <constraint firstItem="kcv-9G-DF0" firstAttribute="baseline" secondItem="hDZ-gL-mDH" secondAttribute="baseline" id="ddJ-eI-tRC"/>
-                            <constraint firstItem="hDZ-gL-mDH" firstAttribute="leading" secondItem="Yjb-tz-69q" secondAttribute="leading" id="jbf-oD-kpk"/>
-                            <constraint firstItem="hDZ-gL-mDH" firstAttribute="width" secondItem="Yjb-tz-69q" secondAttribute="width" multiplier="0.7107" id="qHA-KF-oAF"/>
-                            <constraint firstItem="hDZ-gL-mDH" firstAttribute="top" secondItem="Yjb-tz-69q" secondAttribute="top" id="veb-bt-WYb"/>
-                            <constraint firstAttribute="trailing" secondItem="9W2-WS-jNf" secondAttribute="trailing" id="xRf-jc-Jfb"/>
-                        </constraints>
-                    </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-00%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="382" translatesAutoresizingMaskIntoConstraints="NO" id="PlN-hn-Grz">
-                        <rect key="frame" x="16" y="32" width="382" height="15"/>
-                        <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="13"/>
-                        <color key="textColor" name="offert_red"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    </stackView>
                 </subviews>
+                <color key="backgroundColor" name="background"/>
                 <constraints>
-                    <constraint firstItem="Yjb-tz-69q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="7Uf-7Z-NQt"/>
-                    <constraint firstItem="Yjb-tz-69q" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="A6U-ck-bUp"/>
-                    <constraint firstItem="Yjb-tz-69q" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.923" id="EgX-hj-eLA"/>
-                    <constraint firstItem="PlN-hn-Grz" firstAttribute="top" secondItem="Yjb-tz-69q" secondAttribute="bottom" id="fMu-WH-WB7"/>
-                    <constraint firstAttribute="bottom" secondItem="PlN-hn-Grz" secondAttribute="bottom" id="fxk-Eh-Z6C"/>
-                    <constraint firstItem="PlN-hn-Grz" firstAttribute="leading" secondItem="Yjb-tz-69q" secondAttribute="leading" id="s4Y-4v-gwI"/>
-                    <constraint firstItem="PlN-hn-Grz" firstAttribute="trailing" secondItem="Yjb-tz-69q" secondAttribute="trailing" id="uu0-3I-yWQ"/>
+                    <constraint firstItem="rGF-D5-JAJ" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="HNq-1W-Tpy"/>
+                    <constraint firstAttribute="bottom" secondItem="rGF-D5-JAJ" secondAttribute="bottom" id="PiC-A7-Kcl"/>
+                    <constraint firstItem="rGF-D5-JAJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="wrw-2L-vIQ"/>
+                    <constraint firstItem="rGF-D5-JAJ" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.922705" id="zDg-cZ-HgB"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" name="background"/>
+            <connections>
+                <outlet property="mDiscountPrecentLb" destination="PlN-hn-Grz" id="kEn-we-QyT"/>
+                <outlet property="mPriceLb" destination="9W2-WS-jNf" id="KfY-DF-3sA"/>
+                <outlet property="mPriceTitleLb" destination="hDZ-gL-mDH" id="WJ9-47-EQ4"/>
+            </connections>
             <point key="canvasLocation" x="44.927536231884062" y="85.379464285714278"/>
         </tableViewCell>
     </objects>
     <resources>
+        <namedColor name="background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="navigationBar">
             <color red="0.10980391502380371" green="0.20000001788139343" blue="0.37254902720451355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="offert_red">
             <color red="1" green="0.29411764705882354" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
     </resources>
 </document>
