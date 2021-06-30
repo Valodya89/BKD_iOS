@@ -87,8 +87,8 @@ class ReserveViewController: UIViewController {
         mRightBarBtn.image = img_bkd
         mConfirmBtn.layer.cornerRadius = 10
         mConfirmBtn.addBorder(color: color_navigationBar!, width: 1)
-        mTotalPriceBackgV.setShadow(color: color_shadow!)
         mTotalPriceBackgV.layer.cornerRadius = 3
+        mTotalPriceBackgV.setShadow(color: color_shadow!)
         mRentInfoBckgV.setShadow(color: color_shadow!)
         mCarImgBckgV.layer.cornerRadius = 16
         mCarImgBckgV.setShadow(color: color_shadow!)

@@ -847,7 +847,7 @@
                                                     <outlet property="mReturnTimeTxtFl" destination="Gay-is-bgR" id="GdL-xC-aTf"/>
                                                 </connections>
                                             </view>
-                                            <stackView opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="h0G-ic-ldI" customClass="SearchWithValueView" customModule="BKD" customModuleProvider="target">
+                                            <stackView hidden="YES" opaque="NO" alpha="0.0" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="h0G-ic-ldI" customClass="SearchWithValueView" customModule="BKD" customModuleProvider="target">
                                                 <rect key="frame" x="16" y="843" width="382" height="50"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QMC-5Z-Aua">

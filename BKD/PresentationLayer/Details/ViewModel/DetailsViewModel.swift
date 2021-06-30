@@ -141,5 +141,17 @@ class DetailsViewModel: NSObject {
           }
         return total
     }
+    
+    func getNoWorkingTimeTotalPrice(searchModel: SearchModel, timePrice:Double) -> Double {
+        var total: Double = 0.0
+        if !validator.checkReservationTime(time:searchModel.pickUpTime) {
+            total += timePrice
+        }
+        if !validator.checkReservationTime(time:searchModel.returnTime) {
+            total += timePrice
+        }
+        return total
+    }
+    
    
 }

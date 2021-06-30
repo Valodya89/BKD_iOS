@@ -192,15 +192,12 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         vehicleModel?.ifHasTowBar = true
         vehicleModel?.vehicleDesctiption = "Double cabin"
         vehicleModel?.ifTailLift = false
-        //vehicleModel?.ifHasAccessories = false
-        //vehicleModel?.ifHasAditionalDriver = false
-       // vehicleModel.vehicleValue = price
-        //vehicleModel.vehicleImg = mCarImgV.image
         vehicleModel?.additionalAccessories = additionalAccessories
         vehicleModel?.additionalDrivers = additionalDrivers
         searchModel.pickUpLocation = mSearchV.mPickUpLocationBtn.title(for: .normal)
         searchModel.returnLocation = mSearchV.mReturnLocationBtn.title(for: .normal)
         vehicleModel?.searchModel = searchModel
+        vehicleModel?.noWorkingTimeTotalPrice = detailsViewModel.getNoWorkingTimeTotalPrice(searchModel: searchModel, timePrice: timePrice)
         if !isSearchEdit {
             vehicleModel?.customLocationTotalPrice = detailsViewModel.getCustomLocationTotalPrice(searchV: mSearchV)
         }

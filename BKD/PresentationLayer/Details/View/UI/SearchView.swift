@@ -318,23 +318,6 @@ class SearchView: UIView, UITextFieldDelegate {
             isPickUpLocation = false
         }
         didResult(isPickUpLocation)
-        
-//        switch location {
-//        case .pickUpLocation: break
-//        case .returnLocation: break
-//        case .pickUpCustomLocation:
-//            searchModel.pickUpLocation = place
-//            searchModel.isPickUpCustomLocation = true
-//            setPickUpLocationInfo(searchModel: searchModel)
-//            break
-//        case .returnCustomLocation:
-//            searchModel.returnLocation = place
-//            searchModel.isRetuCustomLocation = true
-//            setReturnLocationInfo(searchModel: searchModel)
-//            break
-//        default:
-//            break
-//        }
     }
     
 //MARK: ACTIONS
