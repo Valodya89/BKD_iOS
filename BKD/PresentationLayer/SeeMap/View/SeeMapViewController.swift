@@ -96,6 +96,7 @@ class SeeMapViewController: BaseViewController {
     private func addChildView(){
         addChild(addressVC)
         view.addSubview(addressVC.view)
+        addressVC.didMove(toParent: self)
     }
     
     private func addMarker(longitude: Double, latitude: Double , marker: GMSMarker) {

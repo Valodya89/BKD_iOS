@@ -47,7 +47,6 @@
 		564E12E1264D787A008CE884 /* MenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E12E0264D787A008CE884 /* MenuModel.swift */; };
 		564E12FE264EAF04008CE884 /* PaddingUILable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E12FD264EAF04008CE884 /* PaddingUILable.swift */; };
 		564E1306264EE294008CE884 /* UIViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E1305264EE294008CE884 /* UIViewExtention.swift */; };
-		564E131F264F0319008CE884 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E131E264F0319008CE884 /* CarouselView.swift */; };
 		564E1354265211FF008CE884 /* SFProDisplay-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 564E1353265211F1008CE884 /* SFProDisplay-Semibold.ttf */; };
 		564E1355265211FF008CE884 /* SongMyung-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 564E1352265211EC008CE884 /* SongMyung-Regular.ttf */; };
 		564E1356265211FF008CE884 /* SFProDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 564E1351265211E8008CE884 /* SFProDisplay-Regular.ttf */; };
@@ -90,6 +89,8 @@
 		565731F8267332620012ADD0 /* TariffSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565731F7267332620012ADD0 /* TariffSlideViewController.swift */; };
 		565731FD267332B10012ADD0 /* TariffSlideModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565731FC267332B10012ADD0 /* TariffSlideModel.swift */; };
 		56573202267339B50012ADD0 /* FontsFree-Net-SFProDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 56573201267339B50012ADD0 /* FontsFree-Net-SFProDisplay-Medium.ttf */; };
+		56573ADD268FBE4000B39136 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56573ADC268FBE3F00B39136 /* SignInViewModel.swift */; };
+		56573AE22690153900B39136 /* EmailAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56573AE12690153900B39136 /* EmailAddressViewController.swift */; };
 		5657E840267108A300788D62 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5657E83F267108A300788D62 /* DetailsViewController.swift */; };
 		5657E848267108B500788D62 /* Details.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5657E847267108B500788D62 /* Details.storyboard */; };
 		5657E84E26711AE800788D62 /* CarPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5657E84D26711AE800788D62 /* CarPhotosView.swift */; };
@@ -104,6 +105,13 @@
 		565A7AE426555EFF006C63D0 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565A7AE226555EFF006C63D0 /* CategoryTableViewCell.xib */; };
 		565A7AEA2655C5AE006C63D0 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565A7AE92655C5AE006C63D0 /* CategoryModel.swift */; };
 		565BD3602659AED1001923F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565BD35F2659AED1001923F5 /* AppDelegate.swift */; };
+		565F8C1F268CF4C700E21C71 /* CarouselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F8C1D268CF4C700E21C71 /* CarouselCollectionViewCell.swift */; };
+		565F8C2B268D027400E21C71 /* UPCarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F8C28268D027400E21C71 /* UPCarouselFlowLayout.swift */; };
+		565F8C45268D12EA00E21C71 /* CarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F8C44268D12EA00E21C71 /* CarouselViewController.swift */; };
+		565F8C4A268D17C200E21C71 /* Carousel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 565F8C49268D17C200E21C71 /* Carousel.storyboard */; };
+		565F8C6F268E94D900E21C71 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F8C6E268E94D900E21C71 /* SignInViewController.swift */; };
+		565F8C75268E94F900E21C71 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 565F8C74268E94F900E21C71 /* SignIn.storyboard */; };
+		565F8C79268EB2D900E21C71 /* NewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F8C78268EB2D900E21C71 /* NewPasswordViewController.swift */; };
 		5660F7F2266C21980082F038 /* Mulish-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5660F7F1266C217F0082F038 /* Mulish-Bold.ttf */; };
 		566354EB268AF8EF0003E2EB /* PriceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566354E9268AF8EF0003E2EB /* PriceTableViewCell.swift */; };
 		566354EC268AF8EF0003E2EB /* PriceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 566354EA268AF8EF0003E2EB /* PriceTableViewCell.xib */; };
@@ -169,6 +177,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		565F8C65268D390600E21C71 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		2C3819EEF98357A5E10F4D7C /* Pods_BKD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BKD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9E56E46535541B3D2E4A8F /* Pods_BKD_BKDUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BKD_BKDUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -211,7 +232,6 @@
 		564E12E0264D787A008CE884 /* MenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuModel.swift; sourceTree = "<group>"; };
 		564E12FD264EAF04008CE884 /* PaddingUILable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingUILable.swift; sourceTree = "<group>"; };
 		564E1305264EE294008CE884 /* UIViewExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtention.swift; sourceTree = "<group>"; };
-		564E131E264F0319008CE884 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		564E134F265211DC008CE884 /* Mulish-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mulish-Light.ttf"; sourceTree = "<group>"; };
 		564E1350265211E4008CE884 /* SFProDisplay-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Light.ttf"; sourceTree = "<group>"; };
 		564E1351265211E8008CE884 /* SFProDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Regular.ttf"; sourceTree = "<group>"; };
@@ -254,6 +274,8 @@
 		565731F7267332620012ADD0 /* TariffSlideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffSlideViewController.swift; sourceTree = "<group>"; };
 		565731FC267332B10012ADD0 /* TariffSlideModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffSlideModel.swift; sourceTree = "<group>"; };
 		56573201267339B50012ADD0 /* FontsFree-Net-SFProDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FontsFree-Net-SFProDisplay-Medium.ttf"; sourceTree = "<group>"; };
+		56573ADC268FBE3F00B39136 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		56573AE12690153900B39136 /* EmailAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAddressViewController.swift; sourceTree = "<group>"; };
 		5657E83F267108A300788D62 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		5657E847267108B500788D62 /* Details.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Details.storyboard; sourceTree = "<group>"; };
 		5657E84D26711AE800788D62 /* CarPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPhotosView.swift; sourceTree = "<group>"; };
@@ -268,6 +290,13 @@
 		565A7AE226555EFF006C63D0 /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
 		565A7AE92655C5AE006C63D0 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		565BD35F2659AED1001923F5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		565F8C1D268CF4C700E21C71 /* CarouselCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewCell.swift; sourceTree = "<group>"; };
+		565F8C28268D027400E21C71 /* UPCarouselFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UPCarouselFlowLayout.swift; sourceTree = "<group>"; };
+		565F8C44268D12EA00E21C71 /* CarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselViewController.swift; sourceTree = "<group>"; };
+		565F8C49268D17C200E21C71 /* Carousel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Carousel.storyboard; sourceTree = "<group>"; };
+		565F8C6E268E94D900E21C71 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		565F8C74268E94F900E21C71 /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
+		565F8C78268EB2D900E21C71 /* NewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
 		5660F7F1266C217F0082F038 /* Mulish-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mulish-Bold.ttf"; sourceTree = "<group>"; };
 		566354E9268AF8EF0003E2EB /* PriceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTableViewCell.swift; sourceTree = "<group>"; };
 		566354EA268AF8EF0003E2EB /* PriceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriceTableViewCell.xib; sourceTree = "<group>"; };
@@ -504,9 +533,9 @@
 		561887342645E5A100BDDB33 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				565F8C43268D12BF00E21C71 /* CarouselViewController */,
 				565A7AC526547FD0006C63D0 /* SearchResult */,
 				565A7AAD2653FDCB006C63D0 /* SearchHeaderView */,
-				564E131D264F02F0008CE884 /* CarouselView */,
 				5618888D264A638100BDDB33 /* LocationDropDownView */,
 			);
 			path = UI;
@@ -516,6 +545,7 @@
 			isa = PBXGroup;
 			children = (
 				5602526626616C8700FB204C /* Storyboardinitializable.swift */,
+				565F8C27268D027400E21C71 /* UPCarouselFlowLayout */,
 				565632122656838800B78562 /* Validator */,
 				565A7AE82655C516006C63D0 /* DataHelper */,
 				564E12D7264D75FD008CE884 /* Constant */,
@@ -628,14 +658,6 @@
 				564E12D8264D7617008CE884 /* Constant.swift */,
 			);
 			path = Constant;
-			sourceTree = "<group>";
-		};
-		564E131D264F02F0008CE884 /* CarouselView */ = {
-			isa = PBXGroup;
-			children = (
-				564E131E264F0319008CE884 /* CarouselView.swift */,
-			);
-			path = CarouselView;
 			sourceTree = "<group>";
 		};
 		564E134E265211D1008CE884 /* Fonts */ = {
@@ -870,6 +892,15 @@
 			path = CarEquipmentCollectionViewCell;
 			sourceTree = "<group>";
 		};
+		56573AE02690151200B39136 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				565F8C78268EB2D900E21C71 /* NewPasswordViewController.swift */,
+				56573AE12690153900B39136 /* EmailAddressViewController.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		5657E83B2671087300788D62 /* Details */ = {
 			isa = PBXGroup;
 			children = (
@@ -988,6 +1019,67 @@
 			path = DataHelper;
 			sourceTree = "<group>";
 		};
+		565F8C1C268CF48200E21C71 /* CarouselCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				565F8C1D268CF4C700E21C71 /* CarouselCollectionViewCell.swift */,
+			);
+			path = CarouselCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		565F8C27268D027400E21C71 /* UPCarouselFlowLayout */ = {
+			isa = PBXGroup;
+			children = (
+				565F8C28268D027400E21C71 /* UPCarouselFlowLayout.swift */,
+			);
+			path = UPCarouselFlowLayout;
+			sourceTree = "<group>";
+		};
+		565F8C43268D12BF00E21C71 /* CarouselViewController */ = {
+			isa = PBXGroup;
+			children = (
+				565F8C44268D12EA00E21C71 /* CarouselViewController.swift */,
+				565F8C49268D17C200E21C71 /* Carousel.storyboard */,
+			);
+			path = CarouselViewController;
+			sourceTree = "<group>";
+		};
+		565F8C6A268E944E00E21C71 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				565F8C6D268E946800E21C71 /* ViewModel */,
+				565F8C6C268E946100E21C71 /* Model */,
+				565F8C6B268E945800E21C71 /* View */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		565F8C6B268E945800E21C71 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				56573AE02690151200B39136 /* UI */,
+				565F8C6E268E94D900E21C71 /* SignInViewController.swift */,
+				565F8C74268E94F900E21C71 /* SignIn.storyboard */,
+			);
+			name = View;
+			path = "../New Group/View";
+			sourceTree = "<group>";
+		};
+		565F8C6C268E946100E21C71 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		565F8C6D268E946800E21C71 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				56573ADC268FBE3F00B39136 /* SignInViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		566354E8268AF8890003E2EB /* PriceTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1070,6 +1162,7 @@
 		568E70942644BD2D000CB6A9 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				565F8C6A268E944E00E21C71 /* SignIn */,
 				560FE635267BE7520068BC85 /* Reserve */,
 				56533F042679BD790012BF4A /* MyDrivers */,
 				56533EDE267925B20012BF4A /* Accessories */,
@@ -1370,6 +1463,7 @@
 				565632382658417C00B78562 /* FilterSearchResultCell */,
 				564E136E265301B7008CE884 /* SearchResultsCell */,
 				5618889F264ABDD700BDDB33 /* DropDownCell */,
+				565F8C1C268CF48200E21C71 /* CarouselCollectionViewCell */,
 				561888242649468400BDDB33 /* CarouselCell */,
 				568E70C826455286000CB6A9 /* MainCollectionViewCell.swift */,
 				568E70C926455286000CB6A9 /* MainCollectionViewCell.xib */,
@@ -1496,6 +1590,7 @@
 				568E6F4C2642FC4B000CB6A9 /* Resources */,
 				B0A73BFE2DC6DAE6AEE73A95 /* [CP] Embed Pods Frameworks */,
 				15F31569E1F0832B69B3951A /* [CP] Copy Pods Resources */,
+				565F8C65268D390600E21C71 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1607,6 +1702,7 @@
 				56C8E173267C1D100061890C /* ReserveTableViewCell.xib in Resources */,
 				560252952664376900FB204C /* Mulish-Regular.ttf in Resources */,
 				564E137A26531F8F008CE884 /* Mulish-SemiBold.ttf in Resources */,
+				565F8C75268E94F900E21C71 /* SignIn.storyboard in Resources */,
 				5660F7F2266C21980082F038 /* Mulish-Bold.ttf in Resources */,
 				564E1354265211FF008CE884 /* SFProDisplay-Semibold.ttf in Resources */,
 				564E137226530208008CE884 /* SearchResultCollectionViewCell.xib in Resources */,
@@ -1644,6 +1740,7 @@
 				565A7ACF26548025006C63D0 /* SearchResult.xib in Resources */,
 				5602521226612A6300FB204C /* SearchTableViewCell.xib in Resources */,
 				5691A614265C50F20008081D /* CustomLocation.storyboard in Resources */,
+				565F8C4A268D17C200E21C71 /* Carousel.storyboard in Resources */,
 				568E6F592642FC4B000CB6A9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1806,7 +1903,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				564E131F264F0319008CE884 /* CarouselView.swift in Sources */,
 				565632522658B11E00B78562 /* EquipmentModel.swift in Sources */,
 				5602532C26670A0100FB204C /* OnlineChatViewController.swift in Sources */,
 				56533F092679BDBE0012BF4A /* MyDriversViewController.swift in Sources */,
@@ -1815,11 +1911,13 @@
 				565731CC26724F720012ADD0 /* CarInfoView.swift in Sources */,
 				565731D126725FBD0012ADD0 /* DetailsAndTailLiftView.swift in Sources */,
 				568E703B264440C2000CB6A9 /* MyBKDViewController.swift in Sources */,
+				56573AE22690153900B39136 /* EmailAddressViewController.swift in Sources */,
 				565BD3602659AED1001923F5 /* AppDelegate.swift in Sources */,
 				565731EE26730F270012ADD0 /* DetailsTableView.swift in Sources */,
 				56C8E172267C1D100061890C /* ReserveTableViewCell.swift in Sources */,
 				560253C0266AB69100FB204C /* OfflineChatViewModel.swift in Sources */,
 				5602534C2667413A00FB204C /* BaseViewController.swift in Sources */,
+				565F8C1F268CF4C700E21C71 /* CarouselCollectionViewCell.swift in Sources */,
 				56533EE3267925FE0012BF4A /* AccessoriesUIViewController.swift in Sources */,
 				5691A639265D53140008081D /* Extentions.swift in Sources */,
 				5656082626785C32009578FA /* MoreViewController.swift in Sources */,
@@ -1842,8 +1940,10 @@
 				56B9F31326806A2E003449AD /* SearchEditModel.swift in Sources */,
 				56316316267A822200ED2144 /* MyDriverCollectionViewCell.swift in Sources */,
 				565A7AB02653FE26006C63D0 /* SearchHeaderView.swift in Sources */,
+				565F8C79268EB2D900E21C71 /* NewPasswordViewController.swift in Sources */,
 				564E12FE264EAF04008CE884 /* PaddingUILable.swift in Sources */,
 				560252DB266534D500FB204C /* SearchCustomLocationViewModel.swift in Sources */,
+				565F8C45268D12EA00E21C71 /* CarouselViewController.swift in Sources */,
 				564E1306264EE294008CE884 /* UIViewExtention.swift in Sources */,
 				5602520226611C4100FB204C /* SearchCustomLocationUiView.swift in Sources */,
 				560FE63D267BE7960068BC85 /* ReserveViewController.swift in Sources */,
@@ -1853,6 +1953,7 @@
 				565731DE2672FDC80012ADD0 /* DetailsAndTailLiftModel.swift in Sources */,
 				568E703126443D90000CB6A9 /* CategoryViewController.swift in Sources */,
 				56B9F2D5267E8CEE003449AD /* SearchView.swift in Sources */,
+				56573ADD268FBE4000B39136 /* SignInViewModel.swift in Sources */,
 				5665403526759D3E008ACD31 /* TariffCarouselView.swift in Sources */,
 				564E13A726535D98008CE884 /* SeeMapViewController.swift in Sources */,
 				56409539264B24D8001DC92D /* BKDAlert.swift in Sources */,
@@ -1867,6 +1968,7 @@
 				560252F42665950700FB204C /* CustomLocationViewModel.swift in Sources */,
 				5656323B265841BE00B78562 /* FilterSearchResultCell.swift in Sources */,
 				5657E840267108A300788D62 /* DetailsViewController.swift in Sources */,
+				565F8C2B268D027400E21C71 /* UPCarouselFlowLayout.swift in Sources */,
 				568E70CA26455286000CB6A9 /* MainCollectionViewCell.swift in Sources */,
 				568E70172643919B000CB6A9 /* LeftViewController.swift in Sources */,
 				560252D62665298200FB204C /* NetworkManager.swift in Sources */,
@@ -1895,6 +1997,7 @@
 				560252E72665368E00FB204C /* SearchPlacesResult.swift in Sources */,
 				5602526726616C8700FB204C /* Storyboardinitializable.swift in Sources */,
 				5656081A2678541B009578FA /* ImagesBottomCollectionViewCell.swift in Sources */,
+				565F8C6F268E94D900E21C71 /* SignInViewController.swift in Sources */,
 				5648C5C8268842D9000B4E2A /* AccessoriesViewModel.swift in Sources */,
 				565731F8267332620012ADD0 /* TariffSlideViewController.swift in Sources */,
 				5691A61B265C71EC0008081D /* ExteriorCollectionViewCell.swift in Sources */,
@@ -2086,6 +2189,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X3VVWK6698;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BKD/Helpers/UPCarouselFlowLayout",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/BKD/SupportFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2111,6 +2218,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X3VVWK6698;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BKD/Helpers/UPCarouselFlowLayout",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/BKD/SupportFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (

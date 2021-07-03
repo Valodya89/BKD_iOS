@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vGy-s1-gA7">
-    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -75,7 +75,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" id="hgO-ot-Ek2">
-                                <rect key="frame" x="0.0" y="-5" width="414" height="36.5"/>
+                                <rect key="frame" x="0.0" y="-5" width="414" height="37.5"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" name="background"/>
                             </view>
@@ -307,24 +307,26 @@
                     <view key="view" contentMode="scaleToFill" id="foA-r9-fCl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aUz-Rk-ztl">
-                                <rect key="frame" x="0.0" y="98" width="302" height="140"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="du2-Ca-fh4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="aUz-Rk-ztl" firstAttribute="width" secondItem="foA-r9-fCl" secondAttribute="width" multiplier="0.729469" id="QUu-b8-aZv"/>
-                            <constraint firstItem="aUz-Rk-ztl" firstAttribute="height" secondItem="foA-r9-fCl" secondAttribute="height" multiplier="0.173267" id="quS-UF-6FB"/>
-                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="bri-BO-hIq"/>
+                    <navigationItem key="navigationItem" id="bri-BO-hIq">
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="a1U-TA-oVV">
+                            <color key="tintColor" name="menu"/>
+                            <connections>
+                                <action selector="menu:" destination="E7g-TO-7Y0" id="hhB-27-mrw"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="bkd" id="y1D-k2-2KB"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mLeftBarBtn" destination="a1U-TA-oVV" id="JoT-a3-Y9A"/>
+                        <outlet property="mRightBarBtn" destination="y1D-k2-2KB" id="mTE-Tn-gOU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jFI-WA-0rb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1399" y="1408"/>
+            <point key="canvasLocation" x="1398.5507246376812" y="1407.5892857142856"/>
         </scene>
         <!--Notifications-->
         <scene sceneID="a71-cK-LJo">

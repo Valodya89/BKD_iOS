@@ -8,7 +8,7 @@
 import UIKit
 
 class CarouselCellView: UIView {
-
+static let identifier = ""
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var mCategoryLb: UILabel!
     @IBOutlet weak var mCategoryImg: UIImageView!

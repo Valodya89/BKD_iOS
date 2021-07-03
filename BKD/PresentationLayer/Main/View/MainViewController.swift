@@ -25,11 +25,13 @@ class MainViewController: BaseViewController {
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
     
     //MARK: Variables
+    private lazy  var carouselVC = CarouselViewController.initFromStoryboard(name: Constant.Storyboards.carousel)
     let mainViewModel: MainViewModel = MainViewModel()
     lazy var searchModel: SearchModel = SearchModel()
     var menu: SideMenuNavigationController?
     var searchHeaderV: SearchHeaderView?
     var searchResultV: SearchResultView?
+
     var datePicker = UIDatePicker()
     let backgroundV =  UIView()
     var responderTxtFl = UITextField()
@@ -74,6 +76,7 @@ class MainViewController: BaseViewController {
 
         removeUserDefaultObjs()
        addHeaderViews()
+        addCarousel()
         configureCarsCollectionView()
         configureAvalableCategoriesTableView()
         configureDelegates()
@@ -83,6 +86,7 @@ class MainViewController: BaseViewController {
         self.updateCategory()
         
     }
+    
     
     // set info to setSearch model
     private func setSearchModel(){
@@ -125,7 +129,7 @@ class MainViewController: BaseViewController {
         mAvalableCategoriesTbV.register(CategoryTableViewCell.nib(),
                                              forCellReuseIdentifier: CategoryTableViewCell.identifier)
         mAvalableCategoriesTbV.separatorStyle = .none
-        UserDefaults.standard.set(searchHeaderV?.carouselBackgV.categoryCarousel.currentItemIndex, forKey: key_category)
+//        UserDefaults.standard.set(searchHeaderV?.carouselBackgV.categoryCarousel.currentItemIndex, forKey: key_category)
     }
     
     private func configureTimeTextField(txtFl: UITextField, txt: String) {
@@ -159,16 +163,19 @@ class MainViewController: BaseViewController {
         return toolBar
     }
     
-//    private func addAvalableCategoriesView() {
-//        addChild(avalableCategoriesVC)
-//        self.view.addSubview(avalableCategoriesVC.view)
-//        avalableCategoriesVC.view.frame = self.view.frame
-//    }
-//
+    func addCarousel() {
+        addChild(carouselVC)
+        carouselVC.view.frame = (searchHeaderV?.mCarouselV.bounds)!
+        
+        searchHeaderV?.mCarouselV.addSubview(carouselVC.view)
+        carouselVC.didMove(toParent: self)
+    }
+    
+    
     private func addHeaderViews() {
         //add top views
         searchHeaderV = SearchHeaderView()
-        searchHeaderHeight = view.frame.height * 0.5928
+        searchHeaderHeight = (view.frame.height * 0.455) + (searchHeaderV?.mCarouselV.bounds.height)! //view.frame.height * 0.5928
         collactionViewTop = searchHeaderHeight
         searchHeaderV!.frame = CGRect(x: 0, y: top_searchResult, width: self.view.bounds.width, height: searchHeaderHeight)
         self.view.addSubview(searchHeaderV!)
@@ -533,7 +540,7 @@ class MainViewController: BaseViewController {
     }
 
     func updateCategory() {
-        searchHeaderV?.carouselBackgV.didChangeCategory = { [weak self] categoryIndex in
+        carouselVC.didChangeCategory = { [weak self] categoryIndex in
            // let category: Categorys = Categorys.init(rawValue: categoryIndex)!
             self?.checkFieldsEdited(pickupDate: UserDefaults.standard.object(forKey: key_pickUpDate) as? Date,
                                     returnDate: UserDefaults.standard.object(forKey: key_returnDate) as? Date,
@@ -544,8 +551,8 @@ class MainViewController: BaseViewController {
                                     categoryIndex: categoryIndex)
             UserDefaults.standard.set(categoryIndex, forKey: key_category)
 
-            
-        
+
+
 //            switch category {
 //            case .trucs: break
 //            case .frigoVans: break
@@ -598,10 +605,6 @@ class MainViewController: BaseViewController {
     
     @IBAction func chatWithUs(_ sender: UIButton) {
         openChatPage ()
-//        let detailsVC = UIStoryboard(name: Constant.Storyboards.details, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.details) as! DetailsViewController
-//
-//        self.navigationController?.pushViewController(detailsVC, animated: true)
-       
     }
     
     
@@ -760,7 +763,7 @@ extension MainViewController: SearchHeaderViewDelegate {
         
         // If will not  found result
         // must be change by api result
-        if searchHeaderV?.carouselBackgV.categoryCarousel.currentItemIndex == 2 {
+        if carouselVC.currentPage == 2 {
             isNoSearchResult = true
             navigationController!.navigationBar.topItem?.title = ""
             animateAvalableCategoriesResult()

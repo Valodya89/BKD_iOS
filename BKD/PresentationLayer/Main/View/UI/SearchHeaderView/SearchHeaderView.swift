@@ -21,13 +21,13 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     
     @IBOutlet weak var mPickUpDataTxtFl: TextField!
     @IBOutlet weak var mReturnDateTxtFl: TextField!
-    @IBOutlet weak var carouselBackgV: CarouselView!
    
     @IBOutlet weak var mCheckBoxPickUpCustomLocBtn: UIButton!
     @IBOutlet weak var mCheckBoxReturnCustomLocBtn: UIButton!
     @IBOutlet weak var mReturnCustomLocationBtn: UIButton!
     @IBOutlet weak var mPickUpCustomLocationBtn: UIButton!
     
+    @IBOutlet weak var mCarouselV: UIView!
     @IBOutlet weak var mDayPickUpBtn: UIButton!
     @IBOutlet weak var mMonthPickUpBtn: UIButton!
     @IBOutlet weak var mDayReturnDateBtn: UIButton!

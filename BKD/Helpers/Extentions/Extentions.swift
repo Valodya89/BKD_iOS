@@ -90,6 +90,10 @@ extension UITextField {
         }
     }
     
+    func setPlaceholder(string: String, font:UIFont, color: UIColor ) {
+        self.attributedPlaceholder = NSAttributedString(string: string,
+                                                        attributes: [NSAttributedString.Key.foregroundColor: color, NSAttributedString.Key.font: font])
+    }
 }
 
 //MARK: UITextView extension

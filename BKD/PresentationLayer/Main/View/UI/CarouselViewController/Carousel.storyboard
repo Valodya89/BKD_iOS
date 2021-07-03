@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Carousel View Controller-->
+        <scene sceneID="AHc-23-dyV">
+            <objects>
+                <viewController storyboardIdentifier="CarouselViewController" id="nnk-MX-OmY" customClass="CarouselViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ym3-hQ-009">
+                        <rect key="frame" x="0.0" y="0.0" width="382" height="111"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncw-x8-4FN">
+                                <rect key="frame" x="0.0" y="0.0" width="382" height="111"/>
+                                <color key="backgroundColor" name="background"/>
+                                <collectionViewLayout key="collectionViewLayout" id="AnX-eG-rVO" customClass="UPCarouselFlowLayout" customModule="BKD" customModuleProvider="target"/>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CarouselCollectionViewCell" id="dqI-9c-bXK" customClass="CarouselCollectionViewCell" customModule="BKD" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="101" height="111"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="e9y-2m-klg">
+                                            <rect key="frame" x="0.0" y="0.0" width="101" height="111"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vih-61-BmY">
+                                                    <rect key="frame" x="0.0" y="0.0" width="101" height="111"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="car.png" translatesAutoresizingMaskIntoConstraints="NO" id="4Ut-32-6TS">
+                                                            <rect key="frame" x="25.5" y="15.5" width="50" height="30"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Car name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xa8-Q1-sSJ">
+                                                            <rect key="frame" x="5" y="83.5" width="91" height="16.5"/>
+                                                            <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
+                                                            <color key="textColor" red="0.86758053300000004" green="0.87751591210000002" blue="0.90697890520000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="Xa8-Q1-sSJ" firstAttribute="height" secondItem="Vih-61-BmY" secondAttribute="height" multiplier="0.15" id="4NC-Ev-Nqn"/>
+                                                        <constraint firstItem="Xa8-Q1-sSJ" firstAttribute="centerX" secondItem="Vih-61-BmY" secondAttribute="centerX" id="Ebi-yW-8Is"/>
+                                                        <constraint firstItem="Xa8-Q1-sSJ" firstAttribute="width" secondItem="Vih-61-BmY" secondAttribute="width" multiplier="0.9" id="Sgp-3D-1UU"/>
+                                                        <constraint firstItem="4Ut-32-6TS" firstAttribute="height" secondItem="Vih-61-BmY" secondAttribute="height" multiplier="0.27" id="WCl-3b-9zU"/>
+                                                        <constraint firstItem="Xa8-Q1-sSJ" firstAttribute="centerY" secondItem="Vih-61-BmY" secondAttribute="centerY" multiplier="1.65" id="die-It-rm0"/>
+                                                        <constraint firstItem="4Ut-32-6TS" firstAttribute="centerY" secondItem="Vih-61-BmY" secondAttribute="centerY" multiplier="0.55" id="ngg-wU-E7e"/>
+                                                        <constraint firstItem="4Ut-32-6TS" firstAttribute="width" secondItem="Vih-61-BmY" secondAttribute="width" multiplier="0.49505" id="tbC-mQ-Qqt"/>
+                                                        <constraint firstItem="4Ut-32-6TS" firstAttribute="centerX" secondItem="Vih-61-BmY" secondAttribute="centerX" id="td7-SM-Zlm"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Vih-61-BmY" secondAttribute="bottom" id="DUt-sT-RAv"/>
+                                                <constraint firstItem="Vih-61-BmY" firstAttribute="top" secondItem="e9y-2m-klg" secondAttribute="top" id="Oc5-0O-47l"/>
+                                                <constraint firstItem="Vih-61-BmY" firstAttribute="leading" secondItem="e9y-2m-klg" secondAttribute="leading" id="edN-my-YV2"/>
+                                                <constraint firstAttribute="trailing" secondItem="Vih-61-BmY" secondAttribute="trailing" id="fZf-Xr-Fdy"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="101" height="111"/>
+                                        <connections>
+                                            <outlet property="mCategoryImg" destination="4Ut-32-6TS" id="m4a-86-HyW"/>
+                                            <outlet property="mCategoryNameLb" destination="Xa8-Q1-sSJ" id="U8G-vS-M1W"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="m6M-ef-Pm5"/>
+                        <color key="backgroundColor" name="background"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="ncw-x8-4FN" secondAttribute="bottom" id="0iZ-E8-nrK"/>
+                            <constraint firstItem="ncw-x8-4FN" firstAttribute="leading" secondItem="m6M-ef-Pm5" secondAttribute="leading" id="3sb-Iq-eWv"/>
+                            <constraint firstAttribute="top" secondItem="ncw-x8-4FN" secondAttribute="top" id="G1o-fr-1LN"/>
+                            <constraint firstItem="m6M-ef-Pm5" firstAttribute="trailing" secondItem="ncw-x8-4FN" secondAttribute="trailing" id="r7a-24-yT9"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="382" height="111"/>
+                    <connections>
+                        <outlet property="collectionView" destination="ncw-x8-4FN" id="6np-ha-yuJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9hI-7a-nJV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2679.7101449275365" y="2068.1919642857142"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="car.png" width="184" height="140"/>
+        <namedColor name="background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

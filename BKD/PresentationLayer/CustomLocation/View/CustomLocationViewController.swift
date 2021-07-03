@@ -127,10 +127,14 @@ class CustomLocationViewController: UIViewController {
     private func addChildView(){
         addChild(searchCustomLocationCV)
         view.addSubview(searchCustomLocationCV.view)
+        searchCustomLocationCV.didMove(toParent: self)
+
     }
     private func addMarkerInfoView(){
         addChild(markerInfoVC)
         mMarkerInfoBckgV.addSubview(markerInfoVC.view)
+        markerInfoVC.didMove(toParent: self)
+
         // markerInfoVC.view.isHidden = true
         
     }

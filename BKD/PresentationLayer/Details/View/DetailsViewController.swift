@@ -247,6 +247,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     func addTariffSliedView() {
         addChild(tariffSlideVC)
         self.view.addSubview(tariffSlideVC.view)
+        tariffSlideVC.didMove(toParent: self)
     }
     
     ///creat tool bar

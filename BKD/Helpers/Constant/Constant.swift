@@ -20,6 +20,9 @@ struct Constant {
         static let accessories = "Accessories"
         static let myDrivers = "MyDrivers"
         static let reserve = "Reserve"
+        static let carousel = "Carousel"
+        static let signIn = "SignIn"
+
     }
     struct NibNames {
         
@@ -45,6 +48,12 @@ struct Constant {
         static let accessories = "AccessoriesUIViewController"
         static let myDrivers = "MyDriversViewController"
         static let reserve = "ReserveViewController"
+        static let carousel = "CarouselViewController"
+        static let signIn = "SignInViewController"
+        static let newPassword = "NewPasswordViewController"
+        static let emailAddress = "EmailAddressViewController"
+        
+        
     }
     
     struct FontNames {
@@ -93,9 +102,13 @@ struct Constant {
         static let month = "month"
         static let additionalDriver = "Additional driver"
         static let accessories = "Accessories"
+        static let emailAdd = "Email address"
+        static let password = "Password"
+        static let oprnEmail = "Open Email"
 
+        
 
-
+        
     }
 }
 
@@ -168,7 +181,8 @@ let color_reserve_start = UIColor(named: "reserve_gradient_start")
 let color_reserve_end = UIColor(named: "reserve_gradient_end")
 let color_reserve_inactive_start = UIColor(named: "reserve_gradient_inactive_start")
 let color_reserve_inactive_end = UIColor(named: "reserve_gradient_inactive_end")
-
+let color_gradient_register_start = UIColor(named: "register_gradient_start")
+let color_gradient_register_end = UIColor(named: "register_gradient_end")
 
 //Fonts
 let font_selected_filter = UIFont(name: "SFProDisplay-Regular", size: 18)
@@ -183,6 +197,7 @@ let font_details_title = UIFont(name: "SFProDisplay-Regular", size: 13)
 let font_more_header = UIFont(name: "SFProDisplay-Semibold", size: 14)
 let font_search_title = UIFont(name: "SFProDisplay-Light", size: 18)
 let font_placeholder = UIFont(name: "SFProDisplay-Light", size: 10)
+let font_register_placeholder = UIFont(name: "SFProDisplay-Light", size: 15)
 
 // Images
 let img_bkd = UIImage(named:"bkd")?.withRenderingMode(.alwaysOriginal)
@@ -195,3 +210,5 @@ let img_check_box = UIImage(named: "check")
 let img_uncheck_box = UIImage(named: "uncheck_box")
 let img_add_unselece = UIImage(named: "add")
 let img_add_selecte = UIImage(named: "added")
+let img_invisible = UIImage(named: "invisible")
+let img_visible = UIImage(named: "visible")

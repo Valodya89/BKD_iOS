@@ -33,6 +33,8 @@ class LeftViewController: UITableViewController {
         let privacyV = PrivacyPoliceView()
         self.addChild(privacyV)
         self.view.addSubview(privacyV.view)
+        privacyV.didMove(toParent: self)
+
         
         let window = UIApplication.shared.windows[0]
         let bottomPadding = window.safeAreaInsets.bottom

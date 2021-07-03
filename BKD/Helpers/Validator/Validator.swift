@@ -155,4 +155,12 @@ func checkReservationTime(time: Date?) -> Bool {
         return emailPred.evaluate(with: email)
     }
     
+    //MARK: SIGNIN  CHECKING
+    //MARK: ------------------------
+    func areFieldsFilled(firstStr: String?, secondStr: String?) -> Bool {
+        if firstStr!.count > 0 && secondStr!.count > 0 {
+            return true
+        }
+        return false
+    }
 }
