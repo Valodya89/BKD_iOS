@@ -14,7 +14,7 @@ class CarouselViewController: UIViewController, UICollectionViewDelegate, UIColl
     @IBOutlet weak var collectionView: UICollectionView!
     fileprivate var items = CategoryCarouselData.categoryCarouselModel
     
-     var currentPage: Int = CategoryCarouselData.categoryCarouselModel.count/2 {
+     var currentPage: Int = 0 {
         
         didSet {
             
@@ -41,7 +41,7 @@ class CarouselViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         self.setupLayout()
         collectionView.alwaysBounceHorizontal = true
-        self.currentPage = items.count/2
+        self.currentPage = 0
         collectionView.delegate = self
         collectionView.dataSource = self
         
