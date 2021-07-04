@@ -22,6 +22,9 @@ struct Constant {
         static let reserve = "Reserve"
         static let carousel = "Carousel"
         static let signIn = "SignIn"
+        static let registration = "Registration"
+
+        
 
     }
     struct NibNames {
@@ -52,6 +55,8 @@ struct Constant {
         static let signIn = "SignInViewController"
         static let newPassword = "NewPasswordViewController"
         static let emailAddress = "EmailAddressViewController"
+        static let registartion = "RegistrationViewController"
+        
         
         
     }
@@ -102,9 +107,17 @@ struct Constant {
         static let month = "month"
         static let additionalDriver = "Additional driver"
         static let accessories = "Accessories"
+        
+        //Register
         static let emailAdd = "Email address"
         static let password = "Password"
+        static let confirmPassword = "Confirm password"
+
         static let oprnEmail = "Open Email"
+        static let signIn = "Sign in"
+        static let checkEmail = "Did not receive the email? Check your spam filter, or try another email address"
+        static let tryAnotherEmail = "try another email address"
+        static let fillFields = "Fill in all the fields"
 
         
 

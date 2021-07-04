@@ -46,6 +46,21 @@ extension UIButton {
         
     }
     
+    func setButtonClickImage (image: UIImage) {
+        let oldImg = self.image(for: .normal)
+        self.setImage(image, for: .normal)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4 ) {
+            self.setImage(oldImg, for: .normal)
+         }
+    }
+    
+    func setClickTitleColor (_ color : UIColor) {
+        let oldColor = self.titleColor(for: .normal)
+        self.setTitleColor(color, for: .normal)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4 ) {
+            self.setTitleColor(oldColor, for: .normal)
+         }
+    }
    
 }
 

@@ -11,7 +11,7 @@ import SideMenu
 
 class MyBKDViewController: BaseViewController {
 
-    //MARK:Outlets
+    //MARK:Outlet
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
     

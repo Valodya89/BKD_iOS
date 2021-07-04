@@ -90,7 +90,7 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
     
     @objc func increase(sender: UIButton) {
        
-        setButtonClickImage(sender: sender, image: #imageLiteral(resourceName: "selected_plus"))
+        sender.setButtonClickImage(image: #imageLiteral(resourceName: "selected_plus"))
         let count = Int(mAccessorieCountLb.text ?? "0" )
         let price = Double(mPriceLb.text ?? "0" )
     
@@ -120,15 +120,7 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
        
     }
     
-    private func setButtonClickImage (sender: UIButton, image: UIImage) {
-        let oldImg = sender.image(for: .normal)
-        sender.setImage(image, for: .normal)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4 ) {
-            sender.setImage(oldImg, for: .normal)
-         }
-    }
-    
-    
+ 
     private func increaseOrDecreaseAccessory(accessoryPrice:Double,
                              accessoryCount:Int,
                              isIncrease: Bool) {

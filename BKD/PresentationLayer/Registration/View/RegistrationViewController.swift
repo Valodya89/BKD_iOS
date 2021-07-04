@@ -1,13 +1,13 @@
 //
-//  NewPasswordViewController.swift
+//  RegistrationViewController.swift
 //  BKD
 //
-//  Created by Karine Karapetyan on 01-07-21.
+//  Created by Karine Karapetyan on 03-07-21.
 //
 
 import UIKit
 
-class NewPasswordViewController: UIViewController {
+class RegistrationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
