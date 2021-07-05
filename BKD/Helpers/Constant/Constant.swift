@@ -108,6 +108,7 @@ struct Constant {
         static let additionalDriver = "Additional driver"
         static let accessories = "Accessories"
         
+        
         //Register
         static let emailAdd = "Email address"
         static let password = "Password"
@@ -118,10 +119,10 @@ struct Constant {
         static let checkEmail = "Did not receive the email? Check your spam filter, or try another email address"
         static let tryAnotherEmail = "try another email address"
         static let fillFields = "Fill in all the fields"
-
-        
-
-        
+        static let agreeTerms = "I agree to BKD Terms & Conditions"
+        static let termsConditions = "Terms & Conditions"
+        static let passwordErr = "Password must be at least 8 characters"
+        static let confirmPasswordErr = "Both passwords must match"
     }
 }
 

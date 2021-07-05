@@ -163,4 +163,17 @@ func checkReservationTime(time: Date?) -> Bool {
         }
         return false
     }
+    
+    //MARK: REGRISTRATION  CHECKING
+    //MARK: ------------------------
+    func areFieldsFilled(email: String?,
+                         password: String?,
+                         confirmpassword: String?) -> Bool {
+        if email?.count ?? 0 > 0 &&
+            password?.count ?? 0 > 0 &&
+            confirmpassword?.count ?? 0 > 0 {
+            return true
+        }
+        return false
+    }
 }

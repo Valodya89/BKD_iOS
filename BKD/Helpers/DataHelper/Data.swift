@@ -238,3 +238,15 @@ struct MyDriversData {
                        price: 50.25),
     ]
 }
+
+
+struct MyBkdData {
+    static let myBkdModel: [MyBkdModel] = [ MyBkdModel(img: #imageLiteral(resourceName: "profile"), title: "My Account"),
+        MyBkdModel(img: #imageLiteral(resourceName: "setting"), title: "Settings"),
+        MyBkdModel(img: #imageLiteral(resourceName: "logOut"), title: "Log out")
+    ]
+}
+
+
+                                                   
+                                                   

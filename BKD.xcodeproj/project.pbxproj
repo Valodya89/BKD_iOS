@@ -143,11 +143,14 @@
 		5691A641265D97550008081D /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5691A640265D97550008081D /* MainViewModel.swift */; };
 		5691A64E265DB6300008081D /* SearchHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5691A64D265DB6300008081D /* SearchHeaderViewModel.swift */; };
 		56AD18D126916061006A53C1 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AD18D026916061006A53C1 /* RegistrationViewController.swift */; };
-		56AD18D726916077006A53C1 /* Registaration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56AD18D626916077006A53C1 /* Registaration.storyboard */; };
+		56AD18D726916077006A53C1 /* Registration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56AD18D626916077006A53C1 /* Registration.storyboard */; };
 		56AD18E92691622C006A53C1 /* EmailAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AD18E52691622C006A53C1 /* EmailAddressViewController.swift */; };
 		56AD18EA2691622C006A53C1 /* NewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AD18E62691622C006A53C1 /* NewPasswordViewController.swift */; };
 		56AD18EB2691622C006A53C1 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56AD18E72691622C006A53C1 /* SignIn.storyboard */; };
 		56AD18EC2691622C006A53C1 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AD18E82691622C006A53C1 /* SignInViewController.swift */; };
+		56AD18F226928861006A53C1 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AD18F126928861006A53C1 /* RegistrationViewModel.swift */; };
+		56AD19022692AD2D006A53C1 /* MyBkdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AD19012692AD2D006A53C1 /* MyBkdModel.swift */; };
+		56AD19072692B9F6006A53C1 /* MyBkdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AD19062692B9F6006A53C1 /* MyBkdTableViewCell.swift */; };
 		56B9F2D5267E8CEE003449AD /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F2D4267E8CEE003449AD /* SearchView.swift */; };
 		56B9F2E326805021003449AD /* SearchWithValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F2E226805020003449AD /* SearchWithValueView.swift */; };
 		56B9F2ED26806488003449AD /* SearchResultModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F2EC26806488003449AD /* SearchResultModelView.swift */; };
@@ -335,11 +338,14 @@
 		5691A640265D97550008081D /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		5691A64D265DB6300008081D /* SearchHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderViewModel.swift; sourceTree = "<group>"; };
 		56AD18D026916061006A53C1 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
-		56AD18D626916077006A53C1 /* Registaration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Registaration.storyboard; sourceTree = "<group>"; };
+		56AD18D626916077006A53C1 /* Registration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Registration.storyboard; sourceTree = "<group>"; };
 		56AD18E52691622C006A53C1 /* EmailAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailAddressViewController.swift; sourceTree = "<group>"; };
 		56AD18E62691622C006A53C1 /* NewPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
 		56AD18E72691622C006A53C1 /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		56AD18E82691622C006A53C1 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		56AD18F126928861006A53C1 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		56AD19012692AD2D006A53C1 /* MyBkdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBkdModel.swift; sourceTree = "<group>"; };
+		56AD19062692B9F6006A53C1 /* MyBkdTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBkdTableViewCell.swift; sourceTree = "<group>"; };
 		56B9F2D4267E8CEE003449AD /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		56B9F2E226805020003449AD /* SearchWithValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWithValueView.swift; sourceTree = "<group>"; };
 		56B9F2EC26806488003449AD /* SearchResultModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultModelView.swift; sourceTree = "<group>"; };
@@ -1421,6 +1427,7 @@
 		568E70B42644BFD2000CB6A9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				56AD19052692B9D5006A53C1 /* Cell */,
 				568E703A264440C2000CB6A9 /* MyBKDViewController.swift */,
 			);
 			path = View;
@@ -1429,6 +1436,7 @@
 		568E70B52644BFD8000CB6A9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				56AD19012692AD2D006A53C1 /* MyBkdModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1526,7 +1534,7 @@
 			isa = PBXGroup;
 			children = (
 				56AD18D026916061006A53C1 /* RegistrationViewController.swift */,
-				56AD18D626916077006A53C1 /* Registaration.storyboard */,
+				56AD18D626916077006A53C1 /* Registration.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1541,6 +1549,7 @@
 		56AD18CF2691603C006A53C1 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				56AD18F126928861006A53C1 /* RegistrationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1562,6 +1571,14 @@
 				56AD18E62691622C006A53C1 /* NewPasswordViewController.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		56AD19052692B9D5006A53C1 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				56AD19062692B9F6006A53C1 /* MyBkdTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		56C8E16E267C1CAD0061890C /* Cell */ = {
@@ -1754,7 +1771,7 @@
 				5656324726585FFF00B78562 /* CarEquipmentCollectionViewCell.xib in Resources */,
 				568E706F264481B0000CB6A9 /* LeftTableViewCell.xib in Resources */,
 				566354EC268AF8EF0003E2EB /* PriceTableViewCell.xib in Resources */,
-				56AD18D726916077006A53C1 /* Registaration.storyboard in Resources */,
+				56AD18D726916077006A53C1 /* Registration.storyboard in Resources */,
 				565A7AE426555EFF006C63D0 /* CategoryTableViewCell.xib in Resources */,
 				561888A3264ABDFC00BDDB33 /* DropDownTableViewCell.xib in Resources */,
 				564E136A2652F0CF008CE884 /* PrivacyPoliceView.xib in Resources */,
@@ -1956,6 +1973,7 @@
 				5602534C2667413A00FB204C /* BaseViewController.swift in Sources */,
 				565F8C1F268CF4C700E21C71 /* CarouselCollectionViewCell.swift in Sources */,
 				56533EE3267925FE0012BF4A /* AccessoriesUIViewController.swift in Sources */,
+				56AD19022692AD2D006A53C1 /* MyBkdModel.swift in Sources */,
 				5691A639265D53140008081D /* Extentions.swift in Sources */,
 				5656082626785C32009578FA /* MoreViewController.swift in Sources */,
 				568E704826446E2D000CB6A9 /* MyReservationsViewController.swift in Sources */,
@@ -2002,6 +2020,8 @@
 				56AD18E92691622C006A53C1 /* EmailAddressViewController.swift in Sources */,
 				561888A2264ABDFC00BDDB33 /* DropDownTableViewCell.swift in Sources */,
 				565A7AD62654C49B006C63D0 /* CategoryCollectionViewCell.swift in Sources */,
+				56AD18F226928861006A53C1 /* RegistrationViewModel.swift in Sources */,
+				56AD19072692B9F6006A53C1 /* MyBkdTableViewCell.swift in Sources */,
 				5691A64E265DB6300008081D /* SearchHeaderViewModel.swift in Sources */,
 				564E12D9264D7617008CE884 /* Constant.swift in Sources */,
 				560252F42665950700FB204C /* CustomLocationViewModel.swift in Sources */,

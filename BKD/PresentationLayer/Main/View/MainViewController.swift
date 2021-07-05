@@ -116,6 +116,7 @@ class MainViewController: BaseViewController {
         mAvalableCategoriesTbV.delegate = self
         mAvalableCategoriesTbV.dataSource = self
         searchHeaderV?.delegate = self
+        //self.tabBarController?.delegate = self
     }
     
     private func configureCarsCollectionView() {
@@ -889,3 +890,33 @@ extension MainViewController: UIScrollViewDelegate {
    
 }
 
+
+//extension MainViewController: UITabBarControllerDelegate {
+//    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+//        let isLogin = false
+//        switch tabBarController.selectedIndex {
+//        case 4:
+//            if !isLogin {
+//                let signInVC = SignInViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
+//                self.navigationController?.pushViewController(signInVC, animated: true)
+//            }
+//        default: break
+//
+//        }
+//    }
+//    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+//
+//
+//
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            if let controller = storyboard.instantiateViewController(withIdentifier: "storyboardID") as? YourViewControllerClass {
+//                controller.modalPresentationStyle = .fullScreen
+//                self.present(controller, animated: true, completion: nil)
+//    }
+//            return false
+//        }
+//
+//        // Tells the tab bar to select other view controller as normal
+//        return true
+//    }
+//}

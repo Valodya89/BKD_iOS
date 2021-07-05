@@ -46,7 +46,7 @@
     </objects>
     <resources>
         <namedColor name="serach_address">
-            <color red="0.039215686274509803" green="0.12941176470588237" blue="0.24705882352941178" alpha="0.67000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.039215686274509803" green="0.12941176470588237" blue="0.24705882352941178" alpha="0.67000001668930054" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

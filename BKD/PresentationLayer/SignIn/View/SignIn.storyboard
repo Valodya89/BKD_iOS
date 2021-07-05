@@ -498,7 +498,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2hW-Eg-Hhj" customClass="TextField" customModule="BKD" customModuleProvider="target">
-                                <rect key="frame" x="16" y="105" width="382" height="48"/>
+                                <rect key="frame" x="16" y="99" width="382" height="43"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" name="navigationBar"/>
                                 <color key="textColor" name="navigationBar"/>
@@ -509,34 +509,34 @@
                                 </connections>
                             </textField>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incorrect E-mail address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ij-Di-y6S">
-                                <rect key="frame" x="16" y="171" width="382" height="19"/>
+                                <rect key="frame" x="16" y="158.5" width="382" height="17.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="15"/>
                                 <color key="textColor" name="offert_red"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the email associated with your account and we’ll send an email with instructions to reset your password.   " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1H-ig-0rf">
-                                <rect key="frame" x="16" y="17.5" width="382" height="59.5"/>
+                                <rect key="frame" x="16" y="12.5" width="382" height="59.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
                                 <color key="textColor" name="navigationBar"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Oo-Fb-syp">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We have sent a password recover instructions to your email." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yFK-O8-hi4">
-                                        <rect key="frame" x="62" y="157" width="290" height="40"/>
+                                        <rect key="frame" x="62" y="147.5" width="290" height="40"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
                                         <color key="textColor" name="navigationBar"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check your mail" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBd-9V-emG">
-                                        <rect key="frame" x="0.0" y="98" width="414" height="25"/>
+                                        <rect key="frame" x="0.0" y="92.5" width="414" height="24"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="21"/>
                                         <color key="textColor" name="navigationBar"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Did not receive the email? Check your spam filter, or try another email address  " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61D-Tx-iDk">
-                                        <rect key="frame" x="47" y="726.5" width="320" height="40"/>
+                                        <rect key="frame" x="47" y="685.5" width="320" height="40"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" name="navigationBar"/>
                                         <nil key="highlightedColor"/>
@@ -559,22 +559,22 @@
                                 </constraints>
                             </view>
                             <view userInteractionEnabled="NO" alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2mo-AA-0ya">
-                                <rect key="frame" x="118" y="306.5" width="178" height="46.5"/>
+                                <rect key="frame" x="118" y="284.5" width="178" height="42"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_gradient" translatesAutoresizingMaskIntoConstraints="NO" id="e1o-M7-mjM">
-                                        <rect key="frame" x="0.0" y="0.0" width="178" height="46.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="178" height="42"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="MZy-LD-k77">
-                                        <rect key="frame" x="0.0" y="0.0" width="178" height="46.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="178" height="42"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SHW-1Y-3XD">
-                                                <rect key="frame" x="0.0" y="0.0" width="81" height="46.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="81" height="42"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_left" translatesAutoresizingMaskIntoConstraints="NO" id="IwA-j5-aOu">
-                                                        <rect key="frame" x="32.5" y="16.5" width="16" height="13.5"/>
+                                                        <rect key="frame" x="32.5" y="15" width="16" height="12"/>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qGq-hX-1zI">
-                                                        <rect key="frame" x="0.0" y="0.0" width="81" height="46.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="81" height="42"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <gestureRecognizers/>
                                                         <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="12"/>
@@ -601,10 +601,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IAz-rO-WEk">
-                                                <rect key="frame" x="97" y="0.0" width="81" height="46.5"/>
+                                                <rect key="frame" x="97" y="0.0" width="81" height="42"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_right" translatesAutoresizingMaskIntoConstraints="NO" id="3dP-mw-FFo">
-                                                        <rect key="frame" x="32" y="16.5" width="17" height="13.5"/>
+                                                        <rect key="frame" x="32" y="14.5" width="17" height="12.5"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -659,7 +659,15 @@
                             <constraint firstItem="k1H-ig-0rf" firstAttribute="centerX" secondItem="JhA-3p-IsG" secondAttribute="centerX" id="yFr-6a-Hj1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="6bz-V0-B6v"/>
+                    <navigationItem key="navigationItem" id="6bz-V0-B6v">
+                        <barButtonItem key="leftBarButtonItem" image="back" id="Or8-Uo-687">
+                            <color key="tintColor" name="menu"/>
+                            <connections>
+                                <action selector="back:" destination="ApW-LA-AOx" id="M0G-x5-GFD"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="bkd" id="ubP-WW-BnN"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="mCheckEmailBckgV" destination="8Oo-Fb-syp" id="yDq-Ek-bi5"/>
                         <outlet property="mCheckEmailTitleLb" destination="sBd-9V-emG" id="cf2-GZ-Liv"/>
@@ -669,6 +677,7 @@
                         <outlet property="mEmailAddressTextFl" destination="2hW-Eg-Hhj" id="O8r-jY-sxc"/>
                         <outlet property="mEmailInfoLb" destination="k1H-ig-0rf" id="jYk-si-QYJ"/>
                         <outlet property="mErrorLb" destination="1Ij-Di-y6S" id="eZa-dl-1Oc"/>
+                        <outlet property="mRightBarBtn" destination="ubP-WW-BnN" id="4S5-qZ-GwN"/>
                         <outlet property="mTryAnotherEmailLb" destination="61D-Tx-iDk" id="zl1-ap-QWG"/>
                     </connections>
                 </viewController>
@@ -679,7 +688,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3065" y="1417"/>
+            <point key="canvasLocation" x="3973.913043478261" y="1416.9642857142856"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="w3k-m0-qyK">
@@ -700,6 +709,25 @@
             </objects>
             <point key="canvasLocation" x="1396" y="2091"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="STc-DB-V4w">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Bgc-HI-IHh" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="6NU-6e-TiR">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" name="navigation_bar"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ApW-LA-AOx" kind="relationship" relationship="rootViewController" id="k1q-FG-NcD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SyY-sY-34Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3063.768115942029" y="1416.9642857142856"/>
+        </scene>
     </scenes>
     <resources>
         <image name="back" width="12" height="21"/>
@@ -715,10 +743,10 @@
             <color red="0.91399997472763062" green="0.78799998760223389" blue="0.41999998688697815" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="navigationBar">
-            <color red="0.10980391502380371" green="0.20000001788139343" blue="0.37254902720451355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="navigation_bar">
-            <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.10999999940395355" green="0.20000000298023224" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="offert_red">
             <color red="1" green="0.29411764705882354" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

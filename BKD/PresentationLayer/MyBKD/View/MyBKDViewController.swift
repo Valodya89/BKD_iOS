@@ -14,10 +14,11 @@ class MyBKDViewController: BaseViewController {
     //MARK:Outlet
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
+    @IBOutlet weak var mTableV: UITableView!
+    @IBOutlet weak var mPrivacyPolicyLb: UILabel!
     
     //MARK: Variables
     private lazy  var signInVC = SignInViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
-    private lazy  var emailAddressVC = EmailAddressViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
     var menu: SideMenuNavigationController?
 
     
@@ -26,12 +27,15 @@ class MyBKDViewController: BaseViewController {
         setUpView()
     }
     func setUpView() {
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = img_bkd
         menu = SideMenuNavigationController(rootViewController: LeftViewController())
         self.setmenu(menu: menu)
+        mPrivacyPolicyLb.font = font_details_title
         addChild(vc: signInVC as SignInViewController)
-        didPressForgotPassword()
+
     }
+    
 
     ///Add child ViewController
     func addChild(vc: UIViewController) {
@@ -48,18 +52,32 @@ class MyBKDViewController: BaseViewController {
         vc.removeFromParent()
     }
     
-    func didPressForgotPassword() {
-        signInVC.didPressForgotPassword = { [weak self] in
-            self?.removeChild(vc: self!.signInVC as SignInViewController)
-            self?.addChild(vc: self!.emailAddressVC as EmailAddressViewController)
-        }
-    }
-    
+
     //MARK: ACTIONS
     @IBAction func menu(_ sender: UIBarButtonItem) {
         present(menu!, animated: true, completion: nil)
     }
+}
+
+
+
+//MARK: UITableViewDelegate, UITableViewDataSource
+//MARK: ------------------------------------------
+extension MyBKDViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return  MyBkdData.myBkdModel.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: MyBkdTableViewCell.identifier, for: indexPath) as! MyBkdTableViewCell
+        let item = MyBkdData.myBkdModel[indexPath.row]
+        cell.mImageV.image = item.img
+        cell.mTitleLb.text = item.title
+        cell.mImageV.setTintColor(color: color_email!)
+        
+         return cell
+    }
     
     
 }

@@ -438,7 +438,7 @@
         <image name="2" width="16.5" height="13"/>
         <image name="search_right" width="17" height="8"/>
         <namedColor name="main">
-            <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.10999999940395355" green="0.20000000298023224" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="main_26%">
             <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="0.25999999046325684" colorSpace="custom" customColorSpace="sRGB"/>
@@ -453,7 +453,7 @@
             <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="0.63999998569488525" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="navigation_bar">
-            <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.10999999940395355" green="0.20000000298023224" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="submenu">
             <color red="0.16500000655651093" green="0.24799999594688416" blue="0.40900000929832458" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

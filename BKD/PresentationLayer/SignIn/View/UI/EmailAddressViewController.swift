@@ -20,6 +20,7 @@ class EmailAddressViewController: UIViewController, StoryboardInitializable {
     @IBOutlet weak var mCheckEmailBckgV: UIView!
     @IBOutlet weak var mCheckEmailTitleLb: UILabel!
     @IBOutlet weak var mTryAnotherEmailLb: UILabel!
+    @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     
     //MARK: Variables
     lazy var signInViewModel = SignInViewModel()
@@ -37,6 +38,7 @@ class EmailAddressViewController: UIViewController, StoryboardInitializable {
 
     
     func  setUpView() {
+        mRightBarBtn.image = img_bkd
         mEmailAddressTextFl.setBorder(color: color_navigationBar!, width: 1)
         mConfirmBtn.layer.cornerRadius = 8
         mConfirmBtn.addBorder(color:color_navigationBar!, width: 1.0)
@@ -119,6 +121,10 @@ class EmailAddressViewController: UIViewController, StoryboardInitializable {
     
     @IBAction func confirmSwipeGesture(_ sender: UISwipeGestureRecognizer) {
         confirmClicked()
+    }
+    
+    @IBAction func back(_ sender: UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func tapLabel(gesture: UITapGestureRecognizer) {

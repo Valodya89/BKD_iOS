@@ -27,9 +27,8 @@ class NewPasswordViewController: UIViewController {
     }
     
     func setUpView() {
+        setBorder()
         mRightBarBtn.image = img_bkd
-        mPasswordTxtFl.setBorder(color: color_navigationBar!, width: 1)
-        mConfirmPasswordTxtFl.setBorder(color: color_navigationBar!, width: 1)
         mResetPasswordBtn.layer.cornerRadius = 8
         mResetPasswordBtn.setGradientWithCornerRadius(cornerRadius: 8.0, startColor: color_gradient_register_start!, endColor: color_gradient_register_end!)
         mPasswordTxtFl.setPlaceholder(string: Constant.Texts.password,
@@ -40,6 +39,10 @@ class NewPasswordViewController: UIViewController {
                                            color: color_email!)
     }
 
+    private func setBorder() {
+        mPasswordTxtFl.setBorder(color: color_navigationBar!, width: 1)
+        mConfirmPasswordTxtFl.setBorder(color: color_navigationBar!, width: 1)
+    }
     // MARK: ACTIONS
     @IBAction func visiblePassword(_ sender: UIButton) {
         if sender.image(for: .normal) == img_invisible {
@@ -65,18 +68,27 @@ class NewPasswordViewController: UIViewController {
         mPasswordTxtFl.resignFirstResponder()
         mConfirmPasswordTxtFl.resignFirstResponder()
         sender.setClickTitleColor(color_menu!)
-        SignInViewModel().areFieldsFilled(firtStr: mPasswordLb.text,
+        SignInViewModel().areFieldsFilled(firtStr: mPasswordTxtFl.text,
                                           secondStr: mConfirmPasswordTxtFl.text) { [self] (isActive) in
             if isActive {
                 if mPasswordTxtFl.text!.count < 8 {
                     mPasswordLb.textColor = color_error
+                    mPasswordTxtFl.addBorder(color: color_error!, width: 2)
                 } else if  mPasswordTxtFl.text! != mConfirmPasswordTxtFl.text! {
                     mConfirmPasswordLb.textColor = color_error
+                    mConfirmPasswordTxtFl.addBorder(color: color_error!, width: 2)
                 } else {
                     // Sent Request of reset password
                 }
             } else {
                 mErrorLb.isHidden = isActive
+                if mPasswordTxtFl.text?.count == 0 {
+                    mPasswordTxtFl.addBorder(color: color_error!, width: 2)
+                }
+                if mConfirmPasswordTxtFl.text?.count == 0{
+                    mConfirmPasswordTxtFl.addBorder(color: color_error!, width: 2)
+                }
+                    
             }
             
         }
@@ -113,6 +125,7 @@ extension NewPasswordViewController: UITextFieldDelegate {
         guard let text = textField.text else { return false }
         let fullString = NSString(string: text).replacingCharacters(in: range, with: string)
         textField.text = fullString
+       setBorder()
         return false
     }
 }

@@ -24,7 +24,7 @@ class SignInViewController: UIViewController, StoryboardInitializable {
     @IBOutlet weak var mRegisterBtn: UIButton!
     
     //MARK: Variables
-    var didPressForgotPassword: (() -> Void)?
+   // var didPressForgotPassword: (() -> Void)?
 
     lazy var signInViewModel = SignInViewModel()
     
@@ -34,6 +34,7 @@ class SignInViewController: UIViewController, StoryboardInitializable {
     }
     
     func setUpView() {
+        tabBarController?.tabBar.isHidden = true
         mVisibilityPasswortBtn.setImage(#imageLiteral(resourceName: "invisible"), for: .normal)
         mRegisterBtn.setGradientWithCornerRadius(cornerRadius: 8.0, startColor: color_gradient_register_start!, endColor: color_gradient_register_end!)
         mPasswordTxtFl.setBorder(color: color_navigationBar!, width: 1)
@@ -60,6 +61,8 @@ class SignInViewController: UIViewController, StoryboardInitializable {
             self.mSignInBckgV.layoutIfNeeded()
         }
     }
+    
+    
     //MARK: ACTIONS
     @IBAction func visibility(_ sender: UIButton) {
         if sender.image(for: .normal) == img_invisible {
@@ -73,8 +76,8 @@ class SignInViewController: UIViewController, StoryboardInitializable {
     
     
     @IBAction func forgotPassword(_ sender: UIButton) {
-        didPressForgotPassword?()
-    }
+        let emailAddressVC = EmailAddressViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
+        self.navigationController?.pushViewController(emailAddressVC, animated: true)    }
     
     @IBAction func signIn(_ sender: UIButton) {
         searchClicked()
@@ -86,6 +89,8 @@ class SignInViewController: UIViewController, StoryboardInitializable {
     }
     
     @IBAction func register(_ sender: UIButton) {
+        let registerVC = RegistrationViewController.initFromStoryboard(name: Constant.Storyboards.registration)
+        self.navigationController?.pushViewController(registerVC, animated: true)
     }
 }
 
