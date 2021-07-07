@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Registartion Bot View Controller-->
+        <scene sceneID="3CM-MT-W9p">
+            <objects>
+                <viewController storyboardIdentifier="RegistartionBotViewController" id="4Ic-yW-tpv" customClass="RegistartionBotViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="32r-hk-FFT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RdY-K3-uUO">
+                                <rect key="frame" x="0.0" y="25" width="414" height="648"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="4Ic-yW-tpv" id="exr-ub-aiT"/>
+                                    <outlet property="delegate" destination="4Ic-yW-tpv" id="pjc-tt-RMr"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gJa-to-eTV"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gJa-to-eTV" firstAttribute="bottom" secondItem="RdY-K3-uUO" secondAttribute="bottom" multiplier="1.15" id="WLP-tp-q4i"/>
+                            <constraint firstItem="RdY-K3-uUO" firstAttribute="leading" secondItem="gJa-to-eTV" secondAttribute="leading" id="dan-22-21c"/>
+                            <constraint firstItem="gJa-to-eTV" firstAttribute="trailing" secondItem="RdY-K3-uUO" secondAttribute="trailing" id="ogt-LA-mrO"/>
+                            <constraint firstItem="RdY-K3-uUO" firstAttribute="top" secondItem="gJa-to-eTV" secondAttribute="top" constant="25" id="zSA-ur-935"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="4Ts-GE-TlK">
+                        <barButtonItem key="leftBarButtonItem" image="back" id="fYO-MR-iDI">
+                            <color key="tintColor" name="menu"/>
+                            <connections>
+                                <action selector="beck:" destination="4Ic-yW-tpv" id="oOJ-gI-2H0"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="bkd" id="pCY-Gx-gCq"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mRightBarBtn" destination="pCY-Gx-gCq" id="oPm-SA-gkx"/>
+                        <outlet property="mTableV" destination="RdY-K3-uUO" id="nqw-ke-mdS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NFu-ib-a0N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1015.9420289855074" y="118.52678571428571"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Kyx-mZ-zKo">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sWi-Uv-O9S" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="hyx-ck-aKs">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" name="navigation_bar"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="4Ic-yW-tpv" kind="relationship" relationship="rootViewController" id="bbE-Ew-uPs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="naW-Sz-qtG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="105.79710144927537" y="118.52678571428571"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="back" width="12" height="21"/>
+        <image name="bkd" width="76" height="23.5"/>
+        <namedColor name="menu">
+            <color red="0.91399997472763062" green="0.78799998760223389" blue="0.41999998688697815" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="navigation_bar">
+            <color red="0.10999999940395355" green="0.20000000298023224" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

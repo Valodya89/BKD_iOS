@@ -23,7 +23,8 @@ struct Constant {
         static let carousel = "Carousel"
         static let signIn = "SignIn"
         static let registration = "Registration"
-
+        static let registrationBot = "RegistrationBot"
+        static let searchPhoneCode = "SearchPhoneCode"
         
 
     }
@@ -55,9 +56,11 @@ struct Constant {
         static let signIn = "SignInViewController"
         static let newPassword = "NewPasswordViewController"
         static let emailAddress = "EmailAddressViewController"
+        static let checkEmail = "CheckEmailViewController"
         static let registartion = "RegistrationViewController"
-        
-        
+        static let termsConditions = "TermsConditionsViewController"
+        static let faceAndTouchId = "FaceAndTouchIdViewController"
+        static let SearchPhoneCode = "SearchPhoneCodeViewController"
         
     }
     
@@ -130,6 +133,10 @@ let tariffOptionsArr =  [["2h", "3h", "4h", "5h", "6h", "10h"],
                          ["1d", "2d", "3d", "4d", "5d", "6d"],
                          ["1w", "2w", "3w"],
                          ["1m"], []]
+
+let countryList = ["Dutch", "Franch", "English"]
+let cityList = ["City1", "City2", "City3", "City4", "City5", "City6", "City7"]
+
 let top_searchResult: CGFloat = 12.0
 let top_avalableCategoryTbv: CGFloat = 30.0
 let cornerRadius_equipment: CGFloat = 15.0
@@ -197,6 +204,8 @@ let color_reserve_inactive_start = UIColor(named: "reserve_gradient_inactive_sta
 let color_reserve_inactive_end = UIColor(named: "reserve_gradient_inactive_end")
 let color_gradient_register_start = UIColor(named: "register_gradient_start")
 let color_gradient_register_end = UIColor(named: "register_gradient_end")
+let color_dark_register = UIColor(named:"navigation_bar")
+let color_selected_start = UIColor (named: "selected_start")
 
 //Fonts
 let font_selected_filter = UIFont(name: "SFProDisplay-Regular", size: 18)
@@ -211,6 +220,8 @@ let font_details_title = UIFont(name: "SFProDisplay-Regular", size: 13)
 let font_more_header = UIFont(name: "SFProDisplay-Semibold", size: 14)
 let font_search_title = UIFont(name: "SFProDisplay-Light", size: 18)
 let font_placeholder = UIFont(name: "SFProDisplay-Light", size: 10)
+let font_bot_placeholder = UIFont(name: "SFProDisplay-Light", size: 13)
+
 let font_register_placeholder = UIFont(name: "SFProDisplay-Light", size: 15)
 
 // Images

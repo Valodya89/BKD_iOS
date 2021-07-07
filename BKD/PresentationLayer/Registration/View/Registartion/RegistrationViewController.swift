@@ -38,7 +38,7 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
         setBorderToTextFileds()
         mPasswordVisibleBtn.setImage(#imageLiteral(resourceName: "invisible"), for: .normal)
         mConfirmPasswordVisibleBtn.setImage(#imageLiteral(resourceName: "invisible"), for: .normal)
-                mContinueBtn.layer.cornerRadius = 8
+        mContinueBtn.layer.cornerRadius = 8
         mContinueBtn.addBorder(color:color_navigationBar!, width: 1.0)
         mEmailAddressTxtFl.setPlaceholder(string: Constant.Texts.emailAdd,
                                       font: font_register_placeholder!,
@@ -124,8 +124,13 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
         UIView.animate(withDuration: 0.5) { [self] in
             self.mContinueLeading.constant = self.mContinueBckgV.bounds.width - self.mContinueBtn.frame.size.width
             self.mContinueBckgV.layoutIfNeeded()
+        } completion: { _ in
+            let emailVerificationVC = EmailVerificationViewController.initFromStoryboard(name: Constant.Storyboards.registration)
+            self.navigationController?.pushViewController(emailVerificationVC, animated: true)
         }
     }
+    
+   
     
     //MARK: ACTIONS
     
@@ -171,14 +176,11 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
     }
     
     @IBAction func tapAgreeLabel(gesture: UITapGestureRecognizer) {
-        let termsRange = (Constant.Texts.termsConditions as NSString).range(of: Constant.Texts.tryAnotherEmail)
+        let termsRange = (Constant.Texts.agreeTerms as NSString).range(of: Constant.Texts.termsConditions)
         if gesture.didTapAttributedTextInLabel(label: mAgreeLb, inRange: termsRange) {
-            if mAgreeCheckBoxBtn.image(for: .normal) == img_check_box {
-                print("Tapped terms")
-                // go to web view
-            }
-        } else {
-            print("Tapped none")
+            
+                let termsConditionsVC = TermsConditionsViewController.initFromStoryboard(name: Constant.Storyboards.registration)
+                self.navigationController?.pushViewController(termsConditionsVC, animated: true)
         }
     }
     

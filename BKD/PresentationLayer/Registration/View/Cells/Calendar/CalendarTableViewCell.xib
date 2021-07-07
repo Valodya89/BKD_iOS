@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Light.ttf">
+            <string>SFProDisplay-Light</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CalendarTableViewCell" id="KGk-i7-Jjw" customClass="CalendarTableViewCell" customModule="BKD" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="78"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="78"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dA3-wO-9vC">
+                        <rect key="frame" x="145.5" y="18" width="252" height="42"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" translatesAutoresizingMaskIntoConstraints="NO" id="k7S-kC-Ygd">
+                                <rect key="frame" x="216.5" y="9" width="22" height="24"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dkl-Ix-SwQ">
+                                <rect key="frame" x="0.0" y="0.0" width="210.5" height="42"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TqP-vD-MeD">
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="42"/>
+                                        <subviews>
+                                            <view alpha="0.55000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8de-VT-o9n">
+                                                <rect key="frame" x="59" y="3.5" width="1" height="35"/>
+                                                <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="1" id="Uz9-Po-xbh"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Day" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BeC-IE-le2">
+                                                <rect key="frame" x="5" y="0.0" width="50" height="42"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="13"/>
+                                                <color key="textColor" name="email"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="BeC-IE-le2" firstAttribute="height" secondItem="TqP-vD-MeD" secondAttribute="height" id="R6X-VD-q1b"/>
+                                            <constraint firstItem="8de-VT-o9n" firstAttribute="height" secondItem="TqP-vD-MeD" secondAttribute="height" multiplier="0.833333" id="Sgz-k8-HCP"/>
+                                            <constraint firstItem="BeC-IE-le2" firstAttribute="centerY" secondItem="TqP-vD-MeD" secondAttribute="centerY" id="YES-9C-kKc"/>
+                                            <constraint firstItem="BeC-IE-le2" firstAttribute="width" secondItem="TqP-vD-MeD" secondAttribute="width" multiplier="0.833333" id="cJd-3V-wiG"/>
+                                            <constraint firstItem="8de-VT-o9n" firstAttribute="centerY" secondItem="TqP-vD-MeD" secondAttribute="centerY" id="gtI-Oi-x25"/>
+                                            <constraint firstAttribute="trailing" secondItem="8de-VT-o9n" secondAttribute="trailing" id="uFE-yX-rBh"/>
+                                            <constraint firstItem="BeC-IE-le2" firstAttribute="centerX" secondItem="TqP-vD-MeD" secondAttribute="centerX" id="ub6-oC-FRA"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOz-Yz-UYk">
+                                        <rect key="frame" x="60" y="0.0" width="70" height="42"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Month" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BkS-f9-cdT">
+                                                <rect key="frame" x="5" y="0.0" width="60" height="42"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="13"/>
+                                                <color key="textColor" name="email"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view alpha="0.55000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wk0-bf-a0U">
+                                                <rect key="frame" x="69" y="0.0" width="1" height="42"/>
+                                                <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="1" id="NwF-cJ-cgr"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="Wk0-bf-a0U" firstAttribute="centerY" secondItem="TOz-Yz-UYk" secondAttribute="centerY" id="EUs-9f-NZZ"/>
+                                            <constraint firstItem="BkS-f9-cdT" firstAttribute="centerX" secondItem="TOz-Yz-UYk" secondAttribute="centerX" id="Er2-JZ-tLV"/>
+                                            <constraint firstItem="BkS-f9-cdT" firstAttribute="centerY" secondItem="TOz-Yz-UYk" secondAttribute="centerY" id="Gtn-fN-xqx"/>
+                                            <constraint firstItem="BkS-f9-cdT" firstAttribute="width" secondItem="TOz-Yz-UYk" secondAttribute="width" multiplier="0.857143" id="Hj1-zf-Fiz"/>
+                                            <constraint firstItem="BkS-f9-cdT" firstAttribute="height" secondItem="TOz-Yz-UYk" secondAttribute="height" id="hlG-zU-gmY"/>
+                                            <constraint firstAttribute="trailing" secondItem="Wk0-bf-a0U" secondAttribute="trailing" id="loP-tB-lKO"/>
+                                            <constraint firstItem="Wk0-bf-a0U" firstAttribute="height" secondItem="TOz-Yz-UYk" secondAttribute="height" id="onH-uY-vYg"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IcI-na-iq0">
+                                        <rect key="frame" x="130" y="0.0" width="80.5" height="42"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Year" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ig5-0O-cYh">
+                                                <rect key="frame" x="5.5" y="0.0" width="70" height="42"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="13"/>
+                                                <color key="textColor" name="email"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="Ig5-0O-cYh" firstAttribute="height" secondItem="IcI-na-iq0" secondAttribute="height" id="47E-zq-H3K"/>
+                                            <constraint firstItem="Ig5-0O-cYh" firstAttribute="width" secondItem="IcI-na-iq0" secondAttribute="width" multiplier="0.869565" id="JDb-YN-BfV"/>
+                                            <constraint firstItem="Ig5-0O-cYh" firstAttribute="centerX" secondItem="IcI-na-iq0" secondAttribute="centerX" id="u4g-hC-4me"/>
+                                            <constraint firstItem="Ig5-0O-cYh" firstAttribute="centerY" secondItem="IcI-na-iq0" secondAttribute="centerY" id="xb2-zI-lAS"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="IcI-na-iq0" firstAttribute="width" secondItem="dkl-Ix-SwQ" secondAttribute="width" multiplier="0.382423" id="3QV-fm-TEu"/>
+                                    <constraint firstItem="TqP-vD-MeD" firstAttribute="width" secondItem="dkl-Ix-SwQ" secondAttribute="width" multiplier="0.285" id="Alq-er-kZa"/>
+                                    <constraint firstItem="IcI-na-iq0" firstAttribute="height" secondItem="dkl-Ix-SwQ" secondAttribute="height" id="FBm-hU-yLb"/>
+                                    <constraint firstItem="TOz-Yz-UYk" firstAttribute="height" secondItem="dkl-Ix-SwQ" secondAttribute="height" id="Kvd-Eh-Uy0"/>
+                                    <constraint firstItem="TOz-Yz-UYk" firstAttribute="width" secondItem="dkl-Ix-SwQ" secondAttribute="width" multiplier="0.333" id="Zt7-Ab-QGf"/>
+                                    <constraint firstItem="TqP-vD-MeD" firstAttribute="height" secondItem="dkl-Ix-SwQ" secondAttribute="height" id="qWO-8z-dP5"/>
+                                </constraints>
+                            </stackView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zks-SV-EgJ">
+                                <rect key="frame" x="0.0" y="0.0" width="252" height="42"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="KGk-i7-Jjw" id="q1I-pN-f8v"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Zks-SV-EgJ" firstAttribute="leading" secondItem="dA3-wO-9vC" secondAttribute="leading" id="57f-qL-B9o"/>
+                            <constraint firstItem="dkl-Ix-SwQ" firstAttribute="leading" secondItem="dA3-wO-9vC" secondAttribute="leading" id="Esc-DR-BVc"/>
+                            <constraint firstItem="k7S-kC-Ygd" firstAttribute="centerY" secondItem="dA3-wO-9vC" secondAttribute="centerY" id="OQ8-VQ-c5n"/>
+                            <constraint firstAttribute="bottom" secondItem="Zks-SV-EgJ" secondAttribute="bottom" id="Pzj-Nc-hP9"/>
+                            <constraint firstItem="dkl-Ix-SwQ" firstAttribute="top" secondItem="dA3-wO-9vC" secondAttribute="top" id="VrO-Hj-5G3"/>
+                            <constraint firstItem="Zks-SV-EgJ" firstAttribute="top" secondItem="dA3-wO-9vC" secondAttribute="top" id="awa-TK-1QB"/>
+                            <constraint firstItem="k7S-kC-Ygd" firstAttribute="width" secondItem="dA3-wO-9vC" secondAttribute="width" multiplier="0.0873016" id="cuM-tk-AQ1"/>
+                            <constraint firstItem="k7S-kC-Ygd" firstAttribute="leading" secondItem="dkl-Ix-SwQ" secondAttribute="trailing" constant="6" id="kKZ-xE-E5a"/>
+                            <constraint firstAttribute="trailing" secondItem="k7S-kC-Ygd" secondAttribute="trailing" multiplier="1.055" id="lmS-95-hrg"/>
+                            <constraint firstAttribute="bottom" secondItem="dkl-Ix-SwQ" secondAttribute="bottom" id="rQy-rs-pjg"/>
+                            <constraint firstAttribute="trailing" secondItem="Zks-SV-EgJ" secondAttribute="trailing" id="shu-7d-WO0"/>
+                            <constraint firstItem="k7S-kC-Ygd" firstAttribute="height" secondItem="dA3-wO-9vC" secondAttribute="height" multiplier="0.571429" id="yrA-Jc-39T"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" name="background"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="dA3-wO-9vC" secondAttribute="bottom" constant="18" id="ALh-Tc-UPz"/>
+                    <constraint firstAttribute="trailing" secondItem="dA3-wO-9vC" secondAttribute="trailing" multiplier="1.042" id="R20-dh-AzL"/>
+                    <constraint firstItem="dA3-wO-9vC" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.608696" id="Xdq-oO-NOH"/>
+                    <constraint firstItem="dA3-wO-9vC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="ci7-l4-kwN"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="mCalendarBckgV" destination="dA3-wO-9vC" id="FWu-ga-V1t"/>
+                <outlet property="mCalendarImgV" destination="k7S-kC-Ygd" id="o7W-bb-fCB"/>
+                <outlet property="mCalendarTxtFl" destination="Zks-SV-EgJ" id="Hg5-Br-Rl4"/>
+                <outlet property="mDayLb" destination="BeC-IE-le2" id="g6f-sh-9u5"/>
+                <outlet property="mDaySeparatorV" destination="8de-VT-o9n" id="kTL-SN-JJp"/>
+                <outlet property="mMonthLb" destination="BkS-f9-cdT" id="pEg-2r-OEy"/>
+                <outlet property="mMonthSeparatorV" destination="Wk0-bf-a0U" id="jch-bg-2D3"/>
+                <outlet property="mStackV" destination="dkl-Ix-SwQ" id="HDF-0X-I2Y"/>
+                <outlet property="mYearLb" destination="Ig5-0O-cYh" id="I8V-6l-gES"/>
+            </connections>
+            <point key="canvasLocation" x="18.840579710144929" y="89.732142857142847"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="calendar" width="22" height="24"/>
+        <namedColor name="background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="email">
+            <color red="0.53700000047683716" green="0.59600001573562622" blue="0.66699999570846558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

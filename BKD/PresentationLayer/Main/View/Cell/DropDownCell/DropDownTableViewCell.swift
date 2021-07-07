@@ -14,7 +14,7 @@ class DropDownTableViewCell: UITableViewCell {
             return UINib(nibName: identifier, bundle: nil)
         }
    //MARK: Outlet
-    @IBOutlet weak var mLocationNameLb: EdgeInsetLabel!
+    @IBOutlet weak var mLocationNameLb: UILabelPadding!
     @IBOutlet weak var mMapImgV: UIImageView!
     @IBOutlet weak var mSeeMapBtn: UIButton!
 
@@ -29,7 +29,7 @@ class DropDownTableViewCell: UITableViewCell {
         mSeeMapBtn.addBorder(color: UIColor(named:"see_map")!, width: 1.0)
         mSeeMapBtn.layer.cornerRadius = 10
         mSeeMapBtn.titleEdgeInsets = UIEdgeInsets(top: 0.0, left: 5.0, bottom: 0.0, right: 0.0)
-        mLocationNameLb.textInsets = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 0)
+        mLocationNameLb.padding = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 0)
 
        
     }

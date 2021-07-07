@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+        <array key="SongMyung-Regular.ttf">
+            <string>SongMyung-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserFillFieldTableViewCell" id="KGk-i7-Jjw" customClass="UserFillFieldTableViewCell" customModule="BKD" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="78"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="78"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tRp-3u-vQL">
+                        <rect key="frame" x="239" y="18" width="159" height="42"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2PS-8D-cWm" customClass="TextField" customModule="BKD" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="159" height="42"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" name="alert_txt"/>
+                                <color key="textColor" name="alert_txt"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="KGk-i7-Jjw" id="WhA-G3-pye"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="2PS-8D-cWm" firstAttribute="leading" secondItem="tRp-3u-vQL" secondAttribute="leading" id="Rle-4K-MiK"/>
+                            <constraint firstItem="2PS-8D-cWm" firstAttribute="height" secondItem="tRp-3u-vQL" secondAttribute="height" id="RyE-Ru-p6L"/>
+                            <constraint firstAttribute="trailing" secondItem="2PS-8D-cWm" secondAttribute="trailing" id="twX-Ov-Z6U"/>
+                            <constraint firstAttribute="bottom" secondItem="2PS-8D-cWm" secondAttribute="bottom" id="xgn-Wg-7iv"/>
+                            <constraint firstItem="2PS-8D-cWm" firstAttribute="top" secondItem="tRp-3u-vQL" secondAttribute="top" id="zpM-dI-X33"/>
+                        </constraints>
+                    </view>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z4b-g6-S71">
+                        <rect key="frame" x="131" y="20" width="152" height="38"/>
+                        <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="20"/>
+                        <state key="normal" title="Start">
+                            <color key="titleColor" name="alert_txt"/>
+                        </state>
+                        <connections>
+                            <action selector="start:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Ehi-tA-Igl"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="tRp-3u-vQL" secondAttribute="trailing" constant="16" id="4GS-q0-we4"/>
+                    <constraint firstAttribute="bottom" secondItem="tRp-3u-vQL" secondAttribute="bottom" constant="18" id="CDy-4C-cji"/>
+                    <constraint firstItem="z4b-g6-S71" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="IxL-z6-Tdk"/>
+                    <constraint firstItem="z4b-g6-S71" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="eFc-bA-j0M"/>
+                    <constraint firstItem="tRp-3u-vQL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="fN2-A7-FXe"/>
+                    <constraint firstItem="z4b-g6-S71" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.49" id="guM-Ez-Nqe"/>
+                    <constraint firstItem="tRp-3u-vQL" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.384058" id="pUm-9j-0WK"/>
+                    <constraint firstItem="z4b-g6-S71" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.36715" id="vdJ-3i-cdf"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" name="background"/>
+            <connections>
+                <outlet property="mBorderV" destination="tRp-3u-vQL" id="mcs-LE-ZZY"/>
+                <outlet property="mStartBtn" destination="z4b-g6-S71" id="geN-Wi-d0c"/>
+                <outlet property="mTextFl" destination="2PS-8D-cWm" id="8Z5-7q-xhG"/>
+            </connections>
+            <point key="canvasLocation" x="18.840579710144929" y="77.008928571428569"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="alert_txt">
+            <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

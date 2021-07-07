@@ -24,8 +24,6 @@ class SignInViewController: UIViewController, StoryboardInitializable {
     @IBOutlet weak var mRegisterBtn: UIButton!
     
     //MARK: Variables
-   // var didPressForgotPassword: (() -> Void)?
-
     lazy var signInViewModel = SignInViewModel()
     
     override func viewDidLoad() {
@@ -89,8 +87,12 @@ class SignInViewController: UIViewController, StoryboardInitializable {
     }
     
     @IBAction func register(_ sender: UIButton) {
-        let registerVC = RegistrationViewController.initFromStoryboard(name: Constant.Storyboards.registration)
-        self.navigationController?.pushViewController(registerVC, animated: true)
+        //MARK: Warnig
+//        let registerVC = RegistrationViewController.initFromStoryboard(name: Constant.Storyboards.registration)
+//        self.navigationController?.pushViewController(registerVC, animated: true)
+        
+        let registrationBotVC = RegistartionBotViewController.initFromStoryboard(name: Constant.Storyboards.registrationBot)
+        self.navigationController?.pushViewController(registrationBotVC, animated: true)
     }
 }
 

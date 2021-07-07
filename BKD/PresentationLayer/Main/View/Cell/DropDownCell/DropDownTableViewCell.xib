@@ -26,7 +26,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BKD  Office" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="47" translatesAutoresizingMaskIntoConstraints="NO" id="pWF-qT-rWz" customClass="EdgeInsetLabel" customModule="BKD" customModuleProvider="target">
+                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BKD  Office" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="47" translatesAutoresizingMaskIntoConstraints="NO" id="pWF-qT-rWz" customClass="UILabelPadding" customModule="BKD" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="17" width="219" height="28"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="28" id="Lt9-qX-558"/>

@@ -34,6 +34,12 @@ extension Date {
         return month
     }
     
+    func getYear() -> String {
+        let forrmater = DateFormatter()
+        forrmater.dateFormat = "YYYY"
+        return forrmater.string(from: self)
+    }
+    
     func getComponentsMonth(fromDate: Date?, toDate: Date?) -> Bool {
         guard let fromDate = fromDate, let toDate = toDate else {
             return false
@@ -47,8 +53,9 @@ extension Date {
         let forrmater = DateFormatter()
         forrmater.dateFormat = "HH:mm"
         return forrmater.string(from: self)
-        
     }
+    
+    
     func getDateByFormat() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = NSLocale(localeIdentifier: "en") as Locale

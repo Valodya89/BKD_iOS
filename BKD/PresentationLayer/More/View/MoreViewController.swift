@@ -79,7 +79,7 @@ extension MoreViewController: UITableViewDelegate, UITableViewDataSource {
         titleLb.textColor = color_email!
         titleLb.font = font_more_header
         titleLb.text = section == 0 ? Constant.Texts.rentalConditions : Constant.Texts.bkdAdvantages
-        titleLb.setMargins(margin: 16)
+        titleLb.setPadding(16)
         return titleLb
     }
     

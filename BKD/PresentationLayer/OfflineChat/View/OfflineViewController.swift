@@ -90,7 +90,7 @@ class OfflineViewController: UIViewController, StoryboardInitializable  {
         mMessageTxtV.tintColor = .white
         mEmailTextFl.tintColor = .black
         mDateLb.text = Date().getDateByFormat()
-        mNoticeLb.setMargins()
+        mNoticeLb.setPadding()
         mNavigationBarV.setShadowByBezierPath(color: .black)
         mEmailTextFl.setPadding()        
     }

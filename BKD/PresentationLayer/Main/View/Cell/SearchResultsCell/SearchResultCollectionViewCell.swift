@@ -14,12 +14,11 @@ protocol SearchResultCellDelegate: AnyObject {
 
 class SearchResultCollectionViewCell: UICollectionViewCell {
     static let identifier = "SearchResultCollectionViewCell"
-        
-        static func nib() -> UINib {
-            return UINib(nibName: identifier, bundle: nil)
-            
-        }
-
+    
+    static func nib() -> UINib {
+        return UINib(nibName: identifier, bundle: nil)
+    }
+    
     @IBOutlet weak var mCarMarkaBckgV: UIView!
     @IBOutlet weak var mInfoV: UIView!
     @IBOutlet weak var mflipBtn: UIButton!

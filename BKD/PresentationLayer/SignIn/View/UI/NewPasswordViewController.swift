@@ -7,7 +7,9 @@
 
 import UIKit
 
-class NewPasswordViewController: UIViewController {
+class NewPasswordViewController: UIViewController, StoryboardInitializable {
+   
+    //MARK: Outlets
     @IBOutlet weak var mNewPasswordTitleLb: UILabel!
     @IBOutlet weak var mNewPasswordInfoLb: UILabel!
     @IBOutlet weak var mPasswordTxtFl: TextField!
@@ -20,6 +22,8 @@ class NewPasswordViewController: UIViewController {
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mErrorLb: UILabel!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +47,8 @@ class NewPasswordViewController: UIViewController {
         mPasswordTxtFl.setBorder(color: color_navigationBar!, width: 1)
         mConfirmPasswordTxtFl.setBorder(color: color_navigationBar!, width: 1)
     }
+    
+    
     // MARK: ACTIONS
     @IBAction func visiblePassword(_ sender: UIButton) {
         if sender.image(for: .normal) == img_invisible {

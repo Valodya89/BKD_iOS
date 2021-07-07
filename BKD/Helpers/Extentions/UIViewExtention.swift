@@ -197,8 +197,18 @@ extension UIView {
             self.layer.addSublayer(borderLayer)
         }
 
+    //MARK: BACKGROUNDCOLOR
+    func setBackgroundColorToCAShapeLayer(color: UIColor) {
+        if self.layer.sublayers != nil {
+            for layer in self.layer.sublayers! {
+               if layer.isKind(of: CAShapeLayer.self) {
+                (layer as! CAShapeLayer).fillColor = color.cgColor
+               }
+            }
+        }
+    }
 
-    //MARK: ANIMATIONs
+    //MARK: ANIMATIONS
     func showFlip(){
                 if self.isHidden{
                     UIView.transition(with: self, duration: 1, options: [.transitionFlipFromRight,.allowUserInteraction], animations: nil, completion: nil)

@@ -16,10 +16,6 @@ class EmailAddressViewController: UIViewController, StoryboardInitializable {
     @IBOutlet weak var mErrorLb: UILabel!
     @IBOutlet weak var mConfirmBckgV: UIView!
     @IBOutlet weak var mConfirmLeading: NSLayoutConstraint!
-    
-    @IBOutlet weak var mCheckEmailBckgV: UIView!
-    @IBOutlet weak var mCheckEmailTitleLb: UILabel!
-    @IBOutlet weak var mTryAnotherEmailLb: UILabel!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     
     //MARK: Variables
@@ -45,44 +41,26 @@ class EmailAddressViewController: UIViewController, StoryboardInitializable {
         mEmailAddressTextFl.setPlaceholder(string: Constant.Texts.emailAdd,
                                            font: font_register_placeholder!,
                                            color: color_email!)
-        setAttribute()
     }
    
-    /// set Atributte to lable
-    private func setAttribute() {
-        let text = Constant.Texts.checkEmail
-        let attriString = NSMutableAttributedString(string: text)
-        let range1 = (text as NSString).range(of: Constant.Texts.tryAnotherEmail)
-        
-        attriString.addAttribute(NSAttributedString.Key.font, value: font_alert_agree! as UIFont, range: range1)
-        attriString.addAttribute(NSAttributedString.Key.foregroundColor, value: color_navigationBar!, range: range1)
-        mTryAnotherEmailLb.attributedText = attriString
-        mTryAnotherEmailLb.isUserInteractionEnabled = true
-        mTryAnotherEmailLb.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(tapLabel(gesture:))))
-    }
     
     ///
-    private func confirmClicked(){
+    private func sendClicked(){
         UIView.animate(withDuration: 0.5) { [self] in
             self.mConfirmLeading.constant = self.mConfirmBckgV.bounds.width - self.mConfirmBtn.frame.size.width
             self.mConfirmBckgV.layoutIfNeeded()
         } completion: { [self] _ in
-            if self.mCheckEmailBckgV.isHidden {
-                self.showOrHideCheckEmailView(isHide: false)
-                self.mEmailAddressTextFl.resignFirstResponder()
-            } else {
-                self.goToNextController()
-            }
+            self.mEmailAddressTextFl.resignFirstResponder()
+            self.goToNextController()
         }
-        
-        
     }
     
     /// will push next viewController
     private func goToNextController() {
-        let newPasswordVC = UIStoryboard(name: Constant.Storyboards.signIn, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.newPassword) as! NewPasswordViewController
-        self.navigationController?.pushViewController(newPasswordVC, animated: true)
+        let ceheckEmailVC = CheckEmailViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
+        self.navigationController?.pushViewController(ceheckEmailVC, animated: true)
     }
+    
     ///will show  or hide error of email
     private func showEmailError(isError: Bool) {
         mEmailAddressTextFl.layer.borderColor = isError ? color_error!.cgColor : color_navigationBar!.cgColor
@@ -90,7 +68,6 @@ class EmailAddressViewController: UIViewController, StoryboardInitializable {
     }
     
     private func showOrHideCheckEmailView(isHide: Bool) {
-        self.mCheckEmailBckgV.isHidden = isHide
         self.mConfirmBtn.setTitle(isHide ? Constant.Texts.signIn : Constant.Texts.oprnEmail, for: .normal)
         self.mConfirmLeading.constant = 0.0
         self.mConfirmBckgV.layoutIfNeeded()
@@ -116,26 +93,18 @@ class EmailAddressViewController: UIViewController, StoryboardInitializable {
     
     //MARK: ACTIONS
     @IBAction func confirm(_ sender: UIButton) {
-        confirmClicked()
+        sendClicked()
     }
     
     @IBAction func confirmSwipeGesture(_ sender: UISwipeGestureRecognizer) {
-        confirmClicked()
+        sendClicked()
     }
     
     @IBAction func back(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func tapLabel(gesture: UITapGestureRecognizer) {
-        let termsRange = (Constant.Texts.checkEmail as NSString).range(of: Constant.Texts.tryAnotherEmail)
-        if gesture.didTapAttributedTextInLabel(label: mTryAnotherEmailLb, inRange: termsRange) {
-            showOrHideCheckEmailView(isHide: true)
-            print("Tapped terms")
-        } else {
-            print("Tapped none")
-        }
-    }
+   
 }
 
 

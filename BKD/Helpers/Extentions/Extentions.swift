@@ -131,12 +131,12 @@ extension UILabel {
         return self.frame.height
     }
     
-    func setMargins(margin: CGFloat = 10) {
+    func setPadding(_ padding: CGFloat = 10) {
             if let textString = self.text {
                 let paragraphStyle = NSMutableParagraphStyle()
-                paragraphStyle.firstLineHeadIndent = margin
-                paragraphStyle.headIndent = margin
-                paragraphStyle.tailIndent = -margin
+                paragraphStyle.firstLineHeadIndent = padding
+                paragraphStyle.headIndent = padding
+                paragraphStyle.tailIndent = -padding
                 let attributedString = NSMutableAttributedString(string: textString)
                 attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
                 attributedText = attributedString
@@ -149,6 +149,17 @@ extension UILabel {
         formatter.numberStyle = .decimal
         return formatter.number(from: self.text!) ?? 0
         
+    }
+    
+    
+    func setAttributeBold(text: String, boldText: String, color: UIColor ) {
+       // let text = Constant.Texts.agreeTerms
+        let attriString = NSMutableAttributedString(string: text)
+        let range1 = (text as NSString).range(of: boldText)
+        
+        attriString.addAttribute(NSAttributedString.Key.font, value: font_alert_agree! as UIFont, range: range1)
+        attriString.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range1)
+        self.attributedText = attriString
     }
 }
 

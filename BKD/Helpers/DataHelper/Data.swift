@@ -241,12 +241,67 @@ struct MyDriversData {
 
 
 struct MyBkdData {
-    static let myBkdModel: [MyBkdModel] = [ MyBkdModel(img: #imageLiteral(resourceName: "profile"), title: "My Account"),
+    static let myBkdModel: [MyBkdModel] = [
+        MyBkdModel(img: #imageLiteral(resourceName: "profile"), title: "My Account"),
         MyBkdModel(img: #imageLiteral(resourceName: "setting"), title: "Settings"),
         MyBkdModel(img: #imageLiteral(resourceName: "logOut"), title: "Log out")
     ]
 }
 
 
-                                                   
+     
+struct  RegistrationBotData {
+    static let registrationBotModel: [RegistrationBotModel] = [RegistrationBotModel(msgToFill: "Hello. I’m the BKD robot. I help new users register fast and fun."),
+        RegistrationBotModel(msgToFill: "Please, have with you your ID and Driving license. You must be at least 23 years old, have a valid Driving license for at least 2 years."),
+        RegistrationBotModel(viewDescription: "button", userRegisterInfo: UserRegisterInfo(string: "Start")),
+         RegistrationBotModel(msgToFill: "Let’s start with some personal details. Firstly, your First name.", msgToFillBold: "First name."),
+        RegistrationBotModel(msgToFill: "P.S. You should use your real names on BKD."),
+        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo(placeholder: "First Name")),
+        RegistrationBotModel(msgToFill: "Now, mention your Last name.", msgToFillBold: "Last name"),
+        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo(placeholder: "Last Name")),
+        RegistrationBotModel(msgToFill: "Insert your Phone number, please.", msgToFillBold: "Phone number"),
+        RegistrationBotModel(viewDescription: "phone"),
+        RegistrationBotModel(msgToFill: "Date of birth, maybe there are some promotions on your specific day.", msgToFillBold:"Date of birth"),
+        RegistrationBotModel(viewDescription: "calendar"),
+        RegistrationBotModel(msgToFill: "Now let’s add your Residential address details by mentioning:"),
+        RegistrationBotModel(msgToFill: "Step 1 - Street name.", msgToFillBold: "Street name"),
+        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo( placeholder: "Street Name")),
+        RegistrationBotModel(msgToFill: "Step 2 - House number.", msgToFillBold: "House number"),
+        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo(placeholder: "House number")),
+        RegistrationBotModel(msgToFill: "Step 3 - Mailbox number, if you’re living in an apartment building.", msgToFillBold: "Mailbox number"),
+        RegistrationBotModel( viewDescription: "mailbox", userRegisterInfo: UserRegisterInfo( placeholder:"Mailbox number")),
+        RegistrationBotModel(msgToFill: "Step 4 - Country.", msgToFillBold: "Country"),
+        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo( placeholder:"Country")),
+        RegistrationBotModel(msgToFill: "Step 5 - Zip number.", msgToFillBold: "Zip number"),
+        RegistrationBotModel(viewDescription: "", userRegisterInfo: UserRegisterInfo(placeholder: "Zip number")),
+        RegistrationBotModel(msgToFill: "Step 6 - City.", msgToFillBold: "City"),
+        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo( placeholder:"City")),
+        RegistrationBotModel(msgToFill: "Your Address is registered successfully."),
+        RegistrationBotModel(msgToFill: "Please, insert your National Register Number.", msgToFillBold: "National Register Number"),
+        RegistrationBotModel(viewDescription: "National Register"),
+        RegistrationBotModel(msgToFill: "Last Registration Step is to attach Documents."),
+        RegistrationBotModel(msgToFill: "Documents should be captured fully, as well as the information on them must be easily readable."),
+        RegistrationBotModel(msgToFill: "First, take the front side photo of your Identity card (Photo holder side).", msgToFillBold: "front side photo of your Identity card"),
+        RegistrationBotModel(viewDescription: "takePhoto"),
+        RegistrationBotModel(msgToFill: "Now, take the back side photo of your Identity card.", msgToFillBold: "back side photo of your Identity card"),
+        RegistrationBotModel(viewDescription: "takePhoto"),
+        RegistrationBotModel(msgToFill: "Now, let’s add the Expiry date.", msgToFillBold: "Expiry date"),
+        RegistrationBotModel(viewDescription: "calendar"),
+        RegistrationBotModel(msgToFill: "Please, take the front side photo of your valid Driving license (Photo holder side).", msgToFillBold: "front side photo of your valid Driving license"),
+        RegistrationBotModel(viewDescription: "takePhoto"),
+        RegistrationBotModel(msgToFill: "Now, take the back side photo of your valid Driving license.", msgToFillBold: "back side photo of your valid Driving license"),
+        RegistrationBotModel(viewDescription: "takePhoto"),
+        RegistrationBotModel(msgToFill: "Now let’s add the Issue date of the Driving license.", msgToFillBold: "Issue date of the Driving license"),
+        RegistrationBotModel(viewDescription: "calendar"),
+        RegistrationBotModel(msgToFill: "Now let’s add the Expiry date of the Driving license.", msgToFillBold: "Expiry date of the Driving license"),
+        RegistrationBotModel(viewDescription: "calendar"),
+        RegistrationBotModel(msgToFill: "Last one left. Please, take a selfie photo with your valid Driving license, like this one.", msgToFillBold: "selfie photo with your valid Driving license"),
+        RegistrationBotModel(examplePhoto: #imageLiteral(resourceName: "selfie")),
+        RegistrationBotModel(viewDescription: "takePhoto"),
+        RegistrationBotModel(msgToFill: "Please, examine carefully the online version of the licensed BKD Agreement. By clicking “Agree”, you agree to our Terms & Conditions.", msgToFillBold: "BKD Agreement"),
+        RegistrationBotModel(viewDescription: "openDoc"),
+        RegistrationBotModel(msgToFill: "By clicking “Confirm”, you confirm that the information provided above is true and correct.")
+          
+    ]
+}
                                                    
