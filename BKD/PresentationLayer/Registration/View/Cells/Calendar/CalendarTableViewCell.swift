@@ -39,6 +39,24 @@ class CalendarTableViewCell: UITableViewCell, UITextFieldDelegate {
         mCalendarTxtFl.delegate = self
         mCalendarBckgV.roundCornersWithBorder(corners: [.bottomRight, .topLeft, .topRight], radius: 8.0, borderColor: color_dark_register!, borderWidth: 1)
     }
+    
+    override func prepareForReuse() {
+        mCalendarBckgV.setBackgroundColorToCAShapeLayer(color: .clear)
+        mCalendarBckgV.roundCornersWithBorder(corners: [.bottomRight, .topLeft, .topRight], radius: 8.0, borderColor: color_dark_register!, borderWidth: 1)
+        mCalendarImgV.setTintColor(color: color_dark_register!)
+        mDayLb.text = Constant.Texts.day
+        mMonthLb.text = Constant.Texts.Month
+        mYearLb.text = Constant.Texts.year
+        mDayLb.font = font_bot_placeholder
+        mMonthLb.font = font_bot_placeholder
+        mYearLb.font = font_bot_placeholder
+        mDayLb.textColor = color_email!
+        mMonthLb.textColor = color_email!
+        mYearLb.textColor = color_email!
+        mCalendarBckgV.isUserInteractionEnabled = true
+        mCalendarBckgV.bringSubviewToFront(mCalendarTxtFl)
+        mCalendarTxtFl.isHidden = false
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

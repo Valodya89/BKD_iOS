@@ -23,6 +23,10 @@ class ExamplePhotoTableViewCell: UITableViewCell {
         mImageV.layer.cornerRadius = 3.0
     }
 
+    override func prepareForReuse() {
+            
+        }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

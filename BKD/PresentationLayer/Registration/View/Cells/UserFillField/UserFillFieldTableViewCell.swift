@@ -7,10 +7,21 @@
 
 import UIKit
 
+enum ViewType: String, CaseIterable {
+    case button = "button"
+    case city = "City"
+    case country = "Country"
+    case phone = "phone"
+    case textFl = "txtFl"
+    case nationalRegister = "national register"
+
+}
+
 protocol UserFillFieldTableViewCellDelegate: AnyObject {
     func didPressStart()
     func didReturnTxtField(txt: String?)
-    func willOpenPicker(textFl: UITextField, isCountry: Bool)
+    func didBeginEdithingTxtField(txtFl: UITextField)
+    func willOpenPicker(textFl: UITextField, viewType: ViewType)
 }
 
 class UserFillFieldTableViewCell: UITableViewCell {
@@ -22,11 +33,15 @@ class UserFillFieldTableViewCell: UITableViewCell {
     
     //MARK: Outlets
     @IBOutlet weak var mStartBtn: UIButton!
+    @IBOutlet weak var mTextLb: UILabelPadding!
     @IBOutlet weak var mTextFl: TextField!
     @IBOutlet weak var mTextFlWidth: NSLayoutConstraint!
     @IBOutlet weak var mBorderV: UIView!
-    
+    @IBOutlet weak var mDropDownImgV: UIImageView!
+    @IBOutlet weak var mDropDownPlaceholderLb: UILabelPadding!
     var placeholder: String?
+    var viewType = ViewType(rawValue: "txtFl")
+    
     weak var delegate: UserFillFieldTableViewCellDelegate?
 //    var didPressStart: (() -> Void)?
 //    var didReturnTxtField: ((String?) -> Void)?
@@ -34,8 +49,41 @@ class UserFillFieldTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+    }
+    
+    override func draw(_ rect: CGRect) {
         setUpView()
     }
+    
+    override func prepareForReuse() {
+        mTextFl.text = ""
+        mTextLb.text = ""
+        mDropDownPlaceholderLb.text = ""
+        placeholder = ""
+        mTextFl.isHidden = false
+        mStartBtn.isHidden = true
+        mBorderV.isHidden = true
+        mTextLb.isHidden = true
+        mDropDownImgV.isHidden = true
+        mDropDownPlaceholderLb.isHidden = true
+        mTextFl.textColor = color_navigationBar!
+        mTextFl.inputAccessoryView = nil
+        mTextFl.inputView = nil
+        // mTextFl.isUserInteractionEnabled = true
+        mTextFl.backgroundColor = .clear
+        mBorderV.setBackgroundColorToCAShapeLayer(color: .clear)
+        mBorderV.bringSubviewToFront(mTextFl)
+        mBorderV.bringSubviewToFront(mDropDownImgV)
+        mTextLb.backgroundColor = color_dark_register
+        mTextLb.roundCorners(corners: [.topLeft, .topRight, .bottomRight], radius: 8.0)
+        mTextLb.textColor = .white
+        mDropDownImgV.image = img_dropDown_light
+        mDropDownPlaceholderLb.backgroundColor = .clear
+        mTextFl.keyboardType = .default
+
+    }
+    
     
     func setUpView() {
         // mStartBtn.layer.cornerRadius = 36
@@ -43,7 +91,11 @@ class UserFillFieldTableViewCell: UITableViewCell {
         mStartBtn.roundCornersWithBorder(corners: [ .allCorners], radius: 36.0, borderColor: color_dark_register!, borderWidth: 1)
         
         mBorderV.roundCornersWithBorder(corners: [ .topLeft, .topRight, .bottomRight ], radius: 8.0, borderColor: color_dark_register!, borderWidth: 1)
+        
+        mTextLb.backgroundColor = color_dark_register
+        mTextLb.roundCorners(corners: [.topLeft, .topRight, .bottomRight], radius: 8.0)
         mTextFl.text = nil
+        mTextFl.padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -53,10 +105,13 @@ class UserFillFieldTableViewCell: UITableViewCell {
     }
     
     func setCellInfo(item: RegistrationBotModel) {
+        placeholder = item.userRegisterInfo?.placeholder
+        viewType = ViewType(rawValue: placeholder ?? "")
         
         if item.viewDescription == "button" {
             mStartBtn.isHidden = false
             mBorderV.isHidden = true
+            mTextLb.isHidden = true
             if ((item.userRegisterInfo?.isFilled) != nil) && item.userRegisterInfo?.isFilled == true {
                 pressStart()
             }
@@ -64,12 +119,19 @@ class UserFillFieldTableViewCell: UITableViewCell {
             mBorderV.isHidden = false
             mStartBtn.isHidden = true
             if ((item.userRegisterInfo?.string) != nil) && item.userRegisterInfo?.isFilled == true {
-                //mTextFl.text = item.userRegisterInfo?.string
                 textFiledFilled(txt: (item.userRegisterInfo?.string)!)
             } else {
                 mTextFl.setPlaceholder(string: item.userRegisterInfo?.placeholder ?? "", font: font_bot_placeholder!, color: color_email!)
-                placeholder = item.userRegisterInfo?.placeholder
+              // viewType = ViewType(rawValue: (item.userRegisterInfo?.placeholder)!)
             }
+            
+            
+            if placeholder == "Country" || placeholder == "City" {
+                mDropDownPlaceholderLb.text = placeholder
+                mDropDownImgV.isHidden = false
+                
+            }
+            
             
         }
     }
@@ -77,16 +139,23 @@ class UserFillFieldTableViewCell: UITableViewCell {
     private func pressStart() {
         mStartBtn.setTitleColor(color_selected_start, for: .normal)
         mStartBtn.isUserInteractionEnabled = false
-        mStartBtn.setBackgroundColorToCAShapeLayer(color: color_navigationBar!)
+        mStartBtn.backgroundColor = color_dark_register!
+        mStartBtn.layer.cornerRadius = 10
+//        mStartBtn.setBackgroundColorToCAShapeLayer(color: color_navigationBar!)
     }
     
     private func textFiledFilled(txt: String) {
-        mTextFl.text = txt
-        mTextFl.textColor = .white
-        mTextFl.isUserInteractionEnabled = false
-        mBorderV.setBackgroundColorToCAShapeLayer(color: color_dark_register!)
-        mBorderV.bringSubviewToFront(mTextFl)
 
+        mTextLb.text = txt
+        mTextLb.isHidden = false
+        mBorderV.isHidden = true
+       
+        if placeholder == "Country" || placeholder == "City" {
+            mDropDownImgV.isHidden = false
+            mDropDownImgV.setTintColor(color: .white)
+            mBorderV.bringSubviewToFront(mDropDownImgV)
+            mTextLb.bringSubviewToFront(mDropDownImgV)
+        }
     }
     
     @IBAction func start(_ sender: UIButton) {
@@ -108,20 +177,25 @@ extension UserFillFieldTableViewCell: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         if textField.text?.count ?? 0 > 0 {
-           // didReturnTxtField?(textField.text)
             delegate?.didReturnTxtField(txt: textField.text)
             textFiledFilled(txt: textField.text!)
-            //textField.isUserInteractionEnabled = false
         }
         return false
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if placeholder == "Country" {
-            delegate?.willOpenPicker(textFl: textField, isCountry: true)
+        if placeholder == "Country" || placeholder == "City" {
+            mDropDownPlaceholderLb.isHidden = false
+            delegate?.willOpenPicker(textFl: textField, viewType: viewType!)
         }else {
+            delegate?.didBeginEdithingTxtField(txtFl: textField)
+            if ((placeholder?.contains("number")) == true) {
+                textField.keyboardType = .numbersAndPunctuation
+            }
+                
             textField.becomeFirstResponder()
         }
+        
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

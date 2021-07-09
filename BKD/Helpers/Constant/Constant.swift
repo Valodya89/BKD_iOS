@@ -61,7 +61,7 @@ struct Constant {
         static let termsConditions = "TermsConditionsViewController"
         static let faceAndTouchId = "FaceAndTouchIdViewController"
         static let SearchPhoneCode = "SearchPhoneCodeViewController"
-        
+        static let bkdAgreement = "BkdAgreementViewController"
     }
     
     struct FontNames {
@@ -126,6 +126,15 @@ struct Constant {
         static let termsConditions = "Terms & Conditions"
         static let passwordErr = "Password must be at least 8 characters"
         static let confirmPasswordErr = "Both passwords must match"
+        static let selecteImg = "Selecte image from"
+        static let camera = "Camera"
+        static let photoLibrary = "Photo library"
+        static let day = "Day"
+        static let Month = "Month"
+        static let year = "Year"
+        static let open = "Open"
+        static let takePhoto = "Take a photo"
+
     }
 }
 
@@ -237,3 +246,5 @@ let img_add_unselece = UIImage(named: "add")
 let img_add_selecte = UIImage(named: "added")
 let img_invisible = UIImage(named: "invisible")
 let img_visible = UIImage(named: "visible")
+let img_dropDown_light = UIImage(named: "dropDown_blue")
+

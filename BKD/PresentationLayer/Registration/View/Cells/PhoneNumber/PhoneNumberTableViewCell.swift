@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import PhoneNumberKit
+import SwiftMaskTextfield
+
 
 protocol PhoneNumberTableViewCellDelegate: AnyObject {
     func didPressCountryCode()
@@ -24,9 +27,13 @@ class PhoneNumberTableViewCell: UITableViewCell {
     @IBOutlet weak var mCountryCodeBtn: UIButton!
     @IBOutlet weak var mPhoneNumberBckgV: UIView!
     @IBOutlet weak var mCodeLb: UILabel!
-    @IBOutlet weak var mPhoneNumberTxtFl: TextField!
+    @IBOutlet weak var mPhoneNumberTxtFl: SwiftMaskTextfield!
     
+//    private let applicationSettings: ApplicationSettings = .shared
+//    private var selectedCountry: CountryCodeResponse?
+    private var validFormPattern: Int = 11
     
+
     weak var delegate: PhoneNumberTableViewCellDelegate?
     
     override func awakeFromNib() {
@@ -34,6 +41,9 @@ class PhoneNumberTableViewCell: UITableViewCell {
         setUpView()
     }
     
+    override func prepareForReuse() {
+            
+        }
     func setUpView(){
         mPhoneNumberBckgV.roundCornersWithBorder(corners: [.bottomRight, .topLeft, .topRight], radius: 8.0, borderColor: color_dark_register!, borderWidth: 1)
     }
@@ -67,6 +77,7 @@ class PhoneNumberTableViewCell: UITableViewCell {
         mPhoneNumberBckgV.bringSubviewToFront(mPhoneNumberTxtFl)
         mPhoneNumberBckgV.bringSubviewToFront(mFlagImgV)
         mPhoneNumberBckgV.bringSubviewToFront(mDropDownImgV)
+        mDropDownImgV.setTintColor(color: .white)
     }
 
     

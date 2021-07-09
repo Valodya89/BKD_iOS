@@ -25,13 +25,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dA3-wO-9vC">
-                        <rect key="frame" x="145.5" y="18" width="252" height="42"/>
+                        <rect key="frame" x="146" y="18" width="252" height="42"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" translatesAutoresizingMaskIntoConstraints="NO" id="k7S-kC-Ygd">
-                                <rect key="frame" x="216.5" y="9" width="22" height="24"/>
+                                <rect key="frame" x="217" y="9" width="22" height="24"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dkl-Ix-SwQ">
-                                <rect key="frame" x="0.0" y="0.0" width="210.5" height="42"/>
+                                <rect key="frame" x="0.0" y="0.0" width="211" height="42"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TqP-vD-MeD">
                                         <rect key="frame" x="0.0" y="0.0" width="60" height="42"/>
@@ -62,16 +62,16 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOz-Yz-UYk">
-                                        <rect key="frame" x="60" y="0.0" width="70" height="42"/>
+                                        <rect key="frame" x="60" y="0.0" width="70.5" height="42"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Month" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BkS-f9-cdT">
-                                                <rect key="frame" x="5" y="0.0" width="60" height="42"/>
+                                                <rect key="frame" x="5" y="0.0" width="60.5" height="42"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="13"/>
                                                 <color key="textColor" name="email"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view alpha="0.55000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wk0-bf-a0U">
-                                                <rect key="frame" x="69" y="0.0" width="1" height="42"/>
+                                                <rect key="frame" x="69.5" y="3.5" width="1" height="35"/>
                                                 <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="1" id="NwF-cJ-cgr"/>
@@ -86,14 +86,14 @@
                                             <constraint firstItem="BkS-f9-cdT" firstAttribute="width" secondItem="TOz-Yz-UYk" secondAttribute="width" multiplier="0.857143" id="Hj1-zf-Fiz"/>
                                             <constraint firstItem="BkS-f9-cdT" firstAttribute="height" secondItem="TOz-Yz-UYk" secondAttribute="height" id="hlG-zU-gmY"/>
                                             <constraint firstAttribute="trailing" secondItem="Wk0-bf-a0U" secondAttribute="trailing" id="loP-tB-lKO"/>
-                                            <constraint firstItem="Wk0-bf-a0U" firstAttribute="height" secondItem="TOz-Yz-UYk" secondAttribute="height" id="onH-uY-vYg"/>
+                                            <constraint firstItem="Wk0-bf-a0U" firstAttribute="height" secondItem="TOz-Yz-UYk" secondAttribute="height" multiplier="0.83" id="onH-uY-vYg"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IcI-na-iq0">
-                                        <rect key="frame" x="130" y="0.0" width="80.5" height="42"/>
+                                        <rect key="frame" x="130" y="0.0" width="81" height="42"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Year" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ig5-0O-cYh">
-                                                <rect key="frame" x="5.5" y="0.0" width="70" height="42"/>
+                                                <rect key="frame" x="5" y="0.0" width="70.5" height="42"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="13"/>
                                                 <color key="textColor" name="email"/>
                                                 <nil key="highlightedColor"/>
@@ -131,7 +131,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Zks-SV-EgJ" firstAttribute="leading" secondItem="dA3-wO-9vC" secondAttribute="leading" id="57f-qL-B9o"/>
+                            <constraint firstAttribute="height" constant="42" id="EWA-EB-Lz4"/>
                             <constraint firstItem="dkl-Ix-SwQ" firstAttribute="leading" secondItem="dA3-wO-9vC" secondAttribute="leading" id="Esc-DR-BVc"/>
+                            <constraint firstAttribute="width" constant="252" id="LFN-Bv-QqY"/>
                             <constraint firstItem="k7S-kC-Ygd" firstAttribute="centerY" secondItem="dA3-wO-9vC" secondAttribute="centerY" id="OQ8-VQ-c5n"/>
                             <constraint firstAttribute="bottom" secondItem="Zks-SV-EgJ" secondAttribute="bottom" id="Pzj-Nc-hP9"/>
                             <constraint firstItem="dkl-Ix-SwQ" firstAttribute="top" secondItem="dA3-wO-9vC" secondAttribute="top" id="VrO-Hj-5G3"/>
@@ -148,8 +150,7 @@
                 <color key="backgroundColor" name="background"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="dA3-wO-9vC" secondAttribute="bottom" constant="18" id="ALh-Tc-UPz"/>
-                    <constraint firstAttribute="trailing" secondItem="dA3-wO-9vC" secondAttribute="trailing" multiplier="1.042" id="R20-dh-AzL"/>
-                    <constraint firstItem="dA3-wO-9vC" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.608696" id="Xdq-oO-NOH"/>
+                    <constraint firstAttribute="trailing" secondItem="dA3-wO-9vC" secondAttribute="trailing" constant="16" id="R20-dh-AzL"/>
                     <constraint firstItem="dA3-wO-9vC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="ci7-l4-kwN"/>
                 </constraints>
             </tableViewCellContentView>

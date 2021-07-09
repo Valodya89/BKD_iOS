@@ -12,6 +12,9 @@ target 'BKD' do
 	pod 'Mapbox-iOS-SDK', '~> 5.9'
 	pod 'MessageKit'
   	pod 'iCarousel'
+	pod 'PhoneNumberKit', '~> 3.3'
+	pod 'SwiftMaskTextfield'
+
 
 
   target 'BKDTests' do

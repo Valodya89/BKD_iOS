@@ -19,6 +19,7 @@ struct UserRegisterInfo {
     public var photo: UIImage?
     public var string: String?
     public var date: Date?
+    public var isOtherNational: Bool = false
     public var placeholder: String?
     public var isFilled: Bool = false
 

@@ -116,6 +116,7 @@ extension UIView {
             mask.path = path.cgPath
             self.layer.mask = mask
     }
+    
     func roundCornersWithShadow(corners:UIRectCorner, radius: CGFloat, color: UIColor) {
             let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
             let mask = CAShapeLayer()
@@ -156,6 +157,26 @@ extension UIView {
         borderLayer.lineWidth = borderWidth
         borderLayer.strokeColor = borderColor.cgColor
         borderLayer.fillColor = UIColor.clear.cgColor
+       // borderLayer.frame = self.bounds
+        self.layer.addSublayer(borderLayer)
+    }
+    
+    func roundCornersWithBackgroundColor(corners:UIRectCorner, radius: CGFloat, color: UIColor) {
+
+        let path = UIBezierPath.init(roundedRect: self.bounds,
+                                     byRoundingCorners: corners,
+                                     cornerRadii: CGSize(width: radius,
+                                                         height: radius))
+
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        self.layer.mask = mask
+
+        let borderPath = UIBezierPath.init(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let borderLayer = CAShapeLayer()
+        borderLayer.path = borderPath.cgPath
+       // borderLayer.strokeColor = borderColor.cgColor
+        borderLayer.fillColor = color.cgColor
        // borderLayer.frame = self.bounds
         self.layer.addSublayer(borderLayer)
         

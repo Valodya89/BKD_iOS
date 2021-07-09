@@ -6,10 +6,12 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="SFProDisplay-Light.ttf">
+            <string>SFProDisplay-Light</string>
+        </array>
         <array key="SFProDisplay-Regular.ttf">
             <string>SFProDisplay-Regular</string>
         </array>
@@ -27,8 +29,18 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="78"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="judhiefuieufr frhjbfjhrbfjbhrfjer jfbrjbrjbrghi" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ws-2n-3Ws" customClass="UILabelPadding" customModule="BKD" customModuleProvider="target">
+                        <rect key="frame" x="238.5" y="18" width="159.5" height="59.5"/>
+                        <color key="backgroundColor" name="navigation_bar"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="42" id="RGG-ax-Ora"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tRp-3u-vQL">
-                        <rect key="frame" x="239" y="18" width="159" height="42"/>
+                        <rect key="frame" x="239" y="15.5" width="159" height="42"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2PS-8D-cWm" customClass="TextField" customModule="BKD" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="159" height="42"/>
@@ -42,17 +54,39 @@
                                 </connections>
                             </textField>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="height" constant="42" id="3h2-gN-d9a"/>
                             <constraint firstItem="2PS-8D-cWm" firstAttribute="leading" secondItem="tRp-3u-vQL" secondAttribute="leading" id="Rle-4K-MiK"/>
                             <constraint firstItem="2PS-8D-cWm" firstAttribute="height" secondItem="tRp-3u-vQL" secondAttribute="height" id="RyE-Ru-p6L"/>
+                            <constraint firstItem="2PS-8D-cWm" firstAttribute="centerY" secondItem="tRp-3u-vQL" secondAttribute="centerY" id="hBo-dA-abo"/>
                             <constraint firstAttribute="trailing" secondItem="2PS-8D-cWm" secondAttribute="trailing" id="twX-Ov-Z6U"/>
                             <constraint firstAttribute="bottom" secondItem="2PS-8D-cWm" secondAttribute="bottom" id="xgn-Wg-7iv"/>
                             <constraint firstItem="2PS-8D-cWm" firstAttribute="top" secondItem="tRp-3u-vQL" secondAttribute="top" id="zpM-dI-X33"/>
                         </constraints>
                     </view>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="judhiefuieufr frhjbfjhrbfjbhrfjer jfbrjbrjbrghi" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KqI-CL-8Yo" customClass="UILabelPadding" customModule="BKD" customModuleProvider="target">
+                        <rect key="frame" x="239" y="15.5" width="159" height="42"/>
+                        <color key="backgroundColor" name="navigation_bar"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="42" id="vY4-BH-2da"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="13"/>
+                        <color key="textColor" name="email"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropDown" translatesAutoresizingMaskIntoConstraints="NO" id="vc9-ne-xPK">
+                        <rect key="frame" x="369" y="36.5" width="17" height="9"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="9" id="dV3-CV-Otc"/>
+                            <constraint firstAttribute="width" constant="17" id="g54-c8-DKl"/>
+                        </constraints>
+                    </imageView>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z4b-g6-S71">
-                        <rect key="frame" x="131" y="20" width="152" height="38"/>
+                        <rect key="frame" x="131" y="18.5" width="152" height="36"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="38" id="kKh-nm-dTG"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="20"/>
                         <state key="normal" title="Start">
                             <color key="titleColor" name="alert_txt"/>
@@ -64,12 +98,22 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="tRp-3u-vQL" secondAttribute="trailing" constant="16" id="4GS-q0-we4"/>
-                    <constraint firstAttribute="bottom" secondItem="tRp-3u-vQL" secondAttribute="bottom" constant="18" id="CDy-4C-cji"/>
+                    <constraint firstItem="tRp-3u-vQL" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="4nN-nc-bSM"/>
+                    <constraint firstItem="KqI-CL-8Yo" firstAttribute="top" secondItem="tRp-3u-vQL" secondAttribute="top" id="BmL-0M-bD4"/>
+                    <constraint firstItem="KqI-CL-8Yo" firstAttribute="leading" secondItem="tRp-3u-vQL" secondAttribute="leading" id="Cyv-qv-EI8"/>
                     <constraint firstItem="z4b-g6-S71" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="IxL-z6-Tdk"/>
+                    <constraint firstItem="9ws-2n-3Ws" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.385" id="MUg-oo-o45"/>
+                    <constraint firstAttribute="trailing" secondItem="9ws-2n-3Ws" secondAttribute="trailing" constant="16" id="T8h-bX-HQ4"/>
+                    <constraint firstItem="KqI-CL-8Yo" firstAttribute="bottom" secondItem="tRp-3u-vQL" secondAttribute="bottom" id="VIA-FG-Uub"/>
+                    <constraint firstItem="9ws-2n-3Ws" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="YYL-mo-h97"/>
+                    <constraint firstItem="KqI-CL-8Yo" firstAttribute="trailing" secondItem="tRp-3u-vQL" secondAttribute="trailing" id="bTm-v6-Yf2"/>
                     <constraint firstItem="z4b-g6-S71" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="eFc-bA-j0M"/>
-                    <constraint firstItem="tRp-3u-vQL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="fN2-A7-FXe"/>
                     <constraint firstItem="z4b-g6-S71" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.49" id="guM-Ez-Nqe"/>
+                    <constraint firstItem="KqI-CL-8Yo" firstAttribute="height" secondItem="tRp-3u-vQL" secondAttribute="height" id="hRN-ji-Q1J"/>
+                    <constraint firstItem="vc9-ne-xPK" firstAttribute="trailing" secondItem="tRp-3u-vQL" secondAttribute="trailing" constant="-12" id="lPw-7P-JaN"/>
                     <constraint firstItem="tRp-3u-vQL" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.384058" id="pUm-9j-0WK"/>
+                    <constraint firstAttribute="bottom" secondItem="9ws-2n-3Ws" secondAttribute="bottom" constant="18" id="t9B-E6-7HJ"/>
+                    <constraint firstItem="vc9-ne-xPK" firstAttribute="top" secondItem="tRp-3u-vQL" secondAttribute="top" constant="21" id="tvI-ox-knC"/>
                     <constraint firstItem="z4b-g6-S71" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.36715" id="vdJ-3i-cdf"/>
                 </constraints>
             </tableViewCellContentView>
@@ -77,21 +121,28 @@
             <color key="backgroundColor" name="background"/>
             <connections>
                 <outlet property="mBorderV" destination="tRp-3u-vQL" id="mcs-LE-ZZY"/>
+                <outlet property="mDropDownImgV" destination="vc9-ne-xPK" id="V9q-r4-xVb"/>
+                <outlet property="mDropDownPlaceholderLb" destination="KqI-CL-8Yo" id="BwC-VM-bSb"/>
                 <outlet property="mStartBtn" destination="z4b-g6-S71" id="geN-Wi-d0c"/>
                 <outlet property="mTextFl" destination="2PS-8D-cWm" id="8Z5-7q-xhG"/>
+                <outlet property="mTextLb" destination="9ws-2n-3Ws" id="tmK-k5-F5N"/>
             </connections>
             <point key="canvasLocation" x="18.840579710144929" y="77.008928571428569"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="dropDown" width="17" height="9"/>
         <namedColor name="alert_txt">
             <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="email">
+            <color red="0.53700000047683716" green="0.59600001573562622" blue="0.66699999570846558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="navigation_bar">
+            <color red="0.10999999940395355" green="0.20000000298023224" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		380442B49F4375A112762AA9 /* Pods_BKDTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0494F70C71625F4C984094D /* Pods_BKDTests.framework */; };
+		560048702697F78C009943B5 /* BkdAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5600486F2697F78C009943B5 /* BkdAgreementViewController.swift */; };
 		560251DB2661074200FB204C /* Carousel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 560251DA2661074200FB204C /* Carousel.xib */; };
 		560251E02661089C00FB204C /* CarouselCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560251DF2661089C00FB204C /* CarouselCellView.swift */; };
 		5602520226611C4100FB204C /* SearchCustomLocationUiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602520126611C4100FB204C /* SearchCustomLocationUiView.swift */; };
@@ -121,6 +122,10 @@
 		566B3761269503360021BCAA /* CalendarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 566B375F269503360021BCAA /* CalendarTableViewCell.xib */; };
 		566B3767269545540021BCAA /* MailBoxNumberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B3765269545540021BCAA /* MailBoxNumberTableViewCell.swift */; };
 		566B3768269545540021BCAA /* MailBoxNumberTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 566B3766269545540021BCAA /* MailBoxNumberTableViewCell.xib */; };
+		566B379A26974F0C0021BCAA /* NationalRegisterNumberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B379826974F0C0021BCAA /* NationalRegisterNumberTableViewCell.swift */; };
+		566B379B26974F0C0021BCAA /* NationalRegisterNumberTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 566B379926974F0C0021BCAA /* NationalRegisterNumberTableViewCell.xib */; };
+		566B37BD2697A6D40021BCAA /* TakePhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B37BB2697A6D30021BCAA /* TakePhotoTableViewCell.swift */; };
+		566B37BE2697A6D40021BCAA /* TakePhotoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 566B37BC2697A6D30021BCAA /* TakePhotoTableViewCell.xib */; };
 		568E6F592642FC4B000CB6A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568E6F572642FC4B000CB6A9 /* Main.storyboard */; };
 		568E6F5E2642FC50000CB6A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568E6F5C2642FC50000CB6A9 /* LaunchScreen.storyboard */; };
 		568E6F692642FC50000CB6A9 /* BKDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E6F682642FC50000CB6A9 /* BKDTests.swift */; };
@@ -221,6 +226,7 @@
 /* Begin PBXFileReference section */
 		2C3819EEF98357A5E10F4D7C /* Pods_BKD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BKD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9E56E46535541B3D2E4A8F /* Pods_BKD_BKDUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BKD_BKDUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5600486F2697F78C009943B5 /* BkdAgreementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BkdAgreementViewController.swift; sourceTree = "<group>"; };
 		560251DA2661074200FB204C /* Carousel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Carousel.xib; sourceTree = "<group>"; };
 		560251DF2661089C00FB204C /* CarouselCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCellView.swift; sourceTree = "<group>"; };
 		5602520126611C4100FB204C /* SearchCustomLocationUiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCustomLocationUiView.swift; sourceTree = "<group>"; };
@@ -334,6 +340,10 @@
 		566B375F269503360021BCAA /* CalendarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarTableViewCell.xib; sourceTree = "<group>"; };
 		566B3765269545540021BCAA /* MailBoxNumberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailBoxNumberTableViewCell.swift; sourceTree = "<group>"; };
 		566B3766269545540021BCAA /* MailBoxNumberTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MailBoxNumberTableViewCell.xib; sourceTree = "<group>"; };
+		566B379826974F0C0021BCAA /* NationalRegisterNumberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NationalRegisterNumberTableViewCell.swift; sourceTree = "<group>"; };
+		566B379926974F0C0021BCAA /* NationalRegisterNumberTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NationalRegisterNumberTableViewCell.xib; sourceTree = "<group>"; };
+		566B37BB2697A6D30021BCAA /* TakePhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakePhotoTableViewCell.swift; sourceTree = "<group>"; };
+		566B37BC2697A6D30021BCAA /* TakePhotoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TakePhotoTableViewCell.xib; sourceTree = "<group>"; };
 		568E6F4E2642FC4B000CB6A9 /* BKD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BKD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		568E6F582642FC4B000CB6A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		568E6F5D2642FC50000CB6A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -1162,6 +1172,24 @@
 			path = MailBoxNumber;
 			sourceTree = "<group>";
 		};
+		566B379726974EE90021BCAA /* NationalRegisterNumber */ = {
+			isa = PBXGroup;
+			children = (
+				566B379826974F0C0021BCAA /* NationalRegisterNumberTableViewCell.swift */,
+				566B379926974F0C0021BCAA /* NationalRegisterNumberTableViewCell.xib */,
+			);
+			path = NationalRegisterNumber;
+			sourceTree = "<group>";
+		};
+		566B37BA2697A6BB0021BCAA /* TakePhoto */ = {
+			isa = PBXGroup;
+			children = (
+				566B37BB2697A6D30021BCAA /* TakePhotoTableViewCell.swift */,
+				566B37BC2697A6D30021BCAA /* TakePhotoTableViewCell.xib */,
+			);
+			path = TakePhoto;
+			sourceTree = "<group>";
+		};
 		568E6F452642FC4B000CB6A9 = {
 			isa = PBXGroup;
 			children = (
@@ -1710,6 +1738,7 @@
 				56AD19212693421C006A53C1 /* TermsConditionsViewController.swift */,
 				56AD192526934D7E006A53C1 /* EmailVerificationViewController.swift */,
 				56CFDE5F26936F8400D731CD /* FaceAndTouchIdViewController.swift */,
+				5600486F2697F78C009943B5 /* BkdAgreementViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1744,6 +1773,8 @@
 		56CFDE64269371CF00D731CD /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				566B37BA2697A6BB0021BCAA /* TakePhoto */,
+				566B379726974EE90021BCAA /* NationalRegisterNumber */,
 				566B3764269545240021BCAA /* MailBoxNumber */,
 				566B375D269503030021BCAA /* Calendar */,
 				56A2AFF32694D4D5001BA7C5 /* SearchPhoneCode */,
@@ -1949,6 +1980,7 @@
 				5665404826759E79008ACD31 /* TariffCarouselCell.xib in Resources */,
 				5656323C265841BE00B78562 /* FilterSearchResultCell.xib in Resources */,
 				56533EF82679263D0012BF4A /* Accessories.storyboard in Resources */,
+				566B379B26974F0C0021BCAA /* NationalRegisterNumberTableViewCell.xib in Resources */,
 				5602533126670A1000FB204C /* Chat.storyboard in Resources */,
 				560251DB2661074200FB204C /* Carousel.xib in Resources */,
 				56AD18EB2691622C006A53C1 /* SignIn.storyboard in Resources */,
@@ -1958,6 +1990,7 @@
 				56533F0E2679BDD50012BF4A /* MyDrivers.storyboard in Resources */,
 				568E6F5E2642FC50000CB6A9 /* LaunchScreen.storyboard in Resources */,
 				565A7AD72654C49B006C63D0 /* CategoryCollectionViewCell.xib in Resources */,
+				566B37BE2697A6D40021BCAA /* TakePhotoTableViewCell.xib in Resources */,
 				565A7AB12653FE26006C63D0 /* SearchHeaderView.xib in Resources */,
 				564E12D0264D72E2008CE884 /* SeeMap.storyboard in Resources */,
 				5618872D2645D99600BDDB33 /* Assets.xcassets in Resources */,
@@ -2163,6 +2196,7 @@
 				56B9F33D26825FF0003449AD /* TariffSlideViewModel.swift in Sources */,
 				56AD191D2693251C006A53C1 /* CheckEmailViewModel.swift in Sources */,
 				5640952D264AE529001DC92D /* DropDownModel.swift in Sources */,
+				566B37BD2697A6D40021BCAA /* TakePhotoTableViewCell.swift in Sources */,
 				5691A5FC265C28860008081D /* AddressNameViewController.swift in Sources */,
 				56B9F2ED26806488003449AD /* SearchResultModelView.swift in Sources */,
 				56CD830B267CF45600B2799F /* ReserveTableView.swift in Sources */,
@@ -2204,6 +2238,7 @@
 				56AD18F226928861006A53C1 /* RegistrationViewModel.swift in Sources */,
 				56AD19072692B9F6006A53C1 /* MyBkdTableViewCell.swift in Sources */,
 				5691A64E265DB6300008081D /* SearchHeaderViewModel.swift in Sources */,
+				566B379A26974F0C0021BCAA /* NationalRegisterNumberTableViewCell.swift in Sources */,
 				564E12D9264D7617008CE884 /* Constant.swift in Sources */,
 				560252F42665950700FB204C /* CustomLocationViewModel.swift in Sources */,
 				5656323B265841BE00B78562 /* FilterSearchResultCell.swift in Sources */,
@@ -2251,6 +2286,7 @@
 				56A2AFEC2694CFC9001BA7C5 /* SearchPhoneCodeViewController.swift in Sources */,
 				560252E2266535CF00FB204C /* Result.swift in Sources */,
 				5656324626585FFF00B78562 /* CarEquipmentCollectionViewCell.swift in Sources */,
+				560048702697F78C009943B5 /* BkdAgreementViewController.swift in Sources */,
 				564E13692652F0CF008CE884 /* PrivacyPoliceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

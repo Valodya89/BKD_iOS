@@ -33,6 +33,11 @@ class MailBoxNumberTableViewCell: UITableViewCell {
         mMAilBoxNumberTxtFl.delegate = self
         
     }
+    
+    override func prepareForReuse() {
+            
+        }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

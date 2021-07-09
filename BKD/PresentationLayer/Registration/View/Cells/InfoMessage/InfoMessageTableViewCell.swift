@@ -17,14 +17,22 @@ class InfoMessageTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        mMessageLb.padding = UIEdgeInsets(top: 8, left: 5, bottom: 8, right: 5)
+        
     }
-    
+    override func draw(_ rect: CGRect) {
+        mMessageLb.padding = UIEdgeInsets(top: 8, left: 5, bottom: 8, right: 5)
+        mMessageLb.roundCorners(corners: [.topLeft, .topRight, .bottomLeft], radius: 8.0)
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    override func prepareForReuse() {
+        mMessageLb.text = ""
+        mMessageLb.padding = UIEdgeInsets(top: 8, left: 5, bottom: 8, right: 5)
     }
     
     func setCellInfo(items: [RegistrationBotModel], index: Int  )  {
@@ -42,6 +50,7 @@ class InfoMessageTableViewCell: UITableViewCell {
         if let _ = model.msgToFillBold {
             mMessageLb.setAttributeBold(text: model.msgToFill!, boldText: model.msgToFillBold!, color: color_alert_txt!)
         }
+       
     }
     
 }

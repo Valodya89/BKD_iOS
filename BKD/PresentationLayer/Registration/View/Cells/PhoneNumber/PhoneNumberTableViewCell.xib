@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -27,33 +27,34 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dTy-mm-L17">
-                        <rect key="frame" x="226" y="18" width="172" height="42"/>
+                        <rect key="frame" x="190" y="18" width="208" height="42"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dutch" translatesAutoresizingMaskIntoConstraints="NO" id="G99-Af-LeI">
-                                <rect key="frame" x="0.0" y="15" width="25" height="12"/>
+                                <rect key="frame" x="5" y="15" width="24" height="12"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropDown_blue" translatesAutoresizingMaskIntoConstraints="NO" id="qrV-De-aeb">
-                                <rect key="frame" x="25" y="16.5" width="17" height="9"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drop_down" translatesAutoresizingMaskIntoConstraints="NO" id="qrV-De-aeb">
+                                <rect key="frame" x="29" y="16.5" width="16" height="9"/>
                                 <color key="tintColor" white="0.25" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MjX-ub-cDy">
-                                <rect key="frame" x="0.0" y="6" width="50" height="30"/>
+                                <rect key="frame" x="0.0" y="6" width="48" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="countryCode:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="nDA-Ga-IRi"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+32 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="65y-VS-3Wn">
-                                <rect key="frame" x="50" y="13.5" width="31" height="15"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+32 3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="65y-VS-3Wn">
+                                <rect key="frame" x="48" y="13.5" width="50" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="TzN-lw-4Gu"/>
+                                    <constraint firstAttribute="width" constant="50" id="rvX-Ye-OWg"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="13"/>
                                 <color key="textColor" name="email"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vqi-re-F8N" customClass="TextField" customModule="BKD" customModuleProvider="target">
-                                <rect key="frame" x="81" y="0.0" width="91" height="42"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vqi-re-F8N" customClass="SwiftMaskTextfield" customModule="SwiftMaskTextfield">
+                                <rect key="frame" x="98" y="0.0" width="110" height="42"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" name="alert_txt"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
@@ -66,7 +67,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="G99-Af-LeI" firstAttribute="width" secondItem="MjX-ub-cDy" secondAttribute="width" multiplier="0.5" id="1lt-yC-4qL"/>
-                            <constraint firstItem="vqi-re-F8N" firstAttribute="width" relation="greaterThanOrEqual" secondItem="dTy-mm-L17" secondAttribute="width" multiplier="0.52924" id="3ps-da-f4I"/>
+                            <constraint firstItem="vqi-re-F8N" firstAttribute="width" secondItem="dTy-mm-L17" secondAttribute="width" multiplier="0.52924" id="3ps-da-f4I"/>
                             <constraint firstItem="MjX-ub-cDy" firstAttribute="top" secondItem="dTy-mm-L17" secondAttribute="top" constant="6" id="5HJ-Ze-LSg"/>
                             <constraint firstAttribute="trailing" secondItem="vqi-re-F8N" secondAttribute="trailing" id="Cdr-Zf-7uf"/>
                             <constraint firstItem="qrV-De-aeb" firstAttribute="centerY" secondItem="G99-Af-LeI" secondAttribute="centerY" id="K1q-yV-swf"/>
@@ -77,7 +78,7 @@
                             <constraint firstItem="MjX-ub-cDy" firstAttribute="leading" secondItem="dTy-mm-L17" secondAttribute="leading" id="YzP-Zg-xlM"/>
                             <constraint firstItem="qrV-De-aeb" firstAttribute="height" secondItem="MjX-ub-cDy" secondAttribute="height" multiplier="0.3" id="aNe-9L-PX5"/>
                             <constraint firstItem="qrV-De-aeb" firstAttribute="leading" secondItem="G99-Af-LeI" secondAttribute="trailing" id="ahM-pn-hJ9"/>
-                            <constraint firstItem="G99-Af-LeI" firstAttribute="leading" secondItem="MjX-ub-cDy" secondAttribute="leading" id="am1-2T-TmT"/>
+                            <constraint firstItem="G99-Af-LeI" firstAttribute="leading" secondItem="MjX-ub-cDy" secondAttribute="leading" constant="5" id="am1-2T-TmT"/>
                             <constraint firstItem="G99-Af-LeI" firstAttribute="centerY" secondItem="MjX-ub-cDy" secondAttribute="centerY" id="eRU-ja-qWM"/>
                             <constraint firstItem="G99-Af-LeI" firstAttribute="height" secondItem="MjX-ub-cDy" secondAttribute="height" multiplier="0.41" id="n0S-gG-zew"/>
                             <constraint firstItem="65y-VS-3Wn" firstAttribute="leading" secondItem="MjX-ub-cDy" secondAttribute="trailing" id="oyM-j0-fON"/>
@@ -90,7 +91,7 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="dTy-mm-L17" secondAttribute="bottom" constant="18" id="DmE-aY-waY"/>
                     <constraint firstItem="dTy-mm-L17" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="fht-9X-WIu"/>
-                    <constraint firstAttribute="trailing" secondItem="dTy-mm-L17" secondAttribute="trailing" multiplier="1.04" id="pFJ-IG-VCH"/>
+                    <constraint firstAttribute="trailing" secondItem="dTy-mm-L17" secondAttribute="trailing" constant="16" id="pFJ-IG-VCH"/>
                     <constraint firstItem="dTy-mm-L17" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.538462" id="ray-qI-Eh7"/>
                 </constraints>
             </tableViewCellContentView>
@@ -108,7 +109,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="dropDown_blue" width="17" height="9"/>
+        <image name="drop_down" width="12.5" height="6.5"/>
         <image name="dutch" width="24" height="18"/>
         <namedColor name="alert_txt">
             <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
