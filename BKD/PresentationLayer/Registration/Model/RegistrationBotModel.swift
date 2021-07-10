@@ -20,6 +20,7 @@ struct UserRegisterInfo {
     public var string: String?
     public var date: Date?
     public var isOtherNational: Bool = false
+    public var nationalString: String?
     public var placeholder: String?
     public var isFilled: Bool = false
 

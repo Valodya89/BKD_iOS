@@ -128,7 +128,7 @@
                                 </connections>
                             </textField>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="background"/>
                         <constraints>
                             <constraint firstItem="Zks-SV-EgJ" firstAttribute="leading" secondItem="dA3-wO-9vC" secondAttribute="leading" id="57f-qL-B9o"/>
                             <constraint firstAttribute="height" constant="42" id="EWA-EB-Lz4"/>

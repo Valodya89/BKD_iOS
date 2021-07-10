@@ -7,6 +7,12 @@
 
 import UIKit
 
+enum PickerType {
+    case date
+    case countryOrCity
+    case nationalCountry
+}
+
 class RegistartionBotViewController: UIViewController, StoryboardInitializable {
     
     //MARK: Outlets
@@ -16,15 +22,21 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mConfirmLeading: NSLayoutConstraint!
     
+    @IBOutlet weak var mThankYouBckgV: UIView!
+    @IBOutlet weak var mThankYouBtn: UIButton!
     
     var tableData:[RegistrationBotModel] = [RegistrationBotData.registrationBotModel[0]]
     var timer: Timer?
     var datePicker = UIDatePicker()
     var pickerV = UIPickerView()
     var pickerList: [String]?
+    var pickerType:PickerType = .date
+    var isTakePhoto:Bool = false
+    
     private var currentIndex = 0
-    private var isDatePicker = true
+   // private var isDatePicker = true
     private var activeTextField: UITextField?
+    
 
     //MARK: - Life cycles
     override func viewDidLoad() {
@@ -44,9 +56,17 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
     
     func setUpView() {
         mRightBarBtn.image = img_bkd
+        mThankYouBtn.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_dark_register!, borderWidth: 1)
+        setUpConfirmView()
         configureTableView()
     }
     
+    
+    ///set up confirm view
+    private func setUpConfirmView() {
+        mConfirmBckgV.setGradientWithCornerRadius(cornerRadius: 0.0, startColor: color_dark_register!,endColor: color_dark_register!.withAlphaComponent(0.85) )
+        mConfirmBckgV.roundCorners(corners: [.topRight, .topLeft], radius: 20)
+    }
     
     func registerForKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -71,6 +91,10 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
         startTimer()
     }
 
+    //MARK: TIMER
+    //MARK -------------------
+    
+    /// Start timer for update table cell
     func startTimer() {
         if timer == nil {
             let seconds = 0.5
@@ -78,15 +102,18 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
           }
     }
     
+    /// Stop timer
     func stopTimer() {
       if timer != nil {
         timer!.invalidate()
         timer = nil
       }
     }
+ 
     
+    /// Update table cell
     @objc func updateTableCell () {
-        if RegistrationBotData.registrationBotModel[currentIndex].viewDescription == nil {
+        if RegistrationBotData.registrationBotModel[currentIndex].viewDescription == nil && mThankYouBckgV.isHidden{
             insertTableCell()
         } else {
             stopTimer()
@@ -94,35 +121,35 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
         
     }
     
+    /// Insert table cell
     func insertTableCell() {
-        tableData.append(RegistrationBotData.registrationBotModel[currentIndex + 1])
-        mTableV.beginUpdates()
-        mTableV.insertRows(at: [IndexPath.init(row: tableData.count-1, section: 0)], with: .automatic)
-        mTableV.endUpdates()
-//        mTableV.scrollToRow(at: IndexPath(row: currentIndex, section: 0), at: .bottom, animated: true)
-
-        DispatchQueue.main.async { [self] in
-            self.mTableV.scrollToRow(at: IndexPath(row: currentIndex, section: 0), at: .none, animated: true)
-        }
-        startTimer()
-    }
-
-//    func updateTableContentInset() {
-//        let contentInsetTop = mTableV.frame.size.height - mTableV.contentSize.height
-//        if mTableV.contentSize.height >= contentInsetTop {
-//            mTableV.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: contentInsetTop, right: 0)
-//
-//
-//            DispatchQueue.main.async { [self] in
-//                let index = IndexPath(row: self.currentIndex, section: 0)
-//                self.mTableV.scrollToRow(at: index, at: .bottom, animated: true)
-//            }
-//            mTableV.scrollToRow(at: IndexPath(row: currentIndex, section: 0), at: .bottom, animated: true)
+        //if tableData.count < RegistrationBotData.registrationBotModel.count {
+            
+            tableData.append(RegistrationBotData.registrationBotModel[currentIndex + 1])
+            mTableV.beginUpdates()
+            mTableV.insertRows(at: [IndexPath.init(row: tableData.count-1, section: 0)], with: .automatic)
+            mTableV.endUpdates()
+            tableScrollToBottom()
+            
+//            if mConfirmBckgV.isUserInteractionEnabled == false {
+                startTimer()
+           // }
+//        } else {
+//            mConfirmBckgV.isUserInteractionEnabled = true
+//            //mConfirmBckgV.alpha = 1.0
 //
 //        }
-//
-//    }
-//
+    }
+    
+    
+    ///Table view scroll to bottom
+    func tableScrollToBottom()  {
+        DispatchQueue.main.async { [self] in
+            self.mTableV.scrollToRow(at: IndexPath(row: currentIndex, section: 0), at: .bottom, animated: false)
+        }
+    }
+
+
     ///Will creat actionshit for camera and photo library
     func takePhotoPressed() {
         let alert = UIAlertController(title: Constant.Texts.selecteImg, message: "", preferredStyle: .actionSheet)
@@ -147,6 +174,7 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
     
     ///Will present Picker controller
     private func presentPicker (sourceType: UIImagePickerController.SourceType) {
+        isTakePhoto = true
         let picker = UIImagePickerController()
         picker.sourceType = sourceType
         picker.delegate = self
@@ -165,20 +193,6 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
         return toolBar
     }
     
-    @objc func donePressed() {
-        if isDatePicker {
-            tableData[currentIndex].userRegisterInfo = UserRegisterInfo(date: datePicker.date, isFilled: true)
-        } else {
-            tableData[currentIndex].userRegisterInfo?.string = pickerList![ pickerV.selectedRow(inComponent: 0)]
-            tableData[currentIndex].userRegisterInfo?.isFilled = true
-        }
-
-        mTableV.reloadRows(at: [IndexPath(row: currentIndex, section: 0)], with: .automatic)
-       // mTableV.reloadData()
-       // updateTableContentInset()
-
-       insertTableCell()
-    }
     //MARK: Keyboard NSNotification
     //MARK: ---------------------------
     
@@ -191,20 +205,6 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
            var contentInset:UIEdgeInsets = self.mTableV.contentInset
            contentInset.bottom = keyboardFrame.size.height
         mTableV.contentInset = contentInset
-        
-        
-        
-//        if let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.height {
-//
-//            let contentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardHeight, right: 0.0);
-//                   self.mTableV.contentInset = contentInsets;
-//                   self.mTableV.scrollIndicatorInsets = contentInsets;
-
-
-            //            UIView.animate(withDuration: 0.2) { [self] in
-//                self.mTableV.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
-//            }
-    //       }
     }
 
     @objc func keyboardWillHide(notification: NSNotification) {
@@ -212,26 +212,64 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
             self.mTableV.contentInset = .zero
         })
     }
-
     
     
+    ///Will animate confirm button
+    func animationConfirm() {
+        self.mConfirmLeading.constant = self.view.bounds.width - self.mConfirmBckgV.bounds.width + 25
+        self.view.setNeedsLayout()
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
+        } completion: { _ in
+            self.mConfirmBckgV.isHidden = true
+            self.mTableV.reloadData()
+            self.mThankYouBckgV.isHidden = false
+        }
+    }
     
-//    NSDictionary* info = [aNotification userInfo];
-//       CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-//
-//       UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
-//       self.myTableView.contentInset = contentInsets;
-//       self.myTableView.scrollIndicatorInsets = contentInsets;
-
     
+    //MARK: ACTIONS
+    //MARK: -----------------
+    @IBAction func confirm(_ sender: UIButton) {
+        tableData = RegistrationBotData.completedAccountModel
+        animationConfirm()
+    }
     
+    @IBAction func thankYou(_ sender: UIButton) {
+        sender.setTitleColor(color_menu!, for: .normal)
+        sender.layer.cornerRadius = 10
+        sender.backgroundColor = color_dark_register
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
+        self.tabBarController?.selectedIndex = 0
+        }
+    }
     
     @IBAction func beck(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
     }
+    
+    @objc func donePressed() {
+        switch pickerType {
+        case .date:
+            tableData[currentIndex].userRegisterInfo = UserRegisterInfo(date: datePicker.date, isFilled: true)
+        case .nationalCountry:
+            // change nationality  textfiled
+            tableData[currentIndex].userRegisterInfo?.nationalString = pickerList![ pickerV.selectedRow(inComponent: 0)]
+        break
+        default:
+            tableData[currentIndex].userRegisterInfo?.string = pickerList![ pickerV.selectedRow(inComponent: 0)]
+            tableData[currentIndex].userRegisterInfo?.isFilled = true
+        }
+
+        mTableV.reloadRows(at: [IndexPath(row: currentIndex, section: 0)], with: .bottom)
+        if pickerType != .nationalCountry {
+            insertTableCell()
+        }
+    }
 }
 
-
+//MARK: UITableViewDataSource
+//MARK: ---------------------------
 extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSource {
     
     
@@ -243,84 +281,99 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = tableData[indexPath.row]
         currentIndex = tableData.count - 1
-//        if  let _ = model.msgToFill {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: InfoMessageTableViewCell.identifier, for: indexPath) as! InfoMessageTableViewCell
-//            cell.setCellInfo(items: tableData, index: indexPath.row)
-//            cell.layoutIfNeeded()
-//            cell.setNeedsLayout()
-//
-//            return cell
-//
-//        } else
+        
         if let _ = model.examplePhoto {
-           let cell = tableView.dequeueReusableCell(withIdentifier: ExamplePhotoTableViewCell.identifier, for: indexPath) as! ExamplePhotoTableViewCell
-            cell.mImageV.image = model.examplePhoto
-            return cell
+           return examplePhotoCell(indexPath: indexPath, model: model)
 
         } else if let _ = model.viewDescription {
             switch model.viewDescription {
             case "button", "txtFl":
-              let cell = tableView.dequeueReusableCell(withIdentifier: UserFillFieldTableViewCell.identifier, for: indexPath) as! UserFillFieldTableViewCell
-                cell.setCellInfo(item: model)
-                cell.delegate = self
-                return cell
+                return userFillFieldCell(indexPath: indexPath, model: model)
             case  "phone" :
-                let cell = tableView.dequeueReusableCell(withIdentifier: PhoneNumberTableViewCell.identifier, for: indexPath) as! PhoneNumberTableViewCell
-                  cell.setCellInfo(item: model)
-                cell.delegate = self
-                  return cell
+                return phoneNumberCell(indexPath: indexPath,model: model)
             case  "calendar" :
-                let cell = tableView.dequeueReusableCell(withIdentifier: CalendarTableViewCell.identifier, for: indexPath) as! CalendarTableViewCell
-                cell.setCellInfo(item: model)
-                cell.delegate = self
-                return cell
+                return calendarCell(indexPath: indexPath,model: model)
             case  "mailbox" :
-                let cell = tableView.dequeueReusableCell(withIdentifier: MailBoxNumberTableViewCell.identifier, for: indexPath) as! MailBoxNumberTableViewCell
-                cell.setCellInfo(item: model)
-                cell.delegate = self
-                return cell
+                return mailBoxCell(indexPath: indexPath, model: model)
             case  "national register" :
-                let cell = tableView.dequeueReusableCell(withIdentifier: NationalRegisterNumberTableViewCell.identifier, for: indexPath) as! NationalRegisterNumberTableViewCell
-                
-                cell.setCellInfo(item: model)
-                cell.delegate = self
-                return cell
-//            case  "takePhoto" :
-//                let cell = tableView.dequeueReusableCell(withIdentifier: TakePhotoTableViewCell.identifier, for: indexPath) as! TakePhotoTableViewCell
-//                
-//                cell.setCellInfo(item: model)
-//                cell.delegate = self
-//                return cell
+               return nationalRegisterCell(indexPath: indexPath, model: model)
             default:
-                
-                let cell = tableView.dequeueReusableCell(withIdentifier: TakePhotoTableViewCell.identifier, for: indexPath) as! TakePhotoTableViewCell
-                
-                cell.setCellInfo(item: model)
-                cell.delegate = self
-                return cell
-//                let cell = tableView.dequeueReusableCell(withIdentifier: PhoneNumberTableViewCell.identifier, for: indexPath) as! PhoneNumberTableViewCell
-//                  cell.setCellInfo(item: model)
-//                  return cell
-   
+                return takePhotoCell(indexPath: indexPath,model: model)
             }
         } else { // info message
-            let cell = tableView.dequeueReusableCell(withIdentifier: InfoMessageTableViewCell.identifier, for: indexPath) as! InfoMessageTableViewCell
-            cell.setCellInfo(items: tableData, index: indexPath.row)
-            cell.layoutIfNeeded()
-            cell.setNeedsLayout()
-            
-            return cell
+            return infoMessageCell(indexPath: indexPath,model: model)
         }
-
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if tableData[indexPath.row].userRegisterInfo?.isOtherNational != nil &&  tableData[indexPath.row].userRegisterInfo?.isOtherNational == true  {
-            return 176
-        } else if  tableData[indexPath.row].userRegisterInfo?.photo != nil &&  tableData[indexPath.row].userRegisterInfo?.isFilled == true {
-            return 244
-        }
-            
         return UITableView.automaticDimension
+    }
+    
+    
+    //MARK: TABLE CELLS
+    //MARK: ---------------------
+    private func infoMessageCell(indexPath: IndexPath, model: RegistrationBotModel) -> InfoMessageTableViewCell{
+        let cell = mTableV.dequeueReusableCell(withIdentifier: InfoMessageTableViewCell.identifier, for: indexPath) as! InfoMessageTableViewCell
+        cell.setCellInfo(items: tableData, index: indexPath.row)
+        cell.layoutIfNeeded()
+        cell.setNeedsLayout()
+        return cell
+    }
+    
+    private func userFillFieldCell(indexPath: IndexPath, model: RegistrationBotModel) -> UserFillFieldTableViewCell {
+        
+    let cell = mTableV.dequeueReusableCell(withIdentifier: UserFillFieldTableViewCell.identifier, for: indexPath) as! UserFillFieldTableViewCell
+      cell.setCellInfo(item: model)
+      cell.delegate = self
+      return cell
+    }
+    
+    private func phoneNumberCell(indexPath: IndexPath, model: RegistrationBotModel) -> PhoneNumberTableViewCell{
+        
+        let cell = mTableV.dequeueReusableCell(withIdentifier: PhoneNumberTableViewCell.identifier, for: indexPath) as! PhoneNumberTableViewCell
+          cell.setCellInfo(item: model)
+        cell.delegate = self
+          return cell
+    }
+    
+    private func calendarCell(indexPath: IndexPath, model: RegistrationBotModel) -> CalendarTableViewCell {
+        
+        let cell = mTableV.dequeueReusableCell(withIdentifier: CalendarTableViewCell.identifier, for: indexPath) as! CalendarTableViewCell
+        cell.setCellInfo(item: model)
+        cell.delegate = self
+        return cell
+    }
+    
+    private func mailBoxCell(indexPath: IndexPath, model: RegistrationBotModel) -> MailBoxNumberTableViewCell{
+        
+        let cell = mTableV.dequeueReusableCell(withIdentifier: MailBoxNumberTableViewCell.identifier, for: indexPath) as! MailBoxNumberTableViewCell
+        cell.setCellInfo(item: model)
+        cell.delegate = self
+        return cell
+    }
+    
+    private func nationalRegisterCell(indexPath: IndexPath, model: RegistrationBotModel) -> NationalRegisterNumberTableViewCell{
+        
+        let cell = mTableV.dequeueReusableCell(withIdentifier: NationalRegisterNumberTableViewCell.identifier, for: indexPath) as! NationalRegisterNumberTableViewCell
+        
+        cell.setCellInfo(item: model)
+        cell.delegate = self
+        return cell
+    }
+    
+    private func takePhotoCell(indexPath: IndexPath, model: RegistrationBotModel) -> TakePhotoTableViewCell{
+        
+        let cell = mTableV.dequeueReusableCell(withIdentifier: TakePhotoTableViewCell.identifier, for: indexPath) as! TakePhotoTableViewCell
+        cell.setCellInfo(item: model)
+        cell.delegate = self
+        return cell
+    }
+    
+    private func examplePhotoCell(indexPath: IndexPath, model: RegistrationBotModel) -> ExamplePhotoTableViewCell {
+        
+        let cell = mTableV.dequeueReusableCell(withIdentifier: ExamplePhotoTableViewCell.identifier, for: indexPath) as! ExamplePhotoTableViewCell
+         cell.mImageV.image = model.examplePhoto
+         return cell
     }
 }
 
@@ -334,10 +387,8 @@ extension RegistartionBotViewController: UserFillFieldTableViewCellDelegate {
         activeTextField = txtFl
     }
     
-    
     func didPressStart() {
         tableData[currentIndex].userRegisterInfo?.isFilled =  true
-        // updateModelObj()
         insertTableCell()
     }
 
@@ -352,7 +403,7 @@ extension RegistartionBotViewController: UserFillFieldTableViewCellDelegate {
         textFl.inputView = pickerV
         textFl.inputAccessoryView = creatToolBar()
         textFl.isHidden = true
-        isDatePicker = false
+        pickerType = .countryOrCity
         if #available(iOS 14.0, *) {
             datePicker.preferredDatePickerStyle = .wheels
         } else {
@@ -398,7 +449,7 @@ extension RegistartionBotViewController: CalendarTableViewCellDelegate {
         textFl.inputView = datePicker
         textFl.inputAccessoryView = creatToolBar()
         textFl.isHidden = true
-        isDatePicker = true
+        pickerType = .date
         if #available(iOS 14.0, *) {
             datePicker.preferredDatePickerStyle = .wheels
         } else {
@@ -435,13 +486,10 @@ extension RegistartionBotViewController: MailBoxNumberTableViewCellDelegate {
 //MARK: NationalRegisterNumberTableViewCellDelegate
 //MARK: -------------------------------------------
 extension RegistartionBotViewController: NationalRegisterNumberTableViewCellDelegate {
-    func didPressOtherCountryNational() {
-        tableData[currentIndex].userRegisterInfo = UserRegisterInfo(isOtherNational: true)
+    func didPressOtherCountryNational(isClicked: Bool) {
+        tableData[currentIndex].userRegisterInfo = UserRegisterInfo(isOtherNational: isClicked)
         mTableV.reloadData()
-
-//        tableData[currentIndex].userRegisterInfo?.isFilled =  true
-//        // updateModelObj()
-//        insertTableCell()
+        tableScrollToBottom()
     }
     
     func didReturnTxt(txt: String?) {
@@ -450,25 +498,21 @@ extension RegistartionBotViewController: NationalRegisterNumberTableViewCellDele
         insertTableCell()
     }
     
-//    func willOpenPicker(textFl: UITextField, viewType: ViewType) {
-//       // countryList
-//        textFl.inputView = pickerV
-//        textFl.inputAccessoryView = creatToolBar()
-//        textFl.isHidden = true
-//        isDatePicker = false
-//        if #available(iOS 14.0, *) {
-//            datePicker.preferredDatePickerStyle = .wheels
-//        } else {
-//            // Fallback on earlier versions
-//        }
-//        if viewType == .country {
-//            pickerList = countryList
-//        } else if viewType == .city {
-//            pickerList = cityList
-//        }
-//        pickerV.delegate = self
-//        pickerV.dataSource = self
-//    }
+    func willOpenPicker(textFl: UITextField) {
+       // countryList
+        textFl.inputView = pickerV
+        textFl.inputAccessoryView = creatToolBar()
+        textFl.isHidden = true
+        pickerType = .nationalCountry
+        if #available(iOS 14.0, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        } else {
+            // Fallback on earlier versions
+        }
+        pickerList = countryList
+        pickerV.delegate = self
+        pickerV.dataSource = self
+    }
 
 }
 
@@ -493,9 +537,10 @@ extension RegistartionBotViewController: TakePhotoTableViewCellDelegate {
 //MARK: ----------------------------
 extension RegistartionBotViewController: BkdAgreementViewControllerDelegate {
     func agreeTermsAndConditions() {
-        tableData[currentIndex].userRegisterInfo?.isFilled = true
+        mConfirmBckgV.isHidden = false
+        tableData[currentIndex].userRegisterInfo  = UserRegisterInfo(isFilled: true)
         mTableV.reloadData()
-        insertTableCell()
+    
     }
 }
 
@@ -506,6 +551,7 @@ extension RegistartionBotViewController: UIImagePickerControllerDelegate, UINavi
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
+        isTakePhoto = false
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -513,9 +559,12 @@ extension RegistartionBotViewController: UIImagePickerControllerDelegate, UINavi
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
              return  }
-        tableData[currentIndex].userRegisterInfo = UserRegisterInfo(photo: image, isFilled: true)
-        mTableV.reloadData()
-        insertTableCell()
+        if isTakePhoto {
+            tableData[currentIndex].userRegisterInfo = UserRegisterInfo(photo: image, isFilled: true)
+            mTableV.reloadData()
+            insertTableCell()
+            isTakePhoto = false
+        }
     }
 }
 

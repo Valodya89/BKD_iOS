@@ -28,6 +28,9 @@ class BkdAgreementViewController: UIViewController, StoryboardInitializable {
     func setUpView() {
         mRightBarBtn.image = img_bkd
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
+        mAgreeBtn.layer.cornerRadius = 8
+        mAgreeBtn.layer.cornerRadius = 8
+        mAgreeBtn.addBorder(color:color_navigationBar!, width: 1.0)
     }
 
     ///Agree button move to right  with animation

@@ -23,7 +23,6 @@ class TakePhotoTableViewCell: UITableViewCell {
     @IBOutlet weak var mTakePhotoLb: UILabel!
     @IBOutlet weak var mTakePhotoBtn: UIButton!
     @IBOutlet weak var mCameraImgV: UIImageView!
-    @IBOutlet weak var mStackVHeight: NSLayoutConstraint!
     @IBOutlet weak var mPhotoImgV: UIImageView!
     
     var isOpenDoc: Bool = false
@@ -40,6 +39,7 @@ class TakePhotoTableViewCell: UITableViewCell {
     
     func setUpView() {
         mTackePhotoBackgV.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_dark_register!, borderWidth: 1)
+        mPhotoImgV.layer.cornerRadius = 3
         
     }
     
@@ -49,21 +49,25 @@ class TakePhotoTableViewCell: UITableViewCell {
         mPhotoImgV.isHidden = true
         mTakePhotoLb.textColor = color_dark_register!
         mCameraImgV.setTintColor(color: color_dark_register!)
-        mStackVHeight.constant = 38
         mTakePhotoBtn.isUserInteractionEnabled = true
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+//    override func setSelected(_ selected: Bool, animated: Bool) {
+//        super.setSelected(selected, animated: animated)
+//
+//        // Configure the view for the selected state
+//    }
     
     
     /// Set cell info
     func  setCellInfo(item: RegistrationBotModel) {
         if ((item.userRegisterInfo?.isFilled) != nil) && item.userRegisterInfo?.isFilled == true {
-            photoWasTaken(img: (item.userRegisterInfo?.photo)!)
+            if item.viewDescription != "openDoc" {
+                mPhotoImgV.isHidden = false
+                mPhotoImgV.image = (item.userRegisterInfo?.photo)!
+            }
+            fieldFilled()
+            
         } else {
             if item.viewDescription == "openDoc" {
                 isOpenDoc = true
@@ -76,12 +80,7 @@ class TakePhotoTableViewCell: UITableViewCell {
         }
     }
     
-    private func photoWasTaken(img: UIImage) {
-        mPhotoImgV.isHidden = false
-        mPhotoImgV.image = img
-        mStackVHeight.constant = 133
-        layoutIfNeeded()
-        
+    private func fieldFilled() {
         
         mTakePhotoLb.textColor = .white
         mCameraImgV.setTintColor(color: .white)

@@ -134,7 +134,7 @@ struct Constant {
         static let year = "Year"
         static let open = "Open"
         static let takePhoto = "Take a photo"
-
+        static let country = "Country"
     }
 }
 
@@ -145,6 +145,9 @@ let tariffOptionsArr =  [["2h", "3h", "4h", "5h", "6h", "10h"],
 
 let countryList = ["Dutch", "Franch", "English"]
 let cityList = ["City1", "City2", "City3", "City4", "City5", "City6", "City7"]
+
+
+
 
 let top_searchResult: CGFloat = 12.0
 let top_avalableCategoryTbv: CGFloat = 30.0

@@ -303,5 +303,11 @@ struct  RegistrationBotData {
         RegistrationBotModel(msgToFill: "By clicking “Confirm”, you confirm that the information provided above is true and correct.")
           
     ]
+    
+    
+    
+    static let completedAccountModel: [RegistrationBotModel] = [RegistrationBotModel(msgToFill: "Your BKD account is completed successfully. Within 24 hours You will receive an email confirming the Verification of the account, and will be able to make reservations."),
+        RegistrationBotModel(msgToFill: "Enjoy the best rental experience with us")]
+    
 }
                                                    

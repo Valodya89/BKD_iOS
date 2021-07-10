@@ -141,7 +141,6 @@ class UserFillFieldTableViewCell: UITableViewCell {
         mStartBtn.isUserInteractionEnabled = false
         mStartBtn.backgroundColor = color_dark_register!
         mStartBtn.layer.cornerRadius = 10
-//        mStartBtn.setBackgroundColorToCAShapeLayer(color: color_navigationBar!)
     }
     
     private func textFiledFilled(txt: String) {
