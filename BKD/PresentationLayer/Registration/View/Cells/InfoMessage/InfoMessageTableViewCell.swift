@@ -33,13 +33,22 @@ class InfoMessageTableViewCell: UITableViewCell {
     
     func setCellInfo(items: [RegistrationBotModel], index: Int  )  {
         let model = items[index]
+        mMessageLb.removeCAShapeLayer()
+
         mMessageLb.text = model.msgToFill
         if index >= 1 &&  items[index - 1].msgToFill != nil {
+            mMessageLb.layer.frame = mMessageLb.bounds
+
             mMessageLb.layer.masksToBounds = true
+
             mMessageLb.layer.cornerRadius = 8
+//            mMessageLb.layoutIfNeeded()
+//            mMessageLb.setNeedsLayout()
+           // mMessageLb.roundCorners(corners: [.allCorners], radius: 8.0)
         } else {
             mMessageLb.layer.cornerRadius = 0
-            mMessageLb.roundCorners(corners: [.topLeft, .topRight, .bottomLeft], radius: 8.0)
+            mMessageLb.roundCorners(corners: [.topLeft, .topRight, .bottomRight], radius: 8.0)
+          
         }
         if let _ = model.msgToFillBold {
             mMessageLb.setAttributeBold(text: model.msgToFill!, boldText: model.msgToFillBold!, color: color_alert_txt!)

@@ -18,11 +18,24 @@ class SearchPhoneCodeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    override func prepareForReuse() {
+        backgroundColor = .clear
+        layer.cornerRadius = 0
+        mCountryLb.textColor = color_dark_register!
     }
+    func setCellInfo(item: PhoneCodeModel)  {
+        mCountryLb.text = item.country
+        mCodeLb.text = item.code
+        mFlagImgV.image = item.flag
+        
+        if isSelected {
+            layer.cornerRadius = 8
+            backgroundColor = color_dark_register!
+            mCountryLb.textColor = color_menu!
+
+        }
+    
+    }
+    
 
 }

@@ -95,6 +95,7 @@
 		5657E848267108B500788D62 /* Details.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5657E847267108B500788D62 /* Details.storyboard */; };
 		5657E84E26711AE800788D62 /* CarPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5657E84D26711AE800788D62 /* CarPhotosView.swift */; };
 		5657E85326713BD400788D62 /* DetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5657E85226713BD400788D62 /* DetailsModel.swift */; };
+		5659B02B2699F5020059D28C /* PhoneCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659B02A2699F5020059D28C /* PhoneCodeModel.swift */; };
 		565A7AB02653FE26006C63D0 /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565A7AAE2653FE26006C63D0 /* SearchHeaderView.swift */; };
 		565A7AB12653FE26006C63D0 /* SearchHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565A7AAF2653FE26006C63D0 /* SearchHeaderView.xib */; };
 		565A7AC726548009006C63D0 /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565A7AC626548009006C63D0 /* SearchResultView.swift */; };
@@ -313,6 +314,7 @@
 		5657E847267108B500788D62 /* Details.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Details.storyboard; sourceTree = "<group>"; };
 		5657E84D26711AE800788D62 /* CarPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPhotosView.swift; sourceTree = "<group>"; };
 		5657E85226713BD400788D62 /* DetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsModel.swift; sourceTree = "<group>"; };
+		5659B02A2699F5020059D28C /* PhoneCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneCodeModel.swift; sourceTree = "<group>"; };
 		565A7AAE2653FE26006C63D0 /* SearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderView.swift; sourceTree = "<group>"; };
 		565A7AAF2653FE26006C63D0 /* SearchHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchHeaderView.xib; sourceTree = "<group>"; };
 		565A7AC626548009006C63D0 /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = "<group>"; };
@@ -1691,6 +1693,7 @@
 			isa = PBXGroup;
 			children = (
 				56CFDE752693920E00D731CD /* RegistrationBotModel.swift */,
+				5659B02A2699F5020059D28C /* PhoneCodeModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2230,6 +2233,7 @@
 				56409539264B24D8001DC92D /* BKDAlert.swift in Sources */,
 				5691A60B265C508C0008081D /* CustomLocationViewController.swift in Sources */,
 				5665403B26759E06008ACD31 /* TariffCarouselCell.swift in Sources */,
+				5659B02B2699F5020059D28C /* PhoneCodeModel.swift in Sources */,
 				5657E85326713BD400788D62 /* DetailsModel.swift in Sources */,
 				56409533264AE5A8001DC92D /* Data.swift in Sources */,
 				56AD18E92691622C006A53C1 /* EmailAddressViewController.swift in Sources */,

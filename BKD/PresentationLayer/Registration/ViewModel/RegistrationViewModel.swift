@@ -19,4 +19,13 @@ class RegistrationViewModel: NSObject {
         didResult(validator.areFieldsFilled(email: email, password: password, confirmpassword: confirmpassword))
             
     }
+    
+    /// Get phone format for tetxtFiled placeholder
+    func getPhonePlaceholder(format: String) -> String {
+        let str = format.replacingOccurrences(of: "-", with: " ", options: .literal, range: nil)
+        
+         let placeholder = str.replacingOccurrences(of: "#", with: "-", options: .literal, range: nil)
+        return placeholder
+         
+    }
 }

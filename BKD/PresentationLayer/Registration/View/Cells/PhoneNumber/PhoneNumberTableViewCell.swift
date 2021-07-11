@@ -29,9 +29,31 @@ class PhoneNumberTableViewCell: UITableViewCell {
     @IBOutlet weak var mCodeLb: UILabel!
     @IBOutlet weak var mPhoneNumberTxtFl: SwiftMaskTextfield!
     
-//    private let applicationSettings: ApplicationSettings = .shared
-//    private var selectedCountry: CountryCodeResponse?
-    private var validFormPattern: Int = 11
+    
+    var selectedCountry: PhoneCodeModel?
+    let phoneNumberKit = PhoneNumberKit()
+    var phoneNumber: String? {
+        get {
+            return "\(selectedCountry?.code ?? "NULL") \(mPhoneNumberTxtFl.text ?? "NULL")".replacingOccurrences(of: "-", with: "").replacingOccurrences(of: " ", with: "")
+        } set {
+            guard let newValue = newValue else {
+                return
+            }
+            guard !newValue.isEmpty else {
+                mPhoneNumberTxtFl.text = ""
+                return
+            }
+
+            guard let phoneNumber = try? phoneNumberKit.parse(newValue, ignoreType: true) else { return }
+            
+            mCodeLb.text = "+" + String(phoneNumber.countryCode)
+            mPhoneNumberTxtFl.text = String(phoneNumber.nationalNumber)
+        }
+    }
+    
+    var isValid: Bool {
+        return mPhoneNumberTxtFl.text?.count == selectedCountry?.validFormPattern
+    }
     
 
     weak var delegate: PhoneNumberTableViewCellDelegate?
@@ -48,23 +70,19 @@ class PhoneNumberTableViewCell: UITableViewCell {
         mPhoneNumberBckgV.roundCornersWithBorder(corners: [.bottomRight, .topLeft, .topRight], radius: 8.0, borderColor: color_dark_register!, borderWidth: 1)
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
+/// Set Cell Info
     func setCellInfo(item: RegistrationBotModel) {
-        //depend on current language
-        let placehoder  = "-- -- --"
-        let code = "+32 3"
-        mCodeLb.text = code
+        let placehoder  = RegistrationViewModel().getPhonePlaceholder(format: (selectedCountry?.phoneFormat!)!)
+        
+        mCodeLb.text = selectedCountry?.code
+        mFlagImgV.image = selectedCountry?.flag
         if ((item.userRegisterInfo?.string) != nil) && item.userRegisterInfo?.isFilled == true {
             textFiledFilled(txt: (item.userRegisterInfo?.string)!)
         } else {
             mPhoneNumberTxtFl.setPlaceholder(string: placehoder, font: font_chat_placeholder!, color: color_email!)
         }
     }
+    
     
     private func textFiledFilled(txt: String) {
         mPhoneNumberBckgV.setBackgroundColorToCAShapeLayer(color: color_dark_register!)
@@ -84,6 +102,7 @@ class PhoneNumberTableViewCell: UITableViewCell {
     @IBAction func countryCode(_ sender: UIButton) {
         delegate?.didPressCountryCode()
     }
+    
 }
 
 
@@ -91,17 +110,6 @@ class PhoneNumberTableViewCell: UITableViewCell {
 //MARK: ---------------------------
 extension PhoneNumberTableViewCell: UITextFieldDelegate {
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        if textField.text?.count ?? 0 > 0 {
-            delegate?.didReturnTxtField(text: textField.text)
-            textFiledFilled(txt: textField.text!)
-        } else {
-            mCodeLb.textColor = color_email!
-            mCodeLb.font = font_chat_placeholder!
-        }
-        return false
-    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         mCodeLb.textColor = color_alert_txt!
@@ -109,21 +117,56 @@ extension PhoneNumberTableViewCell: UITextFieldDelegate {
         textField.becomeFirstResponder()
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-//        let width = getWidth(text: textField.text!)
-//        if  mTextFlWidth.constant < width && width <= 270 {
-//            mTextFlWidth.constant = width
-//            self.layoutIfNeeded()
-//        }
-        return true
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        textField.endEditing(true)
+//        return true
+        textField.resignFirstResponder()
+        if textField.text?.count == selectedCountry?.validFormPattern {
+            
+            delegate?.didReturnTxtField(text: textField.text)
+            textFiledFilled(txt: textField.text!)
+        } else {
+            
+            mCodeLb.textColor = color_email!
+            mCodeLb.font = font_chat_placeholder!
+        }
+        return false
     }
     
-//    private  func getWidth(text: String) -> CGFloat {
-//
-//        let txtField = UITextField(frame: .zero)
-//        txtField.text = text
-//        txtField.sizeToFit()
-//        return txtField.frame.size.width
-//    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string == "" {
+            return true
+        }
+        let fullText = textField.text! + string
+        return fullText.count <= (selectedCountry?.validFormPattern)!
+
+    }
 }
+
+
+
+
+
+
+
+//extension PhoneNumberTableViewCell: UITextFieldDelegate {
+//
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        if textField.text?.count ?? 0 > 0 {
+//            delegate?.didReturnTxtField(text: textField.text)
+//            textFiledFilled(txt: textField.text!)
+//        } else {
+//            mCodeLb.textColor = color_email!
+//            mCodeLb.font = font_chat_placeholder!
+//        }
+//        return false
+//    }
+//
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        mCodeLb.textColor = color_alert_txt!
+//        mCodeLb.font = font_alert_cancel
+//        textField.becomeFirstResponder()
+//    }
+//
+//}

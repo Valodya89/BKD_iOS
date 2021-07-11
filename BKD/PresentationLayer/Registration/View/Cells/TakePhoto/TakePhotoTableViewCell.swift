@@ -51,12 +51,6 @@ class TakePhotoTableViewCell: UITableViewCell {
         mCameraImgV.setTintColor(color: color_dark_register!)
         mTakePhotoBtn.isUserInteractionEnabled = true
     }
-
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//
-//        // Configure the view for the selected state
-//    }
     
     
     /// Set cell info

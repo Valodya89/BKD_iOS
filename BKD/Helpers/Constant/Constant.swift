@@ -135,6 +135,8 @@ struct Constant {
         static let open = "Open"
         static let takePhoto = "Take a photo"
         static let country = "Country"
+        static let search = "Search"
+
     }
 }
 
@@ -143,7 +145,7 @@ let tariffOptionsArr =  [["2h", "3h", "4h", "5h", "6h", "10h"],
                          ["1w", "2w", "3w"],
                          ["1m"], []]
 
-let countryList = ["Dutch", "Franch", "English"]
+let countryList = ["Dutch", "French", "English"]
 let cityList = ["City1", "City2", "City3", "City4", "City5", "City6", "City7"]
 
 

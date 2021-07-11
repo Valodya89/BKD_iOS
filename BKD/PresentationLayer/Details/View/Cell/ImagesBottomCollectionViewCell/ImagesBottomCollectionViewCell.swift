@@ -23,7 +23,8 @@ class ImagesBottomCollectionViewCell: UICollectionViewCell {
     
     /// set cell info
     func setCellInfo(item: CarModel, currentImageIndex: Int, index: Int ) {
-        removeBorderFromCell()
+        mShadowBckgV.removeCAShapeLayer()
+        //removeBorderFromCell()
         mImgV.contentMode = .scaleAspectFit
         mShadowBckgV.layer.cornerRadius = 3
         contentView.setShadow(color: color_shadow!)
@@ -37,14 +38,14 @@ class ImagesBottomCollectionViewCell: UICollectionViewCell {
         }
     }
    
-    ///Remove CAShapeLayer(border) from view
-     func removeBorderFromCell() {
-        if mShadowBckgV.layer.sublayers != nil {
-            for layer in mShadowBckgV.layer.sublayers! {
-               if layer.isKind(of: CAShapeLayer.self) {
-                  layer.removeFromSuperlayer()
-               }
-            }
-        }
-    }
+//    ///Remove CAShapeLayer(border) from view
+//     func removeBorderFromCell() {
+//        if mShadowBckgV.layer.sublayers != nil {
+//            for layer in mShadowBckgV.layer.sublayers! {
+//               if layer.isKind(of: CAShapeLayer.self) {
+//                  layer.removeFromSuperlayer()
+//               }
+//            }
+//        }
+//    }
 }

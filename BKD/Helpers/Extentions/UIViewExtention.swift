@@ -9,7 +9,8 @@ import UIKit
 
 
 extension UIView {
-    //MARK: GRADIENTS
+    //MARK: Gradients
+    //MARK: ----------------------
     func setGradient(startColor: UIColor, endColor: UIColor) {
         //gradient
         let gradientLayer = CAGradientLayer()
@@ -35,7 +36,8 @@ extension UIView {
     }
    
     
-    //MARK: SHADOWS
+    //MARK: Shadows
+    //MARK: ----------------------
     /// add to view shadow 4 sides
     func setShadow(color: UIColor) {
         self.layer.shadowColor = color.cgColor
@@ -65,7 +67,8 @@ extension UIView {
             self.layer.shadowPath = shadowPath.cgPath
     }
     
-    //MARK:BORDERS
+    //MARK: Borders
+    //MARK: ----------------------
     public func setBorder(color: UIColor, width: CGFloat) {
         self.layer.borderWidth = width
         self.layer.borderColor = color.cgColor
@@ -99,7 +102,8 @@ extension UIView {
         
     }
     
-    //MARK: BLUR
+    //MARK: Blur
+    //MARK: ----------------------
     func setBlur() {
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -109,7 +113,8 @@ extension UIView {
     }
     
     
-   //MARK:ROUND CORNER
+   //MARK: Round Corners
+    //MARK: ----------------------
     func roundCorners(corners:UIRectCorner, radius: CGFloat) {
             let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
             let mask = CAShapeLayer()
@@ -217,8 +222,23 @@ extension UIView {
             //Add this layer to give border.
             self.layer.addSublayer(borderLayer)
         }
-
-    //MARK: BACKGROUNDCOLOR
+    
+  
+  
+    //MARK: Remove CAShapeLayer
+    //MARK: ----------------------
+    func removeCAShapeLayer() {
+        if self.layer.sublayers != nil {
+            for layer in self.layer.sublayers! {
+               if layer.isKind(of: CAShapeLayer.self) {
+                layer.removeFromSuperlayer()
+               }
+            }
+        }
+    }
+    
+    //MARK: Background Color
+    //MARK: ----------------------
     func setBackgroundColorToCAShapeLayer(color: UIColor) {
         if self.layer.sublayers != nil {
             for layer in self.layer.sublayers! {
@@ -229,7 +249,8 @@ extension UIView {
         }
     }
 
-    //MARK: ANIMATIONS
+    //MARK: Animations
+    //MARK: ----------------------
     func showFlip(){
                 if self.isHidden{
                     UIView.transition(with: self, duration: 1, options: [.transitionFlipFromRight,.allowUserInteraction], animations: nil, completion: nil)

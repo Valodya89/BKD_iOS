@@ -48,6 +48,7 @@ class NationalRegisterNumberTableViewCell: UITableViewCell {
         mCountryBckV.roundCornersWithBorder(corners: [.topLeft, .topRight, .bottomRight ], radius: 8.0, borderColor: color_dark_register!, borderWidth: 1)
         mDropDownImgV.setTintColor(color: color_dark_register!)
         mCountryTxtFl.setPlaceholder(string: Constant.Texts.country, font: font_bot_placeholder!, color: color_email!)
+        mCountryTxtFl.padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         
     }
     
@@ -65,7 +66,7 @@ class NationalRegisterNumberTableViewCell: UITableViewCell {
         mCountryLb.isHidden = true
         mCountryBckV.backgroundColor = .clear
         self.isUserInteractionEnabled = true
-
+        
     }
     
     

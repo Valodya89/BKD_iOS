@@ -98,12 +98,6 @@ class UserFillFieldTableViewCell: UITableViewCell {
         mTextFl.padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
-    
     func setCellInfo(item: RegistrationBotModel) {
         placeholder = item.userRegisterInfo?.placeholder
         viewType = ViewType(rawValue: placeholder ?? "")

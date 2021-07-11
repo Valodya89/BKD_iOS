@@ -26,6 +26,7 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
     @IBOutlet weak var mThankYouBtn: UIButton!
     
     var tableData:[RegistrationBotModel] = [RegistrationBotData.registrationBotModel[0]]
+    var currentPhoneCode:PhoneCodeModel = PhoneCodeData.phoneCodeModel[0]
     var timer: Timer?
     var datePicker = UIDatePicker()
     var pickerV = UIPickerView()
@@ -34,7 +35,6 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
     var isTakePhoto:Bool = false
     
     private var currentIndex = 0
-   // private var isDatePicker = true
     private var activeTextField: UITextField?
     
 
@@ -146,6 +146,7 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
     func tableScrollToBottom()  {
         DispatchQueue.main.async { [self] in
             self.mTableV.scrollToRow(at: IndexPath(row: currentIndex, section: 0), at: .bottom, animated: false)
+            //mTableV.contentInset.bottom = 78
         }
     }
 
@@ -198,19 +199,17 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
     
     @objc func keyboardWillShow (notification: NSNotification) {
         
-        let userInfo = notification.userInfo!
-        var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-           keyboardFrame = self.view.convert(keyboardFrame, from: nil)
-
-           var contentInset:UIEdgeInsets = self.mTableV.contentInset
-           contentInset.bottom = keyboardFrame.size.height
-        mTableV.contentInset = contentInset
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardInfo = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
+        let keyboardSize = keyboardInfo.cgRectValue.size
+        
+        let bottomInset = keyboardSize.height
+        
+        mTableV.contentInset.bottom = bottomInset
     }
 
     @objc func keyboardWillHide(notification: NSNotification) {
-        UIView.animate(withDuration: 0.2, animations: { [self] in
             self.mTableV.contentInset = .zero
-        })
     }
     
     
@@ -331,7 +330,8 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
     private func phoneNumberCell(indexPath: IndexPath, model: RegistrationBotModel) -> PhoneNumberTableViewCell{
         
         let cell = mTableV.dequeueReusableCell(withIdentifier: PhoneNumberTableViewCell.identifier, for: indexPath) as! PhoneNumberTableViewCell
-          cell.setCellInfo(item: model)
+        cell.selectedCountry = currentPhoneCode
+        cell.setCellInfo(item: model)
         cell.delegate = self
           return cell
     }
@@ -427,6 +427,7 @@ extension RegistartionBotViewController: PhoneNumberTableViewCellDelegate {
     
     func didPressCountryCode() {
         let searchPhoneCodeVC = SearchPhoneCodeViewController.initFromStoryboard(name: Constant.Storyboards.searchPhoneCode)
+        searchPhoneCodeVC.delegate = self
         self.present(searchPhoneCodeVC, animated: true, completion: nil)
     }
     
@@ -542,6 +543,15 @@ extension RegistartionBotViewController: BkdAgreementViewControllerDelegate {
         mTableV.reloadData()
     
     }
+}
+
+extension RegistartionBotViewController: SearchPhoneCodeViewControllerDelegate {
+    
+    func didSelectCountry(_ country: PhoneCodeModel) {
+        currentPhoneCode = country
+        mTableV.reloadRows(at: [IndexPath(row: currentIndex, section: 0)], with: .automatic)
+    }
+    
 }
 
 //MARK: UIImagePickerControllerDelegate
