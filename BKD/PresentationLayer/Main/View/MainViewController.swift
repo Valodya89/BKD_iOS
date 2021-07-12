@@ -131,7 +131,6 @@ class MainViewController: BaseViewController {
         mAvalableCategoriesTbV.register(CategoryTableViewCell.nib(),
                                              forCellReuseIdentifier: CategoryTableViewCell.identifier)
         mAvalableCategoriesTbV.separatorStyle = .none
-//        UserDefaults.standard.set(searchHeaderV?.carouselBackgV.categoryCarousel.currentItemIndex, forKey: key_category)
     }
     
     private func configureTimeTextField(txtFl: UITextField, txt: String) {

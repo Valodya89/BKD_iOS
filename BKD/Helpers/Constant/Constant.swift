@@ -171,6 +171,7 @@ let key_pickUpLocation = "pickUpLocation"
 let key_returnLocation = "returnLocation"
 let key_category = "category"
 let key_email = "E-mail"
+let key_isLogin = "isLogin"
 
 
 

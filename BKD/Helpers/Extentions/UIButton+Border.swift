@@ -62,11 +62,15 @@ extension UIButton {
          }
     }
     
-    func setClickBackgroundColor (_ color : UIColor) {
-        let oldColor = self.backgroundColor
+    func setClickColor (_ color : UIColor, titleColor: UIColor) {
+        let oldBckgColor = self.backgroundColor
+        let oldTitleColor = self.titleColor(for: .normal)
+
         self.backgroundColor = color
+        self.setTitleColor(titleColor, for: .normal)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4 ) {
-            self.setTitleColor(oldColor, for: .normal)
+            self.setTitleColor(oldTitleColor, for: .normal)
+            self.backgroundColor = oldBckgColor
          }
     }
    

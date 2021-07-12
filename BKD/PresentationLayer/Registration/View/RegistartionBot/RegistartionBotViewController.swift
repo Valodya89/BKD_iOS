@@ -24,8 +24,9 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
     
     @IBOutlet weak var mThankYouBckgV: UIView!
     @IBOutlet weak var mThankYouBtn: UIButton!
-    
-    var tableData:[RegistrationBotModel] = [RegistrationBotData.registrationBotModel[0]]
+    //registrationDriverModel
+    var tableData:[RegistrationBotModel] = []
+//    var tableData:[RegistrationBotModel] = [RegistrationBotData.registrationBotModel[0]]
     var currentPhoneCode:PhoneCodeModel = PhoneCodeData.phoneCodeModel[0]
     var timer: Timer?
     var datePicker = UIDatePicker()
@@ -33,6 +34,7 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
     var pickerList: [String]?
     var pickerType:PickerType = .date
     var isTakePhoto:Bool = false
+    var isDriverRegister: Bool = false
     
     private var currentIndex = 0
     private var activeTextField: UITextField?
@@ -123,33 +125,29 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
     
     /// Insert table cell
     func insertTableCell() {
-        //if tableData.count < RegistrationBotData.registrationBotModel.count {
+        if tableData.count < RegistrationBotData.registrationBotModel.count  {
             
+            if !mConfirmBckgV.isHidden &&  tableData.count == RegistrationBotData.completedAccountModel.count {
+                stopTimer()
+            } else {
             tableData.append(RegistrationBotData.registrationBotModel[currentIndex + 1])
             mTableV.beginUpdates()
             mTableV.insertRows(at: [IndexPath.init(row: tableData.count-1, section: 0)], with: .automatic)
             mTableV.endUpdates()
             tableScrollToBottom()
-            
-//            if mConfirmBckgV.isUserInteractionEnabled == false {
-                startTimer()
-           // }
-//        } else {
-//            mConfirmBckgV.isUserInteractionEnabled = true
-//            //mConfirmBckgV.alpha = 1.0
-//
-//        }
+            startTimer()
+            }
+        }
     }
     
     
     ///Table view scroll to bottom
-    func tableScrollToBottom()  {
-        DispatchQueue.main.async { [self] in
-            self.mTableV.scrollToRow(at: IndexPath(row: currentIndex, section: 0), at: .bottom, animated: false)
-            //mTableV.contentInset.bottom = 78
+    func tableScrollToBottom(){
+            DispatchQueue.main.async {
+                let indexPath = IndexPath(row: self.tableData.count-1, section: 0)
+                self.mTableV.scrollToRow(at: indexPath, at: .bottom, animated: true)
+            }
         }
-    }
-
 
     ///Will creat actionshit for camera and photo library
     func takePhotoPressed() {
@@ -230,16 +228,20 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
     //MARK: ACTIONS
     //MARK: -----------------
     @IBAction func confirm(_ sender: UIButton) {
-        tableData = RegistrationBotData.completedAccountModel
+        tableData = isDriverRegister ? RegistrationBotData.completedDriverAccountModel : RegistrationBotData.completedAccountModel
         animationConfirm()
     }
     
     @IBAction func thankYou(_ sender: UIButton) {
+        UserDefaults.standard.set(true, forKey: key_isLogin)
         sender.setTitleColor(color_menu!, for: .normal)
         sender.layer.cornerRadius = 10
         sender.backgroundColor = color_dark_register
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
+           
         self.tabBarController?.selectedIndex = 0
+            self.navigationController?.popToRootViewController(animated: false)
+            
         }
     }
     
@@ -260,7 +262,7 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
             tableData[currentIndex].userRegisterInfo?.isFilled = true
         }
 
-        mTableV.reloadRows(at: [IndexPath(row: currentIndex, section: 0)], with: .bottom)
+        mTableV.reloadRows(at: [IndexPath(row: currentIndex, section: 0)], with: .automatic)
         if pickerType != .nationalCountry {
             insertTableCell()
         }
@@ -489,7 +491,7 @@ extension RegistartionBotViewController: MailBoxNumberTableViewCellDelegate {
 extension RegistartionBotViewController: NationalRegisterNumberTableViewCellDelegate {
     func didPressOtherCountryNational(isClicked: Bool) {
         tableData[currentIndex].userRegisterInfo = UserRegisterInfo(isOtherNational: isClicked)
-        mTableV.reloadData()
+        mTableV.reloadRows(at: [IndexPath(row: currentIndex, section: 0)], with: .automatic)
         tableScrollToBottom()
     }
     
@@ -540,8 +542,8 @@ extension RegistartionBotViewController: BkdAgreementViewControllerDelegate {
     func agreeTermsAndConditions() {
         mConfirmBckgV.isHidden = false
         tableData[currentIndex].userRegisterInfo  = UserRegisterInfo(isFilled: true)
-        mTableV.reloadData()
-    
+        mTableV.reloadRows(at: [IndexPath(row: currentIndex, section: 0)], with: .automatic)
+        insertTableCell()
     }
 }
 
@@ -571,7 +573,7 @@ extension RegistartionBotViewController: UIImagePickerControllerDelegate, UINavi
              return  }
         if isTakePhoto {
             tableData[currentIndex].userRegisterInfo = UserRegisterInfo(photo: image, isFilled: true)
-            mTableV.reloadData()
+            mTableV.reloadRows(at: [IndexPath(row: currentIndex, section: 0)], with: .automatic)
             insertTableCell()
             isTakePhoto = false
         }

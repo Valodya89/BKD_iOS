@@ -8,7 +8,6 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
-import Mapbox
 
 protocol CustomLocationViewControllerDelegate: AnyObject {
     func getCustomLocation(_ locationPlace: String)
@@ -28,7 +27,7 @@ class CustomLocationViewController: UIViewController {
     let customLocationViewModel = CustomLocationViewModel()
     let searchTbV = UITableView()
     let marker = GMSMarker()
-    var mapBoxView: MGLMapView! =  MGLMapView()
+
 
     // The currently selected place.
     var selectedPlace: GMSPlace?
@@ -98,7 +97,6 @@ class CustomLocationViewController: UIViewController {
         mMapV.delegate = self
        searchTbV.delegate = self
        searchTbV.dataSource = self
-        mapBoxView.delegate = self
         
     }
     
@@ -378,16 +376,5 @@ extension CustomLocationViewController: CLLocationManagerDelegate {
 }
 
 
-extension CustomLocationViewController: MGLMapViewDelegate {
-   
-    func mapView(_ mapView: MGLMapView, regionDidChangeAnimated animated: Bool) {
-
-        mapViewCenterCoordinate = mapView.centerCoordinate
-    }
-    
-    func mapView(_ mapView: MGLMapView, regionWillChangeAnimated animated: Bool) {
-        //self.addressLbl.text = "checking.."
-    }
-}
 
 

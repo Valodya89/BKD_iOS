@@ -28,7 +28,7 @@ class InfoMessageTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         mMessageLb.text = ""
         mMessageLb.padding = UIEdgeInsets(top: 8, left: 5, bottom: 8, right: 5)
-        mMessageLb.roundCorners(corners: [.topLeft, .topRight, .bottomLeft], radius: 8.0)
+       // mMessageLb.roundCorners(corners: [.topLeft, .topRight, .bottomLeft], radius: 8.0)
     }
     
     func setCellInfo(items: [RegistrationBotModel], index: Int  )  {
@@ -42,13 +42,16 @@ class InfoMessageTableViewCell: UITableViewCell {
             mMessageLb.layer.masksToBounds = true
 
             mMessageLb.layer.cornerRadius = 8
-//            mMessageLb.layoutIfNeeded()
-//            mMessageLb.setNeedsLayout()
+
            // mMessageLb.roundCorners(corners: [.allCorners], radius: 8.0)
         } else {
             mMessageLb.layer.cornerRadius = 0
-            mMessageLb.roundCorners(corners: [.topLeft, .topRight, .bottomRight], radius: 8.0)
-          
+            mMessageLb.removeCAShapeLayer()
+//            mMessageLb.layoutIfNeeded()
+//            mMessageLb.setNeedsLayout()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4 ) {
+                self.mMessageLb.roundCorners(corners: [.topLeft, .topRight, .bottomLeft], radius: 8.0)
+            }
         }
         if let _ = model.msgToFillBold {
             mMessageLb.setAttributeBold(text: model.msgToFill!, boldText: model.msgToFillBold!, color: color_alert_txt!)

@@ -20,7 +20,7 @@
             <objects>
                 <viewController storyboardIdentifier="RegistartionBotViewController" id="4Ic-yW-tpv" customClass="RegistartionBotViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="32r-hk-FFT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RdY-K3-uUO">
@@ -78,6 +78,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="g4I-7z-nsb"/>
+                                    <constraint firstAttribute="width" constant="171" id="oyS-Td-5VY"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -91,7 +92,6 @@
                             <constraint firstItem="RdY-K3-uUO" firstAttribute="leading" secondItem="gJa-to-eTV" secondAttribute="leading" id="dan-22-21c"/>
                             <constraint firstItem="RdY-K3-uUO" firstAttribute="centerX" secondItem="gJa-to-eTV" secondAttribute="centerX" id="fdD-8c-EDh"/>
                             <constraint firstItem="P71-aL-OMG" firstAttribute="bottom" secondItem="gJa-to-eTV" secondAttribute="bottom" id="kff-gm-Dbb"/>
-                            <constraint firstItem="ewe-7S-0ki" firstAttribute="width" secondItem="32r-hk-FFT" secondAttribute="width" multiplier="0.413043" id="oBa-vG-KgF"/>
                             <constraint firstItem="gJa-to-eTV" firstAttribute="trailing" secondItem="RdY-K3-uUO" secondAttribute="trailing" id="ogt-LA-mrO"/>
                             <constraint firstItem="P71-aL-OMG" firstAttribute="height" secondItem="32r-hk-FFT" secondAttribute="height" multiplier="0.062" id="ojR-hg-bxS"/>
                             <constraint firstItem="P71-aL-OMG" firstAttribute="width" secondItem="32r-hk-FFT" secondAttribute="width" multiplier="0.81" id="zH6-LN-5r7"/>
@@ -145,7 +145,7 @@
             <objects>
                 <viewController storyboardIdentifier="BkdAgreementViewController" id="ZlB-zs-Re5" customClass="BkdAgreementViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Pzf-4b-EQa">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RcP-lR-NoX">

@@ -49,7 +49,10 @@ class MyDriversViewController: UIViewController {
     //MARK: ACTIONS
     //MARK: ----------------
     @IBAction func addDriver(_ sender: UIButton) {
-        
+        let registrationBotVC = RegistartionBotViewController.initFromStoryboard(name: Constant.Storyboards.registrationBot)
+        registrationBotVC.tableData = [RegistrationBotData.registrationDriverModel[0]]
+        registrationBotVC.isDriverRegister = true
+        self.navigationController?.pushViewController(registrationBotVC, animated: true)
     }
     
     @IBAction func back(_ sender: UIBarButtonItem) {

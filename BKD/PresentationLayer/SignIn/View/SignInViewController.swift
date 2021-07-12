@@ -31,10 +31,20 @@ class SignInViewController: UIViewController, StoryboardInitializable {
         setUpView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        mRegisterBtn.setGradientWithCornerRadius(cornerRadius: 8.0, startColor: color_gradient_register_start!, endColor: color_gradient_register_end!)
+    }
+    
     func setUpView() {
         tabBarController?.tabBar.isHidden = true
         mVisibilityPasswortBtn.setImage(#imageLiteral(resourceName: "invisible"), for: .normal)
-        mRegisterBtn.setGradientWithCornerRadius(cornerRadius: 8.0, startColor: color_gradient_register_start!, endColor: color_gradient_register_end!)
+        
         mPasswordTxtFl.setBorder(color: color_navigationBar!, width: 1)
         mEmailAddressTextFl.setBorder(color: color_navigationBar!, width: 1)
         mSignInBtn.layer.cornerRadius = 8
@@ -87,12 +97,11 @@ class SignInViewController: UIViewController, StoryboardInitializable {
     }
     
     @IBAction func register(_ sender: UIButton) {
-        //MARK: Warnig
-//        let registerVC = RegistrationViewController.initFromStoryboard(name: Constant.Storyboards.registration)
-//        self.navigationController?.pushViewController(registerVC, animated: true)
+        let registerVC = RegistrationViewController.initFromStoryboard(name: Constant.Storyboards.registration)
+        self.navigationController?.pushViewController(registerVC, animated: true)
         
-        let registrationBotVC = RegistartionBotViewController.initFromStoryboard(name: Constant.Storyboards.registrationBot)
-        self.navigationController?.pushViewController(registrationBotVC, animated: true)
+//        let registrationBotVC = RegistartionBotViewController.initFromStoryboard(name: Constant.Storyboards.registrationBot)
+//        self.navigationController?.pushViewController(registrationBotVC, animated: true)
     }
 }
 

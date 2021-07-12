@@ -4,10 +4,6 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>The app needs permission to use your location</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>The app needs permission to use your location</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -29,6 +25,14 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>This app will use camera.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>The app needs permission to use your location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>The app needs permission to use your location</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app will use photo library.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Mulish-SemiBold.ttf</string>
@@ -61,9 +65,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSCameraUsageDescription</key>
-	<string>This app will use camera.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app will use photo library.</string>
 </dict>
 </plist>

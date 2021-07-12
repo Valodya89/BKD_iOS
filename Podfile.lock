@@ -10,9 +10,6 @@ PODS:
   - InputBarAccessoryView (5.3.1):
     - InputBarAccessoryView/Core (= 5.3.1)
   - InputBarAccessoryView/Core (5.3.1)
-  - Mapbox-iOS-SDK (5.9.0):
-    - MapboxMobileEvents (= 0.10.2)
-  - MapboxMobileEvents (0.10.2)
   - MessageKit (3.6.1):
     - InputBarAccessoryView (~> 5.3.1)
   - PhoneNumberKit (3.3.3):
@@ -27,7 +24,6 @@ DEPENDENCIES:
   - GoogleMaps (= 4.2.0)
   - GooglePlaces (= 4.2.0)
   - iCarousel
-  - Mapbox-iOS-SDK (~> 5.9)
   - MessageKit
   - PhoneNumberKit (~> 3.3)
   - SwiftMaskTextfield
@@ -38,8 +34,6 @@ SPEC REPOS:
     - GooglePlaces
     - iCarousel
     - InputBarAccessoryView
-    - Mapbox-iOS-SDK
-    - MapboxMobileEvents
     - MessageKit
     - PhoneNumberKit
     - SwiftMaskTextfield
@@ -49,12 +43,10 @@ SPEC CHECKSUMS:
   GooglePlaces: 196a9dd88580dcb3f3df46f415057703d0d2a310
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   InputBarAccessoryView: 1f75d8c9f75e5e57f3ffac36ed58635a8005e0bc
-  Mapbox-iOS-SDK: a5915700ec84bc1a7f8b3e746d474789e35b7956
-  MapboxMobileEvents: 2bc0ca2eedb627b73cf403258dce2b2fa98074a6
   MessageKit: d153fbbbcb12f3f4045a1ba8874298924dacfb62
   PhoneNumberKit: 4ce83273551c4d2ae10b7361162f4283dd02835f
   SwiftMaskTextfield: 8c792e56f25779939d1fd5cf6153ba439b1be761
 
-PODFILE CHECKSUM: 7c623e52ac49006c6767f46d6a39eb9ed6d4e18d
+PODFILE CHECKSUM: 5900e802262ad210d1a8129f9bf64111641bb609
 
 COCOAPODS: 1.10.1

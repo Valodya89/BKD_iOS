@@ -34,6 +34,7 @@ class EmailAddressViewController: UIViewController, StoryboardInitializable {
 
     
     func  setUpView() {
+        tabBarController?.tabBar.isHidden = true
         mRightBarBtn.image = img_bkd
         mEmailAddressTextFl.setBorder(color: color_navigationBar!, width: 1)
         mConfirmBtn.layer.cornerRadius = 8

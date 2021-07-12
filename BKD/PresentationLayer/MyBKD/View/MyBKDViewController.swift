@@ -26,23 +26,38 @@ class MyBKDViewController: BaseViewController {
         super.viewDidLoad()
         setUpView()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addSignInChild()
+
+    }
     func setUpView() {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = img_bkd
         menu = SideMenuNavigationController(rootViewController: LeftViewController())
         self.setmenu(menu: menu)
         mPrivacyPolicyLb.font = font_details_title
-        addChild(vc: signInVC as SignInViewController)
-
     }
+    
     
 
     ///Add child ViewController
-    func addChild(vc: UIViewController) {
-        addChild(vc)
-        vc.view.frame = self.view.bounds
-        self.view.addSubview(vc.view)
-        vc.didMove(toParent: self)
+    func addSignInChild() {
+        
+        if UserDefaults.standard.object(forKey: key_isLogin) == nil  {
+            
+            addChild(signInVC)
+            signInVC.view.frame = self.view.bounds
+            self.view.addSubview(signInVC.view)
+            signInVC.didMove(toParent: self)
+        } else {
+            signInVC.willMove(toParent: nil)
+            signInVC.view.removeFromSuperview()
+            signInVC.removeFromParent()
+        }
+        
+        
     }
     
     ///Remove child ViewController
@@ -79,5 +94,11 @@ extension MyBKDViewController: UITableViewDelegate, UITableViewDataSource {
          return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 2 {
+            UserDefaults.standard.removeObject(forKey: key_isLogin)
+            addSignInChild()
+        }
+    }
     
 }

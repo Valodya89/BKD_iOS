@@ -32,7 +32,13 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
         setUpView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        mContinueLeading.constant = 0
+    }
+    
     func setUpView() {
+        tabBarController?.tabBar.isHidden = true
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = img_bkd
         setBorderToTextFileds()
@@ -192,13 +198,20 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
 extension RegistrationViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let nextTextFieldTag = textField.tag + 1
-
-           if let nextTextField = textField.superview?.viewWithTag(nextTextFieldTag) as? TextField {
-               nextTextField.becomeFirstResponder()
-           } else {
-               textField.resignFirstResponder()
-           }
+//        let nextTextFieldTag = textField.tag + 1
+        if textField == mEmailAddressTxtFl {
+            mPasswordTxtFl.becomeFirstResponder()
+        } else if textField == mPasswordTxtFl {
+            mConfirmPasswordTxtFl.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+    
+//           if let nextTextField = textField.superview?.viewWithTag(nextTextFieldTag) as? TextField {
+//               nextTextField.becomeFirstResponder()
+//           } else {
+//               textField.resignFirstResponder()
+//           }
         return false
     }
     

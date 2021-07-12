@@ -24,6 +24,14 @@ class TakePhotoTableViewCell: UITableViewCell {
     @IBOutlet weak var mTakePhotoBtn: UIButton!
     @IBOutlet weak var mCameraImgV: UIImageView!
     @IBOutlet weak var mPhotoImgV: UIImageView!
+    @IBOutlet weak var mOpenContentV: UIView!
+    
+    @IBOutlet weak var mOpenLb: UILabel!
+    @IBOutlet weak var mAgreeImgV: UIImageView!
+    @IBOutlet weak var mStackV: UIStackView!
+    @IBOutlet weak var mOpenBtn: UIButton!
+    
+    
     
     var isOpenDoc: Bool = false
     weak var delegate:TakePhotoTableViewCellDelegate?
@@ -39,8 +47,8 @@ class TakePhotoTableViewCell: UITableViewCell {
     
     func setUpView() {
         mTackePhotoBackgV.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_dark_register!, borderWidth: 1)
+        mOpenContentV.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_dark_register!, borderWidth: 1)
         mPhotoImgV.layer.cornerRadius = 3
-        
     }
     
     override func prepareForReuse() {
@@ -49,7 +57,7 @@ class TakePhotoTableViewCell: UITableViewCell {
         mPhotoImgV.isHidden = true
         mTakePhotoLb.textColor = color_dark_register!
         mCameraImgV.setTintColor(color: color_dark_register!)
-        mTakePhotoBtn.isUserInteractionEnabled = true
+        self.isUserInteractionEnabled = true
     }
     
     
@@ -57,30 +65,39 @@ class TakePhotoTableViewCell: UITableViewCell {
     func  setCellInfo(item: RegistrationBotModel) {
         if ((item.userRegisterInfo?.isFilled) != nil) && item.userRegisterInfo?.isFilled == true {
             if item.viewDescription != "openDoc" {
-                mPhotoImgV.isHidden = false
-                mPhotoImgV.image = (item.userRegisterInfo?.photo)!
+                    self.mPhotoImgV.isHidden = false
+                    self.mPhotoImgV.image = (item.userRegisterInfo?.photo)!
+                isOpenDoc = false
+            } else {
+                isOpenDoc = true
             }
             fieldFilled()
             
         } else {
             if item.viewDescription == "openDoc" {
                 isOpenDoc = true
-                mCameraImgV.image = #imageLiteral(resourceName: "agree")
-                mTakePhotoLb.text = Constant.Texts.open
-            } else {
-                mCameraImgV.image = #imageLiteral(resourceName: "camera")
-                mTakePhotoLb.text = Constant.Texts.takePhoto
+                mOpenContentV.isHidden = false
+                mStackV.isHidden = true
             }
         }
     }
     
     private func fieldFilled() {
         
-        mTakePhotoLb.textColor = .white
-        mCameraImgV.setTintColor(color: .white)
-        mTakePhotoBtn.isUserInteractionEnabled = false
-        mTackePhotoBackgV.backgroundColor = color_dark_register!
-        mTackePhotoBackgV.layer.cornerRadius = 10
+        mOpenContentV.isHidden = !isOpenDoc
+        mStackV.isHidden = isOpenDoc
+        self.isUserInteractionEnabled = false
+        if isOpenDoc {
+            mOpenLb.textColor = .white
+            mAgreeImgV.setTintColor(color: .white)
+            mOpenContentV.backgroundColor = color_dark_register!
+        } else {
+            mTakePhotoLb.textColor = .white
+            mCameraImgV.setTintColor(color: .white)
+            mTackePhotoBackgV.backgroundColor = color_dark_register!
+            mTackePhotoBackgV.layer.cornerRadius = 10
+        }
+        
     }
     
     
@@ -93,8 +110,11 @@ class TakePhotoTableViewCell: UITableViewCell {
     }
     
     @IBAction func takePhoto(_ sender: UIButton) {
-        delegate?.didPressTackePhoto(isOpenDoc: isOpenDoc)
+        delegate?.didPressTackePhoto(isOpenDoc: false)
         
     }
     
+    @IBAction func open(_ sender: UIButton) {
+        delegate?.didPressTackePhoto(isOpenDoc: true)
+    }
 }

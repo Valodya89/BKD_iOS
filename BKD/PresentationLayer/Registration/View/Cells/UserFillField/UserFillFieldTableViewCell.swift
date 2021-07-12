@@ -67,19 +67,18 @@ class UserFillFieldTableViewCell: UITableViewCell {
         mTextLb.isHidden = true
         mDropDownImgV.isHidden = true
         mDropDownPlaceholderLb.isHidden = true
-        mTextFl.textColor = color_navigationBar!
         mTextFl.inputAccessoryView = nil
         mTextFl.inputView = nil
-        // mTextFl.isUserInteractionEnabled = true
+        mTextFl.textColor = color_navigationBar!
+        mTextLb.textColor = .white
+        mTextLb.backgroundColor = color_dark_register
         mTextFl.backgroundColor = .clear
+        mDropDownPlaceholderLb.backgroundColor = .clear
         mBorderV.setBackgroundColorToCAShapeLayer(color: .clear)
         mBorderV.bringSubviewToFront(mTextFl)
         mBorderV.bringSubviewToFront(mDropDownImgV)
-        mTextLb.backgroundColor = color_dark_register
-        mTextLb.roundCorners(corners: [.topLeft, .topRight, .bottomRight], radius: 8.0)
-        mTextLb.textColor = .white
+       mTextLb.roundCorners(corners: [.topLeft, .topRight, .bottomRight], radius: 8.0)
         mDropDownImgV.image = img_dropDown_light
-        mDropDownPlaceholderLb.backgroundColor = .clear
         mTextFl.keyboardType = .default
 
     }

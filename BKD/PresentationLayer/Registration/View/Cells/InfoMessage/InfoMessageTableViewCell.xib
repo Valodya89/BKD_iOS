@@ -16,20 +16,19 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InfoMessageTableViewCell" rowHeight="136" id="KGk-i7-Jjw" customClass="InfoMessageTableViewCell" customModule="BKD" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="136"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InfoMessageTableViewCell" id="KGk-i7-Jjw" customClass="InfoMessageTableViewCell" customModule="BKD" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="205"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="414" height="136"/>
+                <rect key="frame" x="0.0" y="0.0" width="414" height="205"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="50" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MsN-hu-kaS" customClass="UILabelPadding" customModule="BKD" customModuleProvider="target">
-                        <rect key="frame" x="16" y="0.0" width="208" height="125"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="50" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MsN-hu-kaS" customClass="UILabelPadding" customModule="BKD" customModuleProvider="target">
+                        <rect key="frame" x="16" y="0.0" width="208" height="187"/>
                         <color key="backgroundColor" name="info_message"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="208" id="Ata-Ia-E1E"/>
                         </constraints>
-                        <string key="text">Please, have with you your ID and Driving license. You must be at least 23 years old, have a valid Driving license for at least 2 years.</string>
                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="17"/>
                         <color key="textColor" name="alert_txt"/>
                         <nil key="highlightedColor"/>
@@ -37,7 +36,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="MsN-hu-kaS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="DSg-Id-x03"/>
-                    <constraint firstAttribute="bottom" secondItem="MsN-hu-kaS" secondAttribute="bottom" multiplier="1.09" id="Gso-01-rmQ"/>
+                    <constraint firstAttribute="bottom" secondItem="MsN-hu-kaS" secondAttribute="bottom" constant="18" id="Gso-01-rmQ"/>
                     <constraint firstItem="MsN-hu-kaS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="cze-f3-TRa"/>
                 </constraints>
             </tableViewCellContentView>
@@ -46,7 +45,7 @@
             <connections>
                 <outlet property="mMessageLb" destination="MsN-hu-kaS" id="jXa-Fx-AVH"/>
             </connections>
-            <point key="canvasLocation" x="19" y="108"/>
+            <point key="canvasLocation" x="18.840579710144929" y="130.91517857142856"/>
         </tableViewCell>
     </objects>
     <resources>

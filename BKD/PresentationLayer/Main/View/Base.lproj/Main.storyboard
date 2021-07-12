@@ -318,7 +318,7 @@
                                     <fragment content="FAQs">
                                         <attributes>
                                             <color key="NSColor" name="email"/>
-                                            <font key="NSFont" size="13" name=".SFNS-Regular"/>
+                                            <font key="NSFont" metaFont="system"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" paragraphSpacingBefore="4" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -335,7 +335,7 @@ Cg
                                     <fragment content="Privacy">
                                         <attributes>
                                             <color key="NSColor" name="email"/>
-                                            <font key="NSFont" size="13" name=".SFNS-Regular"/>
+                                            <font key="NSFont" metaFont="system"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -349,7 +349,7 @@ Cg
                                     <fragment content="Policy">
                                         <attributes>
                                             <color key="NSColor" name="email"/>
-                                            <font key="NSFont" size="13" name=".SFNS-Regular"/>
+                                            <font key="NSFont" metaFont="system"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -366,7 +366,7 @@ IAo
                                     <fragment content="Rent">
                                         <attributes>
                                             <color key="NSColor" name="email"/>
-                                            <font key="NSFont" size="13" name=".SFNS-Regular"/>
+                                            <font key="NSFont" metaFont="system"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="9" paragraphSpacingBefore="7" lineHeightMultiple="3" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -380,7 +380,7 @@ IAo
                                     <fragment content="Contract">
                                         <attributes>
                                             <color key="NSColor" name="email"/>
-                                            <font key="NSFont" size="13" name=".SFNS-Regular"/>
+                                            <font key="NSFont" metaFont="system"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="9" paragraphSpacingBefore="7" lineHeightMultiple="3" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -391,7 +391,7 @@ IAo
                                 <rect key="frame" x="0.0" y="25" width="414" height="313"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyBkdTableViewCell" id="Ssp-Ip-CFh" customClass="MyBkdTableViewCell" customModule="BKD" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MyBkdTableViewCell" id="Ssp-Ip-CFh" customClass="MyBkdTableViewCell" customModule="BKD" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ssp-Ip-CFh" id="fCw-JX-mI3">
@@ -437,7 +437,7 @@ IAo
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="du2-Ca-fh4"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="background"/>
                         <constraints>
                             <constraint firstItem="Ljj-ff-sBb" firstAttribute="width" secondItem="foA-r9-fCl" secondAttribute="width" id="4Qe-ZV-hWz"/>
                             <constraint firstItem="EZz-Io-rRw" firstAttribute="height" relation="greaterThanOrEqual" secondItem="du2-Ca-fh4" secondAttribute="height" multiplier="0.0827586" id="HIu-Is-zPd"/>
@@ -516,8 +516,20 @@ IAo
                     <view key="view" contentMode="scaleToFill" id="tUP-iC-jNn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Wi-SY-lOI">
+                                <rect key="frame" x="87" y="341.5" width="240" height="42"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="nDl-gS-wXU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="1Wi-SY-lOI" firstAttribute="height" secondItem="tUP-iC-jNn" secondAttribute="height" multiplier="0.0519802" id="0Xt-rM-WQe"/>
+                            <constraint firstItem="1Wi-SY-lOI" firstAttribute="centerX" secondItem="nDl-gS-wXU" secondAttribute="centerX" id="VH7-TY-0Pa"/>
+                            <constraint firstItem="1Wi-SY-lOI" firstAttribute="width" secondItem="tUP-iC-jNn" secondAttribute="width" multiplier="0.57971" id="eJ2-ff-NGL"/>
+                            <constraint firstItem="1Wi-SY-lOI" firstAttribute="centerY" secondItem="nDl-gS-wXU" secondAttribute="centerY" id="exr-KM-KKv"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="vOO-UM-VUx">

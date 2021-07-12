@@ -29,11 +29,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="sK2-Od-AMn">
-                                <rect key="frame" x="16" y="25" width="382" height="159"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zQm-1J-Pqw">
+                                <rect key="frame" x="0.0" y="25" width="414" height="176"/>
                                 <subviews>
                                     <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gbm-iW-QFg" customClass="TextField" customModule="BKD" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="36.5"/>
+                                        <rect key="frame" x="16" y="0.0" width="382" height="42"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" name="navigationBar"/>
                                         <color key="textColor" name="navigationBar"/>
@@ -44,10 +44,10 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hdp-jD-RB7">
-                                        <rect key="frame" x="0.0" y="61.5" width="382" height="36"/>
+                                        <rect key="frame" x="16" y="67" width="382" height="42"/>
                                         <subviews>
                                             <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NDD-DS-prQ" customClass="TextField" customModule="BKD" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="382" height="36"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="382" height="42"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" name="navigationBar"/>
                                                 <color key="textColor" name="navigationBar"/>
@@ -58,7 +58,7 @@
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mzN-n5-a9y">
-                                                <rect key="frame" x="344.5" y="8.5" width="25" height="19"/>
+                                                <rect key="frame" x="344.5" y="10.5" width="25" height="21.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="invisible"/>
                                                 <connections>
@@ -79,10 +79,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="564-p4-Uw8">
-                                        <rect key="frame" x="0.0" y="122.5" width="382" height="36.5"/>
+                                        <rect key="frame" x="16" y="134" width="382" height="42"/>
                                         <subviews>
                                             <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zxn-54-poe" customClass="TextField" customModule="BKD" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="382" height="36.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="382" height="42"/>
                                                 <color key="textColor" name="navigationBar"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
@@ -91,7 +91,7 @@
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xkp-9Z-8za">
-                                                <rect key="frame" x="344.5" y="9" width="25" height="18.5"/>
+                                                <rect key="frame" x="344.5" y="10" width="25" height="22"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="invisible"/>
                                                 <connections>
@@ -113,21 +113,35 @@
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </stackView>
+                                <constraints>
+                                    <constraint firstItem="564-p4-Uw8" firstAttribute="width" secondItem="gbm-iW-QFg" secondAttribute="width" id="0kI-5W-q3Y"/>
+                                    <constraint firstItem="gbm-iW-QFg" firstAttribute="height" secondItem="zQm-1J-Pqw" secondAttribute="height" multiplier="0.238636" id="0mQ-ah-xrX"/>
+                                    <constraint firstItem="hdp-jD-RB7" firstAttribute="top" secondItem="gbm-iW-QFg" secondAttribute="bottom" multiplier="1.6" id="84y-oT-iO7"/>
+                                    <constraint firstItem="564-p4-Uw8" firstAttribute="height" secondItem="gbm-iW-QFg" secondAttribute="height" id="Ahg-Bq-i7A"/>
+                                    <constraint firstItem="564-p4-Uw8" firstAttribute="top" secondItem="hdp-jD-RB7" secondAttribute="bottom" multiplier="1.225" id="DAW-ab-rBK"/>
+                                    <constraint firstItem="gbm-iW-QFg" firstAttribute="width" secondItem="zQm-1J-Pqw" secondAttribute="width" multiplier="0.922705" id="Qgw-Rt-zO3"/>
+                                    <constraint firstItem="564-p4-Uw8" firstAttribute="centerX" secondItem="gbm-iW-QFg" secondAttribute="centerX" id="bbJ-TW-MSd"/>
+                                    <constraint firstItem="hdp-jD-RB7" firstAttribute="height" secondItem="gbm-iW-QFg" secondAttribute="height" id="d6l-Nq-dZH"/>
+                                    <constraint firstItem="hdp-jD-RB7" firstAttribute="width" secondItem="gbm-iW-QFg" secondAttribute="width" id="edX-Uo-wxM"/>
+                                    <constraint firstItem="hdp-jD-RB7" firstAttribute="centerX" secondItem="gbm-iW-QFg" secondAttribute="centerX" id="fIX-m5-6jD"/>
+                                    <constraint firstItem="gbm-iW-QFg" firstAttribute="top" secondItem="zQm-1J-Pqw" secondAttribute="top" id="mZg-Yf-HmH"/>
+                                    <constraint firstItem="gbm-iW-QFg" firstAttribute="centerX" secondItem="zQm-1J-Pqw" secondAttribute="centerX" id="wOz-pg-A7f"/>
+                                </constraints>
+                            </view>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incorrect E-mail address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UWj-eE-6c7">
-                                <rect key="frame" x="16" y="242" width="382" height="19"/>
+                                <rect key="frame" x="20.5" y="261.5" width="290" height="19"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="15"/>
                                 <color key="textColor" name="offert_red"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="STo-Jj-zS1">
-                                <rect key="frame" x="16" y="200.5" width="382" height="24.5"/>
+                                <rect key="frame" x="16" y="226" width="382" height="24.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AlT-RG-AB9">
-                                        <rect key="frame" x="0.0" y="3" width="20" height="18"/>
+                                        <rect key="frame" x="0.0" y="3.5" width="20" height="18"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" name="navigationBar"/>
-                                        <state key="normal" image="uncheck_box">
+                                        <state key="normal" image="uncheck_mailbox">
                                             <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -235,22 +249,22 @@
                         <viewLayoutGuide key="safeArea" id="m6U-sx-nbt"/>
                         <color key="backgroundColor" name="background"/>
                         <constraints>
-                            <constraint firstItem="UWj-eE-6c7" firstAttribute="centerX" secondItem="m6U-sx-nbt" secondAttribute="centerX" id="0n4-iA-xEj"/>
-                            <constraint firstItem="STo-Jj-zS1" firstAttribute="top" secondItem="sK2-Od-AMn" secondAttribute="bottom" multiplier="1.09" id="3Ce-YT-dUO"/>
+                            <constraint firstItem="UWj-eE-6c7" firstAttribute="centerX" secondItem="m6U-sx-nbt" secondAttribute="centerX" multiplier="0.8" id="0n4-iA-xEj"/>
                             <constraint firstItem="Z9L-Hy-Dp7" firstAttribute="height" secondItem="ixl-nv-195" secondAttribute="height" multiplier="0.052" id="CvB-79-O2b"/>
-                            <constraint firstItem="sK2-Od-AMn" firstAttribute="centerX" secondItem="m6U-sx-nbt" secondAttribute="centerX" id="GpA-mQ-Bu0"/>
-                            <constraint firstItem="UWj-eE-6c7" firstAttribute="centerY" secondItem="m6U-sx-nbt" secondAttribute="centerY" multiplier="0.65" id="H40-ul-m4x"/>
+                            <constraint firstItem="zQm-1J-Pqw" firstAttribute="height" secondItem="ixl-nv-195" secondAttribute="height" multiplier="0.218" id="D8p-61-RF2"/>
+                            <constraint firstItem="UWj-eE-6c7" firstAttribute="centerY" secondItem="m6U-sx-nbt" secondAttribute="centerY" multiplier="0.7" id="H40-ul-m4x"/>
                             <constraint firstItem="m6U-sx-nbt" firstAttribute="bottom" secondItem="Z9L-Hy-Dp7" secondAttribute="bottom" multiplier="1.14" id="H8U-VT-NVo"/>
+                            <constraint firstItem="STo-Jj-zS1" firstAttribute="top" secondItem="zQm-1J-Pqw" secondAttribute="bottom" multiplier="1.125" id="HFR-WN-RPx"/>
+                            <constraint firstItem="zQm-1J-Pqw" firstAttribute="centerX" secondItem="m6U-sx-nbt" secondAttribute="centerX" id="Hnn-S4-LOF"/>
                             <constraint firstItem="STo-Jj-zS1" firstAttribute="centerX" secondItem="m6U-sx-nbt" secondAttribute="centerX" id="JOz-te-Hhn"/>
-                            <constraint firstItem="sK2-Od-AMn" firstAttribute="width" secondItem="ixl-nv-195" secondAttribute="width" multiplier="0.922705" id="KrG-ow-5Op"/>
-                            <constraint firstItem="sK2-Od-AMn" firstAttribute="height" secondItem="ixl-nv-195" secondAttribute="height" multiplier="0.1965" id="REb-8R-Fgb"/>
-                            <constraint firstItem="sK2-Od-AMn" firstAttribute="centerY" secondItem="m6U-sx-nbt" secondAttribute="centerY" multiplier="0.27" id="TJn-kK-KNa"/>
+                            <constraint firstItem="zQm-1J-Pqw" firstAttribute="width" secondItem="ixl-nv-195" secondAttribute="width" id="QBb-uy-vcG"/>
+                            <constraint firstItem="zQm-1J-Pqw" firstAttribute="centerY" secondItem="m6U-sx-nbt" secondAttribute="centerY" multiplier="0.292" id="YfX-38-Dan"/>
+                            <constraint firstItem="UWj-eE-6c7" firstAttribute="width" secondItem="ixl-nv-195" secondAttribute="width" multiplier="0.7" id="ZKi-G1-O7K"/>
                             <constraint firstItem="Z9L-Hy-Dp7" firstAttribute="width" secondItem="ixl-nv-195" secondAttribute="width" multiplier="0.43" id="dqR-H1-OQ1"/>
                             <constraint firstItem="STo-Jj-zS1" firstAttribute="width" secondItem="ixl-nv-195" secondAttribute="width" multiplier="0.922705" id="gyZ-XC-6pN"/>
                             <constraint firstItem="STo-Jj-zS1" firstAttribute="height" secondItem="ixl-nv-195" secondAttribute="height" multiplier="0.0301339" id="kxF-5U-lzk"/>
                             <constraint firstItem="UWj-eE-6c7" firstAttribute="height" secondItem="ixl-nv-195" secondAttribute="height" multiplier="0.0235149" id="nO4-1n-e6p"/>
                             <constraint firstItem="Z9L-Hy-Dp7" firstAttribute="centerX" secondItem="m6U-sx-nbt" secondAttribute="centerX" id="tyr-VH-W3a"/>
-                            <constraint firstItem="UWj-eE-6c7" firstAttribute="width" secondItem="sK2-Od-AMn" secondAttribute="width" id="vg3-K7-PI3"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Registration" id="tlq-L7-DZZ">
@@ -542,16 +556,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do you want to turn on Face ID/Touch ID?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FPr-wi-hHX">
-                                <rect key="frame" x="85.5" y="217" width="243" height="42"/>
+                                <rect key="frame" x="85.5" y="169.5" width="243" height="42"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="18"/>
                                 <color key="textColor" name="navigationBar"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="YZy-hO-Bik">
-                                <rect key="frame" x="48" y="411.5" width="318" height="42"/>
+                                <rect key="frame" x="48" y="336" width="318" height="38"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iem-Hz-tYZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="152" height="42"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="152" height="38"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" name="navigationBar"/>
@@ -561,7 +575,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XTy-eN-F4z">
-                                        <rect key="frame" x="166" y="0.0" width="152" height="42"/>
+                                        <rect key="frame" x="166" y="0.0" width="152" height="38"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
                                         <state key="normal" title="Agree">
@@ -597,15 +611,26 @@
                             <constraint firstItem="YZy-hO-Bik" firstAttribute="height" secondItem="siU-pK-WVt" secondAttribute="height" multiplier="0.047" id="ydF-nf-A4j"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="w0Q-mY-qJ9">
+                        <barButtonItem key="leftBarButtonItem" image="back" id="prM-uI-E0X">
+                            <connections>
+                                <action selector="back:" destination="tF3-vk-ohS" id="4hk-ac-K1a"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="bkd" id="Jak-r2-0AL"/>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mAgreeBtn" destination="XTy-eN-F4z" id="0sf-UK-QKy"/>
                         <outlet property="mCancelBtn" destination="iem-Hz-tYZ" id="Bp2-vy-gIC"/>
                         <outlet property="mInfoLb" destination="FPr-wi-hHX" id="fZL-yM-J90"/>
+                        <outlet property="mRightBarBtn" destination="Jak-r2-0AL" id="u4a-p5-grP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9My-Gp-IaB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6635" y="1408"/>
+            <point key="canvasLocation" x="7544.9275362318849" y="1407.5892857142856"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="B7J-2r-7Rl">
@@ -630,6 +655,25 @@
             </objects>
             <point key="canvasLocation" x="4948" y="1408"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="UNl-bl-3e5">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rS2-qc-38l" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="cAZ-Gn-V4I">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" name="navigation_bar"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="tF3-vk-ohS" kind="relationship" relationship="rootViewController" id="rOV-aq-WJG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mau-Aw-GNq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6634.7826086956529" y="1407.5892857142856"/>
+        </scene>
     </scenes>
     <resources>
         <image name="back" width="12" height="21"/>
@@ -638,7 +682,7 @@
         <image name="search_gradient" width="178" height="42"/>
         <image name="search_left" width="17" height="8"/>
         <image name="search_right" width="17" height="8"/>
-        <image name="uncheck_box" width="14" height="14.5"/>
+        <image name="uncheck_mailbox" width="14" height="14"/>
         <namedColor name="background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

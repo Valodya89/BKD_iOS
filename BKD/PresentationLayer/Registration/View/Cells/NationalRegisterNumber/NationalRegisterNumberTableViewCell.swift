@@ -53,6 +53,7 @@ class NationalRegisterNumberTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        mDropDownImgV.setTintColor(color: color_dark_register!)
         mOtherCountryBtn.backgroundColor = .clear
         mOtherCountryBtn.layer.cornerRadius = 10
         mOtherCountryBtn.setTitleColor(color_dark_register!, for: .normal)
@@ -63,18 +64,11 @@ class NationalRegisterNumberTableViewCell: UITableViewCell {
         mCountryLb.font = font_register_placeholder
         mCountryTxtFl.isHidden = false
         mCountryBckV.isHidden = true
-        mCountryLb.isHidden = true
         mCountryBckV.backgroundColor = .clear
         self.isUserInteractionEnabled = true
         
     }
     
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
     
     /// Set cell info
     func  setCellInfo(item: RegistrationBotModel) {

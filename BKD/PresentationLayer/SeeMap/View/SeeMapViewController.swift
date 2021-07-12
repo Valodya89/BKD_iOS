@@ -7,7 +7,6 @@
 
 import UIKit
 import GoogleMaps
-import Mapbox
 import SideMenu
 
 class SeeMapViewController: BaseViewController {
