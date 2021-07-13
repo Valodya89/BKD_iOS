@@ -25,7 +25,7 @@ struct Constant {
         static let registration = "Registration"
         static let registrationBot = "RegistrationBot"
         static let searchPhoneCode = "SearchPhoneCode"
-        
+        static let verificationCode = "VerificationCode"
 
     }
     struct NibNames {
@@ -62,6 +62,7 @@ struct Constant {
         static let faceAndTouchId = "FaceAndTouchIdViewController"
         static let SearchPhoneCode = "SearchPhoneCodeViewController"
         static let bkdAgreement = "BkdAgreementViewController"
+        static let verificationCode = "VerificationCodeViewController"
     }
     
     struct FontNames {
@@ -95,6 +96,7 @@ struct Constant {
         static let endWorkingHour = "18:30"
         static let errorEmail = "Write your email address, so that we answer the message once it's reviewed"
         static let errorIncorrectEmail = "Incorrect E-mail address"
+        static let errorIncorrectPassword = "Incorrect password"
         static let messagePlaceholder = "Type your message"
         static let rentalConditions = "Rental conditions"
         static let bkdAdvantages = "BKD Advantages"

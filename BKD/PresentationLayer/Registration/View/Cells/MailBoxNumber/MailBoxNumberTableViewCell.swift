@@ -29,7 +29,7 @@ class MailBoxNumberTableViewCell: UITableViewCell {
     }
     func setUpView() {
         mCheehckBoxBtn.setImage(#imageLiteral(resourceName: "uncheck_mailbox"), for: .normal)
-        mMAilBoxNumberTxtFl.setBorder(color: color_navigationBar!, width:1)
+        mMAilBoxNumberTxtFl.setBorder(color: color_dark_register!, width:1)
         mMAilBoxNumberTxtFl.delegate = self
         
     }

@@ -259,6 +259,8 @@ struct PhoneCodeData {
 
 struct  RegistrationBotData {
     static let registrationBotModel: [RegistrationBotModel] = [
+       /* RegistrationBotModel(viewDescription: "national register"),*/
+        
         RegistrationBotModel(msgToFill: "Hello. I’m the BKD robot. I help new users register fast and fun."),
         RegistrationBotModel(msgToFill: "Please, have with you your ID and Driving license. You must be at least 23 years old, have a valid Driving license for at least 2 years."),
         RegistrationBotModel(viewDescription: "button", userRegisterInfo: UserRegisterInfo(string: "Start")),

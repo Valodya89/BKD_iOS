@@ -545,7 +545,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="5858" y="1408"/>
+            <point key="canvasLocation" x="7992.753623188406" y="1433.7053571428571"/>
         </scene>
         <!--Face And Touch Id View Controller-->
         <scene sceneID="Q6t-jr-eSH">
@@ -630,7 +630,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9My-Gp-IaB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7544.9275362318849" y="1407.5892857142856"/>
+            <point key="canvasLocation" x="9679.7101449275378" y="1433.7053571428571"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="B7J-2r-7Rl">
@@ -653,7 +653,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZZQ-zi-f8i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4948" y="1408"/>
+            <point key="canvasLocation" x="7084.057971014493" y="1433.7053571428571"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="UNl-bl-3e5">
@@ -672,7 +672,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mau-Aw-GNq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6634.7826086956529" y="1407.5892857142856"/>
+            <point key="canvasLocation" x="8771.0144927536239" y="1433.7053571428571"/>
         </scene>
     </scenes>
     <resources>

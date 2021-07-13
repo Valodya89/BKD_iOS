@@ -46,8 +46,8 @@ class TakePhotoTableViewCell: UITableViewCell {
     }
     
     func setUpView() {
-        mTackePhotoBackgV.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_navigationBar!, borderWidth: 1)
-        mOpenContentV.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_navigationBar!, borderWidth: 1)
+        mTackePhotoBackgV.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_dark_register!, borderWidth: 1)
+        mOpenContentV.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_dark_register!, borderWidth: 1)
         mPhotoImgV.layer.cornerRadius = 3
     }
     
@@ -55,8 +55,10 @@ class TakePhotoTableViewCell: UITableViewCell {
         mTackePhotoBackgV.backgroundColor = .clear
         mPhotoImgV.image = nil
         mPhotoImgV.isHidden = true
-        mTakePhotoLb.textColor = color_navigationBar!
-        mCameraImgV.setTintColor(color: color_navigationBar!)
+        mTakePhotoLb.textColor = color_alert_txt!
+        mOpenLb.textColor = color_alert_txt!
+        mCameraImgV.setTintColor(color: color_alert_txt!)
+        mAgreeImgV.setTintColor(color: color_alert_txt!)
         self.isUserInteractionEnabled = true
     }
     
@@ -82,32 +84,35 @@ class TakePhotoTableViewCell: UITableViewCell {
         }
     }
     
+    
     private func fieldFilled() {
         
         mOpenContentV.isHidden = !isOpenDoc
         mStackV.isHidden = isOpenDoc
         self.isUserInteractionEnabled = false
         if isOpenDoc {
-            docDidAgree()
+            mOpenLb.textColor = .white
+            mAgreeImgV.setTintColor(color: .white)
+            mOpenContentV.backgroundColor = color_dark_register!
         } else {
             mTakePhotoLb.textColor = .white
             mCameraImgV.setTintColor(color: .white)
-            mTackePhotoBackgV.removeCAShapeLayer()
-            mTackePhotoBackgV.roundCornersWithBorder(corners: [ .allCorners], radius: 36.0, borderColor: color_dark_register!, borderWidth: 1)
             mTackePhotoBackgV.backgroundColor = color_dark_register!
             mTackePhotoBackgV.layer.cornerRadius = 10
-            mTackePhotoBackgV.layer.borderColor = color_dark_register!.cgColor
         }
         
     }
     
     
-    private func docDidAgree() {
-        mOpenLb.textColor = .white
-        mAgreeImgV.setTintColor(color: .white)
-        mOpenContentV.backgroundColor = color_dark_register!
-        mOpenContentV.layer.borderColor = color_dark_register!.cgColor
+    private func docDidAgree(img: UIImage) {
+        mTakePhotoLb.textColor = .white
+        mCameraImgV.setTintColor(color: .white)
+        mTakePhotoBtn.isUserInteractionEnabled = false
+        mTackePhotoBackgV.backgroundColor = color_dark_register!
+        mTackePhotoBackgV.layer.cornerRadius = 10
     }
+    
+
     
     @IBAction func takePhoto(_ sender: UIButton) {
         delegate?.didPressTackePhoto(isOpenDoc: false)
@@ -118,3 +123,32 @@ class TakePhotoTableViewCell: UITableViewCell {
         delegate?.didPressTackePhoto(isOpenDoc: true)
     }
 }
+
+
+
+//private func fieldFilled() {
+//
+//    mOpenContentV.isHidden = !isOpenDoc
+//    mStackV.isHidden = isOpenDoc
+//    self.isUserInteractionEnabled = false
+//    if isOpenDoc {
+//        docDidAgree()
+//    } else {
+//        mTakePhotoLb.textColor = .white
+//        mCameraImgV.setTintColor(color: .white)
+//        mTackePhotoBackgV.removeCAShapeLayer()
+//        mTackePhotoBackgV.roundCornersWithBorder(corners: [ .allCorners], radius: 36.0, borderColor: color_dark_register!, borderWidth: 1)
+//        mTackePhotoBackgV.backgroundColor = color_dark_register!
+//        mTackePhotoBackgV.layer.cornerRadius = 10
+//        mTackePhotoBackgV.layer.borderColor = color_dark_register!.cgColor
+//    }
+//
+//}
+//
+//
+//private func docDidAgree() {
+//    mOpenLb.textColor = .white
+//    mAgreeImgV.setTintColor(color: .white)
+//    mOpenContentV.backgroundColor = color_dark_register!
+//    mOpenContentV.layer.borderColor = color_dark_register!.cgColor
+//}

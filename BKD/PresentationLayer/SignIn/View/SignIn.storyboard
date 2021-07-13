@@ -224,10 +224,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DXy-Ui-4va">
-                                        <rect key="frame" x="57" y="80" width="300" height="35"/>
+                                        <rect key="frame" x="57" y="73" width="300" height="42"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="21x-bY-Z0R"/>
+                                            <constraint firstAttribute="height" constant="42" id="21x-bY-Z0R"/>
                                             <constraint firstAttribute="width" constant="300" id="b9Z-ym-nnT"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="18"/>
@@ -426,6 +426,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z6F-4y-www">
                                 <rect key="frame" x="57" y="331.5" width="300" height="42"/>
                                 <color key="backgroundColor" name="navigationBar"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="kza-Z7-L66"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <state key="normal" title="Reset Password">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -463,7 +466,6 @@
                             <constraint firstItem="w9j-Uj-rg6" firstAttribute="height" secondItem="BUK-ZG-rGA" secondAttribute="height" multiplier="0.173267" id="mc8-Sc-dts"/>
                             <constraint firstItem="iEl-Mz-y19" firstAttribute="height" relation="greaterThanOrEqual" secondItem="BUK-ZG-rGA" secondAttribute="height" multiplier="0.0256696" id="tBD-rc-Jqo"/>
                             <constraint firstItem="Nze-YR-Nbz" firstAttribute="centerY" secondItem="LVU-80-rUP" secondAttribute="centerY" multiplier="0.07" id="vHH-bW-XAX"/>
-                            <constraint firstItem="Z6F-4y-www" firstAttribute="height" secondItem="BUK-ZG-rGA" secondAttribute="height" multiplier="0.0518973" id="zCV-QD-cXi"/>
                             <constraint firstItem="Z6F-4y-www" firstAttribute="width" secondItem="BUK-ZG-rGA" secondAttribute="width" multiplier="0.724638" id="zGl-lY-beE"/>
                         </constraints>
                     </view>

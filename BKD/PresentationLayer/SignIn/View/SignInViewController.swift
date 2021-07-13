@@ -29,11 +29,17 @@ class SignInViewController: UIViewController, StoryboardInitializable {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
+        mPasswordTxtFl.text = ""
+        mEmailAddressTextFl.text = ""
+        mSignInLeading.constant = 0
+        mSignInBckgV.isUserInteractionEnabled = false
+        self.mSignInBckgV.alpha =  0.8
     }
     
     override func viewDidLayoutSubviews() {
@@ -42,7 +48,6 @@ class SignInViewController: UIViewController, StoryboardInitializable {
     }
     
     func setUpView() {
-        tabBarController?.tabBar.isHidden = true
         mVisibilityPasswortBtn.setImage(#imageLiteral(resourceName: "invisible"), for: .normal)
         
         mPasswordTxtFl.setBorder(color: color_navigationBar!, width: 1)
@@ -55,22 +60,42 @@ class SignInViewController: UIViewController, StoryboardInitializable {
         mPasswordTxtFl.setPlaceholder(string: Constant.Texts.password,
                                       font: font_register_placeholder!,
                                       color: color_email!)
-
+        
     }
     
     private func incorrectPassword() {
         mErrorLb.isHidden = false
         mPasswordTxtFl.layer.borderColor = color_error!.cgColor
+        mErrorLb.text = Constant.Texts.errorIncorrectPassword
+        
     }
-    
-    private func searchClicked(){
-        UIView.animate(withDuration: 0.5) { [self] in
-            self.mSignInLeading.constant = self.mSignInBckgV.bounds.width - self.mSignInBtn.frame.size.width
-            self.mSignInBckgV.layoutIfNeeded()
+    private func checkEmailAddress() {
+        OfflineChatViewModel().isValidEmail(email: mEmailAddressTextFl.text!) { [self] (isValid) in
+            if isValid {
+                searchClicked()
+            } else {
+                mErrorLb.isHidden = false
+                mEmailAddressTextFl.layer.borderColor = color_error!.cgColor
+                mErrorLb.text = Constant.Texts.errorIncorrectEmail
+            }
         }
     }
     
+    private func searchClicked(){
+        dissmisKeyboar()
+        UIView.animate(withDuration: 0.5) { [self] in
+            self.mSignInLeading.constant = self.mSignInBckgV.bounds.width - self.mSignInBtn.frame.size.width
+            self.mSignInBckgV.layoutIfNeeded()
+        } completion: { _ in
+            UserDefaults.standard.setValue(true, forKey: key_isLogin)
+            self.tabBarController?.selectedIndex = 0
+        }
+    }
     
+    private func dissmisKeyboar() {
+        mPasswordTxtFl.resignFirstResponder()
+        mEmailAddressTextFl.resignFirstResponder()
+    }
     //MARK: ACTIONS
     @IBAction func visibility(_ sender: UIButton) {
         if sender.image(for: .normal) == img_invisible {
@@ -84,19 +109,26 @@ class SignInViewController: UIViewController, StoryboardInitializable {
     
     
     @IBAction func forgotPassword(_ sender: UIButton) {
+        dissmisKeyboar()
         let emailAddressVC = EmailAddressViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
-        self.navigationController?.pushViewController(emailAddressVC, animated: true)    }
+        self.navigationController?.pushViewController(emailAddressVC, animated: true)
+        
+    }
     
     @IBAction func signIn(_ sender: UIButton) {
-        searchClicked()
-        incorrectPassword()
+        checkEmailAddress()
+        //searchClicked()
+        //incorrectPassword()
     }
     
     @IBAction func signInSwipGesture(_ sender: UISwipeGestureRecognizer) {
-        searchClicked()
+        //searchClicked()
+        checkEmailAddress()
+
     }
     
     @IBAction func register(_ sender: UIButton) {
+        dissmisKeyboar()
         let registerVC = RegistrationViewController.initFromStoryboard(name: Constant.Storyboards.registration)
         self.navigationController?.pushViewController(registerVC, animated: true)
         
@@ -121,6 +153,9 @@ extension SignInViewController: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        mErrorLb.isHidden = true
+        mPasswordTxtFl.layer.borderColor = color_navigationBar!.cgColor
+        mEmailAddressTextFl.layer.borderColor = color_navigationBar!.cgColor
         textField.becomeFirstResponder()
     }
     

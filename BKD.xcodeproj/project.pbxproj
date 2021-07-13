@@ -119,6 +119,8 @@
 		5665403526759D3E008ACD31 /* TariffCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5665403426759D3D008ACD31 /* TariffCarouselView.swift */; };
 		5665403B26759E06008ACD31 /* TariffCarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5665403A26759E06008ACD31 /* TariffCarouselCell.swift */; };
 		5665404826759E79008ACD31 /* TariffCarouselCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5665404726759E79008ACD31 /* TariffCarouselCell.xib */; };
+		56664D9C269DC36A00FDBD22 /* VerificationCode.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56664D9B269DC36A00FDBD22 /* VerificationCode.storyboard */; };
+		56664DC2269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56664DC1269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift */; };
 		566B3760269503360021BCAA /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B375E269503360021BCAA /* CalendarTableViewCell.swift */; };
 		566B3761269503360021BCAA /* CalendarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 566B375F269503360021BCAA /* CalendarTableViewCell.xib */; };
 		566B3767269545540021BCAA /* MailBoxNumberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B3765269545540021BCAA /* MailBoxNumberTableViewCell.swift */; };
@@ -127,6 +129,7 @@
 		566B379B26974F0C0021BCAA /* NationalRegisterNumberTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 566B379926974F0C0021BCAA /* NationalRegisterNumberTableViewCell.xib */; };
 		566B37BD2697A6D40021BCAA /* TakePhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B37BB2697A6D30021BCAA /* TakePhotoTableViewCell.swift */; };
 		566B37BE2697A6D40021BCAA /* TakePhotoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 566B37BC2697A6D30021BCAA /* TakePhotoTableViewCell.xib */; };
+		566B7E8A269DC036007C9241 /* VerificationCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B7E89269DC036007C9241 /* VerificationCodeViewController.swift */; };
 		568E6F592642FC4B000CB6A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568E6F572642FC4B000CB6A9 /* Main.storyboard */; };
 		568E6F5E2642FC50000CB6A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568E6F5C2642FC50000CB6A9 /* LaunchScreen.storyboard */; };
 		568E6F692642FC50000CB6A9 /* BKDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E6F682642FC50000CB6A9 /* BKDTests.swift */; };
@@ -337,6 +340,8 @@
 		5665403426759D3D008ACD31 /* TariffCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffCarouselView.swift; sourceTree = "<group>"; };
 		5665403A26759E06008ACD31 /* TariffCarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffCarouselCell.swift; sourceTree = "<group>"; };
 		5665404726759E79008ACD31 /* TariffCarouselCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TariffCarouselCell.xib; sourceTree = "<group>"; };
+		56664D9B269DC36A00FDBD22 /* VerificationCode.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = VerificationCode.storyboard; sourceTree = "<group>"; };
+		56664DC1269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTimeCodeTextFiled.swift; sourceTree = "<group>"; };
 		566B375E269503360021BCAA /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		566B375F269503360021BCAA /* CalendarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarTableViewCell.xib; sourceTree = "<group>"; };
 		566B3765269545540021BCAA /* MailBoxNumberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailBoxNumberTableViewCell.swift; sourceTree = "<group>"; };
@@ -345,6 +350,7 @@
 		566B379926974F0C0021BCAA /* NationalRegisterNumberTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NationalRegisterNumberTableViewCell.xib; sourceTree = "<group>"; };
 		566B37BB2697A6D30021BCAA /* TakePhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakePhotoTableViewCell.swift; sourceTree = "<group>"; };
 		566B37BC2697A6D30021BCAA /* TakePhotoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TakePhotoTableViewCell.xib; sourceTree = "<group>"; };
+		566B7E89269DC036007C9241 /* VerificationCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationCodeViewController.swift; sourceTree = "<group>"; };
 		568E6F4E2642FC4B000CB6A9 /* BKD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BKD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		568E6F582642FC4B000CB6A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		568E6F5D2642FC50000CB6A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -610,6 +616,7 @@
 		5618873C2645EAF400BDDB33 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				56664DC1269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift */,
 				5602526626616C8700FB204C /* Storyboardinitializable.swift */,
 				565F8C27268D027400E21C71 /* UPCarouselFlowLayout */,
 				565632122656838800B78562 /* Validator */,
@@ -1154,6 +1161,23 @@
 			path = TariffCarouselCell;
 			sourceTree = "<group>";
 		};
+		56664D99269DC33A00FDBD22 /* EmailVerification */ = {
+			isa = PBXGroup;
+			children = (
+				56664D9A269DC34F00FDBD22 /* View */,
+			);
+			path = EmailVerification;
+			sourceTree = "<group>";
+		};
+		56664D9A269DC34F00FDBD22 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				566B7E89269DC036007C9241 /* VerificationCodeViewController.swift */,
+				56664D9B269DC36A00FDBD22 /* VerificationCode.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		566B375D269503030021BCAA /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1245,6 +1269,7 @@
 		568E70942644BD2D000CB6A9 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				56664D99269DC33A00FDBD22 /* EmailVerification */,
 				56AD18CC26916026006A53C1 /* Registration */,
 				565F8C6A268E944E00E21C71 /* SignIn */,
 				560FE635267BE7520068BC85 /* Reserve */,
@@ -1736,8 +1761,8 @@
 			isa = PBXGroup;
 			children = (
 				56A2AFEA2694CF8E001BA7C5 /* SearchPhoneCodeViewController */,
-				56AD19212693421C006A53C1 /* TermsConditionsViewController.swift */,
 				56AD192526934D7E006A53C1 /* EmailVerificationViewController.swift */,
+				56AD19212693421C006A53C1 /* TermsConditionsViewController.swift */,
 				56CFDE5F26936F8400D731CD /* FaceAndTouchIdViewController.swift */,
 				5600486F2697F78C009943B5 /* BkdAgreementViewController.swift */,
 			);
@@ -1969,6 +1994,7 @@
 				566354EC268AF8EF0003E2EB /* PriceTableViewCell.xib in Resources */,
 				56AD18D726916077006A53C1 /* Registration.storyboard in Resources */,
 				565A7AE426555EFF006C63D0 /* CategoryTableViewCell.xib in Resources */,
+				56664D9C269DC36A00FDBD22 /* VerificationCode.storyboard in Resources */,
 				561888A3264ABDFC00BDDB33 /* DropDownTableViewCell.xib in Resources */,
 				56CFDE7C2693CEA200D731CD /* UserFillFieldTableViewCell.xib in Resources */,
 				56CFDE7226938EFC00D731CD /* InfoMessageTableViewCell.xib in Resources */,
@@ -2211,6 +2237,7 @@
 				565A7AB02653FE26006C63D0 /* SearchHeaderView.swift in Sources */,
 				564E12FE264EAF04008CE884 /* PaddingUILable.swift in Sources */,
 				560252DB266534D500FB204C /* SearchCustomLocationViewModel.swift in Sources */,
+				566B7E8A269DC036007C9241 /* VerificationCodeViewController.swift in Sources */,
 				56AD18EA2691622C006A53C1 /* NewPasswordViewController.swift in Sources */,
 				565F8C45268D12EA00E21C71 /* CarouselViewController.swift in Sources */,
 				564E1306264EE294008CE884 /* UIViewExtention.swift in Sources */,
@@ -2218,6 +2245,7 @@
 				560FE63D267BE7960068BC85 /* ReserveViewController.swift in Sources */,
 				564E137126530208008CE884 /* SearchResultCollectionViewCell.swift in Sources */,
 				56563214265683A000B78562 /* Validator.swift in Sources */,
+				56664DC2269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift in Sources */,
 				560252EF2665919A00FB204C /* CustomLocationModel.swift in Sources */,
 				565731DE2672FDC80012ADD0 /* DetailsAndTailLiftModel.swift in Sources */,
 				568E703126443D90000CB6A9 /* CategoryViewController.swift in Sources */,

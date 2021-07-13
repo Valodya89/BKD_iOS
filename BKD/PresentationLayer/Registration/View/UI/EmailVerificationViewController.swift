@@ -10,6 +10,8 @@ import UIKit
 class EmailVerificationViewController: UIViewController, StoryboardInitializable {
 
     //MARK: Outlets
+    
+    
     @IBOutlet weak var mContinueBckgV: UIView!
     @IBOutlet weak var mContinueBtn: UIButton!
     @IBOutlet weak var mContinueLeading: NSLayoutConstraint!
@@ -24,16 +26,14 @@ class EmailVerificationViewController: UIViewController, StoryboardInitializable
     }
     
     func  setUpView() {
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
-        mRightBarBtn.image = img_bkd
+//        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
+//        mRightBarBtn.image = img_bkd
+//        mVerifiedSuccessBckgV.layer.cornerRadius = 8
+//        mContinueBtn.layer.cornerRadius = 8
+//        mContinueBtn.addBorder(color:color_navigationBar!, width: 1.0)
+//
+        mContinueBckgV.isHidden = true
         mVerifiedSuccessBckgV.layer.cornerRadius = 8
-        mContinueBtn.layer.cornerRadius = 8
-        mContinueBtn.addBorder(color:color_navigationBar!, width: 1.0)
-    }
-    
-    
-    ///Confirm button move to right  with animation
-    private func clickContinue() {
         UIView.animate(withDuration: 0.5) { [self] in
             self.mContinueLeading.constant = self.mContinueBckgV.bounds.width - self.mContinueBtn.frame.size.width
             self.mContinueBckgV.layoutIfNeeded()
@@ -41,6 +41,12 @@ class EmailVerificationViewController: UIViewController, StoryboardInitializable
             self.mVerifiedSuccessBckgV.isHidden = false
             self.mVerifiedSuccessBckgV.popupAnimation()
         }
+    }
+    
+    
+    ///Confirm button move to right  with animation
+    private func clickContinue() {
+        
     }
     
     // MARK: ACTIONS

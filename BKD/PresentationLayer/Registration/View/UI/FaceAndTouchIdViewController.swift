@@ -50,6 +50,8 @@ class FaceAndTouchIdViewController: UIViewController, StoryboardInitializable {
     }
     
     @IBAction func back(_ sender: UIBarButtonItem) {
-        self.navigationController?.popViewController(animated: true)
+//        self.navigationController?.popViewController(animated: true)
+        navigationController?.popToViewController(ofClass: RegistrationViewController.self)
+
     }
 }

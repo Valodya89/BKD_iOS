@@ -131,8 +131,10 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
             self.mContinueLeading.constant = self.mContinueBckgV.bounds.width - self.mContinueBtn.frame.size.width
             self.mContinueBckgV.layoutIfNeeded()
         } completion: { _ in
-            let emailVerificationVC = EmailVerificationViewController.initFromStoryboard(name: Constant.Storyboards.registration)
-            self.navigationController?.pushViewController(emailVerificationVC, animated: true)
+            let verificationCode = VerificationCodeViewController.initFromStoryboard(name: Constant.Storyboards.verificationCode)
+            self.navigationController?.pushViewController(verificationCode, animated: true)
+//            let emailVerificationVC = EmailVerificationViewController.initFromStoryboard(name: Constant.Storyboards.registration)
+//            self.navigationController?.pushViewController(emailVerificationVC, animated: true)
         }
     }
     
