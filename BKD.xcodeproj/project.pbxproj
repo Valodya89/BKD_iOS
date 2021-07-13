@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -131,7 +131,6 @@
 		568E6F5E2642FC50000CB6A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568E6F5C2642FC50000CB6A9 /* LaunchScreen.storyboard */; };
 		568E6F692642FC50000CB6A9 /* BKDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E6F682642FC50000CB6A9 /* BKDTests.swift */; };
 		568E6F742642FC50000CB6A9 /* BKDUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E6F732642FC50000CB6A9 /* BKDUITests.swift */; };
-		568E700D26437897000CB6A9 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 568E700C26437897000CB6A9 /* SwiftPackageProductDependency */; };
 		568E701226438C08000CB6A9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E701126438C08000CB6A9 /* MainViewController.swift */; };
 		568E70172643919B000CB6A9 /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E70162643919B000CB6A9 /* LeftViewController.swift */; };
 		568E703126443D90000CB6A9 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E703026443D90000CB6A9 /* CategoryViewController.swift */; };
@@ -428,7 +427,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				568E700D26437897000CB6A9 /* BuildFile in Frameworks */,
 				9893B8799BB3CC6B4B697417 /* Pods_BKD.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1843,7 +1841,7 @@
 				568E6F4C2642FC4B000CB6A9 /* Resources */,
 				B0A73BFE2DC6DAE6AEE73A95 /* [CP] Embed Pods Frameworks */,
 				565F8C65268D390600E21C71 /* Embed Frameworks */,
-				6B805D7BCD455AEBD5F6DA27 /* [CP] Copy Pods Resources */,
+				80678182001453DE907CB63C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1851,7 +1849,6 @@
 			);
 			name = BKD;
 			packageProductDependencies = (
-				568E700C26437897000CB6A9 /* SwiftPackageProductDependency */,
 			);
 			productName = BKD;
 			productReference = 568E6F4E2642FC4B000CB6A9 /* BKD.app */;
@@ -1885,7 +1882,7 @@
 				568E6F6C2642FC50000CB6A9 /* Frameworks */,
 				568E6F6D2642FC50000CB6A9 /* Resources */,
 				7897DF83A809C449209CCB7A /* [CP] Embed Pods Frameworks */,
-				E26F7F305DA980A813CF2305 /* [CP] Copy Pods Resources */,
+				9781094C846A3BFF0B3C2655 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1934,7 +1931,6 @@
 			);
 			mainGroup = 568E6F452642FC4B000CB6A9;
 			packageReferences = (
-				568E700B26437897000CB6A9 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 568E6F4F2642FC4B000CB6A9 /* Products */;
 			projectDirPath = "";
@@ -2092,23 +2088,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6B805D7BCD455AEBD5F6DA27 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		7897DF83A809C449209CCB7A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2126,6 +2105,40 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD-BKDUITests/Pods-BKD-BKDUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		80678182001453DE907CB63C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9781094C846A3BFF0B3C2655 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BKD-BKDUITests/Pods-BKD-BKDUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BKD-BKDUITests/Pods-BKD-BKDUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD-BKDUITests/Pods-BKD-BKDUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B0A73BFE2DC6DAE6AEE73A95 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2141,23 +2154,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E26F7F305DA980A813CF2305 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD-BKDUITests/Pods-BKD-BKDUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD-BKDUITests/Pods-BKD-BKDUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD-BKDUITests/Pods-BKD-BKDUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2663,25 +2659,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		568E700B26437897000CB6A9 /* RemoteSwiftPackageReference */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/jonkykong/SideMenu.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.5.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		568E700C26437897000CB6A9 /* SwiftPackageProductDependency */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 568E700B26437897000CB6A9 /* RemoteSwiftPackageReference */;
-			productName = SideMenu;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 568E6F462642FC4B000CB6A9 /* Project object */;
 }

@@ -35,7 +35,6 @@ class UserFillFieldTableViewCell: UITableViewCell {
     @IBOutlet weak var mStartBtn: UIButton!
     @IBOutlet weak var mTextLb: UILabelPadding!
     @IBOutlet weak var mTextFl: TextField!
-    @IBOutlet weak var mTextFlWidth: NSLayoutConstraint!
     @IBOutlet weak var mBorderV: UIView!
     @IBOutlet weak var mDropDownImgV: UIImageView!
     @IBOutlet weak var mDropDownPlaceholderLb: UILabelPadding!
@@ -69,7 +68,7 @@ class UserFillFieldTableViewCell: UITableViewCell {
         mDropDownPlaceholderLb.isHidden = true
         mTextFl.inputAccessoryView = nil
         mTextFl.inputView = nil
-        mTextFl.textColor = color_navigationBar!
+        mTextFl.textColor = color_alert_txt!
         mTextLb.textColor = .white
         mTextLb.backgroundColor = color_dark_register
         mTextFl.backgroundColor = .clear
@@ -84,17 +83,15 @@ class UserFillFieldTableViewCell: UITableViewCell {
     }
     
     
-    func setUpView() {
-        // mStartBtn.layer.cornerRadius = 36
+    func setUpView() {        
+        mStartBtn.roundCornersWithBorder(corners: [ .allCorners], radius: 36.0, borderColor: color_navigationBar!, borderWidth: 1)
         
-        mStartBtn.roundCornersWithBorder(corners: [ .allCorners], radius: 36.0, borderColor: color_dark_register!, borderWidth: 1)
-        
-        mBorderV.roundCornersWithBorder(corners: [ .topLeft, .topRight, .bottomRight ], radius: 8.0, borderColor: color_dark_register!, borderWidth: 1)
+        mBorderV.roundCornersWithBorder(corners: [ .topLeft, .topRight, .bottomRight ], radius: 8.0, borderColor: color_navigationBar!, borderWidth: 1)
         
         mTextLb.backgroundColor = color_dark_register
         mTextLb.roundCorners(corners: [.topLeft, .topRight, .bottomRight], radius: 8.0)
         mTextFl.text = nil
-        mTextFl.padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        mTextFl.padding = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
     }
     
     func setCellInfo(item: RegistrationBotModel) {
@@ -115,7 +112,6 @@ class UserFillFieldTableViewCell: UITableViewCell {
                 textFiledFilled(txt: (item.userRegisterInfo?.string)!)
             } else {
                 mTextFl.setPlaceholder(string: item.userRegisterInfo?.placeholder ?? "", font: font_bot_placeholder!, color: color_email!)
-              // viewType = ViewType(rawValue: (item.userRegisterInfo?.placeholder)!)
             }
             
             
@@ -130,10 +126,12 @@ class UserFillFieldTableViewCell: UITableViewCell {
     }
     
     private func pressStart() {
-        mStartBtn.setTitleColor(color_selected_start, for: .normal)
+       
         mStartBtn.isUserInteractionEnabled = false
+        mStartBtn.removeCAShapeLayer()
+        mStartBtn.roundCornersWithBorder(corners: [ .allCorners], radius: 36.0, borderColor: color_dark_register!, borderWidth: 1)
         mStartBtn.backgroundColor = color_dark_register!
-        mStartBtn.layer.cornerRadius = 10
+        mStartBtn.setTitleColor(color_selected_start, for: .normal)
     }
     
     private func textFiledFilled(txt: String) {
@@ -190,21 +188,4 @@ extension UserFillFieldTableViewCell: UITextFieldDelegate {
         
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-//        let width = getWidth(text: textField.text!)
-//        if  mTextFlWidth.constant < width && width <= 270 {
-//            mTextFlWidth.constant = width
-//            self.layoutIfNeeded()
-//        }
-        return true
-    }
-    
-//    private  func getWidth(text: String) -> CGFloat {
-//
-//        let txtField = UITextField(frame: .zero)
-//        txtField.text = text
-//        txtField.sizeToFit()
-//        return txtField.frame.size.width
-//    }
 }

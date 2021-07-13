@@ -12,6 +12,9 @@
         <array key="SFProDisplay-Light.ttf">
             <string>SFProDisplay-Light</string>
         </array>
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -27,8 +30,11 @@
                         <rect key="frame" x="16" y="18" width="105" height="42"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" name="alert_txt"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="105" id="aHz-WE-Vj0"/>
+                        </constraints>
                         <color key="textColor" name="alert_txt"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
                         <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                     </textField>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZQL-Q5-fkn">
@@ -57,7 +63,6 @@
                     <constraint firstItem="VCH-Ct-LOI" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.49" id="ZkY-7W-xS1"/>
                     <constraint firstItem="MfI-qH-xsG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="awh-MM-Rz8"/>
                     <constraint firstItem="ZQL-Q5-fkn" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.320513" id="cMx-GU-lEk"/>
-                    <constraint firstItem="MfI-qH-xsG" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.253623" id="xKz-SZ-6sD"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

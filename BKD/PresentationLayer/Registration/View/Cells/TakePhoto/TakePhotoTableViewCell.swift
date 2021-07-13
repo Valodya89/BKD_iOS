@@ -46,8 +46,8 @@ class TakePhotoTableViewCell: UITableViewCell {
     }
     
     func setUpView() {
-        mTackePhotoBackgV.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_dark_register!, borderWidth: 1)
-        mOpenContentV.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_dark_register!, borderWidth: 1)
+        mTackePhotoBackgV.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_navigationBar!, borderWidth: 1)
+        mOpenContentV.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_navigationBar!, borderWidth: 1)
         mPhotoImgV.layer.cornerRadius = 3
     }
     
@@ -55,8 +55,8 @@ class TakePhotoTableViewCell: UITableViewCell {
         mTackePhotoBackgV.backgroundColor = .clear
         mPhotoImgV.image = nil
         mPhotoImgV.isHidden = true
-        mTakePhotoLb.textColor = color_dark_register!
-        mCameraImgV.setTintColor(color: color_dark_register!)
+        mTakePhotoLb.textColor = color_navigationBar!
+        mCameraImgV.setTintColor(color: color_navigationBar!)
         self.isUserInteractionEnabled = true
     }
     
@@ -88,25 +88,25 @@ class TakePhotoTableViewCell: UITableViewCell {
         mStackV.isHidden = isOpenDoc
         self.isUserInteractionEnabled = false
         if isOpenDoc {
-            mOpenLb.textColor = .white
-            mAgreeImgV.setTintColor(color: .white)
-            mOpenContentV.backgroundColor = color_dark_register!
+            docDidAgree()
         } else {
             mTakePhotoLb.textColor = .white
             mCameraImgV.setTintColor(color: .white)
+            mTackePhotoBackgV.removeCAShapeLayer()
+            mTackePhotoBackgV.roundCornersWithBorder(corners: [ .allCorners], radius: 36.0, borderColor: color_dark_register!, borderWidth: 1)
             mTackePhotoBackgV.backgroundColor = color_dark_register!
             mTackePhotoBackgV.layer.cornerRadius = 10
+            mTackePhotoBackgV.layer.borderColor = color_dark_register!.cgColor
         }
         
     }
     
     
-    private func docDidAgree(img: UIImage) {
-        mTakePhotoLb.textColor = .white
-        mCameraImgV.setTintColor(color: .white)
-        mTakePhotoBtn.isUserInteractionEnabled = false
-        mTackePhotoBackgV.backgroundColor = color_dark_register!
-        mTackePhotoBackgV.layer.cornerRadius = 10
+    private func docDidAgree() {
+        mOpenLb.textColor = .white
+        mAgreeImgV.setTintColor(color: .white)
+        mOpenContentV.backgroundColor = color_dark_register!
+        mOpenContentV.layer.borderColor = color_dark_register!.cgColor
     }
     
     @IBAction func takePhoto(_ sender: UIButton) {

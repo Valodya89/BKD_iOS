@@ -29,7 +29,7 @@ class MailBoxNumberTableViewCell: UITableViewCell {
     }
     func setUpView() {
         mCheehckBoxBtn.setImage(#imageLiteral(resourceName: "uncheck_mailbox"), for: .normal)
-        mMAilBoxNumberTxtFl.setBorder(color: color_alert_txt!, width:1)
+        mMAilBoxNumberTxtFl.setBorder(color: color_navigationBar!, width:1)
         mMAilBoxNumberTxtFl.delegate = self
         
     }
@@ -37,14 +37,7 @@ class MailBoxNumberTableViewCell: UITableViewCell {
     override func prepareForReuse() {
             
         }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
-    
+      
     func setCellInfo(item: RegistrationBotModel)  {
         if item.userRegisterInfo?.isFilled == true {
             if let txt = item.userRegisterInfo?.string  {
@@ -75,7 +68,7 @@ class MailBoxNumberTableViewCell: UITableViewCell {
         mMAilBoxNumberTxtFl.textColor = .white
         mMAilBoxNumberTxtFl.isUserInteractionEnabled = false
         mMAilBoxNumberTxtFl.backgroundColor = color_dark_register!
-//        mMAilBoxNumberTxtFl.setBackgroundColorToCAShapeLayer(color: color_dark_register!)
+        mMAilBoxNumberTxtFl.layer.borderColor = color_dark_register!.cgColor
 
     }
 }
@@ -99,13 +92,4 @@ extension MailBoxNumberTableViewCell: UITextFieldDelegate {
         textField.becomeFirstResponder()
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-//        let width = getWidth(text: textField.text!)
-//        if  mTextFlWidth.constant < width && width <= 270 {
-//            mTextFlWidth.constant = width
-//            self.layoutIfNeeded()
-//        }
-        return true
-    }
 }

@@ -13,6 +13,7 @@ target 'BKD' do
   	pod 'iCarousel'
 	pod 'PhoneNumberKit', '~> 3.3'
 	pod 'SwiftMaskTextfield'
+	pod 'SideMenu'
 
 
 

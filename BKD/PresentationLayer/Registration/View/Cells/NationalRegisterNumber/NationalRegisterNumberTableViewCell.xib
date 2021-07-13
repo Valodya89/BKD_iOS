@@ -30,10 +30,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="MXf-oA-j1x">
-                        <rect key="frame" x="122" y="18" width="276" height="93"/>
+                        <rect key="frame" x="122" y="18" width="276" height="93.5"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zan-Wq-8sy" customClass="TextField" customModule="BKD" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="276" height="42"/>
+                                <rect key="frame" x="0.0" y="0.0" width="276" height="21.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" name="alert_txt"/>
                                 <constraints>
@@ -47,7 +47,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="cne-7X-AoV">
-                                <rect key="frame" x="43" y="60" width="233" height="33"/>
+                                <rect key="frame" x="43" y="39.5" width="233" height="54"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="233" id="0K3-bB-8uB"/>
@@ -55,33 +55,33 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="18"/>
                                 <state key="normal" title="Other Country National Register number">
-                                    <color key="titleColor" name="alert_txt"/>
+                                    <color key="titleColor" name="navigationBar"/>
                                 </state>
                                 <connections>
                                     <action selector="otherCountry:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="s24-UA-1kh"/>
                                 </connections>
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rpL-js-XGA">
-                                <rect key="frame" x="117" y="93" width="159" height="42"/>
+                                <rect key="frame" x="117" y="93.5" width="159" height="42"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mGG-8G-ARn" customClass="UILabelPadding" customModule="BKD" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="159" height="42"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                        <color key="textColor" name="email"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h91-mS-Ieg" customClass="TextField" customModule="BKD" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="159" height="42"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" name="alert_txt"/>
-                                        <color key="textColor" name="alert_txt"/>
-                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
+                                        <color key="textColor" name="email"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="13"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                         <connections>
                                             <outlet property="delegate" destination="KGk-i7-Jjw" id="6Ns-WQ-dLD"/>
                                         </connections>
                                     </textField>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipw-ds-OGl" customClass="UILabelPadding" customModule="BKD" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="159" height="42"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="13"/>
-                                        <color key="textColor" name="email"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropDown" translatesAutoresizingMaskIntoConstraints="NO" id="57f-MJ-MMj">
                                         <rect key="frame" x="130" y="21" width="17" height="9"/>
                                         <constraints>
@@ -92,18 +92,18 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="h91-mS-Ieg" firstAttribute="leading" secondItem="rpL-js-XGA" secondAttribute="leading" id="HBE-Lo-786"/>
-                                    <constraint firstItem="h91-mS-Ieg" firstAttribute="top" secondItem="rpL-js-XGA" secondAttribute="top" id="HQk-K0-Ru7"/>
+                                    <constraint firstAttribute="trailing" secondItem="mGG-8G-ARn" secondAttribute="trailing" id="1zF-WI-xgB"/>
+                                    <constraint firstItem="h91-mS-Ieg" firstAttribute="top" secondItem="rpL-js-XGA" secondAttribute="top" id="IKX-8r-mlS"/>
+                                    <constraint firstItem="h91-mS-Ieg" firstAttribute="leading" secondItem="rpL-js-XGA" secondAttribute="leading" id="LDk-QI-dxn"/>
                                     <constraint firstAttribute="width" constant="159" id="MXO-sS-TtQ"/>
                                     <constraint firstAttribute="height" constant="42" id="MfS-ID-oqo"/>
-                                    <constraint firstAttribute="bottom" secondItem="ipw-ds-OGl" secondAttribute="bottom" id="N8K-bv-qr1"/>
-                                    <constraint firstItem="ipw-ds-OGl" firstAttribute="top" secondItem="rpL-js-XGA" secondAttribute="top" id="Rb4-Uf-5EM"/>
                                     <constraint firstAttribute="trailing" secondItem="57f-MJ-MMj" secondAttribute="trailing" constant="12" id="TTB-0w-1SH"/>
-                                    <constraint firstAttribute="bottom" secondItem="h91-mS-Ieg" secondAttribute="bottom" id="ilN-uX-UDk"/>
-                                    <constraint firstAttribute="trailing" secondItem="ipw-ds-OGl" secondAttribute="trailing" id="mDO-JB-gia"/>
-                                    <constraint firstAttribute="trailing" secondItem="h91-mS-Ieg" secondAttribute="trailing" id="pvo-mH-tlM"/>
-                                    <constraint firstItem="ipw-ds-OGl" firstAttribute="leading" secondItem="rpL-js-XGA" secondAttribute="leading" id="tDo-FY-Nbh"/>
+                                    <constraint firstAttribute="bottom" secondItem="h91-mS-Ieg" secondAttribute="bottom" id="jDV-bg-has"/>
+                                    <constraint firstAttribute="bottom" secondItem="mGG-8G-ARn" secondAttribute="bottom" id="pzn-Mw-EXG"/>
+                                    <constraint firstItem="mGG-8G-ARn" firstAttribute="top" secondItem="rpL-js-XGA" secondAttribute="top" id="ukT-PU-DY3"/>
+                                    <constraint firstItem="mGG-8G-ARn" firstAttribute="leading" secondItem="rpL-js-XGA" secondAttribute="leading" id="vKU-wY-elR"/>
                                     <constraint firstItem="57f-MJ-MMj" firstAttribute="top" secondItem="rpL-js-XGA" secondAttribute="top" constant="21" id="wNb-H9-E0g"/>
+                                    <constraint firstAttribute="trailing" secondItem="h91-mS-Ieg" secondAttribute="trailing" id="zqT-cW-mfh"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -125,8 +125,8 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" name="background"/>
             <connections>
-                <outlet property="mCountryBckV" destination="rpL-js-XGA" id="bW7-1y-MSl"/>
-                <outlet property="mCountryLb" destination="ipw-ds-OGl" id="DaW-6D-Hzj"/>
+                <outlet property="mCountryBckV" destination="rpL-js-XGA" id="ka1-Wp-eit"/>
+                <outlet property="mCountryLb" destination="mGG-8G-ARn" id="NEf-2R-znY"/>
                 <outlet property="mCountryTxtFl" destination="h91-mS-Ieg" id="fkw-kQ-BxK"/>
                 <outlet property="mDropDownImgV" destination="57f-MJ-MMj" id="ZJT-7Y-Uoq"/>
                 <outlet property="mOtherCountryBtn" destination="cne-7X-AoV" id="Ly2-6I-old"/>
@@ -145,6 +145,9 @@
         </namedColor>
         <namedColor name="email">
             <color red="0.53700000047683716" green="0.59600001573562622" blue="0.66699999570846558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="navigationBar">
+            <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

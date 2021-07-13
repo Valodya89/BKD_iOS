@@ -37,12 +37,12 @@ class CalendarTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     func setUpView() {
         mCalendarTxtFl.delegate = self
-        mCalendarBckgV.roundCornersWithBorder(corners: [.bottomRight, .topLeft, .topRight], radius: 8.0, borderColor: color_dark_register!, borderWidth: 1)
+        mCalendarBckgV.roundCornersWithBorder(corners: [.bottomRight, .topLeft, .topRight], radius: 8.0, borderColor: color_navigationBar!, borderWidth: 1)
     }
     
     override func prepareForReuse() {
         mCalendarBckgV.setBackgroundColorToCAShapeLayer(color: .clear)
-        mCalendarBckgV.roundCornersWithBorder(corners: [.bottomRight, .topLeft, .topRight], radius: 8.0, borderColor: color_dark_register!, borderWidth: 1)
+        mCalendarBckgV.roundCornersWithBorder(corners: [.bottomRight, .topLeft, .topRight], radius: 8.0, borderColor: color_navigationBar!, borderWidth: 1)
         mCalendarImgV.setTintColor(color: color_dark_register!)
         mDayLb.text = Constant.Texts.day
         mMonthLb.text = Constant.Texts.Month
@@ -74,6 +74,7 @@ class CalendarTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     private func filedsFilled() {
+        mCalendarBckgV.setBorderColorToCAShapeLayer(color: color_dark_register!)
         mCalendarBckgV.setBackgroundColorToCAShapeLayer(color: color_dark_register!)
         mDayLb.textColor = .white
         mMonthLb.textColor = .white

@@ -400,13 +400,13 @@
                                 <rect key="frame" x="82.5" y="182" width="249" height="98"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email verified successfully" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bm8-rF-Vs3">
-                                        <rect key="frame" x="26" y="12" width="197" height="42"/>
+                                        <rect key="frame" x="6" y="22" width="237" height="22"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4eM-p3-w13">
-                                        <rect key="frame" x="82.5" y="65" width="84" height="30"/>
+                                        <rect key="frame" x="82.5" y="53" width="84" height="30"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
                                         <state key="normal" title="Thank you">
                                             <color key="titleColor" name="menu"/>
@@ -418,7 +418,7 @@
                                 </subviews>
                                 <color key="backgroundColor" name="navigation_bar"/>
                                 <constraints>
-                                    <constraint firstItem="bm8-rF-Vs3" firstAttribute="width" secondItem="8GO-LN-vm9" secondAttribute="width" multiplier="0.79" id="0XZ-6G-Pzv"/>
+                                    <constraint firstItem="bm8-rF-Vs3" firstAttribute="width" secondItem="8GO-LN-vm9" secondAttribute="width" multiplier="0.95" id="0XZ-6G-Pzv"/>
                                     <constraint firstItem="4eM-p3-w13" firstAttribute="centerX" secondItem="8GO-LN-vm9" secondAttribute="centerX" id="0ov-Hr-j5S"/>
                                     <constraint firstItem="4eM-p3-w13" firstAttribute="height" secondItem="8GO-LN-vm9" secondAttribute="height" multiplier="0.306122" id="DSl-CA-8yU"/>
                                     <constraint firstItem="bm8-rF-Vs3" firstAttribute="centerX" secondItem="8GO-LN-vm9" secondAttribute="centerX" id="GZ2-zH-Ycb"/>
@@ -599,7 +599,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QZN-Kt-pcv"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="background"/>
                         <constraints>
                             <constraint firstItem="YZy-hO-Bik" firstAttribute="centerX" secondItem="QZN-Kt-pcv" secondAttribute="centerX" id="EYo-DY-A9q"/>
                             <constraint firstItem="FPr-wi-hHX" firstAttribute="width" secondItem="siU-pK-WVt" secondAttribute="width" multiplier="0.586957" id="Sid-GD-xB8"/>

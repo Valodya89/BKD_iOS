@@ -505,6 +505,7 @@ extension RegistartionBotViewController: NationalRegisterNumberTableViewCellDele
        // countryList
         textFl.inputView = pickerV
         textFl.inputAccessoryView = creatToolBar()
+        
         textFl.isHidden = true
         pickerType = .nationalCountry
         if #available(iOS 14.0, *) {
@@ -515,6 +516,7 @@ extension RegistartionBotViewController: NationalRegisterNumberTableViewCellDele
         pickerList = countryList
         pickerV.delegate = self
         pickerV.dataSource = self
+        
     }
 
 }

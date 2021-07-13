@@ -101,6 +101,7 @@ class SignInViewController: UIViewController, StoryboardInitializable {
         self.navigationController?.pushViewController(registerVC, animated: true)
         
 //        let registrationBotVC = RegistartionBotViewController.initFromStoryboard(name: Constant.Storyboards.registrationBot)
+//        registrationBotVC.tableData = [RegistrationBotData.registrationBotModel[0]]
 //        self.navigationController?.pushViewController(registrationBotVC, animated: true)
     }
 }

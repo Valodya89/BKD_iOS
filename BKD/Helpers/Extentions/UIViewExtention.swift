@@ -248,6 +248,16 @@ extension UIView {
             }
         }
     }
+    
+    func setBorderColorToCAShapeLayer(color: UIColor) {
+        if self.layer.sublayers != nil {
+            for layer in self.layer.sublayers! {
+               if layer.isKind(of: CAShapeLayer.self) {
+                (layer as! CAShapeLayer).strokeColor = color.cgColor
+               }
+            }
+        }
+    }
 
     //MARK: Animations
     //MARK: ----------------------

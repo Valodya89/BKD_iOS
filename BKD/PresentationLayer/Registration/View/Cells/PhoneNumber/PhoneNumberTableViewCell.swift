@@ -67,7 +67,7 @@ class PhoneNumberTableViewCell: UITableViewCell {
             
         }
     func setUpView(){
-        mPhoneNumberBckgV.roundCornersWithBorder(corners: [.bottomRight, .topLeft, .topRight], radius: 8.0, borderColor: color_dark_register!, borderWidth: 1)
+        mPhoneNumberBckgV.roundCornersWithBorder(corners: [.bottomRight, .topLeft, .topRight], radius: 8.0, borderColor: color_navigationBar!, borderWidth: 1)
     }
 
 /// Set Cell Info
@@ -85,6 +85,7 @@ class PhoneNumberTableViewCell: UITableViewCell {
     
     
     private func textFiledFilled(txt: String) {
+        mPhoneNumberBckgV.setBorderColorToCAShapeLayer(color: color_dark_register!)
         mPhoneNumberBckgV.setBackgroundColorToCAShapeLayer(color: color_dark_register!)
         mPhoneNumberTxtFl.text = txt
         mPhoneNumberTxtFl.textColor = .white
