@@ -125,5 +125,34 @@ extension Date {
           let result = calendar.date(byAdding: comps, to: self)
         return result!
       }
+    
+    
+    
+    ///Compare two Dates with ignore time
+    func isSameDates(date: Date?) -> Bool {
+        guard let _ = date  else { return true }
+        let order = Calendar.current.compare(self, to: date!, toGranularity: .hour)
+
+        switch order {
+        case .orderedSame:
+            return true
+        default :
+            return false
+        }
+    }
+    
+    
+    ///Compare two hours
+    func isSameHours(hour: Date?) -> Bool {
+        guard let _ = hour  else { return true }
+        let order = Calendar.current.compare(self, to: hour!, toGranularity: .day)
+
+        switch order {
+        case .orderedSame:
+            return true
+        default :
+            return false
+        }
+    }
 
 }

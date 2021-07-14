@@ -55,7 +55,23 @@ class SearchResultView: UIView {
         mSearchResultStackV.setShadow(color:  color_shadow!)
     }
     
-    //MARK: ACTIONS
+    
+     func updateSearchResultFields(pickUpDay: String?,
+                                          pickUpMonth: String?,
+                                          returnDay: String?,
+                                          returnMonth: String?,
+                                          pickUpLocation: String?,
+                                          returnLocation: String?) {
+        mPickUpDayBtn.setTitle(pickUpDay, for: .normal)
+        mPickUpMonthBtn.setTitle(pickUpMonth, for: .normal)
+        mReturnDayBtn.setTitle(returnDay, for: .normal)
+       mReturnMonthBtn.setTitle(returnMonth, for: .normal)
+        mPickUpLocationLb.text = pickUpLocation
+        mReturnLocationLb.text = returnLocation
+    }
+    
+    
+    //MARK: - Actions
     @IBAction func edit(_ sender: UIButton) {
         didPressEdit!()
     }

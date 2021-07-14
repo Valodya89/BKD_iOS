@@ -18,9 +18,6 @@ struct SearchModel {
     public var isRetuCustomLocation: Bool = false
     public var category: Int?
 
-//    public var pickUpCustomLocation:  String?
-//    public var picreturnCustomLocation:  String?
-
 }
 
 struct SearchDateModel {

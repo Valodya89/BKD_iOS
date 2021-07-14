@@ -18,7 +18,7 @@ var additionalAccessories: [AccessoriesModel] = AccessoriesData.accessoriesModel
 var additionalDrivers: [MyDriversModel] = MyDriversData.myDriversModel
 class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
-    //MARK: Outlet
+    //MARK: - Outlet
     
     @IBOutlet weak var mCarNameLb: UILabel!
     @IBOutlet weak var mCarDetailLb: UILabel!
@@ -50,7 +50,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var mReserveLeading: NSLayoutConstraint!
     
     
-    //MARK: Varables
+    //MARK: - Varables
     private lazy  var tariffSlideVC = TariffSlideViewController.initFromStoryboard(name: Constant.Storyboards.details)
     
     let detailsViewModel:DetailsViewModel = DetailsViewModel()
@@ -194,8 +194,8 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         vehicleModel?.ifTailLift = false
         vehicleModel?.additionalAccessories = additionalAccessories
         vehicleModel?.additionalDrivers = additionalDrivers
-        searchModel.pickUpLocation = mSearchV.mPickUpLocationBtn.title(for: .normal)
-        searchModel.returnLocation = mSearchV.mReturnLocationBtn.title(for: .normal)
+//        searchModel.pickUpLocation = mSearchV.mPickUpLocationBtn.title(for: .normal)
+//        searchModel.returnLocation = mSearchV.mReturnLocationBtn.title(for: .normal)
         vehicleModel?.searchModel = searchModel
         vehicleModel?.noWorkingTimeTotalPrice = detailsViewModel.getNoWorkingTimeTotalPrice(searchModel: searchModel, timePrice: timePrice)
         if !isSearchEdit {
@@ -538,7 +538,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     }
     
     
-    //MARK: METODES PRESSES
+    //MARK: - Hendler Methodes
     /// Confirm button pressed
     private func confirmPressed(optionIndex: Int) {
         currentTariffOptionIndex = optionIndex
@@ -595,7 +595,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     
     
-    //MARK: ACTIONS
+    //MARK: -Actions
     //MARK: --------------------
     
     ///Navigation controller will back to pravius controller

@@ -121,6 +121,7 @@
 		5665404826759E79008ACD31 /* TariffCarouselCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5665404726759E79008ACD31 /* TariffCarouselCell.xib */; };
 		56664D9C269DC36A00FDBD22 /* VerificationCode.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56664D9B269DC36A00FDBD22 /* VerificationCode.storyboard */; };
 		56664DC2269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56664DC1269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift */; };
+		56664DCA269E368C00FDBD22 /* TimeCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56664DC9269E368C00FDBD22 /* TimeCompare.swift */; };
 		566B3760269503360021BCAA /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B375E269503360021BCAA /* CalendarTableViewCell.swift */; };
 		566B3761269503360021BCAA /* CalendarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 566B375F269503360021BCAA /* CalendarTableViewCell.xib */; };
 		566B3767269545540021BCAA /* MailBoxNumberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B3765269545540021BCAA /* MailBoxNumberTableViewCell.swift */; };
@@ -342,6 +343,7 @@
 		5665404726759E79008ACD31 /* TariffCarouselCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TariffCarouselCell.xib; sourceTree = "<group>"; };
 		56664D9B269DC36A00FDBD22 /* VerificationCode.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = VerificationCode.storyboard; sourceTree = "<group>"; };
 		56664DC1269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTimeCodeTextFiled.swift; sourceTree = "<group>"; };
+		56664DC9269E368C00FDBD22 /* TimeCompare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCompare.swift; sourceTree = "<group>"; };
 		566B375E269503360021BCAA /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		566B375F269503360021BCAA /* CalendarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarTableViewCell.xib; sourceTree = "<group>"; };
 		566B3765269545540021BCAA /* MailBoxNumberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailBoxNumberTableViewCell.swift; sourceTree = "<group>"; };
@@ -618,6 +620,7 @@
 			children = (
 				56664DC1269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift */,
 				5602526626616C8700FB204C /* Storyboardinitializable.swift */,
+				56664DC9269E368C00FDBD22 /* TimeCompare.swift */,
 				565F8C27268D027400E21C71 /* UPCarouselFlowLayout */,
 				565632122656838800B78562 /* Validator */,
 				565A7AE82655C516006C63D0 /* DataHelper */,
@@ -2255,6 +2258,7 @@
 				5665403526759D3E008ACD31 /* TariffCarouselView.swift in Sources */,
 				564E13A726535D98008CE884 /* SeeMapViewController.swift in Sources */,
 				56409539264B24D8001DC92D /* BKDAlert.swift in Sources */,
+				56664DCA269E368C00FDBD22 /* TimeCompare.swift in Sources */,
 				5691A60B265C508C0008081D /* CustomLocationViewController.swift in Sources */,
 				5665403B26759E06008ACD31 /* TariffCarouselCell.swift in Sources */,
 				5659B02B2699F5020059D28C /* PhoneCodeModel.swift in Sources */,
