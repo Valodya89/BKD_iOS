@@ -13,16 +13,17 @@ class LocationDropDownView: UIView, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var mheightLayoutConst: NSLayoutConstraint!
     
     let cellSpacingHeight:CGFloat = 14.0
+    var parkingList:[Parking] = []
 
-    var didSelectSeeMap: (() -> Void)?
+    var didSelectSeeMap: ((Parking) -> Void)?
     var didSelectLocation: ((String) -> Void)?
-
     var hiddenLocationList: (() -> Void)?
 
 
     override func awakeFromNib() {
         superview?.awakeFromNib()
         self.setUpView()
+        getParkingList()
     }
     
     func setUpView() {
@@ -35,33 +36,40 @@ class LocationDropDownView: UIView, UITableViewDataSource, UITableViewDelegate {
        
 
     }
+    
+    private func getParkingList() {
+        MainViewModel().getParking { [weak self] (result) in
+            guard let self = self else {return}
+            self.parkingList = result ?? []
+            self.mPickUpLocationTableView.reloadData()
+            
+        }
+    }
         
     //MARK: UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DropDownData.dropDownModel.count
+        return parkingList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DropDownTableViewCell.identifier) as! DropDownTableViewCell
-        let dropDown: DropDownModel = DropDownData.dropDownModel[indexPath.row]
-        cell.backgroundColor = .clear
-        cell.mLocationNameLb.backgroundColor = .clear
-        cell.mLocationNameLb.textColor = UIColor(named: "navigationBar")
-        cell.mLocationNameLb.text = dropDown.locationName
-        cell.mSeeMapBtn.tag = indexPath.row
+        
+        cell.setCellInfo(item: parkingList[indexPath.row], index: indexPath.row)
         cell.mSeeMapBtn.addTarget(self, action: #selector(seeMapPressed(sender:)), for: .touchUpInside)
         
         //Enabled imageView
         let tapImg = UITapGestureRecognizer(target: self, action: #selector(seeMapPressed))
         cell.mMapImgV.addGestureRecognizer(tapImg)
+        
         return cell
     }
     
     //MARK: UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let cell = tableView.cellForRow(at: indexPath) as! DropDownTableViewCell
-        cell.mLocationNameLb.backgroundColor = UIColor(named: "navigationBar")
-        cell.mLocationNameLb.textColor = UIColor(named: "see_map")
+        cell.mLocationNameLb.backgroundColor = color_navigationBar
+        cell.mLocationNameLb.textColor = color_menu
         let seconds = 0.15
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds) { [self] in
             self.hiddenLocationList?()
@@ -72,7 +80,7 @@ class LocationDropDownView: UIView, UITableViewDataSource, UITableViewDelegate {
     @objc func seeMapPressed(sender: UIButton) {
         let seconds = 0.15
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds) { [self] in
-            self.didSelectSeeMap?()
+            self.didSelectSeeMap?(parkingList[sender.tag])
             sender.backgroundColor = .clear
         }
     }

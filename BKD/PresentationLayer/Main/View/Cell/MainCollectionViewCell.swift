@@ -19,6 +19,7 @@ static let identifier = "MainCollectionViewCell"
     @IBOutlet weak var mOffertBackgV: UIView!
     @IBOutlet weak var mValueBckV: UIView!
     
+    @IBOutlet weak var mIgnorValueContentV: UIView!
     @IBOutlet weak var mCarImgV: UIImageView!
     @IBOutlet weak var mCardImgV: UIImageView!
     @IBOutlet weak var mCubeImgV: UIImageView!
@@ -57,10 +58,6 @@ static let identifier = "MainCollectionViewCell"
         mValueBckV.layer.cornerRadius = 10
         mValueBckV.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
 
-        // border
-//        mInfoBckV.layer.borderWidth = 0.2
-//        mInfoBckV.layer.borderColor = UIColor.lightGray.cgColor
-
         // shadow
         mInfoBckV.setShadow(color: color_shadow!)
         
@@ -97,5 +94,89 @@ static let identifier = "MainCollectionViewCell"
 
         return vehicleModel
     }
+    
+    override func prepareForReuse() {
+        mCarImgV.image = nil
+        mCarNameLb.text = ""
+        mCardLb.text = ""
+        mCubeLb.text = ""
+        mKgLb.text = ""
+        mCarSizeLb.text = ""
+        mOffertBackgV.isHidden = false
+        mIgnorValueContentV.isHidden = false
+        mValueBckgV.isHidden = false
+        mIgnorValueLb.text = ""
+        mOffertPriceLb.text = ""
+        mValueLb.text = ""
+        mTowBarLb.isHidden = false
+        mTowBarIngV.isHidden = false
+    }
+    
+    /// Set cell info
+    func setCellInfo(item: CarsModel) {
+        UIImage.loadFrom(url: item.image.getURL()!) { image in
+            self.mCarImgV.image = image
+        }
+        mCarNameLb.text = item.name
+        mCardLb.text = item.driverLicenseType
+        mCubeLb.text = String(item.volume) + "m²"
+        mKgLb.text = String(item.loadCapacity) + Constant.Texts.m
+        mCarSizeLb.text = String(item.liftingCapacityTailLift) + "x" + String(item.tailLiftLength) + "x" + String(item.heightOfLoadingFloor) + Constant.Texts.m
+        mOffertBackgV.isHidden = !item.hasSpecialPrice
+        mIgnorValueContentV.isHidden = !item.hasSpecialPrice
+        mValueBckgV.isHidden = item.hasSpecialPrice
+        if item.hasSpecialPrice {
+            mIgnorValueLb.text = "€  \(item.price) / " + Constant.Texts.day
+            mOffertPriceLb.text = String(item.specialPrice ?? 0.0)
+        } else {
+            mValueLb.text = String(item.price)
+        }
+        mTowBarLb.isHidden = item.towbar ? false : true
+        mTowBarIngV.isHidden = item.towbar ? false : true
+    }
 
 }
+
+/*
+{
+           "id": "606078d06ab52e76c71ec7b3",
+           "name": "Ducato Koelwagen",
+           "vendor": "Ducato",
+           "model": "Koelwagen",
+           "volume": 16.5,
+           "loadCapacity": 499.0,
+           "interior": null,
+           "exterior": null,
+           "type": "607c83fab223c86a33f6503a",
+           "image": {
+               "id": "14122AFE1F760709174A3F2B166B05ABE0658A36E274E1DDC5CC3047E7A7951DD64C0AA887918A7978C2C4A5C848E404",
+               "node": "dev-node1"
+           },
+           "driverLicenseType": "B",
+           "price": 99.8,
+           "hasSpecialPrice": false,
+           "specialPrice": null,
+           "seats": 0,
+           "fuel": null,
+           "transmission": null,
+           "motor": 0.0,
+           "euroNorm": 0,
+           "withBetweenWheels": 0.0,
+           "airConditioning": false,
+           "towbar": false,
+           "sideDoor": false,
+           "tailgate": false,
+           "liftingCapacityTailLift": 0.0,
+           "tailLiftLength": 0.0,
+           "heightOfLoadingFloor": 0.0,
+           "active": true,
+           "inRent": false,
+           "reservations": {
+               "785046be-2296-40bb-a678-6cff41e74fa8": {
+                   "start": 1617645253518,
+                   "end": 1618250053518
+               }
+           },
+           "gpsnavigator": false
+       },
+*/

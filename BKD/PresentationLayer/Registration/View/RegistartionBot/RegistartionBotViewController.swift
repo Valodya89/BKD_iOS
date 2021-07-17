@@ -131,11 +131,16 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
                 stopTimer()
             } else {
             tableData.append(RegistrationBotData.registrationBotModel[currentIndex + 1])
-            mTableV.beginUpdates()
-            mTableV.insertRows(at: [IndexPath.init(row: tableData.count-1, section: 0)], with: .automatic)
-            mTableV.endUpdates()
-            tableScrollToBottom()
-            startTimer()
+                mTableV.performBatchUpdates {
+                    mTableV.insertRows(at: [IndexPath.init(row: tableData.count-1, section: 0)], with: .automatic)
+                } completion: { [weak self]_ in
+                    guard let self = self else {return}
+                    self.tableScrollToBottom()
+                    self.startTimer()
+                }
+
+            
+           
             }
         }
     }
@@ -418,6 +423,7 @@ extension RegistartionBotViewController: UserFillFieldTableViewCellDelegate {
         }        
         pickerV.delegate = self
         pickerV.dataSource = self
+        
     }
 
 }
@@ -447,8 +453,7 @@ extension RegistartionBotViewController: PhoneNumberTableViewCellDelegate {
 //MARK: --------------------------------
 extension RegistartionBotViewController: CalendarTableViewCellDelegate {
     func willOpenPicker(textFl: UITextField, isCalendar: Bool) {
-        //self.view.addSubview(self.backgroundV)
-       // let datePicker = UIDatePicker()
+        
         textFl.inputView = datePicker
         textFl.inputAccessoryView = creatToolBar()
         textFl.isHidden = true
@@ -508,11 +513,6 @@ extension RegistartionBotViewController: NationalRegisterNumberTableViewCellDele
         
         textFl.isHidden = true
         pickerType = .nationalCountry
-        if #available(iOS 14.0, *) {
-            datePicker.preferredDatePickerStyle = .wheels
-        } else {
-            // Fallback on earlier versions
-        }
         pickerList = countryList
         pickerV.delegate = self
         pickerV.dataSource = self

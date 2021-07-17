@@ -360,7 +360,7 @@
                                     <constraint firstItem="Y8o-Fq-X9X" firstAttribute="width" secondItem="0O5-R3-1ws" secondAttribute="width" multiplier="0.39" id="qMN-bf-Xic"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="car.png" translatesAutoresizingMaskIntoConstraints="NO" id="ycG-nF-3VA">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ycG-nF-3VA">
                                 <rect key="frame" x="121" y="0.0" width="184" height="140"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
@@ -398,6 +398,7 @@
                 <outlet property="mCubeImgV" destination="imq-0S-60S" id="CNC-Se-1fn"/>
                 <outlet property="mCubeLb" destination="BxO-yr-6ze" id="8pu-Pf-BtH"/>
                 <outlet property="mFiatImgV" destination="rpR-HU-Exf" id="LZY-EL-eaS"/>
+                <outlet property="mIgnorValueContentV" destination="aaN-2M-j9V" id="3RR-Pg-OJj"/>
                 <outlet property="mIgnorValueLb" destination="hxh-SI-dxX" id="w19-Dp-nh7"/>
                 <outlet property="mInfoBckV" destination="0O5-R3-1ws" id="tdP-QY-6N7"/>
                 <outlet property="mKgImgV" destination="Sbh-K1-I1V" id="2rC-aj-c0H"/>
@@ -416,7 +417,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="car.png" width="184" height="140"/>
         <image name="car_kg" width="21" height="20"/>
         <image name="car_m" width="24" height="20"/>
         <image name="card" width="24" height="16"/>
@@ -431,7 +431,7 @@
             <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="navigationBar">
-            <color red="0.10980391502380371" green="0.20000001788139343" blue="0.37254902720451355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="offert_red">
             <color red="1" green="0.29411764705882354" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

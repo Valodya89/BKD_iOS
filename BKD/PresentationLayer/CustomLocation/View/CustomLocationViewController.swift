@@ -25,6 +25,7 @@ class CustomLocationViewController: UIViewController {
     
     //MARK: - Variables
     let customLocationViewModel = CustomLocationViewModel()
+    var restrictedZones:[RestrictedZones]?
     let searchTbV = UITableView()
     let marker = GMSMarker()
 
@@ -86,7 +87,15 @@ class CustomLocationViewController: UIViewController {
         configureDelegates()
         configureMapView()
         configureTableView()
+        getRestrictedZones()
         
+    }
+    
+    func getRestrictedZones(){
+        customLocationViewModel.getRestrictedZones {[weak self] (result) in
+            self?.restrictedZones = result
+            self?.addRestrictedZones()
+        }
     }
     
     /// configure Delegates
@@ -97,14 +106,12 @@ class CustomLocationViewController: UIViewController {
         mMapV.delegate = self
        searchTbV.delegate = self
        searchTbV.dataSource = self
-        
     }
     
     /// configure map view
     private func configureMapView() {
         mMapV.isMyLocationEnabled = true
-        addInactiveCoordinates()
-        moveCameraPosition(cord2D: CLLocationCoordinate2D(latitude:40.220485, longitude:  44.486114))
+        moveCameraPosition(cord2D: CLLocationCoordinate2D(latitude:50.296749, longitude:  4.381935))
           placesClient = GMSPlacesClient.shared()
         self.view.bringSubviewToFront(mSwipeGestureBckgV)
     }
@@ -126,20 +133,23 @@ class CustomLocationViewController: UIViewController {
         addChild(searchCustomLocationCV)
         view.addSubview(searchCustomLocationCV.view)
         searchCustomLocationCV.didMove(toParent: self)
-
     }
+    
     private func addMarkerInfoView(){
         addChild(markerInfoVC)
         mMarkerInfoBckgV.addSubview(markerInfoVC.view)
         markerInfoVC.didMove(toParent: self)
 
         // markerInfoVC.view.isHidden = true
-        
     }
-    private func addInactiveCoordinates(){
-        for inactiveLocation in InactiveLocationRangeData.inactiveLocationRangeModel {
-            drawRangeCircle(cord2D: CLLocationCoordinate2D(latitude:inactiveLocation.latitude, longitude: inactiveLocation.longitude),
-                            radius: inactiveLocation.radius)
+   
+    
+    ///Add restricted zones
+    private func addRestrictedZones(){
+        guard let restrictedZones = restrictedZones  else { return }
+        for restrictedZone in restrictedZones {
+            drawRangeCircle(cord2D: CLLocationCoordinate2D(latitude:restrictedZone.latitude, longitude: restrictedZone.longitude),
+                            radius: restrictedZone.radius)
         }
     }
     
@@ -164,8 +174,9 @@ class CustomLocationViewController: UIViewController {
         marker.map = mMapV
         marker.icon = img_map_marker
         currentMarker = marker
-        let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: zoom)
-        self.mMapV!.animate(to: camera)
+//        let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: zoom)
+//        self.mMapV!.camera = camera
+//        self.mMapV!.animate(to: camera)
     }
     
     private func  deleteMarker() {
@@ -179,7 +190,6 @@ class CustomLocationViewController: UIViewController {
         let circ = GMSCircle(position: cord2D, radius: CLLocationDistance(radius))
         circ.fillColor = color_map_circle!.withAlphaComponent(0.2)
         circ.strokeColor = .clear
-        //  circ.isTappable = true
         circ.map = mMapV
     }
     private func moveCameraPosition(cord2D: CLLocationCoordinate2D) {
@@ -336,11 +346,16 @@ extension CustomLocationViewController: GMSMapViewDelegate {
         self.addMarker(longitude: coordinate.longitude, latitude: coordinate.latitude, marker: marker)
         mapViewCenterCoordinate = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
         showMarkerInfo()
-        for inactiveLocation in InactiveLocationRangeData.inactiveLocationRangeModel {
+        let _ = isInRestractZone(coordinate: coordinate)
+    }
+    
+    private func isInRestractZone(coordinate: CLLocationCoordinate2D) -> Bool{
+        for restrictedZone in restrictedZones! {
             var finish = false
-            customLocationViewModel.isMarkerInInactiveCordinate(fromCoordinate: CLLocationCoordinate2D(latitude: inactiveLocation.latitude, longitude:inactiveLocation.longitude) ,
-                                                                toCoordinate: coordinate,
-                                                                radius: inactiveLocation.radius) { [self] (isInCoordinate) in
+            
+            customLocationViewModel.isMarkerInInactiveCordinate(restrictedZone: restrictedZone,
+                        toCoordinate: coordinate) { [self] (isInCoordinate) in
+                
                 if isInCoordinate == true {
                     self.markerInfoVC.mErrorLb.isHidden = false
                     self.markerInfoVC.mUserAddressLb.textColor = color_error
@@ -350,10 +365,10 @@ extension CustomLocationViewController: GMSMapViewDelegate {
                 }
             }
             if finish == true {
-                return
+                return true
             }
         }
-        print("didTapAt coordinate = \(coordinate)")
+        return false
     }
 }
 

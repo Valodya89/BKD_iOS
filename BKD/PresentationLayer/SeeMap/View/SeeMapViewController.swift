@@ -23,6 +23,8 @@ class SeeMapViewController: BaseViewController {
     var locationManager = CLLocationManager()
     var mapView: GMSMapView?
     var mapViewCenterCoordinate = CLLocationCoordinate2D(latitude: 0.0 , longitude: 0.0)
+    
+    var parking: Parking?
 
     private lazy  var addressVC = AddressNameViewController.initFromStoryboard(name: Constant.Storyboards.seeMap)
 
@@ -53,23 +55,28 @@ class SeeMapViewController: BaseViewController {
         // menu
         menu = SideMenuNavigationController(rootViewController: LeftViewController())
         self.setmenu(menu: menu)
-        mRightBarBtn.image = UIImage(named:"bkd")?.withRenderingMode(.alwaysOriginal)
-
+        mRightBarBtn.image = img_bkd
     }
     /// configure Delegates
     private func configureDelegates() {
         mapView?.delegate = self
         locationManager.delegate = self
         addressVC.delegate = self
-
     }
+    
+    
     /// configure map view
     func configureMapView() {
-        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: zoom)
-        mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)
+        
+        guard let parking = parking else { return }
+//        let camera = GMSCameraPosition.camera(withLatitude: parking.latitude, longitude: parking.longitude, zoom: zoom)
+       // mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)
+        mapView = GMSMapView(frame: self.view.bounds)
+
         self.view.addSubview(mapView!)
-        addMarker(longitude: -33.86, latitude: 151.20, marker: marker)
+        addMarker(longitude: parking.longitude, latitude: parking.latitude, marker: marker)
         mapView!.isMyLocationEnabled = true
+        self.mapView!.animate(toZoom: 4)
         self.view.bringSubviewToFront(mSwipeGestureBckgV)
     }
     

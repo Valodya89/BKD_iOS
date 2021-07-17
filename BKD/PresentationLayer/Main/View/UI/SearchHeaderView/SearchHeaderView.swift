@@ -7,8 +7,16 @@
 
 import UIKit
 
+enum DatePicker {
+    case pickUpDate
+    case returnDate
+    case pickUpTime
+    case returnTime
+    case none
+}
+
 protocol SearchHeaderViewDelegate: AnyObject {
-    func willOpenPicker (textFl: UITextField)
+    func willOpenPicker (textFl: UITextField, timeList:[String]?, pickerState: DatePicker)
     func didSelectLocation (_ locationStr: String, _ btnTag: Int)
     func didSelectCustomLocation(_ btn:UIButton)
     func didSelectSearch()
@@ -63,12 +71,16 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     @IBOutlet weak var mLocationDropDownView: LocationDropDownView!
     @IBOutlet var contentView: UIView!
     
+    
+    //MARK: Variables
+    var pickerList:[String] = []
     var pickUPDropisClose: Bool = true
     var returnDropisClose: Bool = true
     var currLocationBtn = UIButton()
     var currLocationDropImgV = UIImageView()
     var locationPickUp:LocationPickUp?
     var locationReturn:LocationReturn?
+    var datePicker: DatePicker = .none
 
     let searchHeaderViewModel: SearchHeaderViewModel = SearchHeaderViewModel()
     weak var delegate: SearchHeaderViewDelegate?
@@ -149,6 +161,8 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         setUpView()
+        getAvalableTimeList()
+
     }
         
     func setUpView() {
@@ -165,10 +179,10 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         mDayReturnDateBtn.isHidden = true
         mMonthReturnDateBtn.isHidden = true
         mReturnDateTxtFl.text =  Constant.Texts.returnDate
-        mReturnTimeTxtFl.textColor = UIColor(named: "choose_date")
-        mPickUpTimeTxtFl.textColor = UIColor(named: "choose_date")
-        mPickUpLocationBtn.tintColor = UIColor(named: "choose_date")
-        mReturnLocationBtn.tintColor = UIColor(named: "choose_date")
+        mReturnTimeTxtFl.textColor = color_choose_date
+        mPickUpTimeTxtFl.textColor = color_choose_date
+        mPickUpLocationBtn.tintColor = color_choose_date
+        mReturnLocationBtn.tintColor = color_choose_date
 
         mSearchBckgV.layer.cornerRadius = 8
         mSearchBtn.layer.cornerRadius = 8
@@ -218,6 +232,18 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
             mCheckBoxReturnCustomLocBtn.setImage(#imageLiteral(resourceName: "check"), for: .normal)
         }
     }
+    
+    
+    func getAvalableTimeList() {
+        searchHeaderViewModel.getAvalableTimeList { (result) in
+            print(result)
+            self.pickerList = result ?? []
+        }
+    }
+    
+    
+    
+    
     ///update Location Fields
     func updateCustomLocationFields(place: String, didResult: @escaping (Bool) -> ()) {
         
@@ -253,6 +279,12 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
             }
     
         }
+    
+    func resetReturnTime() {
+        mReturnTimeTxtFl.text = Constant.Texts.returnTime
+        mReturnTimeTxtFl.font = font_placeholder
+        mReturnTimeTxtFl.textColor = color_choose_date
+    }
 
     
     func showLocationList() {
@@ -282,13 +314,11 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
             if self?.currLocationBtn.tag == 4 { //pick up location
                 self?.locationPickUp = .pickUpLocation
                 self?.pickUpLocation = self?.currLocationBtn.title(for: .normal)
-//                UserDefaults.standard.set(self?.currLocationBtn.title(for: .normal), forKey: key_pickUpLocation)
                 self?.mCheckBoxPickUpCustomLocBtn.setImage(#imageLiteral(resourceName: "uncheck_box"), for: .normal)
 
             } else { // return location
                 self?.locationReturn = .returnLocation
                 self?.returnLocation = self?.currLocationBtn.title(for: .normal)
-//                UserDefaults.standard.set(self?.currLocationBtn.title(for: .normal), forKey: key_returnLocation)
                 self?.mCheckBoxReturnCustomLocBtn.setImage(#imageLiteral(resourceName: "uncheck_box"), for: .normal)
             }
 
@@ -439,16 +469,20 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     }
     
     @IBAction func pickUp(_ sender: Any) {
+        datePicker = .pickUpDate
         mPickUpDataTxtFl.becomeFirstResponder()
     }
     
     @IBAction func returnDate(_ sender: Any) {
+        datePicker = .returnDate
         mReturnDateTxtFl.becomeFirstResponder()
     }
     @IBAction func pickUpTime(_ sender: Any) {
+        datePicker = .pickUpTime
         mPickUpTimeTxtFl.becomeFirstResponder()
     }
     @IBAction func returnTime(_ sender: Any) {
+        datePicker = .returnTime
         mReturnTimeTxtFl.becomeFirstResponder()
     }
     
@@ -456,7 +490,9 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         delegate?.hideEditView()
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        delegate?.willOpenPicker(textFl: textField)
+
+        delegate?.willOpenPicker(textFl: textField, timeList: pickerList, pickerState: datePicker)
+    
     }
 
 }

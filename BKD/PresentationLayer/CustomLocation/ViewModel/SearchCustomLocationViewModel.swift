@@ -25,28 +25,10 @@ class SearchCustomLocationViewModel: NSObject {
 
             }
             
-//            let result  = LitConverter<BaseResponseModel<UserProfileResponse>>.parseJson(data: response as Any)
-//
-//            if result != nil && result?.success == true {
-//                // success case
-//                print("SUCCESS --->>>>> \(String(describing: response))")
-//                didResult(State.success(data: (result?.data)))
-//
-//            } else {
-//                // error case
-//                var errorMessage = ""
-//                if let errMessage = result?.message  {
-//                    errorMessage = errMessage
-//                } else {
-//                    errorMessage = "Something went wrong"
-//                }
-//                didResult(State.error(message: errorMessage))
-//            }
-  //      }
     }
-    
-    
-    }
+        }
 
+    
 
+    
 }

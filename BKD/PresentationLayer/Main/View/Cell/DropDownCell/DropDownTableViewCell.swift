@@ -34,12 +34,16 @@ class DropDownTableViewCell: UITableViewCell {
        
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    /// Set cell info
+    func setCellInfo(item: Parking, index: Int) {
+        backgroundColor = .clear
+        mLocationNameLb.backgroundColor = .clear
+        mLocationNameLb.textColor = color_navigationBar
+        mLocationNameLb.text = item.name
+        mSeeMapBtn.tag = index
     }
-
+   
     @IBAction func seeMap(_ sender: UIButton) {
         sender.backgroundColor = UIColor(named: "see_map_backg")
     }

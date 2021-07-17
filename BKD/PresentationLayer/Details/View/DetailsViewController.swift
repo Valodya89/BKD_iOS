@@ -330,8 +330,9 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     ///will open  location controller
     func goToLocationController() {
-        mSearchV!.mLocationDropDownView.didSelectSeeMap = { [weak self]  in
+        mSearchV!.mLocationDropDownView.didSelectSeeMap = { [weak self] result  in
             let seeMapContr = UIStoryboard(name: Constant.Storyboards.seeMap, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.seeMap) as! SeeMapViewController
+            seeMapContr.parking = result
             self?.navigationController?.pushViewController(seeMapContr, animated: true)
         }
     }

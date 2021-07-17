@@ -86,6 +86,7 @@ struct Constant {
         
         static let messageWorkingTime = "Time is selected outside of BKD working hours to make a reservation (07:30 - 18:30)."
         static let titleWorkingTime = "Additional service fee is     € %.2f"
+        static let lessThan30Minutes = "You cannot rent a car for less than 30 minutes"
         static let messageCustomLocation  = "You choose a location, BKD vehicle is there. Depending on the location, service fee may vary."
         static let messageCustomLocation2  = "Please, select a location by clicking on the Maps and we will check the availability."
         static let titleCustomLocation = "Starting from € %.2f (incl. VAT)"
@@ -131,13 +132,16 @@ struct Constant {
         static let selecteImg = "Selecte image from"
         static let camera = "Camera"
         static let photoLibrary = "Photo library"
-        static let day = "Day"
+        static let Day = "Day"
+        static let day = "day"
         static let Month = "Month"
         static let year = "Year"
         static let open = "Open"
         static let takePhoto = "Take a photo"
         static let country = "Country"
         static let search = "Search"
+        static let m = "m"
+        
 
     }
 }

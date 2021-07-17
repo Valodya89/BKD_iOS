@@ -78,21 +78,10 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         mInfoV.layer.cornerRadius = 10
         mFlipInfoV.layer.cornerRadius = 10
 
-        // border
-//        mInfoV.layer.borderWidth = 0.2
-//        mInfoV.layer.borderColor = UIColor.lightGray.cgColor
-//        mFlipInfoV.layer.borderWidth = 0.2
-//        mFlipInfoV.layer.borderColor = UIColor.lightGray.cgColor
-
         // shadow
         mInfoV.setShadow(color:  color_shadow!)
         mFlipInfoV.setShadow(color:  color_shadow!)
-
-        //gradient
-       // mGradientV.setGradient(startColor: UIColor(named:"gradient_start")!, endColor: UIColor(named:"gradient_end")!)
-       // mGradientV.setGradientWithCornerRadius(cornerRadius: 0, startColor: UIColor(named:"gradient_start")!, endColor: UIColor(named:"gradient_end")!)
-       // mCarMarkaBckgV.setGradientWithCornerRadius(cornerRadius: 0, startColor: UIColor(named:"gradient_start")!, endColor: UIColor(named:"gradient_end")!)
-        //mCarMarkaBckgV.setGradient(startColor: UIColor(named:"gradient_start")!, endColor: UIColor(named:"gradient_end")!)
+        
         initButtons(btn: mMoreInfoBtn)
         initButtons(btn: mReserveBtn)
         initButtons(btn: mFlipMoreInfoBtn)
@@ -123,13 +112,16 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         return vehicleModel
     }
  
-    func setSearchResultCellInfo(index: Int) {
+    func setSearchResultCellInfo(item: CarsModel, index: Int) {
         mMoreInfoBtn.tag = index
     mFlipMoreInfoBtn.tag = index
         mReserveBtn.tag = index
       mMoreInfoBtn.addTarget(self, action: #selector(moreInfoPressed(sender:)), for: .touchUpInside)
        mFlipMoreInfoBtn.addTarget(self, action: #selector(moreInfoPressed(sender:)), for: .touchUpInside)
         mReserveBtn.addTarget(self, action: #selector(reservePressed), for: .touchUpInside)
+        
+        print(item)
+        
     }
     
     @objc func moreInfoPressed(sender: UIButton) {

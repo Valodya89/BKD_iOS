@@ -31,8 +31,13 @@ class MainViewController: BaseViewController {
     var menu: SideMenuNavigationController?
     var searchHeaderV: SearchHeaderView?
     var searchResultV: SearchResultView?
+    var pickerState: DatePicker?
+
+    private var cars = [CarsModel]()
+    private var pickerList: [String]?
 
     var datePicker = UIDatePicker()
+    let pickerV = UIPickerView()
     let backgroundV =  UIView()
     var responderTxtFl = UITextField()
 
@@ -54,6 +59,7 @@ class MainViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        //getCars()
 
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -88,6 +94,17 @@ class MainViewController: BaseViewController {
         self.updateCategory()
         
     }
+    
+    
+//    func getCars() {
+//        mainViewModel .getCars(completion: { (result) in
+//            guard let cars = result else {return}
+//            self.cars = cars
+//            self.mCarCollectionV.reloadData()
+//        })
+//    }
+    
+    
     
     
     // set info to setSearch model
@@ -285,20 +302,16 @@ class MainViewController: BaseViewController {
     //MARK: -----------------------------
     ///check if reservation date more than a month
     func checkMonthReservation() {
-        if responderTxtFl.tag == 0 { //pick up date
-            mainViewModel.isReservetionMoreThanMonth(pickUpDate: datePicker.date,
-                                                     returnDate: searchHeaderV?.returnDate) { (result) in
-                if result {
-                    self.showAlertMoreThanMonth()
-                }
-            }
-            
-        } else if responderTxtFl.tag == 1{ //return date
-            mainViewModel.isReservetionMoreThanMonth( pickUpDate: searchHeaderV?.pickUpDate,
-                                                     returnDate: datePicker.date) { (result) in
-                if result {
-                    self.showAlertMoreThanMonth()
-                }
+        var pickUpDate: Date? = searchHeaderV?.pickUpDate
+        var returnDate: Date? = searchHeaderV?.returnDate
+        if pickerState == .pickUpDate {
+            pickUpDate = datePicker.date
+        } else if pickerState == .returnDate {
+            returnDate = datePicker.date
+        }
+        mainViewModel.isReservetionMoreThanMonth(pickUpDate: pickUpDate, returnDate: returnDate) { (result) in
+            if result {
+                self.showAlertMoreThanMonth()
             }
         }
     }
@@ -310,7 +323,21 @@ class MainViewController: BaseViewController {
                 self.showAlertWorkingHours()
             }
         }
-        
+    }
+    
+    ///Check if reservetion more then half hour
+    func checkReservetionHalfHour() {
+        guard let pickUpDate = searchHeaderV?.pickUpDate,
+              let returnDate = searchHeaderV?.returnDate,
+              let pickUpTime = searchHeaderV?.pickUpTime,
+              let returnTime = searchHeaderV?.returnTime else { return }
+        mainViewModel.isReservetionMoreHalfHour(pickUpDate: pickUpDate, returnDate: returnDate, pickUpTime: pickUpTime, returnTime: returnTime) { (result) in
+            if !result {
+                self.showAlertMessage(Constant.Texts.lessThan30Minutes, actionText: "") {
+                    self.searchHeaderV?.resetReturnTime()
+                }
+            }
+        }
     }
     
     /// Returns the amount of months from another date
@@ -354,7 +381,7 @@ class MainViewController: BaseViewController {
                              okTitle: Constant.Texts.agree,cancelAction: {
                                 checkedBtn.setImage(img_uncheck_box, for: .normal)
                              }, okAction: { [self] in
-                                self.showCustomLocationMap()
+                                self.goToCustomLocationMap()
                              })
     }
     
@@ -377,7 +404,8 @@ class MainViewController: BaseViewController {
         if responderTxtFl.tag > 1 {
             responderTxtFl.font =  UIFont.init(name: (responderTxtFl.font?.fontName)!, size: 18.0)
 
-            responderTxtFl.text = datePicker.date.getHour()
+            responderTxtFl.text = pickerList![ pickerV.selectedRow(inComponent: 0)]
+//            responderTxtFl.text = datePicker.date.getHour()
             responderTxtFl.textColor = color_entered_date
             searchHeaderV?.mTimeLb.textColor = color_search_placeholder
 
@@ -390,13 +418,14 @@ class MainViewController: BaseViewController {
     
     ///will be show the selected location to map from the list of tables
     func showLocation() {
-        searchHeaderV!.mLocationDropDownView.didSelectSeeMap = { [weak self]  in
+        searchHeaderV!.mLocationDropDownView.didSelectSeeMap = { [weak self] parkingModel  in
             let seeMapContr = UIStoryboard(name: Constant.Storyboards.seeMap, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.seeMap) as! SeeMapViewController
+            seeMapContr.parking = parkingModel
             self?.navigationController?.pushViewController(seeMapContr, animated: true)
         }
     }
-    ///will be show the custom location map controller
-    func showCustomLocationMap() {
+    ///will go to custom location map screen
+    func goToCustomLocationMap() {
         let customLocationContr = UIStoryboard(name: Constant.Storyboards.customLocation, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.customLocation) as! CustomLocationViewController
         customLocationContr.delegate = self
         self.navigationController?.pushViewController(customLocationContr, animated: true)
@@ -448,22 +477,14 @@ class MainViewController: BaseViewController {
 
     func updateCategory() {
         carouselVC.didChangeCategory = { [weak self] categoryIndex in
-           // let category: Categorys = Categorys.init(rawValue: categoryIndex)!
             self?.searchModel.category = categoryIndex
             self?.searchHeaderV?.categore = categoryIndex
-
-
-//            switch category {
-//            case .trucs: break
-//            case .frigoVans: break
-//            case .vans: break
-//            case .doubleCabs:break
-//            case .boxTrucs:break
-//            default:
-//                break
-//            }
-           // mCarCollectionV.reloadData()
-
+        }
+        
+        carouselVC.updateCarList = { [weak self] carModel in
+            guard let self = self else { return }
+            self.cars = carModel
+            self.mCarCollectionV.reloadData()
         }
     }
     
@@ -512,46 +533,48 @@ class MainViewController: BaseViewController {
     
     
     @objc func donePressed() {
+        
         responderTxtFl.resignFirstResponder()
         DispatchQueue.main.async() {
             self.backgroundV.removeFromSuperview()
         }
         checkMonthReservation()
-        if responderTxtFl.tag == 0 { // PickUpDate
-            
+        switch pickerState {
+        case .pickUpDate:
             searchHeaderV?.pickUpDate = datePicker.date
             hideDateInfo(dayBtn: searchHeaderV!.mDayPickUpBtn,
-                          monthBtn: searchHeaderV!.mMonthPickUpBtn,
-                          hidden: false, txtFl: responderTxtFl)
+                         monthBtn: searchHeaderV!.mMonthPickUpBtn,
+                         hidden: false, txtFl: responderTxtFl)
             showSelectedDate(dayBtn: searchHeaderV!.mDayPickUpBtn,
                              monthBtn: searchHeaderV!.mMonthPickUpBtn)
-            
-        } else if responderTxtFl.tag == 1 { // ReturnDate
+        case .returnDate:
             searchHeaderV?.returnDate = datePicker.date
             hideDateInfo(dayBtn: searchHeaderV!.mDayReturnDateBtn,
-                          monthBtn: searchHeaderV!.mMonthReturnDateBtn,
-                          hidden: false, txtFl: responderTxtFl)
+                         monthBtn: searchHeaderV!.mMonthReturnDateBtn,
+                         hidden: false, txtFl: responderTxtFl)
             showSelectedDate(dayBtn: searchHeaderV!.mDayReturnDateBtn,
                              monthBtn: searchHeaderV!.mMonthReturnDateBtn)
-            
-        } else { //Time
-            checkReservetionTime()
-            if responderTxtFl.tag == 2 {
-                searchHeaderV?.pickUpTime = datePicker.date
+        default:
+            let timeStr = pickerList![ pickerV.selectedRow(inComponent: 0)]
+            if pickerState == .pickUpTime {
+                checkReservetionTime()
+                searchHeaderV?.pickUpTime = timeStr.stringToDate()
             } else {
-                searchHeaderV?.returnTime = datePicker.date
+                //check ifMoreThenmediaHour
+                searchHeaderV?.returnTime = timeStr.stringToDate()
             }
             showSelectedDate(dayBtn: nil, monthBtn: nil)
-            
         }
         
         //Checking the filling of any fields and removing the error color from the field
         if searchHeaderV!.mErrorMessageLb.isHidden == false {
             let _ = searchHeaderV!.checkFieldsFilled()
         }
-    }
         
 
+        self.checkReservetionHalfHour()
+    }
+    
 }
 
 
@@ -564,7 +587,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         if isPressedFilter {
             return 5 + 1
         }
-        return 5
+        return cars.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -572,6 +595,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         // will show Main cell
         if !isSearchResultPage {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.identifier, for: indexPath) as! MainCollectionViewCell
+            (cell as! MainCollectionViewCell).setCellInfo(item: cars[indexPath.item])
         } else {
             if isPressedFilter  {
                 // will show filter cell
@@ -579,13 +603,12 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
                     cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilterSearchResultCell.identifier, for: indexPath) as! FilterSearchResultCell
                 } else {
                     // will show search result cell
-                    cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell
-                    
+                    cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell                    
                 }
             } else {
                 // will show search result cell
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell
-                (cell as! SearchResultCollectionViewCell).setSearchResultCellInfo(index: indexPath.row)
+                (cell as! SearchResultCollectionViewCell).setSearchResultCellInfo( item: cars[indexPath.row] , index: indexPath.row)
                 (cell as! SearchResultCollectionViewCell).delegate = self
             }
 
@@ -646,6 +669,7 @@ extension MainViewController: SearchResultCellDelegate {
 //MARK: SearchHeaderViewDelegate
 //MARK: ----------------------------
 extension MainViewController: SearchHeaderViewDelegate {
+    
     func hideEditView() {
         if !isNoSearchResult {
             navigationController!.navigationBar.topItem?.title = Constant.Texts.searchResult
@@ -688,31 +712,58 @@ extension MainViewController: SearchHeaderViewDelegate {
             }
         }
     }
-    
-    func willOpenPicker(textFl: UITextField) {
+   
+    func willOpenPicker(textFl: UITextField, timeList: [String]?, pickerState: DatePicker) {
+        self.pickerState = pickerState
         self.view.addSubview(self.backgroundV)
-        self.datePicker = UIDatePicker()
-        textFl.inputView = self.datePicker
         textFl.inputAccessoryView = creatToolBar()
         responderTxtFl = textFl
-        
-        if #available(iOS 14.0, *) {
-            self.datePicker.preferredDatePickerStyle = .wheels
+
+        if pickerState == .pickUpTime || pickerState == .returnTime {
+            pickerList = timeList
+            textFl.inputView = pickerV
+            textFl.inputAccessoryView = creatToolBar()
+
+            pickerV.delegate = self
+            pickerV.dataSource = self
         } else {
-            // Fallback on earlier versions
-        }
-        if textFl.tag > 1 { // time
-            self.datePicker.datePickerMode = .time
-            self.datePicker.minimumDate = nil
-        } else { // date
+            self.datePicker = UIDatePicker()
+            textFl.inputView = self.datePicker
+
+            if #available(iOS 14.0, *) {
+            self.datePicker.preferredDatePickerStyle = .wheels
+            } else {
+                       // Fallback on earlier versions
+            }
             self.datePicker.datePickerMode = .date
             self.datePicker.minimumDate =  Date()
             self.datePicker.locale = Locale(identifier: "en")
         }
+        
+            
+//        self.datePicker = UIDatePicker()
+//        textFl.inputView = self.datePicker
+//        textFl.inputAccessoryView = creatToolBar()
+//        responderTxtFl = textFl
+//
+//        if #available(iOS 14.0, *) {
+//            self.datePicker.preferredDatePickerStyle = .wheels
+//        } else {
+//            // Fallback on earlier versions
+//        }
+//        if textFl.tag > 1 { // time
+//            self.datePicker.datePickerMode = .time
+//            self.datePicker.minimumDate = nil
+//        } else { // date
+//            self.datePicker.datePickerMode = .date
+//            self.datePicker.minimumDate =  Date()
+//            self.datePicker.locale = Locale(identifier: "en")
+//        }
     }
     
     func didSelectCustomLocation(_ btn: UIButton) {
-        self.showAlertCustomLocation(checkedBtn: btn)
+//        self.showAlertCustomLocation(checkedBtn: btn)
+        goToCustomLocationMap()
     }
     
     
@@ -776,4 +827,24 @@ extension MainViewController: UIScrollViewDelegate {
    
 }
 
+
+//MARK: UIPickerViewDelegate
+//MARK: --------------------------------
+extension MainViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerList!.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerList![row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+    }
+}
 

@@ -44,7 +44,7 @@ class CalendarTableViewCell: UITableViewCell, UITextFieldDelegate {
         mCalendarBckgV.setBackgroundColorToCAShapeLayer(color: .clear)
         mCalendarBckgV.roundCornersWithBorder(corners: [.bottomRight, .topLeft, .topRight], radius: 8.0, borderColor: color_dark_register!, borderWidth: 1)
         mCalendarImgV.setTintColor(color: color_dark_register!)
-        mDayLb.text = Constant.Texts.day
+        mDayLb.text = Constant.Texts.Day
         mMonthLb.text = Constant.Texts.Month
         mYearLb.text = Constant.Texts.year
         mDayLb.font = font_bot_placeholder

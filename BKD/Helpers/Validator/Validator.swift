@@ -115,8 +115,20 @@ func checkReservationMonth(pickupDate: Date?, returnDate: Date?) -> Bool {
 
 /// if the booking time during working hours
 func checkReservationTime(time: Date?) -> Bool {
-    
     return Date().dateIsInRange(time: time)
+}
+    
+/// if the booking duration more than half an hour
+func checkReservationReturnTime(pickUpDate: Date,
+                                returnDate: Date,
+                                pickUpTime:Date,
+                                returnTime: Date) -> Bool {
+    if pickUpDate.isSameDates(date: returnDate) {
+        let diffComponents = Calendar.current.dateComponents([.minute,], from: pickUpTime, to: returnTime)
+        guard let minutes = diffComponents.minute else { return true }
+        return minutes < 30
+    }
+    return true
 }
 
 //MARK: CUSTOM LOCATION PAGE  CHECKING

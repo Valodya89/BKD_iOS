@@ -29,10 +29,12 @@ class CarouselCollectionViewCell: UICollectionViewCell {
 //    }
     
     ///Set cell information
-    func  setInfoCell(item:CategoryCarouselModel, index: Int, currentPage: Int ) {
+    func  setInfoCell(item:CarTypes, index: Int, currentPage: Int ) {
         
-        mCategoryImg.image = item.CategoryImg
-        mCategoryNameLb.text = item.categoryName
+        UIImage.loadFrom(url: item.image.getURL()!) { image in
+            self.mCategoryImg.image = image
+        }
+        mCategoryNameLb.text = item.name
         if index == currentPage {
             backgroundColor = color_menu
             mCategoryNameLb.textColor = color_selected_filter_fields
@@ -42,5 +44,16 @@ class CarouselCollectionViewCell: UICollectionViewCell {
             mCategoryNameLb.textColor = .white
             mCategoryImg.setTintColor(color: color_carousel_img_tint!)
         }
+//        mCategoryImg.image = item.CategoryImg
+//        mCategoryNameLb.text = item.categoryName
+//        if index == currentPage {
+//            backgroundColor = color_menu
+//            mCategoryNameLb.textColor = color_selected_filter_fields
+//            mCategoryImg.setTintColor(color: color_selected_filter_fields!)
+//        } else {
+//            backgroundColor = color_carousel
+//            mCategoryNameLb.textColor = .white
+//            mCategoryImg.setTintColor(color: color_carousel_img_tint!)
+//        }
     }
 }

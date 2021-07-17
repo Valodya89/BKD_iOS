@@ -67,13 +67,8 @@ extension Date {
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
         return dateFormatter.string(from: self)
     }
-    func stringToDateTime(time: String) -> Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone.current
-        dateFormatter.dateFormat = "HH:mm"
-        let date = dateFormatter.date(from:time)!
-        return date
-    }
+    
+    
     
     func dateIsInRange(time: Date?) -> Bool {
         let now = NSDate()
