@@ -9,7 +9,8 @@ import UIKit
 
 enum PickerType {
     case date
-    case countryOrCity
+    case country
+    case city
     case nationalCountry
 }
 
@@ -24,14 +25,20 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
     
     @IBOutlet weak var mThankYouBckgV: UIView!
     @IBOutlet weak var mThankYouBtn: UIButton!
-    //registrationDriverModel
+    
+    
+    
+    //MARK: Variables
+    let registrationBotViewModel = RegistrationBotViewModel()
     var tableData:[RegistrationBotModel] = []
 //    var tableData:[RegistrationBotModel] = [RegistrationBotData.registrationBotModel[0]]
     var currentPhoneCode:PhoneCodeModel = PhoneCodeData.phoneCodeModel[0]
+    var countryList: [Country]?
+    var cityList: [City]?
     var timer: Timer?
     var datePicker = UIDatePicker()
     var pickerV = UIPickerView()
-    var pickerList: [String]?
+    //var pickerList: [String]?
     var pickerType:PickerType = .date
     var isTakePhoto:Bool = false
     var isDriverRegister: Bool = false
@@ -44,6 +51,7 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
+        getCountryList()
     }
         
     override func viewWillAppear(_ animated: Bool) {
@@ -91,6 +99,13 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
         mTableV.estimatedRowHeight = UITableView.automaticDimension
 
         startTimer()
+    }
+    
+    func getCountryList() {
+        registrationBotViewModel.getCountryList { [weak self] (response) in
+            guard let self = self else { return }
+            self.countryList = response
+        }
     }
 
     //MARK: TIMER
@@ -260,10 +275,10 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
             tableData[currentIndex].userRegisterInfo = UserRegisterInfo(date: datePicker.date, isFilled: true)
         case .nationalCountry:
             // change nationality  textfiled
-            tableData[currentIndex].userRegisterInfo?.nationalString = pickerList![ pickerV.selectedRow(inComponent: 0)]
+            tableData[currentIndex].userRegisterInfo?.nationalString = countryList![ pickerV.selectedRow(inComponent: 0)].country
         break
         default:
-            tableData[currentIndex].userRegisterInfo?.string = pickerList![ pickerV.selectedRow(inComponent: 0)]
+            tableData[currentIndex].userRegisterInfo?.string = cityList![ pickerV.selectedRow(inComponent: 0)].city
             tableData[currentIndex].userRegisterInfo?.isFilled = true
         }
 
@@ -410,17 +425,17 @@ extension RegistartionBotViewController: UserFillFieldTableViewCellDelegate {
         textFl.inputView = pickerV
         textFl.inputAccessoryView = creatToolBar()
         textFl.isHidden = true
-        pickerType = .countryOrCity
+        
         if #available(iOS 14.0, *) {
             datePicker.preferredDatePickerStyle = .wheels
         } else {
             // Fallback on earlier versions
         }
         if viewType == .country {
-            pickerList = countryList
+            pickerType = .country
         } else if viewType == .city {
-            pickerList = cityList
-        }        
+            pickerType = .city
+        }
         pickerV.delegate = self
         pickerV.dataSource = self
         
@@ -513,7 +528,6 @@ extension RegistartionBotViewController: NationalRegisterNumberTableViewCellDele
         
         textFl.isHidden = true
         pickerType = .nationalCountry
-        pickerList = countryList
         pickerV.delegate = self
         pickerV.dataSource = self
         
@@ -590,16 +604,20 @@ extension RegistartionBotViewController: UIPickerViewDelegate, UIPickerViewDataS
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerList!.count
+        if pickerType == .country {
+            return countryList?.count ?? 0
+        }
+        return cityList?.count ?? 0
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerList![row]
+        if pickerType == .country {
+            
+            return countryList![row].country
+        }
+        return cityList![row].city
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-    }
 }
 
 

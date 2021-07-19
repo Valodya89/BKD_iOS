@@ -31,4 +31,20 @@ final class BkdConverter<T: Decodable> : NSObject {
             return nil
         }
     }
+    
+//    static func parsToJsonObject(data: Any) -> [String: Any]? {
+//        let jsonString = toJson(data: data)
+//        let jsonData = Data(jsonString.utf8)
+//
+//        do {
+//            // make sure this JSON is in the format we expect
+//            if let json = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
+//                return json
+//            }
+//        } catch let error as NSError {
+//            print("Failed to load: \(error.localizedDescription)")
+//            return nil
+//        }
+//        return nil
+//    }
 }

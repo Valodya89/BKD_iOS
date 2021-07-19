@@ -16,3 +16,18 @@ struct PhoneCodeModel {
 
 
 }
+
+
+struct PhoneCode: Decodable {
+    let id: String
+    let code : String
+    let flag: String?
+    let country: String?
+    let mask: String?
+    
+    var imageFlag: UIImage? {
+        
+        guard let flag = flag, let data = Data(base64Encoded: flag) else { return nil }
+        return UIImage(data: data)
+    }
+}

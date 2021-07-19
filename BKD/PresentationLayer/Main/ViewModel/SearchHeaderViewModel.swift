@@ -54,11 +54,7 @@ class SearchHeaderViewModel: NSObject {
                 guard let timesList = BkdConverter<BaseResponseModel<[TimeModel]>>.parseJson(data: data as Any) else {
                     print("error")
                     return
-            
                 }
-                
-                print(timesList.content)
-
                 completion(self.getTimeList(model: timesList.content!))
             case .failure(let error):
                 print(error.description)
@@ -75,6 +71,26 @@ class SearchHeaderViewModel: NSObject {
             timeList?.append(item.time)
         }
         return timeList
+    }
+    
+    
+    /// get avalable time list
+    func getWorkingTimes(completion: @escaping (WorkingTimes?) -> Void) {
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getWorkingTimes)) { (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let workingTimes = BkdConverter<BaseResponseModel<WorkingTimes>>.parseJson(data: data as Any) else {
+                    print("error")
+                    return
+                }
+                completion(workingTimes.content)
+            case .failure(let error):
+                print(error.description)
+            
+                break
+            }
+        }
     }
     
     

@@ -23,6 +23,7 @@ protocol SearchHeaderViewDelegate: AnyObject {
     func hideEditView()
 }
 
+var workingTimes: WorkingTimes?
 class SearchHeaderView: UIView, UITextFieldDelegate {
 
     static let identifier = "SearchHeaderView"
@@ -162,7 +163,7 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         setUpView()
         getAvalableTimeList()
-
+        getWorkingTimes()
     }
         
     func setUpView() {
@@ -205,6 +206,7 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         mSearchBtn.addBorder(color:color_navigationBar!, width: 1.0)
     }
     
+    /// Set textField border
     func setTextFieldBorder(leftTextField: UITextField, rightTextField: UITextField, color: UIColor) {
         leftTextField.addBorder(side: .bottom, color: color, width: 1.0)
         leftTextField.addBorder(side: .left, color: color, width: 1.0)
@@ -213,6 +215,7 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         rightTextField.addBorder(side: .right, color: color, width: 1.0)
         rightTextField.addBorder(side: .top, color: color, width: 1.0)
     }
+    
     /// Set pick up location info
     func setPickUpLocationInfo(searchModel: SearchModel) {
         mPickUpLocationBtn.setTitleColor(color_entered_date!, for: .normal)
@@ -233,15 +236,21 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         }
     }
     
-    
+  
+    ///get avalable time list
     func getAvalableTimeList() {
         searchHeaderViewModel.getAvalableTimeList { (result) in
-            print(result)
             self.pickerList = result ?? []
         }
     }
     
-    
+    ///get working times
+    func getWorkingTimes() {
+        searchHeaderViewModel.getWorkingTimes(completion: { (result) in
+            workingTimes = result
+        })
+    }
+
     
     
     ///update Location Fields
@@ -270,9 +279,11 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
             if txtFl.tag == 2 { //Pick up Timer
                 pickUpTime = nil
                 txtFl.text = Constant.Texts.pickUpTime
+                pickUpTime = nil
             } else { // return timer
                 returnTime = nil
                 txtFl.text = Constant.Texts.returnTime
+                returnTime = nil
             }
             if mPickUpTimeTxtFl.text!.count <= 0 && mReturnTimeTxtFl.text!.count <= 0{
                 mTimeLb.textColor = .clear
@@ -284,6 +295,7 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         mReturnTimeTxtFl.text = Constant.Texts.returnTime
         mReturnTimeTxtFl.font = font_placeholder
         mReturnTimeTxtFl.textColor = color_choose_date
+        returnTime = nil
     }
 
     

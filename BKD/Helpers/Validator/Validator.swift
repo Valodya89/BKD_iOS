@@ -114,8 +114,12 @@ func checkReservationMonth(pickupDate: Date?, returnDate: Date?) -> Bool {
 
 
 /// if the booking time during working hours
-func checkReservationTime(time: Date?) -> Bool {
-    return Date().dateIsInRange(time: time)
+func checkReservationTime(time: Date?, workingTimes: WorkingTimes) -> Bool {
+    guard let _ = time else { return false}
+    let startTimeDate = workingTimes.workStart.stringToDate()
+    let endTimeDate = workingTimes.workEnd.stringToDate()
+    return time!.dateIsInRange(startTime: startTimeDate,
+                                endTime: endTimeDate)
 }
     
 /// if the booking duration more than half an hour
@@ -123,10 +127,14 @@ func checkReservationReturnTime(pickUpDate: Date,
                                 returnDate: Date,
                                 pickUpTime:Date,
                                 returnTime: Date) -> Bool {
-    if pickUpDate.isSameDates(date: returnDate) {
-        let diffComponents = Calendar.current.dateComponents([.minute,], from: pickUpTime, to: returnTime)
-        guard let minutes = diffComponents.minute else { return true }
-        return minutes < 30
+    if pickUpDate.hasSame(Calendar.Component.day, as: returnDate) &&  pickUpDate.hasSame(Calendar.Component.month, as: returnDate) && pickUpDate.hasSame(Calendar.Component.year, as: returnDate) {
+        
+//    }
+//    if pickUpDate.isSameDates(date: returnDate) {
+        let diff = Int(returnTime.timeIntervalSince1970 - pickUpTime.timeIntervalSince1970)
+        let hours = diff / 3600
+        let minutes = (diff - hours * 3600) / 60
+        return minutes > 30
     }
     return true
 }

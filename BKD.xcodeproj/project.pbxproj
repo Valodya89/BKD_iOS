@@ -129,6 +129,10 @@
 		565BFDFB26A0C3800044D081 /* CarTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565BFDFA26A0C3800044D081 /* CarTypes.swift */; };
 		565BFDFF26A0D3960044D081 /* RestrictedZones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565BFDFE26A0D3960044D081 /* RestrictedZones.swift */; };
 		565BFE0326A12CA10044D081 /* Parking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565BFE0226A12CA10044D081 /* Parking.swift */; };
+		565F807426A3C46600ADB9FE /* WorkingTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F807326A3C46600ADB9FE /* WorkingTimes.swift */; };
+		565F807826A4FE8600ADB9FE /* RegistrationBotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F807726A4FE8600ADB9FE /* RegistrationBotViewModel.swift */; };
+		565F807C26A510AA00ADB9FE /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F807B26A510AA00ADB9FE /* Country.swift */; };
+		565F808026A5159000ADB9FE /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F807F26A5159000ADB9FE /* City.swift */; };
 		565F8C1F268CF4C700E21C71 /* CarouselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F8C1D268CF4C700E21C71 /* CarouselCollectionViewCell.swift */; };
 		565F8C2B268D027400E21C71 /* UPCarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F8C28268D027400E21C71 /* UPCarouselFlowLayout.swift */; };
 		565F8C45268D12EA00E21C71 /* CarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F8C44268D12EA00E21C71 /* CarouselViewController.swift */; };
@@ -374,6 +378,10 @@
 		565BFDFA26A0C3800044D081 /* CarTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarTypes.swift; sourceTree = "<group>"; };
 		565BFDFE26A0D3960044D081 /* RestrictedZones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrictedZones.swift; sourceTree = "<group>"; };
 		565BFE0226A12CA10044D081 /* Parking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parking.swift; sourceTree = "<group>"; };
+		565F807326A3C46600ADB9FE /* WorkingTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingTimes.swift; sourceTree = "<group>"; };
+		565F807726A4FE8600ADB9FE /* RegistrationBotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationBotViewModel.swift; sourceTree = "<group>"; };
+		565F807B26A510AA00ADB9FE /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		565F807F26A5159000ADB9FE /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		565F8C1D268CF4C700E21C71 /* CarouselCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewCell.swift; sourceTree = "<group>"; };
 		565F8C28268D027400E21C71 /* UPCarouselFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UPCarouselFlowLayout.swift; sourceTree = "<group>"; };
 		565F8C44268D12EA00E21C71 /* CarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselViewController.swift; sourceTree = "<group>"; };
@@ -665,6 +673,7 @@
 		5618873C2645EAF400BDDB33 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				56409538264B24D8001DC92D /* BKDAlert.swift */,
 				565BFDD6269F961B0044D081 /* BkdConverter.swift */,
 				565BFDBC269F91930044D081 /* SessionExpiredAlert.swift */,
 				56664DC1269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift */,
@@ -738,7 +747,6 @@
 				565BFDB0269F5AD80044D081 /* AuthAPI.swift */,
 				565BFD79269F535D0044D081 /* Network */,
 				560252D42665296B00FB204C /* NetworkManager */,
-				56409538264B24D8001DC92D /* BKDAlert.swift */,
 			);
 			path = Manageres;
 			sourceTree = "<group>";
@@ -1425,6 +1433,7 @@
 				565BFDDE269F9D140044D081 /* Time.swift */,
 				565BFDFA26A0C3800044D081 /* CarTypes.swift */,
 				565BFE0226A12CA10044D081 /* Parking.swift */,
+				565F807326A3C46600ADB9FE /* WorkingTimes.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1813,6 +1822,8 @@
 			children = (
 				56CFDE752693920E00D731CD /* RegistrationBotModel.swift */,
 				5659B02A2699F5020059D28C /* PhoneCodeModel.swift */,
+				565F807B26A510AA00ADB9FE /* Country.swift */,
+				565F807F26A5159000ADB9FE /* City.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1821,6 +1832,7 @@
 			isa = PBXGroup;
 			children = (
 				56AD18F126928861006A53C1 /* RegistrationViewModel.swift */,
+				565F807726A4FE8600ADB9FE /* RegistrationBotViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2369,11 +2381,13 @@
 				56AD18E92691622C006A53C1 /* EmailAddressViewController.swift in Sources */,
 				565BFDBD269F91930044D081 /* SessionExpiredAlert.swift in Sources */,
 				561888A2264ABDFC00BDDB33 /* DropDownTableViewCell.swift in Sources */,
+				565F807C26A510AA00ADB9FE /* Country.swift in Sources */,
 				565A7AD62654C49B006C63D0 /* CategoryCollectionViewCell.swift in Sources */,
 				56AD18F226928861006A53C1 /* RegistrationViewModel.swift in Sources */,
 				56AD19072692B9F6006A53C1 /* MyBkdTableViewCell.swift in Sources */,
 				565BFDB1269F5AD80044D081 /* AuthAPI.swift in Sources */,
 				5691A64E265DB6300008081D /* SearchHeaderViewModel.swift in Sources */,
+				565F807826A4FE8600ADB9FE /* RegistrationBotViewModel.swift in Sources */,
 				566B379A26974F0C0021BCAA /* NationalRegisterNumberTableViewCell.swift in Sources */,
 				565BFDD7269F961B0044D081 /* BkdConverter.swift in Sources */,
 				564E12D9264D7617008CE884 /* Constant.swift in Sources */,
@@ -2421,6 +2435,7 @@
 				56533ED62678BF3A0012BF4A /* BkdAdvantagesTableViewCell.swift in Sources */,
 				56CD8313267CF56800B2799F /* ReserveModel.swift in Sources */,
 				565BFDB9269F8F310044D081 /* StorageManager.swift in Sources */,
+				565F807426A3C46600ADB9FE /* WorkingTimes.swift in Sources */,
 				560252E72665368E00FB204C /* SearchPlacesResult.swift in Sources */,
 				56CFDE6026936F8400D731CD /* FaceAndTouchIdViewController.swift in Sources */,
 				5602526726616C8700FB204C /* Storyboardinitializable.swift in Sources */,
@@ -2428,6 +2443,7 @@
 				5656081A2678541B009578FA /* ImagesBottomCollectionViewCell.swift in Sources */,
 				565BFDF726A064360044D081 /* String.swift in Sources */,
 				5648C5C8268842D9000B4E2A /* AccessoriesViewModel.swift in Sources */,
+				565F808026A5159000ADB9FE /* City.swift in Sources */,
 				565731F8267332620012ADD0 /* TariffSlideViewController.swift in Sources */,
 				5691A61B265C71EC0008081D /* ExteriorCollectionViewCell.swift in Sources */,
 				5618888F264A63CA00BDDB33 /* LocationDropDownView.swift in Sources */,

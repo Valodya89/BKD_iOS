@@ -70,16 +70,22 @@ extension Date {
     
     
     
-    func dateIsInRange(time: Date?) -> Bool {
+    func dateIsInRange(startTime: Date, endTime: Date) -> Bool {
         let now = NSDate()
         let calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
+        let hourStart = calendar.component(.hour, from: startTime)
+        let minuteStart = calendar.component(.minute, from: startTime)
+        let hourEnd = calendar.component(.hour, from: endTime)
+        let minuteEnd = calendar.component(.minute, from: endTime)
         
         let nowDateValue = now as Date
-        let todayAtSevenAM = calendar.date(bySettingHour: 7, minute: 30, second: 0, of: nowDateValue, options: [])
-        let todayAtTenPM = calendar.date(bySettingHour: 18, minute: 30, second: 0, of: nowDateValue, options: [])
+        let todayAtSevenAM = calendar.date(bySettingHour: hourStart, minute: minuteStart, second: 0, of: nowDateValue, options: [])
+        let todayAtTenPM = calendar.date(bySettingHour: hourEnd, minute: minuteEnd, second: 0, of: nowDateValue, options: [])
+//        let todayAtSevenAM = calendar.date(bySettingHour: 7, minute: 30, second: 0, of: nowDateValue, options: [])
+//        let todayAtTenPM = calendar.date(bySettingHour: 18, minute: 30, second: 0, of: nowDateValue, options: [])
         
-        if time! >= todayAtSevenAM! &&
-            time! <= todayAtTenPM!
+        if self >= todayAtSevenAM! &&
+            self <= todayAtTenPM!
         {
             print ("date is in range")
             return true
@@ -135,6 +141,25 @@ extension Date {
             return false
         }
     }
+    
+    
+    
+    
+    func fullDistance(from date: Date, resultIn component: Calendar.Component, calendar: Calendar = .current) -> Int? {
+            calendar.dateComponents([component], from: self, to: date).value(for: component)
+        }
+
+        func distance(from date: Date, only component: Calendar.Component, calendar: Calendar = .current) -> Int {
+            let days1 = calendar.component(component, from: self)
+            let days2 = calendar.component(component, from: date)
+            return days1 - days2
+        }
+
+        func hasSame(_ component: Calendar.Component, as date: Date) -> Bool {
+            distance(from: date, only: component) == 0
+        }
+    
+    
     
     
     ///Compare two hours

@@ -84,7 +84,7 @@ struct Constant {
         static let messageChangeTariffSeconst = "Since your selection was for"
         static let titleChangeTariff = "Pick up date/time  Return date/time"
         
-        static let messageWorkingTime = "Time is selected outside of BKD working hours to make a reservation (07:30 - 18:30)."
+        static let messageWorkingTime = "Time is selected outside of BKD working hours to make a reservation "
         static let titleWorkingTime = "Additional service fee is     € %.2f"
         static let lessThan30Minutes = "You cannot rent a car for less than 30 minutes"
         static let messageCustomLocation  = "You choose a location, BKD vehicle is there. Depending on the location, service fee may vary."
@@ -116,6 +116,7 @@ struct Constant {
         
         
         //Register
+        static let accountExist = "Account already exists"
         static let emailAdd = "Email address"
         static let password = "Password"
         static let confirmPassword = "Confirm password"

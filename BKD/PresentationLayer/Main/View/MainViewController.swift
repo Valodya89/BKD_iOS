@@ -318,7 +318,8 @@ class MainViewController: BaseViewController {
    
     /// check if reservetion time in range
     func checkReservetionTime() {
-        mainViewModel.isReservetionInWorkingHours(time: datePicker.date ) { [self] (result) in
+        guard let _ = workingTimes else { return }
+        mainViewModel.isReservetionInWorkingHours(time: datePicker.date, workingTimes: workingTimes! ) { [self] (result) in
             if !result {
                 self.showAlertWorkingHours()
             }
@@ -333,13 +334,16 @@ class MainViewController: BaseViewController {
               let returnTime = searchHeaderV?.returnTime else { return }
         mainViewModel.isReservetionMoreHalfHour(pickUpDate: pickUpDate, returnDate: returnDate, pickUpTime: pickUpTime, returnTime: returnTime) { (result) in
             if !result {
-                self.showAlertMessage(Constant.Texts.lessThan30Minutes, actionText: "") {
+                BKDAlert().showAlertOk(on: self, message: Constant.Texts.lessThan30Minutes, okTitle: "ok", okAction: {
                     self.searchHeaderV?.resetReturnTime()
-                }
+                })
+            } else {
+                self.checkReservetionTime()
             }
         }
     }
     
+   
     /// Returns the amount of months from another date
     func months(from date: Date, toDate: Date) -> Int {
             return Calendar.current.dateComponents([.month], from: date, to: toDate).month ?? 0
@@ -364,7 +368,7 @@ class MainViewController: BaseViewController {
     func showAlertWorkingHours() {
         BKDAlert().showAlert(on: self,
                              title:String(format: Constant.Texts.titleWorkingTime, timePrice),
-                             message: Constant.Texts.messageWorkingTime,
+                             message: Constant.Texts.messageWorkingTime + "(\(workingTimes?.workStart ?? "") -  \(workingTimes?.workEnd ?? "")).",
                              messageSecond: nil,
                              cancelTitle: Constant.Texts.cancel,
                              okTitle: Constant.Texts.agree,cancelAction: { [self] in
@@ -538,7 +542,6 @@ class MainViewController: BaseViewController {
         DispatchQueue.main.async() {
             self.backgroundV.removeFromSuperview()
         }
-        checkMonthReservation()
         switch pickerState {
         case .pickUpDate:
             searchHeaderV?.pickUpDate = datePicker.date
@@ -548,6 +551,7 @@ class MainViewController: BaseViewController {
             showSelectedDate(dayBtn: searchHeaderV!.mDayPickUpBtn,
                              monthBtn: searchHeaderV!.mMonthPickUpBtn)
         case .returnDate:
+            checkMonthReservation()
             searchHeaderV?.returnDate = datePicker.date
             hideDateInfo(dayBtn: searchHeaderV!.mDayReturnDateBtn,
                          monthBtn: searchHeaderV!.mMonthReturnDateBtn,
@@ -557,7 +561,6 @@ class MainViewController: BaseViewController {
         default:
             let timeStr = pickerList![ pickerV.selectedRow(inComponent: 0)]
             if pickerState == .pickUpTime {
-                checkReservetionTime()
                 searchHeaderV?.pickUpTime = timeStr.stringToDate()
             } else {
                 //check ifMoreThenmediaHour

@@ -123,7 +123,8 @@ class DetailsViewModel: NSObject {
     /// Check if reserve time in working hours
     func isReservetionInWorkingHours(time: Date?,
                                      didResult: @escaping (Bool) -> ()) {
-        didResult(validator.checkReservationTime(time:time))
+        guard let _ = workingTimes else { return }
+        didResult(validator.checkReservationTime(time:time, workingTimes: workingTimes!))
     }
     
     /// Check if reserve will  be acteve
@@ -144,10 +145,12 @@ class DetailsViewModel: NSObject {
     
     func getNoWorkingTimeTotalPrice(searchModel: SearchModel, timePrice:Double) -> Double {
         var total: Double = 0.0
-        if !validator.checkReservationTime(time:searchModel.pickUpTime) {
+        guard let _ = workingTimes else { return 0.0 }
+        
+        if !validator.checkReservationTime(time:searchModel.pickUpTime, workingTimes: workingTimes!) {
             total += timePrice
         }
-        if !validator.checkReservationTime(time:searchModel.returnTime) {
+        if !validator.checkReservationTime(time:searchModel.returnTime, workingTimes: workingTimes!) {
             total += timePrice
         }
         return total

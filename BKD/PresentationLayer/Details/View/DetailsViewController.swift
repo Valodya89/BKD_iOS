@@ -490,7 +490,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     func showAlertWorkingHours() {
         BKDAlert().showAlert(on: self,
                              title:String(format: Constant.Texts.titleWorkingTime, timePrice),
-                             message: Constant.Texts.messageWorkingTime,
+                             message: Constant.Texts.messageWorkingTime + "(\(workingTimes?.workStart ?? "") -  \(workingTimes?.workEnd ?? "")).",
                              messageSecond: nil,
                              cancelTitle: Constant.Texts.cancel,
                              okTitle: Constant.Texts.agree,cancelAction:nil,
@@ -500,6 +500,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
 
                              })
     }
+    
     func showAlertMoreThanMonth(optionIndex: Int) {
         BKDAlert().showAlert(on: self,
                              title: nil,

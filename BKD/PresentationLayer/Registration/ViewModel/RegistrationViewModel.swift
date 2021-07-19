@@ -6,6 +6,13 @@
 //
 
 import UIKit
+struct EmptyModel: Decodable {
+}
+enum SignUpStatus: String, CaseIterable {
+    case accountExist = "ACCOUNTS_user_already_exists"
+    case success = "SUCCESS"
+    
+}
 
 class RegistrationViewModel: NSObject {
     let validator = Validator()
@@ -27,5 +34,33 @@ class RegistrationViewModel: NSObject {
          let placeholder = str.replacingOccurrences(of: "#", with: "-", options: .literal, range: nil)
         return placeholder
          
+    }
+    
+    
+    ///sign up
+    func signUp(username: String, password: String, completion: @escaping (SignUpStatus) -> Void) {
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.signUp(username: username, password: password))) { (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let signUp = BkdConverter<BaseResponseModel<EmptyModel>>.parseJson(data: data as Any) else {
+                    print("error")
+                    return
+                }
+                print(signUp.content as Any)
+                completion(SignUpStatus(rawValue: signUp.message)!)
+            case .failure(let error):
+                print(error.description)
+                break
+            }
+//            case .success(let data):
+//                print(date)
+//                break
+//
+//            case .failure(let error):
+//                break
+//
+//            }
+        }
     }
 }

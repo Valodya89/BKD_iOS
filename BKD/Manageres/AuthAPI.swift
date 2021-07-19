@@ -17,19 +17,18 @@ enum AuthAPI: APIProtocol {
     case getCarsByType(fieldName: String,
                        fieldValue: String,
                        searchOperation: String)
-    
+    case getWorkingTimes
+    case getPhoneCodes
+    case getCountries
+    case signUp(username: String,
+                password: String)
     
 
-    case updateTranslation(key: String, language: String, module: String, value: String)
-    case depositFromAttachedCard(ammount: Double)
-    case depositFromUnAttachedCard(ammount: Double, locale: String)
-    case depositWithTelcell(amount: Double, number: String)
-    case orderCard(address: String, birthday: String, email: String, socialCard: String, passportImageBase64: String)
-    
     
     var base: String {
         switch self {
-
+        case .getWorkingTimes, .getPhoneCodes, .getCountries, .signUp:
+            return BKDBaseURLs.account.rawValue
         default:
             return BKDBaseURLs.auth.rawValue
         }
@@ -49,14 +48,20 @@ enum AuthAPI: APIProtocol {
             return "/parking/list"
         case .getCarsByType:
             return "car/search"
-        default:
-            return""
+        case .getWorkingTimes:
+            return "settings/default"
+        case .getPhoneCodes:
+            return "phone-code/list"
+        case .getCountries:
+            return "country/list"
+        case .signUp:
+            return "accounts/create"
         }
     }
     
     var header: [String : String] {
         switch self {
-        case .getCarsByType:
+        case .getCarsByType, .signUp:
             return [
                 "Content-Type": "application/json"]
         
@@ -82,20 +87,19 @@ enum AuthAPI: APIProtocol {
     
     var body: [String : Any]? {
         switch self {
-        case .getAvailableTimeList:
-            return nil
-        case .getCarList:
-            return nil
-        case .getCarTypes:
-            return nil
-        case .getRestrictedZones:
-            return nil
+        
         case let .getCarsByType(fieldName, fieldValue, searchOperation):
-        return [
-            "fieldName": fieldName,
-            "fieldValue": fieldValue,
-            "searchOperation":searchOperation
-        ]
+            return [
+                "fieldName": fieldName,
+                "fieldValue": fieldValue,
+                "searchOperation":searchOperation
+            ]
+        case let .signUp(username, password):
+            return [
+                "username": username,
+                "password": password
+            ]
+            
         default:
             return nil
         }
@@ -108,7 +112,7 @@ enum AuthAPI: APIProtocol {
     var method: RequestMethod {
         switch self {
 
-        case .getCarsByType:
+        case .getCarsByType, .signUp:
             return .post
         default:
             return .get

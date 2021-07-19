@@ -110,7 +110,7 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
         OfflineChatViewModel().isValidEmail(email: mEmailAddressTxtFl.text!) { [self] (isValid) in
             if isValid {
                 if self.areValidPasswordFields() {
-                    self.animateContinue()
+                    self.signUp()
                 }
             } else {
                 self.showError(errorTxt: Constant.Texts.errorIncorrectEmail, textFld: mEmailAddressTxtFl)
@@ -119,8 +119,10 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
     }
     
     ///will show error lable
-    private func showError(errorTxt: String, textFld: UITextField) {
-        textFld.setBorder(color: color_error!, width: 2)
+    private func showError(errorTxt: String, textFld: UITextField?) {
+        if let _ = textFld {
+            textFld!.setBorder(color: color_error!, width: 2)
+        }
         mErrorLb.isHidden = false
         mErrorLb.text = errorTxt
     }
@@ -131,17 +133,33 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
             self.mContinueLeading.constant = self.mContinueBckgV.bounds.width - self.mContinueBtn.frame.size.width
             self.mContinueBckgV.layoutIfNeeded()
         } completion: { _ in
-            let verificationCode = VerificationCodeViewController.initFromStoryboard(name: Constant.Storyboards.verificationCode)
-            self.navigationController?.pushViewController(verificationCode, animated: true)
-//            let emailVerificationVC = EmailVerificationViewController.initFromStoryboard(name: Constant.Storyboards.registration)
-//            self.navigationController?.pushViewController(emailVerificationVC, animated: true)
+            self.goToVerification()
         }
+    }
+    
+    ///Sent sign up request
+    func signUp()  {
+        registrationViewModel.signUp(username: mEmailAddressTxtFl.text!, password: mPasswordTxtFl.text!) { (status) in
+            switch status {
+            case .accountExist:
+                self.showError(errorTxt: Constant.Texts.accountExist,
+                               textFld: nil)
+            case .success:
+                self.animateContinue()
+            }
+        }
+    }
+    
+    ///Open Verification screen
+    func goToVerification() {
+        let verificationCode = VerificationCodeViewController.initFromStoryboard(name: Constant.Storyboards.verificationCode)
+        self.navigationController?.pushViewController(verificationCode, animated: true)
     }
     
    
     
-    //MARK: ACTIONS
-    
+    //MARK: - Actions
+    // -----------------------------
     @IBAction func visiblePassword(_ sender: UIButton) {
         if sender.image(for: .normal) == img_invisible {
             sender.setImage(#imageLiteral(resourceName: "visible"), for: .normal)
