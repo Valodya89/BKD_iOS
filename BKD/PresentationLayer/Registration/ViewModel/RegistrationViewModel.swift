@@ -47,20 +47,12 @@ class RegistrationViewModel: NSObject {
                     print("error")
                     return
                 }
-                print(signUp.content as Any)
+                print(signUp.message as Any)
                 completion(SignUpStatus(rawValue: signUp.message)!)
             case .failure(let error):
                 print(error.description)
                 break
             }
-//            case .success(let data):
-//                print(date)
-//                break
-//
-//            case .failure(let error):
-//                break
-//
-//            }
         }
     }
 }

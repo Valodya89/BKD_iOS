@@ -133,6 +133,7 @@
 		565F807826A4FE8600ADB9FE /* RegistrationBotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F807726A4FE8600ADB9FE /* RegistrationBotViewModel.swift */; };
 		565F807C26A510AA00ADB9FE /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F807B26A510AA00ADB9FE /* Country.swift */; };
 		565F808026A5159000ADB9FE /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F807F26A5159000ADB9FE /* City.swift */; };
+		565F808526A59C3800ADB9FE /* VerificationCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F808426A59C3800ADB9FE /* VerificationCodeViewModel.swift */; };
 		565F8C1F268CF4C700E21C71 /* CarouselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F8C1D268CF4C700E21C71 /* CarouselCollectionViewCell.swift */; };
 		565F8C2B268D027400E21C71 /* UPCarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F8C28268D027400E21C71 /* UPCarouselFlowLayout.swift */; };
 		565F8C45268D12EA00E21C71 /* CarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F8C44268D12EA00E21C71 /* CarouselViewController.swift */; };
@@ -382,6 +383,7 @@
 		565F807726A4FE8600ADB9FE /* RegistrationBotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationBotViewModel.swift; sourceTree = "<group>"; };
 		565F807B26A510AA00ADB9FE /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		565F807F26A5159000ADB9FE /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		565F808426A59C3800ADB9FE /* VerificationCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationCodeViewModel.swift; sourceTree = "<group>"; };
 		565F8C1D268CF4C700E21C71 /* CarouselCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewCell.swift; sourceTree = "<group>"; };
 		565F8C28268D027400E21C71 /* UPCarouselFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UPCarouselFlowLayout.swift; sourceTree = "<group>"; };
 		565F8C44268D12EA00E21C71 /* CarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselViewController.swift; sourceTree = "<group>"; };
@@ -1182,6 +1184,14 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		565F808326A59C1700ADB9FE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				565F808426A59C3800ADB9FE /* VerificationCodeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		565F8C1C268CF48200E21C71 /* CarouselCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1263,6 +1273,7 @@
 		56664D99269DC33A00FDBD22 /* EmailVerification */ = {
 			isa = PBXGroup;
 			children = (
+				565F808326A59C1700ADB9FE /* ViewModel */,
 				56664D9A269DC34F00FDBD22 /* View */,
 			);
 			path = EmailVerification;
@@ -2445,6 +2456,7 @@
 				5648C5C8268842D9000B4E2A /* AccessoriesViewModel.swift in Sources */,
 				565F808026A5159000ADB9FE /* City.swift in Sources */,
 				565731F8267332620012ADD0 /* TariffSlideViewController.swift in Sources */,
+				565F808526A59C3800ADB9FE /* VerificationCodeViewModel.swift in Sources */,
 				5691A61B265C71EC0008081D /* ExteriorCollectionViewCell.swift in Sources */,
 				5618888F264A63CA00BDDB33 /* LocationDropDownView.swift in Sources */,
 				56A2AFEC2694CFC9001BA7C5 /* SearchPhoneCodeViewController.swift in Sources */,

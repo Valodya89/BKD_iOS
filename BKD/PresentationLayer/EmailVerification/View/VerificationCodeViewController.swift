@@ -26,7 +26,7 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
     
     @IBOutlet weak var mThankBtn: UIButton!
     //MARK: Variables
-//    private lazy  var emailVerificationVC = EmailVerificationViewController.initFromStoryboard(name: Constant.Storyboards.registration)
+    var email:String = ""
     private var timer = Timer()
     private var counter = 59
     
@@ -58,7 +58,24 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
 //            self?.emailVerificationVC.didMove(toParent: self)
 //        }
     }
+    
+    /// Send verification code
+    func sendVerification(){
+        VerificationCodeViewModel().putVerification(username: email, code: mCodeTxtFl.text!) { (status) in
+            
+            //            showAlert()
 
+        }
+    }
+    
+    
+    func resendVerification(){
+        VerificationCodeViewModel().resendVerificationCode(username: email) { (status) in
+            self.startTimer()
+            //            showAlert()
+
+        }
+    }
     
     /// start timer
     private func startTimer(){
@@ -72,7 +89,7 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
     func stopTimer() {
         timer.invalidate()
         mReserndCodeBtn.isUserInteractionEnabled = true
-
+        mTimerLb.textColor = color_navigationBar
     }
 
     /// timer selector function
@@ -107,7 +124,7 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
         if mCodeTxtFl.text?.count == 6 {
             mAlertContentV.isHidden = false
             mCodeTxtFl.resignFirstResponder()
-            showAlert()
+            sendVerification()
 //            addChild(emailVerificationVC)
 //            emailVerificationVC.view.frame = view.bounds
 //            view.addSubview(emailVerificationVC.view)

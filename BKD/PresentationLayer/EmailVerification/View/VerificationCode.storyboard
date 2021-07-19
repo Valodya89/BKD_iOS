@@ -28,9 +28,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hc2-tP-mI2">
-                                <rect key="frame" x="16" y="10" width="382" height="75"/>
-                                <string key="text">First step to make the reservation is to verify your phone number. We will send a verification code to XXXXXXXXXX number, indicated during the Reservation.</string>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please, check your Email. We’ve sent a verification link for your BKD account." lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hc2-tP-mI2">
+                                <rect key="frame" x="16" y="10" width="382" height="37.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                 <color key="textColor" name="navigationBar"/>
                                 <nil key="highlightedColor"/>
@@ -73,7 +72,7 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QCT-7s-iqH">
-                                <rect key="frame" x="16" y="117" width="382" height="57.5"/>
+                                <rect key="frame" x="16" y="65.5" width="382" height="57.5"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eTW-oa-tsc" customClass="OneTimeCodeTextField" customModule="BKD" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="57.5"/>

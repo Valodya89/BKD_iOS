@@ -22,12 +22,20 @@ enum AuthAPI: APIProtocol {
     case getCountries
     case signUp(username: String,
                 password: String)
+    case verifyAccounts(username: String,
+                        code: String)
+    case resendCode(username: String)
     
 
     
     var base: String {
         switch self {
-        case .getWorkingTimes, .getPhoneCodes, .getCountries, .signUp:
+        case .getWorkingTimes,
+             .getPhoneCodes,
+             .getCountries,
+             .signUp,
+             .verifyAccounts,
+             .resendCode:
             return BKDBaseURLs.account.rawValue
         default:
             return BKDBaseURLs.auth.rawValue
@@ -56,12 +64,19 @@ enum AuthAPI: APIProtocol {
             return "country/list"
         case .signUp:
             return "accounts/create"
+        case .verifyAccounts:
+            return "accounts/verify"
+        case .resendCode:
+            return "accounts/send-code"
         }
     }
     
     var header: [String : String] {
         switch self {
-        case .getCarsByType, .signUp:
+        case .getCarsByType,
+             .signUp,
+             .verifyAccounts,
+             .resendCode:
             return [
                 "Content-Type": "application/json"]
         
@@ -99,7 +114,17 @@ enum AuthAPI: APIProtocol {
                 "username": username,
                 "password": password
             ]
-            
+        case let .verifyAccounts(username, code):
+            return [
+                "username": username,
+                "password": code
+            ]
+        case let .resendCode(username):
+            return [
+                "username": username
+            ]
+        
+        
         default:
             return nil
         }
@@ -114,6 +139,10 @@ enum AuthAPI: APIProtocol {
 
         case .getCarsByType, .signUp:
             return .post
+        case .verifyAccounts:
+            return .put
+        case .resendCode:
+            return .patch
         default:
             return .get
         }

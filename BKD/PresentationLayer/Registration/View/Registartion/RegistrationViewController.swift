@@ -153,6 +153,7 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
     ///Open Verification screen
     func goToVerification() {
         let verificationCode = VerificationCodeViewController.initFromStoryboard(name: Constant.Storyboards.verificationCode)
+        verificationCode.email = mEmailAddressTxtFl.text!
         self.navigationController?.pushViewController(verificationCode, animated: true)
     }
     
