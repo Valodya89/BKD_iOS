@@ -275,7 +275,15 @@
                             <constraint firstItem="oDB-n1-8HH" firstAttribute="centerX" secondItem="qmQ-yQ-x5p" secondAttribute="centerX" id="zJm-3P-yOz"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="tFS-W1-Lcg"/>
+                    <navigationItem key="navigationItem" id="tFS-W1-Lcg">
+                        <barButtonItem key="backBarButtonItem" title="  " id="ScV-0h-eVG"/>
+                        <barButtonItem key="leftBarButtonItem" image="back" id="D6n-Nb-zLa">
+                            <connections>
+                                <action selector="back:" destination="ifl-Xx-GTX" id="mLx-2G-nbd"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="bkd" id="xGG-5l-gFj"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="mEmailAddressTextFl" destination="x3r-5D-OWI" id="xox-vu-xOp"/>
                         <outlet property="mErrorLb" destination="SFl-bA-dB1" id="Hga-PB-ylY"/>
@@ -283,6 +291,7 @@
                         <outlet property="mPasswordTxtFl" destination="dng-FE-ns4" id="igc-60-dnC"/>
                         <outlet property="mRegisterBtn" destination="DXy-Ui-4va" id="USn-Mg-bdJ"/>
                         <outlet property="mRegisterInfoLb" destination="NhF-jx-ftc" id="A7y-b8-332"/>
+                        <outlet property="mRightBarBtn" destination="xGG-5l-gFj" id="hVM-wG-v5V"/>
                         <outlet property="mSignInBckgV" destination="Uww-kE-ARD" id="wtz-ri-BHd"/>
                         <outlet property="mSignInBtn" destination="CvO-zl-DYd" id="cDm-dT-Dni"/>
                         <outlet property="mSignInInfoLb" destination="6Gr-e7-3cz" id="0to-1u-nbR"/>

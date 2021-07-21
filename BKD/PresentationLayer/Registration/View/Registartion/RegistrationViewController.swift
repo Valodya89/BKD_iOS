@@ -146,6 +146,9 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
                                textFld: nil)
             case .success:
                 self.animateContinue()
+            case .error:
+                self.showError(errorTxt: Constant.Texts.failedRequest,
+                               textFld: nil)
             }
         }
     }

@@ -105,11 +105,21 @@ extension UIView {
     //MARK: Blur
     //MARK: ----------------------
     func setBlur() {
-        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = self.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
+
+       // blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.addSubview(blurEffectView)
+    }
+    
+    func removeBlur() {
+        for subview in self.subviews {
+            if subview is UIVisualEffectView {
+                subview.removeFromSuperview()
+            }
+        }
     }
     
     

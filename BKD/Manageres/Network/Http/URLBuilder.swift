@@ -153,8 +153,18 @@ private extension NSMutableData {
 fileprivate extension APIProtocol {
     
     var privateApiKey: [String: String] {
-        let keychainManager = KeychainManager()
-        return ["Authorization": "Bearer \(keychainManager.getAccessToken() ?? "")"]
-    }
+            let keychainManager = KeychainManager()
+            return ["Authorization": "Bearer \(keychainManager.getAccessToken() ?? "")"]
+        }
+        
+//        let username = "gmail"
+//        let password = "gmail_secret"
+//
+//        let loginString = String(format: "%@:%@", username, password)
+//        let loginData = loginString.data(using: String.Encoding.utf8)!
+//        let base64LoginString = loginData.base64EncodedString()
+//
+//        return ["Authorization": "Basic \(base64LoginString)"]
+  //  }
 }
 

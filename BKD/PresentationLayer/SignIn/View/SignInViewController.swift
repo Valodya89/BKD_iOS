@@ -21,6 +21,7 @@ class SignInViewController: UIViewController, StoryboardInitializable {
     @IBOutlet weak var mSignInBckgV: UIView!
     @IBOutlet weak var mSignInLeading: NSLayoutConstraint!
     @IBOutlet weak var mRegisterInfoLb: UILabel!
+    @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mRegisterBtn: UIButton!
     
     //MARK: Variables
@@ -35,6 +36,7 @@ class SignInViewController: UIViewController, StoryboardInitializable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
+        
         mPasswordTxtFl.text = ""
         mEmailAddressTextFl.text = ""
         mSignInLeading.constant = 0
@@ -48,6 +50,7 @@ class SignInViewController: UIViewController, StoryboardInitializable {
     }
     
     func setUpView() {
+        mRightBarBtn.image = img_bkd
         mVisibilityPasswortBtn.setImage(#imageLiteral(resourceName: "invisible"), for: .normal)
         
         mPasswordTxtFl.setBorder(color: color_navigationBar!, width: 1)
@@ -63,6 +66,19 @@ class SignInViewController: UIViewController, StoryboardInitializable {
         
     }
     
+    func signIn()  {
+        signInViewModel.signIn(username: mEmailAddressTextFl.text!, password: mPasswordTxtFl.text!) { [self] (status) in
+            switch status {
+            case .success:
+                self.signInClicked()
+
+            default: break
+            
+            }
+        }
+    }
+    
+    
     private func incorrectPassword() {
         mErrorLb.isHidden = false
         mPasswordTxtFl.layer.borderColor = color_error!.cgColor
@@ -72,7 +88,7 @@ class SignInViewController: UIViewController, StoryboardInitializable {
     private func checkEmailAddress() {
         OfflineChatViewModel().isValidEmail(email: mEmailAddressTextFl.text!) { [self] (isValid) in
             if isValid {
-                searchClicked()
+                signIn()
             } else {
                 mErrorLb.isHidden = false
                 mEmailAddressTextFl.layer.borderColor = color_error!.cgColor
@@ -81,7 +97,7 @@ class SignInViewController: UIViewController, StoryboardInitializable {
         }
     }
     
-    private func searchClicked(){
+    private func signInClicked(){
         dissmisKeyboar()
         UIView.animate(withDuration: 0.5) { [self] in
             self.mSignInLeading.constant = self.mSignInBckgV.bounds.width - self.mSignInBtn.frame.size.width
@@ -97,6 +113,11 @@ class SignInViewController: UIViewController, StoryboardInitializable {
         mEmailAddressTextFl.resignFirstResponder()
     }
     //MARK: ACTIONS
+    @IBAction func back(_ sender: UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
     @IBAction func visibility(_ sender: UIButton) {
         if sender.image(for: .normal) == img_invisible {
             sender.setImage(#imageLiteral(resourceName: "visible"), for: .normal)

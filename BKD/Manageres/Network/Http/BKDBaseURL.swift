@@ -8,6 +8,7 @@
 import Foundation
 
 enum BKDBaseURLs: String {
-    case auth = "https://dev-rents.bkdrental.com"
+    case rent = "https://dev-rents.bkdrental.com"
     case account = "https://dev-accounts.bkdrental.com"
+    case auth = "https://dev-auth.bkdrental.com"
 }

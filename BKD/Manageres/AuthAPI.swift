@@ -25,6 +25,7 @@ enum AuthAPI: APIProtocol {
     case verifyAccounts(username: String,
                         code: String)
     case resendCode(username: String)
+    case getToken(username: String, password: String)
     
 
     
@@ -37,8 +38,10 @@ enum AuthAPI: APIProtocol {
              .verifyAccounts,
              .resendCode:
             return BKDBaseURLs.account.rawValue
-        default:
+        case .getToken:
             return BKDBaseURLs.auth.rawValue
+        default:
+            return BKDBaseURLs.rent.rawValue
         }
     }
     
@@ -68,6 +71,8 @@ enum AuthAPI: APIProtocol {
             return "accounts/verify"
         case .resendCode:
             return "accounts/send-code"
+        case .getToken:
+            return "oauth/token"
         }
     }
     
@@ -79,6 +84,15 @@ enum AuthAPI: APIProtocol {
              .resendCode:
             return [
                 "Content-Type": "application/json"]
+        case .getToken:
+            let username = "gmail"
+            let password = "gmail_secret"
+            
+            let loginString = String(format: "%@:%@", username, password)
+            let loginData = loginString.data(using: String.Encoding.utf8)!
+            let base64LoginString = loginData.base64EncodedString()
+            
+            return ["Authorization": "Basic \(base64LoginString)"]
         
         default:
             return [:]
@@ -117,13 +131,18 @@ enum AuthAPI: APIProtocol {
         case let .verifyAccounts(username, code):
             return [
                 "username": username,
-                "password": code
+                "code": code
             ]
         case let .resendCode(username):
             return [
                 "username": username
             ]
-        
+        case .getToken(let username, let password):
+            return [
+                "username": username,
+                "password": password,
+                "grant_type": "password"
+            ]
         
         default:
             return nil
@@ -137,7 +156,9 @@ enum AuthAPI: APIProtocol {
     var method: RequestMethod {
         switch self {
 
-        case .getCarsByType, .signUp:
+        case .getCarsByType,
+             .signUp,
+             .getToken:
             return .post
         case .verifyAccounts:
             return .put

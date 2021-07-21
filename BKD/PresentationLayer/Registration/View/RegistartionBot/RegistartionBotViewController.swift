@@ -14,6 +14,18 @@ enum PickerType {
     case nationalCountry
 }
 
+enum RegistrationState {
+    case PERSONAL_DATA
+    case IDENTITY_FRONT
+    case IDENTITY_BACK
+    case IDENTITY_EXPIRATION
+    case DRIVING_LICENSE_FRONT
+    case DRIVING_LICENSE_BACK
+    case DRIVING_LICENSE_DATES
+    case DRIVING_LICENSE_SELFIE
+    case AGREEMENT_ACCEPTED
+}
+
 class RegistartionBotViewController: UIViewController, StoryboardInitializable {
     
     //MARK: Outlets
@@ -31,18 +43,19 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
     //MARK: Variables
     let registrationBotViewModel = RegistrationBotViewModel()
     var tableData:[RegistrationBotModel] = []
-//    var tableData:[RegistrationBotModel] = [RegistrationBotData.registrationBotModel[0]]
     var currentPhoneCode:PhoneCodeModel = PhoneCodeData.phoneCodeModel[0]
     var countryList: [Country]?
     var cityList: [City]?
+    var personalData: PersonalData?
+    
+    var pickerType:PickerType = .date
+    var registrationState: RegistrationState = .PERSONAL_DATA
+    
     var timer: Timer?
     var datePicker = UIDatePicker()
     var pickerV = UIPickerView()
-    //var pickerList: [String]?
-    var pickerType:PickerType = .date
     var isTakePhoto:Bool = false
     var isDriverRegister: Bool = false
-    
     private var currentIndex = 0
     private var activeTextField: UITextField?
     
@@ -402,7 +415,7 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
 
 
 
-//MARK: UserFillFieldTableViewCellDelegate
+//MARK: - UserFillFieldTableViewCellDelegate
 //MARK: --------------------------------
 extension RegistartionBotViewController: UserFillFieldTableViewCellDelegate {
     func didBeginEdithingTxtField(txtFl: UITextField) {
@@ -444,7 +457,7 @@ extension RegistartionBotViewController: UserFillFieldTableViewCellDelegate {
 }
  
 
-//MARK: PhoneNumberTableViewCellDelegate
+//MARK: - PhoneNumberTableViewCellDelegate
 //MARK: --------------------------------
 extension RegistartionBotViewController: PhoneNumberTableViewCellDelegate {
     
@@ -464,7 +477,7 @@ extension RegistartionBotViewController: PhoneNumberTableViewCellDelegate {
 }
 
 
-//MARK: CalendarTableViewCellDelegate
+//MARK: - CalendarTableViewCellDelegate
 //MARK: --------------------------------
 extension RegistartionBotViewController: CalendarTableViewCellDelegate {
     func willOpenPicker(textFl: UITextField, isCalendar: Bool) {
@@ -488,7 +501,7 @@ extension RegistartionBotViewController: CalendarTableViewCellDelegate {
 
 
 
-//MARK: MailBoxNumberTableViewCellDelegate
+//MARK: - MailBoxNumberTableViewCellDelegate
 //MARK: --------------------------------
 extension RegistartionBotViewController: MailBoxNumberTableViewCellDelegate {
     
@@ -506,7 +519,7 @@ extension RegistartionBotViewController: MailBoxNumberTableViewCellDelegate {
 
 
 
-//MARK: NationalRegisterNumberTableViewCellDelegate
+//MARK: - NationalRegisterNumberTableViewCellDelegate
 //MARK: -------------------------------------------
 extension RegistartionBotViewController: NationalRegisterNumberTableViewCellDelegate {
     func didPressOtherCountryNational(isClicked: Bool) {
@@ -537,7 +550,7 @@ extension RegistartionBotViewController: NationalRegisterNumberTableViewCellDele
 
 
 
-//MARK: TakePhotoTableViewCellDelegate
+//MARK: - TakePhotoTableViewCellDelegate
 //MARK: --------------------------------
 extension RegistartionBotViewController: TakePhotoTableViewCellDelegate {
     
@@ -552,7 +565,7 @@ extension RegistartionBotViewController: TakePhotoTableViewCellDelegate {
     }
 }
 
-//MARK: BkdAgreementViewControllerDelegate
+//MARK: - BkdAgreementViewControllerDelegate
 //MARK: ----------------------------
 extension RegistartionBotViewController: BkdAgreementViewControllerDelegate {
     func agreeTermsAndConditions() {
@@ -563,6 +576,9 @@ extension RegistartionBotViewController: BkdAgreementViewControllerDelegate {
     }
 }
 
+
+//MARK: - SearchPhoneCodeViewControllerDelegate
+//MARK: --------------------------------------
 extension RegistartionBotViewController: SearchPhoneCodeViewControllerDelegate {
     
     func didSelectCountry(_ country: PhoneCodeModel) {
@@ -572,7 +588,7 @@ extension RegistartionBotViewController: SearchPhoneCodeViewControllerDelegate {
     
 }
 
-//MARK: UIImagePickerControllerDelegate
+//MARK: - UIImagePickerControllerDelegate
 //MARK: --------------------------------
 extension RegistartionBotViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     

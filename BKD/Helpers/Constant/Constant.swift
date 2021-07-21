@@ -26,6 +26,10 @@ struct Constant {
         static let registrationBot = "RegistrationBot"
         static let searchPhoneCode = "SearchPhoneCode"
         static let verificationCode = "VerificationCode"
+        static let changePhoneNumber = "ChangePhoneNumber"
+        static let phoneVerification = "PhoneVerification"
+        static let reservationCompleted = "ReservationCompleted"
+        static let payment = "Payment"
 
     }
     struct NibNames {
@@ -63,6 +67,10 @@ struct Constant {
         static let SearchPhoneCode = "SearchPhoneCodeViewController"
         static let bkdAgreement = "BkdAgreementViewController"
         static let verificationCode = "VerificationCodeViewController"
+        static let changePhoneNumber = "ChangePhoneNumberViewController"
+        static let phoneVerification = "PhoneVerificationViewController"
+        static let reservationCompleted = "ReservationCompletedViewController"
+        static let selectPayment = "SelectPaymentViewController"
     }
     
     struct FontNames {
@@ -117,6 +125,8 @@ struct Constant {
         
         //Register
         static let accountExist = "Account already exists"
+        static let failedRequest = "Request failed please try again"
+        static let  reciveEmail = "You will receive the email in"
         static let emailAdd = "Email address"
         static let password = "Password"
         static let confirmPassword = "Confirm password"
@@ -139,9 +149,24 @@ struct Constant {
         static let year = "Year"
         static let open = "Open"
         static let takePhoto = "Take a photo"
-        static let country = "Country"
         static let search = "Search"
         static let m = "m"
+        
+        static let name = "First Name"
+        static let surname = "Last Name"
+        static let streetName = "Street Name"
+        static let houseNumber = "House number"
+        static let country = "Country"
+        static let city = "City"
+        static let mailboxNumber = "Mailbox number"
+        static let zipNumber = "Zip number"
+        
+        
+        //Payment
+        static let invalidCode = "Verification code is invalid"
+        static let payAlert = "You should pay 24 hours before the reservation. If not, the Pre-Reservation will be automatically cancelled. There are only 3 free cancellations of the Pre-Reservation in a month."
+        static let gotIt = "Got it"
+        static let payNow = "Pay now"
         
 
     }
@@ -260,4 +285,11 @@ let img_add_selecte = UIImage(named: "added")
 let img_invisible = UIImage(named: "invisible")
 let img_visible = UIImage(named: "visible")
 let img_dropDown_light = UIImage(named: "dropDown_blue")
+
+ //Payment
+let img_bancontact = UIImage(named: "bancontact")
+let img_applePay = UIImage(named: "apple_pay")
+let img_gPay = UIImage(named: "g_pay")
+let img_payPal = UIImage(named: "paypal")
+
 

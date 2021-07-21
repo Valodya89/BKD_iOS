@@ -257,6 +257,7 @@ struct PhoneCodeData {
 }
 
 
+
 struct  RegistrationBotData {
     static let registrationBotModel: [RegistrationBotModel] = [
        /* RegistrationBotModel(viewDescription: "national register"),*/
@@ -266,26 +267,26 @@ struct  RegistrationBotData {
         RegistrationBotModel(viewDescription: "button", userRegisterInfo: UserRegisterInfo(string: "Start")),
          RegistrationBotModel(msgToFill: "Let’s start with some personal details. Firstly, your First name.", msgToFillBold: "First name."),
         RegistrationBotModel(msgToFill: "P.S. You should use your real names on BKD."),
-        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo(placeholder: "First Name")),
+        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo(placeholder: Constant.Texts.name)),
         RegistrationBotModel(msgToFill: "Now, mention your Last name.", msgToFillBold: "Last name"),
-        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo(placeholder: "Last Name")),
+        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo(placeholder: Constant.Texts.surname)),
         RegistrationBotModel(msgToFill: "Insert your Phone number, please.", msgToFillBold: "Phone number"),
         RegistrationBotModel(viewDescription: "phone"),
         RegistrationBotModel(msgToFill: "Date of birth, maybe there are some promotions on your specific day.", msgToFillBold:"Date of birth"),
         RegistrationBotModel(viewDescription: "calendar"),
         RegistrationBotModel(msgToFill: "Now let’s add your Residential address details by mentioning:"),
         RegistrationBotModel(msgToFill: "Step 1 - Street name.", msgToFillBold: "Street name"),
-        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo( placeholder: "Street Name")),
+        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo( placeholder: Constant.Texts.streetName)),
         RegistrationBotModel(msgToFill: "Step 2 - House number.", msgToFillBold: "House number"),
-        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo(placeholder: "House number")),
+        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo(placeholder: Constant.Texts.houseNumber)),
         RegistrationBotModel(msgToFill: "Step 3 - Mailbox number, if you’re living in an apartment building.", msgToFillBold: "Mailbox number"),
-        RegistrationBotModel( viewDescription: "mailbox", userRegisterInfo: UserRegisterInfo( placeholder:"Mailbox number")),
+        RegistrationBotModel( viewDescription: "mailbox", userRegisterInfo: UserRegisterInfo( placeholder:Constant.Texts.mailboxNumber)),
         RegistrationBotModel(msgToFill: "Step 4 - Country.", msgToFillBold: "Country"),
-        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo( placeholder:"Country")),
+        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo( placeholder:Constant.Texts.country)),
         RegistrationBotModel(msgToFill: "Step 5 - Zip number.", msgToFillBold: "Zip number"),
-        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo(placeholder: "Zip number")),
+        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo(placeholder: Constant.Texts.zipNumber)),
         RegistrationBotModel(msgToFill: "Step 6 - City.", msgToFillBold: "City"),
-        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo( placeholder:"City")),
+        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo( placeholder: Constant.Texts.city)),
         RegistrationBotModel(msgToFill: "Your Address is registered successfully."),
         RegistrationBotModel(msgToFill: "Please, insert your National Register Number.", msgToFillBold: "National Register Number"),
         RegistrationBotModel(viewDescription: "national register"),
@@ -320,26 +321,26 @@ struct  RegistrationBotData {
         RegistrationBotModel(viewDescription: "button", userRegisterInfo: UserRegisterInfo(string: "Start")),
          RegistrationBotModel(msgToFill: "Let’s start with some personal details. Firstly, your additional driver’s First name.", msgToFillBold: "First name"),
         RegistrationBotModel(msgToFill: "P.S. You should use real names on BKD."),
-        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo(placeholder: "First Name")),
+        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo(placeholder: Constant.Texts.name)),
         RegistrationBotModel(msgToFill: "Now, mention your additional driver’s Last name.", msgToFillBold: "Last name"),
-        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo(placeholder: "Last Name")),
+        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo(placeholder: Constant.Texts.surname)),
         RegistrationBotModel(msgToFill: "Insert your additional driver’s Phone number, please.", msgToFillBold: "Phone number"),
         RegistrationBotModel(viewDescription: "phone"),
         RegistrationBotModel(msgToFill: "Date of birth, maybe there are some promotions on your additional driver’s specific day.", msgToFillBold:"Date of birth"),
         RegistrationBotModel(viewDescription: "calendar"),
         RegistrationBotModel(msgToFill: "Now let’s add your additional driver’s address details by mentioning:"),
-        RegistrationBotModel(msgToFill: "Step 1 - Street name.", msgToFillBold: "Street name"),
-        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo( placeholder: "Street Name")),
+        RegistrationBotModel(msgToFill: "Step 1 - Street name.", msgToFillBold: Constant.Texts.streetName),
+        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo( placeholder: Constant.Texts.streetName)),
         RegistrationBotModel(msgToFill: "Step 2 - House number.", msgToFillBold: "House number"),
-        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo(placeholder: "House number")),
+        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo(placeholder: Constant.Texts.houseNumber)),
         RegistrationBotModel(msgToFill: "Step 3 - Mailbox number, if you’re living in an apartment building.", msgToFillBold: "Mailbox number"),
-        RegistrationBotModel( viewDescription: "mailbox", userRegisterInfo: UserRegisterInfo( placeholder:"Mailbox number")),
+        RegistrationBotModel( viewDescription: "mailbox", userRegisterInfo: UserRegisterInfo( placeholder:Constant.Texts.mailboxNumber)),
         RegistrationBotModel(msgToFill: "Step 4 - Country.", msgToFillBold: "Country"),
-        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo( placeholder:"Country")),
+        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo( placeholder:Constant.Texts.country)),
         RegistrationBotModel(msgToFill: "Step 5 - Zip number.", msgToFillBold: "Zip number"),
-        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo(placeholder: "Zip number")),
+        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo(placeholder: Constant.Texts.zipNumber)),
         RegistrationBotModel(msgToFill: "Step 6 - City.", msgToFillBold: "City"),
-        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo( placeholder:"City")),
+        RegistrationBotModel(viewDescription: "txtFl", userRegisterInfo: UserRegisterInfo( placeholder:Constant.Texts.city)),
         RegistrationBotModel(msgToFill: "Your additional driver’s Address is registered successfully."),
         RegistrationBotModel(msgToFill: "Please, insert your additional driver’s National Register number.", msgToFillBold: "National Register Number"),
         RegistrationBotModel(viewDescription: "national register"),
@@ -372,3 +373,17 @@ struct  RegistrationBotData {
         RegistrationBotModel(msgToFill: "Enjoy the best rental experience with us")]
 }
                                                    
+
+
+//MARK: - Payment
+struct PaymentTypeData {
+    static let paymentTypeModel: [PaymentTypes] = [ PaymentTypes(title: "PaymentTypes", image: nil),
+        PaymentTypes(title: nil, image: UIImage(named: "bancontact")),
+        PaymentTypes(title: nil, image: UIImage(named: "apple_pay")),
+        PaymentTypes(title: nil, image: UIImage(named: "g_pay")),
+        PaymentTypes(title: nil, image: UIImage(named: "paypal")),
+        PaymentTypes(title: "Kaartlazer", image: nil),
+        PaymentTypes(title: "Office terminal", image: nil),
+        PaymentTypes(title: "Cash", image: nil)]
+
+}

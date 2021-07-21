@@ -44,11 +44,11 @@ class PhoneNumberTableViewCell: UITableViewCell {
             }
 
             guard let phoneNumber = try? phoneNumberKit.parse(newValue, ignoreType: true) else { return }
-            
             mCodeLb.text = "+" + String(phoneNumber.countryCode)
             mPhoneNumberTxtFl.text = String(phoneNumber.nationalNumber)
         }
     }
+    
     
     var isValid: Bool {
         return mPhoneNumberTxtFl.text?.count == selectedCountry?.validFormPattern

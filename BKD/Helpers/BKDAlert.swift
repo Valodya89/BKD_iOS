@@ -66,15 +66,19 @@ class BKDAlert: NSObject {
         let messageLabel2 = UILabel()
 
         //Message
-        messageLabelHeight = messageLabel.requiredHeight(labelText: message!,
-                                                             width: titleWidth,
-                                                             font: font_unselected_filter!)
-        messageLabel.frame = CGRect(x: titleX, y: titleTop, width: titleWidth , height: messageLabelHeight)
-        messageLabel.textColor = color_alert_txt
-        messageLabel.text = message
-        messageLabel.textAlignment = messageAlignment
-        messageLabel.numberOfLines = 20
-        alertView.addSubview(messageLabel)
+        if let _ = message {
+            messageLabelHeight = messageLabel.requiredHeight(labelText: message!,
+                                                                 width: titleWidth,
+                                                                 font: font_unselected_filter!)
+            messageLabel.frame = CGRect(x: titleX, y: titleTop, width: titleWidth , height: messageLabelHeight)
+            messageLabel.textColor = color_alert_txt
+            messageLabel.text = message
+            messageLabel.textAlignment = messageAlignment
+            messageLabel.numberOfLines = 20
+            alertView.addSubview(messageLabel)
+        }
+            
+       
         
         //title
         if let title = title {

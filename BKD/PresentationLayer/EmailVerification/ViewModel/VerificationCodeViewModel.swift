@@ -17,12 +17,14 @@ class VerificationCodeViewModel: NSObject {
             case .success(let data):
                 guard let verification = BkdConverter<BaseResponseModel<EmptyModel>>.parseJson(data: data as Any) else {
                     print("error")
+                    completion(SignUpStatus(rawValue: "error")!)
                     return
                 }
                 print(verification.message as Any)
                 completion(SignUpStatus(rawValue: verification.message)!)
             case .failure(let error):
                 print(error.description)
+                completion(SignUpStatus(rawValue: "error")!)
                 break
             }
         }
@@ -37,12 +39,14 @@ class VerificationCodeViewModel: NSObject {
             case .success(let data):
                 guard let resendCode = BkdConverter<BaseResponseModel<EmptyModel>>.parseJson(data: data as Any) else {
                     print("error")
+                    completion(SignUpStatus(rawValue: "error")!)
                     return
                 }
                 print(resendCode.message as Any)
                 completion(SignUpStatus(rawValue: resendCode.message)!)
             case .failure(let error):
                 print(error.description)
+                completion(SignUpStatus(rawValue: "error")!)
                 break
             }
         }

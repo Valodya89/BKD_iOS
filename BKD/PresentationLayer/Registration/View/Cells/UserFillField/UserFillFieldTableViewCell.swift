@@ -14,8 +14,33 @@ enum ViewType: String, CaseIterable {
     case phone = "phone"
     case textFl = "txtFl"
     case nationalRegister = "national register"
-
+    
+    case name = "name"
+    case surname = "surname"
+    case dateOfBirth = "dateOfBirth"
+    case street = "street"
+    case house = "house"
+    case mailBox = "mailBox"
+    case countryId = "countryId"
+    case zip = "zip"
+    //case city = "city"
+    case nationalRegisterNumber = "nationalRegisterNumber"
+    
 }
+//
+//"name": "Valodya",
+//  "surname": "Galstyan",
+//  "phoneNumber": "+37441099906",
+//  "dateOfBirth": "15-37-2021",
+//  "street": "some street",
+//  "house": "11",
+//  "mailBox": "374",
+//  "countryId": "60e30c6e89bf4b6b024559a1",
+//  "zip": "4sdf42ds4f",
+//  "city": "Yerevan",
+//  "nationalRegisterNumber": "1245454534"
+
+
 
 protocol UserFillFieldTableViewCellDelegate: AnyObject {
     func didPressStart()
@@ -38,12 +63,30 @@ class UserFillFieldTableViewCell: UITableViewCell {
     @IBOutlet weak var mBorderV: UIView!
     @IBOutlet weak var mDropDownImgV: UIImageView!
     @IBOutlet weak var mDropDownPlaceholderLb: UILabelPadding!
-    var placeholder: String?
     var viewType = ViewType(rawValue: "txtFl")
     
     weak var delegate: UserFillFieldTableViewCellDelegate?
-//    var didPressStart: (() -> Void)?
-//    var didReturnTxtField: ((String?) -> Void)?
+
+    var placeholder: String? {
+        
+        didSet {
+            if placeholder == Constant.Texts.name {
+                viewType = .name
+            } else if placeholder == Constant.Texts.surname {
+                viewType = .surname
+            } else if placeholder == Constant.Texts.streetName {
+                viewType = .street
+            } else if placeholder == Constant.Texts.houseNumber {
+                viewType = .house
+            } else if placeholder == Constant.Texts.mailboxNumber {
+                viewType = .mailBox
+            } else if placeholder == Constant.Texts.country {
+                viewType = .country
+            } else if placeholder == Constant.Texts.mailboxNumber {
+                viewType = .mailBox
+            }
+        }
+    }
 
     
     override func awakeFromNib() {
@@ -84,7 +127,6 @@ class UserFillFieldTableViewCell: UITableViewCell {
     
     
     func setUpView() {
-        // mStartBtn.layer.cornerRadius = 36
         
         mStartBtn.roundCornersWithBorder(corners: [ .allCorners], radius: 36.0, borderColor: color_dark_register!, borderWidth: 1)
         
@@ -96,6 +138,7 @@ class UserFillFieldTableViewCell: UITableViewCell {
         mTextFl.padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
     }
     
+    /// Set cell info
     func setCellInfo(item: RegistrationBotModel) {
         placeholder = item.userRegisterInfo?.placeholder
         viewType = ViewType(rawValue: placeholder ?? "")
@@ -128,6 +171,7 @@ class UserFillFieldTableViewCell: UITableViewCell {
         }
     }
     
+    ///Press Start button
     private func pressStart() {
         mStartBtn.setTitleColor(color_selected_start, for: .normal)
         mStartBtn.isUserInteractionEnabled = false
@@ -135,6 +179,7 @@ class UserFillFieldTableViewCell: UITableViewCell {
         mStartBtn.layer.cornerRadius = 10
     }
     
+    ///Fill text filed data
     private func textFiledFilled(txt: String) {
 
         mTextLb.text = txt
@@ -147,6 +192,10 @@ class UserFillFieldTableViewCell: UITableViewCell {
             mBorderV.bringSubviewToFront(mDropDownImgV)
             mTextLb.bringSubviewToFront(mDropDownImgV)
         }
+        
+    }
+    
+    func setCurrentDataType(plaseholder: String) {
     }
     
     @IBAction func start(_ sender: UIButton) {

@@ -134,6 +134,18 @@
 		565F807C26A510AA00ADB9FE /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F807B26A510AA00ADB9FE /* Country.swift */; };
 		565F808026A5159000ADB9FE /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F807F26A5159000ADB9FE /* City.swift */; };
 		565F808526A59C3800ADB9FE /* VerificationCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F808426A59C3800ADB9FE /* VerificationCodeViewModel.swift */; };
+		565F80A826A5FD7D00ADB9FE /* PersonalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F80A726A5FD7D00ADB9FE /* PersonalData.swift */; };
+		565F80AC26A62EE200ADB9FE /* MyBKDViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F80AB26A62EE200ADB9FE /* MyBKDViewModel.swift */; };
+		565F80B426A6391000ADB9FE /* ChangePhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F80B326A6391000ADB9FE /* ChangePhoneNumberViewController.swift */; };
+		565F80B826A6392600ADB9FE /* ChangePhoneNumber.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 565F80B726A6392600ADB9FE /* ChangePhoneNumber.storyboard */; };
+		565F80C426A667D900ADB9FE /* ReservationCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F80C326A667D900ADB9FE /* ReservationCompletedViewController.swift */; };
+		565F80CA26A6690B00ADB9FE /* ReservationCompleted.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 565F80C926A6690B00ADB9FE /* ReservationCompleted.storyboard */; };
+		565F80D826A7042100ADB9FE /* Payment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 565F80D726A7042100ADB9FE /* Payment.storyboard */; };
+		565F80E026A74D4C00ADB9FE /* PhoneVerification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 565F80DF26A74D4C00ADB9FE /* PhoneVerification.storyboard */; };
+		565F80E426A74D6000ADB9FE /* PhoneVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F80E326A74D6000ADB9FE /* PhoneVerificationViewController.swift */; };
+		565F80FC26A7BE1600ADB9FE /* SelectPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F80FB26A7BE1600ADB9FE /* SelectPaymentViewController.swift */; };
+		565F810026A7C1E700ADB9FE /* PaymentTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F80FF26A7C1E700ADB9FE /* PaymentTypes.swift */; };
+		565F810526A7D08600ADB9FE /* PaymenTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F810426A7D08600ADB9FE /* PaymenTypeTableViewCell.swift */; };
 		565F8C1F268CF4C700E21C71 /* CarouselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F8C1D268CF4C700E21C71 /* CarouselCollectionViewCell.swift */; };
 		565F8C2B268D027400E21C71 /* UPCarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F8C28268D027400E21C71 /* UPCarouselFlowLayout.swift */; };
 		565F8C45268D12EA00E21C71 /* CarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F8C44268D12EA00E21C71 /* CarouselViewController.swift */; };
@@ -384,6 +396,18 @@
 		565F807B26A510AA00ADB9FE /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		565F807F26A5159000ADB9FE /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		565F808426A59C3800ADB9FE /* VerificationCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationCodeViewModel.swift; sourceTree = "<group>"; };
+		565F80A726A5FD7D00ADB9FE /* PersonalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalData.swift; sourceTree = "<group>"; };
+		565F80AB26A62EE200ADB9FE /* MyBKDViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBKDViewModel.swift; sourceTree = "<group>"; };
+		565F80B326A6391000ADB9FE /* ChangePhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhoneNumberViewController.swift; sourceTree = "<group>"; };
+		565F80B726A6392600ADB9FE /* ChangePhoneNumber.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChangePhoneNumber.storyboard; sourceTree = "<group>"; };
+		565F80C326A667D900ADB9FE /* ReservationCompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCompletedViewController.swift; sourceTree = "<group>"; };
+		565F80C926A6690B00ADB9FE /* ReservationCompleted.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ReservationCompleted.storyboard; sourceTree = "<group>"; };
+		565F80D726A7042100ADB9FE /* Payment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Payment.storyboard; sourceTree = "<group>"; };
+		565F80DF26A74D4C00ADB9FE /* PhoneVerification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PhoneVerification.storyboard; sourceTree = "<group>"; };
+		565F80E326A74D6000ADB9FE /* PhoneVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewController.swift; sourceTree = "<group>"; };
+		565F80FB26A7BE1600ADB9FE /* SelectPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPaymentViewController.swift; sourceTree = "<group>"; };
+		565F80FF26A7C1E700ADB9FE /* PaymentTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTypes.swift; sourceTree = "<group>"; };
+		565F810426A7D08600ADB9FE /* PaymenTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymenTypeTableViewCell.swift; sourceTree = "<group>"; };
 		565F8C1D268CF4C700E21C71 /* CarouselCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewCell.swift; sourceTree = "<group>"; };
 		565F8C28268D027400E21C71 /* UPCarouselFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UPCarouselFlowLayout.swift; sourceTree = "<group>"; };
 		565F8C44268D12EA00E21C71 /* CarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselViewController.swift; sourceTree = "<group>"; };
@@ -1192,6 +1216,148 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		565F80AF26A638D200ADB9FE /* ChangePhoneNumber */ = {
+			isa = PBXGroup;
+			children = (
+				565F80B226A638EB00ADB9FE /* ViewModel */,
+				565F80B126A638E500ADB9FE /* View */,
+				565F80B026A638DE00ADB9FE /* Model */,
+			);
+			path = ChangePhoneNumber;
+			sourceTree = "<group>";
+		};
+		565F80B026A638DE00ADB9FE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		565F80B126A638E500ADB9FE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				565F80B326A6391000ADB9FE /* ChangePhoneNumberViewController.swift */,
+				565F80B726A6392600ADB9FE /* ChangePhoneNumber.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		565F80B226A638EB00ADB9FE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		565F80BB26A6678900ADB9FE /* ReservationCompleted */ = {
+			isa = PBXGroup;
+			children = (
+				565F80BE26A667B500ADB9FE /* ViewModel */,
+				565F80BD26A667AE00ADB9FE /* Model */,
+				565F80BC26A667A700ADB9FE /* View */,
+			);
+			path = ReservationCompleted;
+			sourceTree = "<group>";
+		};
+		565F80BC26A667A700ADB9FE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				565F80C326A667D900ADB9FE /* ReservationCompletedViewController.swift */,
+				565F80C926A6690B00ADB9FE /* ReservationCompleted.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		565F80BD26A667AE00ADB9FE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		565F80BE26A667B500ADB9FE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		565F80CD26A703AA00ADB9FE /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				565F80D026A703D700ADB9FE /* ViewModel */,
+				565F80CF26A703D000ADB9FE /* Model */,
+				565F80CE26A703C900ADB9FE /* View */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		565F80CE26A703C900ADB9FE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				565F810326A7D05C00ADB9FE /* Cell */,
+				565F80D726A7042100ADB9FE /* Payment.storyboard */,
+				565F80FB26A7BE1600ADB9FE /* SelectPaymentViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		565F80CF26A703D000ADB9FE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				565F80FF26A7C1E700ADB9FE /* PaymentTypes.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		565F80D026A703D700ADB9FE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		565F80DB26A74D0800ADB9FE /* PhoneVerification */ = {
+			isa = PBXGroup;
+			children = (
+				565F80DE26A74D2100ADB9FE /* ViewModel */,
+				565F80DD26A74D1B00ADB9FE /* Model */,
+				565F80DC26A74D1400ADB9FE /* View */,
+			);
+			path = PhoneVerification;
+			sourceTree = "<group>";
+		};
+		565F80DC26A74D1400ADB9FE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				565F80E326A74D6000ADB9FE /* PhoneVerificationViewController.swift */,
+				565F80DF26A74D4C00ADB9FE /* PhoneVerification.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		565F80DD26A74D1B00ADB9FE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		565F80DE26A74D2100ADB9FE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		565F810326A7D05C00ADB9FE /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				565F810426A7D08600ADB9FE /* PaymenTypeTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		565F8C1C268CF48200E21C71 /* CarouselCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1379,6 +1545,10 @@
 		568E70942644BD2D000CB6A9 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				565F80DB26A74D0800ADB9FE /* PhoneVerification */,
+				565F80CD26A703AA00ADB9FE /* Payment */,
+				565F80BB26A6678900ADB9FE /* ReservationCompleted */,
+				565F80AF26A638D200ADB9FE /* ChangePhoneNumber */,
 				56664D99269DC33A00FDBD22 /* EmailVerification */,
 				56AD18CC26916026006A53C1 /* Registration */,
 				565F8C6A268E944E00E21C71 /* SignIn */,
@@ -1677,6 +1847,7 @@
 		568E70B62644BFDE000CB6A9 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				565F80AB26A62EE200ADB9FE /* MyBKDViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1835,6 +2006,7 @@
 				5659B02A2699F5020059D28C /* PhoneCodeModel.swift */,
 				565F807B26A510AA00ADB9FE /* Country.swift */,
 				565F807F26A5159000ADB9FE /* City.swift */,
+				565F80A726A5FD7D00ADB9FE /* PersonalData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2092,10 +2264,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				565F80E026A74D4C00ADB9FE /* PhoneVerification.storyboard in Resources */,
 				56A2AFF02694CFE1001BA7C5 /* SearchPhoneCode.storyboard in Resources */,
 				56C8E173267C1D100061890C /* ReserveTableViewCell.xib in Resources */,
 				560252952664376900FB204C /* Mulish-Regular.ttf in Resources */,
 				564E137A26531F8F008CE884 /* Mulish-SemiBold.ttf in Resources */,
+				565F80B826A6392600ADB9FE /* ChangePhoneNumber.storyboard in Resources */,
 				5660F7F2266C21980082F038 /* Mulish-Bold.ttf in Resources */,
 				564E1354265211FF008CE884 /* SFProDisplay-Semibold.ttf in Resources */,
 				564E137226530208008CE884 /* SearchResultCollectionViewCell.xib in Resources */,
@@ -2106,6 +2280,8 @@
 				5691A61C265C71EC0008081D /* ExteriorCollectionViewCell.xib in Resources */,
 				564E1358265211FF008CE884 /* Mulish-Light.ttf in Resources */,
 				568E70C326454DB1000CB6A9 /* AboutUs.storyboard in Resources */,
+				565F80D826A7042100ADB9FE /* Payment.storyboard in Resources */,
+				565F80CA26A6690B00ADB9FE /* ReservationCompleted.storyboard in Resources */,
 				568E70CB26455286000CB6A9 /* MainCollectionViewCell.xib in Resources */,
 				56573202267339B50012ADD0 /* FontsFree-Net-SFProDisplay-Medium.ttf in Resources */,
 				5656324726585FFF00B78562 /* CarEquipmentCollectionViewCell.xib in Resources */,
@@ -2313,7 +2489,9 @@
 				56533F092679BDBE0012BF4A /* MyDriversViewController.swift in Sources */,
 				56533ECF2678B94D0012BF4A /* MoreModel.swift in Sources */,
 				566354F4268B72950003E2EB /* PriceTableView.swift in Sources */,
+				565F810026A7C1E700ADB9FE /* PaymentTypes.swift in Sources */,
 				56CFDE682693721C00D731CD /* RegistartionBotViewController.swift in Sources */,
+				565F80A826A5FD7D00ADB9FE /* PersonalData.swift in Sources */,
 				565731CC26724F720012ADD0 /* CarInfoView.swift in Sources */,
 				565731D126725FBD0012ADD0 /* DetailsAndTailLiftView.swift in Sources */,
 				568E703B264440C2000CB6A9 /* MyBKDViewController.swift in Sources */,
@@ -2354,6 +2532,7 @@
 				566354EB268AF8EF0003E2EB /* PriceTableViewCell.swift in Sources */,
 				564E12E1264D787A008CE884 /* MenuModel.swift in Sources */,
 				565731D92672DE810012ADD0 /* UINavigationControllerExtention.swift in Sources */,
+				565F80B426A6391000ADB9FE /* ChangePhoneNumberViewController.swift in Sources */,
 				560251E02661089C00FB204C /* CarouselCellView.swift in Sources */,
 				56B9F31326806A2E003449AD /* SearchEditModel.swift in Sources */,
 				56316316267A822200ED2144 /* MyDriverCollectionViewCell.swift in Sources */,
@@ -2364,6 +2543,7 @@
 				560252DB266534D500FB204C /* SearchCustomLocationViewModel.swift in Sources */,
 				566B7E8A269DC036007C9241 /* VerificationCodeViewController.swift in Sources */,
 				56AD18EA2691622C006A53C1 /* NewPasswordViewController.swift in Sources */,
+				565F810526A7D08600ADB9FE /* PaymenTypeTableViewCell.swift in Sources */,
 				565F8C45268D12EA00E21C71 /* CarouselViewController.swift in Sources */,
 				564E1306264EE294008CE884 /* UIViewExtention.swift in Sources */,
 				5602520226611C4100FB204C /* SearchCustomLocationUiView.swift in Sources */,
@@ -2451,12 +2631,16 @@
 				56CFDE6026936F8400D731CD /* FaceAndTouchIdViewController.swift in Sources */,
 				5602526726616C8700FB204C /* Storyboardinitializable.swift in Sources */,
 				56CFDE7126938EFC00D731CD /* InfoMessageTableViewCell.swift in Sources */,
+				565F80C426A667D900ADB9FE /* ReservationCompletedViewController.swift in Sources */,
 				5656081A2678541B009578FA /* ImagesBottomCollectionViewCell.swift in Sources */,
 				565BFDF726A064360044D081 /* String.swift in Sources */,
 				5648C5C8268842D9000B4E2A /* AccessoriesViewModel.swift in Sources */,
+				565F80FC26A7BE1600ADB9FE /* SelectPaymentViewController.swift in Sources */,
 				565F808026A5159000ADB9FE /* City.swift in Sources */,
+				565F80AC26A62EE200ADB9FE /* MyBKDViewModel.swift in Sources */,
 				565731F8267332620012ADD0 /* TariffSlideViewController.swift in Sources */,
 				565F808526A59C3800ADB9FE /* VerificationCodeViewModel.swift in Sources */,
+				565F80E426A74D6000ADB9FE /* PhoneVerificationViewController.swift in Sources */,
 				5691A61B265C71EC0008081D /* ExteriorCollectionViewCell.swift in Sources */,
 				5618888F264A63CA00BDDB33 /* LocationDropDownView.swift in Sources */,
 				56A2AFEC2694CFC9001BA7C5 /* SearchPhoneCodeViewController.swift in Sources */,

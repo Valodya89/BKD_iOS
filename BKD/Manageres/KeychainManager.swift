@@ -15,7 +15,7 @@ protocol UserToken {
 
 final class KeychainManager {
     
-    let keychain = Keychain(service: "com.mimo.MimoBike")
+    let keychain = Keychain(service: "com.BKD.bkdrental")
     let accessTokenKey = "AccessToken"
     let refreshTokenKey = "RefreshToken"
     let expiresInKey = "RefreshToken"
@@ -55,6 +55,7 @@ final class KeychainManager {
     func isUserLoggedIn() -> Bool {
         return keychain[accessTokenKey] != nil
     }
+    
     
     /// Check user token
     func isTokenExpired() -> Bool {

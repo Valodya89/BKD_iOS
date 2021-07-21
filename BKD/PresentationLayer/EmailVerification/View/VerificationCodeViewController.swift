@@ -26,6 +26,7 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
     
     @IBOutlet weak var mThankBtn: UIButton!
     //MARK: Variables
+    lazy var verificationCodeViewModel =         VerificationCodeViewModel()
     var email:String = ""
     private var timer = Timer()
     private var counter = 59
@@ -49,37 +50,38 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
     func configtextFiledUI() {
         mCodeTxtFl.setBorder(color: color_navigationBar!, width: 1)
         mCodeTxtFl.defaultCharacter = "-"
-        mCodeTxtFl.configure()
-//        mCodeTxtFl.didEnterLastDigit = { [weak self] code in
-//            print(code)
-//            self?.addChild(self!.emailVerificationVC)
-//            self?.emailVerificationVC.view.frame = (self?.view.bounds)!
-//            self?.view.addSubview(self!.emailVerificationVC.view)
-//            self?.emailVerificationVC.didMove(toParent: self)
-//        }
+        mCodeTxtFl.configure(with: 5)
     }
     
     /// Send verification code
     func sendVerification(){
-        VerificationCodeViewModel().putVerification(username: email, code: mCodeTxtFl.text!) { (status) in
+        VerificationCodeViewModel().putVerification(username: email, code: mCodeTxtFl.text!) { [self] (status) in
             
-            //            showAlert()
-
+            switch status {
+            case .success:
+                self.showAlert()
+            case .error:
+                showError()
+            default: break
+            }
         }
     }
     
-    
+    /// Send verification again
     func resendVerification(){
         VerificationCodeViewModel().resendVerificationCode(username: email) { (status) in
             self.startTimer()
-            //            showAlert()
 
         }
     }
     
     /// start timer
     private func startTimer(){
-        mReserndCodeBtn.isUserInteractionEnabled = false
+        mTimerTitleLb.textColor = color_navigationBar
+        mTimerTitleLb.text = Constant.Texts.reciveEmail
+        mReserndCodeBtn.disable()
+        mTimerLb.isHidden = false
+
         counter = 59
         let seconds = 1.0
         timer = Timer.scheduledTimer(timeInterval: seconds, target:self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
@@ -88,8 +90,11 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
     /// stop timer
     func stopTimer() {
         timer.invalidate()
-        mReserndCodeBtn.isUserInteractionEnabled = true
+        mVerifyBtn.disable()
+        mReserndCodeBtn.enable()
         mTimerLb.textColor = color_navigationBar
+        mCodeTxtFl.configure()
+        
     }
 
     /// timer selector function
@@ -110,28 +115,42 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
     }
     
     func showAlert() {
+        mAlertContentV.isHidden = false
         self.mAlertV.isHidden = false
         self.mAlertV.popupAnimation()
     }
     
+    
+    func showError() {
+        //failedRequest
+        mTimerTitleLb.text = Constant.Texts.failedRequest
+        mTimerTitleLb.textColor = color_error
+        mTimerLb.isHidden = true
+        mCodeTxtFl.text = ""
+        self.stopTimer()
+    }
+    
+    
+    
     @IBAction func back(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    
     @IBAction func resendCode(_ sender: UIButton) {
+        
+        self.mVerifyBtn.enable()
+        resendVerification()
     }
     
     @IBAction func verify(_ sender: UIButton) {
-        if mCodeTxtFl.text?.count == 6 {
-            mAlertContentV.isHidden = false
+        
+        if mCodeTxtFl.text?.count == 5 {
             mCodeTxtFl.resignFirstResponder()
             sendVerification()
-//            addChild(emailVerificationVC)
-//            emailVerificationVC.view.frame = view.bounds
-//            view.addSubview(emailVerificationVC.view)
-//            emailVerificationVC.didMove(toParent: self)
         }
-        
     }
+    
     @IBAction func thankYou(_ sender: UIButton) {
         let FaceAndTouchIdVC = FaceAndTouchIdViewController.initFromStoryboard(name: Constant.Storyboards.registration)
         self.navigationController?.pushViewController(FaceAndTouchIdVC, animated: true)

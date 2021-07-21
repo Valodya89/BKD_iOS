@@ -19,6 +19,7 @@ class MyBKDViewController: BaseViewController {
     
     //MARK: Variables
     private lazy  var signInVC = SignInViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
+    private lazy var myBKDViewModel = MyBKDViewModel()
     var menu: SideMenuNavigationController?
 
     
@@ -97,7 +98,9 @@ extension MyBKDViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 2 {
             UserDefaults.standard.removeObject(forKey: key_isLogin)
+            myBKDViewModel.logout()
             addSignInChild()
+            
         }
     }
     

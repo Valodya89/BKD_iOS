@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Light.ttf">
+            <string>SFProDisplay-Light</string>
+        </array>
+        <array key="SFProDisplay-Semibold.ttf">
+            <string>SFProDisplay-Semibold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Select Payment View Controller-->
+        <scene sceneID="Ewu-DU-z2e">
+            <objects>
+                <viewController storyboardIdentifier="SelectPaymentViewController" id="Ia9-oM-TDf" customClass="SelectPaymentViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rfv-c2-eiK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make XX,XX  Payment via" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsT-wT-iVq">
+                                <rect key="frame" x="17" y="25" width="331" height="22"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
+                                <color key="textColor" name="navigationBar"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kQW-qx-kY2">
+                                <rect key="frame" x="0.0" y="114" width="414" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PaymenTypeTableViewCell" id="ZNR-Kv-EjC" customClass="PaymenTypeTableViewCell" customModule="BKD" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="66.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZNR-Kv-EjC" id="GxL-Mg-FgN">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="66.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EzH-dL-bz2">
+                                                    <rect key="frame" x="16" y="22" width="382" height="33.5"/>
+                                                    <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
+                                                    <state key="normal" title="test">
+                                                        <color key="titleColor" name="navigationBar"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="EzH-dL-bz2" firstAttribute="centerX" secondItem="GxL-Mg-FgN" secondAttribute="centerX" id="0R6-vr-ec3"/>
+                                                <constraint firstItem="EzH-dL-bz2" firstAttribute="top" secondItem="GxL-Mg-FgN" secondAttribute="top" constant="22" id="7VE-Q4-Tst"/>
+                                                <constraint firstItem="EzH-dL-bz2" firstAttribute="width" secondItem="GxL-Mg-FgN" secondAttribute="width" multiplier="0.922705" id="UwL-6l-AKR"/>
+                                                <constraint firstAttribute="bottom" secondItem="EzH-dL-bz2" secondAttribute="bottom" constant="11" id="cGc-O7-jbs"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Ia9-oM-TDf" id="Qg4-pf-kh9"/>
+                                    <outlet property="delegate" destination="Ia9-oM-TDf" id="0o1-yT-ZuD"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="BSU-vw-Mw1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="tsT-wT-iVq" firstAttribute="height" secondItem="rfv-c2-eiK" secondAttribute="height" multiplier="0.0272277" id="NvV-Dq-BdY"/>
+                            <constraint firstItem="tsT-wT-iVq" firstAttribute="width" secondItem="rfv-c2-eiK" secondAttribute="width" multiplier="0.8" id="gJK-Vl-w8B"/>
+                            <constraint firstItem="tsT-wT-iVq" firstAttribute="centerY" secondItem="BSU-vw-Mw1" secondAttribute="centerY" multiplier="0.093" id="gmf-lM-dQB"/>
+                            <constraint firstItem="tsT-wT-iVq" firstAttribute="centerX" secondItem="BSU-vw-Mw1" secondAttribute="centerX" multiplier="0.882" id="pVd-yA-r0s"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="tCY-lp-3Sz">
+                        <barButtonItem key="leftBarButtonItem" image="back" id="4cv-06-TQz"/>
+                        <barButtonItem key="rightBarButtonItem" image="bkd" id="fo6-yI-lWs"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="htZ-GT-2Ba" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1098.5507246376812" y="212.94642857142856"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="PIT-N8-u8e">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YTS-XU-yYm" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="VTZ-oD-Pr5">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" name="navigation_bar"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Ia9-oM-TDf" kind="relationship" relationship="rootViewController" id="5qK-If-eCn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TdF-GG-cNm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="189.85507246376812" y="212.94642857142856"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="back" width="12" height="21"/>
+        <image name="bkd" width="76" height="23.5"/>
+        <namedColor name="navigationBar">
+            <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="navigation_bar">
+            <color red="0.10999999940395355" green="0.20000000298023224" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

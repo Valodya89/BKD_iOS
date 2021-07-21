@@ -8,7 +8,7 @@
 import UIKit
 
 class ReserveViewController: UIViewController {
-    //MARK: Outlet
+    //MARK: - Outlet
     //Car
     @IBOutlet weak var mCarBckgV: UIView!
     @IBOutlet weak var mTowBarBckgV: UIView!
@@ -66,16 +66,24 @@ class ReserveViewController: UIViewController {
     @IBOutlet weak var mPriceTableV: PriceTableView!
     
     @IBOutlet weak var mPriceTableHeight: NSLayoutConstraint!
+    
+    //MARK: - Variables
+
     var reserveViewModel = ReserveViewModel()
     public var vehicleModel: VehicleModel?
     var lastContentOffset:CGFloat = 0.0
     var totalPrice: Double = 0.0
     
     
-    //MARK: Life cycle
+    //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.mConfirmLeading.constant = 0.0
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -98,15 +106,6 @@ class ReserveViewController: UIViewController {
         configureView()
     }
     
-    func clickConfirm() {
-        UIView.animate(withDuration: 0.5) { [self] in
-            self.mConfirmLeading.constant = self.mConfirmBckgV.bounds.width - self.mConfirmBtn.frame.size.width
-            self.mConfirmBckgV.layoutIfNeeded()
-
-        } completion: { _ in
-
-        }
-    }
     
     func configureView() {
         
@@ -136,10 +135,61 @@ class ReserveViewController: UIViewController {
         
     }
     
+    /// Animate Confirm click
+    private func clickConfirm() {
+        UIView.animate(withDuration: 0.5) { [self] in
+            self.mConfirmLeading.constant = self.mConfirmBckgV.bounds.width - self.mConfirmBtn.frame.size.width
+            self.mConfirmBckgV.layoutIfNeeded()
+
+        } completion: { _ in
+            self.checkIsUserSignIn()
+        }
+    }
     
     
-//MARK: ACTIONS
-//MARK: ----------
+  /// Check user is loged in or not, and get languages if loged in
+    private func checkIsUserSignIn() {
+        reserveViewModel.isUserSignIn { [weak self] isUserSignIn in
+            guard let self = self else { return }
+            
+            //WARNING:
+            self.goToPhoneVerification()
+//            if !isUserSignIn {
+//                self.goToSignInPage()
+//            } else {
+//                if self.checkPhoneNumberVerification() {
+//                    self.goToResrvetionCompletedPage()
+//                } else {
+//
+//                }
+//            }
+        }
+    }
+    
+    private func checkPhoneNumberVerification() -> Bool {
+        return false
+    }
+    
+    /// Go to Sign in screen
+    private func goToSignInPage() {
+          let signInVC = SignInViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
+        self.navigationController?.pushViewController(signInVC, animated: true)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    /// Go to reservation completed screen
+    private func goToResrvetionCompletedPage() {
+          let signInVC = SignInViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
+        self.navigationController?.pushViewController(signInVC, animated: true)
+    }
+    
+    private func goToPhoneVerification() {
+        let changePhoneNumberVC = ChangePhoneNumberViewController.initFromStoryboard(name: Constant.Storyboards.changePhoneNumber)
+      self.navigationController?.pushViewController(changePhoneNumberVC, animated: true)
+    }
+    
+//MARK: - Actions
+//MARK: -------------------
     
     @IBAction func back(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
@@ -154,6 +204,10 @@ class ReserveViewController: UIViewController {
     }
 
 }
+
+ 
+//MARK: - UIScrollViewDelegate
+//MARK: -----------------------------
 
 extension ReserveViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

@@ -8,6 +8,12 @@
 import UIKit
 
 class ReserveViewModel: NSObject {
+    private let keychain = KeychainManager()
+
+    
+    func isUserSignIn(completion: @escaping (Bool) -> Void) {
+        completion(keychain.isUserLoggedIn())
+    }
 
     func getAdditionalAccessories(vehicleModel:VehicleModel) -> Array<Any>?  {
         var accessories:[AccessoriesModel]?
