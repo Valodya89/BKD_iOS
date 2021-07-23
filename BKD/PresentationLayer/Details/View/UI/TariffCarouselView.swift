@@ -14,7 +14,7 @@ protocol TariffCarouselViewDelegate: AnyObject {
     func willChangeTariffOption(tariff: Tariff, optionIndex: Int)
 }
 class TariffCarouselView: UIView,  iCarouselDataSource, iCarouselDelegate {
-    var didChangeCategory: ((Int) -> Void)?
+   // var didChangeCategory: ((Int) -> Void)?
 
     var selectedSegmentIndex: Int?
     var tariffCarouselCellV: TariffCarouselCell?

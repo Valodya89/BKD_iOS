@@ -84,7 +84,10 @@ class ReserveViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.mConfirmLeading.constant = 0.0
+        self.tabBarController?.tabBar.isHidden = false
     }
+    
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         mReserveTableHeight.constant = mReserveInfoTableV.contentSize.height

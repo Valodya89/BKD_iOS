@@ -21,6 +21,7 @@ class ReservationCompletedViewController: UIViewController, StoryboardInitializa
     @IBOutlet weak var mPayLaterLb: UILabel!
     @IBOutlet weak var mPayLaterBtn: UIButton!
     @IBOutlet weak var mDepositRentalPriceLb: UILabel!
+    @IBOutlet weak var mGradientV: UIView!
     @IBOutlet weak var mDepositRentalLb: UILabel!
     @IBOutlet weak var mDepositRentalCheckBtn: UIButton!
     @IBOutlet weak var mDepositPriceLb: UILabel!
@@ -34,7 +35,6 @@ class ReservationCompletedViewController: UIViewController, StoryboardInitializa
     @IBOutlet weak var mConfirmContentV: UIView!
     @IBOutlet weak var mConfirmBtn: UIButton!
     @IBOutlet weak var mConfirmLeading: NSLayoutConstraint!
-   
     @IBOutlet weak var mVisualEffectV: UIVisualEffectView!
     
     //MARK: - Variables
@@ -47,7 +47,19 @@ class ReservationCompletedViewController: UIViewController, StoryboardInitializa
         setUpView()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        mConfirmBtn.roundCornersWithBorder(corners: .allCorners, radius: 8, borderColor: color_navigationBar!, borderWidth: 1)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        mConfirmLeading.constant = 0.0
+        mVisualEffectV.isHidden = true
+    }
+    
     func setUpView()  {
+        mRightBarBtn.image = img_bkd
         configUI()
     }
     
@@ -59,7 +71,8 @@ class ReservationCompletedViewController: UIViewController, StoryboardInitializa
         mPreReservetionTitleLb.layer.cornerRadius = 8
         mPreReservetionTitleLb.setPadding(8)
         mPreReservetionTitleLb.textAlignment = .center
-        mConfirmBtn.roundCornersWithBorder(corners: .allCorners, radius: 8.0, borderColor: color_navigationBar!, borderWidth: 1)
+        mConfirmBtn.layer.cornerRadius = 8
+        mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
         
     }
     
@@ -89,15 +102,11 @@ class ReservationCompletedViewController: UIViewController, StoryboardInitializa
     }
     
     private func showAlertOfPayLater() {
-        //mBlurV.isHidden = false
-        //self.view.setBlur()
-        mVisualEffectV.isHidden = false
-        mVisualEffectV.setGradient(startColor: .white, endColor: color_navigationBar!)
-        
-        BKDAlert().showAlert(on: self, title: nil, message: Constant.Texts.payAlert, messageSecond: nil, cancelTitle: Constant.Texts.gotIt, okTitle: Constant.Texts.payNow) {
+        self.mVisualEffectV.isHidden = false
+        let bkdAlert = BKDAlert()
+        bkdAlert.backgroundView.isHidden = true
+        bkdAlert.showAlert(on: self, title: nil, message: Constant.Texts.payAlert, messageSecond: nil, cancelTitle: Constant.Texts.gotIt, okTitle: Constant.Texts.payNow) {
             self.mVisualEffectV.isHidden = true
-
-           // self.view.removeBlur()
         } okAction: {
             self.goToSelectPayment()
         }

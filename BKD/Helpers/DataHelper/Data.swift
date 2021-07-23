@@ -377,7 +377,7 @@ struct  RegistrationBotData {
 
 //MARK: - Payment
 struct PaymentTypeData {
-    static let paymentTypeModel: [PaymentTypes] = [ PaymentTypes(title: "PaymentTypes", image: nil),
+    static let paymentTypeModel: [PaymentTypes] = [ PaymentTypes(title: "Credit Card", image: nil),
         PaymentTypes(title: nil, image: UIImage(named: "bancontact")),
         PaymentTypes(title: nil, image: UIImage(named: "apple_pay")),
         PaymentTypes(title: nil, image: UIImage(named: "g_pay")),

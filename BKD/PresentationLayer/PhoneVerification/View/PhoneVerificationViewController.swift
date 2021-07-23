@@ -32,8 +32,13 @@ class PhoneVerificationViewController: UIViewController, StoryboardInitializable
     //MARK: - Life cicle
     override func viewDidLoad() {
         super.viewDidLoad()
-        configtextFiledUI()
         setUpView()
+    }
+    
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        configtextFiledUI()
     }
     
     func setUpView() {

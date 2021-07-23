@@ -57,8 +57,8 @@
                                                 <color key="textColor" name="navigationBar"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Є   350" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smn-va-Dsc">
-                                                <rect key="frame" x="346" y="2.5" width="52" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€   350" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smn-va-Dsc">
+                                                <rect key="frame" x="349" y="2.5" width="49" height="21"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" name="email"/>
                                                 <nil key="highlightedColor"/>
@@ -96,8 +96,8 @@
                                                 <color key="textColor" name="navigationBar"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Є   350 + 105.7" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyM-BE-4eX">
-                                                <rect key="frame" x="287.5" y="2.5" width="110.5" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€   350 + 105.7" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyM-BE-4eX">
+                                                <rect key="frame" x="290.5" y="2.5" width="107.5" height="21"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" name="email"/>
                                                 <nil key="highlightedColor"/>
@@ -165,6 +165,12 @@
                                 <rect key="frame" x="16" y="214.5" width="320" height="112"/>
                                 <string key="text">You can opt for “Pay later” option, however if no payment is made before 24 hours of the Reservation start date, the Pre-Reservation will be automatically cancelled. There are only 3 free cancellations of the Pre-Reservation in a month.</string>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
+                                <color key="textColor" name="navigationBar"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a Payment option (Deposit or Deposit + Rental price) to fully complete the reservation." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYF-Sn-Cpt">
+                                <rect key="frame" x="16" y="131" width="320" height="66"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
                                 <color key="textColor" name="navigationBar"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -246,33 +252,13 @@
                                     <outletCollection property="gestureRecognizers" destination="e0x-RX-cEd" appends="YES" id="ziC-Gg-Mrb"/>
                                 </connections>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a Payment option (Deposit or Deposit + Rental price) to fully complete the reservation." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYF-Sn-Cpt">
-                                <rect key="frame" x="16" y="131" width="320" height="66"/>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
-                                <color key="textColor" name="navigationBar"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1bL-bN-C4t">
+                            <visualEffectView hidden="YES" opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iTd-kx-Ggq">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="4K0-HV-51p">
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000001192092896" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vYa-8c-pOA">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HMF-7k-s8Q">
-                                            <rect key="frame" x="0.0" y="0.0" width="174" height="646"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="zcz-G3-1kn">
-                                                <rect key="frame" x="0.0" y="0.0" width="174" height="646"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            </view>
-                                            <vibrancyEffect>
-                                                <blurEffect style="regular"/>
-                                            </vibrancyEffect>
-                                        </visualEffectView>
-                                    </subviews>
                                 </view>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <blurEffect style="light"/>
+                                <blurEffect style="regular"/>
                             </visualEffectView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="m2K-Ma-LBk"/>
@@ -280,28 +266,28 @@
                         <constraints>
                             <constraint firstItem="xeS-aD-3GN" firstAttribute="leading" secondItem="YYF-Sn-Cpt" secondAttribute="leading" id="1jG-1y-rAC"/>
                             <constraint firstItem="xeS-aD-3GN" firstAttribute="height" relation="greaterThanOrEqual" secondItem="5WC-bV-Yju" secondAttribute="height" multiplier="0.117574" id="2eH-3q-cmc"/>
-                            <constraint firstItem="1bL-bN-C4t" firstAttribute="top" secondItem="m2K-Ma-LBk" secondAttribute="top" id="2o1-ev-VDy"/>
                             <constraint firstItem="1Cd-US-4rU" firstAttribute="height" secondItem="5WC-bV-Yju" secondAttribute="height" multiplier="0.121287" id="3FS-wS-rbz"/>
+                            <constraint firstItem="iTd-kx-Ggq" firstAttribute="top" secondItem="m2K-Ma-LBk" secondAttribute="top" id="7ci-mB-UOB"/>
+                            <constraint firstItem="iTd-kx-Ggq" firstAttribute="leading" secondItem="m2K-Ma-LBk" secondAttribute="leading" id="7fK-uf-Ji8"/>
                             <constraint firstItem="1Cd-US-4rU" firstAttribute="centerY" secondItem="m2K-Ma-LBk" secondAttribute="centerY" multiplier="0.17" id="CeL-Ua-ZrN"/>
-                            <constraint firstItem="m2K-Ma-LBk" firstAttribute="bottom" secondItem="1bL-bN-C4t" secondAttribute="bottom" id="Fvt-Ft-cVg"/>
+                            <constraint firstItem="iTd-kx-Ggq" firstAttribute="bottom" secondItem="m2K-Ma-LBk" secondAttribute="bottom" id="FIn-g9-McC"/>
                             <constraint firstItem="gCY-pl-jgw" firstAttribute="width" secondItem="5WC-bV-Yju" secondAttribute="width" id="IdW-dJ-R1d"/>
                             <constraint firstItem="m2K-Ma-LBk" firstAttribute="bottom" secondItem="gr5-dN-n17" secondAttribute="bottom" multiplier="1.106" id="KMk-gE-BHw"/>
                             <constraint firstItem="xeS-aD-3GN" firstAttribute="top" secondItem="YYF-Sn-Cpt" secondAttribute="bottom" multiplier="1.09" id="LPb-6h-oRY"/>
                             <constraint firstItem="1Cd-US-4rU" firstAttribute="width" secondItem="5WC-bV-Yju" secondAttribute="width" multiplier="0.480676" id="PLV-Xp-XBp"/>
                             <constraint firstItem="gr5-dN-n17" firstAttribute="width" secondItem="5WC-bV-Yju" secondAttribute="width" multiplier="0.646" id="Tkq-JA-gei"/>
                             <constraint firstItem="gCY-pl-jgw" firstAttribute="top" secondItem="xeS-aD-3GN" secondAttribute="bottom" multiplier="1.19" id="Up7-1c-LSw"/>
+                            <constraint firstItem="m2K-Ma-LBk" firstAttribute="trailing" secondItem="iTd-kx-Ggq" secondAttribute="trailing" id="Zve-Ae-kN2"/>
                             <constraint firstItem="YYF-Sn-Cpt" firstAttribute="centerX" secondItem="m2K-Ma-LBk" secondAttribute="centerX" multiplier="0.85" id="egb-aJ-6zb"/>
                             <constraint firstItem="gr5-dN-n17" firstAttribute="centerX" secondItem="m2K-Ma-LBk" secondAttribute="centerX" id="eiO-Ha-mi5"/>
                             <constraint firstItem="gr5-dN-n17" firstAttribute="height" secondItem="5WC-bV-Yju" secondAttribute="height" multiplier="0.0519802" id="lwm-ow-lfD"/>
                             <constraint firstItem="YYF-Sn-Cpt" firstAttribute="width" secondItem="5WC-bV-Yju" secondAttribute="width" multiplier="0.772947" id="mBs-rg-xtM"/>
-                            <constraint firstItem="m2K-Ma-LBk" firstAttribute="trailing" secondItem="1bL-bN-C4t" secondAttribute="trailing" id="mn2-DT-REi"/>
                             <constraint firstItem="1Cd-US-4rU" firstAttribute="centerX" secondItem="m2K-Ma-LBk" secondAttribute="centerX" id="pc0-Nk-ms4"/>
                             <constraint firstItem="gCY-pl-jgw" firstAttribute="centerX" secondItem="m2K-Ma-LBk" secondAttribute="centerX" id="q9h-GH-IxH"/>
                             <constraint firstItem="gCY-pl-jgw" firstAttribute="height" secondItem="5WC-bV-Yju" secondAttribute="height" multiplier="0.105" id="sNV-rY-C50"/>
                             <constraint firstItem="YYF-Sn-Cpt" firstAttribute="top" secondItem="1Cd-US-4rU" secondAttribute="bottom" multiplier="1.14" id="xXa-Z5-S5n"/>
                             <constraint firstItem="YYF-Sn-Cpt" firstAttribute="height" relation="greaterThanOrEqual" secondItem="5WC-bV-Yju" secondAttribute="height" multiplier="0.0816832" id="xrN-uj-PFP"/>
                             <constraint firstItem="xeS-aD-3GN" firstAttribute="width" secondItem="5WC-bV-Yju" secondAttribute="width" multiplier="0.772947" id="yVW-F0-jvm"/>
-                            <constraint firstItem="1bL-bN-C4t" firstAttribute="leading" secondItem="m2K-Ma-LBk" secondAttribute="leading" id="zDX-qG-CXc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Kai-Fn-USo">
@@ -322,6 +308,7 @@
                         <outlet property="mDepositRentalCheckBtn" destination="BDY-o0-6yw" id="AxS-2r-Xao"/>
                         <outlet property="mDepositRentalLb" destination="0yo-Q1-lH8" id="8RC-v2-zDA"/>
                         <outlet property="mDepositRentalPriceLb" destination="cyM-BE-4eX" id="fpJ-uG-wJv"/>
+                        <outlet property="mGradientV" destination="vYa-8c-pOA" id="FAH-Jz-GsK"/>
                         <outlet property="mLeftBarBtn" destination="YkZ-5I-shI" id="Hor-jQ-7g5"/>
                         <outlet property="mPayLaterBtn" destination="kYF-Ll-hqA" id="s09-nB-t6X"/>
                         <outlet property="mPayLaterInfoLb" destination="xeS-aD-3GN" id="dpc-2s-6WE"/>
@@ -329,7 +316,7 @@
                         <outlet property="mPaymentOptionInfoLb" destination="YYF-Sn-Cpt" id="5zO-fG-qKD"/>
                         <outlet property="mPreReservetionTitleLb" destination="1Cd-US-4rU" id="8U3-iZ-hB9"/>
                         <outlet property="mRightBarBtn" destination="MHV-CG-jhK" id="czD-SJ-ybP"/>
-                        <outlet property="mVisualEffectV" destination="1bL-bN-C4t" id="ouC-7Q-Ldw"/>
+                        <outlet property="mVisualEffectV" destination="iTd-kx-Ggq" id="Iga-4x-c6e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GqJ-Qf-zOC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

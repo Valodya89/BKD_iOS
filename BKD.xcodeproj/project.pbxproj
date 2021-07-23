@@ -223,6 +223,10 @@
 		56B9F34226826DE1003449AD /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F34126826DE1003449AD /* DetailsViewModel.swift */; };
 		56C8E172267C1D100061890C /* ReserveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C8E170267C1D100061890C /* ReserveTableViewCell.swift */; };
 		56C8E173267C1D100061890C /* ReserveTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56C8E171267C1D100061890C /* ReserveTableViewCell.xib */; };
+		56CC7D7326A87A9F006DB7B8 /* PaymentWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CC7D7226A87A9F006DB7B8 /* PaymentWebViewController.swift */; };
+		56CC7D7926A91309006DB7B8 /* BancontactTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CC7D7726A91308006DB7B8 /* BancontactTypeViewController.swift */; };
+		56CC7D8126A9FED1006DB7B8 /* BancontactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CC7D8026A9FED1006DB7B8 /* BancontactView.swift */; };
+		56CC7D8526AA07F2006DB7B8 /* BancontactCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CC7D8426AA07F2006DB7B8 /* BancontactCollectionViewCell.swift */; };
 		56CD830B267CF45600B2799F /* ReserveTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CD830A267CF45600B2799F /* ReserveTableView.swift */; };
 		56CD8313267CF56800B2799F /* ReserveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CD8312267CF56800B2799F /* ReserveModel.swift */; };
 		56CFDE6026936F8400D731CD /* FaceAndTouchIdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFDE5F26936F8400D731CD /* FaceAndTouchIdViewController.swift */; };
@@ -491,6 +495,10 @@
 		56B9F34126826DE1003449AD /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
 		56C8E170267C1D100061890C /* ReserveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveTableViewCell.swift; sourceTree = "<group>"; };
 		56C8E171267C1D100061890C /* ReserveTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReserveTableViewCell.xib; sourceTree = "<group>"; };
+		56CC7D7226A87A9F006DB7B8 /* PaymentWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentWebViewController.swift; sourceTree = "<group>"; };
+		56CC7D7726A91308006DB7B8 /* BancontactTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BancontactTypeViewController.swift; sourceTree = "<group>"; };
+		56CC7D8026A9FED1006DB7B8 /* BancontactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BancontactView.swift; sourceTree = "<group>"; };
+		56CC7D8426AA07F2006DB7B8 /* BancontactCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BancontactCollectionViewCell.swift; sourceTree = "<group>"; };
 		56CD830A267CF45600B2799F /* ReserveTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveTableView.swift; sourceTree = "<group>"; };
 		56CD8312267CF56800B2799F /* ReserveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveModel.swift; sourceTree = "<group>"; };
 		56CFDE5F26936F8400D731CD /* FaceAndTouchIdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceAndTouchIdViewController.swift; sourceTree = "<group>"; };
@@ -1295,6 +1303,7 @@
 		565F80CE26A703C900ADB9FE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				56CC7D7126A879DA006DB7B8 /* UI */,
 				565F810326A7D05C00ADB9FE /* Cell */,
 				565F80D726A7042100ADB9FE /* Payment.storyboard */,
 				565F80FB26A7BE1600ADB9FE /* SelectPaymentViewController.swift */,
@@ -1354,6 +1363,7 @@
 			isa = PBXGroup;
 			children = (
 				565F810426A7D08600ADB9FE /* PaymenTypeTableViewCell.swift */,
+				56CC7D8426AA07F2006DB7B8 /* BancontactCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -2078,6 +2088,32 @@
 			path = ReserveTableViewCell;
 			sourceTree = "<group>";
 		};
+		56CC7D7126A879DA006DB7B8 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				56CC7D7F26A9FEA5006DB7B8 /* Bancontact */,
+				56CC7D7626A912D2006DB7B8 /* BancontactType */,
+				56CC7D7226A87A9F006DB7B8 /* PaymentWebViewController.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		56CC7D7626A912D2006DB7B8 /* BancontactType */ = {
+			isa = PBXGroup;
+			children = (
+				56CC7D7726A91308006DB7B8 /* BancontactTypeViewController.swift */,
+			);
+			path = BancontactType;
+			sourceTree = "<group>";
+		};
+		56CC7D7F26A9FEA5006DB7B8 /* Bancontact */ = {
+			isa = PBXGroup;
+			children = (
+				56CC7D8026A9FED1006DB7B8 /* BancontactView.swift */,
+			);
+			path = Bancontact;
+			sourceTree = "<group>";
+		};
 		56CD8309267CF42500B2799F /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -2532,12 +2568,14 @@
 				566354EB268AF8EF0003E2EB /* PriceTableViewCell.swift in Sources */,
 				564E12E1264D787A008CE884 /* MenuModel.swift in Sources */,
 				565731D92672DE810012ADD0 /* UINavigationControllerExtention.swift in Sources */,
+				56CC7D7326A87A9F006DB7B8 /* PaymentWebViewController.swift in Sources */,
 				565F80B426A6391000ADB9FE /* ChangePhoneNumberViewController.swift in Sources */,
 				560251E02661089C00FB204C /* CarouselCellView.swift in Sources */,
 				56B9F31326806A2E003449AD /* SearchEditModel.swift in Sources */,
 				56316316267A822200ED2144 /* MyDriverCollectionViewCell.swift in Sources */,
 				565A7AB02653FE26006C63D0 /* SearchHeaderView.swift in Sources */,
 				564E12FE264EAF04008CE884 /* PaddingUILable.swift in Sources */,
+				56CC7D8126A9FED1006DB7B8 /* BancontactView.swift in Sources */,
 				565BFD87269F55550044D081 /* URLBuilderProtocol.swift in Sources */,
 				565BFD86269F55550044D081 /* SessionProtocol.swift in Sources */,
 				560252DB266534D500FB204C /* SearchCustomLocationViewModel.swift in Sources */,
@@ -2599,6 +2637,7 @@
 				5602521126612A6300FB204C /* SearchTableViewCell.swift in Sources */,
 				5656F1A82689650600E70BAB /* ReserveViewModel.swift in Sources */,
 				566B3760269503360021BCAA /* CalendarTableViewCell.swift in Sources */,
+				56CC7D8526AA07F2006DB7B8 /* BancontactCollectionViewCell.swift in Sources */,
 				56AD18D126916061006A53C1 /* RegistrationViewController.swift in Sources */,
 				565A7AEA2655C5AE006C63D0 /* CategoryModel.swift in Sources */,
 				5656F196268936E000E70BAB /* MyDriversModel.swift in Sources */,
@@ -2610,6 +2649,7 @@
 				565BFD76269F4C5A0044D081 /* Car.swift in Sources */,
 				56A2AFF52694D503001BA7C5 /* SearchPhoneCodeTableViewCell.swift in Sources */,
 				5691A641265D97550008081D /* MainViewModel.swift in Sources */,
+				56CC7D7926A91309006DB7B8 /* BancontactTypeViewController.swift in Sources */,
 				565BFD9F269F590A0044D081 /* KeychainManager.swift in Sources */,
 				5648C5B6268803F7000B4E2A /* AccessoriesModel.swift in Sources */,
 				5657E84E26711AE800788D62 /* CarPhotosView.swift in Sources */,

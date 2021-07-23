@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -72,7 +71,7 @@
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ChT-3h-E0J" customClass="OneTimeCodeTextField" customModule="BKD" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="57.5"/>
-                                        <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                        <color key="backgroundColor" name="background"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -86,7 +85,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VS7-E2-5iw">
-                                <rect key="frame" x="84.5" y="194" width="245.5" height="22"/>
+                                <rect key="frame" x="84.5" y="227" width="245.5" height="22"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" You will receive the SMS in" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcZ-2V-k31">
                                         <rect key="frame" x="0.0" y="0.0" width="197" height="21"/>
@@ -136,10 +135,10 @@
                             <constraint firstItem="1re-Z0-t2e" firstAttribute="centerX" secondItem="6kQ-tC-ulE" secondAttribute="centerX" id="3OL-Rq-y2s"/>
                             <constraint firstItem="kcz-bf-Oaj" firstAttribute="centerY" secondItem="NIX-N8-zk0" secondAttribute="centerY" multiplier="1.055" id="5w1-Dn-t1d"/>
                             <constraint firstItem="6kQ-tC-ulE" firstAttribute="width" secondItem="D9y-8T-jdg" secondAttribute="width" multiplier="0.922705" id="G2h-HG-XGW"/>
-                            <constraint firstItem="kcz-bf-Oaj" firstAttribute="height" secondItem="D9y-8T-jdg" secondAttribute="height" multiplier="0.0519802" id="Gnf-Ko-EoJ"/>
                             <constraint firstItem="1NJ-go-QEl" firstAttribute="centerX" secondItem="NIX-N8-zk0" secondAttribute="centerX" id="JqA-Kk-Q4X"/>
                             <constraint firstItem="kcz-bf-Oaj" firstAttribute="centerX" secondItem="NIX-N8-zk0" secondAttribute="centerX" id="WaL-80-Ejp"/>
-                            <constraint firstItem="VS7-E2-5iw" firstAttribute="centerY" secondItem="NIX-N8-zk0" secondAttribute="centerY" multiplier="0.53" id="d9B-3V-XnT"/>
+                            <constraint firstItem="kcz-bf-Oaj" firstAttribute="height" secondItem="D9y-8T-jdg" secondAttribute="height" multiplier="0.052" id="chL-Lx-fG6"/>
+                            <constraint firstItem="VS7-E2-5iw" firstAttribute="top" secondItem="1re-Z0-t2e" secondAttribute="bottom" multiplier="1.3" id="dG5-n7-2LC"/>
                             <constraint firstItem="1re-Z0-t2e" firstAttribute="width" secondItem="D9y-8T-jdg" secondAttribute="width" multiplier="0.922705" id="jVt-5y-P8T"/>
                             <constraint firstItem="kcz-bf-Oaj" firstAttribute="width" secondItem="D9y-8T-jdg" secondAttribute="width" multiplier="0.400966" id="jrR-xj-Sfa"/>
                             <constraint firstItem="VS7-E2-5iw" firstAttribute="centerX" secondItem="NIX-N8-zk0" secondAttribute="centerX" id="pcT-GC-oX3"/>
@@ -154,7 +153,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="CLc-Z7-Fib">
-                        <barButtonItem key="leftBarButtonItem" image="back" id="A2r-eR-lKX"/>
+                        <barButtonItem key="leftBarButtonItem" image="back" id="A2r-eR-lKX">
+                            <connections>
+                                <action selector="back:" destination="6Dt-jj-DFZ" id="wUX-Gf-A1b"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="bkd" id="d2p-hZ-a4H"/>
                     </navigationItem>
                     <connections>
@@ -219,8 +222,5 @@
         <namedColor name="see_map">
             <color red="0.9137254901960784" green="0.78823529411764703" blue="0.41960784313725491" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
     </resources>
 </document>

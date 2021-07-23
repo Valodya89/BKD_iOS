@@ -71,6 +71,7 @@ struct Constant {
         static let phoneVerification = "PhoneVerificationViewController"
         static let reservationCompleted = "ReservationCompletedViewController"
         static let selectPayment = "SelectPaymentViewController"
+        static let paymentWeb = "PaymentWebViewController"
     }
     
     struct FontNames {
@@ -167,6 +168,8 @@ struct Constant {
         static let payAlert = "You should pay 24 hours before the reservation. If not, the Pre-Reservation will be automatically cancelled. There are only 3 free cancellations of the Pre-Reservation in a month."
         static let gotIt = "Got it"
         static let payNow = "Pay now"
+        static let mobileBancking = "Mobile banking"
+        static let bancontactCard = "Bancontact card"
         
 
     }
@@ -179,6 +182,10 @@ let tariffOptionsArr =  [["2h", "3h", "4h", "5h", "6h", "10h"],
 
 let countryList = ["Dutch", "French", "English"]
 let cityList = ["City1", "City2", "City3", "City4", "City5", "City6", "City7"]
+let bancontactList = [UIImage(named: "ing"),
+                      UIImage(named: "bnp"),
+                      UIImage(named: "kbc")]
+
 
 
 
