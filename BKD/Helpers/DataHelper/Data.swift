@@ -380,10 +380,8 @@ struct PaymentTypeData {
     static let paymentTypeModel: [PaymentTypes] = [ PaymentTypes(title: "Credit Card", image: nil),
         PaymentTypes(title: nil, image: UIImage(named: "bancontact")),
         PaymentTypes(title: nil, image: UIImage(named: "apple_pay")),
-        PaymentTypes(title: nil, image: UIImage(named: "g_pay")),
         PaymentTypes(title: nil, image: UIImage(named: "paypal")),
         PaymentTypes(title: "Kaartlazer", image: nil),
-        PaymentTypes(title: "Office terminal", image: nil),
-        PaymentTypes(title: "Cash", image: nil)]
-
+        PaymentTypes(title: "Office terminal", image: nil)
+    ]
 }

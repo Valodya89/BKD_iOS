@@ -166,6 +166,7 @@ struct Constant {
         //Payment
         static let invalidCode = "Verification code is invalid"
         static let payAlert = "You should pay 24 hours before the reservation. If not, the Pre-Reservation will be automatically cancelled. There are only 3 free cancellations of the Pre-Reservation in a month."
+        static let  reciveSms = "You will receive the SMS in"
         static let gotIt = "Got it"
         static let payNow = "Pay now"
         static let mobileBancking = "Mobile banking"
@@ -182,9 +183,11 @@ let tariffOptionsArr =  [["2h", "3h", "4h", "5h", "6h", "10h"],
 
 let countryList = ["Dutch", "French", "English"]
 let cityList = ["City1", "City2", "City3", "City4", "City5", "City6", "City7"]
+let paymentSupportedCountriesCode: Set<String>? = ["AM", "FR", "NL", "GB"]
 let bancontactList = [UIImage(named: "ing"),
                       UIImage(named: "bnp"),
                       UIImage(named: "kbc")]
+
 
 
 

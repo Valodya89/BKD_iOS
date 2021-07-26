@@ -9,12 +9,9 @@ enum PaymentType: Int {
     case creditCard
     case bancontact
     case applePay
-    case gPay
-    case payPall
+    case payPal
     case kaartlazer
     case officeTerminal
-    case cash
-
 
 }
 import UIKit

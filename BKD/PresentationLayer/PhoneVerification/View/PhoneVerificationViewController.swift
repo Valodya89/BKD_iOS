@@ -24,8 +24,8 @@ class PhoneVerificationViewController: UIViewController, StoryboardInitializable
     
     //MARK: Variables
     lazy var verificationCodeViewModel =         VerificationCodeViewModel()
-    var email:String = ""
-    private var timer = Timer()
+    var phone:String = ""
+    private weak var timer:Timer?
     private var counter = 59
     
     
@@ -42,6 +42,7 @@ class PhoneVerificationViewController: UIViewController, StoryboardInitializable
     }
     
     func setUpView() {
+        mVerifySecondBtn.disable()
         startTimer()
     }
 
@@ -74,7 +75,7 @@ class PhoneVerificationViewController: UIViewController, StoryboardInitializable
     
     /// Send verification again
     func resendVerification(){
-        VerificationCodeViewModel().resendVerificationCode(username: email) { (status) in
+        VerificationCodeViewModel().resendVerificationCode(username: phone) { (status) in
             self.startTimer()
 
         }
@@ -82,22 +83,28 @@ class PhoneVerificationViewController: UIViewController, StoryboardInitializable
     
     /// start timer
     private func startTimer(){
+        
+        mTimerLb.textColor = color_navigationBar
         mTimerTitleLb.textColor = color_navigationBar
-        mTimerTitleLb.text = Constant.Texts.reciveEmail
+        mTimerTitleLb.text = Constant.Texts.reciveSms
         mResendCodeBtn.disable()
         mTimerLb.isHidden = false
 
         counter = 59
         let seconds = 1.0
-        timer = Timer.scheduledTimer(timeInterval: seconds, target:self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
+        if let _ = timer {
+            timer?.fire()
+        } else {
+            timer = Timer.scheduledTimer(timeInterval: seconds, target:self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
+        }
     }
     
     /// stop timer
     func stopTimer() {
-        timer.invalidate()
+        timer?.invalidate()
+        timer = nil
         mVerifyBtn.disable()
         mResendCodeBtn.enable()
-        mTimerLb.textColor = color_navigationBar
         mButtonsStackV.isHidden = false
         mVerifySecondBtn.isHidden = true
         mCodeTxtFl.configure()
@@ -129,6 +136,16 @@ class PhoneVerificationViewController: UIViewController, StoryboardInitializable
     }
     
     
+    @IBAction func changeTextFiled(_ sender: OneTimeCodeTextField) {
+        if mCodeTxtFl.text?.count == 5 {
+            mVerifySecondBtn.enable()
+            mVerifyBtn.enable()
+        } else {
+            mVerifyBtn.disable()
+            mVerifySecondBtn.disable()
+
+        }
+    }
     
     func showError() {
         //failedRequest
@@ -150,7 +167,7 @@ class PhoneVerificationViewController: UIViewController, StoryboardInitializable
     
     
     @IBAction func resendCode(_ sender: UIButton) {
-        
+        startTimer()
         self.mVerifyBtn.enable()
         resendVerification()
     }

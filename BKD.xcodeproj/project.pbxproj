@@ -294,6 +294,7 @@
 		5602534B2667413A00FB204C /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		5602536E2669AE1B00FB204C /* OfflineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineViewController.swift; sourceTree = "<group>"; };
 		560253BF266AB69000FB204C /* OfflineChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineChatViewModel.swift; sourceTree = "<group>"; };
+		5603424D26AC5B4200FDD5EA /* BKD.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BKD.entitlements; sourceTree = "<group>"; };
 		560FE63C267BE7960068BC85 /* ReserveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveViewController.swift; sourceTree = "<group>"; };
 		560FE649267BE7BE0068BC85 /* Reserve.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Reserve.storyboard; sourceTree = "<group>"; };
 		5618872C2645D99600BDDB33 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1525,6 +1526,7 @@
 		568E6F502642FC4B000CB6A9 /* BKD */ = {
 			isa = PBXGroup;
 			children = (
+				5603424D26AC5B4200FDD5EA /* BKD.entitlements */,
 				56409537264B247E001DC92D /* Manageres */,
 				5618873C2645EAF400BDDB33 /* Helpers */,
 				568E70962644BD7D000CB6A9 /* SupportFiles */,
@@ -2870,6 +2872,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ADDRESS_SANITIZER_CONTAINER_OVERFLOW = NO;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = BKD/BKD.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6BNHGG43WU;
@@ -2901,6 +2904,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ADDRESS_SANITIZER_CONTAINER_OVERFLOW = NO;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = BKD/BKD.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6BNHGG43WU;

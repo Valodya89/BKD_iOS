@@ -45,6 +45,9 @@
                                         <state key="normal" title="Resend Code">
                                             <color key="titleColor" name="navigationBar"/>
                                         </state>
+                                        <connections>
+                                            <action selector="resendCode:" destination="6Dt-jj-DFZ" eventType="touchUpInside" id="6j4-4v-e1E"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBU-oC-uEI">
                                         <rect key="frame" x="184" y="0.0" width="166" height="42"/>
@@ -53,6 +56,9 @@
                                         <state key="normal" title="Verify">
                                             <color key="titleColor" name="navigationBar"/>
                                         </state>
+                                        <connections>
+                                            <action selector="verify:" destination="6Dt-jj-DFZ" eventType="touchUpInside" id="NRh-MX-gGS"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -74,6 +80,9 @@
                                         <color key="backgroundColor" name="background"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="changeTextFiled:" destination="6Dt-jj-DFZ" eventType="editingChanged" id="ipX-nn-DWc"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

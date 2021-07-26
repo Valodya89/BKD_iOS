@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PassKit
 
 class SelectPaymentViewController: UIViewController, StoryboardInitializable {
     
@@ -20,6 +21,18 @@ class SelectPaymentViewController: UIViewController, StoryboardInitializable {
     
     //MARK: - Variables
     let paymentTypes = PaymentTypeData.paymentTypeModel
+    //MARK: - Local properties
+    private var paymentRequest: PKPaymentRequest = {
+        let request = PKPaymentRequest()
+        request.merchantIdentifier = "merchant.com.BKD.bkdrental"
+        request.supportedNetworks = [.masterCard, .visa, .quicPay]
+        request.supportedCountries = paymentSupportedCountriesCode
+        request.merchantCapabilities = .capability3DS
+        request.countryCode = "AM"
+        request.currencyCode = "ARM"
+        request.paymentSummaryItems = [PKPaymentSummaryItem(label: "Car rent", amount: 150)]
+        return request
+    }()
 
     //MARK: - Life cycle
     override func viewDidLoad() {
@@ -67,6 +80,17 @@ class SelectPaymentViewController: UIViewController, StoryboardInitializable {
         }
     }
     
+    
+    /// Selected Apple Pay
+    func selectApplePay() {
+        let applePaymentController = PKPaymentAuthorizationViewController(paymentRequest: paymentRequest)
+        if applePaymentController != nil  {
+            applePaymentController! .delegate = self
+            present(applePaymentController!, animated: true)
+        }
+        
+    }
+    
     ///Open Payment Web Screen
     private func goToWebScreen(paymentType: PaymentType) {
         let paymentWebVC = PaymentWebViewController.initFromStoryboard(name: Constant.Storyboards.payment)
@@ -82,6 +106,7 @@ class SelectPaymentViewController: UIViewController, StoryboardInitializable {
             self.view.layoutIfNeeded()
         })
     }
+    
     
     //MARK: - Actions
     @IBAction func swipeBancontactTypeV(_ sender: UISwipeGestureRecognizer) {
@@ -129,21 +154,38 @@ extension SelectPaymentViewController: UITableViewDelegate, UITableViewDataSourc
                 //mGradientV.isHidden = false
                 self.animateBancontactTypeView(isShow: true, bottom: self.mBancontactTypeBottom)
             case .applePay:
-                self.goToWebScreen(paymentType: .creditCard)
-            case .gPay:
-                self.goToWebScreen(paymentType: .creditCard)
-            case .payPall:
+                self.selectApplePay()
+            case .payPal:
                 self.goToWebScreen(paymentType: .creditCard)
             case .kaartlazer:
                 self.goToWebScreen(paymentType: .creditCard)
             case .officeTerminal:
                 self.goToWebScreen(paymentType: .creditCard)
-            case .cash:
-                self.goToWebScreen(paymentType: .creditCard)
 
             }
             
         }
+    }
+    
+}
+
+
+extension SelectPaymentViewController: PKPaymentAuthorizationViewControllerDelegate {
+    func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
+        let paymentTocken = payment.token
+        sendBackendServiceToProcessPayment(tocken: paymentTocken) { (success) in
+            completion(PKPaymentAuthorizationResult(status: success ? .success : .failure, errors: nil))
+            //[NSError(domain: "com.ali", code: 12, userInfo: nil)]
+        }
+       // completion(PKPaymentAuthorizationResult(status: .success, errors: nil))
+    }
+    
+    func sendBackendServiceToProcessPayment(tocken: PKPaymentToken, complition: (Bool) -> Void ) {
+        complition(true)
     }
     
 }

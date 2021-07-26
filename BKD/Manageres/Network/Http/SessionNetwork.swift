@@ -89,7 +89,7 @@ final class SessionNetwork: SessionProtocol {
                         return
                     }
                     
-                    guard let response = response as? HTTPURLResponse else {
+                     guard let response = response as? HTTPURLResponse else {
                         completion(.failure(.invalidRequest(request: request)))
                         return
                     }
