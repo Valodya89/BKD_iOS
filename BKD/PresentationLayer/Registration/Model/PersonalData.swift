@@ -9,15 +9,15 @@ import UIKit
 
 struct PersonalData {
 
-     var name: String
-     var surname: String
-     var phoneNumber: String
-     var dateOfBirth: String
-     var street: String
-     var house: String
-     var mailBox: String
-     var countryId: String
-     var zip: String
-     var city: String
-     var nationalRegisterNumber: String
+    public var name: String?
+    public var surname: String?
+    public var phoneNumber: String?
+    public var dateOfBirth: String?
+    public var street: String?
+    public var house: String?
+    public var mailBox: String?
+    public var countryId: String?
+    public var zip: String?
+    public var city: String?
+    public var nationalRegisterNumber: String?
 }

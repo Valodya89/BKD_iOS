@@ -26,6 +26,18 @@ enum AuthAPI: APIProtocol {
                         code: String)
     case resendCode(username: String)
     case getToken(username: String, password: String)
+    case addPersonalData(name: String,
+                         surname: String,
+                         phoneNumber: String,
+                         dateOfBirth: String,
+                         street: String,
+                         house: String,
+                         mailBox: String,
+                         countryId: String,
+                         zip: String,
+                         city: String,
+                         nationalRegisterNumber: String)
+    
     
 
     
@@ -36,7 +48,8 @@ enum AuthAPI: APIProtocol {
              .getCountries,
              .signUp,
              .verifyAccounts,
-             .resendCode:
+             .resendCode,
+             .addPersonalData:
             return BKDBaseURLs.account.rawValue
         case .getToken:
             return BKDBaseURLs.auth.rawValue
@@ -73,6 +86,8 @@ enum AuthAPI: APIProtocol {
             return "accounts/send-code"
         case .getToken:
             return "oauth/token"
+        case .addPersonalData:
+            return "api/driver/personal"
         }
     }
     
@@ -81,7 +96,8 @@ enum AuthAPI: APIProtocol {
         case .getCarsByType,
              .signUp,
              .verifyAccounts,
-             .resendCode:
+             .resendCode,
+             .addPersonalData:
             return [
                 "Content-Type": "application/json"]
         case .getToken:
@@ -143,6 +159,20 @@ enum AuthAPI: APIProtocol {
                 "password": password,
                 "grant_type": "password"
             ]
+        case .addPersonalData(let name, let surname, let phoneNumber, let dateOfBirth, let street, let house, let mailBox, let countryId, let zip, let city, let nationalRegisterNumber):
+            return [
+                "name": name,
+                "surname": surname,
+                "phoneNumber": phoneNumber,
+                "dateOfBirth": dateOfBirth,
+                "street": street,
+                "house": house,
+                "mailBox": mailBox,
+                "countryId": countryId,
+                "zip": zip,
+                "city": city,
+                "nationalRegisterNumber": nationalRegisterNumber
+            ]
         
         default:
             return nil
@@ -158,12 +188,14 @@ enum AuthAPI: APIProtocol {
 
         case .getCarsByType,
              .signUp,
-             .getToken:
+             .getToken,
+             .addPersonalData:
             return .post
         case .verifyAccounts:
             return .put
         case .resendCode:
             return .patch
+            
         default:
             return .get
         }

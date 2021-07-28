@@ -30,9 +30,9 @@ class RegistrationViewModel: NSObject {
     
     /// Get phone format for tetxtFiled placeholder
     func getPhonePlaceholder(format: String) -> String {
-        let str = format.replacingOccurrences(of: "-", with: " ", options: .literal, range: nil)
+//        let str = format.replacingOccurrences(of: "-", with: " ", options: .literal, range: nil)
         
-         let placeholder = str.replacingOccurrences(of: "#", with: "-", options: .literal, range: nil)
+         let placeholder = format.replacingOccurrences(of: "#", with: "-", options: .literal, range: nil)
         return placeholder
          
     }
@@ -57,3 +57,5 @@ class RegistrationViewModel: NSObject {
         }
     }
 }
+
+

@@ -47,6 +47,7 @@ protocol UserFillFieldTableViewCellDelegate: AnyObject {
     func didReturnTxtField(txt: String?)
     func didBeginEdithingTxtField(txtFl: UITextField)
     func willOpenPicker(textFl: UITextField, viewType: ViewType)
+    func updateUserData(dataType: ViewType, data: String)
 }
 
 class UserFillFieldTableViewCell: UITableViewCell {
@@ -82,8 +83,10 @@ class UserFillFieldTableViewCell: UITableViewCell {
                 viewType = .mailBox
             } else if placeholder == Constant.Texts.country {
                 viewType = .country
-            } else if placeholder == Constant.Texts.mailboxNumber {
-                viewType = .mailBox
+            } else if placeholder == Constant.Texts.zipNumber {
+                viewType = .zip
+            } else if placeholder == Constant.Texts.city {
+                viewType = .city
             }
         }
     }
@@ -141,7 +144,7 @@ class UserFillFieldTableViewCell: UITableViewCell {
     /// Set cell info
     func setCellInfo(item: RegistrationBotModel) {
         placeholder = item.userRegisterInfo?.placeholder
-        viewType = ViewType(rawValue: placeholder ?? "")
+      //  viewType = ViewType(rawValue: placeholder ?? "")
         
         if item.viewDescription == "button" {
             mStartBtn.isHidden = false
@@ -195,8 +198,7 @@ class UserFillFieldTableViewCell: UITableViewCell {
         
     }
     
-    func setCurrentDataType(plaseholder: String) {
-    }
+        
     
     @IBAction func start(_ sender: UIButton) {
         pressStart()
@@ -218,6 +220,9 @@ extension UserFillFieldTableViewCell: UITextFieldDelegate {
         textField.resignFirstResponder()
         if textField.text?.count ?? 0 > 0 {
             delegate?.didReturnTxtField(txt: textField.text)
+            
+            delegate?.updateUserData(dataType: viewType!, data:  textField.text!)
+
             textFiledFilled(txt: textField.text!)
         }
         return false
@@ -237,24 +242,7 @@ extension UserFillFieldTableViewCell: UITextFieldDelegate {
         }
         
     }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-//        let width = getWidth(text: textField.text!)
-//        if  mTextFlWidth.constant < width && width <= 270 {
-//            mTextFlWidth.constant = width
-//            self.layoutIfNeeded()
-//        }
-        return true
-    }
-    
-//    private  func getWidth(text: String) -> CGFloat {
-//
-//        let txtField = UITextField(frame: .zero)
-//        txtField.text = text
-//        txtField.sizeToFit()
-//        return txtField.frame.size.width
-//    }
+
 }
 
     

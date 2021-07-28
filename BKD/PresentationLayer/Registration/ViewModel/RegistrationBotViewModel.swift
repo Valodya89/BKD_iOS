@@ -50,4 +50,29 @@ class RegistrationBotViewModel: NSObject {
         }
     }
     
+    /// add Personla Data
+    func addPersonlaData(personlaData: PersonalData,  completion: @escaping (String) -> Void) {
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addPersonalData(name: personlaData.name!, surname: personlaData.surname!, phoneNumber: personlaData.phoneNumber!, dateOfBirth: personlaData.dateOfBirth!, street: personlaData.street!, house: personlaData.house!, mailBox: personlaData.mailBox ?? "", countryId: personlaData.countryId!, zip: personlaData.zip!, city: personlaData.city!, nationalRegisterNumber: personlaData.nationalRegisterNumber!))) { (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let result = BkdConverter<BaseResponseModel<EmptyModel>>.parseJson(data: data as Any) else {
+                    print("error")
+                    completion( "error")
+                    return
+                }
+                print(result.message as Any)
+                completion(result.message)
+                //completion(RegistrationState(rawValue: result.message)!)
+
+            case .failure(let error):
+                print(error.description)
+                break
+            }
+        }
+    }
+    
 }
+
+
+

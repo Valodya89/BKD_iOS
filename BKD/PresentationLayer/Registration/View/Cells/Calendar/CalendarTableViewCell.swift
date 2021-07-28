@@ -9,6 +9,7 @@ import UIKit
 
 protocol CalendarTableViewCellDelegate: AnyObject {
     func willOpenPicker(textFl: UITextField, isCalendar: Bool)
+    func updateData(viewType: ViewType, calendarData: String)
 }
 class CalendarTableViewCell: UITableViewCell, UITextFieldDelegate {
 
@@ -28,7 +29,17 @@ class CalendarTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var mStackV: UIStackView!
     @IBOutlet weak var mCalendarTxtFl: UITextField!
     
+    var viewType:ViewType = .dateOfBirth
     weak var delegate: CalendarTableViewCellDelegate?
+    
+    var placeholder: String? {
+        didSet {
+            if placeholder == Constant.Texts.dateOfBirth {
+                viewType = .dateOfBirth
+            }
+                
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -65,15 +76,16 @@ class CalendarTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     func  setCellInfo(item: RegistrationBotModel) {
-        if item.userRegisterInfo?.date != nil {
-           filedsFilled()
-            mDayLb.text = String((item.userRegisterInfo?.date)!.get(.day))
-            mMonthLb.text = (item.userRegisterInfo?.date)!.getMonth(lng: "en")
-            mYearLb.text = String((item.userRegisterInfo?.date)!.getYear())
+        if let date = item.userRegisterInfo?.date {
+            placeholder = item.userRegisterInfo?.placeholder ?? ""
+            mDayLb.text = String(date.get(.day))
+            mMonthLb.text = date.getMonth(lng: "en")
+            mYearLb.text = String(date.getYear())
+            filedsFilled(date: date)
         }
     }
     
-    private func filedsFilled() {
+    private func filedsFilled(date: Date) {
         mCalendarBckgV.setBackgroundColorToCAShapeLayer(color: color_dark_register!)
 //        mCalendarBckgV.setBorderColorToCAShapeLayer(color: color_dark_register!)
 
@@ -87,10 +99,14 @@ class CalendarTableViewCell: UITableViewCell, UITextFieldDelegate {
         mCalendarBckgV.isUserInteractionEnabled = false
         mCalendarBckgV.bringSubviewToFront(mStackV)
         mCalendarBckgV.bringSubviewToFront(mCalendarImgV)
+        
+        delegate?.updateData(viewType: viewType, calendarData: "\( mDayLb.text!)-\( date.get(.month))-\(mYearLb.text!)")
+        
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         delegate?.willOpenPicker(textFl: textField, isCalendar: true)
     }
+
     
 }

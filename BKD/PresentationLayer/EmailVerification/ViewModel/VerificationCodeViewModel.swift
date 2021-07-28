@@ -20,8 +20,13 @@ class VerificationCodeViewModel: NSObject {
                     completion(SignUpStatus(rawValue: "error")!)
                     return
                 }
-                print(verification.message as Any)
-                completion(SignUpStatus(rawValue: verification.message)!)
+                if verification.message != "SUCCESS" {
+                    completion(SignUpStatus(rawValue: "error")!)
+                } else {
+                    print(verification.message as Any)
+                    completion(SignUpStatus(rawValue: verification.message)!)
+                }
+               
             case .failure(let error):
                 print(error.description)
                 completion(SignUpStatus(rawValue: "error")!)

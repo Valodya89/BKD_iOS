@@ -28,6 +28,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verification code is invalid" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="et9-Os-OLk">
+                                <rect key="frame" x="16" y="129" width="382" height="19.5"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                <color key="textColor" name="offert_red"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please, check your Email. We’ve sent a verification link for your BKD account." lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hc2-tP-mI2">
                                 <rect key="frame" x="16" y="10" width="382" height="37.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
@@ -164,16 +170,19 @@
                         <viewLayoutGuide key="safeArea" id="rbc-zC-DKC"/>
                         <color key="backgroundColor" name="background"/>
                         <constraints>
+                            <constraint firstItem="et9-Os-OLk" firstAttribute="leading" secondItem="QCT-7s-iqH" secondAttribute="leading" id="0Zc-gd-g5w"/>
                             <constraint firstItem="GeY-GZ-xyl" firstAttribute="width" secondItem="6ne-UA-0Wn" secondAttribute="width" multiplier="0.846" id="2KY-2g-Paz"/>
                             <constraint firstItem="QJD-I8-VxG" firstAttribute="height" secondItem="6ne-UA-0Wn" secondAttribute="height" multiplier="0.0272277" id="37N-BW-U1w"/>
                             <constraint firstItem="GeY-GZ-xyl" firstAttribute="centerX" secondItem="rbc-zC-DKC" secondAttribute="centerX" id="5G4-cx-GTc"/>
                             <constraint firstItem="QJD-I8-VxG" firstAttribute="centerX" secondItem="rbc-zC-DKC" secondAttribute="centerX" id="A3Q-ls-kN0"/>
+                            <constraint firstItem="et9-Os-OLk" firstAttribute="top" secondItem="QCT-7s-iqH" secondAttribute="bottom" multiplier="1.05" id="Mnx-zH-dJy"/>
                             <constraint firstItem="GeY-GZ-xyl" firstAttribute="height" secondItem="6ne-UA-0Wn" secondAttribute="height" multiplier="0.052" id="N6R-BC-PMy"/>
                             <constraint firstItem="S83-Yi-bzH" firstAttribute="top" secondItem="rbc-zC-DKC" secondAttribute="top" id="R5m-d3-g4G"/>
                             <constraint firstItem="S83-Yi-bzH" firstAttribute="leading" secondItem="rbc-zC-DKC" secondAttribute="leading" id="WyW-Dk-ntI"/>
                             <constraint firstItem="QJD-I8-VxG" firstAttribute="centerY" secondItem="rbc-zC-DKC" secondAttribute="centerY" multiplier="0.53" id="Xaf-ad-lIQ"/>
                             <constraint firstItem="QCT-7s-iqH" firstAttribute="height" secondItem="6ne-UA-0Wn" secondAttribute="height" multiplier="0.0711634" id="fw9-i0-bcL"/>
                             <constraint firstItem="rbc-zC-DKC" firstAttribute="bottom" secondItem="S83-Yi-bzH" secondAttribute="bottom" id="jcq-zy-fpp"/>
+                            <constraint firstItem="et9-Os-OLk" firstAttribute="trailing" secondItem="QCT-7s-iqH" secondAttribute="trailing" id="kxs-fR-w6o"/>
                             <constraint firstItem="hc2-tP-mI2" firstAttribute="top" secondItem="rbc-zC-DKC" secondAttribute="top" constant="10" id="mF9-cj-cRn"/>
                             <constraint firstItem="GeY-GZ-xyl" firstAttribute="centerY" secondItem="rbc-zC-DKC" secondAttribute="centerY" multiplier="0.91" id="ntf-1k-I46"/>
                             <constraint firstItem="QCT-7s-iqH" firstAttribute="top" secondItem="hc2-tP-mI2" secondAttribute="bottom" multiplier="1.377" id="o0g-jx-GJ0"/>
@@ -181,6 +190,7 @@
                             <constraint firstItem="QCT-7s-iqH" firstAttribute="width" secondItem="6ne-UA-0Wn" secondAttribute="width" multiplier="0.922705" id="pW7-xH-0h6"/>
                             <constraint firstItem="QCT-7s-iqH" firstAttribute="centerX" secondItem="hc2-tP-mI2" secondAttribute="centerX" id="pd7-uA-vo4"/>
                             <constraint firstItem="hc2-tP-mI2" firstAttribute="width" secondItem="6ne-UA-0Wn" secondAttribute="width" multiplier="0.922705" id="qkh-2G-wTk"/>
+                            <constraint firstItem="et9-Os-OLk" firstAttribute="height" secondItem="6ne-UA-0Wn" secondAttribute="height" multiplier="0.0241337" id="vGA-CI-e99"/>
                             <constraint firstItem="hc2-tP-mI2" firstAttribute="centerX" secondItem="rbc-zC-DKC" secondAttribute="centerX" id="wD4-nh-Ep4"/>
                         </constraints>
                     </view>
@@ -196,6 +206,7 @@
                         <outlet property="mAlertContentV" destination="S83-Yi-bzH" id="fET-2D-xEz"/>
                         <outlet property="mAlertV" destination="ay6-r1-YMU" id="av1-in-Bf2"/>
                         <outlet property="mCodeTxtFl" destination="eTW-oa-tsc" id="Uf2-hM-R8c"/>
+                        <outlet property="mErrorLb" destination="et9-Os-OLk" id="muS-20-DPW"/>
                         <outlet property="mInfoLb" destination="hc2-tP-mI2" id="zCk-Ln-SZs"/>
                         <outlet property="mReserndCodeBtn" destination="ki0-Yh-cGe" id="k29-s5-RED"/>
                         <outlet property="mRightBarBtn" destination="Tur-DA-yBB" id="pTi-JW-zxT"/>
@@ -208,7 +219,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zlz-Ig-HYx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5803" y="1418"/>
+            <point key="canvasLocation" x="5802.898550724638" y="1417.6339285714284"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AyH-hm-fJb">
@@ -247,6 +258,9 @@
         </namedColor>
         <namedColor name="navigation_bar">
             <color red="0.10999999940395355" green="0.20000000298023224" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="offert_red">
+            <color red="1" green="0.29411764705882354" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="see_map">
             <color red="0.9137254901960784" green="0.78823529411764703" blue="0.41960784313725491" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

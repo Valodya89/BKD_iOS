@@ -23,10 +23,10 @@ class SearchPhoneCodeTableViewCell: UITableViewCell {
         layer.cornerRadius = 0
         mCountryLb.textColor = color_dark_register!
     }
-    func setCellInfo(item: PhoneCodeModel)  {
+    func setCellInfo(item: PhoneCode)  {
         mCountryLb.text = item.country
         mCodeLb.text = item.code
-        mFlagImgV.image = item.flag
+        mFlagImgV.image = item.imageFlag
         
         if isSelected {
             layer.cornerRadius = 8

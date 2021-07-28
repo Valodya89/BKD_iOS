@@ -43,10 +43,13 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
     //MARK: Variables
     let registrationBotViewModel = RegistrationBotViewModel()
     var tableData:[RegistrationBotModel] = []
-    var currentPhoneCode:PhoneCodeModel = PhoneCodeData.phoneCodeModel[0]
+    private let applicationSettings: ApplicationSettings = .shared
+    var currentPhoneCode: PhoneCode?
+
     var countryList: [Country]?
-    var cityList: [City]?
-    var personalData: PersonalData?
+    var cityList: [City]? = [City(id: "test", city: "Test"),
+                             City(id: "test1", city: "Test1")]
+    var personalData: PersonalData = PersonalData()
     
     var pickerType:PickerType = .date
     var registrationState: RegistrationState = .PERSONAL_DATA
@@ -78,6 +81,7 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
     }
     
     func setUpView() {
+        currentPhoneCode = applicationSettings.phoneCodes?.first
         mRightBarBtn.image = img_bkd
         mThankYouBtn.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_dark_register!, borderWidth: 1)
         setUpConfirmView()
@@ -118,6 +122,12 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
         registrationBotViewModel.getCountryList { [weak self] (response) in
             guard let self = self else { return }
             self.countryList = response
+        }
+    }
+    
+    func sendPersonalData(personalData: PersonalData) {
+        registrationBotViewModel.addPersonlaData(personlaData: personalData) { (status) in
+            print(status)
         }
     }
 
@@ -290,9 +300,15 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
             // change nationality  textfiled
             tableData[currentIndex].userRegisterInfo?.nationalString = countryList![ pickerV.selectedRow(inComponent: 0)].country
         break
-        default:
+        case .country:
+            tableData[currentIndex].userRegisterInfo?.string = countryList![ pickerV.selectedRow(inComponent: 0)].country
+            tableData[currentIndex].userRegisterInfo?.isFilled = true
+            personalData.countryId = countryList![ pickerV.selectedRow(inComponent: 0)].id
+        case .city:
             tableData[currentIndex].userRegisterInfo?.string = cityList![ pickerV.selectedRow(inComponent: 0)].city
             tableData[currentIndex].userRegisterInfo?.isFilled = true
+            personalData.city = cityList![ pickerV.selectedRow(inComponent: 0)].city
+            
         }
 
         mTableV.reloadRows(at: [IndexPath(row: currentIndex, section: 0)], with: .automatic)
@@ -365,7 +381,10 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
     private func phoneNumberCell(indexPath: IndexPath, model: RegistrationBotModel) -> PhoneNumberTableViewCell{
         
         let cell = mTableV.dequeueReusableCell(withIdentifier: PhoneNumberTableViewCell.identifier, for: indexPath) as! PhoneNumberTableViewCell
-        cell.selectedCountry = currentPhoneCode
+        if let _ = currentPhoneCode {
+            cell.selectedCountry = currentPhoneCode
+            cell.validFormPattern = (currentPhoneCode?.mask!.count)!
+        }
         cell.setCellInfo(item: model)
         cell.delegate = self
           return cell
@@ -418,6 +437,7 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
 //MARK: - UserFillFieldTableViewCellDelegate
 //MARK: --------------------------------
 extension RegistartionBotViewController: UserFillFieldTableViewCellDelegate {
+    
     func didBeginEdithingTxtField(txtFl: UITextField) {
         activeTextField = txtFl
     }
@@ -453,6 +473,31 @@ extension RegistartionBotViewController: UserFillFieldTableViewCellDelegate {
         pickerV.dataSource = self
         
     }
+    
+    func updateUserData(dataType: ViewType, data: String) {
+        switch dataType {
+        case .name:
+            personalData.name = data
+        case .surname:
+            personalData.surname = data
+        case .street:
+            personalData.street = data
+        case .house:
+            personalData.house = data
+        case .mailBox:
+            personalData.mailBox = data
+        case .countryId:
+            personalData.countryId = data
+        case .zip:
+            personalData.zip = data
+        case .city:
+            personalData.city = data
+        case .nationalRegister:
+            personalData.nationalRegisterNumber = data
+        default: break
+        }
+        
+    }
 
 }
  
@@ -467,13 +512,12 @@ extension RegistartionBotViewController: PhoneNumberTableViewCellDelegate {
         self.present(searchPhoneCodeVC, animated: true, completion: nil)
     }
     
-    func didReturnTxtField(text: String?) {
+    func didReturnTxtField(text: String, code: String) {
         tableData[currentIndex].userRegisterInfo = UserRegisterInfo( string: text, isFilled: true)
         insertTableCell()
+        personalData.phoneNumber = code + text
     }
-    
-    
-    
+
 }
 
 
@@ -496,6 +540,15 @@ extension RegistartionBotViewController: CalendarTableViewCellDelegate {
         datePicker.minimumDate =  Date()
         datePicker.locale = Locale(identifier: "en")
     }
+    }
+    
+    func updateData(viewType: ViewType, calendarData: String) {
+        switch viewType {
+        case .dateOfBirth:
+            personalData.dateOfBirth = calendarData
+        default:
+            break
+        }
     }
 }
 
@@ -532,6 +585,9 @@ extension RegistartionBotViewController: NationalRegisterNumberTableViewCellDele
         tableData[currentIndex].userRegisterInfo?.string = txt
         tableData[currentIndex].userRegisterInfo?.isFilled = true
         insertTableCell()
+        personalData.nationalRegisterNumber = txt
+        sendPersonalData(personalData: personalData)
+        
     }
     
     func willOpenPicker(textFl: UITextField) {
@@ -581,10 +637,11 @@ extension RegistartionBotViewController: BkdAgreementViewControllerDelegate {
 //MARK: --------------------------------------
 extension RegistartionBotViewController: SearchPhoneCodeViewControllerDelegate {
     
-    func didSelectCountry(_ country: PhoneCodeModel) {
+    func didSelectCountry(_ country: PhoneCode) {
         currentPhoneCode = country
         mTableV.reloadRows(at: [IndexPath(row: currentIndex, section: 0)], with: .automatic)
     }
+    
     
 }
 

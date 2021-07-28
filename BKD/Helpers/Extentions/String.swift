@@ -9,6 +9,11 @@ import UIKit
 
 extension String {
     
+    func isNumber() -> Bool {
+        return Int(self) != nil || Double(self) != nil
+        }
+    
+    
     func stringToDate() -> Date {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
@@ -18,3 +23,4 @@ extension String {
         return date
     }
 }
+

@@ -39,7 +39,8 @@ class ChangePhoneNumberViewController: UIViewController, StoryboardInitializable
         }
     }
     
-    var selectedCountry: PhoneCodeModel? = PhoneCodeData.phoneCodeModel[0]
+    var selectedCountry: PhoneCode?
+    var validFormPattern: Int = 0
     let test_phoneNumber = "15 234 6077"
 
     let phoneNumberKit = PhoneNumberKit()
@@ -63,13 +64,15 @@ class ChangePhoneNumberViewController: UIViewController, StoryboardInitializable
 //        }
 //    }
     
-    var isValid: Bool {
-        return mNumberTxtFl.text?.count == selectedCountry?.validFormPattern
-    }
+//    var isValid: Bool {
+//        return mNumberTxtFl.text?.count == selectedCountry?.validFormPattern
+//    }
     
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        selectedCountry = ApplicationSettings.shared.phoneCodes?.first
+        validFormPattern = (selectedCountry?.mask!.count)!
         phoneNumber = test_phoneNumber
         
         setUpView()
@@ -119,8 +122,7 @@ class ChangePhoneNumberViewController: UIViewController, StoryboardInitializable
     
     // MARK: - Actions
     @IBAction func didChangeFiled() {
-        didUpdateStatus(mNumberTxtFl.text?.count == selectedCountry?.validFormPattern)
-       // didUpdateStatus?(phoneTextField.text?.count == valida)
+        didUpdateStatus(mNumberTxtFl.text?.count == validFormPattern)
     }
     
     @IBAction func back(_ sender: UIBarButtonItem) {
@@ -155,7 +157,7 @@ extension ChangePhoneNumberViewController: UITextFieldDelegate {
             return true
         }
         let fullText = textField.text! + string
-        return fullText.count <= selectedCountry?.validFormPattern ?? 0
+        return fullText.count <= validFormPattern ?? 0
 
     }
 }
@@ -166,10 +168,11 @@ extension ChangePhoneNumberViewController: UITextFieldDelegate {
 //MARK: --------------------------------------
 extension ChangePhoneNumberViewController: SearchPhoneCodeViewControllerDelegate {
     
-    func didSelectCountry(_ country: PhoneCodeModel) {
+    func didSelectCountry(_ country: PhoneCode) {
         selectedCountry = country
-        mFlagImgV.image = country.flag
+        mFlagImgV.image = country.imageFlag
         mCodeLb.text = country.code
+        validFormPattern = (selectedCountry?.mask!.count)!
     }
     
 }

@@ -59,6 +59,7 @@
 		564E137226530208008CE884 /* SearchResultCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 564E137026530208008CE884 /* SearchResultCollectionViewCell.xib */; };
 		564E137A26531F8F008CE884 /* Mulish-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 564E137926531F71008CE884 /* Mulish-SemiBold.ttf */; };
 		564E13A726535D98008CE884 /* SeeMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E13A626535D97008CE884 /* SeeMapViewController.swift */; };
+		564E944826AF8BFA00291164 /* ApplicationSttings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E944626AF8BFA00291164 /* ApplicationSttings.swift */; };
 		56533ECF2678B94D0012BF4A /* MoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56533ECE2678B94D0012BF4A /* MoreModel.swift */; };
 		56533ED62678BF3A0012BF4A /* BkdAdvantagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56533ED42678BF3A0012BF4A /* BkdAdvantagesTableViewCell.swift */; };
 		56533ED72678BF3A0012BF4A /* BkdAdvantagesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56533ED52678BF3A0012BF4A /* BkdAdvantagesTableViewCell.xib */; };
@@ -326,6 +327,7 @@
 		564E137026530208008CE884 /* SearchResultCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultCollectionViewCell.xib; sourceTree = "<group>"; };
 		564E137926531F71008CE884 /* Mulish-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mulish-SemiBold.ttf"; sourceTree = "<group>"; };
 		564E13A626535D97008CE884 /* SeeMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMapViewController.swift; sourceTree = "<group>"; };
+		564E944626AF8BFA00291164 /* ApplicationSttings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationSttings.swift; sourceTree = "<group>"; };
 		56533ECE2678B94D0012BF4A /* MoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreModel.swift; sourceTree = "<group>"; };
 		56533ED42678BF3A0012BF4A /* BkdAdvantagesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BkdAdvantagesTableViewCell.swift; sourceTree = "<group>"; };
 		56533ED52678BF3A0012BF4A /* BkdAdvantagesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BkdAdvantagesTableViewCell.xib; sourceTree = "<group>"; };
@@ -777,6 +779,7 @@
 		56409537264B247E001DC92D /* Manageres */ = {
 			isa = PBXGroup;
 			children = (
+				564E944426AF8BFA00291164 /* AccountSettings */,
 				565BFDB8269F8F310044D081 /* StorageManager.swift */,
 				565BFD9E269F590A0044D081 /* KeychainManager.swift */,
 				565BFDB0269F5AD80044D081 /* AuthAPI.swift */,
@@ -858,6 +861,14 @@
 				564E137026530208008CE884 /* SearchResultCollectionViewCell.xib */,
 			);
 			path = SearchResultsCell;
+			sourceTree = "<group>";
+		};
+		564E944426AF8BFA00291164 /* AccountSettings */ = {
+			isa = PBXGroup;
+			children = (
+				564E944626AF8BFA00291164 /* ApplicationSttings.swift */,
+			);
+			path = AccountSettings;
 			sourceTree = "<group>";
 		};
 		56533ED32678BEF20012BF4A /* BkdAdvantagesTableViewCell */ = {
@@ -2571,6 +2582,7 @@
 				564E12E1264D787A008CE884 /* MenuModel.swift in Sources */,
 				565731D92672DE810012ADD0 /* UINavigationControllerExtention.swift in Sources */,
 				56CC7D7326A87A9F006DB7B8 /* PaymentWebViewController.swift in Sources */,
+				564E944826AF8BFA00291164 /* ApplicationSttings.swift in Sources */,
 				565F80B426A6391000ADB9FE /* ChangePhoneNumberViewController.swift in Sources */,
 				560251E02661089C00FB204C /* CarouselCellView.swift in Sources */,
 				56B9F31326806A2E003449AD /* SearchEditModel.swift in Sources */,

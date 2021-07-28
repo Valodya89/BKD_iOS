@@ -143,15 +143,6 @@ extension NationalRegisterNumberTableViewCell: UITextFieldDelegate {
         }
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-//        let width = getWidth(text: textField.text!)
-//        if  mTextFlWidth.constant < width && width <= 270 {
-//            mTextFlWidth.constant = width
-//            self.layoutIfNeeded()
-//        }
-        return true
-    }
     
 }
 

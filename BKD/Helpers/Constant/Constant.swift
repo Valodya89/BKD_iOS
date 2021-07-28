@@ -161,6 +161,7 @@ struct Constant {
         static let city = "City"
         static let mailboxNumber = "Mailbox number"
         static let zipNumber = "Zip number"
+        static let dateOfBirth = "Date of birth"
         
         
         //Payment
@@ -174,7 +175,16 @@ struct Constant {
         
 
     }
+    
+    
+    struct Notifications {
+        static let LanguageUpdate = NSNotification.Name(rawValue: "BKD.Notification.Language")
+    }
 }
+
+
+
+
 
 let tariffOptionsArr =  [["2h", "3h", "4h", "5h", "6h", "10h"],
                          ["1d", "2d", "3d", "4d", "5d", "6d"],

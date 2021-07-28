@@ -13,6 +13,7 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
     
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
 //    @IBOutlet weak var mCodeTxtFl: OneTimeCodeTextFiled!
+    @IBOutlet weak var mErrorLb: UILabel!
     @IBOutlet weak var mCodeTxtFl: OneTimeCodeTextField!
     @IBOutlet weak var mReserndCodeBtn: UIButton!
     @IBOutlet weak var mVerifyBtn: UIButton!
@@ -123,9 +124,9 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
     
     func showError() {
         //failedRequest
-        mTimerTitleLb.text = Constant.Texts.failedRequest
-        mTimerTitleLb.textColor = color_error
-        mTimerLb.isHidden = true
+        mCodeTxtFl.setBorderColorToCAShapeLayer(color: color_error!)
+        mErrorLb.text = Constant.Texts.invalidCode
+        mErrorLb.isHidden = false
         mCodeTxtFl.text = ""
         self.stopTimer()
     }
@@ -138,7 +139,7 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
     
     
     @IBAction func resendCode(_ sender: UIButton) {
-        
+        mCodeTxtFl.setBorderColorToCAShapeLayer(color: color_navigationBar!)
         self.mVerifyBtn.enable()
         resendVerification()
     }

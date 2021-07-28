@@ -7,7 +7,7 @@
 
 import UIKit
 protocol SearchPhoneCodeViewControllerDelegate: AnyObject {
-    func didSelectCountry(_ country: PhoneCodeModel)
+    func didSelectCountry(_ country: PhoneCode)
 }
 
 class SearchPhoneCodeViewController: UIViewController, StoryboardInitializable {
@@ -19,7 +19,8 @@ class SearchPhoneCodeViewController: UIViewController, StoryboardInitializable {
     @IBOutlet weak var mSearchContentV: UIView!
     
     //MARK: - Variables
-    var phoneCodes: [PhoneCodeModel] = PhoneCodeData.phoneCodeModel
+    private let applicationSettings: ApplicationSettings = .shared
+    var phoneCodes: [PhoneCode] = []
     weak var delegate: SearchPhoneCodeViewControllerDelegate?
     
     
@@ -30,6 +31,7 @@ class SearchPhoneCodeViewController: UIViewController, StoryboardInitializable {
     
     func setUpView() {
         mSearchTxtFl.delegate = self
+        phoneCodes = applicationSettings.phoneCodes!
         mSearchContentV.setShadow(color: color_shadow!)
         mSearchTxtFl.setPlaceholder(string: Constant.Texts.search, font: font_search_cell!, color: color_email!)
     }
@@ -65,7 +67,7 @@ extension SearchPhoneCodeViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func search(text: String) {
-        let phoneCodesStore: [PhoneCodeModel] = PhoneCodeData.phoneCodeModel
+        let phoneCodesStore: [PhoneCode] = applicationSettings.phoneCodes!
         self.phoneCodes = phoneCodesStore.filter { if text.isEmpty { return true }; return $0.country?.lowercased().contains(text.lowercased()) ?? false }
         mSearchTableV.reloadData()
     }

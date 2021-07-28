@@ -12,7 +12,7 @@ import SwiftMaskTextfield
 
 protocol PhoneNumberTableViewCellDelegate: AnyObject {
     func didPressCountryCode()
-    func didReturnTxtField(text: String?)
+    func didReturnTxtField(text: String, code:String)
 }
 
 class PhoneNumberTableViewCell: UITableViewCell {
@@ -29,8 +29,10 @@ class PhoneNumberTableViewCell: UITableViewCell {
     @IBOutlet weak var mCodeLb: UILabel!
     @IBOutlet weak var mPhoneNumberTxtFl: SwiftMaskTextfield!
     
-    var selectedCountry: PhoneCodeModel?
+    
+    var selectedCountry: PhoneCode?
     let phoneNumberKit = PhoneNumberKit()
+    var validFormPattern: Int = 0
     var phoneNumber: String? {
         get {
             return "\(selectedCountry?.code ?? "NULL") \(mPhoneNumberTxtFl.text ?? "NULL")".replacingOccurrences(of: "-", with: "").replacingOccurrences(of: " ", with: "")
@@ -42,6 +44,13 @@ class PhoneNumberTableViewCell: UITableViewCell {
                 mPhoneNumberTxtFl.text = ""
                 return
             }
+            
+            if (newValue.isNumber() == false)  {
+                mPhoneNumberTxtFl.text = String(newValue.dropLast())
+                
+            }
+            
+            
 
             guard let phoneNumber = try? phoneNumberKit.parse(newValue, ignoreType: true) else { return }
             mCodeLb.text = "+" + String(phoneNumber.countryCode)
@@ -51,7 +60,7 @@ class PhoneNumberTableViewCell: UITableViewCell {
     
     
     var isValid: Bool {
-        return mPhoneNumberTxtFl.text?.count == selectedCountry?.validFormPattern
+        return mPhoneNumberTxtFl.text?.count == validFormPattern
     }
     
 
@@ -68,19 +77,41 @@ class PhoneNumberTableViewCell: UITableViewCell {
     func setUpView(){
         mPhoneNumberBckgV.roundCornersWithBorder(corners: [.bottomRight, .topLeft, .topRight], radius: 8.0, borderColor: color_dark_register!, borderWidth: 1)
     }
+    
+//    private func configUI() {
+//
+//        guard let selectedCountry = selectedCountry else { return }
+//
+//
+//        mPhoneNumberTxtFl.formatPattern = "## ##-##-##"
+//        mPhoneNumberTxtFl.placeholder = "99 00-00-00"
+//        mPhoneNumberTxtFl.text = ""
+//        validFormPattern = selectedCountry.phoneFormat
+//
+//        } else {
+//            phoneTextField.formatPattern = "### ###-##-##"
+//            phoneTextField.placeholder = "900 000-00-00"
+//            phoneTextField.text = ""
+//            validFormPattern = 13
+//        }
+//        didUpdateStatus?(phoneTextField.text?.count == validFormPattern)
+//    }
+ 
 
 /// Set Cell Info
     func setCellInfo(item: RegistrationBotModel) {
-        let placehoder  = RegistrationViewModel().getPhonePlaceholder(format: (selectedCountry?.phoneFormat!)!)
+        let placehoder  = RegistrationViewModel().getPhonePlaceholder(format: (selectedCountry?.mask!)!)
         
         mCodeLb.text = selectedCountry?.code
-        mFlagImgV.image = selectedCountry?.flag
+        mFlagImgV.image = selectedCountry?.imageFlag
         if ((item.userRegisterInfo?.string) != nil) && item.userRegisterInfo?.isFilled == true {
             textFiledFilled(txt: (item.userRegisterInfo?.string)!)
         } else {
             mPhoneNumberTxtFl.setPlaceholder(string: placehoder, font: font_chat_placeholder!, color: color_email!)
         }
     }
+    
+    
     
     
     private func textFiledFilled(txt: String) {
@@ -120,9 +151,9 @@ extension PhoneNumberTableViewCell: UITextFieldDelegate {
 //        textField.endEditing(true)
 //        return true
         textField.resignFirstResponder()
-        if textField.text?.count == selectedCountry?.validFormPattern {
+        if textField.text?.count == validFormPattern {
             
-            delegate?.didReturnTxtField(text: textField.text)
+            delegate?.didReturnTxtField(text: textField.text!, code: mCodeLb.text!)
             textFiledFilled(txt: textField.text!)
         } else {
             
@@ -137,7 +168,8 @@ extension PhoneNumberTableViewCell: UITextFieldDelegate {
             return true
         }
         let fullText = textField.text! + string
-        return fullText.count <= (selectedCountry?.validFormPattern)!
+        phoneNumber = fullText
+        return fullText.count <= validFormPattern
 
     }
 }
