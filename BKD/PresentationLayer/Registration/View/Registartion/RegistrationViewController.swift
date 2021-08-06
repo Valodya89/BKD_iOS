@@ -149,6 +149,7 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
             case .error:
                 self.showError(errorTxt: Constant.Texts.failedRequest,
                                textFld: nil)
+            default: break
             }
         }
     }

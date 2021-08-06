@@ -45,14 +45,24 @@ class EmailAddressViewController: UIViewController, StoryboardInitializable {
     }
    
     
-    ///
-    private func sendClicked(){
+    ///Animate Send button
+    private func animateSendButton(){
         UIView.animate(withDuration: 0.5) { [self] in
             self.mConfirmLeading.constant = self.mConfirmBckgV.bounds.width - self.mConfirmBtn.frame.size.width
             self.mConfirmBckgV.layoutIfNeeded()
-        } completion: { [self] _ in
-            self.mEmailAddressTextFl.resignFirstResponder()
-            self.goToNextController()
+        }
+    }
+    
+    func sendForgotPassword() {
+        signInViewModel.forgotPassword(username:  mEmailAddressTextFl.text ?? "") { (status) in
+            switch status {
+            case .accountNoSuchUser:
+                self.showEmailError(isError: true, error: Constant.Texts.errorIncorrectEmail)
+            case .success:
+                self.animateSendButton()
+                self.goToNextController()
+            default: break
+            }
         }
     }
     
@@ -63,9 +73,10 @@ class EmailAddressViewController: UIViewController, StoryboardInitializable {
     }
     
     ///will show  or hide error of email
-    private func showEmailError(isError: Bool) {
+    private func showEmailError(isError: Bool, error: String?) {
         mEmailAddressTextFl.layer.borderColor = isError ? color_error!.cgColor : color_navigationBar!.cgColor
         mErrorLb.isHidden = !isError
+        mErrorLb.text = error
     }
     
     private func showOrHideCheckEmailView(isHide: Bool) {
@@ -87,19 +98,20 @@ class EmailAddressViewController: UIViewController, StoryboardInitializable {
         OfflineChatViewModel().isValidEmail(email: text) { [self] (isValid) in
             changeConfirmStatus(isActive: isValid)
             if isShowError {
-                showEmailError(isError: !isValid)
+                showEmailError(isError: !isValid, error: Constant.Texts.errorIncorrectEmail)
             }
         }
     }
     
     //MARK: ACTIONS
     @IBAction func confirm(_ sender: UIButton) {
-        sendClicked()
+        self.mEmailAddressTextFl.resignFirstResponder()
+        self.sendForgotPassword()
     }
     
     @IBAction func confirmSwipeGesture(_ sender: UISwipeGestureRecognizer) {
-        sendClicked()
-    }
+        self.mEmailAddressTextFl.resignFirstResponder()
+        self.sendForgotPassword()    }
     
     @IBAction func back(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
@@ -122,7 +134,7 @@ extension EmailAddressViewController: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        showEmailError(isError: false)
+        showEmailError(isError: false, error: nil)
         textField.becomeFirstResponder()
     }
     

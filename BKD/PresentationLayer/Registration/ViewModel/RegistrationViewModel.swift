@@ -10,6 +10,8 @@ struct EmptyModel: Decodable {
 }
 enum SignUpStatus: String, CaseIterable {
     case accountExist = "ACCOUNTS_user_already_exists"
+    case accountNoSuchUser = "ACCOUNTS_no_such_user"
+
     case success = "SUCCESS"
     case error = "error"
     

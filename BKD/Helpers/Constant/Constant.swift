@@ -128,6 +128,10 @@ struct Constant {
         static let accountExist = "Account already exists"
         static let failedRequest = "Request failed please try again"
         static let  reciveEmail = "You will receive the email in"
+        static let touchIdNotice = "Please autorize with touch id!"
+        static let touchIdError = "You can´t use this feature"
+        static let touchIdFailed = "Failed to  Authenticate. Please try again."
+
         static let emailAdd = "Email address"
         static let password = "Password"
         static let confirmPassword = "Confirm password"
@@ -152,6 +156,7 @@ struct Constant {
         static let takePhoto = "Take a photo"
         static let search = "Search"
         static let m = "m"
+        static let ok = "ok"
         
         static let name = "First Name"
         static let surname = "Last Name"

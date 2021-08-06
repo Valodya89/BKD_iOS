@@ -18,11 +18,14 @@ class SearchPhoneCodeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
     override func prepareForReuse() {
         backgroundColor = .clear
         layer.cornerRadius = 0
         mCountryLb.textColor = color_dark_register!
     }
+    
+    
     func setCellInfo(item: PhoneCode)  {
         mCountryLb.text = item.country
         mCodeLb.text = item.code

@@ -38,5 +38,27 @@ class SignInViewModel: UIView {
             }
         }
     }
+    
+    ///send email for restore password
+    func forgotPassword(username: String, completion: @escaping (SignUpStatus) -> Void) {
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.forgotPassword(username: username))) { (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let forgotPassword = BkdConverter<BaseResponseModel<EmptyModel>>.parseJson(data: data as Any) else {
+                    print("error")
+                    completion(SignUpStatus(rawValue: "error")!)
+
+                    return
+                }
+                print(forgotPassword.message as Any)
+                completion(SignUpStatus(rawValue: forgotPassword.message)!)
+            case .failure(let error):
+                print(error.description)
+                completion(SignUpStatus(rawValue: "error")!)
+                break
+            }
+        }
+    }
 
 }

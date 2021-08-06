@@ -11,7 +11,7 @@ class DetailsViewModel: NSObject {
  //static let shared = DetailsViewModel()
     
     let validator = Validator()
-
+//    var workingTimes: WorkingTimes? = ApplicationSettings.shared.workingTimes
     
     func updateSearchInfo(tariff: Tariff,
                           search: Search,

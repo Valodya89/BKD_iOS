@@ -92,17 +92,7 @@ class SearchHeaderViewModel: NSObject {
             }
         }
     }
-    
-    
-//    func  timeToDate(model: [TimeModel]?) -> [Date]? {
-//        guard let model = model else { return nil}
-//        var timeList:[Date]?
-//        for item in model {
-//            let t:String = item.time
-//            timeList?.append(t.stringToDate())
-//        }
-//        return timeList
-//    }
+
     
     
     

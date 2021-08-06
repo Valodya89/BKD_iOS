@@ -26,6 +26,7 @@ class MainViewController: BaseViewController {
     
     //MARK: - Variables
     private lazy  var carouselVC = CarouselViewController.initFromStoryboard(name: Constant.Storyboards.carousel)
+  //  var workingTimes: WorkingTimes? = ApplicationSettings.shared.workingTimes
     let mainViewModel: MainViewModel = MainViewModel()
     lazy var searchModel: SearchModel = SearchModel()
     var menu: SideMenuNavigationController?
@@ -58,6 +59,7 @@ class MainViewController: BaseViewController {
     //MARK: - Life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
+       // workingTimes = ApplicationSettings.shared.workingTimes
         setupView()
         //getCars()
 
@@ -322,6 +324,9 @@ class MainViewController: BaseViewController {
         mainViewModel.isReservetionInWorkingHours(time: datePicker.date, workingTimes: workingTimes! ) { [self] (result) in
             if !result {
                 self.showAlertWorkingHours()
+            } else {
+                self.checkReservetionHalfHour()
+
             }
         }
     }
@@ -331,16 +336,18 @@ class MainViewController: BaseViewController {
         guard let pickUpDate = searchHeaderV?.pickUpDate,
               let returnDate = searchHeaderV?.returnDate,
               let pickUpTime = searchHeaderV?.pickUpTime,
-              let returnTime = searchHeaderV?.returnTime else { return }
-        mainViewModel.isReservetionMoreHalfHour(pickUpDate: pickUpDate, returnDate: returnDate, pickUpTime: pickUpTime, returnTime: returnTime) { (result) in
-            if !result {
-                BKDAlert().showAlertOk(on: self, message: Constant.Texts.lessThan30Minutes, okTitle: "ok", okAction: {
-                    self.searchHeaderV?.resetReturnTime()
-                })
-            } else {
-                self.checkReservetionTime()
-            }
+              let returnTime = searchHeaderV?.returnTime else {
+            return
+            
         }
+            mainViewModel.isReservetionMoreHalfHour(pickUpDate: pickUpDate, returnDate: returnDate, pickUpTime: pickUpTime, returnTime: returnTime) { (result) in
+
+                if !result {
+                    BKDAlert().showAlertOk(on: self, message: Constant.Texts.lessThan30Minutes, okTitle: "ok", okAction: {
+                        self.searchHeaderV?.resetReturnTime()
+                    })
+                }
+            }
     }
     
    
@@ -373,7 +380,9 @@ class MainViewController: BaseViewController {
                              cancelTitle: Constant.Texts.cancel,
                              okTitle: Constant.Texts.agree,cancelAction: { [self] in
                                 self.searchHeaderV?.configureTimeTextField(txtFl: responderTxtFl)
-                             }, okAction: nil)
+                             }, okAction: {
+                                self.checkReservetionHalfHour()
+                             })
     }
     
     func showAlertCustomLocation(checkedBtn: UIButton) {
@@ -550,6 +559,8 @@ class MainViewController: BaseViewController {
                          hidden: false, txtFl: responderTxtFl)
             showSelectedDate(dayBtn: searchHeaderV!.mDayPickUpBtn,
                              monthBtn: searchHeaderV!.mMonthPickUpBtn)
+            self.checkReservetionHalfHour()
+
         case .returnDate:
             checkMonthReservation()
             searchHeaderV?.returnDate = datePicker.date
@@ -558,6 +569,8 @@ class MainViewController: BaseViewController {
                          hidden: false, txtFl: responderTxtFl)
             showSelectedDate(dayBtn: searchHeaderV!.mDayReturnDateBtn,
                              monthBtn: searchHeaderV!.mMonthReturnDateBtn)
+            self.checkReservetionHalfHour()
+
         default:
             let timeStr = pickerList![ pickerV.selectedRow(inComponent: 0)]
             if pickerState == .pickUpTime {
@@ -567,6 +580,8 @@ class MainViewController: BaseViewController {
                 searchHeaderV?.returnTime = timeStr.stringToDate()
             }
             showSelectedDate(dayBtn: nil, monthBtn: nil)
+            self.checkReservetionTime()
+
         }
         
         //Checking the filling of any fields and removing the error color from the field
@@ -574,8 +589,6 @@ class MainViewController: BaseViewController {
             let _ = searchHeaderV!.checkFieldsFilled()
         }
         
-
-        self.checkReservetionHalfHour()
     }
     
 }

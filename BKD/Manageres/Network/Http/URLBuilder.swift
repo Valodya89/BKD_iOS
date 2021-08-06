@@ -165,6 +165,6 @@ fileprivate extension APIProtocol {
 //        let base64LoginString = loginData.base64EncodedString()
 //
 //        return ["Authorization": "Basic \(base64LoginString)"]
-  //  }
+//    }
 }
 

@@ -54,6 +54,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     private lazy  var tariffSlideVC = TariffSlideViewController.initFromStoryboard(name: Constant.Storyboards.details)
     
     let detailsViewModel:DetailsViewModel = DetailsViewModel()
+//    var workingTimes: WorkingTimes? = ApplicationSettings.shared.workingTimes
     var searchModel:SearchModel = SearchModel()
     var vehicleModel:VehicleModel?
     

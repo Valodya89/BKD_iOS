@@ -35,7 +35,10 @@ class SearchPhoneCodeViewController: UIViewController, StoryboardInitializable {
         mSearchContentV.setShadow(color: color_shadow!)
         mSearchTxtFl.setPlaceholder(string: Constant.Texts.search, font: font_search_cell!, color: color_email!)
     }
+    
+    
     @IBAction func searc(_ sender: UIButton) {
+        self.search(text: mSearchTxtFl.text ?? "")
     }
     
 
@@ -44,6 +47,7 @@ class SearchPhoneCodeViewController: UIViewController, StoryboardInitializable {
 //MARK: - UITableViewDelegate, UITableViewDataSource
 //MARK: --------------------------------
 extension SearchPhoneCodeViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return phoneCodes.count
     }
@@ -64,6 +68,10 @@ extension SearchPhoneCodeViewController: UITableViewDelegate, UITableViewDataSou
         }
         }
         
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
     
     func search(text: String) {

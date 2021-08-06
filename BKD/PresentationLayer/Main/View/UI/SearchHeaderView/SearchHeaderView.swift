@@ -84,6 +84,8 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     var datePicker: DatePicker = .none
 
     let searchHeaderViewModel: SearchHeaderViewModel = SearchHeaderViewModel()
+//    var workingTimes: WorkingTimes? = ApplicationSettings.shared.workingTimes
+
     weak var delegate: SearchHeaderViewDelegate?
 
     var pickUpDate: Date? {

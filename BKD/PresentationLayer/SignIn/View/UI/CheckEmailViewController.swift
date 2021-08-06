@@ -59,12 +59,12 @@ class CheckEmailViewController: UIViewController, StoryboardInitializable {
             self.mOpenEmailLeading.constant = self.mOpenEmailBckgV.bounds.width - self.mOpenEmailBtn.frame.size.width
             self.mOpenEmailBckgV.layoutIfNeeded()
         } completion: { [self] _ in
-            //self.goToNextController()
-            checkEmailViewModel.getEmailApps { (emailAppNames) in
-                if emailAppNames?.count ?? 0 > 0 {
-                    self.showActionSheet(texts: emailAppNames!)
-                }
-            }
+            self.goToNextController()
+//            checkEmailViewModel.getEmailApps { (emailAppNames) in
+//                if emailAppNames?.count ?? 0 > 0 {
+//                    self.showActionSheet(texts: emailAppNames!)
+//                }
+//            }
             
         }
     }

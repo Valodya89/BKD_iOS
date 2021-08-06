@@ -14,10 +14,16 @@ final class ApplicationSettings {
     private var network: SessionNetwork = .init()
     
     private(set) var phoneCodes: [PhoneCode]?
+    private(set) var pickerList: [String]?
+
+    //private(set) var workingTimes: WorkingTimes?
+
     
     private init() {
         NotificationCenter.default.addObserver(self, selector: #selector(fetchPhoneCodes), name: Constant.Notifications.LanguageUpdate, object: nil)
         fetchPhoneCodes()
+        getAvalableTimeList()
+       // getWorkingTimes()
     }
     
 }
@@ -63,15 +69,63 @@ extension ApplicationSettings {
                     print(content as Any)
                     self.phoneCodes = content
                 }
-               
-
-                
+     
             case .failure(let error):
                 print(error.description)
                 break
             }
         }
     }
+    
+    
+    /// get avalable time list
+    func getAvalableTimeList() {
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getAvailableTimeList)) { [self] (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let timesList = BkdConverter<BaseResponseModel<[TimeModel]>>.parseJson(data: data as Any) else {
+                    print("error")
+                    return
+                }
+                self.pickerList = self.getTimeList(model: timesList.content!)
+            case .failure(let error):
+                print(error.description)
+            
+                break
+            }
+        }
+    }
+    
+    private func getTimeList(model: [TimeModel]) -> [String]? {
+
+        var timeList:[String]? = []
+        for item in model {
+            timeList?.append(item.time)
+        }
+        return timeList
+    }
+    
+    
+    /// get avalable time list
+//    @objc private func getWorkingTimes() {
+//        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getWorkingTimes)) { [self] (result) in
+//            
+//            switch result {
+//            case .success(let data):
+//                guard let workingTime = BkdConverter<BaseResponseModel<WorkingTimes>>.parseJson(data: data as Any) else {
+//                    print("error")
+//                    return
+//                }
+//                self.workingTimes = workingTime.content
+//               // completion(workingTimes.content)
+//            case .failure(let error):
+//                print(error.description)
+//            
+//                break
+//            }
+//        }
+//    }
     
     
     
