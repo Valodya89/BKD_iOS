@@ -26,7 +26,6 @@ class MainViewController: BaseViewController {
     
     //MARK: - Variables
     private lazy  var carouselVC = CarouselViewController.initFromStoryboard(name: Constant.Storyboards.carousel)
-  //  var workingTimes: WorkingTimes? = ApplicationSettings.shared.workingTimes
     let mainViewModel: MainViewModel = MainViewModel()
     lazy var searchModel: SearchModel = SearchModel()
     var menu: SideMenuNavigationController?
@@ -36,6 +35,7 @@ class MainViewController: BaseViewController {
 
     private var cars = [CarsModel]()
     private var pickerList: [String]?
+    var workingTimes: WorkingTimes?
 
     var datePicker = UIDatePicker()
     let pickerV = UIPickerView()
@@ -59,7 +59,6 @@ class MainViewController: BaseViewController {
     //MARK: - Life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-       // workingTimes = ApplicationSettings.shared.workingTimes
         setupView()
         //getCars()
 
@@ -96,18 +95,6 @@ class MainViewController: BaseViewController {
         self.updateCategory()
         
     }
-    
-    
-//    func getCars() {
-//        mainViewModel .getCars(completion: { (result) in
-//            guard let cars = result else {return}
-//            self.cars = cars
-//            self.mCarCollectionV.reloadData()
-//        })
-//    }
-    
-    
-    
     
     // set info to setSearch model
     private func setSearchModel(){
@@ -320,8 +307,9 @@ class MainViewController: BaseViewController {
    
     /// check if reservetion time in range
     func checkReservetionTime() {
+        workingTimes = ApplicationSettings.shared.workingTimes
         guard let _ = workingTimes else { return }
-        mainViewModel.isReservetionInWorkingHours(time: datePicker.date, workingTimes: workingTimes! ) { [self] (result) in
+        mainViewModel.isReservetionInWorkingHours(time: searchHeaderV?.pickUpTime, workingTimes: workingTimes! ) { [self] (result) in
             if !result {
                 self.showAlertWorkingHours()
             } else {
@@ -330,6 +318,8 @@ class MainViewController: BaseViewController {
             }
         }
     }
+    
+    
     
     ///Check if reservetion more then half hour
     func checkReservetionHalfHour() {
@@ -576,7 +566,7 @@ class MainViewController: BaseViewController {
             if pickerState == .pickUpTime {
                 searchHeaderV?.pickUpTime = timeStr.stringToDate()
             } else {
-                //check ifMoreThenmediaHour
+                //check if more then half hour
                 searchHeaderV?.returnTime = timeStr.stringToDate()
             }
             showSelectedDate(dayBtn: nil, monthBtn: nil)
@@ -638,7 +628,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         
         if !isSearchResultPage {
             let cell = collectionView.cellForItem(at: indexPath) as! MainCollectionViewCell
-            let vehicleModel =  cell.setVehicleModel()
+            let vehicleModel =  cell.setVehicleModel(carModel: cars[indexPath.row])
             goToDetailPage(vehicleModel: vehicleModel,
                            isSearchEdit: false)
         } else {
@@ -729,14 +719,15 @@ extension MainViewController: SearchHeaderViewDelegate {
         }
     }
    
-    func willOpenPicker(textFl: UITextField, timeList: [String]?, pickerState: DatePicker) {
+    func willOpenPicker(textFl: UITextField, pickerState: DatePicker) {
         self.pickerState = pickerState
         self.view.addSubview(self.backgroundV)
         textFl.inputAccessoryView = creatToolBar()
         responderTxtFl = textFl
 
         if pickerState == .pickUpTime || pickerState == .returnTime {
-            pickerList = timeList
+            
+            pickerList = ApplicationSettings.shared.pickerList
             textFl.inputView = pickerV
             textFl.inputAccessoryView = creatToolBar()
 
@@ -755,27 +746,8 @@ extension MainViewController: SearchHeaderViewDelegate {
             self.datePicker.minimumDate =  Date()
             self.datePicker.locale = Locale(identifier: "en")
         }
-        
-            
-//        self.datePicker = UIDatePicker()
-//        textFl.inputView = self.datePicker
-//        textFl.inputAccessoryView = creatToolBar()
-//        responderTxtFl = textFl
-//
-//        if #available(iOS 14.0, *) {
-//            self.datePicker.preferredDatePickerStyle = .wheels
-//        } else {
-//            // Fallback on earlier versions
-//        }
-//        if textFl.tag > 1 { // time
-//            self.datePicker.datePickerMode = .time
-//            self.datePicker.minimumDate = nil
-//        } else { // date
-//            self.datePicker.datePickerMode = .date
-//            self.datePicker.minimumDate =  Date()
-//            self.datePicker.locale = Locale(identifier: "en")
-//        }
     }
+    
     
     func didSelectCustomLocation(_ btn: UIButton) {
 //        self.showAlertCustomLocation(checkedBtn: btn)
@@ -860,6 +832,7 @@ extension MainViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print(pickerView.selectedRow(inComponent: component))
         
     }
 }

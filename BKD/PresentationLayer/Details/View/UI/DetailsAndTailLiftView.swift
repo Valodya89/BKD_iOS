@@ -19,13 +19,23 @@ protocol DetailsAndTailLiftViewDelegate: AnyObject {
 
 class DetailsAndTailLiftView: UIView {
  //MARK: Outlates
+    
     @IBOutlet weak var mDetailsBtn: UIButton!
-    @IBOutlet weak var mTailLiftBtn: UIButton!
     @IBOutlet weak var mDetailsDropDownImgV: UIImageView!
+    @IBOutlet weak var mDetailV: UIView!
+    
+    @IBOutlet weak var mTailLiftBtn: UIButton!
+    
+    @IBOutlet weak var mTailLiftV: UIView!
     @IBOutlet weak var mTailLiftDropDownImgV: UIImageView!
-    @IBOutlet weak var mTailLiftBckgV: UIView!
+    
+
+
+//    @IBOutlet weak var mDetailHeight: NSLayoutConstraint!
+  
     //MARK: Variables
     var currentOpenList: CurrentOpenList?
+    var isShowTailLift: Bool = true
     weak var delegate: DetailsAndTailLiftViewDelegate?
     
     var isDetail = false
@@ -40,7 +50,10 @@ class DetailsAndTailLiftView: UIView {
         self.setShadow(color: color_shadow!)
         self.setBorder(color: color_shadow!, width: 0.25)
         self.layer.cornerRadius = 3
+        mTailLiftV.isHidden = !isShowTailLift
+       
     }
+    
     
     //MARK: ACTIONS
     //MARK: --------------------
@@ -55,7 +68,10 @@ class DetailsAndTailLiftView: UIView {
         isTailLift = false
     }
     
+  
     @IBAction func tailLift(_ sender: UIButton) {
+
+    
         if !isTailLift {
             mTailLiftDropDownImgV.rotateImage(rotationAngle: CGFloat(Double.pi))
             delegate?.didPressTailLift(willOpen: true)

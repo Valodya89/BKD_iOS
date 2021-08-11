@@ -45,6 +45,7 @@ static let identifier = "MainCollectionViewCell"
     @IBAction func mSwitch(_ sender: Any) {
     }
     
+    let mainViewModel: MainViewModel = MainViewModel()
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setup()
@@ -76,7 +77,7 @@ static let identifier = "MainCollectionViewCell"
     }
 
     ///Set  values to vehicle model
-     func setVehicleModel() -> VehicleModel {
+     func setVehicleModel(carModel: CarsModel) -> VehicleModel {
         var vehicleModel = VehicleModel()
         vehicleModel.vehicleName = mCarNameLb.text
         vehicleModel.ifHasTowBar = true
@@ -86,12 +87,16 @@ static let identifier = "MainCollectionViewCell"
         vehicleModel.vehicleCube = mCubeLb.text
         vehicleModel.vehicleWeight = mKgLb.text
         vehicleModel.vehicleSize = mCarSizeLb.text
-        vehicleModel.ifTailLift = false
+        vehicleModel.ifTailLift = carModel.tailgate
         vehicleModel.ifHasAccessories = false
         vehicleModel.ifHasAditionalDriver = false
         let price: Double = mOffertBackgV.isHidden ? (mValueLb.text!  as NSString).doubleValue : (mOffertPriceLb.text!  as NSString).doubleValue
         vehicleModel.vehicleValue = price
-
+        
+        if vehicleModel.ifTailLift  {
+            vehicleModel.tailLiftList = mainViewModel.getTailLiftList(carModel: carModel)
+        }
+        vehicleModel.detailList = mainViewModel.getDetail(carModel: carModel)
         return vehicleModel
     }
     
@@ -131,8 +136,8 @@ static let identifier = "MainCollectionViewCell"
         } else {
             mValueLb.text = String(item.price)
         }
-        mTowBarLb.isHidden = item.towbar ? false : true
-        mTowBarIngV.isHidden = item.towbar ? false : true
+        mTowBarLb.isHidden = !item.towbar
+        mTowBarIngV.isHidden = !item.towbar
     }
 
 }

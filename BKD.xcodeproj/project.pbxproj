@@ -2206,15 +2206,13 @@
 				568E6F4C2642FC4B000CB6A9 /* Resources */,
 				B0A73BFE2DC6DAE6AEE73A95 /* [CP] Embed Pods Frameworks */,
 				565F8C65268D390600E21C71 /* Embed Frameworks */,
-				80678182001453DE907CB63C /* [CP] Copy Pods Resources */,
+				FF81B9993C466FEDA7B27F30 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = BKD;
-			packageProductDependencies = (
-			);
 			productName = BKD;
 			productReference = 568E6F4E2642FC4B000CB6A9 /* BKD.app */;
 			productType = "com.apple.product-type.application";
@@ -2247,7 +2245,7 @@
 				568E6F6C2642FC50000CB6A9 /* Frameworks */,
 				568E6F6D2642FC50000CB6A9 /* Resources */,
 				7897DF83A809C449209CCB7A /* [CP] Embed Pods Frameworks */,
-				9781094C846A3BFF0B3C2655 /* [CP] Copy Pods Resources */,
+				F06432695F6A81DB00D8F9AE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2295,8 +2293,6 @@
 				Base,
 			);
 			mainGroup = 568E6F452642FC4B000CB6A9;
-			packageReferences = (
-			);
 			productRefGroup = 568E6F4F2642FC4B000CB6A9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2475,24 +2471,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD-BKDUITests/Pods-BKD-BKDUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		80678182001453DE907CB63C /* [CP] Copy Pods Resources */ = {
+		B0A73BFE2DC6DAE6AEE73A95 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9781094C846A3BFF0B3C2655 /* [CP] Copy Pods Resources */ = {
+		F06432695F6A81DB00D8F9AE /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2509,21 +2505,21 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD-BKDUITests/Pods-BKD-BKDUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B0A73BFE2DC6DAE6AEE73A95 /* [CP] Embed Pods Frameworks */ = {
+		FF81B9993C466FEDA7B27F30 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

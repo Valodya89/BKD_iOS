@@ -17,7 +17,7 @@ enum LocationReturn {
 }
 
 protocol SearchViewDelegate: AnyObject {
-    func willOpenPicker (textFl: UITextField)
+    func willOpenPicker (textFl: UITextField, pickerState: DatePicker)
     func didSelectLocation (_ text:String, _ tag:Int)
     func didSelectCustomLocation(_ btn:UIButton)
     func didDeselectCustomLocation(tag: Int)
@@ -66,6 +66,7 @@ class SearchView: UIView, UITextFieldDelegate {
     var responderTxtFl = UITextField()
     var locationPickUp:LocationPickUp?
     var locationReturn:LocationReturn?
+    var datePicker: DatePicker = .none
 
     public var searchModel: SearchModel =  SearchModel()
     let detailsViewModel:DetailsViewModel = DetailsViewModel()
@@ -233,19 +234,26 @@ class SearchView: UIView, UITextFieldDelegate {
         }
     }
 
-    private func animateLocationList(isShow: Bool) {
+    func animateLocationList(isShow: Bool) {
+    
+//        currLocationDropImgV.rotateImage(rotationAngle: CGFloat(Double.pi * (isShow ? 1 : -2) ))
+//        if !isShow {
+//            returnDropisClose = true
+//            pickUPDropisClose = true
+//        }
         UIView.animate(withDuration: 0.3, animations: { [self] in
             self.mLocationDropDownView.setShadow(color: color_gradient_end!)
-           let height = isShow ? 172.0 : 0.0
+            let height = isShow ? 172.0 : 0.0
             self.mLocationDropDownView.mheightLayoutConst.constant = CGFloat(height)
             self.mLocationDropDownView.layoutIfNeeded()
+            self.mLocationDropDownView.layer.shadowOpacity = 0;
+
         })
     }
     
     private func didHideLocationList () {
         mLocationDropDownView.hiddenLocationList = { [weak self] in
             self?.animateLocationList(isShow: false)
-            self?.mLocationDropDownView.layer.shadowOpacity = 0;
 
         }
     }
@@ -288,7 +296,7 @@ class SearchView: UIView, UITextFieldDelegate {
     func updateSearchDate(searchModel:SearchModel) {
         setReturnDateInfo(searchModel: searchModel)
         if let _ = searchModel.pickUpTime {
-            mReturnTimeTxtFl.text = searchModel.returnDate!.getHour()
+            mReturnTimeTxtFl.text = searchModel.returnTime!.getHour()
         }
     }
     
@@ -323,20 +331,25 @@ class SearchView: UIView, UITextFieldDelegate {
 //MARK: ACTIONS
     //MARK: ---------------
     @IBAction func pickupDate(_ sender: UIButton) {
+        datePicker = .pickUpDate
         mPickUpDataTxtFl.becomeFirstResponder()
+
     }
     
     @IBAction func returnDate(_ sender: UIButton) {
+        datePicker = .returnDate
         mReturnDateTxtFl.becomeFirstResponder()
+
     }
     
     @IBAction func pickupTime(_ sender: UIButton) {
+        datePicker = .pickUpTime
         mPickUpTimeTxtFl.becomeFirstResponder()
     }
     
     @IBAction func returnTime(_ sender: UIButton) {
+        datePicker = .returnTime
         mReturnTimeTxtFl.becomeFirstResponder()
-
     }
     
     @IBAction func pickUpLocation(_ sender: UIButton) {
@@ -422,7 +435,7 @@ class SearchView: UIView, UITextFieldDelegate {
   //MARK: UITextFieldDelegate
     func textFieldDidBeginEditing(_ textField: UITextField) {
        responderTxtFl = textField
-        delegate?.willOpenPicker(textFl: textField)
+        delegate?.willOpenPicker(textFl: textField, pickerState: datePicker)
         
     }
 }

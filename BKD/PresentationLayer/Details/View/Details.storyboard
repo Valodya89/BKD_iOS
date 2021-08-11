@@ -370,7 +370,7 @@
                                                                     <color key="titleColor" name="navigationBar"/>
                                                                 </state>
                                                                 <connections>
-                                                                    <action selector="details:" destination="Rkc-pZ-qaf" eventType="touchUpInside" id="ldX-bx-aKN"/>
+                                                                    <action selector="details:" destination="Rkc-pZ-qaf" eventType="touchUpInside" id="X5Z-Lc-9vR"/>
                                                                 </connections>
                                                             </button>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lrt-sX-Ptq">
@@ -386,30 +386,30 @@
                                                             <constraint firstItem="ozX-Jg-qJ8" firstAttribute="height" secondItem="nXv-KW-SjD" secondAttribute="height" multiplier="0.214286" id="8NA-SP-e4G"/>
                                                             <constraint firstItem="SJ4-VL-ewq" firstAttribute="height" secondItem="nXv-KW-SjD" secondAttribute="height" multiplier="1.03" id="Nwf-IS-Au8"/>
                                                             <constraint firstItem="ozX-Jg-qJ8" firstAttribute="width" secondItem="nXv-KW-SjD" secondAttribute="width" multiplier="0.0445026" id="RGN-oi-C2D"/>
+                                                            <constraint firstItem="Lrt-sX-Ptq" firstAttribute="top" secondItem="ozX-Jg-qJ8" secondAttribute="bottom" constant="15.5" id="a2K-zb-ogJ"/>
                                                             <constraint firstItem="Lrt-sX-Ptq" firstAttribute="width" secondItem="nXv-KW-SjD" secondAttribute="width" multiplier="0.937173" id="fLd-OV-Mn2"/>
                                                             <constraint firstItem="ozX-Jg-qJ8" firstAttribute="centerX" secondItem="nXv-KW-SjD" secondAttribute="centerX" multiplier="1.89" id="g4b-dc-ILA"/>
-                                                            <constraint firstItem="Lrt-sX-Ptq" firstAttribute="height" secondItem="nXv-KW-SjD" secondAttribute="height" multiplier="0.0238095" id="ogm-iv-rbH"/>
                                                             <constraint firstItem="Lrt-sX-Ptq" firstAttribute="centerX" secondItem="nXv-KW-SjD" secondAttribute="centerX" id="uD5-34-TfM"/>
                                                             <constraint firstAttribute="bottom" secondItem="Lrt-sX-Ptq" secondAttribute="bottom" id="vx7-8p-iIL"/>
                                                             <constraint firstItem="SJ4-VL-ewq" firstAttribute="width" secondItem="nXv-KW-SjD" secondAttribute="width" multiplier="0.97" id="xsL-TV-gUe"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kmk-99-UzY">
+                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kmk-99-UzY">
                                                         <rect key="frame" x="0.0" y="42" width="382" height="41.5"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropDown_blue" translatesAutoresizingMaskIntoConstraints="NO" id="enN-Yh-eeu">
-                                                                <rect key="frame" x="352.5" y="16" width="17" height="9"/>
+                                                                <rect key="frame" x="352.5" y="16.5" width="17" height="9"/>
                                                                 <color key="tintColor" name="navigationBar"/>
                                                             </imageView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fp1-pK-tXe">
-                                                                <rect key="frame" x="10" y="4" width="372.5" height="33"/>
+                                                                <rect key="frame" x="10" y="4.5" width="372.5" height="33"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                                 <state key="normal" title="Tail Lift">
                                                                     <color key="titleColor" name="navigationBar"/>
                                                                 </state>
                                                                 <connections>
-                                                                    <action selector="tailLift:" destination="Rkc-pZ-qaf" eventType="touchUpInside" id="o5n-9X-wOw"/>
+                                                                    <action selector="tailLift:" destination="Rkc-pZ-qaf" eventType="touchUpInside" id="bYz-C4-uwg"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -424,10 +424,11 @@
                                                 <constraints>
                                                     <constraint firstItem="kmk-99-UzY" firstAttribute="top" secondItem="nXv-KW-SjD" secondAttribute="bottom" id="3TD-CO-bs8"/>
                                                     <constraint firstAttribute="trailing" secondItem="nXv-KW-SjD" secondAttribute="trailing" id="Avb-NQ-k7s"/>
-                                                    <constraint firstItem="kmk-99-UzY" firstAttribute="height" secondItem="nXv-KW-SjD" secondAttribute="height" id="BEC-63-W9z"/>
                                                     <constraint firstAttribute="trailing" secondItem="kmk-99-UzY" secondAttribute="trailing" id="Dd1-Et-J4I"/>
                                                     <constraint firstItem="Fp1-pK-tXe" firstAttribute="leading" secondItem="SJ4-VL-ewq" secondAttribute="leading" id="Ew3-Y0-MCW"/>
+                                                    <constraint firstItem="nXv-KW-SjD" firstAttribute="height" secondItem="Rkc-pZ-qaf" secondAttribute="height" multiplier="0.502994" id="GDd-0R-D2h"/>
                                                     <constraint firstItem="nXv-KW-SjD" firstAttribute="leading" secondItem="Rkc-pZ-qaf" secondAttribute="leading" id="IHf-PJ-5Cc"/>
+                                                    <constraint firstItem="kmk-99-UzY" firstAttribute="height" secondItem="Rkc-pZ-qaf" secondAttribute="height" multiplier="0.497006" id="P8I-Qx-I5n"/>
                                                     <constraint firstItem="enN-Yh-eeu" firstAttribute="width" secondItem="ozX-Jg-qJ8" secondAttribute="width" id="XJp-9B-S0L"/>
                                                     <constraint firstItem="kmk-99-UzY" firstAttribute="leading" secondItem="Rkc-pZ-qaf" secondAttribute="leading" id="av6-jp-kxi"/>
                                                     <constraint firstItem="enN-Yh-eeu" firstAttribute="centerX" secondItem="ozX-Jg-qJ8" secondAttribute="centerX" id="cXA-ZO-lRn"/>
@@ -437,11 +438,12 @@
                                                     <constraint firstAttribute="bottom" secondItem="kmk-99-UzY" secondAttribute="bottom" id="pzL-DZ-vrh"/>
                                                 </constraints>
                                                 <connections>
-                                                    <outlet property="mDetailsBtn" destination="SJ4-VL-ewq" id="Z7J-Tb-gDy"/>
-                                                    <outlet property="mDetailsDropDownImgV" destination="ozX-Jg-qJ8" id="aU0-Lm-SNP"/>
-                                                    <outlet property="mTailLiftBckgV" destination="kmk-99-UzY" id="tyT-XY-dNF"/>
-                                                    <outlet property="mTailLiftBtn" destination="Fp1-pK-tXe" id="aIP-Hg-UHd"/>
-                                                    <outlet property="mTailLiftDropDownImgV" destination="enN-Yh-eeu" id="B1n-bu-78s"/>
+                                                    <outlet property="mDetailV" destination="nXv-KW-SjD" id="VPA-FS-XJ4"/>
+                                                    <outlet property="mDetailsBtn" destination="SJ4-VL-ewq" id="1qJ-vb-YnE"/>
+                                                    <outlet property="mDetailsDropDownImgV" destination="ozX-Jg-qJ8" id="qnb-km-d7y"/>
+                                                    <outlet property="mTailLiftBtn" destination="Fp1-pK-tXe" id="Q0Y-rz-11n"/>
+                                                    <outlet property="mTailLiftDropDownImgV" destination="enN-Yh-eeu" id="AJ5-ah-LgN"/>
+                                                    <outlet property="mTailLiftV" destination="kmk-99-UzY" id="yaQ-Eh-HzJ"/>
                                                 </connections>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="W6S-sP-DFk">
@@ -561,7 +563,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="181" height="39"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <connections>
-                                                                            <action selector="pickupDate:" destination="lTX-qV-DSn" eventType="touchUpInside" id="8Wg-BJ-C6p"/>
+                                                                            <action selector="pickupDate:" destination="lTX-qV-DSn" eventType="touchUpInside" id="UrJ-Oi-6MK"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
@@ -775,7 +777,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" tag="7" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c0E-XK-1SW">
-                                                                <rect key="frame" x="227.5" y="0.0" width="134.5" height="29"/>
+                                                                <rect key="frame" x="259" y="0.0" width="103" height="29"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="14"/>
                                                                 <state key="normal" title="Custom location">
                                                                     <color key="titleColor" name="entered_date"/>
@@ -785,7 +787,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gEj-kr-2ki">
-                                                                <rect key="frame" x="191" y="0.0" width="29.5" height="29"/>
+                                                                <rect key="frame" x="222.5" y="0.0" width="29.5" height="29"/>
                                                                 <state key="normal" image="uncheck_box"/>
                                                                 <connections>
                                                                     <action selector="checkBoxReturnCustomLOcation:" destination="lTX-qV-DSn" eventType="touchUpInside" id="NjD-ps-dwZ"/>
@@ -1160,6 +1162,8 @@
                         <outlet property="mCarDetailLb" destination="df0-G3-Bo1" id="JXa-EY-9hT"/>
                         <outlet property="mCarInfoV" destination="r84-Se-m90" id="LQv-ha-DQf"/>
                         <outlet property="mCarNameLb" destination="Lxf-m8-zfj" id="Cx7-Jk-FqY"/>
+                        <outlet property="mDetailAndTailLiftBottom" destination="afl-kI-2oj" id="2ev-GA-hFw"/>
+                        <outlet property="mDetailHeight" destination="GDd-0R-D2h" id="9QP-MT-c9f"/>
                         <outlet property="mDetailsAndTailLiftV" destination="Rkc-pZ-qaf" id="w79-Eg-4GV"/>
                         <outlet property="mDetailsTableBckgV" destination="y0o-Vl-H0J" id="wjS-2z-aYR"/>
                         <outlet property="mDetailsTbV" destination="6cy-G0-U5a" id="mi8-7T-VgA"/>

@@ -123,6 +123,18 @@ struct Constant {
         static let additionalDriver = "Additional driver"
         static let accessories = "Accessories"
         
+        //Detail
+        static let conditioning = "Conditioning"
+        static let gps = "GPS"
+        static let towBar = "Tow Bar"
+        static let slideDoor = "Slide door"
+        
+        //Tail Lift
+        static let kg = "kg"
+        static let cm = "cm"
+        static let tailLiftCapacity = "Tail lift lifting capacity"
+        static let tailLiftLength = "Tail lift length"
+        static let loadingFloorHeight = "Loading floor height"
         
         //Register
         static let accountExist = "Account already exists"

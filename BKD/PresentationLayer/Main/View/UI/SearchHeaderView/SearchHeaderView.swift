@@ -16,14 +16,13 @@ enum DatePicker {
 }
 
 protocol SearchHeaderViewDelegate: AnyObject {
-    func willOpenPicker (textFl: UITextField, timeList:[String]?, pickerState: DatePicker)
+    func willOpenPicker (textFl: UITextField, pickerState: DatePicker)
     func didSelectLocation (_ locationStr: String, _ btnTag: Int)
     func didSelectCustomLocation(_ btn:UIButton)
     func didSelectSearch()
     func hideEditView()
 }
 
-var workingTimes: WorkingTimes?
 class SearchHeaderView: UIView, UITextFieldDelegate {
 
     static let identifier = "SearchHeaderView"
@@ -74,7 +73,7 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     
     
     //MARK: Variables
-    var pickerList:[String] = []
+   // var pickerList:[String] = []
     var pickUPDropisClose: Bool = true
     var returnDropisClose: Bool = true
     var currLocationBtn = UIButton()
@@ -84,7 +83,6 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     var datePicker: DatePicker = .none
 
     let searchHeaderViewModel: SearchHeaderViewModel = SearchHeaderViewModel()
-//    var workingTimes: WorkingTimes? = ApplicationSettings.shared.workingTimes
 
     weak var delegate: SearchHeaderViewDelegate?
 
@@ -164,8 +162,7 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         setUpView()
-        getAvalableTimeList()
-        getWorkingTimes()
+
     }
         
     func setUpView() {
@@ -237,23 +234,7 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
             mCheckBoxReturnCustomLocBtn.setImage(#imageLiteral(resourceName: "check"), for: .normal)
         }
     }
-    
-  
-    ///get avalable time list
-    func getAvalableTimeList() {
-        searchHeaderViewModel.getAvalableTimeList { (result) in
-            self.pickerList = result ?? []
-        }
-    }
-    
-    ///get working times
-    func getWorkingTimes() {
-        searchHeaderViewModel.getWorkingTimes(completion: { (result) in
-            workingTimes = result
-        })
-    }
 
-    
     
     ///update Location Fields
     func updateCustomLocationFields(place: String, didResult: @escaping (Bool) -> ()) {
@@ -505,7 +486,7 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
 
-        delegate?.willOpenPicker(textFl: textField, timeList: pickerList, pickerState: datePicker)
+        delegate?.willOpenPicker(textFl: textField, pickerState: datePicker)
     
     }
 

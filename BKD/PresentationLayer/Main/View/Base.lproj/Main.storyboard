@@ -553,8 +553,17 @@ IAo
                     <view key="view" contentMode="scaleToFill" id="j4K-5k-2Pn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zdb-QS-c8c">
+                                <rect key="frame" x="76" y="315" width="240" height="200"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="KTz-7d-pnZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="zdb-QS-c8c" firstAttribute="height" secondItem="j4K-5k-2Pn" secondAttribute="height" multiplier="0.247525" id="nWo-k4-O60"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8A8-hj-iL3">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="menu" id="EOZ-qK-xTe">
@@ -567,7 +576,7 @@ IAo
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sTd-HO-yt5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-491" y="638"/>
+            <point key="canvasLocation" x="-491.304347826087" y="637.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7aB-Sz-qa8">

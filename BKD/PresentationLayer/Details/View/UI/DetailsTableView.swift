@@ -8,6 +8,8 @@
 import UIKit
 
 class DetailsTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
+    
+    var detailList: [DetailsModel] = []
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,13 +29,13 @@ class DetailsTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
     //MARK: UITableViewDataSource
     //MARK: ----------------------------------
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DetailsData.detailsModel.count
+        return detailList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.imageView?.image = DetailsData.detailsModel[indexPath.row].image
-        cell.textLabel?.text = DetailsData.detailsModel[indexPath.row].title
+        cell.imageView?.image = detailList[indexPath.row].image
+        cell.textLabel?.text = detailList[indexPath.row].title
         cell.textLabel?.textColor = color_navigationBar
         cell.textLabel?.font = font_details_title
         cell.backgroundColor = .clear

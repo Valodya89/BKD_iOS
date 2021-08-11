@@ -8,19 +8,6 @@
 import UIKit
 
 struct CarsModel: Decodable {
-//    let id: String
-//    let name: String
-//    let vendor: String
-//    let volume: String
-//    let type: String
-//    let driverLicenseType: String
-//    let price: String
-//    let hasSpecialPrice: Bool
-//    let specialPrice: String?
-//    let airConditioning: Bool
-//    let towbar: Bool
-//    let active: Bool
-//    let inRent: Bool
     
     
     let id: String
@@ -29,13 +16,29 @@ struct CarsModel: Decodable {
     let model: String
     let volume: Double
     let loadCapacity: Double
-    let liftingCapacityTailLift: Double
-    let tailLiftLength: Double
-    let heightOfLoadingFloor: Double
+    
     let driverLicenseType: String
     let price: Double
     let hasSpecialPrice: Bool
     let specialPrice: Double?
+    
+    //Detail
+    let seats: Double
+    let fuel: String? //from base come null
+    let transmission: String? ////from base come null
+    let motor: Double
+    let euroNorm: Double
+    let withBetweenWheels: Double
+    let airConditioning: Bool
+    let sideDoor: Bool
+    let gpsnavigator:Bool
+    let exterior: CarExterior?
+    
+    //Tail lift
+    let tailgate: Bool
+    let liftingCapacityTailLift: Double
+    let tailLiftLength: Double
+    let heightOfLoadingFloor: Double
     
     let towbar: Bool
     let active: Bool
@@ -56,3 +59,15 @@ struct CarImageResponse: Decodable {
         return URL(string: avatar)
     }
 }
+
+struct CarExterior: Decodable {
+    let length: Double
+    let width: Double
+    let height: Double
+    
+    func getExterior() -> String {
+        return "\(length)x\(width)x\(height)\(Constant.Texts.m)"
+    }
+}
+
+

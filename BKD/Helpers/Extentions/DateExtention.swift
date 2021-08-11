@@ -16,6 +16,24 @@ extension Date {
         return calendar.component(component, from: self)
     }
     
+//    func getDay() -> String {
+//        //let dateString = "2018-12-24 18:00:00 UTC"
+//        let formatter = DateFormatter()
+////        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss 'UTC'"
+////        guard let date = formatter.date(from: dateString) else {
+////            return
+////        }
+////
+////        formatter.dateFormat = "yyyy"
+////        let year = formatter.string(from: date)
+////        formatter.dateFormat = "MM"
+////        let month = formatter.string(from: date)
+//        formatter.dateFormat = "dd"
+//        formatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+//        let day = formatter.string(from: self)
+//        return day
+//    }
+    
     func getMonthAndWeek(lng: String) -> String {
         let formatter = DateFormatter()
         formatter.locale = NSLocale(localeIdentifier: lng) as Locale
@@ -52,6 +70,7 @@ extension Date {
     func getHour() -> String {
         let forrmater = DateFormatter()
         forrmater.dateFormat = "HH:mm"
+        forrmater.timeZone = NSTimeZone(name: "UTC") as TimeZone?
         return forrmater.string(from: self)
     }
     
@@ -69,6 +88,15 @@ extension Date {
     }
     
     
+//    func dateTimeByToday(time: Date) -> Date {
+//        let now = NSDate()
+//        let calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
+//        let hour = calendar.component(.hour, from: time)
+//        let minute = calendar.component(.minute, from: time)
+//        
+//        let nowDateValue = now as Date
+//        let timeByToday = calendar.date(bySettingHour: hourStart, minute: minuteStart, second: 0, of: nowDateValue, options: [])
+//    }
     
     func dateIsInRange(startTime: Date, endTime: Date) -> Bool {
         let now = NSDate()

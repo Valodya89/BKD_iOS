@@ -15,15 +15,14 @@ final class ApplicationSettings {
     
     private(set) var phoneCodes: [PhoneCode]?
     private(set) var pickerList: [String]?
-
-    //private(set) var workingTimes: WorkingTimes?
+    private(set) var workingTimes: WorkingTimes?
 
     
     private init() {
         NotificationCenter.default.addObserver(self, selector: #selector(fetchPhoneCodes), name: Constant.Notifications.LanguageUpdate, object: nil)
         fetchPhoneCodes()
         getAvalableTimeList()
-       // getWorkingTimes()
+        getWorkingTimes()
     }
     
 }
@@ -107,25 +106,25 @@ extension ApplicationSettings {
     }
     
     
-    /// get avalable time list
-//    @objc private func getWorkingTimes() {
-//        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getWorkingTimes)) { [self] (result) in
-//            
-//            switch result {
-//            case .success(let data):
-//                guard let workingTime = BkdConverter<BaseResponseModel<WorkingTimes>>.parseJson(data: data as Any) else {
-//                    print("error")
-//                    return
-//                }
-//                self.workingTimes = workingTime.content
-//               // completion(workingTimes.content)
-//            case .failure(let error):
-//                print(error.description)
-//            
-//                break
-//            }
-//        }
-//    }
+    /// get working time list
+    @objc private func getWorkingTimes() {
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getWorkingTimes)) { [self] (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let workingTime = BkdConverter<BaseResponseModel<WorkingTimes>>.parseJson(data: data as Any) else {
+                    print("error")
+                    return
+                }
+                self.workingTimes = workingTime.content
+               // completion(workingTimes.content)
+            case .failure(let error):
+                print(error.description)
+            
+                break
+            }
+        }
+    }
     
     
     
