@@ -48,29 +48,26 @@ final class SessionNetwork: SessionProtocol {
         
     func request(with builderProtocol: URLBuilderProtocol, _ completion: @escaping (Result<Data,NetworkSessionErrors>) -> (), _ queue: DispatchQueue = .global()) {
         
-//        if keychainManager.isTokenExpired() && needAccessTokenUpdate {
-//            dispatchWorkItem?.cancel()
-//            needAccessTokenUpdate = false
-//            let refreshToken = keychainManager.getRefreshToken() ?? ""
-//            let deviceID = UIDevice.current.identifierForVendor?.uuidString ?? ""
-//            request(with: URLBuilder(from: AuthAPI.refreshToken(refreshToken: refreshToken, deviceID: deviceID))) { result in
-//                switch result {
-//                case .success(let data):
-//                    guard let signInResponse = MimoConverter<BaseResponseModel<SignInReponse>>.parseJson(data: data as Any) else { return }
-//                    if let content = signInResponse.content, signInResponse.statusCode == 200 {
-//                        self.keychainManager.parse(from: content)
-//                    }
-//                case .failure(let error):
-//                    completion(.failure(error))
-//                print(error)
-//                }
-//                builderProtocol.rebuild()
-//                queue.async(execute: self.dispatchWorkItem!)
-//                self.needAccessTokenUpdate = true
-//                return
-//            }
-//        }
-
+        if keychainManager.isTokenExpired() && needAccessTokenUpdate {
+            dispatchWorkItem?.cancel()
+            needAccessTokenUpdate = false
+            let refreshToken = keychainManager.getRefreshToken() ?? ""
+            let deviceID = UIDevice.current.identifierForVendor?.uuidString ?? ""
+            request(with: URLBuilder(from: AuthAPI.getAuthRefreshToken(refreshToken: refreshToken))) { result in
+                switch result {
+                case .success(let data):
+                    guard let tokenResponse = BkdConverter<TokenResponse>.parseJson(data: data as Any) else { return }
+                    self.keychainManager.parse(from: tokenResponse)
+                case .failure(let error):
+                    completion(.failure(error))
+                print(error)
+                }
+                builderProtocol.rebuild()
+                queue.async(execute: self.dispatchWorkItem!)
+                self.needAccessTokenUpdate = true
+                return
+            }
+        }
 
         dispatchWorkItem = DispatchWorkItem {
             guard let request = builderProtocol.getRequst() else {

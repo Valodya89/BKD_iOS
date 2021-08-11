@@ -7,13 +7,14 @@
 
 import UIKit
 
-class MyBKDViewModel: NSObject {
+final class MyBKDViewModel: NSObject {
     private let keychainManager = KeychainManager()
 
+    var isUserSignIn: Bool {
+        return keychainManager.isUserLoggedIn()
+    }
     
     func logout() {
         keychainManager.removeData()
-        //UserManager.share.userResponse = nil
-    
     }
 }

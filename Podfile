@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '12.1'
 #source 'https://github.com/CocoaPods/Specs.git'
 
 target 'BKD' do
@@ -15,17 +15,5 @@ target 'BKD' do
 	pod 'SwiftMaskTextfield'
 	pod 'SideMenu'
  	pod 'KeychainAccess'
-
-
-
-
-  target 'BKDTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-  target 'BKDUITests' do
-    # Pods for testing
-  end
 
 end

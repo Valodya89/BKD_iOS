@@ -8,32 +8,33 @@
 import UIKit
 import SideMenu
 
-
-class MyBKDViewController: BaseViewController {
-
+final class MyBKDViewController: BaseViewController {
+    
     //MARK:Outlet
-    @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
-    @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
-    @IBOutlet weak var mTableV: UITableView!
-    @IBOutlet weak var mPrivacyPolicyLb: UILabel!
+    @IBOutlet weak private var mRightBarBtn: UIBarButtonItem!
+    @IBOutlet weak private var mLeftBarBtn: UIBarButtonItem!
+    @IBOutlet weak private var mTableV: UITableView!
+    @IBOutlet weak private var mPrivacyPolicyLb: UILabel!
     
     //MARK: Variables
-    private lazy  var signInVC = SignInViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
-    private lazy var myBKDViewModel = MyBKDViewModel()
-    var menu: SideMenuNavigationController?
-
+    private lazy var signInVC = SignInViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
+    private lazy var viewModel = MyBKDViewModel()
+    private var menu: SideMenuNavigationController?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setUpView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         addSignInChild()
-
     }
-    func setUpView() {
+    
+    private func setUpView() {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = img_bkd
         menu = SideMenuNavigationController(rootViewController: LeftViewController())
@@ -41,41 +42,37 @@ class MyBKDViewController: BaseViewController {
         mPrivacyPolicyLb.font = font_details_title
     }
     
-    
-
     ///Add child ViewController
-    func addSignInChild() {
-        
-        if UserDefaults.standard.object(forKey: key_isLogin) == nil  {
-            
+    private func addSignInChild() {
+        if viewModel.isUserSignIn {
+            signInVC.willMove(toParent: nil)
+            signInVC.view.removeFromSuperview()
+            signInVC.removeFromParent()
+        } else {
             addChild(signInVC)
             signInVC.view.frame = self.view.bounds
             self.view.addSubview(signInVC.view)
             signInVC.didMove(toParent: self)
-        } else {
-            signInVC.willMove(toParent: nil)
-            signInVC.view.removeFromSuperview()
-            signInVC.removeFromParent()
         }
-        
-        
     }
     
     ///Remove child ViewController
-    func removeChild(vc: UIViewController) {
+    private func removeChild(vc: UIViewController) {
         vc.willMove(toParent: nil)
         vc.view.removeFromSuperview()
         vc.removeFromParent()
     }
     
-
+    private func logOut() {
+        viewModel.logout()
+        addSignInChild()
+    }
+    
     //MARK: ACTIONS
     @IBAction func menu(_ sender: UIBarButtonItem) {
         present(menu!, animated: true, completion: nil)
     }
 }
-
-
 
 //MARK: UITableViewDelegate, UITableViewDataSource
 //MARK: ------------------------------------------
@@ -92,16 +89,12 @@ extension MyBKDViewController: UITableViewDelegate, UITableViewDataSource {
         cell.mTitleLb.text = item.title
         cell.mImageV.setTintColor(color: color_email!)
         
-         return cell
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 2 {
-            UserDefaults.standard.removeObject(forKey: key_isLogin)
-            myBKDViewModel.logout()
-            addSignInChild()
-            
+            logOut()
         }
     }
-    
 }

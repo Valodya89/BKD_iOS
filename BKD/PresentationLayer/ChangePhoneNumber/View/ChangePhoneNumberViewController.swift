@@ -9,7 +9,7 @@ import UIKit
 import SwiftMaskTextfield
 import PhoneNumberKit
 
-class ChangePhoneNumberViewController: UIViewController, StoryboardInitializable {
+final class ChangePhoneNumberViewController: UIViewController, StoryboardInitializable {
     
     //MARK: - Outlets
     @IBOutlet weak var mInfoLb: UILabel!
@@ -19,12 +19,15 @@ class ChangePhoneNumberViewController: UIViewController, StoryboardInitializable
     @IBOutlet weak var mCodeLb: UILabel!
     @IBOutlet weak var mSearchCountryBtn: UIButton!
     @IBOutlet weak var mFlagImgV: UIImageView!
-        @IBOutlet weak var mDropDownImgV: UIImageView!
+    @IBOutlet weak var mDropDownImgV: UIImageView!
     @IBOutlet weak var mPhoneNumberContentV: UIView!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     
 
-    var phoneNumber:String? {
+    private var selectedCountry: PhoneCode?
+    private var validFormPattern: Int = 0
+    private let phoneNumberKit = PhoneNumberKit()
+    private var phoneNumber: String? {
         didSet {
             if let _ = phoneNumber {
                 mSendBtn.enable()
@@ -35,15 +38,9 @@ class ChangePhoneNumberViewController: UIViewController, StoryboardInitializable
                 mChangeNumberBtn.disable()
                 setToPhoneNumberActiveColor(color_navigationBar!)
             }
-                
         }
     }
     
-    var selectedCountry: PhoneCode?
-    var validFormPattern: Int = 0
-    let test_phoneNumber = "15 234 6077"
-
-    let phoneNumberKit = PhoneNumberKit()
     
 //    var phoneNumber: String? {
 //        get {
@@ -71,21 +68,20 @@ class ChangePhoneNumberViewController: UIViewController, StoryboardInitializable
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        selectedCountry = ApplicationSettings.shared.phoneCodes?.first
-        validFormPattern = (selectedCountry?.mask!.count)!
-        phoneNumber = test_phoneNumber
         
+        if let phoneCode = ApplicationSettings.shared.phoneCodes?.first {
+            setPhoneCode(phoneCode)
+        }
         setUpView()
     }
     
-    func setUpView() {
+    private func setUpView() {
         self.tabBarController?.tabBar.isHidden = true
         mRightBarBtn.image = img_bkd
         mSendBtn.layer.cornerRadius = 8
         mChangeNumberBtn.layer.cornerRadius = 8
         mPhoneNumberContentV.setBorder(color: color_email!, width: 1)
         mDropDownImgV.setTintColor(color: color_email!)
-        mNumberTxtFl.text = test_phoneNumber
         mNumberTxtFl.delegate = self
     }
     
@@ -109,7 +105,7 @@ class ChangePhoneNumberViewController: UIViewController, StoryboardInitializable
         self.navigationController?.pushViewController(phoneVerification, animated: true)
     }
     
-    func didUpdateStatus(_ isActive: Bool)  {
+    private func didUpdateStatus(_ isActive: Bool)  {
         if isActive {
             mSendBtn.enable()
             mChangeNumberBtn.enable()
@@ -118,6 +114,14 @@ class ChangePhoneNumberViewController: UIViewController, StoryboardInitializable
             mChangeNumberBtn.disable()
         }
         setToPhoneNumberActiveColor(isActive ? color_email! : color_navigationBar!)
+    }
+    
+    private func setPhoneCode(_ phoneCode: PhoneCode) {
+        selectedCountry = phoneCode
+        mFlagImgV.image = phoneCode.imageFlag
+        mCodeLb.text = phoneCode.code
+        mNumberTxtFl.formatPattern = phoneCode.mask ?? ""
+        validFormPattern = (selectedCountry?.mask!.count)!
     }
     
     // MARK: - Actions
@@ -132,7 +136,6 @@ class ChangePhoneNumberViewController: UIViewController, StoryboardInitializable
     @IBAction func send(_ sender: Any) {
         //WARNING:
         goToPhoneVerification()
-        
     }
     
     @IBAction func changeNumber(_ sender: UIButton) {
@@ -157,11 +160,9 @@ extension ChangePhoneNumberViewController: UITextFieldDelegate {
             return true
         }
         let fullText = textField.text! + string
-        return fullText.count <= validFormPattern ?? 0
-
+        return fullText.count <= validFormPattern
     }
 }
-
 
 
 //MARK: - SearchPhoneCodeViewControllerDelegate
@@ -169,10 +170,6 @@ extension ChangePhoneNumberViewController: UITextFieldDelegate {
 extension ChangePhoneNumberViewController: SearchPhoneCodeViewControllerDelegate {
     
     func didSelectCountry(_ country: PhoneCode) {
-        selectedCountry = country
-        mFlagImgV.image = country.imageFlag
-        mCodeLb.text = country.code
-        validFormPattern = (selectedCountry?.mask!.count)!
+        setPhoneCode(country)
     }
-    
 }

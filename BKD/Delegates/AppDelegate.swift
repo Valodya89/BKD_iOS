@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSPlacesClient.provideAPIKey(googleApiKey)
         GMSServices.provideAPIKey(googleApiKey)
         ApplicationSettings.construct()
-
+        KeychainManager().resetIfNeed()
 
         return true
     }

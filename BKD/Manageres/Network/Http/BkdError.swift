@@ -1,5 +1,5 @@
 //
-//  MimoError.swift
+//  BkdError.swift
 //  MimoBike
 //
 //  Created by Vardan on 12.05.21.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MimoError: Error {
+final class BkdError: Error {
     public var message: String
     
     init(error: NetworkError) {

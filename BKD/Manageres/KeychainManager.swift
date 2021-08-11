@@ -10,7 +10,7 @@ import KeychainAccess
 
 protocol UserToken {
 //    var user: UserResponse? { get }
-//    var token: TokenResponse? { get}
+    var token: TokenResponse? { get }
 }
 
 final class KeychainManager {
@@ -100,9 +100,9 @@ final class KeychainManager {
         }
     }
     
-    func parse(from content: UserToken) {
-//        self.saveToken(token: content.token?.accessToken ?? "")
-//        self.saveRefreshToken(token: content.token?.refreshToken ?? "")
-//        self.saveExpireIn(expiresIn: content.token?.expiresIn ?? 0)
+    func parse(from content: TokenResponse) {
+        self.saveToken(token: content.accessToken ?? "")
+        self.saveRefreshToken(token: content.refreshToken ?? "")
+        self.saveExpireIn(expiresIn: content.expiresIn ?? 0)
     }
 }

@@ -18,20 +18,21 @@ struct MultipartFormData {
     let blob: Blob?
     
     
-    func getParameterBoundary() -> Data? {
+    func getParameterBoundary(boundary: String) -> Data? {
         guard let params = parameters else { return nil }
-        let boundary = "Boundary-\(UUID().uuidString)"
         
-        var body = Data()
-        let boundaryPrefix = " — \(boundary)\r\n"
+        var body = ""
         
         for (key, value) in params {
-            body.appendString(boundaryPrefix)
-            body.appendString("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
-            body.appendString("\(value)\r\n")
+            body += "--\(boundary)\r\n"
+            body += "Content-Disposition:form-data; name=\"\(key)\""
+            body += "\r\n\r\n\(value)\r\n"
         }
+        body += "--\(boundary)--\r\n";
         
-        return body
+        let postData = body.data(using: .utf8)
+        
+        return postData
     }
     
     func getBlobBoundary() -> Data? {

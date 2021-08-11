@@ -66,8 +66,10 @@ final class URLBuilder: URLBuilderProtocol {
         
         
         if let formData = api.formData {
-            if let formDataParams = formData.getParameterBoundary() {
-                request.httpBody?.append(formDataParams)
+            let boundary = generateBoundaryString()
+            if let formDataParams = formData.getParameterBoundary(boundary: boundary) {
+                request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+                request.httpBody = formDataParams
             }
             
             if let formDataBlob = formData.getBlobBoundary() {
@@ -151,20 +153,9 @@ private extension NSMutableData {
 }
 
 fileprivate extension APIProtocol {
-    
     var privateApiKey: [String: String] {
-            let keychainManager = KeychainManager()
-            return ["Authorization": "Bearer \(keychainManager.getAccessToken() ?? "")"]
-        }
-        
-//        let username = "gmail"
-//        let password = "gmail_secret"
-//
-//        let loginString = String(format: "%@:%@", username, password)
-//        let loginData = loginString.data(using: String.Encoding.utf8)!
-//        let base64LoginString = loginData.base64EncodedString()
-//
-//        return ["Authorization": "Basic \(base64LoginString)"]
-//    }
+        let keychainManager = KeychainManager()
+        guard let unwrapToken = keychainManager.getAccessToken() else { return [:] }
+        return ["Authorization": "Bearer \(unwrapToken)"]
+    }
 }
-

@@ -25,6 +25,7 @@ enum AuthAPI: APIProtocol {
     case verifyAccounts(username: String,
                         code: String)
     case resendCode(username: String)
+    case getAuthRefreshToken(refreshToken: String)
     case getToken(username: String, password: String)
     case forgotPassword(username: String)
     case addPersonalData(name: String,
@@ -54,7 +55,8 @@ enum AuthAPI: APIProtocol {
              .forgotPassword:
             return BKDBaseURLs.account.rawValue
             
-        case .getToken:
+        case .getAuthRefreshToken,
+             .getToken:
             return BKDBaseURLs.auth.rawValue
             
         default:
@@ -88,6 +90,8 @@ enum AuthAPI: APIProtocol {
             return "accounts/verify"
         case .resendCode:
             return "accounts/send-code"
+        case .getAuthRefreshToken:
+            fallthrough
         case .getToken:
             return "oauth/token"
         case .forgotPassword:
@@ -107,6 +111,8 @@ enum AuthAPI: APIProtocol {
              .forgotPassword:
             return [
                 "Content-Type": "application/json"]
+        case .getAuthRefreshToken:
+            fallthrough
         case .getToken:
             let username = "gmail"
             let password = "gmail_secret"
@@ -115,7 +121,8 @@ enum AuthAPI: APIProtocol {
             let loginData = loginString.data(using: String.Encoding.utf8)!
             let base64LoginString = loginData.base64EncodedString()
             
-            return ["Authorization": "Basic \(base64LoginString)"]
+            return [
+                "Authorization": "Basic \(base64LoginString)"]
         
         default:
             return [:]
@@ -160,11 +167,10 @@ enum AuthAPI: APIProtocol {
             return [
                 "username": username
             ]
-        case .getToken(let username, let password):
+        case .getAuthRefreshToken(let refreshToken):
             return [
-                "username": username,
-                "password": password,
-                "grant_type": "password"
+                "refresh_token": refreshToken,
+                "grant_type": "refresh_token"
             ]
         case .forgotPassword(let username):
             return [
@@ -191,7 +197,18 @@ enum AuthAPI: APIProtocol {
     }
     
     var formData: MultipartFormData? {
-        return nil
+        switch self {
+        case .getToken(let username, let password):
+            let params = [
+                "username": username,
+                "password": password,
+                "grant_type": "password"
+            ]
+            return MultipartFormData(parameters: params, blob: nil)
+        default:
+            return nil
+        }
+        
     }
     
     var method: RequestMethod {

@@ -7,9 +7,10 @@
 
 import UIKit
 
-class SignInViewModel: UIView {
-    let validator = Validator()
-
+final class SignInViewModel {
+    private let validator = Validator()
+    private let network = SessionNetwork()
+    private let keychainManager = KeychainManager()
     
     ///Checking is all fields are filled
     func areFieldsFilled(firtStr: String?, secondStr: String?,
@@ -19,21 +20,21 @@ class SignInViewModel: UIView {
     
     ///sign in
     func signIn(username: String, password: String, completion: @escaping (SignUpStatus) -> Void) {
-        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getToken(username: username, password: password))) { (result) in
-            
+        network.request(with: URLBuilder(from: AuthAPI.getToken(username: username, password: password))) { (result) in
+
             switch result {
             case .success(let data):
-                guard let signIn = BkdConverter<BaseResponseModel<EmptyModel>>.parseJson(data: data as Any) else {
+                guard let tokenResponse = BkdConverter<TokenResponse>.parseJson(data: data as Any) else {
                     print("error")
-                    completion(SignUpStatus(rawValue: "error")!)
-
+                    completion(.error)
                     return
                 }
-                print(signIn.message as Any)
-                completion(SignUpStatus(rawValue: signIn.message)!)
+                print(tokenResponse)
+                self.keychainManager.parse(from: tokenResponse)
+                completion(.success)
             case .failure(let error):
                 print(error.description)
-                completion(SignUpStatus(rawValue: "error")!)
+                completion(.error)
                 break
             }
         }
@@ -41,7 +42,7 @@ class SignInViewModel: UIView {
     
     ///send email for restore password
     func forgotPassword(username: String, completion: @escaping (SignUpStatus) -> Void) {
-        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.forgotPassword(username: username))) { (result) in
+        network.request(with: URLBuilder.init(from: AuthAPI.forgotPassword(username: username))) { (result) in
             
             switch result {
             case .success(let data):

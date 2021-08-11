@@ -8,7 +8,7 @@
 import UIKit
 
 
-class SignInViewController: UIViewController, StoryboardInitializable {
+final class SignInViewController: UIViewController, StoryboardInitializable {
     
     //MARK: Outlets
     @IBOutlet weak var mEmailAddressTextFl: TextField!
@@ -29,8 +29,8 @@ class SignInViewController: UIViewController, StoryboardInitializable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpView()
 
+        setUpView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,7 +49,7 @@ class SignInViewController: UIViewController, StoryboardInitializable {
         mRegisterBtn.setGradientWithCornerRadius(cornerRadius: 8.0, startColor: color_gradient_register_start!, endColor: color_gradient_register_end!)
     }
     
-    func setUpView() {
+    private func setUpView() {
         mRightBarBtn.image = img_bkd
         mVisibilityPasswortBtn.setImage(#imageLiteral(resourceName: "invisible"), for: .normal)
         
@@ -63,17 +63,15 @@ class SignInViewController: UIViewController, StoryboardInitializable {
         mPasswordTxtFl.setPlaceholder(string: Constant.Texts.password,
                                       font: font_register_placeholder!,
                                       color: color_email!)
-        
     }
     
-    func signIn()  {
-        signInViewModel.signIn(username: mEmailAddressTextFl.text!, password: mPasswordTxtFl.text!) { [self] (status) in
+    private func signIn()  {
+        signInViewModel.signIn(username: mEmailAddressTextFl.text!, password: mPasswordTxtFl.text!) { [weak self] (status) in
+            guard let self = self else { return }
             switch status {
             case .success:
                 self.signInClicked()
-
             default: break
-            
             }
         }
     }
@@ -83,8 +81,8 @@ class SignInViewController: UIViewController, StoryboardInitializable {
         mErrorLb.isHidden = false
         mPasswordTxtFl.layer.borderColor = color_error!.cgColor
         mErrorLb.text = Constant.Texts.errorIncorrectPassword
-        
     }
+        
     private func checkEmailAddress() {
         OfflineChatViewModel().isValidEmail(email: mEmailAddressTextFl.text!) { [self] (isValid) in
             if isValid {
@@ -112,11 +110,13 @@ class SignInViewController: UIViewController, StoryboardInitializable {
         mPasswordTxtFl.resignFirstResponder()
         mEmailAddressTextFl.resignFirstResponder()
     }
+    
+    
     //MARK: ACTIONS
+    
     @IBAction func back(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
     }
-    
     
     @IBAction func visibility(_ sender: UIButton) {
         if sender.image(for: .normal) == img_invisible {
@@ -127,7 +127,6 @@ class SignInViewController: UIViewController, StoryboardInitializable {
             mPasswordTxtFl.isSecureTextEntry = true
         }
     }
-    
     
     @IBAction func forgotPassword(_ sender: UIButton) {
         dissmisKeyboar()
@@ -150,6 +149,10 @@ class SignInViewController: UIViewController, StoryboardInitializable {
     
     @IBAction func register(_ sender: UIButton) {
         dissmisKeyboar()
+//        // TODO: - remove
+        let selectPaymentVC = SelectPaymentViewController.initFromStoryboard(name: Constant.Storyboards.payment)
+        self.navigationController?.pushViewController(selectPaymentVC, animated: true)
+        return
         let registerVC = RegistrationViewController.initFromStoryboard(name: Constant.Storyboards.registration)
         self.navigationController?.pushViewController(registerVC, animated: true)
         

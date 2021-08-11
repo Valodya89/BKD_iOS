@@ -383,6 +383,7 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
         let cell = mTableV.dequeueReusableCell(withIdentifier: PhoneNumberTableViewCell.identifier, for: indexPath) as! PhoneNumberTableViewCell
         if let _ = currentPhoneCode {
             cell.selectedCountry = currentPhoneCode
+            cell.mPhoneNumberTxtFl.formatPattern = currentPhoneCode?.mask ?? ""
             cell.validFormPattern = (currentPhoneCode?.mask!.count)!
         }
         cell.setCellInfo(item: model)
