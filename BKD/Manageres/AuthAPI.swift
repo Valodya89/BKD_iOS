@@ -14,9 +14,7 @@ enum AuthAPI: APIProtocol {
     case getCarTypes
     case getRestrictedZones
     case getParking
-    case getCarsByType(fieldName: String,
-                       fieldValue: String,
-                       searchOperation: String)
+    case getCarsByType(criteria: [String : Any])
     case getWorkingTimes
     case getPhoneCodes
     case getCountries
@@ -140,11 +138,9 @@ enum AuthAPI: APIProtocol {
     var body: [String : Any]? {
         switch self {
         
-        case let .getCarsByType(fieldName, fieldValue, searchOperation):
+        case let .getCarsByType(criteria):
             return [
-                "fieldName": fieldName,
-                "fieldValue": fieldValue,
-                "searchOperation":searchOperation
+                "criteria" : [criteria]
             ]
         case let .signUp(username, password):
             return [

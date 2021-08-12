@@ -480,15 +480,6 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         })
     }
     
-//    ///hide detail or tail lift if it open
-//    func hideTableViewIfOpen() {
-//        if mDetailsTableBckgV.alpha == 1 {
-//            hideTableView(view: mDetailsTableBckgV, imgRotate: self.mDetailsAndTailLiftV.mDetailsDropDownImgV)
-//        }
-//        if mTailLiftTableBckgV.alpha == 1 {
-//            hideTableView(view: mTailLiftTableBckgV, imgRotate: self.mDetailsAndTailLiftV.mTailLiftDropDownImgV)
-//        }
-//    }
     
     //MARK: ALERT
     //MARK: -------------------

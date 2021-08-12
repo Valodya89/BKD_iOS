@@ -243,8 +243,13 @@ class SearchView: UIView, UITextFieldDelegate {
 //        }
         UIView.animate(withDuration: 0.3, animations: { [self] in
             self.mLocationDropDownView.setShadow(color: color_gradient_end!)
-            let height = isShow ? 172.0 : 0.0
-            self.mLocationDropDownView.mheightLayoutConst.constant = CGFloat(height)
+            if isShow {
+            self.mLocationDropDownView.mheightLayoutConst.constant = self.mLocationDropDownView.parkingList.count >=
+                3 ? locationList_height : CGFloat(self.mLocationDropDownView.parkingList.count) * locationList_cell_height
+            } else {
+                self.mLocationDropDownView.mheightLayoutConst.constant = 0.0
+            }
+            
             self.mLocationDropDownView.layoutIfNeeded()
             self.mLocationDropDownView.layer.shadowOpacity = 0;
 

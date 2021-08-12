@@ -285,7 +285,8 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     func showLocationList() {
         UIView.animate(withDuration: 0.3, animations: { [self] in
             self.mLocationDropDownView.setShadow(color: UIColor(named: "gradient_end")!)
-            self.mLocationDropDownView.mheightLayoutConst.constant = 172.0
+            self.mLocationDropDownView.mheightLayoutConst.constant = self.mLocationDropDownView.parkingList.count >=
+                3 ? locationList_height : CGFloat(self.mLocationDropDownView.parkingList.count) * locationList_cell_height
             self.layoutIfNeeded()
         })
     }

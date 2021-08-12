@@ -227,6 +227,8 @@ let zoom: Float = 12.0
 let detail_cell_height: CGFloat = 28
 let mydriver_cell_height: CGFloat = 66
 let tailLift_cell_height: CGFloat = 40
+let locationList_height: CGFloat = 172.0
+let locationList_cell_height: CGFloat = 57.3
 
 //h* 16 /37
 

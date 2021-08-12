@@ -126,13 +126,12 @@ class MainViewModel: NSObject {
     }
     
     /// get cars list by car type
-    func getCarsByTypes(fieldName: String,
-                        fieldValue:String,
-                        operation: String,
+    func getCarsByTypes( fieldValue:String,
                         completion: @escaping ([CarsModel]) -> Void) {
-        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getCarsByType(fieldName: fieldName,
-                                                                                        fieldValue: fieldValue,
-                                                                                        searchOperation: operation))) { (result) in
+        let criteria = ["fieldName": "type",
+                        "fieldValue": fieldValue,
+                        "searchOperation" : SearchOperation.equals.rawValue ] as [String : Any]
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getCarsByType(criteria: criteria))) { (result) in
             
             switch result {
             case .success(let data):
@@ -190,7 +189,9 @@ class MainViewModel: NSObject {
     }
     
     
-    
+//    func getSearchResultCars(cars: [CarsModel]) -> [CarsModel] {
+//        
+//    }
     
 }
 

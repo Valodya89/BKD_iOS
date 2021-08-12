@@ -21,7 +21,6 @@
 		560252DB266534D500FB204C /* SearchCustomLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560252DA266534D500FB204C /* SearchCustomLocationViewModel.swift */; };
 		560252E2266535CF00FB204C /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560252E1266535CF00FB204C /* Result.swift */; };
 		560252E72665368E00FB204C /* SearchPlacesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560252E62665368E00FB204C /* SearchPlacesResult.swift */; };
-		560252EF2665919A00FB204C /* CustomLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560252EE2665919A00FB204C /* CustomLocationModel.swift */; };
 		560252F42665950700FB204C /* CustomLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560252F32665950700FB204C /* CustomLocationViewModel.swift */; };
 		5602532C26670A0100FB204C /* OnlineChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602532B26670A0100FB204C /* OnlineChatViewController.swift */; };
 		5602533126670A1000FB204C /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5602533026670A1000FB204C /* Chat.storyboard */; };
@@ -288,7 +287,6 @@
 		560252DA266534D500FB204C /* SearchCustomLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCustomLocationViewModel.swift; sourceTree = "<group>"; };
 		560252E1266535CF00FB204C /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		560252E62665368E00FB204C /* SearchPlacesResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPlacesResult.swift; sourceTree = "<group>"; };
-		560252EE2665919A00FB204C /* CustomLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLocationModel.swift; sourceTree = "<group>"; };
 		560252F32665950700FB204C /* CustomLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLocationViewModel.swift; sourceTree = "<group>"; };
 		5602532B26670A0100FB204C /* OnlineChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineChatViewController.swift; sourceTree = "<group>"; };
 		5602533026670A1000FB204C /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
@@ -1913,7 +1911,6 @@
 			isa = PBXGroup;
 			children = (
 				560252E62665368E00FB204C /* SearchPlacesResult.swift */,
-				560252EE2665919A00FB204C /* CustomLocationModel.swift */,
 				565BFDFE26A0D3960044D081 /* RestrictedZones.swift */,
 			);
 			path = Model;
@@ -2600,7 +2597,6 @@
 				564E137126530208008CE884 /* SearchResultCollectionViewCell.swift in Sources */,
 				56563214265683A000B78562 /* Validator.swift in Sources */,
 				56664DC2269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift in Sources */,
-				560252EF2665919A00FB204C /* CustomLocationModel.swift in Sources */,
 				565731DE2672FDC80012ADD0 /* DetailsAndTailLiftModel.swift in Sources */,
 				568E703126443D90000CB6A9 /* CategoryViewController.swift in Sources */,
 				56B9F2D5267E8CEE003449AD /* SearchView.swift in Sources */,

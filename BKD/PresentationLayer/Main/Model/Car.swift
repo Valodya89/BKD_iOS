@@ -44,6 +44,7 @@ struct CarsModel: Decodable {
     let active: Bool
     let inRent: Bool
     let image: CarImageResponse
+   // let reservation: Reservations
     
     
 }
@@ -68,6 +69,19 @@ struct CarExterior: Decodable {
     func getExterior() -> String {
         return "\(length)x\(width)x\(height)\(Constant.Texts.m)"
     }
+}
+
+
+
+//"reservations": {
+//                "785046be-2296-40bb-a678-6cff41e74fa8": {
+//                    "start": 1617645253518,
+//                    "end": 1618250053518
+//                }
+//            },
+struct Reservations: Decodable {
+    let start: Date
+    let end: Date
 }
 
 

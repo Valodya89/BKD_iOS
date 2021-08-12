@@ -377,18 +377,43 @@
                             <constraint firstItem="ycG-nF-3VA" firstAttribute="centerX" secondItem="cWx-r5-7ek" secondAttribute="centerX" multiplier="1.115" id="z2U-l2-D6b"/>
                         </constraints>
                     </view>
+                    <visualEffectView hidden="YES" opaque="NO" alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bEN-PI-lSO">
+                        <rect key="frame" x="16" y="23.5" width="382" height="316"/>
+                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000000000000004" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="HyX-BS-8nI">
+                            <rect key="frame" x="0.0" y="0.0" width="382" height="316"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <blurEffect style="regular"/>
+                    </visualEffectView>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gtk-kJ-R4X">
+                        <rect key="frame" x="54" y="155.5" width="306" height="16"/>
+                        <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="16"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <color key="backgroundColor" name="background"/>
             <constraints>
+                <constraint firstItem="bEN-PI-lSO" firstAttribute="height" secondItem="cWx-r5-7ek" secondAttribute="height" multiplier="1.01608" id="8UL-Vn-nzv"/>
                 <constraint firstItem="cWx-r5-7ek" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="8kE-Ti-V4n"/>
+                <constraint firstItem="Gtk-kJ-R4X" firstAttribute="centerY" secondItem="bEN-PI-lSO" secondAttribute="centerY" multiplier="0.9" id="CtR-Lj-PYr"/>
+                <constraint firstItem="bEN-PI-lSO" firstAttribute="width" secondItem="cWx-r5-7ek" secondAttribute="width" id="M2N-gu-h3h"/>
                 <constraint firstItem="cWx-r5-7ek" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.871148" id="OYr-WC-FXk"/>
+                <constraint firstItem="Gtk-kJ-R4X" firstAttribute="height" relation="greaterThanOrEqual" secondItem="bEN-PI-lSO" secondAttribute="height" multiplier="0.0506329" id="SXc-fE-5R6"/>
+                <constraint firstItem="bEN-PI-lSO" firstAttribute="centerY" secondItem="cWx-r5-7ek" secondAttribute="centerY" multiplier="1.018" id="TOw-qy-2J8"/>
                 <constraint firstItem="cWx-r5-7ek" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.922705" id="aVt-TE-fu7"/>
+                <constraint firstItem="Gtk-kJ-R4X" firstAttribute="centerX" secondItem="bEN-PI-lSO" secondAttribute="centerX" id="g10-fz-3ME"/>
+                <constraint firstItem="bEN-PI-lSO" firstAttribute="centerX" secondItem="cWx-r5-7ek" secondAttribute="centerX" id="r85-9h-CCb"/>
                 <constraint firstItem="cWx-r5-7ek" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="wQn-Gc-7Mo"/>
+                <constraint firstItem="Gtk-kJ-R4X" firstAttribute="width" secondItem="bEN-PI-lSO" secondAttribute="width" multiplier="0.8" id="z56-2t-B01"/>
             </constraints>
             <size key="customSize" width="215" height="18"/>
             <connections>
+                <outlet property="mBlurV" destination="bEN-PI-lSO" id="DT6-4R-94J"/>
                 <outlet property="mCarImgV" destination="ycG-nF-3VA" id="TxD-sz-N5b"/>
                 <outlet property="mCarNameLb" destination="sns-pR-Vkg" id="Y1P-7A-Q2l"/>
                 <outlet property="mCarSizeImgV" destination="5X3-DB-YNF" id="Iu3-N5-YiM"/>
@@ -398,8 +423,10 @@
                 <outlet property="mCubeImgV" destination="imq-0S-60S" id="CNC-Se-1fn"/>
                 <outlet property="mCubeLb" destination="BxO-yr-6ze" id="8pu-Pf-BtH"/>
                 <outlet property="mFiatImgV" destination="rpR-HU-Exf" id="LZY-EL-eaS"/>
+                <outlet property="mGradientV" destination="HyX-BS-8nI" id="xrC-uY-JFW"/>
                 <outlet property="mIgnorValueContentV" destination="aaN-2M-j9V" id="3RR-Pg-OJj"/>
                 <outlet property="mIgnorValueLb" destination="hxh-SI-dxX" id="w19-Dp-nh7"/>
+                <outlet property="mInactiveCarNameLb" destination="Gtk-kJ-R4X" id="eZh-IP-2Qh"/>
                 <outlet property="mInfoBckV" destination="0O5-R3-1ws" id="tdP-QY-6N7"/>
                 <outlet property="mKgImgV" destination="Sbh-K1-I1V" id="2rC-aj-c0H"/>
                 <outlet property="mKgLb" destination="dB7-8a-qg3" id="D9p-07-a7D"/>
@@ -413,7 +440,7 @@
                 <outlet property="mValueDayLb" destination="Bqo-Xi-o7T" id="SXm-Ya-x1T"/>
                 <outlet property="mValueLb" destination="hyc-b6-DSl" id="4tN-M2-qde"/>
             </connections>
-            <point key="canvasLocation" x="-101.44927536231884" y="78.348214285714278"/>
+            <point key="canvasLocation" x="-101.44927536231884" y="77.34375"/>
         </collectionViewCell>
     </objects>
     <resources>
