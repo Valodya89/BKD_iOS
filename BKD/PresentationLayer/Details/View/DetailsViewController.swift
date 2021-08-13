@@ -24,7 +24,9 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var mCarDetailLb: UILabel!
     @IBOutlet weak var carPhotosView: CarPhotosView!
     @IBOutlet weak var mCarInfoV: CarInfoView!
+
     @IBOutlet weak var mDetailsAndTailLiftV: DetailsAndTailLiftView!
+    
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     
@@ -47,14 +49,21 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var mSearchV: SearchView!
     @IBOutlet weak var mReserveBckgV: UIView!
     @IBOutlet weak var mReserveBtn: UIButton!
+ 
+    @IBOutlet weak var mDetailAndTailLiftBottom: NSLayoutConstraint!
     @IBOutlet weak var mReserveLeading: NSLayoutConstraint!
-    
+    @IBOutlet weak var mDetailHeight: NSLayoutConstraint!
     
     //MARK: - Varables
     private lazy  var tariffSlideVC = TariffSlideViewController.initFromStoryboard(name: Constant.Storyboards.details)
     
     let detailsViewModel:DetailsViewModel = DetailsViewModel()
-//    var workingTimes: WorkingTimes? = ApplicationSettings.shared.workingTimes
+    var workingTimes: WorkingTimes?
+    
+    var pickerState: DatePicker?
+    var pickerList: [String]?
+    let pickerV = UIPickerView()    
+
     var searchModel:SearchModel = SearchModel()
     var vehicleModel:VehicleModel?
     
@@ -94,12 +103,15 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         super.viewWillAppear(animated)
         mReserveLeading.constant = -50.0
         mReserveBckgV.roundCorners(corners: [.topRight, .topLeft], radius: 20)
+        mSearchV.animateLocationList(isShow: false)
 
     }
     
     func setupView() {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = #imageLiteral(resourceName: "bkd").withRenderingMode(.alwaysOriginal)
+        workingTimes = ApplicationSettings.shared.workingTimes
+
         if isSearchEdit {
             mSearchWithValueStackV.searchModel = searchModel
             mSearchWithValueStackV.setupView()
@@ -107,6 +119,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             mTariffCarouselV.tariffCarousel.reloadData()
             currentTariff = .flexible
         }
+        
         configureViews()
         setDetailDatas()
         configureTransparentView()
@@ -133,17 +146,17 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     /// set height to details or tailLift tableView
     func  setTableViewsHeight() {
-        if DetailsData.detailsModel.count > 11{
+        if (vehicleModel?.detailList?.count) ?? 0 > 11{
             mDetailsTbVHeight.constant = 11 * detail_cell_height
         } else {
-            mDetailsTbVHeight.constant = CGFloat(DetailsData.detailsModel.count) * detail_cell_height
+            mDetailsTbVHeight.constant = CGFloat(vehicleModel?.detailList?.count ?? 0) * detail_cell_height
         }
         mDetailsTbV.frame.size = CGSize(width: mDetailsTbV.frame.size.width, height: mDetailsTbVHeight.constant)
         self.view.layoutIfNeeded()
-        if TailLiftData.tailLiftModel.count > 10 {
+        if vehicleModel?.tailLiftList?.count ?? 0 > 10 {
             mTailLiftTbVHeight.constant = 10 * tailLift_cell_height
         } else {
-            mTailLiftTbVHeight.constant = CGFloat(TailLiftData.tailLiftModel.count) * tailLift_cell_height
+            mTailLiftTbVHeight.constant = CGFloat(vehicleModel?.tailLiftList?.count ?? 0) * tailLift_cell_height
         }
     }
     
@@ -179,10 +192,14 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         mCarInfoV.mSizeLb.text = vehicleModel?.vehicleSize
         mAccessoriesBtn.alpha = vehicleModel!.ifHasAccessories ? 1.0 : 0.67
         mAdditionalDriverBtn.alpha = vehicleModel!.ifHasAditionalDriver ? 1.0 : 0.67
-//        mDetailsAndTailLiftV.mTailLiftBckgV.isHidden = !vehicleModel!.ifTailLift
-//        mTailLiftBottom.constant = vehicleModel!.ifTailLift ? 0.0 : -mDetailsAndTailLiftV.mTailLiftBtn.bounds.height
-//        mDetailsAndTailLiftV.layoutIfNeeded()
-                
+        mDetailsAndTailLiftV.mTailLiftV.isHidden = !(vehicleModel?.ifTailLift)!
+        if !vehicleModel!.ifTailLift {
+            mDetailAndTailLiftBottom.constant = -mDetailsAndTailLiftV.mTailLiftBtn.bounds.height
+            mDetailHeight.constant = self.view.bounds.height * 0.0185644
+            self.view.layoutIfNeeded()
+            
+        }
+            
     }
     
     
@@ -283,11 +300,11 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
    
     ///Will put new values from pickerDate
-    func showSelectedDate(dayBtn : UIButton?, monthBtn: UIButton?) {
-        if responderTxtFl.tag > 1 { //Time
+    func showSelectedDate(dayBtn : UIButton?, monthBtn: UIButton?, timeStr: String?) {
+        if pickerState == .pickUpTime || pickerState == .returnTime { //Time
             
             responderTxtFl.font =  UIFont.init(name: (responderTxtFl.font?.fontName)!, size: 18.0)
-            responderTxtFl.text = datePicker.date.getHour()
+            responderTxtFl.text = timeStr
             responderTxtFl.textColor = color_entered_date
             updateSearchTimes()
             
@@ -316,7 +333,8 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     func updateSearchTimes() {
         if currentTariff != .flexible {
             search = .time
-            searchModel.pickUpTime = datePicker.date
+            let timeStr = pickerList![ pickerV.selectedRow(inComponent: 0)]
+            searchModel.pickUpTime = timeStr.stringToDate()
             mSearchV.mReturnTimeTxtFl.font =  UIFont.init(name: (responderTxtFl.font?.fontName)!, size: 18.0)
             
             let newSearchModel = detailsViewModel.updateSearchInfo(tariff:
@@ -462,15 +480,6 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         })
     }
     
-//    ///hide detail or tail lift if it open
-//    func hideTableViewIfOpen() {
-//        if mDetailsTableBckgV.alpha == 1 {
-//            hideTableView(view: mDetailsTableBckgV, imgRotate: self.mDetailsAndTailLiftV.mDetailsDropDownImgV)
-//        }
-//        if mTailLiftTableBckgV.alpha == 1 {
-//            hideTableView(view: mTailLiftTableBckgV, imgRotate: self.mDetailsAndTailLiftV.mTailLiftDropDownImgV)
-//        }
-//    }
     
     //MARK: ALERT
     //MARK: -------------------
@@ -497,7 +506,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
                              okTitle: Constant.Texts.agree,cancelAction:nil,
                              
                              okAction: { [self] in
-                                showSelectedDate(dayBtn: nil, monthBtn: nil)
+                                showSelectedDate(dayBtn: nil, monthBtn: nil, timeStr: pickerList![ pickerV.selectedRow(inComponent: 0)])
 
                              })
     }
@@ -569,33 +578,40 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             self.backgroundV.removeFromSuperview()
         }
         
-        if responderTxtFl.tag == 0 { // PickUpDate
-            
+        
+        switch pickerState {
+        case .pickUpDate:
             mSearchV.showDateInfoViews(dayBtn: mSearchV!.mDayPickUpBtn,
                               monthBtn: mSearchV!.mMonthPickUpBtn,
                               txtFl: responderTxtFl)
             showSelectedDate(dayBtn: mSearchV!.mDayPickUpBtn,
-                             monthBtn: mSearchV!.mMonthPickUpBtn)
+                             monthBtn: mSearchV!.mMonthPickUpBtn, timeStr: nil)
             
-        } else if responderTxtFl.tag == 1 { // ReturnDate
+        case .returnDate:
             mSearchV.showDateInfoViews(dayBtn: mSearchV!.mDayReturnDateBtn,
                          monthBtn: mSearchV!.mMonthReturnDateBtn,
                          txtFl: responderTxtFl)
             showSelectedDate(dayBtn: mSearchV!.mDayReturnDateBtn,
-                             monthBtn: mSearchV!.mMonthReturnDateBtn)
+                             monthBtn: mSearchV!.mMonthReturnDateBtn, timeStr: nil)
             
-        } else { // Time
-            //check time
-            detailsViewModel.isReservetionInWorkingHours(time: datePicker.date ) { [self] (result) in
-                if !result {
-                    self.showAlertWorkingHours()
-                } else {
-                    showSelectedDate(dayBtn: nil, monthBtn: nil)
-                }
-            }
+        default:
+            let timeStr = pickerList![ pickerV.selectedRow(inComponent: 0)]
+            chanckReservationTime(timeStr: timeStr)
         }
+        
     }
     
+    ///check is reservation time during working time
+    private func chanckReservationTime(timeStr: String?) {
+        detailsViewModel.isReservetionInWorkingHours(time: timeStr?.stringToDate()) { [self] (result) in
+            if !result {
+                self.showAlertWorkingHours()
+            } else {
+                showSelectedDate(dayBtn: nil, monthBtn: nil, timeStr: timeStr)
+            }
+        }
+        
+    }
     
     
     //MARK: -Actions
@@ -641,8 +657,11 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
 extension DetailsViewController: DetailsAndTailLiftViewDelegate {
     
     func didPressDetails(willOpen: Bool) {
+        
         if willOpen  {
-            scrollToBottom(distance: 0.0)
+            mDetailsTbV.detailList = vehicleModel?.detailList ?? []
+            mDetailsTbV.reloadData()
+            scrollToBottom(distance: vehicleModel!.ifTailLift ? 0.0 : -(self.view.bounds.height * 0.247))
             if self.mTailLiftTableBckgV.alpha == 1 {
                 hideTableView(view: mTailLiftTableBckgV, imgRotate: self.mDetailsAndTailLiftV.mTailLiftDropDownImgV)
                 // will show Details tableView and close TailLift tableView
@@ -660,6 +679,8 @@ extension DetailsViewController: DetailsAndTailLiftViewDelegate {
         scrollToBottom(distance: 0.0)
         // will show TailLift tableView
         if willOpen {
+            mTailLiftTbV.tailLiftList = vehicleModel?.tailLiftList ?? []
+            mTailLiftTbV.reloadData()
             showTableView(view: mTailLiftTableBckgV, imgRotate: nil)
         } else if !willOpen { // will hide TailLift tableView
             hideTableView(view: mTailLiftTableBckgV, imgRotate: nil)
@@ -723,6 +744,7 @@ extension DetailsViewController: TariffCarouselViewDelegate {
     func willChangeTariffOption(tariff: Tariff, optionIndex: Int) {
         search = (tariff == .hourly) ? .time : .date
        updateSearchFields(optionIndex: optionIndex)
+        currentTariffOptionIndex = optionIndex
     }
 
     func didPressMore() {
@@ -746,28 +768,33 @@ extension DetailsViewController: TariffCarouselViewDelegate {
 //MARK: --------------------
 extension DetailsViewController: SearchViewDelegate {
 
-    func willOpenPicker(textFl: UITextField) {
-        
+    func willOpenPicker(textFl: UITextField, pickerState: DatePicker) {
+        self.pickerState = pickerState
         self.view.addSubview(self.backgroundV)
-        self.datePicker = UIDatePicker()
-        textFl.inputView = self.datePicker
         textFl.inputAccessoryView = creatToolBar()
-        self.responderTxtFl = textFl
+        responderTxtFl = textFl
         scrollToBottom(distance: mSearchV.bounds.height)
-        
-        if #available(iOS 14.0, *) {
-            self.datePicker.preferredDatePickerStyle = .wheels
-        } else {
-            // Fallback on earlier versions
-        }
-        if textFl.tag > 1 { // time
-            self.datePicker.datePickerMode = .time
-            self.datePicker.minimumDate = nil
 
-        } else { // date
+        if pickerState == .pickUpTime || pickerState == .returnTime {
+            
+            pickerList = ApplicationSettings.shared.pickerList
+            textFl.inputView = pickerV
+            textFl.inputAccessoryView = creatToolBar()
+
+            pickerV.delegate = self
+            pickerV.dataSource = self
+        } else {
+            self.datePicker = UIDatePicker()
+            textFl.inputView = self.datePicker
+
+            if #available(iOS 14.0, *) {
+            self.datePicker.preferredDatePickerStyle = .wheels
+            } else {
+                       // Fallback on earlier versions
+            }
             self.datePicker.datePickerMode = .date
             self.datePicker.minimumDate =  Date()
-            
+            self.datePicker.timeZone = TimeZone(secondsFromGMT: 0)
             self.datePicker.locale = Locale(identifier: "en")
         }
     }
@@ -894,4 +921,26 @@ extension DetailsViewController: UIScrollViewDelegate {
         
     }
     
+}
+
+
+//MARK: UIPickerViewDelegate
+//MARK: --------------------------------
+extension DetailsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerList!.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerList![row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print(pickerView.selectedRow(inComponent: component))
+        
+    }
 }

@@ -9,6 +9,8 @@ import UIKit
 
 class TailLiftTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
+    var tailLiftList: [TailLiftModel] = []
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
@@ -28,17 +30,17 @@ class TailLiftTableView: UITableView, UITableViewDelegate, UITableViewDataSource
     //MARK: UITableViewDataSource
     //MARK: ----------------------------------
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return TailLiftData.tailLiftModel.count
+        return tailLiftList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        cell.textLabel?.text = TailLiftData.tailLiftModel[indexPath.row].title
+        cell.textLabel?.text = tailLiftList[indexPath.row].title
         cell.textLabel?.textColor = color_navigationBar
         cell.textLabel?.font = font_search_cell
         let label = UILabel.init(frame: CGRect(x:0,y:0,width:100,height:20))
-        label.text = TailLiftData.tailLiftModel[indexPath.row].value
+        label.text = tailLiftList[indexPath.row].value
         label.textColor = color_navigationBar
         label.font = font_unselected_filter
         label.textAlignment = .center

@@ -20,7 +20,6 @@
 		560252DB266534D500FB204C /* SearchCustomLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560252DA266534D500FB204C /* SearchCustomLocationViewModel.swift */; };
 		560252E2266535CF00FB204C /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560252E1266535CF00FB204C /* Result.swift */; };
 		560252E72665368E00FB204C /* SearchPlacesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560252E62665368E00FB204C /* SearchPlacesResult.swift */; };
-		560252EF2665919A00FB204C /* CustomLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560252EE2665919A00FB204C /* CustomLocationModel.swift */; };
 		560252F42665950700FB204C /* CustomLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560252F32665950700FB204C /* CustomLocationViewModel.swift */; };
 		5602532C26670A0100FB204C /* OnlineChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602532B26670A0100FB204C /* OnlineChatViewController.swift */; };
 		5602533126670A1000FB204C /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5602533026670A1000FB204C /* Chat.storyboard */; };
@@ -271,7 +270,6 @@
 		560252DA266534D500FB204C /* SearchCustomLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCustomLocationViewModel.swift; sourceTree = "<group>"; };
 		560252E1266535CF00FB204C /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		560252E62665368E00FB204C /* SearchPlacesResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPlacesResult.swift; sourceTree = "<group>"; };
-		560252EE2665919A00FB204C /* CustomLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLocationModel.swift; sourceTree = "<group>"; };
 		560252F32665950700FB204C /* CustomLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLocationViewModel.swift; sourceTree = "<group>"; };
 		5602532B26670A0100FB204C /* OnlineChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineChatViewController.swift; sourceTree = "<group>"; };
 		5602533026670A1000FB204C /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
@@ -1844,7 +1842,6 @@
 			isa = PBXGroup;
 			children = (
 				560252E62665368E00FB204C /* SearchPlacesResult.swift */,
-				560252EE2665919A00FB204C /* CustomLocationModel.swift */,
 				565BFDFE26A0D3960044D081 /* RestrictedZones.swift */,
 			);
 			path = Model;
@@ -2151,17 +2148,15 @@
 				568E6F4A2642FC4B000CB6A9 /* Sources */,
 				568E6F4B2642FC4B000CB6A9 /* Frameworks */,
 				568E6F4C2642FC4B000CB6A9 /* Resources */,
-				B0A73BFE2DC6DAE6AEE73A95 /* [CP] Embed Pods Frameworks */,
+				B0A73BFE2DC6DAE6AEE73A95 /* [CP] Copy Pods Resources */,
 				565F8C65268D390600E21C71 /* Embed Frameworks */,
-				80678182001453DE907CB63C /* [CP] Copy Pods Resources */,
+				995B321BDC49670283C49A78 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = BKD;
-			packageProductDependencies = (
-			);
 			productName = BKD;
 			productReference = 568E6F4E2642FC4B000CB6A9 /* BKD.app */;
 			productType = "com.apple.product-type.application";
@@ -2194,8 +2189,6 @@
 				Base,
 			);
 			mainGroup = 568E6F452642FC4B000CB6A9;
-			packageReferences = (
-			);
 			productRefGroup = 568E6F4F2642FC4B000CB6A9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2297,24 +2290,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		80678182001453DE907CB63C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B0A73BFE2DC6DAE6AEE73A95 /* [CP] Embed Pods Frameworks */ = {
+		995B321BDC49670283C49A78 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2329,6 +2305,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B0A73BFE2DC6DAE6AEE73A95 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2410,7 +2403,6 @@
 				564E137126530208008CE884 /* SearchResultCollectionViewCell.swift in Sources */,
 				56563214265683A000B78562 /* Validator.swift in Sources */,
 				56664DC2269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift in Sources */,
-				560252EF2665919A00FB204C /* CustomLocationModel.swift in Sources */,
 				565731DE2672FDC80012ADD0 /* DetailsAndTailLiftModel.swift in Sources */,
 				568E703126443D90000CB6A9 /* CategoryViewController.swift in Sources */,
 				93CDB1EE26C17C69009F9B6C /* TokenResponse.swift in Sources */,

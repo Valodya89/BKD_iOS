@@ -11,7 +11,7 @@ class DetailsViewModel: NSObject {
  //static let shared = DetailsViewModel()
     
     let validator = Validator()
-//    var workingTimes: WorkingTimes? = ApplicationSettings.shared.workingTimes
+    var workingTimes: WorkingTimes?
     
     func updateSearchInfo(tariff: Tariff,
                           search: Search,
@@ -72,7 +72,9 @@ class DetailsViewModel: NSObject {
             searchModel.returnDate = searchModel.pickUpDate!.addHours(getOptionFromString(item: optionsArr[optionIndex]))
         }
     } else {
-        searchModel.returnTime = searchModel.pickUpTime!.addHours(getOptionFromString(item: optionsArr[optionIndex]))
+        if let _ = searchModel.pickUpTime {
+            searchModel.returnTime = searchModel.pickUpTime!.addHours(getOptionFromString(item: optionsArr[optionIndex]))
+        }
         if let pickUpDate = searchModel.pickUpDate {
             searchModel.returnDate = pickUpDate.addHours(getOptionFromString(item: optionsArr[optionIndex]))
             }
@@ -123,6 +125,7 @@ class DetailsViewModel: NSObject {
     /// Check if reserve time in working hours
     func isReservetionInWorkingHours(time: Date?,
                                      didResult: @escaping (Bool) -> ()) {
+        workingTimes = ApplicationSettings.shared.workingTimes
         guard let _ = workingTimes else { return }
         didResult(validator.checkReservationTime(time:time, workingTimes: workingTimes!))
     }
@@ -158,3 +161,7 @@ class DetailsViewModel: NSObject {
     
    
 }
+
+
+
+

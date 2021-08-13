@@ -14,3 +14,17 @@ enum RequestMethod: String {
     case delete = "DELETE"
     case patch = "PATCH"
 }
+
+
+enum SearchOperation: String {
+    case equals = "EQUALS"
+    case more = "MORE"
+    case less = "LESS"
+    case after = "AFTER"
+    case before = "BEFORE"
+    case between = "BETWEEN"
+    case interval = "INTERVAL"
+    case like = "LIKE"
+    case exist = "EXIST"
+    case In = "IN"
+}

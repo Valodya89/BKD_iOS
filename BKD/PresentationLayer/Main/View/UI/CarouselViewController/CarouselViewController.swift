@@ -71,23 +71,21 @@ class CarouselViewController: UIViewController, UICollectionViewDelegate, UIColl
         mainViewModel.getCarTypes { [self] (result) in
             carTypes = result
             collectionView.reloadData()
-            getCarsByType(carType: carTypes[currentPage])
+            if carTypes.count > 0 {
+                getCarsByType(carType: carTypes[currentPage])
+            }            
         }
     }
     
     func getCarsByType(carType: CarTypes) {
-        mainViewModel.getCarsByTypes(fieldName: carType.name, fieldValue: carType.id, operation: "EQUALS") { (result) in
+        mainViewModel.getCarsByTypes(fieldValue: carType.id) { (result) in
             print(result)
             self.updateCarList?(result)
         }
     }
     
-    // MARK: - Card Collection Delegate & DataSource
-//
-//    func numberOfSections(in collectionView: UICollectionView) -> Int {
-//        return 1
-//    }
     
+    // MARK: - Card Collection Delegate & DataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return carTypes.count
     }

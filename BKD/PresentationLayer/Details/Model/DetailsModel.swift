@@ -36,6 +36,8 @@ struct VehicleModel {
     public var customLocationTotalPrice: Double = 0.0
     public var noWorkingTimeTotalPrice: Double = 0.0
 
+    public var tailLiftList: [TailLiftModel]?
+    public var detailList: [DetailsModel]?
     public var searchModel: SearchModel?
     public var additionalAccessories: [AccessoriesModel]?
     public var additionalDrivers: [MyDriversModel]?

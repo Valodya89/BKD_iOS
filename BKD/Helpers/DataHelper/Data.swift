@@ -59,43 +59,43 @@ struct ExteriorData {
                                                   ExteriorModel(exterior: "5.91 x 2.42 x 2.82 m")]
 }
 
-//MARK: DetailsData
-//MARK: --------------------
-struct DetailsData {
-    static let detailsModel: [DetailsModel] = [ DetailsModel (image: #imageLiteral(resourceName: "1"), title: "3"),
-                                                DetailsModel (image: #imageLiteral(resourceName: "2"), title: "Diesel"),
-                                                DetailsModel (image: #imageLiteral(resourceName: "3"), title: "Manual"),
-                                                DetailsModel (image: #imageLiteral(resourceName: "4"), title: "95 Kw / 130 Pk"),
-                                                DetailsModel (image: #imageLiteral(resourceName: "5"), title: "7"),
-                                                DetailsModel (image: #imageLiteral(resourceName: "6"), title: "5.91 x 2.42 x 2.82 m"),
-                                                DetailsModel (image: #imageLiteral(resourceName: "7"), title: "1.20 m"),
-                                                DetailsModel (image: #imageLiteral(resourceName: "8"), title: "Conditioning"),
-                                                DetailsModel (image: #imageLiteral(resourceName: "9"), title: "GPS"),
-                                                DetailsModel (image: #imageLiteral(resourceName: "10"), title: "Tow Bar"),
-                                                DetailsModel (image: #imageLiteral(resourceName: "11"), title: "Slide door")
-    ]
-}
+////MARK: DetailsData
+////MARK: --------------------
+//struct DetailsData {
+//    static let detailsModel: [DetailsModel] = [ DetailsModel (image: #imageLiteral(resourceName: "1"), title: "3"),
+//                                                DetailsModel (image: #imageLiteral(resourceName: "2"), title: "Diesel"),
+//                                                DetailsModel (image: #imageLiteral(resourceName: "3"), title: "Manual"),
+//                                                DetailsModel (image: #imageLiteral(resourceName: "4"), title: "95 Kw / 130 Pk"),
+//                                                DetailsModel (image: #imageLiteral(resourceName: "5"), title: "7"),
+//                                                DetailsModel (image: #imageLiteral(resourceName: "6"), title: "5.91 x 2.42 x 2.82 m"),
+//                                                DetailsModel (image: #imageLiteral(resourceName: "7"), title: "1.20 m"),
+//                                                DetailsModel (image: #imageLiteral(resourceName: "8"), title: "Conditioning"),
+//                                                DetailsModel (image: #imageLiteral(resourceName: "9"), title: "GPS"),
+//                                                DetailsModel (image: #imageLiteral(resourceName: "10"), title: "Tow Bar"),
+//                                                DetailsModel (image: #imageLiteral(resourceName: "11"), title: "Slide door")
+//    ]
+//}
 
 
-//MARK: TailLiftData
-//MARK: --------------------
-struct TailLiftData {
-    static let tailLiftModel: [TailLiftModel] = [ TailLiftModel(value: "300 kg", title: "Tail lift lifting capacity"),
-                                                  TailLiftModel(value: "190 cm", title: "Tail lift length"),
-                                                  TailLiftModel(value: "68 cm", title: "Loading floor height")]
-    
-    
-    
-}
+////MARK: TailLiftData
+////MARK: --------------------
+//struct TailLiftData {
+//    static let tailLiftModel: [TailLiftModel] = [ TailLiftModel(value: "300 kg", title: "Tail lift lifting capacity"),
+//                                                  TailLiftModel(value: "190 cm", title: "Tail lift length"),
+//                                                  TailLiftModel(value: "68 cm", title: "Loading floor height")]
+//    
+//    
+//    
+//}
 
 //MARK: InactiveLocationRangeData
 //MARK: --------------------
-struct InactiveLocationRangeData {
-    static let inactiveLocationRangeModel: [InactiveLocationRangeModel] = [InactiveLocationRangeModel(latitude: 40.177200, longitude: 44.503490, radius: 2000 ),
-                                                                           InactiveLocationRangeModel(latitude: 40.226096280004306, longitude: 44.4105064496398, radius: 700 ),
-                                                                           InactiveLocationRangeModel(latitude: 40.22622734367619, longitude: 44.48037263005972, radius: 1000 ),
-                                                                           InactiveLocationRangeModel(latitude: 40.098976432681816, longitude: 44.52054139226675, radius: 3000 ), InactiveLocationRangeModel(latitude:40.27347513165386, longitude: 44.50302891433239, radius: 1500 )]
-}
+//struct InactiveLocationRangeData {
+//    static let inactiveLocationRangeModel: [InactiveLocationRangeModel] = [InactiveLocationRangeModel(latitude: 40.177200, longitude: 44.503490, radius: 2000 ),
+//                                                                           InactiveLocationRangeModel(latitude: 40.226096280004306, longitude: 44.4105064496398, radius: 700 ),
+//                                                                           InactiveLocationRangeModel(latitude: 40.22622734367619, longitude: 44.48037263005972, radius: 1000 ),
+//                                                                           InactiveLocationRangeModel(latitude: 40.098976432681816, longitude: 44.52054139226675, radius: 3000 ), InactiveLocationRangeModel(latitude:40.27347513165386, longitude: 44.50302891433239, radius: 1500 )]
+//}
 
 
 //MARK: CarsData

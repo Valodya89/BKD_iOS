@@ -33,6 +33,7 @@ class SearchHeaderViewModel: NSObject {
         didResult(validator.checkSearchDatas(searchDateModel: searchDateModel))
     }
     
+    ///Get custom location total price
     func getCustomLocationTotalPrice(searchV: SearchHeaderView) -> Double {
         var total: Double = 0.0
         if LocationPickUp.pickUpCustomLocation == searchV.locationPickUp {
@@ -64,6 +65,7 @@ class SearchHeaderViewModel: NSObject {
         }
     }
     
+    
     private func getTimeList(model: [TimeModel]) -> [String]? {
 
         var timeList:[String]? = []
@@ -72,28 +74,5 @@ class SearchHeaderViewModel: NSObject {
         }
         return timeList
     }
-    
-    
-    /// get avalable time list
-    func getWorkingTimes(completion: @escaping (WorkingTimes?) -> Void) {
-        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getWorkingTimes)) { (result) in
-            
-            switch result {
-            case .success(let data):
-                guard let workingTimes = BkdConverter<BaseResponseModel<WorkingTimes>>.parseJson(data: data as Any) else {
-                    print("error")
-                    return
-                }
-                completion(workingTimes.content)
-            case .failure(let error):
-                print(error.description)
-            
-                break
-            }
-        }
-    }
-
-    
-    
-    
+   
 }

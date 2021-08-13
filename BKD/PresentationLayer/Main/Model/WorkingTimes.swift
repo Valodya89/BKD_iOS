@@ -12,5 +12,5 @@ struct  WorkingTimes: Codable {
    // let agreementUrl
     let workStart: String
     let workEnd: String
-    let metadata: String?
+    let metadata: [String : String]
 }

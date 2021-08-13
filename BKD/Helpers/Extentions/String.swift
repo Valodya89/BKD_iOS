@@ -16,8 +16,11 @@ extension String {
     
     func stringToDate() -> Date {
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+        //dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
         dateFormatter.dateFormat = "HH:mm"
+        dateFormatter.defaultDate = Date()
+
         let date = dateFormatter.date(from:self)!
         print(date)
         return date

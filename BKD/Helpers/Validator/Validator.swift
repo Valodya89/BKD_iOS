@@ -118,6 +118,10 @@ func checkReservationTime(time: Date?, workingTimes: WorkingTimes) -> Bool {
     guard let _ = time else { return false}
     let startTimeDate = workingTimes.workStart.stringToDate()
     let endTimeDate = workingTimes.workEnd.stringToDate()
+    
+    print(startTimeDate.getString())
+    print(endTimeDate.getString())
+
     return time!.dateIsInRange(startTime: startTimeDate,
                                 endTime: endTimeDate)
 }
