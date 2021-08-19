@@ -243,9 +243,14 @@ let emailAppNames = [ "Googleg Mail", "Yahoo Mail", "Message"]
 let bancontactList = [UIImage(named: "ing"),
                       UIImage(named: "bnp"),
                       UIImage(named: "kbc")]
+let equipmentForSearch = [ "0": "towbar",
+                  "1": "Duble cabin" /*it needs to check*/,
+                  "2": "tailgate",
+                  "3": "GPSNavigator",
+                  "4": "airConditioning" ]
 
 
-
+ 
 
 
 

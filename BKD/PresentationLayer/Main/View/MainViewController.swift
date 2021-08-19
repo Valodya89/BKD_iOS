@@ -38,6 +38,7 @@ class MainViewController: BaseViewController {
     private var carsList:[String : [CarsModel]?]?
     private var pickerList: [String]?
     var workingTimes: WorkingTimes?
+    var currentCarType: CarTypes?
 
     var datePicker = UIDatePicker()
     let pickerV = UIPickerView()
@@ -266,9 +267,10 @@ class MainViewController: BaseViewController {
     private func animateSearchResultContainer (isThereResult : Bool) {
         carTypes = ApplicationSettings.shared.carTypes
         carsList = ApplicationSettings.shared.carsList
+        currentCarType =  carTypes![carouselVC.currentPage]
         searchResultV?.mFilterV.isHidden = !isThereResult
         searchResultV?.mNoticeLb.isHidden = isThereResult
-        searchResultV?.mNoticeLb.text = String(format: Constant.Texts.notCategory, carTypes![carouselVC.currentPage].name)
+        searchResultV?.mNoticeLb.text = String(format: Constant.Texts.notCategory, currentCarType!.name)
         
         if isThereResult { // will show avalable cars
             self.mCarCollectionV.isHidden = false
@@ -615,6 +617,11 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
                 // will show filter cell
                 if indexPath.row == 0 {
                   let cellFilter = collectionView.dequeueReusableCell(withReuseIdentifier: FilterSearchResultCell.identifier, for: indexPath) as! FilterSearchResultCell
+                    cellFilter.currentCarType = currentCarType
+                    cellFilter.filterCars = { cars in
+                        self.cars = cars!
+                        collectionView.reloadData()
+                    }
                     return cellFilter
                 } else {
                     // will show search result cell
@@ -662,10 +669,10 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         let cellSearch = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell
         
         cellSearch.startRendDate = searchHeaderV?.pickUpTime
-         cellSearch.endRendtDate = searchHeaderV?.returnTime
-         cellSearch.setSearchResultCellInfo( item: cars[indexPath.row] , index: indexPath.row)
-         cellSearch.delegate = self
-         return cellSearch
+        cellSearch.endRendtDate = searchHeaderV?.returnTime
+        cellSearch.setSearchResultCellInfo( item: cars[indexPath.row] , index: indexPath.row)
+        cellSearch.delegate = self
+        return cellSearch
     }
 }
 

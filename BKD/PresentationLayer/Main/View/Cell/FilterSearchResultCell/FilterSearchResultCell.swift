@@ -29,10 +29,14 @@ class FilterSearchResultCell: UICollectionViewCell {
     @IBOutlet weak var mBackgroundV: UIView!
     @IBOutlet weak var mCarEquipmentCollectionV: UICollectionView!
     @IBOutlet weak var mExteriorCollcetionV: UICollectionView!
-    var selectedItem:Int = 0
     
+    var selectedItem:Int = 0
+    var currentCarType:CarTypes?
     let searchResultModelView = SearchResultModelView()
     var exteriorSizes: [Exterior]?
+    var criteriaParam: [[ String : Any]]? = []
+    
+    var filterCars: (([CarsModel]?) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,6 +46,7 @@ class FilterSearchResultCell: UICollectionViewCell {
     }
     
     func setUpView() {
+        
         initTransmission(firstBtn: mAutomaticBtn,
                          secondBtn: mManualBtn,
                          firstLb: mAutomaticLb,
@@ -167,34 +172,67 @@ extension FilterSearchResultCell: UICollectionViewDelegate, UICollectionViewData
        }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var cell: UICollectionViewCell
-        if collectionView == mCarEquipmentCollectionV {
-             cell = collectionView.cellForItem(at: indexPath) as! CarEquipmentCollectionViewCell
-            
-        } else {
-             cell = collectionView.cellForItem(at: indexPath) as! ExteriorCollectionViewCell
-        }
+        
+        let cell: UICollectionViewCell = collectionViewDidTouch(indexPath: indexPath, collectionView: collectionView)
+        
         if cell.backgroundColor == .clear {
-            cell.backgroundColor = color_btn_pressed
-            cell.layer.borderWidth = 0.0
-            if collectionView == mCarEquipmentCollectionV {
-                (cell as! CarEquipmentCollectionViewCell).mImageV.setTintColor(color: color_selected_filter_fields!)
-                (cell as! CarEquipmentCollectionViewCell).mTitleLb.font = font_selected_filter
-                (cell as! CarEquipmentCollectionViewCell).mTitleLb.textColor = color_selected_filter_fields
-            } else {
-                (cell as! ExteriorCollectionViewCell).mTitleLb.textColor = color_selected_filter_fields
-            }
+            selectedCell(collectionView: collectionView, cell: cell, index: indexPath.row)
         } else {
-            cell.layer.borderWidth = 1.0
-            cell.backgroundColor = .clear
-            if collectionView == mCarEquipmentCollectionV {
-                (cell as! CarEquipmentCollectionViewCell).mImageV.setTintColor(color: color_exterior_tint!)
-                (cell as! CarEquipmentCollectionViewCell).mTitleLb.font = font_unselected_filter
-                (cell as! CarEquipmentCollectionViewCell).mTitleLb.textColor = color_filter_fields
-            } else {
-                (cell as! ExteriorCollectionViewCell).mTitleLb.textColor = color_filter_fields
+            unselectedCell(collectionView: collectionView, cell: cell, index: indexPath.row)
+        }
+    }
+    
+    ///Get touched CollectionCell
+    private func collectionViewDidTouch(indexPath: IndexPath, collectionView: UICollectionView) -> UICollectionViewCell {
+        
+        if collectionView == mCarEquipmentCollectionV {
+             return collectionView.cellForItem(at: indexPath) as! CarEquipmentCollectionViewCell
+        } else {
+             return collectionView.cellForItem(at: indexPath) as! ExteriorCollectionViewCell
+        }
+    }
+    
+    ///Selecte cell
+    private func selectedCell(collectionView: UICollectionView, cell: UICollectionViewCell, index: Int) {
+        
+        cell.backgroundColor = color_btn_pressed
+        cell.layer.borderWidth = 0.0
+        if collectionView == mCarEquipmentCollectionV {
+            (cell as! CarEquipmentCollectionViewCell).mImageV.setTintColor(color: color_selected_filter_fields!)
+            (cell as! CarEquipmentCollectionViewCell).mTitleLb.font = font_selected_filter
+            (cell as! CarEquipmentCollectionViewCell).mTitleLb.textColor = color_selected_filter_fields
+            criteriaParam = searchResultModelView.setEquipmentParam(index: index, criteriaParams: criteriaParam)
+        } else {
+            (cell as! ExteriorCollectionViewCell).mTitleLb.textColor = color_selected_filter_fields
+        }
+        filterCollectionView()
+
+    }
+    
+    ///Unselecte cell
+    private func unselectedCell(collectionView: UICollectionView, cell: UICollectionViewCell, index: Int) {
+        
+        cell.layer.borderWidth = 1.0
+        cell.backgroundColor = .clear
+        if collectionView == mCarEquipmentCollectionV {
+            (cell as! CarEquipmentCollectionViewCell).mImageV.setTintColor(color: color_exterior_tint!)
+            (cell as! CarEquipmentCollectionViewCell).mTitleLb.font = font_unselected_filter
+            (cell as! CarEquipmentCollectionViewCell).mTitleLb.textColor = color_filter_fields
             
-            }
+            criteriaParam = searchResultModelView.removeEquipmentParam(index: index, criteriaParams: criteriaParam)
+        } else {
+            (cell as! ExteriorCollectionViewCell).mTitleLb.textColor = color_filter_fields
+        }
+        
+        filterCollectionView()
+    }
+    
+    /// Filter cars (search)
+    private func filterCollectionView() {
+        guard let _ = criteriaParam, let _ = currentCarType else {return}
+        searchResultModelView.getCarsByFilter(carType: currentCarType!, criteria: criteriaParam!) { (carsModel) in
+            self.filterCars!(carsModel)
+            print(carsModel)
         }
     }
 }

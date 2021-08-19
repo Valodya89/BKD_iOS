@@ -17,6 +17,7 @@ enum AuthAPI: APIProtocol {
     case getExteriorSize
     case getCustomLocation(longitude:Double, latitude: Double)
     case getCarsByType(criteria: [String : Any])
+    case getCarsByFilter(criteria: [[String : Any]])
     case getWorkingTimes
     case getPhoneCodes
     case getCountries
@@ -80,9 +81,9 @@ enum AuthAPI: APIProtocol {
             return "/parking/list"
         case .getExteriorSize:
             return "car/sizes"
-        case let .getCustomLocation:
+        case .getCustomLocation:
             return "parking/custom-location"
-        case .getCarsByType:
+        case .getCarsByType, .getCarsByFilter:
             return "car/search"
         case .getWorkingTimes:
             return "settings/default"
@@ -112,6 +113,7 @@ enum AuthAPI: APIProtocol {
     var header: [String : String] {
         switch self {
         case .getCarsByType,
+             .getCarsByFilter,
              .signUp,
              .verifyAccounts,
              .resendCode,
@@ -165,6 +167,10 @@ enum AuthAPI: APIProtocol {
         case let .getCarsByType(criteria):
             return [
                 "criteria" : [criteria]
+            ]
+        case let .getCarsByFilter(criteria):
+            return [
+                "criteria" : criteria
             ]
         case let .signUp(username, password):
             return [
@@ -234,6 +240,7 @@ enum AuthAPI: APIProtocol {
         switch self {
 
         case .getCarsByType,
+             .getCarsByFilter,
              .signUp,
              .getToken,
              .addPersonalData:

@@ -45,6 +45,56 @@ class SearchResultModelView: NSObject {
         return !result
     }
     
+    /// Set criteria for search request
+    func setEquipmentParam(index: Int, criteriaParams: [[ String : Any]]?) ->  [[ String : Any]]?{
+        
+        var criteriaParam: [[ String : Any]]? = criteriaParams
+        let param = [ "fieldName": (equipmentForSearch["\(index)"] ?? "") as String,
+                      "fieldValue": true,
+                      "searchOperation": SearchOperation.equals.rawValue] as [String : Any]
+        criteriaParam?.append(param)
+        return criteriaParam
+    }
+    
+    /// Remove criteria for search request
+    func removeEquipmentParam(index: Int, criteriaParams: [[ String : Any]]?) ->  [[ String : Any]]?{
+        
+        var criteriaParam: [[ String : Any]]? = criteriaParams
+        for i in 0 ..< criteriaParams!.count {
+            let item:[ String : Any]  = criteriaParams![i]
+            if (item["fieldName"] as! String) == equipmentForSearch["\(index)"] {
+                criteriaParam?.remove(at: i)
+            }
+        }
+        return criteriaParam
+    }
+    
+    
+    /// get cars list by car type
+    func getCarsByFilter(carType: CarTypes, criteria: [[ String : Any]],
+                        completion: @escaping ([CarsModel]) -> Void) {
+        var param = criteria
+        param.insert( [ "fieldName": "type",
+                        "fieldValue": carType.id,
+                        "searchOperation": SearchOperation.equals.rawValue] as [String : Any], at: 0)
+        
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getCarsByFilter(criteria: param))) { (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let carList = BkdConverter<BaseResponseModel<[CarsModel]>>.parseJson(data: data as Any) else {
+                    print("error")
+                    return
+                }
+                print(carList.content as Any)
+                completion(carList.content!)
+            case .failure(let error):
+                print(error.description)
+                break
+            }
+        }
+    }
+    
 //    /// Get filtering cars list
 //    func getFilterCars(fieldName: String,
 //                        fieldValue:String,

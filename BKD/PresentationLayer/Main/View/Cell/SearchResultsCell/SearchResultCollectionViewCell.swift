@@ -137,10 +137,12 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         UIImage.loadFrom(url: item.image.getURL()!) { image in
             self.mCarImgV.image = image
         }
-//        UIImage.loadFrom(url: item.logo.getURL()!) { image in
-//            //guard let _ = image else {return}
-//            self.mCarLogoImgV.image = image
-//            self.mFlipCarLogoImgV.image = image
+//        if item.logo != nil {
+//            UIImage.loadFrom(url: item.logo!.getURL()!) { image in
+//                //guard let _ = image else {return}
+//                self.mCarLogoImgV.image = image
+//                self.mFlipCarLogoImgV.image = image
+//            }
 //        }
 
         DispatchQueue.main.async { [self] in

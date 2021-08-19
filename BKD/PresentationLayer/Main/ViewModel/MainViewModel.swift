@@ -176,6 +176,7 @@ class MainViewModel: NSObject {
         }
     }
     
+    ///Get images of car´s type
     func getTypeImages(carTypes: [CarTypes], completion: @escaping ([UIImage])-> Void) {
     
         var imagesArr:[UIImage] = []
