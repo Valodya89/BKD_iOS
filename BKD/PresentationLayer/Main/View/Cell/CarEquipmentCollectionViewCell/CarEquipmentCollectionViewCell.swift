@@ -28,5 +28,18 @@ class CarEquipmentCollectionViewCell: UICollectionViewCell {
         self.layer.cornerRadius = self.frame.size.height/2.5
         mTitleLb.textColor = color_filter_fields
     }
+    
+    override func prepareForReuse() {
+        mTitleLb.text = ""
+        mImageV.image = nil
+    }
+    
+    ///Set cell info
+    func setCellInfo(item: EquipmentModel) {
+        mTitleLb.text = item.equipmentName
+        mImageV.image = item.equipmentImg
+        mImageV.setTintColor(color: mImageV.tintColor)
+    }
+    
 
 }

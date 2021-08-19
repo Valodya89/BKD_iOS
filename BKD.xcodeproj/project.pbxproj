@@ -94,6 +94,13 @@
 		5657E848267108B500788D62 /* Details.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5657E847267108B500788D62 /* Details.storyboard */; };
 		5657E84E26711AE800788D62 /* CarPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5657E84D26711AE800788D62 /* CarPhotosView.swift */; };
 		5657E85326713BD400788D62 /* DetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5657E85226713BD400788D62 /* DetailsModel.swift */; };
+		565863B426C72017003C19A2 /* OfficeTerminalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565863B326C72017003C19A2 /* OfficeTerminalViewController.swift */; };
+		565863B626C72029003C19A2 /* OfficeTerminal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 565863B526C72029003C19A2 /* OfficeTerminal.storyboard */; };
+		565863B826C73F1A003C19A2 /* BkdOfficeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565863B726C73F1A003C19A2 /* BkdOfficeInfoView.swift */; };
+		565863BB26C76B3C003C19A2 /* CashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565863BA26C76B3C003C19A2 /* CashViewController.swift */; };
+		565863BD26C76B5D003C19A2 /* Cash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 565863BC26C76B5D003C19A2 /* Cash.storyboard */; };
+		5658D76826C9BB5700CD6A3F /* CustomLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5658D76726C9BB5700CD6A3F /* CustomLocationModel.swift */; };
+		5658D79326CCA50000CD6A3F /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5658D79226CCA50000CD6A3F /* CategoryViewModel.swift */; };
 		5659B02B2699F5020059D28C /* PhoneCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659B02A2699F5020059D28C /* PhoneCodeModel.swift */; };
 		565A7AB02653FE26006C63D0 /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565A7AAE2653FE26006C63D0 /* SearchHeaderView.swift */; };
 		565A7AB12653FE26006C63D0 /* SearchHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565A7AAF2653FE26006C63D0 /* SearchHeaderView.xib */; };
@@ -103,7 +110,6 @@
 		565A7AD72654C49B006C63D0 /* CategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565A7AD52654C49B006C63D0 /* CategoryCollectionViewCell.xib */; };
 		565A7AE326555EFF006C63D0 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565A7AE126555EFF006C63D0 /* CategoryTableViewCell.swift */; };
 		565A7AE426555EFF006C63D0 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565A7AE226555EFF006C63D0 /* CategoryTableViewCell.xib */; };
-		565A7AEA2655C5AE006C63D0 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565A7AE92655C5AE006C63D0 /* CategoryModel.swift */; };
 		565BD3602659AED1001923F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565BD35F2659AED1001923F5 /* AppDelegate.swift */; };
 		565BFD76269F4C5A0044D081 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565BFD75269F4C5A0044D081 /* Car.swift */; };
 		565BFD85269F55550044D081 /* APIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565BFD82269F55550044D081 /* APIProtocol.swift */; };
@@ -149,6 +155,12 @@
 		565F8C2B268D027400E21C71 /* UPCarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F8C28268D027400E21C71 /* UPCarouselFlowLayout.swift */; };
 		565F8C45268D12EA00E21C71 /* CarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F8C44268D12EA00E21C71 /* CarouselViewController.swift */; };
 		565F8C4A268D17C200E21C71 /* Carousel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 565F8C49268D17C200E21C71 /* Carousel.storyboard */; };
+		565F9AFE26C87D1E00064AD4 /* Kaartlazer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 565F9AFD26C87D1E00064AD4 /* Kaartlazer.storyboard */; };
+		565F9B0026C87D2F00064AD4 /* KaartlazerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F9AFF26C87D2F00064AD4 /* KaartlazerViewController.swift */; };
+		565F9B0526C8AE2900064AD4 /* ReservetionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F9B0326C8AE2900064AD4 /* ReservetionCollectionViewCell.swift */; };
+		565F9B0626C8AE2900064AD4 /* ReservetionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565F9B0426C8AE2900064AD4 /* ReservetionCollectionViewCell.xib */; };
+		565F9B0B26C8AEA100064AD4 /* ReservetionStartRideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F9B0926C8AEA100064AD4 /* ReservetionStartRideCollectionViewCell.swift */; };
+		565F9B0C26C8AEA100064AD4 /* ReservetionStartRideCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565F9B0A26C8AEA100064AD4 /* ReservetionStartRideCollectionViewCell.xib */; };
 		5660F7F2266C21980082F038 /* Mulish-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5660F7F1266C217F0082F038 /* Mulish-Bold.ttf */; };
 		566354EB268AF8EF0003E2EB /* PriceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566354E9268AF8EF0003E2EB /* PriceTableViewCell.swift */; };
 		566354EC268AF8EF0003E2EB /* PriceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 566354EA268AF8EF0003E2EB /* PriceTableViewCell.xib */; };
@@ -345,6 +357,13 @@
 		5657E847267108B500788D62 /* Details.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Details.storyboard; sourceTree = "<group>"; };
 		5657E84D26711AE800788D62 /* CarPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPhotosView.swift; sourceTree = "<group>"; };
 		5657E85226713BD400788D62 /* DetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsModel.swift; sourceTree = "<group>"; };
+		565863B326C72017003C19A2 /* OfficeTerminalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficeTerminalViewController.swift; sourceTree = "<group>"; };
+		565863B526C72029003C19A2 /* OfficeTerminal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OfficeTerminal.storyboard; sourceTree = "<group>"; };
+		565863B726C73F1A003C19A2 /* BkdOfficeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BkdOfficeInfoView.swift; sourceTree = "<group>"; };
+		565863BA26C76B3C003C19A2 /* CashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashViewController.swift; sourceTree = "<group>"; };
+		565863BC26C76B5D003C19A2 /* Cash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Cash.storyboard; sourceTree = "<group>"; };
+		5658D76726C9BB5700CD6A3F /* CustomLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLocationModel.swift; sourceTree = "<group>"; };
+		5658D79226CCA50000CD6A3F /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		5659B02A2699F5020059D28C /* PhoneCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneCodeModel.swift; sourceTree = "<group>"; };
 		565A7AAE2653FE26006C63D0 /* SearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderView.swift; sourceTree = "<group>"; };
 		565A7AAF2653FE26006C63D0 /* SearchHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchHeaderView.xib; sourceTree = "<group>"; };
@@ -354,7 +373,6 @@
 		565A7AD52654C49B006C63D0 /* CategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		565A7AE126555EFF006C63D0 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		565A7AE226555EFF006C63D0 /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
-		565A7AE92655C5AE006C63D0 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		565BD35F2659AED1001923F5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		565BFD75269F4C5A0044D081 /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 		565BFD82269F55550044D081 /* APIProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIProtocol.swift; sourceTree = "<group>"; };
@@ -400,6 +418,12 @@
 		565F8C28268D027400E21C71 /* UPCarouselFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UPCarouselFlowLayout.swift; sourceTree = "<group>"; };
 		565F8C44268D12EA00E21C71 /* CarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselViewController.swift; sourceTree = "<group>"; };
 		565F8C49268D17C200E21C71 /* Carousel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Carousel.storyboard; sourceTree = "<group>"; };
+		565F9AFD26C87D1E00064AD4 /* Kaartlazer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Kaartlazer.storyboard; sourceTree = "<group>"; };
+		565F9AFF26C87D2F00064AD4 /* KaartlazerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaartlazerViewController.swift; sourceTree = "<group>"; };
+		565F9B0326C8AE2900064AD4 /* ReservetionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservetionCollectionViewCell.swift; sourceTree = "<group>"; };
+		565F9B0426C8AE2900064AD4 /* ReservetionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReservetionCollectionViewCell.xib; sourceTree = "<group>"; };
+		565F9B0926C8AEA100064AD4 /* ReservetionStartRideCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservetionStartRideCollectionViewCell.swift; sourceTree = "<group>"; };
+		565F9B0A26C8AEA100064AD4 /* ReservetionStartRideCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReservetionStartRideCollectionViewCell.xib; sourceTree = "<group>"; };
 		5660F7F1266C217F0082F038 /* Mulish-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mulish-Bold.ttf"; sourceTree = "<group>"; };
 		566354E9268AF8EF0003E2EB /* PriceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTableViewCell.swift; sourceTree = "<group>"; };
 		566354EA268AF8EF0003E2EB /* PriceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriceTableViewCell.xib; sourceTree = "<group>"; };
@@ -1108,6 +1132,24 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		565863B226C71FB0003C19A2 /* OfficeTerminalViewController */ = {
+			isa = PBXGroup;
+			children = (
+				565863B326C72017003C19A2 /* OfficeTerminalViewController.swift */,
+				565863B526C72029003C19A2 /* OfficeTerminal.storyboard */,
+			);
+			path = OfficeTerminalViewController;
+			sourceTree = "<group>";
+		};
+		565863B926C76A38003C19A2 /* CashViewController */ = {
+			isa = PBXGroup;
+			children = (
+				565863BA26C76B3C003C19A2 /* CashViewController.swift */,
+				565863BC26C76B5D003C19A2 /* Cash.storyboard */,
+			);
+			path = CashViewController;
+			sourceTree = "<group>";
+		};
 		565A7AAD2653FDCB006C63D0 /* SearchHeaderView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1279,6 +1321,9 @@
 		565F80CE26A703C900ADB9FE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				565F9AFC26C87CFD00064AD4 /* KaartlazerViewController */,
+				565863B926C76A38003C19A2 /* CashViewController */,
+				565863B226C71FB0003C19A2 /* OfficeTerminalViewController */,
 				56CC7D7126A879DA006DB7B8 /* UI */,
 				565F810326A7D05C00ADB9FE /* Cell */,
 				565F80D726A7042100ADB9FE /* Payment.storyboard */,
@@ -1380,6 +1425,50 @@
 				56AD191C2693251C006A53C1 /* CheckEmailViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		565F9AFC26C87CFD00064AD4 /* KaartlazerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				565F9AFD26C87D1E00064AD4 /* Kaartlazer.storyboard */,
+				565F9AFF26C87D2F00064AD4 /* KaartlazerViewController.swift */,
+			);
+			path = KaartlazerViewController;
+			sourceTree = "<group>";
+		};
+		565F9B0126C8ADC100064AD4 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				565F9B0226C8ADD500064AD4 /* Cells */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		565F9B0226C8ADD500064AD4 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				565F9B0826C8AE5600064AD4 /* ReservetionStartRideCell */,
+				565F9B0726C8AE3700064AD4 /* ReservetionCell */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		565F9B0726C8AE3700064AD4 /* ReservetionCell */ = {
+			isa = PBXGroup;
+			children = (
+				565F9B0426C8AE2900064AD4 /* ReservetionCollectionViewCell.xib */,
+				565F9B0326C8AE2900064AD4 /* ReservetionCollectionViewCell.swift */,
+			);
+			path = ReservetionCell;
+			sourceTree = "<group>";
+		};
+		565F9B0826C8AE5600064AD4 /* ReservetionStartRideCell */ = {
+			isa = PBXGroup;
+			children = (
+				565F9B0926C8AEA100064AD4 /* ReservetionStartRideCollectionViewCell.swift */,
+				565F9B0A26C8AEA100064AD4 /* ReservetionStartRideCollectionViewCell.xib */,
+			);
+			path = ReservetionStartRideCell;
 			sourceTree = "<group>";
 		};
 		566354E8268AF8890003E2EB /* PriceTableViewCell */ = {
@@ -1660,7 +1749,6 @@
 		568E70A22644BEEF000CB6A9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				565A7AE92655C5AE006C63D0 /* CategoryModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1668,6 +1756,7 @@
 		568E70A32644BEF6000CB6A9 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				5658D79226CCA50000CD6A3F /* CategoryViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1750,6 +1839,7 @@
 		568E70B02644BFA2000CB6A9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				565F9B0126C8ADC100064AD4 /* UI */,
 				568E704726446E2D000CB6A9 /* MyReservationsViewController.swift */,
 			);
 			path = View;
@@ -1843,6 +1933,7 @@
 			children = (
 				560252E62665368E00FB204C /* SearchPlacesResult.swift */,
 				565BFDFE26A0D3960044D081 /* RestrictedZones.swift */,
+				5658D76726C9BB5700CD6A3F /* CustomLocationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2035,6 +2126,7 @@
 				56CC7D7F26A9FEA5006DB7B8 /* Bancontact */,
 				56CC7D7626A912D2006DB7B8 /* BancontactType */,
 				56CC7D7226A87A9F006DB7B8 /* PaymentWebViewController.swift */,
+				565863B726C73F1A003C19A2 /* BkdOfficeInfoView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2211,6 +2303,7 @@
 				565F80B826A6392600ADB9FE /* ChangePhoneNumber.storyboard in Resources */,
 				5660F7F2266C21980082F038 /* Mulish-Bold.ttf in Resources */,
 				564E1354265211FF008CE884 /* SFProDisplay-Semibold.ttf in Resources */,
+				565863B626C72029003C19A2 /* OfficeTerminal.storyboard in Resources */,
 				564E137226530208008CE884 /* SearchResultCollectionViewCell.xib in Resources */,
 				564E1355265211FF008CE884 /* SongMyung-Regular.ttf in Resources */,
 				564E1356265211FF008CE884 /* SFProDisplay-Regular.ttf in Resources */,
@@ -2241,13 +2334,16 @@
 				56533EF82679263D0012BF4A /* Accessories.storyboard in Resources */,
 				566B379B26974F0C0021BCAA /* NationalRegisterNumberTableViewCell.xib in Resources */,
 				5602533126670A1000FB204C /* Chat.storyboard in Resources */,
+				565F9AFE26C87D1E00064AD4 /* Kaartlazer.storyboard in Resources */,
 				560251DB2661074200FB204C /* Carousel.xib in Resources */,
 				56AD18EB2691622C006A53C1 /* SignIn.storyboard in Resources */,
+				565F9B0C26C8AEA100064AD4 /* ReservetionStartRideCollectionViewCell.xib in Resources */,
 				5656082E26785C47009578FA /* More.storyboard in Resources */,
 				5656083A26785E2C009578FA /* RentalConditionsTableViewCell.xib in Resources */,
 				56533ED72678BF3A0012BF4A /* BkdAdvantagesTableViewCell.xib in Resources */,
 				56533F0E2679BDD50012BF4A /* MyDrivers.storyboard in Resources */,
 				568E6F5E2642FC50000CB6A9 /* LaunchScreen.storyboard in Resources */,
+				565863BD26C76B5D003C19A2 /* Cash.storyboard in Resources */,
 				565A7AD72654C49B006C63D0 /* CategoryCollectionViewCell.xib in Resources */,
 				566B37BE2697A6D40021BCAA /* TakePhotoTableViewCell.xib in Resources */,
 				565A7AB12653FE26006C63D0 /* SearchHeaderView.xib in Resources */,
@@ -2255,6 +2351,7 @@
 				5618872D2645D99600BDDB33 /* Assets.xcassets in Resources */,
 				5657E848267108B500788D62 /* Details.storyboard in Resources */,
 				566B3761269503360021BCAA /* CalendarTableViewCell.xib in Resources */,
+				565F9B0626C8AE2900064AD4 /* ReservetionCollectionViewCell.xib in Resources */,
 				565A7ACF26548025006C63D0 /* SearchResult.xib in Resources */,
 				5602521226612A6300FB204C /* SearchTableViewCell.xib in Resources */,
 				5691A614265C50F20008081D /* CustomLocation.storyboard in Resources */,
@@ -2334,10 +2431,12 @@
 				565632522658B11E00B78562 /* EquipmentModel.swift in Sources */,
 				5602532C26670A0100FB204C /* OnlineChatViewController.swift in Sources */,
 				56533F092679BDBE0012BF4A /* MyDriversViewController.swift in Sources */,
+				565863BB26C76B3C003C19A2 /* CashViewController.swift in Sources */,
 				56533ECF2678B94D0012BF4A /* MoreModel.swift in Sources */,
 				566354F4268B72950003E2EB /* PriceTableView.swift in Sources */,
 				565F810026A7C1E700ADB9FE /* PaymentTypes.swift in Sources */,
 				56CFDE682693721C00D731CD /* RegistartionBotViewController.swift in Sources */,
+				565863B426C72017003C19A2 /* OfficeTerminalViewController.swift in Sources */,
 				565F80A826A5FD7D00ADB9FE /* PersonalData.swift in Sources */,
 				565731CC26724F720012ADD0 /* CarInfoView.swift in Sources */,
 				565731D126725FBD0012ADD0 /* DetailsAndTailLiftView.swift in Sources */,
@@ -2350,6 +2449,7 @@
 				56C8E172267C1D100061890C /* ReserveTableViewCell.swift in Sources */,
 				560253C0266AB69100FB204C /* OfflineChatViewModel.swift in Sources */,
 				565BFDFB26A0C3800044D081 /* CarTypes.swift in Sources */,
+				565F9B0526C8AE2900064AD4 /* ReservetionCollectionViewCell.swift in Sources */,
 				5602534C2667413A00FB204C /* BaseViewController.swift in Sources */,
 				565F8C1F268CF4C700E21C71 /* CarouselCollectionViewCell.swift in Sources */,
 				56533EE3267925FE0012BF4A /* AccessoriesUIViewController.swift in Sources */,
@@ -2380,6 +2480,7 @@
 				566354EB268AF8EF0003E2EB /* PriceTableViewCell.swift in Sources */,
 				564E12E1264D787A008CE884 /* MenuModel.swift in Sources */,
 				565731D92672DE810012ADD0 /* UINavigationControllerExtention.swift in Sources */,
+				5658D79326CCA50000CD6A3F /* CategoryViewModel.swift in Sources */,
 				56CC7D7326A87A9F006DB7B8 /* PaymentWebViewController.swift in Sources */,
 				564E944826AF8BFA00291164 /* ApplicationSttings.swift in Sources */,
 				565F80B426A6391000ADB9FE /* ChangePhoneNumberViewController.swift in Sources */,
@@ -2402,12 +2503,14 @@
 				560FE63D267BE7960068BC85 /* ReserveViewController.swift in Sources */,
 				564E137126530208008CE884 /* SearchResultCollectionViewCell.swift in Sources */,
 				56563214265683A000B78562 /* Validator.swift in Sources */,
+				565F9B0026C87D2F00064AD4 /* KaartlazerViewController.swift in Sources */,
 				56664DC2269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift in Sources */,
 				565731DE2672FDC80012ADD0 /* DetailsAndTailLiftModel.swift in Sources */,
 				568E703126443D90000CB6A9 /* CategoryViewController.swift in Sources */,
 				93CDB1EE26C17C69009F9B6C /* TokenResponse.swift in Sources */,
 				56B9F2D5267E8CEE003449AD /* SearchView.swift in Sources */,
 				56A2AFE62694C827001BA7C5 /* PhoneNumberTableViewCell.swift in Sources */,
+				5658D76826C9BB5700CD6A3F /* CustomLocationModel.swift in Sources */,
 				56573ADD268FBE4000B39136 /* SignInViewModel.swift in Sources */,
 				93CDB1F526C1CE1F009F9B6C /* AttachedCardResponse.swift in Sources */,
 				5665403526759D3E008ACD31 /* TariffCarouselView.swift in Sources */,
@@ -2420,6 +2523,7 @@
 				5665403B26759E06008ACD31 /* TariffCarouselCell.swift in Sources */,
 				5659B02B2699F5020059D28C /* PhoneCodeModel.swift in Sources */,
 				5657E85326713BD400788D62 /* DetailsModel.swift in Sources */,
+				565863B826C73F1A003C19A2 /* BkdOfficeInfoView.swift in Sources */,
 				56409533264AE5A8001DC92D /* Data.swift in Sources */,
 				56AD18E92691622C006A53C1 /* EmailAddressViewController.swift in Sources */,
 				565BFDBD269F91930044D081 /* SessionExpiredAlert.swift in Sources */,
@@ -2453,7 +2557,6 @@
 				566B3760269503360021BCAA /* CalendarTableViewCell.swift in Sources */,
 				56CC7D8526AA07F2006DB7B8 /* BancontactCollectionViewCell.swift in Sources */,
 				56AD18D126916061006A53C1 /* RegistrationViewController.swift in Sources */,
-				565A7AEA2655C5AE006C63D0 /* CategoryModel.swift in Sources */,
 				93CDB1F326C1CBD5009F9B6C /* PaymentViewModel.swift in Sources */,
 				5656F196268936E000E70BAB /* MyDriversModel.swift in Sources */,
 				565A7AE326555EFF006C63D0 /* CategoryTableViewCell.swift in Sources */,
@@ -2482,6 +2585,7 @@
 				56CD8313267CF56800B2799F /* ReserveModel.swift in Sources */,
 				565BFDB9269F8F310044D081 /* StorageManager.swift in Sources */,
 				565F807426A3C46600ADB9FE /* WorkingTimes.swift in Sources */,
+				565F9B0B26C8AEA100064AD4 /* ReservetionStartRideCollectionViewCell.swift in Sources */,
 				560252E72665368E00FB204C /* SearchPlacesResult.swift in Sources */,
 				56CFDE6026936F8400D731CD /* FaceAndTouchIdViewController.swift in Sources */,
 				5602526726616C8700FB204C /* Storyboardinitializable.swift in Sources */,

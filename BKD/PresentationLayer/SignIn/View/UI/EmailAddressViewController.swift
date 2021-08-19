@@ -68,8 +68,9 @@ class EmailAddressViewController: UIViewController, StoryboardInitializable {
     
     /// will push next viewController
     private func goToNextController() {
-        let ceheckEmailVC = CheckEmailViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
-        self.navigationController?.pushViewController(ceheckEmailVC, animated: true)
+        let checkEmailVC = CheckEmailViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
+        checkEmailVC.emailAddress = mEmailAddressTextFl.text
+        self.navigationController?.pushViewController(checkEmailVC, animated: true)
     }
     
     ///will show  or hide error of email

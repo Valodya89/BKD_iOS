@@ -30,10 +30,14 @@ class FilterSearchResultCell: UICollectionViewCell {
     @IBOutlet weak var mCarEquipmentCollectionV: UICollectionView!
     @IBOutlet weak var mExteriorCollcetionV: UICollectionView!
     var selectedItem:Int = 0
-
+    
+    let searchResultModelView = SearchResultModelView()
+    var exteriorSizes: [Exterior]?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setUpView()
+        getExteriorSizes()
         
     }
     
@@ -87,6 +91,14 @@ class FilterSearchResultCell: UICollectionViewCell {
         secondImgV.setTintColor(color: color_exterior_tint!)
 
     }
+    
+    func getExteriorSizes() {
+        searchResultModelView.getExteriorSizes { (exteriorList) in
+            print(exteriorList)
+            self.exteriorSizes = exteriorList
+            self.mExteriorCollcetionV.reloadData()
+        }
+    }
 
     //MARK: ACTIONS
     @IBAction func manual(_ sender: UIButton) {
@@ -116,22 +128,21 @@ extension FilterSearchResultCell: UICollectionViewDelegate, UICollectionViewData
         if collectionView == mCarEquipmentCollectionV {
             return EquipmentData.equipmentModel.count
         }
-        return ExteriorData.exteriorModel.count
+        
+        return exteriorSizes?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == mCarEquipmentCollectionV {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarEquipmentCollectionViewCell.identifier, for: indexPath) as! CarEquipmentCollectionViewCell
             let equipmentModel: EquipmentModel = (EquipmentData.equipmentModel[indexPath.item])
-            cell.mTitleLb.text = equipmentModel.equipmentName
-            cell.mImageV.image = equipmentModel.equipmentImg
-            cell.mImageV.setTintColor(color: cell.mImageV.tintColor)
+            cell.setCellInfo(item: equipmentModel)
             return cell
         }
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExteriorCollectionViewCell.identifier, for: indexPath) as! ExteriorCollectionViewCell
-        let exteriorModel: ExteriorModel = (ExteriorData.exteriorModel[indexPath.item])
-        cell.mTitleLb.text = exteriorModel.exterior
+        guard let _ = exteriorSizes else { return cell }
+        cell.mTitleLb.text = exteriorSizes![indexPath.row].getExterior()
         return cell
         
     }
@@ -149,9 +160,9 @@ extension FilterSearchResultCell: UICollectionViewDelegate, UICollectionViewData
             size.width =  width + widthInPoints + 60
             return size
         }
-        let exteriorModel: ExteriorModel = (ExteriorData.exteriorModel[indexPath.item])
-        let width = exteriorModel.exterior.size(OfFont: font!).width
-        size.width =  width + 30
+
+        let width = exteriorSizes![indexPath.item].getExterior().size(OfFont: font!).width
+        size.width = width + 30
         return size
        }
     

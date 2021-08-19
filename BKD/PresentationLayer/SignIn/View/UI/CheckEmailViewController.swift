@@ -18,6 +18,8 @@ class CheckEmailViewController: UIViewController, StoryboardInitializable {
     @IBOutlet weak var mOpenEmailBtn: UIButton!
     @IBOutlet weak var mOpenEmailLeading: NSLayoutConstraint!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
+    
+    var emailAddress: String?
 
     
     let checkEmailViewModel = CheckEmailViewModel()
@@ -50,6 +52,7 @@ class CheckEmailViewController: UIViewController, StoryboardInitializable {
     /// will push next viewController
     private func goToNextController() {
         let newPasswordVC = NewPasswordViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
+        newPasswordVC.emailAddress = emailAddress
         self.navigationController?.pushViewController(newPasswordVC, animated: true)
     }
     
@@ -70,25 +73,24 @@ class CheckEmailViewController: UIViewController, StoryboardInitializable {
     }
     
     func showActionSheet(texts: [String]) {
-        let alertC = UIAlertController(title: "Select", message: "Select Mail App", preferredStyle: .actionSheet)
+        let alertC = UIAlertController(title: Constant.Texts.select, message: Constant.Texts.selectMailApp, preferredStyle: .actionSheet)
 
         texts.forEach { (text) in
             let alertAction = UIAlertAction(title: text, style: .default) { (action ) in
                 switch action.title {
-               // "googlegmail", "yahooMail"
-                case "Googleg Mail" :
-                    UIApplication.shared.canOpenURL(NSURL(string: "googlegmail://app")! as URL)
-                case "Yahoo Mail":
-                    UIApplication.shared.canOpenURL(NSURL(string: "yahooMail://app")! as URL)
+                case Constant.Texts.googleMail :
+                    UIApplication.shared.canOpenURL(NSURL(string: Constant.DeepLinks.googleMailApp)! as URL)
+                case Constant.Texts.yahooMail:
+                    UIApplication.shared.canOpenURL(NSURL(string: Constant.DeepLinks.yahooMailApp)! as URL)
                 default :
-                    UIApplication.shared.open(NSURL(string: "message://app")! as URL)
+                    UIApplication.shared.open(NSURL(string: Constant.DeepLinks.messageApp)! as URL)
                 }
             }
             
             alertC.addAction(alertAction)
         }
         
-        alertC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+        alertC.addAction(UIAlertAction(title: Constant.Texts.cancel, style: .cancel, handler: { _ in
             self.mOpenEmailLeading.constant = 0.0
             self.mOpenEmailBckgV.layoutIfNeeded()
         }))

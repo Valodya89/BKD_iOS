@@ -14,7 +14,7 @@ struct CarModel {
 
 struct VehicleModel {
     public var vehicleName: String?
-    public var vehicleDesctiption: String?
+    public var vehicleType: String?
     public var vehicleImg: UIImage?
     public var ifHasTowBar: Bool = false
     public var vehicleValue: Double = 0.0

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Office Terminal View Controller-->
+        <scene sceneID="cAU-8R-04f">
+            <objects>
+                <viewController storyboardIdentifier="OfficeTerminalViewController" id="fdx-7n-wN4" customClass="OfficeTerminalViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eCS-fy-quq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="19" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FCA-FN-sEi">
+                                <rect key="frame" x="17" y="23.5" width="380" height="105"/>
+                                <string key="text">You need to make the payment at the BKD office before 24 hours  of the Reservation start, get the Payment check number and insert it in the BKD application as a proof of payment. Later you need to ask the admin to check.  </string>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
+                                <color key="textColor" name="navigationBar"/>
+                                <nil key="highlightedColor"/>
+                                <string key="userLabel">You need to make the payment at the BKD office before 24 hours  of the Reservation start, get the Payment check number and insert it in the BKD application as a proof of payment. Later you need to ask the admin to check.</string>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Generated Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G7o-IF-zW7" customClass="OneTimeCodeTextField" customModule="BKD" customModuleProvider="target">
+                                <rect key="frame" x="17" y="212" width="380" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" name="navigationBar"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="changeTextFiled:" destination="fdx-7n-wN4" eventType="editingDidEnd" id="E5I-wT-OPz"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4h5-KU-YJh">
+                                <rect key="frame" x="84.5" y="371.5" width="245" height="50"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
+                                <state key="normal" title="Ask Admin to check">
+                                    <color key="titleColor" name="email"/>
+                                </state>
+                                <connections>
+                                    <action selector="askAdmin:" destination="fdx-7n-wN4" eventType="touchUpInside" id="Noe-az-Sds"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bwp-vR-ze7" customClass="BkdOfficeInfoView" customModule="BKD" customModuleProvider="target">
+                                <rect key="frame" x="17" y="590.5" width="267" height="143"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_picker" translatesAutoresizingMaskIntoConstraints="NO" id="HtG-85-tjE">
+                                        <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="UiI-0Q-rWl">
+                                        <rect key="frame" x="38.5" y="0.0" width="214" height="31"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                        <state key="normal" title="Provinceisteenweg 660, B-2530 Boechout">
+                                            <color key="titleColor" name="email"/>
+                                        </state>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone" translatesAutoresizingMaskIntoConstraints="NO" id="Fjy-qA-I29">
+                                        <rect key="frame" x="4" y="57.5" width="16" height="27"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ICn-fd-v40">
+                                        <rect key="frame" x="38.5" y="40" width="214" height="32"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                        <state key="normal" title="+32 (0)3 283 63 33">
+                                            <color key="titleColor" name="email"/>
+                                        </state>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="LU2-rx-xwA">
+                                        <rect key="frame" x="2" y="100.5" width="20" height="20"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                                <color key="value" name="email"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monday - Friday: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qth-mZ-zkc">
+                                        <rect key="frame" x="38.5" y="86.5" width="214" height="19"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                        <color key="textColor" name="email"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9 AM - 5 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j9N-XL-7xT">
+                                        <rect key="frame" x="38.5" y="121.5" width="214" height="19"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                        <color key="textColor" name="email"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="UiI-0Q-rWl" firstAttribute="centerX" secondItem="bwp-vR-ze7" secondAttribute="centerX" multiplier="1.09" id="3MW-wz-l7H"/>
+                                    <constraint firstItem="LU2-rx-xwA" firstAttribute="top" secondItem="Fjy-qA-I29" secondAttribute="bottom" multiplier="1.19" id="4o5-9f-CMI"/>
+                                    <constraint firstItem="HtG-85-tjE" firstAttribute="top" secondItem="bwp-vR-ze7" secondAttribute="top" id="5F2-k0-ai1"/>
+                                    <constraint firstItem="ICn-fd-v40" firstAttribute="top" secondItem="UiI-0Q-rWl" secondAttribute="bottom" multiplier="1.3" id="9Av-Fs-e8x"/>
+                                    <constraint firstItem="j9N-XL-7xT" firstAttribute="leading" secondItem="Qth-mZ-zkc" secondAttribute="leading" id="C6b-mu-BH3"/>
+                                    <constraint firstItem="ICn-fd-v40" firstAttribute="trailing" secondItem="UiI-0Q-rWl" secondAttribute="trailing" id="Cbt-Iq-c2s"/>
+                                    <constraint firstItem="Fjy-qA-I29" firstAttribute="top" secondItem="HtG-85-tjE" secondAttribute="bottom" multiplier="2.4" id="Fxn-bK-eVp"/>
+                                    <constraint firstItem="LU2-rx-xwA" firstAttribute="centerX" secondItem="Fjy-qA-I29" secondAttribute="centerX" id="IVd-yi-nDo"/>
+                                    <constraint firstItem="Qth-mZ-zkc" firstAttribute="trailing" secondItem="ICn-fd-v40" secondAttribute="trailing" id="MJj-2Y-k8t"/>
+                                    <constraint firstItem="ICn-fd-v40" firstAttribute="height" relation="greaterThanOrEqual" secondItem="bwp-vR-ze7" secondAttribute="height" multiplier="0.223776" id="PFV-1k-wpg"/>
+                                    <constraint firstItem="j9N-XL-7xT" firstAttribute="top" secondItem="Qth-mZ-zkc" secondAttribute="bottom" multiplier="1.15" id="QZX-NY-XId"/>
+                                    <constraint firstItem="ICn-fd-v40" firstAttribute="leading" secondItem="UiI-0Q-rWl" secondAttribute="leading" id="UwD-eQ-rJ9"/>
+                                    <constraint firstItem="Fjy-qA-I29" firstAttribute="height" secondItem="bwp-vR-ze7" secondAttribute="height" multiplier="0.188811" id="VDb-mb-Eb6"/>
+                                    <constraint firstItem="Fjy-qA-I29" firstAttribute="width" secondItem="bwp-vR-ze7" secondAttribute="width" multiplier="0.0599251" id="VPV-Q1-0xD"/>
+                                    <constraint firstItem="Qth-mZ-zkc" firstAttribute="leading" secondItem="ICn-fd-v40" secondAttribute="leading" id="YWg-7a-CkZ"/>
+                                    <constraint firstItem="HtG-85-tjE" firstAttribute="width" secondItem="bwp-vR-ze7" secondAttribute="width" multiplier="0.0898876" id="dV2-0P-y9k"/>
+                                    <constraint firstItem="Qth-mZ-zkc" firstAttribute="top" secondItem="ICn-fd-v40" secondAttribute="bottom" multiplier="1.2" id="f09-NX-KJV"/>
+                                    <constraint firstItem="LU2-rx-xwA" firstAttribute="height" secondItem="bwp-vR-ze7" secondAttribute="height" multiplier="0.13986" id="hLa-W6-sPT"/>
+                                    <constraint firstItem="LU2-rx-xwA" firstAttribute="width" secondItem="bwp-vR-ze7" secondAttribute="width" multiplier="0.0749064" id="i9z-ao-adQ"/>
+                                    <constraint firstItem="Fjy-qA-I29" firstAttribute="centerX" secondItem="HtG-85-tjE" secondAttribute="centerX" id="iJf-oh-sSQ"/>
+                                    <constraint firstItem="HtG-85-tjE" firstAttribute="leading" secondItem="bwp-vR-ze7" secondAttribute="leading" id="k2w-ke-n8f"/>
+                                    <constraint firstItem="j9N-XL-7xT" firstAttribute="trailing" secondItem="Qth-mZ-zkc" secondAttribute="trailing" id="ko7-tX-Giq"/>
+                                    <constraint firstItem="HtG-85-tjE" firstAttribute="height" secondItem="bwp-vR-ze7" secondAttribute="height" multiplier="0.167832" id="qDV-tw-1Ay"/>
+                                    <constraint firstItem="UiI-0Q-rWl" firstAttribute="width" secondItem="bwp-vR-ze7" secondAttribute="width" multiplier="0.8" id="r6Z-u2-yeI"/>
+                                    <constraint firstItem="UiI-0Q-rWl" firstAttribute="height" relation="greaterThanOrEqual" secondItem="bwp-vR-ze7" secondAttribute="height" multiplier="0.20979" id="wJc-9x-r7Q"/>
+                                    <constraint firstItem="UiI-0Q-rWl" firstAttribute="top" secondItem="bwp-vR-ze7" secondAttribute="top" id="zie-m9-4Wd"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="mLocationBtn" destination="UiI-0Q-rWl" id="OJ6-Ek-evh"/>
+                                    <outlet property="mLocationImgV" destination="HtG-85-tjE" id="9mt-ME-2fb"/>
+                                    <outlet property="mPhoneBtn" destination="ICn-fd-v40" id="qzC-Fq-Kb8"/>
+                                    <outlet property="mPhoneImgV" destination="Fjy-qA-I29" id="bL3-TR-8dO"/>
+                                    <outlet property="mTimeImgV" destination="LU2-rx-xwA" id="TAv-85-VIf"/>
+                                    <outlet property="mWorkDaysLb" destination="Qth-mZ-zkc" id="kG6-zc-1gP"/>
+                                    <outlet property="mWorkHoursLb" destination="j9N-XL-7xT" id="uwB-Ds-q0l"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="FSm-3z-PqJ"/>
+                        <color key="backgroundColor" name="background"/>
+                        <constraints>
+                            <constraint firstItem="4h5-KU-YJh" firstAttribute="centerX" secondItem="FSm-3z-PqJ" secondAttribute="centerX" id="0nH-Zd-xct"/>
+                            <constraint firstItem="bwp-vR-ze7" firstAttribute="centerX" secondItem="FSm-3z-PqJ" secondAttribute="centerX" multiplier="0.727" id="6wm-bC-WWW"/>
+                            <constraint firstItem="FCA-FN-sEi" firstAttribute="centerY" secondItem="FSm-3z-PqJ" secondAttribute="centerY" multiplier="0.196" id="AC4-5W-X6T"/>
+                            <constraint firstItem="FCA-FN-sEi" firstAttribute="width" secondItem="eCS-fy-quq" secondAttribute="width" multiplier="0.917" id="As6-xS-AwJ"/>
+                            <constraint firstItem="G7o-IF-zW7" firstAttribute="trailing" secondItem="FCA-FN-sEi" secondAttribute="trailing" id="BP4-oj-rE1"/>
+                            <constraint firstItem="G7o-IF-zW7" firstAttribute="leading" secondItem="FCA-FN-sEi" secondAttribute="leading" id="CzH-dm-gm4"/>
+                            <constraint firstItem="FCA-FN-sEi" firstAttribute="centerX" secondItem="FSm-3z-PqJ" secondAttribute="centerX" id="O1P-RB-FW0"/>
+                            <constraint firstItem="bwp-vR-ze7" firstAttribute="centerY" secondItem="FSm-3z-PqJ" secondAttribute="centerY" multiplier="1.71" id="UU7-cw-oMn"/>
+                            <constraint firstItem="bwp-vR-ze7" firstAttribute="height" relation="greaterThanOrEqual" secondItem="eCS-fy-quq" secondAttribute="height" multiplier="0.17698" id="a6z-8u-Vlc"/>
+                            <constraint firstItem="4h5-KU-YJh" firstAttribute="width" secondItem="eCS-fy-quq" secondAttribute="width" multiplier="0.591787" id="bF1-8r-Zqr"/>
+                            <constraint firstItem="4h5-KU-YJh" firstAttribute="height" secondItem="eCS-fy-quq" secondAttribute="height" multiplier="0.0618812" id="cf4-Ys-adB"/>
+                            <constraint firstItem="4h5-KU-YJh" firstAttribute="top" secondItem="G7o-IF-zW7" secondAttribute="bottom" multiplier="1.42" id="cwS-iK-h7t"/>
+                            <constraint firstItem="bwp-vR-ze7" firstAttribute="width" secondItem="eCS-fy-quq" secondAttribute="width" multiplier="0.644928" id="f7j-qQ-Mg1"/>
+                            <constraint firstItem="FCA-FN-sEi" firstAttribute="height" relation="greaterThanOrEqual" secondItem="eCS-fy-quq" secondAttribute="height" multiplier="0.0965347" id="gey-mR-F1W"/>
+                            <constraint firstItem="G7o-IF-zW7" firstAttribute="top" secondItem="FCA-FN-sEi" secondAttribute="bottom" multiplier="1.65" id="kst-69-Jkt"/>
+                            <constraint firstItem="G7o-IF-zW7" firstAttribute="height" secondItem="eCS-fy-quq" secondAttribute="height" multiplier="0.0618812" id="raC-Mr-UX6"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="GoP-H3-TpJ">
+                        <barButtonItem key="leftBarButtonItem" image="back" id="mpI-Pf-6up">
+                            <connections>
+                                <action selector="back:" destination="fdx-7n-wN4" id="zCP-lE-qBY"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="bkd" id="Xdd-bv-Hbw"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mAskAdminBtn" destination="4h5-KU-YJh" id="yyw-wv-ulP"/>
+                        <outlet property="mInfoLb" destination="FCA-FN-sEi" id="L5x-On-ocT"/>
+                        <outlet property="mLeftBarBtn" destination="mpI-Pf-6up" id="hGw-f1-JHb"/>
+                        <outlet property="mNumberTextFl" destination="G7o-IF-zW7" id="zQa-0d-ygw"/>
+                        <outlet property="mOfficeInfoV" destination="bwp-vR-ze7" id="4R3-tw-DEx"/>
+                        <outlet property="mRightBarBtn" destination="Xdd-bv-Hbw" id="d5T-qW-Fjp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bTd-pS-TVG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="668.11594202898561" y="102.45535714285714"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="SSO-Ft-aCP">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TVX-jj-eZt" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="C5A-Ci-9W9">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" name="navigation_bar"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fdx-7n-wN4" kind="relationship" relationship="rootViewController" id="tBf-GV-vHJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DNP-Q1-gTc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-242.0289855072464" y="102.45535714285714"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="back" width="12" height="21"/>
+        <image name="bkd" width="76" height="23.5"/>
+        <image name="map_picker" width="15" height="20"/>
+        <image name="phone" width="16" height="27"/>
+        <image name="time" width="15" height="15"/>
+        <namedColor name="background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="email">
+            <color red="0.53700000047683716" green="0.59600001573562622" blue="0.66699999570846558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="navigationBar">
+            <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="navigation_bar">
+            <color red="0.10999999940395355" green="0.20000000298023224" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

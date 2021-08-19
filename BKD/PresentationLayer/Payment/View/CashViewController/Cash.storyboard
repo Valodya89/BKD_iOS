@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Cash View Controller-->
+        <scene sceneID="0Uc-5O-jgu">
+            <objects>
+                <viewController storyboardIdentifier="CashViewController" id="okt-ID-3Dg" customClass="CashViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="x1u-0S-UvG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="19" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ng1-0h-s7l">
+                                <rect key="frame" x="17" y="22" width="380" height="84"/>
+                                <string key="text">You need to make the payment at the BKD office before 24hours of the Reservation start and ask the admin to confirm the payment in the system.</string>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
+                                <color key="textColor" name="navigationBar"/>
+                                <nil key="highlightedColor"/>
+                                <string key="userLabel">You need to make the payment at the BKD office before 24 hours  of the Reservation start, get the Payment check number and insert it in the BKD application as a proof of payment. Later you need to ask the admin to check.</string>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ym9-qW-a23">
+                                <rect key="frame" x="84.5" y="368.5" width="245" height="50"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
+                                <state key="normal" title="Ask Admin to check">
+                                    <color key="titleColor" name="navigationBar"/>
+                                </state>
+                                <connections>
+                                    <action selector="askAdmin:" destination="okt-ID-3Dg" eventType="touchUpInside" id="x9j-Sy-f6T"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vV8-wj-qup" customClass="BkdOfficeInfoView" customModule="BKD" customModuleProvider="target">
+                                <rect key="frame" x="17" y="590.5" width="267" height="143"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_picker" translatesAutoresizingMaskIntoConstraints="NO" id="Bvl-18-Y44">
+                                        <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="89b-MJ-gHZ">
+                                        <rect key="frame" x="38.5" y="0.0" width="214" height="31"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                        <state key="normal" title="Provinceisteenweg 660, B-2530 Boechout">
+                                            <color key="titleColor" name="email"/>
+                                        </state>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone" translatesAutoresizingMaskIntoConstraints="NO" id="3aA-qo-C1w">
+                                        <rect key="frame" x="4" y="57.5" width="16" height="27"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XDg-6F-TzO">
+                                        <rect key="frame" x="38.5" y="40" width="214" height="32"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                        <state key="normal" title="+32 (0)3 283 63 33">
+                                            <color key="titleColor" name="email"/>
+                                        </state>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="U0V-1I-qim">
+                                        <rect key="frame" x="2" y="100.5" width="20" height="20"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                                <color key="value" name="email"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monday - Friday: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jep-D5-AcS">
+                                        <rect key="frame" x="38.5" y="86.5" width="214" height="19"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                        <color key="textColor" name="email"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9 AM - 5 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4s8-hF-Zst">
+                                        <rect key="frame" x="38.5" y="121.5" width="214" height="19"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                        <color key="textColor" name="email"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="XDg-6F-TzO" firstAttribute="leading" secondItem="89b-MJ-gHZ" secondAttribute="leading" id="1hc-S6-dag"/>
+                                    <constraint firstItem="U0V-1I-qim" firstAttribute="height" secondItem="vV8-wj-qup" secondAttribute="height" multiplier="0.13986" id="2sW-kl-nxi"/>
+                                    <constraint firstItem="U0V-1I-qim" firstAttribute="top" secondItem="3aA-qo-C1w" secondAttribute="bottom" multiplier="1.19" id="3dV-oq-Szk"/>
+                                    <constraint firstItem="U0V-1I-qim" firstAttribute="centerX" secondItem="3aA-qo-C1w" secondAttribute="centerX" id="3jh-H9-90b"/>
+                                    <constraint firstItem="3aA-qo-C1w" firstAttribute="width" secondItem="vV8-wj-qup" secondAttribute="width" multiplier="0.0599251" id="4qD-hg-mDY"/>
+                                    <constraint firstItem="Bvl-18-Y44" firstAttribute="top" secondItem="vV8-wj-qup" secondAttribute="top" id="4xH-aD-fKF"/>
+                                    <constraint firstItem="jep-D5-AcS" firstAttribute="leading" secondItem="XDg-6F-TzO" secondAttribute="leading" id="51Y-Od-Ybh"/>
+                                    <constraint firstItem="jep-D5-AcS" firstAttribute="top" secondItem="XDg-6F-TzO" secondAttribute="bottom" multiplier="1.2" id="752-Tn-RO2"/>
+                                    <constraint firstItem="89b-MJ-gHZ" firstAttribute="width" secondItem="vV8-wj-qup" secondAttribute="width" multiplier="0.8" id="92P-4n-f8u"/>
+                                    <constraint firstItem="89b-MJ-gHZ" firstAttribute="height" relation="greaterThanOrEqual" secondItem="vV8-wj-qup" secondAttribute="height" multiplier="0.20979" id="BXs-X6-wnQ"/>
+                                    <constraint firstItem="XDg-6F-TzO" firstAttribute="height" relation="greaterThanOrEqual" secondItem="vV8-wj-qup" secondAttribute="height" multiplier="0.223776" id="DCk-cc-obC"/>
+                                    <constraint firstItem="89b-MJ-gHZ" firstAttribute="top" secondItem="vV8-wj-qup" secondAttribute="top" id="GI5-Sh-8JW"/>
+                                    <constraint firstItem="3aA-qo-C1w" firstAttribute="height" secondItem="vV8-wj-qup" secondAttribute="height" multiplier="0.188811" id="JDQ-jR-cfa"/>
+                                    <constraint firstItem="Bvl-18-Y44" firstAttribute="width" secondItem="vV8-wj-qup" secondAttribute="width" multiplier="0.0898876" id="LzV-f1-FmC"/>
+                                    <constraint firstItem="89b-MJ-gHZ" firstAttribute="centerX" secondItem="vV8-wj-qup" secondAttribute="centerX" multiplier="1.09" id="N8b-mE-sj5"/>
+                                    <constraint firstItem="3aA-qo-C1w" firstAttribute="centerX" secondItem="Bvl-18-Y44" secondAttribute="centerX" id="Pv6-1J-FnR"/>
+                                    <constraint firstItem="U0V-1I-qim" firstAttribute="width" secondItem="vV8-wj-qup" secondAttribute="width" multiplier="0.0749064" id="V3V-gW-2RY"/>
+                                    <constraint firstItem="4s8-hF-Zst" firstAttribute="top" secondItem="jep-D5-AcS" secondAttribute="bottom" multiplier="1.15" id="a9w-GK-JTW"/>
+                                    <constraint firstItem="4s8-hF-Zst" firstAttribute="trailing" secondItem="jep-D5-AcS" secondAttribute="trailing" id="bxE-tt-JMg"/>
+                                    <constraint firstItem="XDg-6F-TzO" firstAttribute="trailing" secondItem="89b-MJ-gHZ" secondAttribute="trailing" id="gXU-1u-oWC"/>
+                                    <constraint firstItem="jep-D5-AcS" firstAttribute="trailing" secondItem="XDg-6F-TzO" secondAttribute="trailing" id="hD8-cU-VvS"/>
+                                    <constraint firstItem="Bvl-18-Y44" firstAttribute="leading" secondItem="vV8-wj-qup" secondAttribute="leading" id="heN-wY-nbj"/>
+                                    <constraint firstItem="3aA-qo-C1w" firstAttribute="top" secondItem="Bvl-18-Y44" secondAttribute="bottom" multiplier="2.4" id="mm4-AS-zfE"/>
+                                    <constraint firstItem="Bvl-18-Y44" firstAttribute="height" secondItem="vV8-wj-qup" secondAttribute="height" multiplier="0.167832" id="oo0-UQ-LrK"/>
+                                    <constraint firstItem="4s8-hF-Zst" firstAttribute="leading" secondItem="jep-D5-AcS" secondAttribute="leading" id="s0r-2B-0fM"/>
+                                    <constraint firstItem="XDg-6F-TzO" firstAttribute="top" secondItem="89b-MJ-gHZ" secondAttribute="bottom" multiplier="1.3" id="zga-We-MSc"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="mLocationBtn" destination="89b-MJ-gHZ" id="mXQ-kD-Qz7"/>
+                                    <outlet property="mLocationImgV" destination="Bvl-18-Y44" id="jvT-Zi-iH6"/>
+                                    <outlet property="mPhoneBtn" destination="XDg-6F-TzO" id="tBC-WZ-ngc"/>
+                                    <outlet property="mPhoneImgV" destination="3aA-qo-C1w" id="8gF-f7-QXE"/>
+                                    <outlet property="mTimeImgV" destination="U0V-1I-qim" id="4Sd-wZ-fyq"/>
+                                    <outlet property="mWorkDaysLb" destination="jep-D5-AcS" id="Enh-5b-Pln"/>
+                                    <outlet property="mWorkHoursLb" destination="4s8-hF-Zst" id="7RI-Nj-Bn6"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="0o6-cM-qSm"/>
+                        <color key="backgroundColor" name="background"/>
+                        <constraints>
+                            <constraint firstItem="vV8-wj-qup" firstAttribute="width" secondItem="x1u-0S-UvG" secondAttribute="width" multiplier="0.644928" id="5bj-6b-fbU"/>
+                            <constraint firstItem="vV8-wj-qup" firstAttribute="centerY" secondItem="0o6-cM-qSm" secondAttribute="centerY" multiplier="1.71" id="6ks-Mf-PxH"/>
+                            <constraint firstItem="ym9-qW-a23" firstAttribute="height" secondItem="x1u-0S-UvG" secondAttribute="height" multiplier="0.0618812" id="H11-56-drN"/>
+                            <constraint firstItem="ym9-qW-a23" firstAttribute="width" secondItem="x1u-0S-UvG" secondAttribute="width" multiplier="0.591787" id="Hcc-Cj-NzG"/>
+                            <constraint firstItem="vV8-wj-qup" firstAttribute="centerX" secondItem="0o6-cM-qSm" secondAttribute="centerX" multiplier="0.727" id="Loa-42-4VG"/>
+                            <constraint firstItem="Ng1-0h-s7l" firstAttribute="centerX" secondItem="0o6-cM-qSm" secondAttribute="centerX" id="Rwn-fa-f6g"/>
+                            <constraint firstItem="Ng1-0h-s7l" firstAttribute="height" relation="greaterThanOrEqual" secondItem="x1u-0S-UvG" secondAttribute="height" multiplier="0.0965347" id="Ur9-se-lBM"/>
+                            <constraint firstItem="ym9-qW-a23" firstAttribute="centerX" secondItem="0o6-cM-qSm" secondAttribute="centerX" id="Yhj-Zi-YNV"/>
+                            <constraint firstItem="ym9-qW-a23" firstAttribute="top" secondItem="Ng1-0h-s7l" secondAttribute="bottom" multiplier="3.47" id="aYQ-SZ-Bqg"/>
+                            <constraint firstItem="Ng1-0h-s7l" firstAttribute="width" secondItem="x1u-0S-UvG" secondAttribute="width" multiplier="0.917" id="akK-mC-va5"/>
+                            <constraint firstItem="Ng1-0h-s7l" firstAttribute="centerY" secondItem="0o6-cM-qSm" secondAttribute="centerY" multiplier="0.166" id="lXj-da-ksd"/>
+                            <constraint firstItem="vV8-wj-qup" firstAttribute="height" relation="greaterThanOrEqual" secondItem="x1u-0S-UvG" secondAttribute="height" multiplier="0.17698" id="rJL-NF-4Vn"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="o4N-Ni-SU4">
+                        <barButtonItem key="leftBarButtonItem" image="back" id="19C-GF-0gF">
+                            <connections>
+                                <action selector="back:" destination="okt-ID-3Dg" id="ti3-Um-cZN"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="bkd" id="VTH-1R-OEw"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mAskAdminBtn" destination="ym9-qW-a23" id="don-HF-A6e"/>
+                        <outlet property="mBkdOfficeInfoV" destination="vV8-wj-qup" id="z9O-cb-TsV"/>
+                        <outlet property="mInfoLb" destination="Ng1-0h-s7l" id="z8z-sT-NpU"/>
+                        <outlet property="mLeftBarBtn" destination="19C-GF-0gF" id="KR2-6z-8tt"/>
+                        <outlet property="mRightBArBtn" destination="VTH-1R-OEw" id="Ony-Na-WUC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FZe-PY-HbK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1578.2608695652175" y="102.45535714285714"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VNR-8S-3mn">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jbI-VN-Ab1" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="wzD-Li-ACG">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" name="navigation_bar"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="okt-ID-3Dg" kind="relationship" relationship="rootViewController" id="ZeN-vp-6u5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZoN-Ze-H3y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="668.11594202898561" y="102.45535714285714"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="back" width="12" height="21"/>
+        <image name="bkd" width="76" height="23.5"/>
+        <image name="map_picker" width="15" height="20"/>
+        <image name="phone" width="16" height="27"/>
+        <image name="time" width="15" height="15"/>
+        <namedColor name="background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="email">
+            <color red="0.53700000047683716" green="0.59600001573562622" blue="0.66699999570846558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="navigationBar">
+            <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="navigation_bar">
+            <color red="0.10999999940395355" green="0.20000000298023224" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

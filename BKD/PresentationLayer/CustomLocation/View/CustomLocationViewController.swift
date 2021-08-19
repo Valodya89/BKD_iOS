@@ -39,6 +39,7 @@ class CustomLocationViewController: UIViewController {
     private var isChangeTableHeight = false
     private var searchTableHeight: CGFloat = 0.0
     private var searchTableData: String = String()
+    var customLocation:CustomLocation?
     
     private lazy  var searchCustomLocationCV = SearchCustomLocationUIViewController.initFromStoryboard(name: Constant.Storyboards.customLocation)
     private lazy  var markerInfoVC = MarkerInfoViewController.initFromStoryboard(name: Constant.Storyboards.customLocation)
@@ -82,19 +83,30 @@ class CustomLocationViewController: UIViewController {
     }
     func setUpView() {
         mRightBarBtn.image = img_bkd
+        restrictedZones = ApplicationSettings.shared.restrictedZones
         addChildView()
         addMarkerInfoView()
         configureDelegates()
         configureMapView()
         configureTableView()
-        getRestrictedZones()
+        addRestrictedZones()
         
     }
     
-    func getRestrictedZones(){
-        customLocationViewModel.getRestrictedZones {[weak self] (result) in
-            self?.restrictedZones = result
-            self?.addRestrictedZones()
+    
+    /// Get marked location price
+    func getCustomLocationPrice(longitude: Double, latitude: Double) {
+        customLocationViewModel.getCustomLocation(longitude: longitude, latitude: latitude) { [weak self] (result) in
+            
+            guard let self = self else {return}
+            self.customLocation = result
+            guard let price = self.customLocation?.amount else {
+                self.markerInfoVC.mValueBackgV.isHidden = true
+                return
+            }
+            self.markerInfoVC.mPriceLb.text = String(price)
+            self.markerInfoVC.mValueBackgV.isHidden = false
+
         }
     }
     
@@ -183,6 +195,8 @@ class CustomLocationViewController: UIViewController {
        // self.markerInfoVC.mPriceBckVCenterVertical.constant = 0
         self.view.layoutIfNeeded()
         currentMarker?.map = nil
+        self.markerInfoVC.mValueBackgV.isHidden = true
+        
     }
     
     private func drawRangeCircle(cord2D: CLLocationCoordinate2D, radius: Double) {
@@ -205,6 +219,7 @@ class CustomLocationViewController: UIViewController {
         markerInfoVC.mUserAddressLb.textColor = color_navigationBar
         markerInfoVC.mContinueBackgV.isUserInteractionEnabled = true
         markerInfoVC.mContinueBackgV.alpha = 1.0
+        //markerInfoVC.mContinueBackgV.isHidden = false
         UIView.animate(withDuration: 0.3, animations: { [self] in
             mMarkInfoBackgBottom.constant = 0
             self.view.layoutIfNeeded()
@@ -216,7 +231,7 @@ class CustomLocationViewController: UIViewController {
         let geocoder = GMSGeocoder()
         geocoder.reverseGeocodeCoordinate(mapViewCenterCoordinate) { response, _ in
             guard let address1 = response?.firstResult()?.lines?.first else {
-                self.markerInfoVC.mUserAddressLb.text = "Can't detect address"
+                self.markerInfoVC.mUserAddressLb.text = Constant.Texts.cantDetectAddress
                 return
             }
             self.markerInfoVC.mUserAddressLb.text = address1
@@ -360,7 +375,9 @@ extension CustomLocationViewController: GMSMapViewDelegate {
                     self.markerInfoVC.mErrorLb.isHidden = false
                     self.markerInfoVC.mUserAddressLb.textColor = color_error
                     self.markerInfoVC.mContinueBackgV.isUserInteractionEnabled = false
-                    self.markerInfoVC.mContinueBackgV.alpha = 0.8
+                     self.markerInfoVC.mContinueBackgV.alpha = 0.8
+                    //self.markerInfoVC.mContinueBackgV.isHidden = true
+                    self.markerInfoVC.mValueBackgV.isHidden = true
                     finish = true
                 }
             }
@@ -368,6 +385,7 @@ extension CustomLocationViewController: GMSMapViewDelegate {
                 return true
             }
         }
+        getCustomLocationPrice(longitude: coordinate.longitude, latitude: coordinate.latitude)
         return false
     }
 }

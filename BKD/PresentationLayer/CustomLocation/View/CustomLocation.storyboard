@@ -273,53 +273,47 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3we-5p-b07">
-                                                <rect key="frame" x="18.5" y="5.5" width="262" height="21.5"/>
+                                                <rect key="frame" x="13.5" y="5.5" width="89.5" height="21.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
                                                 <color key="textColor" name="navigationBar"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V7f-Pa-RYd">
-                                                <rect key="frame" x="280.5" y="3" width="87" height="26"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gtl-nW-o3P">
-                                                        <rect key="frame" x="0.0" y="0.0" width="13.5" height="26"/>
-                                                        <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="22"/>
-                                                        <color key="textColor" name="navigationBar_64%"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="59,9" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exq-Tc-iUy">
-                                                        <rect key="frame" x="17.5" y="0.0" width="60.5" height="26"/>
-                                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="22"/>
-                                                        <color key="textColor" name="navigationBar"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gtl-nW-o3P">
+                                                <rect key="frame" x="296.5" y="3" width="13.5" height="26.5"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="22"/>
+                                                <color key="textColor" name="navigationBar_64%"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exq-Tc-iUy">
+                                                <rect key="frame" x="316" y="3" width="50.5" height="26.5"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="22"/>
+                                                <color key="textColor" name="navigationBar"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V7f-Pa-RYd">
+                                                <rect key="frame" x="280.5" y="3" width="70" height="26.5"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstItem="exq-Tc-iUy" firstAttribute="centerY" secondItem="V7f-Pa-RYd" secondAttribute="centerY" id="0ig-TC-ybX"/>
-                                                    <constraint firstItem="exq-Tc-iUy" firstAttribute="leading" secondItem="Gtl-nW-o3P" secondAttribute="trailing" constant="4" id="5jY-he-TuO"/>
-                                                    <constraint firstItem="exq-Tc-iUy" firstAttribute="height" relation="greaterThanOrEqual" secondItem="V7f-Pa-RYd" secondAttribute="height" multiplier="0.646154" id="V5P-LT-sfK"/>
-                                                    <constraint firstItem="Gtl-nW-o3P" firstAttribute="leading" secondItem="V7f-Pa-RYd" secondAttribute="leading" id="XKs-MX-8uF"/>
-                                                    <constraint firstItem="exq-Tc-iUy" firstAttribute="width" secondItem="V7f-Pa-RYd" secondAttribute="width" multiplier="0.7" id="baE-aQ-6Pe"/>
-                                                    <constraint firstItem="Gtl-nW-o3P" firstAttribute="width" secondItem="V7f-Pa-RYd" secondAttribute="width" multiplier="0.15544" id="s2Y-gQ-MUU"/>
-                                                    <constraint firstItem="Gtl-nW-o3P" firstAttribute="height" secondItem="V7f-Pa-RYd" secondAttribute="height" id="vgv-ZM-NWH"/>
-                                                    <constraint firstItem="Gtl-nW-o3P" firstAttribute="centerY" secondItem="V7f-Pa-RYd" secondAttribute="centerY" id="xD5-i0-P8m"/>
-                                                </constraints>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="3we-5p-b07" firstAttribute="width" relation="greaterThanOrEqual" secondItem="Tg2-d1-qfO" secondAttribute="width" multiplier="0.213351" id="0Zf-5d-y85"/>
+                                            <constraint firstItem="Gtl-nW-o3P" firstAttribute="centerY" secondItem="Tg2-d1-qfO" secondAttribute="centerY" id="10C-9A-dES"/>
                                             <constraint firstItem="QGe-rP-fG1" firstAttribute="centerY" secondItem="Tg2-d1-qfO" secondAttribute="centerY" id="11L-xt-xGY"/>
+                                            <constraint firstItem="exq-Tc-iUy" firstAttribute="trailing" secondItem="Tg2-d1-qfO" secondAttribute="centerX" multiplier="1.92" id="6Ln-ew-cqi"/>
                                             <constraint firstItem="3we-5p-b07" firstAttribute="centerY" secondItem="Tg2-d1-qfO" secondAttribute="centerY" id="6ly-pN-58P"/>
                                             <constraint firstItem="QGe-rP-fG1" firstAttribute="width" secondItem="Tg2-d1-qfO" secondAttribute="width" id="Afb-ax-W7j"/>
-                                            <constraint firstItem="V7f-Pa-RYd" firstAttribute="centerY" secondItem="Tg2-d1-qfO" secondAttribute="centerY" id="FPc-oO-BEy"/>
-                                            <constraint firstItem="V7f-Pa-RYd" firstAttribute="width" secondItem="Tg2-d1-qfO" secondAttribute="width" multiplier="0.227749" id="MpY-Bv-1EK"/>
-                                            <constraint firstItem="3we-5p-b07" firstAttribute="centerX" secondItem="Tg2-d1-qfO" secondAttribute="centerX" multiplier="0.782" id="P1i-ev-sdH"/>
-                                            <constraint firstItem="V7f-Pa-RYd" firstAttribute="leading" secondItem="3we-5p-b07" secondAttribute="trailing" id="TIJ-hg-dDx"/>
+                                            <constraint firstItem="Gtl-nW-o3P" firstAttribute="width" secondItem="Tg2-d1-qfO" secondAttribute="width" multiplier="0.0353403" id="LE6-gU-QCK"/>
+                                            <constraint firstItem="3we-5p-b07" firstAttribute="centerX" secondItem="Tg2-d1-qfO" secondAttribute="centerX" multiplier="0.305" id="P1i-ev-sdH"/>
+                                            <constraint firstItem="exq-Tc-iUy" firstAttribute="height" secondItem="Tg2-d1-qfO" secondAttribute="height" multiplier="0.815385" id="S3l-3N-j48"/>
+                                            <constraint firstItem="exq-Tc-iUy" firstAttribute="width" relation="greaterThanOrEqual" secondItem="Tg2-d1-qfO" secondAttribute="width" multiplier="0.132199" id="T6E-0y-8g6"/>
                                             <constraint firstItem="3we-5p-b07" firstAttribute="height" secondItem="Tg2-d1-qfO" secondAttribute="height" multiplier="0.661538" id="WAn-uO-IdA"/>
                                             <constraint firstItem="QGe-rP-fG1" firstAttribute="height" secondItem="Tg2-d1-qfO" secondAttribute="height" id="cHM-Q9-rY0"/>
+                                            <constraint firstItem="Gtl-nW-o3P" firstAttribute="trailing" secondItem="exq-Tc-iUy" secondAttribute="leading" multiplier="0.98" id="dkn-12-f75"/>
                                             <constraint firstItem="QGe-rP-fG1" firstAttribute="centerX" secondItem="Tg2-d1-qfO" secondAttribute="centerX" id="gHn-zx-Q9M"/>
-                                            <constraint firstAttribute="trailing" secondItem="V7f-Pa-RYd" secondAttribute="trailing" multiplier="1.04" id="lgj-pM-DM1"/>
+                                            <constraint firstItem="Gtl-nW-o3P" firstAttribute="height" secondItem="Tg2-d1-qfO" secondAttribute="height" multiplier="0.815385" id="uCh-Rs-3FC"/>
+                                            <constraint firstItem="exq-Tc-iUy" firstAttribute="centerY" secondItem="Tg2-d1-qfO" secondAttribute="centerY" id="w8i-dr-2mv"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Frl-pV-YBF">
@@ -492,7 +486,7 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="navigationBar">
-            <color red="0.10980391502380371" green="0.20000001788139343" blue="0.37254902720451355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="navigationBar_64%">
             <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="0.63999998569488525" colorSpace="custom" customColorSpace="sRGB"/>

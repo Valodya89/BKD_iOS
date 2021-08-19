@@ -15,7 +15,7 @@ class CategoryTableViewCell: UITableViewCell {
     }
     @IBOutlet weak var mCategoryNameLb: UILabel!
     @IBOutlet weak var mCategoryCollectionV: UICollectionView!
-    var collectionData: CategoryModel?
+    var collectionData: [CarsModel]?
     
 
     override func awakeFromNib() {
@@ -33,6 +33,13 @@ class CategoryTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    ///Set cell info
+    func setCellInfo(carsList: [String : [CarsModel]?]?, carType: CarTypes) {
+        let item:[CarsModel] = carsList![carType.id]! ?? []
+        mCategoryNameLb.text = carType.name
+        collectionData =  item
+    }
+    
 }
 
 
@@ -40,28 +47,23 @@ extension CategoryTableViewCell: UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return  collectionData?.data.count ?? 0
+        return  collectionData?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.identifier, for: indexPath) as! CategoryCollectionViewCell
-        let categoryData: CategoryCollectionData = (collectionData?.data[indexPath.row])!
         
-      
-        cell.mCarNameLb.text = categoryData.carName
-        cell.mCarImgV.image = categoryData.carImg
-        cell.mBlurBackgV.isHidden = categoryData.isCarExist
-        cell.mBlurCarNameLb.isHidden = categoryData.isCarExist
-        cell.mInfoBckgV.isHidden = !categoryData.isCarExist
-
+        guard let _ = collectionData else { return cell }
+        let item: CarsModel = collectionData![indexPath.row]
+        cell.setCellInfo(item: item)
         return cell
     }
     
-    //MARK: UICollectionViewDelegateFlowLayout
-   /* func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width * 0.342995, height: self.frame.height * 0.820809)//0.183168
-    }*/
+//    //MARK: UICollectionViewDelegateFlowLayout
+//    func collectionView(_ collectionView: UICollectionView,
+//                        layout collectionViewLayout: UICollectionViewLayout,
+//                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: collectionView.bounds.width * 0.342995, height: self.frame.height * 0.820809)//0.183168
+//    }
     
 }

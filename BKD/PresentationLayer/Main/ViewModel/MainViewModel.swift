@@ -74,6 +74,14 @@ class MainViewModel: NSObject {
                                                        pickUpTime: pickUpTime,
                                                        returnTime: returnTime))
     }
+    
+    ///Chack if car is active now
+    func isCarActiveNow(start:Date, end:Date) -> Bool {
+        let now = Date()
+        let result = now.isBetween(start: start, end: end)
+        
+        return !result
+    }
    
     
     /// Get Tail lift info
@@ -111,7 +119,7 @@ class MainViewModel: NSObject {
         if carModel.airConditioning {
             detailsModel.append(DetailsModel (image: #imageLiteral(resourceName: "8"), title: Constant.Texts.conditioning))
         }
-        if carModel.gpsnavigator {
+        if carModel.GPSNavigator {
             detailsModel.append(DetailsModel (image: #imageLiteral(resourceName: "9"), title: Constant.Texts.gps))
         }
         if carModel.towbar {
@@ -166,6 +174,26 @@ class MainViewModel: NSObject {
                 break
             }
         }
+    }
+    
+    func getTypeImages(carTypes: [CarTypes], completion: @escaping ([UIImage])-> Void) {
+    
+        var imagesArr:[UIImage] = []
+        let dispatchGroup = DispatchGroup()
+        for i in 0 ..< carTypes.count{
+            dispatchGroup.enter()
+            UIImage.loadFrom(url: carTypes[i].image.getURL()!) { (image) in
+                guard let _ = image else {return}
+                imagesArr.append(image!)
+                dispatchGroup.leave()
+            }
+        }
+        dispatchGroup.notify(queue: DispatchQueue.main, execute: {
+            completion(imagesArr)
+               print("Finished all requests.")
+           })
+        
+       
     }
     
     

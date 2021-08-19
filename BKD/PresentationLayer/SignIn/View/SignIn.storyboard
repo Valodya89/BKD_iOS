@@ -454,7 +454,7 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LVU-80-rUP"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="background"/>
                         <constraints>
                             <constraint firstItem="iEl-Mz-y19" firstAttribute="width" secondItem="BUK-ZG-rGA" secondAttribute="width" multiplier="0.922705" id="0fz-0b-qa4"/>
                             <constraint firstItem="w9j-Uj-rg6" firstAttribute="top" secondItem="iEl-Mz-y19" secondAttribute="bottom" multiplier="1.28" id="1h4-NC-lro"/>

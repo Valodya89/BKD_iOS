@@ -12,149 +12,120 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
    //MARK: Outlets
     
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
-//    @IBOutlet weak var mCodeTxtFl: OneTimeCodeTextFiled!
-    @IBOutlet weak var mErrorLb: UILabel!
-    @IBOutlet weak var mCodeTxtFl: OneTimeCodeTextField!
-    @IBOutlet weak var mReserndCodeBtn: UIButton!
-    @IBOutlet weak var mVerifyBtn: UIButton!
     @IBOutlet weak var mInfoLb: UILabel!
-    
-    @IBOutlet weak var mTimerContentV: UIView!
-    @IBOutlet weak var mTimerLb: UILabel!
     @IBOutlet weak var mAlertContentV: UIView!
-    @IBOutlet weak var mTimerTitleLb: UILabel!
     @IBOutlet weak var mAlertV: UIView!
     
     @IBOutlet weak var mThankBtn: UIButton!
+    
+    @IBOutlet weak var mOpenEmailOrContinueBtn: UIButton!
+    @IBOutlet weak var mContinueV: UIView!
+    @IBOutlet weak var mContinueLeading: NSLayoutConstraint!
+    
     //MARK: Variables
     lazy var verificationCodeViewModel =         VerificationCodeViewModel()
     var email:String = ""
-    private var timer = Timer()
-    private var counter = 59
+ 
     
     //MARK: - Life cicle
     override func viewDidLoad() {
         super.viewDidLoad()
-        configtextFiledUI()
         setUpView()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
     func setUpView() {
+        NotificationCenter.default.addObserver(self, selector: #selector(VerificationCodeViewController.handleDeepLink), name: Constant.Notifications.signUpEmailVerify, object: nil)
         mRightBarBtn.image = img_bkd
-        mReserndCodeBtn.layer.cornerRadius = 8
-        mVerifyBtn.layer.cornerRadius = 8
         mAlertV.layer.cornerRadius = 8
         mAlertContentV.backgroundColor = color_background?.withAlphaComponent(0.5)
-        startTimer()
+        mOpenEmailOrContinueBtn.layer.cornerRadius = 8
+        mOpenEmailOrContinueBtn.addBorder(color:color_navigationBar!, width: 1.0)
     }
 
-    func configtextFiledUI() {
-        mCodeTxtFl.setBorder(color: color_navigationBar!, width: 1)
-        mCodeTxtFl.defaultCharacter = "-"
-        mCodeTxtFl.configure(with: 5)
-    }
-    
-    /// Send verification code
-    func sendVerification(){
-        VerificationCodeViewModel().putVerification(username: email, code: mCodeTxtFl.text!) { [self] (status) in
-            
-            switch status {
-            case .success:
-                self.showAlert()
-            case .error:
-                showError()
-            default: break
-            }
+    @objc private func handleDeepLink(notification: Notification) {
+            showAlert()
         }
-    }
     
-    /// Send verification again
-    func resendVerification(){
-        VerificationCodeViewModel().resendVerificationCode(username: email) { (status) in
-            self.startTimer()
-
-        }
-    }
-    
-    /// start timer
-    private func startTimer(){
-        mTimerTitleLb.textColor = color_navigationBar
-        mTimerTitleLb.text = Constant.Texts.reciveEmail
-        mReserndCodeBtn.disable()
-        mTimerLb.isHidden = false
-
-        counter = 59
-        let seconds = 1.0
-        timer = Timer.scheduledTimer(timeInterval: seconds, target:self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
-    }
-    
-    /// stop timer
-    func stopTimer() {
-        timer.invalidate()
-        mVerifyBtn.disable()
-        mReserndCodeBtn.enable()
-        mTimerLb.textColor = color_navigationBar
-        mCodeTxtFl.configure()
-        
-    }
-
-    /// timer selector function
-    @objc private func updateCounter() {
-        if counter > 0 {
-            counter -= 1
-            if counter < 10 {
-                mTimerLb.textColor = color_error
-                mTimerLb.text = "0:0\(counter)"
-            } else {
-                mTimerLb.text = "0:\(counter)"
-            }
-        } else {
-            if counter == 0 {
-                stopTimer()
-            }
-        }
-    }
-    
+    //Show alert of success email verify
     func showAlert() {
+        self.mOpenEmailOrContinueBtn.setTitle(Constant.Texts.continueTxt, for: .normal)
+        self.mContinueLeading.constant = 0.0
+        self.mContinueV.layoutIfNeeded()
         mAlertContentV.isHidden = false
         self.mAlertV.isHidden = false
         self.mAlertV.popupAnimation()
     }
     
-    
-    func showError() {
-        //failedRequest
-        mCodeTxtFl.setBorderColorToCAShapeLayer(color: color_error!)
-        mErrorLb.text = Constant.Texts.invalidCode
-        mErrorLb.isHidden = false
-        mCodeTxtFl.text = ""
-        self.stopTimer()
+    func showActionSheet(texts: [String]) {
+        let alertC = UIAlertController(title: Constant.Texts.select, message: Constant.Texts.selectMailApp, preferredStyle: .actionSheet)
+
+        texts.forEach { (text) in
+            let alertAction = UIAlertAction(title: text, style: .default) { (action ) in
+                switch action.title {
+                case Constant.Texts.googleMail :
+                    UIApplication.shared.canOpenURL(NSURL(string: Constant.DeepLinks.googleMailApp)! as URL)
+                case Constant.Texts.yahooMail:
+                    UIApplication.shared.canOpenURL(NSURL(string: Constant.DeepLinks.yahooMailApp)! as URL)
+                default :
+                    UIApplication.shared.open(NSURL(string: Constant.DeepLinks.messageApp)! as URL)
+                }
+            }
+
+            alertC.addAction(alertAction)
+        }
+        
+        alertC.addAction(UIAlertAction(title: Constant.Texts.cancel, style: .cancel, handler: { _ in
+            self.mContinueLeading.constant = 0.0
+            self.mContinueV.layoutIfNeeded()
+        }))
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+            self?.present(alertC, animated: true)
+        }
     }
     
+    private func openEmailClicked(){
+        UIView.animate(withDuration: 0.5) { [self] in
+            self.mContinueLeading.constant = self.mContinueV.bounds.width - self.mOpenEmailOrContinueBtn.frame.size.width
+            self.mContinueV.layoutIfNeeded()
+        } completion: { [self] _ in
+            if self.mOpenEmailOrContinueBtn.title(for: .normal) == Constant.Texts.continueTxt {
+                 self.goToFaceAndTouchId()
+            } else {
+                self.showActionSheet(texts: emailAppNames)
+            }
+        }
+    }
     
+   //Open FaceAndTouchId Screen
+    private func goToFaceAndTouchId() {
+        let FaceAndTouchIdVC = FaceAndTouchIdViewController.initFromStoryboard(name: Constant.Storyboards.registration)
+        self.navigationController?.pushViewController(FaceAndTouchIdVC, animated: true)
+    }
     
     @IBAction func back(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
     }
     
     
-    @IBAction func resendCode(_ sender: UIButton) {
-        mCodeTxtFl.setBorderColorToCAShapeLayer(color: color_navigationBar!)
-        self.mVerifyBtn.enable()
-        resendVerification()
-    }
-    
-    @IBAction func verify(_ sender: UIButton) {
-        
-        if mCodeTxtFl.text?.count == 5 {
-            mCodeTxtFl.resignFirstResponder()
-            sendVerification()
-        }
-    }
-    
     @IBAction func thankYou(_ sender: UIButton) {
-        let FaceAndTouchIdVC = FaceAndTouchIdViewController.initFromStoryboard(name: Constant.Storyboards.registration)
-        self.navigationController?.pushViewController(FaceAndTouchIdVC, animated: true)
+        mAlertV.isHidden = true
+        mAlertContentV.isHidden = true
+    }
+    
+    
+    @IBAction func openEmailOrContinue(_ sender: UIButton) {
+        openEmailClicked()
+    }
+    
+    @IBAction func swipeContinue(_ sender: UISwipeGestureRecognizer) {
+        openEmailClicked()
     }
 }
 

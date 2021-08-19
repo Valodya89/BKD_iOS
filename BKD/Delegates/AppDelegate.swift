@@ -30,15 +30,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
-//        let urlComponent = URLComponents(url: url, resolvingAgainstBaseURL: true)
-//
-//                let questItem = urlComponent?.queryItems?.first(where: { $0.name == "code" })
-//
-//                guard let code = questItem?.value else {
+        let urlComponent = URLComponents(url: url, resolvingAgainstBaseURL: true)
+
+                let questItem = urlComponent?.queryItems?.first(where: { $0.name == "code" })
+
+                guard let code = questItem?.value else {
 //                    UIAlertController.showError(message: "Could not perform email verification")
-//
-//                    return true
-//                }
+
+                    return true
+                }
+        let notification = Notification(name: Constant.Notifications.signUpEmailVerify, object: url)
+        NotificationCenter.default.post(notification)
+
         return true
     }
 

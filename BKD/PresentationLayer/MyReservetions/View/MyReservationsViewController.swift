@@ -21,14 +21,32 @@ class MyReservationsViewController: BaseViewController {
         present(menu!, animated: true, completion: nil)
     }
     
-    /*
-    // MARK: - Navigation
+    
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+}
+
+
+// MARK: UICollectionViewDelegate, UICollectionViewDataSource
+//MARK: -----------------
+extension MyReservationsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 2
     }
-    */
-
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyDriverCollectionViewCell.identifier, for: indexPath) as!  MyDriverCollectionViewCell
+        let item = additionalDrivers[indexPath.item]
+        cell.setCellInfo(item:item, index: indexPath.item)
+        
+        return cell
+    }
+    
+    //MARK: UICollectionViewDelegateFlowLayout
+    //MARK: -------------------------------------
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: self.view.bounds.width,
+                      height: mydriver_cell_height)
+    }
+    
 }

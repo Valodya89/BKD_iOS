@@ -114,7 +114,7 @@ class ReserveViewController: UIViewController {
         
         mCarImgV.image = vehicleModel?.vehicleImg?.resizeImage(targetSize: CGSize(width:self.view.bounds.width * 0.729, height:self.view.bounds.height * 0.173))
 
-        mCarDescriptionlb.text = vehicleModel?.vehicleDesctiption
+        mCarDescriptionlb.text = vehicleModel?.vehicleType
         mTowBarBckgV.isHidden = !((vehicleModel?.ifHasTowBar) == true)
         mPickUpParkingLb.text = vehicleModel?.searchModel?.pickUpLocation
         mReturnParkingLb.text = vehicleModel?.searchModel?.returnLocation

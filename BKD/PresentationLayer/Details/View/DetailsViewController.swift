@@ -184,7 +184,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     func setDetailDatas()  {
 
         mCarNameLb.text = vehicleModel?.vehicleName
-        mCarDetailLb.text = vehicleModel?.vehicleDesctiption
+        mCarDetailLb.text = vehicleModel?.vehicleType
         carPhotosView.mTowBarBckgV.isHidden = !vehicleModel!.ifHasTowBar
         mCarInfoV.mCardLb.text = vehicleModel?.drivingLicense
         mCarInfoV.mKgLb.text = vehicleModel?.vehicleWeight
@@ -208,7 +208,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         //var vehicleModel = VehicleModel()
         vehicleModel?.vehicleName = mCarNameLb.text
         vehicleModel?.ifHasTowBar = true
-        vehicleModel?.vehicleDesctiption = "Double cabin"
+        vehicleModel?.vehicleType = "Double cabin"
         vehicleModel?.ifTailLift = false
         vehicleModel?.additionalAccessories = additionalAccessories
         vehicleModel?.additionalDrivers = additionalDrivers

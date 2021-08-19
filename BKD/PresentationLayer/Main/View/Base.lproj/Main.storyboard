@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vGy-s1-gA7">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vGy-s1-gA7">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <array key="Mulish-Bold.ttf">
             <string>Mulish-Bold</string>
+        </array>
+        <array key="Mulish-Regular.ttf">
+            <string>Mulish-Regular</string>
         </array>
         <array key="SFProDisplay-Regular.ttf">
             <string>SFProDisplay-Regular</string>
@@ -214,6 +218,7 @@
                                 <color key="backgroundColor" name="background"/>
                                 <connections>
                                     <outlet property="dataSource" destination="baS-Zk-gBJ" id="E2x-uv-4Wh"/>
+                                    <outlet property="delegate" destination="baS-Zk-gBJ" id="Lcb-fC-Kav"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -392,7 +397,7 @@ IAo
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MyBkdTableViewCell" id="Ssp-Ip-CFh" customClass="MyBkdTableViewCell" customModule="BKD" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ssp-Ip-CFh" id="fCw-JX-mI3">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -554,15 +559,67 @@ IAo
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zdb-QS-c8c">
-                                <rect key="frame" x="76" y="315" width="240" height="200"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="q1g-Dc-u7l">
+                                <rect key="frame" x="0.0" y="76.5" width="414" height="648.5"/>
+                                <color key="backgroundColor" name="background"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jqu-J1-HCl">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ymG-qa-eF0">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="g8u-tU-swH">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tap-qR-AYC">
+                                <rect key="frame" x="82.5" y="166.5" width="249" height="98"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The are no active reservations yet." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FdB-rH-JUz">
+                                        <rect key="frame" x="25" y="15" width="199" height="68.5"/>
+                                        <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="navigation_bar"/>
+                                <constraints>
+                                    <constraint firstItem="FdB-rH-JUz" firstAttribute="height" secondItem="tap-qR-AYC" secondAttribute="height" multiplier="0.7" id="5cb-Jv-UPM"/>
+                                    <constraint firstItem="FdB-rH-JUz" firstAttribute="width" secondItem="tap-qR-AYC" secondAttribute="width" multiplier="0.8" id="Sae-dw-tw8"/>
+                                    <constraint firstItem="FdB-rH-JUz" firstAttribute="centerY" secondItem="tap-qR-AYC" secondAttribute="centerY" id="hsP-Jj-dx3"/>
+                                    <constraint firstItem="FdB-rH-JUz" firstAttribute="centerX" secondItem="tap-qR-AYC" secondAttribute="centerX" id="q9w-nC-bIi"/>
+                                </constraints>
                             </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="nEd-dq-w9V">
+                                <rect key="frame" x="35.5" y="10.5" width="343" height="31"/>
+                                <segments>
+                                    <segment title="Active Reservations"/>
+                                    <segment title="Reservations History"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KTz-7d-pnZ"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="background"/>
                         <constraints>
-                            <constraint firstItem="zdb-QS-c8c" firstAttribute="height" secondItem="j4K-5k-2Pn" secondAttribute="height" multiplier="0.247525" id="nWo-k4-O60"/>
+                            <constraint firstItem="KTz-7d-pnZ" firstAttribute="trailing" secondItem="q1g-Dc-u7l" secondAttribute="trailing" id="4eK-wZ-zIV"/>
+                            <constraint firstItem="tap-qR-AYC" firstAttribute="width" secondItem="j4K-5k-2Pn" secondAttribute="width" multiplier="0.601449" id="B5c-C9-Vh6"/>
+                            <constraint firstItem="KTz-7d-pnZ" firstAttribute="bottom" secondItem="q1g-Dc-u7l" secondAttribute="bottom" id="DFN-CM-HoX"/>
+                            <constraint firstItem="q1g-Dc-u7l" firstAttribute="top" secondItem="nEd-dq-w9V" secondAttribute="bottom" multiplier="1.9" id="EnH-hb-IMs"/>
+                            <constraint firstItem="nEd-dq-w9V" firstAttribute="width" secondItem="j4K-5k-2Pn" secondAttribute="width" multiplier="0.828502" id="MFF-xs-JC5"/>
+                            <constraint firstItem="nEd-dq-w9V" firstAttribute="centerY" secondItem="KTz-7d-pnZ" secondAttribute="centerY" multiplier="0.07" id="RHf-UF-XnO"/>
+                            <constraint firstItem="q1g-Dc-u7l" firstAttribute="leading" secondItem="KTz-7d-pnZ" secondAttribute="leading" id="TRk-3p-Dag"/>
+                            <constraint firstItem="tap-qR-AYC" firstAttribute="centerX" secondItem="KTz-7d-pnZ" secondAttribute="centerX" id="cO0-5Z-bmM"/>
+                            <constraint firstItem="nEd-dq-w9V" firstAttribute="height" secondItem="j4K-5k-2Pn" secondAttribute="height" multiplier="0.0371287" id="iWy-Dj-ZNy"/>
+                            <constraint firstItem="tap-qR-AYC" firstAttribute="height" secondItem="j4K-5k-2Pn" secondAttribute="height" multiplier="0.121287" id="kUN-RM-IPR"/>
+                            <constraint firstItem="nEd-dq-w9V" firstAttribute="centerX" secondItem="KTz-7d-pnZ" secondAttribute="centerX" id="mQn-QH-mdk"/>
+                            <constraint firstItem="tap-qR-AYC" firstAttribute="centerY" secondItem="KTz-7d-pnZ" secondAttribute="centerY" multiplier="0.595" id="uj9-tI-tTO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8A8-hj-iL3">

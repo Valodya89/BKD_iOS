@@ -14,6 +14,8 @@ enum AuthAPI: APIProtocol {
     case getCarTypes
     case getRestrictedZones
     case getParking
+    case getExteriorSize
+    case getCustomLocation(longitude:Double, latitude: Double)
     case getCarsByType(criteria: [String : Any])
     case getWorkingTimes
     case getPhoneCodes
@@ -26,6 +28,7 @@ enum AuthAPI: APIProtocol {
     case getAuthRefreshToken(refreshToken: String)
     case getToken(username: String, password: String)
     case forgotPassword(username: String)
+    case changePassword(username: String, password: String)
     case addPersonalData(name: String,
                          surname: String,
                          phoneNumber: String,
@@ -50,7 +53,8 @@ enum AuthAPI: APIProtocol {
              .verifyAccounts,
              .resendCode,
              .addPersonalData,
-             .forgotPassword:
+             .forgotPassword,
+             .changePassword:
             return BKDBaseURLs.account.rawValue
             
         case .getAuthRefreshToken,
@@ -74,6 +78,10 @@ enum AuthAPI: APIProtocol {
             return "restricted-zones/list"
         case .getParking:
             return "/parking/list"
+        case .getExteriorSize:
+            return "car/sizes"
+        case let .getCustomLocation:
+            return "parking/custom-location"
         case .getCarsByType:
             return "car/search"
         case .getWorkingTimes:
@@ -96,6 +104,8 @@ enum AuthAPI: APIProtocol {
             return "accounts/send-code"
         case .addPersonalData:
             return "api/driver/personal"
+        case .changePassword:
+            return "accounts/change-password"
         }
     }
     
@@ -106,7 +116,9 @@ enum AuthAPI: APIProtocol {
              .verifyAccounts,
              .resendCode,
              .addPersonalData,
-             .forgotPassword:
+             .forgotPassword,
+             .getExteriorSize,
+             .getCustomLocation:
             return [
                 "Content-Type": "application/json"]
         case .getAuthRefreshToken:
@@ -137,6 +149,11 @@ enum AuthAPI: APIProtocol {
 //            return [
 //                "deviceId": deviceID
 //            ]
+        case let .getCustomLocation(longitude, latitude):
+           return [
+                "longitude" : "\(longitude)",
+                "latitude" : "\(latitude)"
+            ]
         default:
             return [:]
         }
@@ -172,6 +189,12 @@ enum AuthAPI: APIProtocol {
             return [
                 "username": username
             ]
+        case .changePassword(let username, let password):
+            return [
+                "username": username,
+                "password": password,
+                "newPassword": password
+            ]
         case .addPersonalData(let name, let surname, let phoneNumber, let dateOfBirth, let street, let house, let mailBox, let countryId, let zip, let city, let nationalRegisterNumber):
             return [
                 "name": name,
@@ -186,7 +209,7 @@ enum AuthAPI: APIProtocol {
                 "city": city,
                 "nationalRegisterNumber": nationalRegisterNumber
             ]
-        
+       
         default:
             return nil
         }
@@ -215,7 +238,8 @@ enum AuthAPI: APIProtocol {
              .getToken,
              .addPersonalData:
             return .post
-        case .verifyAccounts:
+        case .verifyAccounts,
+             .changePassword:
             return .put
         case .resendCode,
              .forgotPassword:

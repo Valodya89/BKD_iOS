@@ -34,6 +34,8 @@ class MainViewController: BaseViewController {
     var pickerState: DatePicker?
 
     private var cars = [CarsModel]()
+    private var carTypes:[CarTypes]?
+    private var carsList:[String : [CarsModel]?]?
     private var pickerList: [String]?
     var workingTimes: WorkingTimes?
 
@@ -60,7 +62,6 @@ class MainViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        //getCars()
 
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -263,8 +264,11 @@ class MainViewController: BaseViewController {
     
     /// if there is any search result it will show car CollectionView else it will show avalable categories TableView
     private func animateSearchResultContainer (isThereResult : Bool) {
+        carTypes = ApplicationSettings.shared.carTypes
+        carsList = ApplicationSettings.shared.carsList
         searchResultV?.mFilterV.isHidden = !isThereResult
         searchResultV?.mNoticeLb.isHidden = isThereResult
+        searchResultV?.mNoticeLb.text = String(format: Constant.Texts.notCategory, carTypes![carouselVC.currentPage].name)
         
         if isThereResult { // will show avalable cars
             self.mCarCollectionV.isHidden = false
@@ -277,6 +281,7 @@ class MainViewController: BaseViewController {
 
         } else { // will show avalable categories
             self.mAvalableCategoriesTbV.isHidden = false
+            self.mAvalableCategoriesTbV.reloadData()
             UIView.animate(withDuration: 0.7) { [weak self] in
                 self?.mAvalableCategoriesTbV.alpha = 1.0
             } completion: { [self] _ in
@@ -459,6 +464,7 @@ class MainViewController: BaseViewController {
     
     
     func selectedBack(isBackFromResult: Bool) {
+        isPressedFilter = false
         isSearchResultPage = false
         isPressedEdit = true
         isNoSearchResult = false
@@ -562,6 +568,7 @@ class MainViewController: BaseViewController {
             self.checkReservetionHalfHour()
 
         default:
+            guard let _ = pickerList else { return }
             let timeStr = pickerList![ pickerV.selectedRow(inComponent: 0)]
             if pickerState == .pickUpTime {
                 searchHeaderV?.pickUpTime = timeStr.stringToDate()
@@ -591,35 +598,33 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     //MARK: -------------------------------
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if isPressedFilter {
-            return 5 + 1
+            return cars.count + 1
         }
         return cars.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cell: UICollectionViewCell
+       // var cell: UICollectionViewCell
         // will show Main cell
         if !isSearchResultPage {
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.identifier, for: indexPath) as! MainCollectionViewCell
-            (cell as! MainCollectionViewCell).setCellInfo(item: cars[indexPath.item])
-        } else {
+          let cellMain = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.identifier, for: indexPath) as! MainCollectionViewCell
+            cellMain.setCellInfo(item: cars[indexPath.item])
+            return cellMain
+        } else { // show search result page
             if isPressedFilter  {
                 // will show filter cell
                 if indexPath.row == 0 {
-                    cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilterSearchResultCell.identifier, for: indexPath) as! FilterSearchResultCell
+                  let cellFilter = collectionView.dequeueReusableCell(withReuseIdentifier: FilterSearchResultCell.identifier, for: indexPath) as! FilterSearchResultCell
+                    return cellFilter
                 } else {
                     // will show search result cell
-                    cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell                    
+                    return initSearchResultCell(indexPath: indexPath, collectionView: collectionView)
                 }
             } else {
                 // will show search result cell
-                cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell
-                (cell as! SearchResultCollectionViewCell).setSearchResultCellInfo( item: cars[indexPath.row] , index: indexPath.row)
-                (cell as! SearchResultCollectionViewCell).delegate = self
+                return initSearchResultCell(indexPath: indexPath, collectionView: collectionView)
             }
-
         }
-        return cell
     }
 
     //MARK: UICollectionViewDelegate
@@ -650,6 +655,17 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             return CGSize(width: collectionView.bounds.width, height: view.frame.height * 0.306931)
         }
         return CGSize(width: collectionView.bounds.width, height: view.frame.height * 0.441832)
+    }
+    
+    ///Search resul cell
+    private func initSearchResultCell(indexPath: IndexPath, collectionView: UICollectionView) -> SearchResultCollectionViewCell{
+        let cellSearch = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell
+        
+        cellSearch.startRendDate = searchHeaderV?.pickUpTime
+         cellSearch.endRendtDate = searchHeaderV?.returnTime
+         cellSearch.setSearchResultCellInfo( item: cars[indexPath.row] , index: indexPath.row)
+         cellSearch.delegate = self
+         return cellSearch
     }
 }
 
@@ -697,8 +713,7 @@ extension MainViewController: SearchHeaderViewDelegate {
         mCarCollectionV.reloadData()
         
         // If will not  found result
-        // must be change by api result
-        if carouselVC.currentPage == 2 {
+        if cars.count == 0 {
             isNoSearchResult = true
             navigationController!.navigationBar.topItem?.title = ""
             animateAvalableCategoriesResult()
@@ -780,20 +795,21 @@ extension MainViewController: CustomLocationViewControllerDelegate {
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return CategoryData.avalableCategoryModel.count
-   }
+    return carTypes?.count ?? 0
+    }
 
-   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTableViewCell.identifier) as! CategoryTableViewCell
-
-       let categoryModel: CategoryModel = CategoryData.avalableCategoryModel[indexPath.row]
-       cell.mCategoryNameLb.text = categoryModel.categoryName
-       cell.collectionData = CategoryData.avalableCategoryModel[indexPath.row]
+        guard let _ = carsList else { return cell }
+         cell.setCellInfo(carsList: carsList, carType: carTypes![indexPath.row])
        return cell
    }
    
    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    let item:[CarsModel] = carsList![carTypes![indexPath.row].id]! ?? []
+    if item.count == 0 {
+        return 0
+    }
        return self.view.frame.size.height * 0.222772;
    }
    
@@ -824,7 +840,7 @@ extension MainViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerList!.count
+        return pickerList?.count ?? 0
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

@@ -12,8 +12,8 @@ static let identifier = "MainCollectionViewCell"
     
     static func nib() -> UINib {
         return UINib(nibName: identifier, bundle: nil)
-        
     }
+    
     @IBOutlet weak var mOffertPriceLb: UILabel!
     @IBOutlet weak var mInfoBckV: UIView!
     @IBOutlet weak var mOffertBackgV: UIView!
@@ -86,7 +86,7 @@ static let identifier = "MainCollectionViewCell"
         var vehicleModel = VehicleModel()
         vehicleModel.vehicleName = mCarNameLb.text
         vehicleModel.ifHasTowBar = true
-        vehicleModel.vehicleDesctiption = "Double cabin"
+        vehicleModel.vehicleType = "Double cabin"
         vehicleModel.vehicleImg = mCarImgV.image
         vehicleModel.drivingLicense = mCardLb.text
         vehicleModel.vehicleCube = mCubeLb.text
@@ -129,11 +129,12 @@ static let identifier = "MainCollectionViewCell"
         UIImage.loadFrom(url: item.image.getURL()!) { image in
             self.mCarImgV.image = image
         }
+       
         mCarNameLb.text = item.name
         mCardLb.text = item.driverLicenseType
-        mCubeLb.text = String(item.volume) + "m²"
-        mKgLb.text = String(item.loadCapacity) + Constant.Texts.m
-        mCarSizeLb.text = String(item.liftingCapacityTailLift) + "x" + String(item.tailLiftLength) + "x" + String(item.heightOfLoadingFloor) + Constant.Texts.m
+        mCubeLb.text = String(item.volume) + Constant.Texts.mCuadrad
+        mKgLb.text = String(item.loadCapacity) + Constant.Texts.kg
+        mCarSizeLb.text = item.exterior?.getExterior()
         mOffertBackgV.isHidden = !item.hasSpecialPrice
         mIgnorValueContentV.isHidden = !item.hasSpecialPrice
         mValueBckgV.isHidden = item.hasSpecialPrice
@@ -148,6 +149,16 @@ static let identifier = "MainCollectionViewCell"
         mBlurV.isHidden = item.active
         mInactiveCarNameLb.isHidden = item.active
         mInactiveCarNameLb.text = item.name
+        
+        if item.logo != nil {
+            UIImage.loadFrom(url: (item.logo!.getURL() ?? URL(string: ""))!) { image in
+                self.mFiatImgV.image = image
+            }
+        }
+        guard let start = item.reservations?.getStart(), let end = item.reservations?.getEnd()  else { return }
+        let isActiveCar: Bool = mainViewModel.isCarActiveNow(start: start, end: end)
+        mBlurV.isHidden = isActiveCar
+        mInactiveCarNameLb.isHidden = isActiveCar
         
     }
 

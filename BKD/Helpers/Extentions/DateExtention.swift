@@ -16,24 +16,9 @@ extension Date {
         return calendar.component(component, from: self)
     }
     
-//    func getDay() -> String {
-//        //let dateString = "2018-12-24 18:00:00 UTC"
-//        let formatter = DateFormatter()
-////        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss 'UTC'"
-////        guard let date = formatter.date(from: dateString) else {
-////            return
-////        }
-////
-////        formatter.dateFormat = "yyyy"
-////        let year = formatter.string(from: date)
-////        formatter.dateFormat = "MM"
-////        let month = formatter.string(from: date)
-//        formatter.dateFormat = "dd"
-//        formatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
-//        let day = formatter.string(from: self)
-//        return day
-//    }
+   
     
+    ///Get month and week as string
     func getMonthAndWeek(lng: String) -> String {
         let formatter = DateFormatter()
         formatter.locale = NSLocale(localeIdentifier: lng) as Locale
@@ -44,6 +29,7 @@ extension Date {
         return month + " " + day
     }
     
+    ///Get month as string
     func getMonth(lng: String) -> String {
         let formatter = DateFormatter()
         formatter.locale = NSLocale(localeIdentifier: lng) as Locale
@@ -52,12 +38,22 @@ extension Date {
         return month
     }
     
+    ///Get year as string
     func getYear() -> String {
         let forrmater = DateFormatter()
         forrmater.dateFormat = "YYYY"
         return forrmater.string(from: self)
     }
     
+    ///Get hour as string
+    func getHour() -> String {
+        let forrmater = DateFormatter()
+        forrmater.dateFormat = "HH:mm"
+        forrmater.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+        return forrmater.string(from: self)
+    }
+    
+    ///Get components month
     func getComponentsMonth(fromDate: Date?, toDate: Date?) -> Bool {
         guard let fromDate = fromDate, let toDate = toDate else {
             return false
@@ -67,20 +63,15 @@ extension Date {
     }
     
     
-    func getHour() -> String {
-        let forrmater = DateFormatter()
-        forrmater.dateFormat = "HH:mm"
-        forrmater.timeZone = NSTimeZone(name: "UTC") as TimeZone?
-        return forrmater.string(from: self)
-    }
-    
-    
+    /// Format date
     func getDateByFormat() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = NSLocale(localeIdentifier: "en") as Locale
         dateFormatter.dateFormat = "d MMM, YYYY"
         return dateFormatter.string(from: self)
     }
+   
+    ///Get Format date as string
     func getString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
@@ -88,16 +79,7 @@ extension Date {
     }
     
     
-//    func dateTimeByToday(time: Date) -> Date {
-//        let now = NSDate()
-//        let calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
-//        let hour = calendar.component(.hour, from: time)
-//        let minute = calendar.component(.minute, from: time)
-//        
-//        let nowDateValue = now as Date
-//        let timeByToday = calendar.date(bySettingHour: hourStart, minute: minuteStart, second: 0, of: nowDateValue, options: [])
-//    }
-    
+    ///Check if time in range
     func dateIsInRange(startTime: Date, endTime: Date) -> Bool {
         let now = NSDate()
         let calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
@@ -109,8 +91,6 @@ extension Date {
         let nowDateValue = now as Date
         let todayAtSevenAM = calendar.date(bySettingHour: hourStart, minute: minuteStart, second: 0, of: nowDateValue, options: [])
         let todayAtTenPM = calendar.date(bySettingHour: hourEnd, minute: minuteEnd, second: 0, of: nowDateValue, options: [])
-//        let todayAtSevenAM = calendar.date(bySettingHour: 7, minute: 30, second: 0, of: nowDateValue, options: [])
-//        let todayAtTenPM = calendar.date(bySettingHour: 18, minute: 30, second: 0, of: nowDateValue, options: [])
         
         if self >= todayAtSevenAM! &&
             self <= todayAtTenPM!
@@ -123,6 +103,7 @@ extension Date {
         }
     }
     
+    ///Get additional days
     func  addDays(_ day: Int) -> Date {
         var dayComponent    = DateComponents()
         dayComponent.day    = day // For removing one day (yesterday): -1
@@ -131,6 +112,7 @@ extension Date {
         return nextDate!
     }
     
+    ///Get additional hours
      func addHours(_ hours: Int) -> Date {
            var comps = DateComponents()
         comps.hour = hours
@@ -139,6 +121,7 @@ extension Date {
         return result!
        }
     
+    ///Get additional weeks
     func addWeeks(_ weeks: Int) -> Date {
           var comps = DateComponents()
         comps.day = 7 * weeks
@@ -147,6 +130,7 @@ extension Date {
         return result!
       }
     
+    ///Get additional months
     func addMonths(_ months: Int) -> Date {
           var comps = DateComponents()
         comps.month = months
@@ -183,12 +167,11 @@ extension Date {
             return days1 - days2
         }
 
+    /// Chaeck if dates same
         func hasSame(_ component: Calendar.Component, as date: Date) -> Bool {
             distance(from: date, only: component) == 0
         }
-    
-    
-    
+        
     
     ///Compare two hours
     func isSameHours(hour: Date?) -> Bool {
@@ -202,5 +185,10 @@ extension Date {
             return false
         }
     }
+    
+    /// is date between two dates
+    func isBetween(start: Date,  end: Date) -> Bool {
+            return (min(start, end) ... max(start, end)).contains(self)
+        }
 
 }

@@ -30,6 +30,10 @@ struct Constant {
         static let phoneVerification = "PhoneVerification"
         static let reservationCompleted = "ReservationCompleted"
         static let payment = "Payment"
+        static let officeTerminal = "OfficeTerminal"
+        static let cash = "Cash"
+        static let kaartlazer = "Kaartlazer"
+
 
     }
     struct NibNames {
@@ -72,6 +76,16 @@ struct Constant {
         static let reservationCompleted = "ReservationCompletedViewController"
         static let selectPayment = "SelectPaymentViewController"
         static let paymentWeb = "PaymentWebViewController"
+        static let cash = "CashViewController"
+        static let officeTerminal = "OfficeTerminalViewController"
+        static let kaartlazer = "KaartlazerViewController"
+
+    }
+    
+    struct DeepLinks {
+        static let messageApp = "message://app"
+        static let googleMailApp = "googlegmail://app"
+        static let yahooMailApp = "yahooMail://app"
     }
     
     struct FontNames {
@@ -81,6 +95,9 @@ struct Constant {
     }
     
     struct Texts {
+        //Main
+        static let inclVat = "(incl, VAT)"
+        static let continueTxt = "Continue"
         static let pickUpDate = "Pick up date"
         static let returnDate = "Return date"
         static let pickUpTime = "Pick up time"
@@ -88,6 +105,7 @@ struct Constant {
         static let pickUpLocation = "Pick up Location"
         static let returnLocation = "Return Location"
         static let searchResult = "Search Results"
+        static let notCategory = "There are no available  %@ for the selected criteria. You can have a look at the models below."
         static let messageMoreThanMonth = "All the BKD vehicles are taken to technical check up once a month. You should return the vehicle to the BKD office after a month, and have it checked or be offered a new vehicle of the same type."
         static let messageChangeTariff = "Are you sure you want to Reserve for "
         static let messageChangeTariffSeconst = "Since your selection was for"
@@ -111,6 +129,15 @@ struct Constant {
         static let rentalConditions = "Rental conditions"
         static let bkdAdvantages = "BKD Advantages"
         static let select = "Select"
+        
+        //Custo Location
+        static let cantDetectAddress = "Can't detect address"
+        
+        //Detail
+        static let conditioning = "Conditioning"
+        static let gps = "GPS"
+        static let towBar = "Tow Bar"
+        static let slideDoor = "Slide door"
         static let hourly = "Hourly"
         static let daily = "Daily"
         static let weekly = "Weekly"
@@ -122,12 +149,6 @@ struct Constant {
         static let month = "month"
         static let additionalDriver = "Additional driver"
         static let accessories = "Accessories"
-        
-        //Detail
-        static let conditioning = "Conditioning"
-        static let gps = "GPS"
-        static let towBar = "Tow Bar"
-        static let slideDoor = "Slide door"
         
         //Tail Lift
         static let kg = "kg"
@@ -168,6 +189,7 @@ struct Constant {
         static let takePhoto = "Take a photo"
         static let search = "Search"
         static let m = "m"
+        static let mCuadrad = "m²"
         static let ok = "ok"
         
         static let name = "First Name"
@@ -189,13 +211,19 @@ struct Constant {
         static let payNow = "Pay now"
         static let mobileBancking = "Mobile banking"
         static let bancontactCard = "Bancontact card"
+        static let generatedCode = "Generated Code"
         
+        //Verify
+        static let selectMailApp = "Select Mail App"
+        static let  googleMail = "Googleg Mail"
+        static let  yahooMail = "Yahoo Mail"
 
     }
     
     
     struct Notifications {
         static let LanguageUpdate = NSNotification.Name(rawValue: "BKD.Notification.Language")
+        static let signUpEmailVerify =  NSNotification.Name(rawValue: "BKD.Notification.EmailVerify")
     }
 }
 
@@ -211,6 +239,7 @@ let tariffOptionsArr =  [["2h", "3h", "4h", "5h", "6h", "10h"],
 let countryList = ["Dutch", "French", "English"]
 let cityList = ["City1", "City2", "City3", "City4", "City5", "City6", "City7"]
 let paymentSupportedCountriesCode: Set<String>? = ["AM", "FR", "NL", "GB"]
+let emailAppNames = [ "Googleg Mail", "Yahoo Mail", "Message"]
 let bancontactList = [UIImage(named: "ing"),
                       UIImage(named: "bnp"),
                       UIImage(named: "kbc")]

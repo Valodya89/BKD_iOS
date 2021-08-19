@@ -23,7 +23,7 @@ class NewPasswordViewController: UIViewController, StoryboardInitializable {
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mErrorLb: UILabel!
     
-    
+    var emailAddress: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +46,15 @@ class NewPasswordViewController: UIViewController, StoryboardInitializable {
     private func setBorder() {
         mPasswordTxtFl.setBorder(color: color_navigationBar!, width: 1)
         mConfirmPasswordTxtFl.setBorder(color: color_navigationBar!, width: 1)
+    }
+    
+    private func changePassword() {
+        SignInViewModel().changePassword(username: emailAddress ?? "", password: mPasswordTxtFl.text!, newPassword: mConfirmPasswordTxtFl.text!) { (status) in
+            switch status {
+            case .success: break
+            default: break
+            }
+        }
     }
     
     
@@ -84,7 +93,7 @@ class NewPasswordViewController: UIViewController, StoryboardInitializable {
                     mConfirmPasswordLb.textColor = color_error
                     mConfirmPasswordTxtFl.addBorder(color: color_error!, width: 2)
                 } else {
-                    // Sent Request of reset password
+                    changePassword()
                 }
             } else {
                 mErrorLb.isHidden = isActive

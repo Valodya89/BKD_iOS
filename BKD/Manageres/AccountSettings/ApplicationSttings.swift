@@ -16,13 +16,20 @@ final class ApplicationSettings {
     private(set) var phoneCodes: [PhoneCode]?
     private(set) var pickerList: [String]?
     private(set) var workingTimes: WorkingTimes?
+    private(set) var restrictedZones: [RestrictedZones]?
+    var carsList:[String : [CarsModel]?]?
+    var carTypes:[CarTypes]?
 
     
     private init() {
         NotificationCenter.default.addObserver(self, selector: #selector(fetchPhoneCodes), name: Constant.Notifications.LanguageUpdate, object: nil)
+        if carTypes == nil {
+            getCarTypes()
+        }
         fetchPhoneCodes()
         getAvalableTimeList()
         getWorkingTimes()
+        getRestrictedZones()
     }
     
 }
@@ -50,6 +57,11 @@ extension ApplicationSettings {
 //        }
 //    }
     
+    func getCarTypes()  {
+        MainViewModel().getCarTypes { [self] (result) in
+            carTypes = result
+        }
+    }
     
     
     /// get phone codes
@@ -123,6 +135,13 @@ extension ApplicationSettings {
             
                 break
             }
+        }
+    }
+    
+    /// Get lst of restricted zones
+    func getRestrictedZones(){
+        CustomLocationViewModel().getRestrictedZones {[weak self] (result) in
+            self?.restrictedZones = result
         }
     }
     

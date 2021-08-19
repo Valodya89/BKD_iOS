@@ -6,8 +6,9 @@
 //
 
 import UIKit
-
-struct CarsModel: Decodable {
+//result.first?.reservations?.innerArray.first?.value.start
+//result.first?.reservations?.innerArray.first?.value.end
+struct CarsModel: Codable {
     
     
     let id: String
@@ -31,7 +32,7 @@ struct CarsModel: Decodable {
     let withBetweenWheels: Double
     let airConditioning: Bool
     let sideDoor: Bool
-    let gpsnavigator:Bool
+    let GPSNavigator:Bool
     let exterior: CarExterior?
     
     //Tail lift
@@ -44,12 +45,12 @@ struct CarsModel: Decodable {
     let active: Bool
     let inRent: Bool
     let image: CarImageResponse
-   // let reservation: Reservations
-    
+    let logo: Logo?
+    let reservations: Reservation?
     
 }
 
-struct CarImageResponse: Decodable {
+struct CarImageResponse: Codable {
     let id: String
     let node: String
     
@@ -61,7 +62,17 @@ struct CarImageResponse: Decodable {
     }
 }
 
-struct CarExterior: Decodable {
+struct Logo: Codable{
+    let id: String
+    let node: String
+    
+    func getURL() -> URL? {
+        let avatar = "https://\(node).bkdrental.com/files?id=\(id)"
+        return URL(string: avatar)
+    }
+}
+
+struct CarExterior: Codable {
     let length: Double
     let width: Double
     let height: Double
@@ -72,16 +83,51 @@ struct CarExterior: Decodable {
 }
 
 
-
-//"reservations": {
-//                "785046be-2296-40bb-a678-6cff41e74fa8": {
-//                    "start": 1617645253518,
-//                    "end": 1618250053518
-//                }
-//            },
-struct Reservations: Decodable {
-    let start: Date
-    let end: Date
+struct Reservation: Codable {
+        public var innerArray: [String: Inner]
+        
+        public struct Inner: Codable {
+            public let start: Double
+            public let end: Double
+        }
+        
+        private struct CustomCodingKeys: CodingKey {
+            var stringValue: String
+            init?(stringValue: String) {
+                self.stringValue = stringValue
+            }
+            var intValue: Int?
+            init?(intValue: Int) {
+                return nil
+            }
+        }
+    
+        public init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CustomCodingKeys.self)
+            
+            self.innerArray = [String: Inner]()
+            for key in container.allKeys {
+                let value = try container.decode(Inner.self, forKey: CustomCodingKeys(stringValue: key.stringValue)!)
+                self.innerArray[key.stringValue] = value
+            }
+        }
+    
+    func  getStart() -> Date {
+           
+            let start = (innerArray.first?.value.start)!
+            let epocTime = TimeInterval(start / 1000)
+            let date = NSDate(timeIntervalSince1970: epocTime)
+            print("Converted Time \(date)")
+            return date as Date
+        }
+    
+    func  getEnd() -> Date {
+        let end = innerArray.first?.value.end
+        let epocTime = TimeInterval(end! / 1000)
+        let date = NSDate(timeIntervalSince1970: epocTime)
+        print("Converted Time \(date)")
+        return date as Date
+    }
 }
 
 

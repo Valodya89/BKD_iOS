@@ -114,7 +114,7 @@ class FaceAndTouchIdViewController: UIViewController, StoryboardInitializable {
     
 //MARK: ACTIONS
     @IBAction func cancel(_ sender: UIButton) {
-        
+        self.goToRegistartaionBot()
     }
     
     @IBAction func agree(_ sender: UIButton) {

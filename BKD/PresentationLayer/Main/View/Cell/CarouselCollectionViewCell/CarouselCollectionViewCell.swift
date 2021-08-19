@@ -20,30 +20,24 @@ class CarouselCollectionViewCell: UICollectionViewCell {
         self.setShadow(color: color_shadow!)
         // Initialization code
     }
-//    required  ?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//      //  self.layer.cornerRadius = max(self.frame.size.width, self.frame.size.height) / 2
-//        
-////        self.layer.borderWidth = 10
-////        self.layer.borderColor = UIColor(red: 110.0/255.0, green: 80.0/255.0, blue: 140.0/255.0, alpha: 1.0).cgColor
-//    }
+
     
     ///Set cell information
-    func  setInfoCell(item:CarTypes, index: Int, currentPage: Int ) {
-        
-        UIImage.loadFrom(url: item.image.getURL()!) { image in
-            self.mCategoryImg.image = image
-        }
+    func  setInfoCell(item:CarTypes, typeImages: [UIImage], index: Int, currentPage: Int ) {
         mCategoryNameLb.text = item.name
-        if index == currentPage {
-            backgroundColor = color_menu
-            mCategoryNameLb.textColor = color_selected_filter_fields
-            mCategoryImg.setTintColor(color: color_selected_filter_fields!)
-        } else {
-            backgroundColor = color_carousel
-            mCategoryNameLb.textColor = .white
-            mCategoryImg.setTintColor(color: color_carousel_img_tint!)
-        }
+       // UIImage.loadFrom(url: item.image.getURL()!) { image in
+        self.mCategoryImg.image = typeImages[index]
+            if index == currentPage {
+                self.backgroundColor = color_menu
+                self.mCategoryNameLb.textColor = color_selected_filter_fields
+                self.mCategoryImg.setTintColor(color: color_selected_filter_fields!)
+            } else {
+                self.backgroundColor = color_carousel
+                self.mCategoryNameLb.textColor = .white
+                self.mCategoryImg.setTintColor(color: color_carousel_img_tint!)
+            }
+       // }
+        
 //        mCategoryImg.image = item.CategoryImg
 //        mCategoryNameLb.text = item.categoryName
 //        if index == currentPage {

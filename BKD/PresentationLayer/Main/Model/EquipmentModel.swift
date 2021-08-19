@@ -14,7 +14,13 @@ struct EquipmentModel {
 
 }
 
-struct ExteriorModel {
-    public var exterior: String
 
+struct Exterior: Codable {
+    let length: Double
+    let width: Double
+    let height: Double
+    
+    func getExterior() -> String {
+        return "\(length)x\(width)x\(height)\(Constant.Texts.m)"
+    }
 }

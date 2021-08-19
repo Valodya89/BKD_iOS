@@ -150,9 +150,9 @@ final class SignInViewController: UIViewController, StoryboardInitializable {
     @IBAction func register(_ sender: UIButton) {
         dissmisKeyboar()
 //        // TODO: - remove
-        let selectPaymentVC = SelectPaymentViewController.initFromStoryboard(name: Constant.Storyboards.payment)
-        self.navigationController?.pushViewController(selectPaymentVC, animated: true)
-        return
+//        let selectPaymentVC = SelectPaymentViewController.initFromStoryboard(name: Constant.Storyboards.payment)
+//        self.navigationController?.pushViewController(selectPaymentVC, animated: true)
+//        return
         let registerVC = RegistrationViewController.initFromStoryboard(name: Constant.Storyboards.registration)
         self.navigationController?.pushViewController(registerVC, animated: true)
         

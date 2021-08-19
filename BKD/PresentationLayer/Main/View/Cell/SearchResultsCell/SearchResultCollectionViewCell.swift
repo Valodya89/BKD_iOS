@@ -25,9 +25,8 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mDetailsBtn: UIButton!
     @IBOutlet weak var mDetailsUnderLineV: UIView!
     
-    @IBOutlet weak var mFiatImgV: UIImageView!
+    @IBOutlet weak var mCarLogoImgV: UIImageView!
     @IBOutlet weak var mCarNameLb: UILabel!
-    
     
     @IBOutlet weak var mGradientV: UIView!
     @IBOutlet weak var mGradientEuroLb: UILabel!
@@ -48,23 +47,30 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mFlipMoreInfoBtn: UIButton!
     
     @IBOutlet weak var mCarImgV: UIImageView!
-    
-    
     @IBOutlet weak var mFlipInfoV: UIView!
     
     @IBOutlet var mCardImgV: UIImageView!
     @IBOutlet var mCubeImgV: UIImageView!
     @IBOutlet var mKgImgV: UIImageView!
     @IBOutlet var mMetrImgV: UIImageView!
+    @IBOutlet weak var mFlipCarLogoImgV: UIImageView!
+    @IBOutlet weak var mFlipCarNameLb: UILabel!
     
     @IBOutlet var mCardLb: UILabel!
     @IBOutlet var mCubeLb: UILabel!
     @IBOutlet var mKgLb: UILabel!
     @IBOutlet var mMetrLb: UILabel!
     @IBOutlet weak var containerV: UIView!
+    
+    @IBOutlet weak var mInactiveCarNameLb: UILabel!
+    @IBOutlet weak var mVisualEffectV: UIVisualEffectView!
+    
     @IBOutlet weak var mCarImageViewCenterY: NSLayoutConstraint!
     
+  
     weak var delegate:SearchResultCellDelegate?
+    var startRendDate: Date?
+    var endRendtDate: Date?
     
     private var isFlipView: Bool = false
     override func awakeFromNib() {
@@ -88,6 +94,13 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         initButtons(btn: mFlipReserveBtn)
                 
     }
+    
+    override func prepareForReuse() {
+        mGradientV.isHidden = false
+        mOffertBckgV.isHidden = true
+        
+    }
+    
     func initButtons(btn:UIButton) {
         btn.addBorder(color: color_btn_pressed!, width: 1.0)
         btn.layer.cornerRadius = 8
@@ -98,7 +111,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         var vehicleModel = VehicleModel()
         vehicleModel.vehicleName = mCarNameLb.text
         vehicleModel.ifHasTowBar = true
-        vehicleModel.vehicleDesctiption = "Double cabin"
+        vehicleModel.vehicleType = "Double cabin"
         vehicleModel.vehicleImg = mCarImgV.image
         vehicleModel.drivingLicense = mCardLb.text
         vehicleModel.vehicleCube = mCubeLb.text
@@ -112,6 +125,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         return vehicleModel
     }
  
+    // Set Search result cell info
     func setSearchResultCellInfo(item: CarsModel, index: Int) {
         mMoreInfoBtn.tag = index
     mFlipMoreInfoBtn.tag = index
@@ -119,9 +133,38 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
       mMoreInfoBtn.addTarget(self, action: #selector(moreInfoPressed(sender:)), for: .touchUpInside)
        mFlipMoreInfoBtn.addTarget(self, action: #selector(moreInfoPressed(sender:)), for: .touchUpInside)
         mReserveBtn.addTarget(self, action: #selector(reservePressed), for: .touchUpInside)
-        
-        print(item)
-        
+     
+        UIImage.loadFrom(url: item.image.getURL()!) { image in
+            self.mCarImgV.image = image
+        }
+//        UIImage.loadFrom(url: item.logo.getURL()!) { image in
+//            //guard let _ = image else {return}
+//            self.mCarLogoImgV.image = image
+//            self.mFlipCarLogoImgV.image = image
+//        }
+
+        DispatchQueue.main.async { [self] in
+           
+            self.mCarNameLb.text = item.name
+            self.mFlipCarNameLb.text = item.name
+            self.mOffertBckgV.isHidden = !item.hasSpecialPrice
+            self.mGradientV.isHidden = item.hasSpecialPrice
+            if item.hasSpecialPrice {
+                self.mOffertValueLB.text = String(item.specialPrice!) + Constant.Texts.inclVat
+                self.mValueLb.text = String(item.price) + Constant.Texts.inclVat
+            } else {
+                self.mGradientValueLb.text = String(item.price) + Constant.Texts.inclVat
+            }
+            self.mCardLb.text = item.driverLicenseType
+            self.mCubeLb.text = String(item.volume) + Constant.Texts.mCuadrad
+            self.mKgLb.text = String(item.loadCapacity) + Constant.Texts.kg
+            self.mMetrLb.text = item.exterior?.getExterior()
+            
+            guard let start = item.reservations?.getStart(), let end = item.reservations?.getEnd() else { return }
+            let isActiveCar: Bool = SearchResultModelView().isCarAvailable(start:start, end:end, rentStart: startRendDate!, rendEnd: endRendtDate)
+            self.mVisualEffectV.isHidden = isActiveCar
+            self.mInactiveCarNameLb.isHidden = isActiveCar
+        }
     }
     
     @objc func moreInfoPressed(sender: UIButton) {
@@ -146,7 +189,6 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
                     self.mCarImageViewCenterY.constant = 0
                     self.layoutIfNeeded()
                 }
-                
             }
         } else {
             UIView.transition(with: mInfoV, duration: 0.5 , options: [.transitionFlipFromLeft], animations: nil) { [self]_ in

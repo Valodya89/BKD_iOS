@@ -87,7 +87,7 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fiat" translatesAutoresizingMaskIntoConstraints="NO" id="rRe-mE-pK0">
                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ducato Koelwagen" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDl-6f-NM6">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="test 2" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDl-6f-NM6">
                                                 <rect key="frame" x="32.5" y="2" width="159.5" height="21"/>
                                                 <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="18"/>
                                                 <color key="textColor" name="navigationBar"/>
@@ -364,7 +364,7 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fiat" translatesAutoresizingMaskIntoConstraints="NO" id="pfT-Tr-46K">
                                                 <rect key="frame" x="-0.5" y="0.0" width="25" height="26"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ducato Koelwagen" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A8B-Wm-iCr">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="test 1" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A8B-Wm-iCr">
                                                 <rect key="frame" x="32" y="2" width="160" height="22"/>
                                                 <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="18"/>
                                                 <color key="textColor" name="navigationBar"/>
@@ -554,15 +554,39 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="car.png" translatesAutoresizingMaskIntoConstraints="NO" id="lpz-oR-cie">
                                 <rect key="frame" x="48.5" y="14.5" width="158" height="136"/>
                             </imageView>
+                            <visualEffectView hidden="YES" opaque="NO" alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQL-v0-7tn">
+                                <rect key="frame" x="16" y="7" width="382" height="316"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000001192092896" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="iL8-jH-xla">
+                                    <rect key="frame" x="0.0" y="0.0" width="382" height="316"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="68O-Fq-7wZ">
+                                <rect key="frame" x="54" y="157" width="306" height="16"/>
+                                <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="7Sl-Bb-XkN" firstAttribute="height" secondItem="r5f-Qf-yre" secondAttribute="height" multiplier="0.757" id="3hF-w2-AhK"/>
+                            <constraint firstItem="68O-Fq-7wZ" firstAttribute="centerX" secondItem="aQL-v0-7tn" secondAttribute="centerX" id="E3R-HD-diU"/>
                             <constraint firstItem="l8r-WE-WOv" firstAttribute="centerX" secondItem="r5f-Qf-yre" secondAttribute="centerX" id="Juc-8N-1s0"/>
+                            <constraint firstAttribute="trailing" secondItem="aQL-v0-7tn" secondAttribute="trailing" constant="16" id="KXI-6U-SRB"/>
                             <constraint firstItem="l8r-WE-WOv" firstAttribute="centerY" secondItem="r5f-Qf-yre" secondAttribute="centerY" multiplier="1.19" id="MEo-nx-RRj"/>
+                            <constraint firstItem="aQL-v0-7tn" firstAttribute="leading" secondItem="r5f-Qf-yre" secondAttribute="leading" constant="16" id="MeL-6r-peb"/>
+                            <constraint firstItem="68O-Fq-7wZ" firstAttribute="height" secondItem="aQL-v0-7tn" secondAttribute="height" multiplier="0.0506329" id="Mqw-Ta-i6Y"/>
+                            <constraint firstItem="68O-Fq-7wZ" firstAttribute="centerY" secondItem="aQL-v0-7tn" secondAttribute="centerY" id="Nyo-cz-cfb"/>
                             <constraint firstItem="lpz-oR-cie" firstAttribute="centerX" secondItem="r5f-Qf-yre" secondAttribute="centerX" multiplier="0.615" id="PaU-Yz-Z7d"/>
                             <constraint firstItem="7Sl-Bb-XkN" firstAttribute="centerX" secondItem="r5f-Qf-yre" secondAttribute="centerX" id="QVZ-BD-JrU"/>
+                            <constraint firstAttribute="bottom" secondItem="aQL-v0-7tn" secondAttribute="bottom" constant="7" id="aJL-0m-daI"/>
+                            <constraint firstItem="aQL-v0-7tn" firstAttribute="top" secondItem="r5f-Qf-yre" secondAttribute="top" constant="7" id="afU-rf-kGu"/>
                             <constraint firstItem="lpz-oR-cie" firstAttribute="width" secondItem="r5f-Qf-yre" secondAttribute="width" multiplier="0.381643" id="fso-aQ-mBw"/>
+                            <constraint firstItem="68O-Fq-7wZ" firstAttribute="width" secondItem="aQL-v0-7tn" secondAttribute="width" multiplier="0.801047" id="i85-Fp-e3X"/>
                             <constraint firstItem="l8r-WE-WOv" firstAttribute="height" secondItem="r5f-Qf-yre" secondAttribute="height" multiplier="0.643" id="iS9-6k-Z9J"/>
                             <constraint firstItem="lpz-oR-cie" firstAttribute="height" secondItem="r5f-Qf-yre" secondAttribute="height" multiplier="0.410959" id="p8W-3c-VM6"/>
                             <constraint firstItem="7Sl-Bb-XkN" firstAttribute="centerY" secondItem="r5f-Qf-yre" secondAttribute="centerY" multiplier="1.2" id="qJO-fN-oTU"/>
@@ -585,8 +609,9 @@
                 <outlet property="containerV" destination="r5f-Qf-yre" id="IQW-ro-2sZ"/>
                 <outlet property="mCarImageViewCenterY" destination="tj1-PS-44J" id="3QA-yt-Psw"/>
                 <outlet property="mCarImgV" destination="lpz-oR-cie" id="ugc-1R-51v"/>
+                <outlet property="mCarLogoImgV" destination="rRe-mE-pK0" id="igX-cd-qQ6"/>
                 <outlet property="mCarMarkaBckgV" destination="o82-tc-ySm" id="N5P-ui-ORj"/>
-                <outlet property="mCarNameLb" destination="A8B-Wm-iCr" id="409-KI-MtW"/>
+                <outlet property="mCarNameLb" destination="NDl-6f-NM6" id="IqP-QX-MXE"/>
                 <outlet property="mCardImgV" destination="H0m-Aa-IdU" id="JKM-iH-kgy"/>
                 <outlet property="mCardLb" destination="EQ9-ZK-hf7" id="ZAY-RX-0NB"/>
                 <outlet property="mCubeImgV" destination="ajv-ek-Fdy" id="vWZ-MC-zf2"/>
@@ -594,13 +619,15 @@
                 <outlet property="mDetailsBtn" destination="eZf-dm-rbK" id="bzN-nb-PwR"/>
                 <outlet property="mDetailsUnderLineV" destination="Pxd-QZ-t9e" id="KKm-gg-bdM"/>
                 <outlet property="mEuroLb" destination="qK2-rT-Aab" id="Hr5-Jj-CFU"/>
-                <outlet property="mFiatImgV" destination="pfT-Tr-46K" id="DnA-YT-G60"/>
+                <outlet property="mFlipCarLogoImgV" destination="pfT-Tr-46K" id="TqB-3T-Ae2"/>
+                <outlet property="mFlipCarNameLb" destination="A8B-Wm-iCr" id="3yt-Rv-NDl"/>
                 <outlet property="mFlipInfoV" destination="7Sl-Bb-XkN" id="rEn-zj-IgW"/>
                 <outlet property="mFlipMoreInfoBtn" destination="wYb-7v-VWh" id="mdT-46-vka"/>
                 <outlet property="mFlipReserveBtn" destination="GHg-k3-oWF" id="nf7-oS-moJ"/>
                 <outlet property="mGradientEuroLb" destination="13E-Vx-KOX" id="Tgt-QK-ukP"/>
                 <outlet property="mGradientV" destination="SXt-nT-90c" id="0yc-3Z-WoY"/>
                 <outlet property="mGradientValueLb" destination="69h-7E-QkD" id="iUt-Mp-9l3"/>
+                <outlet property="mInactiveCarNameLb" destination="68O-Fq-7wZ" id="Pov-by-vvO"/>
                 <outlet property="mInfoV" destination="l8r-WE-WOv" id="1r2-dm-8w9"/>
                 <outlet property="mKgImgV" destination="Ywj-wa-5T8" id="tLy-zi-Dtm"/>
                 <outlet property="mKgLb" destination="HmF-Hp-tfM" id="7rO-zl-jOw"/>
@@ -614,6 +641,7 @@
                 <outlet property="mReserveBtn" destination="cXa-qj-XS9" id="TG3-4V-oEw"/>
                 <outlet property="mValueDeleteV" destination="2iD-Tt-10v" id="qGY-ID-Kar"/>
                 <outlet property="mValueLb" destination="dTf-80-SKD" id="7Fq-EN-CuJ"/>
+                <outlet property="mVisualEffectV" destination="aQL-v0-7tn" id="nmo-Ec-4ak"/>
                 <outlet property="mflipBtn" destination="hw9-Gh-9cQ" id="Phq-ZD-vvt"/>
             </connections>
             <point key="canvasLocation" x="-1" y="309"/>

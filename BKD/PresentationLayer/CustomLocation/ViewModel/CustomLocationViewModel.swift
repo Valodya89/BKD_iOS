@@ -25,6 +25,7 @@ class CustomLocationViewModel: NSObject {
     }
     
     
+    //Get restricted zones
     func getRestrictedZones(completion: @escaping ([RestrictedZones]?) -> Void) {
         
         SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getRestrictedZones)) { (result) in
@@ -45,6 +46,29 @@ class CustomLocationViewModel: NSObject {
             }
         }
     }
+    
+    //Get Custom location price
+    func getCustomLocation(longitude: Double, latitude: Double, completion: @escaping (CustomLocation) -> Void) {
+        
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getCustomLocation(longitude: longitude, latitude: latitude))) { (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let customLocation = BkdConverter<BaseResponseModel<CustomLocation>>.parseJson(data: data as Any) else {
+                    print("error")
+                    return
+                }
+                print(customLocation.content)
+
+                completion(customLocation.content!)
+            case .failure(let error):
+                print(error.description)
+            
+                break
+            }
+        }
+    }
+    
 }
 
 

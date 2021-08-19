@@ -14,11 +14,18 @@ class CategoryViewController: UIViewController {
     private var searchResultHeight: CGFloat = 0.0
 
     //MARK: Variables
+    let categoryViewModel: CategoryViewModel = CategoryViewModel()
     var searchResultV: SearchResultView?
+    var carTypes:[CarTypes]?
+    var carsList:[String : [CarsModel]?]?
+
     
     //MARK: Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        carTypes = ApplicationSettings.shared.carTypes
+        guard let _ = carTypes else { return }
+        getCarsByType()
         setUpView()
     }
     
@@ -26,13 +33,32 @@ class CategoryViewController: UIViewController {
         super.viewWillLayoutSubviews()
     }
     
+    
     func setUpView() {
         //CollectionView
         mCategoryTableV.register(CategoryTableViewCell.nib(),
                                           forCellReuseIdentifier: CategoryTableViewCell.identifier)
         mCategoryTableV.separatorStyle = .none
-//        addHeaderView()
-//        animateSearchResult()
+
+    }
+    
+    private func setCollationViewPosittion(top: CGFloat) {
+        self.mCategoryTableV.contentInset = .init(top: top + 20, left: 0, bottom: 0, right: 0)
+        self.mCategoryTableV.setContentOffset(.init(x: 0, y: -top - 20), animated: false)
+    }
+    
+    /// Get all cars by type
+    private func getCarsByType() {
+        guard let carsList = ApplicationSettings.shared.carsList else {
+            categoryViewModel.getCarsByTypes(carTypes:  carTypes!) { [self] (cars) in
+                guard let _ = cars else {return}
+                ApplicationSettings.shared.carsList = cars!
+                self.carsList = cars!
+                self.mCategoryTableV.reloadData()
+            }
+            return
+        }
+        self.carsList = carsList
     }
     
     private func addHeaderView() {
@@ -55,10 +81,6 @@ class CategoryViewController: UIViewController {
             }, completion: nil)
         }
     }
-    private func setCollationViewPosittion(top: CGFloat) {
-        self.mCategoryTableV.contentInset = .init(top: top + 20, left: 0, bottom: 0, right: 0)
-        self.mCategoryTableV.setContentOffset(.init(x: 0, y: -top - 20), animated: false)
-    }
     
     //MARK: ACTIONS
     //MARK: ------------------------
@@ -77,21 +99,25 @@ class CategoryViewController: UIViewController {
 //MARK: ------------------------
 extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return CategoryData.categoryModel.count
+        return carTypes?.count ?? 0
     }
 
     
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTableViewCell.identifier) as! CategoryTableViewCell
-
-        let categoryModel: CategoryModel = CategoryData.categoryModel[indexPath.row]
-        cell.mCategoryNameLb.text = categoryModel.categoryName
-        cell.collectionData = CategoryData.categoryModel[indexPath.row]
+       guard let _ = carsList else { return cell }
+        cell.setCellInfo(carsList: carsList, carType: carTypes![indexPath.row])
+        cell.mCategoryCollectionV.reloadData()
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.view.frame.size.height * 0.222772;
+        guard let _ = carsList else { return 0}
+        let item:[CarsModel] = carsList![carTypes![indexPath.row].id]! ?? []
+        if item.count == 0 {
+            return 0
+        }
+        return self.view.frame.size.height * 0.222772
     }
     
     //MARK: UITableViewDelegate

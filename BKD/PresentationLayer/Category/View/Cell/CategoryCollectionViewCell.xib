@@ -27,7 +27,7 @@
                         <rect key="frame" x="10.5" y="14" width="121" height="105"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fiat Doblo L1H1" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4C-si-lYT">
-                                <rect key="frame" x="12" y="80.5" width="97" height="23"/>
+                                <rect key="frame" x="12" y="76" width="97" height="26.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="12"/>
                                 <color key="textColor" name="navigationBar"/>
@@ -37,20 +37,20 @@
                         <color key="backgroundColor" name="subview_background"/>
                         <constraints>
                             <constraint firstItem="g4C-si-lYT" firstAttribute="width" secondItem="Xwg-v1-MVv" secondAttribute="width" multiplier="0.8" id="Djf-mh-S9l"/>
-                            <constraint firstItem="g4C-si-lYT" firstAttribute="height" relation="greaterThanOrEqual" secondItem="Xwg-v1-MVv" secondAttribute="height" multiplier="0.215" id="IPE-dg-zO3"/>
+                            <constraint firstItem="g4C-si-lYT" firstAttribute="height" relation="greaterThanOrEqual" secondItem="Xwg-v1-MVv" secondAttribute="height" multiplier="0.25" id="IPE-dg-zO3"/>
                             <constraint firstItem="g4C-si-lYT" firstAttribute="centerX" secondItem="Xwg-v1-MVv" secondAttribute="centerX" id="hAd-PZ-MaY"/>
-                            <constraint firstItem="g4C-si-lYT" firstAttribute="centerY" secondItem="Xwg-v1-MVv" secondAttribute="centerY" multiplier="1.75" id="ymf-aQ-Yxx"/>
+                            <constraint firstItem="g4C-si-lYT" firstAttribute="centerY" secondItem="Xwg-v1-MVv" secondAttribute="centerY" multiplier="1.7" id="ymf-aQ-Yxx"/>
                         </constraints>
                     </view>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vans" translatesAutoresizingMaskIntoConstraints="NO" id="N8J-oc-jZL">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N8J-oc-jZL">
                         <rect key="frame" x="18" y="18.5" width="106" height="70.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </imageView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h0c-8O-QwS">
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h0c-8O-QwS">
                         <rect key="frame" x="9.5" y="5" width="123" height="123"/>
                         <color key="backgroundColor" name="background"/>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fiat Doblo L1H1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c5D-me-gRr">
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fiat Doblo L1H1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c5D-me-gRr">
                         <rect key="frame" x="17.5" y="75" width="107" height="23"/>
                         <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="12"/>
                         <color key="textColor" name="navigationBar"/>
@@ -90,12 +90,11 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="vans" width="106" height="71"/>
         <namedColor name="background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="navigationBar">
-            <color red="0.10980391502380371" green="0.20000001788139343" blue="0.37254902720451355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="subview_background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

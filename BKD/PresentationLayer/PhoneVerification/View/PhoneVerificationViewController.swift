@@ -23,7 +23,7 @@ class PhoneVerificationViewController: UIViewController, StoryboardInitializable
     
     
     //MARK: Variables
-    lazy var verificationCodeViewModel =         VerificationCodeViewModel()
+    lazy var verificationCodeViewModel = VerificationCodeViewModel()
     var phone:String = ""
     private weak var timer:Timer?
     private var counter = 59
