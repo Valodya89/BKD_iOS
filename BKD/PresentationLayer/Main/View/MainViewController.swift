@@ -56,6 +56,7 @@ class MainViewController: BaseViewController {
     private var isPressedEdit: Bool = false
     private var isNoSearchResult: Bool = false
     private var isOnline: Bool = false
+    private var needsUpdateFilterCell: Bool = false
 
 
 
@@ -397,7 +398,7 @@ class MainViewController: BaseViewController {
     
     
     func  showFilter()  {
-        searchResultV?.didPressFilter = { [weak self] isShowFilter in
+        searchResultV?.didPressFilter = { [weak self] isShowFilter, needsUpdateFilterCell in
             self?.isPressedFilter = isShowFilter
             let indexPath = IndexPath(row:0, section: 0)
             if isShowFilter {
@@ -406,6 +407,11 @@ class MainViewController: BaseViewController {
                 self?.mCarCollectionV.deleteItems(at: [indexPath])
             }
             self?.mCarCollectionV.scrollToItem(at: IndexPath(item: 0, section: 0), at: [.centeredVertically, .centeredHorizontally], animated: true)
+            if isShowFilter && needsUpdateFilterCell  {
+               self?.needsUpdateFilterCell = needsUpdateFilterCell
+                 self?.mCarCollectionV.reloadItems(at: [IndexPath(item: 0, section: 0)])
+            }
+           
         }
     }
     
@@ -470,7 +476,9 @@ class MainViewController: BaseViewController {
         isSearchResultPage = false
         isPressedEdit = true
         isNoSearchResult = false
-        
+        searchResultV?.isPressedFilter = false
+        mCarCollectionV.reloadData()
+        searchResultV?.mFilterImgV.image = img_unselected_filter
         animateSearchResultContainer(isThereResult: isBackFromResult)
         navigationController!.navigationBar.topItem?.title = ""
         mLeftBarBtn.image = img_menu
@@ -482,6 +490,7 @@ class MainViewController: BaseViewController {
         searchHeaderV?.layer.shadowOpacity = 0.0
         searchHeaderV?.mSearchLeading.constant = 0
         self.view.layoutIfNeeded()
+        cars = (carsList?[currentCarType!.id] ?? []) ?? []
         mCarCollectionV.reloadData()
         animateSearchHeader()
     }
@@ -606,6 +615,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
        // var cell: UICollectionViewCell
         // will show Main cell
         if !isSearchResultPage {
@@ -618,6 +628,11 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
                 if indexPath.row == 0 {
                   let cellFilter = collectionView.dequeueReusableCell(withReuseIdentifier: FilterSearchResultCell.identifier, for: indexPath) as! FilterSearchResultCell
                     cellFilter.currentCarType = currentCarType
+                    if needsUpdateFilterCell {
+                        cellFilter.setUpView()
+                        needsUpdateFilterCell = false
+                    }
+                    //cellFilter.setInfoCell()
                     cellFilter.filterCars = { cars in
                         self.cars = cars!
                         collectionView.reloadData()
@@ -625,14 +640,15 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
                     return cellFilter
                 } else {
                     // will show search result cell
-                    return initSearchResultCell(indexPath: indexPath, collectionView: collectionView)
+                    return initSearchResultCell(index: indexPath.row - 1, collectionView: collectionView)
                 }
             } else {
                 // will show search result cell
-                return initSearchResultCell(indexPath: indexPath, collectionView: collectionView)
+                return initSearchResultCell(index: indexPath.row, collectionView: collectionView)
             }
         }
     }
+    
 
     //MARK: UICollectionViewDelegate
     //MARK: -------------------------------
@@ -644,13 +660,16 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             goToDetailPage(vehicleModel: vehicleModel,
                            isSearchEdit: false)
         } else {
+            if !isPressedFilter {
             let cell = collectionView.cellForItem(at: indexPath) as! SearchResultCollectionViewCell
             var vehicleModel =  cell.setVehicleModel()
             vehicleModel.customLocationTotalPrice = SearchHeaderViewModel().getCustomLocationTotalPrice(searchV:searchHeaderV!)
             goToDetailPage(vehicleModel: vehicleModel,
                            isSearchEdit: true)
+            }
         }
     }
+    
 
     //MARK: UICollectionViewDelegateFlowLayout
     //MARK: -------------------------------
@@ -665,12 +684,13 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     ///Search resul cell
-    private func initSearchResultCell(indexPath: IndexPath, collectionView: UICollectionView) -> SearchResultCollectionViewCell{
-        let cellSearch = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell
+    private func initSearchResultCell(index: Int, collectionView: UICollectionView) -> SearchResultCollectionViewCell{
+        
+        let cellSearch = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: IndexPath(row: index, section: 0) ) as! SearchResultCollectionViewCell
         
         cellSearch.startRendDate = searchHeaderV?.pickUpTime
         cellSearch.endRendtDate = searchHeaderV?.returnTime
-        cellSearch.setSearchResultCellInfo( item: cars[indexPath.row] , index: indexPath.row)
+        cellSearch.setSearchResultCellInfo( item: cars[index] , index: index)
         cellSearch.delegate = self
         return cellSearch
     }
@@ -709,6 +729,7 @@ extension MainViewController: SearchHeaderViewDelegate {
         }
     }
     
+    ///
     func didSelectSearch() {
         isSearchResultPage = true
         isPressedEdit = false
@@ -731,6 +752,7 @@ extension MainViewController: SearchHeaderViewDelegate {
         }
     }
     
+    /// Selecet location
     func didSelectLocation(_ locationStr: String, _ btnTag: Int) {
         if ((isPressedEdit) == true) {
             if btnTag == 4 { //pick up location

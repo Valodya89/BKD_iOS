@@ -17,30 +17,42 @@ class ExteriorCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mTitleLb: UILabel!
      var selectedItems :[Int] = []
    
-//    override var isSelected: Bool {
-//           didSet {
-//            
-//             //  if isSelected {
-//                   backgroundColor = color_btn_pressed
-//                   layer.borderWidth = 0.0
-//print(selectedItems)
-////               } else {
-////                backgroundColor = .clear
-////                layer.borderWidth = 1.0
-////
-////               }
-//
-//
-//           }
-//       }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
     }
     
+    override func draw(_ rect: CGRect) {
+        mTitleLb.backgroundColor = .clear
+    }
+    override func prepareForReuse() {
+        setupView()
+        mTitleLb.backgroundColor = .clear
+        backgroundColor = .clear
+        layer.borderWidth = 1.0
+//        mTitleLb.textColor = item.didSelect ? color_selected_filter_fields : color_filter_fields
+    }
+    
     func setupView() {
         self.setBorder(color: color_navigationBar!, width: 1)
         layer.cornerRadius = self.frame.size.height/2.5
+    }
+    
+    
+    func setCellInfo(item: ExteriorModel) {
+        mTitleLb.text = item.exterior!.getExterior()
+        if item.didSelect {
+            mTitleLb.textColor = color_selected_filter_fields
+            backgroundColor = color_btn_pressed
+            layer.borderWidth = 0.0
+
+        } else {
+            mTitleLb.textColor = color_filter_fields
+            backgroundColor = .clear
+            layer.borderWidth = 1.0
+
+        }
     }
 
 

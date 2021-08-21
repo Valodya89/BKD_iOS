@@ -27,11 +27,21 @@ class CarEquipmentCollectionViewCell: UICollectionViewCell {
         self.layer.borderColor = color_navigationBar?.cgColor
         self.layer.cornerRadius = self.frame.size.height/2.5
         mTitleLb.textColor = color_filter_fields
+        mImageV.setTintColor(color: color_exterior_tint!)
+
     }
     
     override func prepareForReuse() {
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = color_navigationBar?.cgColor
+        self.layer.cornerRadius = self.frame.size.height/2.5
+
         mTitleLb.text = ""
         mImageV.image = nil
+        self.backgroundColor = .clear
+        
+       // mImageV.setTintColor(color: color_exterior_tint!)
+        unselectCell()
     }
     
     ///Set cell info
@@ -39,7 +49,19 @@ class CarEquipmentCollectionViewCell: UICollectionViewCell {
         mTitleLb.text = item.equipmentName
         mImageV.image = item.equipmentImg
         mImageV.setTintColor(color: mImageV.tintColor)
+        if item.didSelect {
+            mImageV.setTintColor(color: color_selected_filter_fields!)
+            mTitleLb.font = font_selected_filter
+            mTitleLb.textColor = color_selected_filter_fields
+        } else {
+            unselectCell()
+        }
     }
     
+    private func unselectCell() {
+        mImageV.setTintColor(color: color_exterior_tint!)
+        mTitleLb.font = font_unselected_filter
+        mTitleLb.textColor = color_filter_fields
+    }
 
 }

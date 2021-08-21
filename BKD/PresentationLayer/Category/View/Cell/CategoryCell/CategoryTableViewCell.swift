@@ -35,11 +35,11 @@ class CategoryTableViewCell: UITableViewCell {
     
     ///Set cell info
     func setCellInfo(carsList: [String : [CarsModel]?]?, carType: CarTypes) {
+        guard let _ = carsList else {return}
         let item:[CarsModel] = carsList![carType.id]! ?? []
         mCategoryNameLb.text = carType.name
         collectionData =  item
     }
-    
 }
 
 

@@ -30,29 +30,33 @@ class FilterSearchResultCell: UICollectionViewCell {
     @IBOutlet weak var mCarEquipmentCollectionV: UICollectionView!
     @IBOutlet weak var mExteriorCollcetionV: UICollectionView!
     
+    var equipmentModel:[EquipmentModel]?
     var selectedItem:Int = 0
     var currentCarType:CarTypes?
     let searchResultModelView = SearchResultModelView()
-    var exteriorSizes: [Exterior]?
-    var criteriaParam: [[ String : Any]]? = []
+    var exteriors: [ExteriorModel]? = []
+    var selectedExteriors: [Exterior]? = []
+    var selectedTranssmitions:[String]? = []
+    var criteriaParam: [[String : Any]]? = []
     
     var filterCars: (([CarsModel]?) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
+
         setUpView()
         getExteriorSizes()
         
     }
     
     func setUpView() {
-        
-        initTransmission(firstBtn: mAutomaticBtn,
-                         secondBtn: mManualBtn,
-                         firstLb: mAutomaticLb,
-                         secondLb: mManualLb,
-                         firstImgV: mAutomaticImgV,
-                         secondImgV: mManualImgV )
+        equipmentModel = EquipmentData.equipmentModel
+        for  i in 0 ..< exteriors!.count  {
+            self.exteriors![i].didSelect = false
+        }
+        initTransmission(sender: mAutomaticBtn, title: mAutomaticLb, imgV: mAutomaticImgV)
+       initTransmission(sender: mManualBtn, title: mManualLb, imgV: mManualImgV)
+       
         registerCollectionViews()
         // set the corner radius
        
@@ -68,7 +72,8 @@ class FilterSearchResultCell: UICollectionViewCell {
         mAutomaticBtn.layer.cornerRadius = mAutomaticBtn.frame.size.height/2.5
         mCarSizeLb.layer.cornerRadius = mCarSizeLb.frame.size.height/2.5
         
-
+        mCarEquipmentCollectionV.reloadData()
+        mExteriorCollcetionV.reloadData()
     }
     
     func registerCollectionViews() {
@@ -81,75 +86,97 @@ class FilterSearchResultCell: UICollectionViewCell {
         self.mExteriorCollcetionV.register(ExteriorCollectionViewCell.nib(), forCellWithReuseIdentifier: ExteriorCollectionViewCell.identifier)
     }
     
-    func initTransmission(firstBtn:UIButton, secondBtn: UIButton,
-                          firstLb:UILabel, secondLb: UILabel, firstImgV:UIImageView, secondImgV: UIImageView) {
-        firstBtn.backgroundColor = color_btn_pressed
-        firstBtn.layer.borderWidth = 0.0
-        firstLb.font = font_selected_filter
-        firstLb.textColor = color_selected_filter_fields
-        firstImgV.setTintColor(color: color_selected_filter_fields!)
-
-        secondBtn.backgroundColor = .clear
-        secondBtn.addBorder(color: color_navigationBar!, width: 1.0)
-        secondLb.font = font_unselected_filter
-        secondLb.textColor = color_entered_date
-        secondImgV.setTintColor(color: color_exterior_tint!)
-
+    func initTransmission(sender:UIButton,
+                          title:UILabel,
+                          imgV:UIImageView) {
+        sender.backgroundColor = .clear
+        sender.addBorder(color: color_navigationBar!, width: 1.0)
+        title.font = font_unselected_filter
+        title.textColor = color_entered_date
+        imgV.setTintColor(color: color_exterior_tint!)
     }
     
+    
+    func selectTransmission(sender:UIButton,
+                          title:UILabel,
+                          imgV:UIImageView) {
+        
+        if sender.backgroundColor == .clear {
+            sender.backgroundColor = color_btn_pressed
+            sender.layer.borderWidth = 0.0
+            title.font = font_selected_filter
+            title.textColor = color_selected_filter_fields
+            imgV.setTintColor(color: color_selected_filter_fields!)
+        } else {
+            sender.backgroundColor = .clear
+            sender.addBorder(color: color_navigationBar!, width: 1.0)
+            title.font = font_unselected_filter
+            title.textColor = color_entered_date
+            imgV.setTintColor(color: color_exterior_tint!)
+        }
+    }
+    
+    ///Get exterior sizes of the cars
     func getExteriorSizes() {
         searchResultModelView.getExteriorSizes { (exteriorList) in
             print(exteriorList)
-            self.exteriorSizes = exteriorList
+            for  i in 0 ..< exteriorList.count {
+                self.exteriors!.append(ExteriorModel(exterior: exteriorList[i], didSelect: false))
+            }
             self.mExteriorCollcetionV.reloadData()
         }
     }
 
     //MARK: ACTIONS
     @IBAction func manual(_ sender: UIButton) {
-        initTransmission(firstBtn: mManualBtn,
-                         secondBtn: mAutomaticBtn,
-                         firstLb: mManualLb,
-                         secondLb: mAutomaticLb,
-                         firstImgV: mManualImgV,
-                         secondImgV: mAutomaticImgV)
+        selectTransmission(sender: mManualBtn, title: mManualLb, imgV:mManualImgV)
         
-    }
-    @IBAction func automatic(_ sender: UIButton) {
-        initTransmission(firstBtn: mAutomaticBtn,
-                         secondBtn: mManualBtn,
-                         firstLb: mAutomaticLb,
-                         secondLb: mManualLb,
-                         firstImgV: mAutomaticImgV,
-                         secondImgV: mManualImgV)
+        if mManualBtn.backgroundColor == color_btn_pressed {
+            selectedTranssmitions?.append(Constant.Texts.manual)
+        }  else  {
+            selectedTranssmitions = selectedTranssmitions!.filter(){$0 != Constant.Texts.manual}
+        }
+        criteriaParam = searchResultModelView.setTransmissions(criteriaParams: criteriaParam, transmissions: selectedTranssmitions ?? [])
+        filterCollectionView()
     }
     
-  
+    
+    @IBAction func automatic(_ sender: UIButton) {
+        selectTransmission(sender: mAutomaticBtn, title: mAutomaticLb, imgV:mAutomaticImgV)
+        
+        if mAutomaticBtn.backgroundColor == color_btn_pressed {
+            selectedTranssmitions?.append(Constant.Texts.automatic)
+        }  else  {
+            selectedTranssmitions = selectedTranssmitions!.filter(){$0 != Constant.Texts.automatic}
+        }
+        criteriaParam = searchResultModelView.setTransmissions(criteriaParams: criteriaParam, transmissions: selectedTranssmitions ?? [])
+        filterCollectionView()
+    }
 }
+
 
 extension FilterSearchResultCell: UICollectionViewDelegate, UICollectionViewDataSource,  UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == mCarEquipmentCollectionV {
-            return EquipmentData.equipmentModel.count
+            return equipmentModel?.count ?? 0
         }
-        
-        return exteriorSizes?.count ?? 0
+        return exteriors?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         if collectionView == mCarEquipmentCollectionV {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarEquipmentCollectionViewCell.identifier, for: indexPath) as! CarEquipmentCollectionViewCell
-            let equipmentModel: EquipmentModel = (EquipmentData.equipmentModel[indexPath.item])
-            cell.setCellInfo(item: equipmentModel)
+           
+            cell.setCellInfo(item: equipmentModel![indexPath.item])
             return cell
         }
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExteriorCollectionViewCell.identifier, for: indexPath) as! ExteriorCollectionViewCell
-        guard let _ = exteriorSizes else { return cell }
-        cell.mTitleLb.text = exteriorSizes![indexPath.row].getExterior()
+        guard let _ = exteriors else { return cell }
+        cell.setCellInfo(item:  exteriors![indexPath.row])
         return cell
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -158,15 +185,15 @@ extension FilterSearchResultCell: UICollectionViewDelegate, UICollectionViewData
         size.height = collectionView.frame.height * 0.480519
 
        if collectionView == mCarEquipmentCollectionV {
-            let equipmentModel: EquipmentModel = (EquipmentData.equipmentModel[indexPath.item])
-            _ = equipmentModel.equipmentImg.size.height
-            let widthInPoints = equipmentModel.equipmentImg.size.width
-            let width = equipmentModel.equipmentName.size(OfFont: font!).width
+            let equipment: EquipmentModel = equipmentModel![indexPath.item]
+            _ = equipment.equipmentImg.size.height
+            let widthInPoints = equipment.equipmentImg.size.width
+            let width = equipment.equipmentName.size(OfFont: font!).width
             size.width =  width + widthInPoints + 60
             return size
         }
 
-        let width = exteriorSizes![indexPath.item].getExterior().size(OfFont: font!).width
+        let width = exteriors![indexPath.item].exterior!.getExterior().size(OfFont: font!).width
         size.width = width + 30
         return size
        }
@@ -198,12 +225,15 @@ extension FilterSearchResultCell: UICollectionViewDelegate, UICollectionViewData
         cell.backgroundColor = color_btn_pressed
         cell.layer.borderWidth = 0.0
         if collectionView == mCarEquipmentCollectionV {
-            (cell as! CarEquipmentCollectionViewCell).mImageV.setTintColor(color: color_selected_filter_fields!)
-            (cell as! CarEquipmentCollectionViewCell).mTitleLb.font = font_selected_filter
-            (cell as! CarEquipmentCollectionViewCell).mTitleLb.textColor = color_selected_filter_fields
+            
+            equipmentModel![index].didSelect = true
             criteriaParam = searchResultModelView.setEquipmentParam(index: index, criteriaParams: criteriaParam)
+            
         } else {
-            (cell as! ExteriorCollectionViewCell).mTitleLb.textColor = color_selected_filter_fields
+
+            exteriors![index].didSelect = true
+            selectedExteriors?.append(exteriors![index].exterior!)
+            criteriaParam = searchResultModelView.setExteriorParam(criteriaParams: criteriaParam, exteriors: selectedExteriors!)
         }
         filterCollectionView()
 
@@ -215,13 +245,14 @@ extension FilterSearchResultCell: UICollectionViewDelegate, UICollectionViewData
         cell.layer.borderWidth = 1.0
         cell.backgroundColor = .clear
         if collectionView == mCarEquipmentCollectionV {
-            (cell as! CarEquipmentCollectionViewCell).mImageV.setTintColor(color: color_exterior_tint!)
-            (cell as! CarEquipmentCollectionViewCell).mTitleLb.font = font_unselected_filter
-            (cell as! CarEquipmentCollectionViewCell).mTitleLb.textColor = color_filter_fields
-            
+
+            equipmentModel![index].didSelect = false
             criteriaParam = searchResultModelView.removeEquipmentParam(index: index, criteriaParams: criteriaParam)
         } else {
-            (cell as! ExteriorCollectionViewCell).mTitleLb.textColor = color_filter_fields
+
+            exteriors![index].didSelect = false
+            selectedExteriors = searchResultModelView.removeExterior(exteriors: selectedExteriors!, exterior: exteriors![index].exterior!)
+            criteriaParam = searchResultModelView.setExteriorParam(criteriaParams: criteriaParam, exteriors: selectedExteriors!)
         }
         
         filterCollectionView()

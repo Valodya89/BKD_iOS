@@ -14,6 +14,10 @@ struct EquipmentModel {
 
 }
 
+struct ExteriorModel {
+    var exterior: Exterior?
+    var didSelect: Bool = false
+}
 
 struct Exterior: Codable {
     let length: Double

@@ -28,8 +28,9 @@ class SearchResultView: UIView {
     @IBOutlet var contentView: UIView!
     
     var isPressedFilter: Bool = false
+    var needsUpdateFilterCell: Bool = false
     
-    var didPressFilter: ((Bool) -> Void)?
+    var didPressFilter: ((Bool, Bool) -> Void)?
     var didPressEdit: (() -> Void)?
 
     
@@ -51,7 +52,6 @@ class SearchResultView: UIView {
         setUpView()
     }
     func setUpView() {
-       // mSearchResultStackV.setShadowByBezierPath(color: UIColor.lightGray)
         mSearchResultStackV.setShadow(color:  color_shadow!)
     }
     
@@ -68,6 +68,7 @@ class SearchResultView: UIView {
        mReturnMonthBtn.setTitle(returnMonth, for: .normal)
         mPickUpLocationLb.text = pickUpLocation
         mReturnLocationLb.text = returnLocation
+        needsUpdateFilterCell = true
     }
     
     
@@ -82,8 +83,8 @@ class SearchResultView: UIView {
             mFilterImgV.image = UIImage(named: "show_car_param")
         }
         isPressedFilter = !isPressedFilter
-        didPressFilter!(isPressedFilter)
-
+        didPressFilter!(isPressedFilter, needsUpdateFilterCell)
+        needsUpdateFilterCell = false
     }
     
 }

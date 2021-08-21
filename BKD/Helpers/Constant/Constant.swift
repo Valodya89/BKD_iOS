@@ -217,6 +217,14 @@ struct Constant {
         static let selectMailApp = "Select Mail App"
         static let  googleMail = "Googleg Mail"
         static let  yahooMail = "Yahoo Mail"
+        
+        //Request texts
+        static let type = "type"
+        static let exterior = "exterior"
+        static let transmission = "transmission"
+        static let automatic = "AUTOMATIC"
+        static let manual = "MANUAL"
+
 
     }
     
@@ -277,6 +285,14 @@ let key_returnLocation = "returnLocation"
 let key_category = "category"
 let key_email = "E-mail"
 let key_isLogin = "isLogin"
+
+//Request keis
+let key_fieldName = "fieldName"
+let key_fieldValue = "fieldValue"
+let key_searchOperation = "searchOperation"
+let key_length = "length"
+let key_width = "width"
+let key_height = "height"
 
 
 
