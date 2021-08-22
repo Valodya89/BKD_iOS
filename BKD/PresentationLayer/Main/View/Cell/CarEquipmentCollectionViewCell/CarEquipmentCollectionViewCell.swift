@@ -39,8 +39,6 @@ class CarEquipmentCollectionViewCell: UICollectionViewCell {
         mTitleLb.text = ""
         mImageV.image = nil
         self.backgroundColor = .clear
-        
-       // mImageV.setTintColor(color: color_exterior_tint!)
         unselectCell()
     }
     
@@ -50,18 +48,33 @@ class CarEquipmentCollectionViewCell: UICollectionViewCell {
         mImageV.image = item.equipmentImg
         mImageV.setTintColor(color: mImageV.tintColor)
         if item.didSelect {
-            mImageV.setTintColor(color: color_selected_filter_fields!)
-            mTitleLb.font = font_selected_filter
-            mTitleLb.textColor = color_selected_filter_fields
+            DispatchQueue.main.async {
+                self.mImageV.setTintColor(color: color_selected_filter_fields!)
+                self.mTitleLb.font = font_selected_filter
+                self.mTitleLb.textColor = color_selected_filter_fields
+    //            self.layer.borderColor = color_menu!.cgColor
+    //            self.backgroundColor = color_menu!
+                self.backgroundColor = color_btn_pressed
+                self.layer.borderWidth = 0.0
+            }
+            
         } else {
             unselectCell()
         }
     }
     
     private func unselectCell() {
-        mImageV.setTintColor(color: color_exterior_tint!)
-        mTitleLb.font = font_unselected_filter
-        mTitleLb.textColor = color_filter_fields
+        DispatchQueue.main.async { 
+            self.layer.borderWidth = 1.0
+            self.backgroundColor = .clear
+            self.mImageV.setTintColor(color: color_exterior_tint!)
+            self.mTitleLb.font = font_unselected_filter
+            self.mTitleLb.textColor = color_filter_fields
+    //        self.layer.borderColor = color_navigationBar?.cgColor
+    //        self.backgroundColor = .clear
+        }
+        
+
     }
 
 }

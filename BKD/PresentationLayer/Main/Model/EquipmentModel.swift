@@ -10,7 +10,7 @@ import UIKit
 struct EquipmentModel {
     public var equipmentImg: UIImage
     public var equipmentName: String
-    public var didSelect: Bool
+    public var didSelect: Bool = false
 
 }
 

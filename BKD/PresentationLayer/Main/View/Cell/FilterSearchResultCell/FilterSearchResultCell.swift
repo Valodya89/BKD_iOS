@@ -189,7 +189,7 @@ extension FilterSearchResultCell: UICollectionViewDelegate, UICollectionViewData
             _ = equipment.equipmentImg.size.height
             let widthInPoints = equipment.equipmentImg.size.width
             let width = equipment.equipmentName.size(OfFont: font!).width
-            size.width =  width + widthInPoints + 60
+            size.width =  width + widthInPoints + 65
             return size
         }
 
@@ -225,7 +225,9 @@ extension FilterSearchResultCell: UICollectionViewDelegate, UICollectionViewData
         cell.backgroundColor = color_btn_pressed
         cell.layer.borderWidth = 0.0
         if collectionView == mCarEquipmentCollectionV {
-            
+            (cell as! CarEquipmentCollectionViewCell).mImageV.setTintColor(color: color_selected_filter_fields!)
+            (cell as! CarEquipmentCollectionViewCell).mTitleLb.font = font_selected_filter
+
             equipmentModel![index].didSelect = true
             criteriaParam = searchResultModelView.setEquipmentParam(index: index, criteriaParams: criteriaParam)
             
@@ -246,6 +248,9 @@ extension FilterSearchResultCell: UICollectionViewDelegate, UICollectionViewData
         cell.backgroundColor = .clear
         if collectionView == mCarEquipmentCollectionV {
 
+            (cell as! CarEquipmentCollectionViewCell).mImageV.setTintColor(color: color_exterior_tint!)
+            (cell as! CarEquipmentCollectionViewCell).mTitleLb.font = font_unselected_filter
+            
             equipmentModel![index].didSelect = false
             criteriaParam = searchResultModelView.removeEquipmentParam(index: index, criteriaParams: criteriaParam)
         } else {
