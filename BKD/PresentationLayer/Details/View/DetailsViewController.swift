@@ -68,6 +68,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     var vehicleModel:VehicleModel?
     
     var isSearchEdit = false
+    var isClickMore = false
     var currentTariff: Tariff = .hourly
     var search: Search = .date
     var currentTariffOptionIndex: Int = 0
@@ -119,6 +120,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             mTariffCarouselV.tariffCarousel.reloadData()
             currentTariff = .flexible
         }
+        
         
         configureViews()
         setDetailDatas()
@@ -185,19 +187,18 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
 
         mCarNameLb.text = vehicleModel?.vehicleName
         mCarDetailLb.text = vehicleModel?.vehicleType
-        carPhotosView.mTowBarBckgV.isHidden = !vehicleModel!.ifHasTowBar
+        carPhotosView.mTowBarBckgV.isHidden = vehicleModel?.ifHasTowBar != nil ? !vehicleModel!.ifHasTowBar : true
         mCarInfoV.mCardLb.text = vehicleModel?.drivingLicense
         mCarInfoV.mKgLb.text = vehicleModel?.vehicleWeight
         mCarInfoV.mMeterCubeLb.text = vehicleModel?.vehicleCube
         mCarInfoV.mSizeLb.text = vehicleModel?.vehicleSize
-        mAccessoriesBtn.alpha = vehicleModel!.ifHasAccessories ? 1.0 : 0.67
-        mAdditionalDriverBtn.alpha = vehicleModel!.ifHasAditionalDriver ? 1.0 : 0.67
-        mDetailsAndTailLiftV.mTailLiftV.isHidden = !(vehicleModel?.ifTailLift)!
-        if !vehicleModel!.ifTailLift {
+        mAccessoriesBtn.alpha = vehicleModel?.ifHasAccessories ?? false ? 1.0 : 0.67
+        mAdditionalDriverBtn.alpha = vehicleModel?.ifHasAditionalDriver ?? false ? 1.0 : 0.67
+        mDetailsAndTailLiftV.mTailLiftV.isHidden = !(vehicleModel?.ifTailLift ?? false)!
+        if !(vehicleModel?.ifTailLift ?? false) {
             mDetailAndTailLiftBottom.constant = -mDetailsAndTailLiftV.mTailLiftBtn.bounds.height
             mDetailHeight.constant = self.view.bounds.height * 0.0185644
             self.view.layoutIfNeeded()
-            
         }
             
     }
@@ -237,7 +238,11 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         mTailLiftTableBckgV.layer.cornerRadius = 3
         mAccessoriesBtn.layer.cornerRadius = 8
         mAdditionalDriverBtn.layer.cornerRadius = 8
-        configureReserveView(isActive: isSearchEdit)
+        mReserveBckgV.isHidden = isClickMore
+        if !isClickMore {
+            configureReserveView(isActive: isSearchEdit)
+        }
+            
     }
     
     ///configure reserve view
@@ -661,7 +666,7 @@ extension DetailsViewController: DetailsAndTailLiftViewDelegate {
         if willOpen  {
             mDetailsTbV.detailList = vehicleModel?.detailList ?? []
             mDetailsTbV.reloadData()
-            scrollToBottom(distance: vehicleModel!.ifTailLift ? 0.0 : -(self.view.bounds.height * 0.247))
+            scrollToBottom(distance: (vehicleModel?.ifTailLift ?? false) ? 0.0 : -(self.view.bounds.height * 0.247))
             if self.mTailLiftTableBckgV.alpha == 1 {
                 hideTableView(view: mTailLiftTableBckgV, imgRotate: self.mDetailsAndTailLiftV.mTailLiftDropDownImgV)
                 // will show Details tableView and close TailLift tableView

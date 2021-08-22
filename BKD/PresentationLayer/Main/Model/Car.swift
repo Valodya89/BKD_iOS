@@ -45,6 +45,7 @@ struct CarsModel: Codable {
     let active: Bool
     let inRent: Bool
     let image: CarImageResponse
+    let images: [CarImageResponse]?
     let logo: Logo?
     let reservations: Reservation?
     

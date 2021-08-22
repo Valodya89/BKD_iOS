@@ -189,7 +189,9 @@ class MainViewController: BaseViewController {
     }
 
     ///will open detail controller
-    private func goToDetailPage(vehicleModel: VehicleModel,         isSearchEdit: Bool) {
+    private func goToDetailPage(vehicleModel: VehicleModel,
+                                isSearchEdit: Bool,
+                                isClickMore: Bool) {
         
         let detailsVC = UIStoryboard(name: Constant.Storyboards.details, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.details) as! DetailsViewController
         if isSearchEdit {
@@ -197,6 +199,7 @@ class MainViewController: BaseViewController {
             detailsVC.searchModel = searchModel
         }
         detailsVC.isSearchEdit = isSearchEdit
+        detailsVC.isClickMore = isClickMore
         detailsVC.vehicleModel = vehicleModel
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }
@@ -658,14 +661,15 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             let cell = collectionView.cellForItem(at: indexPath) as! MainCollectionViewCell
             let vehicleModel =  cell.setVehicleModel(carModel: cars[indexPath.row])
             goToDetailPage(vehicleModel: vehicleModel,
-                           isSearchEdit: false)
+                           isSearchEdit: false, isClickMore: false)
         } else {
             if !isPressedFilter {
             let cell = collectionView.cellForItem(at: indexPath) as! SearchResultCollectionViewCell
-            var vehicleModel =  cell.setVehicleModel()
+            var vehicleModel =
+                cell.setVehicleModel(carModel: cars[indexPath.row])
             vehicleModel.customLocationTotalPrice = SearchHeaderViewModel().getCustomLocationTotalPrice(searchV:searchHeaderV!)
             goToDetailPage(vehicleModel: vehicleModel,
-                           isSearchEdit: true)
+                           isSearchEdit: true, isClickMore: false)
             }
         }
     }
@@ -701,17 +705,23 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
 //MARK: ----------------------------
 extension MainViewController: SearchResultCellDelegate {
     
-    func didPressMore() {
-        let detailsVC = UIStoryboard(name: Constant.Storyboards.details, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.details) as! DetailsViewController
-        self.navigationController?.pushViewController(detailsVC, animated: true)
+    func didPressMore(tag: Int) {
+        openDetails(tag: tag, isMore: true)
+
+//        let detailsVC = UIStoryboard(name: Constant.Storyboards.details, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.details) as! DetailsViewController
+//        self.navigationController?.pushViewController(detailsVC, animated: true)
     }
     
     func didPressReserve(tag: Int) {
+        openDetails(tag: tag, isMore: false)
+    }
+    
+    private func openDetails(tag: Int, isMore: Bool) {
         let cell = mCarCollectionV.cellForItem(at: IndexPath(item: tag, section: 0)) as! SearchResultCollectionViewCell
-        var vehicleModel =  cell.setVehicleModel()
+        var vehicleModel =  cell.setVehicleModel(carModel: cars[tag])
         vehicleModel.customLocationTotalPrice = SearchHeaderViewModel().getCustomLocationTotalPrice(searchV:searchHeaderV!)
         goToDetailPage(vehicleModel: vehicleModel,
-                       isSearchEdit: true)
+                       isSearchEdit: true, isClickMore: isMore)
     }
 }
 

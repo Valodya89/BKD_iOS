@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SearchResultCellDelegate: AnyObject {
-    func didPressMore()
+    func didPressMore(tag: Int)
     func didPressReserve(tag: Int)
 }
 
@@ -67,7 +67,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var mCarImageViewCenterY: NSLayoutConstraint!
     
-  
+  lazy var mainViewModel = MainViewModel()
     weak var delegate:SearchResultCellDelegate?
     var startRendDate: Date?
     var endRendtDate: Date?
@@ -107,7 +107,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     }
     
     ///Set  values to vehicle model
-     func setVehicleModel() -> VehicleModel {
+     func setVehicleModel(carModel: CarsModel) -> VehicleModel {
         var vehicleModel = VehicleModel()
         vehicleModel.vehicleName = mCarNameLb.text
         vehicleModel.ifHasTowBar = true
@@ -117,13 +117,36 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         vehicleModel.vehicleCube = mCubeLb.text
         vehicleModel.vehicleWeight = mKgLb.text
         vehicleModel.vehicleSize = mMetrLb.text
-        vehicleModel.ifTailLift = false
+        vehicleModel.ifTailLift = carModel.tailgate
         vehicleModel.ifHasAccessories = false
         vehicleModel.ifHasAditionalDriver = false
-        let price: Double = mGradientV.isHidden ? (mOffertValueLB.text!  as NSString).doubleValue : (mValueLb.text!  as NSString).doubleValue
+        let price: Double = mOffertBckgV.isHidden ? (mValueLb.text!  as NSString).doubleValue : (mOffertValueLB.text!  as NSString).doubleValue
         vehicleModel.vehicleValue = price
+        
+        if vehicleModel.ifTailLift  {
+            vehicleModel.tailLiftList = mainViewModel.getTailLiftList(carModel: carModel)
+        }
+        vehicleModel.detailList = mainViewModel.getDetail(carModel: carModel)
         return vehicleModel
     }
+//    ///Set  values to vehicle model
+//     func setVehicleModel() -> VehicleModel {
+//        var vehicleModel = VehicleModel()
+//        vehicleModel.vehicleName = mCarNameLb.text
+//        vehicleModel.ifHasTowBar = true
+//        vehicleModel.vehicleType = "Double cabin"
+//        vehicleModel.vehicleImg = mCarImgV.image
+//        vehicleModel.drivingLicense = mCardLb.text
+//        vehicleModel.vehicleCube = mCubeLb.text
+//        vehicleModel.vehicleWeight = mKgLb.text
+//        vehicleModel.vehicleSize = mMetrLb.text
+//        vehicleModel.ifTailLift = false
+//        vehicleModel.ifHasAccessories = false
+//        vehicleModel.ifHasAditionalDriver = false
+//        let price: Double = mGradientV.isHidden ? (mOffertValueLB.text!  as NSString).doubleValue : (mValueLb.text!  as NSString).doubleValue
+//        vehicleModel.vehicleValue = price
+//        return vehicleModel
+//    }
  
     // Set Search result cell info
     func setSearchResultCellInfo(item: CarsModel, index: Int) {
@@ -170,7 +193,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func moreInfoPressed(sender: UIButton) {
-        delegate?.didPressMore()
+        delegate?.didPressMore(tag: sender.tag)
     }
     
     @objc func reservePressed (sender: UIButton) {
