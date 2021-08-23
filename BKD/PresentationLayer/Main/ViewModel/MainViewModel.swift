@@ -103,10 +103,10 @@ class MainViewModel: NSObject {
         var detailsModel: [DetailsModel] = []
         detailsModel.append(DetailsModel(image: #imageLiteral(resourceName: "1"), title: String(format: "%.0f", carModel.seats)))
         if let diesel = carModel.fuel {
-            detailsModel.append(DetailsModel(image: #imageLiteral(resourceName: "1"), title: String(diesel)))
+            detailsModel.append(DetailsModel(image: #imageLiteral(resourceName: "2"), title: String(diesel)))
         }
         if let transmission = carModel.transmission {
-            detailsModel.append(DetailsModel(image: #imageLiteral(resourceName: "1"), title: String(transmission)))
+            detailsModel.append(DetailsModel(image: #imageLiteral(resourceName: "3"), title: String(transmission)))
         }
         detailsModel.append(DetailsModel (image: #imageLiteral(resourceName: "4"), title: String(carModel.motor)))
         if carModel.euroNorm > 0 {

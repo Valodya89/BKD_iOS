@@ -10,6 +10,6 @@ import UIKit
 struct Country: Codable {
     let id: String
     let code: String
-    let country: String
+    let country: String?
     let nationalDocumentMask: String?
 }

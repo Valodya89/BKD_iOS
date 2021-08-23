@@ -120,7 +120,8 @@ enum AuthAPI: APIProtocol {
              .addPersonalData,
              .forgotPassword,
              .getExteriorSize,
-             .getCustomLocation:
+             .getCustomLocation,
+             .addPersonalData:
             return [
                 "Content-Type": "application/json"]
         case .getAuthRefreshToken:

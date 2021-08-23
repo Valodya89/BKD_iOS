@@ -137,7 +137,7 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
     /// Start timer for update table cell
     func startTimer() {
         if timer == nil {
-            let seconds = 0.5
+            let seconds = 0.65
             timer = Timer.scheduledTimer(timeInterval: seconds, target:self, selector: #selector(updateTableCell), userInfo: nil, repeats: true)
           }
     }
@@ -298,9 +298,11 @@ class RegistartionBotViewController: UIViewController, StoryboardInitializable {
             tableData[currentIndex].userRegisterInfo = UserRegisterInfo(date: datePicker.date, isFilled: true)
         case .nationalCountry:
             // change nationality  textfiled
-            tableData[currentIndex].userRegisterInfo?.nationalString = countryList![ pickerV.selectedRow(inComponent: 0)].country
+            guard let _ = countryList else { return }
+            tableData[currentIndex].userRegisterInfo?.nationalString = countryList?[ pickerV.selectedRow(inComponent: 0)].country
         break
         case .country:
+            guard let _ = countryList else { return }
             tableData[currentIndex].userRegisterInfo?.string = countryList![ pickerV.selectedRow(inComponent: 0)].country
             tableData[currentIndex].userRegisterInfo?.isFilled = true
             personalData.countryId = countryList![ pickerV.selectedRow(inComponent: 0)].id

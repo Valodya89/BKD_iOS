@@ -53,8 +53,8 @@ class PhoneNumberTableViewCell: UITableViewCell {
             
 
             guard let phoneNumber = try? phoneNumberKit.parse(newValue, ignoreType: true) else { return }
-            mCodeLb.text = "+" + String(phoneNumber.countryCode)
-            mPhoneNumberTxtFl.text = String(phoneNumber.nationalNumber)
+//            mCodeLb.text = "+" + String(phoneNumber.countryCode)
+//            mPhoneNumberTxtFl.text = String(phoneNumber.nationalNumber)
         }
     }
     
