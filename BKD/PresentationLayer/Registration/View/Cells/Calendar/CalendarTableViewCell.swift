@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CalendarTableViewCellDelegate: AnyObject {
-    func willOpenPicker(textFl: UITextField, isCalendar: Bool)
+    func willOpenPicker(textFl: UITextField, isExpireDate: Bool)
     func updateData(viewType: ViewType, calendarData: String)
 }
 class CalendarTableViewCell: UITableViewCell, UITextFieldDelegate {
@@ -29,10 +29,11 @@ class CalendarTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var mStackV: UIStackView!
     @IBOutlet weak var mCalendarTxtFl: UITextField!
     
-    var viewType:ViewType = .dateOfBirth
+    var isExpireDate = false
+    private var viewType:ViewType = .dateOfBirth
     weak var delegate: CalendarTableViewCellDelegate?
     
-    var placeholder: String? {
+    private var placeholder: String? {
         didSet {
             if placeholder == Constant.Texts.dateOfBirth {
                 viewType = .dateOfBirth
@@ -105,7 +106,7 @@ class CalendarTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        delegate?.willOpenPicker(textFl: textField, isCalendar: true)
+        delegate?.willOpenPicker(textFl: textField, isExpireDate: isExpireDate)
     }
 
     

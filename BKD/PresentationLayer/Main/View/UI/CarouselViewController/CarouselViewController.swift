@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import AVFoundation
+
 
 class CarouselViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate, StoryboardInitializable {
     
@@ -19,15 +21,17 @@ class CarouselViewController: UIViewController, UICollectionViewDelegate, UIColl
     var carTypeImages:[UIImage]?
     
     var currentPage: Int = 0 {
-        
         didSet {
-            
             didChangeCategory?(currentPage)
             collectionView.reloadData()
             
             guard let _ = carTypes else { return }
             getCarsByType(carType: carTypes![currentPage])
             //  collectionView.scrollToItem(index: self.currentPage)
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.prepare()
+            generator.impactOccurred()
+            AudioServicesPlaySystemSound(1157)
         }
     }
     

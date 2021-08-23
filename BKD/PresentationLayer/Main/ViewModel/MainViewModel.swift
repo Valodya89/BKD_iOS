@@ -182,8 +182,9 @@ class MainViewModel: NSObject {
         var imagesArr:[UIImage] = []
         let dispatchGroup = DispatchGroup()
         for i in 0 ..< carTypes.count{
+            guard let image = carTypes[i].image, let imageURL = image.getURL() else { return }
             dispatchGroup.enter()
-            UIImage.loadFrom(url: carTypes[i].image.getURL()!) { (image) in
+            UIImage.loadFrom(url: imageURL) { (image) in
                 guard let _ = image else {return}
                 imagesArr.append(image!)
                 dispatchGroup.leave()

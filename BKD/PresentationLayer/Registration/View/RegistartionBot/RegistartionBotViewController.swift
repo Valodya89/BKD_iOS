@@ -344,7 +344,9 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
             case  "phone" :
                 return phoneNumberCell(indexPath: indexPath,model: model)
             case  "calendar" :
-                return calendarCell(indexPath: indexPath,model: model)
+                return calendarCell(indexPath: indexPath,model: model, isExpireDate: false)
+            case "calendar_expire":
+                return calendarCell(indexPath: indexPath,model: model, isExpireDate: true)
             case  "mailbox" :
                 return mailBoxCell(indexPath: indexPath, model: model)
             case  "national register" :
@@ -393,10 +395,11 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
           return cell
     }
     
-    private func calendarCell(indexPath: IndexPath, model: RegistrationBotModel) -> CalendarTableViewCell {
+    private func calendarCell(indexPath: IndexPath, model: RegistrationBotModel, isExpireDate: Bool) -> CalendarTableViewCell {
         
         let cell = mTableV.dequeueReusableCell(withIdentifier: CalendarTableViewCell.identifier, for: indexPath) as! CalendarTableViewCell
         cell.setCellInfo(item: model)
+        cell.isExpireDate = isExpireDate
         cell.delegate = self
         return cell
     }
@@ -527,7 +530,7 @@ extension RegistartionBotViewController: PhoneNumberTableViewCellDelegate {
 //MARK: - CalendarTableViewCellDelegate
 //MARK: --------------------------------
 extension RegistartionBotViewController: CalendarTableViewCellDelegate {
-    func willOpenPicker(textFl: UITextField, isCalendar: Bool) {
+    func willOpenPicker(textFl: UITextField, isExpireDate: Bool) {
         
         textFl.inputView = datePicker
         textFl.inputAccessoryView = creatToolBar()
@@ -538,11 +541,15 @@ extension RegistartionBotViewController: CalendarTableViewCellDelegate {
         } else {
             // Fallback on earlier versions
         }
-    if isCalendar {
-        datePicker.datePickerMode = .date
-        datePicker.minimumDate =  Date()
-        datePicker.locale = Locale(identifier: "en")
-    }
+        if isExpireDate {
+            datePicker.datePickerMode = .date
+            datePicker.minimumDate =  Date()
+            datePicker.locale = Locale(identifier: "en")
+        } else {
+            datePicker.datePickerMode = .date
+            datePicker.maximumDate = Date()
+            datePicker.locale = Locale(identifier: "en")
+        }
     }
     
     func updateData(viewType: ViewType, calendarData: String) {

@@ -74,7 +74,7 @@ enum AuthAPI: APIProtocol {
         case .getCarList:
             return "car/list"
         case .getCarTypes:
-            return "car-type/list"
+            return "/car-type/list"
         case .getRestrictedZones:
             return "restricted-zones/list"
         case .getParking:

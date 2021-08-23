@@ -76,8 +76,9 @@ class FaceAndTouchIdViewController: UIViewController, StoryboardInitializable {
                                                 }
                                                 
                                             } else {
-                                                self.notifyUser("Authentication Successful",
-                                                                err: "You now have full access")
+                                                self.goToRegistartaionBot()
+//                                                self.notifyUser("Authentication Successful",
+//                                                                err: "You now have full access")
                                             }
 
 //                    guard  success, error == nil else {
@@ -97,19 +98,10 @@ class FaceAndTouchIdViewController: UIViewController, StoryboardInitializable {
     }
     
     func notifyUser(_ msg: String, err: String?) {
-        let alert = UIAlertController(title: msg,
-            message: err,
-            preferredStyle: .alert)
-
-        let cancelAction = UIAlertAction(title: "OK",
-                                         style: .cancel, handler: {_ in 
-                print(msg)
-            })
-
+        let alert = UIAlertController(title: msg, message: err, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "OK", style: .cancel)
         alert.addAction(cancelAction)
-
-        self.present(alert, animated: true,
-                            completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
 //MARK: ACTIONS

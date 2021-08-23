@@ -10,7 +10,7 @@ import UIKit
 struct CarTypes: Decodable {
     let id: String
     let name: String
-    let image: CarTypeImageResponse
+    let image: CarTypeImageResponse?
     let active: Bool
 
 }
