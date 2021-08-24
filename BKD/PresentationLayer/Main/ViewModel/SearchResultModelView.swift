@@ -84,10 +84,6 @@ class SearchResultModelView: NSObject {
                             key_height: item.height]
             exteriorArr.append(exterior)
         }
-        
-        let param = [key_fieldName: Constant.Texts.exterior,
-                     key_fieldValue: exteriorArr,
-                      key_searchOperation: SearchOperation.In.rawValue] as [String : Any]
         if criteriaParams != nil {
             for i in 0 ..< criteriaParams!.count {
                 let item = criteriaParams![i]
@@ -97,7 +93,15 @@ class SearchResultModelView: NSObject {
                 }
             }
         }
-        criteriaParam?.append(param)
+        
+        if exteriorArr.count > 0 {
+            let param = [key_fieldName: Constant.Texts.exterior,
+                         key_fieldValue: exteriorArr,
+                          key_searchOperation: SearchOperation.In.rawValue] as [String : Any]
+            
+            criteriaParam?.append(param)
+        }
+      
         print(criteriaParam)
         return criteriaParam
     }
@@ -143,6 +147,7 @@ class SearchResultModelView: NSObject {
                         completion: @escaping ([CarsModel]) -> Void) {
         
         var param = criteria
+        print(param)
         param.insert( [ key_fieldName: Constant.Texts.type,
                         key_fieldValue: carType.id,
                         key_searchOperation: SearchOperation.equals.rawValue] as [String : Any], at: 0)

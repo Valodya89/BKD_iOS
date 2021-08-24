@@ -18,7 +18,6 @@ class FilterSearchResultCell: UICollectionViewCell {
     @IBOutlet weak var mManualLb: UILabel!
     @IBOutlet weak var mManualImgV: UIImageView!
     
-    
     @IBOutlet weak var mAutomaticBtn: UIButton!
     @IBOutlet weak var mAutomaticLb: UILabel!
     @IBOutlet weak var mAutomaticImgV: UIImageView!
@@ -259,7 +258,6 @@ extension FilterSearchResultCell: UICollectionViewDelegate, UICollectionViewData
             selectedExteriors = searchResultModelView.removeExterior(exteriors: selectedExteriors!, exterior: exteriors![index].exterior!)
             criteriaParam = searchResultModelView.setExteriorParam(criteriaParams: criteriaParam, exteriors: selectedExteriors!)
         }
-        
         filterCollectionView()
     }
     
