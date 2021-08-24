@@ -236,9 +236,6 @@ struct Constant {
 }
 
 
-
-
-
 let tariffOptionsArr =  [["2h", "3h", "4h", "5h", "6h", "10h"],
                          ["1d", "2d", "3d", "4d", "5d", "6d"],
                          ["1w", "2w", "3w"],
@@ -293,7 +290,6 @@ let key_searchOperation = "searchOperation"
 let key_length = "length"
 let key_width = "width"
 let key_height = "height"
-
 
 
 //Colors
