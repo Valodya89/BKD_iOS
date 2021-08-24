@@ -32,7 +32,7 @@
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="Qun-4X-yI5">
                         <rect key="frame" x="122" y="18" width="276" height="93"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AxT-Ex-RLq" customClass="TextField" customModule="BKD" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AxT-Ex-RLq" customClass="SwiftMaskTextfield" customModule="SwiftMaskTextfield">
                                 <rect key="frame" x="0.0" y="0.0" width="276" height="42"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" name="alert_txt"/>
@@ -130,7 +130,7 @@
                 <outlet property="mCountryTxtFl" destination="xGM-vO-Bkl" id="pnb-4D-F9I"/>
                 <outlet property="mDropDownImgV" destination="v5Q-9C-dF6" id="OUP-6Z-DhE"/>
                 <outlet property="mOtherCountryBtn" destination="5iA-MM-26w" id="3C5-BN-Xci"/>
-                <outlet property="mTextFl" destination="AxT-Ex-RLq" id="XV9-p6-o4z"/>
+                <outlet property="mTextFl" destination="AxT-Ex-RLq" id="ZzK-OE-pDh"/>
             </connections>
             <point key="canvasLocation" x="19" y="300"/>
         </tableViewCell>

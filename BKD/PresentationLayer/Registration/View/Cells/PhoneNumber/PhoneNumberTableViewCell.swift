@@ -77,25 +77,6 @@ class PhoneNumberTableViewCell: UITableViewCell {
     func setUpView(){
         mPhoneNumberBckgV.roundCornersWithBorder(corners: [.bottomRight, .topLeft, .topRight], radius: 8.0, borderColor: color_dark_register!, borderWidth: 1)
     }
-    
-//    private func configUI() {
-//
-//        guard let selectedCountry = selectedCountry else { return }
-//
-//
-//        mPhoneNumberTxtFl.formatPattern = "## ##-##-##"
-//        mPhoneNumberTxtFl.placeholder = "99 00-00-00"
-//        mPhoneNumberTxtFl.text = ""
-//        validFormPattern = selectedCountry.phoneFormat
-//
-//        } else {
-//            phoneTextField.formatPattern = "### ###-##-##"
-//            phoneTextField.placeholder = "900 000-00-00"
-//            phoneTextField.text = ""
-//            validFormPattern = 13
-//        }
-//        didUpdateStatus?(phoneTextField.text?.count == validFormPattern)
-//    }
  
 
 /// Set Cell Info
@@ -107,7 +88,7 @@ class PhoneNumberTableViewCell: UITableViewCell {
         if ((item.userRegisterInfo?.string) != nil) && item.userRegisterInfo?.isFilled == true {
             textFiledFilled(txt: (item.userRegisterInfo?.string)!)
         } else {
-            mPhoneNumberTxtFl.setPlaceholder(string: placehoder, font: font_chat_placeholder!, color: color_email!)
+            mPhoneNumberTxtFl.setPlaceholder(string: placehoder, font: font_search_title!, color: color_email!)
         }
     }
     

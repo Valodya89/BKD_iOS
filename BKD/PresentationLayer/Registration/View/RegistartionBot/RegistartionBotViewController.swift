@@ -45,6 +45,7 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
     var tableData:[RegistrationBotModel] = []
     private let applicationSettings: ApplicationSettings = .shared
     var currentPhoneCode: PhoneCode?
+    var currentCountry: Country?
 
     var countryList: [Country]?
     var cityList: [City]? = [City(id: "test", city: "Test"),
@@ -82,6 +83,7 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
     
     func setUpView() {
         currentPhoneCode = applicationSettings.phoneCodes?.first
+        currentCountry = countryList?.first
         mRightBarBtn.image = img_bkd
         mThankYouBtn.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_dark_register!, borderWidth: 1)
         setUpConfirmView()
@@ -122,6 +124,8 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
         registrationBotViewModel.getCountryList { [weak self] (response) in
             guard let self = self else { return }
             self.countryList = response
+            self.currentCountry = self.countryList?.first
+
         }
     }
     
@@ -415,7 +419,9 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
     private func nationalRegisterCell(indexPath: IndexPath, model: RegistrationBotModel) -> NationalRegisterNumberTableViewCell{
         
         let cell = mTableV.dequeueReusableCell(withIdentifier: NationalRegisterNumberTableViewCell.identifier, for: indexPath) as! NationalRegisterNumberTableViewCell
-        
+        cell.selectedCountry = currentCountry
+        cell.mTextFl.formatPattern = currentCountry?.nationalDocumentMask ?? ""
+        cell.validFormPattern = (currentCountry?.nationalDocumentMask!.count)!
         cell.setCellInfo(item: model)
         cell.delegate = self
         return cell
@@ -572,6 +578,7 @@ extension RegistartionBotViewController: MailBoxNumberTableViewCellDelegate {
             tableData[currentIndex].userRegisterInfo?.string = text
         }
         tableData[currentIndex].userRegisterInfo?.isFilled = true
+        personalData.mailBox = text ?? ""
         self.insertTableCell()
     }
 }
@@ -677,14 +684,15 @@ extension RegistartionBotViewController: UIPickerViewDelegate, UIPickerViewDataS
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerType == .country {
+        if pickerType == .country || pickerType == .nationalCountry {
             return countryList?.count ?? 0
         }
         return cityList?.count ?? 0
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerType == .country {
+        if pickerType == .country || pickerType == .nationalCountry {
+            currentCountry = countryList![row]
             return countryList![row].country
         }
         return cityList![row].city
