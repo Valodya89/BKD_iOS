@@ -26,7 +26,7 @@ enum RegistrationState {
     case AGREEMENT_ACCEPTED
 }
 
-class RegistartionBotViewController: UIViewController, StoryboardInitializable {
+final class RegistartionBotViewController: UIViewController, StoryboardInitializable {
     
     //MARK: Outlets
     @IBOutlet weak var mTableV: UITableView!
@@ -477,7 +477,6 @@ extension RegistartionBotViewController: UserFillFieldTableViewCellDelegate {
         }
         pickerV.delegate = self
         pickerV.dataSource = self
-        
     }
     
     func updateUserData(dataType: ViewType, data: String) {
@@ -502,9 +501,7 @@ extension RegistartionBotViewController: UserFillFieldTableViewCellDelegate {
             personalData.nationalRegisterNumber = data
         default: break
         }
-        
     }
-
 }
  
 
@@ -523,7 +520,6 @@ extension RegistartionBotViewController: PhoneNumberTableViewCellDelegate {
         insertTableCell()
         personalData.phoneNumber = code + text
     }
-
 }
 
 
@@ -543,10 +539,12 @@ extension RegistartionBotViewController: CalendarTableViewCellDelegate {
         }
         if isExpireDate {
             datePicker.datePickerMode = .date
-            datePicker.minimumDate =  Date()
+            datePicker.minimumDate = Date()
+            datePicker.maximumDate = nil
             datePicker.locale = Locale(identifier: "en")
         } else {
             datePicker.datePickerMode = .date
+            datePicker.minimumDate = nil
             datePicker.maximumDate = Date()
             datePicker.locale = Locale(identifier: "en")
         }
@@ -576,8 +574,6 @@ extension RegistartionBotViewController: MailBoxNumberTableViewCellDelegate {
         tableData[currentIndex].userRegisterInfo?.isFilled = true
         self.insertTableCell()
     }
-    
-    
 }
 
 
@@ -597,21 +593,17 @@ extension RegistartionBotViewController: NationalRegisterNumberTableViewCellDele
         insertTableCell()
         personalData.nationalRegisterNumber = txt
         sendPersonalData(personalData: personalData)
-        
     }
     
     func willOpenPicker(textFl: UITextField) {
        // countryList
         textFl.inputView = pickerV
         textFl.inputAccessoryView = creatToolBar()
-        
         textFl.isHidden = true
         pickerType = .nationalCountry
         pickerV.delegate = self
         pickerV.dataSource = self
-        
     }
-
 }
 
 
@@ -651,8 +643,6 @@ extension RegistartionBotViewController: SearchPhoneCodeViewControllerDelegate {
         currentPhoneCode = country
         mTableV.reloadRows(at: [IndexPath(row: currentIndex, section: 0)], with: .automatic)
     }
-    
-    
 }
 
 //MARK: - UIImagePickerControllerDelegate
@@ -695,13 +685,8 @@ extension RegistartionBotViewController: UIPickerViewDelegate, UIPickerViewDataS
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerType == .country {
-            
             return countryList![row].country
         }
         return cityList![row].city
     }
-    
 }
-
-
-

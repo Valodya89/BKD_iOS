@@ -117,7 +117,6 @@ enum AuthAPI: APIProtocol {
              .signUp,
              .verifyAccounts,
              .resendCode,
-             .addPersonalData,
              .forgotPassword,
              .getExteriorSize,
              .getCustomLocation,
