@@ -23,8 +23,10 @@ class NewPasswordViewController: UIViewController, StoryboardInitializable {
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mErrorLb: UILabel!
     
+    lazy var signInViewModel = SignInViewModel()
     var emailAddress: String?
-    
+    var code: String?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
@@ -34,6 +36,8 @@ class NewPasswordViewController: UIViewController, StoryboardInitializable {
         setBorder()
         mRightBarBtn.image = img_bkd
         mResetPasswordBtn.layer.cornerRadius = 8
+        mVisiblePasswordBtn.setImage(#imageLiteral(resourceName: "invisible"), for: .normal)
+        mVisibleConfirmPasswordBtn.setImage(#imageLiteral(resourceName: "invisible"), for: .normal)
         mResetPasswordBtn.setGradientWithCornerRadius(cornerRadius: 8.0, startColor: color_gradient_register_start!, endColor: color_gradient_register_end!)
         mPasswordTxtFl.setPlaceholder(string: Constant.Texts.password,
                                            font: font_register_placeholder!,
@@ -48,24 +52,34 @@ class NewPasswordViewController: UIViewController, StoryboardInitializable {
         mConfirmPasswordTxtFl.setBorder(color: color_navigationBar!, width: 1)
     }
     
+    ///Change user account password
     private func changePassword() {
-        SignInViewModel().changePassword(username: emailAddress ?? "", password: mPasswordTxtFl.text!, newPassword: mConfirmPasswordTxtFl.text!) { (status) in
+        signInViewModel.changePassword(username: emailAddress ?? "", password: mPasswordTxtFl.text!, code: code ?? "") { [self] (status) in
             switch status {
-            case .success: break
-            default: break
+            case .success:
+                goSignInController()
+                break                
+            default:
+                self.showAlertMessage(Constant.Texts.errChangePassword)
+                break
             }
         }
     }
     
+    //Open Sign in Screen
+     private func goSignInController() {
+         let signInVC = SignInViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
+         self.navigationController?.pushViewController(signInVC, animated: true)
+     }
     
     // MARK: ACTIONS
     @IBAction func visiblePassword(_ sender: UIButton) {
         if sender.image(for: .normal) == img_invisible {
             sender.setImage(#imageLiteral(resourceName: "visible"), for: .normal)
-                mPasswordTxtFl.isSecureTextEntry = false
+            mPasswordTxtFl.isSecureTextEntry = false
         } else {
             sender.setImage(#imageLiteral(resourceName: "invisible"), for: .normal)
-                mPasswordTxtFl.isSecureTextEntry = true
+            mPasswordTxtFl.isSecureTextEntry = true
         }
     }
 
@@ -83,7 +97,7 @@ class NewPasswordViewController: UIViewController, StoryboardInitializable {
         mPasswordTxtFl.resignFirstResponder()
         mConfirmPasswordTxtFl.resignFirstResponder()
         sender.setClickTitleColor(color_menu!)
-        SignInViewModel().areFieldsFilled(firtStr: mPasswordTxtFl.text,
+        signInViewModel.areFieldsFilled(firtStr: mPasswordTxtFl.text,
                                           secondStr: mConfirmPasswordTxtFl.text) { [self] (isActive) in
             if isActive {
                 if mPasswordTxtFl.text!.count < 8 {
@@ -108,8 +122,9 @@ class NewPasswordViewController: UIViewController, StoryboardInitializable {
             
         }
     }
+    
     @IBAction func back(_ sender: UIBarButtonItem) {
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popToViewController(ofClass: EmailAddressViewController.self)
     }
 }
 

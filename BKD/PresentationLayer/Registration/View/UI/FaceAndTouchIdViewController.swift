@@ -116,7 +116,7 @@ class FaceAndTouchIdViewController: UIViewController, StoryboardInitializable {
         clickAgree()    }
     
     @IBAction func back(_ sender: UIBarButtonItem) {
-//        self.navigationController?.popViewController(animated: true)
+
         navigationController?.popToViewController(ofClass: RegistrationViewController.self)
 
     }

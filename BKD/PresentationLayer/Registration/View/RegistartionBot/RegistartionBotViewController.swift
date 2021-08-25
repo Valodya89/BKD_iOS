@@ -420,8 +420,8 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
         
         let cell = mTableV.dequeueReusableCell(withIdentifier: NationalRegisterNumberTableViewCell.identifier, for: indexPath) as! NationalRegisterNumberTableViewCell
         cell.selectedCountry = currentCountry
-        cell.mTextFl.formatPattern = currentCountry?.nationalDocumentMask ?? ""
-        cell.validFormPattern = (currentCountry?.nationalDocumentMask!.count)!
+//        cell.mTextFl.formatPattern = currentCountry?.nationalDocumentMask ?? ""
+//        cell.validFormPattern = (currentCountry?.nationalDocumentMask!.count)!
         cell.setCellInfo(item: model)
         cell.delegate = self
         return cell

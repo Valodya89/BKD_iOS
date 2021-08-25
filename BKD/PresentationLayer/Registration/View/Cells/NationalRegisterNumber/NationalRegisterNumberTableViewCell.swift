@@ -31,34 +31,34 @@ class NationalRegisterNumberTableViewCell: UITableViewCell {
     @IBOutlet weak var mCountryLb: UILabelPadding!
     
     var selectedCountry: Country?
-    let phoneNumberKit = PhoneNumberKit()
-    var validFormPattern: Int = 0
-    var phoneNumber: String? {
-        get {
-            return "\(selectedCountry?.code ?? "NULL") \(mTextFl.text ?? "NULL")".replacingOccurrences(of: "-", with: "").replacingOccurrences(of: " ", with: "")
-        } set {
-            guard let newValue = newValue else {
-                return
-            }
-            guard !newValue.isEmpty else {
-                mTextFl.text = ""
-                return
-            }
-            
-            if (newValue.isNumber() == false)  {
-                mTextFl.text = String(newValue.dropLast())
-                
-            }
-
-            guard let phoneNumber = try? phoneNumberKit.parse(newValue, ignoreType: true) else { return }
-//            mCodeLb.text = "+" + String(phoneNumber.countryCode)
-//            mPhoneNumberTxtFl.text = String(phoneNumber.nationalNumber)
-        }
-    }
+//    let phoneNumberKit = PhoneNumberKit()
+//    var validFormPattern: Int = 0
+//    var phoneNumber: String? {
+//        get {
+//            return "\(selectedCountry?.code ?? "NULL") \(mTextFl.text ?? "NULL")".replacingOccurrences(of: "-", with: "").replacingOccurrences(of: " ", with: "")
+//        } set {
+//            guard let newValue = newValue else {
+//                return
+//            }
+//            guard !newValue.isEmpty else {
+//                mTextFl.text = ""
+//                return
+//            }
+//
+//            if (newValue.isNumber() == false)  {
+//                mTextFl.text = String(newValue.dropLast())
+//
+//            }
+//
+//            guard let phoneNumber = try? phoneNumberKit.parse(newValue, ignoreType: true) else { return }
+////            mCodeLb.text = "+" + String(phoneNumber.countryCode)
+////            mPhoneNumberTxtFl.text = String(phoneNumber.nationalNumber)
+//        }
+//    }
     
-    var isValid: Bool {
-        return mTextFl.text?.count == validFormPattern
-    }
+//    var isValid: Bool {
+//        return mTextFl.text?.count == validFormPattern
+//    }
     
     weak var delegate: NationalRegisterNumberTableViewCellDelegate?
 
@@ -104,8 +104,8 @@ class NationalRegisterNumberTableViewCell: UITableViewCell {
     
     /// Set cell info
     func  setCellInfo(item: RegistrationBotModel) {
-        let placehoder  = RegistrationViewModel().getPhonePlaceholder(format: (selectedCountry?.nationalDocumentMask!)!)
-        mTextFl.setPlaceholder(string: placehoder, font: font_chat_placeholder!, color: color_email!)
+//        let placehoder  = RegistrationViewModel().getPhonePlaceholder(format: (selectedCountry?.nationalDocumentMask!)!)
+//        mTextFl.setPlaceholder(string: placehoder, font: font_chat_placeholder!, color: color_email!)
         
         if ((item.userRegisterInfo?.isFilled) != nil) && item.userRegisterInfo?.isFilled == true {
                 textFiledFilled(txt: (item.userRegisterInfo?.string)!)
@@ -172,26 +172,22 @@ extension NationalRegisterNumberTableViewCell: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        if textField.text?.count == validFormPattern {
+        if textField.text?.count ?? 0 > 0 {
             delegate?.didReturnTxt(txt: textField.text)
             textFiledFilled(txt: textField.text!)
-        } else {
-            
-//            mCodeLb.textColor = color_email!
-//            mCodeLb.font = font_chat_placeholder!
         }
         return false
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if string == "" {
-            return true
-        }
-        let fullText = textField.text! + string
-        phoneNumber = fullText
-        return fullText.count <= validFormPattern
-
-    }
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        if string == "" {
+//            return true
+//        }
+//        let fullText = textField.text! + string
+//        phoneNumber = fullText
+//        return fullText.count <= validFormPattern
+//
+//    }
     
     
 }

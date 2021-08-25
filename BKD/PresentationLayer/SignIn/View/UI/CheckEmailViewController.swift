@@ -19,22 +19,31 @@ class CheckEmailViewController: UIViewController, StoryboardInitializable {
     @IBOutlet weak var mOpenEmailLeading: NSLayoutConstraint!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     
+    //MARK: Variables
     var emailAddress: String?
-
-    
     let checkEmailViewModel = CheckEmailViewModel()
+    
+    //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
 
     func  setUpView() {
+        NotificationCenter.default.addObserver(self, selector: #selector(CheckEmailViewController.handleDeepLink), name: Constant.Notifications.resetPassEmailVerify, object: nil)
+        
         mRightBarBtn.image = img_bkd
         mOpenEmailBtn.layer.cornerRadius = 8
         mOpenEmailBtn.addBorder(color:color_navigationBar!, width: 1.0)
         setAttribute()
     }
+    
+    
 
     /// set Atributte to lable
     private func setAttribute() {
@@ -49,10 +58,19 @@ class CheckEmailViewController: UIViewController, StoryboardInitializable {
         mTryAnotherEmailLb.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(tapLabel(gesture:))))
     }
     
+    ///Handle DeepLink
+    @objc private func handleDeepLink(notification: Notification) {
+      
+        self.dismiss(animated: true, completion: nil)
+        goToNextController(code: notification.object as? String)
+        }
+    
     /// will push next viewController
-    private func goToNextController() {
+    private func goToNextController(code: String?) {
+        
         let newPasswordVC = NewPasswordViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
         newPasswordVC.emailAddress = emailAddress
+        newPasswordVC.code = code
         self.navigationController?.pushViewController(newPasswordVC, animated: true)
     }
     
@@ -62,13 +80,8 @@ class CheckEmailViewController: UIViewController, StoryboardInitializable {
             self.mOpenEmailLeading.constant = self.mOpenEmailBckgV.bounds.width - self.mOpenEmailBtn.frame.size.width
             self.mOpenEmailBckgV.layoutIfNeeded()
         } completion: { [self] _ in
-            self.goToNextController()
-//            checkEmailViewModel.getEmailApps { (emailAppNames) in
-//                if emailAppNames?.count ?? 0 > 0 {
-//                    self.showActionSheet(texts: emailAppNames!)
-//                }
-//            }
-            
+
+            self.showActionSheet(texts: emailAppNames)
         }
     }
     

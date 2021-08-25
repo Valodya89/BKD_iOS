@@ -31,6 +31,7 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
+        sendEmailVerification()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -49,8 +50,38 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
     }
 
     @objc private func handleDeepLink(notification: Notification) {
-            showAlert()
+        sendAccountVerification(code: notification.object as? String ?? "")
         }
+    
+    ///Send email verification for signup
+    func sendEmailVerification() {
+        SignInViewModel().forgotPassword(username:  email, action: Constant.Texts.verification) { (status) in
+            switch status {
+            case .accountNoSuchUser:
+                self.showErrorAlertMessage(Constant.Texts.errEmailVerifyNoUser)
+                break
+            case .success: break
+            default:
+                self.showAlertMessage(Constant.Texts.errEmailVerify)
+                break
+            }
+        }
+    }
+    
+    ///Send account verification for active account
+    func sendAccountVerification(code: String){
+
+        verificationCodeViewModel.putVerification(username: email, code: code) { [self] (status) in
+
+            switch status {
+            case .success:
+                showAlert()
+            default:
+                self.showErrorAlertMessage(Constant.Texts.errAccountVerify)
+                break
+            }
+        }
+    }
     
     //Show alert of success email verify
     func showAlert() {

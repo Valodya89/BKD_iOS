@@ -51,7 +51,7 @@
                                 <rect key="frame" x="59.5" y="8.5" width="38" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="ESc-us-b1Z"/>
-                                    <constraint firstAttribute="width" constant="38" id="YMN-to-l5V"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="38" id="YMN-to-l5V"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="12"/>
                                 <color key="textColor" name="email"/>

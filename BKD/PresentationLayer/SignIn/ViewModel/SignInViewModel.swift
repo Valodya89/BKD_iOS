@@ -41,8 +41,8 @@ final class SignInViewModel {
     }
     
     ///send email for restore password
-    func forgotPassword(username: String, completion: @escaping (SignUpStatus) -> Void) {
-        network.request(with: URLBuilder.init(from: AuthAPI.forgotPassword(username: username))) { (result) in
+    func forgotPassword(username: String, action: String, completion: @escaping (SignUpStatus) -> Void) {
+        network.request(with: URLBuilder.init(from: AuthAPI.forgotPassword(username: username, action: action))) { (result) in
             
             switch result {
             case .success(let data):
@@ -63,8 +63,8 @@ final class SignInViewModel {
     }
     
     ///send change password request
-    func changePassword(username: String, password: String, newPassword: String, completion: @escaping (SignUpStatus) -> Void) {
-        network.request(with: URLBuilder.init(from: AuthAPI.forgotPassword(username: username))) { (result) in
+    func changePassword(username: String, password: String, code: String, completion: @escaping (SignUpStatus) -> Void) {
+        network.request(with: URLBuilder.init(from: AuthAPI.recoverPassword(username: username, password: password, code: code))) { (result) in
             
             switch result {
             case .success(let data):

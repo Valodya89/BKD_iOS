@@ -71,16 +71,19 @@ final class SignInViewController: UIViewController, StoryboardInitializable {
             switch status {
             case .success:
                 self.signInClicked()
-            default: break
+            default:
+                self.incorrectPasswordOrUsername()
+                break
             }
         }
     }
     
-    
-    private func incorrectPassword() {
+    ///Incorrect username or password
+    private func incorrectPasswordOrUsername() {
         mErrorLb.isHidden = false
         mPasswordTxtFl.layer.borderColor = color_error!.cgColor
-        mErrorLb.text = Constant.Texts.errorIncorrectPassword
+        mEmailAddressTextFl.layer.borderColor = color_error!.cgColor
+        mErrorLb.text = Constant.Texts.errUserOrPass
     }
         
     private func checkEmailAddress() {

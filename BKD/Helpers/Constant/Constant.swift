@@ -218,12 +218,21 @@ struct Constant {
         static let  googleMail = "Googleg Mail"
         static let  yahooMail = "Yahoo Mail"
         
+        //Error Messages
+        static let errChangePassword = "Failed to change password, please try again"
+        static let errAccountVerify = "Failed to verify account"
+        static let errEmailVerifyNoUser = "Failed to send verification email, there is no such user"
+        static let errEmailVerify = "Failed to send verification email"
+        static let errUserOrPass = "Incorrect username or password!"
+        
         //Request texts
         static let type = "type"
         static let exterior = "exterior"
         static let transmission = "transmission"
         static let automatic = "AUTOMATIC"
         static let manual = "MANUAL"
+        static let resetPassword = "PASSWORD_RESET"
+        static let verification = "VERIFICATION"
 
 
     }
@@ -232,6 +241,7 @@ struct Constant {
     struct Notifications {
         static let LanguageUpdate = NSNotification.Name(rawValue: "BKD.Notification.Language")
         static let signUpEmailVerify =  NSNotification.Name(rawValue: "BKD.Notification.EmailVerify")
+        static let resetPassEmailVerify =  NSNotification.Name(rawValue: "BKD.Notification.ResetPassEmailVerify")
     }
 }
 
@@ -290,6 +300,7 @@ let key_searchOperation = "searchOperation"
 let key_length = "length"
 let key_width = "width"
 let key_height = "height"
+
 
 
 //Colors

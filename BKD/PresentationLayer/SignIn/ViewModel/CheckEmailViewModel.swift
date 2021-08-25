@@ -12,18 +12,18 @@ let mailAppNames = ["Mail", "Google Mail", "Yahoo Mail"]
 
 class CheckEmailViewModel: NSObject {
     //
-    func getEmailApps(didResult: @escaping ([String]?) -> ()) {
-        var appList:[String]? = []
-        for (i, item) in mailUrls.enumerated() {
-            if let appURL = NSURL(string: "\(item)://app") {
-                let canOpen = UIApplication.shared.canOpenURL(appURL as URL)
-                if canOpen {
-                    appList?.append(mailAppNames[i])
-                }
-                print("Can open \"\(appURL)\": \(canOpen)")
-            }
-        }
-        didResult(appList)
-    }
+//    func getEmailApps(didResult: @escaping ([String]?) -> ()) {
+//        var appList:[String]? = []
+//        for (i, item) in mailUrls.enumerated() {
+//            if let appURL = NSURL(string: "\(item)://app") {
+//                let canOpen = UIApplication.shared.canOpenURL(appURL as URL)
+//                if canOpen {
+//                    appList?.append(mailAppNames[i])
+//                }
+//                print("Can open \"\(appURL)\": \(canOpen)")
+//            }
+//        }
+//        didResult(appList)
+//    }
 
 }

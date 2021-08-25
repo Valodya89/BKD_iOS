@@ -50,17 +50,18 @@ class EmailAddressViewController: UIViewController, StoryboardInitializable {
         UIView.animate(withDuration: 0.5) { [self] in
             self.mConfirmLeading.constant = self.mConfirmBckgV.bounds.width - self.mConfirmBtn.frame.size.width
             self.mConfirmBckgV.layoutIfNeeded()
+        } completion: { _ in
+            self.goToNextController()
         }
     }
     
     func sendForgotPassword() {
-        signInViewModel.forgotPassword(username:  mEmailAddressTextFl.text ?? "") { (status) in
+        signInViewModel.forgotPassword(username:  mEmailAddressTextFl.text ?? "", action: Constant.Texts.resetPassword) { (status) in
             switch status {
             case .accountNoSuchUser:
                 self.showEmailError(isError: true, error: Constant.Texts.errorIncorrectEmail)
             case .success:
                 self.animateSendButton()
-                self.goToNextController()
             default: break
             }
         }

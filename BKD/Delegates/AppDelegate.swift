@@ -32,16 +32,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let urlComponent = URLComponents(url: url, resolvingAgainstBaseURL: true)
 
-                let questItem = urlComponent?.queryItems?.first(where: { $0.name == "code" })
+        let viewItem = urlComponent?.queryItems?.first(where: { $0.name == "view" })
 
-                guard let code = questItem?.value else {
-//                    UIAlertController.showError(message: "Could not perform email verification")
+        guard let view = viewItem?.value else {return true}
+        let codeItem = urlComponent?.queryItems?.first(where: { $0.name == "code" })
+        guard let code = codeItem?.value else {return true}
+        var notification: Notification
+        
+        if view == Constant.Texts.verification {
+            notification = Notification(name: Constant.Notifications.signUpEmailVerify, object: code)
+            
+        } else {///Reset password
+            notification = Notification(name: Constant.Notifications.resetPassEmailVerify, object: code)
+        }
 
-                    return true
-                }
-        let notification = Notification(name: Constant.Notifications.signUpEmailVerify, object: url)
         NotificationCenter.default.post(notification)
-
         return true
     }
 

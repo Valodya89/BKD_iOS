@@ -27,9 +27,13 @@ enum AuthAPI: APIProtocol {
                         code: String)
     case resendCode(username: String)
     case getAuthRefreshToken(refreshToken: String)
-    case getToken(username: String, password: String)
-    case forgotPassword(username: String)
-    case changePassword(username: String, password: String)
+    case getToken(username: String,
+                  password: String)
+    case forgotPassword(username: String,
+                        action: String)
+    case recoverPassword(username: String,
+                         password: String,
+                         code: String)
     case addPersonalData(name: String,
                          surname: String,
                          phoneNumber: String,
@@ -55,7 +59,7 @@ enum AuthAPI: APIProtocol {
              .resendCode,
              .addPersonalData,
              .forgotPassword,
-             .changePassword:
+             .recoverPassword:
             return BKDBaseURLs.account.rawValue
             
         case .getAuthRefreshToken,
@@ -105,8 +109,8 @@ enum AuthAPI: APIProtocol {
             return "accounts/send-code"
         case .addPersonalData:
             return "api/driver/personal"
-        case .changePassword:
-            return "accounts/change-password"
+        case .recoverPassword:
+            return "accounts/recover-password"
         }
     }
     
@@ -118,6 +122,7 @@ enum AuthAPI: APIProtocol {
              .verifyAccounts,
              .resendCode,
              .forgotPassword,
+             .recoverPassword,
              .getExteriorSize,
              .getCustomLocation,
              .addPersonalData:
@@ -191,15 +196,16 @@ enum AuthAPI: APIProtocol {
                 "refresh_token": refreshToken,
                 "grant_type": "refresh_token"
             ]
-        case .forgotPassword(let username):
+        case let .forgotPassword(username, action):
             return [
-                "username": username
+                "username": username,
+                "action": action
             ]
-        case .changePassword(let username, let password):
+        case let .recoverPassword(username, password, code):
             return [
                 "username": username,
                 "password": password,
-                "newPassword": password
+                "code": code
             ]
         case .addPersonalData(let name, let surname, let phoneNumber, let dateOfBirth, let street, let house, let mailBox, let countryId, let zip, let city, let nationalRegisterNumber):
             return [
@@ -246,7 +252,7 @@ enum AuthAPI: APIProtocol {
              .addPersonalData:
             return .post
         case .verifyAccounts,
-             .changePassword:
+             .recoverPassword:
             return .put
         case .resendCode,
              .forgotPassword:
