@@ -87,7 +87,7 @@ final class SignInViewController: UIViewController, StoryboardInitializable {
     }
         
     private func checkEmailAddress() {
-        OfflineChatViewModel().isValidEmail(email: mEmailAddressTextFl.text!) { [self] (isValid) in
+        ChatViewModel().isValidEmail(email: mEmailAddressTextFl.text!) { [self] (isValid) in
             if isValid {
                 signIn()
             } else {

@@ -12,4 +12,5 @@ enum BKDBaseURLs: String {
     case account = "https://dev-accounts.bkdrental.com"
     case auth = "https://dev-auth.bkdrental.com"
     case payment = "https://dev-ipay.bkdrental.com/"
+    case admin = "https://dev-admin-api.bkdrental.com/"
 }

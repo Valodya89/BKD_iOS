@@ -107,7 +107,7 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
     
     ///click continue  button
     private func clickContinue() {
-        OfflineChatViewModel().isValidEmail(email: mEmailAddressTxtFl.text!) { [self] (isValid) in
+        ChatViewModel().isValidEmail(email: mEmailAddressTxtFl.text!) { [self] (isValid) in
             if isValid {
                 if self.areValidPasswordFields() {
                     self.signUp()

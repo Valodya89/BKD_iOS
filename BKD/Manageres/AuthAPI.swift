@@ -45,6 +45,9 @@ enum AuthAPI: APIProtocol {
                          zip: String,
                          city: String,
                          nationalRegisterNumber: String)
+    case getChatID(name: String, type: String, identifier: String)
+    case getMessages(chatID: String)
+    case sendMessage(chatID: String, message: String, userIdentifier: String)
     
     
 
@@ -59,13 +62,16 @@ enum AuthAPI: APIProtocol {
              .resendCode,
              .addPersonalData,
              .forgotPassword,
-             .recoverPassword:
+             .recoverPassword,
+             .getChatID:
             return BKDBaseURLs.account.rawValue
-            
         case .getAuthRefreshToken,
              .getToken:
             return BKDBaseURLs.auth.rawValue
-            
+        case .getMessages:
+            return BKDBaseURLs.account.rawValue
+        case .sendMessage:
+            return BKDBaseURLs.account.rawValue
         default:
             return BKDBaseURLs.rent.rawValue
         }
@@ -111,6 +117,12 @@ enum AuthAPI: APIProtocol {
             return "api/driver/personal"
         case .recoverPassword:
             return "accounts/recover-password"
+        case .getChatID:
+            return "/chat/start"
+        case .getMessages(let chatID):
+            return "/chat/\(chatID)/message"
+        case let .sendMessage(chatID, _, _):
+            return "/chat/\(chatID)/message"
         }
     }
     
@@ -125,9 +137,10 @@ enum AuthAPI: APIProtocol {
              .recoverPassword,
              .getExteriorSize,
              .getCustomLocation,
-             .addPersonalData:
-            return [
-                "Content-Type": "application/json"]
+             .addPersonalData,
+             .getChatID,
+             .sendMessage:
+            return ["Content-Type": "application/json"]
         case .getAuthRefreshToken:
             fallthrough
         case .getToken:
@@ -160,6 +173,11 @@ enum AuthAPI: APIProtocol {
            return [
                 "longitude" : "\(longitude)",
                 "latitude" : "\(latitude)"
+            ]
+        case .getMessages:
+            return [
+                "size": "10",
+                "sort": "sentAt,DESC"
             ]
         default:
             return [:]
@@ -221,7 +239,17 @@ enum AuthAPI: APIProtocol {
                 "city": city,
                 "nationalRegisterNumber": nationalRegisterNumber
             ]
-       
+        case let .getChatID(name, type, identifier):
+            return [
+                "userViewName": name,
+                "type": type,
+                "userIdentifier": identifier
+            ]
+        case let .sendMessage(_, message, userIdentifier):
+            return [
+                "message": message,
+                "userIdentifier": userIdentifier
+            ]
         default:
             return nil
         }
@@ -249,7 +277,9 @@ enum AuthAPI: APIProtocol {
              .getCarsByFilter,
              .signUp,
              .getToken,
-             .addPersonalData:
+             .addPersonalData,
+             .getChatID,
+             .sendMessage:
             return .post
         case .verifyAccounts,
              .recoverPassword:

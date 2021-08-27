@@ -15,5 +15,6 @@ target 'BKD' do
 	pod 'SwiftMaskTextfield'
 	pod 'SideMenu'
  	pod 'KeychainAccess'
+	pod 'SwiftStomp'
 
 end
