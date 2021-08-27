@@ -10,6 +10,7 @@ import UIKit
 protocol SearchCustomLocationUIViewControllerDelegate: AnyObject {
     func goToPlaces()
     func updateTableViewHeight(tableHeight: CGFloat, tableData: String)
+    func showAutocompleteViewController() 
 }
 
 class SearchCustomLocationUIViewController: UIViewController, StoryboardInitializable {
@@ -38,14 +39,24 @@ class SearchCustomLocationUIViewController: UIViewController, StoryboardInitiali
         mSearchTxtFl.returnKeyType = .search
         mSearchTxtFl.delegate = self
     }
-       
     
-    func serachPlaceFromGoogle(place: String)  {
-        //https://maps.googleapis.com/maps/api/place/textsearch/output?parameters
-        searchCustomLocationViewModel.getGooglePlaces(place: place) { (result) in
-            print(result as Any)
+    func updateSerachResults() {
+        guard let query = mSearchTxtFl.text, !query.trimmingCharacters(in: .whitespaces).isEmpty else {
+            return
+        }
+
+        GooglePlacesManager.shared.findPlace(query: query) { (result) in
+            switch result {
+            case .success(let places):
+                print (places)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
     }
+       
+    
+
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -63,12 +74,13 @@ class SearchCustomLocationUIViewController: UIViewController, StoryboardInitiali
 extension SearchCustomLocationUIViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        serachPlaceFromGoogle(place: textField.text!)
+        updateSerachResults()
         return false
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.becomeFirstResponder()
+        delegate?.showAutocompleteViewController()
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

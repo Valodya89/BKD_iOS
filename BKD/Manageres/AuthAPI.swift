@@ -45,6 +45,7 @@ enum AuthAPI: APIProtocol {
                          zip: String,
                          city: String,
                          nationalRegisterNumber: String)
+    case addDocument (documentname: String, documentData: Data)
     
     
 
@@ -58,6 +59,7 @@ enum AuthAPI: APIProtocol {
              .verifyAccounts,
              .resendCode,
              .addPersonalData,
+             .addDocument,
              .forgotPassword,
              .recoverPassword:
             return BKDBaseURLs.account.rawValue
@@ -109,6 +111,8 @@ enum AuthAPI: APIProtocol {
             return "accounts/send-code"
         case .addPersonalData:
             return "api/driver/personal"
+        case .addDocument: // DLS needs to be dinamic
+            return "api/driver/document/DLS"
         case .recoverPassword:
             return "accounts/recover-password"
         }
@@ -140,7 +144,7 @@ enum AuthAPI: APIProtocol {
             
             return [
                 "Authorization": "Basic \(base64LoginString)"]
-        
+       
         default:
             return [:]
         }
@@ -148,14 +152,7 @@ enum AuthAPI: APIProtocol {
     
     var query: [String : String] {
         switch self {
-//        case .preactivate(let deviceId):
-//            return [
-//                "deviceId": deviceId
-//            ]
-//        case .getFinancialState(let deviceID):
-//            return [
-//                "deviceId": deviceID
-//            ]
+
         case let .getCustomLocation(longitude, latitude):
            return [
                 "longitude" : "\(longitude)",
@@ -236,6 +233,13 @@ enum AuthAPI: APIProtocol {
                 "grant_type": "password"
             ]
             return MultipartFormData(parameters: params, blob: nil)
+            
+        case .addDocument(let documentName, let documentData):
+            let params = [
+                "document": documentName,
+            ]
+            return MultipartFormData(parameters: params, blob: Blob(mimeType: "image/png", fileName: documentName, data: documentData))
+
         default:
             return nil
         }
@@ -249,7 +253,8 @@ enum AuthAPI: APIProtocol {
              .getCarsByFilter,
              .signUp,
              .getToken,
-             .addPersonalData:
+             .addPersonalData,
+             .addDocument:
             return .post
         case .verifyAccounts,
              .recoverPassword:

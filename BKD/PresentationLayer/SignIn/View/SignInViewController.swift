@@ -25,6 +25,7 @@ final class SignInViewController: UIViewController, StoryboardInitializable {
     @IBOutlet weak var mRegisterBtn: UIButton!
     
     //MARK: Variables
+    private var keychainManager = KeychainManager()
     lazy var signInViewModel = SignInViewModel()
     
     override func viewDidLoad() {
@@ -70,6 +71,8 @@ final class SignInViewController: UIViewController, StoryboardInitializable {
             guard let self = self else { return }
             switch status {
             case .success:
+                self.keychainManager.saveUsername(username: self.mEmailAddressTextFl.text!)
+                self.keychainManager.savePassword(passw: self.mPasswordTxtFl.text!)
                 self.signInClicked()
             default:
                 self.incorrectPasswordOrUsername()
@@ -98,6 +101,7 @@ final class SignInViewController: UIViewController, StoryboardInitializable {
         }
     }
     
+    ///Animate view when clicked signIn
     private func signInClicked(){
         dissmisKeyboar()
         UIView.animate(withDuration: 0.5) { [self] in
@@ -156,6 +160,7 @@ final class SignInViewController: UIViewController, StoryboardInitializable {
 //        let selectPaymentVC = SelectPaymentViewController.initFromStoryboard(name: Constant.Storyboards.payment)
 //        self.navigationController?.pushViewController(selectPaymentVC, animated: true)
 //        return
+        
         let registerVC = RegistrationViewController.initFromStoryboard(name: Constant.Storyboards.registration)
         self.navigationController?.pushViewController(registerVC, animated: true)
         

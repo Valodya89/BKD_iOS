@@ -145,6 +145,7 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
                 self.showError(errorTxt: Constant.Texts.accountExist,
                                textFld: nil)
             case .success:
+                self.saveEmailAndPassOnKeychain()
                 self.animateContinue()
             case .error:
                 self.showError(errorTxt: Constant.Texts.failedRequest,
@@ -153,15 +154,21 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
             }
         }
     }
-    
+        
     ///Open Verification screen
     func goToVerification() {
+        
         let verificationCode = VerificationCodeViewController.initFromStoryboard(name: Constant.Storyboards.verificationCode)
         verificationCode.email = mEmailAddressTxtFl.text!
         self.navigationController?.pushViewController(verificationCode, animated: true)
     }
     
    
+    /// Save email and password on KeychainManager
+    private func saveEmailAndPassOnKeychain() {
+        KeychainManager().saveUsername(username: mEmailAddressTxtFl.text ?? "")
+        KeychainManager().savePassword(passw: mPasswordTxtFl.text ?? "")
+    }
     
     //MARK: - Actions
     // -----------------------------

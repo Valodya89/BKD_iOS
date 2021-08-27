@@ -19,9 +19,29 @@ final class KeychainManager {
     let accessTokenKey = "AccessToken"
     let refreshTokenKey = "RefreshToken"
     let expiresInKey = "RefreshToken"
+    let userName = "UserName"
+    let password = "Password"
 
     
     // MARK: - Functions
+    
+    /// Save userName in keychain
+    func saveUsername(username: String) {
+        do {
+            try keychain.set(username, key: userName)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    /// Save password in keychain
+    func savePassword(passw: String) {
+        do {
+            try keychain.set(passw, key: password)
+        } catch let error {
+            print(error)
+        }
+    }
     
     /// Save token in keychain
     func saveToken(token: String) {
@@ -74,6 +94,18 @@ final class KeychainManager {
     func getRefreshToken() -> String? {
         let token = try? keychain.getString(refreshTokenKey)
         return token
+    }
+    
+    /// Get token from keychain
+    func getUsername() -> String? {
+        let username = try? keychain.getString(userName)
+        return username
+    }
+    
+    /// Get refresh token from keychain
+    func getPasswor() -> String? {
+        let passw = try? keychain.getString(password)
+        return passw
     }
     
     /// Delete token from keychain

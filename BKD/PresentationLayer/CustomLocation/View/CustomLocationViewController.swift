@@ -24,6 +24,7 @@ class CustomLocationViewController: UIViewController {
     @IBOutlet weak var mMarkInfoBackgBottom: NSLayoutConstraint!
     
     //MARK: - Variables
+    //let searchVC = UISearchController(searchResultsController: ResultViewController())
     let customLocationViewModel = CustomLocationViewModel()
     var restrictedZones:[RestrictedZones]?
     let searchTbV = UITableView()
@@ -49,6 +50,7 @@ class CustomLocationViewController: UIViewController {
     //MARK ---------------------
     override func viewDidLoad() {
         super.viewDidLoad()
+        //view.addSubview(searchVC.searchBar)
         setUpView()
     }
     
@@ -151,8 +153,6 @@ class CustomLocationViewController: UIViewController {
         addChild(markerInfoVC)
         mMarkerInfoBckgV.addSubview(markerInfoVC.view)
         markerInfoVC.didMove(toParent: self)
-
-        // markerInfoVC.view.isHidden = true
     }
    
     
@@ -180,19 +180,13 @@ class CustomLocationViewController: UIViewController {
         // Creates a marker in the center of the map.
         marker.position = CLLocationCoordinate2D(latitude: longitude, longitude: latitude)
         let center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        // marker.title = "Sydney"
-        //marker.snippet = "Australia"
         marker.position = center
         marker.map = mMapV
         marker.icon = img_map_marker
         currentMarker = marker
-//        let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: zoom)
-//        self.mMapV!.camera = camera
-//        self.mMapV!.animate(to: camera)
     }
     
     private func  deleteMarker() {
-       // self.markerInfoVC.mPriceBckVCenterVertical.constant = 0
         self.view.layoutIfNeeded()
         currentMarker?.map = nil
         self.markerInfoVC.mValueBackgV.isHidden = true
@@ -266,6 +260,24 @@ class CustomLocationViewController: UIViewController {
 //MARK: SearchCustomLocationUIViewControllerDelegate
 //MARK ---------------------
 extension CustomLocationViewController: SearchCustomLocationUIViewControllerDelegate {
+    func showAutocompleteViewController() {
+        let autocompleteController = GMSAutocompleteViewController()
+        autocompleteController.delegate = self
+
+        // Specify the place data types to return.
+        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
+                                                    UInt(GMSPlaceField.placeID.rawValue))
+        autocompleteController.placeFields = fields
+
+        // Specify a filter.
+        let filter = GMSAutocompleteFilter()
+        filter.type = .address
+        autocompleteController.autocompleteFilter = filter
+
+        // Display the autocomplete view controller.
+        present(autocompleteController, animated: true, completion: nil)
+   }
+    
     func updateTableViewHeight(tableHeight: CGFloat, tableData: String) {
         isChangeTableHeight = true
         searchTableHeight = tableHeight
@@ -275,10 +287,12 @@ extension CustomLocationViewController: SearchCustomLocationUIViewControllerDele
     }
     
     func goToPlaces()  {
-        let acControllers = GMSAutocompleteViewController()
-        acControllers.delegate = self
-        present(acControllers, animated: true, completion: nil)
+//        let acControllers = GMSAutocompleteViewController()
+//        acControllers.delegate = self
+//        present(acControllers, animated: true, completion: nil)
     }
+    
+    
 }
 
 //MARK: MarkerInfoViewControllerDelegate
@@ -321,35 +335,7 @@ extension CustomLocationViewController: UITableViewDelegate, UITableViewDataSour
     
 }
 
-//MARK: GMSAutocompleteViewControllerDelegate
-//MARK ---------------------
-extension CustomLocationViewController: GMSAutocompleteViewControllerDelegate {
 
-    func viewController(_ vcontroller: GMSAutocompleteViewController,
-                        didAutocompleteWith place: GMSPlace ) {
-        dismiss(animated: true, completion: nil)
-
-        self.mMapV.clear()
-        self.searchCustomLocationCV.mSearchTxtFl.text = place.name
-        mapViewCenterCoordinate = CLLocationCoordinate2D(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
-        
-        self.addPlace(longitude: place.coordinate.longitude,
-                      latitude: place.coordinate.latitude,
-                      place: place)
-        self.mMapV.camera = GMSCameraPosition.camera(withTarget: mapViewCenterCoordinate, zoom: zoom)
-
-    }
-
-    func viewController(_ vcontroller: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error ) {
-
-        print(error.localizedDescription)
-    }
-
-    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
-
-    }
-
-}
 
 
 //MARK: GMSMapViewDelegate
@@ -408,6 +394,33 @@ extension CustomLocationViewController: CLLocationManagerDelegate {
     }
 }
 
+extension CustomLocationViewController: GMSAutocompleteViewControllerDelegate {
 
+  // Handle the user's selection.
+  func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+    print("Place name: \(place.name)")
+    print("Place ID: \(place.placeID)")
+    print("Place attributions: \(place.attributions)")
+    dismiss(animated: true, completion: nil)
+  }
 
+  func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+    // TODO: handle the error.
+    print("Error: ", error.localizedDescription)
+  }
 
+  // User canceled the operation.
+  func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+    dismiss(animated: true, completion: nil)
+  }
+
+  // Turn the network activity indicator on and off again.
+  func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+    UIApplication.shared.isNetworkActivityIndicatorVisible = true
+  }
+
+  func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+  }
+
+}

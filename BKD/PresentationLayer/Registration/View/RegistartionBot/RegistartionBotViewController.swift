@@ -14,7 +14,7 @@ enum PickerType {
     case nationalCountry
 }
 
-enum RegistrationState {
+enum RegistrationState: String {
     case PERSONAL_DATA
     case IDENTITY_FRONT
     case IDENTITY_BACK
@@ -129,9 +129,29 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
         }
     }
     
+    
+    ///Sigin user for get token
+    func signIn()  {
+        let keychainManager = KeychainManager()
+        SignInViewModel().signIn(username: keychainManager.getUsername() ?? "", password: keychainManager.getPasswor() ?? "") { [weak self] (status) in
+            guard let self = self else { return }
+            switch status {
+            case .success:
+                self.tableData[self.currentIndex].userRegisterInfo?.isFilled =  true
+                self.insertTableCell()
+                break
+            default:
+                self.showAlertMessage(Constant.Texts.errToken)
+                break
+            }
+        }
+    }
+    
+    
     func sendPersonalData(personalData: PersonalData) {
-        registrationBotViewModel.addPersonlaData(personlaData: personalData) { (status) in
-            print(status)
+        registrationBotViewModel.addPersonlaData(personlaData: personalData) { (result) in
+            print(result)
+            guard let result = result else { return }
         }
     }
 
@@ -455,8 +475,7 @@ extension RegistartionBotViewController: UserFillFieldTableViewCellDelegate {
     }
     
     func didPressStart() {
-        tableData[currentIndex].userRegisterInfo?.isFilled =  true
-        insertTableCell()
+        signIn()
     }
 
     func didReturnTxtField(txt: String?) {
