@@ -75,6 +75,16 @@ class RegistrationBotViewModel: NSObject {
         }
     }
     
+    func imageUpload(image: UIImage, state: String, completion: @escaping (String) -> Void)  {
+            
+        SessionNetwork.init().request(with: URLBuilder(from: ImageUploadAPI.upload(image: image, state: state))) { result in
+            print(result)
+                completion("")
+            }
+            
+        }
+    
+    
 }
 
 

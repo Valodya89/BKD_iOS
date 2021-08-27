@@ -225,6 +225,7 @@ struct Constant {
         static let errEmailVerify = "Failed to send verification email"
         static let errUserOrPass = "Incorrect username or password!"
         static let errToken = "Failed to get token"
+        static let errLocation = "Can't detect location"
         
         //Request texts
         static let type = "type"

@@ -9,11 +9,11 @@ import UIKit
 
 enum ImageUploadAPI: ImageUplaoder {
     
-    case upload(image: UIImage)
+    case upload(image: UIImage, state: String = "")
     
     var image: UIImage?  {
         switch self {
-        case .upload(image: let image):
+        case .upload(image: let image, _):
             return image
         }
     }
@@ -24,7 +24,11 @@ enum ImageUploadAPI: ImageUplaoder {
     
     var path: String {
         ///dls needs to be dinamic
-        return "api/driver/document/DLS"
+        switch self {
+        case .upload(_, state: let state):
+            return "/api/driver/document/\(state)"
+                }
+        
     }
     
     var header: [String : String] { [:] }

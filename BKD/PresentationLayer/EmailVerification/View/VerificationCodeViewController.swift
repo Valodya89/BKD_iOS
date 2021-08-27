@@ -61,7 +61,9 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
             case .accountNoSuchUser:
                 self.showErrorAlertMessage(Constant.Texts.errEmailVerifyNoUser)
                 break
-            case .success: break
+            case .success:
+                print("sendEmailVerification success")
+                break
             default:
                 self.showAlertMessage(Constant.Texts.errEmailVerify)
                 break

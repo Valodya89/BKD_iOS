@@ -100,7 +100,6 @@ class TakePhotoTableViewCell: UITableViewCell {
             mTackePhotoBackgV.backgroundColor = color_dark_register!
             mTackePhotoBackgV.layer.cornerRadius = 10
         }
-        
     }
     
     
@@ -116,7 +115,6 @@ class TakePhotoTableViewCell: UITableViewCell {
     
     @IBAction func takePhoto(_ sender: UIButton) {
         delegate?.didPressTackePhoto(isOpenDoc: false)
-        
     }
     
     @IBAction func open(_ sender: UIButton) {

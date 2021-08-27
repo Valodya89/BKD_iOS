@@ -21,6 +21,7 @@ final class GooglePlacesManager {
     
     enum PlacesError: Error {
         case failedToFind
+        case failedToGetCordinates
     }
     
     public func findPlace(query: String, complition: @escaping (Result <[Place], Error>) -> Void ) {
