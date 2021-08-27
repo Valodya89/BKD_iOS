@@ -25,7 +25,6 @@
 		5602533126670A1000FB204C /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5602533026670A1000FB204C /* Chat.storyboard */; };
 		5602534C2667413A00FB204C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602534B2667413A00FB204C /* BaseViewController.swift */; };
 		5602536F2669AE1C00FB204C /* OfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602536E2669AE1B00FB204C /* OfflineViewController.swift */; };
-		560253C0266AB69100FB204C /* OfflineChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560253BF266AB69000FB204C /* OfflineChatViewModel.swift */; };
 		560FE63D267BE7960068BC85 /* ReserveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560FE63C267BE7960068BC85 /* ReserveViewController.swift */; };
 		560FE64A267BE7BE0068BC85 /* Reserve.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560FE649267BE7BE0068BC85 /* Reserve.storyboard */; };
 		5618872D2645D99600BDDB33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5618872C2645D99600BDDB33 /* Assets.xcassets */; };
@@ -250,6 +249,12 @@
 		56CFDE762693920E00D731CD /* RegistrationBotModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFDE752693920E00D731CD /* RegistrationBotModel.swift */; };
 		56CFDE7B2693CEA100D731CD /* UserFillFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFDE792693CEA100D731CD /* UserFillFieldTableViewCell.swift */; };
 		56CFDE7C2693CEA200D731CD /* UserFillFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56CFDE7A2693CEA100D731CD /* UserFillFieldTableViewCell.xib */; };
+		935D479C26D973F200D000A6 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D479B26D973F200D000A6 /* ChatViewModel.swift */; };
+		9393BAED26D78833003878BF /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9393BAEC26D78833003878BF /* SocketService.swift */; };
+		9393BAEF26D78846003878BF /* SocketServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9393BAEE26D78846003878BF /* SocketServiceProtocol.swift */; };
+		9393BAF526D78BCD003878BF /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9393BAF426D78BCD003878BF /* Message.swift */; };
+		9393BAF726D78BF9003878BF /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9393BAF626D78BF9003878BF /* Sender.swift */; };
+		9393BAFA26D7F2B8003878BF /* ChatInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9393BAF926D7F2B8003878BF /* ChatInfo.swift */; };
 		93CDB1EE26C17C69009F9B6C /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CDB1ED26C17C69009F9B6C /* TokenResponse.swift */; };
 		93CDB1F026C1C8FA009F9B6C /* PaymentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CDB1EF26C1C8FA009F9B6C /* PaymentAPI.swift */; };
 		93CDB1F326C1CBD5009F9B6C /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CDB1F226C1CBD5009F9B6C /* PaymentViewModel.swift */; };
@@ -291,7 +296,6 @@
 		5602533026670A1000FB204C /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		5602534B2667413A00FB204C /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		5602536E2669AE1B00FB204C /* OfflineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineViewController.swift; sourceTree = "<group>"; };
-		560253BF266AB69000FB204C /* OfflineChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineChatViewModel.swift; sourceTree = "<group>"; };
 		5603424D26AC5B4200FDD5EA /* BKD.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BKD.entitlements; sourceTree = "<group>"; };
 		560FE63C267BE7960068BC85 /* ReserveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveViewController.swift; sourceTree = "<group>"; };
 		560FE649267BE7BE0068BC85 /* Reserve.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Reserve.storyboard; sourceTree = "<group>"; };
@@ -524,6 +528,12 @@
 		767846430166189C964DC0D8 /* Pods-BKDTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BKDTests.release.xcconfig"; path = "Target Support Files/Pods-BKDTests/Pods-BKDTests.release.xcconfig"; sourceTree = "<group>"; };
 		7F5FF4796C75BF4003CE98DD /* Pods-BKDTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BKDTests.debug.xcconfig"; path = "Target Support Files/Pods-BKDTests/Pods-BKDTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8B7C0BB5C9C4AEBA9B9128EA /* Pods-BKD-BKDUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BKD-BKDUITests.release.xcconfig"; path = "Target Support Files/Pods-BKD-BKDUITests/Pods-BKD-BKDUITests.release.xcconfig"; sourceTree = "<group>"; };
+		935D479B26D973F200D000A6 /* ChatViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		9393BAEC26D78833003878BF /* SocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
+		9393BAEE26D78846003878BF /* SocketServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketServiceProtocol.swift; sourceTree = "<group>"; };
+		9393BAF426D78BCD003878BF /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		9393BAF626D78BF9003878BF /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
+		9393BAF926D7F2B8003878BF /* ChatInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInfo.swift; sourceTree = "<group>"; };
 		93CDB1ED26C17C69009F9B6C /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
 		93CDB1EF26C1C8FA009F9B6C /* PaymentAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentAPI.swift; sourceTree = "<group>"; };
 		93CDB1F226C1CBD5009F9B6C /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
@@ -581,78 +591,24 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		560253262667098C00FB204C /* OnlineChat */ = {
+		560253262667098C00FB204C /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				56025329266709B900FB204C /* ViewModel */,
-				56025328266709B100FB204C /* Model */,
+				9393BAF326D78BBA003878BF /* Model */,
+				9393BAF026D789F1003878BF /* ViewModel */,
 				56025327266709A400FB204C /* View */,
 			);
-			path = OnlineChat;
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		56025327266709A400FB204C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5602532A266709CE00FB204C /* UI */,
+				9393BAF826D78C29003878BF /* UI */,
 				5602532B26670A0100FB204C /* OnlineChatViewController.swift */,
-				5602533026670A1000FB204C /* Chat.storyboard */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		56025328266709B100FB204C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		56025329266709B900FB204C /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		5602532A266709CE00FB204C /* UI */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		560253A9266A824100FB204C /* OfflineChat */ = {
-			isa = PBXGroup;
-			children = (
-				560253AC266A825A00FB204C /* ViewModel */,
-				560253AB266A825200FB204C /* Model */,
-				560253AA266A824C00FB204C /* View */,
-			);
-			path = OfflineChat;
-			sourceTree = "<group>";
-		};
-		560253AA266A824C00FB204C /* View */ = {
-			isa = PBXGroup;
-			children = (
 				5602536E2669AE1B00FB204C /* OfflineViewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		560253AB266A825200FB204C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		560253AC266A825A00FB204C /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				560253BF266AB69000FB204C /* OfflineChatViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		560FE635267BE7520068BC85 /* Reserve */ = {
@@ -1223,6 +1179,7 @@
 		565BFD79269F535D0044D081 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				9393BAEB26D787FD003878BF /* Socket */,
 				565BFD7A269F53EA0044D081 /* Http */,
 			);
 			path = Network;
@@ -1617,8 +1574,7 @@
 				56533EDE267925B20012BF4A /* Accessories */,
 				5656082126785BE4009578FA /* More */,
 				5657E83B2671087300788D62 /* Details */,
-				560253A9266A824100FB204C /* OfflineChat */,
-				560253262667098C00FB204C /* OnlineChat */,
+				560253262667098C00FB204C /* Chat */,
 				560252DF266535AB00FB204C /* Base */,
 				5691A605265C50390008081D /* CustomLocation */,
 				564E12C4264C9F22008CE884 /* SeeMap */,
@@ -2233,6 +2189,41 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		9393BAEB26D787FD003878BF /* Socket */ = {
+			isa = PBXGroup;
+			children = (
+				9393BAEC26D78833003878BF /* SocketService.swift */,
+				9393BAEE26D78846003878BF /* SocketServiceProtocol.swift */,
+			);
+			path = Socket;
+			sourceTree = "<group>";
+		};
+		9393BAF026D789F1003878BF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				935D479B26D973F200D000A6 /* ChatViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9393BAF326D78BBA003878BF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9393BAF426D78BCD003878BF /* Message.swift */,
+				9393BAF626D78BF9003878BF /* Sender.swift */,
+				9393BAF926D7F2B8003878BF /* ChatInfo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9393BAF826D78C29003878BF /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				5602533026670A1000FB204C /* Chat.storyboard */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		93CDB1EC26C17C5D009F9B6C /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -2452,6 +2443,7 @@
 				5602532C26670A0100FB204C /* OnlineChatViewController.swift in Sources */,
 				56533F092679BDBE0012BF4A /* MyDriversViewController.swift in Sources */,
 				565863BB26C76B3C003C19A2 /* CashViewController.swift in Sources */,
+				9393BAEF26D78846003878BF /* SocketServiceProtocol.swift in Sources */,
 				56533ECF2678B94D0012BF4A /* MoreModel.swift in Sources */,
 				566354F4268B72950003E2EB /* PriceTableView.swift in Sources */,
 				565F810026A7C1E700ADB9FE /* PaymentTypes.swift in Sources */,
@@ -2467,7 +2459,6 @@
 				56A2AFDF2693F221001BA7C5 /* ExamplePhotoTableViewCell.swift in Sources */,
 				56AD190D26931AB2006A53C1 /* CheckEmailViewController.swift in Sources */,
 				56C8E172267C1D100061890C /* ReserveTableViewCell.swift in Sources */,
-				560253C0266AB69100FB204C /* OfflineChatViewModel.swift in Sources */,
 				565BFDFB26A0C3800044D081 /* CarTypes.swift in Sources */,
 				565F9B0526C8AE2900064AD4 /* ReservetionCollectionViewCell.swift in Sources */,
 				5602534C2667413A00FB204C /* BaseViewController.swift in Sources */,
@@ -2475,6 +2466,7 @@
 				56533EE3267925FE0012BF4A /* AccessoriesUIViewController.swift in Sources */,
 				56AD19022692AD2D006A53C1 /* MyBkdModel.swift in Sources */,
 				5691A639265D53140008081D /* Extentions.swift in Sources */,
+				9393BAFA26D7F2B8003878BF /* ChatInfo.swift in Sources */,
 				565BFE0326A12CA10044D081 /* Parking.swift in Sources */,
 				5656082626785C32009578FA /* MoreViewController.swift in Sources */,
 				568E704826446E2D000CB6A9 /* MyReservationsViewController.swift in Sources */,
@@ -2504,6 +2496,7 @@
 				5658D79326CCA50000CD6A3F /* CategoryViewModel.swift in Sources */,
 				56CC7D7326A87A9F006DB7B8 /* PaymentWebViewController.swift in Sources */,
 				564E944826AF8BFA00291164 /* ApplicationSttings.swift in Sources */,
+				9393BAF726D78BF9003878BF /* Sender.swift in Sources */,
 				565F80B426A6391000ADB9FE /* ChangePhoneNumberViewController.swift in Sources */,
 				560251E02661089C00FB204C /* CarouselCellView.swift in Sources */,
 				56B9F31326806A2E003449AD /* SearchEditModel.swift in Sources */,
@@ -2529,6 +2522,7 @@
 				565731DE2672FDC80012ADD0 /* DetailsAndTailLiftModel.swift in Sources */,
 				568E703126443D90000CB6A9 /* CategoryViewController.swift in Sources */,
 				93CDB1EE26C17C69009F9B6C /* TokenResponse.swift in Sources */,
+				9393BAED26D78833003878BF /* SocketService.swift in Sources */,
 				56B9F2D5267E8CEE003449AD /* SearchView.swift in Sources */,
 				56A2AFE62694C827001BA7C5 /* PhoneNumberTableViewCell.swift in Sources */,
 				5658D76826C9BB5700CD6A3F /* CustomLocationModel.swift in Sources */,
@@ -2569,9 +2563,11 @@
 				565BFD97269F58460044D081 /* MultipartFormData.swift in Sources */,
 				565BFD9B269F586D0044D081 /* RequestMethod.swift in Sources */,
 				568E70CA26455286000CB6A9 /* MainCollectionViewCell.swift in Sources */,
+				9393BAF526D78BCD003878BF /* Message.swift in Sources */,
 				565BFDB5269F5B850044D081 /* BKDBaseURL.swift in Sources */,
 				56CFDE762693920E00D731CD /* RegistrationBotModel.swift in Sources */,
 				568E70172643919B000CB6A9 /* LeftViewController.swift in Sources */,
+				935D479C26D973F200D000A6 /* ChatViewModel.swift in Sources */,
 				560252D62665298200FB204C /* NetworkManager.swift in Sources */,
 				5602521126612A6300FB204C /* SearchTableViewCell.swift in Sources */,
 				5656F1A82689650600E70BAB /* ReserveViewModel.swift in Sources */,

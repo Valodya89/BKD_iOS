@@ -7,10 +7,19 @@
 
 import UIKit
 
-class MainViewModel: NSObject {
+final class MainViewModel: NSObject {
    // static let shared = MainViewModel()
     var searchModel = SearchModel()
     let validator = Validator()
+    var isOnline: Bool {
+        guard let workingTimes = ApplicationSettings.shared.workingTimes else { return false }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        guard let start = dateFormatter.date(from: workingTimes.workStart) else { return false }
+        guard let end = dateFormatter.date(from: workingTimes.workEnd) else { return false }
+        guard let current = dateFormatter.date(from: dateFormatter.string(from: Date())) else { return false }
+        return (start...end).contains(current)
+    }
     
     override init() {}
     

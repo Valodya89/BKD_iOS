@@ -26,7 +26,7 @@ class MainViewController: BaseViewController {
     
     //MARK: - Variables
     private lazy  var carouselVC = CarouselViewController.initFromStoryboard(name: Constant.Storyboards.carousel)
-    let mainViewModel: MainViewModel = MainViewModel()
+    private let mainViewModel: MainViewModel = MainViewModel()
     lazy var searchModel: SearchModel = SearchModel()
     var menu: SideMenuNavigationController?
     var searchHeaderV: SearchHeaderView?
@@ -55,7 +55,6 @@ class MainViewController: BaseViewController {
     private var isPressedFilter: Bool = false
     private var isPressedEdit: Bool = false
     private var isNoSearchResult: Bool = false
-    private var isOnline: Bool = false
     private var needsUpdateFilterCell: Bool = false
 
 
@@ -523,11 +522,11 @@ class MainViewController: BaseViewController {
     
     /// Will open Chat View Controller
     private func openChatPage () {
-        if isOnline {
-            let onlineChat = UIStoryboard(name: Constant.Storyboards.chat, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.onlineChat) as! OnlineChatViewController
+        if mainViewModel.isOnline {
+            let onlineChat = OnlineChatViewController.initFromStoryboard(name: Constant.Storyboards.chat)
             self.navigationController?.pushViewController(onlineChat, animated: true)
         } else {
-            let offlineChat = UIStoryboard(name: Constant.Storyboards.chat, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.offlineChat) as! OfflineViewController
+            let offlineChat = OfflineViewController.initFromStoryboard(name: Constant.Storyboards.chat)
             self.navigationController?.pushViewController(offlineChat, animated: true)
         }
     }

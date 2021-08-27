@@ -97,7 +97,7 @@ class EmailAddressViewController: UIViewController, StoryboardInitializable {
     
     /// check is valid email address
     private func checkEmailAddress(text: String, isShowError: Bool) {
-        OfflineChatViewModel().isValidEmail(email: text) { [self] (isValid) in
+        ChatViewModel().isValidEmail(email: text) { [self] (isValid) in
             changeConfirmStatus(isActive: isValid)
             if isShowError {
                 showEmailError(isError: !isValid, error: Constant.Texts.errorIncorrectEmail)
