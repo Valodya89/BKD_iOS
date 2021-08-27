@@ -7,13 +7,7 @@
 
 import UIKit
 
-
-
-
-protocol OfflineViewControllerDelegate: AnyObject {
-    func dismiss()
-}
-class OfflineViewController: UIViewController, StoryboardInitializable  {
+final class OfflineViewController: UIViewController, StoryboardInitializable  {
     
     //MARK: Outlets
     @IBOutlet weak var mNavigationBarV: UIView!
@@ -38,9 +32,7 @@ class OfflineViewController: UIViewController, StoryboardInitializable  {
     @IBOutlet weak var mMessageTextVHeight: NSLayoutConstraint!
     
     //MARK: Variables
-    weak var delegate: OfflineViewControllerDelegate?
-    let offlineChatViewModel: OfflineChatViewModel = OfflineChatViewModel()
-
+    private let viewModel = ChatViewModel()
     private var textViewMinHeight: CGFloat = 36
     private var textViewMaxHeight: CGFloat = 129
     private var isOpenKeyboard: Bool = false
@@ -218,7 +210,7 @@ class OfflineViewController: UIViewController, StoryboardInitializable  {
         if !isFilledInEmail(email: mEmailTextFl.text) {
             showEmailError(errorText: Constant.Texts.errorEmail)
         } else  {
-            offlineChatViewModel.isValidEmail(email: mEmailTextFl.text!) { [self] (isValid) in
+            viewModel.isValidEmail(email: mEmailTextFl.text!) { [self] (isValid) in
                 if isValid { // we should send request
                     self.showOfflineMessageStatus()
                 } else {
@@ -308,4 +300,3 @@ extension OfflineViewController: UITextViewDelegate {
         return textHeight < textViewMaxHeight
     }
 }
-
