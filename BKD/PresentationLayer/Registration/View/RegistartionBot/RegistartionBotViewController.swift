@@ -14,7 +14,7 @@ enum PickerType {
     case nationalCountry
 }
 
-enum RegistrationState {
+enum RegistrationState: String {
     case PERSONAL_DATA
     case IDENTITY_FRONT
     case IDENTITY_BACK
@@ -129,9 +129,29 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
         }
     }
     
+    
+    ///Sigin user for get token
+    func signIn()  {
+        let keychainManager = KeychainManager()
+        SignInViewModel().signIn(username: keychainManager.getUsername() ?? "", password: keychainManager.getPasswor() ?? "") { [weak self] (status) in
+            guard let self = self else { return }
+            switch status {
+            case .success:
+                self.tableData[self.currentIndex].userRegisterInfo?.isFilled =  true
+                self.insertTableCell()
+                break
+            default:
+                self.showAlertMessage(Constant.Texts.errToken)
+                break
+            }
+        }
+    }
+    
+    
     func sendPersonalData(personalData: PersonalData) {
-        registrationBotViewModel.addPersonlaData(personlaData: personalData) { (status) in
-            print(status)
+        registrationBotViewModel.addPersonlaData(personlaData: personalData) { (result) in
+            print(result)
+            guard let result = result else { return }
         }
     }
 
@@ -455,8 +475,7 @@ extension RegistartionBotViewController: UserFillFieldTableViewCellDelegate {
     }
     
     func didPressStart() {
-        tableData[currentIndex].userRegisterInfo?.isFilled =  true
-        insertTableCell()
+        signIn()
     }
 
     func didReturnTxtField(txt: String?) {
@@ -672,7 +691,36 @@ extension RegistartionBotViewController: UIImagePickerControllerDelegate, UINavi
             mTableV.reloadRows(at: [IndexPath(row: currentIndex, section: 0)], with: .automatic)
             insertTableCell()
             isTakePhoto = false
+            var newImage = resizeImage(image: image, targetSize: CGSize(width: 50, height: 50)) ?? UIImage()
+            registrationBotViewModel.imageUpload(image: newImage, state: "DLS") { (str) in
+            }
+            
         }
+    }
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+        
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
+        }
+        
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(origin: .zero, size: newSize)
+        
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
     }
 }
 

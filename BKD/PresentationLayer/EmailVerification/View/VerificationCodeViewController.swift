@@ -23,7 +23,7 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
     @IBOutlet weak var mContinueLeading: NSLayoutConstraint!
     
     //MARK: Variables
-    lazy var verificationCodeViewModel =         VerificationCodeViewModel()
+    lazy var verificationCodeViewModel = VerificationCodeViewModel()
     var email:String = ""
  
     
@@ -50,8 +50,9 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
     }
 
     @objc private func handleDeepLink(notification: Notification) {
+        self.dismiss(animated: true, completion: nil)
         sendAccountVerification(code: notification.object as? String ?? "")
-        }
+    }
     
     ///Send email verification for signup
     func sendEmailVerification() {
@@ -60,7 +61,9 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
             case .accountNoSuchUser:
                 self.showErrorAlertMessage(Constant.Texts.errEmailVerifyNoUser)
                 break
-            case .success: break
+            case .success:
+                print("sendEmailVerification success")
+                break
             default:
                 self.showAlertMessage(Constant.Texts.errEmailVerify)
                 break
@@ -136,6 +139,7 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
     
    //Open FaceAndTouchId Screen
     private func goToFaceAndTouchId() {
+    
         let FaceAndTouchIdVC = FaceAndTouchIdViewController.initFromStoryboard(name: Constant.Storyboards.registration)
         self.navigationController?.pushViewController(FaceAndTouchIdVC, animated: true)
     }
