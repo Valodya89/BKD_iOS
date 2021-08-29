@@ -45,6 +45,7 @@ enum AuthAPI: APIProtocol {
                          zip: String,
                          city: String,
                          nationalRegisterNumber: String)
+
     case getChatID(name: String, type: String, identifier: String)
     case getMessages(chatID: String)
     case sendMessage(chatID: String, message: String, userIdentifier: String)
@@ -153,7 +154,7 @@ enum AuthAPI: APIProtocol {
             
             return [
                 "Authorization": "Basic \(base64LoginString)"]
-        
+       
         default:
             return [:]
         }
@@ -161,14 +162,7 @@ enum AuthAPI: APIProtocol {
     
     var query: [String : String] {
         switch self {
-//        case .preactivate(let deviceId):
-//            return [
-//                "deviceId": deviceId
-//            ]
-//        case .getFinancialState(let deviceID):
-//            return [
-//                "deviceId": deviceID
-//            ]
+
         case let .getCustomLocation(longitude, latitude):
            return [
                 "longitude" : "\(longitude)",

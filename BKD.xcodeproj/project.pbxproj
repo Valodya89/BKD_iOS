@@ -77,6 +77,10 @@
 		5656324626585FFF00B78562 /* CarEquipmentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656324426585FFF00B78562 /* CarEquipmentCollectionViewCell.swift */; };
 		5656324726585FFF00B78562 /* CarEquipmentCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5656324526585FFF00B78562 /* CarEquipmentCollectionViewCell.xib */; };
 		565632522658B11E00B78562 /* EquipmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565632512658B11D00B78562 /* EquipmentModel.swift */; };
+		5656A9C626D69E1C00A71375 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656A9C526D69E1C00A71375 /* ResultViewController.swift */; };
+		5656A9C926D69F7900A71375 /* GooglePlacesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656A9C826D69F7900A71375 /* GooglePlacesManager.swift */; };
+		5656A9D626D8303E00A71375 /* PersonalDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656A9D526D8303E00A71375 /* PersonalDriver.swift */; };
+		5656A9E626D84D2700A71375 /* ImageUploadAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656A9E526D84D2700A71375 /* ImageUploadAPI.swift */; };
 		5656F196268936E000E70BAB /* MyDriversModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656F195268936E000E70BAB /* MyDriversModel.swift */; };
 		5656F1A82689650600E70BAB /* ReserveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656F1A72689650600E70BAB /* ReserveViewModel.swift */; };
 		565731CC26724F720012ADD0 /* CarInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565731CB26724F720012ADD0 /* CarInfoView.swift */; };
@@ -345,6 +349,10 @@
 		5656324426585FFF00B78562 /* CarEquipmentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarEquipmentCollectionViewCell.swift; sourceTree = "<group>"; };
 		5656324526585FFF00B78562 /* CarEquipmentCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarEquipmentCollectionViewCell.xib; sourceTree = "<group>"; };
 		565632512658B11D00B78562 /* EquipmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentModel.swift; sourceTree = "<group>"; };
+		5656A9C526D69E1C00A71375 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		5656A9C826D69F7900A71375 /* GooglePlacesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesManager.swift; sourceTree = "<group>"; };
+		5656A9D526D8303E00A71375 /* PersonalDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDriver.swift; sourceTree = "<group>"; };
+		5656A9E526D84D2700A71375 /* ImageUploadAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUploadAPI.swift; sourceTree = "<group>"; };
 		5656F195268936E000E70BAB /* MyDriversModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDriversModel.swift; sourceTree = "<group>"; };
 		5656F1A72689650600E70BAB /* ReserveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveViewModel.swift; sourceTree = "<group>"; };
 		565731CB26724F720012ADD0 /* CarInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarInfoView.swift; sourceTree = "<group>"; };
@@ -551,6 +559,7 @@
 			children = (
 				5602529B2664465200FB204C /* MarkerInfoViewController.swift */,
 				5602520126611C4100FB204C /* SearchCustomLocationUiView.swift */,
+				5656A9C526D69E1C00A71375 /* ResultViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -722,6 +731,7 @@
 		56409537264B247E001DC92D /* Manageres */ = {
 			isa = PBXGroup;
 			children = (
+				5656A9C726D69F4000A71375 /* GoogleMapManager */,
 				564E944426AF8BFA00291164 /* AccountSettings */,
 				565BFDB8269F8F310044D081 /* StorageManager.swift */,
 				565BFD9E269F590A0044D081 /* KeychainManager.swift */,
@@ -1022,6 +1032,14 @@
 			path = CarEquipmentCollectionViewCell;
 			sourceTree = "<group>";
 		};
+		5656A9C726D69F4000A71375 /* GoogleMapManager */ = {
+			isa = PBXGroup;
+			children = (
+				5656A9C826D69F7900A71375 /* GooglePlacesManager.swift */,
+			);
+			path = GoogleMapManager;
+			sourceTree = "<group>";
+		};
 		5657E83B2671087300788D62 /* Details */ = {
 			isa = PBXGroup;
 			children = (
@@ -1170,6 +1188,7 @@
 		565BFD7A269F53EA0044D081 /* Http */ = {
 			isa = PBXGroup;
 			children = (
+				5656A9E526D84D2700A71375 /* ImageUploadAPI.swift */,
 				565BFDB4269F5B850044D081 /* BKDBaseURL.swift */,
 				565BFD9A269F586D0044D081 /* RequestMethod.swift */,
 				565BFD92269F57CE0044D081 /* BkdError.swift */,
@@ -2005,6 +2024,7 @@
 				565F807B26A510AA00ADB9FE /* Country.swift */,
 				565F807F26A5159000ADB9FE /* City.swift */,
 				565F80A726A5FD7D00ADB9FE /* PersonalData.swift */,
+				5656A9D526D8303E00A71375 /* PersonalDriver.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2455,6 +2475,7 @@
 				56B9F34226826DE1003449AD /* DetailsViewModel.swift in Sources */,
 				56AD19222693421C006A53C1 /* TermsConditionsViewController.swift in Sources */,
 				5656083926785E2C009578FA /* RentalConditionsTableViewCell.swift in Sources */,
+				5656A9C626D69E1C00A71375 /* ResultViewController.swift in Sources */,
 				5602536F2669AE1C00FB204C /* OfflineViewController.swift in Sources */,
 				56188889264A61ED00BDDB33 /* TextField.swift in Sources */,
 				56B9F33D26825FF0003449AD /* TariffSlideViewModel.swift in Sources */,
@@ -2557,7 +2578,9 @@
 				5656F196268936E000E70BAB /* MyDriversModel.swift in Sources */,
 				565A7AE326555EFF006C63D0 /* CategoryTableViewCell.swift in Sources */,
 				568E701226438C08000CB6A9 /* MainViewController.swift in Sources */,
+				5656A9C926D69F7900A71375 /* GooglePlacesManager.swift in Sources */,
 				56CFDE7B2693CEA100D731CD /* UserFillFieldTableViewCell.swift in Sources */,
+				5656A9E626D84D2700A71375 /* ImageUploadAPI.swift in Sources */,
 				5656321C26568C0D00B78562 /* SearchHeaderModel.swift in Sources */,
 				565BFDD3269F954C0044D081 /* UIViewController.swift in Sources */,
 				565BFD76269F4C5A0044D081 /* Car.swift in Sources */,
@@ -2569,6 +2592,7 @@
 				5657E84E26711AE800788D62 /* CarPhotosView.swift in Sources */,
 				565731F32673188F0012ADD0 /* TailLiftTableView.swift in Sources */,
 				5665400C2673A0A5008ACD31 /* TariffSlideCollectionViewCell.swift in Sources */,
+				5656A9D626D8303E00A71375 /* PersonalDriver.swift in Sources */,
 				5602529C2664465200FB204C /* MarkerInfoViewController.swift in Sources */,
 				56B9F2E326805021003449AD /* SearchWithValueView.swift in Sources */,
 				568E704026446136000CB6A9 /* AboutUsViewController.swift in Sources */,

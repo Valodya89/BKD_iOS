@@ -51,28 +51,48 @@ class RegistrationBotViewModel: NSObject {
     }
     
     /// add Personla Data
-    func addPersonlaData(personlaData: PersonalData,  completion: @escaping (String) -> Void) {
+    func addPersonlaData(personlaData: PersonalData,  completion: @escaping (PersonalDriver?) -> Void) {
         SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addPersonalData(name: personlaData.name!, surname: personlaData.surname!, phoneNumber: personlaData.phoneNumber!, dateOfBirth: personlaData.dateOfBirth!, street: personlaData.street!, house: personlaData.house!, mailBox: personlaData.mailBox ?? "", countryId: personlaData.countryId!, zip: personlaData.zip!, city: personlaData.city!, nationalRegisterNumber: personlaData.nationalRegisterNumber!))) { (result) in
             
             switch result {
             case .success(let data):
-                guard let result = BkdConverter<BaseResponseModel<EmptyModel>>.parseJson(data: data as Any) else {
+                guard let result = BkdConverter<BaseResponseModel<PersonalDriver>>.parseJson(data: data as Any) else {
                     print("error")
-                    completion( "error")
+                    completion(nil)
                     return
                 }
                 print(result.message as Any)
-                completion(result.message)
+                completion(result.content!)
                 //completion(RegistrationState(rawValue: result.message)!)
 
             case .failure(let error):
                 print(error.description)
+                completion(nil)
+                //completion(State.Error)
+
                 break
             }
         }
     }
     
+    func imageUpload(image: UIImage, state: String, completion: @escaping (String) -> Void)  {
+            
+        SessionNetwork.init().request(with: URLBuilder(from: ImageUploadAPI.upload(image: image, state: state))) { result in
+            print(result)
+                completion("")
+            }
+            
+        }
+    
+    
 }
 
+
+
+
+
+
+
+ 
 
 
