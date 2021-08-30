@@ -14,18 +14,6 @@ enum PickerType {
     case nationalCountry
 }
 
-enum RegistrationState: String {
-    case PERSONAL_DATA
-    case IDENTITY_FRONT
-    case IDENTITY_BACK
-    case IDENTITY_EXPIRATION
-    case DRIVING_LICENSE_FRONT
-    case DRIVING_LICENSE_BACK
-    case DRIVING_LICENSE_DATES
-    case DRIVING_LICENSE_SELFIE
-    case AGREEMENT_ACCEPTED
-}
-
 final class RegistartionBotViewController: UIViewController, StoryboardInitializable {
     
     //MARK: Outlets
@@ -61,6 +49,7 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
     var isTakePhoto:Bool = false
     var isDriverRegister: Bool = false
     private var currentIndex = 0
+    private var imageUploadCounter = 0
     private var activeTextField: UITextField?
     
 
@@ -691,37 +680,18 @@ extension RegistartionBotViewController: UIImagePickerControllerDelegate, UINavi
             mTableV.reloadRows(at: [IndexPath(row: currentIndex, section: 0)], with: .automatic)
             insertTableCell()
             isTakePhoto = false
-            var newImage = resizeImage(image: image, targetSize: CGSize(width: 50, height: 50)) ?? UIImage()
-            registrationBotViewModel.imageUpload(image: newImage, state: "DLS") { (str) in
-            }
             
         }
     }
-    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
-        let size = image.size
+    
+    private func uploadImage(image: UIImage) {
+        let uploadState = DocumentState(rawValue: String(currentIndex))
         
-        let widthRatio  = targetSize.width  / size.width
-        let heightRatio = targetSize.height / size.height
-        
-        // Figure out what our orientation is, and use that to form the rectangle
-        var newSize: CGSize
-        if(widthRatio > heightRatio) {
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-        } else {
-            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
-        }
-        
-        // This is the rect that we've calculated out and this is what is actually used below
-        let rect = CGRect(origin: .zero, size: newSize)
-        
-        // Actually do the resizing to the rect using the ImageContext stuff
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage
+        let newImage = image.resizeImage(targetSize: CGSize(width: 50, height: 50))
+//        registrationBotViewModel.imageUpload(image: newImage, state: uploadState.rawValue) { (str) in
+//        }
     }
+  
 }
 
 //MARK: UIPickerViewDelegate

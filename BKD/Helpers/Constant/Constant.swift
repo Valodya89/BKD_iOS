@@ -130,8 +130,6 @@ struct Constant {
         static let bkdAdvantages = "BKD Advantages"
         static let select = "Select"
         
-        //Custo Location
-        static let cantDetectAddress = "Can't detect address"
         
         //Detail
         static let conditioning = "Conditioning"
@@ -226,6 +224,8 @@ struct Constant {
         static let errUserOrPass = "Incorrect username or password!"
         static let errToken = "Failed to get token"
         static let errLocation = "Can't detect location"
+        static let errAddress = "Can't detect address"
+
         
         //Request texts
         static let type = "type"
@@ -274,7 +274,7 @@ let equipmentForSearch = [ "0": "towbar",
 let top_searchResult: CGFloat = 12.0
 let top_avalableCategoryTbv: CGFloat = 30.0
 let cornerRadius_equipment: CGFloat = 15.0
-let zoom: Float = 12.0
+let zoom: Float = 18.0
 let detail_cell_height: CGFloat = 28
 let mydriver_cell_height: CGFloat = 66
 let tailLift_cell_height: CGFloat = 40

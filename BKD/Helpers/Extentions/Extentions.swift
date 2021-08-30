@@ -22,6 +22,8 @@ extension UIImageView {
     }
     
     
+    
+    
 }
 
 //MARK: UIImage
@@ -52,6 +54,7 @@ extension UIImage {
 
         return newImage!
       }
+
     
     
     public static func loadFrom(url: URL, completion: @escaping (_ image: UIImage?) -> ()) {

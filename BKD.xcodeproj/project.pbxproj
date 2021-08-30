@@ -10,9 +10,6 @@
 		560048702697F78C009943B5 /* BkdAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5600486F2697F78C009943B5 /* BkdAgreementViewController.swift */; };
 		560251DB2661074200FB204C /* Carousel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 560251DA2661074200FB204C /* Carousel.xib */; };
 		560251E02661089C00FB204C /* CarouselCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560251DF2661089C00FB204C /* CarouselCellView.swift */; };
-		5602520226611C4100FB204C /* SearchCustomLocationUiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602520126611C4100FB204C /* SearchCustomLocationUiView.swift */; };
-		5602521126612A6300FB204C /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602520F26612A6200FB204C /* SearchTableViewCell.swift */; };
-		5602521226612A6300FB204C /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5602521026612A6200FB204C /* SearchTableViewCell.xib */; };
 		5602526726616C8700FB204C /* Storyboardinitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602526626616C8700FB204C /* Storyboardinitializable.swift */; };
 		560252952664376900FB204C /* Mulish-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 560252942664372300FB204C /* Mulish-Regular.ttf */; };
 		5602529C2664465200FB204C /* MarkerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5602529B2664465200FB204C /* MarkerInfoViewController.swift */; };
@@ -77,7 +74,6 @@
 		5656324626585FFF00B78562 /* CarEquipmentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656324426585FFF00B78562 /* CarEquipmentCollectionViewCell.swift */; };
 		5656324726585FFF00B78562 /* CarEquipmentCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5656324526585FFF00B78562 /* CarEquipmentCollectionViewCell.xib */; };
 		565632522658B11E00B78562 /* EquipmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565632512658B11D00B78562 /* EquipmentModel.swift */; };
-		5656A9C626D69E1C00A71375 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656A9C526D69E1C00A71375 /* ResultViewController.swift */; };
 		5656A9C926D69F7900A71375 /* GooglePlacesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656A9C826D69F7900A71375 /* GooglePlacesManager.swift */; };
 		5656A9D626D8303E00A71375 /* PersonalDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656A9D526D8303E00A71375 /* PersonalDriver.swift */; };
 		5656A9E626D84D2700A71375 /* ImageUploadAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656A9E526D84D2700A71375 /* ImageUploadAPI.swift */; };
@@ -281,9 +277,6 @@
 		5600486F2697F78C009943B5 /* BkdAgreementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BkdAgreementViewController.swift; sourceTree = "<group>"; };
 		560251DA2661074200FB204C /* Carousel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Carousel.xib; sourceTree = "<group>"; };
 		560251DF2661089C00FB204C /* CarouselCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCellView.swift; sourceTree = "<group>"; };
-		5602520126611C4100FB204C /* SearchCustomLocationUiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCustomLocationUiView.swift; sourceTree = "<group>"; };
-		5602520F26612A6200FB204C /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
-		5602521026612A6200FB204C /* SearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
 		5602526626616C8700FB204C /* Storyboardinitializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboardinitializable.swift; sourceTree = "<group>"; };
 		560252942664372300FB204C /* Mulish-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mulish-Regular.ttf"; sourceTree = "<group>"; };
 		5602529B2664465200FB204C /* MarkerInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerInfoViewController.swift; sourceTree = "<group>"; };
@@ -349,7 +342,6 @@
 		5656324426585FFF00B78562 /* CarEquipmentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarEquipmentCollectionViewCell.swift; sourceTree = "<group>"; };
 		5656324526585FFF00B78562 /* CarEquipmentCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarEquipmentCollectionViewCell.xib; sourceTree = "<group>"; };
 		565632512658B11D00B78562 /* EquipmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentModel.swift; sourceTree = "<group>"; };
-		5656A9C526D69E1C00A71375 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		5656A9C826D69F7900A71375 /* GooglePlacesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesManager.swift; sourceTree = "<group>"; };
 		5656A9D526D8303E00A71375 /* PersonalDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDriver.swift; sourceTree = "<group>"; };
 		5656A9E526D84D2700A71375 /* ImageUploadAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUploadAPI.swift; sourceTree = "<group>"; };
@@ -558,19 +550,8 @@
 			isa = PBXGroup;
 			children = (
 				5602529B2664465200FB204C /* MarkerInfoViewController.swift */,
-				5602520126611C4100FB204C /* SearchCustomLocationUiView.swift */,
-				5656A9C526D69E1C00A71375 /* ResultViewController.swift */,
 			);
 			path = UI;
-			sourceTree = "<group>";
-		};
-		5602520E26612A2E00FB204C /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				5602520F26612A6200FB204C /* SearchTableViewCell.swift */,
-				5602521026612A6200FB204C /* SearchTableViewCell.xib */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		560252D42665296B00FB204C /* NetworkManager */ = {
@@ -1916,7 +1897,6 @@
 		5691A607265C50500008081D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5602520E26612A2E00FB204C /* Cell */,
 				560251FF26611C0600FB204C /* UI */,
 				5691A609265C508C0008081D /* CustomLocationViewController.swift */,
 				5691A613265C50F10008081D /* CustomLocation.storyboard */,
@@ -2364,7 +2344,6 @@
 				566B3761269503360021BCAA /* CalendarTableViewCell.xib in Resources */,
 				565F9B0626C8AE2900064AD4 /* ReservetionCollectionViewCell.xib in Resources */,
 				565A7ACF26548025006C63D0 /* SearchResult.xib in Resources */,
-				5602521226612A6300FB204C /* SearchTableViewCell.xib in Resources */,
 				5691A614265C50F20008081D /* CustomLocation.storyboard in Resources */,
 				56CFDE6C2693723400D731CD /* RegistrationBot.storyboard in Resources */,
 				565F8C4A268D17C200E21C71 /* Carousel.storyboard in Resources */,
@@ -2475,7 +2454,6 @@
 				56B9F34226826DE1003449AD /* DetailsViewModel.swift in Sources */,
 				56AD19222693421C006A53C1 /* TermsConditionsViewController.swift in Sources */,
 				5656083926785E2C009578FA /* RentalConditionsTableViewCell.swift in Sources */,
-				5656A9C626D69E1C00A71375 /* ResultViewController.swift in Sources */,
 				5602536F2669AE1C00FB204C /* OfflineViewController.swift in Sources */,
 				56188889264A61ED00BDDB33 /* TextField.swift in Sources */,
 				56B9F33D26825FF0003449AD /* TariffSlideViewModel.swift in Sources */,
@@ -2512,7 +2490,6 @@
 				565F810526A7D08600ADB9FE /* PaymenTypeTableViewCell.swift in Sources */,
 				565F8C45268D12EA00E21C71 /* CarouselViewController.swift in Sources */,
 				564E1306264EE294008CE884 /* UIViewExtention.swift in Sources */,
-				5602520226611C4100FB204C /* SearchCustomLocationUiView.swift in Sources */,
 				565BFDC1269F92310044D081 /* UIApplicationExtention.swift in Sources */,
 				560FE63D267BE7960068BC85 /* ReserveViewController.swift in Sources */,
 				564E137126530208008CE884 /* SearchResultCollectionViewCell.swift in Sources */,
@@ -2569,7 +2546,6 @@
 				568E70172643919B000CB6A9 /* LeftViewController.swift in Sources */,
 				935D479C26D973F200D000A6 /* ChatViewModel.swift in Sources */,
 				560252D62665298200FB204C /* NetworkManager.swift in Sources */,
-				5602521126612A6300FB204C /* SearchTableViewCell.swift in Sources */,
 				5656F1A82689650600E70BAB /* ReserveViewModel.swift in Sources */,
 				566B3760269503360021BCAA /* CalendarTableViewCell.swift in Sources */,
 				56CC7D8526AA07F2006DB7B8 /* BancontactCollectionViewCell.swift in Sources */,

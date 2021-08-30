@@ -61,7 +61,6 @@ enum AuthAPI: APIProtocol {
              .verifyAccounts,
              .resendCode,
              .addPersonalData,
-             .addDocument,
              .forgotPassword,
              .recoverPassword,
              .getChatID:
@@ -116,8 +115,6 @@ enum AuthAPI: APIProtocol {
             return "accounts/send-code"
         case .addPersonalData:
             return "api/driver/personal"
-        case .addDocument: // DLS needs to be dinamic
-            return "api/driver/document/DLS"
         case .recoverPassword:
             return "accounts/recover-password"
         case .getChatID:
@@ -260,12 +257,6 @@ enum AuthAPI: APIProtocol {
                 "grant_type": "password"
             ]
             return MultipartFormData(parameters: params, blob: nil)
-            
-        case .addDocument(let documentName, let documentData):
-            let params = [
-                "document": documentName,
-            ]
-            return MultipartFormData(parameters: params, blob: Blob(mimeType: "image/png", fileName: documentName, data: documentData))
 
         default:
             return nil

@@ -118,7 +118,7 @@ class SeeMapViewController: BaseViewController {
         let geocoder = GMSGeocoder()
         geocoder.reverseGeocodeCoordinate(mapViewCenterCoordinate) { response, _ in
             guard let address = response?.firstResult()?.lines?.first else {
-                self.addressVC.mAddressNameLb.text = "Can't detect address"
+                self.addressVC.mAddressNameLb.text = Constant.Texts.errAddress
                 return
             }
             self.addressVC.mAddressNameLb.text = address
@@ -130,9 +130,7 @@ class SeeMapViewController: BaseViewController {
         let coord = locationObj.coordinate
         let lattitude = coord.latitude
         let longitude = coord.longitude
-        let center = CLLocationCoordinate2D(latitude: locationObj.coordinate.latitude, longitude: locationObj.coordinate.longitude)
-       // showAddressNameByGeocoder(mapViewCenterCoordinate: center)
-        let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: lattitude, longitude: longitude, zoom: zoom)
+        let camera: GMSCameraPosition =  GMSCameraPosition(target: CLLocationCoordinate2D(latitude: lattitude, longitude: longitude), zoom: zoom, bearing: 0, viewingAngle: 0)
         self.mapView!.animate(to: camera)
     }
     
@@ -152,16 +150,16 @@ extension SeeMapViewController: AddressNameViewControllerDelegate {
     }
     
     func didPressRoute() {
-                                    var url = "yandexnavi://build_route_on_map?lat_to=\(mapViewCenterCoordinate.latitude)&lon_to=\(mapViewCenterCoordinate.longitude)"
-                                    if UIApplication.shared.canOpenURL(URL(string: url)!) {
-                                        UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
-                                    } else {
-                                        url = "https://itunes.apple.com/ru/app/yandex.navigator/id474500851"
-                                        if UIApplication.shared.canOpenURL(URL(string: url)!) {
-                                            UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
-                                        }
-                                    }
-
+        var url = "yandexnavi://build_route_on_map?lat_to=\(mapViewCenterCoordinate.latitude)&lon_to=\(mapViewCenterCoordinate.longitude)"
+        if UIApplication.shared.canOpenURL(URL(string: url)!) {
+            UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
+        } else {
+            url = "https://itunes.apple.com/ru/app/yandex.navigator/id474500851"
+            if UIApplication.shared.canOpenURL(URL(string: url)!) {
+                UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
+            }
+        }
+        
     }
     
     func didPressUserLocation() {

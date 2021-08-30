@@ -7,29 +7,28 @@
 
 import UIKit
 
+enum RegistrationState: String {
+    case PERSONAL_DATA
+    case IDENTITY_FRONT
+    case IDENTITY_BACK
+    case IDENTITY_EXPIRATION
+    case DRIVING_LICENSE_FRONT
+    case DRIVING_LICENSE_BACK
+    case DRIVING_LICENSE_DATES
+    case DRIVING_LICENSE_SELFIE
+    case AGREEMENT_ACCEPTED
+}
+
+enum DocumentState: String {
+    case DLF = "0"
+    case DLB = "1"
+    case DLS = "2"
+    case IF = "3"
+    case IB = "4"
+}
+
 class RegistrationBotViewModel: NSObject {
     
-   
-    
-
-//    /// get phone codes
-//    func getPhoneCodeList(completion: @escaping ([PhoneCode]) -> Void) {
-//        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getPhoneCodes)) { (result) in
-//            
-//            switch result {
-//            case .success(let data):
-//                guard let phoneCodeList = BkdConverter<BaseResponseModel<[PhoneCode]>>.parseJson(data: data as Any) else {
-//                    print("error")
-//                    return
-//                }
-//                print(phoneCodeList.content as Any)
-//                completion(phoneCodeList.content!)
-//            case .failure(let error):
-//                print(error.description)
-//                break
-//            }
-//        }
-//    }
     
     /// get country list
     func getCountryList(completion: @escaping ([Country]) -> Void) {
