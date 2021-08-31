@@ -19,13 +19,15 @@ enum RegistrationState: String {
     case AGREEMENT_ACCEPTED
 }
 
-enum DocumentState: String {
-    case DLF = "0"
-    case DLB = "1"
-    case DLS = "2"
-    case IF = "3"
-    case IB = "4"
-}
+//enum DocumentState: String {
+//    case DLF = "0"
+//    case DLB = "1"
+//    case DLS = "2"
+//    case IF = "3"
+//    case IB = "4"
+//}
+
+
 
 class RegistrationBotViewModel: NSObject {
     
@@ -50,7 +52,9 @@ class RegistrationBotViewModel: NSObject {
     }
     
     /// add Personla Data
-    func addPersonlaData(personlaData: PersonalData,  completion: @escaping (PersonalDriver?) -> Void) {
+    func addPersonlaData(personlaData: PersonalData,
+                         completion: @escaping (PersonalDriver?) -> Void) {
+        
         SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addPersonalData(name: personlaData.name!, surname: personlaData.surname!, phoneNumber: personlaData.phoneNumber!, dateOfBirth: personlaData.dateOfBirth!, street: personlaData.street!, house: personlaData.house!, mailBox: personlaData.mailBox ?? "", countryId: personlaData.countryId!, zip: personlaData.zip!, city: personlaData.city!, nationalRegisterNumber: personlaData.nationalRegisterNumber!))) { (result) in
             
             switch result {
@@ -62,18 +66,69 @@ class RegistrationBotViewModel: NSObject {
                 }
                 print(result.message as Any)
                 completion(result.content!)
-                //completion(RegistrationState(rawValue: result.message)!)
 
             case .failure(let error):
                 print(error.description)
                 completion(nil)
-                //completion(State.Error)
-
                 break
             }
         }
     }
     
+    
+    ///add identity experation date
+    //Optional("ACCOUNTS_wrong_feeling_state_identity_back_empty")
+
+    func addIdentityExpiration(experationDate: String,
+                               completion: @escaping (String?) -> Void) {
+        
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addIdentityExpiration(expirationDate: experationDate))) { (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let result = BkdConverter<BaseResponseModel<EmptyModel>>.parseJson(data: data as Any) else {
+                    print("error")
+                    completion(nil)
+                    return
+                }
+                print(result.message as Any)
+                completion(result.message as String)
+               // completion(result.content!)
+
+            case .failure(let error):
+                print(error.description)
+                completion(nil)
+                break
+            }
+        }
+    }
+    
+    ///add the date of the driver's license
+    func addDriverLicenseDates(driverLicenseDateData: DriverLiceseDateData,
+                               completion: @escaping (String?) -> Void) {
+        
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addDriverLicenseDates(issueDate: driverLicenseDateData.issueDate ?? "", expirationDate: driverLicenseDateData.expirationDate ?? ""))) { (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let result = BkdConverter<BaseResponseModel<EmptyModel>>.parseJson(data: data as Any) else {
+                    print("error")
+                    completion(nil)
+                    return
+                }
+                print(result.message as Any)
+                completion(result.message as String)
+               // completion(result.content!)
+
+            case .failure(let error):
+                print(error.description)
+                completion(nil)
+                break
+            }
+        }
+    }
+    
+    ///Upload image
     func imageUpload(image: UIImage, state: String, completion: @escaping (String) -> Void)  {
             
         SessionNetwork.init().request(with: URLBuilder(from: ImageUploadAPI.upload(image: image, state: state))) { result in

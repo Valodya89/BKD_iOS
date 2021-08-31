@@ -39,6 +39,7 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
     var cityList: [City]? = [City(id: "test", city: "Test"),
                              City(id: "test1", city: "Test1")]
     var personalData: PersonalData = PersonalData()
+    var driverLicenseDateData: DriverLiceseDateData = DriverLiceseDateData()
     
     var pickerType:PickerType = .date
     var registrationState: RegistrationState = .PERSONAL_DATA
@@ -138,9 +139,12 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
     
     
     func sendPersonalData(personalData: PersonalData) {
-        registrationBotViewModel.addPersonlaData(personlaData: personalData) { (result) in
+        registrationBotViewModel.addPersonlaData(personlaData: personalData) { [self] (result) in
             print(result)
-            guard let result = result else { return }
+            guard let result = result else {
+                self.showAlertMessage(Constant.Texts.errPersonalData)
+                return }
+            self.registrationState = RegistrationState(rawValue: result.driver.state ?? "")!
         }
     }
 
@@ -352,17 +356,20 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
 
         } else if let _ = model.viewDescription {
             switch model.viewDescription {
-            case "button", "txtFl":
+            case Constant.Texts.button,
+                 Constant.Texts.txtFl:
                 return userFillFieldCell(indexPath: indexPath, model: model)
-            case  "phone" :
+            case Constant.Texts.phone:
                 return phoneNumberCell(indexPath: indexPath,model: model)
-            case  "calendar" :
+            case Constant.Texts.calendar:
                 return calendarCell(indexPath: indexPath,model: model, isExpireDate: false)
-            case "calendar_expire":
+            case Constant.Texts.expityDate,
+                 Constant.Texts.issueDateDrivingLicense,
+                 Constant.Texts.expityDateDrivingLicense:
                 return calendarCell(indexPath: indexPath,model: model, isExpireDate: true)
-            case  "mailbox" :
+            case Constant.Texts.mailbox:
                 return mailBoxCell(indexPath: indexPath, model: model)
-            case  "national register" :
+            case  Constant.Texts.nationalRegister:
                return nationalRegisterCell(indexPath: indexPath, model: model)
             default:
                 return takePhotoCell(indexPath: indexPath,model: model)
@@ -540,6 +547,7 @@ extension RegistartionBotViewController: PhoneNumberTableViewCellDelegate {
 //MARK: - CalendarTableViewCellDelegate
 //MARK: --------------------------------
 extension RegistartionBotViewController: CalendarTableViewCellDelegate {
+    
     func willOpenPicker(textFl: UITextField, isExpireDate: Bool) {
         
         textFl.inputView = datePicker
@@ -551,25 +559,63 @@ extension RegistartionBotViewController: CalendarTableViewCellDelegate {
         } else {
             // Fallback on earlier versions
         }
+        
+        datePicker.datePickerMode = .date
+        datePicker.locale = Locale(identifier: "en")
         if isExpireDate {
-            datePicker.datePickerMode = .date
             datePicker.minimumDate = Date()
             datePicker.maximumDate = nil
-            datePicker.locale = Locale(identifier: "en")
         } else {
-            datePicker.datePickerMode = .date
             datePicker.minimumDate = nil
             datePicker.maximumDate = Date()
-            datePicker.locale = Locale(identifier: "en")
         }
     }
     
     func updateData(viewType: ViewType, calendarData: String) {
         switch viewType {
-        case .dateOfBirth:
+         case .dateOfBirth:
             personalData.dateOfBirth = calendarData
+        case .expityDate:
+            if registrationState == .IDENTITY_BACK {
+                addIdentityExpirationDate(expityDate: calendarData)
+            }
+        case .issueDateDrivingLicense:
+            
+            driverLicenseDateData.issueDate = calendarData
+            
+        case .expityDateDrivingLicense:
+            
+            if registrationState == .DRIVING_LICENSE_BACK {
+                driverLicenseDateData.expirationDate = calendarData
+                addDriverLicenseDate()
+            }
         default:
             break
+        }
+    }
+    
+    private func addIdentityExpirationDate(expityDate: String) {
+        registrationBotViewModel.addIdentityExpiration(experationDate: expityDate) { (result) in
+            //Will changed
+            if result == "SUCCESS" {
+                self.registrationState = .IDENTITY_EXPIRATION
+            } else {
+                self.showAlertMessage(Constant.Texts.errIDExpirationDate)
+            }
+            print (result)
+        }
+        
+    }
+    
+    private func addDriverLicenseDate() {
+        registrationBotViewModel.addDriverLicenseDates(driverLicenseDateData: driverLicenseDateData) { (result) in
+            //Will changed
+            if result == "SUCCESS" {
+                self.registrationState = .DRIVING_LICENSE_DATES
+            } else {
+                self.showAlertMessage(Constant.Texts.errDrivLicenseDate)
+            }
+            print (result)
         }
     }
 }
@@ -607,7 +653,10 @@ extension RegistartionBotViewController: NationalRegisterNumberTableViewCellDele
         tableData[currentIndex].userRegisterInfo?.isFilled = true
         insertTableCell()
         personalData.nationalRegisterNumber = txt
-        sendPersonalData(personalData: personalData)
+        
+        if registrationState == .PERSONAL_DATA {
+            sendPersonalData(personalData: personalData)
+        }
     }
     
     func willOpenPicker(textFl: UITextField) {
@@ -676,20 +725,34 @@ extension RegistartionBotViewController: UIImagePickerControllerDelegate, UINavi
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
              return  }
         if isTakePhoto {
-            tableData[currentIndex].userRegisterInfo = UserRegisterInfo(photo: image, isFilled: true)
-            mTableV.reloadRows(at: [IndexPath(row: currentIndex, section: 0)], with: .automatic)
-            insertTableCell()
-            isTakePhoto = false
+            uploadImage(image: image)
             
         }
     }
     
     private func uploadImage(image: UIImage) {
-        let uploadState = DocumentState(rawValue: String(currentIndex))
+        let uploadState = documentStateArr[imageUploadCounter]
+       
         
         let newImage = image.resizeImage(targetSize: CGSize(width: 50, height: 50))
-//        registrationBotViewModel.imageUpload(image: newImage, state: uploadState.rawValue) { (str) in
-//        }
+        registrationBotViewModel.imageUpload(image: newImage, state: uploadState) { [self] (result) in
+            if result == "SUCCESS" {
+                DispatchQueue.main.async { [self] in
+                    tableData[self.currentIndex].userRegisterInfo = UserRegisterInfo(photo: image, isFilled: true)
+                    mTableV.reloadRows(at: [IndexPath(row: self.currentIndex, section: 0)], with: .automatic)
+                    self.insertTableCell()
+                }
+                self.isTakePhoto = false
+                self.imageUploadCounter += 1
+                if uploadState == "IB" {
+                    self.registrationState = .IDENTITY_BACK
+                } else if uploadState == "DLB" {
+                    self.registrationState = .DRIVING_LICENSE_BACK
+                }
+            } else {
+                self.showAlertMessage(Constant.Texts.errImageUpload)
+            }            
+        }
     }
   
 }

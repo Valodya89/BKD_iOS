@@ -23,6 +23,11 @@ struct PersonalData {
     
 }
 
+struct DriverLiceseDateData {
+    public var issueDate: String?
+    public var expirationDate: String?
+}
+
 
 
 /*

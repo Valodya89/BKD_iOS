@@ -48,8 +48,10 @@ enum AuthAPI: APIProtocol {
     case getChatID(name: String, type: String, identifier: String)
     case getMessages(chatID: String)
     case sendMessage(chatID: String, message: String, userIdentifier: String)
-    
-    
+    case addIdentityExpiration(expirationDate: String)
+    case addDriverLicenseDates(issueDate: String,
+                               expirationDate: String)
+
 
     
     var base: String {
@@ -63,7 +65,9 @@ enum AuthAPI: APIProtocol {
              .addPersonalData,
              .forgotPassword,
              .recoverPassword,
-             .getChatID:
+             .getChatID,
+             .addIdentityExpiration,
+             .addDriverLicenseDates:
             return BKDBaseURLs.account.rawValue
         case .getAuthRefreshToken,
              .getToken:
@@ -123,7 +127,12 @@ enum AuthAPI: APIProtocol {
             return "/chat/\(chatID)/message"
         case let .sendMessage(chatID, _, _):
             return "/chat/\(chatID)/message"
+        case .addIdentityExpiration:
+            return "api/driver/identity-expiration"
+        case .addDriverLicenseDates:
+            return "api/driver/driving-license-dates"
         }
+        
     }
     
     var header: [String : String] {
@@ -139,7 +148,9 @@ enum AuthAPI: APIProtocol {
              .getCustomLocation,
              .addPersonalData,
              .getChatID,
-             .sendMessage:
+             .sendMessage,
+             .addIdentityExpiration,
+             .addDriverLicenseDates:
             return ["Content-Type": "application/json"]
         case .getAuthRefreshToken:
             fallthrough
@@ -218,7 +229,7 @@ enum AuthAPI: APIProtocol {
                 "password": password,
                 "code": code
             ]
-        case .addPersonalData(let name, let surname, let phoneNumber, let dateOfBirth, let street, let house, let mailBox, let countryId, let zip, let city, let nationalRegisterNumber):
+        case let .addPersonalData(name, surname, phoneNumber, dateOfBirth, street, house, mailBox, countryId, zip, city, nationalRegisterNumber):
             return [
                 "name": name,
                 "surname": surname,
@@ -242,6 +253,16 @@ enum AuthAPI: APIProtocol {
             return [
                 "message": message,
                 "userIdentifier": userIdentifier
+            ]
+        case let .addIdentityExpiration(expirationDate):
+            return [
+                "expirationDate": expirationDate,
+            ]
+        case let .addDriverLicenseDates(issueDate,
+                                   expirationDate):
+            return [
+                "issueDate": issueDate,
+                "expirationDate": expirationDate
             ]
         default:
             return nil
@@ -273,7 +294,9 @@ enum AuthAPI: APIProtocol {
              .getToken,
              .addPersonalData,
              .getChatID,
-             .sendMessage:
+             .sendMessage,
+             .addIdentityExpiration,
+             .addDriverLicenseDates:
             return .post
         case .verifyAccounts,
              .recoverPassword:

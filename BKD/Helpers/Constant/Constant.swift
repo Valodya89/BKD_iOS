@@ -200,6 +200,16 @@ struct Constant {
         static let zipNumber = "Zip number"
         static let dateOfBirth = "Date of birth"
         
+        //Personal date types
+        static let button = "button"
+        static let txtFl = "txtFl"
+        static let phone = "phone"
+        static let mailbox = "mailbox"
+        static let nationalRegister = "national register" 
+        static let calendar = "calendar"
+        static let expityDate = "calendar_expire"
+        static let expityDateDrivingLicense = "calendar_expire_driving_license"
+        static let issueDateDrivingLicense = "calendar_issue_driving_license"
         
         //Payment
         static let invalidCode = "Verification code is invalid"
@@ -225,6 +235,10 @@ struct Constant {
         static let errToken = "Failed to get token"
         static let errLocation = "Can't detect location"
         static let errAddress = "Can't detect address"
+        static let errPersonalData = "Failed to add personal data!"
+        static let errImageUpload = "Failed to load image!"
+        static let errIDExpirationDate = "Failed to add ID expiration date!"
+        static let errDrivLicenseDate = "Failed to add issue and expired driver license dates."
 
         
         //Request texts
@@ -266,6 +280,15 @@ let equipmentForSearch = [ "0": "towbar",
                   "3": "GPSNavigator",
                   "4": "airConditioning" ]
 
+let documentStateArr = ["DLS", "DLB", "DLF", "IF",
+                        "IB" ]
+
+    
+//    ["IF",
+//                            "IB",
+//                            "DLF",
+//                            "DLB",
+//                            "DLS"]
 
  
 

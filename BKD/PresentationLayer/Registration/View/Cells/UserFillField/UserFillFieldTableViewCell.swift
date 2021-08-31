@@ -26,6 +26,12 @@ enum ViewType: String, CaseIterable {
     //case city = "city"
     case nationalRegisterNumber = "nationalRegisterNumber"
     
+   
+    
+    case expityDate = "Expiry date"
+    case expityDateDrivingLicense = "Expiry date of the Driving license"
+    case issueDateDrivingLicense = "Issue date of the Driving license"
+    
 }
 //
 //"name": "Valodya",
@@ -64,7 +70,7 @@ class UserFillFieldTableViewCell: UITableViewCell {
     @IBOutlet weak var mBorderV: UIView!
     @IBOutlet weak var mDropDownImgV: UIImageView!
     @IBOutlet weak var mDropDownPlaceholderLb: UILabelPadding!
-    var viewType = ViewType(rawValue: "txtFl")
+    var viewType = ViewType(rawValue: Constant.Texts.txtFl)
     
     weak var delegate: UserFillFieldTableViewCellDelegate?
 
@@ -146,7 +152,7 @@ class UserFillFieldTableViewCell: UITableViewCell {
         placeholder = item.userRegisterInfo?.placeholder
       //  viewType = ViewType(rawValue: placeholder ?? "")
         
-        if item.viewDescription == "button" {
+        if item.viewDescription == Constant.Texts.button {
             mStartBtn.isHidden = false
             mBorderV.isHidden = true
             mTextLb.isHidden = true

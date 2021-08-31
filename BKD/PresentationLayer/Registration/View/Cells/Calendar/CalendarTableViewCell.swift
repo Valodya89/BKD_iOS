@@ -33,12 +33,18 @@ class CalendarTableViewCell: UITableViewCell, UITextFieldDelegate {
     private var viewType:ViewType = .dateOfBirth
     weak var delegate: CalendarTableViewCellDelegate?
     
-    private var placeholder: String? {
+    private var viewDescription: String? {
         didSet {
-            if placeholder == Constant.Texts.dateOfBirth {
+            if viewDescription == Constant.Texts.dateOfBirth {
                 viewType = .dateOfBirth
+            } else if viewDescription == Constant.Texts.expityDate {
+                viewType = .expityDate
+            } else if  viewDescription == Constant.Texts.issueDateDrivingLicense {
+                viewType = .issueDateDrivingLicense
+            } else if viewDescription == Constant.Texts.expityDateDrivingLicense {
+                viewType = .expityDateDrivingLicense
             }
-                
+                 
         }
     }
 
@@ -78,7 +84,8 @@ class CalendarTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     func  setCellInfo(item: RegistrationBotModel) {
         if let date = item.userRegisterInfo?.date {
-            placeholder = item.userRegisterInfo?.placeholder ?? ""
+            viewDescription = item.viewDescription
+//            placeholder = item.userRegisterInfo?.placeholder ?? ""
             mDayLb.text = String(date.get(.day))
             mMonthLb.text = date.getMonth(lng: "en")
             mYearLb.text = String(date.getYear())
@@ -100,7 +107,7 @@ class CalendarTableViewCell: UITableViewCell, UITextFieldDelegate {
         mCalendarBckgV.isUserInteractionEnabled = false
         mCalendarBckgV.bringSubviewToFront(mStackV)
         mCalendarBckgV.bringSubviewToFront(mCalendarImgV)
-        
+         
         delegate?.updateData(viewType: viewType, calendarData: "\( mDayLb.text!)-\( date.get(.month))-\(mYearLb.text!)")
         
     }
