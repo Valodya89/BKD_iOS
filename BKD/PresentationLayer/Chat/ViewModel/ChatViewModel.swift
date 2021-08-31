@@ -52,7 +52,7 @@ final class ChatViewModel {
             type = "USER"
             identifier = keychain.getAccessToken() ?? ""
         } else {
-            name = ""
+            name = "Ruben"
             type = "DEVICE"
             identifier = UIDevice.current.identifierForVendor?.uuidString ?? ""
         }

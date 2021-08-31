@@ -278,7 +278,6 @@ enum AuthAPI: APIProtocol {
                 "grant_type": "password"
             ]
             return MultipartFormData(parameters: params, blob: nil)
-
         default:
             return nil
         }
