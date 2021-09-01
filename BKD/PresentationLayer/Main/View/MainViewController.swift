@@ -428,7 +428,7 @@ class MainViewController: BaseViewController {
             searchHeaderV?.mTimeLb.textColor = color_search_placeholder
 
         } else {
-            dayBtn?.setTitle(String(datePicker.date.get(.day)), for: .normal)
+            dayBtn?.setTitle(datePicker.date.getDay(), for: .normal)
             monthBtn?.setTitle(datePicker.date.getMonthAndWeek(lng: "en"), for: .normal)
             searchHeaderV?.mDateLb.textColor = color_search_placeholder
         }

@@ -71,6 +71,7 @@ class ReserveViewController: UIViewController {
 
     var reserveViewModel = ReserveViewModel()
     public var vehicleModel: VehicleModel?
+    var currentTariff: Tariff = .hourly
     var lastContentOffset:CGFloat = 0.0
     var totalPrice: Double = 0.0
     
@@ -128,12 +129,20 @@ class ReserveViewController: UIViewController {
         mTowBarBckgV.isHidden = !((vehicleModel?.ifHasTowBar) == true)
         mPickUpParkingLb.text = vehicleModel?.searchModel?.pickUpLocation
         mReturnParkingLb.text = vehicleModel?.searchModel?.returnLocation
-        mPickUpDateLb.text = String((vehicleModel?.searchModel?.pickUpDate?.get(.day))!)
-        mReturnDateLb.text = String((vehicleModel?.searchModel?.returnDate?.get(.day))!)
+        
         mPickUpMonthLb.text = String((vehicleModel?.searchModel?.pickUpDate?.getMonth(lng: "en"))!)
         mReturnMonthLb.text = String((vehicleModel?.searchModel?.returnDate?.getMonth(lng: "en"))!)
         mPickUpTimeLb.text = vehicleModel?.searchModel?.pickUpTime?.getHour()
         mReturnTimeLb.text = vehicleModel?.searchModel?.returnTime?.getHour()
+        if currentTariff == .hourly{
+            mPickUpDateLb.text = String((vehicleModel?.searchModel?.pickUpTime?.getDay())!)
+            mReturnDateLb.text = String((vehicleModel?.searchModel?.returnTime?.getDay())!)
+        } else {
+            mPickUpDateLb.text = String((vehicleModel?.searchModel?.pickUpDate?.getDay())!)
+            mReturnDateLb.text = String((vehicleModel?.searchModel?.returnDate?.getDay())!)
+        }
+            
+        
         
         self.mReserveInfoTableV.accessories = reserveViewModel.getAdditionalAccessories(vehicleModel: vehicleModel!) as? [AccessoriesModel]
         self.mReserveInfoTableV.drivers = reserveViewModel.getAdditionalDrivers(vehicleModel: vehicleModel!) as? [MyDriversModel]

@@ -46,9 +46,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="62.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l5a-zG-7Lr">
-                                                    <rect key="frame" x="162" y="0.0" width="90" height="49.5"/>
-                                                </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EzH-dL-bz2">
                                                     <rect key="frame" x="16" y="0.0" width="382" height="49.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -57,6 +54,9 @@
                                                         <color key="titleColor" name="navigationBar"/>
                                                     </state>
                                                 </button>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l5a-zG-7Lr">
+                                                    <rect key="frame" x="16" y="0.0" width="382" height="49.5"/>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="EzH-dL-bz2" firstAttribute="centerX" secondItem="GxL-Mg-FgN" secondAttribute="centerX" id="0R6-vr-ec3"/>
@@ -65,7 +65,7 @@
                                                 <constraint firstItem="EzH-dL-bz2" firstAttribute="top" secondItem="GxL-Mg-FgN" secondAttribute="top" id="7VE-Q4-Tst"/>
                                                 <constraint firstItem="l5a-zG-7Lr" firstAttribute="centerX" secondItem="EzH-dL-bz2" secondAttribute="centerX" id="8PA-qe-Qko"/>
                                                 <constraint firstItem="l5a-zG-7Lr" firstAttribute="height" secondItem="EzH-dL-bz2" secondAttribute="height" id="C9n-AW-kbS"/>
-                                                <constraint firstItem="l5a-zG-7Lr" firstAttribute="width" secondItem="EzH-dL-bz2" secondAttribute="width" multiplier="0.235602" id="KHv-sv-IDb"/>
+                                                <constraint firstItem="l5a-zG-7Lr" firstAttribute="width" secondItem="EzH-dL-bz2" secondAttribute="width" id="KHv-sv-IDb"/>
                                                 <constraint firstItem="EzH-dL-bz2" firstAttribute="width" secondItem="GxL-Mg-FgN" secondAttribute="width" multiplier="0.922705" id="UwL-6l-AKR"/>
                                                 <constraint firstAttribute="bottom" secondItem="EzH-dL-bz2" secondAttribute="bottom" constant="13" id="cGc-O7-jbs"/>
                                             </constraints>
@@ -104,14 +104,14 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="52" translatesAutoresizingMaskIntoConstraints="NO" id="Lc7-Ru-Hv6">
                                                 <rect key="frame" x="31" y="75.5" width="320" height="57"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhT-qt-TS3">
+                                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhT-qt-TS3">
                                                         <rect key="frame" x="0.0" y="0.0" width="72" height="57"/>
                                                         <state key="normal" image="ing"/>
                                                         <connections>
                                                             <action selector="ingBanc:" destination="AoF-l6-Nwb" eventType="touchUpInside" id="EHz-VL-bCa"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="km4-ws-rsd">
+                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="km4-ws-rsd">
                                                         <rect key="frame" x="124" y="0.0" width="72" height="57"/>
                                                         <state key="normal" image="bnp"/>
                                                         <connections>
@@ -128,14 +128,11 @@
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="km4-ws-rsd" firstAttribute="centerY" secondItem="Lc7-Ru-Hv6" secondAttribute="centerY" id="H4a-jV-6Ix"/>
-                                                    <constraint firstItem="nQz-2d-aAF" firstAttribute="width" secondItem="Lc7-Ru-Hv6" secondAttribute="width" multiplier="0.225" id="I4G-U0-esf"/>
                                                     <constraint firstItem="fhT-qt-TS3" firstAttribute="centerY" secondItem="Lc7-Ru-Hv6" secondAttribute="centerY" id="Ops-6W-XVf"/>
-                                                    <constraint firstItem="km4-ws-rsd" firstAttribute="width" secondItem="Lc7-Ru-Hv6" secondAttribute="width" multiplier="0.225" id="Q1j-Nv-chc"/>
                                                     <constraint firstItem="nQz-2d-aAF" firstAttribute="centerY" secondItem="Lc7-Ru-Hv6" secondAttribute="centerY" id="RcO-hK-Dgf"/>
                                                     <constraint firstItem="nQz-2d-aAF" firstAttribute="height" secondItem="Lc7-Ru-Hv6" secondAttribute="height" id="W8R-QW-Z8N"/>
                                                     <constraint firstItem="km4-ws-rsd" firstAttribute="height" secondItem="Lc7-Ru-Hv6" secondAttribute="height" id="gZj-UV-GAh"/>
                                                     <constraint firstItem="fhT-qt-TS3" firstAttribute="height" secondItem="Lc7-Ru-Hv6" secondAttribute="height" id="h1a-8P-qH9"/>
-                                                    <constraint firstItem="fhT-qt-TS3" firstAttribute="width" secondItem="Lc7-Ru-Hv6" secondAttribute="width" multiplier="0.225" id="zok-Qa-Jkr"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>

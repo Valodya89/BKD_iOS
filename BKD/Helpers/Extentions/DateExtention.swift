@@ -17,10 +17,19 @@ extension Date {
     }
     
    
+    ///Get day as string
+    func getDay() -> String {
+        let formatter = DateFormatter()
+        formatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+        formatter.dateFormat = "d"
+        let day = formatter.string(from: self)
+        return day
+    }
     
     ///Get month and week as string
     func getMonthAndWeek(lng: String) -> String {
         let formatter = DateFormatter()
+        formatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
         formatter.locale = NSLocale(localeIdentifier: lng) as Locale
         formatter.dateFormat = "MMM"
         let month = formatter.string(from: self)
@@ -32,6 +41,7 @@ extension Date {
     ///Get month as string
     func getMonth(lng: String) -> String {
         let formatter = DateFormatter()
+        formatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
         formatter.locale = NSLocale(localeIdentifier: lng) as Locale
         formatter.dateFormat = "MMM"
         let month = formatter.string(from: self)

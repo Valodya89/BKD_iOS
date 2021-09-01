@@ -313,7 +313,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             updateSearchTimes()
             
         } else { // date
-            dayBtn?.setTitle(String(datePicker.date.get(.day)), for: .normal)
+        dayBtn?.setTitle(String(datePicker.date.getDay()), for: .normal)
             monthBtn?.setTitle(datePicker.date.getMonthAndWeek(lng: "en"), for: .normal)
             updateSearchDates()
         }
@@ -372,6 +372,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         let reserve = UIStoryboard(name: Constant.Storyboards.reserve, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.reserve) as! ReserveViewController
         setVehicleModel()
         reserve.vehicleModel = vehicleModel
+        reserve.currentTariff = currentTariff
         self.navigationController?.pushViewController(reserve, animated: true)
     }
     
@@ -582,7 +583,6 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             self.backgroundV.removeFromSuperview()
         }
         
-        
         switch pickerState {
         case .pickUpDate:
             mSearchV.showDateInfoViews(dayBtn: mSearchV!.mDayPickUpBtn,
@@ -591,16 +591,26 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             showSelectedDate(dayBtn: mSearchV!.mDayPickUpBtn,
                              monthBtn: mSearchV!.mMonthPickUpBtn, timeStr: nil)
             
+                searchModel.pickUpDate = datePicker.date
+                        
         case .returnDate:
             mSearchV.showDateInfoViews(dayBtn: mSearchV!.mDayReturnDateBtn,
                          monthBtn: mSearchV!.mMonthReturnDateBtn,
                          txtFl: responderTxtFl)
             showSelectedDate(dayBtn: mSearchV!.mDayReturnDateBtn,
                              monthBtn: mSearchV!.mMonthReturnDateBtn, timeStr: nil)
-            
+            searchModel.returnDate = datePicker.date
+
         default:
             let timeStr = pickerList![ pickerV.selectedRow(inComponent: 0)]
             chanckReservationTime(timeStr: timeStr)
+            
+            if pickerState == .pickUpTime {
+                searchModel.pickUpTime = timeStr.stringToDate()
+            } else{
+                searchModel.returnTime = timeStr.stringToDate()
+            }
+            
         }
         
     }
@@ -698,7 +708,7 @@ extension DetailsViewController: TariffSlideViewControllerDelegate {
     
     func didPressTariffOption(tariff: Tariff, optionIndex: Int) {
         
-        //scrollContentHeight = 0.0
+        scrollContentHeight = 0.0
         setScrollVoiewHeight()
         scrollToBottom(distance: 0.0)
         currentTariff = tariff

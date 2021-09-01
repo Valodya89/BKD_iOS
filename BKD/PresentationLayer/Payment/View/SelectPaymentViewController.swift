@@ -49,17 +49,23 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
         mBlurV.isHidden = true
         paymentTypes = PaymentTypeData.paymentTypeModel
         mPaymentTbV.reloadData()
-        mBancontactV.mContentVBottom.constant = -400
-        //self.view.layoutIfNeeded()
+        
+        self.view.setNeedsLayout()
 
     }
     
     override func viewDidLayoutSubviews() {
+        if mBlurV.isHidden {
+            mBancontactV.mContentVBottom.constant = -400
+            mBancontactTypeV.mContentVBottom.constant = -400
+        }
     }
     
     func setUpView() {
         mRightBarBtn.image = img_bkd
         mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
+        mPaymentTbV.delegate = self
+        mPaymentTbV.dataSource = self
         selectBancontactType()
         selectBancontactCard()
     }
@@ -180,10 +186,14 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
         mBlurV.isHidden = true
         //mGradientV.isHidden = true
         self.animateBancontactTypeView(isShow: false, bottom: self.mBancontactTypeBottom )
+        self.paymentTypes = PaymentTypeData.paymentTypeModel
         self.mPaymentTbV.reloadData()
     }
     
     @IBAction func swipeBancontactV(_ sender: UISwipeGestureRecognizer) {
+        mBlurV.isHidden = true
+        self.paymentTypes = PaymentTypeData.paymentTypeModel
+        self.mPaymentTbV.reloadData()
         self.animateBancontactTypeView(isShow: false, bottom: self.mBancontactV.mContentVBottom )
     }
     
@@ -207,15 +217,15 @@ extension SelectPaymentViewController: UITableViewDelegate, UITableViewDataSourc
           return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        paymentTypes = PaymentTypeData.paymentTypeModel
-        paymentTypes[indexPath.row].isClicked = true
-        tableView.reloadData()
-    }
     
     ///
     private func openPaymentScreen(cell: PaymenTypeTableViewCell) {
-        cell.didPressPayment = { [self] paymentType in
+        cell.didPressPayment = { [self] paymentType, index in
+            
+            self.paymentTypes = PaymentTypeData.paymentTypeModel
+            self.paymentTypes[index].isClicked = true
+            self.mPaymentTbV.reloadData()
+            
             switch paymentType {
             case .creditCard:
                 self.getCreditCardURL()
@@ -227,11 +237,8 @@ extension SelectPaymentViewController: UITableViewDelegate, UITableViewDataSourc
                 self.selectApplePay()
             case .payPal:
                 self.goToWebScreen(paymentType: .payPal)
-            case .kaartlazer:
-                self.goToWebScreen(paymentType: .kaartlazer)
-            case .officeTerminal:
-                self.goToWebScreen(paymentType: .officeTerminal)
             }
+            
         }
     }
 }
@@ -240,6 +247,8 @@ extension SelectPaymentViewController: UITableViewDelegate, UITableViewDataSourc
 extension SelectPaymentViewController: PKPaymentAuthorizationViewControllerDelegate {
     func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
         controller.dismiss(animated: true, completion: nil)
+        self.paymentTypes = PaymentTypeData.paymentTypeModel
+        self.mPaymentTbV.reloadData()
     }
     
     func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {

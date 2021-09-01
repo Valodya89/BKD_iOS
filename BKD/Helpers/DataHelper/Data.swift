@@ -44,7 +44,6 @@ struct MenuData {
 //MARK: --------------------
 struct EquipmentData {
    static let equipmentModel: [EquipmentModel] = [ EquipmentModel(equipmentImg: UIImage(named: "selected_tow_bar")!, equipmentName: "Tow Bar", didSelect: false),
-                                                    EquipmentModel(equipmentImg: UIImage(named: "double_cabin")!, equipmentName: "Double cabin", didSelect: false),
                                                     EquipmentModel(equipmentImg: UIImage(named: "tail_lift")!, equipmentName: "Tail Lift", didSelect: false),
                                                     EquipmentModel(equipmentImg: UIImage(named: "gps_navigator")!, equipmentName: "GPS navigation", didSelect: false),
                                                     EquipmentModel(equipmentImg: UIImage(named: "air_conditioning")!, equipmentName: "Air conditioning", didSelect: false)]
@@ -351,7 +350,7 @@ struct  RegistrationBotData {
 
 //MARK: - Payment
 struct PaymentTypeData {
-  static  var paymentTypeModel: [PaymentTypes] = [ PaymentTypes(title: nil, image: UIImage(named: "credit_card")),
+  static  let paymentTypeModel: [PaymentTypes] = [ PaymentTypes(title: nil, image: UIImage(named: "credit_card")),
         PaymentTypes(title: nil, image: UIImage(named: "bancontact")),
         PaymentTypes(title: nil, image: UIImage(named: "apple_pay")),
         PaymentTypes(title: nil, image: UIImage(named: "paypal")),

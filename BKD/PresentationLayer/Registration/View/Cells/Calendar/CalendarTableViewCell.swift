@@ -85,8 +85,8 @@ class CalendarTableViewCell: UITableViewCell, UITextFieldDelegate {
     func  setCellInfo(item: RegistrationBotModel) {
         if let date = item.userRegisterInfo?.date {
             viewDescription = item.viewDescription
-//            placeholder = item.userRegisterInfo?.placeholder ?? ""
-            mDayLb.text = String(date.get(.day))
+           // mDayLb.text = String(date.get(.day))
+            mDayLb.text = String(date.getDay())
             mMonthLb.text = date.getMonth(lng: "en")
             mYearLb.text = String(date.getYear())
             filedsFilled(date: date)
