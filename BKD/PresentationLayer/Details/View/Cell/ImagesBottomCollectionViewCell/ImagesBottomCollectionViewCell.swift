@@ -21,20 +21,27 @@ class ImagesBottomCollectionViewCell: UICollectionViewCell {
        
     }
     
+
+    
     /// set cell info
-    func setCellInfo(item: CarModel, currentImageIndex: Int, index: Int ) {
+    func setCellInfo(img: UIImage, currentImageIndex: Int, index: Int ) {
         mShadowBckgV.removeCAShapeLayer()
         //removeBorderFromCell()
         mImgV.contentMode = .scaleAspectFit
         mShadowBckgV.layer.cornerRadius = 3
         contentView.setShadow(color: color_shadow!)
-        mImgV.image = item.carImage
+        mImgV.image = img
        
         
         if  currentImageIndex == index {
            
              //  mShadowBckgV.makeBorderWithCornerRadius(radius: 3, borderColor: color_navigationBar!, borderWidth: 0.5)
-            mShadowBckgV.roundCornersWithBorder(corners: .allCorners, radius: 3, borderColor: color_navigationBar!, borderWidth: 0.5)
+            
+//            mShadowBckgV.roundCornersWithBorder(corners: .allCorners, radius: 3, borderColor: color_navigationBar!, borderWidth: 0.5)
+            
+            mShadowBckgV.layer.cornerRadius = 3
+            mShadowBckgV.layer.borderWidth = 0.5
+            mShadowBckgV.layer.borderColor = color_navigationBar!.cgColor
         }
     }
    

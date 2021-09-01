@@ -16,6 +16,7 @@ struct VehicleModel {
     public var vehicleName: String?
     public var vehicleType: String?
     public var vehicleImg: UIImage?
+    public var vehicleLogo: UIImage?
     public var ifHasTowBar: Bool = false
     public var vehicleValue: Double = 0.0
     public var vehicleOffertValue: Double = 0.0
@@ -41,5 +42,7 @@ struct VehicleModel {
     public var searchModel: SearchModel?
     public var additionalAccessories: [AccessoriesModel]?
     public var additionalDrivers: [MyDriversModel]?
+    public var images: [CarImageResponse]?
+    public var carImagesList:[UIImage]?
 }
 

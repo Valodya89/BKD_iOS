@@ -7,7 +7,6 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -99,59 +98,57 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose your bank" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aW8-hW-5X6">
                                                 <rect key="frame" x="57.5" y="9" width="267" height="27"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="22"/>
-                                                <color key="textColor" name="navigationBar"/>
+                                                <color key="textColor" name="filter_fields"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tyW-qU-ghS">
-                                                <rect key="frame" x="38" y="77.5" width="306" height="72"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="85F-SA-STf">
-                                                    <size key="itemSize" width="70" height="50"/>
-                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                </collectionViewFlowLayout>
-                                                <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="BancontactCollectionViewCell" id="GRu-8y-qk9" customClass="BancontactCollectionViewCell" customModule="BKD" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="70" height="50"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
-                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="SXH-8x-KWv">
-                                                            <rect key="frame" x="0.0" y="0.0" width="70" height="50"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uZ1-Q9-Ht7">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="50"/>
-                                                                </imageView>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstItem="uZ1-Q9-Ht7" firstAttribute="height" secondItem="SXH-8x-KWv" secondAttribute="height" id="QXZ-GS-dfm"/>
-                                                                <constraint firstItem="uZ1-Q9-Ht7" firstAttribute="width" secondItem="SXH-8x-KWv" secondAttribute="width" id="YL7-30-MAh"/>
-                                                                <constraint firstItem="uZ1-Q9-Ht7" firstAttribute="centerY" secondItem="SXH-8x-KWv" secondAttribute="centerY" id="l4z-ow-VJW"/>
-                                                                <constraint firstItem="uZ1-Q9-Ht7" firstAttribute="centerX" secondItem="SXH-8x-KWv" secondAttribute="centerX" id="qIA-U0-EMn"/>
-                                                            </constraints>
-                                                        </collectionViewCellContentView>
-                                                        <size key="customSize" width="70" height="50"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="52" translatesAutoresizingMaskIntoConstraints="NO" id="Lc7-Ru-Hv6">
+                                                <rect key="frame" x="31" y="75.5" width="320" height="57"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhT-qt-TS3">
+                                                        <rect key="frame" x="0.0" y="0.0" width="72" height="57"/>
+                                                        <state key="normal" image="ing"/>
                                                         <connections>
-                                                            <outlet property="mCardImgV" destination="uZ1-Q9-Ht7" id="NcG-px-Fgp"/>
+                                                            <action selector="ingBanc:" destination="AoF-l6-Nwb" eventType="touchUpInside" id="EHz-VL-bCa"/>
                                                         </connections>
-                                                    </collectionViewCell>
-                                                </cells>
-                                                <connections>
-                                                    <outlet property="dataSource" destination="AoF-l6-Nwb" id="Cku-QG-pKV"/>
-                                                    <outlet property="delegate" destination="AoF-l6-Nwb" id="oDN-2q-Oly"/>
-                                                </connections>
-                                            </collectionView>
+                                                    </button>
+                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="km4-ws-rsd">
+                                                        <rect key="frame" x="124" y="0.0" width="72" height="57"/>
+                                                        <state key="normal" image="bnp"/>
+                                                        <connections>
+                                                            <action selector="bnpBank:" destination="AoF-l6-Nwb" eventType="touchUpInside" id="tWq-C5-YQD"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQz-2d-aAF">
+                                                        <rect key="frame" x="248" y="0.0" width="72" height="57"/>
+                                                        <state key="normal" image="kbc"/>
+                                                        <connections>
+                                                            <action selector="kbcBank:" destination="AoF-l6-Nwb" eventType="touchUpInside" id="CWI-FB-PwV"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="km4-ws-rsd" firstAttribute="centerY" secondItem="Lc7-Ru-Hv6" secondAttribute="centerY" id="H4a-jV-6Ix"/>
+                                                    <constraint firstItem="nQz-2d-aAF" firstAttribute="width" secondItem="Lc7-Ru-Hv6" secondAttribute="width" multiplier="0.225" id="I4G-U0-esf"/>
+                                                    <constraint firstItem="fhT-qt-TS3" firstAttribute="centerY" secondItem="Lc7-Ru-Hv6" secondAttribute="centerY" id="Ops-6W-XVf"/>
+                                                    <constraint firstItem="km4-ws-rsd" firstAttribute="width" secondItem="Lc7-Ru-Hv6" secondAttribute="width" multiplier="0.225" id="Q1j-Nv-chc"/>
+                                                    <constraint firstItem="nQz-2d-aAF" firstAttribute="centerY" secondItem="Lc7-Ru-Hv6" secondAttribute="centerY" id="RcO-hK-Dgf"/>
+                                                    <constraint firstItem="nQz-2d-aAF" firstAttribute="height" secondItem="Lc7-Ru-Hv6" secondAttribute="height" id="W8R-QW-Z8N"/>
+                                                    <constraint firstItem="km4-ws-rsd" firstAttribute="height" secondItem="Lc7-Ru-Hv6" secondAttribute="height" id="gZj-UV-GAh"/>
+                                                    <constraint firstItem="fhT-qt-TS3" firstAttribute="height" secondItem="Lc7-Ru-Hv6" secondAttribute="height" id="h1a-8P-qH9"/>
+                                                    <constraint firstItem="fhT-qt-TS3" firstAttribute="width" secondItem="Lc7-Ru-Hv6" secondAttribute="width" multiplier="0.225" id="zok-Qa-Jkr"/>
+                                                </constraints>
+                                            </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" name="background"/>
+                                        <color key="backgroundColor" name="subview_background"/>
                                         <constraints>
                                             <constraint firstItem="aW8-hW-5X6" firstAttribute="centerX" secondItem="BcP-jh-0mA" secondAttribute="centerX" id="41d-d8-fBY"/>
+                                            <constraint firstItem="Lc7-Ru-Hv6" firstAttribute="height" secondItem="BcP-jh-0mA" secondAttribute="height" multiplier="0.314917" id="AOA-Vx-kic"/>
                                             <constraint firstItem="aW8-hW-5X6" firstAttribute="height" secondItem="BcP-jh-0mA" secondAttribute="height" multiplier="0.149171" id="LoR-a9-sAA"/>
-                                            <constraint firstItem="tyW-qU-ghS" firstAttribute="centerX" secondItem="BcP-jh-0mA" secondAttribute="centerX" id="Lsc-sB-S0O"/>
-                                            <constraint firstItem="tyW-qU-ghS" firstAttribute="top" secondItem="aW8-hW-5X6" secondAttribute="bottom" multiplier="2.14" id="MCo-Je-fbB"/>
-                                            <constraint firstItem="tyW-qU-ghS" firstAttribute="width" secondItem="BcP-jh-0mA" secondAttribute="width" multiplier="0.8" id="Zh7-9n-sqc"/>
+                                            <constraint firstItem="Lc7-Ru-Hv6" firstAttribute="width" secondItem="BcP-jh-0mA" secondAttribute="width" multiplier="0.837696" id="R1F-nX-aQT"/>
                                             <constraint firstItem="aW8-hW-5X6" firstAttribute="width" secondItem="BcP-jh-0mA" secondAttribute="width" multiplier="0.7" id="brX-Tv-52C"/>
-                                            <constraint firstItem="tyW-qU-ghS" firstAttribute="height" secondItem="BcP-jh-0mA" secondAttribute="height" multiplier="0.4" id="e7a-qg-25J"/>
                                             <constraint firstItem="aW8-hW-5X6" firstAttribute="centerY" secondItem="BcP-jh-0mA" secondAttribute="centerY" multiplier="0.25" id="mbD-7f-ftC"/>
+                                            <constraint firstItem="Lc7-Ru-Hv6" firstAttribute="centerY" secondItem="BcP-jh-0mA" secondAttribute="centerY" multiplier="1.15" id="qeG-nb-mpY"/>
+                                            <constraint firstItem="Lc7-Ru-Hv6" firstAttribute="centerX" secondItem="BcP-jh-0mA" secondAttribute="centerX" id="rhR-OQ-5VG"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -164,7 +161,6 @@
                                     <constraint firstAttribute="bottom" secondItem="BcP-jh-0mA" secondAttribute="bottom" id="onf-Zd-wYA"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="mBancksCollectionV" destination="tyW-qU-ghS" id="5bX-tS-nXE"/>
                                     <outlet property="mContentV" destination="BcP-jh-0mA" id="S5d-BC-07c"/>
                                     <outlet property="mContentVBottom" destination="tCg-y9-tJU" id="wal-HN-FGJ"/>
                                     <outlet property="mTitleLb" destination="aW8-hW-5X6" id="2b8-Ko-Db3"/>
@@ -375,14 +371,23 @@
     <resources>
         <image name="back" width="12" height="21"/>
         <image name="bkd" width="76" height="23.5"/>
+        <image name="bnp" width="72" height="57"/>
+        <image name="ing" width="72" height="57"/>
+        <image name="kbc" width="72" height="57"/>
         <namedColor name="background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="filter_fields">
+            <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="navigationBar">
             <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="navigation_bar">
             <color red="0.10999999940395355" green="0.20000000298023224" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="subview_background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -99,7 +99,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K0X-93-Au1">
                                                 <rect key="frame" x="40.5" y="167" width="333" height="46.5"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fiat" translatesAutoresizingMaskIntoConstraints="NO" id="Yi7-vT-6Ig">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fiat" translatesAutoresizingMaskIntoConstraints="NO" id="Yi7-vT-6Ig">
                                                         <rect key="frame" x="0.0" y="0.0" width="39.5" height="34.5"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ducato Koelwagen" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bKI-gf-14e">
@@ -461,36 +461,16 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="MNj-hI-Mpo"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="JjJ-E4-bmo"/>
                             </scrollView>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lRB-Gz-9eY">
-                                <rect key="frame" x="56" y="15" width="302" height="140"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="car.png" translatesAutoresizingMaskIntoConstraints="NO" id="1jG-Rl-Kuq">
-                                        <rect key="frame" x="0.0" y="0.0" width="302" height="140"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemYellowColor"/>
-                                <constraints>
-                                    <constraint firstItem="1jG-Rl-Kuq" firstAttribute="centerX" secondItem="lRB-Gz-9eY" secondAttribute="centerX" id="7Zi-kQ-dvn"/>
-                                    <constraint firstItem="1jG-Rl-Kuq" firstAttribute="height" secondItem="lRB-Gz-9eY" secondAttribute="height" id="Cmv-1P-Sac"/>
-                                    <constraint firstItem="1jG-Rl-Kuq" firstAttribute="width" secondItem="lRB-Gz-9eY" secondAttribute="width" id="NaU-Lv-L7E"/>
-                                    <constraint firstItem="1jG-Rl-Kuq" firstAttribute="centerY" secondItem="lRB-Gz-9eY" secondAttribute="centerY" id="jAd-Tl-ehy"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YKV-84-ekL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="lRB-Gz-9eY" firstAttribute="width" secondItem="Y5i-7p-TRf" secondAttribute="width" multiplier="0.729469" id="4GW-Da-HhN"/>
                             <constraint firstItem="Yi7-vT-6Ig" firstAttribute="height" secondItem="Y5i-7p-TRf" secondAttribute="height" multiplier="0.043" id="4sO-hz-ITT"/>
-                            <constraint firstItem="lRB-Gz-9eY" firstAttribute="centerX" secondItem="YKV-84-ekL" secondAttribute="centerX" id="BW4-CR-p4j"/>
                             <constraint firstItem="gXZ-e4-8gD" firstAttribute="leading" secondItem="YKV-84-ekL" secondAttribute="leading" id="Ng2-xU-v0I"/>
-                            <constraint firstItem="lRB-Gz-9eY" firstAttribute="height" secondItem="Y5i-7p-TRf" secondAttribute="height" multiplier="0.173267" id="PTb-cq-oXy"/>
                             <constraint firstItem="YKV-84-ekL" firstAttribute="trailing" secondItem="gXZ-e4-8gD" secondAttribute="trailing" id="YMD-ym-clY"/>
                             <constraint firstAttribute="bottom" secondItem="gXZ-e4-8gD" secondAttribute="bottom" id="c1r-KL-ueN"/>
                             <constraint firstItem="Yi7-vT-6Ig" firstAttribute="width" secondItem="Y5i-7p-TRf" secondAttribute="width" multiplier="0.096" id="mQV-At-7XA"/>
                             <constraint firstItem="gXZ-e4-8gD" firstAttribute="top" secondItem="YKV-84-ekL" secondAttribute="top" id="nrk-Rh-Z8i"/>
-                            <constraint firstItem="lRB-Gz-9eY" firstAttribute="centerY" secondItem="YKV-84-ekL" secondAttribute="centerY" multiplier="0.22" id="oXg-Hw-Enj"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Reserve" id="ShH-fF-1Mi">
@@ -503,17 +483,12 @@
                         <barButtonItem key="rightBarButtonItem" image="bkd" id="wPU-yE-9al"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="mCarAnimationV" destination="lRB-Gz-9eY" id="09z-SL-IN3"/>
                         <outlet property="mCarBckgV" destination="hUb-PV-4h1" id="M78-HG-PSA"/>
-                        <outlet property="mCarCenterX" destination="BW4-CR-p4j" id="eWw-hJ-A8C"/>
-                        <outlet property="mCarCenterY" destination="oXg-Hw-Enj" id="v6T-J7-H5y"/>
                         <outlet property="mCarDescriptionlb" destination="bKb-I8-syK" id="53w-sw-RUn"/>
-                        <outlet property="mCarHeight" destination="PTb-cq-oXy" id="QHJ-L4-Kud"/>
                         <outlet property="mCarImgBckgV" destination="ezd-5C-D1R" id="oEd-ht-Lzp"/>
                         <outlet property="mCarImgV" destination="sGk-ks-2al" id="h9q-At-Y4h"/>
                         <outlet property="mCarMarkBckgV" destination="K0X-93-Au1" id="dUY-Qu-qan"/>
                         <outlet property="mCarMarkLb" destination="bKI-gf-14e" id="hHh-Lf-x5u"/>
-                        <outlet property="mCarWidth" destination="4GW-Da-HhN" id="3rD-hT-ZW9"/>
                         <outlet property="mConfirmBckgV" destination="2Rv-bm-yBv" id="sHc-TH-Sr2"/>
                         <outlet property="mConfirmBtn" destination="MtZ-ZN-rV1" id="PzN-Jv-kX4"/>
                         <outlet property="mConfirmLeading" destination="duz-6y-jNc" id="aSm-P6-038"/>
@@ -607,9 +582,6 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

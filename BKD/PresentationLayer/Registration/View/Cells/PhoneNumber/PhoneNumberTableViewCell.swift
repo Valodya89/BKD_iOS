@@ -35,7 +35,7 @@ class PhoneNumberTableViewCell: UITableViewCell {
     var validFormPattern: Int = 0
     var phoneNumber: String? {
         get {
-            return "\(selectedCountry?.code ?? "NULL") \(mPhoneNumberTxtFl.text ?? "NULL")".replacingOccurrences(of: "-", with: "").replacingOccurrences(of: " ", with: "")
+            return "\(selectedCountry?.code ?? "NULL") \(mPhoneNumberTxtFl.text ?? "NULL")".replacingOccurrences(of: "_", with: "").replacingOccurrences(of: " ", with: "")
         } set {
             guard let newValue = newValue else {
                 return

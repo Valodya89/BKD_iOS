@@ -135,6 +135,7 @@ class DetailsViewModel: NSObject {
         didResult(validator.checkReserve(searchModel: searchModel))
     }
     
+    ///Total price of custom location
     func getCustomLocationTotalPrice(searchV: SearchView) -> Double {
         var total: Double = 0.0
         if LocationPickUp.pickUpCustomLocation == searchV.locationPickUp {
@@ -146,6 +147,7 @@ class DetailsViewModel: NSObject {
         return total
     }
     
+    ///Total cost of reservations outside working hours
     func getNoWorkingTimeTotalPrice(searchModel: SearchModel, timePrice:Double) -> Double {
         var total: Double = 0.0
         guard let _ = workingTimes else { return 0.0 }
@@ -159,6 +161,26 @@ class DetailsViewModel: NSObject {
         return total
     }
     
+    ///Get all car images
+    func getCarImageList(item: VehicleModel?) -> [UIImage]? {
+        guard let item = item else { return nil }
+        var imagesList:[UIImage] = []
+        if let img = item.vehicleImg {
+            imagesList.append(img)
+        }
+        guard let images = item.images else {
+            return imagesList
+        }
+        images.forEach { (carImage) in
+            guard let url = carImage.getURL() else {return}
+            UIImage.loadFrom(url: url) { image in
+                guard let image = image else { return}
+                imagesList.append(image)
+            }
+        }
+        return imagesList
+        
+    }
    
 }
 

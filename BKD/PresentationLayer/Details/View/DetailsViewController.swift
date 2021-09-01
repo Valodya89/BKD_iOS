@@ -21,6 +21,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     //MARK: - Outlet
     
     @IBOutlet weak var mCarNameLb: UILabel!
+    @IBOutlet weak var mCarLogoImgV: UIImageView!
     @IBOutlet weak var mCarDetailLb: UILabel!
     @IBOutlet weak var carPhotosView: CarPhotosView!
     @IBOutlet weak var mCarInfoV: CarInfoView!
@@ -187,6 +188,8 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
 
         mCarNameLb.text = vehicleModel?.vehicleName
         mCarDetailLb.text = vehicleModel?.vehicleType
+        mCarLogoImgV.image = vehicleModel?.vehicleLogo
+        carPhotosView.carImagesList = detailsViewModel.getCarImageList(item: vehicleModel) ?? []
         carPhotosView.mTowBarBckgV.isHidden = vehicleModel?.ifHasTowBar != nil ? !vehicleModel!.ifHasTowBar : true
         mCarInfoV.mCardLb.text = vehicleModel?.drivingLicense
         mCarInfoV.mKgLb.text = vehicleModel?.vehicleWeight
@@ -208,9 +211,6 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
      func setVehicleModel(){
         //var vehicleModel = VehicleModel()
         vehicleModel?.vehicleName = mCarNameLb.text
-        vehicleModel?.ifHasTowBar = true
-        vehicleModel?.vehicleType = "Double cabin"
-        vehicleModel?.ifTailLift = false
         vehicleModel?.additionalAccessories = additionalAccessories
         vehicleModel?.additionalDrivers = additionalDrivers
 //        searchModel.pickUpLocation = mSearchV.mPickUpLocationBtn.title(for: .normal)
@@ -220,7 +220,6 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         if !isSearchEdit {
             vehicleModel?.customLocationTotalPrice = detailsViewModel.getCustomLocationTotalPrice(searchV: mSearchV)
         }
-        
      }
     
     private func configureTransparentView()  {

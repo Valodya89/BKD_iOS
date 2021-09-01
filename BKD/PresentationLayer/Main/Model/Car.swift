@@ -17,7 +17,7 @@ struct CarsModel: Codable {
     let model: String
     let volume: Double
     let loadCapacity: Double
-    
+    let type: String
     let driverLicenseType: String
     let price: Double
     let hasSpecialPrice: Bool

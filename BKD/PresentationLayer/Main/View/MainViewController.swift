@@ -656,12 +656,13 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     //MARK: -------------------------------
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        //Main screen
         if !isSearchResultPage {
             let cell = collectionView.cellForItem(at: indexPath) as! MainCollectionViewCell
             let vehicleModel =  cell.setVehicleModel(carModel: cars[indexPath.row])
             goToDetailPage(vehicleModel: vehicleModel,
                            isSearchEdit: false, isClickMore: false)
-        } else {
+        } else { //search result
             if !isPressedFilter {
             let cell = collectionView.cellForItem(at: indexPath) as! SearchResultCollectionViewCell
             var vehicleModel =

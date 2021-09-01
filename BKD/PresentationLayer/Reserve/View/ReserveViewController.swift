@@ -16,12 +16,12 @@ class ReserveViewController: UIViewController {
     @IBOutlet weak var mTowBarBtn: UIButton!
     @IBOutlet weak var mCarImgV: UIImageView!
     @IBOutlet weak var mCarImgBckgV: UIView!
-    @IBOutlet weak var mCarAnimationV: UIView!
-    
-    @IBOutlet weak var mCarHeight: NSLayoutConstraint!
-    @IBOutlet weak var mCarWidth: NSLayoutConstraint!
-    @IBOutlet weak var mCarCenterX: NSLayoutConstraint!
-    @IBOutlet weak var mCarCenterY: NSLayoutConstraint!
+//    @IBOutlet weak var mCarAnimationV: UIView!
+//
+//    @IBOutlet weak var mCarHeight: NSLayoutConstraint!
+//    @IBOutlet weak var mCarWidth: NSLayoutConstraint!
+//    @IBOutlet weak var mCarCenterX: NSLayoutConstraint!
+//    @IBOutlet weak var mCarCenterY: NSLayoutConstraint!
     
     
     @IBOutlet weak var mCarMarkBckgV: UIView!
@@ -92,6 +92,12 @@ class ReserveViewController: UIViewController {
         super.viewDidLayoutSubviews()
         mReserveTableHeight.constant = mReserveInfoTableV.contentSize.height
         mPriceTableHeight.constant = mPriceTableV.contentSize.height
+        mCarImgV.layer.cornerRadius = 16
+        mCarImgV.setShadow(color: color_shadow!)
+        mCarImgBckgV.layer.borderColor = color_shadow!.cgColor
+        mCarImgBckgV.layer.borderWidth = 0.5
+        mCarImgBckgV.layer.cornerRadius = 16
+        mCarImgBckgV.setShadow(color: color_shadow!)
     }
     
     func setupView() {
@@ -101,10 +107,11 @@ class ReserveViewController: UIViewController {
         mTotalPriceBackgV.layer.cornerRadius = 3
         mTotalPriceBackgV.setShadow(color: color_shadow!)
         mRentInfoBckgV.setShadow(color: color_shadow!)
-        mCarImgBckgV.layer.cornerRadius = 16
-        mCarImgBckgV.setShadow(color: color_shadow!)
+       
+        
+        
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
-        mScrollV.delegate = self
+      //  mScrollV.delegate = self
         
         configureView()
     }
@@ -115,6 +122,9 @@ class ReserveViewController: UIViewController {
         mCarImgV.image = vehicleModel?.vehicleImg?.resizeImage(targetSize: CGSize(width:self.view.bounds.width * 0.729, height:self.view.bounds.height * 0.173))
 
         mCarDescriptionlb.text = vehicleModel?.vehicleType
+        mFiatImgV.image = vehicleModel?.vehicleLogo
+        mCarMarkLb.text = vehicleModel?.vehicleName
+        
         mTowBarBckgV.isHidden = !((vehicleModel?.ifHasTowBar) == true)
         mPickUpParkingLb.text = vehicleModel?.searchModel?.pickUpLocation
         mReturnParkingLb.text = vehicleModel?.searchModel?.returnLocation
@@ -209,53 +219,53 @@ class ReserveViewController: UIViewController {
 }
 
  
-//MARK: - UIScrollViewDelegate
-//MARK: -----------------------------
-
-extension ReserveViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        if(scrollView.panGestureRecognizer.translation(in: scrollView.superview).y > 0) {
-                print("up \(mCarHeight.constant)")
-            if mCarHeight.constant <= 0 {
-                mCarHeight.constant += 1
-                mCarWidth.constant += 2.3
-                mCarCenterX.constant -= 1.5
-                mCarCenterY.constant += 0.5
-            }
-            
-            } else {
-                print("down \(mCarHeight.constant)")
-                if mCarHeight.constant >= -100 {
-                    mCarHeight.constant -= 1
-                    mCarWidth.constant -= 2.3
-                    mCarCenterX.constant += 1.5
-                    mCarCenterY.constant -= 0.5
-                }
-           }
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        print("scrollViewDidEndDecelerating")
-        if(scrollView.panGestureRecognizer.translation(in: scrollView.superview).y > 0) {
-                print("up \(mCarHeight.constant)")
-            UIView.animate(withDuration: 0.8) { [self] in
-                self.mCarHeight.constant = 0
-                self.mCarWidth.constant = 0
-                self.mCarCenterX.constant = 0
-                self.mCarCenterY.constant = 0
-            }
-                
-            
-            }
-        else {
-                print("down \(mCarHeight.constant)")
-                UIView.animate(withDuration: 0.8) {
-                    self.mCarHeight.constant = -100
-                    self.mCarWidth.constant = -230
-                    self.mCarCenterX.constant = 150
-                    self.mCarCenterY.constant = -50
-                }
-           }
-    }
-}
+////MARK: - UIScrollViewDelegate
+////MARK: -----------------------------
+//
+//extension ReserveViewController: UIScrollViewDelegate {
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//
+//        if(scrollView.panGestureRecognizer.translation(in: scrollView.superview).y > 0) {
+//                print("up \(mCarHeight.constant)")
+//            if mCarHeight.constant <= 0 {
+//                mCarHeight.constant += 1
+//                mCarWidth.constant += 2.3
+//                mCarCenterX.constant -= 1.5
+//                mCarCenterY.constant += 0.5
+//            }
+//
+//            } else {
+//                print("down \(mCarHeight.constant)")
+//                if mCarHeight.constant >= -100 {
+//                    mCarHeight.constant -= 1
+//                    mCarWidth.constant -= 2.3
+//                    mCarCenterX.constant += 1.5
+//                    mCarCenterY.constant -= 0.5
+//                }
+//           }
+//    }
+//
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        print("scrollViewDidEndDecelerating")
+//        if(scrollView.panGestureRecognizer.translation(in: scrollView.superview).y > 0) {
+//                print("up \(mCarHeight.constant)")
+//            UIView.animate(withDuration: 0.8) { [self] in
+//                self.mCarHeight.constant = 0
+//                self.mCarWidth.constant = 0
+//                self.mCarCenterX.constant = 0
+//                self.mCarCenterY.constant = 0
+//            }
+//
+//
+//            }
+//        else {
+//                print("down \(mCarHeight.constant)")
+//                UIView.animate(withDuration: 0.8) {
+//                    self.mCarHeight.constant = -100
+//                    self.mCarWidth.constant = -230
+//                    self.mCarCenterX.constant = 150
+//                    self.mCarCenterY.constant = -50
+//                }
+//           }
+//    }
+//}

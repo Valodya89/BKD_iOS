@@ -8,6 +8,9 @@
 import UIKit
 import PassKit
 
+let kCustomURLScheme = "kitefasterCustomUrlScheme://"
+
+
 final class SelectPaymentViewController: UIViewController, StoryboardInitializable {
     
     //MARK: - Outlet
@@ -21,7 +24,7 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
     
     //MARK: - Variables
     private let viewModel = PaymentViewModel()
-    let paymentTypes = PaymentTypeData.paymentTypeModel
+    var paymentTypes = PaymentTypeData.paymentTypeModel
     //MARK: - Local properties
     private var paymentRequest: PKPaymentRequest = {
         let request = PKPaymentRequest()
@@ -44,7 +47,14 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         mBlurV.isHidden = true
+        paymentTypes = PaymentTypeData.paymentTypeModel
+        mPaymentTbV.reloadData()
         mBancontactV.mContentVBottom.constant = -400
+        //self.view.layoutIfNeeded()
+
+    }
+    
+    override func viewDidLayoutSubviews() {
     }
     
     func setUpView() {
@@ -57,13 +67,14 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
     /// Selected bancontact type
     func selectBancontactType() {
         mBancontactTypeV.didPressBancontact = {
+            self.goToWebScreen(paymentType: .creditCard)
+        }
+        
+        mBancontactTypeV.didPressMobileBancking = {
+            
             self.animateBancontactTypeView(isShow: false, bottom: self.mBancontactTypeBottom )
 
             self.animateBancontactTypeView(isShow: true, bottom: self.mBancontactV.mContentVBottom )
-        }
-        mBancontactTypeV.didPressMobileBancking = {
-            self.goToWebScreen(paymentType: .creditCard)
-
         }
     }
     
@@ -72,7 +83,8 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
         mBancontactV.didPressBancontactCard = { cardType in
             switch cardType {
             case .ing:
-                self.goToWebScreen(paymentType: .creditCard)
+                //self.goToWebScreen(paymentType: .creditCard)
+                SelectPaymentViewController.openCustomApp(by: kCustomURLScheme)
             case .bnp:
             self.goToWebScreen(paymentType: .creditCard)
             case .kbc:
@@ -80,6 +92,41 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
             }
         }
     }
+    
+    
+    
+    ///Test of url scheme
+
+    class func openCustomApp(by urlScheme: String) {
+        if openCustomURLScheme(customURLScheme: urlScheme) {
+            print("app was opened successfully")
+           } else {
+            print("handle unable to open the app, perhaps redirect to the App Store")
+           }
+       }
+
+
+       class func openCustomURLScheme(customURLScheme: String) -> Bool {
+           let customURL = URL(string: customURLScheme)!
+           if UIApplication.shared.canOpenURL(customURL) {
+               if #available(iOS 10.0, *) {
+                   UIApplication.shared.open(customURL)
+               } else {
+                   UIApplication.shared.openURL(customURL)
+               }
+               return true
+           }
+
+           return false
+       }
+    
+    
+    ///Test
+    
+    
+    
+    
+    
     
     
     /// Selected Apple Pay
@@ -158,6 +205,12 @@ extension SelectPaymentViewController: UITableViewDelegate, UITableViewDataSourc
         cell.setCellInfo(item: paymentTypes[indexPath.row], index: indexPath.row)
         openPaymentScreen(cell: cell)
           return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        paymentTypes = PaymentTypeData.paymentTypeModel
+        paymentTypes[indexPath.row].isClicked = true
+        tableView.reloadData()
     }
     
     ///

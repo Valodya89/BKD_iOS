@@ -86,7 +86,6 @@ static let identifier = "MainCollectionViewCell"
         var vehicleModel = VehicleModel()
         vehicleModel.vehicleName = mCarNameLb.text
         vehicleModel.ifHasTowBar = true
-        vehicleModel.vehicleType = "Double cabin"
         vehicleModel.vehicleImg = mCarImgV.image
         vehicleModel.drivingLicense = mCardLb.text
         vehicleModel.vehicleCube = mCubeLb.text
@@ -95,6 +94,15 @@ static let identifier = "MainCollectionViewCell"
         vehicleModel.ifTailLift = carModel.tailgate
         vehicleModel.ifHasAccessories = false
         vehicleModel.ifHasAditionalDriver = false
+        vehicleModel.vehicleLogo = mFiatImgV.image
+        vehicleModel.vehicleImg = mCarImgV.image
+        vehicleModel.images = carModel.images
+
+        let carType = ApplicationSettings.shared.carTypes?.filter{
+              $0.id == carModel.type
+      }
+        vehicleModel.vehicleType = carType?.first?.name
+        
         let price: Double = mOffertBackgV.isHidden ? (mValueLb.text!  as NSString).doubleValue : (mOffertPriceLb.text!  as NSString).doubleValue
         vehicleModel.vehicleValue = price
         
@@ -152,7 +160,7 @@ static let identifier = "MainCollectionViewCell"
         
         if item.logo != nil {
             UIImage.loadFrom(url: (item.logo!.getURL() ?? URL(string: ""))!) { image in
-                self.mFiatImgV.image = image
+                self.mFiatImgV.image = image ?? UIImage()
             }
         }
         guard let start = item.reservations?.getStart(), let end = item.reservations?.getEnd()  else { return }

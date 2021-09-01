@@ -111,7 +111,6 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         var vehicleModel = VehicleModel()
         vehicleModel.vehicleName = mCarNameLb.text
         vehicleModel.ifHasTowBar = true
-        vehicleModel.vehicleType = "Double cabin"
         vehicleModel.vehicleImg = mCarImgV.image
         vehicleModel.drivingLicense = mCardLb.text
         vehicleModel.vehicleCube = mCubeLb.text
@@ -120,6 +119,13 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         vehicleModel.ifTailLift = carModel.tailgate
         vehicleModel.ifHasAccessories = false
         vehicleModel.ifHasAditionalDriver = false
+        vehicleModel.vehicleLogo = mCarLogoImgV.image
+        vehicleModel.vehicleImg = mCarImgV.image
+        let carType = ApplicationSettings.shared.carTypes?.filter{
+              $0.id == carModel.type
+      }
+        vehicleModel.vehicleType = carType?.first?.name
+        
         let price: Double = mOffertBckgV.isHidden ? (mValueLb.text!  as NSString).doubleValue : (mOffertValueLB.text!  as NSString).doubleValue
         vehicleModel.vehicleValue = price
         
@@ -160,13 +166,11 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         UIImage.loadFrom(url: item.image.getURL()!) { image in
             self.mCarImgV.image = image
         }
-//        if item.logo != nil {
-//            UIImage.loadFrom(url: item.logo!.getURL()!) { image in
-//                //guard let _ = image else {return}
-//                self.mCarLogoImgV.image = image
-//                self.mFlipCarLogoImgV.image = image
-//            }
-//        }
+        if item.logo != nil {
+            UIImage.loadFrom(url: (item.logo!.getURL() ?? URL(string: ""))!) { image in
+                self.mCarLogoImgV.image = image ?? UIImage()
+            }
+        }
 
         DispatchQueue.main.async { [self] in
            
