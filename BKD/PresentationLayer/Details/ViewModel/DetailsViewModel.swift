@@ -162,23 +162,33 @@ class DetailsViewModel: NSObject {
     }
     
     ///Get all car images
-    func getCarImageList(item: VehicleModel?) -> [UIImage]? {
-        guard let item = item else { return nil }
+    func getCarImageList(item: VehicleModel, completion: @escaping ([UIImage]?)-> Void){
+        
         var imagesList:[UIImage] = []
         if let img = item.vehicleImg {
             imagesList.append(img)
         }
         guard let images = item.images else {
-            return imagesList
+            completion(imagesList)
+            return
         }
+        
+        let dispatchGroup = DispatchGroup()
+
         images.forEach { (carImage) in
             guard let url = carImage.getURL() else {return}
+            dispatchGroup.enter()
             UIImage.loadFrom(url: url) { image in
                 guard let image = image else { return}
                 imagesList.append(image)
+                dispatchGroup.leave()
+
             }
         }
-        return imagesList
+        
+        dispatchGroup.notify(queue: DispatchQueue.main, execute: {
+            completion(imagesList)
+           })
         
     }
    

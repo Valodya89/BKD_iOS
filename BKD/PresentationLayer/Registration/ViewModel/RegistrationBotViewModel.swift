@@ -129,14 +129,29 @@ class RegistrationBotViewModel: NSObject {
     }
     
     ///Upload image
-    func imageUpload(image: UIImage, state: String, completion: @escaping (String) -> Void)  {
+    func imageUpload(image: UIImage, state: String, completion: @escaping (String?) -> Void)  {
             
         SessionNetwork.init().request(with: URLBuilder(from: ImageUploadAPI.upload(image: image, state: state))) { result in
-            print(result)
-                completion("")
+            
+            switch result {
+            case .success(let data):
+                guard let result = BkdConverter<BaseResponseModel<EmptyModel>>.parseJson(data: data as Any) else {
+                    print("error")
+                    completion(nil)
+                    return
+                }
+                print(result.message as Any)
+                completion(result.message as String)
+               // completion(result.content!)
+
+            case .failure(let error):
+                print(error.description)
+                completion(nil)
+                break
             }
             
         }
+    }
     
     
 }

@@ -147,6 +147,15 @@ struct Constant {
         static let month = "month"
         static let additionalDriver = "Additional driver"
         static let accessories = "Accessories"
+        static let diesel = "Diesel"
+        static let petrol = "Petrol"
+        static let keyPetrol = "PETROL"
+        static let keyDiesel = "DIESEL"
+        static let transmissionManual = "Manual"
+        static let transmissionAutomatic = "Automatic"
+
+        
+        
         
         //Tail Lift
         static let kg = "kg"
@@ -280,15 +289,11 @@ let equipmentForSearch = [ "0": "towbar",
                   "3": "GPSNavigator",
                   "4": "airConditioning" ]
 
-let documentStateArr = ["DLS", "DLB", "DLF", "IF",
-                        "IB" ]
-
-    
-//    ["IF",
-//                            "IB",
-//                            "DLF",
-//                            "DLB",
-//                            "DLS"]
+let documentStateArr = ["IF",
+                        "IB",
+                        "DLF",
+                        "DLB",
+                        "DLS"]
 
  
 

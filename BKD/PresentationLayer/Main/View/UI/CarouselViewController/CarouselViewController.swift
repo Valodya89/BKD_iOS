@@ -129,8 +129,6 @@ class CarouselViewController: UIViewController, UICollectionViewDelegate, UIColl
         return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    }
     
     
     // MARK: - UIScrollViewDelegate

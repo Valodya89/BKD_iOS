@@ -33,15 +33,28 @@ class DetailsTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.imageView?.image = detailList[indexPath.row].image
-        cell.textLabel?.text = detailList[indexPath.row].title
         cell.textLabel?.textColor = color_navigationBar
         cell.textLabel?.font = font_details_title
         cell.backgroundColor = .clear
         cell.imageView?.setTintColor(color: color_email!)
+        if detailList[indexPath.row].title == Constant.Texts.keyDiesel {
+            cell.textLabel?.text = Constant.Texts.diesel
+        } else if detailList[indexPath.row].title == Constant.Texts.keyPetrol {
+            cell.textLabel?.text = Constant.Texts.petrol
+        } else if detailList[indexPath.row].title == Constant.Texts.manual {
+            cell.textLabel?.text = Constant.Texts.transmissionManual
+        } else if detailList[indexPath.row].title == Constant.Texts.automatic {
+            cell.textLabel?.text = Constant.Texts.transmissionAutomatic
+        } else {
+            cell.textLabel?.text = detailList[indexPath.row].title
+        }
+        
         return cell
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return detail_cell_height
     }

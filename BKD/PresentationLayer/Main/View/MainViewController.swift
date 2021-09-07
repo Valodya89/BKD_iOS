@@ -634,7 +634,6 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
                         cellFilter.setUpView()
                         needsUpdateFilterCell = false
                     }
-                    //cellFilter.setInfoCell()
                     cellFilter.filterCars = { cars in
                         self.cars = cars!
                         collectionView.reloadData()

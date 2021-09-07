@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol SearchResultCellDelegate: AnyObject {
     func didPressMore(tag: Int)
@@ -96,8 +97,18 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
+        mCarNameLb.text = ""
+        mFlipCarNameLb.text = ""
+        mCarLogoImgV.image = UIImage()
+        mFlipCarLogoImgV.image = UIImage()
         mGradientV.isHidden = false
         mOffertBckgV.isHidden = true
+        initButtons(btn: mMoreInfoBtn)
+        initButtons(btn: mReserveBtn)
+        initButtons(btn: mFlipMoreInfoBtn)
+        initButtons(btn: mFlipReserveBtn)
+//        mInfoV.isHidden = false
+//        mFlipInfoV.isHidden = true
         
     }
     
@@ -108,8 +119,9 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     
     ///Set  values to vehicle model
      func setVehicleModel(carModel: CarsModel) -> VehicleModel {
+        
         var vehicleModel = VehicleModel()
-        vehicleModel.vehicleName = mCarNameLb.text
+        vehicleModel.vehicleName = carModel.name
         vehicleModel.ifHasTowBar = true
         vehicleModel.vehicleImg = mCarImgV.image
         vehicleModel.drivingLicense = mCardLb.text
@@ -121,6 +133,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         vehicleModel.ifHasAditionalDriver = false
         vehicleModel.vehicleLogo = mCarLogoImgV.image
         vehicleModel.vehicleImg = mCarImgV.image
+        vehicleModel.images = carModel.images
         let carType = ApplicationSettings.shared.carTypes?.filter{
               $0.id == carModel.type
       }
@@ -135,66 +148,47 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         vehicleModel.detailList = mainViewModel.getDetail(carModel: carModel)
         return vehicleModel
     }
-//    ///Set  values to vehicle model
-//     func setVehicleModel() -> VehicleModel {
-//        var vehicleModel = VehicleModel()
-//        vehicleModel.vehicleName = mCarNameLb.text
-//        vehicleModel.ifHasTowBar = true
-//        vehicleModel.vehicleType = "Double cabin"
-//        vehicleModel.vehicleImg = mCarImgV.image
-//        vehicleModel.drivingLicense = mCardLb.text
-//        vehicleModel.vehicleCube = mCubeLb.text
-//        vehicleModel.vehicleWeight = mKgLb.text
-//        vehicleModel.vehicleSize = mMetrLb.text
-//        vehicleModel.ifTailLift = false
-//        vehicleModel.ifHasAccessories = false
-//        vehicleModel.ifHasAditionalDriver = false
-//        let price: Double = mGradientV.isHidden ? (mOffertValueLB.text!  as NSString).doubleValue : (mValueLb.text!  as NSString).doubleValue
-//        vehicleModel.vehicleValue = price
-//        return vehicleModel
-//    }
+
  
     // Set Search result cell info
     func setSearchResultCellInfo(item: CarsModel, index: Int) {
         mMoreInfoBtn.tag = index
-    mFlipMoreInfoBtn.tag = index
+        mFlipMoreInfoBtn.tag = index
         mReserveBtn.tag = index
-      mMoreInfoBtn.addTarget(self, action: #selector(moreInfoPressed(sender:)), for: .touchUpInside)
-       mFlipMoreInfoBtn.addTarget(self, action: #selector(moreInfoPressed(sender:)), for: .touchUpInside)
+        mFlipReserveBtn.tag = index
+        mMoreInfoBtn.addTarget(self, action: #selector(moreInfoPressed(sender:)), for: .touchUpInside)
+        mFlipMoreInfoBtn.addTarget(self, action: #selector(moreInfoPressed(sender:)), for: .touchUpInside)
         mReserveBtn.addTarget(self, action: #selector(reservePressed), for: .touchUpInside)
-     
-        UIImage.loadFrom(url: item.image.getURL()!) { image in
-            self.mCarImgV.image = image
-        }
+        mFlipReserveBtn.addTarget(self, action: #selector(reservePressed), for: .touchUpInside)
+        
         if item.logo != nil {
-            UIImage.loadFrom(url: (item.logo!.getURL() ?? URL(string: ""))!) { image in
-                self.mCarLogoImgV.image = image ?? UIImage()
-            }
+            self.mCarLogoImgV.kf.setImage(with: item.logo!.getURL() ?? URL(string: ""))
+            self.mFlipCarLogoImgV.kf.setImage(with: item.logo!.getURL() ?? URL(string: ""))
         }
-
-        DispatchQueue.main.async { [self] in
-           
-            self.mCarNameLb.text = item.name
-            self.mFlipCarNameLb.text = item.name
-            self.mOffertBckgV.isHidden = !item.hasSpecialPrice
-            self.mGradientV.isHidden = item.hasSpecialPrice
-            if item.hasSpecialPrice {
-                self.mOffertValueLB.text = String(item.specialPrice!) + Constant.Texts.inclVat
-                self.mValueLb.text = String(item.price) + Constant.Texts.inclVat
-            } else {
-                self.mGradientValueLb.text = String(item.price) + Constant.Texts.inclVat
-            }
-            self.mCardLb.text = item.driverLicenseType
-            self.mCubeLb.text = String(item.volume) + Constant.Texts.mCuadrad
-            self.mKgLb.text = String(item.loadCapacity) + Constant.Texts.kg
-            self.mMetrLb.text = item.exterior?.getExterior()
-            
-            guard let start = item.reservations?.getStart(), let end = item.reservations?.getEnd() else { return }
-            let isActiveCar: Bool = SearchResultModelView().isCarAvailable(start:start, end:end, rentStart: startRendDate!, rendEnd: endRendtDate)
-            self.mVisualEffectV.isHidden = isActiveCar
-            self.mInactiveCarNameLb.isHidden = isActiveCar
+        
+        if item.hasSpecialPrice {
+            self.mOffertValueLB.text = String(item.specialPrice!) + Constant.Texts.inclVat
+            self.mValueLb.text = String(item.price) + Constant.Texts.inclVat
+        } else {
+            self.mGradientValueLb.text = String(item.price) + Constant.Texts.inclVat
         }
+        
+        self.mCarNameLb.text = item.name
+        self.mFlipCarNameLb.text = item.name
+        self.mCarImgV.kf.setImage(with: item.image.getURL()!)
+        self.mOffertBckgV.isHidden = !item.hasSpecialPrice
+        self.mGradientV.isHidden = item.hasSpecialPrice
+        self.mCardLb.text = item.driverLicenseType
+        self.mCubeLb.text = String(item.volume) + Constant.Texts.mCuadrad
+        self.mKgLb.text = String(item.loadCapacity) + Constant.Texts.kg
+        self.mMetrLb.text = item.exterior?.getExterior()
+        
+        guard let start = item.reservations?.getStart(), let end = item.reservations?.getEnd() else { return }
+        let isActiveCar: Bool = SearchResultModelView().isCarAvailable(start:start, end:end, rentStart: startRendDate!, rendEnd: endRendtDate)
+        self.mVisualEffectV.isHidden = isActiveCar
+        self.mInactiveCarNameLb.isHidden = isActiveCar
     }
+    
     
     @objc func moreInfoPressed(sender: UIButton) {
         delegate?.didPressMore(tag: sender.tag)
@@ -236,20 +230,17 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func moreInfo(_ sender: UIButton) {
-        mMoreInfoBtn.backgroundColor = color_btn_pressed
-        mFlipMoreInfoBtn.backgroundColor = color_btn_pressed
-        mReserveBtn.backgroundColor = .clear
-        mFlipReserveBtn.backgroundColor = .clear
-        
-
+        mMoreInfoBtn.setClickColor(color_btn_pressed!, titleColor: color_navigationBar!)
+        mFlipMoreInfoBtn.setClickColor(color_btn_pressed!, titleColor: color_navigationBar!)
+//        mMoreInfoBtn.backgroundColor = color_btn_pressed
+//        mFlipMoreInfoBtn.backgroundColor = color_btn_pressed
     }
     
     @IBAction func reserve(_ sender: UIButton) {
-        mReserveBtn.backgroundColor = color_btn_pressed
-        mFlipReserveBtn.backgroundColor = color_btn_pressed
-        mMoreInfoBtn.backgroundColor = .clear
-        mFlipMoreInfoBtn.backgroundColor = .clear
-
+        mReserveBtn.setClickTitleColor(color_email!)
+        mFlipReserveBtn.setClickTitleColor(color_email!)
+//        mReserveBtn.backgroundColor = color_btn_pressed
+//        mFlipReserveBtn.backgroundColor = color_btn_pressed
 
     }
 }

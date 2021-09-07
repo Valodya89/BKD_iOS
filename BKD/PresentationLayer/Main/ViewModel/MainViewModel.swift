@@ -194,6 +194,7 @@ final class MainViewModel: NSObject {
         for i in 0 ..< carTypes.count{
             guard let image = carTypes[i].image, let imageURL = image.getURL() else { return }
             dispatchGroup.enter()
+            
             UIImage.loadFrom(url: imageURL) { (image) in
                 guard let _ = image else {return}
                 imagesArr.append(image!)
@@ -203,9 +204,7 @@ final class MainViewModel: NSObject {
         dispatchGroup.notify(queue: DispatchQueue.main, execute: {
             completion(imagesArr)
                print("Finished all requests.")
-           })
-        
-       
+           }) 
     }
     
     

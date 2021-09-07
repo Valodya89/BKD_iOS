@@ -11,6 +11,7 @@ PODS:
     - InputBarAccessoryView/Core (= 5.3.1)
   - InputBarAccessoryView/Core (5.3.1)
   - KeychainAccess (4.2.2)
+  - Kingfisher (6.3.1)
   - MessageKit (3.6.1):
     - InputBarAccessoryView (~> 5.3.1)
   - PhoneNumberKit (3.3.3):
@@ -32,6 +33,7 @@ DEPENDENCIES:
   - GooglePlaces (= 4.2.0)
   - iCarousel
   - KeychainAccess
+  - Kingfisher (~> 6.0)
   - MessageKit
   - PhoneNumberKit (~> 3.3)
   - SideMenu
@@ -45,6 +47,7 @@ SPEC REPOS:
     - iCarousel
     - InputBarAccessoryView
     - KeychainAccess
+    - Kingfisher
     - MessageKit
     - PhoneNumberKit
     - ReachabilitySwift
@@ -59,6 +62,7 @@ SPEC CHECKSUMS:
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   InputBarAccessoryView: 1f75d8c9f75e5e57f3ffac36ed58635a8005e0bc
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
+  Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
   MessageKit: d153fbbbcb12f3f4045a1ba8874298924dacfb62
   PhoneNumberKit: 4ce83273551c4d2ae10b7361162f4283dd02835f
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
@@ -67,6 +71,6 @@ SPEC CHECKSUMS:
   SwiftMaskTextfield: 8c792e56f25779939d1fd5cf6153ba439b1be761
   SwiftStomp: bb16e710ad6be09a1980196d4e00540432b24305
 
-PODFILE CHECKSUM: ef391f3c19744121364591c2c21a8ce13c258cee
+PODFILE CHECKSUM: 5ed8024fe61788a87c199f4e2b4bbc02173ff043
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.10.1

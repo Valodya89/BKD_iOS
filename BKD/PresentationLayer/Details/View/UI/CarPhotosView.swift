@@ -78,15 +78,22 @@ class CarPhotosView: UIView {
     private func scrollToIndex(index:Int) {
         let rect = mImagePagingCollectionV.layoutAttributesForItem(at:IndexPath(row: index, section: 0))?.frame
         mImagePagingCollectionV.scrollRectToVisible(rect!, animated: true)
-        delegate?.didChangeCarImage(CarsData.carModel[index].carImage)
+        delegate?.didChangeCarImage(carImagesList[index])
     }
     
     ///Will show or hide previous and next arrow buttons
     private func showOrHideScrollButtons () {
         if currentCarPhotoItem == 0 {
             mScrollLeftBtn.isHidden = true
-        } else if currentCarPhotoItem == CarsData.carModel.count - 1 {
+            if carImagesList.count > 1  {
+                mScrollRightBtn.isHidden = false
+            }
+        } else if currentCarPhotoItem == carImagesList.count - 1 {
             mScrollRightBtn.isHidden = true
+            if currentCarPhotoItem == 1 {
+                mScrollLeftBtn.isHidden = false
+            }
+                
         } else {
             mScrollLeftBtn.isHidden = false
             mScrollRightBtn.isHidden = false
@@ -98,7 +105,7 @@ class CarPhotosView: UIView {
     private func movetoPositionBottomCollectionView() {
         mImagesBottomCollectionV.reloadData()
         mImagesBottomCollectionV.scrollToItem(at:NSIndexPath(item: currentCarPhotoItem, section: 0) as IndexPath , at: .centeredHorizontally, animated: true)
-        delegate?.didChangeCarImage(CarsData.carModel[currentCarPhotoItem].carImage)
+        delegate?.didChangeCarImage(carImagesList[currentCarPhotoItem])//CarsData.carModel[currentCarPhotoItem].carImage)
     }
     //MARK: ACTIONS
     //MARK: -----------------
@@ -115,7 +122,7 @@ class CarPhotosView: UIView {
     
     @IBAction func scrollRight(_ sender: UIButton) {
         print ("currentCarPhotoItem =  \(currentCarPhotoItem)")
-        if currentCarPhotoItem <= CarsData.carModel.count - 1 {
+        if currentCarPhotoItem <= carImagesList.count - 1 {
             scrollToIndex(index: currentCarPhotoItem + 1)
             currentCarPhotoItem += 1
         }

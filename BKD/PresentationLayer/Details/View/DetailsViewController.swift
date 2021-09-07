@@ -122,7 +122,6 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             currentTariff = .flexible
         }
         
-        
         configureViews()
         setDetailDatas()
         configureTransparentView()
@@ -132,7 +131,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         
     }
     
-    /// set height of scroll view
+    /// Set height of scroll view
     func setScrollVoiewHeight() {
         if scrollContentHeight == 0.0 {
             // will show only tariff cards
@@ -163,7 +162,8 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    ///set frame to Tariff Slide View
+    
+    ///Set frame to Tariff Slide View
     func setTariffSlideViewFrame() {
         var bottomPadding:CGFloat  = 0
         let tariffSlideHeight = self.view.bounds.height * 0.08168
@@ -189,7 +189,6 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         mCarNameLb.text = vehicleModel?.vehicleName
         mCarDetailLb.text = vehicleModel?.vehicleType
         mCarLogoImgV.image = vehicleModel?.vehicleLogo
-        carPhotosView.carImagesList = detailsViewModel.getCarImageList(item: vehicleModel) ?? []
         carPhotosView.mTowBarBckgV.isHidden = vehicleModel?.ifHasTowBar != nil ? !vehicleModel!.ifHasTowBar : true
         mCarInfoV.mCardLb.text = vehicleModel?.drivingLicense
         mCarInfoV.mKgLb.text = vehicleModel?.vehicleWeight
@@ -203,7 +202,12 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             mDetailHeight.constant = self.view.bounds.height * 0.0185644
             self.view.layoutIfNeeded()
         }
-            
+        detailsViewModel.getCarImageList(item: vehicleModel ?? VehicleModel()) { (imagesRetsult) in
+            self.carPhotosView.carImagesList = imagesRetsult ?? []
+            self.carPhotosView.mScrollRightBtn.isHidden =  self.carPhotosView.carImagesList.count > 1 ? false : true
+            self.carPhotosView.mImagePagingCollectionV.reloadData()
+            self.carPhotosView.mImagesBottomCollectionV.reloadData()
+        }
     }
     
     
@@ -333,7 +337,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             }
     }
     
-    /// will update time fields depend on tariff option
+    ///Will update time fields depend on tariff option
     func updateSearchTimes() {
         if currentTariff != .flexible {
             search = .time
@@ -351,7 +355,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    ///will open  location controller
+    ///Will open  location controller
     func goToLocationController() {
         mSearchV!.mLocationDropDownView.didSelectSeeMap = { [weak self] result  in
             let seeMapContr = UIStoryboard(name: Constant.Storyboards.seeMap, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.seeMap) as! SeeMapViewController
@@ -360,14 +364,14 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    ///will open custom location map controller
+    ///Will open custom location map controller
     func goToCustomLocationMapController () {
         let customLocationContr = UIStoryboard(name: Constant.Storyboards.customLocation, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.customLocation) as! CustomLocationViewController
         customLocationContr.delegate = self
         self.navigationController?.pushViewController(customLocationContr, animated: true)
     }
     
-    ///will open  custom location map controller
+    ///Will open  custom location map controller
     func goToReserveController() {
         let reserve = UIStoryboard(name: Constant.Storyboards.reserve, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.reserve) as! ReserveViewController
         setVehicleModel()
@@ -398,7 +402,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    ///will show or hide SearchEdit view with animation
+    ///Will show or hide SearchEdit view with animation
     func animateSearchEdit(isShow: Bool) {
         let alphaValue = isShow ? 1.0 : 0.0
         if isShow {
@@ -413,7 +417,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    /// will be hidden search view
+    ///Will be hidden search view
     private func hideSearchView() {
         UIView.animate(withDuration: 0.7) { [self] in
             self.mSearchV.alpha = 0.0
@@ -422,7 +426,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    ///will show tariff cards
+    ///Will show tariff cards
     private func showTariffCards () {
             self.mTariffCarouselV.tariffCarousel.reloadData()
             self.tariffSlideVC.tariffSlideArr = TariffSlideData.tariffSlideModel
@@ -436,7 +440,6 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
                 }
             }
         showTariffCardWithDelay()
-        
     }
    
     private func showTariffCardWithDelay() {
@@ -448,7 +451,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    /// will hide tariff cards
+    ///Will hide tariff cards
     private func hideTariffCards() {
             UIView.animate(withDuration: 0.5) { [self] in
                 self.tariffSlideVC.view.frame.origin.y -= 500
@@ -462,7 +465,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             }
     }
     
-    /// show Tarif lift or Detail tableView
+    ///Show Tarif lift or Detail tableView
     private func showTableView(view: UIView, imgRotate: UIImageView?) {
             UIView.transition(with: view, duration: tableAnimationDuration, options: [.transitionCurlDown,.allowUserInteraction], animations: {
                 if let _ = imgRotate {
@@ -473,7 +476,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             }, completion: nil)
     }
     
-    /// close Tarif lift or Detail tableView
+    ///Close Tarif lift or Detail tableView
     private func hideTableView(view: UIView, imgRotate: UIImageView?) {
         UIView.transition(with: view, duration: tableAnimationDuration, options: [.transitionCurlUp,.allowUserInteraction], animations: {
             if let _ = imgRotate {

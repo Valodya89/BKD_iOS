@@ -134,9 +134,11 @@ static let identifier = "MainCollectionViewCell"
     
     /// Set cell info
     func setCellInfo(item: CarsModel) {
-        UIImage.loadFrom(url: item.image.getURL()!) { image in
-            self.mCarImgV.image = image
-        }
+        mCarImgV.kf.setImage(with: item.image.getURL()!)
+
+//        UIImage.loadFrom(url: item.image.getURL()!) { image in
+//            self.mCarImgV.image = image
+//        }
        
         mCarNameLb.text = item.name
         mCardLb.text = item.driverLicenseType
@@ -159,9 +161,11 @@ static let identifier = "MainCollectionViewCell"
         mInactiveCarNameLb.text = item.name
         
         if item.logo != nil {
-            UIImage.loadFrom(url: (item.logo!.getURL() ?? URL(string: ""))!) { image in
-                self.mFiatImgV.image = image ?? UIImage()
-            }
+            mFiatImgV.kf.setImage(with: (item.logo!.getURL() ?? URL(string: ""))!)
+
+//            UIImage.loadFrom(url: (item.logo!.getURL() ?? URL(string: ""))!) { image in
+//                self.mFiatImgV.image = image ?? UIImage()
+//            }
         }
         guard let start = item.reservations?.getStart(), let end = item.reservations?.getEnd()  else { return }
         let isActiveCar: Bool = mainViewModel.isCarActiveNow(start: start, end: end)
