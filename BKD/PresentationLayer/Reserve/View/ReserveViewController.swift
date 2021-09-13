@@ -101,6 +101,11 @@ class ReserveViewController: UIViewController {
         mCarImgBckgV.setShadow(color: color_shadow!)
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        mConfirmBtn.addBorder(color: color_navigationBar!, width: 1)
+    }
+    
     func setupView() {
         mRightBarBtn.image = img_bkd
         mConfirmBtn.layer.cornerRadius = 10

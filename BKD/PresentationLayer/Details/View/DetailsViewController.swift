@@ -109,6 +109,12 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
 
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        configureReserveView(isActive: mReserveBckgV.isUserInteractionEnabled)
+    }
+    
+    
     func setupView() {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = #imageLiteral(resourceName: "bkd").withRenderingMode(.alwaysOriginal)

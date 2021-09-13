@@ -32,6 +32,12 @@ class NewPasswordViewController: UIViewController, StoryboardInitializable {
         setUpView()
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        setBorder()
+        mResetPasswordBtn.setGradientWithCornerRadius(cornerRadius: 8.0, startColor: color_gradient_register_start!, endColor: color_gradient_register_end!)
+    }
+    
     func setUpView() {
         setBorder()
         mRightBarBtn.image = img_bkd

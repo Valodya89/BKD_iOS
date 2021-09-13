@@ -15,9 +15,16 @@ class ImagesBottomCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mShadowBckgV: UIView!
 
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        mShadowBckgV.layer.borderColor = UIColor.clear.cgColor
+        setShadow()
+    }
+    
     override func draw(_ rect: CGRect) {
         setShadow()
     }
+    
     
     override func prepareForReuse() {
         mShadowBckgV.layer.borderColor = UIColor.clear.cgColor
@@ -38,7 +45,18 @@ class ImagesBottomCollectionViewCell: UICollectionViewCell {
             
             mShadowBckgV.layer.cornerRadius = 3
             mShadowBckgV.layer.borderWidth = 0.5
-            mShadowBckgV.layer.borderColor = color_navigationBar!.cgColor
+           // mShadowBckgV.layer.borderColor = color_navigationBar!.cgColor
+            
+            if #available(iOS 13.0, *) {
+                self.traitCollection.performAsCurrent {
+                    mShadowBckgV.layer.borderColor = color_navigationBar!.cgColor
+//                mShadowBckgV.layer.borderColor = color_navigationBar?.resolvedColor(with: self.traitCollection).cgColor
+                }
+            } else {
+                // Fallback on earlier versions
+                mShadowBckgV.layer.borderColor = color_navigationBar!.cgColor
+            }
+
         }
     }
    

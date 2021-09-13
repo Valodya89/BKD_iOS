@@ -155,6 +155,13 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         commonInit()
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        mPickUpLocationBtn.addBorder(color: color_navigationBar!, width: 1.0)
+        mReturnLocationBtn.addBorder(color: color_navigationBar!, width: 1.0)
+        mSearchBtn.addBorder(color:color_navigationBar!, width: 1.0)
+    }
+    
     private func commonInit() {
         
         Bundle.main.loadNibNamed(Constant.NibNames.SearchHeaderView, owner: self, options: nil)
@@ -199,6 +206,7 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         // textField border
         setTextFieldBorder(leftTextField: mPickUpDataTxtFl, rightTextField: mReturnDateTxtFl, color: color_navigationBar!)
         setTextFieldBorder(leftTextField: mPickUpTimeTxtFl, rightTextField: mReturnTimeTxtFl, color: color_navigationBar!)
+        
         //botton border
         mPickUpLocationBtn.addBorder(color: color_navigationBar!, width: 1.0)
         mReturnLocationBtn.addBorder(color: color_navigationBar!, width: 1.0)

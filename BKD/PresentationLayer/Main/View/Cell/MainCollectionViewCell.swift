@@ -53,6 +53,13 @@ static let identifier = "MainCollectionViewCell"
         self.setup()
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        mValueBckV.setGradient(startColor: color_gradient_start!, endColor: color_gradient_end!)
+        mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
+    }
+    
+    
     func setup() {
      
         // corner radius
@@ -114,6 +121,10 @@ static let identifier = "MainCollectionViewCell"
     }
     
     override func prepareForReuse() {
+        
+        //gradient
+        mValueBckV.setGradient(startColor: color_gradient_start!, endColor: color_gradient_end!)
+        mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
         mCarImgV.image = nil
         mCarNameLb.text = ""
         mCardLb.text = ""
@@ -135,11 +146,6 @@ static let identifier = "MainCollectionViewCell"
     /// Set cell info
     func setCellInfo(item: CarsModel) {
         mCarImgV.kf.setImage(with: item.image.getURL()!)
-
-//        UIImage.loadFrom(url: item.image.getURL()!) { image in
-//            self.mCarImgV.image = image
-//        }
-       
         mCarNameLb.text = item.name
         mCardLb.text = item.driverLicenseType
         mCubeLb.text = String(item.volume) + Constant.Texts.mCuadrad

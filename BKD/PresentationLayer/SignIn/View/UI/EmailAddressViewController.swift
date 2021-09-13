@@ -31,7 +31,11 @@ class EmailAddressViewController: UIViewController, StoryboardInitializable {
         mConfirmLeading.constant = 0.0
     }
     
-
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        mEmailAddressTextFl.setBorder(color: color_navigationBar!, width: 1)
+        mConfirmBtn.addBorder(color:color_navigationBar!, width: 1.0)
+    }
     
     func  setUpView() {
         tabBarController?.tabBar.isHidden = true

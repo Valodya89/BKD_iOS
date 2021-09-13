@@ -40,6 +40,11 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
     }
     
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        mOpenEmailOrContinueBtn.addBorder(color:color_navigationBar!, width: 1.0)
+    }
+    
     func setUpView() {
         NotificationCenter.default.addObserver(self, selector: #selector(VerificationCodeViewController.handleDeepLink), name: Constant.Notifications.signUpEmailVerify, object: nil)
         mRightBarBtn.image = img_bkd

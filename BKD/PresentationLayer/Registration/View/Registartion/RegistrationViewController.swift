@@ -37,6 +37,11 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
         mContinueLeading.constant = 0
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        setBorderToTextFileds() 
+    }
+    
     func setUpView() {
         tabBarController?.tabBar.isHidden = true
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]

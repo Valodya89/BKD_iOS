@@ -50,6 +50,15 @@ final class SignInViewController: UIViewController, StoryboardInitializable {
         mRegisterBtn.setGradientWithCornerRadius(cornerRadius: 8.0, startColor: color_gradient_register_start!, endColor: color_gradient_register_end!)
     }
     
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        mPasswordTxtFl.setBorder(color: color_navigationBar!, width: 1)
+        mEmailAddressTextFl.setBorder(color: color_navigationBar!, width: 1)
+        mSignInBtn.addBorder(color:color_navigationBar!, width: 1.0)
+//        mRegisterBtn.setGradientWithCornerRadius(cornerRadius: 8.0, startColor: color_gradient_register_start!, endColor: color_gradient_register_end!)
+    }
+    
     private func setUpView() {
         mRightBarBtn.image = img_bkd
         mVisibilityPasswortBtn.setImage(#imageLiteral(resourceName: "invisible"), for: .normal)
