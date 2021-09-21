@@ -7,9 +7,13 @@
 
 import UIKit
 
-class ReservetionStartRideCollectionViewCell: UICollectionViewCell {
-    static let identifier = "ReservetionStartRideCollectionViewCell"
-
+class ReservetionMakePaymentCell: UICollectionViewCell {
+    
+    static let identifier = "ReservetionMakePaymentCell"
+    static func nib() -> UINib {
+        return UINib(nibName: identifier, bundle: nil)
+    }
+    
 //MARK: -- Outlets
     @IBOutlet weak var mCarNameLb: UILabel!
     @IBOutlet weak var mCarIconImgV: UIImageView!
@@ -26,24 +30,35 @@ class ReservetionStartRideCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mReturnMonthLb: UILabel!
     @IBOutlet weak var mReturnTimelb: UILabel!
     
-    @IBOutlet weak var mCarRegisterInfoLb: UILabel!
-    @IBOutlet weak var mCarRegisterNumberLb: UILabel!
-    
+    @IBOutlet weak var mPayLaterLb: UILabel!
     @IBOutlet weak var mStatusLb: UILabel!
     @IBOutlet weak var mReservedPayedLb: UILabel!
- @IBOutlet weak var mPriceLb: UILabel!
-    
-    @IBOutlet weak var mStartRideBtn: UIButton!
+    @IBOutlet weak var mPriceLb: UILabel!
+    @IBOutlet weak var mShadowContentV: UIView!
+    @IBOutlet weak var mMakePaymentBtn: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        setupView()
+    }
+    
+    func setupView() {
+        mMakePaymentBtn.layer.cornerRadius = 8
+        mShadowContentV.layer.cornerRadius = 16
+        mShadowContentV.setShadow(color: color_shadow!)
+    }
+
+    override func prepareForReuse() {
+        mPriceLb.text = "XX,X"
+       // mRegistrationNumberLb.text = ""
+        mMakePaymentBtn.setTitleColor(color_email!, for: .normal)
+        mMakePaymentBtn.isEnabled = false
+        
     }
     
     func  setCellInfo() {
         
     }
 
-    @IBAction func startRide(_ sender: UIButton) {
-    }
+   
 }

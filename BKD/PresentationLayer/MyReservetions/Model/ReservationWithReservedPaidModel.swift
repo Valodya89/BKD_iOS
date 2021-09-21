@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct ReservationWithReservedPaidModel {
+    public var isActiveStartRide: Bool = false
+    public var isRegisterNumber: Bool = false
+}
+

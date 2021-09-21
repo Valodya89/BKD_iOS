@@ -59,7 +59,6 @@ class ReservationCompletedViewController: UIViewController, StoryboardInitializa
     }
     
     func setUpView()  {
-        mRightBarBtn.image = img_bkd
         configUI()
     }
     
@@ -73,7 +72,6 @@ class ReservationCompletedViewController: UIViewController, StoryboardInitializa
         mPreReservetionTitleLb.textAlignment = .center
         mConfirmBtn.layer.cornerRadius = 8
         mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
-        
     }
     
     //Animate confirm

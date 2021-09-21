@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vGy-s1-gA7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19158" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vGy-s1-gA7">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19141"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -27,7 +26,7 @@
             <objects>
                 <viewController id="YSm-xS-VSB" customClass="MainViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VrM-PG-bE9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView hidden="YES" clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xfv-Qt-jYJ">
@@ -50,14 +49,14 @@
                                 </collectionReusableView>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nOJ-Gd-nKd">
-                                <rect key="frame" x="351" y="616.5" width="65" height="34"/>
+                                <rect key="frame" x="347" y="616.5" width="69" height="34"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uBi-RC-Pej">
-                                        <rect key="frame" x="0.0" y="0.0" width="65" height="34"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="69" height="34"/>
                                         <color key="backgroundColor" name="gradient_start"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eI-UP-HPX">
-                                        <rect key="frame" x="6" y="2" width="53" height="30"/>
+                                        <rect key="frame" x="6" y="2" width="57" height="30"/>
                                         <fontDescription key="fontDescription" name="Mulish-Bold" family="Mulish" pointSize="9"/>
                                         <state key="normal" title="Chat with us!">
                                             <color key="titleColor" name="navigationBar"/>
@@ -82,7 +81,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" id="hgO-ot-Ek2">
-                                <rect key="frame" x="0.0" y="-6" width="414" height="38.5"/>
+                                <rect key="frame" x="0.0" y="-6" width="414" height="35"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" name="background"/>
                             </view>
@@ -210,7 +209,7 @@
             <objects>
                 <viewController id="baS-Zk-gBJ" customClass="CategoryViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kYK-fv-ZhM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ilV-lK-Jwv">
@@ -256,7 +255,7 @@
             <objects>
                 <viewController id="ceI-lw-dx8" customClass="NotificationsViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A1I-cU-SsK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xd4-CU-VYz">
@@ -313,7 +312,7 @@
             <objects>
                 <viewController id="E7g-TO-7Y0" customClass="MyBKDViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="foA-r9-fCl">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="12" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="193" translatesAutoresizingMaskIntoConstraints="NO" id="EZz-Io-rRw">
@@ -397,7 +396,7 @@ IAo
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MyBkdTableViewCell" id="Ssp-Ip-CFh" customClass="MyBkdTableViewCell" customModule="BKD" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ssp-Ip-CFh" id="fCw-JX-mI3">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -519,7 +518,7 @@ IAo
             <objects>
                 <viewController storyboardIdentifier="AboutUsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gSa-Xv-Ipy" customClass="AboutUsViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tUP-iC-jNn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Wi-SY-lOI">
@@ -556,28 +555,23 @@ IAo
             <objects>
                 <viewController storyboardIdentifier="MyReservationsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4kt-qQ-nUS" customClass="MyReservationsViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="j4K-5k-2Pn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="q1g-Dc-u7l">
                                 <rect key="frame" x="0.0" y="76.5" width="414" height="648.5"/>
                                 <color key="backgroundColor" name="background"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jqu-J1-HCl">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="50" minimumInteritemSpacing="50" id="jqu-J1-HCl">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ymG-qa-eF0">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="g8u-tU-swH">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="4kt-qQ-nUS" id="ucD-sS-Pya"/>
+                                    <outlet property="delegate" destination="4kt-qQ-nUS" id="4Tg-nm-IbV"/>
+                                </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tap-qR-AYC">
                                 <rect key="frame" x="82.5" y="166.5" width="249" height="98"/>
@@ -599,10 +593,15 @@ IAo
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="nEd-dq-w9V">
                                 <rect key="frame" x="35.5" y="10.5" width="343" height="31"/>
+                                <color key="backgroundColor" name="myReservation_segment_backg"/>
                                 <segments>
                                     <segment title="Active Reservations"/>
                                     <segment title="Reservations History"/>
                                 </segments>
+                                <color key="selectedSegmentTintColor" name="myReservation_select_segment"/>
+                                <connections>
+                                    <action selector="reservation:" destination="4kt-qQ-nUS" eventType="valueChanged" id="ady-71-PHo"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KTz-7d-pnZ"/>
@@ -614,7 +613,7 @@ IAo
                             <constraint firstItem="q1g-Dc-u7l" firstAttribute="top" secondItem="nEd-dq-w9V" secondAttribute="bottom" multiplier="1.9" id="EnH-hb-IMs"/>
                             <constraint firstItem="nEd-dq-w9V" firstAttribute="width" secondItem="j4K-5k-2Pn" secondAttribute="width" multiplier="0.828502" id="MFF-xs-JC5"/>
                             <constraint firstItem="nEd-dq-w9V" firstAttribute="centerY" secondItem="KTz-7d-pnZ" secondAttribute="centerY" multiplier="0.07" id="RHf-UF-XnO"/>
-                            <constraint firstItem="q1g-Dc-u7l" firstAttribute="leading" secondItem="KTz-7d-pnZ" secondAttribute="leading" id="TRk-3p-Dag"/>
+                            <constraint firstItem="q1g-Dc-u7l" firstAttribute="leading" secondItem="KTz-7d-pnZ" secondAttribute="leading" multiplier="1.2" id="TRk-3p-Dag"/>
                             <constraint firstItem="tap-qR-AYC" firstAttribute="centerX" secondItem="KTz-7d-pnZ" secondAttribute="centerX" id="cO0-5Z-bmM"/>
                             <constraint firstItem="nEd-dq-w9V" firstAttribute="height" secondItem="j4K-5k-2Pn" secondAttribute="height" multiplier="0.0371287" id="iWy-Dj-ZNy"/>
                             <constraint firstItem="tap-qR-AYC" firstAttribute="height" secondItem="j4K-5k-2Pn" secondAttribute="height" multiplier="0.121287" id="kUN-RM-IPR"/>
@@ -630,6 +629,12 @@ IAo
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mNoReservationContentV" destination="tap-qR-AYC" id="RgR-Hz-Wxm"/>
+                        <outlet property="mNoReservationLb" destination="FdB-rH-JUz" id="Kn5-cn-keK"/>
+                        <outlet property="mReservCollectionV" destination="q1g-Dc-u7l" id="oo9-iB-BZT"/>
+                        <outlet property="mReservationSegmentedC" destination="nEd-dq-w9V" id="8mY-tq-n1z"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sTd-HO-yt5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -705,6 +710,12 @@ IAo
         </namedColor>
         <namedColor name="menu">
             <color red="0.91399997472763062" green="0.78799998760223389" blue="0.41999998688697815" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="myReservation_segment_backg">
+            <color red="0.8901960784313725" green="0.89411764705882357" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="myReservation_select_segment">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="navigationBar">
             <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

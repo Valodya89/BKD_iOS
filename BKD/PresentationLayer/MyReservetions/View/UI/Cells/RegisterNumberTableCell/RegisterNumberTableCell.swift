@@ -8,16 +8,32 @@
 import UIKit
 
 class RegisterNumberTableCell: UITableViewCell {
+    
+    static let identifier = "RegisterNumberTableCell"
+    static func nib() -> UINib {
+            return UINib(nibName: identifier, bundle: nil)
+        }
 
+    //MARK: -- Outlets
+    @IBOutlet weak var mRegisterNumberTitleLb: UILabel!
+    @IBOutlet weak var mRegisterNumberLb: UILabel!
+    
+    //MARK: -- Life cicle
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    
+    override func prepareForReuse() {
+        mRegisterNumberLb.text = ""
+   }
+   
+   
+    func setCellInfo(item: String ) {
+       mRegisterNumberLb.text = item
+ 
+   }
+   
+   
     
 }

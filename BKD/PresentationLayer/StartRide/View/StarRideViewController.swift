@@ -7,7 +7,7 @@
 
 import UIKit
 
-class StarRideViewController: UIViewController {
+class StarRideViewController: UIViewController, StoryboardInitializable {
 
     override func viewDidLoad() {
         super.viewDidLoad()

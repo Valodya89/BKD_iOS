@@ -9,15 +9,25 @@ import UIKit
 
 class AdditionalDriverForWaithingApprovalCell: UITableViewCell {
 
+    static let identifier = "AdditionalDriverForWaithingApprovalCell"
+    static func nib() -> UINib {
+            return UINib(nibName: identifier, bundle: nil)
+        }
+    
+    //MARK: -- Outlets
+    @IBOutlet weak var mAdditionalDriverLb: UILabel!
+    @IBOutlet weak var mDriverFullNameLb: UILabel!
+    
+    //MARK: -- Lifecicle
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    /// Set cell info
+    func setCellInfo(item: MyDriversModel) {
+        
+        mDriverFullNameLb.text = item.fullname
     }
     
 }

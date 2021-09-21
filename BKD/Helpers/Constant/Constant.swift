@@ -5,6 +5,7 @@
 //  Created by Karine Karapetyan on 13-05-21.
 //
  import UIKit
+import SwiftUI
 
 struct Constant {
     
@@ -33,6 +34,11 @@ struct Constant {
         static let officeTerminal = "OfficeTerminal"
         static let cash = "Cash"
         static let kaartlazer = "Kaartlazer"
+        static let payLater = "PayLater"
+        static let myReservetionAdvanced = "MyReservetionAdvanced"
+        static let vehicleCheck = "VehicleCheck"
+        static let newDamage = "NewDamage"
+
 
 
     }
@@ -79,6 +85,11 @@ struct Constant {
         static let cash = "CashViewController"
         static let officeTerminal = "OfficeTerminalViewController"
         static let kaartlazer = "KaartlazerViewController"
+        static let payLater = "PayLaterViewController"
+        static let myReservetionAdvanced = "MyReservetionAdvancedViewController"
+        static let myReservetion = "MyReservetionViewController"
+        static let vehicleCheck = "VehicleCheckViewController"
+        static let newDamage = "NewDamageViewController"
 
     }
     
@@ -230,6 +241,25 @@ struct Constant {
         static let bancontactCard = "Bancontact card"
         static let generatedCode = "Generated Code"
         
+        //My Reservation
+        static let totalPrice = "Total price"
+        static let oldTotalPrice = "Old total price"
+        static let newTotalPrice = "New total price"
+        static let cancelWithFreeReservations = "Are you sure you want to cancel your reservation? You have only 3 free reservations in a month. You will be fully refunded, as it’s your %st/%nd time in the current month."
+        static let cancelLastFreeReservation = "Are you sure you want to cancel your reservation? You will be fully refunded, however this is your last free cancellation in the current month, so for the next reservation you will have to pay either Deposit or Rental price without a refund."
+        static let cancelWithoutRefaund = "Are you sure you want to cancel your reservation? You will not be refunded, as your free cancellations have expired in the current month."
+        static let back = "Back"
+        static let confirm = "Confirm"
+        
+        
+        //Start Ride
+       static let confirmStartNow =  "By clicking “Start now” button you confirm that you got your keys and are to start the ride."
+        static let startNow = "Start Now"
+        static let vehicleOdometerPlaceholder = "Vehicle Odometer numbers"
+        static let damageName = "Damage name"
+        static let cancelDamage = "Are you sure you want to cancel the new damage adding process."
+        static let yesCancel = "Yes, Cancel"
+        
         //Verify
         static let selectMailApp = "Select Mail App"
         static let  googleMail = "Googleg Mail"
@@ -295,6 +325,7 @@ let documentStateArr = ["IF",
                         "DLB",
                         "DLS"]
 
+
  
 
 
@@ -309,6 +340,11 @@ let tailLift_cell_height: CGFloat = 40
 let locationList_height: CGFloat = 172.0
 let locationList_cell_height: CGFloat = 57.3
 
+let main_subwidth = UIScreen.main.bounds.width * 0.158416
+let reservation_no_carNumber_height = UIScreen.main.bounds.height * 0.306931
+let reservation_with_carNumber_height = UIScreen.main.bounds.height * 0.391089
+
+// 0.158416
 //h* 16 /37
 
 // 16/212 * height(curr height)

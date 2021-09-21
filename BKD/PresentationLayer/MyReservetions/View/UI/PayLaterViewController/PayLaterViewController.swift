@@ -7,23 +7,114 @@
 
 import UIKit
 
-class PayLaterViewController: UIViewController {
-
+class PayLaterViewController: UIViewController, StoryboardInitializable {
+    
+    @IBOutlet weak var mDescriptionLb: UILabel!
+    @IBOutlet weak var mDepositCheckBtn: UIButton!
+    @IBOutlet weak var mDepositRentalimgV: UIImageView!
+    @IBOutlet weak var mdepositimgV: UIImageView!
+    @IBOutlet weak var mDepositLb: UILabel!
+    @IBOutlet weak var mDepositPriceLb: UILabel!
+    
+    @IBOutlet weak var mDepositRentalCheckBtn: UIButton!
+    @IBOutlet weak var mDepositRentalLb: UILabel!
+    @IBOutlet weak var mDepositRentalPriceLb: UILabel!
+    
+    @IBOutlet weak var mContinueContentV: UIView!
+    @IBOutlet weak var mContinueBtn: UIButton!
+    @IBOutlet weak var mContinueLeading: NSLayoutConstraint!
+    
+    @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
+    @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
+    
+    //MARK: - Variables
+    var paymentOption:PaymentOption = .none
+    
+    
+    //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setUpView()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        mContinueLeading.constant = 0.0
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setUpView()  {
+        mRightBarBtn.image = img_bkd
+        mContinueBtn.layer.cornerRadius = 8
+        mContinueBtn.layer.borderColor = color_navigationBar!.cgColor
+        mContinueBtn.layer.borderWidth = 1.0
     }
-    */
+    
+    //Animate continue
+    private func clickContinue() {
+        UIView.animate(withDuration: 0.5) { [self] in
+            self.mContinueLeading.constant = self.mContinueContentV.bounds.width - self.mContinueBtn.frame.size.width
+            self.mContinueContentV.layoutIfNeeded()
+        } completion: { _ in
+            self.goToSelectPayment()
+        }
+    }
+    
+    //Open SelectPayment screen
+     func goToSelectPayment() {
+        let selectPaymentVC = SelectPaymentViewController.initFromStoryboard(name: Constant.Storyboards.payment)
+        self.navigationController?.pushViewController(selectPaymentVC, animated: true)
+    }
+    
+    //Uncheck all buttons
+    private func resetChecks() {
+        isEnableConfirm(enable: false)
+        mdepositimgV.image = #imageLiteral(resourceName: "uncheck_box")
+        mDepositRentalimgV.image = #imageLiteral(resourceName: "uncheck_box")
+    }
 
+    //Set enable or disable to confirm button
+    private func isEnableConfirm(enable: Bool) {
+        mContinueContentV.isUserInteractionEnabled = enable
+        mContinueContentV.alpha = enable ? 1 : 0.8
+    }
+
+   //MARK: -- Actions
+    @IBAction func back(_ sender: UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
+
+    }
+    
+    
+    @IBAction func depositRentalPrice(_ sender: UIButton) {
+        
+        resetChecks()
+        if paymentOption == .depositRental {
+            mDepositRentalimgV.image = #imageLiteral(resourceName: "uncheck_box")
+            paymentOption = .none
+        } else {
+            isEnableConfirm(enable: true)
+            mDepositRentalimgV.image = #imageLiteral(resourceName: "check")
+            paymentOption = .depositRental
+        }
+    }
+    
+    @IBAction func deposite(_ sender: UIButton) {
+        
+        resetChecks()
+        if paymentOption == .deposit {
+            mdepositimgV.image = #imageLiteral(resourceName: "uncheck_box")
+            paymentOption = .none
+        } else {
+            isEnableConfirm(enable: true)
+            mdepositimgV.image = #imageLiteral(resourceName: "check")
+            paymentOption = .deposit
+        }
+    }
+    
+    @IBAction func continuewSwipe(_ sender: UISwipeGestureRecognizer) {
+        clickContinue()
+    }
+    
+    @IBAction func continueHandler(_ sender: UIButton) {
+        clickContinue()
+    }
 }

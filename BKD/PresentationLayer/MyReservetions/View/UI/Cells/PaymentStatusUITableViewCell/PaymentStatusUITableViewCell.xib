@@ -1,21 +1,174 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19158" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19141"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Mulish-Regular.ttf">
+            <string>Mulish-Regular</string>
+        </array>
+        <array key="SFProDisplay-Light.ttf">
+            <string>SFProDisplay-Light</string>
+        </array>
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+        <array key="SFProDisplay-Semibold.ttf">
+            <string>SFProDisplay-Semibold</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="PaymentStatusUITableViewCell" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PaymentStatusUITableViewCell" rowHeight="93" id="KGk-i7-Jjw" customClass="PaymentStatusUITableViewCell" customModule="BKD" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="94"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="94"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BN0-Fn-jhn">
+                        <rect key="frame" x="16" y="0.0" width="382" height="36"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2VE-df-ENv">
+                                <rect key="frame" x="0.0" y="0.0" width="45.5" height="16"/>
+                                <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="14"/>
+                                <color key="textColor" name="email"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay later" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CS7-xW-VXc">
+                                <rect key="frame" x="58" y="0.0" width="58" height="16"/>
+                                <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="14"/>
+                                <color key="textColor" name="navigationBar"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="via Credit card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGh-Z9-I7L">
+                                <rect key="frame" x="0.0" y="19.5" width="104" height="13"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
+                                <color key="textColor" name="chat_placeholder"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="CS7-xW-VXc" firstAttribute="width" relation="greaterThanOrEqual" secondItem="BN0-Fn-jhn" secondAttribute="width" multiplier="0.109948" id="9DW-lp-3Rz"/>
+                            <constraint firstItem="pGh-Z9-I7L" firstAttribute="top" secondItem="2VE-df-ENv" secondAttribute="bottom" multiplier="1.2" id="DRu-FM-bBe"/>
+                            <constraint firstItem="2VE-df-ENv" firstAttribute="width" relation="greaterThanOrEqual" secondItem="BN0-Fn-jhn" secondAttribute="width" multiplier="0.109948" id="Li2-4f-5sp"/>
+                            <constraint firstItem="CS7-xW-VXc" firstAttribute="leading" secondItem="2VE-df-ENv" secondAttribute="trailing" multiplier="1.27" id="Lt0-gG-PbO"/>
+                            <constraint firstItem="pGh-Z9-I7L" firstAttribute="height" secondItem="BN0-Fn-jhn" secondAttribute="height" multiplier="0.361702" id="NM4-yQ-s7a"/>
+                            <constraint firstItem="CS7-xW-VXc" firstAttribute="height" secondItem="2VE-df-ENv" secondAttribute="height" id="TEz-ad-eWY"/>
+                            <constraint firstItem="pGh-Z9-I7L" firstAttribute="width" relation="greaterThanOrEqual" secondItem="BN0-Fn-jhn" secondAttribute="width" multiplier="0.272251" id="WLC-N2-GpN"/>
+                            <constraint firstItem="pGh-Z9-I7L" firstAttribute="leading" secondItem="2VE-df-ENv" secondAttribute="leading" id="Yxv-L3-BNy"/>
+                            <constraint firstItem="2VE-df-ENv" firstAttribute="top" secondItem="BN0-Fn-jhn" secondAttribute="top" id="bU9-gw-K4g"/>
+                            <constraint firstItem="CS7-xW-VXc" firstAttribute="centerY" secondItem="2VE-df-ENv" secondAttribute="centerY" id="cuO-Yf-JoA"/>
+                            <constraint firstItem="2VE-df-ENv" firstAttribute="leading" secondItem="BN0-Fn-jhn" secondAttribute="leading" id="dQY-kN-g6R"/>
+                            <constraint firstAttribute="height" constant="36" id="eeG-pv-bT4"/>
+                            <constraint firstItem="2VE-df-ENv" firstAttribute="height" secondItem="BN0-Fn-jhn" secondAttribute="height" multiplier="0.446809" id="uKN-75-Lmr"/>
+                        </constraints>
+                    </view>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JS8-6w-FWu">
+                        <rect key="frame" x="16" y="36" width="382" height="58"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5yg-vz-e03">
+                                <rect key="frame" x="0.0" y="2" width="166" height="42"/>
+                                <color key="backgroundColor" name="see_map"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Make Payment">
+                                    <fontDescription key="titleFontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
+                                    <color key="baseForegroundColor" name="selected_filter_field"/>
+                                </buttonConfiguration>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EP8-NQ-US0">
+                                <rect key="frame" x="323" y="13.5" width="59" height="19.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tkt-MG-jPv">
+                                        <rect key="frame" x="7.5" y="0.0" width="11" height="19.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="11" id="0Gv-co-0h1"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
+                                        <color key="textColor" name="offert_red"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZ5-rN-HnF">
+                                        <rect key="frame" x="31.5" y="-1" width="27.5" height="21.5"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
+                                        <color key="textColor" name="offert_red"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="EZ5-rN-HnF" firstAttribute="height" relation="greaterThanOrEqual" secondItem="EP8-NQ-US0" secondAttribute="height" id="2lG-e0-GNT"/>
+                                    <constraint firstItem="tkt-MG-jPv" firstAttribute="height" secondItem="EP8-NQ-US0" secondAttribute="height" id="2yB-Et-xQk"/>
+                                    <constraint firstItem="tkt-MG-jPv" firstAttribute="leading" secondItem="EP8-NQ-US0" secondAttribute="leading" constant="7.5" id="5tR-4e-Tnx"/>
+                                    <constraint firstItem="tkt-MG-jPv" firstAttribute="centerY" secondItem="EP8-NQ-US0" secondAttribute="centerY" id="94Q-1D-YUU"/>
+                                    <constraint firstItem="EZ5-rN-HnF" firstAttribute="centerY" secondItem="EP8-NQ-US0" secondAttribute="centerY" id="HrY-3x-B4C"/>
+                                    <constraint firstItem="tkt-MG-jPv" firstAttribute="trailing" secondItem="EZ5-rN-HnF" secondAttribute="leading" multiplier="0.59" id="Wjq-3F-B15"/>
+                                    <constraint firstAttribute="trailing" secondItem="EZ5-rN-HnF" secondAttribute="trailing" id="nbF-ON-Ibr"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="58" id="8RL-oT-Gci"/>
+                            <constraint firstItem="5yg-vz-e03" firstAttribute="centerY" secondItem="JS8-6w-FWu" secondAttribute="centerY" multiplier="0.8" id="8qE-j5-Q3v"/>
+                            <constraint firstItem="5yg-vz-e03" firstAttribute="width" secondItem="JS8-6w-FWu" secondAttribute="width" multiplier="0.434555" id="OSL-Pr-viJ"/>
+                            <constraint firstAttribute="trailing" secondItem="EP8-NQ-US0" secondAttribute="trailing" id="X53-Km-8qi"/>
+                            <constraint firstItem="5yg-vz-e03" firstAttribute="leading" secondItem="JS8-6w-FWu" secondAttribute="leading" id="caT-0S-4xU"/>
+                            <constraint firstItem="EP8-NQ-US0" firstAttribute="centerY" secondItem="5yg-vz-e03" secondAttribute="centerY" id="ieJ-Sv-MQa"/>
+                            <constraint firstItem="EP8-NQ-US0" firstAttribute="height" secondItem="JS8-6w-FWu" secondAttribute="height" multiplier="0.336207" id="pKr-4t-OPC"/>
+                            <constraint firstItem="5yg-vz-e03" firstAttribute="height" secondItem="JS8-6w-FWu" secondAttribute="height" multiplier="0.724138" id="sdE-dD-YsL"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="BN0-Fn-jhn" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.922" id="2or-aR-Ucz"/>
+                    <constraint firstAttribute="bottom" secondItem="BN0-Fn-jhn" secondAttribute="bottom" constant="20" id="60s-T4-BvE"/>
+                    <constraint firstItem="JS8-6w-FWu" firstAttribute="top" secondItem="BN0-Fn-jhn" secondAttribute="bottom" id="Hbl-tw-YkU"/>
+                    <constraint firstItem="JS8-6w-FWu" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="dsx-0e-IQ3"/>
+                    <constraint firstItem="BN0-Fn-jhn" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="qmZ-Cl-6OM"/>
+                    <constraint firstItem="JS8-6w-FWu" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.922" id="tO6-bd-SbG"/>
+                    <constraint firstItem="BN0-Fn-jhn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="z8F-ws-8yJ"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="mPayBtn" destination="5yg-vz-e03" id="pe0-MX-29p"/>
+                <outlet property="mPayContantV" destination="JS8-6w-FWu" id="MK2-uG-agm"/>
+                <outlet property="mPayContentVHeight" destination="8RL-oT-Gci" id="aJg-Cg-rAY"/>
+                <outlet property="mPaymentTypeLb" destination="pGh-Z9-I7L" id="Fvx-hL-Sdj"/>
+                <outlet property="mPriceLb" destination="EZ5-rN-HnF" id="fhR-fH-XYc"/>
+                <outlet property="mStatusLb" destination="2VE-df-ENv" id="Xy0-3a-8w0"/>
+                <outlet property="mStatusNameLb" destination="CS7-xW-VXc" id="Uaa-EF-e8f"/>
+                <outlet property="mStatusVBottom" destination="60s-T4-BvE" id="JMB-AM-lwd"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="92.410714285714278"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <namedColor name="chat_placeholder">
+            <color red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="email">
+            <color red="0.53725490196078429" green="0.59607843137254901" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="navigationBar">
+            <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="offert_red">
+            <color red="1" green="0.29411764705882354" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="see_map">
+            <color red="0.9137254901960784" green="0.78823529411764703" blue="0.41960784313725491" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="selected_filter_field">
+            <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

@@ -1,30 +1,229 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17150" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19158" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17122"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19141"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Mulish-Regular.ttf">
+            <string>Mulish-Regular</string>
+        </array>
+        <array key="SFProDisplay-Semibold.ttf">
+            <string>SFProDisplay-Semibold</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Start Ride-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VehicleCheckViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="VehicleCheckViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o0d-XX-XMz">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wvU-8c-G1c">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Step 1 -" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="unw-EH-FOq">
+                                                <rect key="frame" x="19" y="13" width="71" height="16"/>
+                                                <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="18"/>
+                                                <color key="textColor" name="email"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vehicle check" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oH6-XK-vty">
+                                                <rect key="frame" x="95.5" y="9.5" width="111.5" height="23"/>
+                                                <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="18"/>
+                                                <color key="textColor" name="navigationBar"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Here you can see all the vehicle damages and approve them or add new ones if observed before the Start.  " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="12" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Kq-29-hVJ">
+                                                <rect key="frame" x="19" y="37.5" width="376" height="68"/>
+                                                <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="18"/>
+                                                <color key="textColor" name="navigationBar"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mdN-Ck-cKa">
+                                                <rect key="frame" x="0.0" y="125" width="414" height="501"/>
+                                                <subviews>
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1Qj-yE-qDi">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="501"/>
+                                                        <color key="backgroundColor" red="0.91426187749999999" green="0.78907972569999996" blue="0.41917234660000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="22" minimumInteritemSpacing="22" id="xxP-dW-KCh">
+                                                            <size key="itemSize" width="324" height="507"/>
+                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                            <inset key="sectionInset" minX="46" minY="0.0" maxX="22" maxY="0.0"/>
+                                                        </collectionViewFlowLayout>
+                                                        <cells/>
+                                                        <connections>
+                                                            <outlet property="dataSource" destination="Y6W-OH-hqX" id="2on-pr-mVg"/>
+                                                            <outlet property="delegate" destination="Y6W-OH-hqX" id="5Sv-n7-Jm8"/>
+                                                        </connections>
+                                                    </collectionView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="1Qj-yE-qDi" secondAttribute="trailing" id="0KH-pk-1g4"/>
+                                                    <constraint firstAttribute="bottom" secondItem="1Qj-yE-qDi" secondAttribute="bottom" id="GsT-tp-Ww7"/>
+                                                    <constraint firstItem="1Qj-yE-qDi" firstAttribute="leading" secondItem="mdN-Ck-cKa" secondAttribute="leading" id="Zrf-QR-Ofc"/>
+                                                    <constraint firstItem="1Qj-yE-qDi" firstAttribute="top" secondItem="mdN-Ck-cKa" secondAttribute="top" id="uph-Fq-GsY"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Additional charges may apply if we discover new damage(s) after your ride." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fiy-I2-k1m">
+                                                <rect key="frame" x="38" y="638.5" width="338" height="41"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="17"/>
+                                                <color key="textColor" name="navigationBar"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="S2Q-Aw-uvN">
+                                                <rect key="frame" x="129" y="689" width="156" height="26"/>
+                                                <color key="backgroundColor" red="0.91426187749999999" green="0.78907972569999996" blue="0.41917234660000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="pageIndicatorTintColor" systemColor="tintColor"/>
+                                                <color key="currentPageIndicatorTintColor" red="0.1733854413" green="0.61057633160000002" blue="0.90795642139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </pageControl>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tw5-So-oCI">
+                                                <rect key="frame" x="52.5" y="125" width="309" height="501.5"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pXP-A7-NnM">
+                                                <rect key="frame" x="57" y="727.5" width="300" height="42"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Finish Check">
+                                                    <fontDescription key="titleFontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="20"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="finishCheck:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="3VW-SH-WKv"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="pXP-A7-NnM" secondAttribute="bottom" multiplier="1.05" id="06q-Sb-OkV"/>
+                                            <constraint firstItem="S2Q-Aw-uvN" firstAttribute="width" secondItem="mdN-Ck-cKa" secondAttribute="width" multiplier="0.376812" id="0HP-CF-JUR"/>
+                                            <constraint firstItem="pXP-A7-NnM" firstAttribute="centerX" secondItem="wvU-8c-G1c" secondAttribute="centerX" id="6f9-Cw-SqF"/>
+                                            <constraint firstItem="Tw5-So-oCI" firstAttribute="width" secondItem="mdN-Ck-cKa" secondAttribute="width" multiplier="0.746377" id="8Z5-qb-yI1"/>
+                                            <constraint firstItem="unw-EH-FOq" firstAttribute="top" secondItem="wvU-8c-G1c" secondAttribute="topMargin" multiplier="1.6" id="9VM-5Y-Qu6"/>
+                                            <constraint firstItem="6Kq-29-hVJ" firstAttribute="top" secondItem="unw-EH-FOq" secondAttribute="bottom" multiplier="1.3" id="9rq-Bz-9mK"/>
+                                            <constraint firstItem="S2Q-Aw-uvN" firstAttribute="centerX" secondItem="mdN-Ck-cKa" secondAttribute="centerX" id="Fyb-22-5nh"/>
+                                            <constraint firstItem="fiy-I2-k1m" firstAttribute="width" secondItem="mdN-Ck-cKa" secondAttribute="width" multiplier="0.816425" id="Mhd-UR-G9B"/>
+                                            <constraint firstItem="fiy-I2-k1m" firstAttribute="top" secondItem="mdN-Ck-cKa" secondAttribute="bottom" multiplier="1.02" id="NjT-1e-EZ0"/>
+                                            <constraint firstItem="pXP-A7-NnM" firstAttribute="width" secondItem="wvU-8c-G1c" secondAttribute="width" multiplier="0.724638" id="ONM-ce-ueS"/>
+                                            <constraint firstItem="mdN-Ck-cKa" firstAttribute="centerX" secondItem="wvU-8c-G1c" secondAttribute="centerX" id="QDv-7e-hrE"/>
+                                            <constraint firstItem="mdN-Ck-cKa" firstAttribute="centerY" secondItem="wvU-8c-G1c" secondAttribute="centerY" multiplier="0.93" id="TLC-wn-qBm"/>
+                                            <constraint firstItem="6Kq-29-hVJ" firstAttribute="leading" secondItem="unw-EH-FOq" secondAttribute="leading" id="W6N-gR-WeB"/>
+                                            <constraint firstItem="Tw5-So-oCI" firstAttribute="centerX" secondItem="mdN-Ck-cKa" secondAttribute="centerX" id="XfM-YE-YUt"/>
+                                            <constraint firstItem="Tw5-So-oCI" firstAttribute="centerY" secondItem="mdN-Ck-cKa" secondAttribute="centerY" id="bUU-kV-BYj"/>
+                                            <constraint firstItem="oH6-XK-vty" firstAttribute="leading" secondItem="unw-EH-FOq" secondAttribute="trailing" multiplier="1.06" id="diR-oG-I6k"/>
+                                            <constraint firstItem="Tw5-So-oCI" firstAttribute="height" secondItem="mdN-Ck-cKa" secondAttribute="height" multiplier="1.00097" id="fxq-JQ-Bj7"/>
+                                            <constraint firstItem="mdN-Ck-cKa" firstAttribute="width" secondItem="wvU-8c-G1c" secondAttribute="width" id="hLG-OA-WR6"/>
+                                            <constraint firstItem="unw-EH-FOq" firstAttribute="leading" secondItem="wvU-8c-G1c" secondAttribute="centerX" multiplier="0.092" id="kGm-b5-xwp"/>
+                                            <constraint firstItem="oH6-XK-vty" firstAttribute="centerY" secondItem="unw-EH-FOq" secondAttribute="centerY" id="nYb-E2-NL0"/>
+                                            <constraint firstItem="fiy-I2-k1m" firstAttribute="centerX" secondItem="mdN-Ck-cKa" secondAttribute="centerX" id="qqz-GI-cgX"/>
+                                            <constraint firstItem="6Kq-29-hVJ" firstAttribute="width" secondItem="wvU-8c-G1c" secondAttribute="width" multiplier="0.908213" id="szt-nT-T4z"/>
+                                            <constraint firstItem="S2Q-Aw-uvN" firstAttribute="top" secondItem="mdN-Ck-cKa" secondAttribute="bottom" multiplier="1.1" id="vuZ-R3-el3"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="wvU-8c-G1c" firstAttribute="leading" secondItem="0v3-bH-tuN" secondAttribute="leading" id="0MW-hm-aiM"/>
+                                    <constraint firstItem="wvU-8c-G1c" firstAttribute="height" secondItem="hDL-Gc-vag" secondAttribute="height" id="7jV-0p-PRr"/>
+                                    <constraint firstItem="wvU-8c-G1c" firstAttribute="width" secondItem="hDL-Gc-vag" secondAttribute="width" id="KSw-b2-igj"/>
+                                    <constraint firstItem="wvU-8c-G1c" firstAttribute="bottom" secondItem="0v3-bH-tuN" secondAttribute="bottom" id="MJE-8m-OAa"/>
+                                    <constraint firstItem="wvU-8c-G1c" firstAttribute="trailing" secondItem="0v3-bH-tuN" secondAttribute="trailing" id="QVg-qw-aSD"/>
+                                    <constraint firstItem="wvU-8c-G1c" firstAttribute="top" secondItem="0v3-bH-tuN" secondAttribute="top" id="gwC-FC-UGb"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="0v3-bH-tuN"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="hDL-Gc-vag"/>
+                            </scrollView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="mdN-Ck-cKa" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.62" id="9kt-lp-c6B"/>
+                            <constraint firstItem="o0d-XX-XMz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="CAc-7E-WKg"/>
+                            <constraint firstItem="o0d-XX-XMz" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Fwr-UV-QT2"/>
+                            <constraint firstAttribute="bottom" secondItem="o0d-XX-XMz" secondAttribute="bottom" id="FzY-BG-ocp"/>
+                            <constraint firstItem="unw-EH-FOq" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.02" id="Tkx-w2-wK3"/>
+                            <constraint firstItem="pXP-A7-NnM" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.052" id="e90-Qs-0ac"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="o0d-XX-XMz" secondAttribute="trailing" id="iWw-0O-8jM"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Start Ride" id="RZt-6D-Fhm">
+                        <barButtonItem key="leftBarButtonItem" image="back" id="zrr-lV-mTI">
+                            <connections>
+                                <action selector="back:" destination="Y6W-OH-hqX" id="gY4-va-nKO"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="bkd" id="mHs-5p-22p"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mAddDamageContentV" destination="Tw5-So-oCI" id="B9k-RY-jtr"/>
+                        <outlet property="mDescriptionLb" destination="6Kq-29-hVJ" id="gRd-wh-cRe"/>
+                        <outlet property="mFinishCheckLb" destination="pXP-A7-NnM" id="2Qi-Uo-8AV"/>
+                        <outlet property="mPageCollcetionV" destination="1Qj-yE-qDi" id="xhm-vR-zJj"/>
+                        <outlet property="mPageContentV" destination="mdN-Ck-cKa" id="eTz-PG-emw"/>
+                        <outlet property="mPageControl" destination="S2Q-Aw-uvN" id="piK-Gn-Xeh"/>
+                        <outlet property="mStepTitleLb" destination="unw-EH-FOq" id="jC8-e4-VCp"/>
+                        <outlet property="mVehicleCheckLb" destination="oH6-XK-vty" id="3gA-iW-95T"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="939.13043478260875" y="55.580357142857139"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Taq-vh-sp6">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7hI-3a-O9N" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="PZt-uA-AEo">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" name="navigation_bar"/>
+                        <color key="barTintColor" name="navigation_bar"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="6YX-Iv-lnp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7M3-yQ-cpz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="28.985507246376812" y="55.580357142857139"/>
         </scene>
     </scenes>
     <resources>
+        <image name="back" width="12" height="21"/>
+        <image name="bkd" width="76" height="23.5"/>
+        <namedColor name="email">
+            <color red="0.53725490196078429" green="0.59607843137254901" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="navigationBar">
+            <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="navigation_bar">
+            <color red="0.10999999940395355" green="0.20000000298023224" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

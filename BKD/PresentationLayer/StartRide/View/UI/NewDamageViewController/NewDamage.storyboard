@@ -1,28 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17150" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19158" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17122"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19141"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Mulish-Regular.ttf">
+            <string>Mulish-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--New Damage View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewDamageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="NewDamageViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="309" height="517"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pn2-5s-Cuh">
+                                <rect key="frame" x="0.0" y="0.0" width="309" height="517"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b5A-l8-XoV">
+                                        <rect key="frame" x="0.0" y="0.0" width="309" height="262"/>
+                                    </imageView>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MrD-Mw-1ni" customClass="TextField" customModule="BKD" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="317.5" width="309" height="50"/>
+                                        <color key="textColor" name="navigationBar"/>
+                                        <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="vb9-o5-VeG">
+                                        <rect key="frame" x="0.0" y="473" width="309" height="42"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3f5-Rs-fwv">
+                                                <rect key="frame" x="0.0" y="0.0" width="146" height="42"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Cancel">
+                                                    <fontDescription key="titleFontDescription" name="Mulish-Regular" family="Mulish" pointSize="18"/>
+                                                    <color key="baseForegroundColor" name="navigationBar"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="cancel:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="rDz-DQ-WxZ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3x2-lD-6DD">
+                                                <rect key="frame" x="163" y="0.0" width="146" height="42"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Confirm">
+                                                    <fontDescription key="titleFontDescription" name="Mulish-Regular" family="Mulish" pointSize="18"/>
+                                                    <color key="baseForegroundColor" name="navigationBar"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="confirm:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="dsb-XI-wpA"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="vb9-o5-VeG" firstAttribute="width" secondItem="Pn2-5s-Cuh" secondAttribute="width" id="0Gi-6v-Jtz"/>
+                                    <constraint firstItem="vb9-o5-VeG" firstAttribute="height" secondItem="Pn2-5s-Cuh" secondAttribute="height" multiplier="0.081" id="2J9-VI-dJO"/>
+                                    <constraint firstItem="b5A-l8-XoV" firstAttribute="centerX" secondItem="Pn2-5s-Cuh" secondAttribute="centerX" id="6k5-GA-N7u"/>
+                                    <constraint firstItem="b5A-l8-XoV" firstAttribute="top" secondItem="Pn2-5s-Cuh" secondAttribute="top" id="7J4-Vk-hHq"/>
+                                    <constraint firstItem="MrD-Mw-1ni" firstAttribute="centerY" secondItem="Pn2-5s-Cuh" secondAttribute="centerY" multiplier="1.325" id="CHU-r8-aXX"/>
+                                    <constraint firstItem="vb9-o5-VeG" firstAttribute="centerX" secondItem="Pn2-5s-Cuh" secondAttribute="centerX" id="Ja7-uc-E1B"/>
+                                    <constraint firstItem="MrD-Mw-1ni" firstAttribute="width" secondItem="Pn2-5s-Cuh" secondAttribute="width" id="N3y-Z8-aDm"/>
+                                    <constraint firstItem="MrD-Mw-1ni" firstAttribute="height" secondItem="Pn2-5s-Cuh" secondAttribute="height" multiplier="0.0967118" id="cmU-CG-SqP"/>
+                                    <constraint firstItem="vb9-o5-VeG" firstAttribute="bottom" secondItem="Pn2-5s-Cuh" secondAttribute="bottom" constant="-2" id="gbu-cX-N2I"/>
+                                    <constraint firstItem="b5A-l8-XoV" firstAttribute="height" secondItem="Pn2-5s-Cuh" secondAttribute="height" multiplier="0.50677" id="ndu-eI-rnQ"/>
+                                    <constraint firstItem="MrD-Mw-1ni" firstAttribute="centerX" secondItem="Pn2-5s-Cuh" secondAttribute="centerX" id="sJj-TM-zvm"/>
+                                    <constraint firstItem="b5A-l8-XoV" firstAttribute="width" secondItem="Pn2-5s-Cuh" secondAttribute="width" id="zqF-AE-sj7"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Pn2-5s-Cuh" secondAttribute="trailing" id="YVB-aY-pvb"/>
+                            <constraint firstItem="Pn2-5s-Cuh" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="dVf-Mg-yjJ"/>
+                            <constraint firstItem="Pn2-5s-Cuh" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="eqa-is-CCB"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Pn2-5s-Cuh" secondAttribute="bottom" id="fpG-g2-Psc"/>
+                        </constraints>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="309" height="517"/>
+                    <connections>
+                        <outlet property="mCancelBtn" destination="3f5-Rs-fwv" id="qrw-wt-cPf"/>
+                        <outlet property="mConfirmBtn" destination="3x2-lD-6DD" id="xIo-N4-uxo"/>
+                        <outlet property="mContentV" destination="Pn2-5s-Cuh" id="dZK-Sz-5fa"/>
+                        <outlet property="mDamageImgV" destination="b5A-l8-XoV" id="rQs-hP-dho"/>
+                        <outlet property="mDemageTxtFl" destination="MrD-Mw-1ni" id="aeQ-ZH-ni9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="17" y="58"/>
         </scene>
     </scenes>
     <resources>
+        <namedColor name="navigationBar">
+            <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

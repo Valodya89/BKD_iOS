@@ -28,7 +28,30 @@
 		5618888F264A63CA00BDDB33 /* LocationDropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5618888E264A63CA00BDDB33 /* LocationDropDownView.swift */; };
 		561888A2264ABDFC00BDDB33 /* DropDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561888A0264ABDFC00BDDB33 /* DropDownTableViewCell.swift */; };
 		561888A3264ABDFC00BDDB33 /* DropDownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 561888A1264ABDFC00BDDB33 /* DropDownTableViewCell.xib */; };
+		562585CD26F0E2C400EC9284 /* MyReservetionAdvancedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562585CB26F0E2C400EC9284 /* MyReservetionAdvancedViewController.swift */; };
+		562585CE26F0E2C400EC9284 /* MyReservetionAdvanced.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 562585CC26F0E2C400EC9284 /* MyReservetionAdvanced.storyboard */; };
+		562585D126F0F5A500EC9284 /* PaymentStatusUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562585D026F0F5A500EC9284 /* PaymentStatusUITableView.swift */; };
+		562585D526F0F5D100EC9284 /* PaymentStatusUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562585D326F0F5D100EC9284 /* PaymentStatusUITableViewCell.swift */; };
+		562585D626F0F5D100EC9284 /* PaymentStatusUITableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 562585D426F0F5D100EC9284 /* PaymentStatusUITableViewCell.xib */; };
+		562585D826F1040200EC9284 /* PaymentStausModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562585D726F1040200EC9284 /* PaymentStausModel.swift */; };
+		562585DB26F175CB00EC9284 /* RegisterNumberUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562585DA26F175CA00EC9284 /* RegisterNumberUITableView.swift */; };
+		562585DF26F176D500EC9284 /* RegisterNumberTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562585DD26F176D500EC9284 /* RegisterNumberTableCell.swift */; };
+		562585E026F176D500EC9284 /* RegisterNumberTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 562585DE26F176D500EC9284 /* RegisterNumberTableCell.xib */; };
+		562585E326F1860800EC9284 /* AdditionalDriverTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562585E226F1860800EC9284 /* AdditionalDriverTableView.swift */; };
+		562585E726F1867800EC9284 /* AditionalDriverTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562585E526F1867800EC9284 /* AditionalDriverTableCell.swift */; };
+		562585E826F1867800EC9284 /* AditionalDriverTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 562585E626F1867800EC9284 /* AditionalDriverTableCell.xib */; };
 		56316316267A822200ED2144 /* MyDriverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56316315267A822200ED2144 /* MyDriverCollectionViewCell.swift */; };
+		5640394E26EF854B0064256C /* ReservationWithStartRideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5640394C26EF854B0064256C /* ReservationWithStartRideCollectionViewCell.swift */; };
+		5640394F26EF854B0064256C /* ReservationWithStartRideCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5640394D26EF854B0064256C /* ReservationWithStartRideCollectionViewCell.xib */; };
+		5640395126EFA2590064256C /* ReservationWithReservedPaidModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5640395026EFA2590064256C /* ReservationWithReservedPaidModel.swift */; };
+		5640395526EFD0690064256C /* ReservationWithRegisterNumberCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5640395326EFD0680064256C /* ReservationWithRegisterNumberCollectionViewCell.xib */; };
+		5640395626EFD0690064256C /* ReservationWithRegisterNumberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5640395426EFD0680064256C /* ReservationWithRegisterNumberCollectionViewCell.swift */; };
+		5640395A26EFEF5A0064256C /* ReservetionWithDistancePriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5640395826EFEF590064256C /* ReservetionWithDistancePriceCell.swift */; };
+		5640395B26EFEF5A0064256C /* ReservetionWithDistancePriceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5640395926EFEF590064256C /* ReservetionWithDistancePriceCell.xib */; };
+		5640395F26F01D530064256C /* ReservetionWithPayRentalPriceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5640395D26F01D530064256C /* ReservetionWithPayRentalPriceCell.xib */; };
+		5640396026F01D530064256C /* ReservetionWithPayRentalPriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5640395E26F01D530064256C /* ReservetionWithPayRentalPriceCell.swift */; };
+		5640396326F0207F0064256C /* PayLaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5640396226F0207F0064256C /* PayLaterViewController.swift */; };
+		5640396526F020930064256C /* PayLater.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5640396426F020930064256C /* PayLater.storyboard */; };
 		5640952D264AE529001DC92D /* DropDownModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5640952C264AE529001DC92D /* DropDownModel.swift */; };
 		56409533264AE5A8001DC92D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56409532264AE5A8001DC92D /* Data.swift */; };
 		56409539264B24D8001DC92D /* BKDAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56409538264B24D8001DC92D /* BKDAlert.swift */; };
@@ -154,10 +177,8 @@
 		565F8C4A268D17C200E21C71 /* Carousel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 565F8C49268D17C200E21C71 /* Carousel.storyboard */; };
 		565F9AFE26C87D1E00064AD4 /* Kaartlazer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 565F9AFD26C87D1E00064AD4 /* Kaartlazer.storyboard */; };
 		565F9B0026C87D2F00064AD4 /* KaartlazerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F9AFF26C87D2F00064AD4 /* KaartlazerViewController.swift */; };
-		565F9B0526C8AE2900064AD4 /* ReservetionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F9B0326C8AE2900064AD4 /* ReservetionCollectionViewCell.swift */; };
-		565F9B0626C8AE2900064AD4 /* ReservetionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565F9B0426C8AE2900064AD4 /* ReservetionCollectionViewCell.xib */; };
-		565F9B0B26C8AEA100064AD4 /* ReservetionStartRideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F9B0926C8AEA100064AD4 /* ReservetionStartRideCollectionViewCell.swift */; };
-		565F9B0C26C8AEA100064AD4 /* ReservetionStartRideCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565F9B0A26C8AEA100064AD4 /* ReservetionStartRideCollectionViewCell.xib */; };
+		565F9B0B26C8AEA100064AD4 /* ReservetionMakePaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F9B0926C8AEA100064AD4 /* ReservetionMakePaymentCell.swift */; };
+		565F9B0C26C8AEA100064AD4 /* ReservetionMakePaymentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565F9B0A26C8AEA100064AD4 /* ReservetionMakePaymentCell.xib */; };
 		5660F7F2266C21980082F038 /* Mulish-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5660F7F1266C217F0082F038 /* Mulish-Bold.ttf */; };
 		566354EB268AF8EF0003E2EB /* PriceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566354E9268AF8EF0003E2EB /* PriceTableViewCell.swift */; };
 		566354EC268AF8EF0003E2EB /* PriceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 566354EA268AF8EF0003E2EB /* PriceTableViewCell.xib */; };
@@ -201,6 +222,10 @@
 		5691A639265D53140008081D /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5691A638265D53140008081D /* Extentions.swift */; };
 		5691A641265D97550008081D /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5691A640265D97550008081D /* MainViewModel.swift */; };
 		5691A64E265DB6300008081D /* SearchHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5691A64D265DB6300008081D /* SearchHeaderViewModel.swift */; };
+		5692658626F3B1B000004E81 /* EditBySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5692658526F3B1B000004E81 /* EditBySearchView.swift */; };
+		5692658A26F3B71C00004E81 /* WaithingAdminApplovalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5692658826F3B71C00004E81 /* WaithingAdminApplovalCell.xib */; };
+		5692658B26F3B71C00004E81 /* WaithingAdminApplovalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5692658926F3B71C00004E81 /* WaithingAdminApplovalCell.swift */; };
+		569C8C9626F2603C001D65EF /* TotalPriceStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569C8C9526F2603C001D65EF /* TotalPriceStackView.swift */; };
 		56A2AFDF2693F221001BA7C5 /* ExamplePhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A2AFDD2693F221001BA7C5 /* ExamplePhotoTableViewCell.swift */; };
 		56A2AFE02693F221001BA7C5 /* ExamplePhotoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56A2AFDE2693F221001BA7C5 /* ExamplePhotoTableViewCell.xib */; };
 		56A2AFE62694C827001BA7C5 /* PhoneNumberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A2AFE42694C827001BA7C5 /* PhoneNumberTableViewCell.swift */; };
@@ -221,6 +246,10 @@
 		56AD191D2693251C006A53C1 /* CheckEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AD191C2693251C006A53C1 /* CheckEmailViewModel.swift */; };
 		56AD19222693421C006A53C1 /* TermsConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AD19212693421C006A53C1 /* TermsConditionsViewController.swift */; };
 		56AD192626934D7E006A53C1 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AD192526934D7E006A53C1 /* EmailVerificationViewController.swift */; };
+		56ADD80D26F2C65800C0ECC3 /* EditReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD80C26F2C65800C0ECC3 /* EditReservationViewController.swift */; };
+		56ADD80F26F2C66900C0ECC3 /* EditReservation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56ADD80E26F2C66900C0ECC3 /* EditReservation.storyboard */; };
+		56ADD81326F2CED400C0ECC3 /* ReservationHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56ADD81126F2CED400C0ECC3 /* ReservationHistoryCell.xib */; };
+		56ADD81426F2CED400C0ECC3 /* ReservationHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD81226F2CED400C0ECC3 /* ReservationHistoryCell.swift */; };
 		56B9F2D5267E8CEE003449AD /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F2D4267E8CEE003449AD /* SearchView.swift */; };
 		56B9F2E326805021003449AD /* SearchWithValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F2E226805020003449AD /* SearchWithValueView.swift */; };
 		56B9F2ED26806488003449AD /* SearchResultModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F2EC26806488003449AD /* SearchResultModelView.swift */; };
@@ -235,6 +264,19 @@
 		56CC7D8526AA07F2006DB7B8 /* BancontactCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CC7D8426AA07F2006DB7B8 /* BancontactCollectionViewCell.swift */; };
 		56CD830B267CF45600B2799F /* ReserveTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CD830A267CF45600B2799F /* ReserveTableView.swift */; };
 		56CD8313267CF56800B2799F /* ReserveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CD8312267CF56800B2799F /* ReserveModel.swift */; };
+		56CF781B26F3BD1C0092F555 /* AdditionalDriverWaithingApplovalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF781926F3BD1B0092F555 /* AdditionalDriverWaithingApplovalCell.swift */; };
+		56CF781C26F3BD1C0092F555 /* AdditionalDriverWaithingApplovalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56CF781A26F3BD1B0092F555 /* AdditionalDriverWaithingApplovalCell.xib */; };
+		56CF782026F3C72C0092F555 /* AdditionalDriverForWaithingApprovalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF781E26F3C72C0092F555 /* AdditionalDriverForWaithingApprovalCell.swift */; };
+		56CF782126F3C72C0092F555 /* AdditionalDriverForWaithingApprovalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56CF781F26F3C72C0092F555 /* AdditionalDriverForWaithingApprovalCell.xib */; };
+		56CF782D26F3E1380092F555 /* OdometerCheck.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56CF782C26F3E1380092F555 /* OdometerCheck.storyboard */; };
+		56CF782F26F3E1490092F555 /* OdometerCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF782E26F3E1490092F555 /* OdometerCheckViewController.swift */; };
+		56CF783226F4F55F0092F555 /* VehicleCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF783126F4F55F0092F555 /* VehicleCheckViewController.swift */; };
+		56CF783426F4F56E0092F555 /* VehicleCheck.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56CF783326F4F56E0092F555 /* VehicleCheck.storyboard */; };
+		56CF783C26F578620092F555 /* StartRideModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF783B26F578620092F555 /* StartRideModel.swift */; };
+		56CF784126F8AD7B0092F555 /* VehicleDimageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF783F26F8AD7B0092F555 /* VehicleDimageCollectionCell.swift */; };
+		56CF784226F8AD7B0092F555 /* VehicleDimageCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56CF784026F8AD7B0092F555 /* VehicleDimageCollectionCell.xib */; };
+		56CF784526F8F7D10092F555 /* NewDamageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF784426F8F7D10092F555 /* NewDamageViewController.swift */; };
+		56CF784726F8F7E20092F555 /* NewDamage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56CF784626F8F7E10092F555 /* NewDamage.storyboard */; };
 		56CFDE6026936F8400D731CD /* FaceAndTouchIdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFDE5F26936F8400D731CD /* FaceAndTouchIdViewController.swift */; };
 		56CFDE682693721C00D731CD /* RegistartionBotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFDE672693721C00D731CD /* RegistartionBotViewController.swift */; };
 		56CFDE6C2693723400D731CD /* RegistrationBot.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56CFDE6B2693723400D731CD /* RegistrationBot.storyboard */; };
@@ -294,7 +336,30 @@
 		5618888E264A63CA00BDDB33 /* LocationDropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDropDownView.swift; sourceTree = "<group>"; };
 		561888A0264ABDFC00BDDB33 /* DropDownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownTableViewCell.swift; sourceTree = "<group>"; };
 		561888A1264ABDFC00BDDB33 /* DropDownTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropDownTableViewCell.xib; sourceTree = "<group>"; };
+		562585CB26F0E2C400EC9284 /* MyReservetionAdvancedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyReservetionAdvancedViewController.swift; sourceTree = "<group>"; };
+		562585CC26F0E2C400EC9284 /* MyReservetionAdvanced.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyReservetionAdvanced.storyboard; sourceTree = "<group>"; };
+		562585D026F0F5A500EC9284 /* PaymentStatusUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentStatusUITableView.swift; sourceTree = "<group>"; };
+		562585D326F0F5D100EC9284 /* PaymentStatusUITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentStatusUITableViewCell.swift; sourceTree = "<group>"; };
+		562585D426F0F5D100EC9284 /* PaymentStatusUITableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentStatusUITableViewCell.xib; sourceTree = "<group>"; };
+		562585D726F1040200EC9284 /* PaymentStausModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentStausModel.swift; sourceTree = "<group>"; };
+		562585DA26F175CA00EC9284 /* RegisterNumberUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterNumberUITableView.swift; sourceTree = "<group>"; };
+		562585DD26F176D500EC9284 /* RegisterNumberTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterNumberTableCell.swift; sourceTree = "<group>"; };
+		562585DE26F176D500EC9284 /* RegisterNumberTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterNumberTableCell.xib; sourceTree = "<group>"; };
+		562585E226F1860800EC9284 /* AdditionalDriverTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalDriverTableView.swift; sourceTree = "<group>"; };
+		562585E526F1867800EC9284 /* AditionalDriverTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AditionalDriverTableCell.swift; sourceTree = "<group>"; };
+		562585E626F1867800EC9284 /* AditionalDriverTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AditionalDriverTableCell.xib; sourceTree = "<group>"; };
 		56316315267A822200ED2144 /* MyDriverCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDriverCollectionViewCell.swift; sourceTree = "<group>"; };
+		5640394C26EF854B0064256C /* ReservationWithStartRideCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationWithStartRideCollectionViewCell.swift; sourceTree = "<group>"; };
+		5640394D26EF854B0064256C /* ReservationWithStartRideCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReservationWithStartRideCollectionViewCell.xib; sourceTree = "<group>"; };
+		5640395026EFA2590064256C /* ReservationWithReservedPaidModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationWithReservedPaidModel.swift; sourceTree = "<group>"; };
+		5640395326EFD0680064256C /* ReservationWithRegisterNumberCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReservationWithRegisterNumberCollectionViewCell.xib; sourceTree = "<group>"; };
+		5640395426EFD0680064256C /* ReservationWithRegisterNumberCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationWithRegisterNumberCollectionViewCell.swift; sourceTree = "<group>"; };
+		5640395826EFEF590064256C /* ReservetionWithDistancePriceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservetionWithDistancePriceCell.swift; sourceTree = "<group>"; };
+		5640395926EFEF590064256C /* ReservetionWithDistancePriceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReservetionWithDistancePriceCell.xib; sourceTree = "<group>"; };
+		5640395D26F01D530064256C /* ReservetionWithPayRentalPriceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReservetionWithPayRentalPriceCell.xib; sourceTree = "<group>"; };
+		5640395E26F01D530064256C /* ReservetionWithPayRentalPriceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservetionWithPayRentalPriceCell.swift; sourceTree = "<group>"; };
+		5640396226F0207F0064256C /* PayLaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayLaterViewController.swift; sourceTree = "<group>"; };
+		5640396426F020930064256C /* PayLater.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PayLater.storyboard; sourceTree = "<group>"; };
 		5640952C264AE529001DC92D /* DropDownModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownModel.swift; sourceTree = "<group>"; };
 		56409532264AE5A8001DC92D /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		56409538264B24D8001DC92D /* BKDAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BKDAlert.swift; sourceTree = "<group>"; };
@@ -420,10 +485,8 @@
 		565F8C49268D17C200E21C71 /* Carousel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Carousel.storyboard; sourceTree = "<group>"; };
 		565F9AFD26C87D1E00064AD4 /* Kaartlazer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Kaartlazer.storyboard; sourceTree = "<group>"; };
 		565F9AFF26C87D2F00064AD4 /* KaartlazerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaartlazerViewController.swift; sourceTree = "<group>"; };
-		565F9B0326C8AE2900064AD4 /* ReservetionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservetionCollectionViewCell.swift; sourceTree = "<group>"; };
-		565F9B0426C8AE2900064AD4 /* ReservetionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReservetionCollectionViewCell.xib; sourceTree = "<group>"; };
-		565F9B0926C8AEA100064AD4 /* ReservetionStartRideCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservetionStartRideCollectionViewCell.swift; sourceTree = "<group>"; };
-		565F9B0A26C8AEA100064AD4 /* ReservetionStartRideCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReservetionStartRideCollectionViewCell.xib; sourceTree = "<group>"; };
+		565F9B0926C8AEA100064AD4 /* ReservetionMakePaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservetionMakePaymentCell.swift; sourceTree = "<group>"; };
+		565F9B0A26C8AEA100064AD4 /* ReservetionMakePaymentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReservetionMakePaymentCell.xib; sourceTree = "<group>"; };
 		5660F7F1266C217F0082F038 /* Mulish-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mulish-Bold.ttf"; sourceTree = "<group>"; };
 		566354E9268AF8EF0003E2EB /* PriceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTableViewCell.swift; sourceTree = "<group>"; };
 		566354EA268AF8EF0003E2EB /* PriceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriceTableViewCell.xib; sourceTree = "<group>"; };
@@ -469,6 +532,10 @@
 		5691A638265D53140008081D /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		5691A640265D97550008081D /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		5691A64D265DB6300008081D /* SearchHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderViewModel.swift; sourceTree = "<group>"; };
+		5692658526F3B1B000004E81 /* EditBySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBySearchView.swift; sourceTree = "<group>"; };
+		5692658826F3B71C00004E81 /* WaithingAdminApplovalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaithingAdminApplovalCell.xib; sourceTree = "<group>"; };
+		5692658926F3B71C00004E81 /* WaithingAdminApplovalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaithingAdminApplovalCell.swift; sourceTree = "<group>"; };
+		569C8C9526F2603C001D65EF /* TotalPriceStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalPriceStackView.swift; sourceTree = "<group>"; };
 		56A2AFDD2693F221001BA7C5 /* ExamplePhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplePhotoTableViewCell.swift; sourceTree = "<group>"; };
 		56A2AFDE2693F221001BA7C5 /* ExamplePhotoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExamplePhotoTableViewCell.xib; sourceTree = "<group>"; };
 		56A2AFE42694C827001BA7C5 /* PhoneNumberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberTableViewCell.swift; sourceTree = "<group>"; };
@@ -489,6 +556,10 @@
 		56AD191C2693251C006A53C1 /* CheckEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckEmailViewModel.swift; sourceTree = "<group>"; };
 		56AD19212693421C006A53C1 /* TermsConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsConditionsViewController.swift; sourceTree = "<group>"; };
 		56AD192526934D7E006A53C1 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
+		56ADD80C26F2C65800C0ECC3 /* EditReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReservationViewController.swift; sourceTree = "<group>"; };
+		56ADD80E26F2C66900C0ECC3 /* EditReservation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditReservation.storyboard; sourceTree = "<group>"; };
+		56ADD81126F2CED400C0ECC3 /* ReservationHistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReservationHistoryCell.xib; sourceTree = "<group>"; };
+		56ADD81226F2CED400C0ECC3 /* ReservationHistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationHistoryCell.swift; sourceTree = "<group>"; };
 		56B9F2D4267E8CEE003449AD /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		56B9F2E226805020003449AD /* SearchWithValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWithValueView.swift; sourceTree = "<group>"; };
 		56B9F2EC26806488003449AD /* SearchResultModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultModelView.swift; sourceTree = "<group>"; };
@@ -503,6 +574,19 @@
 		56CC7D8426AA07F2006DB7B8 /* BancontactCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BancontactCollectionViewCell.swift; sourceTree = "<group>"; };
 		56CD830A267CF45600B2799F /* ReserveTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveTableView.swift; sourceTree = "<group>"; };
 		56CD8312267CF56800B2799F /* ReserveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveModel.swift; sourceTree = "<group>"; };
+		56CF781926F3BD1B0092F555 /* AdditionalDriverWaithingApplovalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionalDriverWaithingApplovalCell.swift; sourceTree = "<group>"; };
+		56CF781A26F3BD1B0092F555 /* AdditionalDriverWaithingApplovalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdditionalDriverWaithingApplovalCell.xib; sourceTree = "<group>"; };
+		56CF781E26F3C72C0092F555 /* AdditionalDriverForWaithingApprovalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalDriverForWaithingApprovalCell.swift; sourceTree = "<group>"; };
+		56CF781F26F3C72C0092F555 /* AdditionalDriverForWaithingApprovalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdditionalDriverForWaithingApprovalCell.xib; sourceTree = "<group>"; };
+		56CF782C26F3E1380092F555 /* OdometerCheck.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OdometerCheck.storyboard; sourceTree = "<group>"; };
+		56CF782E26F3E1490092F555 /* OdometerCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OdometerCheckViewController.swift; sourceTree = "<group>"; };
+		56CF783126F4F55F0092F555 /* VehicleCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCheckViewController.swift; sourceTree = "<group>"; };
+		56CF783326F4F56E0092F555 /* VehicleCheck.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = VehicleCheck.storyboard; sourceTree = "<group>"; };
+		56CF783B26F578620092F555 /* StartRideModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartRideModel.swift; sourceTree = "<group>"; };
+		56CF783F26F8AD7B0092F555 /* VehicleDimageCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleDimageCollectionCell.swift; sourceTree = "<group>"; };
+		56CF784026F8AD7B0092F555 /* VehicleDimageCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VehicleDimageCollectionCell.xib; sourceTree = "<group>"; };
+		56CF784426F8F7D10092F555 /* NewDamageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDamageViewController.swift; sourceTree = "<group>"; };
+		56CF784626F8F7E10092F555 /* NewDamage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewDamage.storyboard; sourceTree = "<group>"; };
 		56CFDE5F26936F8400D731CD /* FaceAndTouchIdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceAndTouchIdViewController.swift; sourceTree = "<group>"; };
 		56CFDE672693721C00D731CD /* RegistartionBotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistartionBotViewController.swift; sourceTree = "<group>"; };
 		56CFDE6B2693723400D731CD /* RegistrationBot.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RegistrationBot.storyboard; sourceTree = "<group>"; };
@@ -695,6 +779,111 @@
 				561888A1264ABDFC00BDDB33 /* DropDownTableViewCell.xib */,
 			);
 			path = DropDownCell;
+			sourceTree = "<group>";
+		};
+		562585CA26F0E2C400EC9284 /* MyReservetionAdvancedViewController */ = {
+			isa = PBXGroup;
+			children = (
+				562585CB26F0E2C400EC9284 /* MyReservetionAdvancedViewController.swift */,
+				562585CC26F0E2C400EC9284 /* MyReservetionAdvanced.storyboard */,
+			);
+			path = MyReservetionAdvancedViewController;
+			sourceTree = "<group>";
+		};
+		562585CF26F0F56B00EC9284 /* PaymentStatusUITableView */ = {
+			isa = PBXGroup;
+			children = (
+				562585D026F0F5A500EC9284 /* PaymentStatusUITableView.swift */,
+			);
+			path = PaymentStatusUITableView;
+			sourceTree = "<group>";
+		};
+		562585D226F0F5AE00EC9284 /* PaymentStatusUITableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				562585D326F0F5D100EC9284 /* PaymentStatusUITableViewCell.swift */,
+				562585D426F0F5D100EC9284 /* PaymentStatusUITableViewCell.xib */,
+			);
+			path = PaymentStatusUITableViewCell;
+			sourceTree = "<group>";
+		};
+		562585D926F1759700EC9284 /* RegisterNumberUITableView */ = {
+			isa = PBXGroup;
+			children = (
+				562585DA26F175CA00EC9284 /* RegisterNumberUITableView.swift */,
+			);
+			path = RegisterNumberUITableView;
+			sourceTree = "<group>";
+		};
+		562585DC26F176AB00EC9284 /* RegisterNumberTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				562585DD26F176D500EC9284 /* RegisterNumberTableCell.swift */,
+				562585DE26F176D500EC9284 /* RegisterNumberTableCell.xib */,
+			);
+			path = RegisterNumberTableCell;
+			sourceTree = "<group>";
+		};
+		562585E126F185D800EC9284 /* AdditionalDriverTableView */ = {
+			isa = PBXGroup;
+			children = (
+				562585E226F1860800EC9284 /* AdditionalDriverTableView.swift */,
+			);
+			path = AdditionalDriverTableView;
+			sourceTree = "<group>";
+		};
+		562585E426F1862B00EC9284 /* AditionalDriverTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				562585E526F1867800EC9284 /* AditionalDriverTableCell.swift */,
+				562585E626F1867800EC9284 /* AditionalDriverTableCell.xib */,
+			);
+			path = AditionalDriverTableCell;
+			sourceTree = "<group>";
+		};
+		5640394926EF84CF0064256C /* ReservationWithStartRideCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5640394C26EF854B0064256C /* ReservationWithStartRideCollectionViewCell.swift */,
+				5640394D26EF854B0064256C /* ReservationWithStartRideCollectionViewCell.xib */,
+			);
+			path = ReservationWithStartRideCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		5640395226EFD0680064256C /* ReservationWithRegisterNumberCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5640395326EFD0680064256C /* ReservationWithRegisterNumberCollectionViewCell.xib */,
+				5640395426EFD0680064256C /* ReservationWithRegisterNumberCollectionViewCell.swift */,
+			);
+			path = ReservationWithRegisterNumberCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		5640395726EFEF590064256C /* ReservetionWithDistancePriceCell */ = {
+			isa = PBXGroup;
+			children = (
+				5640395826EFEF590064256C /* ReservetionWithDistancePriceCell.swift */,
+				5640395926EFEF590064256C /* ReservetionWithDistancePriceCell.xib */,
+			);
+			path = ReservetionWithDistancePriceCell;
+			sourceTree = "<group>";
+		};
+		5640395C26F01D530064256C /* ReservetionWithPayRentalPriceCell */ = {
+			isa = PBXGroup;
+			children = (
+				5640395D26F01D530064256C /* ReservetionWithPayRentalPriceCell.xib */,
+				5640395E26F01D530064256C /* ReservetionWithPayRentalPriceCell.swift */,
+			);
+			path = ReservetionWithPayRentalPriceCell;
+			sourceTree = "<group>";
+		};
+		5640396126F0203A0064256C /* PayLaterViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5640396226F0207F0064256C /* PayLaterViewController.swift */,
+				5640396426F020930064256C /* PayLater.storyboard */,
+			);
+			path = PayLaterViewController;
 			sourceTree = "<group>";
 		};
 		56409537264B247E001DC92D /* Manageres */ = {
@@ -1383,6 +1572,14 @@
 		565F9B0126C8ADC100064AD4 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				5692658426F3B15600004E81 /* EditBySearchView */,
+				56ADD80B26F2C62200C0ECC3 /* EditReservationViewController */,
+				569C8C9426F2601C001D65EF /* TotalPriceStackView */,
+				562585E126F185D800EC9284 /* AdditionalDriverTableView */,
+				562585D926F1759700EC9284 /* RegisterNumberUITableView */,
+				562585CF26F0F56B00EC9284 /* PaymentStatusUITableView */,
+				562585CA26F0E2C400EC9284 /* MyReservetionAdvancedViewController */,
+				5640396126F0203A0064256C /* PayLaterViewController */,
 				565F9B0226C8ADD500064AD4 /* Cells */,
 			);
 			path = UI;
@@ -1391,28 +1588,29 @@
 		565F9B0226C8ADD500064AD4 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				565F9B0826C8AE5600064AD4 /* ReservetionStartRideCell */,
-				565F9B0726C8AE3700064AD4 /* ReservetionCell */,
+				56CF781D26F3C6FE0092F555 /* AdditionalDriverForWaithingApprovalCell */,
+				56CF781826F3BD1B0092F555 /* AdditionalDriverWaithingApplovalCell */,
+				5692658726F3B71C00004E81 /* WaithingAdminApplovalCell */,
+				56ADD81026F2CED400C0ECC3 /* ReservetionHistoryCell */,
+				562585E426F1862B00EC9284 /* AditionalDriverTableCell */,
+				562585DC26F176AB00EC9284 /* RegisterNumberTableCell */,
+				562585D226F0F5AE00EC9284 /* PaymentStatusUITableViewCell */,
+				5640395C26F01D530064256C /* ReservetionWithPayRentalPriceCell */,
+				5640395726EFEF590064256C /* ReservetionWithDistancePriceCell */,
+				5640395226EFD0680064256C /* ReservationWithRegisterNumberCollectionViewCell */,
+				5640394926EF84CF0064256C /* ReservationWithStartRideCollectionViewCell */,
+				565F9B0826C8AE5600064AD4 /* ReservetionMakePaymentCell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		565F9B0726C8AE3700064AD4 /* ReservetionCell */ = {
+		565F9B0826C8AE5600064AD4 /* ReservetionMakePaymentCell */ = {
 			isa = PBXGroup;
 			children = (
-				565F9B0426C8AE2900064AD4 /* ReservetionCollectionViewCell.xib */,
-				565F9B0326C8AE2900064AD4 /* ReservetionCollectionViewCell.swift */,
+				565F9B0926C8AEA100064AD4 /* ReservetionMakePaymentCell.swift */,
+				565F9B0A26C8AEA100064AD4 /* ReservetionMakePaymentCell.xib */,
 			);
-			path = ReservetionCell;
-			sourceTree = "<group>";
-		};
-		565F9B0826C8AE5600064AD4 /* ReservetionStartRideCell */ = {
-			isa = PBXGroup;
-			children = (
-				565F9B0926C8AEA100064AD4 /* ReservetionStartRideCollectionViewCell.swift */,
-				565F9B0A26C8AEA100064AD4 /* ReservetionStartRideCollectionViewCell.xib */,
-			);
-			path = ReservetionStartRideCell;
+			path = ReservetionMakePaymentCell;
 			sourceTree = "<group>";
 		};
 		566354E8268AF8890003E2EB /* PriceTableViewCell */ = {
@@ -1530,6 +1728,7 @@
 		568E70942644BD2D000CB6A9 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				56CF782226F3DF4D0092F555 /* StartRide */,
 				565F80DB26A74D0800ADB9FE /* PhoneVerification */,
 				565F80CD26A703AA00ADB9FE /* Payment */,
 				565F80BB26A6678900ADB9FE /* ReservationCompleted */,
@@ -1791,6 +1990,8 @@
 		568E70B12644BFA8000CB6A9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5640395026EFA2590064256C /* ReservationWithReservedPaidModel.swift */,
+				562585D726F1040200EC9284 /* PaymentStausModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1906,6 +2107,31 @@
 				5691A61A265C71EC0008081D /* ExteriorCollectionViewCell.xib */,
 			);
 			path = ExteriorCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		5692658426F3B15600004E81 /* EditBySearchView */ = {
+			isa = PBXGroup;
+			children = (
+				5692658526F3B1B000004E81 /* EditBySearchView.swift */,
+			);
+			path = EditBySearchView;
+			sourceTree = "<group>";
+		};
+		5692658726F3B71C00004E81 /* WaithingAdminApplovalCell */ = {
+			isa = PBXGroup;
+			children = (
+				5692658826F3B71C00004E81 /* WaithingAdminApplovalCell.xib */,
+				5692658926F3B71C00004E81 /* WaithingAdminApplovalCell.swift */,
+			);
+			path = WaithingAdminApplovalCell;
+			sourceTree = "<group>";
+		};
+		569C8C9426F2601C001D65EF /* TotalPriceStackView */ = {
+			isa = PBXGroup;
+			children = (
+				569C8C9526F2603C001D65EF /* TotalPriceStackView.swift */,
+			);
+			path = TotalPriceStackView;
 			sourceTree = "<group>";
 		};
 		56A2AFDA2693F1C8001BA7C5 /* InfoMessage */ = {
@@ -2044,6 +2270,24 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		56ADD80B26F2C62200C0ECC3 /* EditReservationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				56ADD80C26F2C65800C0ECC3 /* EditReservationViewController.swift */,
+				56ADD80E26F2C66900C0ECC3 /* EditReservation.storyboard */,
+			);
+			path = EditReservationViewController;
+			sourceTree = "<group>";
+		};
+		56ADD81026F2CED400C0ECC3 /* ReservetionHistoryCell */ = {
+			isa = PBXGroup;
+			children = (
+				56ADD81126F2CED400C0ECC3 /* ReservationHistoryCell.xib */,
+				56ADD81226F2CED400C0ECC3 /* ReservationHistoryCell.swift */,
+			);
+			path = ReservetionHistoryCell;
+			sourceTree = "<group>";
+		};
 		56C8E16E267C1CAD0061890C /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2096,6 +2340,112 @@
 				566354F3268B72950003E2EB /* PriceTableView.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		56CF781826F3BD1B0092F555 /* AdditionalDriverWaithingApplovalCell */ = {
+			isa = PBXGroup;
+			children = (
+				56CF781926F3BD1B0092F555 /* AdditionalDriverWaithingApplovalCell.swift */,
+				56CF781A26F3BD1B0092F555 /* AdditionalDriverWaithingApplovalCell.xib */,
+			);
+			path = AdditionalDriverWaithingApplovalCell;
+			sourceTree = "<group>";
+		};
+		56CF781D26F3C6FE0092F555 /* AdditionalDriverForWaithingApprovalCell */ = {
+			isa = PBXGroup;
+			children = (
+				56CF781E26F3C72C0092F555 /* AdditionalDriverForWaithingApprovalCell.swift */,
+				56CF781F26F3C72C0092F555 /* AdditionalDriverForWaithingApprovalCell.xib */,
+			);
+			path = AdditionalDriverForWaithingApprovalCell;
+			sourceTree = "<group>";
+		};
+		56CF782226F3DF4D0092F555 /* StartRide */ = {
+			isa = PBXGroup;
+			children = (
+				56CF782526F3DF750092F555 /* ViewModel */,
+				56CF782426F3DF660092F555 /* Model */,
+				56CF782326F3DF5E0092F555 /* View */,
+			);
+			path = StartRide;
+			sourceTree = "<group>";
+		};
+		56CF782326F3DF5E0092F555 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				56CF783D26F8AD330092F555 /* Cells */,
+				56CF782A26F3E1110092F555 /* UI */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		56CF782426F3DF660092F555 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				56CF783B26F578620092F555 /* StartRideModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		56CF782526F3DF750092F555 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		56CF782A26F3E1110092F555 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				56CF784326F8F7A30092F555 /* NewDamageViewController */,
+				56CF783026F4F51F0092F555 /* VehicleCheckViewController */,
+				56CF782B26F3E1180092F555 /* OdometerCheckViewController */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		56CF782B26F3E1180092F555 /* OdometerCheckViewController */ = {
+			isa = PBXGroup;
+			children = (
+				56CF782C26F3E1380092F555 /* OdometerCheck.storyboard */,
+				56CF782E26F3E1490092F555 /* OdometerCheckViewController.swift */,
+			);
+			path = OdometerCheckViewController;
+			sourceTree = "<group>";
+		};
+		56CF783026F4F51F0092F555 /* VehicleCheckViewController */ = {
+			isa = PBXGroup;
+			children = (
+				56CF783126F4F55F0092F555 /* VehicleCheckViewController.swift */,
+				56CF783326F4F56E0092F555 /* VehicleCheck.storyboard */,
+			);
+			path = VehicleCheckViewController;
+			sourceTree = "<group>";
+		};
+		56CF783D26F8AD330092F555 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				56CF783E26F8AD390092F555 /* VehicleDimageCollectionCell */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		56CF783E26F8AD390092F555 /* VehicleDimageCollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				56CF783F26F8AD7B0092F555 /* VehicleDimageCollectionCell.swift */,
+				56CF784026F8AD7B0092F555 /* VehicleDimageCollectionCell.xib */,
+			);
+			path = VehicleDimageCollectionCell;
+			sourceTree = "<group>";
+		};
+		56CF784326F8F7A30092F555 /* NewDamageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				56CF784426F8F7D10092F555 /* NewDamageViewController.swift */,
+				56CF784626F8F7E10092F555 /* NewDamage.storyboard */,
+			);
+			path = NewDamageViewController;
 			sourceTree = "<group>";
 		};
 		56CFDE64269371CF00D731CD /* Cells */ = {
@@ -2219,7 +2569,7 @@
 				568E6F4C2642FC4B000CB6A9 /* Resources */,
 				565F8C65268D390600E21C71 /* Embed Frameworks */,
 				995B321BDC49670283C49A78 /* [CP] Embed Pods Frameworks */,
-				3BA753CAA5DBDE109A2DA4E0 /* [CP] Copy Pods Resources */,
+				5C5E742748ADD7B031A91DA0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2277,15 +2627,21 @@
 				56C8E173267C1D100061890C /* ReserveTableViewCell.xib in Resources */,
 				560252952664376900FB204C /* Mulish-Regular.ttf in Resources */,
 				564E137A26531F8F008CE884 /* Mulish-SemiBold.ttf in Resources */,
+				5640395F26F01D530064256C /* ReservetionWithPayRentalPriceCell.xib in Resources */,
 				565F80B826A6392600ADB9FE /* ChangePhoneNumber.storyboard in Resources */,
+				5640394F26EF854B0064256C /* ReservationWithStartRideCollectionViewCell.xib in Resources */,
+				56CF782126F3C72C0092F555 /* AdditionalDriverForWaithingApprovalCell.xib in Resources */,
 				5660F7F2266C21980082F038 /* Mulish-Bold.ttf in Resources */,
+				56ADD80F26F2C66900C0ECC3 /* EditReservation.storyboard in Resources */,
 				564E1354265211FF008CE884 /* SFProDisplay-Semibold.ttf in Resources */,
+				562585E826F1867800EC9284 /* AditionalDriverTableCell.xib in Resources */,
 				565863B626C72029003C19A2 /* OfficeTerminal.storyboard in Resources */,
 				564E137226530208008CE884 /* SearchResultCollectionViewCell.xib in Resources */,
 				564E1355265211FF008CE884 /* SongMyung-Regular.ttf in Resources */,
 				564E1356265211FF008CE884 /* SFProDisplay-Regular.ttf in Resources */,
 				564E1357265211FF008CE884 /* SFProDisplay-Light.ttf in Resources */,
 				560FE64A267BE7BE0068BC85 /* Reserve.storyboard in Resources */,
+				56CF781C26F3BD1C0092F555 /* AdditionalDriverWaithingApplovalCell.xib in Resources */,
 				5691A61C265C71EC0008081D /* ExteriorCollectionViewCell.xib in Resources */,
 				564E1358265211FF008CE884 /* Mulish-Light.ttf in Resources */,
 				568E70C326454DB1000CB6A9 /* AboutUs.storyboard in Resources */,
@@ -2293,12 +2649,15 @@
 				565F80CA26A6690B00ADB9FE /* ReservationCompleted.storyboard in Resources */,
 				568E70CB26455286000CB6A9 /* MainCollectionViewCell.xib in Resources */,
 				56573202267339B50012ADD0 /* FontsFree-Net-SFProDisplay-Medium.ttf in Resources */,
+				56ADD81326F2CED400C0ECC3 /* ReservationHistoryCell.xib in Resources */,
 				5656324726585FFF00B78562 /* CarEquipmentCollectionViewCell.xib in Resources */,
 				568E706F264481B0000CB6A9 /* LeftTableViewCell.xib in Resources */,
 				566354EC268AF8EF0003E2EB /* PriceTableViewCell.xib in Resources */,
+				5692658A26F3B71C00004E81 /* WaithingAdminApplovalCell.xib in Resources */,
 				56AD18D726916077006A53C1 /* Registration.storyboard in Resources */,
 				565A7AE426555EFF006C63D0 /* CategoryTableViewCell.xib in Resources */,
 				56664D9C269DC36A00FDBD22 /* VerificationCode.storyboard in Resources */,
+				562585D626F0F5D100EC9284 /* PaymentStatusUITableViewCell.xib in Resources */,
 				561888A3264ABDFC00BDDB33 /* DropDownTableViewCell.xib in Resources */,
 				56CFDE7C2693CEA200D731CD /* UserFillFieldTableViewCell.xib in Resources */,
 				56CFDE7226938EFC00D731CD /* InfoMessageTableViewCell.xib in Resources */,
@@ -2306,29 +2665,37 @@
 				564E136A2652F0CF008CE884 /* PrivacyPoliceView.xib in Resources */,
 				5665400D2673A0A5008ACD31 /* TariffSlideCollectionViewCell.xib in Resources */,
 				566B3768269545540021BCAA /* MailBoxNumberTableViewCell.xib in Resources */,
+				56CF783426F4F56E0092F555 /* VehicleCheck.storyboard in Resources */,
 				5665404826759E79008ACD31 /* TariffCarouselCell.xib in Resources */,
 				5656323C265841BE00B78562 /* FilterSearchResultCell.xib in Resources */,
 				56533EF82679263D0012BF4A /* Accessories.storyboard in Resources */,
 				566B379B26974F0C0021BCAA /* NationalRegisterNumberTableViewCell.xib in Resources */,
 				5602533126670A1000FB204C /* Chat.storyboard in Resources */,
 				565F9AFE26C87D1E00064AD4 /* Kaartlazer.storyboard in Resources */,
+				56CF784226F8AD7B0092F555 /* VehicleDimageCollectionCell.xib in Resources */,
 				560251DB2661074200FB204C /* Carousel.xib in Resources */,
+				56CF784726F8F7E20092F555 /* NewDamage.storyboard in Resources */,
 				56AD18EB2691622C006A53C1 /* SignIn.storyboard in Resources */,
-				565F9B0C26C8AEA100064AD4 /* ReservetionStartRideCollectionViewCell.xib in Resources */,
+				565F9B0C26C8AEA100064AD4 /* ReservetionMakePaymentCell.xib in Resources */,
 				5656082E26785C47009578FA /* More.storyboard in Resources */,
+				56CF782D26F3E1380092F555 /* OdometerCheck.storyboard in Resources */,
+				5640395B26EFEF5A0064256C /* ReservetionWithDistancePriceCell.xib in Resources */,
 				5656083A26785E2C009578FA /* RentalConditionsTableViewCell.xib in Resources */,
 				56533ED72678BF3A0012BF4A /* BkdAdvantagesTableViewCell.xib in Resources */,
 				56533F0E2679BDD50012BF4A /* MyDrivers.storyboard in Resources */,
 				568E6F5E2642FC50000CB6A9 /* LaunchScreen.storyboard in Resources */,
+				5640396526F020930064256C /* PayLater.storyboard in Resources */,
 				565863BD26C76B5D003C19A2 /* Cash.storyboard in Resources */,
 				565A7AD72654C49B006C63D0 /* CategoryCollectionViewCell.xib in Resources */,
+				562585CE26F0E2C400EC9284 /* MyReservetionAdvanced.storyboard in Resources */,
 				566B37BE2697A6D40021BCAA /* TakePhotoTableViewCell.xib in Resources */,
 				565A7AB12653FE26006C63D0 /* SearchHeaderView.xib in Resources */,
+				5640395526EFD0690064256C /* ReservationWithRegisterNumberCollectionViewCell.xib in Resources */,
 				564E12D0264D72E2008CE884 /* SeeMap.storyboard in Resources */,
 				5618872D2645D99600BDDB33 /* Assets.xcassets in Resources */,
 				5657E848267108B500788D62 /* Details.storyboard in Resources */,
+				562585E026F176D500EC9284 /* RegisterNumberTableCell.xib in Resources */,
 				566B3761269503360021BCAA /* CalendarTableViewCell.xib in Resources */,
-				565F9B0626C8AE2900064AD4 /* ReservetionCollectionViewCell.xib in Resources */,
 				565A7ACF26548025006C63D0 /* SearchResult.xib in Resources */,
 				5691A614265C50F20008081D /* CustomLocation.storyboard in Resources */,
 				56CFDE6C2693723400D731CD /* RegistrationBot.storyboard in Resources */,
@@ -2363,7 +2730,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3BA753CAA5DBDE109A2DA4E0 /* [CP] Copy Pods Resources */ = {
+		5C5E742748ADD7B031A91DA0 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2410,6 +2777,7 @@
 				565863BB26C76B3C003C19A2 /* CashViewController.swift in Sources */,
 				9393BAEF26D78846003878BF /* SocketServiceProtocol.swift in Sources */,
 				56533ECF2678B94D0012BF4A /* MoreModel.swift in Sources */,
+				562585E726F1867800EC9284 /* AditionalDriverTableCell.swift in Sources */,
 				566354F4268B72950003E2EB /* PriceTableView.swift in Sources */,
 				565F810026A7C1E700ADB9FE /* PaymentTypes.swift in Sources */,
 				56CFDE682693721C00D731CD /* RegistartionBotViewController.swift in Sources */,
@@ -2417,15 +2785,16 @@
 				565F80A826A5FD7D00ADB9FE /* PersonalData.swift in Sources */,
 				565731CC26724F720012ADD0 /* CarInfoView.swift in Sources */,
 				565731D126725FBD0012ADD0 /* DetailsAndTailLiftView.swift in Sources */,
+				5640395626EFD0690064256C /* ReservationWithRegisterNumberCollectionViewCell.swift in Sources */,
 				568E703B264440C2000CB6A9 /* MyBKDViewController.swift in Sources */,
 				93CDB1F026C1C8FA009F9B6C /* PaymentAPI.swift in Sources */,
 				565BD3602659AED1001923F5 /* AppDelegate.swift in Sources */,
+				5692658B26F3B71C00004E81 /* WaithingAdminApplovalCell.swift in Sources */,
 				565731EE26730F270012ADD0 /* DetailsTableView.swift in Sources */,
 				56A2AFDF2693F221001BA7C5 /* ExamplePhotoTableViewCell.swift in Sources */,
 				56AD190D26931AB2006A53C1 /* CheckEmailViewController.swift in Sources */,
 				56C8E172267C1D100061890C /* ReserveTableViewCell.swift in Sources */,
 				565BFDFB26A0C3800044D081 /* CarTypes.swift in Sources */,
-				565F9B0526C8AE2900064AD4 /* ReservetionCollectionViewCell.swift in Sources */,
 				5602534C2667413A00FB204C /* BaseViewController.swift in Sources */,
 				565F8C1F268CF4C700E21C71 /* CarouselCollectionViewCell.swift in Sources */,
 				56533EE3267925FE0012BF4A /* AccessoriesUIViewController.swift in Sources */,
@@ -2440,18 +2809,25 @@
 				56B9F34226826DE1003449AD /* DetailsViewModel.swift in Sources */,
 				56AD19222693421C006A53C1 /* TermsConditionsViewController.swift in Sources */,
 				5656083926785E2C009578FA /* RentalConditionsTableViewCell.swift in Sources */,
+				562585DF26F176D500EC9284 /* RegisterNumberTableCell.swift in Sources */,
+				56CF782F26F3E1490092F555 /* OdometerCheckViewController.swift in Sources */,
 				5602536F2669AE1C00FB204C /* OfflineViewController.swift in Sources */,
+				5640395A26EFEF5A0064256C /* ReservetionWithDistancePriceCell.swift in Sources */,
 				56188889264A61ED00BDDB33 /* TextField.swift in Sources */,
 				56B9F33D26825FF0003449AD /* TariffSlideViewModel.swift in Sources */,
 				56AD191D2693251C006A53C1 /* CheckEmailViewModel.swift in Sources */,
 				5640952D264AE529001DC92D /* DropDownModel.swift in Sources */,
+				562585DB26F175CB00EC9284 /* RegisterNumberUITableView.swift in Sources */,
 				566B37BD2697A6D40021BCAA /* TakePhotoTableViewCell.swift in Sources */,
 				5691A5FC265C28860008081D /* AddressNameViewController.swift in Sources */,
+				56ADD80D26F2C65800C0ECC3 /* EditReservationViewController.swift in Sources */,
 				56B9F2ED26806488003449AD /* SearchResultModelView.swift in Sources */,
 				565BFD8F269F56510044D081 /* SessionNetwork.swift in Sources */,
 				56CD830B267CF45600B2799F /* ReserveTableView.swift in Sources */,
+				5640395126EFA2590064256C /* ReservationWithReservedPaidModel.swift in Sources */,
 				568E706E264481B0000CB6A9 /* LeftTableViewCell.swift in Sources */,
 				566B3767269545540021BCAA /* MailBoxNumberTableViewCell.swift in Sources */,
+				562585D126F0F5A500EC9284 /* PaymentStatusUITableView.swift in Sources */,
 				565BFDFF26A0D3960044D081 /* RestrictedZones.swift in Sources */,
 				56533EFF267954560012BF4A /* AccessoriesCollectionViewCell.swift in Sources */,
 				566354EB268AF8EF0003E2EB /* PriceTableViewCell.swift in Sources */,
@@ -2459,6 +2835,7 @@
 				565731D92672DE810012ADD0 /* UINavigationControllerExtention.swift in Sources */,
 				5658D79326CCA50000CD6A3F /* CategoryViewModel.swift in Sources */,
 				56CC7D7326A87A9F006DB7B8 /* PaymentWebViewController.swift in Sources */,
+				569C8C9626F2603C001D65EF /* TotalPriceStackView.swift in Sources */,
 				564E944826AF8BFA00291164 /* ApplicationSttings.swift in Sources */,
 				9393BAF726D78BF9003878BF /* Sender.swift in Sources */,
 				565F80B426A6391000ADB9FE /* ChangePhoneNumberViewController.swift in Sources */,
@@ -2475,13 +2852,16 @@
 				565F810526A7D08600ADB9FE /* PaymenTypeTableViewCell.swift in Sources */,
 				565F8C45268D12EA00E21C71 /* CarouselViewController.swift in Sources */,
 				564E1306264EE294008CE884 /* UIViewExtention.swift in Sources */,
+				56CF784126F8AD7B0092F555 /* VehicleDimageCollectionCell.swift in Sources */,
 				565BFDC1269F92310044D081 /* UIApplicationExtention.swift in Sources */,
 				560FE63D267BE7960068BC85 /* ReserveViewController.swift in Sources */,
 				564E137126530208008CE884 /* SearchResultCollectionViewCell.swift in Sources */,
+				56CF783226F4F55F0092F555 /* VehicleCheckViewController.swift in Sources */,
 				56563214265683A000B78562 /* Validator.swift in Sources */,
 				565F9B0026C87D2F00064AD4 /* KaartlazerViewController.swift in Sources */,
 				56664DC2269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift in Sources */,
 				565731DE2672FDC80012ADD0 /* DetailsAndTailLiftModel.swift in Sources */,
+				562585D826F1040200EC9284 /* PaymentStausModel.swift in Sources */,
 				568E703126443D90000CB6A9 /* CategoryViewController.swift in Sources */,
 				93CDB1EE26C17C69009F9B6C /* TokenResponse.swift in Sources */,
 				9393BAED26D78833003878BF /* SocketService.swift in Sources */,
@@ -2492,8 +2872,11 @@
 				93CDB1F526C1CE1F009F9B6C /* AttachedCardResponse.swift in Sources */,
 				5665403526759D3E008ACD31 /* TariffCarouselView.swift in Sources */,
 				564E13A726535D98008CE884 /* SeeMapViewController.swift in Sources */,
+				562585E326F1860800EC9284 /* AdditionalDriverTableView.swift in Sources */,
 				56409539264B24D8001DC92D /* BKDAlert.swift in Sources */,
 				56664DCA269E368C00FDBD22 /* TimeCompare.swift in Sources */,
+				5640394E26EF854B0064256C /* ReservationWithStartRideCollectionViewCell.swift in Sources */,
+				56CF781B26F3BD1C0092F555 /* AdditionalDriverWaithingApplovalCell.swift in Sources */,
 				5691A60B265C508C0008081D /* CustomLocationViewController.swift in Sources */,
 				565BFDDF269F9D140044D081 /* Time.swift in Sources */,
 				565BFD85269F55550044D081 /* APIProtocol.swift in Sources */,
@@ -2514,6 +2897,7 @@
 				565F807826A4FE8600ADB9FE /* RegistrationBotViewModel.swift in Sources */,
 				566B379A26974F0C0021BCAA /* NationalRegisterNumberTableViewCell.swift in Sources */,
 				565BFDD7269F961B0044D081 /* BkdConverter.swift in Sources */,
+				56ADD81426F2CED400C0ECC3 /* ReservationHistoryCell.swift in Sources */,
 				564E12D9264D7617008CE884 /* Constant.swift in Sources */,
 				560252F42665950700FB204C /* CustomLocationViewModel.swift in Sources */,
 				5656323B265841BE00B78562 /* FilterSearchResultCell.swift in Sources */,
@@ -2522,6 +2906,8 @@
 				5657E840267108A300788D62 /* DetailsViewController.swift in Sources */,
 				565F8C2B268D027400E21C71 /* UPCarouselFlowLayout.swift in Sources */,
 				565BFD93269F57CF0044D081 /* BkdError.swift in Sources */,
+				5640396026F01D530064256C /* ReservetionWithPayRentalPriceCell.swift in Sources */,
+				5692658626F3B1B000004E81 /* EditBySearchView.swift in Sources */,
 				565BFD97269F58460044D081 /* MultipartFormData.swift in Sources */,
 				565BFD9B269F586D0044D081 /* RequestMethod.swift in Sources */,
 				568E70CA26455286000CB6A9 /* MainCollectionViewCell.swift in Sources */,
@@ -2541,19 +2927,23 @@
 				5656A9C926D69F7900A71375 /* GooglePlacesManager.swift in Sources */,
 				56CFDE7B2693CEA100D731CD /* UserFillFieldTableViewCell.swift in Sources */,
 				5656A9E626D84D2700A71375 /* ImageUploadAPI.swift in Sources */,
+				56CF782026F3C72C0092F555 /* AdditionalDriverForWaithingApprovalCell.swift in Sources */,
 				5656321C26568C0D00B78562 /* SearchHeaderModel.swift in Sources */,
 				565BFDD3269F954C0044D081 /* UIViewController.swift in Sources */,
 				565BFD76269F4C5A0044D081 /* Car.swift in Sources */,
+				56CF784526F8F7D10092F555 /* NewDamageViewController.swift in Sources */,
 				56A2AFF52694D503001BA7C5 /* SearchPhoneCodeTableViewCell.swift in Sources */,
 				5691A641265D97550008081D /* MainViewModel.swift in Sources */,
 				56CC7D7926A91309006DB7B8 /* BancontactTypeViewController.swift in Sources */,
 				565BFD9F269F590A0044D081 /* KeychainManager.swift in Sources */,
+				56CF783C26F578620092F555 /* StartRideModel.swift in Sources */,
 				5648C5B6268803F7000B4E2A /* AccessoriesModel.swift in Sources */,
 				5657E84E26711AE800788D62 /* CarPhotosView.swift in Sources */,
 				565731F32673188F0012ADD0 /* TailLiftTableView.swift in Sources */,
 				5665400C2673A0A5008ACD31 /* TariffSlideCollectionViewCell.swift in Sources */,
 				5656A9D626D8303E00A71375 /* PersonalDriver.swift in Sources */,
 				5602529C2664465200FB204C /* MarkerInfoViewController.swift in Sources */,
+				562585CD26F0E2C400EC9284 /* MyReservetionAdvancedViewController.swift in Sources */,
 				56B9F2E326805021003449AD /* SearchWithValueView.swift in Sources */,
 				568E704026446136000CB6A9 /* AboutUsViewController.swift in Sources */,
 				565731FD267332B10012ADD0 /* TariffSlideModel.swift in Sources */,
@@ -2565,12 +2955,13 @@
 				56CD8313267CF56800B2799F /* ReserveModel.swift in Sources */,
 				565BFDB9269F8F310044D081 /* StorageManager.swift in Sources */,
 				565F807426A3C46600ADB9FE /* WorkingTimes.swift in Sources */,
-				565F9B0B26C8AEA100064AD4 /* ReservetionStartRideCollectionViewCell.swift in Sources */,
+				565F9B0B26C8AEA100064AD4 /* ReservetionMakePaymentCell.swift in Sources */,
 				560252E72665368E00FB204C /* SearchPlacesResult.swift in Sources */,
 				56CFDE6026936F8400D731CD /* FaceAndTouchIdViewController.swift in Sources */,
 				5602526726616C8700FB204C /* Storyboardinitializable.swift in Sources */,
 				56CFDE7126938EFC00D731CD /* InfoMessageTableViewCell.swift in Sources */,
 				565F80C426A667D900ADB9FE /* ReservationCompletedViewController.swift in Sources */,
+				562585D526F0F5D100EC9284 /* PaymentStatusUITableViewCell.swift in Sources */,
 				5656081A2678541B009578FA /* ImagesBottomCollectionViewCell.swift in Sources */,
 				565BFDF726A064360044D081 /* String.swift in Sources */,
 				5648C5C8268842D9000B4E2A /* AccessoriesViewModel.swift in Sources */,
@@ -2584,6 +2975,7 @@
 				5618888F264A63CA00BDDB33 /* LocationDropDownView.swift in Sources */,
 				56A2AFEC2694CFC9001BA7C5 /* SearchPhoneCodeViewController.swift in Sources */,
 				560252E2266535CF00FB204C /* Result.swift in Sources */,
+				5640396326F0207F0064256C /* PayLaterViewController.swift in Sources */,
 				5656324626585FFF00B78562 /* CarEquipmentCollectionViewCell.swift in Sources */,
 				560048702697F78C009943B5 /* BkdAgreementViewController.swift in Sources */,
 				564E13692652F0CF008CE884 /* PrivacyPoliceView.swift in Sources */,

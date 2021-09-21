@@ -70,8 +70,8 @@ class UserFillFieldTableViewCell: UITableViewCell {
     @IBOutlet weak var mBorderV: UIView!
     @IBOutlet weak var mDropDownImgV: UIImageView!
     @IBOutlet weak var mDropDownPlaceholderLb: UILabelPadding!
-    var viewType = ViewType(rawValue: Constant.Texts.txtFl)
     
+    var viewType = ViewType(rawValue: Constant.Texts.txtFl)
     weak var delegate: UserFillFieldTableViewCellDelegate?
 
     var placeholder: String? {

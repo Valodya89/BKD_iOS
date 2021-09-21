@@ -19,6 +19,8 @@ class PriceTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
     func setupView() {
         self.register(PriceTableViewCell.nib(), forCellReuseIdentifier: PriceTableViewCell.identifier)
+        self.layer.cornerRadius = 3
+        self.setShadow(color: color_shadow!)
         self.separatorColor = .clear
         self.delegate = self
         self.dataSource = self

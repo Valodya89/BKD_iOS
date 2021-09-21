@@ -17,7 +17,8 @@ class BKDAlert: NSObject {
     private var didHandleCancelAction: (() -> Void)?
 
     var messageAlignment: NSTextAlignment = .center
-    let backgroundView = UIView()
+    let backgroundView = UIVisualEffectView()
+    //let backgroundView = UIView()
     let alertView = UIView()
 
     
@@ -37,7 +38,9 @@ class BKDAlert: NSObject {
         didHandleCancelAction = cancelAction
         
         backgroundView.frame = targetView.bounds
-        backgroundView.backgroundColor = .black
+        backgroundView.contentView.alpha = 0.95
+        backgroundView.contentView.setGradient(startColor: .white, endColor: color_navigationBar!)
+       // backgroundView.backgroundColor = .black
         backgroundView.alpha = Constants.backgroundAlpaTo
         targetView.addSubview(backgroundView)
         

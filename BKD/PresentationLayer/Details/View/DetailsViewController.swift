@@ -106,7 +106,6 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         mReserveLeading.constant = -50.0
         mReserveBckgV.roundCorners(corners: [.topRight, .topLeft], radius: 20)
         mSearchV.animateLocationList(isShow: false)
-
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -379,7 +378,12 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     ///Will open  custom location map controller
     func goToReserveController() {
-        let reserve = UIStoryboard(name: Constant.Storyboards.reserve, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.reserve) as! ReserveViewController
+        
+        //WARNING: This code is tempirary
+        let reserve = UIStoryboard(name: Constant.Storyboards.myReservetionAdvanced, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.myReservetionAdvanced) as! MyReservetionAdvancedViewController
+        
+        
+//        let reserve = UIStoryboard(name: Constant.Storyboards.reserve, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.reserve) as! ReserveViewController
         setVehicleModel()
         reserve.vehicleModel = vehicleModel
         reserve.currentTariff = currentTariff

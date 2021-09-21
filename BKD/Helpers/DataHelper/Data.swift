@@ -311,3 +311,31 @@ struct PaymentTypeData {
        
     ]
 }
+
+//MARK: - ReservationWithReservedPaidModel
+
+struct ReservationWithReservedPaidData {
+    static let reservationWithReservedPaidModel:[ReservationWithReservedPaidModel] = [ReservationWithReservedPaidModel(isActiveStartRide: true, isRegisterNumber: false),
+        ReservationWithReservedPaidModel(isActiveStartRide: false, isRegisterNumber: true),
+        ReservationWithReservedPaidModel(isActiveStartRide: true, isRegisterNumber: true)
+    ]
+}
+
+//MARK: PaymentStatusModel
+struct PaymentStatusData {
+    static let paymentStatusModel:[PaymentStatusModel] = [PaymentStatusModel(status: "Reserved & Paid", paymentType: "via Office Terminal - Confirmed"),
+            PaymentStatusModel(status: "Rental price paid", paymentType: "via Apple pay"),
+                                                          PaymentStatusModel(status: "Pay later", isActivePaymentBtn: true, price: 57.79, paymentButtonType: "Make payment"),
+                                                          PaymentStatusModel(status: "Deposit paid", paymentType: "via Credit Card", isActivePaymentBtn: true, price: 77.42, paymentButtonType: "Pay rental price")]
+}
+
+
+//MARK: --StartRideData
+struct StartRideData {
+    static let startRideModel:[StartRideModel] = [
+        StartRideModel (damageImg: UIImage(named: "carDamage") ?? UIImage(), damageName: "Damage 1"),
+        StartRideModel (damageImg: UIImage(named: "carDamage") ?? UIImage(), damageName: "Damage 2"),
+        StartRideModel (damageImg: UIImage(named: "carDamage") ?? UIImage(), damageName: "Damage 3"),
+        StartRideModel (damageImg: UIImage(named: "carDamage") ?? UIImage(), damageName: "Damage 4")]
+    
+}
