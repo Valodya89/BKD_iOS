@@ -21,7 +21,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Pay Later View Controller-->
+        <!--Payment-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="PayLaterViewController" id="Y6W-OH-hqX" customClass="PayLaterViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
@@ -40,10 +40,10 @@
                                 <rect key="frame" x="0.0" y="213.5" width="414" height="56.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uncheck_box" translatesAutoresizingMaskIntoConstraints="NO" id="myz-jX-6WD">
-                                        <rect key="frame" x="23.5" y="5.5" width="14" height="14"/>
+                                        <rect key="frame" x="22.5" y="8" width="18.5" height="21"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJR-q8-boS">
-                                        <rect key="frame" x="18" y="0.0" width="25" height="25"/>
+                                        <rect key="frame" x="15" y="0.0" width="33" height="37"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain"/>
@@ -52,13 +52,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DeZ-SW-Aqz">
-                                        <rect key="frame" x="72" y="1" width="106" height="23"/>
+                                        <rect key="frame" x="78.5" y="7" width="106" height="23"/>
                                         <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="18"/>
                                         <color key="textColor" name="navigationBar"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ca-Yh-OB6">
-                                        <rect key="frame" x="72" y="24" width="13" height="21"/>
+                                        <rect key="frame" x="78.5" y="30" width="13" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="JBD-n6-pYw"/>
                                             <constraint firstAttribute="width" constant="13" id="emr-88-xwz"/>
@@ -68,7 +68,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tcB-VQ-Fe9">
-                                        <rect key="frame" x="97.5" y="24" width="41.5" height="21"/>
+                                        <rect key="frame" x="105" y="30" width="41.5" height="21"/>
                                         <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="16"/>
                                         <color key="textColor" name="email"/>
                                         <nil key="highlightedColor"/>
@@ -88,10 +88,10 @@
                                     <constraint firstItem="LJR-q8-boS" firstAttribute="top" secondItem="HOa-Rx-MSO" secondAttribute="top" id="kAK-eT-wgE"/>
                                     <constraint firstItem="DeZ-SW-Aqz" firstAttribute="height" secondItem="HOa-Rx-MSO" secondAttribute="height" multiplier="0.4" id="lFt-Lc-ggF"/>
                                     <constraint firstItem="tcB-VQ-Fe9" firstAttribute="leading" secondItem="5Ca-Yh-OB6" secondAttribute="trailing" multiplier="1.15" id="lSh-1e-Paj"/>
-                                    <constraint firstItem="LJR-q8-boS" firstAttribute="height" secondItem="HOa-Rx-MSO" secondAttribute="height" multiplier="0.44" id="lkI-oX-U5b"/>
+                                    <constraint firstItem="LJR-q8-boS" firstAttribute="height" secondItem="HOa-Rx-MSO" secondAttribute="height" multiplier="0.65" id="lkI-oX-U5b"/>
                                     <constraint firstItem="5Ca-Yh-OB6" firstAttribute="leading" secondItem="DeZ-SW-Aqz" secondAttribute="leading" id="mfD-2q-1Pr"/>
-                                    <constraint firstItem="LJR-q8-boS" firstAttribute="leading" secondItem="HOa-Rx-MSO" secondAttribute="leading" constant="18" id="xeV-LN-a3b"/>
-                                    <constraint firstItem="LJR-q8-boS" firstAttribute="width" secondItem="HOa-Rx-MSO" secondAttribute="width" multiplier="0.06" id="yUw-9k-X19"/>
+                                    <constraint firstItem="LJR-q8-boS" firstAttribute="leading" secondItem="HOa-Rx-MSO" secondAttribute="leading" constant="15" id="xeV-LN-a3b"/>
+                                    <constraint firstItem="LJR-q8-boS" firstAttribute="width" secondItem="HOa-Rx-MSO" secondAttribute="width" multiplier="0.08" id="yUw-9k-X19"/>
                                     <constraint firstItem="tcB-VQ-Fe9" firstAttribute="height" secondItem="HOa-Rx-MSO" secondAttribute="height" multiplier="0.37" id="ziR-ie-ps2"/>
                                 </constraints>
                             </view>
@@ -99,10 +99,10 @@
                                 <rect key="frame" x="0.0" y="270" width="414" height="57"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uncheck_box" translatesAutoresizingMaskIntoConstraints="NO" id="A1o-NC-gyJ">
-                                        <rect key="frame" x="23.5" y="5.5" width="14" height="14"/>
+                                        <rect key="frame" x="22.5" y="8.5" width="18.5" height="20.5"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3qI-ds-w5T">
-                                        <rect key="frame" x="18" y="0.0" width="25" height="25.5"/>
+                                        <rect key="frame" x="15" y="0.0" width="33" height="37"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain"/>
@@ -111,13 +111,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit + Rental Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G1L-Pr-ZsX">
-                                        <rect key="frame" x="72" y="1.5" width="184" height="22.5"/>
+                                        <rect key="frame" x="78.5" y="7.5" width="184" height="22.5"/>
                                         <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="18"/>
                                         <color key="textColor" name="navigationBar"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAZ-zS-13T">
-                                        <rect key="frame" x="72" y="24" width="13" height="21"/>
+                                        <rect key="frame" x="78.5" y="30" width="13" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="Ul4-yx-uBb"/>
                                             <constraint firstAttribute="width" constant="13" id="XRt-Zf-RoW"/>
@@ -127,7 +127,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300 + 105.7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Otr-KT-4fP">
-                                        <rect key="frame" x="97.5" y="24" width="89" height="21"/>
+                                        <rect key="frame" x="105" y="30" width="89" height="21"/>
                                         <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="16"/>
                                         <color key="textColor" name="email"/>
                                         <nil key="highlightedColor"/>
@@ -142,9 +142,9 @@
                                     <constraint firstItem="G1L-Pr-ZsX" firstAttribute="leading" secondItem="A1o-NC-gyJ" secondAttribute="trailing" multiplier="1.92" id="CAv-sf-SQE"/>
                                     <constraint firstItem="Otr-KT-4fP" firstAttribute="height" secondItem="CMh-nW-ILX" secondAttribute="height" multiplier="0.37" id="FuV-lz-vbq"/>
                                     <constraint firstItem="3qI-ds-w5T" firstAttribute="top" secondItem="CMh-nW-ILX" secondAttribute="top" id="Kqb-Fb-zb3"/>
-                                    <constraint firstItem="3qI-ds-w5T" firstAttribute="height" secondItem="CMh-nW-ILX" secondAttribute="height" multiplier="0.44" id="MfY-ve-6HR"/>
+                                    <constraint firstItem="3qI-ds-w5T" firstAttribute="height" secondItem="CMh-nW-ILX" secondAttribute="height" multiplier="0.65" id="MfY-ve-6HR"/>
                                     <constraint firstItem="Otr-KT-4fP" firstAttribute="width" relation="greaterThanOrEqual" secondItem="CMh-nW-ILX" secondAttribute="width" multiplier="0.1" id="NLO-HC-hEf"/>
-                                    <constraint firstItem="3qI-ds-w5T" firstAttribute="width" secondItem="CMh-nW-ILX" secondAttribute="width" multiplier="0.06" id="Nvn-eN-qyg"/>
+                                    <constraint firstItem="3qI-ds-w5T" firstAttribute="width" secondItem="CMh-nW-ILX" secondAttribute="width" multiplier="0.08" id="Nvn-eN-qyg"/>
                                     <constraint firstItem="Otr-KT-4fP" firstAttribute="leading" secondItem="BAZ-zS-13T" secondAttribute="trailing" multiplier="1.15" id="RYd-Gh-AOE"/>
                                     <constraint firstItem="BAZ-zS-13T" firstAttribute="top" secondItem="G1L-Pr-ZsX" secondAttribute="bottom" id="ZVZ-X4-ubn"/>
                                     <constraint firstItem="A1o-NC-gyJ" firstAttribute="centerY" secondItem="3qI-ds-w5T" secondAttribute="centerY" id="dIU-V9-hvK"/>
@@ -152,7 +152,7 @@
                                     <constraint firstItem="A1o-NC-gyJ" firstAttribute="width" secondItem="3qI-ds-w5T" secondAttribute="width" multiplier="0.56" id="iBz-Tg-Mf7"/>
                                     <constraint firstItem="BAZ-zS-13T" firstAttribute="leading" secondItem="G1L-Pr-ZsX" secondAttribute="leading" id="ioj-29-Ixg"/>
                                     <constraint firstItem="A1o-NC-gyJ" firstAttribute="height" secondItem="3qI-ds-w5T" secondAttribute="height" multiplier="0.56" id="oai-bM-6Na"/>
-                                    <constraint firstItem="3qI-ds-w5T" firstAttribute="leading" secondItem="CMh-nW-ILX" secondAttribute="leading" constant="18" id="wjx-77-Tjs"/>
+                                    <constraint firstItem="3qI-ds-w5T" firstAttribute="leading" secondItem="CMh-nW-ILX" secondAttribute="leading" constant="15" id="wjx-77-Tjs"/>
                                 </constraints>
                             </view>
                             <view userInteractionEnabled="NO" alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JKd-Gi-fyL">
@@ -256,7 +256,7 @@
                             <constraint firstItem="HOa-Rx-MSO" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" id="wfc-HX-4UH"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Reu-4v-Imh">
+                    <navigationItem key="navigationItem" title="Payment" id="Reu-4v-Imh">
                         <barButtonItem key="leftBarButtonItem" image="back" id="f2f-fF-zKw">
                             <connections>
                                 <action selector="back:" destination="Y6W-OH-hqX" id="skh-0G-Zli"/>
@@ -300,6 +300,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" name="navigation_bar"/>
                         <color key="barTintColor" name="navigation_bar"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -322,7 +329,7 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="email">
-            <color red="0.53700000047683716" green="0.59600001573562622" blue="0.66699999570846558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.53725490196078429" green="0.59607843137254901" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="navigationBar">
             <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

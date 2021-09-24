@@ -73,10 +73,10 @@
                                         <rect key="frame" x="0.0" y="62" width="382" height="64"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="car_pickup_reservation" translatesAutoresizingMaskIntoConstraints="NO" id="R4q-Fa-WTD">
-                                                <rect key="frame" x="20" y="27" width="28" height="10"/>
+                                                <rect key="frame" x="20" y="26.5" width="28" height="11"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="car_return_reservetion" translatesAutoresizingMaskIntoConstraints="NO" id="EyP-tj-NRr">
-                                                <rect key="frame" x="333.5" y="27" width="28" height="10"/>
+                                                <rect key="frame" x="333.5" y="26.5" width="28" height="11"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iZJ-Ci-mRo">
                                                 <rect key="frame" x="105" y="0.0" width="58" height="64"/>
@@ -184,7 +184,7 @@
                                             <constraint firstItem="0Qj-Nf-lih" firstAttribute="width" secondItem="zma-w1-P2m" secondAttribute="width" multiplier="0.0026178" id="3Y8-wj-fmf"/>
                                             <constraint firstItem="0Qj-Nf-lih" firstAttribute="centerX" secondItem="zma-w1-P2m" secondAttribute="centerX" id="5yf-eZ-zfg"/>
                                             <constraint firstItem="EyP-tj-NRr" firstAttribute="centerY" secondItem="zma-w1-P2m" secondAttribute="centerY" id="8ab-pJ-Brc"/>
-                                            <constraint firstItem="EyP-tj-NRr" firstAttribute="height" secondItem="zma-w1-P2m" secondAttribute="height" multiplier="0.15" id="HJt-v6-CRb"/>
+                                            <constraint firstItem="EyP-tj-NRr" firstAttribute="height" secondItem="zma-w1-P2m" secondAttribute="height" multiplier="0.175" id="HJt-v6-CRb"/>
                                             <constraint firstAttribute="bottom" secondItem="iZJ-Ci-mRo" secondAttribute="bottom" id="J19-eh-p60"/>
                                             <constraint firstItem="R4q-Fa-WTD" firstAttribute="width" secondItem="zma-w1-P2m" secondAttribute="width" multiplier="0.0732984" id="Jnw-39-jV1"/>
                                             <constraint firstItem="a4K-Mb-Pa8" firstAttribute="top" secondItem="zma-w1-P2m" secondAttribute="top" id="KZs-hf-t7x"/>
@@ -198,13 +198,13 @@
                                             <constraint firstItem="iZJ-Ci-mRo" firstAttribute="width" secondItem="zma-w1-P2m" secondAttribute="width" multiplier="0.324607" constant="-65.999873999999991" id="gCJ-qv-ZUO"/>
                                             <constraint firstItem="EyP-tj-NRr" firstAttribute="centerX" secondItem="zma-w1-P2m" secondAttribute="centerX" multiplier="1.82" id="mRs-5i-qVH"/>
                                             <constraint firstItem="R4q-Fa-WTD" firstAttribute="centerX" secondItem="zma-w1-P2m" secondAttribute="centerX" multiplier="0.178" id="mf9-dt-puU"/>
-                                            <constraint firstItem="R4q-Fa-WTD" firstAttribute="height" secondItem="zma-w1-P2m" secondAttribute="height" multiplier="0.15" id="o9f-mi-aiF"/>
+                                            <constraint firstItem="R4q-Fa-WTD" firstAttribute="height" secondItem="zma-w1-P2m" secondAttribute="height" multiplier="0.175" id="o9f-mi-aiF"/>
                                             <constraint firstItem="R4q-Fa-WTD" firstAttribute="centerY" secondItem="zma-w1-P2m" secondAttribute="centerY" id="rc8-71-Ub0"/>
                                             <constraint firstItem="0Qj-Nf-lih" firstAttribute="centerY" secondItem="zma-w1-P2m" secondAttribute="centerY" id="yHi-2Q-cQw"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="029-ll-tb3">
-                                        <rect key="frame" x="0.0" y="126" width="382" height="60"/>
+                                        <rect key="frame" x="0.0" y="126" width="382" height="59.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Car registration number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGF-mR-AXe">
                                                 <rect key="frame" x="20" y="6" width="137.5" height="18"/>
@@ -213,7 +213,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1-ZBF-401" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="In4-it-OT6">
-                                                <rect key="frame" x="20" y="29" width="84.5" height="22.5"/>
+                                                <rect key="frame" x="20" y="28.5" width="84.5" height="22.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                                                 <color key="textColor" name="navigationBar"/>
                                                 <nil key="highlightedColor"/>
@@ -232,7 +232,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TSf-Sf-Hq9">
-                                        <rect key="frame" x="0.0" y="186" width="382" height="55"/>
+                                        <rect key="frame" x="0.0" y="185" width="382" height="55"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9cP-Mp-Wgf">
                                                 <rect key="frame" x="20" y="11.5" width="46" height="21"/>
@@ -247,7 +247,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gqt-XA-wuy">
-                                                <rect key="frame" x="279" y="-3" width="95.5" height="49.5"/>
+                                                <rect key="frame" x="279" y="-2.5" width="95.5" height="49.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7tr-5d-SEo">
                                                         <rect key="frame" x="7.5" y="0.0" width="11" height="49.5"/>
@@ -304,7 +304,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDA-jt-RoP">
-                                        <rect key="frame" x="0.0" y="259.5" width="382" height="47.5"/>
+                                        <rect key="frame" x="0.0" y="260" width="382" height="47.5"/>
                                         <color key="backgroundColor" name="menu"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                                         <state key="normal" title="Start Ride">
@@ -314,14 +314,14 @@
                                 </subviews>
                                 <color key="backgroundColor" name="subview_background"/>
                                 <constraints>
-                                    <constraint firstItem="zma-w1-P2m" firstAttribute="top" secondItem="rQI-X9-Vj7" secondAttribute="bottom" multiplier="1.03" id="06C-Wm-q2F"/>
-                                    <constraint firstItem="TSf-Sf-Hq9" firstAttribute="top" secondItem="029-ll-tb3" secondAttribute="bottom" id="1RI-1B-eiv"/>
                                     <constraint firstAttribute="trailing" secondItem="029-ll-tb3" secondAttribute="trailing" id="2WF-OR-ilm"/>
+                                    <constraint firstItem="JDA-jt-RoP" firstAttribute="centerY" secondItem="U04-dB-EvS" secondAttribute="centerY" multiplier="1.85" id="2u4-t9-WNF"/>
                                     <constraint firstItem="TSf-Sf-Hq9" firstAttribute="leading" secondItem="U04-dB-EvS" secondAttribute="leading" id="BhD-Et-aE9"/>
-                                    <constraint firstItem="029-ll-tb3" firstAttribute="top" secondItem="zma-w1-P2m" secondAttribute="bottom" id="HX6-UA-WaQ"/>
                                     <constraint firstItem="rQI-X9-Vj7" firstAttribute="width" secondItem="U04-dB-EvS" secondAttribute="width" id="I0e-9P-g9p"/>
+                                    <constraint firstItem="TSf-Sf-Hq9" firstAttribute="centerY" secondItem="U04-dB-EvS" secondAttribute="centerY" multiplier="1.385" id="MC0-m4-dA2"/>
                                     <constraint firstItem="029-ll-tb3" firstAttribute="leading" secondItem="U04-dB-EvS" secondAttribute="leading" id="MD3-FO-zvd"/>
-                                    <constraint firstItem="rQI-X9-Vj7" firstAttribute="top" secondItem="U04-dB-EvS" secondAttribute="top" id="UAy-gQ-mid"/>
+                                    <constraint firstItem="zma-w1-P2m" firstAttribute="centerY" secondItem="U04-dB-EvS" secondAttribute="centerY" multiplier="0.612" id="NqU-fn-mnO"/>
+                                    <constraint firstItem="029-ll-tb3" firstAttribute="centerY" secondItem="U04-dB-EvS" secondAttribute="centerY" multiplier="1.015" id="TF3-1v-54c"/>
                                     <constraint firstAttribute="trailing" secondItem="TSf-Sf-Hq9" secondAttribute="trailing" id="WG7-Uf-yXk"/>
                                     <constraint firstItem="JDA-jt-RoP" firstAttribute="width" secondItem="U04-dB-EvS" secondAttribute="width" id="Whl-9H-cvt"/>
                                     <constraint firstItem="zma-w1-P2m" firstAttribute="width" secondItem="U04-dB-EvS" secondAttribute="width" id="cdD-9u-Dxa"/>
@@ -330,7 +330,7 @@
                                     <constraint firstItem="029-ll-tb3" firstAttribute="height" secondItem="U04-dB-EvS" secondAttribute="height" multiplier="0.195" id="jYJ-yE-1Md"/>
                                     <constraint firstItem="JDA-jt-RoP" firstAttribute="centerX" secondItem="U04-dB-EvS" secondAttribute="centerX" id="mIs-8q-a14"/>
                                     <constraint firstItem="rQI-X9-Vj7" firstAttribute="leading" secondItem="U04-dB-EvS" secondAttribute="leading" id="pVD-S4-S4f"/>
-                                    <constraint firstItem="JDA-jt-RoP" firstAttribute="top" secondItem="TSf-Sf-Hq9" secondAttribute="bottom" multiplier="1.077" id="pzB-cn-2g9"/>
+                                    <constraint firstItem="rQI-X9-Vj7" firstAttribute="centerY" secondItem="U04-dB-EvS" secondAttribute="centerY" multiplier="0.195" id="prH-al-H8q"/>
                                     <constraint firstItem="zma-w1-P2m" firstAttribute="height" secondItem="U04-dB-EvS" secondAttribute="height" multiplier="0.21" id="vfU-fG-CYJ"/>
                                     <constraint firstItem="JDA-jt-RoP" firstAttribute="height" secondItem="U04-dB-EvS" secondAttribute="height" multiplier="0.155" id="yEk-Xt-X2e"/>
                                 </constraints>
@@ -368,7 +368,6 @@
                 <outlet property="mRegistrationNumberTitleLb" destination="zGF-mR-AXe" id="TiU-QA-d6Q"/>
                 <outlet property="mReservedPayedContentV" destination="TSf-Sf-Hq9" id="Qbm-bF-f7Z"/>
                 <outlet property="mReservedPayedLb" destination="ZSV-d0-MVE" id="fto-KJ-sG7"/>
-                <outlet property="mReservedPayedTop" destination="1RI-1B-eiv" id="jdU-Vu-3Ni"/>
                 <outlet property="mReturnAddressLb" destination="Xpp-D5-ZVb" id="LFF-t2-xbq"/>
                 <outlet property="mReturnCarImgV" destination="EyP-tj-NRr" id="YQP-rX-0y4"/>
                 <outlet property="mReturnDayLb" destination="pp6-2E-hAh" id="knj-Pg-5BB"/>

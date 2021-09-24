@@ -96,13 +96,13 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kgc-ER-T1K">
-                                                        <rect key="frame" x="28" y="25" width="20" height="8.5"/>
+                                                        <rect key="frame" x="28" y="25" width="20" height="8"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="8"/>
                                                         <color key="textColor" name="navigationBar"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awv-QF-HxD">
-                                                        <rect key="frame" x="28" y="33.5" width="20" height="9"/>
+                                                        <rect key="frame" x="28" y="33" width="20" height="9.5"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="8"/>
                                                         <color key="textColor" name="navigationBar"/>
                                                         <nil key="highlightedColor"/>
@@ -148,13 +148,13 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMg-EH-C7e">
-                                                        <rect key="frame" x="30" y="25" width="20" height="8.5"/>
+                                                        <rect key="frame" x="30" y="25" width="20" height="8"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="8"/>
                                                         <color key="textColor" name="navigationBar"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y4A-wg-wSp">
-                                                        <rect key="frame" x="30" y="33.5" width="20" height="9"/>
+                                                        <rect key="frame" x="30" y="33" width="20" height="9.5"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="8"/>
                                                         <color key="textColor" name="navigationBar"/>
                                                         <nil key="highlightedColor"/>
@@ -229,13 +229,13 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rsh-rQ-egW">
-                                        <rect key="frame" x="0.0" y="184.5" width="382" height="23"/>
+                                        <rect key="frame" x="0.0" y="185" width="382" height="22.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jSs-CL-ssK">
-                                                <rect key="frame" x="288" y="0.0" width="72.5" height="23"/>
+                                                <rect key="frame" x="288" y="0.0" width="72.5" height="22.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BZF-Sz-yLy">
-                                                        <rect key="frame" x="7.5" y="0.0" width="11" height="23"/>
+                                                        <rect key="frame" x="7.5" y="0.0" width="11" height="22.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="11" id="ysq-Zw-GTL"/>
                                                         </constraints>
@@ -286,7 +286,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Review status by Admins:  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sQj-UV-hxx">
-                                                <rect key="frame" x="14" y="24" width="133" height="14.5"/>
+                                                <rect key="frame" x="14" y="23.5" width="133" height="15"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
                                                 <color key="textColor" name="chat_placeholder"/>
                                                 <nil key="highlightedColor"/>
@@ -349,20 +349,20 @@
                                 <constraints>
                                     <constraint firstItem="4Az-Pl-OmE" firstAttribute="width" secondItem="kbB-uu-N3I" secondAttribute="width" multiplier="0.86" id="0Hw-Vu-LDr"/>
                                     <constraint firstItem="rsM-r0-shv" firstAttribute="height" secondItem="kbB-uu-N3I" secondAttribute="height" multiplier="0.22" id="0vP-7r-aGA"/>
-                                    <constraint firstItem="EAc-gX-HYE" firstAttribute="top" secondItem="Rsh-rQ-egW" secondAttribute="bottom" multiplier="1.06" id="1PT-gb-N4r"/>
-                                    <constraint firstItem="Rsh-rQ-egW" firstAttribute="top" secondItem="4Az-Pl-OmE" secondAttribute="bottom" multiplier="1.03" id="3LJ-ZR-sSp"/>
-                                    <constraint firstItem="rsM-r0-shv" firstAttribute="top" secondItem="kbB-uu-N3I" secondAttribute="top" id="6FJ-CE-YQ5"/>
                                     <constraint firstItem="4Az-Pl-OmE" firstAttribute="centerX" secondItem="kbB-uu-N3I" secondAttribute="centerX" id="6ug-Ek-n6j"/>
                                     <constraint firstAttribute="trailing" secondItem="EAc-gX-HYE" secondAttribute="trailing" id="7ch-Zx-lRe"/>
-                                    <constraint firstItem="IUK-mr-HdB" firstAttribute="top" secondItem="rsM-r0-shv" secondAttribute="bottom" multiplier="1.41" id="CEv-zf-xtb"/>
                                     <constraint firstItem="4Az-Pl-OmE" firstAttribute="height" secondItem="kbB-uu-N3I" secondAttribute="height" multiplier="0.0948905" id="CX9-Ps-zzw"/>
+                                    <constraint firstItem="Rsh-rQ-egW" firstAttribute="centerY" secondItem="kbB-uu-N3I" secondAttribute="centerY" multiplier="1.46" id="IeU-rn-YU3"/>
                                     <constraint firstItem="IUK-mr-HdB" firstAttribute="height" secondItem="kbB-uu-N3I" secondAttribute="height" multiplier="0.21" id="JLx-9r-fbW"/>
+                                    <constraint firstItem="IUK-mr-HdB" firstAttribute="centerY" secondItem="kbB-uu-N3I" secondAttribute="centerY" multiplier="0.83" id="K39-2i-mHY"/>
                                     <constraint firstItem="rsM-r0-shv" firstAttribute="leading" secondItem="kbB-uu-N3I" secondAttribute="leading" id="KJB-sw-xeM"/>
+                                    <constraint firstItem="rsM-r0-shv" firstAttribute="centerY" secondItem="kbB-uu-N3I" secondAttribute="centerY" multiplier="0.22" id="Mmg-xO-gqb"/>
+                                    <constraint firstItem="4Az-Pl-OmE" firstAttribute="centerY" secondItem="kbB-uu-N3I" secondAttribute="centerY" multiplier="1.24" id="P5j-IS-5nP"/>
+                                    <constraint firstItem="EAc-gX-HYE" firstAttribute="centerY" secondItem="kbB-uu-N3I" secondAttribute="centerY" multiplier="1.802" id="Ynf-jo-zbA"/>
                                     <constraint firstItem="IUK-mr-HdB" firstAttribute="centerX" secondItem="kbB-uu-N3I" secondAttribute="centerX" id="dSZ-sP-NX5"/>
                                     <constraint firstItem="EAc-gX-HYE" firstAttribute="leading" secondItem="kbB-uu-N3I" secondAttribute="leading" id="eLX-08-e8Y"/>
                                     <constraint firstItem="Rsh-rQ-egW" firstAttribute="leading" secondItem="kbB-uu-N3I" secondAttribute="leading" id="iWY-7X-WzN"/>
                                     <constraint firstAttribute="trailing" secondItem="Rsh-rQ-egW" secondAttribute="trailing" id="jmY-aW-53b"/>
-                                    <constraint firstItem="4Az-Pl-OmE" firstAttribute="top" secondItem="IUK-mr-HdB" secondAttribute="bottom" multiplier="1.1" id="kBc-lg-JRZ"/>
                                     <constraint firstItem="IUK-mr-HdB" firstAttribute="width" secondItem="kbB-uu-N3I" secondAttribute="width" id="lvN-bR-iU4"/>
                                     <constraint firstItem="Rsh-rQ-egW" firstAttribute="height" secondItem="kbB-uu-N3I" secondAttribute="height" multiplier="0.085" id="mC8-t3-aF8"/>
                                     <constraint firstItem="rsM-r0-shv" firstAttribute="width" secondItem="kbB-uu-N3I" secondAttribute="width" id="xLs-Ae-U5d"/>
@@ -428,7 +428,7 @@
             <color red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="email">
-            <color red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.53725490196078429" green="0.59607843137254901" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="navigationBar">
             <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

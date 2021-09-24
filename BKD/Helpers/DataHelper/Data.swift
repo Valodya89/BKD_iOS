@@ -304,10 +304,10 @@ struct  RegistrationBotData {
 
 //MARK: - Payment
 struct PaymentTypeData {
-  static  let paymentTypeModel: [PaymentTypes] = [ PaymentTypes(title: nil, image: UIImage(named: "credit_card")),
+  static  let paymentTypeModel: [PaymentTypes] = [ /*PaymentTypes(title: nil, image: UIImage(named: "credit_card")),*/
         PaymentTypes(title: nil, image: UIImage(named: "bancontact")),
-        PaymentTypes(title: nil, image: UIImage(named: "apple_pay")),
-        PaymentTypes(title: nil, image: UIImage(named: "paypal")),
+        PaymentTypes(title: nil, image: UIImage(named: "apple_pay"))/*,
+        PaymentTypes(title: nil, image: UIImage(named: "paypal"))*/
        
     ]
 }
@@ -315,9 +315,13 @@ struct PaymentTypeData {
 //MARK: - ReservationWithReservedPaidModel
 
 struct ReservationWithReservedPaidData {
-    static let reservationWithReservedPaidModel:[ReservationWithReservedPaidModel] = [ReservationWithReservedPaidModel(isActiveStartRide: true, isRegisterNumber: false),
-        ReservationWithReservedPaidModel(isActiveStartRide: false, isRegisterNumber: true),
-        ReservationWithReservedPaidModel(isActiveStartRide: true, isRegisterNumber: true)
+    static let reservationWithReservedPaidModel:[ReservationWithReservedPaidModel] = [ReservationWithReservedPaidModel(isActiveStartRide: true, isRegisterNumber: false, myReservationState: MyReservationState.startRide),
+        ReservationWithReservedPaidModel(isActiveStartRide: false, isRegisterNumber: true, myReservationState: MyReservationState.startRide),
+        ReservationWithReservedPaidModel(isActiveStartRide: true, isRegisterNumber: true, myReservationState: MyReservationState.startRide),
+       ReservationWithReservedPaidModel(isActiveStartRide: false, isRegisterNumber: false, myReservationState: MyReservationState.payDistancePrice),
+        ReservationWithReservedPaidModel(isActiveStartRide: false, isRegisterNumber: false, myReservationState: MyReservationState.maykePayment),
+        ReservationWithReservedPaidModel(isActiveStartRide: false, isRegisterNumber: false, myReservationState: MyReservationState.payRentalPrice),
+         ReservationWithReservedPaidModel(isActiveStartRide: false, isRegisterNumber: false, myReservationState: MyReservationState.stopRide)
     ]
 }
 
@@ -333,9 +337,15 @@ struct PaymentStatusData {
 //MARK: --StartRideData
 struct StartRideData {
     static let startRideModel:[StartRideModel] = [
-        StartRideModel (damageImg: UIImage(named: "carDamage") ?? UIImage(), damageName: "Damage 1"),
-        StartRideModel (damageImg: UIImage(named: "carDamage") ?? UIImage(), damageName: "Damage 2"),
-        StartRideModel (damageImg: UIImage(named: "carDamage") ?? UIImage(), damageName: "Damage 3"),
-        StartRideModel (damageImg: UIImage(named: "carDamage") ?? UIImage(), damageName: "Damage 4")]
+        StartRideModel (damageImg: UIImage(named: "camera") ?? UIImage(), damageName: "Damage Name"),
+        StartRideModel (damageImg: nil, damageName: nil)]
     
+}
+
+
+//MARK: -- PriceModel
+struct PriceData {
+    static let priceModel:[PriceModel] = [PriceModel(priceTitle: "Price", price: 5.00),
+          PriceModel(priceTitle: "Accsessories", price: 0.00),
+           PriceModel(priceTitle: "Additional driver", price: 0.00)]
 }

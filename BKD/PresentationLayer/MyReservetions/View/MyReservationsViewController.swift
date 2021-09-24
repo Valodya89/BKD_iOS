@@ -28,6 +28,11 @@ class MyReservationsViewController: BaseViewController {
         setupView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     func setupView() {
         menu = SideMenuNavigationController(rootViewController: LeftViewController())
         self.setmenu(menu: menu)
@@ -39,6 +44,13 @@ class MyReservationsViewController: BaseViewController {
     func registerCollectionCells() {
         self.mReservCollectionV.register(ReservationWithStartRideCollectionViewCell.nib(), forCellWithReuseIdentifier: ReservationWithStartRideCollectionViewCell.identifier)
         self.mReservCollectionV.register(ReservationWithRegisterNumberCollectionViewCell.nib(), forCellWithReuseIdentifier: ReservationWithRegisterNumberCollectionViewCell.identifier)
+        self.mReservCollectionV.register(ReservetionWithDistancePriceCell.nib(), forCellWithReuseIdentifier: ReservetionWithDistancePriceCell.identifier)
+        self.mReservCollectionV.register(ReservetionWithPayRentalPriceCell.nib(), forCellWithReuseIdentifier: ReservetionWithPayRentalPriceCell.identifier)
+        self.mReservCollectionV.register(ReservetionMakePaymentCell.nib(), forCellWithReuseIdentifier: ReservetionMakePaymentCell.identifier)
+        self.mReservCollectionV.register(OnRideCollectionViewCell.nib(), forCellWithReuseIdentifier: OnRideCollectionViewCell.identifier)
+        
+        
+        
         self.mReservCollectionV.register(ReservationHistoryCell.nib(), forCellWithReuseIdentifier: ReservationHistoryCell.identifier)
     }
     
@@ -48,10 +60,48 @@ class MyReservationsViewController: BaseViewController {
         self.navigationController?.pushViewController(payLaterVC, animated: true)
     }
     
+    ///Go to SelectPayment ViewController
+    func goToSelectPayment() {
+        let selectPaymentVC = SelectPaymentViewController.initFromStoryboard(name: Constant.Storyboards.payment)
+        self.navigationController?.pushViewController(selectPaymentVC, animated: true)
+    }
+    
     ///Go to VehicleCheck ViewController
     func goToVehicleCheck() {
         let vehicleCheckVC = VehicleCheckViewController.initFromStoryboard(name: Constant.Storyboards.vehicleCheck)
         self.navigationController?.pushViewController(vehicleCheckVC, animated: true)
+    }
+    
+    ///Go to Add damage ViewController
+    func goToAddDamage() {
+        let addDamageVC = AddDamageViewController.initFromStoryboard(name: Constant.Storyboards.addDamage)
+        self.navigationController?.pushViewController(addDamageVC, animated: true)
+    }
+    
+    ///Go to my reservation ViewController
+    func goToMyReservation(myReservationState: MyReservationState,
+                           paymentStatusArr: [PaymentStatusModel]?,
+                           registerNumberArr:[String]?,
+                           onRideArr:[OnRideModel]?) {
+        
+        let myReservetionAdvancedVC = MyReservetionAdvancedViewController.initFromStoryboard(name: Constant.Storyboards.myReservetionAdvanced)
+        myReservetionAdvancedVC.myReservationState = myReservationState
+        myReservetionAdvancedVC.paymentStatusArr = paymentStatusArr
+        myReservetionAdvancedVC.registerNumberArr = registerNumberArr
+        myReservetionAdvancedVC.onRideArr = onRideArr
+        self.navigationController?.pushViewController(myReservetionAdvancedVC, animated: true)
+    }
+    
+    ///Show alert for switch driver
+    private func showAlertForSwitchDriver() {
+        BKDAlert().showAlert(on: self, title: String(format: Constant.Texts.confirmSwitchDriver, "Name Surname") ,
+                             message: nil,
+                             messageSecond: nil,
+                             cancelTitle: Constant.Texts.cancel,
+                             okTitle: Constant.Texts.confirm, cancelAction: nil) {
+            
+        }
+        
     }
     
     
@@ -83,21 +133,114 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         
         if isReservationHistory {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReservationHistoryCell.identifier, for: indexPath) as!  ReservationHistoryCell
-            //cell.setInfoCell(item: item, index: indexPath.item)
             return cell
             
-        } else if item.isRegisterNumber {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReservationWithRegisterNumberCollectionViewCell.identifier, for: indexPath) as!  ReservationWithRegisterNumberCollectionViewCell
-            
-            cell.setInfoCell(item: item, index: indexPath.item)
-            cell.didPressStartRide = {
-                self.goToPayLater()
+        } else {
+            switch item.myReservationState {
+            case .startRide:
+                if item.isRegisterNumber {
+                  return startRideWithRegisterNumberCell(item: item, indexPath: indexPath)
+                }
+                return startRideCell(item: item, indexPath: indexPath)
+            case .maykePayment:
+                return maykePaymentCell(item: item, indexPath: indexPath)
+            case .payDistancePrice:
+                return payDistancePriceCell(item: item, indexPath: indexPath)
+            case .payRentalPrice:
+                return payRentalPriceCell(item: item, indexPath: indexPath)
+            case .stopRide:
+                return stopRideCell(item: item, indexPath: indexPath)
             }
-            return cell
+        }
+    }
+    
+    //MARK: UICollectionViewDelegate
+    //MARK: -------------------------------------
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if !isReservationHistory {
+            
+            let item = ReservationWithReservedPaidData.reservationWithReservedPaidModel[indexPath.item]
+            var paymentStatusModel: PaymentStatusModel?
+            var registerNumberArr:[String]?
+            var onRideArr:[OnRideModel]?
+            
+            switch item.myReservationState {
+            case .startRide:
+                if item.isRegisterNumber {
+                    let cell: ReservationWithRegisterNumberCollectionViewCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservationWithRegisterNumberCollectionViewCell
+                    paymentStatusModel = cell.getPaymentStatusModel()
+                    registerNumberArr = [cell.mRegistrationNumberLb.text!]
+                } else {
+                    let cell: ReservationWithStartRideCollectionViewCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservationWithStartRideCollectionViewCell
+                    paymentStatusModel = cell.getPaymentStatusModel()
+                }
+            case .payRentalPrice:
+                let cell: ReservetionWithPayRentalPriceCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservetionWithPayRentalPriceCell
+                paymentStatusModel = cell.getPaymentStatusModel()
+            case .payDistancePrice:
+                let cell: ReservetionWithDistancePriceCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservetionWithDistancePriceCell
+                paymentStatusModel = cell.getPaymentStatusModel()
+            case .maykePayment:
+                let cell: ReservetionMakePaymentCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservetionMakePaymentCell
+                paymentStatusModel = cell.getPaymentStatusModel()
+            case .stopRide:
+                let cell: OnRideCollectionViewCell = mReservCollectionV.cellForItem(at: indexPath) as! OnRideCollectionViewCell
+               let onRideModel = cell.getOnRideModel()
+                onRideArr = [onRideModel]
+            }
+            
+            var paymentArr:[PaymentStatusModel]?
+            if let payment = paymentStatusModel {
+                paymentArr = []
+                paymentArr!.append(payment)
+            }
+            
+            goToMyReservation(myReservationState: item.myReservationState,
+                              paymentStatusArr: paymentArr,
+                              registerNumberArr: registerNumberArr,
+                              onRideArr: onRideArr )
+            
+        }
+    }
+    
+    //MARK: UICollectionViewDelegateFlowLayout
+    //MARK: -------------------------------------
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        if isReservationHistory {
+            return CGSize(width: collectionView.bounds.width,
+                          height: height274)
         }
         
+       let item =  ReservationWithReservedPaidData.reservationWithReservedPaidModel[indexPath.item]
+           
+        switch item.myReservationState {
+        case .startRide:
+            if item.isRegisterNumber {
+                return CGSize(width: collectionView.bounds.width,
+                              height: height307)
+            }
+            return CGSize(width: collectionView.bounds.width,
+                          height: height245)
+        case .maykePayment:
+            return CGSize(width: collectionView.bounds.width,
+                          height: height240)
+        case .payDistancePrice:
+            return CGSize(width: collectionView.bounds.width,
+                          height: height285)
+        case .payRentalPrice:
+            return CGSize(width: collectionView.bounds.width,
+                          height: height285)
+        case .stopRide:
+            return CGSize(width: collectionView.bounds.width,
+                          height: height405)
+        }
+    }
+    
+    ///Start ride UICollectionViewCell
+    private func startRideCell(item: ReservationWithReservedPaidModel, indexPath: IndexPath) -> ReservationWithStartRideCollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReservationWithStartRideCollectionViewCell.identifier, for: indexPath) as!  ReservationWithStartRideCollectionViewCell
+        let cell = mReservCollectionV.dequeueReusableCell(withReuseIdentifier: ReservationWithStartRideCollectionViewCell.identifier, for: indexPath) as!  ReservationWithStartRideCollectionViewCell
         
         cell.setInfoCell(item: item, index: indexPath.item)
         cell.pressStartRide = {
@@ -106,27 +249,71 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         return cell
     }
     
+    ///Start ride UICollectionViewCell
+    private func stopRideCell(item: ReservationWithReservedPaidModel, indexPath: IndexPath) -> OnRideCollectionViewCell {
+        
+        let cell = mReservCollectionV.dequeueReusableCell(withReuseIdentifier: OnRideCollectionViewCell.identifier, for: indexPath) as!  OnRideCollectionViewCell
+        
+        cell.setInfoCell(item: item, index: indexPath.item)
+        cell.pressedStopRide = {
+            self.goToVehicleCheck()
+        }
+        cell.pressedAddDamages = {
+            self.goToAddDamage()
+        }
+        cell.pressedSwitchDriver = {
+            self.showAlertForSwitchDriver()
+        }
+        return cell
+    }
     
-    //MARK: UICollectionViewDelegateFlowLayout
-    //MARK: -------------------------------------
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    ///Start Ride with registretion number UICollectionViewCell
+    private func startRideWithRegisterNumberCell(item: ReservationWithReservedPaidModel, indexPath: IndexPath) -> ReservationWithRegisterNumberCollectionViewCell {
         
-        if isReservationHistory {
-            return CGSize(width: collectionView.bounds.width,
-                          height: 274)
-        }
-        if ReservationWithReservedPaidData.reservationWithReservedPaidModel[indexPath.item].isRegisterNumber {
-            return CGSize(width: collectionView.bounds.width,
-                          height: 307)
-//            return CGSize(width: collectionView.bounds.width - 32,
-//                          height: reservation_with_carNumber_height)
-        }
-       return CGSize(width: collectionView.bounds.width,
-                    height: 245)
-            //        return CGSize(width: collectionView.bounds.width - 32,
-            //                      height: reservation_no_carNumber_height)
-
+        let cell = mReservCollectionV.dequeueReusableCell(withReuseIdentifier: ReservationWithRegisterNumberCollectionViewCell.identifier, for: indexPath) as!  ReservationWithRegisterNumberCollectionViewCell
         
+        cell.setInfoCell(item: item, index: indexPath.item)
+        cell.didPressStartRide = {
+            self.goToVehicleCheck()
+        }
+        return cell
+    }
+    
+    ///Mayke Payment UICollectionViewCell
+    private func maykePaymentCell(item: ReservationWithReservedPaidModel, indexPath: IndexPath) -> ReservetionMakePaymentCell {
+        
+        let cell = mReservCollectionV.dequeueReusableCell(withReuseIdentifier: ReservetionMakePaymentCell.identifier, for: indexPath) as!  ReservetionMakePaymentCell
+        
+        cell.setCellInfo(item: item, index: indexPath.item)
+        cell.makePayment = {
+            self.goToPayLater()
+        }
+        return cell
+    }
+    
+    ///Pay Distance Price UICollectionViewCell
+    private func payDistancePriceCell(item: ReservationWithReservedPaidModel, indexPath: IndexPath) -> ReservetionWithDistancePriceCell {
+        
+        let cell = mReservCollectionV.dequeueReusableCell(withReuseIdentifier: ReservetionWithDistancePriceCell.identifier, for: indexPath) as!  ReservetionWithDistancePriceCell
+        
+        cell.setCellInfo(item: item, index: indexPath.item)
+        
+        cell.payDistancePrice = {
+            self.goToSelectPayment()
+        }
+        return cell
+    }
+    
+    ///Pay Rental Price UICollectionViewCell
+    private func payRentalPriceCell(item: ReservationWithReservedPaidModel, indexPath: IndexPath) -> ReservetionWithPayRentalPriceCell {
+        
+        let cell = mReservCollectionV.dequeueReusableCell(withReuseIdentifier: ReservetionWithPayRentalPriceCell.identifier, for: indexPath) as!  ReservetionWithPayRentalPriceCell
+        
+        cell.setInfoCell(item: item, index: indexPath.item)
+        cell.payRentalPrice = {
+            self.goToSelectPayment()
+        }
+        return cell
     }
     
 }

@@ -22,7 +22,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ReservetionWithPayRentalPriceCell" id="gTV-IL-0wX" customClass="ReservetionWithPayRentalPriceCell">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ReservetionWithPayRentalPriceCell" id="gTV-IL-0wX" customClass="ReservetionWithPayRentalPriceCell" customModule="BKD" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="274"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -33,13 +33,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="274"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kbB-uu-N3I">
-                                <rect key="frame" x="16" y="0.0" width="382" height="274"/>
+                                <rect key="frame" x="16" y="2.5" width="382" height="269"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rsM-r0-shv">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="53.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="52.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fiat" translatesAutoresizingMaskIntoConstraints="NO" id="KIc-hC-Rjd">
-                                                <rect key="frame" x="8" y="7.5" width="40" height="33"/>
+                                                <rect key="frame" x="8" y="7.5" width="40" height="32.5"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ducato Koelwagen" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i9F-vo-bO4">
                                                 <rect key="frame" x="56.5" y="14" width="314" height="20"/>
@@ -48,7 +48,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Double cabin" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QyS-1b-dKN">
-                                                <rect key="frame" x="56.5" y="34" width="314" height="17.5"/>
+                                                <rect key="frame" x="56.5" y="34" width="314" height="16.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="14"/>
                                                 <color key="textColor" name="navigationBar"/>
                                                 <nil key="highlightedColor"/>
@@ -71,37 +71,37 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IUK-mr-HdB">
-                                        <rect key="frame" x="0.0" y="65.5" width="382" height="58"/>
+                                        <rect key="frame" x="0.0" y="64.5" width="382" height="56.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="car_pickup_reservation" translatesAutoresizingMaskIntoConstraints="NO" id="P0Y-dh-JbU">
-                                                <rect key="frame" x="9" y="24" width="28" height="10"/>
+                                                <rect key="frame" x="9" y="22.5" width="28" height="11.5"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="car_return_reservetion" translatesAutoresizingMaskIntoConstraints="NO" id="DL3-MK-V3v">
-                                                <rect key="frame" x="333.5" y="24" width="28" height="10"/>
+                                                <rect key="frame" x="333.5" y="22.5" width="28" height="11.5"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CUG-aj-O0Z">
-                                                <rect key="frame" x="105" y="0.0" width="58" height="58"/>
+                                                <rect key="frame" x="105" y="0.0" width="58" height="56.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parking 1" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPp-dv-vev">
-                                                        <rect key="frame" x="0.0" y="5" width="124" height="23"/>
+                                                        <rect key="frame" x="0.0" y="5" width="124" height="22.5"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="10"/>
                                                         <color key="textColor" name="navigationBar"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L99-ah-8Kd">
-                                                        <rect key="frame" x="0.0" y="22" width="21" height="25.5"/>
+                                                        <rect key="frame" x="0.0" y="21.5" width="21" height="25"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                                                         <color key="textColor" name="navigationBar"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kgc-ER-T1K">
-                                                        <rect key="frame" x="29" y="25.5" width="20" height="8.5"/>
+                                                        <rect key="frame" x="29" y="25" width="20" height="8.5"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="8"/>
                                                         <color key="textColor" name="navigationBar"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awv-QF-HxD">
-                                                        <rect key="frame" x="29" y="34" width="20" height="9.5"/>
+                                                        <rect key="frame" x="29" y="33.5" width="20" height="9"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="8"/>
                                                         <color key="textColor" name="navigationBar"/>
                                                         <nil key="highlightedColor"/>
@@ -128,32 +128,32 @@
                                                 </constraints>
                                             </view>
                                             <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iDq-9Z-0bT">
-                                                <rect key="frame" x="190.5" y="9" width="1" height="40"/>
+                                                <rect key="frame" x="190.5" y="8.5" width="1" height="39.5"/>
                                                 <color key="backgroundColor" name="email"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7XC-eT-1Pc">
-                                                <rect key="frame" x="228" y="0.0" width="38" height="58"/>
+                                                <rect key="frame" x="228" y="0.0" width="38" height="56.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parking 1" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXh-i4-rbH">
-                                                        <rect key="frame" x="0.0" y="5" width="81" height="23"/>
+                                                        <rect key="frame" x="0.0" y="5" width="81" height="22.5"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="10"/>
                                                         <color key="textColor" name="navigationBar"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w7r-d7-jRN">
-                                                        <rect key="frame" x="0.0" y="22" width="22" height="25.5"/>
+                                                        <rect key="frame" x="0.0" y="21.5" width="22" height="25"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                                                         <color key="textColor" name="navigationBar"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMg-EH-C7e">
-                                                        <rect key="frame" x="30" y="25.5" width="20" height="8.5"/>
+                                                        <rect key="frame" x="30" y="25" width="20" height="8.5"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="8"/>
                                                         <color key="textColor" name="navigationBar"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y4A-wg-wSp">
-                                                        <rect key="frame" x="30" y="34" width="20" height="9.5"/>
+                                                        <rect key="frame" x="30" y="33.5" width="20" height="9"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="8"/>
                                                         <color key="textColor" name="navigationBar"/>
                                                         <nil key="highlightedColor"/>
@@ -185,7 +185,7 @@
                                             <constraint firstItem="7XC-eT-1Pc" firstAttribute="leading" secondItem="iDq-9Z-0bT" secondAttribute="leading" multiplier="1.58" constant="-72.990000000000009" id="02k-3Y-1mH"/>
                                             <constraint firstItem="DL3-MK-V3v" firstAttribute="width" secondItem="IUK-mr-HdB" secondAttribute="width" multiplier="0.0732984" id="6ni-j4-2bx"/>
                                             <constraint firstItem="DL3-MK-V3v" firstAttribute="centerX" secondItem="IUK-mr-HdB" secondAttribute="centerX" multiplier="1.82" id="BaN-gf-U4N"/>
-                                            <constraint firstItem="P0Y-dh-JbU" firstAttribute="height" secondItem="IUK-mr-HdB" secondAttribute="height" multiplier="0.166667" id="D3x-dV-Lbg"/>
+                                            <constraint firstItem="P0Y-dh-JbU" firstAttribute="height" secondItem="IUK-mr-HdB" secondAttribute="height" multiplier="0.2" id="D3x-dV-Lbg"/>
                                             <constraint firstItem="iDq-9Z-0bT" firstAttribute="centerX" secondItem="IUK-mr-HdB" secondAttribute="centerX" id="GOq-af-ET5"/>
                                             <constraint firstItem="iDq-9Z-0bT" firstAttribute="centerY" secondItem="IUK-mr-HdB" secondAttribute="centerY" id="HAB-Ug-Lmk"/>
                                             <constraint firstItem="P0Y-dh-JbU" firstAttribute="centerX" secondItem="IUK-mr-HdB" secondAttribute="centerX" multiplier="0.12" id="JPi-Sr-lcE"/>
@@ -193,7 +193,7 @@
                                             <constraint firstItem="CUG-aj-O0Z" firstAttribute="width" secondItem="IUK-mr-HdB" secondAttribute="width" multiplier="0.324607" constant="-65.999873999999991" id="PCg-fa-VF6"/>
                                             <constraint firstItem="P0Y-dh-JbU" firstAttribute="centerY" secondItem="IUK-mr-HdB" secondAttribute="centerY" id="abj-Ie-p8q"/>
                                             <constraint firstAttribute="trailing" secondItem="7XC-eT-1Pc" secondAttribute="trailing" constant="116" id="d38-si-LJS"/>
-                                            <constraint firstItem="DL3-MK-V3v" firstAttribute="height" secondItem="IUK-mr-HdB" secondAttribute="height" multiplier="0.166667" id="hWM-I8-rU9"/>
+                                            <constraint firstItem="DL3-MK-V3v" firstAttribute="height" secondItem="IUK-mr-HdB" secondAttribute="height" multiplier="0.2" id="hWM-I8-rU9"/>
                                             <constraint firstItem="P0Y-dh-JbU" firstAttribute="width" secondItem="IUK-mr-HdB" secondAttribute="width" multiplier="0.0732984" id="hyt-U6-V7e"/>
                                             <constraint firstAttribute="bottom" secondItem="7XC-eT-1Pc" secondAttribute="bottom" id="j60-xW-Foy"/>
                                             <constraint firstAttribute="bottom" secondItem="CUG-aj-O0Z" secondAttribute="bottom" id="kHL-sH-7Wh"/>
@@ -205,16 +205,16 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EAc-gX-HYE">
-                                        <rect key="frame" x="0.0" y="133" width="382" height="48.5"/>
+                                        <rect key="frame" x="0.0" y="130.5" width="382" height="48.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DrA-sU-Fdc">
-                                                <rect key="frame" x="12" y="5.5" width="46" height="18.5"/>
+                                                <rect key="frame" x="12" y="5" width="46" height="18.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                                 <color key="textColor" name="email"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit paid" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PpS-Nx-vrU">
-                                                <rect key="frame" x="64.5" y="5.5" width="76.5" height="18.5"/>
+                                                <rect key="frame" x="64.5" y="5" width="76.5" height="18.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                                 <color key="textColor" name="navigation_bar"/>
                                                 <nil key="highlightedColor"/>
@@ -243,7 +243,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rsh-rQ-egW">
-                                        <rect key="frame" x="0.0" y="181.5" width="382" height="23"/>
+                                        <rect key="frame" x="0.0" y="179.5" width="382" height="23"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jSs-CL-ssK">
                                                 <rect key="frame" x="288" y="0.0" width="72.5" height="23"/>
@@ -285,7 +285,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wcz-ER-Tre">
-                                        <rect key="frame" x="12" y="221" width="182.5" height="33.5"/>
+                                        <rect key="frame" x="12" y="219" width="182.5" height="32.5"/>
                                         <color key="backgroundColor" name="menu"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                                         <state key="normal" title="Pay Rental Price">
@@ -296,30 +296,30 @@
                                 <color key="backgroundColor" name="subview_background"/>
                                 <constraints>
                                     <constraint firstItem="rsM-r0-shv" firstAttribute="height" secondItem="kbB-uu-N3I" secondAttribute="height" multiplier="0.195" id="0vP-7r-aGA"/>
-                                    <constraint firstItem="rsM-r0-shv" firstAttribute="top" secondItem="kbB-uu-N3I" secondAttribute="top" id="6FJ-CE-YQ5"/>
                                     <constraint firstAttribute="trailing" secondItem="EAc-gX-HYE" secondAttribute="trailing" id="7ch-Zx-lRe"/>
-                                    <constraint firstItem="IUK-mr-HdB" firstAttribute="top" secondItem="rsM-r0-shv" secondAttribute="bottom" multiplier="1.23" id="CEv-zf-xtb"/>
                                     <constraint firstItem="wcz-ER-Tre" firstAttribute="width" secondItem="kbB-uu-N3I" secondAttribute="width" multiplier="0.479058" id="ElA-9Q-NQw"/>
                                     <constraint firstItem="wcz-ER-Tre" firstAttribute="height" secondItem="kbB-uu-N3I" secondAttribute="height" multiplier="0.121" id="Hwt-zw-cCx"/>
                                     <constraint firstItem="wcz-ER-Tre" firstAttribute="centerX" secondItem="kbB-uu-N3I" secondAttribute="centerX" multiplier="0.54" id="J3R-zR-3UA"/>
                                     <constraint firstItem="IUK-mr-HdB" firstAttribute="height" secondItem="kbB-uu-N3I" secondAttribute="height" multiplier="0.21" id="JLx-9r-fbW"/>
                                     <constraint firstItem="rsM-r0-shv" firstAttribute="leading" secondItem="kbB-uu-N3I" secondAttribute="leading" id="KJB-sw-xeM"/>
-                                    <constraint firstItem="Rsh-rQ-egW" firstAttribute="top" secondItem="EAc-gX-HYE" secondAttribute="bottom" id="dPF-NJ-P01"/>
+                                    <constraint firstItem="IUK-mr-HdB" firstAttribute="centerY" secondItem="kbB-uu-N3I" secondAttribute="centerY" multiplier="0.69" id="NtC-Ut-9lQ"/>
+                                    <constraint firstItem="Rsh-rQ-egW" firstAttribute="centerY" secondItem="kbB-uu-N3I" secondAttribute="centerY" multiplier="1.42" id="XEd-0n-Ei3"/>
                                     <constraint firstItem="IUK-mr-HdB" firstAttribute="centerX" secondItem="kbB-uu-N3I" secondAttribute="centerX" id="dSZ-sP-NX5"/>
-                                    <constraint firstItem="EAc-gX-HYE" firstAttribute="top" secondItem="IUK-mr-HdB" secondAttribute="bottom" multiplier="1.08" id="dZA-dx-fr1"/>
                                     <constraint firstItem="EAc-gX-HYE" firstAttribute="leading" secondItem="kbB-uu-N3I" secondAttribute="leading" id="eLX-08-e8Y"/>
-                                    <constraint firstItem="wcz-ER-Tre" firstAttribute="top" secondItem="Rsh-rQ-egW" secondAttribute="bottom" multiplier="1.08" id="fik-dk-9wj"/>
+                                    <constraint firstItem="wcz-ER-Tre" firstAttribute="centerY" secondItem="kbB-uu-N3I" secondAttribute="centerY" multiplier="1.75" id="f3H-gl-Sm7"/>
                                     <constraint firstItem="Rsh-rQ-egW" firstAttribute="leading" secondItem="kbB-uu-N3I" secondAttribute="leading" id="iWY-7X-WzN"/>
                                     <constraint firstAttribute="trailing" secondItem="Rsh-rQ-egW" secondAttribute="trailing" id="jmY-aW-53b"/>
+                                    <constraint firstItem="EAc-gX-HYE" firstAttribute="centerY" secondItem="kbB-uu-N3I" secondAttribute="centerY" multiplier="1.15" id="kO5-2Q-zG1"/>
                                     <constraint firstItem="IUK-mr-HdB" firstAttribute="width" secondItem="kbB-uu-N3I" secondAttribute="width" id="lvN-bR-iU4"/>
                                     <constraint firstItem="Rsh-rQ-egW" firstAttribute="height" secondItem="kbB-uu-N3I" secondAttribute="height" multiplier="0.085" id="mC8-t3-aF8"/>
+                                    <constraint firstItem="rsM-r0-shv" firstAttribute="centerY" secondItem="kbB-uu-N3I" secondAttribute="centerY" multiplier="0.195" id="t39-4b-7Ee"/>
                                     <constraint firstItem="rsM-r0-shv" firstAttribute="width" secondItem="kbB-uu-N3I" secondAttribute="width" id="xLs-Ae-U5d"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" name="background"/>
                         <constraints>
-                            <constraint firstItem="kbB-uu-N3I" firstAttribute="height" secondItem="Xcw-gb-lEn" secondAttribute="height" id="5bk-61-cmw"/>
+                            <constraint firstItem="kbB-uu-N3I" firstAttribute="height" secondItem="Xcw-gb-lEn" secondAttribute="height" multiplier="0.98" id="5bk-61-cmw"/>
                             <constraint firstItem="kbB-uu-N3I" firstAttribute="centerY" secondItem="Xcw-gb-lEn" secondAttribute="centerY" id="6xe-Wv-Kdm"/>
                             <constraint firstItem="kbB-uu-N3I" firstAttribute="width" secondItem="Xcw-gb-lEn" secondAttribute="width" multiplier="0.922" id="KQE-lo-lGx"/>
                             <constraint firstItem="kbB-uu-N3I" firstAttribute="centerX" secondItem="Xcw-gb-lEn" secondAttribute="centerX" id="Ol8-p2-DGJ"/>
@@ -339,7 +339,6 @@
                 <outlet property="mCarDescriptionLb" destination="QyS-1b-dKN" id="hct-Q0-0Lh"/>
                 <outlet property="mCarIconImgV" destination="KIc-hC-Rjd" id="kdd-ly-xeJ"/>
                 <outlet property="mCarNameLb" destination="i9F-vo-bO4" id="Ntq-RI-In3"/>
-                <outlet property="mDepositPaidLb" destination="PpS-Nx-vrU" id="PdI-HC-j6U"/>
                 <outlet property="mPayRentalPriceBtn" destination="wcz-ER-Tre" id="Q6h-Yr-IlY"/>
                 <outlet property="mPickupCarImgV" destination="P0Y-dh-JbU" id="nNT-PO-9ld"/>
                 <outlet property="mPickupDay" destination="L99-ah-8Kd" id="CaO-tT-Obt"/>
@@ -354,6 +353,7 @@
                 <outlet property="mReturnTimelb" destination="y4A-wg-wSp" id="lzs-UI-6YH"/>
                 <outlet property="mShadowContentV" destination="kbB-uu-N3I" id="GgL-kI-9iR"/>
                 <outlet property="mStatusLb" destination="DrA-sU-Fdc" id="ZGy-tn-buR"/>
+                <outlet property="mStatusTypeLb" destination="PpS-Nx-vrU" id="nFb-gB-OBH"/>
                 <outlet property="mViaOfficeTerminalLb" destination="sQj-UV-hxx" id="g3y-Vv-vrB"/>
             </connections>
             <point key="canvasLocation" x="230.43478260869566" y="116.51785714285714"/>

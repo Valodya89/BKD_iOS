@@ -50,6 +50,11 @@ class TariffCarouselCell: UIView {
     @IBOutlet weak var mDetailsCenterY: NSLayoutConstraint!
     @IBOutlet weak var mPriceCenterY: NSLayoutConstraint!
     
+    @IBOutlet weak var mFlexibleFuelCheckBoxBtn: UIButton!
+    //flexible
+    
+    @IBOutlet weak var mFlexiblestatv: UIStackView!
+    
     //MARK: Variable
     var selectedSegmentIndex = 0
     var isConfirm = false
@@ -149,17 +154,28 @@ class TariffCarouselCell: UIView {
     
     ///set info to the Flexible Cell
      func setFlexibleCellInfo() {
-        mConfirmBtn.setTitle("Select", for: .normal)
-        mKwImgV.setTintColor(color: .white)
-        mDepositImgV.setTintColor(color: UIColor(ciColor: .white).withAlphaComponent(0.49))
-        mFuelConsumptionImgV.setTintColor(color: .white)
-        mTitleLb.textColor = .white
+      
         
         mStartingPriceLb.isHidden = false
         mHoursSegmentC.isHidden = true
         mPriceCenterX.constant = 45
         mPriceCenterY.constant = 20
         mDetailsCenterY.constant = 52
+         
+         mFlexibleFuelCheckBoxBtn.isHidden = false
+         mFlexibleFuelCheckBoxBtn.setTitle("", for: .normal)
+         mDepositLb.text = Constant.Texts.fuelConsumption
+         mFuelConsumptionLb.text = Constant.Texts.depositApplies
+         mDepositImgV.image = UIImage(named: "12")
+         mFuelConsumptionImgV.image = UIImage(named: "13")
+         mFuelConsumptionLb.font = font_alert_title
+         mKwLb.font = font_alert_title
+         
+         mConfirmBtn.setTitle(Constant.Texts.select, for: .normal)
+         mKwImgV.setTintColor(color: .white.withAlphaComponent(0.6))
+         mDepositImgV.setTintColor(color: UIColor(ciColor: .white).withAlphaComponent(0.49))
+         mFuelConsumptionImgV.setTintColor(color: .white)
+         mTitleLb.textColor = .white
 
     }
     
@@ -231,6 +247,17 @@ class TariffCarouselCell: UIView {
     
     //MARK: ACTIONS
     //MARK: --------------------
+    @IBAction func flexibleFuelCheckBox(_ sender: UIButton) {
+        if sender.image(for: .normal) == img_check_box  {
+            mDepositLb.font = font_bot_placeholder
+            sender.setImage(img_uncheck_box, for: .normal)
+        } else {
+            mDepositLb.font = font_alert_title
+            sender.setImage(img_check_box, for: .normal)
+        }
+    }
+    
+    
     @IBAction func more(_ sender: UIButton) {
         delegate?.didPressMore()
     }

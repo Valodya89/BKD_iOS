@@ -7,8 +7,17 @@
 
 import Foundation
 
+enum MyReservationState {
+    case startRide
+    case stopRide
+    case payDistancePrice
+    case maykePayment
+    case payRentalPrice
+}
+
 struct ReservationWithReservedPaidModel {
     public var isActiveStartRide: Bool = false
     public var isRegisterNumber: Bool = false
+    public var myReservationState: MyReservationState
 }
 

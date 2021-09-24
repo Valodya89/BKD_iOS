@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19158" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19141"/>
@@ -777,7 +777,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" tag="7" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c0E-XK-1SW">
-                                                                <rect key="frame" x="269" y="0.0" width="93" height="29"/>
+                                                                <rect key="frame" x="227.5" y="0.0" width="134.5" height="29"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="14"/>
                                                                 <state key="normal" title="Custom location">
                                                                     <color key="titleColor" name="entered_date"/>
@@ -787,7 +787,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gEj-kr-2ki">
-                                                                <rect key="frame" x="232.5" y="0.0" width="29.5" height="29"/>
+                                                                <rect key="frame" x="191" y="0.0" width="29.5" height="29"/>
                                                                 <state key="normal" image="uncheck_box"/>
                                                                 <connections>
                                                                     <action selector="checkBoxReturnCustomLOcation:" destination="lTX-qV-DSn" eventType="touchUpInside" id="NjD-ps-dwZ"/>
@@ -850,13 +850,13 @@
                                                 </connections>
                                             </view>
                                             <stackView hidden="YES" opaque="NO" alpha="0.0" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="h0G-ic-ldI" customClass="SearchWithValueView" customModule="BKD" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="843" width="0.0" height="50"/>
+                                                <rect key="frame" x="16" y="843" width="382" height="50"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QMC-5Z-Aua">
-                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="50"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="328" height="50"/>
                                                         <subviews>
                                                             <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yP6-d0-Xqg" customClass="TextField" customModule="BKD" customModuleProvider="target">
-                                                                <rect key="frame" x="-4" y="0.0" width="4" height="50"/>
+                                                                <rect key="frame" x="-4" y="0.0" width="168" height="50"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="textColor" name="choose_date"/>
@@ -885,13 +885,13 @@
                                                                 </state>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="auX-W1-Mxg">
-                                                                <rect key="frame" x="11" y="-2" width="0.0" height="24"/>
+                                                                <rect key="frame" x="11" y="-2" width="147.5" height="24"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="10"/>
                                                                 <color key="textColor" name="entered_date"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Md-vh-xvP">
-                                                                <rect key="frame" x="11" y="12" width="25" height="34"/>
+                                                                <rect key="frame" x="175" y="12" width="25" height="34"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="25" id="hMb-sf-6al"/>
                                                                 </constraints>
@@ -902,7 +902,7 @@
                                                                 </state>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="kU8-Zf-KHa">
-                                                                <rect key="frame" x="44" y="16" width="22" height="24"/>
+                                                                <rect key="frame" x="208" y="16" width="22" height="24"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="22" id="ErV-U2-XSy"/>
                                                                 </constraints>
@@ -912,7 +912,7 @@
                                                                 </state>
                                                             </button>
                                                             <textField hidden="YES" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JAx-xC-Tu1" customClass="TextField" customModule="BKD" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="50"/>
+                                                                <rect key="frame" x="164" y="0.0" width="164" height="50"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="textColor" name="choose_date"/>
@@ -920,13 +920,13 @@
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zZ-hF-N8g">
-                                                                <rect key="frame" x="11" y="-2" width="0.0" height="24"/>
+                                                                <rect key="frame" x="175" y="-2" width="147.5" height="24"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="10"/>
                                                                 <color key="textColor" name="entered_date"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hdd-T4-rgj">
-                                                                <rect key="frame" x="-0.5" y="4.5" width="1" height="39"/>
+                                                                <rect key="frame" x="163.5" y="4.5" width="1" height="39"/>
                                                                 <color key="backgroundColor" red="0.86758053300000004" green="0.87751591210000002" blue="0.90697890520000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="1" id="rKz-t3-m50"/>

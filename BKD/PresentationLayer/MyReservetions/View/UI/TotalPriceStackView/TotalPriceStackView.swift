@@ -7,11 +7,6 @@
 
 import UIKit
 
-enum TotalPriceState {
-    case oldTotalPrice
-    case newTotalPrice
-    case none
-}
 
 class TotalPriceStackView: UIStackView {
 
@@ -29,7 +24,9 @@ class TotalPriceStackView: UIStackView {
     
     //MARK: Variables
     var isEdited: Bool = false
-    var dropDownState: TotalPriceState = .none
+    var isOpenNewTotalView: Bool = false
+    var isOpenOldTotalView: Bool = false
+
     var willOpenNewTotalPrice: (() -> Void)?
     var willOpenOldTotalPrice: (() -> Void)?
     var willCloseNewTotalPrice: (() -> Void)?
@@ -65,36 +62,28 @@ class TotalPriceStackView: UIStackView {
     
     //MARK: -- Actions
     @IBAction func oldTotalPriceHandler(_ sender: UIButton) {
-        if dropDownState == .newTotalPrice {
-           mNewTotalPriceDropDownImg.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
-            willCloseNewTotalPrice?()
-       }
-        if dropDownState == .oldTotalPrice {
+
+        if isOpenOldTotalView {
             mOldTotalPriceDropDownImg.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
-            dropDownState = .none
             willCloseOldTotalPrice?()
-        }  else {
+        } else {
             willOpenOldTotalPrice?()
-            dropDownState = .oldTotalPrice
             mOldTotalPriceDropDownImg.rotateImage(rotationAngle: CGFloat(Double.pi))
         }
+        isOpenOldTotalView = !isOpenOldTotalView
+     
     }
     
 
     @IBAction func newTotalPriceHandler(_ sender: Any) {
-        if dropDownState == .oldTotalPrice {
-            mOldTotalPriceDropDownImg.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
-            willCloseOldTotalPrice?()
-        }
-        if dropDownState == .newTotalPrice {
+        
+        if isOpenNewTotalView {
             mNewTotalPriceDropDownImg.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
-            dropDownState = .none
             willCloseNewTotalPrice?()
-
-        }  else {
+        } else {
             willOpenNewTotalPrice?()
-            dropDownState = .newTotalPrice
             mNewTotalPriceDropDownImg.rotateImage(rotationAngle: CGFloat(Double.pi))
         }
+        isOpenNewTotalView = !isOpenNewTotalView
     }
 }

@@ -43,10 +43,13 @@ class ReservetionWithDistancePriceCell: UICollectionViewCell {
     @IBOutlet weak var mPayDistancePriceBtn: UIButton!
     
     @IBOutlet weak var mStatusLb: UILabel!
-    @IBOutlet weak var mCompletedLb: UILabel!
+    @IBOutlet weak var mStatusTypeLb: UILabel!
     @IBOutlet weak var mShadowContentV: UIView!
     
+    //MARK: -- Variable
+    var payDistancePrice:(()->Void)?
     
+    //MARK: -- Life cicle
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
@@ -61,13 +64,26 @@ class ReservetionWithDistancePriceCell: UICollectionViewCell {
     override func prepareForReuse() {
         mPriceLb.text = "XX,X"
        // mRegistrationNumberLb.text = ""
-        mPayDistancePriceBtn.setTitleColor(color_email!, for: .normal)
-        mPayDistancePriceBtn.isEnabled = false
+      //  mPayDistancePriceBtn.setTitleColor(color_email!, for: .normal)
+        mPayDistancePriceBtn.isEnabled = true
         
     }
     
-    func  setCellInfo() {
+    //
+    func getPaymentStatusModel() -> PaymentStatusModel {
+        let paymentModel = PaymentStatusModel(status: mStatusTypeLb.text ?? "", paymentType:  mRentalPriceLb.text! + mPaidLb.text! + " €" + mPaidPriceLb.text!, isActivePaymentBtn: true,  price: Double(mPriceLb.text ?? "0.0") ?? 0.00 , paymentButtonType: mPayDistancePriceBtn.title(for: .normal))
+        return paymentModel
+    }
+
+    
+    func  setCellInfo(item: ReservationWithReservedPaidModel , index: Int) {
+        mPayDistancePriceBtn.tag = index
+        mPayDistancePriceBtn.addTarget(self, action: #selector(payDistancePrice(sender:)), for: .touchUpInside)
         
+    }
+
+    @objc func payDistancePrice(sender: UIButton) {
+        payDistancePrice?()
     }
 
  

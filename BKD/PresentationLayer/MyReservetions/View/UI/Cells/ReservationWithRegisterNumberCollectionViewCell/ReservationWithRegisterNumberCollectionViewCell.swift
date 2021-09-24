@@ -64,13 +64,20 @@ class ReservationWithRegisterNumberCollectionViewCell: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
-        mReservedPayedTop.constant = 0
+      //  mReservedPayedTop.constant = 0
         mPriceLb.text = "XX,X"
        // mRegistrationNumberLb.text = ""
         mStartRideBtn.setTitleColor(color_email!, for: .normal)
         mStartRideBtn.isEnabled = false
         
     }
+    
+    //
+    func getPaymentStatusModel() -> PaymentStatusModel {
+        let paymentModel = PaymentStatusModel(status: mReservedPayedLb.text ?? "", paymentType: mViaOfficeTerminalLb.text, isActivePaymentBtn: false, price: Double(mPriceLb.text ?? "0.0") ?? 0.00)
+        return paymentModel
+    }
+    
     
     func setInfoCell(item: ReservationWithReservedPaidModel, index: Int) {
         mStartRideBtn.tag = index
@@ -80,7 +87,7 @@ class ReservationWithRegisterNumberCollectionViewCell: UICollectionViewCell {
         mRegistrationNumberContentV.isHidden = !item.isRegisterNumber
 
         if !item.isRegisterNumber {
-            mReservedPayedTop.constant = -mRegistrationNumberContentV.frame.size.height
+          //  mReservedPayedTop.constant = -mRegistrationNumberContentV.frame.size.height
         }
         if item.isActiveStartRide {
             mStartRideBtn.setTitleColor(color_navigationBar, for: .normal)

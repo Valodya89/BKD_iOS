@@ -32,17 +32,28 @@ class VehicleDimageCollectionCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupView()
     }
     
+    override func draw(_ rect: CGRect) {
+        setupView()
+    }
     func setupView() {
-        mGradientV.setGradient(startColor: color_navigationBar!.withAlphaComponent(13.5), endColor: color_navigationBar!.withAlphaComponent(45))
-        mDamageGradientV.setGradient(startColor: color_navigationBar!.withAlphaComponent(13.5), endColor: color_navigationBar!.withAlphaComponent(45))
+        mGradientV.setGradient(startColor: color_gradient_start!, endColor: color_gradient_end!)
+        mDamageGradientV.setGradient(startColor: color_gradient_start!, endColor: color_gradient_end!)
         mDamageContentV.layer.borderColor = color_shadow!.cgColor
         mDamageContentV.layer.borderWidth = 1.0
         mAddDAmageContentV.layer.borderColor = color_shadow!.cgColor
         mAddDAmageContentV.layer.borderWidth = 1.0
+        mAddBtn.setTitle("", for: .normal)
+        
     }
+    
+    override func prepareForReuse() {
+        mDamageImgV.image = img_camera!
+        mDamageNameLb.text = Constant.Texts.damageName
+
+    }
+    
     
     func setCellInfo(item: StartRideModel, index: Int, isAddCell: Bool) {
         mAddBtn.addTarget(self, action: #selector(pressAdd(sender:)), for: .touchUpInside)
@@ -50,8 +61,13 @@ class VehicleDimageCollectionCell: UICollectionViewCell {
         mDamageImgV.image = item.damageImg
         mDamageContentV.isHidden = isAddCell
         mAddDAmageContentV.isHidden = !isAddCell
-        
+        if item.damageImg == img_camera {
+            mDamageImgV.contentMode = .center
+        } else {
+            mDamageImgV.contentMode = .scaleAspectFit
+        }
     }
+    
     
     @objc func pressAdd(sender:UIButton) {
         didPressAdd?()

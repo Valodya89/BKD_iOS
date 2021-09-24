@@ -66,6 +66,11 @@ class ReservationWithStartRideCollectionViewCell: UICollectionViewCell {
         
     }
     
+    func getPaymentStatusModel() -> PaymentStatusModel {
+        let paymentModel = PaymentStatusModel(status: mReservedPayedLb.text ?? "", paymentType: mViaOfficeTerminalLb.text, isActivePaymentBtn: false, price: Double(mPriceLb.text ?? "0.0") ?? 0.00)
+        return paymentModel
+    }
+    
     func setInfoCell(item: ReservationWithReservedPaidModel, index: Int) {
         mStartRideBtn.tag = index
         mStartRideBtn.addTarget(self, action: #selector(pressedStartRide(sender:)), for: .touchUpInside)

@@ -26,6 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ApplicationSettings.construct()
         KeychainManager().resetIfNeed()
         
+        let pageControl = UIPageControl.appearance()
+        pageControl.currentPageIndicatorTintColor = UIColor.init(patternImage: UIImage(named: "selecte_page")!)
+        pageControl.pageIndicatorTintColor = UIColor.init(patternImage: UIImage(named: "unselecte_page")!)
+//        
         return true
     }
     

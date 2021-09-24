@@ -19,12 +19,16 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
     @IBOutlet weak var mBancontactTypeV: BancontactTypeView!
     @IBOutlet weak var mGradientV: UIView!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
+    @IBOutlet weak var mDepositInfoLb: UILabel!
+    @IBOutlet weak var mDepositLbHeight: NSLayoutConstraint!
     @IBOutlet weak var mBancontactV: BancontactView!
     @IBOutlet weak var mBlurV: UIVisualEffectView!
     
     //MARK: - Variables
     private let viewModel = PaymentViewModel()
     var paymentTypes = PaymentTypeData.paymentTypeModel
+    public var isDeposit:Bool = false
+    
     //MARK: - Local properties
     private var paymentRequest: PKPaymentRequest = {
         let request = PKPaymentRequest()
@@ -49,15 +53,17 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
         mBlurV.isHidden = true
         paymentTypes = PaymentTypeData.paymentTypeModel
         mPaymentTbV.reloadData()
-        
         self.view.setNeedsLayout()
+        mDepositInfoLb.isHidden = !isDeposit
 
     }
     
     override func viewDidLayoutSubviews() {
+        mDepositLbHeight.constant =  isDeposit ? 100 : 0
         if mBlurV.isHidden {
             mBancontactV.mContentVBottom.constant = -400
             mBancontactTypeV.mContentVBottom.constant = -400
+            
         }
     }
     

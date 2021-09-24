@@ -379,11 +379,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     ///Will open  custom location map controller
     func goToReserveController() {
         
-        //WARNING: This code is tempirary
-        let reserve = UIStoryboard(name: Constant.Storyboards.myReservetionAdvanced, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.myReservetionAdvanced) as! MyReservetionAdvancedViewController
-        
-        
-//        let reserve = UIStoryboard(name: Constant.Storyboards.reserve, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.reserve) as! ReserveViewController
+        let reserve = UIStoryboard(name: Constant.Storyboards.reserve, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.reserve) as! ReserveViewController
         setVehicleModel()
         reserve.vehicleModel = vehicleModel
         reserve.currentTariff = currentTariff

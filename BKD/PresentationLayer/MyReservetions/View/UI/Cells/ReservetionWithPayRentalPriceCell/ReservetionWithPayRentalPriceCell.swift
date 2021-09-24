@@ -17,7 +17,6 @@ class ReservetionWithPayRentalPriceCell: UICollectionViewCell {
     @IBOutlet weak var mCarNameLb: UILabel!
     @IBOutlet weak var mCarIconImgV: UIImageView!
     @IBOutlet weak var mCarDescriptionLb: UILabel!
-    
     @IBOutlet weak var mPickupCarImgV: UIImageView!
     @IBOutlet weak var mReturnCarImgV: UIImageView!
     @IBOutlet weak var mPickupLocationLb: UILabel!
@@ -28,18 +27,16 @@ class ReservetionWithPayRentalPriceCell: UICollectionViewCell {
     @IBOutlet weak var mReturnDayLb: UILabel!
     @IBOutlet weak var mReturnMonthLb: UILabel!
     @IBOutlet weak var mReturnTimelb: UILabel!
-    
     @IBOutlet weak var mPriceLb: UILabel!
-    
     @IBOutlet weak var mStatusLb: UILabel!
-
     @IBOutlet weak var mViaOfficeTerminalLb: UILabel!
-    @IBOutlet weak var mDepositPaidLb: UILabel!
+    @IBOutlet weak var mStatusTypeLb: UILabel!
     @IBOutlet weak var mShadowContentV: UIView!
-    
     @IBOutlet weak var mPayRentalPriceBtn: UIButton!
     
-    
+    //MARK: -- Variables
+    var payRentalPrice:(()-> Void)?
+    //MARK: -- Life cicle
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
@@ -54,14 +51,27 @@ class ReservetionWithPayRentalPriceCell: UICollectionViewCell {
     override func prepareForReuse() {
         mPriceLb.text = "XX,X"
        // mRegistrationNumberLb.text = ""
-        mPayRentalPriceBtn.setTitleColor(color_email!, for: .normal)
-        mPayRentalPriceBtn.isEnabled = false
+      //  mPayRentalPriceBtn.setTitleColor(color_email!, for: .normal)
+        mPayRentalPriceBtn.isEnabled = true
         
     }
     
-    func  setCellInfo() {
+    //
+    func getPaymentStatusModel() -> PaymentStatusModel {
+        let paymentModel = PaymentStatusModel(status: mStatusTypeLb.text ?? "", paymentType: mViaOfficeTerminalLb.text, isActivePaymentBtn: true,  price: Double(mPriceLb.text ?? "0.0") ?? 0.00 , paymentButtonType: mPayRentalPriceBtn.title(for: .normal))
+        return paymentModel
+    }
+    
+    
+    ///Set cell informetion
+    func  setInfoCell(item: ReservationWithReservedPaidModel , index: Int) {
+        mPayRentalPriceBtn.tag = index
+        mPayRentalPriceBtn.addTarget(self, action: #selector(payRentalPrice(sender:)), for: .touchUpInside)
         
     }
 
+    @objc func payRentalPrice(sender: UIButton) {
+        payRentalPrice?()
+    }
  
 }

@@ -71,6 +71,7 @@ class EditBySearchView: UIView, UITextFieldDelegate {
         super.awakeFromNib()
         setUpView()
         configureDelegate()
+        configureSearchPassiveFields()
     }
     
     func setUpView() {
@@ -104,10 +105,12 @@ class EditBySearchView: UIView, UITextFieldDelegate {
         didHideLocationList()
     }
     
+    ///Set Active borders
     func setBorder() {
-        mPickUpDataTxtFl.addBorder(color: color_navigationBar!, width: 1.0)
-        mPickUpTimeTxtFl.addBorder(color: color_navigationBar!, width: 1.0)
-        mPickUpLocationBtn.addBorder(color: color_navigationBar!, width: 1.0)
+        mReturnTimeTxtFl.addBorder(color: color_navigationBar!, width: 1.0)
+        mReturnDateTxtFl.addBorder(color: color_navigationBar!, width: 1.0)
+        
+        //            mPickUpLocationBtn.addBorder(color: color_navigationBar!, width: 1.0)
         mReturnLocationBtn.addBorder(color: color_navigationBar!, width: 1.0)
     }
     
@@ -138,12 +141,6 @@ class EditBySearchView: UIView, UITextFieldDelegate {
         mPickUpTimeTxtFl.text = searchModel.pickUpTime!.getHour()
     }
     
-    /// Set return time info
-    func setReturnTimeInfo(searchModel: SearchModel, tariff: Tariff) {
-        mReturnTimeTxtFl.font =  UIFont.init(name: (mReturnTimeTxtFl.font?.fontName)!, size: 18.0)
-        mReturnTimeTxtFl.textColor = (tariff == .flexible) ? color_entered_date : color_search_passive
-        mReturnTimeTxtFl.text = searchModel.returnTime!.getHour()
-    }
     
     /// Set pick up location info
     func setPickUpLocationInfo(searchModel: SearchModel) {
@@ -166,33 +163,31 @@ class EditBySearchView: UIView, UITextFieldDelegate {
     }
     
     ///configure search passive fields
-    func configureSearchPassiveFields(tariff: Tariff) {
-        var isPassive = true
-        if tariff != .flexible {
-            isPassive = false
-            mReturnTimeTxtFl.addBorder(color: color_search_passive!, width: 1.0)
-            mReturnDateTxtFl.addBorder(color: color_search_passive!, width: 1.0)
-            
-            mDayReturnDateBtn.setTitleColor(color_search_passive!, for: .normal)
-            mMonthReturnDateBtn.setTitleColor(color_search_passive!, for: .normal)
-            mReturnTimeTxtFl.textColor = color_search_passive!
-            mReturnDateTxtFl.textColor = (mReturnTimeTxtFl.text == Constant.Texts.returnDate) ? color_choose_date : color_search_passive!
-            
-            mReturnDateImgV.setTintColor(color:  color_search_passive!)
-            mReturnTimeImgV.setTintColor(color:  color_search_passive!)
-        } else {
-            mReturnTimeTxtFl.addBorder(color: color_navigationBar!, width: 1.0)
-            mReturnDateTxtFl.addBorder(color: color_navigationBar!, width: 1.0)
-            
-            mDayReturnDateBtn.setTitleColor(color_entered_date!, for: .normal)
-            mMonthReturnDateBtn.setTitleColor(color_entered_date!, for: .normal)
-            
-            mReturnDateImgV.setTintColor(color:  color_navigationBar!)
-            mReturnTimeImgV.setTintColor(color:  color_navigationBar!)
-            mReturnTimeTxtFl.textColor = (mReturnTimeTxtFl.text == Constant.Texts.returnTime) ? color_choose_date! : color_entered_date!
-        }
-        mReturnDateTxtFl.isUserInteractionEnabled = isPassive
-        mReturnTimeTxtFl.isUserInteractionEnabled = isPassive
+    func configureSearchPassiveFields() {
+        mPickUpTimeTxtFl.addBorder(color: color_search_passive!, width: 1.0)
+        mPickUpDataTxtFl.addBorder(color: color_search_passive!, width: 1.0)
+        
+        mDayPickUpBtn.setTitleColor(color_search_passive!, for: .normal)
+        mMonthPickUpBtn.setTitleColor(color_search_passive!, for: .normal)
+        mPickUpTimeTxtFl.textColor = color_search_passive!
+        mPickUpDataTxtFl.textColor = (mReturnTimeTxtFl.text == Constant.Texts.returnDate) ? color_choose_date : color_search_passive!
+        
+        
+        mPickUpDateImgV.setTintColor(color:  color_search_passive!)
+        mPickUpTimeImgV.setTintColor(color:  color_search_passive!)
+        mPickUpDataTxtFl.isUserInteractionEnabled = false
+        mPickUpTimeTxtFl.isUserInteractionEnabled = false
+        
+        //Location
+        mPickUpLocationBtn.isEnabled = false
+        mPickUpCustomLocationBtn.isEnabled = false
+        mCheckBoxPickUpCustomLocBtn.isEnabled = false
+
+        mPickUpLocationBtn.setTitleColor(color_search_passive!, for: .normal)
+        mPickUpLocationBtn.addBorder(color: color_search_passive!, width: 1.0)
+        mPickUpTimeDropImgV.setTintColor(color: color_search_passive!)
+        mPickUpCustomLocationBtn.setTitleColor(color_search_passive!, for: .normal)
+        mCheckBoxPickUpCustomLocBtn.setTitleColor(color_search_passive!, for: .normal)
     }
     
     func configureDelegate() {
@@ -227,28 +222,45 @@ class EditBySearchView: UIView, UITextFieldDelegate {
         }
     }
     
-    func animateLocationList(isShow: Bool) {
-        
-        //        currLocationDropImgV.rotateImage(rotationAngle: CGFloat(Double.pi * (isShow ? 1 : -2) ))
-        //        if !isShow {
-        //            returnDropisClose = true
-        //            pickUPDropisClose = true
-        //        }
+//    func animateLocationList(isShow: Bool) {
+//
+//        UIView.animate(withDuration: 0.3, animations: { [self] in
+//            self.mLocationDropDownView.setShadow(color: color_gradient_end!)
+//            if isShow {
+//                self.mLocationDropDownView.mheightLayoutConst.constant = self.mLocationDropDownView.parkingList.count >=
+//                3 ? locationList_height : CGFloat(self.mLocationDropDownView.parkingList.count) * locationList_cell_height
+//            } else {
+//                self.mLocationDropDownView.mheightLayoutConst.constant = 0.0
+//            }
+//
+//            self.mLocationDropDownView.layoutIfNeeded()
+//            self.mLocationDropDownView.layer.shadowOpacity = 0;
+//
+//        })
+//    }
+    
+    func animateLocationList(isShow: Bool)  {
         UIView.animate(withDuration: 0.3, animations: { [self] in
-            self.mLocationDropDownView.setShadow(color: color_gradient_end!)
-            if isShow {
-                self.mLocationDropDownView.mheightLayoutConst.constant = self.mLocationDropDownView.parkingList.count >=
-                3 ? locationList_height : CGFloat(self.mLocationDropDownView.parkingList.count) * locationList_cell_height
-            } else {
-                self.mLocationDropDownView.mheightLayoutConst.constant = 0.0
-            }
             
-            self.mLocationDropDownView.layoutIfNeeded()
-            self.mLocationDropDownView.layer.shadowOpacity = 0;
+            if isShow {
+                self.mLocationDropDownView.setShadow(color: color_shadow!)
+                self.mLocationDropDownView.mheightLayoutConst.constant = self.mLocationDropDownView.parkingList.count >=
+                    3 ? locationList_height : CGFloat(self.mLocationDropDownView.parkingList.count) * locationList_cell_height
+                self.layoutIfNeeded()
+                
+            } else {
+                
+                self.mLocationDropDownView.mheightLayoutConst.constant = 0.0
+                //self.mLocationLb.textColor = color_search_placeholder
+                self.layoutIfNeeded()
+            }
             
         })
     }
     
+    
+    
+    /// Did hide location list
     private func didHideLocationList () {
         mLocationDropDownView.hiddenLocationList = { [weak self] in
             self?.animateLocationList(isShow: false)
@@ -266,34 +278,15 @@ class EditBySearchView: UIView, UITextFieldDelegate {
     }
     
     ///Update search fields
-    func updateSearchFields(searchModel:SearchModel, tariff: Tariff){
+    func updateSearchFields(searchModel:SearchModel){
         setPickUpDateInfo(searchModel: searchModel)
         setReturnDateInfo(searchModel: searchModel)
         setPickUpTimeInfo(searchModel: searchModel)
-        setReturnTimeInfo(searchModel: searchModel, tariff: tariff)
         setPickUpLocationInfo(searchModel: searchModel)
         setReturnLocationInfo(searchModel: searchModel)
     }
     
-    /// will update time fields depend on tariff option
-    func updateSearchTimes(searchModel:SearchModel, tariff:Tariff) {
-        setReturnTimeInfo(searchModel: searchModel, tariff: tariff)
-        
-        if let _ = searchModel.returnDate {
-            showDateInfoViews(dayBtn: mDayReturnDateBtn,
-                              monthBtn:
-                                mMonthReturnDateBtn,
-                              txtFl: mReturnDateTxtFl)
-            //                mDayReturnDateBtn.setTitle(String(searchModel.returnTime!.get(.day)), for: .normal)
-            if tariff == .hourly {
-                mDayReturnDateBtn.setTitle(searchModel.returnTime!.getDay(), for: .normal)
-                mMonthReturnDateBtn.setTitle(searchModel.returnTime!.getMonthAndWeek(lng: "en"), for: .normal)
-            } else {
-                mDayReturnDateBtn.setTitle(searchModel.returnDate!.getDay(), for: .normal)
-                mMonthReturnDateBtn.setTitle(searchModel.returnDate!.getMonthAndWeek(lng: "en"), for: .normal)
-            }
-        }
-    }
+    
     
     
     /// will update date fields depend on tariff option
@@ -304,16 +297,6 @@ class EditBySearchView: UIView, UITextFieldDelegate {
         }
     }
     
-    ///Update search filled fields
-    func updateSearchFilledFields(tariff:Tariff,
-                                  searchModel:SearchModel){
-        
-        if tariff == .hourly &&  searchModel.pickUpTime != nil {
-            updateSearchTimes(searchModel: searchModel, tariff:tariff)
-        } else if searchModel.pickUpDate != nil {
-            updateSearchDate(searchModel: searchModel)
-        }
-    }
     
     ///update Location Fields
     func updateCustomLocationFields(place: String, didResult: @escaping (Bool) -> ()) {
@@ -331,6 +314,7 @@ class EditBySearchView: UIView, UITextFieldDelegate {
         }
         didResult(isPickUpLocation)
     }
+    
     
     //MARK: ACTIONS
     //MARK: ---------------
@@ -443,4 +427,3 @@ class EditBySearchView: UIView, UITextFieldDelegate {
         
     }
 }
-

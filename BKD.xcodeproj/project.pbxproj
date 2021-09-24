@@ -119,6 +119,10 @@
 		565863B826C73F1A003C19A2 /* BkdOfficeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565863B726C73F1A003C19A2 /* BkdOfficeInfoView.swift */; };
 		565863BB26C76B3C003C19A2 /* CashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565863BA26C76B3C003C19A2 /* CashViewController.swift */; };
 		565863BD26C76B5D003C19A2 /* Cash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 565863BC26C76B5D003C19A2 /* Cash.storyboard */; };
+		5658BDF226FBB7DE00A5B122 /* OnRideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5658BDF026FBB7DE00A5B122 /* OnRideCollectionViewCell.swift */; };
+		5658BDF326FBB7DE00A5B122 /* OnRideCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5658BDF126FBB7DE00A5B122 /* OnRideCollectionViewCell.xib */; };
+		5658BDFB26FBECC000A5B122 /* AddDamageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5658BDFA26FBECC000A5B122 /* AddDamageViewController.swift */; };
+		5658BDFD26FBECCF00A5B122 /* AddDamage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5658BDFC26FBECCF00A5B122 /* AddDamage.storyboard */; };
 		5658D76826C9BB5700CD6A3F /* CustomLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5658D76726C9BB5700CD6A3F /* CustomLocationModel.swift */; };
 		5658D79326CCA50000CD6A3F /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5658D79226CCA50000CD6A3F /* CategoryViewModel.swift */; };
 		5659B02B2699F5020059D28C /* PhoneCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659B02A2699F5020059D28C /* PhoneCodeModel.swift */; };
@@ -179,6 +183,10 @@
 		565F9B0026C87D2F00064AD4 /* KaartlazerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F9AFF26C87D2F00064AD4 /* KaartlazerViewController.swift */; };
 		565F9B0B26C8AEA100064AD4 /* ReservetionMakePaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F9B0926C8AEA100064AD4 /* ReservetionMakePaymentCell.swift */; };
 		565F9B0C26C8AEA100064AD4 /* ReservetionMakePaymentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565F9B0A26C8AEA100064AD4 /* ReservetionMakePaymentCell.xib */; };
+		5660E61826FE0376009BB73F /* AdvancedWithOnRideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5660E61626FE0376009BB73F /* AdvancedWithOnRideCell.xib */; };
+		5660E61926FE0376009BB73F /* AdvancedWithOnRideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5660E61726FE0376009BB73F /* AdvancedWithOnRideCell.swift */; };
+		5660E61C26FE0BED009BB73F /* OnRideTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5660E61B26FE0BED009BB73F /* OnRideTableView.swift */; };
+		5660E61E26FE0DB4009BB73F /* OnRideModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5660E61D26FE0DB4009BB73F /* OnRideModel.swift */; };
 		5660F7F2266C21980082F038 /* Mulish-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5660F7F1266C217F0082F038 /* Mulish-Bold.ttf */; };
 		566354EB268AF8EF0003E2EB /* PriceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566354E9268AF8EF0003E2EB /* PriceTableViewCell.swift */; };
 		566354EC268AF8EF0003E2EB /* PriceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 566354EA268AF8EF0003E2EB /* PriceTableViewCell.xib */; };
@@ -191,6 +199,7 @@
 		56664D9C269DC36A00FDBD22 /* VerificationCode.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56664D9B269DC36A00FDBD22 /* VerificationCode.storyboard */; };
 		56664DC2269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56664DC1269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift */; };
 		56664DCA269E368C00FDBD22 /* TimeCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56664DC9269E368C00FDBD22 /* TimeCompare.swift */; };
+		5669F5FC26FC170D00FF73F7 /* ContactActionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669F5FB26FC170D00FF73F7 /* ContactActionSheetView.swift */; };
 		566B3760269503360021BCAA /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B375E269503360021BCAA /* CalendarTableViewCell.swift */; };
 		566B3761269503360021BCAA /* CalendarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 566B375F269503360021BCAA /* CalendarTableViewCell.xib */; };
 		566B3767269545540021BCAA /* MailBoxNumberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B3765269545540021BCAA /* MailBoxNumberTableViewCell.swift */; };
@@ -427,6 +436,10 @@
 		565863B726C73F1A003C19A2 /* BkdOfficeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BkdOfficeInfoView.swift; sourceTree = "<group>"; };
 		565863BA26C76B3C003C19A2 /* CashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashViewController.swift; sourceTree = "<group>"; };
 		565863BC26C76B5D003C19A2 /* Cash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Cash.storyboard; sourceTree = "<group>"; };
+		5658BDF026FBB7DE00A5B122 /* OnRideCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnRideCollectionViewCell.swift; sourceTree = "<group>"; };
+		5658BDF126FBB7DE00A5B122 /* OnRideCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnRideCollectionViewCell.xib; sourceTree = "<group>"; };
+		5658BDFA26FBECC000A5B122 /* AddDamageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDamageViewController.swift; sourceTree = "<group>"; };
+		5658BDFC26FBECCF00A5B122 /* AddDamage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddDamage.storyboard; sourceTree = "<group>"; };
 		5658D76726C9BB5700CD6A3F /* CustomLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLocationModel.swift; sourceTree = "<group>"; };
 		5658D79226CCA50000CD6A3F /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		5659B02A2699F5020059D28C /* PhoneCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneCodeModel.swift; sourceTree = "<group>"; };
@@ -487,6 +500,10 @@
 		565F9AFF26C87D2F00064AD4 /* KaartlazerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaartlazerViewController.swift; sourceTree = "<group>"; };
 		565F9B0926C8AEA100064AD4 /* ReservetionMakePaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservetionMakePaymentCell.swift; sourceTree = "<group>"; };
 		565F9B0A26C8AEA100064AD4 /* ReservetionMakePaymentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReservetionMakePaymentCell.xib; sourceTree = "<group>"; };
+		5660E61626FE0376009BB73F /* AdvancedWithOnRideCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdvancedWithOnRideCell.xib; sourceTree = "<group>"; };
+		5660E61726FE0376009BB73F /* AdvancedWithOnRideCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedWithOnRideCell.swift; sourceTree = "<group>"; };
+		5660E61B26FE0BED009BB73F /* OnRideTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnRideTableView.swift; sourceTree = "<group>"; };
+		5660E61D26FE0DB4009BB73F /* OnRideModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnRideModel.swift; sourceTree = "<group>"; };
 		5660F7F1266C217F0082F038 /* Mulish-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mulish-Bold.ttf"; sourceTree = "<group>"; };
 		566354E9268AF8EF0003E2EB /* PriceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTableViewCell.swift; sourceTree = "<group>"; };
 		566354EA268AF8EF0003E2EB /* PriceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PriceTableViewCell.xib; sourceTree = "<group>"; };
@@ -499,6 +516,7 @@
 		56664D9B269DC36A00FDBD22 /* VerificationCode.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = VerificationCode.storyboard; sourceTree = "<group>"; };
 		56664DC1269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTimeCodeTextFiled.swift; sourceTree = "<group>"; };
 		56664DC9269E368C00FDBD22 /* TimeCompare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCompare.swift; sourceTree = "<group>"; };
+		5669F5FB26FC170D00FF73F7 /* ContactActionSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactActionSheetView.swift; sourceTree = "<group>"; };
 		566B375E269503360021BCAA /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		566B375F269503360021BCAA /* CalendarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarTableViewCell.xib; sourceTree = "<group>"; };
 		566B3765269545540021BCAA /* MailBoxNumberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailBoxNumberTableViewCell.swift; sourceTree = "<group>"; };
@@ -1281,6 +1299,65 @@
 			path = CashViewController;
 			sourceTree = "<group>";
 		};
+		5658BDEF26FBB7A100A5B122 /* OnRideCell */ = {
+			isa = PBXGroup;
+			children = (
+				5658BDF026FBB7DE00A5B122 /* OnRideCollectionViewCell.swift */,
+				5658BDF126FBB7DE00A5B122 /* OnRideCollectionViewCell.xib */,
+			);
+			path = OnRideCell;
+			sourceTree = "<group>";
+		};
+		5658BDF426FBEC6900A5B122 /* OnRide */ = {
+			isa = PBXGroup;
+			children = (
+				5658BDF726FBEC8600A5B122 /* Model */,
+				5658BDF626FBEC7D00A5B122 /* ViewModel */,
+				5658BDF526FBEC7700A5B122 /* View */,
+			);
+			path = OnRide;
+			sourceTree = "<group>";
+		};
+		5658BDF526FBEC7700A5B122 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5658BDF826FBEC8F00A5B122 /* UI */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5658BDF626FBEC7D00A5B122 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		5658BDF726FBEC8600A5B122 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5658BDF826FBEC8F00A5B122 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				5658BDF926FBEC9800A5B122 /* AddDamageViewController */,
+				5669F5FB26FC170D00FF73F7 /* ContactActionSheetView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		5658BDF926FBEC9800A5B122 /* AddDamageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5658BDFA26FBECC000A5B122 /* AddDamageViewController.swift */,
+				5658BDFC26FBECCF00A5B122 /* AddDamage.storyboard */,
+			);
+			path = AddDamageViewController;
+			sourceTree = "<group>";
+		};
 		565A7AAD2653FDCB006C63D0 /* SearchHeaderView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1572,6 +1649,7 @@
 		565F9B0126C8ADC100064AD4 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				5660E61A26FE0BC4009BB73F /* OnRideTableView */,
 				5692658426F3B15600004E81 /* EditBySearchView */,
 				56ADD80B26F2C62200C0ECC3 /* EditReservationViewController */,
 				569C8C9426F2601C001D65EF /* TotalPriceStackView */,
@@ -1588,6 +1666,8 @@
 		565F9B0226C8ADD500064AD4 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				5660E61526FE02BA009BB73F /* AdvancedWithOnRideCell */,
+				5658BDEF26FBB7A100A5B122 /* OnRideCell */,
 				56CF781D26F3C6FE0092F555 /* AdditionalDriverForWaithingApprovalCell */,
 				56CF781826F3BD1B0092F555 /* AdditionalDriverWaithingApplovalCell */,
 				5692658726F3B71C00004E81 /* WaithingAdminApplovalCell */,
@@ -1611,6 +1691,23 @@
 				565F9B0A26C8AEA100064AD4 /* ReservetionMakePaymentCell.xib */,
 			);
 			path = ReservetionMakePaymentCell;
+			sourceTree = "<group>";
+		};
+		5660E61526FE02BA009BB73F /* AdvancedWithOnRideCell */ = {
+			isa = PBXGroup;
+			children = (
+				5660E61726FE0376009BB73F /* AdvancedWithOnRideCell.swift */,
+				5660E61626FE0376009BB73F /* AdvancedWithOnRideCell.xib */,
+			);
+			path = AdvancedWithOnRideCell;
+			sourceTree = "<group>";
+		};
+		5660E61A26FE0BC4009BB73F /* OnRideTableView */ = {
+			isa = PBXGroup;
+			children = (
+				5660E61B26FE0BED009BB73F /* OnRideTableView.swift */,
+			);
+			path = OnRideTableView;
 			sourceTree = "<group>";
 		};
 		566354E8268AF8890003E2EB /* PriceTableViewCell */ = {
@@ -1728,6 +1825,7 @@
 		568E70942644BD2D000CB6A9 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				5658BDF426FBEC6900A5B122 /* OnRide */,
 				56CF782226F3DF4D0092F555 /* StartRide */,
 				565F80DB26A74D0800ADB9FE /* PhoneVerification */,
 				565F80CD26A703AA00ADB9FE /* Payment */,
@@ -1992,6 +2090,7 @@
 			children = (
 				5640395026EFA2590064256C /* ReservationWithReservedPaidModel.swift */,
 				562585D726F1040200EC9284 /* PaymentStausModel.swift */,
+				5660E61D26FE0DB4009BB73F /* OnRideModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2569,7 +2668,7 @@
 				568E6F4C2642FC4B000CB6A9 /* Resources */,
 				565F8C65268D390600E21C71 /* Embed Frameworks */,
 				995B321BDC49670283C49A78 /* [CP] Embed Pods Frameworks */,
-				5C5E742748ADD7B031A91DA0 /* [CP] Copy Pods Resources */,
+				D2ABCF87262983EC3FAB7FCA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2659,6 +2758,7 @@
 				56664D9C269DC36A00FDBD22 /* VerificationCode.storyboard in Resources */,
 				562585D626F0F5D100EC9284 /* PaymentStatusUITableViewCell.xib in Resources */,
 				561888A3264ABDFC00BDDB33 /* DropDownTableViewCell.xib in Resources */,
+				5660E61826FE0376009BB73F /* AdvancedWithOnRideCell.xib in Resources */,
 				56CFDE7C2693CEA200D731CD /* UserFillFieldTableViewCell.xib in Resources */,
 				56CFDE7226938EFC00D731CD /* InfoMessageTableViewCell.xib in Resources */,
 				56A2AFE02693F221001BA7C5 /* ExamplePhotoTableViewCell.xib in Resources */,
@@ -2667,6 +2767,7 @@
 				566B3768269545540021BCAA /* MailBoxNumberTableViewCell.xib in Resources */,
 				56CF783426F4F56E0092F555 /* VehicleCheck.storyboard in Resources */,
 				5665404826759E79008ACD31 /* TariffCarouselCell.xib in Resources */,
+				5658BDF326FBB7DE00A5B122 /* OnRideCollectionViewCell.xib in Resources */,
 				5656323C265841BE00B78562 /* FilterSearchResultCell.xib in Resources */,
 				56533EF82679263D0012BF4A /* Accessories.storyboard in Resources */,
 				566B379B26974F0C0021BCAA /* NationalRegisterNumberTableViewCell.xib in Resources */,
@@ -2690,6 +2791,7 @@
 				562585CE26F0E2C400EC9284 /* MyReservetionAdvanced.storyboard in Resources */,
 				566B37BE2697A6D40021BCAA /* TakePhotoTableViewCell.xib in Resources */,
 				565A7AB12653FE26006C63D0 /* SearchHeaderView.xib in Resources */,
+				5658BDFD26FBECCF00A5B122 /* AddDamage.storyboard in Resources */,
 				5640395526EFD0690064256C /* ReservationWithRegisterNumberCollectionViewCell.xib in Resources */,
 				564E12D0264D72E2008CE884 /* SeeMap.storyboard in Resources */,
 				5618872D2645D99600BDDB33 /* Assets.xcassets in Resources */,
@@ -2730,23 +2832,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5C5E742748ADD7B031A91DA0 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		995B321BDC49670283C49A78 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2762,6 +2847,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D2ABCF87262983EC3FAB7FCA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2816,6 +2918,7 @@
 				56188889264A61ED00BDDB33 /* TextField.swift in Sources */,
 				56B9F33D26825FF0003449AD /* TariffSlideViewModel.swift in Sources */,
 				56AD191D2693251C006A53C1 /* CheckEmailViewModel.swift in Sources */,
+				5658BDFB26FBECC000A5B122 /* AddDamageViewController.swift in Sources */,
 				5640952D264AE529001DC92D /* DropDownModel.swift in Sources */,
 				562585DB26F175CB00EC9284 /* RegisterNumberUITableView.swift in Sources */,
 				566B37BD2697A6D40021BCAA /* TakePhotoTableViewCell.swift in Sources */,
@@ -2887,6 +2990,7 @@
 				56409533264AE5A8001DC92D /* Data.swift in Sources */,
 				56AD18E92691622C006A53C1 /* EmailAddressViewController.swift in Sources */,
 				565BFDBD269F91930044D081 /* SessionExpiredAlert.swift in Sources */,
+				5658BDF226FBB7DE00A5B122 /* OnRideCollectionViewCell.swift in Sources */,
 				561888A2264ABDFC00BDDB33 /* DropDownTableViewCell.swift in Sources */,
 				565F807C26A510AA00ADB9FE /* Country.swift in Sources */,
 				565A7AD62654C49B006C63D0 /* CategoryCollectionViewCell.swift in Sources */,
@@ -2907,6 +3011,7 @@
 				565F8C2B268D027400E21C71 /* UPCarouselFlowLayout.swift in Sources */,
 				565BFD93269F57CF0044D081 /* BkdError.swift in Sources */,
 				5640396026F01D530064256C /* ReservetionWithPayRentalPriceCell.swift in Sources */,
+				5660E61926FE0376009BB73F /* AdvancedWithOnRideCell.swift in Sources */,
 				5692658626F3B1B000004E81 /* EditBySearchView.swift in Sources */,
 				565BFD97269F58460044D081 /* MultipartFormData.swift in Sources */,
 				565BFD9B269F586D0044D081 /* RequestMethod.swift in Sources */,
@@ -2925,6 +3030,7 @@
 				565A7AE326555EFF006C63D0 /* CategoryTableViewCell.swift in Sources */,
 				568E701226438C08000CB6A9 /* MainViewController.swift in Sources */,
 				5656A9C926D69F7900A71375 /* GooglePlacesManager.swift in Sources */,
+				5660E61C26FE0BED009BB73F /* OnRideTableView.swift in Sources */,
 				56CFDE7B2693CEA100D731CD /* UserFillFieldTableViewCell.swift in Sources */,
 				5656A9E626D84D2700A71375 /* ImageUploadAPI.swift in Sources */,
 				56CF782026F3C72C0092F555 /* AdditionalDriverForWaithingApprovalCell.swift in Sources */,
@@ -2973,8 +3079,10 @@
 				565F80E426A74D6000ADB9FE /* PhoneVerificationViewController.swift in Sources */,
 				5691A61B265C71EC0008081D /* ExteriorCollectionViewCell.swift in Sources */,
 				5618888F264A63CA00BDDB33 /* LocationDropDownView.swift in Sources */,
+				5660E61E26FE0DB4009BB73F /* OnRideModel.swift in Sources */,
 				56A2AFEC2694CFC9001BA7C5 /* SearchPhoneCodeViewController.swift in Sources */,
 				560252E2266535CF00FB204C /* Result.swift in Sources */,
+				5669F5FC26FC170D00FF73F7 /* ContactActionSheetView.swift in Sources */,
 				5640396326F0207F0064256C /* PayLaterViewController.swift in Sources */,
 				5656324626585FFF00B78562 /* CarEquipmentCollectionViewCell.swift in Sources */,
 				560048702697F78C009943B5 /* BkdAgreementViewController.swift in Sources */,

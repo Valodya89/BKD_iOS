@@ -30,13 +30,17 @@ class ReservetionMakePaymentCell: UICollectionViewCell {
     @IBOutlet weak var mReturnMonthLb: UILabel!
     @IBOutlet weak var mReturnTimelb: UILabel!
     
-    @IBOutlet weak var mPayLaterLb: UILabel!
+    @IBOutlet weak var mStatusTypeLb: UILabel!
     @IBOutlet weak var mStatusLb: UILabel!
-    @IBOutlet weak var mReservedPayedLb: UILabel!
     @IBOutlet weak var mPriceLb: UILabel!
     @IBOutlet weak var mShadowContentV: UIView!
     @IBOutlet weak var mMakePaymentBtn: UIButton!
     
+    
+    //MARK: -- VAriable
+    var makePayment:(()-> Void)?
+    
+    //MARK: -- Life cicle
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
@@ -51,13 +55,27 @@ class ReservetionMakePaymentCell: UICollectionViewCell {
     override func prepareForReuse() {
         mPriceLb.text = "XX,X"
        // mRegistrationNumberLb.text = ""
-        mMakePaymentBtn.setTitleColor(color_email!, for: .normal)
-        mMakePaymentBtn.isEnabled = false
+       // mMakePaymentBtn.setTitleColor(color_email!, for: .normal)
+        mMakePaymentBtn.isEnabled = true
         
     }
     
-    func  setCellInfo() {
+    
+    //
+    func getPaymentStatusModel() -> PaymentStatusModel {
+        let paymentModel = PaymentStatusModel(status: mStatusTypeLb.text ?? "",  isActivePaymentBtn: true,  price: Double(mPriceLb.text ?? "0.0") ?? 0.00 , paymentButtonType: mMakePaymentBtn.title(for: .normal))
+        return paymentModel
+    }
+    
+    
+    func  setCellInfo(item: ReservationWithReservedPaidModel , index: Int) {
+        mMakePaymentBtn.tag = index
+        mMakePaymentBtn.addTarget(self, action: #selector(makePayment(sender:)), for: .touchUpInside)
         
+    }
+
+    @objc func makePayment(sender: UIButton) {
+        makePayment?()
     }
 
    

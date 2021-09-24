@@ -9,7 +9,7 @@ import UIKit
 
 class RegisterNumberUITableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
-    var registerNumberArr:[String]? = ["1-ZBF-401"]
+    var registerNumberArr:[String]?
 
     override func awakeFromNib() {
         super.awakeFromNib()

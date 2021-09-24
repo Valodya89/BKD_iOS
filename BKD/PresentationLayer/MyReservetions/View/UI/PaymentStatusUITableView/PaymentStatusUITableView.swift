@@ -9,7 +9,9 @@ import UIKit
 
 class PaymentStatusUITableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
+    var didPressPayment:((Bool)->Void)?
     var statusArr:[PaymentStatusModel]? = nil
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,6 +21,8 @@ class PaymentStatusUITableView: UITableView, UITableViewDelegate, UITableViewDat
         self.delegate = self
         self.dataSource = self
     }
+    
+    
 
     //MARK: UITableViewDataSource
     //MARK: ----------------------------------
@@ -30,11 +34,18 @@ class PaymentStatusUITableView: UITableView, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PaymentStatusUITableViewCell.identifier, for: indexPath) as! PaymentStatusUITableViewCell
         cell.setCellInfo(item: statusArr![indexPath.row])
-        
+        cell.didPressPay = { isPayLater in
+            self.didPressPayment?(isPayLater)
+        }
         return cell
     }
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return detail_cell_height
-//    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let item = statusArr![indexPath.row]
+        if !item.isActivePaymentBtn {
+            return  CGFloat(height75)
+        }
+        return height115
+    }
 
 }

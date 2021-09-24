@@ -43,9 +43,12 @@ class PayLaterViewController: UIViewController, StoryboardInitializable {
     
     func setUpView()  {
         mRightBarBtn.image = img_bkd
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         mContinueBtn.layer.cornerRadius = 8
         mContinueBtn.layer.borderColor = color_navigationBar!.cgColor
         mContinueBtn.layer.borderWidth = 1.0
+        mDepositRentalCheckBtn.setTitle("", for: .normal)
+        mDepositCheckBtn.setTitle("", for: .normal)
     }
     
     //Animate continue

@@ -10,6 +10,6 @@ import UIKit
 
 struct StartRideModel {
     
-    public var damageImg: UIImage
-    public var damageName: String
+    public var damageImg: UIImage?
+    public var damageName: String?
 }

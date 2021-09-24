@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19158" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19141"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -33,6 +33,7 @@
                 <outlet property="mDepositLb" destination="nUr-X2-IXR" id="mwn-De-YWe"/>
                 <outlet property="mDetailsCenterY" destination="Ren-hb-D7m" id="UTt-sp-Yqy"/>
                 <outlet property="mEuroLb" destination="EsN-ZS-zjt" id="5PI-YU-48y"/>
+                <outlet property="mFlexibleFuelCheckBoxBtn" destination="NPN-2K-xTh" id="GAc-yh-nQy"/>
                 <outlet property="mFuelConsumptionImgV" destination="D4u-cp-zVK" id="68L-uk-HcM"/>
                 <outlet property="mFuelConsumptionLb" destination="nLc-xv-RU2" id="VeU-vQ-zmR"/>
                 <outlet property="mHoursSegmentC" destination="hya-Tr-Piy" id="7Ir-h9-tOt"/>
@@ -66,7 +67,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="195" height="230"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flexible" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hai-yG-3AG">
-                            <rect key="frame" x="144.5" y="24" width="62" height="21"/>
+                            <rect key="frame" x="147" y="24" width="57.5" height="21"/>
                             <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -84,7 +85,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="195" height="230"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kq4-cZ-c0h" userLabel="prive View">
-                            <rect key="frame" x="42.5" y="43" width="110" height="24"/>
+                            <rect key="frame" x="43.5" y="43" width="108" height="24"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EsN-ZS-zjt">
                                     <rect key="frame" x="0.0" y="5" width="13" height="14"/>
@@ -96,13 +97,13 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9,99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EbF-IU-SVH">
-                                    <rect key="frame" x="23" y="1.5" width="33.5" height="21"/>
+                                    <rect key="frame" x="23" y="1.5" width="35" height="21"/>
                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="incl VAT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNC-uZ-nZw">
-                                    <rect key="frame" x="58.5" y="3.5" width="42.5" height="21"/>
+                                    <rect key="frame" x="60" y="3.5" width="39" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="gI6-vH-Bpe"/>
                                     </constraints>
@@ -111,7 +112,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ugi-Mh-VgT">
-                                    <rect key="frame" x="-5.5" y="11.5" width="115.5" height="1"/>
+                                    <rect key="frame" x="-5.5" y="11.5" width="113.5" height="1"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="TDH-PZ-ow9"/>
@@ -146,7 +147,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tp9-CG-pRm" userLabel="offery prive View">
-                            <rect key="frame" x="41.5" y="72" width="112" height="34.5"/>
+                            <rect key="frame" x="43.5" y="72" width="108.5" height="34.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r9a-Fo-06a">
                                     <rect key="frame" x="0.0" y="7" width="13" height="20.5"/>
@@ -158,13 +159,13 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7,99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gu5-uk-Non">
-                                    <rect key="frame" x="23" y="2" width="33.5" height="30.5"/>
+                                    <rect key="frame" x="23" y="2" width="32.5" height="30.5"/>
                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="17"/>
                                     <color key="textColor" red="0.69574183229999997" green="0.058825768530000003" blue="0.12262827900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(incl VAT)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NP6-ff-Mue">
-                                    <rect key="frame" x="58.5" y="9" width="48.5" height="21"/>
+                                    <rect key="frame" x="57.5" y="9" width="46" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="AfU-el-k6A"/>
                                     </constraints>
@@ -333,15 +334,28 @@
                                             <color key="textColor" name="navigation_bar"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NPN-2K-xTh">
+                                            <rect key="frame" x="149" y="-6" width="30" height="29.5"/>
+                                            <color key="tintColor" name="main"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" image="uncheck_box"/>
+                                            <connections>
+                                                <action selector="flexibleFuelCheckBox:" destination="-1" eventType="touchUpInside" id="8Hj-Wg-8Pm"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
+                                        <constraint firstItem="NPN-2K-xTh" firstAttribute="centerX" secondItem="4Ro-aX-GuF" secondAttribute="centerX" multiplier="1.81" id="30f-Fs-krQ"/>
                                         <constraint firstItem="LeQ-Yv-jnk" firstAttribute="height" secondItem="4Ro-aX-GuF" secondAttribute="height" multiplier="0.866667" id="7Hw-hP-rCB"/>
                                         <constraint firstItem="nUr-X2-IXR" firstAttribute="height" secondItem="4Ro-aX-GuF" secondAttribute="height" multiplier="1.4" id="7hl-dz-7dd"/>
                                         <constraint firstItem="LeQ-Yv-jnk" firstAttribute="centerY" secondItem="4Ro-aX-GuF" secondAttribute="centerY" id="Asm-a8-hZB"/>
+                                        <constraint firstItem="NPN-2K-xTh" firstAttribute="width" secondItem="4Ro-aX-GuF" secondAttribute="width" multiplier="0.165746" id="Jcl-VB-r64"/>
                                         <constraint firstItem="nUr-X2-IXR" firstAttribute="leading" secondItem="LeQ-Yv-jnk" secondAttribute="trailing" multiplier="1.5" id="N9J-FO-Ugc"/>
                                         <constraint firstItem="LeQ-Yv-jnk" firstAttribute="width" secondItem="4Ro-aX-GuF" secondAttribute="width" multiplier="0.0824742" id="RhX-MI-7TI"/>
                                         <constraint firstItem="nUr-X2-IXR" firstAttribute="width" secondItem="4Ro-aX-GuF" secondAttribute="width" multiplier="0.87" id="X6X-Lr-akD"/>
+                                        <constraint firstItem="NPN-2K-xTh" firstAttribute="height" secondItem="4Ro-aX-GuF" secondAttribute="height" multiplier="1.5" id="X88-ye-PPA"/>
+                                        <constraint firstItem="NPN-2K-xTh" firstAttribute="centerY" secondItem="4Ro-aX-GuF" secondAttribute="centerY" multiplier="0.87" id="clo-EZ-P3T"/>
                                         <constraint firstItem="nUr-X2-IXR" firstAttribute="centerY" secondItem="LeQ-Yv-jnk" secondAttribute="centerY" id="kWa-Uy-eKa"/>
                                         <constraint firstItem="LeQ-Yv-jnk" firstAttribute="leading" secondItem="4Ro-aX-GuF" secondAttribute="leading" id="lHc-JW-wQ0"/>
                                     </constraints>
@@ -437,8 +451,9 @@
         <image name="13" width="15" height="13"/>
         <image name="2" width="16.5" height="13"/>
         <image name="search_right" width="17" height="8"/>
+        <image name="uncheck_box" width="14" height="14.5"/>
         <namedColor name="main">
-            <color red="0.10999999940395355" green="0.20000000298023224" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="main_26%">
             <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="0.25999999046325684" colorSpace="custom" customColorSpace="sRGB"/>

@@ -250,7 +250,7 @@
             </objects>
             <point key="canvasLocation" x="1399" y="638"/>
         </scene>
-        <!--Notifications View Controller-->
+        <!--My Reservation-->
         <scene sceneID="WGX-km-U7w">
             <objects>
                 <viewController id="ceI-lw-dx8" customClass="NotificationsViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
@@ -258,16 +258,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xd4-CU-VYz">
-                                <rect key="frame" x="16" y="0.0" width="382" height="479"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xd4-CU-VYz">
+                                <rect key="frame" x="16" y="0.0" width="382" height="130"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pmx-4J-saQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="xd4-CU-VYz" firstAttribute="height" secondItem="A1I-cU-SsK" secondAttribute="height" multiplier="0.160891" id="SDw-3d-YXs"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="3IS-eZ-wTf">
+                    <navigationItem key="navigationItem" title="My Reservation" id="3IS-eZ-wTf">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="menu" id="Z62-eQ-Ljg"/>
                     </navigationItem>
                 </viewController>

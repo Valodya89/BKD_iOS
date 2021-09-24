@@ -19,14 +19,17 @@ class PaymentStatusUITableViewCell: UITableViewCell  {
     //MARK: Outlets
     @IBOutlet weak var mStatusLb: UILabel!
     @IBOutlet weak var mStatusNameLb: UILabel!
+    @IBOutlet weak var mPaymentTypeContentV: UIView!
     @IBOutlet weak var mPaymentTypeLb: UILabel!
     
     @IBOutlet weak var mPayContantV: UIView!
     @IBOutlet weak var mPriceLb: UILabel!
     @IBOutlet weak var mPayBtn: UIButton!
-    @IBOutlet weak var mPayContentVHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var mStatusVBottom: NSLayoutConstraint!
+    //MARK: --Varible
+    var didPressPay:((Bool)-> Void)?
+    var isPayLater = false
+    
     //MARK: Life cicle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,7 +37,8 @@ class PaymentStatusUITableViewCell: UITableViewCell  {
     }
 
      override func prepareForReuse() {
-         mStatusVBottom.constant = 20
+         isPayLater = false
+         mPaymentTypeContentV.isHidden = false
          mPayContantV.isHidden = true
          mPaymentTypeLb.text = ""
     }
@@ -48,7 +52,6 @@ class PaymentStatusUITableViewCell: UITableViewCell  {
         
         mPayContantV.isHidden = !item.isActivePaymentBtn
         if  item.isActivePaymentBtn {
-            mStatusVBottom.constant = 66
             if let title = item.paymentButtonType {
                 mPayBtn.setTitle(title, for: .normal)
             }
@@ -56,7 +59,17 @@ class PaymentStatusUITableViewCell: UITableViewCell  {
         if let price = item.price {
             mPriceLb.text = String(price)
         }
+        
+        if item.status == Constant.Texts.payLater {
+            mPaymentTypeContentV.isHidden = true
+            isPayLater = true
+        }
   
+    }
+    
+    @IBAction func pay(_ sender: UIButton) {
+        
+        didPressPay?(isPayLater)
     }
     
 }

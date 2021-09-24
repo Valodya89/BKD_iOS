@@ -6,10 +6,11 @@
 //
 
 enum PaymentType: Int {
-    case creditCard
     case bancontact
     case applePay
     case payPal
+    case creditCard
+
 
 }
 import UIKit

@@ -17,5 +17,4 @@ target 'BKD' do
  	pod 'KeychainAccess'
 	pod 'SwiftStomp'
  	pod 'Kingfisher', '~> 6.0'
-
 end

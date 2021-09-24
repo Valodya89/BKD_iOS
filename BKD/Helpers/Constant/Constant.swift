@@ -38,6 +38,10 @@ struct Constant {
         static let myReservetionAdvanced = "MyReservetionAdvanced"
         static let vehicleCheck = "VehicleCheck"
         static let newDamage = "NewDamage"
+        static let odometerCheck = "OdometerCheck"
+        static let addDamage = "AddDamage"
+        static let editReservation = "EditReservation"
+
 
 
 
@@ -90,6 +94,7 @@ struct Constant {
         static let myReservetion = "MyReservetionViewController"
         static let vehicleCheck = "VehicleCheckViewController"
         static let newDamage = "NewDamageViewController"
+        static let odometerCheck = "OdometerCheckViewController"
 
     }
     
@@ -140,6 +145,8 @@ struct Constant {
         static let rentalConditions = "Rental conditions"
         static let bkdAdvantages = "BKD Advantages"
         static let select = "Select"
+        static let fuelConsumption = "Fuel consumption"
+        static let depositApplies = "Deposit applies"
         
         
         //Detail
@@ -250,6 +257,8 @@ struct Constant {
         static let cancelWithoutRefaund = "Are you sure you want to cancel your reservation? You will not be refunded, as your free cancellations have expired in the current month."
         static let back = "Back"
         static let confirm = "Confirm"
+        static let payLater = "Pay later"
+        
         
         
         //Start Ride
@@ -259,6 +268,11 @@ struct Constant {
         static let damageName = "Damage name"
         static let cancelDamage = "Are you sure you want to cancel the new damage adding process."
         static let yesCancel = "Yes, Cancel"
+        static let odometerNumber = "Vehicle Odometer numbers"
+        static let startRideAlert = "By clicking “Start now” button you confirm that you got your keys and are to start the ride."
+        
+        //On ride
+        static let confirmSwitchDriver = "Please, confirm that you want to switch to [%@] driver."
         
         //Verify
         static let selectMailApp = "Select Mail App"
@@ -339,10 +353,19 @@ let mydriver_cell_height: CGFloat = 66
 let tailLift_cell_height: CGFloat = 40
 let locationList_height: CGFloat = 172.0
 let locationList_cell_height: CGFloat = 57.3
+let height75 =  75
 
 let main_subwidth = UIScreen.main.bounds.width * 0.158416
 let reservation_no_carNumber_height = UIScreen.main.bounds.height * 0.306931
 let reservation_with_carNumber_height = UIScreen.main.bounds.height * 0.391089
+let height307 = UIScreen.main.bounds.height * 0.379
+let height245 = UIScreen.main.bounds.height * 0.303
+let height240 = UIScreen.main.bounds.height * 0.297
+let height285 = UIScreen.main.bounds.height * 0.352
+let height405 = UIScreen.main.bounds.height * 0.501
+let height115 = UIScreen.main.bounds.height * 0.142
+let height274 = UIScreen.main.bounds.height * 0.339
+let height130 = UIScreen.main.bounds.height * 0.160
 
 // 0.158416
 //h* 16 /37
@@ -453,5 +476,10 @@ let img_bancontact = UIImage(named: "bancontact")
 let img_applePay = UIImage(named: "apple_pay")
 let img_gPay = UIImage(named: "g_pay")
 let img_payPal = UIImage(named: "paypal")
+
+//Start Ride
+let img_camera = UIImage(named: "camera")
+let img_select_RadioBtn = UIImage(named: "select_radiobutton")
+let img_unselect_RadioBtn = UIImage(named: "unselect_radiobutton")
 
 

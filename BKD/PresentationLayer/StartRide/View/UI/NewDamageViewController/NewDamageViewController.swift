@@ -10,10 +10,11 @@ import UIKit
 protocol NewDamageViewControllerDelegate: AnyObject {
     func didPressConfirm()
     func didPressCancel()
+
     
 }
 
-class NewDamageViewController: UIViewController, StoryboardInitializable, UITextFieldDelegate {
+class NewDamageViewController: UIViewController, StoryboardInitializable {
 
     //MARK: -- Outlets
     @IBOutlet weak var mContentV: UIView!
@@ -42,9 +43,11 @@ class NewDamageViewController: UIViewController, StoryboardInitializable, UIText
         mConfirmBtn.layer.borderWidth = 1.0
         mConfirmBtn.backgroundColor = .clear
         mCancelBtn.backgroundColor = .clear
+        mConfirmBtn.disable()
         mDemageTxtFl.setPlaceholder(string: Constant.Texts.damageName, font: font_placeholder!, color: color_chat_placeholder!)
         mDemageTxtFl.addBorder(color: color_navigationBar!, width: 1.0)
         mDemageTxtFl.delegate = self
+        
         
     }
     
@@ -52,20 +55,38 @@ class NewDamageViewController: UIViewController, StoryboardInitializable, UIText
  //MARK: -- Actions
     @IBAction func cancel(_ sender: UIButton) {
         sender.backgroundColor = color_menu!
-        BKDAlert().showAlert(on: self, title: Constant.Texts.cancelDamage, message: nil, messageSecond: nil, cancelTitle: Constant.Texts.back, okTitle: Constant.Texts.yesCancel) {
-            sender.backgroundColor = .clear
-        } okAction: {
-            self.delegate?.didPressCancel()
-            sender.backgroundColor = .clear
-
-        }
-
+        self.delegate?.didPressCancel()
     }
     
     @IBAction func confirm(_ sender: UIButton) {
         sender.backgroundColor = color_menu!
         delegate?.didPressConfirm()
     }
-    
-    
+       
 }
+
+
+//MARK: UITextFieldDelegate
+//MARK: ---------------------------
+extension NewDamageViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.becomeFirstResponder()
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+        let fullText = textField.text! + string
+        if fullText.count > 0 {
+            mConfirmBtn.enable()
+        }
+        return true
+    }
+
+}
+
+
