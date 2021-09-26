@@ -8,8 +8,8 @@
 enum PaymentType: Int {
     case bancontact
     case applePay
-    case payPal
-    case creditCard
+    //case payPal
+   // case creditCard
 
 
 }

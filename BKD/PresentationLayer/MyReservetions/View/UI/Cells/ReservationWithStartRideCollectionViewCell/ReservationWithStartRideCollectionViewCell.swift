@@ -44,7 +44,7 @@ class ReservationWithStartRideCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mShadowContentV: UIView!
     
     //MARK: -- Variables
-    var pressStartRide:(()->Void)?
+    var pressInactiveStartRide:(()->Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -62,7 +62,6 @@ class ReservationWithStartRideCollectionViewCell: UICollectionViewCell {
         mPriceLb.text = "XX,X"
        // mRegistrationNumberLb.text = ""
         mStartRideBtn.setTitleColor(color_email!, for: .normal)
-        mStartRideBtn.isEnabled = false
         
     }
     
@@ -74,14 +73,13 @@ class ReservationWithStartRideCollectionViewCell: UICollectionViewCell {
     func setInfoCell(item: ReservationWithReservedPaidModel, index: Int) {
         mStartRideBtn.tag = index
         mStartRideBtn.addTarget(self, action: #selector(pressedStartRide(sender:)), for: .touchUpInside)
-        mStartRideBtn.isEnabled = item.isActiveStartRide
         if item.isActiveStartRide {
             mStartRideBtn.setTitleColor(color_selected_filter_fields!, for: .normal)
         }
     }
     
     @objc func pressedStartRide(sender: UIButton) {
-        pressStartRide?()
+        pressInactiveStartRide?()
     }
     
 }

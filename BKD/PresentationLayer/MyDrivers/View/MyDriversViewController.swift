@@ -11,7 +11,7 @@ protocol MyDriversViewControllerDelegate: AnyObject {
     func selectedDrivers(_ isSelecte: Bool, totalPrice: Double)
 }
 
-class MyDriversViewController: UIViewController {
+class MyDriversViewController: BaseViewController {
 //MARK: Outlets
     @IBOutlet weak var mMyDriverCollectionV: UICollectionView!
     @IBOutlet weak var mTotalPriceBckgV: UIView!
@@ -22,8 +22,14 @@ class MyDriversViewController: UIViewController {
     @IBOutlet weak var mAddBtn: UIButton!
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
+    @IBOutlet weak var mTotalPriceContentbottom: NSLayoutConstraint!
     
+    //Confirm
+    @IBOutlet weak var mConfirmV: ConfirmView!
+    
+    //MARK: --Variables
     weak var delegate: MyDriversViewControllerDelegate?
+    public var isEditReservation:Bool = false
     var totalPrice:Double = 0
 
     //MARK: life cycle
@@ -35,29 +41,60 @@ class MyDriversViewController: UIViewController {
     func setupView() {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = img_bkd
+       
         mTotalPriceBckgV.setShadow(color: color_shadow!)
         mAddDriverBckgV.layer.cornerRadius = mAddDriverBckgV.frame.height/2
         mAddBtn.layer.cornerRadius = mAddBtn.frame.size.width/2
         mAddBtn.clipsToBounds = true
         configureDelegates()
+        configureViewForEdit()
+        handlerConfirm()
     }
      
      private func configureDelegates() {
         mMyDriverCollectionV.delegate = self
         mMyDriverCollectionV.dataSource = self
      }
+    
+    ///Configure view wehn it open for edit
+    func configureViewForEdit() {
+        if isEditReservation {
+            mConfirmV.isHidden = !isEditReservation
+            mTotalPriceContentbottom.constant = -76
+        }
+    }
+    
+    private func showAlertSelecteDriver() {
+        BKDAlert().showAlert(on: self,
+                             message: String(format: Constant.Texts.addDriverAlert, 9.99), cancelTitle: Constant.Texts.cancel,
+                             okTitle: Constant.Texts.confirm) {
+            
+        } okAction: {
+            self.mConfirmV.enableView()
+        }
+
+    }
+
+    
     //MARK: ACTIONS
     //MARK: ----------------
     @IBAction func addDriver(_ sender: UIButton) {
-        let registrationBotVC = RegistartionBotViewController.initFromStoryboard(name: Constant.Storyboards.registrationBot)
-        registrationBotVC.tableData = [RegistrationBotData.registrationDriverModel[0]]
-        registrationBotVC.isDriverRegister = true
-        self.navigationController?.pushViewController(registrationBotVC, animated: true)
+        BKDAlert().showAlert(on: self, message: String(format: Constant.Texts.addDriverAlert, 0.00) , cancelTitle: Constant.Texts.cancel, okTitle: Constant.Texts.confirm, cancelAction: nil) {
+            
+            self.goToRegistrationBot(isDriverRegister: true,
+                                     tableData: [RegistrationBotData.registrationDriverModel[0]])
+        }
     }
     
     @IBAction func back(_ sender: UIBarButtonItem) {
         self.delegate?.selectedDrivers(totalPrice > 0.0 ? true : false , totalPrice: totalPrice)
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func handlerConfirm() {
+        mConfirmV.didPressConfirm = {
+            self.goToEditReservationAdvanced()
+        }
     }
 }
 
@@ -97,11 +134,21 @@ extension MyDriversViewController: UICollectionViewDelegate, UICollectionViewDat
 extension MyDriversViewController: MyDriverCollectionViewCellDelegate {
     
     func didPressSelect(isSelected: Bool, cellIndex: Int) {
+        
         let driverPrice = additionalDrivers[cellIndex].price
         if isSelected {
-            totalPrice += driverPrice
+            if isEditReservation {
+                showAlertSelecteDriver()
+            } else {
+                totalPrice += driverPrice
+            }
+            
         } else {
-            totalPrice -= driverPrice
+            if isEditReservation {
+                mConfirmV.enableView()
+            } else {
+                totalPrice -= driverPrice
+            }
         }
         mPriceLb.text = String(totalPrice)
         additionalDrivers[cellIndex].isSelected = isSelected

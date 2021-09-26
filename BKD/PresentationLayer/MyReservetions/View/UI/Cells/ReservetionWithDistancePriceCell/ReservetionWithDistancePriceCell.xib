@@ -329,10 +329,10 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wcz-ER-Tre">
-                                        <rect key="frame" x="12" y="224.5" width="182.5" height="32"/>
+                                        <rect key="frame" x="12" y="224.5" width="183" height="32"/>
                                         <color key="backgroundColor" name="menu"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
-                                        <state key="normal" title="Pay distance price">
+                                        <state key="normal" title="Pay Distance Price">
                                             <color key="titleColor" name="selected_filter_field"/>
                                         </state>
                                     </button>
@@ -342,9 +342,9 @@
                                     <constraint firstItem="wcz-ER-Tre" firstAttribute="centerY" secondItem="kbB-uu-N3I" secondAttribute="centerY" multiplier="1.81" id="0j3-cI-EvH"/>
                                     <constraint firstItem="rsM-r0-shv" firstAttribute="height" secondItem="kbB-uu-N3I" secondAttribute="height" multiplier="0.195" id="0vP-7r-aGA"/>
                                     <constraint firstAttribute="trailing" secondItem="EAc-gX-HYE" secondAttribute="trailing" id="7ch-Zx-lRe"/>
-                                    <constraint firstItem="wcz-ER-Tre" firstAttribute="width" secondItem="kbB-uu-N3I" secondAttribute="width" multiplier="0.479058" id="ElA-9Q-NQw"/>
+                                    <constraint firstItem="wcz-ER-Tre" firstAttribute="width" relation="greaterThanOrEqual" secondItem="kbB-uu-N3I" secondAttribute="width" multiplier="0.479058" id="ElA-9Q-NQw"/>
                                     <constraint firstItem="wcz-ER-Tre" firstAttribute="height" secondItem="kbB-uu-N3I" secondAttribute="height" multiplier="0.121" id="Hwt-zw-cCx"/>
-                                    <constraint firstItem="wcz-ER-Tre" firstAttribute="centerX" secondItem="kbB-uu-N3I" secondAttribute="centerX" multiplier="0.54" id="J3R-zR-3UA"/>
+                                    <constraint firstItem="wcz-ER-Tre" firstAttribute="leading" secondItem="kbB-uu-N3I" secondAttribute="centerX" multiplier="0.063" id="J3R-zR-3UA"/>
                                     <constraint firstItem="IUK-mr-HdB" firstAttribute="height" secondItem="kbB-uu-N3I" secondAttribute="height" multiplier="0.21" id="JLx-9r-fbW"/>
                                     <constraint firstItem="rsM-r0-shv" firstAttribute="leading" secondItem="kbB-uu-N3I" secondAttribute="leading" id="KJB-sw-xeM"/>
                                     <constraint firstItem="EAc-gX-HYE" firstAttribute="centerY" secondItem="kbB-uu-N3I" secondAttribute="centerY" multiplier="1.17" id="RCJ-zq-obo"/>

@@ -206,8 +206,8 @@ class BKDAlert: NSObject {
         didHandleOkAction = okAction
         
         backgroundView.frame = targetView.bounds
-        backgroundView.backgroundColor = .black
         backgroundView.alpha = Constants.backgroundAlpaTo
+        backgroundView.contentView.setGradient(startColor: .white, endColor: color_navigationBar!)
         targetView.addSubview(backgroundView)
         
         //Aert
@@ -298,7 +298,6 @@ class BKDAlert: NSObject {
         backgroundView.frame = targetView.bounds
         backgroundView.contentView.alpha = 0.95
         backgroundView.contentView.setGradient(startColor: .white, endColor: color_navigationBar!)
-       // backgroundView.backgroundColor = .black
         backgroundView.alpha = Constants.backgroundAlpaTo
         targetView.addSubview(backgroundView)
         
@@ -316,6 +315,8 @@ class BKDAlert: NSObject {
         let titleX: CGFloat = 20
         let titleTop: CGFloat = 11
         let buttonHeight: CGFloat = 44
+        let titleSpacep: CGFloat = 10
+        let alertSpaces: CGFloat = titleSpacep*2
         var messageLabelHeight: CGFloat = 0
         
         let messageLabel = UILabel()
@@ -324,7 +325,7 @@ class BKDAlert: NSObject {
         if let _ = message {
             messageLabelHeight = messageLabel.requiredHeight(labelText: message!,
                                                                  width: titleWidth,
-                                                                 font: font_unselected_filter!)
+                                                                 font: font_category_name!)
             messageLabel.frame = CGRect(x: titleX, y: titleTop, width: titleWidth , height: messageLabelHeight)
             messageLabel.textColor = color_alert_txt
             messageLabel.text = message
@@ -333,9 +334,7 @@ class BKDAlert: NSObject {
             alertView.addSubview(messageLabel)
         }
             
-        
-        
-        var buttonY:CGFloat = messageLabel.frame.origin.y + messageLabel.frame.size.height + titleTop
+        let  buttonY:CGFloat = messageLabel.frame.origin.y + messageLabel.frame.size.height + titleTop
         let buttonCancel:UIButton? =  UIButton(type: .system)
         // buttons
         if let cancelTitle = cancelTitle {
@@ -379,7 +378,7 @@ class BKDAlert: NSObject {
                                      height: buttonHeight)
             buttonOk!.setTitle(okTitle, for: .normal)
             buttonOk!.setTitleColor(color_btn_alert, for: .normal)
-            buttonOk!.titleLabel?.font = font_category_name
+            buttonOk!.titleLabel?.font = font_alert_agree
             buttonOk!.addBorderBySide(sides: [.top], color: color_btn_border!, width: 1)
                         
             if #available(iOS 14.0, *) {
@@ -400,7 +399,7 @@ class BKDAlert: NSObject {
         alertView.frame = CGRect(x: targetView.frame.size.width/2 - alertView.frame.size.width/2,
                                  y: targetView.frame.size.height * 0.2,
                                  width: alertView.frame.size.width,
-                                 height: messageLabelHeight +  buttonHeight)
+                                 height: messageLabelHeight +  buttonHeight + alertSpaces)
        
         targetView.addSubview(alertView)
         alertView.addSubview(buttonOk!)

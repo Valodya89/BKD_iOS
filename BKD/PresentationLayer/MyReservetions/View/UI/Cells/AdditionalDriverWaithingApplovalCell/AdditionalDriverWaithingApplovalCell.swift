@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AdditionalDriverWaithingApplovalCell: UICollectionViewCell {
+class AdditionalDriverWaithingApplovalCell: UICollectionViewCell, UITableViewDelegate, UITableViewDataSource {
     static let identifier = "AdditionalDriverWaithingApplovalCell"
     static func nib() -> UINib {
         return UINib(nibName: identifier, bundle: nil)
@@ -34,6 +34,7 @@ class AdditionalDriverWaithingApplovalCell: UICollectionViewCell {
     @IBOutlet weak var mWaithingApprovalLb: UILabel!
     @IBOutlet weak var mShadowContentV: UIView!
     @IBOutlet weak var mAdditionalDriverTableV: UITableView!
+    @IBOutlet weak var mAdditionalDriverTableHeight: NSLayoutConstraint!
     
     var drivers:[MyDriversModel]? = nil
 
@@ -46,7 +47,10 @@ class AdditionalDriverWaithingApplovalCell: UICollectionViewCell {
         
         mShadowContentV.layer.cornerRadius = 16
         mShadowContentV.setShadow(color: color_shadow!)
+        mAdditionalDriverTableV.delegate = self
+        mAdditionalDriverTableV.dataSource = self
         mAdditionalDriverTableV.register(AdditionalDriverForWaithingApprovalCell.nib(), forCellReuseIdentifier: AdditionalDriverForWaithingApprovalCell.identifier)
+       //
         
     }
 
@@ -56,16 +60,15 @@ class AdditionalDriverWaithingApplovalCell: UICollectionViewCell {
         
     }
     
+    /// Set cell information
     func  setCellInfo() {
-        
+        mAdditionalDriverTableV.reloadData()
+        mAdditionalDriverTableHeight.constant = mAdditionalDriverTableV.contentSize.height
     }
 
- 
-}
-
-
-extension AdditionalDriverWaithingApplovalCell: UITableViewDelegate, UITableViewDataSource {
-    
+  
+    //MARK: -- UITableViewDelegate, UITableViewDataSource
+    //MARK: ----------------------------------------------
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return drivers?.count ?? 0
     }
@@ -73,7 +76,13 @@ extension AdditionalDriverWaithingApplovalCell: UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AdditionalDriverForWaithingApprovalCell.identifier, for: indexPath) as! AdditionalDriverForWaithingApprovalCell
-                
+        guard let drivers = drivers else {
+            return cell
+        }
+        cell.setCellInfo(item: drivers[indexPath.row])
         return cell
     }
+ 
 }
+
+

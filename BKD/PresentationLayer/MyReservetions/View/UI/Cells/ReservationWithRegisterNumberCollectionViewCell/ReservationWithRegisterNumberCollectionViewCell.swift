@@ -43,7 +43,6 @@ class ReservationWithRegisterNumberCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mReservedPayedLb: UILabel!
     @IBOutlet weak var mPriceLb: UILabel!
     @IBOutlet weak var mViaOfficeTerminalLb: UILabel!
-    @IBOutlet weak var mReservedPayedTop: NSLayoutConstraint!
     
     /// start ride
     @IBOutlet weak var mStartRideBtn: UIButton!
@@ -64,11 +63,9 @@ class ReservationWithRegisterNumberCollectionViewCell: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
-      //  mReservedPayedTop.constant = 0
         mPriceLb.text = "XX,X"
        // mRegistrationNumberLb.text = ""
         mStartRideBtn.setTitleColor(color_email!, for: .normal)
-        mStartRideBtn.isEnabled = false
         
     }
     
@@ -83,12 +80,8 @@ class ReservationWithRegisterNumberCollectionViewCell: UICollectionViewCell {
         mStartRideBtn.tag = index
         mStartRideBtn.addTarget(self, action: #selector(startRide(sender:)), for: .touchUpInside)
         
-        mStartRideBtn.isEnabled = item.isActiveStartRide
         mRegistrationNumberContentV.isHidden = !item.isRegisterNumber
 
-        if !item.isRegisterNumber {
-          //  mReservedPayedTop.constant = -mRegistrationNumberContentV.frame.size.height
-        }
         if item.isActiveStartRide {
             mStartRideBtn.setTitleColor(color_navigationBar, for: .normal)
         }

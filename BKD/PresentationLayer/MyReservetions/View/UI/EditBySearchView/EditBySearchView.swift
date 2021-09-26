@@ -13,6 +13,7 @@ protocol EditBySearchViewDelegate: AnyObject {
     func didSelectLocation (_ text:String, _ tag:Int)
     func didSelectCustomLocation(_ btn:UIButton)
     func didDeselectCustomLocation(tag: Int)
+    func editReservation(isEdited: Bool)
 }
 class EditBySearchView: UIView, UITextFieldDelegate {
     
@@ -67,6 +68,48 @@ class EditBySearchView: UIView, UITextFieldDelegate {
     weak var delegate: EditBySearchViewDelegate?
     
     
+    var returnDate: Date? {
+        didSet {
+            if !(returnDate?.isSameDates(date: oldValue))! {
+                delegate?.editReservation(isEdited: true)
+            }
+        }
+    }
+   
+    var returnTime: Date? {
+        didSet {
+            if  returnTime?.time != oldValue?.time {
+                delegate?.editReservation(isEdited: true)
+            }
+        }
+    }
+ 
+    
+    var pickUpLocation: String? {
+        didSet {
+            if pickUpLocation != oldValue &&
+                oldValue != nil {
+                delegate?.editReservation(isEdited: true)
+            } else if oldValue == nil {
+                delegate?.editReservation(isEdited: false)
+            }
+        }
+    }
+    
+    var returnLocation: String? {
+        didSet {
+            if returnLocation != oldValue &&
+                oldValue != nil {
+                delegate?.editReservation(isEdited: true)
+            } else if oldValue == nil {
+                delegate?.editReservation(isEdited: false)
+
+            }
+        }
+    }
+    
+    
+    //MARK: --Life ciclñe
     override func awakeFromNib() {
         super.awakeFromNib()
         setUpView()
@@ -110,7 +153,7 @@ class EditBySearchView: UIView, UITextFieldDelegate {
         mReturnTimeTxtFl.addBorder(color: color_navigationBar!, width: 1.0)
         mReturnDateTxtFl.addBorder(color: color_navigationBar!, width: 1.0)
         
-        //            mPickUpLocationBtn.addBorder(color: color_navigationBar!, width: 1.0)
+        mPickUpLocationBtn.addBorder(color: color_navigationBar!, width: 1.0)
         mReturnLocationBtn.addBorder(color: color_navigationBar!, width: 1.0)
     }
     
@@ -162,6 +205,20 @@ class EditBySearchView: UIView, UITextFieldDelegate {
         }
     }
     
+    ///Passive pickUp locations
+    public func passivePickUpLocations() {
+        //Location
+        mPickUpLocationBtn.isEnabled = false
+        mPickUpCustomLocationBtn.isEnabled = false
+        mCheckBoxPickUpCustomLocBtn.isEnabled = false
+
+        mPickUpLocationBtn.setTitleColor(color_search_passive!, for: .normal)
+        mPickUpLocationBtn.addBorder(color: color_search_passive!, width: 1.0)
+        mPickUpTimeDropImgV.setTintColor(color: color_search_passive!)
+        mPickUpCustomLocationBtn.setTitleColor(color_search_passive!, for: .normal)
+        mCheckBoxPickUpCustomLocBtn.setTitleColor(color_search_passive!, for: .normal)
+    }
+    
     ///configure search passive fields
     func configureSearchPassiveFields() {
         mPickUpTimeTxtFl.addBorder(color: color_search_passive!, width: 1.0)
@@ -178,16 +235,6 @@ class EditBySearchView: UIView, UITextFieldDelegate {
         mPickUpDataTxtFl.isUserInteractionEnabled = false
         mPickUpTimeTxtFl.isUserInteractionEnabled = false
         
-        //Location
-        mPickUpLocationBtn.isEnabled = false
-        mPickUpCustomLocationBtn.isEnabled = false
-        mCheckBoxPickUpCustomLocBtn.isEnabled = false
-
-        mPickUpLocationBtn.setTitleColor(color_search_passive!, for: .normal)
-        mPickUpLocationBtn.addBorder(color: color_search_passive!, width: 1.0)
-        mPickUpTimeDropImgV.setTintColor(color: color_search_passive!)
-        mPickUpCustomLocationBtn.setTitleColor(color_search_passive!, for: .normal)
-        mCheckBoxPickUpCustomLocBtn.setTitleColor(color_search_passive!, for: .normal)
     }
     
     func configureDelegate() {

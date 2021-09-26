@@ -315,13 +315,13 @@ struct PaymentTypeData {
 //MARK: - ReservationWithReservedPaidModel
 
 struct ReservationWithReservedPaidData {
-    static let reservationWithReservedPaidModel:[ReservationWithReservedPaidModel] = [ReservationWithReservedPaidModel(isActiveStartRide: true, isRegisterNumber: false, myReservationState: MyReservationState.startRide),
-        ReservationWithReservedPaidModel(isActiveStartRide: false, isRegisterNumber: true, myReservationState: MyReservationState.startRide),
+    static let reservationWithReservedPaidModel:[ReservationWithReservedPaidModel] = [ReservationWithReservedPaidModel(isActiveStartRide: false, isRegisterNumber: false, myReservationState: MyReservationState.startRide),
         ReservationWithReservedPaidModel(isActiveStartRide: true, isRegisterNumber: true, myReservationState: MyReservationState.startRide),
        ReservationWithReservedPaidModel(isActiveStartRide: false, isRegisterNumber: false, myReservationState: MyReservationState.payDistancePrice),
         ReservationWithReservedPaidModel(isActiveStartRide: false, isRegisterNumber: false, myReservationState: MyReservationState.maykePayment),
         ReservationWithReservedPaidModel(isActiveStartRide: false, isRegisterNumber: false, myReservationState: MyReservationState.payRentalPrice),
-         ReservationWithReservedPaidModel(isActiveStartRide: false, isRegisterNumber: false, myReservationState: MyReservationState.stopRide)
+         ReservationWithReservedPaidModel(isActiveStartRide: false, isRegisterNumber: false, myReservationState: MyReservationState.stopRide),
+       ReservationWithReservedPaidModel(isActiveStartRide: false, isRegisterNumber: false, myReservationState: MyReservationState.driverWaithingApproval)
     ]
 }
 

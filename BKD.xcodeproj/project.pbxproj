@@ -75,6 +75,9 @@
 		564E137A26531F8F008CE884 /* Mulish-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 564E137926531F71008CE884 /* Mulish-SemiBold.ttf */; };
 		564E13A726535D98008CE884 /* SeeMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E13A626535D97008CE884 /* SeeMapViewController.swift */; };
 		564E944826AF8BFA00291164 /* ApplicationSttings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E944626AF8BFA00291164 /* ApplicationSttings.swift */; };
+		564ED63D270052F900FA9714 /* EditReservetionAdvancedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564ED63B270052F900FA9714 /* EditReservetionAdvancedViewController.swift */; };
+		564ED63E270052F900FA9714 /* EditReservetionAdvanced.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 564ED63C270052F900FA9714 /* EditReservetionAdvanced.storyboard */; };
+		564ED6402700652300FA9714 /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564ED63F2700652300FA9714 /* ConfirmView.swift */; };
 		56533ECF2678B94D0012BF4A /* MoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56533ECE2678B94D0012BF4A /* MoreModel.swift */; };
 		56533ED62678BF3A0012BF4A /* BkdAdvantagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56533ED42678BF3A0012BF4A /* BkdAdvantagesTableViewCell.swift */; };
 		56533ED72678BF3A0012BF4A /* BkdAdvantagesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56533ED52678BF3A0012BF4A /* BkdAdvantagesTableViewCell.xib */; };
@@ -392,6 +395,9 @@
 		564E137926531F71008CE884 /* Mulish-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mulish-SemiBold.ttf"; sourceTree = "<group>"; };
 		564E13A626535D97008CE884 /* SeeMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMapViewController.swift; sourceTree = "<group>"; };
 		564E944626AF8BFA00291164 /* ApplicationSttings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationSttings.swift; sourceTree = "<group>"; };
+		564ED63B270052F900FA9714 /* EditReservetionAdvancedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditReservetionAdvancedViewController.swift; sourceTree = "<group>"; };
+		564ED63C270052F900FA9714 /* EditReservetionAdvanced.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EditReservetionAdvanced.storyboard; sourceTree = "<group>"; };
+		564ED63F2700652300FA9714 /* ConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
 		56533ECE2678B94D0012BF4A /* MoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreModel.swift; sourceTree = "<group>"; };
 		56533ED42678BF3A0012BF4A /* BkdAdvantagesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BkdAdvantagesTableViewCell.swift; sourceTree = "<group>"; };
 		56533ED52678BF3A0012BF4A /* BkdAdvantagesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BkdAdvantagesTableViewCell.xib; sourceTree = "<group>"; };
@@ -778,6 +784,7 @@
 			children = (
 				56188888264A61ED00BDDB33 /* TextField.swift */,
 				564E12FD264EAF04008CE884 /* PaddingUILable.swift */,
+				564ED63F2700652300FA9714 /* ConfirmView.swift */,
 			);
 			path = Customs;
 			sourceTree = "<group>";
@@ -998,6 +1005,15 @@
 				564E944626AF8BFA00291164 /* ApplicationSttings.swift */,
 			);
 			path = AccountSettings;
+			sourceTree = "<group>";
+		};
+		564ED63A270052F900FA9714 /* EditReservetionAdvancedViewController */ = {
+			isa = PBXGroup;
+			children = (
+				564ED63B270052F900FA9714 /* EditReservetionAdvancedViewController.swift */,
+				564ED63C270052F900FA9714 /* EditReservetionAdvanced.storyboard */,
+			);
+			path = EditReservetionAdvancedViewController;
 			sourceTree = "<group>";
 		};
 		56533ED32678BEF20012BF4A /* BkdAdvantagesTableViewCell */ = {
@@ -1649,6 +1665,7 @@
 		565F9B0126C8ADC100064AD4 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				564ED63A270052F900FA9714 /* EditReservetionAdvancedViewController */,
 				5660E61A26FE0BC4009BB73F /* OnRideTableView */,
 				5692658426F3B15600004E81 /* EditBySearchView */,
 				56ADD80B26F2C62200C0ECC3 /* EditReservationViewController */,
@@ -2668,7 +2685,7 @@
 				568E6F4C2642FC4B000CB6A9 /* Resources */,
 				565F8C65268D390600E21C71 /* Embed Frameworks */,
 				995B321BDC49670283C49A78 /* [CP] Embed Pods Frameworks */,
-				D2ABCF87262983EC3FAB7FCA /* [CP] Copy Pods Resources */,
+				8FBFFE3E8FFEA4240B0E0919 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2747,6 +2764,7 @@
 				565F80D826A7042100ADB9FE /* Payment.storyboard in Resources */,
 				565F80CA26A6690B00ADB9FE /* ReservationCompleted.storyboard in Resources */,
 				568E70CB26455286000CB6A9 /* MainCollectionViewCell.xib in Resources */,
+				564ED63E270052F900FA9714 /* EditReservetionAdvanced.storyboard in Resources */,
 				56573202267339B50012ADD0 /* FontsFree-Net-SFProDisplay-Medium.ttf in Resources */,
 				56ADD81326F2CED400C0ECC3 /* ReservationHistoryCell.xib in Resources */,
 				5656324726585FFF00B78562 /* CarEquipmentCollectionViewCell.xib in Resources */,
@@ -2832,6 +2850,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		8FBFFE3E8FFEA4240B0E0919 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		995B321BDC49670283C49A78 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2847,23 +2882,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D2ABCF87262983EC3FAB7FCA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2922,6 +2940,7 @@
 				5640952D264AE529001DC92D /* DropDownModel.swift in Sources */,
 				562585DB26F175CB00EC9284 /* RegisterNumberUITableView.swift in Sources */,
 				566B37BD2697A6D40021BCAA /* TakePhotoTableViewCell.swift in Sources */,
+				564ED63D270052F900FA9714 /* EditReservetionAdvancedViewController.swift in Sources */,
 				5691A5FC265C28860008081D /* AddressNameViewController.swift in Sources */,
 				56ADD80D26F2C65800C0ECC3 /* EditReservationViewController.swift in Sources */,
 				56B9F2ED26806488003449AD /* SearchResultModelView.swift in Sources */,
@@ -2949,6 +2968,7 @@
 				564E12FE264EAF04008CE884 /* PaddingUILable.swift in Sources */,
 				56CC7D8126A9FED1006DB7B8 /* BancontactView.swift in Sources */,
 				565BFD87269F55550044D081 /* URLBuilderProtocol.swift in Sources */,
+				564ED6402700652300FA9714 /* ConfirmView.swift in Sources */,
 				565BFD86269F55550044D081 /* SessionProtocol.swift in Sources */,
 				566B7E8A269DC036007C9241 /* VerificationCodeViewController.swift in Sources */,
 				56AD18EA2691622C006A53C1 /* NewPasswordViewController.swift in Sources */,

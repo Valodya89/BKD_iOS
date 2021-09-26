@@ -312,5 +312,15 @@ extension UIView {
         }
     
     
+   //MARK: -- Enable and Disable view
+    //MARK: -------------------------
+    func enableView() {
+        self.isUserInteractionEnabled = true
+        self.alpha = 1
+    }
    
+    func disableView() {
+        self.isUserInteractionEnabled = false
+        self.alpha = 0.8
+    }
 }

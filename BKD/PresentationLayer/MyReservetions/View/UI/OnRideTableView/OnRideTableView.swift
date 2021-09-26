@@ -11,6 +11,7 @@ class OnRideTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
     var didPressAddDamage:(()->Void)?
     var didPressSwitchDriver:(()->Void)?
+    var didPressMap:(()->Void)?
 
     var onRideArr:[OnRideModel]? = nil
     
@@ -39,6 +40,9 @@ class OnRideTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
         }
         cell.didPressSwitchDriver = {
             self.didPressSwitchDriver?()
+        }
+        cell.didPressMap = {
+            self.didPressMap?()
         }
         
         return cell

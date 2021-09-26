@@ -38,52 +38,52 @@ class AddDamageViewController: UIViewController, StoryboardInitializable {
         mContactBkdBtn.setBorder(color: color_menu!, width: 1.0)
         mContactInsuranceBtn.setBorder(color: color_menu!, width: 1.0)
         mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
-
-        handlerActionSheet()
         
     }
     
-    ///Show ActionSheet of contact
-    func showContactActionSheet(phone: String) {
-        
-        mContactActionSheet.mPhoneNumberBtn.setTitle(phone, for: .normal)
-        mVisualEffectV.isHidden = false
-        UIView.animate(withDuration: 0.5) {
-            self.mActionSheetBottom.constant = 0
-            self.view.layoutIfNeeded()
-        }
-    }
+//    ///Show ActionSheet of contact
+//    func showContactActionSheet(phone: String) {
+//
+//        mContactActionSheet.mPhoneNumberBtn.setTitle(phone, for: .normal)
+//        mVisualEffectV.isHidden = false
+//        UIView.animate(withDuration: 0.5) {
+//            self.mActionSheetBottom.constant = 0
+//            self.view.layoutIfNeeded()
+//        }
+//    }
     
-    ///Hide Contact ActionSheet
-    func hideContactActionSheet() {
-        UIView.animate(withDuration: 0.5) {
-            self.mActionSheetBottom.constant = -200
-            self.view.layoutIfNeeded()
-
-        } completion: { _ in
-            self.mContactBkdBtn.backgroundColor = .clear
-            self.mContactInsuranceBtn.backgroundColor = .clear
-            self.mVisualEffectV.isHidden = true
-        }
-    }
+//    ///Hide Contact ActionSheet
+//    func hideContactActionSheet() {
+//        UIView.animate(withDuration: 0.5) {
+//            self.mActionSheetBottom.constant = -200
+//            self.view.layoutIfNeeded()
+//
+//        } completion: { _ in
+//            self.mContactBkdBtn.backgroundColor = .clear
+//            self.mContactInsuranceBtn.backgroundColor = .clear
+//            self.mVisualEffectV.isHidden = true
+//        }
+//    }
     
     //Call by phone number
     func phoneClick(phone: String) {
         
-        if let callUrl = URL(string: "tel://\("+(56)975270693")"), UIApplication.shared.canOpenURL(callUrl) {
+        if let callUrl = URL(string: "tel://\(phone)"), UIApplication.shared.canOpenURL(callUrl) {
                     UIApplication.shared.open(callUrl)
         }
     }
 
    //MARK: -- Actions
     @IBAction func contactInsuance(_ sender: UIButton) {
-        sender.backgroundColor = color_menu!
-        showContactActionSheet(phone: phoneInsuance)
+        sender.setClickColor(color_menu!, titleColor: sender.titleColor(for: .normal)!)
+        phoneClick(phone: "+(56)975270693")
+       // showContactActionSheet(phone: phoneInsuance)
     }
     
     @IBAction func contactBKD(_ sender: UIButton) {
-        sender.backgroundColor = color_menu!
-        showContactActionSheet(phone: phoneBkd)
+        sender.setClickColor(color_menu!, titleColor: sender.titleColor(for: .normal)!)
+        phoneClick(phone: "+(56)975277792")
+       // showContactActionSheet(phone: phoneBkd)
     }
     
     
@@ -95,14 +95,14 @@ class AddDamageViewController: UIViewController, StoryboardInitializable {
         navigationController?.popViewController(animated: true)
     }
     
-    /// Handler custom actionSheet actions
-    func handlerActionSheet() {
-        mContactActionSheet.callByNumber = { phone in
-            self.phoneClick(phone: phone)
-        }
-        
-        mContactActionSheet.cancel = {
-            self.hideContactActionSheet()
-        }
-    }
+//    /// Handler custom actionSheet actions
+//    func handlerActionSheet() {
+//        mContactActionSheet.callByNumber = { phone in
+//            self.phoneClick(phone: phone)
+//        }
+//
+//        mContactActionSheet.cancel = {
+//            self.hideContactActionSheet()
+//        }
+//    }
 }

@@ -21,11 +21,14 @@ class MyReservationsViewController: BaseViewController {
     //MARK -- Variables
     var menu: SideMenuNavigationController?
     var isReservationHistory: Bool = false
+    var drivers:[MyDriversModel]? = MyDriversData.myDriversModel
+
 
     //MARK: -- Life cicle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,35 +51,21 @@ class MyReservationsViewController: BaseViewController {
         self.mReservCollectionV.register(ReservetionWithPayRentalPriceCell.nib(), forCellWithReuseIdentifier: ReservetionWithPayRentalPriceCell.identifier)
         self.mReservCollectionV.register(ReservetionMakePaymentCell.nib(), forCellWithReuseIdentifier: ReservetionMakePaymentCell.identifier)
         self.mReservCollectionV.register(OnRideCollectionViewCell.nib(), forCellWithReuseIdentifier: OnRideCollectionViewCell.identifier)
-        
-        
+        self.mReservCollectionV.register(AdditionalDriverWaithingApplovalCell.nib(), forCellWithReuseIdentifier: AdditionalDriverWaithingApplovalCell.identifier)
         
         self.mReservCollectionV.register(ReservationHistoryCell.nib(), forCellWithReuseIdentifier: ReservationHistoryCell.identifier)
     }
     
-    ///Go to PayLater ViewController
-    func goToPayLater() {
-        let payLaterVC = PayLaterViewController.initFromStoryboard(name: Constant.Storyboards.payLater)
-        self.navigationController?.pushViewController(payLaterVC, animated: true)
+   
+    
+    ///Open agree Screen
+    private func goToAgreement() {
+        
+        let bkdAgreementVC = UIStoryboard(name: Constant.Storyboards.registrationBot, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.bkdAgreement) as! BkdAgreementViewController
+        bkdAgreementVC.isMyReservationCell = true
+        self.navigationController?.pushViewController(bkdAgreementVC, animated: true)
     }
     
-    ///Go to SelectPayment ViewController
-    func goToSelectPayment() {
-        let selectPaymentVC = SelectPaymentViewController.initFromStoryboard(name: Constant.Storyboards.payment)
-        self.navigationController?.pushViewController(selectPaymentVC, animated: true)
-    }
-    
-    ///Go to VehicleCheck ViewController
-    func goToVehicleCheck() {
-        let vehicleCheckVC = VehicleCheckViewController.initFromStoryboard(name: Constant.Storyboards.vehicleCheck)
-        self.navigationController?.pushViewController(vehicleCheckVC, animated: true)
-    }
-    
-    ///Go to Add damage ViewController
-    func goToAddDamage() {
-        let addDamageVC = AddDamageViewController.initFromStoryboard(name: Constant.Storyboards.addDamage)
-        self.navigationController?.pushViewController(addDamageVC, animated: true)
-    }
     
     ///Go to my reservation ViewController
     func goToMyReservation(myReservationState: MyReservationState,
@@ -94,14 +83,20 @@ class MyReservationsViewController: BaseViewController {
     
     ///Show alert for switch driver
     private func showAlertForSwitchDriver() {
-        BKDAlert().showAlert(on: self, title: String(format: Constant.Texts.confirmSwitchDriver, "Name Surname") ,
-                             message: nil,
-                             messageSecond: nil,
+        BKDAlert().showAlert(on: self,
+                             message: String(format: Constant.Texts.confirmSwitchDriver, "Name Surname"),
                              cancelTitle: Constant.Texts.cancel,
-                             okTitle: Constant.Texts.confirm, cancelAction: nil) {
+                             okTitle: Constant.Texts.confirm,
+                             cancelAction: nil) {
             
         }
+    }
         
+        ///Show alert for inactive start ride
+        private func showAlertForInactiveStartRide() {
+            BKDAlert().showAlert(on: self, message: Constant.Texts.activeStartRide, cancelTitle: nil, okTitle: Constant.Texts.gotIt, cancelAction: nil) {
+                
+            }
     }
     
     
@@ -150,6 +145,8 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
                 return payRentalPriceCell(item: item, indexPath: indexPath)
             case .stopRide:
                 return stopRideCell(item: item, indexPath: indexPath)
+            case .driverWaithingApproval:
+                return driverWaithingApprovalCell(indexPath: indexPath)
             }
         }
     }
@@ -187,6 +184,8 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
                 let cell: OnRideCollectionViewCell = mReservCollectionV.cellForItem(at: indexPath) as! OnRideCollectionViewCell
                let onRideModel = cell.getOnRideModel()
                 onRideArr = [onRideModel]
+            case .driverWaithingApproval:
+                break
             }
             
             var paymentArr:[PaymentStatusModel]?
@@ -234,6 +233,13 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         case .stopRide:
             return CGSize(width: collectionView.bounds.width,
                           height: height405)
+        case .driverWaithingApproval:
+            var driversCellHight = height48
+            if drivers?.count ?? 0 > 1 {
+                driversCellHight *= drivers!.count
+            }
+            return CGSize(width: collectionView.bounds.width,
+                          height: 230.0 + CGFloat(driversCellHight))
         }
     }
     
@@ -243,8 +249,8 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         let cell = mReservCollectionV.dequeueReusableCell(withReuseIdentifier: ReservationWithStartRideCollectionViewCell.identifier, for: indexPath) as!  ReservationWithStartRideCollectionViewCell
         
         cell.setInfoCell(item: item, index: indexPath.item)
-        cell.pressStartRide = {
-            self.goToVehicleCheck()
+        cell.pressInactiveStartRide = {
+            self.showAlertForInactiveStartRide()
         }
         return cell
     }
@@ -263,6 +269,9 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         }
         cell.pressedSwitchDriver = {
             self.showAlertForSwitchDriver()
+        }
+        cell.pressedSeeMap = {
+            self.goToSeeMap(parking: nil)
         }
         return cell
     }
@@ -299,7 +308,7 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         cell.setCellInfo(item: item, index: indexPath.item)
         
         cell.payDistancePrice = {
-            self.goToSelectPayment()
+            self.goToAgreement()
         }
         return cell
     }
@@ -311,9 +320,18 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         
         cell.setInfoCell(item: item, index: indexPath.item)
         cell.payRentalPrice = {
-            self.goToSelectPayment()
+            self.goToAgreement()
         }
         return cell
     }
     
+    
+    ///Driver Waithing Approval  UICollectionViewCell
+    private func driverWaithingApprovalCell(indexPath: IndexPath) -> AdditionalDriverWaithingApplovalCell {
+        
+        let cell = mReservCollectionV.dequeueReusableCell(withReuseIdentifier: AdditionalDriverWaithingApplovalCell.identifier, for: indexPath) as!  AdditionalDriverWaithingApplovalCell
+        cell.drivers = drivers
+        cell.setCellInfo()
+        return cell
+    }
 }

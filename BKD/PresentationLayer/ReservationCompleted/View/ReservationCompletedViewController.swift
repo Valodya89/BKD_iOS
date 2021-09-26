@@ -14,7 +14,7 @@ enum PaymentOption {
 
 import UIKit
 
-class ReservationCompletedViewController: UIViewController, StoryboardInitializable {
+class ReservationCompletedViewController: BaseViewController {
     
     //MARK: - Outlets
 
@@ -110,11 +110,6 @@ class ReservationCompletedViewController: UIViewController, StoryboardInitializa
         }
     }
     
-    //Open SelectPayment screen
-     func goToSelectPayment() {
-        let selectPaymentVC = SelectPaymentViewController.initFromStoryboard(name: Constant.Storyboards.payment)
-        self.navigationController?.pushViewController(selectPaymentVC, animated: true)
-    }
     
    //MARK: - Actions
     //MARK: ---------------

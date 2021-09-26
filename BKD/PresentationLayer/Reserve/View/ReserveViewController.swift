@@ -16,13 +16,6 @@ class ReserveViewController: UIViewController {
     @IBOutlet weak var mTowBarBtn: UIButton!
     @IBOutlet weak var mCarImgV: UIImageView!
     @IBOutlet weak var mCarImgBckgV: UIView!
-//    @IBOutlet weak var mCarAnimationV: UIView!
-//
-//    @IBOutlet weak var mCarHeight: NSLayoutConstraint!
-//    @IBOutlet weak var mCarWidth: NSLayoutConstraint!
-//    @IBOutlet weak var mCarCenterX: NSLayoutConstraint!
-//    @IBOutlet weak var mCarCenterY: NSLayoutConstraint!
-    
     
     @IBOutlet weak var mCarMarkBckgV: UIView!
     @IBOutlet weak var mFiatImgV: UIImageView!
@@ -196,19 +189,8 @@ class ReserveViewController: UIViewController {
     private func checkPhoneNumberVerification() -> Bool {
         return false
     }
+
     
-    /// Go to Sign in screen
-    private func goToSignInPage() {
-          let signInVC = SignInViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
-        self.navigationController?.pushViewController(signInVC, animated: true)
-        self.tabBarController?.tabBar.isHidden = false
-    }
-    
-    /// Go to reservation completed screen
-    private func goToResrvetionCompletedPage() {
-          let signInVC = SignInViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
-        self.navigationController?.pushViewController(signInVC, animated: true)
-    }
     
     private func goToPhoneVerification() {
         let changePhoneNumberVC = ChangePhoneNumberViewController.initFromStoryboard(name: Constant.Storyboards.changePhoneNumber)
@@ -233,53 +215,3 @@ class ReserveViewController: UIViewController {
 }
 
  
-////MARK: - UIScrollViewDelegate
-////MARK: -----------------------------
-//
-//extension ReserveViewController: UIScrollViewDelegate {
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//
-//        if(scrollView.panGestureRecognizer.translation(in: scrollView.superview).y > 0) {
-//                print("up \(mCarHeight.constant)")
-//            if mCarHeight.constant <= 0 {
-//                mCarHeight.constant += 1
-//                mCarWidth.constant += 2.3
-//                mCarCenterX.constant -= 1.5
-//                mCarCenterY.constant += 0.5
-//            }
-//
-//            } else {
-//                print("down \(mCarHeight.constant)")
-//                if mCarHeight.constant >= -100 {
-//                    mCarHeight.constant -= 1
-//                    mCarWidth.constant -= 2.3
-//                    mCarCenterX.constant += 1.5
-//                    mCarCenterY.constant -= 0.5
-//                }
-//           }
-//    }
-//
-//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-//        print("scrollViewDidEndDecelerating")
-//        if(scrollView.panGestureRecognizer.translation(in: scrollView.superview).y > 0) {
-//                print("up \(mCarHeight.constant)")
-//            UIView.animate(withDuration: 0.8) { [self] in
-//                self.mCarHeight.constant = 0
-//                self.mCarWidth.constant = 0
-//                self.mCarCenterX.constant = 0
-//                self.mCarCenterY.constant = 0
-//            }
-//
-//
-//            }
-//        else {
-//                print("down \(mCarHeight.constant)")
-//                UIView.animate(withDuration: 0.8) {
-//                    self.mCarHeight.constant = -100
-//                    self.mCarWidth.constant = -230
-//                    self.mCarCenterX.constant = 150
-//                    self.mCarCenterY.constant = -50
-//                }
-//           }
-//    }
-//}

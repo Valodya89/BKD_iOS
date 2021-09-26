@@ -11,7 +11,7 @@ import UIKit
 protocol AccessoriesUIViewControllerDelegate: AnyObject {
     func addedAccessories(_ isAdd: Bool, totalPrice: Double)
 }
-class AccessoriesUIViewController: UIViewController {
+class AccessoriesUIViewController: BaseViewController {
     
     //MARK: Outlets
     @IBOutlet weak var mAccessoriesCollectionV: UICollectionView!
@@ -21,9 +21,17 @@ class AccessoriesUIViewController: UIViewController {
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
     
+    @IBOutlet weak var mConfirmV: ConfirmView!
+    @IBOutlet weak var mTotalPriceBottom: NSLayoutConstraint!
+    
+    //MARK: -- VAriables
+    public var isEditReservation:Bool = false
+
     let accessoriesViewModel = AccessoriesViewModel()
     var totalPrice:Double = 0
     weak var delegate:AccessoriesUIViewControllerDelegate?
+    
+    
     //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +42,18 @@ class AccessoriesUIViewController: UIViewController {
         mRightBarBtn.image = img_bkd
         mTotalPriceBckgV.setShadow(color: color_shadow!)
         configureDelegates()
+        configureViewForEdit()
+        handlerConfirm()
+
     }
     
+    ///Configure view wehn it open for edit
+    func configureViewForEdit() {
+        if isEditReservation {
+            mConfirmV.isHidden = !isEditReservation
+            mTotalPriceBottom.constant = -76
+        }
+    }
   
    ///configure Delegates
     private func configureDelegates() {
@@ -48,6 +66,12 @@ class AccessoriesUIViewController: UIViewController {
         
         self.delegate?.addedAccessories(self.mPriceLb.text == "0.0" ? false : true , totalPrice: totalPrice)
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func handlerConfirm() {
+        mConfirmV.didPressConfirm = {
+            self.goToEditReservationAdvanced()
+        }
     }
 
 }
@@ -100,9 +124,13 @@ extension AccessoriesUIViewController: AccessoriesCollectionViewCellDelegate {
                      isIncrease: Bool) {
         totalPrice = (mPriceLb.text! as NSString).doubleValue
         
-        accessoriesViewModel.getTotalAccesories(accessoryPrice: accessoryPrice, totalPrice: totalPrice, isIncrease: isIncrease) { (totalValue) in
+        accessoriesViewModel.getTotalAccesories(accessoryPrice: accessoryPrice, totalPrice: totalPrice, isIncrease: isIncrease) { [self] (totalValue) in
             self.mPriceLb.text = totalValue
             self.totalPrice = (totalValue as NSString).doubleValue
+            
+            if self.isEditReservation {
+                self.mConfirmV.enableView()
+            }
         }
     }
     

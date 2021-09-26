@@ -267,7 +267,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wcz-ER-Tre">
-                                        <rect key="frame" x="12.5" y="188" width="182.5" height="32"/>
+                                        <rect key="frame" x="12" y="188" width="183" height="32"/>
                                         <color key="backgroundColor" name="menu"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                                         <state key="normal" title="Make Payment">
@@ -278,9 +278,9 @@
                                 <color key="backgroundColor" name="subview_background"/>
                                 <constraints>
                                     <constraint firstItem="rsM-r0-shv" firstAttribute="height" secondItem="kbB-uu-N3I" secondAttribute="height" multiplier="0.23" id="0vP-7r-aGA"/>
-                                    <constraint firstItem="wcz-ER-Tre" firstAttribute="width" secondItem="kbB-uu-N3I" secondAttribute="width" multiplier="0.479058" id="ElA-9Q-NQw"/>
+                                    <constraint firstItem="wcz-ER-Tre" firstAttribute="width" relation="greaterThanOrEqual" secondItem="kbB-uu-N3I" secondAttribute="width" multiplier="0.479058" id="ElA-9Q-NQw"/>
                                     <constraint firstItem="wcz-ER-Tre" firstAttribute="height" secondItem="kbB-uu-N3I" secondAttribute="height" multiplier="0.14" id="Hwt-zw-cCx"/>
-                                    <constraint firstItem="wcz-ER-Tre" firstAttribute="centerX" secondItem="kbB-uu-N3I" secondAttribute="centerX" multiplier="0.543" id="J3R-zR-3UA"/>
+                                    <constraint firstItem="wcz-ER-Tre" firstAttribute="leading" secondItem="kbB-uu-N3I" secondAttribute="centerX" multiplier="0.063" id="J3R-zR-3UA"/>
                                     <constraint firstItem="IUK-mr-HdB" firstAttribute="height" secondItem="kbB-uu-N3I" secondAttribute="height" multiplier="0.247" id="JLx-9r-fbW"/>
                                     <constraint firstItem="rsM-r0-shv" firstAttribute="leading" secondItem="kbB-uu-N3I" secondAttribute="leading" id="KJB-sw-xeM"/>
                                     <constraint firstItem="rsM-r0-shv" firstAttribute="centerY" secondItem="kbB-uu-N3I" secondAttribute="centerY" multiplier="0.23" id="Sod-gK-XnL"/>

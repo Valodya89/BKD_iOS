@@ -12,7 +12,7 @@ protocol EditReservationDelegate: AnyObject {
     func didPressCheckPrice(isEdit: Bool)
     
 }
-class EditReservationViewController: UIViewController, StoryboardInitializable {
+class EditReservationViewController: BaseViewController {
     
     //MARK: -- Outlets
     @IBOutlet weak var mEditBySearchV: EditBySearchView!
@@ -30,15 +30,15 @@ class EditReservationViewController: UIViewController, StoryboardInitializable {
     @IBOutlet weak var mDamageCheckBoxBtn: UIButton!
     
     ///Continue
-    @IBOutlet weak var mContinueContentV: UIView!
-    @IBOutlet weak var mContinueBtn: UIButton!
-    @IBOutlet weak var mContinueleading: NSLayoutConstraint!
+  
+    @IBOutlet weak var mConfirmV: ConfirmView!
+   
     
     
     
     //MARK: -- Viriables
     weak var delegate: EditReservationDelegate?
-    public var isextendReservation: Bool = false
+    public var isExtendReservation: Bool = false
     
     var workingTimes: WorkingTimes?
     var searchModel:SearchModel = SearchModel()
@@ -66,7 +66,7 @@ class EditReservationViewController: UIViewController, StoryboardInitializable {
         mEditBySearchV.delegate = self
         showLocation()
         configureExtendReservation()
-       
+       handlerCinfirm()
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -77,16 +77,15 @@ class EditReservationViewController: UIViewController, StoryboardInitializable {
     ///Configure Extend reservation view
     func configureExtendReservation() {
         
-        mChangePriceContentV.isHidden = !isextendReservation
-        mAdditionalServicestackV.isHidden = isextendReservation
-        mCheckPriceBtn.isHidden = isextendReservation
-        mContinueContentV.isHidden = !isextendReservation
+       // mChangePriceContentV.isHidden = !isExtendReservation
+        mAdditionalServicestackV.isHidden = isExtendReservation
+        mCheckPriceBtn.isHidden = isExtendReservation
+        mConfirmV.isHidden = !isExtendReservation
+        mDamageCheckBoxBtn.setTitle("", for: .normal)
         
-        if isextendReservation {
+        if isExtendReservation {
+            mEditBySearchV.passivePickUpLocations()
             mCheckPriceBtn.setTitle("", for: .normal)
-            mContinueBtn.layer.cornerRadius = 8
-            mContinueBtn.setBorder(color: color_navigationBar!, width: 1.0)
-            mContinueContentV.layer.cornerRadius = 8
         }
     }
     
@@ -120,10 +119,12 @@ class EditReservationViewController: UIViewController, StoryboardInitializable {
             showSelectedDate(dayBtn: mEditBySearchV!.mDayReturnDateBtn,
                              monthBtn: mEditBySearchV!.mMonthReturnDateBtn, timeStr: nil)
             searchModel.returnDate = datePicker.date
+            mEditBySearchV.returnDate = datePicker.date
         case .returnTime :
             let timeStr = pickerList![ pickerV.selectedRow(inComponent: 0)]
             chanckReservationTime(timeStr: timeStr)
             searchModel.returnTime = timeStr.stringToDate()
+            mEditBySearchV.returnTime = timeStr.stringToDate()
 
         default: break
             
@@ -160,19 +161,10 @@ class EditReservationViewController: UIViewController, StoryboardInitializable {
     }
     
     
-    ///Will open custom location map controller
-    func goToCustomLocationMapController () {
-        let customLocationContr = UIStoryboard(name: Constant.Storyboards.customLocation, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.customLocation) as! CustomLocationViewController
-        customLocationContr.delegate = self
-        self.navigationController?.pushViewController(customLocationContr, animated: true)
-    }
-    
     ///will be show the selected location to map from the list of tables
     func showLocation() {
         mEditBySearchV!.mLocationDropDownView.didSelectSeeMap = { [weak self] parkingModel  in
-            let seeMapContr = UIStoryboard(name: Constant.Storyboards.seeMap, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.seeMap) as! SeeMapViewController
-            seeMapContr.parking = parkingModel
-            self?.navigationController?.pushViewController(seeMapContr, animated: true)
+            self?.goToSeeMap(parking: parkingModel)
         }
     }
     
@@ -188,7 +180,7 @@ class EditReservationViewController: UIViewController, StoryboardInitializable {
                              okTitle: Constant.Texts.agree,cancelAction: {
                                 checkedBtn.setImage(img_uncheck_box, for: .normal)
                              }, okAction: { [self] in
-                                self.goToCustomLocationMapController()
+                                 self.goToCustomLocationMapController(on: self)
                              })
     }
     
@@ -231,17 +223,13 @@ class EditReservationViewController: UIViewController, StoryboardInitializable {
         
     @IBAction func additionalDriver(_ sender: UIButton) {
         
-        let myDriverVC = UIStoryboard(name: Constant.Storyboards.myDrivers, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.myDrivers) as! MyDriversViewController
-       // myDriverVC.delegate = self
-        self.navigationController?.pushViewController(myDriverVC, animated: true)
+        self.goToAdditionalDriver(on: nil, isEditReservation: true)
     }
     
     
     @IBAction func accessories(_ sender: UIButton) {
         
-        let accessoriesVC = UIStoryboard(name: Constant.Storyboards.accessories, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.accessories) as! AccessoriesUIViewController
-        //accessoriesVC.delegate = self
-        self.navigationController?.pushViewController(accessoriesVC, animated: true)
+        goToAccessories(on: nil, isEditReservation: true)
     }
     
     
@@ -249,7 +237,8 @@ class EditReservationViewController: UIViewController, StoryboardInitializable {
         sender.setClickTitleColor(color_menu!)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3 ) {
             self.delegate?.didPressCheckPrice(isEdit: true)
-            self.navigationController?.popViewController(animated: true)
+            self.goToEditReservationAdvanced()
+           
          }
     }
     
@@ -263,14 +252,15 @@ class EditReservationViewController: UIViewController, StoryboardInitializable {
             
     }
     
-    
-    @IBAction func continueHandler(_ sender: UIButton) {
-    }
-    
-    @IBAction func continueSwipe(_ sender: UISwipeGestureRecognizer) {
+    func handlerCinfirm() {
+        mConfirmV.didPressConfirm = {
+            self.goToEditReservationAdvanced()
+        }
     }
     
 }
+
+
 
 
 extension EditReservationViewController: EditBySearchViewDelegate {
@@ -306,8 +296,11 @@ extension EditReservationViewController: EditBySearchViewDelegate {
     func didSelectLocation(_ text: String, _ tag: Int) {
         if tag == 4 { //pick up location
             searchModel.pickUpLocation = text
+            
         } else {// return location
             searchModel.returnLocation = text
+            mEditBySearchV.returnLocation = text
+
         }
         //isActiveReserve()
         
@@ -322,13 +315,22 @@ extension EditReservationViewController: EditBySearchViewDelegate {
         if tag == 6 { //pick up custom location
             searchModel.isPickUpCustomLocation = false
             searchModel.pickUpLocation = nil
+            mEditBySearchV.pickUpLocation = nil
         } else {//return custom location
             searchModel.isRetuCustomLocation = false
             searchModel.returnLocation = nil
+            mEditBySearchV.returnLocation = nil
         }
-        //isActiveReserve()
     }
     
+    func editReservation(isEdited: Bool) {
+        if isExtendReservation {
+            isEdited ? mConfirmV.enableView() : mConfirmV.disableView()
+            mChangePriceContentV.isHidden = !isEdited
+        } else  {
+            isEdited ? mCheckPriceBtn.enable() : mCheckPriceBtn.disable()
+        }
+    }
     
 }
 
@@ -336,16 +338,19 @@ extension EditReservationViewController: EditBySearchViewDelegate {
 //MARK: CustomLocationUIViewControllerDelegate
 //MARK: ----------------------------
 extension EditReservationViewController: CustomLocationViewControllerDelegate {
+    
     func getCustomLocation(_ locationPlace: String) {
          mEditBySearchV.updateCustomLocationFields(place: locationPlace, didResult: { [weak self] (isPickUpLocation) in
             if isPickUpLocation {
                 self?.searchModel.isPickUpCustomLocation = true
                 self?.searchModel.pickUpLocation = locationPlace
+                self?.mEditBySearchV.pickUpLocation = locationPlace
             } else {
                 self?.searchModel.isRetuCustomLocation = true
                 self?.searchModel.returnLocation = locationPlace
+                self?.mEditBySearchV.returnLocation = locationPlace
+
             }
-            //self?.isActiveReserve()
 
         })
     }

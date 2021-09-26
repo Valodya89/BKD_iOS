@@ -33,6 +33,7 @@ class AdvancedWithOnRideCell: UITableViewCell  {
     //MARK: --Varible
     var didPressAddDamage:(()-> Void)?
     var didPressSwitchDriver:(()-> Void)?
+    var didPressMap:(()-> Void)?
 
     
     //MARK: Life cicle
@@ -70,5 +71,8 @@ class AdvancedWithOnRideCell: UITableViewCell  {
     
     @IBAction func addDamage(_ sender: UIButton) {
         didPressAddDamage?()
+    }
+    @IBAction func map(_ sender: UIButton) {
+        didPressMap?()
     }
 }

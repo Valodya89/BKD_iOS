@@ -11,7 +11,7 @@ protocol BkdAgreementViewControllerDelegate: AnyObject {
     func agreeTermsAndConditions()
 }
 
-class BkdAgreementViewController: UIViewController, StoryboardInitializable {
+class BkdAgreementViewController: BaseViewController {
     
     //MARK: -- Outlets
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
@@ -22,6 +22,9 @@ class BkdAgreementViewController: UIViewController, StoryboardInitializable {
     //MARK: -- Variables
     weak var delegate: BkdAgreementViewControllerDelegate?
     var isAdvanced:Bool = false
+    var isEditAdvanced:Bool = false
+    var isMyReservationCell:Bool = false
+    var isPayLater:Bool = false
     
     //MARK: --Life cicle
     override func viewDidLoad() {
@@ -37,13 +40,6 @@ class BkdAgreementViewController: UIViewController, StoryboardInitializable {
         mAgreeBtn.addBorder(color:color_navigationBar!, width: 1.0)
     }
     
-    //Open SelectPayment screen
-     private func goToSelectPayment() {
-         
-        let selectPaymentVC = SelectPaymentViewController.initFromStoryboard(name: Constant.Storyboards.payment)
-        self.navigationController?.pushViewController(selectPaymentVC, animated: true)
-    }
-    
     
     ///Agree button move to right  with animation
     private func agreeClicked() {
@@ -52,7 +48,10 @@ class BkdAgreementViewController: UIViewController, StoryboardInitializable {
             self.mAgreeBckgV.layoutIfNeeded()
         } completion: { _ in
             
-            if self.isAdvanced {
+            if self.isAdvanced ||
+                self.isMyReservationCell ||
+                self.isPayLater ||
+                self.isEditAdvanced  {
                 
                 self.goToSelectPayment()
                 

@@ -57,14 +57,19 @@ class PayLaterViewController: UIViewController, StoryboardInitializable {
             self.mContinueLeading.constant = self.mContinueContentV.bounds.width - self.mContinueBtn.frame.size.width
             self.mContinueContentV.layoutIfNeeded()
         } completion: { _ in
-            self.goToSelectPayment()
+            
+            self.goToAgreement()
         }
     }
     
-    //Open SelectPayment screen
-     func goToSelectPayment() {
-        let selectPaymentVC = SelectPaymentViewController.initFromStoryboard(name: Constant.Storyboards.payment)
-        self.navigationController?.pushViewController(selectPaymentVC, animated: true)
+    
+    
+    ///Open agree Screen
+    private func goToAgreement() {
+        
+        let bkdAgreementVC = UIStoryboard(name: Constant.Storyboards.registrationBot, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.bkdAgreement) as! BkdAgreementViewController
+        bkdAgreementVC.isPayLater = true
+        self.navigationController?.pushViewController(bkdAgreementVC, animated: true)
     }
     
     //Uncheck all buttons

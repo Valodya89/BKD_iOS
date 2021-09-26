@@ -303,7 +303,7 @@
                                             <constraint firstItem="9cP-Mp-Wgf" firstAttribute="height" secondItem="TSf-Sf-Hq9" secondAttribute="height" multiplier="0.382979" id="yWt-K1-glb"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDA-jt-RoP">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDA-jt-RoP">
                                         <rect key="frame" x="0.0" y="260" width="382" height="47.5"/>
                                         <color key="backgroundColor" name="menu"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>

@@ -68,7 +68,7 @@ extension UIButton {
 
         self.backgroundColor = color
         self.setTitleColor(titleColor, for: .normal)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4 ) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2 ) {
             self.setTitleColor(oldTitleColor, for: .normal)
             self.backgroundColor = oldBckgColor
          }

@@ -16,6 +16,7 @@ enum Search {
 
 var additionalAccessories: [AccessoriesModel] = AccessoriesData.accessoriesModel
 var additionalDrivers: [MyDriversModel] = MyDriversData.myDriversModel
+
 class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     //MARK: - Outlet
@@ -363,9 +364,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     ///Will open  location controller
     func goToLocationController() {
         mSearchV!.mLocationDropDownView.didSelectSeeMap = { [weak self] result  in
-            let seeMapContr = UIStoryboard(name: Constant.Storyboards.seeMap, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.seeMap) as! SeeMapViewController
-            seeMapContr.parking = result
-            self?.navigationController?.pushViewController(seeMapContr, animated: true)
+            self?.goToSeeMap(parking: result)
         }
     }
     
@@ -648,16 +647,12 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func accessories(_ sender: UIButton) {
-        let accessoriesVC = UIStoryboard(name: Constant.Storyboards.accessories, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.accessories) as! AccessoriesUIViewController
-        accessoriesVC.delegate = self
-        self.navigationController?.pushViewController(accessoriesVC, animated: true)
+        self.goToAccessories(on: self, isEditReservation: false)
     }
     
     
     @IBAction func additionalDriver(_ sender: UIButton) {
-        let myDriverVC = UIStoryboard(name: Constant.Storyboards.myDrivers, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.myDrivers) as! MyDriversViewController
-        myDriverVC.delegate = self
-        self.navigationController?.pushViewController(myDriverVC, animated: true)
+        self.goToAdditionalDriver(on: self, isEditReservation: false)
     }
     
     @IBAction func reserve(_ sender: UIButton) {

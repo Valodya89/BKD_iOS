@@ -138,7 +138,7 @@
                             <constraint firstItem="EP8-NQ-US0" firstAttribute="height" secondItem="JS8-6w-FWu" secondAttribute="height" multiplier="0.336207" id="OEh-WR-Bwg"/>
                             <constraint firstItem="5yg-vz-e03" firstAttribute="height" secondItem="JS8-6w-FWu" secondAttribute="height" multiplier="0.724138" id="ffR-iS-yAv"/>
                             <constraint firstItem="EP8-NQ-US0" firstAttribute="centerY" secondItem="5yg-vz-e03" secondAttribute="centerY" id="ieJ-Sv-MQa"/>
-                            <constraint firstItem="5yg-vz-e03" firstAttribute="width" secondItem="JS8-6w-FWu" secondAttribute="width" multiplier="0.434555" id="lmm-pi-5Ra"/>
+                            <constraint firstItem="5yg-vz-e03" firstAttribute="width" relation="greaterThanOrEqual" secondItem="JS8-6w-FWu" secondAttribute="width" multiplier="0.434555" id="lmm-pi-5Ra"/>
                             <constraint firstAttribute="trailing" secondItem="EP8-NQ-US0" secondAttribute="trailing" id="sk4-mQ-evv"/>
                         </constraints>
                     </view>

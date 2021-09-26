@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MyReservetionAdvancedViewController: BaseViewController {
+class EditReservetionAdvancedViewController: BaseViewController {
     //MARK: - Outlet
     //Car
     @IBOutlet weak var mCarBckgV: UIView!
@@ -37,7 +37,11 @@ class MyReservetionAdvancedViewController: BaseViewController {
     @IBOutlet weak var mReturnMonthLb: UILabel!
     @IBOutlet weak var mReturnTimeLb: UILabel!
     
-
+   //Confirm
+    @IBOutlet weak var mConfirmBckgV: UIView!
+    @IBOutlet weak var mConfirmBtn: UIButton!
+    @IBOutlet var mConfirmSwipeGesture: UISwipeGestureRecognizer!
+    @IBOutlet weak var mConfirmLeading: NSLayoutConstraint!
     
     //Navigation
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
@@ -68,20 +72,13 @@ class MyReservetionAdvancedViewController: BaseViewController {
     @IBOutlet weak var mTotalPriceStackV: TotalPriceStackView!
     @IBOutlet weak var mNewPriceTableV: PriceTableView!
     @IBOutlet weak var mNewPriceTableHeight: NSLayoutConstraint!
-   
+    @IBOutlet weak var mOldPriceTableV: PriceTableView!
+    @IBOutlet weak var mOldPriceTableHeight: NSLayoutConstraint!
     
     ///Buttons
-    @IBOutlet weak var mEditContentV: UIView!
     @IBOutlet weak var mAgreementBtn: UIButton!
-    @IBOutlet weak var mEditBtn: UIButton!
-    @IBOutlet weak var mCancelBtn: UIButton!
-    @IBOutlet weak var mEditContentVHeight: UIView!
-    @IBOutlet weak var mExtendReservationBtn: UIButton!
     
-    ///Start ride
-    @IBOutlet weak var mStartRideContentV: UIView!
-    @IBOutlet weak var mStartRideBtn: UIButton!
-    @IBOutlet weak var mStartRideVLeading: NSLayoutConstraint!
+
 
     //MARK: - Variables
     public var vehicleModel: VehicleModel?
@@ -95,7 +92,6 @@ class MyReservetionAdvancedViewController: BaseViewController {
     var currentTariff: Tariff = .hourly
     var lastContentOffset:CGFloat = 0.0
     var totalPrice: Double = 0.0
-    var isEdited: Bool = false
     
     
     //MARK: - Life cycle
@@ -107,12 +103,8 @@ class MyReservetionAdvancedViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.mConfirmLeading.constant = 0.0
         self.tabBarController?.tabBar.isHidden = true
-        mEditBtn.backgroundColor = .clear
-        mStartRideVLeading.constant = -50.0
-        mExtendReservationBtn.layer.cornerRadius = 8
-        mExtendReservationBtn.setBorder(color: color_menu!, width: 1.0)
-       // mStartRideContentV.roundCorners(corners: [.topRight, .topLeft], radius: 20)
     }
     
     
@@ -133,13 +125,13 @@ class MyReservetionAdvancedViewController: BaseViewController {
         mCarImgBckgV.layer.borderWidth = 0.5
         mCarImgBckgV.layer.cornerRadius = 16
         mCarImgBckgV.setShadow(color: color_shadow!)
-        configureStartRideView(isActive: false)
-
+        mTotalPriceStackV.mOldTotalPriceContentV.isHidden = false
     }
     
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
+        mConfirmBtn.addBorder(color: color_navigationBar!, width: 1)
        // configureStartRideView(isActive: false)
     }
     
@@ -147,15 +139,11 @@ class MyReservetionAdvancedViewController: BaseViewController {
     func setupView() {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = img_bkd
+        mConfirmBtn.layer.cornerRadius = 10
+        mConfirmBtn.addBorder(color: color_navigationBar!, width: 1)
         mRentInfoBckgV.setShadow(color: color_shadow!)
-        mEditBtn.layer.cornerRadius = 8
-        mEditBtn.setBorder(color: color_menu!, width: 1.0)
-        mCancelBtn.layer.cornerRadius = 8
-        mCancelBtn.setBorder(color: color_menu!, width: 1.0)
                 
         configureView()
-        configureOnRide()
-        configureTotalPriceSteckView()
         handlerTotalPrice()
         
     }
@@ -211,33 +199,8 @@ class MyReservetionAdvancedViewController: BaseViewController {
         
     }
     
-    ///Configure on ride case
-    func configureOnRide() {
-        if myReservationState == .stopRide {
-            mOnRideTableV.onRideArr = onRideArr
-            mOnRideTableV.reloadData()
-            handlerOnRide()
-            
-            mAdditionalDriverTableV.drivers = [MyDriversModel(fullname: "Name Surname", licenciNumber: "XXXXXXXX", price: 0.0, isSelected: false, totalPrice: 0.0)]
-            mAdditionalDriverTableV.reloadData()
-
-            mTotalPriceStackV.mNewTotalPriceContentV.isHidden = true
-            mEditBtn.isHidden = true
-            mCancelBtn.isHidden = true
-            mExtendReservationBtn.isHidden = false
-            mStartRideBtn.setTitle(Constant.Texts.stopRide, for: .normal)
-        }
-    }
     
-    
-    ///Configure pay dstance price
-    func configurePayDistancePrice() {
-        
-        if myReservationState == .payDistancePrice {
-            mStartRideContentV.isHidden = true
-            mEditContentV.isHidden = true
-        }
-    }
+   
     
     func configureReservationStatus() {
         switch myReservationState {
@@ -250,31 +213,17 @@ class MyReservetionAdvancedViewController: BaseViewController {
         }
     }
     
-    func configureTotalPriceSteckView() {
-        //Total price
-        totalPrice = reserveViewModel.getTotalPrice(totalPrices: mNewPriceTableV.pricesArr)
-        mTotalPriceStackV.mNewTotalPriceLb.text = String(format: "%.2f",totalPrice)
-        if isEdited {
-            mTotalPriceStackV.showOldAndNewTotalPrices(oldPrice: totalPrice, newPrice: 00.0)
-        }
-    }
-    
-    ///configure reserve view
-    private func configureStartRideView(isActive: Bool) {
-//        mStartRideContentV.setGradientWithCornerRadius(cornerRadius: 0.0, startColor:isActive ? color_reserve_start! : color_reserve_inactive_start!,
-//                                                  endColor:isActive ? color_reserve_end!: color_reserve_inactive_end! )
-//        mStartRideContentV.roundCorners(corners: [.topRight, .topLeft], radius: 20)
-//        mStartRideContentV.isUserInteractionEnabled = isActive
-        
-        
-        mStartRideContentV.setGradientWithCornerRadius(cornerRadius: 0.0, startColor: color_dark_register!,endColor: color_dark_register!.withAlphaComponent(0.85) )
-        mStartRideContentV.roundCorners(corners: [.topRight, .topLeft], radius: 20)
-    }
-    
     
     ///Handel Total price View
     func handlerTotalPrice() {
         
+        mTotalPriceStackV.willCloseOldTotalPrice = { [weak self] in
+            self?.mOldPriceTableHeight.constant = 0.0
+            UIView.animate(withDuration: 0.3) {
+                self?.mOldPriceTableV.isHidden = true
+                self?.view.layoutIfNeeded()
+            }
+        }
         mTotalPriceStackV.willCloseNewTotalPrice = { [weak self] in
             
             self?.mNewPriceTableHeight.constant = 0.0
@@ -284,7 +233,12 @@ class MyReservetionAdvancedViewController: BaseViewController {
             }
         }
         
-       
+        mTotalPriceStackV.willOpenOldTotalPrice = { [weak self] in
+            UIView.animate(withDuration: 0.3) {
+                self?.mOldPriceTableV.isHidden = false
+                self?.mOldPriceTableHeight.constant = self?.mOldPriceTableV.contentSize.height ?? 0.0
+            }
+        }
         
         mTotalPriceStackV.willOpenNewTotalPrice = { [weak self] in
             UIView.animate(withDuration: 0.3) {
@@ -305,34 +259,14 @@ class MyReservetionAdvancedViewController: BaseViewController {
         }
     }
     
+    /// Animate Confirm click
+    private func clickConfirm() {
+        UIView.animate(withDuration: 0.5) { [self] in
+            self.mConfirmLeading.constant = self.mConfirmBckgV.bounds.width - self.mConfirmBtn.frame.size.width
+            self.mConfirmBckgV.layoutIfNeeded()
 
-    
-    ///Will animate start ride View
-    func animationStartRide() {
-        self.mStartRideVLeading.constant = self.view.bounds.width - self.mStartRideContentV.bounds.width + 25
-        self.view.setNeedsLayout()
-        UIView.animate(withDuration: 0.5) {
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    ///Open edit reservation screen
-    private func goToEditReservation(isExtendReservation: Bool) {
-        
-        let editReservationVC = EditReservationViewController.initFromStoryboard(name: Constant.Storyboards.editReservation)
-        editReservationVC.isExtendReservation = isExtendReservation
-        self.navigationController?.pushViewController(editReservationVC, animated: true)
-    }
-    
-    
-    
-    ///Update start ride button
-    private func updateStartRide(isActive: Bool) {
-        
-        if isActive && registerNumberArr?.count ?? 0 > 0 {
-            mStartRideContentV.isUserInteractionEnabled = isActive
-            mStartRideContentV.alpha = isActive ? 1 : 0.75
-            
+        } completion: { _ in
+            self.goToAgreement(on: self, isAdvanced: false, isEditAdvanced: true)
         }
     }
     
@@ -356,46 +290,19 @@ class MyReservetionAdvancedViewController: BaseViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    
-    @IBAction func startRideSwipe(_ sender: UISwipeGestureRecognizer) {
-        animationStartRide()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [self] in
-            self.goToVehicleCheck()
-        }
+    @IBAction func confirm(_ sender: UIButton) {
+        clickConfirm()
     }
     
-    @IBAction func startRide(_ sender: UIButton) {
-        animationStartRide()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [self] in
-            self.goToVehicleCheck()
-        }
+    @IBAction func confirmSwipe(_ sender: UISwipeGestureRecognizer) {
+        clickConfirm()
     }
+    
     
     @IBAction func agreement(_ sender: UIButton) {
-        self.goToAgreement(on: self,
-                           isAdvanced: false,
-                           isEditAdvanced: false)
+        self.goToAgreement(on: self, isAdvanced: false, isEditAdvanced: true)
     }
     
-    @IBAction func edit(_ sender: UIButton) {
-        sender.backgroundColor = color_menu!
-        mCancelBtn.backgroundColor = .clear
-        goToEditReservation(isExtendReservation: false)
-    }
-    
-    @IBAction func cancel(_ sender: UIButton) {
-        sender.backgroundColor = color_menu!
-        mEditBtn.backgroundColor = .clear
-        showAlert(message: Constant.Texts.cancelWithoutRefaund)
-    }
-    
-    @IBAction func extentReservation(_ sender: UIButton) {
-        sender.setClickColor(color_menu!, titleColor: sender.titleColor(for: .normal)!)
-        sender.backgroundColor = color_menu!
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
-            goToEditReservation(isExtendReservation: true)
-        }
-    }
     
     
     ///Handler payment tableCell´s button
@@ -405,37 +312,30 @@ class MyReservetionAdvancedViewController: BaseViewController {
                 self.goToPayLater()
             } else {
                 self.goToAgreement(on: self,
-                                   isAdvanced: true,
-                                   isEditAdvanced: false)
+                                   isAdvanced: false,
+                                   isEditAdvanced: true)
             }
         }
     }
     
-    ///Handler on ride tableCell´s buttons
-    func handlerOnRide() {
-        mOnRideTableV.didPressAddDamage = {
-            self.goToAddDamage()
-        }
-         
-        mOnRideTableV.didPressSwitchDriver = {
-            self.showAlertForSwitchDriver()
-        }
-        
-        mOnRideTableV.didPressMap = {
-            self.goToSeeMap(parking: nil)
-        }
-    }
+
 }
 
  
-
-//MARK: - BkdAgreementViewControllerDelegate
-//MARK: ----------------------------
-extension MyReservetionAdvancedViewController: BkdAgreementViewControllerDelegate {
-    func agreeTermsAndConditions() {
-        if registerNumberArr?.count ?? 0 > 0 {
-            updateStartRide(isActive: true)
-        }
-    }
-}
+////MARK: - EditReservationDelegate0
+////MARK: ----------------------------
+//extension MyReservetionAdvancedViewController: EditReservationDelegate {
+//    func didPressCheckPrice(isEdit: Bool) {
+//        mTotalPriceStackV.mOldTotalPriceContentV.isHidden = !isEdit
+//        mConfirmBckgV.isHidden = !isEdit
+//        mStartRideContentV.isHidden = isEdit
+//        mEditContentV.isHidden = isEdit
+//        
+//        if isEdit {
+//            mTotalPriceStackV.mNewTotalPriceTitleLb.text = Constant.Texts.newTotalPrice
+//        } else {
+//            mTotalPriceStackV.mNewTotalPriceTitleLb.text = Constant.Texts.totalPrice
+//        }
+//    }
+//}
 

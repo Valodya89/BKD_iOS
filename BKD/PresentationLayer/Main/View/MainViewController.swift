@@ -394,7 +394,7 @@ class MainViewController: BaseViewController {
                              okTitle: Constant.Texts.agree,cancelAction: {
                                 checkedBtn.setImage(img_uncheck_box, for: .normal)
                              }, okAction: { [self] in
-                                self.goToCustomLocationMap()
+                                 self.goToCustomLocationMapController(on: self)
                              })
     }
     
@@ -437,17 +437,10 @@ class MainViewController: BaseViewController {
     ///will be show the selected location to map from the list of tables
     func showLocation() {
         searchHeaderV!.mLocationDropDownView.didSelectSeeMap = { [weak self] parkingModel  in
-            let seeMapContr = UIStoryboard(name: Constant.Storyboards.seeMap, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.seeMap) as! SeeMapViewController
-            seeMapContr.parking = parkingModel
-            self?.navigationController?.pushViewController(seeMapContr, animated: true)
+            self?.goToSeeMap(parking: parkingModel)
         }
     }
-    ///will go to custom location map screen
-    func goToCustomLocationMap() {
-        let customLocationContr = UIStoryboard(name: Constant.Storyboards.customLocation, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.customLocation) as! CustomLocationViewController
-        customLocationContr.delegate = self
-        self.navigationController?.pushViewController(customLocationContr, animated: true)
-    }
+
     
   //MARK: - Selected Closures
     //MARK ------------------------------
@@ -804,7 +797,7 @@ extension MainViewController: SearchHeaderViewDelegate {
     
     func didSelectCustomLocation(_ btn: UIButton) {
 //        self.showAlertCustomLocation(checkedBtn: btn)
-        goToCustomLocationMap()
+        self.goToCustomLocationMapController(on: self)
     }
     
     

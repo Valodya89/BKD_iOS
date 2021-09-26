@@ -15,13 +15,10 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
     
     //MARK: - Outlet
     @IBOutlet weak var mPaymentTbV: UITableView!
-    @IBOutlet weak var mBancontactTypeBottom: NSLayoutConstraint!
-    @IBOutlet weak var mBancontactTypeV: BancontactTypeView!
     @IBOutlet weak var mGradientV: UIView!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mDepositInfoLb: UILabel!
     @IBOutlet weak var mDepositLbHeight: NSLayoutConstraint!
-    @IBOutlet weak var mBancontactV: BancontactView!
     @IBOutlet weak var mBlurV: UIVisualEffectView!
     
     //MARK: - Variables
@@ -60,11 +57,6 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
     
     override func viewDidLayoutSubviews() {
         mDepositLbHeight.constant =  isDeposit ? 100 : 0
-        if mBlurV.isHidden {
-            mBancontactV.mContentVBottom.constant = -400
-            mBancontactTypeV.mContentVBottom.constant = -400
-            
-        }
     }
     
     func setUpView() {
@@ -72,38 +64,10 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
         mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
         mPaymentTbV.delegate = self
         mPaymentTbV.dataSource = self
-        selectBancontactType()
-        selectBancontactCard()
-    }
-    
-    /// Selected bancontact type
-    func selectBancontactType() {
-        mBancontactTypeV.didPressBancontact = {
-            self.goToWebScreen(paymentType: .creditCard)
-        }
-        
-        mBancontactTypeV.didPressMobileBancking = {
-            
-            self.animateBancontactTypeView(isShow: false, bottom: self.mBancontactTypeBottom )
 
-            self.animateBancontactTypeView(isShow: true, bottom: self.mBancontactV.mContentVBottom )
-        }
     }
     
-    ///Selected bancontact card type
-    func selectBancontactCard() {
-        mBancontactV.didPressBancontactCard = { cardType in
-            switch cardType {
-            case .ing:
-                //self.goToWebScreen(paymentType: .creditCard)
-                SelectPaymentViewController.openCustomApp(by: kCustomURLScheme)
-            case .bnp:
-            self.goToWebScreen(paymentType: .creditCard)
-            case .kbc:
-                self.goToWebScreen(paymentType: .creditCard)
-            }
-        }
-    }
+
     
     
     
@@ -133,14 +97,8 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
        }
     
     
-    ///Test
     
-    
-    
-    
-    
-    
-    
+ ///TEST
     /// Selected Apple Pay
     func selectApplePay() {
         let applePaymentController = PKPaymentAuthorizationViewController(paymentRequest: paymentRequest)
@@ -165,14 +123,7 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
         navigationController?.pushViewController(paymentWebVC, animated: true)
     }
     
-    /// Animate Bancontact Type View
-    private func animateBancontactTypeView(isShow: Bool, bottom: NSLayoutConstraint){
 
-        UIView.animate(withDuration: 0.7, animations: {
-            bottom.constant = isShow ? 17 : -400
-            self.view.layoutIfNeeded()
-        })
-    }
     
     func getCreditCardURL() {
         viewModel.getAttachedCardURL { [weak self] result in
@@ -188,20 +139,6 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
     
     
     //MARK: - Actions
-    @IBAction func swipeBancontactTypeV(_ sender: UISwipeGestureRecognizer) {
-        mBlurV.isHidden = true
-        //mGradientV.isHidden = true
-        self.animateBancontactTypeView(isShow: false, bottom: self.mBancontactTypeBottom )
-        self.paymentTypes = PaymentTypeData.paymentTypeModel
-        self.mPaymentTbV.reloadData()
-    }
-    
-    @IBAction func swipeBancontactV(_ sender: UISwipeGestureRecognizer) {
-        mBlurV.isHidden = true
-        self.paymentTypes = PaymentTypeData.paymentTypeModel
-        self.mPaymentTbV.reloadData()
-        self.animateBancontactTypeView(isShow: false, bottom: self.mBancontactV.mContentVBottom )
-    }
     
     @IBAction func back(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
@@ -233,16 +170,18 @@ extension SelectPaymentViewController: UITableViewDelegate, UITableViewDataSourc
             self.mPaymentTbV.reloadData()
             
             switch paymentType {
-            case .creditCard:
-                self.getCreditCardURL()
+//            case .creditCard:
+//                self.getCreditCardURL()
             case .bancontact:
-                mBlurV.isHidden = false
-                //mGradientV.isHidden = false
-                self.animateBancontactTypeView(isShow: true, bottom: self.mBancontactTypeBottom)
+                self.goToWebScreen(paymentType: .bancontact)
+
+//                mBlurV.isHidden = false
+//                //mGradientV.isHidden = false
+//                self.animateBancontactTypeView(isShow: true, bottom: self.mBancontactTypeBottom)
             case .applePay:
                 self.selectApplePay()
-            case .payPal:
-                self.goToWebScreen(paymentType: .payPal)
+//            case .payPal:
+//                self.goToWebScreen(paymentType: .payPal)
             }
             
         }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NewPasswordViewController: UIViewController, StoryboardInitializable {
+class NewPasswordViewController: BaseViewController {
    
     //MARK: Outlets
     @IBOutlet weak var mNewPasswordTitleLb: UILabel!
@@ -63,7 +63,7 @@ class NewPasswordViewController: UIViewController, StoryboardInitializable {
         signInViewModel.changePassword(username: emailAddress ?? "", password: mPasswordTxtFl.text!, code: code ?? "") { [self] (status) in
             switch status {
             case .success:
-                goSignInController()
+                self.goToSignInPage()
                 break                
             default:
                 self.showAlertMessage(Constant.Texts.errChangePassword)
@@ -72,11 +72,6 @@ class NewPasswordViewController: UIViewController, StoryboardInitializable {
         }
     }
     
-    //Open Sign in Screen
-     private func goSignInController() {
-         let signInVC = SignInViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
-         self.navigationController?.pushViewController(signInVC, animated: true)
-     }
     
     // MARK: ACTIONS
     @IBAction func visiblePassword(_ sender: UIButton) {

@@ -78,6 +78,9 @@
                                         <color key="tintColor" name="navigationBar"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="see_map"/>
+                                        <connections>
+                                            <action selector="map:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="WZX-5n-62z"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -104,9 +107,9 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5yg-vz-e03">
                                 <rect key="frame" x="12.5" y="15" width="166" height="42"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="background"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Add damages">
+                                <buttonConfiguration key="configuration" style="plain" title="Add Damages">
                                     <fontDescription key="titleFontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                                     <color key="baseForegroundColor" name="selected_filter_field"/>
                                 </buttonConfiguration>

@@ -48,7 +48,7 @@ class OnRideCollectionViewCell: UICollectionViewCell {
     var pressedStopRide:(()-> Void)?
     var pressedAddDamages:(()-> Void)?
     var pressedSwitchDriver:(()-> Void)?
-
+    var pressedSeeMap:(()->Void)?
     
     
     //MARK: -- Life cicle
@@ -92,6 +92,9 @@ class OnRideCollectionViewCell: UICollectionViewCell {
         mAddDamagesBtn.addTarget(self, action: #selector(addDamages(sender:)), for: .touchUpInside)
         mSwitchDriverBtn.tag = index
         mSwitchDriverBtn.addTarget(self, action: #selector(switchDriver(sender:)), for: .touchUpInside)
+        
+        mLocationBtn.tag = index
+        mLocationBtn.addTarget(self, action: #selector(seeMap(sender:)), for: .touchUpInside)
     }
     
     @objc func pressedStopRide(sender: UIButton) {
@@ -106,4 +109,7 @@ class OnRideCollectionViewCell: UICollectionViewCell {
         pressedSwitchDriver?()
     }
     
+    @objc func seeMap(sender: UIButton) {
+        pressedSeeMap?()
+    }
 }

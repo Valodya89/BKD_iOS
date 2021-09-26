@@ -41,6 +41,7 @@ struct Constant {
         static let odometerCheck = "OdometerCheck"
         static let addDamage = "AddDamage"
         static let editReservation = "EditReservation"
+        static let editReservetionAdvanced = "EditReservetionAdvanced"
 
 
 
@@ -270,9 +271,18 @@ struct Constant {
         static let yesCancel = "Yes, Cancel"
         static let odometerNumber = "Vehicle Odometer numbers"
         static let startRideAlert = "By clicking “Start now” button you confirm that you got your keys and are to start the ride."
+        static let activeStartRide = "You will get vehicle Registration numbers 15 minutes before the Reservation Pick up time, and will be able to start the ride."
         
         //On ride
+        static let stopRide = "Stop Ride"
         static let confirmSwitchDriver = "Please, confirm that you want to switch to [%@] driver."
+        
+        //Additional driver
+        static let addDriverAlert = "Additional driver servide is %.2f euro per driver. You need to wait for Admin approval to have an additional drier for your account. No payment will be needed unless the Admin approves the driver addition."
+        static let addDriverService = "Additional driver service is %.2f euro per driver. Please, confirm that you want to turn on the service."
+        
+        
+        
         
         //Verify
         static let selectMailApp = "Select Mail App"
@@ -354,6 +364,7 @@ let tailLift_cell_height: CGFloat = 40
 let locationList_height: CGFloat = 172.0
 let locationList_cell_height: CGFloat = 57.3
 let height75 =  75
+let height48 = 48
 
 let main_subwidth = UIScreen.main.bounds.width * 0.158416
 let reservation_no_carNumber_height = UIScreen.main.bounds.height * 0.306931
@@ -366,6 +377,7 @@ let height405 = UIScreen.main.bounds.height * 0.501
 let height115 = UIScreen.main.bounds.height * 0.142
 let height274 = UIScreen.main.bounds.height * 0.339
 let height130 = UIScreen.main.bounds.height * 0.160
+let height273 = UIScreen.main.bounds.height * 0.337
 
 // 0.158416
 //h* 16 /37
