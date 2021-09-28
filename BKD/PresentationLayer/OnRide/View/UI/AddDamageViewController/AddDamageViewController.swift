@@ -10,7 +10,7 @@ import UIKit
 let phoneInsuance = "+32 (0) 3 255 63 45"
 let phoneBkd = "+32 (0) 3 282 63 33"
 
-class AddDamageViewController: UIViewController, StoryboardInitializable {
+class AddDamageViewController: BaseViewController {
 
     @IBOutlet weak var mContactActionSheet: ContactActionSheetView!
     @IBOutlet weak var mActionSheetBottom: NSLayoutConstraint!
@@ -31,6 +31,7 @@ class AddDamageViewController: UIViewController, StoryboardInitializable {
     }
     
     func setupView() {
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = img_bkd
         mAddAccidentDetailsBtn.layer.cornerRadius = 5
         mContactBkdBtn.layer.cornerRadius = 8
@@ -88,6 +89,9 @@ class AddDamageViewController: UIViewController, StoryboardInitializable {
     
     
     @IBAction func AddAccidentDetails(_ sender: UIButton) {
+        let addAccidentDetailsVC = AddAccidentDetailsViewController.initFromStoryboard(name: Constant.Storyboards.addAccidentDetails)
+        self.navigationController?.pushViewController(addAccidentDetailsVC, animated: true)
+        
     }
     
     

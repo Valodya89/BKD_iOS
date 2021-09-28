@@ -11,7 +11,6 @@ PODS:
     - InputBarAccessoryView/Core (= 5.3.1)
   - InputBarAccessoryView/Core (5.3.1)
   - KeychainAccess (4.2.2)
-  - Kingfisher (6.3.1)
   - MessageKit (3.6.1):
     - InputBarAccessoryView (~> 5.3.1)
   - PhoneNumberKit (3.3.3):
@@ -21,6 +20,9 @@ PODS:
   - PhoneNumberKit/UIKit (3.3.3):
     - PhoneNumberKit/PhoneNumberKitCore
   - ReachabilitySwift (5.0.0)
+  - SDWebImage (5.11.1):
+    - SDWebImage/Core (= 5.11.1)
+  - SDWebImage/Core (5.11.1)
   - SideMenu (6.5.0)
   - Starscream (4.0.4)
   - SwiftMaskTextfield (1.1.0)
@@ -33,9 +35,9 @@ DEPENDENCIES:
   - GooglePlaces (= 4.2.0)
   - iCarousel
   - KeychainAccess
-  - Kingfisher (~> 6.0)
   - MessageKit
   - PhoneNumberKit (~> 3.3)
+  - SDWebImage
   - SideMenu
   - SwiftMaskTextfield
   - SwiftStomp
@@ -47,10 +49,10 @@ SPEC REPOS:
     - iCarousel
     - InputBarAccessoryView
     - KeychainAccess
-    - Kingfisher
     - MessageKit
     - PhoneNumberKit
     - ReachabilitySwift
+    - SDWebImage
     - SideMenu
     - Starscream
     - SwiftMaskTextfield
@@ -62,15 +64,15 @@ SPEC CHECKSUMS:
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   InputBarAccessoryView: 1f75d8c9f75e5e57f3ffac36ed58635a8005e0bc
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
-  Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
   MessageKit: d153fbbbcb12f3f4045a1ba8874298924dacfb62
   PhoneNumberKit: 4ce83273551c4d2ae10b7361162f4283dd02835f
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
   SwiftMaskTextfield: 8c792e56f25779939d1fd5cf6153ba439b1be761
   SwiftStomp: bb16e710ad6be09a1980196d4e00540432b24305
 
-PODFILE CHECKSUM: 8cce57ef5ef65784a2991de2890f5204978d8d19
+PODFILE CHECKSUM: 8f0927cff0f5cf9c6c840378d7691ff2d5bdef12
 
 COCOAPODS: 1.10.1

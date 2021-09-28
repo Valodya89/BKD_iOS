@@ -231,7 +231,7 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
         self.present(alert, animated: true)
     }
     
-    ///Will present Picker controller
+    ///Will present image Picker controller
     private func presentPicker (sourceType: UIImagePickerController.SourceType) {
         isTakePhoto = true
         let picker = UIImagePickerController()

@@ -42,6 +42,7 @@ struct Constant {
         static let addDamage = "AddDamage"
         static let editReservation = "EditReservation"
         static let editReservetionAdvanced = "EditReservetionAdvanced"
+        static let addAccidentDetails = "AddAccidentDetails"
 
 
 
@@ -281,8 +282,16 @@ struct Constant {
         static let addDriverAlert = "Additional driver servide is %.2f euro per driver. You need to wait for Admin approval to have an additional drier for your account. No payment will be needed unless the Admin approves the driver addition."
         static let addDriverService = "Additional driver service is %.2f euro per driver. Please, confirm that you want to turn on the service."
         
-        
-        
+        //Add accident details
+        static let selectSide = "Select vehicle side"
+        static let selectDate = "Select date"
+        static let selectTime = "Select time"
+        static let accidentAddress = "Input accident address"
+        static let frontSide = "Front side"
+        static let backSide = "Back side"
+        static let rightSide = "Right side"
+        static let leftSide = "Left side"
+
         
         //Verify
         static let selectMailApp = "Select Mail App"
@@ -331,6 +340,11 @@ let tariffOptionsArr =  [["2h", "3h", "4h", "5h", "6h", "10h"],
                          ["1m"], []]
 
 let countryList = ["Dutch", "French", "English"]
+let sidesList = [Constant.Texts.frontSide,
+                 Constant.Texts.backSide,
+                 Constant.Texts.rightSide,
+                 Constant.Texts.leftSide
+                ]
 let cityList = ["City1", "City2", "City3", "City4", "City5", "City6", "City7"]
 let paymentSupportedCountriesCode: Set<String>? = ["AM", "FR", "NL", "GB"]
 let emailAppNames = [ "Googleg Mail", "Yahoo Mail", "Message"]

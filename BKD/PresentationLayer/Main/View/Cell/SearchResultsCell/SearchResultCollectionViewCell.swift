@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
 
 protocol SearchResultCellDelegate: AnyObject {
     func didPressMore(tag: Int)
@@ -162,8 +162,11 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         mFlipReserveBtn.addTarget(self, action: #selector(reservePressed), for: .touchUpInside)
         
         if item.logo != nil {
-            self.mCarLogoImgV.kf.setImage(with: item.logo!.getURL() ?? URL(string: ""))
-            self.mFlipCarLogoImgV.kf.setImage(with: item.logo!.getURL() ?? URL(string: ""))
+            self.mCarLogoImgV.sd_setImage(with: item.logo!.getURL() ?? URL(string: ""), placeholderImage: nil)
+            self.mFlipCarLogoImgV.sd_setImage(with: item.logo!.getURL() ?? URL(string: ""), placeholderImage: nil)
+
+//            self.mCarLogoImgV.kf.setImage(with: item.logo!.getURL() ?? URL(string: ""))
+//            self.mFlipCarLogoImgV.kf.setImage(with: item.logo!.getURL() ?? URL(string: ""))
         }
         
         if item.hasSpecialPrice {
@@ -175,7 +178,10 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         
         self.mCarNameLb.text = item.name
         self.mFlipCarNameLb.text = item.name
-        self.mCarImgV.kf.setImage(with: item.image.getURL()!)
+        
+        self.mCarImgV.sd_setImage(with: item.image.getURL()!, placeholderImage: nil)
+        
+        //self.mCarImgV.kf.setImage(with: item.image.getURL()!)
         self.mOffertBckgV.isHidden = !item.hasSpecialPrice
         self.mGradientV.isHidden = item.hasSpecialPrice
         self.mCardLb.text = item.driverLicenseType

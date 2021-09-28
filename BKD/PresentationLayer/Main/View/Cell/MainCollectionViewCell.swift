@@ -145,7 +145,8 @@ static let identifier = "MainCollectionViewCell"
     
     /// Set cell info
     func setCellInfo(item: CarsModel) {
-        mCarImgV.kf.setImage(with: item.image.getURL()!)
+        self.mCarImgV.sd_setImage(with:item.image.getURL()!, placeholderImage: nil)
+       // mCarImgV.kf.setImage(with: item.image.getURL()!)
         mCarNameLb.text = item.name
         mCardLb.text = item.driverLicenseType
         mCubeLb.text = String(item.volume) + Constant.Texts.mCuadrad
@@ -167,7 +168,8 @@ static let identifier = "MainCollectionViewCell"
         mInactiveCarNameLb.text = item.name
         
         if item.logo != nil {
-            mFiatImgV.kf.setImage(with: (item.logo!.getURL() ?? URL(string: ""))!)
+            mFiatImgV.sd_setImage(with:item.logo!.getURL()!, placeholderImage: nil)
+          //  mFiatImgV.kf.setImage(with: (item.logo!.getURL() ?? URL(string: ""))!)
 
 //            UIImage.loadFrom(url: (item.logo!.getURL() ?? URL(string: ""))!) { image in
 //                self.mFiatImgV.image = image ?? UIImage()

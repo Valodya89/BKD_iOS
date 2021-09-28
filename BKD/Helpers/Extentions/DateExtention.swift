@@ -63,6 +63,13 @@ extension Date {
         return forrmater.string(from: self)
     }
     
+    //Get hour as string without timzone
+    func getTime()-> String {
+        let forrmater = DateFormatter()
+        forrmater.dateFormat = "HH:mm"
+        return forrmater.string(from: self)
+    }
+    
     ///Get components month
     func getComponentsMonth(fromDate: Date?, toDate: Date?) -> Bool {
         guard let fromDate = fromDate, let toDate = toDate else {

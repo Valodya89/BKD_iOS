@@ -178,6 +178,10 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         mReturnDateTxtFl.delegate = self
         mPickUpTimeTxtFl.delegate = self
         mReturnTimeTxtFl.delegate = self
+        
+        mPickUpTimeTxtFl.setPlaceholder(string: Constant.Texts.selectTime, font: font_placeholder!, color: color_choose_date!)
+        mReturnTimeTxtFl.setPlaceholder(string: Constant.Texts.selectTime, font: font_placeholder!, color: color_choose_date!)
+       
         mPickUpDataTxtFl.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
         
         mDayPickUpBtn.isHidden = true
@@ -186,8 +190,6 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         mDayReturnDateBtn.isHidden = true
         mMonthReturnDateBtn.isHidden = true
         mReturnDateTxtFl.text =  Constant.Texts.returnDate
-        mReturnTimeTxtFl.textColor = color_choose_date
-        mPickUpTimeTxtFl.textColor = color_choose_date
         mPickUpLocationBtn.tintColor = color_choose_date
         mReturnLocationBtn.tintColor = color_choose_date
 
@@ -243,6 +245,53 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         }
     }
 
+    //Update pick up data field
+    func updatePickUpDate(datePicker: UIDatePicker) {
+        mDayPickUpBtn.isHidden = false
+        mMonthPickUpBtn.isHidden = false
+        mPickUpDataTxtFl.text = ""
+        mDayPickUpBtn.setTitle(datePicker.date.getDay(), for: .normal)
+
+        mMonthPickUpBtn?.setTitle(datePicker.date.getMonthAndWeek(lng: "en"), for: .normal)
+        mDateLb.textColor = color_search_placeholder
+    }
+    
+    
+    //Update pick up data field
+    func updateReturnDate(datePicker: UIDatePicker) {
+        mDayReturnDateBtn.isHidden = false
+        mMonthReturnDateBtn.isHidden = false
+        mReturnDateTxtFl.text = ""
+        mDayReturnDateBtn.setTitle(datePicker.date.getDay(), for: .normal)
+
+        mMonthReturnDateBtn?.setTitle(datePicker.date.getMonthAndWeek(lng: "en"), for: .normal)
+        mDateLb.textColor = color_search_placeholder
+    }
+    
+    //Update time field
+    func updateTime(responderTxtFl: UITextField, text: String) {
+        
+        responderTxtFl.text = text
+        mTimeLb.textColor = color_search_placeholder
+
+    }
+    
+//    //Will put new values from pickerDate
+//    func showSelectedDate(dayBtn : UIButton?,
+//                          monthBtn: UIButton?) {
+//        if datePicker == .pickUpTime ||  datePicker == .returnTime{
+//
+//
+//            responderTxtFl.text = pickerList![ pickerV.selectedRow(inComponent: 0)]
+//            responderTxtFl.textColor = color_entered_date
+//            mTimeLb.textColor = color_search_placeholder
+//
+//        } else {
+//            dayBtn?.setTitle(datePicker.date.getDay(), for: .normal)
+//            monthBtn?.setTitle(datePicker.date.getMonthAndWeek(lng: "en"), for: .normal)
+//            mDateLb.textColor = color_search_placeholder
+//        }
+//    }
     
     ///update Location Fields
     func updateCustomLocationFields(place: String, didResult: @escaping (Bool) -> ()) {

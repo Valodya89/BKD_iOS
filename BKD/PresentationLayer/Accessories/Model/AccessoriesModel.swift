@@ -18,13 +18,3 @@ struct AccessoriesModel {
 }
 
 
-//struct AdditionalAccessoriesModel {
-//    static let shared = AdditionalAccessoriesModel()
-//
-//    public var accessoryImg: UIImage?
-//    public var accessoryName: String?
-//    public var accessoryPrice: Double?
-//    public var accessoryCount: Int?
-//    public var totalPrice: Double?
-//    private init() {}
-//}

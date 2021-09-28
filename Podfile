@@ -16,5 +16,5 @@ target 'BKD' do
 	pod 'SideMenu'
  	pod 'KeychainAccess'
 	pod 'SwiftStomp'
- 	pod 'Kingfisher', '~> 6.0'
+	pod 'SDWebImage'
 end

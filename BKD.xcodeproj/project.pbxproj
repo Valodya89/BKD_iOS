@@ -57,6 +57,17 @@
 		56409539264B24D8001DC92D /* BKDAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56409538264B24D8001DC92D /* BKDAlert.swift */; };
 		5648C5B6268803F7000B4E2A /* AccessoriesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648C5B5268803F6000B4E2A /* AccessoriesModel.swift */; };
 		5648C5C8268842D9000B4E2A /* AccessoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648C5C7268842D9000B4E2A /* AccessoriesViewModel.swift */; };
+		564BE86F2701F54B0037DF39 /* AddAccidentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564BE86E2701F54B0037DF39 /* AddAccidentDetailsViewController.swift */; };
+		564BE8712701F55B0037DF39 /* AddAccidentDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 564BE8702701F55B0037DF39 /* AddAccidentDetails.storyboard */; };
+		564BE8762702068D0037DF39 /* DamageSideTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564BE8742702068D0037DF39 /* DamageSideTableCell.swift */; };
+		564BE8772702068D0037DF39 /* DamageSideTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 564BE8752702068D0037DF39 /* DamageSideTableCell.xib */; };
+		564BE87B270206F10037DF39 /* AccidentFormTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564BE879270206F10037DF39 /* AccidentFormTableCell.swift */; };
+		564BE87C270206F10037DF39 /* AccidentFormTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 564BE87A270206F10037DF39 /* AccidentFormTableCell.xib */; };
+		564BE87F2702225E0037DF39 /* DamageSidesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564BE87E2702225E0037DF39 /* DamageSidesTableView.swift */; };
+		564BE882270222870037DF39 /* AccidentFormTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564BE881270222870037DF39 /* AccidentFormTableView.swift */; };
+		564BE885270223B70037DF39 /* DateAndLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564BE884270223B70037DF39 /* DateAndLocationView.swift */; };
+		564BE88727026BA90037DF39 /* DamagesSideModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564BE88627026BA80037DF39 /* DamagesSideModel.swift */; };
+		564BE8892702B8670037DF39 /* AddAccidentDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564BE8882702B8670037DF39 /* AddAccidentDetailViewModel.swift */; };
 		564E12AB264BEF94008CE884 /* DateExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E12AA264BEF94008CE884 /* DateExtention.swift */; };
 		564E12D0264D72E2008CE884 /* SeeMap.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 564E12CF264D72E2008CE884 /* SeeMap.storyboard */; };
 		564E12D9264D7617008CE884 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E12D8264D7617008CE884 /* Constant.swift */; };
@@ -377,6 +388,17 @@
 		56409538264B24D8001DC92D /* BKDAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BKDAlert.swift; sourceTree = "<group>"; };
 		5648C5B5268803F6000B4E2A /* AccessoriesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoriesModel.swift; sourceTree = "<group>"; };
 		5648C5C7268842D9000B4E2A /* AccessoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoriesViewModel.swift; sourceTree = "<group>"; };
+		564BE86E2701F54B0037DF39 /* AddAccidentDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccidentDetailsViewController.swift; sourceTree = "<group>"; };
+		564BE8702701F55B0037DF39 /* AddAccidentDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddAccidentDetails.storyboard; sourceTree = "<group>"; };
+		564BE8742702068D0037DF39 /* DamageSideTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamageSideTableCell.swift; sourceTree = "<group>"; };
+		564BE8752702068D0037DF39 /* DamageSideTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DamageSideTableCell.xib; sourceTree = "<group>"; };
+		564BE879270206F10037DF39 /* AccidentFormTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccidentFormTableCell.swift; sourceTree = "<group>"; };
+		564BE87A270206F10037DF39 /* AccidentFormTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccidentFormTableCell.xib; sourceTree = "<group>"; };
+		564BE87E2702225E0037DF39 /* DamageSidesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamageSidesTableView.swift; sourceTree = "<group>"; };
+		564BE881270222870037DF39 /* AccidentFormTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccidentFormTableView.swift; sourceTree = "<group>"; };
+		564BE884270223B70037DF39 /* DateAndLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndLocationView.swift; sourceTree = "<group>"; };
+		564BE88627026BA80037DF39 /* DamagesSideModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamagesSideModel.swift; sourceTree = "<group>"; };
+		564BE8882702B8670037DF39 /* AddAccidentDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccidentDetailViewModel.swift; sourceTree = "<group>"; };
 		564E12AA264BEF94008CE884 /* DateExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtention.swift; sourceTree = "<group>"; };
 		564E12CF264D72E2008CE884 /* SeeMap.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SeeMap.storyboard; sourceTree = "<group>"; };
 		564E12D8264D7617008CE884 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -925,6 +947,103 @@
 			path = Manageres;
 			sourceTree = "<group>";
 		};
+		564BE8682701F4D30037DF39 /* AddAccidentDetails */ = {
+			isa = PBXGroup;
+			children = (
+				564BE86B2701F5070037DF39 /* Model */,
+				564BE86A2701F4FD0037DF39 /* ViewModel */,
+				564BE8692701F4F50037DF39 /* View */,
+			);
+			path = AddAccidentDetails;
+			sourceTree = "<group>";
+		};
+		564BE8692701F4F50037DF39 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				564BE86C2701F5190037DF39 /* UI */,
+				564BE86E2701F54B0037DF39 /* AddAccidentDetailsViewController.swift */,
+				564BE8702701F55B0037DF39 /* AddAccidentDetails.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		564BE86A2701F4FD0037DF39 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				564BE8882702B8670037DF39 /* AddAccidentDetailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		564BE86B2701F5070037DF39 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		564BE86C2701F5190037DF39 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				564BE8832702239A0037DF39 /* DateAndLocationView */,
+				564BE880270222640037DF39 /* AccidentFormTableView */,
+				564BE87D2702222F0037DF39 /* DamageSidesTableView */,
+				564BE8722702058F0037DF39 /* Cells */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		564BE8722702058F0037DF39 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				564BE878270206C30037DF39 /* AccidentFormTableCell */,
+				564BE873270206590037DF39 /* DamageSideTableCell */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		564BE873270206590037DF39 /* DamageSideTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				564BE8742702068D0037DF39 /* DamageSideTableCell.swift */,
+				564BE8752702068D0037DF39 /* DamageSideTableCell.xib */,
+			);
+			path = DamageSideTableCell;
+			sourceTree = "<group>";
+		};
+		564BE878270206C30037DF39 /* AccidentFormTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				564BE879270206F10037DF39 /* AccidentFormTableCell.swift */,
+				564BE87A270206F10037DF39 /* AccidentFormTableCell.xib */,
+			);
+			path = AccidentFormTableCell;
+			sourceTree = "<group>";
+		};
+		564BE87D2702222F0037DF39 /* DamageSidesTableView */ = {
+			isa = PBXGroup;
+			children = (
+				564BE87E2702225E0037DF39 /* DamageSidesTableView.swift */,
+			);
+			path = DamageSidesTableView;
+			sourceTree = "<group>";
+		};
+		564BE880270222640037DF39 /* AccidentFormTableView */ = {
+			isa = PBXGroup;
+			children = (
+				564BE881270222870037DF39 /* AccidentFormTableView.swift */,
+			);
+			path = AccidentFormTableView;
+			sourceTree = "<group>";
+		};
+		564BE8832702239A0037DF39 /* DateAndLocationView */ = {
+			isa = PBXGroup;
+			children = (
+				564BE884270223B70037DF39 /* DateAndLocationView.swift */,
+			);
+			path = DateAndLocationView;
+			sourceTree = "<group>";
+		};
 		564E12BD264C9E71008CE884 /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -1352,6 +1471,7 @@
 		5658BDF726FBEC8600A5B122 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				564BE88627026BA80037DF39 /* DamagesSideModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1842,6 +1962,7 @@
 		568E70942644BD2D000CB6A9 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				564BE8682701F4D30037DF39 /* AddAccidentDetails */,
 				5658BDF426FBEC6900A5B122 /* OnRide */,
 				56CF782226F3DF4D0092F555 /* StartRide */,
 				565F80DB26A74D0800ADB9FE /* PhoneVerification */,
@@ -2748,6 +2869,7 @@
 				5640394F26EF854B0064256C /* ReservationWithStartRideCollectionViewCell.xib in Resources */,
 				56CF782126F3C72C0092F555 /* AdditionalDriverForWaithingApprovalCell.xib in Resources */,
 				5660F7F2266C21980082F038 /* Mulish-Bold.ttf in Resources */,
+				564BE87C270206F10037DF39 /* AccidentFormTableCell.xib in Resources */,
 				56ADD80F26F2C66900C0ECC3 /* EditReservation.storyboard in Resources */,
 				564E1354265211FF008CE884 /* SFProDisplay-Semibold.ttf in Resources */,
 				562585E826F1867800EC9284 /* AditionalDriverTableCell.xib in Resources */,
@@ -2798,6 +2920,7 @@
 				565F9B0C26C8AEA100064AD4 /* ReservetionMakePaymentCell.xib in Resources */,
 				5656082E26785C47009578FA /* More.storyboard in Resources */,
 				56CF782D26F3E1380092F555 /* OdometerCheck.storyboard in Resources */,
+				564BE8772702068D0037DF39 /* DamageSideTableCell.xib in Resources */,
 				5640395B26EFEF5A0064256C /* ReservetionWithDistancePriceCell.xib in Resources */,
 				5656083A26785E2C009578FA /* RentalConditionsTableViewCell.xib in Resources */,
 				56533ED72678BF3A0012BF4A /* BkdAdvantagesTableViewCell.xib in Resources */,
@@ -2822,6 +2945,7 @@
 				565F8C4A268D17C200E21C71 /* Carousel.storyboard in Resources */,
 				568E6F592642FC4B000CB6A9 /* Main.storyboard in Resources */,
 				56A2AFE72694C827001BA7C5 /* PhoneNumberTableViewCell.xib in Resources */,
+				564BE8712701F55B0037DF39 /* AddAccidentDetails.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2919,10 +3043,12 @@
 				565F8C1F268CF4C700E21C71 /* CarouselCollectionViewCell.swift in Sources */,
 				56533EE3267925FE0012BF4A /* AccessoriesUIViewController.swift in Sources */,
 				56AD19022692AD2D006A53C1 /* MyBkdModel.swift in Sources */,
+				564BE8892702B8670037DF39 /* AddAccidentDetailViewModel.swift in Sources */,
 				5691A639265D53140008081D /* Extentions.swift in Sources */,
 				9393BAFA26D7F2B8003878BF /* ChatInfo.swift in Sources */,
 				565BFE0326A12CA10044D081 /* Parking.swift in Sources */,
 				5656082626785C32009578FA /* MoreViewController.swift in Sources */,
+				564BE87B270206F10037DF39 /* AccidentFormTableCell.swift in Sources */,
 				568E704826446E2D000CB6A9 /* MyReservationsViewController.swift in Sources */,
 				56AD192626934D7E006A53C1 /* EmailVerificationViewController.swift in Sources */,
 				56AD18EC2691622C006A53C1 /* SignInViewController.swift in Sources */,
@@ -2949,6 +3075,7 @@
 				5640395126EFA2590064256C /* ReservationWithReservedPaidModel.swift in Sources */,
 				568E706E264481B0000CB6A9 /* LeftTableViewCell.swift in Sources */,
 				566B3767269545540021BCAA /* MailBoxNumberTableViewCell.swift in Sources */,
+				564BE8762702068D0037DF39 /* DamageSideTableCell.swift in Sources */,
 				562585D126F0F5A500EC9284 /* PaymentStatusUITableView.swift in Sources */,
 				565BFDFF26A0D3960044D081 /* RestrictedZones.swift in Sources */,
 				56533EFF267954560012BF4A /* AccessoriesCollectionViewCell.swift in Sources */,
@@ -2978,6 +3105,7 @@
 				56CF784126F8AD7B0092F555 /* VehicleDimageCollectionCell.swift in Sources */,
 				565BFDC1269F92310044D081 /* UIApplicationExtention.swift in Sources */,
 				560FE63D267BE7960068BC85 /* ReserveViewController.swift in Sources */,
+				564BE88727026BA90037DF39 /* DamagesSideModel.swift in Sources */,
 				564E137126530208008CE884 /* SearchResultCollectionViewCell.swift in Sources */,
 				56CF783226F4F55F0092F555 /* VehicleCheckViewController.swift in Sources */,
 				56563214265683A000B78562 /* Validator.swift in Sources */,
@@ -3004,6 +3132,7 @@
 				565BFDDF269F9D140044D081 /* Time.swift in Sources */,
 				565BFD85269F55550044D081 /* APIProtocol.swift in Sources */,
 				5665403B26759E06008ACD31 /* TariffCarouselCell.swift in Sources */,
+				564BE86F2701F54B0037DF39 /* AddAccidentDetailsViewController.swift in Sources */,
 				5659B02B2699F5020059D28C /* PhoneCodeModel.swift in Sources */,
 				5657E85326713BD400788D62 /* DetailsModel.swift in Sources */,
 				565863B826C73F1A003C19A2 /* BkdOfficeInfoView.swift in Sources */,
@@ -3039,6 +3168,7 @@
 				9393BAF526D78BCD003878BF /* Message.swift in Sources */,
 				565BFDB5269F5B850044D081 /* BKDBaseURL.swift in Sources */,
 				56CFDE762693920E00D731CD /* RegistrationBotModel.swift in Sources */,
+				564BE87F2702225E0037DF39 /* DamageSidesTableView.swift in Sources */,
 				568E70172643919B000CB6A9 /* LeftViewController.swift in Sources */,
 				935D479C26D973F200D000A6 /* ChatViewModel.swift in Sources */,
 				5656F1A82689650600E70BAB /* ReserveViewModel.swift in Sources */,
@@ -3048,6 +3178,7 @@
 				93CDB1F326C1CBD5009F9B6C /* PaymentViewModel.swift in Sources */,
 				5656F196268936E000E70BAB /* MyDriversModel.swift in Sources */,
 				565A7AE326555EFF006C63D0 /* CategoryTableViewCell.swift in Sources */,
+				564BE882270222870037DF39 /* AccidentFormTableView.swift in Sources */,
 				568E701226438C08000CB6A9 /* MainViewController.swift in Sources */,
 				5656A9C926D69F7900A71375 /* GooglePlacesManager.swift in Sources */,
 				5660E61C26FE0BED009BB73F /* OnRideTableView.swift in Sources */,
@@ -3105,6 +3236,7 @@
 				5669F5FC26FC170D00FF73F7 /* ContactActionSheetView.swift in Sources */,
 				5640396326F0207F0064256C /* PayLaterViewController.swift in Sources */,
 				5656324626585FFF00B78562 /* CarEquipmentCollectionViewCell.swift in Sources */,
+				564BE885270223B70037DF39 /* DateAndLocationView.swift in Sources */,
 				560048702697F78C009943B5 /* BkdAgreementViewController.swift in Sources */,
 				564E13692652F0CF008CE884 /* PrivacyPoliceView.swift in Sources */,
 			);

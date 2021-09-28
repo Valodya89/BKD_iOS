@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19158" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19141"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -73,7 +73,7 @@
                                     <rect key="frame" x="19.5" y="0.0" width="375" height="184.5"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4r4-5e-fQc">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="40.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="41"/>
                                             <subviews>
                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="bj0-kI-5cT">
                                                     <rect key="frame" x="44" y="8.5" width="22" height="24"/>
@@ -89,7 +89,7 @@
                                                     </connections>
                                                 </button>
                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tmO-8r-1jE">
-                                                    <rect key="frame" x="11" y="4" width="25" height="33"/>
+                                                    <rect key="frame" x="11" y="3.5" width="25" height="34"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="FUY-fQ-I2a"/>
                                                     </constraints>
@@ -102,7 +102,7 @@
                                                     </connections>
                                                 </button>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Pick up date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TYJ-eF-Gi0" customClass="TextField" customModule="BKD" customModuleProvider="target">
-                                                    <rect key="frame" x="-4" y="0.0" width="191.5" height="40.5"/>
+                                                    <rect key="frame" x="-4" y="0.0" width="191.5" height="41"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="textColor" name="choose_date"/>
@@ -113,7 +113,7 @@
                                                     <rect key="frame" x="150.5" y="11" width="24" height="19"/>
                                                 </imageView>
                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e0t-1G-gII">
-                                                    <rect key="frame" x="198.5" y="4" width="25" height="33"/>
+                                                    <rect key="frame" x="198.5" y="3.5" width="25" height="34"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="sdJ-ad-oay"/>
                                                     </constraints>
@@ -139,7 +139,7 @@
                                                     </connections>
                                                 </button>
                                                 <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Return date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bwX-ZJ-q8Q" customClass="TextField" customModule="BKD" customModuleProvider="target">
-                                                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="40.5"/>
+                                                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="41"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="textColor" name="choose_date"/>
@@ -147,7 +147,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4vU-Vz-h4l">
-                                                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="40.5"/>
+                                                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="41"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <connections>
                                                         <action selector="returnDate:" destination="-1" eventType="touchUpInside" id="ZZf-g3-re9"/>
@@ -164,7 +164,7 @@
                                                     </constraints>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V8n-l9-qWR">
-                                                    <rect key="frame" x="-4" y="0.0" width="191.5" height="40.5"/>
+                                                    <rect key="frame" x="-4" y="0.0" width="191.5" height="41"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <connections>
                                                         <action selector="pickUp:" destination="-1" eventType="touchUpInside" id="v95-gp-SWN"/>
@@ -207,53 +207,53 @@
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q2i-C1-jfg">
-                                            <rect key="frame" x="0.0" y="26" width="375" height="41"/>
+                                            <rect key="frame" x="0.0" y="26.5" width="375" height="40.5"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="9"/>
                                             <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="znl-tL-DWZ">
-                                            <rect key="frame" x="0.0" y="59" width="375" height="40.5"/>
+                                            <rect key="frame" x="0.0" y="58.5" width="375" height="41"/>
                                             <subviews>
-                                                <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Pick up time" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pNe-Qs-AAU" customClass="TextField" customModule="BKD" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="187.5" height="40.5"/>
+                                                <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pNe-Qs-AAU" customClass="TextField" customModule="BKD" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="187.5" height="41"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="textColor" name="choose_date"/>
-                                                    <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="10"/>
+                                                    <color key="textColor" name="navigationBar"/>
+                                                    <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ei4-UY-1L4">
-                                                    <rect key="frame" x="0.0" y="0.0" width="187.5" height="40.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="187.5" height="41"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <connections>
                                                         <action selector="pickUpTime:" destination="-1" eventType="touchUpInside" id="eUc-Dg-CFU"/>
                                                     </connections>
                                                 </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="Z2P-aK-WOV">
-                                                    <rect key="frame" x="155" y="6.5" width="19.5" height="27.5"/>
+                                                    <rect key="frame" x="155" y="6.5" width="19.5" height="28"/>
                                                 </imageView>
-                                                <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Return time" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Kx-02-0qs" customClass="TextField" customModule="BKD" customModuleProvider="target">
-                                                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="40.5"/>
+                                                <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Kx-02-0qs" customClass="TextField" customModule="BKD" customModuleProvider="target">
+                                                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="41"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="textColor" name="choose_date"/>
-                                                    <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="10"/>
+                                                    <color key="textColor" name="navigationBar"/>
+                                                    <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Zy-yM-UGh">
-                                                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="40.5"/>
+                                                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="41"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <connections>
                                                         <action selector="returnTime:" destination="-1" eventType="touchUpInside" id="57r-HX-RGg"/>
                                                     </connections>
                                                 </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="6hM-fa-dqy">
-                                                    <rect key="frame" x="342" y="10.5" width="20" height="19.5"/>
+                                                    <rect key="frame" x="342" y="11" width="20" height="19"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="78S-Px-Zuk">
-                                                    <rect key="frame" x="187" y="3.5" width="1" height="33"/>
+                                                    <rect key="frame" x="187" y="4" width="1" height="33"/>
                                                     <color key="backgroundColor" red="0.86758053300000004" green="0.87751591210000002" blue="0.90697890520000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="1" id="4aD-bi-VrM"/>
@@ -299,10 +299,10 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y97-hQ-SNq">
-                                            <rect key="frame" x="0.0" y="117.5" width="375" height="40.5"/>
+                                            <rect key="frame" x="0.0" y="117" width="375" height="41"/>
                                             <subviews>
                                                 <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Lg-08-1AB">
-                                                    <rect key="frame" x="0.0" y="0.0" width="177.5" height="40.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="177.5" height="41"/>
                                                     <color key="backgroundColor" name="background"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="10"/>
                                                     <inset key="contentEdgeInsets" minX="11" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -319,7 +319,7 @@
                                                     <color key="backgroundColor" name="background"/>
                                                 </imageView>
                                                 <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gSd-Mj-GeT">
-                                                    <rect key="frame" x="197.5" y="0.0" width="177.5" height="40.5"/>
+                                                    <rect key="frame" x="197.5" y="0.0" width="177.5" height="41"/>
                                                     <color key="backgroundColor" name="background"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="10"/>
                                                     <inset key="contentEdgeInsets" minX="11" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -386,7 +386,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N8T-uH-pTC">
-                                            <rect key="frame" x="37" y="0.0" width="103" height="19.5"/>
+                                            <rect key="frame" x="37" y="0.0" width="93" height="19.5"/>
                                             <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="14"/>
                                             <state key="normal" title="Custom location">
                                                 <color key="titleColor" name="entered_date"/>
@@ -621,7 +621,7 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="choose_date">
-            <color red="0.55699998140335083" green="0.55699998140335083" blue="0.57599997520446777" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="entered_date">
             <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -417,23 +417,6 @@ class MainViewController: BaseViewController {
         }
     }
     
-    //Will put new values from pickerDate
-    func showSelectedDate(dayBtn : UIButton?, monthBtn: UIButton?) {
-        if responderTxtFl.tag > 1 {
-            responderTxtFl.font =  UIFont.init(name: (responderTxtFl.font?.fontName)!, size: 18.0)
-
-            responderTxtFl.text = pickerList![ pickerV.selectedRow(inComponent: 0)]
-//            responderTxtFl.text = datePicker.date.getHour()
-            responderTxtFl.textColor = color_entered_date
-            searchHeaderV?.mTimeLb.textColor = color_search_placeholder
-
-        } else {
-            dayBtn?.setTitle(datePicker.date.getDay(), for: .normal)
-            monthBtn?.setTitle(datePicker.date.getMonthAndWeek(lng: "en"), for: .normal)
-            searchHeaderV?.mDateLb.textColor = color_search_placeholder
-        }
-    }
-    
     ///will be show the selected location to map from the list of tables
     func showLocation() {
         searchHeaderV!.mLocationDropDownView.didSelectSeeMap = { [weak self] parkingModel  in
@@ -503,16 +486,6 @@ class MainViewController: BaseViewController {
         }
     }
     
-    /// Hide Date views in search View
-    func hideDateInfo(dayBtn : UIButton, monthBtn: UIButton, hidden: Bool, txtFl: UITextField)  {
-        dayBtn.isHidden = hidden
-        monthBtn.isHidden = hidden
-        if hidden == false {
-            responderTxtFl.text = ""
-        }
-    }
-    
-    
     /// Will open Chat View Controller
     private func openChatPage () {
         if mainViewModel.isOnline {
@@ -556,21 +529,13 @@ class MainViewController: BaseViewController {
         switch pickerState {
         case .pickUpDate:
             searchHeaderV?.pickUpDate = datePicker.date
-            hideDateInfo(dayBtn: searchHeaderV!.mDayPickUpBtn,
-                         monthBtn: searchHeaderV!.mMonthPickUpBtn,
-                         hidden: false, txtFl: responderTxtFl)
-            showSelectedDate(dayBtn: searchHeaderV!.mDayPickUpBtn,
-                             monthBtn: searchHeaderV!.mMonthPickUpBtn)
+            searchHeaderV!.updatePickUpDate(datePicker: datePicker)
             self.checkReservetionHalfHour()
 
         case .returnDate:
             checkMonthReservation()
             searchHeaderV?.returnDate = datePicker.date
-            hideDateInfo(dayBtn: searchHeaderV!.mDayReturnDateBtn,
-                         monthBtn: searchHeaderV!.mMonthReturnDateBtn,
-                         hidden: false, txtFl: responderTxtFl)
-            showSelectedDate(dayBtn: searchHeaderV!.mDayReturnDateBtn,
-                             monthBtn: searchHeaderV!.mMonthReturnDateBtn)
+            searchHeaderV?.updateReturnDate(datePicker: datePicker)
             self.checkReservetionHalfHour()
 
         default:
@@ -582,7 +547,7 @@ class MainViewController: BaseViewController {
                 //check if more then half hour
                 searchHeaderV?.returnTime = timeStr.stringToDate()
             }
-            showSelectedDate(dayBtn: nil, monthBtn: nil)
+            searchHeaderV?.updateTime(responderTxtFl: responderTxtFl, text: pickerList![ pickerV.selectedRow(inComponent: 0)])
             self.checkReservetionTime()
 
         }
@@ -876,11 +841,6 @@ extension MainViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerList![row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(pickerView.selectedRow(inComponent: component))
-        
     }
 }
 
