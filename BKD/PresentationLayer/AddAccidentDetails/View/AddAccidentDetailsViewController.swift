@@ -14,6 +14,7 @@ class AddAccidentDetailsViewController: BaseViewController {
     @IBOutlet weak var mDamageSideLb: UILabel!
     @IBOutlet weak var mDamageSideTbV: DamageSidesTableView!
     @IBOutlet weak var mDamageSideTableHeight: NSLayoutConstraint!
+    @IBOutlet weak var mAccidentFormHeight: NSLayoutConstraint!
     @IBOutlet weak var mFilledAccidentLb: UILabel!
     @IBOutlet weak var mAccidentFormTbV: AccidentFormTableView!
     @IBOutlet weak var mConfirmV: ConfirmView!
@@ -28,8 +29,9 @@ class AddAccidentDetailsViewController: BaseViewController {
 
     let backgroundV =  UIView()
     var responderTxtFl = UITextField()
-    
+    var isDamageSide = true
     var currIndexOfDamageSide: Int = 0
+    var currIndexOfAccidentForm: Int = 0
 
     
     //MARK: -- Life cicle
@@ -42,6 +44,7 @@ class AddAccidentDetailsViewController: BaseViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         mDamageSideTableHeight.constant = mDamageSideTbV.contentSize.height
+        mAccidentFormHeight.constant = mAccidentFormTbV.contentSize.height
 
     }
     
@@ -49,6 +52,7 @@ class AddAccidentDetailsViewController: BaseViewController {
     func setupView() {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = img_bkd
+        mConfirmV.needsCheck = true
         handlerConfirm()
     }
     
@@ -56,6 +60,7 @@ class AddAccidentDetailsViewController: BaseViewController {
     func configureDelegates() {
         mDateAndLocationV.delegate = self
         mDamageSideTbV.damageSidesDelegate = self
+        mAccidentFormTbV.accidentFormDelegate = self
         pickerV.delegate = self
     }
     
@@ -86,6 +91,7 @@ class AddAccidentDetailsViewController: BaseViewController {
         case .date:
             mDateAndLocationV.updateDateInfo(datePicker: datePicker)
         case .time :
+            mDateAndLocationV.mDropDownImgV.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
             mDateAndLocationV.updateTime(datePicker: datePicker)
         default:
             let side = sidesList[pickerV.selectedRow(inComponent: 0)]
@@ -104,16 +110,81 @@ class AddAccidentDetailsViewController: BaseViewController {
                               isTakePhoto:Bool?) {
         
         mDamageSideTbV.damageSideArr =    addAccidentDetailViewModel.updateDamageSideList(side: side,
-                                                          img: img,
-                                                          isTakePhoto: isTakePhoto, damageSideArr: mDamageSideTbV.damageSideArr, currIndex: currIndexOfDamageSide)       
+                                                                                          img: img,
+                                                                                          isTakePhoto: isTakePhoto,
+                                                                                          damageSideArr: mDamageSideTbV.damageSideArr,
+                                                                                          currIndex: currIndexOfDamageSide)
         mDamageSideTbV.reloadData()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4 ) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2 ) {
             self.view.setNeedsLayout()
 
         }
     }
     
     
+    ///Update accident form side list
+    func updateAccidentFormList(img: UIImage?,
+                                isTakePhoto:Bool?) {
+        
+        mAccidentFormTbV.accidentFormArr = addAccidentDetailViewModel.updateAccidentFormList(img: img,
+                                                                                             isTakePhoto: isTakePhoto,
+                                                                                             accidentFormArr: mAccidentFormTbV.accidentFormArr, currIndex: currIndexOfAccidentForm)
+        mAccidentFormTbV.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2 ) {
+            self.view.setNeedsLayout()
+
+        }
+    }
+    
+    ///Will present image Picker controller
+    private func presentPicker (sourceType: UIImagePickerController.SourceType) {
+       // isTakePhoto = true
+        let picker = UIImagePickerController()
+        picker.sourceType = sourceType
+        picker.delegate = self
+        present(picker, animated: true)
+    }
+    
+    
+    ///Will creat actionsheet for camera and photo library
+     func openActionSheetForPhoto() {
+        
+        let alert = UIAlertController(title: Constant.Texts.selecteImg, message: "", preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction (title: Constant.Texts.camera, style: .default) { [self] (action) in
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                self.presentPicker(sourceType: .camera)
+            }
+        }
+        
+        let photoLibraryAction = UIAlertAction (title: Constant.Texts.photoLibrary, style: .default) { [self] (action) in
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                self.presentPicker(sourceType: .photoLibrary)
+            }
+        }
+        let cancelAction = UIAlertAction (title: Constant.Texts.cancel, style: .cancel){ [self] (action) in
+            if isDamageSide {
+                self.updateDamageSideList(side:nil,
+                                     img: nil,
+                                     isTakePhoto: true)
+            } else {
+                updateAccidentFormList(img: nil, isTakePhoto: true)
+            }
+        }
+        
+        alert.addAction(cameraAction)
+        alert.addAction(photoLibraryAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true)
+    }
+    
+    ///Show alert forn confirm info of accident details
+    func showAlertForConfirm() {
+        BKDAlert().showAlert(on: self, message: Constant.Texts.confirmAccidentDetails, cancelTitle: Constant.Texts.cancel, okTitle: Constant.Texts.yes) {
+            
+        } okAction: {
+            
+        }
+    }
     
     //MARK: -- Actions
     @IBAction func back(_ sender: UIBarButtonItem) {
@@ -121,7 +192,34 @@ class AddAccidentDetailsViewController: BaseViewController {
     }
     
     func handlerConfirm() {
+        mConfirmV.willCheckConfirm = {
+            var isError = false
+            if !self.mDateAndLocationV.checkAllFieldsAreFilled()  {
+                isError = true
+            }
+            
+            if !self.addAccidentDetailViewModel.isAccidentFormIsFilled(accidentFormList: self.mAccidentFormTbV.accidentFormArr)  {
+                isError = true
+                self.mAccidentFormTbV.accidentFormArr[0] = AccidentFormModel(isTakePhoto: true, isError: true)
+                self.mAccidentFormTbV.reloadData()
+            }
+            
+            let damageSideCheck = self.addAccidentDetailViewModel.isDamagesSideIsFilled(damagesSideList: self.mDamageSideTbV.damageSideArr)
+            if !damageSideCheck.0 {
+                isError = true
+                self.mDamageSideTbV.damageSideArr = damageSideCheck.1
+                self.mDamageSideTbV.reloadData()
+            }
+            
+            if !isError {
+                self.mConfirmV.needsCheck = false
+                self.mConfirmV.clickConfirm()
+            }
+        }
         
+        mConfirmV.didPressConfirm = {
+            self.showAlertForConfirm()
+        }
     }
 }
 
@@ -153,9 +251,7 @@ extension AddAccidentDetailsViewController: DateAndLocationViewDelegate {
         }
         
     }
-    
-    
-    
+        
     func openMap() {
         self.goToSeeMap(parking: nil)
     }
@@ -166,35 +262,15 @@ extension AddAccidentDetailsViewController: DateAndLocationViewDelegate {
 //MARK: ---------------------------------
 extension AddAccidentDetailsViewController: DamageSidesTableViewDelegate {
     
-    func didPressTakePhoto() {
-        ///Will creat actionshit for camera and photo library
-        let alert = UIAlertController(title: Constant.Texts.selecteImg, message: "", preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction (title: Constant.Texts.camera, style: .default) { [self] (action) in
-            if UIImagePickerController.isSourceTypeAvailable(.camera) {
-                self.presentPicker(sourceType: .camera)
-            }
-        }
-        
-        let photoLibraryAction = UIAlertAction (title: Constant.Texts.photoLibrary, style: .default) { [self] (action) in
-            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-                self.presentPicker(sourceType: .photoLibrary)
-            }
-        }
-        let cancelAction = UIAlertAction (title: Constant.Texts.cancel, style: .cancel){ [self] (action) in
-            self.updateDamageSideList(side:nil,
-                                 img: nil,
-                                 isTakePhoto: true)
-            
-        }
-        
-        alert.addAction(cameraAction)
-        alert.addAction(photoLibraryAction)
-        alert.addAction(cancelAction)
-        self.present(alert, animated: true)
-        
+    func didPressTakePhoto(index: Int) {
+        isDamageSide = true
+        currIndexOfDamageSide = index
+        openActionSheetForPhoto()
     }
     
-    func didPressAddMore() {
+    func didPressAddMore(index: Int) {
+        
+        currIndexOfDamageSide = index
         mDamageSideTbV.damageSideArr = addAccidentDetailViewModel.addDamageSide(damageSideArr: mDamageSideTbV.damageSideArr)
         mDamageSideTbV.reloadData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2 ) {
@@ -211,17 +287,32 @@ extension AddAccidentDetailsViewController: DamageSidesTableViewDelegate {
         responderTxtFl = textFl
         self.currIndexOfDamageSide = textFl.tag
     }
+        
+}
+
+
+
+//MARK: -- AccidentFormTableViewDelegate
+//MARK: ---------------------------------
+extension AddAccidentDetailsViewController: AccidentFormTableViewDelegate{
     
-    ///Will present image Picker controller
-    private func presentPicker (sourceType: UIImagePickerController.SourceType) {
-       // isTakePhoto = true
-        let picker = UIImagePickerController()
-        picker.sourceType = sourceType
-        picker.delegate = self
-        present(picker, animated: true)
+    func pressedTakePhoto(index: Int) {
+        isDamageSide = false
+        currIndexOfAccidentForm = index
+        openActionSheetForPhoto()
+        
     }
     
-    
+    func pressedAddMore(index: Int) {
+        currIndexOfAccidentForm = index
+        mAccidentFormTbV.accidentFormArr = addAccidentDetailViewModel.addAccidentForm(accidentFormList: mAccidentFormTbV.accidentFormArr)
+        mAccidentFormTbV.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2 ) {
+            self.view.setNeedsLayout()
+
+        }
+    }
+     
 }
 
 
@@ -249,10 +340,14 @@ extension AddAccidentDetailsViewController: UIImagePickerControllerDelegate, UIN
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
-        updateDamageSideList(side:nil,
-                             img: nil,
-                             isTakePhoto: true)
-
+        
+        if isDamageSide {
+            updateDamageSideList(side:nil,
+                                 img: nil,
+                                 isTakePhoto: true)
+        } else {
+            updateAccidentFormList(img: nil, isTakePhoto: true)
+        }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -260,13 +355,15 @@ extension AddAccidentDetailsViewController: UIImagePickerControllerDelegate, UIN
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
              return  }
-        updateDamageSideList(side:nil,
-                             img: image,
-                             isTakePhoto: false)
-       // if isTakePhoto {
-           // uploadImage(image: image)
-            
-        //}
+        
+        if isDamageSide {
+            updateDamageSideList(side:nil,
+                                 img: image,
+                                 isTakePhoto: false)
+        } else {
+            updateAccidentFormList(img: image, isTakePhoto: false)
+        }
+        
     }
     
    

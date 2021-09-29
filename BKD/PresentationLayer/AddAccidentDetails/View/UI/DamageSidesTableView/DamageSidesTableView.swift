@@ -10,8 +10,8 @@ import UIKit
 
 protocol DamageSidesTableViewDelegate: AnyObject {
     func willOpenPicker(textFl: UITextField)
-    func didPressTakePhoto()
-    func didPressAddMore()
+    func didPressTakePhoto(index: Int)
+    func didPressAddMore(index: Int)
 }
 
 class DamageSidesTableView: UITableView, UITableViewDelegate, UITableViewDataSource  {
@@ -27,10 +27,6 @@ class DamageSidesTableView: UITableView, UITableViewDelegate, UITableViewDataSou
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
-    }
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
     }
     
     func setupView() {
@@ -54,12 +50,11 @@ class DamageSidesTableView: UITableView, UITableViewDelegate, UITableViewDataSou
         cell.willOpenPicker = {textFl in
             self.damageSidesDelegate?.willOpenPicker(textFl: textFl)
         }
-        cell.didPressTakePhoto = {
-            self.damageSidesDelegate?.didPressTakePhoto()
+        cell.didPressTakePhoto = { index in
+            self.damageSidesDelegate?.didPressTakePhoto(index: index)
         }
-        cell.didPressAddMore = {
-            self.damageSidesDelegate?.didPressAddMore()
-
+        cell.didPressAddMore = { index in
+            self.damageSidesDelegate?.didPressAddMore(index: index)
         }
         return cell
     }

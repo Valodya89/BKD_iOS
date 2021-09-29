@@ -148,6 +148,8 @@
 		565A7AD72654C49B006C63D0 /* CategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565A7AD52654C49B006C63D0 /* CategoryCollectionViewCell.xib */; };
 		565A7AE326555EFF006C63D0 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565A7AE126555EFF006C63D0 /* CategoryTableViewCell.swift */; };
 		565A7AE426555EFF006C63D0 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565A7AE226555EFF006C63D0 /* CategoryTableViewCell.xib */; };
+		565A9F642703616F00C3C36B /* AccidentFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565A9F632703616F00C3C36B /* AccidentFormModel.swift */; };
+		565A9F672703D33500C3C36B /* SwitchDriversTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565A9F662703D33500C3C36B /* SwitchDriversTableView.swift */; };
 		565BD3602659AED1001923F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565BD35F2659AED1001923F5 /* AppDelegate.swift */; };
 		565BFD76269F4C5A0044D081 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565BFD75269F4C5A0044D081 /* Car.swift */; };
 		565BFD85269F55550044D081 /* APIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565BFD82269F55550044D081 /* APIProtocol.swift */; };
@@ -479,6 +481,8 @@
 		565A7AD52654C49B006C63D0 /* CategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		565A7AE126555EFF006C63D0 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		565A7AE226555EFF006C63D0 /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
+		565A9F632703616F00C3C36B /* AccidentFormModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccidentFormModel.swift; sourceTree = "<group>"; };
+		565A9F662703D33500C3C36B /* SwitchDriversTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchDriversTableView.swift; sourceTree = "<group>"; };
 		565BD35F2659AED1001923F5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		565BFD75269F4C5A0044D081 /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 		565BFD82269F55550044D081 /* APIProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIProtocol.swift; sourceTree = "<group>"; };
@@ -978,6 +982,8 @@
 		564BE86B2701F5070037DF39 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				564BE88627026BA80037DF39 /* DamagesSideModel.swift */,
+				565A9F632703616F00C3C36B /* AccidentFormModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1471,7 +1477,6 @@
 		5658BDF726FBEC8600A5B122 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				564BE88627026BA80037DF39 /* DamagesSideModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1544,6 +1549,14 @@
 				56409532264AE5A8001DC92D /* Data.swift */,
 			);
 			path = DataHelper;
+			sourceTree = "<group>";
+		};
+		565A9F652703D31200C3C36B /* SwitchDriversTableView */ = {
+			isa = PBXGroup;
+			children = (
+				565A9F662703D33500C3C36B /* SwitchDriversTableView.swift */,
+			);
+			path = SwitchDriversTableView;
 			sourceTree = "<group>";
 		};
 		565BFD79269F535D0044D081 /* Network */ = {
@@ -1785,6 +1798,7 @@
 		565F9B0126C8ADC100064AD4 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				565A9F652703D31200C3C36B /* SwitchDriversTableView */,
 				564ED63A270052F900FA9714 /* EditReservetionAdvancedViewController */,
 				5660E61A26FE0BC4009BB73F /* OnRideTableView */,
 				5692658426F3B15600004E81 /* EditBySearchView */,
@@ -2806,7 +2820,7 @@
 				568E6F4C2642FC4B000CB6A9 /* Resources */,
 				565F8C65268D390600E21C71 /* Embed Frameworks */,
 				995B321BDC49670283C49A78 /* [CP] Embed Pods Frameworks */,
-				8FBFFE3E8FFEA4240B0E0919 /* [CP] Copy Pods Resources */,
+				70A2094758486EB96AC333E7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2974,7 +2988,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8FBFFE3E8FFEA4240B0E0919 /* [CP] Copy Pods Resources */ = {
+		70A2094758486EB96AC333E7 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3036,6 +3050,7 @@
 				5692658B26F3B71C00004E81 /* WaithingAdminApplovalCell.swift in Sources */,
 				565731EE26730F270012ADD0 /* DetailsTableView.swift in Sources */,
 				56A2AFDF2693F221001BA7C5 /* ExamplePhotoTableViewCell.swift in Sources */,
+				565A9F672703D33500C3C36B /* SwitchDriversTableView.swift in Sources */,
 				56AD190D26931AB2006A53C1 /* CheckEmailViewController.swift in Sources */,
 				56C8E172267C1D100061890C /* ReserveTableViewCell.swift in Sources */,
 				565BFDFB26A0C3800044D081 /* CarTypes.swift in Sources */,
@@ -3161,6 +3176,7 @@
 				565BFD93269F57CF0044D081 /* BkdError.swift in Sources */,
 				5640396026F01D530064256C /* ReservetionWithPayRentalPriceCell.swift in Sources */,
 				5660E61926FE0376009BB73F /* AdvancedWithOnRideCell.swift in Sources */,
+				565A9F642703616F00C3C36B /* AccidentFormModel.swift in Sources */,
 				5692658626F3B1B000004E81 /* EditBySearchView.swift in Sources */,
 				565BFD97269F58460044D081 /* MultipartFormData.swift in Sources */,
 				565BFD9B269F586D0044D081 /* RequestMethod.swift in Sources */,

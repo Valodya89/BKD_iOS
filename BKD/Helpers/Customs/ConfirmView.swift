@@ -16,8 +16,9 @@ class ConfirmView: UIView {
   
     //MARK: --Variables
     var didPressConfirm:(()-> Void)?
+    var willCheckConfirm:(()-> Void)?
     var title: String?
-    
+    var needsCheck = false
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -35,7 +36,7 @@ class ConfirmView: UIView {
     }
     
     /// Animate Confirm click
-    private func clickConfirm() {
+    public func clickConfirm() {
         UIView.animate(withDuration: 0.5) { [self] in
             self.mConfirmBtnLeading.constant = self.bounds.width - self.mConfirmBtn.frame.size.width
             self.layoutIfNeeded()
@@ -47,10 +48,19 @@ class ConfirmView: UIView {
     
     //MARK: -- Actions
     @IBAction func confirm(_ sender: UIButton) {
-        clickConfirm()
+        if needsCheck {
+            willCheckConfirm?()
+        } else {
+            clickConfirm()
+
+        }
     }
     
     @IBAction func swipe(_ sender: UISwipeGestureRecognizer) {
-        clickConfirm()
+        if needsCheck {
+            willCheckConfirm?()
+        } else {
+            clickConfirm()
+        }
     }
 }

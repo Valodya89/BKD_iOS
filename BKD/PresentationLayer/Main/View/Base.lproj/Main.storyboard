@@ -257,17 +257,8 @@
                     <view key="view" contentMode="scaleToFill" id="A1I-cU-SsK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xd4-CU-VYz">
-                                <rect key="frame" x="16" y="0.0" width="382" height="273"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="pmx-4J-saQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="xd4-CU-VYz" firstAttribute="height" secondItem="A1I-cU-SsK" secondAttribute="height" multiplier="0.337871" id="Yyf-D1-hco"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My Reservation" id="3IS-eZ-wTf">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="menu" id="Z62-eQ-Ljg"/>
@@ -605,21 +596,44 @@ IAo
                                     <action selector="reservation:" destination="4kt-qQ-nUS" eventType="valueChanged" id="ady-71-PHo"/>
                                 </connections>
                             </segmentedControl>
+                            <visualEffectView hidden="YES" opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uaz-Le-yR6">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000000000000004" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="dOc-VJ-itm">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="goa-9s-Ya0" customClass="SwitchDriversTableView" customModule="BKD" customModuleProvider="target">
+                                <rect key="frame" x="16" y="1095" width="382" height="130"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="YNe-Pj-tBY"/>
+                                </constraints>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KTz-7d-pnZ"/>
                         <color key="backgroundColor" name="background"/>
                         <constraints>
                             <constraint firstItem="KTz-7d-pnZ" firstAttribute="trailing" secondItem="q1g-Dc-u7l" secondAttribute="trailing" id="4eK-wZ-zIV"/>
+                            <constraint firstItem="Uaz-Le-yR6" firstAttribute="centerX" secondItem="KTz-7d-pnZ" secondAttribute="centerX" id="6MP-sU-iEl"/>
                             <constraint firstItem="tap-qR-AYC" firstAttribute="width" secondItem="j4K-5k-2Pn" secondAttribute="width" multiplier="0.601449" id="B5c-C9-Vh6"/>
                             <constraint firstItem="KTz-7d-pnZ" firstAttribute="bottom" secondItem="q1g-Dc-u7l" secondAttribute="bottom" id="DFN-CM-HoX"/>
                             <constraint firstItem="q1g-Dc-u7l" firstAttribute="top" secondItem="nEd-dq-w9V" secondAttribute="bottom" multiplier="1.9" id="EnH-hb-IMs"/>
+                            <constraint firstItem="Uaz-Le-yR6" firstAttribute="centerY" secondItem="KTz-7d-pnZ" secondAttribute="centerY" id="FYX-G0-EhI"/>
+                            <constraint firstItem="goa-9s-Ya0" firstAttribute="centerX" secondItem="KTz-7d-pnZ" secondAttribute="centerX" id="LTN-NB-8Hd"/>
                             <constraint firstItem="nEd-dq-w9V" firstAttribute="width" secondItem="j4K-5k-2Pn" secondAttribute="width" multiplier="0.828502" id="MFF-xs-JC5"/>
                             <constraint firstItem="nEd-dq-w9V" firstAttribute="centerY" secondItem="KTz-7d-pnZ" secondAttribute="centerY" multiplier="0.07" id="RHf-UF-XnO"/>
                             <constraint firstItem="q1g-Dc-u7l" firstAttribute="leading" secondItem="KTz-7d-pnZ" secondAttribute="leading" multiplier="1.2" id="TRk-3p-Dag"/>
+                            <constraint firstItem="goa-9s-Ya0" firstAttribute="width" secondItem="j4K-5k-2Pn" secondAttribute="width" multiplier="0.922" id="apG-cW-4JR"/>
                             <constraint firstItem="tap-qR-AYC" firstAttribute="centerX" secondItem="KTz-7d-pnZ" secondAttribute="centerX" id="cO0-5Z-bmM"/>
                             <constraint firstItem="nEd-dq-w9V" firstAttribute="height" secondItem="j4K-5k-2Pn" secondAttribute="height" multiplier="0.0371287" id="iWy-Dj-ZNy"/>
                             <constraint firstItem="tap-qR-AYC" firstAttribute="height" secondItem="j4K-5k-2Pn" secondAttribute="height" multiplier="0.121287" id="kUN-RM-IPR"/>
                             <constraint firstItem="nEd-dq-w9V" firstAttribute="centerX" secondItem="KTz-7d-pnZ" secondAttribute="centerX" id="mQn-QH-mdk"/>
+                            <constraint firstItem="Uaz-Le-yR6" firstAttribute="height" secondItem="KTz-7d-pnZ" secondAttribute="height" id="mg2-8F-YGL"/>
+                            <constraint firstItem="KTz-7d-pnZ" firstAttribute="bottom" secondItem="goa-9s-Ya0" secondAttribute="bottom" constant="-500" id="nUa-dE-ztL"/>
+                            <constraint firstItem="Uaz-Le-yR6" firstAttribute="width" secondItem="j4K-5k-2Pn" secondAttribute="width" id="sgU-5K-lVc"/>
                             <constraint firstItem="tap-qR-AYC" firstAttribute="centerY" secondItem="KTz-7d-pnZ" secondAttribute="centerY" multiplier="0.595" id="uj9-tI-tTO"/>
                         </constraints>
                     </view>
@@ -632,10 +646,15 @@ IAo
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="mGradientV" destination="dOc-VJ-itm" id="HCk-9U-3Kh"/>
                         <outlet property="mNoReservationContentV" destination="tap-qR-AYC" id="RgR-Hz-Wxm"/>
                         <outlet property="mNoReservationLb" destination="FdB-rH-JUz" id="Kn5-cn-keK"/>
                         <outlet property="mReservCollectionV" destination="q1g-Dc-u7l" id="oo9-iB-BZT"/>
                         <outlet property="mReservationSegmentedC" destination="nEd-dq-w9V" id="8mY-tq-n1z"/>
+                        <outlet property="mSwitchDriversBottom" destination="nUa-dE-ztL" id="5Ru-1S-9VW"/>
+                        <outlet property="mSwitchDriversTbHeight" destination="YNe-Pj-tBY" id="6lZ-EU-7pz"/>
+                        <outlet property="mSwitchDriversTbV" destination="goa-9s-Ya0" id="Dzh-X0-oMh"/>
+                        <outlet property="mVissualEffectV" destination="Uaz-Le-yR6" id="s2G-oG-BYp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sTd-HO-yt5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -48,6 +48,9 @@ class DateAndLocationView: UIView, UITextFieldDelegate {
     weak var delegate: DateAndLocationViewDelegate?
     var dateAndLocationState: DateAndLocationState?
     
+    var date: Date?
+    var time: Date?
+    var location:String?
     
     //MARK: -- Life cicle
     override func awakeFromNib() {
@@ -64,9 +67,9 @@ class DateAndLocationView: UIView, UITextFieldDelegate {
         mLocationV.setBorder(color: color_navigationBar!, width: 1.0)
         
         //Set placeholder
-        mDateTxtFl.setPlaceholder(string: Constant.Texts.selectDate, font: font_placeholder!, color: color_choose_date!)
-        mTimeTxtFl.setPlaceholder(string: Constant.Texts.selectTime, font: font_placeholder!, color: color_choose_date!)
-        mLocationTxtFl.setPlaceholder(string: Constant.Texts.accidentAddress, font: font_placeholder!, color: color_choose_date!)
+        mDateTxtFl.setPlaceholder(string: Constant.Texts.selectDate, font: font_placeholder!, color: color_search_placeholder!)
+        mTimeTxtFl.setPlaceholder(string: Constant.Texts.selectTime, font: font_placeholder!, color: color_search_placeholder!)
+        mLocationTxtFl.setPlaceholder(string: Constant.Texts.accidentAddress, font: font_placeholder!, color: color_search_placeholder!)
         mMapBtn.setTitle("", for: .normal)
         
     }
@@ -82,6 +85,8 @@ class DateAndLocationView: UIView, UITextFieldDelegate {
     
     ///Update date information
     func updateDateInfo(datePicker: UIDatePicker)  {
+        mDateBtn.layer.borderColor = color_navigationBar!.cgColor
+        date = datePicker.date
         mDateTxtFl.isHidden = true
         mDayBtn.isHidden = false
         mMonthBtn.isHidden = false
@@ -93,12 +98,28 @@ class DateAndLocationView: UIView, UITextFieldDelegate {
     
      ///Update time information
     func updateTime(datePicker: UIDatePicker) {
-        print (datePicker.date)
-
+        mTimeBtn.layer.borderColor = color_navigationBar!.cgColor
+        time = datePicker.date
         mTimeTxtFl.text = String(datePicker.date.getTime())
     }
     
-    
+    ///Are filled all fields
+    func checkAllFieldsAreFilled() -> Bool {
+        var areFilled =  true
+        if date == nil  {
+            mDateBtn.layer.borderColor = color_error!.cgColor
+            areFilled = false
+          }
+        if time == nil {
+            mTimeBtn.layer.borderColor = color_error!.cgColor
+            areFilled = false
+        }
+        if location == nil ||  location?.count == 0 {
+            mLocationV.layer.borderColor = color_error!.cgColor
+            areFilled = false
+          }
+        return areFilled
+    }
     
     //MARK: -- Actios
     
@@ -109,6 +130,7 @@ class DateAndLocationView: UIView, UITextFieldDelegate {
     
     @IBAction func time(_ sender: UIButton) {
         dateAndLocationState = .time
+        mDropDownImgV.rotateImage(rotationAngle: CGFloat(Double.pi))
         mTimeTxtFl.becomeFirstResponder()
     }
     
@@ -124,12 +146,33 @@ class DateAndLocationView: UIView, UITextFieldDelegate {
         } else {
             delegate?.willOpenPicker(textFl: textField, dateAndLocationState: dateAndLocationState!)
         }
-        
-        
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == mLocationTxtFl {
+            mLocationV.layer.borderColor = color_navigationBar!.cgColor
+        }
+        return true
+
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == mLocationTxtFl {
+            location = textField.text
+        }
         mLocationTxtFl.resignFirstResponder()
         return true
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == mLocationTxtFl {
+            let fullText = textField.text! + string
+            if fullText.count > 0 {
+                location = textField.text
+            }
+        }
+        
+        return true
+    }
+    
 }

@@ -21,22 +21,41 @@ class AditionalDriverTableCell: UITableViewCell {
     @IBOutlet weak var mDriverNameLb: UILabel!
     @IBOutlet weak var mDriverNumberLb: UILabel!
     
-
+    var isSwitchDriver = false
     //MARK: -- Life cicle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        setupView()
+    }
+    
+    func setupView() {
+        if isSwitchDriver {
+            mDriverNumberLb.textColor = color_email!
+            mDriverNumberLb.font = font_selected_filter!
+        }
+        
     }
     
     override func prepareForReuse() {
+        setupView()
+        mAdditionalDriverHeight.constant = 17
+        mDriverNumberLb.text = ""
+        mDriverNumberLb.text = ""
    }
    
    
    func setCellInfo(item: MyDriversModel, index: Int) {
-       mAdditionalDriverLb.isHidden = (index != 0)
-       if index != 0 {
+       if isSwitchDriver {
+           mAdditionalDriverLb.isHidden = false
            mAdditionalDriverHeight.constant = 0
+
+       } else {
+           mAdditionalDriverLb.isHidden = (index != 0)
+           if index != 0 {
+               mAdditionalDriverHeight.constant = 0
+           }
        }
+       
        mDriverNameLb.text = item.fullname
        mDriverNumberLb.text = item.licenciNumber
    }

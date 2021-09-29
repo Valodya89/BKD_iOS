@@ -15,8 +15,16 @@ class MyReservationsViewController: BaseViewController {
     @IBOutlet weak var mNoReservationContentV: UIView!
     @IBOutlet weak var mNoReservationLb: UILabel!
     @IBOutlet weak var mReservationSegmentedC: UISegmentedControl!
-    @IBOutlet weak var mVisualEffectV: UIVisualEffectView!
+    
+    //Switch driver table
+    @IBOutlet weak var mSwitchDriversTbV: SwitchDriversTableView!
+    @IBOutlet weak var mSwitchDriversTbHeight: NSLayoutConstraint!
+    @IBOutlet weak var mSwitchDriversBottom: NSLayoutConstraint!
+    
+    ///Visual effect
+    @IBOutlet weak var mVissualEffectV: UIVisualEffectView!
     @IBOutlet weak var mGradientV: UIView!
+    
     
     //MARK -- Variables
     var menu: SideMenuNavigationController?
@@ -36,11 +44,22 @@ class MyReservationsViewController: BaseViewController {
         tabBarController?.tabBar.isHidden = false
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if mSwitchDriversTbV.contentSize.height > 260 {
+            mSwitchDriversTbHeight.constant = 260
+        } else {
+            mSwitchDriversTbHeight.constant = mSwitchDriversTbV.contentSize.height
+        }
+        
+    }
+    
     func setupView() {
         menu = SideMenuNavigationController(rootViewController: LeftViewController())
         self.setmenu(menu: menu)
         mNoReservationContentV.isHidden = ReservationWithReservedPaidData.reservationWithReservedPaidModel.count > 0
-        
+        mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
+        mSwitchDriversTbV.switchDriversDelegate = self
         registerCollectionCells()
     }
     
@@ -81,14 +100,28 @@ class MyReservationsViewController: BaseViewController {
         self.navigationController?.pushViewController(myReservetionAdvancedVC, animated: true)
     }
     
+    
+    ///Configure
+    private func animateSwitchDriversTable() {                self.mSwitchDriversTbV.isScrollEnabled = false
+        mVissualEffectV.isHidden = false
+        UIView.animate(withDuration: 0.5) {
+            self.mSwitchDriversBottom.constant = 10
+            self.view.layoutIfNeeded()
+        } completion: { _ in
+            if self.mSwitchDriversTbV.contentSize.height >  self.mSwitchDriversTbHeight.constant {
+                self.mSwitchDriversTbV.isScrollEnabled = true
+            }
+        }
+    }
+    
+    
     ///Show alert for switch driver
-    private func showAlertForSwitchDriver() {
+    private func showAlertForSwitchDriver(driverName: String) {
         BKDAlert().showAlert(on: self,
-                             message: String(format: Constant.Texts.confirmSwitchDriver, "Name Surname"),
+                             message: String(format: Constant.Texts.confirmSwitchDriver, driverName),
                              cancelTitle: Constant.Texts.cancel,
                              okTitle: Constant.Texts.confirm,
                              cancelAction: nil) {
-            
         }
     }
         
@@ -122,7 +155,7 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return ReservationWithReservedPaidData.reservationWithReservedPaidModel.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = ReservationWithReservedPaidData.reservationWithReservedPaidModel[indexPath.item]
         
@@ -268,7 +301,8 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
             self.goToAddDamage()
         }
         cell.pressedSwitchDriver = {
-            self.showAlertForSwitchDriver()
+            self.animateSwitchDriversTable()
+           // self.showAlertForSwitchDriver()
         }
         cell.pressedSeeMap = {
             self.goToSeeMap(parking: nil)
@@ -334,4 +368,21 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         cell.setCellInfo()
         return cell
     }
+}
+
+extension MyReservationsViewController: SwitchDriversTableViewDelegate {
+    
+    func didPressCell(item: MyDriversModel) {
+        
+        UIView.animate(withDuration: 0.5) {
+            self.mSwitchDriversTbHeight.constant = -500
+            self.view.layoutIfNeeded()
+            self.view.setNeedsLayout()
+        } completion: { _ in
+            self.mVissualEffectV.isHidden = true
+            self.showAlertForSwitchDriver(driverName: item.fullname)
+        }
+    }
+
+        
 }

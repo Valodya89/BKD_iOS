@@ -7,14 +7,52 @@
 
 import UIKit
 
-class AccidentFormTableView: UITableView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
+protocol AccidentFormTableViewDelegate: AnyObject {
+    func pressedTakePhoto(index: Int)
+    func pressedAddMore(index: Int)
 }
+
+class AccidentFormTableView: UITableView, UITableViewDelegate, UITableViewDataSource  {
+    
+    //MARK: -- Variables
+    var accidentFormArr:[AccidentFormModel] = [AccidentFormModel(accidentFormImg: nil, isTakePhoto: true)]
+    weak var accidentFormDelegate: AccidentFormTableViewDelegate?
+    
+    
+    //MARK: -- Life cicle
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setupView()
+    }
+    
+    func setupView() {
+        self.delegate = self
+        self.dataSource = self
+        self.register(AccidentFormTableCell.nib(), forCellReuseIdentifier: AccidentFormTableCell.identifier)
+    }
+
+    
+    
+    //MARK: UITableViewDataSource
+    //MARK: ----------------------------------
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return  accidentFormArr.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: AccidentFormTableCell.identifier, for: indexPath) as! AccidentFormTableCell
+        cell.setCallInfo(itemList: accidentFormArr, index: indexPath.row)
+        
+        cell.didPressTakePhoto = { index in
+            self.accidentFormDelegate?.pressedTakePhoto(index: index)
+        }
+        cell.didPressAddMore = { index in
+            self.accidentFormDelegate?.pressedAddMore(index: index)
+        }
+        return cell
+    }
+}
+
+    
+ 

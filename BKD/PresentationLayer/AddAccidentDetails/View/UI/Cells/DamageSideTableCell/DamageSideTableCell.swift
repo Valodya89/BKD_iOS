@@ -42,8 +42,8 @@ class DamageSideTableCell: UITableViewCell, UITextFieldDelegate {
     //MARK: -- Viriables
     
     var willOpenPicker:((UITextField) -> Void)?
-    var didPressTakePhoto:(()->Void)?
-    var didPressAddMore:(()->Void)?
+    var didPressTakePhoto:((Int)->Void)?
+    var didPressAddMore:((Int)->Void)?
     
     //MARK: --Life cicle
     override func awakeFromNib() {
@@ -72,7 +72,8 @@ class DamageSideTableCell: UITableViewCell, UITextFieldDelegate {
         mTakePhotoContentV.backgroundColor = color_background
         mTakePhotoLb.textColor = color_navigationBar!
         mCameraImgV.setTintColor(color: color_navigationBar!)
-        
+        mSelectSideTxtFl.layer.borderColor = color_navigationBar!.cgColor
+
         mSelectSideTxtFl.text = ""
         mAddAndTakePhotoContentV.isHidden = false
         mDemageImgContentV.isHidden = true
@@ -86,6 +87,7 @@ class DamageSideTableCell: UITableViewCell, UITextFieldDelegate {
         let item = itemList[index]
         mSelectSideTxtFl.tag = index
         mSelectSideBtn.tag = index
+        mTakePhotoBtn.tag = index
         mAddMoreBtn.tag = index
         mSelectSideBtn.addTarget(self, action: #selector(selecteSide(sender: )), for: .touchUpInside)
         mAddMoreBtn.addTarget(self, action: #selector(addMore(sender: )), for: .touchUpInside)
@@ -93,6 +95,7 @@ class DamageSideTableCell: UITableViewCell, UITextFieldDelegate {
         mTakePhotoContentV.isHidden = !item.isTakePhoto
 
         if let side = item.damageSide {
+            mSelectSideDropDownImgV.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
             mSelectSideTxtFl.text = side
         }
         
@@ -107,24 +110,47 @@ class DamageSideTableCell: UITableViewCell, UITextFieldDelegate {
             }
         }
         
-        
+        if item.isDamageSideError {
+            mSelectSideTxtFl.layer.borderColor = color_error!.cgColor
+        }
+        updateTakePhoto(isError: item.isTakePhotoError)
+
     }
 
+    ///Update take photo button style
+    private func updateTakePhoto(isError: Bool) {
+        
+        let color:UIColor = isError ? color_error! : color_navigationBar!
+        mTakePhotoLb.textColor = color
+        mTakePhotoContentV.layer.borderColor = color.cgColor
+        mCameraImgV.setTintColor(color: color)
+    }
     
+    
+    /// pressed take photo button
     @IBAction func takePhoto(_ sender: UIButton) {
         mTakePhotoContentV.backgroundColor = color_navigationBar!
+        mTakePhotoContentV.layer.borderColor = color_navigationBar!.cgColor
         mCameraImgV.setTintColor(color: .white)
         mTakePhotoLb.textColor = .white
         
-        didPressTakePhoto?()
+        didPressTakePhoto?(sender.tag)
     }
     
+    /// pressed select side button
     @objc func selecteSide(sender: UIButton) {
+        mSelectSideDropDownImgV.rotateImage(rotationAngle: CGFloat(Double.pi))
         mSelectSideTxtFl.becomeFirstResponder()
     }
     
+    /// pressed add more button
     @objc func addMore(sender: UIButton) {
-        didPressAddMore?()
+        if mSelectSideTxtFl.text == nil ||
+            mSelectSideTxtFl.text == "" {
+            mSelectSideTxtFl.layer.borderColor = color_error!.cgColor
+        } else {
+            didPressAddMore?(sender.tag)
+        }
     }
     
     //MARK: -- UITextFieldDelegate

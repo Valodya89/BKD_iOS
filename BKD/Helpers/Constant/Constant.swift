@@ -291,6 +291,8 @@ struct Constant {
         static let backSide = "Back side"
         static let rightSide = "Right side"
         static let leftSide = "Left side"
+        static let confirmAccidentDetails = "Do you confirm the accident details and all the provided information assurance?"
+        static let yes = "Yes"
 
         
         //Verify
@@ -383,6 +385,7 @@ let height48 = 48
 let main_subwidth = UIScreen.main.bounds.width * 0.158416
 let reservation_no_carNumber_height = UIScreen.main.bounds.height * 0.306931
 let reservation_with_carNumber_height = UIScreen.main.bounds.height * 0.391089
+let height42 = UIScreen.main.bounds.height * 0.0519
 let height307 = UIScreen.main.bounds.height * 0.379
 let height245 = UIScreen.main.bounds.height * 0.303
 let height240 = UIScreen.main.bounds.height * 0.297
