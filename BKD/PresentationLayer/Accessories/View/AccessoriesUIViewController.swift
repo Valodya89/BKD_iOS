@@ -26,11 +26,14 @@ class AccessoriesUIViewController: BaseViewController {
     
     //MARK: -- VAriables
     public var isEditReservation:Bool = false
-
+    var accessoriesList:[Accessories]?
+    var accessoriesEditList: [AccessoriesEditModel]?
     let accessoriesViewModel = AccessoriesViewModel()
     var totalPrice:Double = 0
     weak var delegate:AccessoriesUIViewControllerDelegate?
     
+    public var vehicleModel:VehicleModel?
+
     
     //MARK: life cycle
     override func viewDidLoad() {
@@ -41,10 +44,21 @@ class AccessoriesUIViewController: BaseViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = img_bkd
         mTotalPriceBckgV.setShadow(color: color_shadow!)
+        
+        getAccessories()
         configureDelegates()
         configureViewForEdit()
         handlerConfirm()
 
+    }
+    
+    ///Get accessories list
+    func getAccessories() {
+        accessoriesViewModel.getAccessories(carID: vehicleModel?.vehicleId ?? "") { result in
+            guard let _ = result else {return}
+            self.accessoriesList = result
+            self.accessoriesEditList = Array(repeating: AccessoriesEditModel(accessoryCount: 0, isAdded: false, totalPrice: 0), count: self.accessoriesList!.count)
+            self.mAccessoriesCollectionV.reloadData()        }
     }
     
     ///Configure view wehn it open for edit
@@ -61,7 +75,20 @@ class AccessoriesUIViewController: BaseViewController {
         mAccessoriesCollectionV.dataSource = self
     }
     
-    //MARK: ACTION
+    ///Show alert for sign in account
+    private func showAlertSignIn() {
+        BKDAlert().showAlert(on: self,
+                             title: nil,
+                             message: Constant.Texts.loginAccessories,
+                             messageSecond: nil,
+                             cancelTitle: Constant.Texts.cancel,
+                             okTitle: Constant.Texts.signIn,
+                             cancelAction: nil) {
+            self.goToSignInPage()
+        }
+    }
+    
+    //MARK: -- ACTION
     @IBAction func back(_ sender: Any) {
         
         self.delegate?.addedAccessories(self.mPriceLb.text == "0.0" ? false : true , totalPrice: totalPrice)
@@ -81,16 +108,20 @@ class AccessoriesUIViewController: BaseViewController {
 //MARK: -----------------
 extension AccessoriesUIViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return additionalAccessories.count//AccessoriesData.accessoriesModel.count
+        return accessoriesList?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AccessoriesCollectionViewCell.identifier, for: indexPath) as!  AccessoriesCollectionViewCell
-        let item = additionalAccessories[indexPath.row]
-        cell.setCellInfo(item: item,index: indexPath.row)
+        guard  let _ = accessoriesList else {
+            return cell
+        }
+        let item = accessoriesList![indexPath.row]
+        let editItem = accessoriesEditList![indexPath.row]
+        cell.setCellInfo(item: item, editItem: editItem,  index: indexPath.row)
         
-        if item.isAdded {
-            totalPrice += Double(item.accessoryCount!) * item.accessoryPrice!
+        if editItem.isAdded {
+            totalPrice += Double(editItem.accessoryCount!) * item.price
             self.mPriceLb.text = String(totalPrice)
 
         }
@@ -111,11 +142,16 @@ extension AccessoriesUIViewController: UICollectionViewDelegate, UICollectionVie
 extension AccessoriesUIViewController: AccessoriesCollectionViewCellDelegate {
     
     func didChangeCount(cellIndex: Int, count: Int) {
-        additionalAccessories[cellIndex].accessoryCount = count
+            accessoriesEditList![cellIndex].accessoryCount = count
+        
     }
 
     func didPressAdd(isAdd: Bool, cellIndex: Int) {
-        additionalAccessories[cellIndex].isAdded = isAdd
+        if KeychainManager().isUserLoggedIn() {
+            accessoriesEditList![cellIndex].isAdded = isAdd
+        } else {
+            showAlertSignIn()
+        }
     }
     
     

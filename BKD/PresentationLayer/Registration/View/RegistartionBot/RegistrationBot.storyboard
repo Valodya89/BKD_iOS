@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19158" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19141"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -20,7 +20,7 @@
             <objects>
                 <viewController storyboardIdentifier="RegistartionBotViewController" id="4Ic-yW-tpv" customClass="RegistartionBotViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="32r-hk-FFT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RdY-K3-uUO">
@@ -145,10 +145,10 @@
             <objects>
                 <viewController storyboardIdentifier="BkdAgreementViewController" id="ZlB-zs-Re5" customClass="BkdAgreementViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Pzf-4b-EQa">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RcP-lR-NoX">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RcP-lR-NoX" customClass="ConfirmView" customModule="BKD" customModuleProvider="target">
                                 <rect key="frame" x="118" y="641" width="178" height="42"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_gradient" translatesAutoresizingMaskIntoConstraints="NO" id="Ddz-su-4Mw">
@@ -163,16 +163,23 @@
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_left" translatesAutoresizingMaskIntoConstraints="NO" id="zZO-bx-ZSz">
                                                         <rect key="frame" x="32.5" y="15" width="16" height="11.5"/>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cIZ-t2-xsT">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agree" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jkf-7w-vuc">
                                                         <rect key="frame" x="0.0" y="0.0" width="81" height="42"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="12"/>
+                                                        <color key="textColor" name="navigationBar"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cIZ-t2-xsT">
+                                                        <rect key="frame" x="0.0" y="0.0" width="81" height="42"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <gestureRecognizers/>
                                                         <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="12"/>
-                                                        <state key="normal" title="Agree">
+                                                        <state key="normal">
                                                             <color key="titleColor" name="navigationBar"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="agree:" destination="ZlB-zs-Re5" eventType="touchUpInside" id="Efc-WL-aKd"/>
+                                                            <action selector="confirm:" destination="RcP-lR-NoX" eventType="touchUpInside" id="zXV-Bs-vqT"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -181,11 +188,15 @@
                                                 <constraints>
                                                     <constraint firstItem="zZO-bx-ZSz" firstAttribute="height" secondItem="bZt-3g-iNq" secondAttribute="height" multiplier="0.282353" id="24e-5X-BOi"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cIZ-t2-xsT" secondAttribute="trailing" id="Me8-vA-uYy"/>
+                                                    <constraint firstItem="Jkf-7w-vuc" firstAttribute="centerX" secondItem="cIZ-t2-xsT" secondAttribute="centerX" id="Phj-80-2QZ"/>
                                                     <constraint firstItem="zZO-bx-ZSz" firstAttribute="centerY" secondItem="bZt-3g-iNq" secondAttribute="centerY" id="WUy-8A-GOv"/>
+                                                    <constraint firstItem="Jkf-7w-vuc" firstAttribute="width" secondItem="cIZ-t2-xsT" secondAttribute="width" id="Y0j-bi-F7Y"/>
                                                     <constraint firstItem="cIZ-t2-xsT" firstAttribute="centerY" secondItem="bZt-3g-iNq" secondAttribute="centerY" id="aV4-rn-Gcg"/>
                                                     <constraint firstItem="cIZ-t2-xsT" firstAttribute="width" secondItem="bZt-3g-iNq" secondAttribute="width" id="ecq-aG-KYp"/>
                                                     <constraint firstItem="zZO-bx-ZSz" firstAttribute="centerX" secondItem="bZt-3g-iNq" secondAttribute="centerX" id="kc4-uK-eJu"/>
                                                     <constraint firstItem="cIZ-t2-xsT" firstAttribute="leading" secondItem="bZt-3g-iNq" secondAttribute="leading" id="luh-7c-5yF"/>
+                                                    <constraint firstItem="Jkf-7w-vuc" firstAttribute="centerY" secondItem="cIZ-t2-xsT" secondAttribute="centerY" id="oSa-DO-bBh"/>
+                                                    <constraint firstItem="Jkf-7w-vuc" firstAttribute="height" secondItem="cIZ-t2-xsT" secondAttribute="height" id="qa3-KC-Uri"/>
                                                     <constraint firstItem="cIZ-t2-xsT" firstAttribute="height" secondItem="bZt-3g-iNq" secondAttribute="height" id="yze-NI-5tp"/>
                                                     <constraint firstItem="zZO-bx-ZSz" firstAttribute="width" secondItem="bZt-3g-iNq" secondAttribute="width" multiplier="0.201258" id="zsU-5M-EIP"/>
                                                 </constraints>
@@ -223,6 +234,10 @@
                                     <constraint firstItem="k5P-wV-SbR" firstAttribute="height" secondItem="RcP-lR-NoX" secondAttribute="height" id="ySR-ye-uR2"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="mConfirmBtn" destination="cIZ-t2-xsT" id="w6k-Qq-hMX"/>
+                                    <outlet property="mConfirmBtnLeading" destination="luh-7c-5yF" id="pfL-Or-Ipo"/>
+                                    <outlet property="mConfirmLb" destination="Jkf-7w-vuc" id="IKn-op-uet"/>
+                                    <outlet property="mGradientImgV" destination="zZO-bx-ZSz" id="Z80-w7-hlb"/>
                                     <outletCollection property="gestureRecognizers" destination="kqy-YE-gGe" appends="YES" id="aaZ-FC-ifg"/>
                                 </connections>
                             </view>
@@ -246,16 +261,14 @@
                         <barButtonItem key="rightBarButtonItem" image="bkd" id="eol-NR-koe"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="mAgreeBckgV" destination="RcP-lR-NoX" id="c23-xV-FSC"/>
-                        <outlet property="mAgreeBtn" destination="cIZ-t2-xsT" id="Mbd-9j-9np"/>
-                        <outlet property="mAgreeLeading" destination="luh-7c-5yF" id="YMw-zW-Yrx"/>
+                        <outlet property="mAgreeV" destination="RcP-lR-NoX" id="rpb-Up-Qxl"/>
                         <outlet property="mRightBarBtn" destination="eol-NR-koe" id="0qr-Us-7wN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oGj-4t-Wga" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="right" id="kqy-YE-gGe">
                     <connections>
-                        <action selector="agreeSwipeGesture:" destination="ZlB-zs-Re5" id="8rR-Gc-bz6"/>
+                        <action selector="swipe:" destination="RcP-lR-NoX" id="HvX-PV-6ga"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>

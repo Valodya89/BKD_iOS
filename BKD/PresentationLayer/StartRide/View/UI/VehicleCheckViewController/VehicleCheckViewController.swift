@@ -11,7 +11,6 @@ import SwiftUI
 class VehicleCheckViewController: UIViewController, StoryboardInitializable {
     
    //MARK: --Outlets
-    @IBOutlet weak var mScrollV: UIScrollView!
     @IBOutlet weak var mStepTitleLb: UILabel!
     @IBOutlet weak var mVehicleCheckLb: UILabel!
     @IBOutlet weak var mDescriptionLb: UILabel!
@@ -38,6 +37,7 @@ class VehicleCheckViewController: UIViewController, StoryboardInitializable {
         super.viewDidLoad()
         tabBarController?.tabBar.isHidden = true
         setupView()
+        configCollectionView()
     }
     
     override func viewDidLayoutSubviews() {
@@ -66,6 +66,20 @@ class VehicleCheckViewController: UIViewController, StoryboardInitializable {
         
     }
    
+    /// configure pageCollcetion view user interface
+    private func configCollectionView() {
+
+        let floawLayout = UPCarouselFlowLayout()
+        floawLayout.itemSize = mAddDamageContentV.frame.size
+        floawLayout.scrollDirection = .horizontal
+        floawLayout.sideItemScale = 1
+        floawLayout.sideItemAlpha = 0.7
+        floawLayout.spacingMode = .fixed(spacing: 22.0)
+        mPageCollcetionV.collectionViewLayout = floawLayout
+        mPageCollcetionV.showsHorizontalScrollIndicator = false
+    }
+    
+    
     ///Configure page control
     func configurePageControl() {
         mPageControl.numberOfPages = pageDataSours.count
@@ -121,7 +135,6 @@ class VehicleCheckViewController: UIViewController, StoryboardInitializable {
         self.view.addSubview(addDamageVC.view)
         addDamageVC.didMove(toParent: self)
         addDamageVC.mDemageTxtFl.text = nil
-        addDamageVC.mConfirmBtn.disable()
         addDamageVC.delegate = self
     }
     
@@ -181,38 +194,32 @@ extension VehicleCheckViewController: UICollectionViewDelegateFlowLayout, UIColl
     }
     
     //MARK: UICollectionViewDelegateFlowLayout
-    //MARK: -------------------------------------
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return mAddDamageContentV.frame.size
 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 100, bottom: 0, right: 100)
+        return UIEdgeInsets(top: 0, left: 22, bottom: 0, right: 22)
     }
-    
+   
+   
+    //MARK: UIScrollViewDelegate
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        let visibleIndexPath = mPageCollcetionV.getCurrentVisibleCellIndexPath()
         if #available(iOS 14.0, *) {
             mPageControl?.setIndicatorImage(UIImage(named: "unselecte_page"), forPage: mPageControl!.currentPage)
         }
-          
-        mPageControl?.currentPage = Int(scrollView.contentOffset.x / (view.bounds.width * 0.746377))
-        
+        mPageControl?.currentPage = visibleIndexPath.item
+
         if #available(iOS 14.0, *) {
             mPageControl?.setIndicatorImage(UIImage(named: "selecte_page"), forPage: mPageControl!.currentPage)
         }
-           print("mPageControl?.currentPage = \(mPageControl?.currentPage)")
-           enableFinishCheck()
-       }
-
-       func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-
-           mPageControl?.currentPage = Int(scrollView.contentOffset.x / (view.bounds.width * 0.746377))
            enableFinishCheck()
        }
     
-    
-   
+   //Enable or disable finish check button
     private func enableFinishCheck() {
         if mPageControl?.currentPage == pageDataSours.count - 1 {
             mAdditionalChargesLb.isHidden = false

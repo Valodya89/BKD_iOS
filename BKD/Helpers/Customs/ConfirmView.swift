@@ -12,6 +12,7 @@ class ConfirmView: UIView {
     //MARK: Outlets
     @IBOutlet weak var mGradientImgV: UIImageView!
     @IBOutlet weak var mConfirmBtn: UIButton!
+    @IBOutlet weak var mConfirmLb: UILabel!
     @IBOutlet weak var mConfirmBtnLeading: NSLayoutConstraint!
   
     //MARK: --Variables
@@ -19,11 +20,14 @@ class ConfirmView: UIView {
     var willCheckConfirm:(()-> Void)?
     var title: String?
     var needsCheck = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         mConfirmBtn.layer.cornerRadius = 8
         mGradientImgV.layer.cornerRadius = 8
+        mConfirmLb.layer.masksToBounds = true
+        mConfirmLb.layer.cornerRadius = 8
         mConfirmBtn.addBorder(color: color_navigationBar!, width: 1.0)
         guard let title = title else {return}
         mConfirmBtn.setTitle(title, for: .normal)

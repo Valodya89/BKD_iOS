@@ -48,6 +48,7 @@ struct CarsModel: Codable {
     let images: [CarImageResponse]?
     let logo: Logo?
     let reservations: Reservation?
+    let supportedAccessories: [String]?
     
 }
 

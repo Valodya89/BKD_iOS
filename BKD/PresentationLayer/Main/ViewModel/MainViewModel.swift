@@ -11,6 +11,7 @@ final class MainViewModel: NSObject {
    // static let shared = MainViewModel()
     var searchModel = SearchModel()
     let validator = Validator()
+    
     var isOnline: Bool {
         return true
         guard let workingTimes = ApplicationSettings.shared.workingTimes else { return false }

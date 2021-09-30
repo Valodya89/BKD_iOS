@@ -121,6 +121,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
      func setVehicleModel(carModel: CarsModel) -> VehicleModel {
         
         var vehicleModel = VehicleModel()
+         vehicleModel.vehicleId = carModel.id
         vehicleModel.vehicleName = carModel.name
         vehicleModel.ifHasTowBar = true
         vehicleModel.vehicleImg = mCarImgV.image

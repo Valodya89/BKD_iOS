@@ -247,6 +247,12 @@
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_left" translatesAutoresizingMaskIntoConstraints="NO" id="TkH-lf-Ajq">
                                                                         <rect key="frame" x="32.5" y="15" width="16" height="12"/>
                                                                     </imageView>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kuR-Pp-Ce8">
+                                                                        <rect key="frame" x="15" y="10.5" width="42" height="21"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G7x-rP-tzp">
                                                                         <rect key="frame" x="0.0" y="0.0" width="72" height="42"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -263,10 +269,14 @@
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <gestureRecognizers/>
                                                                 <constraints>
+                                                                    <constraint firstItem="kuR-Pp-Ce8" firstAttribute="width" secondItem="G7x-rP-tzp" secondAttribute="width" multiplier="0.583333" id="2AM-c8-jWs"/>
                                                                     <constraint firstItem="G7x-rP-tzp" firstAttribute="height" secondItem="e5t-9G-VUK" secondAttribute="height" id="34s-rX-qxg"/>
+                                                                    <constraint firstItem="kuR-Pp-Ce8" firstAttribute="centerX" secondItem="G7x-rP-tzp" secondAttribute="centerX" id="BgV-el-XHh"/>
                                                                     <constraint firstItem="TkH-lf-Ajq" firstAttribute="centerY" secondItem="e5t-9G-VUK" secondAttribute="centerY" id="GmA-st-wH1"/>
+                                                                    <constraint firstItem="kuR-Pp-Ce8" firstAttribute="centerY" secondItem="G7x-rP-tzp" secondAttribute="centerY" id="JFK-yu-RkP"/>
                                                                     <constraint firstItem="TkH-lf-Ajq" firstAttribute="width" secondItem="e5t-9G-VUK" secondAttribute="width" multiplier="0.201258" id="OBJ-Wh-gNY"/>
                                                                     <constraint firstItem="TkH-lf-Ajq" firstAttribute="height" secondItem="e5t-9G-VUK" secondAttribute="height" multiplier="0.282353" id="SRA-C2-m7A"/>
+                                                                    <constraint firstItem="kuR-Pp-Ce8" firstAttribute="height" secondItem="G7x-rP-tzp" secondAttribute="height" multiplier="0.5" id="VLo-Yo-ZOb"/>
                                                                     <constraint firstItem="G7x-rP-tzp" firstAttribute="width" secondItem="e5t-9G-VUK" secondAttribute="width" multiplier="0.89" id="bBb-RZ-Z2t"/>
                                                                     <constraint firstItem="G7x-rP-tzp" firstAttribute="leading" secondItem="e5t-9G-VUK" secondAttribute="leading" id="cTQ-hj-wVL"/>
                                                                     <constraint firstItem="G7x-rP-tzp" firstAttribute="centerY" secondItem="e5t-9G-VUK" secondAttribute="centerY" id="dYj-Fc-93h"/>
@@ -307,6 +317,7 @@
                                                 <connections>
                                                     <outlet property="mConfirmBtn" destination="G7x-rP-tzp" id="hxW-vP-Gbl"/>
                                                     <outlet property="mConfirmBtnLeading" destination="cTQ-hj-wVL" id="lXc-la-MDa"/>
+                                                    <outlet property="mConfirmLb" destination="kuR-Pp-Ce8" id="qKw-Nx-4tl"/>
                                                     <outlet property="mGradientImgV" destination="teJ-ZO-aE8" id="9vb-Vj-g92"/>
                                                     <outletCollection property="gestureRecognizers" destination="rt9-t5-1Rw" appends="YES" id="adM-PZ-Akn"/>
                                                 </connections>

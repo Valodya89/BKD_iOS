@@ -253,6 +253,12 @@
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_left" translatesAutoresizingMaskIntoConstraints="NO" id="kz2-aS-gx1">
                                                         <rect key="frame" x="50" y="15" width="25.5" height="12"/>
                                                     </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DqU-FH-vYa">
+                                                        <rect key="frame" x="0.0" y="0.0" width="111.5" height="42"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q8a-ic-pgy">
                                                         <rect key="frame" x="0.0" y="0.0" width="111.5" height="42"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -269,13 +275,17 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <gestureRecognizers/>
                                                 <constraints>
+                                                    <constraint firstItem="DqU-FH-vYa" firstAttribute="centerY" secondItem="Q8a-ic-pgy" secondAttribute="centerY" id="3gp-0y-1NJ"/>
+                                                    <constraint firstItem="DqU-FH-vYa" firstAttribute="centerX" secondItem="Q8a-ic-pgy" secondAttribute="centerX" id="58B-pj-1Pn"/>
                                                     <constraint firstItem="kz2-aS-gx1" firstAttribute="centerX" secondItem="jb9-mo-DMF" secondAttribute="centerX" id="7iy-ep-wDT"/>
+                                                    <constraint firstItem="DqU-FH-vYa" firstAttribute="height" secondItem="Q8a-ic-pgy" secondAttribute="height" id="8c5-4k-ush"/>
                                                     <constraint firstItem="kz2-aS-gx1" firstAttribute="centerY" secondItem="jb9-mo-DMF" secondAttribute="centerY" id="Hnt-oH-czb"/>
                                                     <constraint firstItem="Q8a-ic-pgy" firstAttribute="leading" secondItem="jb9-mo-DMF" secondAttribute="leading" id="Id9-uP-tE0"/>
                                                     <constraint firstItem="kz2-aS-gx1" firstAttribute="height" secondItem="jb9-mo-DMF" secondAttribute="height" multiplier="0.282353" id="L6O-Ge-8vB"/>
                                                     <constraint firstItem="Q8a-ic-pgy" firstAttribute="height" secondItem="jb9-mo-DMF" secondAttribute="height" id="bJs-5J-Jok"/>
                                                     <constraint firstItem="Q8a-ic-pgy" firstAttribute="centerY" secondItem="jb9-mo-DMF" secondAttribute="centerY" id="cUE-ZW-bLW"/>
                                                     <constraint firstItem="Q8a-ic-pgy" firstAttribute="width" secondItem="jb9-mo-DMF" secondAttribute="width" multiplier="0.89" id="nIU-AA-aE9"/>
+                                                    <constraint firstItem="DqU-FH-vYa" firstAttribute="width" secondItem="Q8a-ic-pgy" secondAttribute="width" id="pl3-3M-Ze2"/>
                                                     <constraint firstItem="kz2-aS-gx1" firstAttribute="width" secondItem="jb9-mo-DMF" secondAttribute="width" multiplier="0.201258" id="v19-Oc-fYL"/>
                                                 </constraints>
                                             </view>
@@ -314,6 +324,7 @@
                                 <connections>
                                     <outlet property="mConfirmBtn" destination="Q8a-ic-pgy" id="y5z-RF-gc5"/>
                                     <outlet property="mConfirmBtnLeading" destination="Id9-uP-tE0" id="vFa-py-DMi"/>
+                                    <outlet property="mConfirmLb" destination="DqU-FH-vYa" id="T72-K8-BOC"/>
                                     <outlet property="mGradientImgV" destination="ePp-Lg-rGh" id="NfE-9x-ILh"/>
                                 </connections>
                             </view>

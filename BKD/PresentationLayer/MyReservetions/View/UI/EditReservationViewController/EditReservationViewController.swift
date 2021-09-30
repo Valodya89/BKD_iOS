@@ -229,7 +229,7 @@ class EditReservationViewController: BaseViewController {
     
     @IBAction func accessories(_ sender: UIButton) {
         
-        goToAccessories(on: nil, isEditReservation: true)
+        goToAccessories(on: nil, vehicleModel: nil, isEditReservation: true)
     }
     
     

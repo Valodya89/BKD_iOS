@@ -19,6 +19,7 @@ final class ApplicationSettings {
     private(set) var restrictedZones: [RestrictedZones]?
     var carsList:[String : [CarsModel]?]?
     var carTypes:[CarTypes]?
+    
 
     
     private init() {
@@ -30,6 +31,7 @@ final class ApplicationSettings {
         getAvalableTimeList()
         getWorkingTimes()
         getRestrictedZones()
+        
     }
     
 }
@@ -144,8 +146,7 @@ extension ApplicationSettings {
             self?.restrictedZones = result
         }
     }
-    
-    
+
     
 }
 

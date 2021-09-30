@@ -43,6 +43,7 @@ class SwitchDriversTableView: UITableView, UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AditionalDriverTableCell.identifier, for: indexPath) as! AditionalDriverTableCell
         let item = switchDriversList[indexPath.row]
+        cell.isSwitchDriver = true
         cell.setCellInfo(item: item , index: indexPath.row)
         cell.mAdditionalDriverLb.isHidden = true
         

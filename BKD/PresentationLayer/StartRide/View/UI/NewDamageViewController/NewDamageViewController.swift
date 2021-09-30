@@ -32,6 +32,12 @@ class NewDamageViewController: UIViewController, StoryboardInitializable {
         setupView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.mDemageTxtFl.layer.borderColor = color_navigationBar!.cgColor
+
+    }
+    
     func setupView() {
         mContentV.layer.borderWidth = 1.0
         mContentV.layer.borderColor = color_shadow!.cgColor
@@ -43,24 +49,31 @@ class NewDamageViewController: UIViewController, StoryboardInitializable {
         mConfirmBtn.layer.borderWidth = 1.0
         mConfirmBtn.backgroundColor = .clear
         mCancelBtn.backgroundColor = .clear
-        mConfirmBtn.disable()
+        mConfirmBtn.enable()
         mDemageTxtFl.setPlaceholder(string: Constant.Texts.damageName, font: font_placeholder!, color: color_chat_placeholder!)
         mDemageTxtFl.addBorder(color: color_navigationBar!, width: 1.0)
         mDemageTxtFl.delegate = self
-        
-        
     }
     
 
  //MARK: -- Actions
     @IBAction func cancel(_ sender: UIButton) {
-        sender.backgroundColor = color_menu!
-        self.delegate?.didPressCancel()
+        sender.setClickColor(color_menu!, titleColor: sender.titleColor(for: .normal)!)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.delegate?.didPressCancel()
+        }
     }
     
     @IBAction func confirm(_ sender: UIButton) {
-        sender.backgroundColor = color_menu!
-        delegate?.didPressConfirm()
+        sender.setClickColor(color_menu!, titleColor: sender.titleColor(for: .normal)!)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            if  self.mDemageTxtFl.text == nil ||  self.mDemageTxtFl.text == "" {
+                self.mDemageTxtFl.layer.borderColor = color_error!.cgColor
+            } else {
+                self.delegate?.didPressConfirm()
+            }
+        }
+       
     }
        
 }
@@ -78,11 +91,14 @@ extension NewDamageViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.becomeFirstResponder()
     }
+    
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 
+        
         let fullText = textField.text! + string
         if fullText.count > 0 {
-            mConfirmBtn.enable()
+            textField.layer.borderColor = color_navigationBar!.cgColor
         }
         return true
     }

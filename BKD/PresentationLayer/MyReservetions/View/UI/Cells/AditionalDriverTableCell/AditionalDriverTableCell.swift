@@ -31,7 +31,6 @@ class AditionalDriverTableCell: UITableViewCell {
     func setupView() {
         if isSwitchDriver {
             mDriverNumberLb.textColor = color_email!
-            mDriverNumberLb.font = font_selected_filter!
         }
         
     }
@@ -48,7 +47,7 @@ class AditionalDriverTableCell: UITableViewCell {
        if isSwitchDriver {
            mAdditionalDriverLb.isHidden = false
            mAdditionalDriverHeight.constant = 0
-
+           setupView()
        } else {
            mAdditionalDriverLb.isHidden = (index != 0)
            if index != 0 {

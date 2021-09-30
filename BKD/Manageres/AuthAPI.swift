@@ -21,6 +21,7 @@ enum AuthAPI: APIProtocol {
     case getWorkingTimes
     case getPhoneCodes
     case getCountries
+    case getAccessories(carID: String)
     case signUp(username: String,
                 password: String)
     case verifyAccounts(username: String,
@@ -105,6 +106,8 @@ enum AuthAPI: APIProtocol {
             return "phone-code/list"
         case .getCountries:
             return "country/list"
+        case .getAccessories(let carID):
+            return "car/\(carID)/accessories"
         case .signUp:
             return "accounts/create"
         case .verifyAccounts:
@@ -148,6 +151,7 @@ enum AuthAPI: APIProtocol {
              .getCustomLocation,
              .addPersonalData,
              .getChatID,
+             .getAccessories,
              .sendMessage,
              .addIdentityExpiration,
              .addDriverLicenseDates:

@@ -13,6 +13,7 @@ struct CarModel {
 }
 
 struct VehicleModel {
+    public var vehicleId: String?
     public var vehicleName: String?
     public var vehicleType: String?
     public var vehicleImg: UIImage?

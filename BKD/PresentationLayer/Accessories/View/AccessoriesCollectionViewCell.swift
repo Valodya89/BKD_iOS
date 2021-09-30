@@ -28,8 +28,10 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mPriceLb: UILabel!
     @IBOutlet weak var mAddImgV: UIImageView!
     
-    let accessoriesViewModel = AccessoriesViewModel()
+    //MARK: -- Variables
     weak var delegate: AccessoriesCollectionViewCellDelegate?
+    let accessoriesViewModel = AccessoriesViewModel()
+    var maxCount: Double?
     
     
     override func awakeFromNib() {
@@ -43,24 +45,46 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
       //  mAccessoriesBackgImgV.setShadow(color: color_shadow!)
     }
     
-    func setCellInfo(item: AccessoriesModel, index: Int) {
-        mAccessorieImgV.image = item.accessoryImg
-        mTitleLb.text = item.accessoryName
-        mPriceLb.text = String(item.accessoryPrice!)
-        mAccessorieCountLb.text = String(item.accessoryCount!)
+    func setCellInfo(item: Accessories, editItem: AccessoriesEditModel, index: Int) {
+        maxCount = item.maxCount
         mAddBtn.tag = index
         mIncreaseBtn.tag = index
         mDecreaseBtn.tag = index
-        if item.isAdded {
+        mAddBtn.addTarget(self, action: #selector(add), for: .touchUpInside)
+        mIncreaseBtn.addTarget(self, action: #selector(increase(sender:)), for: .touchUpInside)
+        mDecreaseBtn.addTarget(self, action: #selector(decrease(sender:)), for: .touchUpInside)
+        
+        self.mAccessorieImgV.sd_setImage(with:  item.image.getURL() ?? URL(string: ""), placeholderImage: nil)
+        mTitleLb.text = item.name
+        mPriceLb.text = String(item.price)
+        mAccessorieCountLb.text = String(1)
+
+        if editItem.isAdded {
             mAddImgV.image = img_add_selecte
             mAddBtn.setTitleColor(color_menu, for: .normal)
         } else {
             mAddImgV.image = img_add_unselece
             mAddBtn.setTitleColor(color_alert_txt!, for: .normal)
         }
-        mAddBtn.addTarget(self, action: #selector(add), for: .touchUpInside)
-        mIncreaseBtn.addTarget(self, action: #selector(increase(sender:)), for: .touchUpInside)
-        mDecreaseBtn.addTarget(self, action: #selector(decrease(sender:)), for: .touchUpInside)
+        
+        
+        
+//        mAccessorieImgV.image = item.accessoryImg
+//        mTitleLb.text = item.accessoryName
+//        mPriceLb.text = String(item.accessoryPrice!)
+//        mAccessorieCountLb.text = String(item.accessoryCount!)
+//        mAddBtn.tag = index
+//        mIncreaseBtn.tag = index
+//        mDecreaseBtn.tag = index
+//        if item.isAdded {
+//            mAddImgV.image = img_add_selecte
+//            mAddBtn.setTitleColor(color_menu, for: .normal)
+//        } else {
+//            mAddImgV.image = img_add_unselece
+//            mAddBtn.setTitleColor(color_alert_txt!, for: .normal)
+//        }
+        
+        
         
     }
     
@@ -69,7 +93,6 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
         let count = Int(mAccessorieCountLb.text ?? "0")
         let price = Double(mPriceLb.text ?? "0")
         var isIncrease = true
-        
         if sender.titleColor(for: .normal) == color_alert_txt { //select
             mAddImgV.image = img_add_selecte
             sender.setTitleColor(color_menu, for: .normal)
@@ -78,31 +101,35 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
             isIncrease = false
             mAddImgV.image = img_add_unselece
             sender.setTitleColor(color_alert_txt!, for: .normal)
-
+            
         }
-        
         increaseOrDecreaseAccessory(accessoryPrice:Double(count!) * price!,
-                    accessoryCount: count!,
-                    isIncrease: isIncrease)
+                                    accessoryCount: count!,
+                                    isIncrease: isIncrease)
         delegate?.didPressAdd(isAdd: isIncrease, cellIndex: sender.tag)
     }
     
     
     @objc func increase(sender: UIButton) {
-       
-        sender.setButtonClickImage(image: #imageLiteral(resourceName: "selected_plus"))
-        let count = Int(mAccessorieCountLb.text ?? "0" )
-        let price = Double(mPriceLb.text ?? "0" )
-    
-        mAccessorieCountLb.text = String(count! + 1)
-        if mAddBtn.titleColor(for: .normal) == color_menu!  {
-            increaseOrDecreaseAccessory(accessoryPrice:price!,
-                        accessoryCount:count! + 1,
-                        isIncrease: true)
+        let count = Int(mAccessorieCountLb.text ?? "0")
 
+        if Double(count!) < maxCount ?? 0 {
+            sender.setButtonClickImage(image: #imageLiteral(resourceName: "selected_plus"))
+            let count = Int(mAccessorieCountLb.text ?? "0" )
+            let price = Double(mPriceLb.text ?? "0" )
+            
+            mAccessorieCountLb.text = String(count! + 1)
+            if mAddBtn.titleColor(for: .normal) == color_menu!  {
+                increaseOrDecreaseAccessory(accessoryPrice:price!,
+                                            accessoryCount:count! + 1,
+                                            isIncrease: true)
+                
+            }
+            delegate?.didChangeCount(cellIndex: sender.tag, count: count! + 1)
         }
-        delegate?.didChangeCount(cellIndex: sender.tag, count: count! + 1)
     }
+    
+    
     @objc func decrease(sender: UIButton) {
         let count = Int(mAccessorieCountLb.text ?? "0" )
         let price = Double(mPriceLb.text ?? "0" )

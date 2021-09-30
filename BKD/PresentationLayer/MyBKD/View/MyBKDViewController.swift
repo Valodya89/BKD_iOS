@@ -32,6 +32,7 @@ final class MyBKDViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         addSignInChild()
+        handlerSignIn()
     }
     
     
@@ -72,6 +73,12 @@ final class MyBKDViewController: BaseViewController {
     //MARK: ACTIONS
     @IBAction func menu(_ sender: UIBarButtonItem) {
         present(menu!, animated: true, completion: nil)
+    }
+    
+    func handlerSignIn() {
+        signInVC.didSignIn = { [self] in
+            self.removeChild(vc: self.signInVC)
+        }
     }
 }
 

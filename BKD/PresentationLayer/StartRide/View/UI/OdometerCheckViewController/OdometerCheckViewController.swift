@@ -39,10 +39,11 @@ class OdometerCheckViewController: UIViewController, StoryboardInitializable {
     @IBOutlet weak var mOdometerImgHeight: NSLayoutConstraint!
     
     ///Start now
-    @IBOutlet weak var mStartNowContentV: UIView!
-    @IBOutlet weak var mStartNowBtn: UIButton!
-    @IBOutlet weak var mStartNowLeading: NSLayoutConstraint!
+   
+    @IBOutlet weak var mStartNowV: ConfirmView!
     @IBOutlet weak var mStartNowTop: NSLayoutConstraint!
+    @IBOutlet weak var mStartNowHeight: NSLayoutConstraint!
+    
     ///Navigation bar
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
@@ -58,20 +59,21 @@ class OdometerCheckViewController: UIViewController, StoryboardInitializable {
         setupView()
 
     }
-   //36
-    //3
+  
+    override func  viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        mStartNowHeight.constant = height42
+    }
     
     func setupView() {
         mRightBarBtn.image = img_bkd
         mOpenCameraBtn.layer.cornerRadius = view.bounds.height * 0.0235149
         mOpenCameraBtn.addBorder(color:color_navigationBar!, width: 1.0)
-    
+        mOdomateNumberTxtFl.setBorder(color: color_navigationBar!, width: 1.0)
         mInputManuallyRadioBtn.setTitle("", for: .normal)
         mConfirmLastOdometRadioBtn.setTitle("", for: .normal)
         mOdomateImgV.layer.cornerRadius = 3
         mOdomateNumberTxtFl.setPlaceholder(string: Constant.Texts.odometerNumber, font: font_search_cell!, color: color_chat_placeholder!)
-        mStartNowBtn.layer.cornerRadius = 8
-        mStartNowBtn.addBorder(color:color_navigationBar!, width: 1.0)
         mOdomateNumberTxtFl.delegate = self
 
     }
@@ -79,12 +81,9 @@ class OdometerCheckViewController: UIViewController, StoryboardInitializable {
     ///Enable StartNow button
     private func enableStartNow() {
         if odometerState == .confirmLastCheck || (odometerState == .inputManually && mOdomateNumberTxtFl.text?.count ?? 0 > 0) {
-            mStartNowContentV.isUserInteractionEnabled = true
-            mStartNowContentV.alpha = 1
-        
+            mStartNowV.enableView()
         } else {
-            mStartNowContentV.isUserInteractionEnabled = false
-            mStartNowContentV.alpha = 0.9
+            mStartNowV.disableView()
         }
     }
     
@@ -121,22 +120,11 @@ class OdometerCheckViewController: UIViewController, StoryboardInitializable {
         present(picker, animated: true)
     }
     
-    ///Click start now button
-    private func clickStartNow() {
-        UIView.animate(withDuration: 0.5) { [self] in
-            self.mStartNowLeading.constant = self.mStartNowContentV.bounds.width - self.mStartNowBtn.frame.size.width
-            self.mStartNowContentV.layoutIfNeeded()
-
-        } completion: { _ in
-            self.startRideAlert()
-        }
-    }
     
     /// Call Alert For confirm start ride
     private func startRideAlert() {
         BKDAlert().showAlert(on: self, title: nil, message: Constant.Texts.startRideAlert, messageSecond: nil, cancelTitle: Constant.Texts.back, okTitle: Constant.Texts.startNow) {
-            self.mStartNowLeading.constant = 0
-            self.mStartNowContentV.layoutIfNeeded()
+            self.mStartNowV.initConfirm()
 
         } okAction: {
             
@@ -180,16 +168,14 @@ class OdometerCheckViewController: UIViewController, StoryboardInitializable {
         openCamera()
     }
     
-    @IBAction func startRideSwipe(_ sender: UISwipeGestureRecognizer) {
-        clickStartNow()
-    }
-    
-    @IBAction func startNow(_ sender: UIButton) {
-        clickStartNow()
-    }
-    
     @IBAction func back(_ sender: Any) {
         navigationController?.popViewController(animated: true)
+    }
+    
+    private func handlerStartNoew() {
+        mStartNowV.didPressConfirm = {
+            self.startRideAlert()
+        }
     }
 }
 

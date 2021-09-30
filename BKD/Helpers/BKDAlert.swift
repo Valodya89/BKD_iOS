@@ -12,6 +12,8 @@ class BKDAlert: NSObject {
     
     struct  Constants {
         static let backgroundAlpaTo: CGFloat = 0.6
+        static let gradientAlpaTo: CGFloat = 0.8
+
     }
     private var didHandleOkAction: (() -> Void)?
     private var didHandleCancelAction: (() -> Void)?
@@ -38,9 +40,8 @@ class BKDAlert: NSObject {
         didHandleCancelAction = cancelAction
         
         backgroundView.frame = targetView.bounds
-        backgroundView.contentView.alpha = 0.95
+        backgroundView.contentView.alpha = Constants.gradientAlpaTo
         backgroundView.contentView.setGradient(startColor: .white, endColor: color_navigationBar!)
-       // backgroundView.backgroundColor = .black
         backgroundView.alpha = Constants.backgroundAlpaTo
         targetView.addSubview(backgroundView)
         
@@ -296,7 +297,7 @@ class BKDAlert: NSObject {
         didHandleCancelAction = cancelAction
         
         backgroundView.frame = targetView.bounds
-        backgroundView.contentView.alpha = 0.95
+        backgroundView.contentView.alpha = Constants.gradientAlpaTo
         backgroundView.contentView.setGradient(startColor: .white, endColor: color_navigationBar!)
         backgroundView.alpha = Constants.backgroundAlpaTo
         targetView.addSubview(backgroundView)

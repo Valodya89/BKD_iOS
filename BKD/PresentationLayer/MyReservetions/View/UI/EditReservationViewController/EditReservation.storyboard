@@ -554,6 +554,12 @@
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_left" translatesAutoresizingMaskIntoConstraints="NO" id="9dj-4V-9mM">
                                                         <rect key="frame" x="45" y="12" width="23" height="9"/>
                                                     </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbA-3J-peh">
+                                                        <rect key="frame" x="0.0" y="0.0" width="100.5" height="32.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xmj-8N-Ao9">
                                                         <rect key="frame" x="0.0" y="0.0" width="100.5" height="32.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -571,10 +577,14 @@
                                                 <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstItem="xmj-8N-Ao9" firstAttribute="leading" secondItem="KsG-bQ-Lcu" secondAttribute="leading" id="7Rx-2G-gyl"/>
+                                                    <constraint firstItem="hbA-3J-peh" firstAttribute="centerX" secondItem="xmj-8N-Ao9" secondAttribute="centerX" id="Frs-ox-8lr"/>
                                                     <constraint firstItem="9dj-4V-9mM" firstAttribute="centerY" secondItem="KsG-bQ-Lcu" secondAttribute="centerY" id="MZb-5v-XoY"/>
+                                                    <constraint firstItem="hbA-3J-peh" firstAttribute="centerY" secondItem="xmj-8N-Ao9" secondAttribute="centerY" id="Qb9-AT-EQn"/>
                                                     <constraint firstItem="9dj-4V-9mM" firstAttribute="centerX" secondItem="KsG-bQ-Lcu" secondAttribute="centerX" id="VB6-Tu-hEx"/>
                                                     <constraint firstItem="xmj-8N-Ao9" firstAttribute="width" secondItem="KsG-bQ-Lcu" secondAttribute="width" multiplier="0.89" id="WRl-uQ-9bs"/>
                                                     <constraint firstItem="xmj-8N-Ao9" firstAttribute="height" secondItem="KsG-bQ-Lcu" secondAttribute="height" id="WbY-bm-ncC"/>
+                                                    <constraint firstItem="hbA-3J-peh" firstAttribute="height" secondItem="xmj-8N-Ao9" secondAttribute="height" id="cjt-Yb-weF"/>
+                                                    <constraint firstItem="hbA-3J-peh" firstAttribute="width" secondItem="xmj-8N-Ao9" secondAttribute="width" id="euv-y8-sP8"/>
                                                     <constraint firstItem="9dj-4V-9mM" firstAttribute="height" secondItem="KsG-bQ-Lcu" secondAttribute="height" multiplier="0.282353" id="j4S-Lp-u6K"/>
                                                     <constraint firstItem="xmj-8N-Ao9" firstAttribute="centerY" secondItem="KsG-bQ-Lcu" secondAttribute="centerY" id="jat-ke-yAl"/>
                                                     <constraint firstItem="9dj-4V-9mM" firstAttribute="width" secondItem="KsG-bQ-Lcu" secondAttribute="width" multiplier="0.201258" id="qKz-z4-14a"/>
@@ -614,6 +624,7 @@
                                 <connections>
                                     <outlet property="mConfirmBtn" destination="xmj-8N-Ao9" id="CJv-wA-Xx3"/>
                                     <outlet property="mConfirmBtnLeading" destination="7Rx-2G-gyl" id="96K-sX-udr"/>
+                                    <outlet property="mConfirmLb" destination="hbA-3J-peh" id="owM-st-oNw"/>
                                     <outlet property="mGradientImgV" destination="IHa-7g-bnC" id="zh9-XV-FsS"/>
                                     <outletCollection property="gestureRecognizers" destination="vJG-uT-DAy" appends="YES" id="PMs-K2-FaB"/>
                                 </connections>

@@ -91,6 +91,7 @@ static let identifier = "MainCollectionViewCell"
     ///Set  values to vehicle model
      func setVehicleModel(carModel: CarsModel) -> VehicleModel {
         var vehicleModel = VehicleModel()
+         vehicleModel.vehicleId = carModel.id
         vehicleModel.vehicleName = mCarNameLb.text
         vehicleModel.ifHasTowBar = true
         vehicleModel.vehicleImg = mCarImgV.image
@@ -146,7 +147,6 @@ static let identifier = "MainCollectionViewCell"
     /// Set cell info
     func setCellInfo(item: CarsModel) {
         self.mCarImgV.sd_setImage(with:item.image.getURL()!, placeholderImage: nil)
-       // mCarImgV.kf.setImage(with: item.image.getURL()!)
         mCarNameLb.text = item.name
         mCardLb.text = item.driverLicenseType
         mCubeLb.text = String(item.volume) + Constant.Texts.mCuadrad
@@ -169,12 +169,8 @@ static let identifier = "MainCollectionViewCell"
         
         if item.logo != nil {
             mFiatImgV.sd_setImage(with:item.logo!.getURL()!, placeholderImage: nil)
-          //  mFiatImgV.kf.setImage(with: (item.logo!.getURL() ?? URL(string: ""))!)
-
-//            UIImage.loadFrom(url: (item.logo!.getURL() ?? URL(string: ""))!) { image in
-//                self.mFiatImgV.image = image ?? UIImage()
-//            }
         }
+                
         guard let start = item.reservations?.getStart(), let end = item.reservations?.getEnd()  else { return }
         let isActiveCar: Bool = mainViewModel.isCarActiveNow(start: start, end: end)
         mBlurV.isHidden = isActiveCar

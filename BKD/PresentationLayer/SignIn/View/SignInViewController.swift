@@ -28,6 +28,8 @@ final class SignInViewController: UIViewController, StoryboardInitializable {
     private var keychainManager = KeychainManager()
     lazy var signInViewModel = SignInViewModel()
     
+    var didSignIn:(()->Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -118,7 +120,9 @@ final class SignInViewController: UIViewController, StoryboardInitializable {
             self.mSignInBckgV.layoutIfNeeded()
         } completion: { _ in
             UserDefaults.standard.setValue(true, forKey: key_isLogin)
-            self.tabBarController?.selectedIndex = 0
+            self.didSignIn?()
+            self.navigationController?.popViewController(animated: true)
+            //self.tabBarController?.selectedIndex = 0
         }
     }
     

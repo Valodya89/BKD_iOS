@@ -38,10 +38,8 @@ class EditReservetionAdvancedViewController: BaseViewController {
     @IBOutlet weak var mReturnTimeLb: UILabel!
     
    //Confirm
-    @IBOutlet weak var mConfirmBckgV: UIView!
-    @IBOutlet weak var mConfirmBtn: UIButton!
-    @IBOutlet var mConfirmSwipeGesture: UISwipeGestureRecognizer!
-    @IBOutlet weak var mConfirmLeading: NSLayoutConstraint!
+    @IBOutlet weak var mConfirmV: ConfirmView!
+    @IBOutlet weak var mConfirmHeight: NSLayoutConstraint!
     
     //Navigation
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
@@ -74,10 +72,6 @@ class EditReservetionAdvancedViewController: BaseViewController {
     @IBOutlet weak var mNewPriceTableHeight: NSLayoutConstraint!
     @IBOutlet weak var mOldPriceTableV: PriceTableView!
     @IBOutlet weak var mOldPriceTableHeight: NSLayoutConstraint!
-    
-    ///Buttons
-    @IBOutlet weak var mAgreementBtn: UIButton!
-    
 
 
     //MARK: - Variables
@@ -103,7 +97,7 @@ class EditReservetionAdvancedViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.mConfirmLeading.constant = 0.0
+        mConfirmV.initConfirm()
         self.tabBarController?.tabBar.isHidden = true
     }
     
@@ -118,7 +112,7 @@ class EditReservetionAdvancedViewController: BaseViewController {
         mRegisterNumberTableHeight.constant = mRegisterNumberTableV.contentSize.height
         
         mOnRideTableHeight.constant = mOnRideTableV.contentSize.height
-        
+        mConfirmHeight.constant = height42
         mCarImgV.layer.cornerRadius = 16
         mCarImgV.setShadow(color: color_shadow!)
         mCarImgBckgV.layer.borderColor = color_shadow!.cgColor
@@ -131,7 +125,6 @@ class EditReservetionAdvancedViewController: BaseViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        mConfirmBtn.addBorder(color: color_navigationBar!, width: 1)
        // configureStartRideView(isActive: false)
     }
     
@@ -139,13 +132,11 @@ class EditReservetionAdvancedViewController: BaseViewController {
     func setupView() {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = img_bkd
-        mConfirmBtn.layer.cornerRadius = 10
-        mConfirmBtn.addBorder(color: color_navigationBar!, width: 1)
         mRentInfoBckgV.setShadow(color: color_shadow!)
                 
         configureView()
         handlerTotalPrice()
-        
+        handlerConfirm()
     }
     
     
@@ -259,17 +250,6 @@ class EditReservetionAdvancedViewController: BaseViewController {
         }
     }
     
-    /// Animate Confirm click
-    private func clickConfirm() {
-        UIView.animate(withDuration: 0.5) { [self] in
-            self.mConfirmLeading.constant = self.mConfirmBckgV.bounds.width - self.mConfirmBtn.frame.size.width
-            self.mConfirmBckgV.layoutIfNeeded()
-
-        } completion: { _ in
-            self.goToAgreement(on: self, isAdvanced: false, isEditAdvanced: true)
-        }
-    }
-    
     
     ///Show alert for switch driver
     private func showAlertForSwitchDriver() {
@@ -290,19 +270,12 @@ class EditReservetionAdvancedViewController: BaseViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func confirm(_ sender: UIButton) {
-        clickConfirm()
+    
+    func handlerConfirm() {
+        mConfirmV.didPressConfirm = {
+            self.goToAgreement(on: self, isAdvanced: false, isEditAdvanced: true)
+        }
     }
-    
-    @IBAction func confirmSwipe(_ sender: UISwipeGestureRecognizer) {
-        clickConfirm()
-    }
-    
-    
-    @IBAction func agreement(_ sender: UIButton) {
-        self.goToAgreement(on: self, isAdvanced: false, isEditAdvanced: true)
-    }
-    
     
     
     ///Handler payment tableCell´s button

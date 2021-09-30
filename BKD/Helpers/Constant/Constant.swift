@@ -174,7 +174,8 @@ struct Constant {
         static let transmissionManual = "Manual"
         static let transmissionAutomatic = "Automatic"
 
-        
+        //Accessories
+       static let loginAccessories = "To add accessories, you need to sign in" //???
         
         
         //Tail Lift

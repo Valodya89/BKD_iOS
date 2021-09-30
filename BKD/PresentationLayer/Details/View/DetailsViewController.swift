@@ -647,7 +647,9 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func accessories(_ sender: UIButton) {
-        self.goToAccessories(on: self, isEditReservation: false)
+        self.goToAccessories(on: self,
+                             vehicleModel: vehicleModel,
+                             isEditReservation: false)
     }
     
     

@@ -101,7 +101,7 @@ class MyReservationsViewController: BaseViewController {
     }
     
     
-    ///Configure
+    ///Show switch drivers table view
     private func animateSwitchDriversTable() {                self.mSwitchDriversTbV.isScrollEnabled = false
         mVissualEffectV.isHidden = false
         UIView.animate(withDuration: 0.5) {
@@ -114,6 +114,18 @@ class MyReservationsViewController: BaseViewController {
         }
     }
     
+    ///Hide switch drivers table view
+    private func hideSwitchTable(driverName: String?){
+        UIView.animate(withDuration: 0.5) {
+            self.mSwitchDriversBottom.constant = -500
+            self.view.layoutIfNeeded()
+            self.view.setNeedsLayout()
+        } completion: { _ in
+            self.mVissualEffectV.isHidden = true
+            guard let driverName = driverName else {return}
+            self.showAlertForSwitchDriver(driverName: driverName)
+        }
+    }
     
     ///Show alert for switch driver
     private func showAlertForSwitchDriver(driverName: String) {
@@ -134,6 +146,8 @@ class MyReservationsViewController: BaseViewController {
     
     
     
+    
+    
     //MARK: -- Actions
     @IBAction func menu(_ sender: Any) {
         present(menu!, animated: true, completion: nil)
@@ -144,7 +158,10 @@ class MyReservationsViewController: BaseViewController {
         mReservCollectionV.reloadData()
     }
     
-
+    @IBAction func swipeSwitchTable(_ sender: UISwipeGestureRecognizer) {
+        hideSwitchTable(driverName: nil)
+    }
+    
 }
 
 
@@ -370,18 +387,12 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
     }
 }
 
+//MARK: -- SwitchDriversTableViewDelegate
+//MARK: ----------------------------------
 extension MyReservationsViewController: SwitchDriversTableViewDelegate {
     
     func didPressCell(item: MyDriversModel) {
-        
-        UIView.animate(withDuration: 0.5) {
-            self.mSwitchDriversTbHeight.constant = -500
-            self.view.layoutIfNeeded()
-            self.view.setNeedsLayout()
-        } completion: { _ in
-            self.mVissualEffectV.isHidden = true
-            self.showAlertForSwitchDriver(driverName: item.fullname)
-        }
+        hideSwitchTable(driverName: item.fullname)
     }
 
         

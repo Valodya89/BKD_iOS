@@ -24,22 +24,22 @@ class AccessoriesViewModel: NSObject {
         didResult(String(value))
     }
     
-//    func countTotalAccesories(accessoryImg:UIImage,
-//                              accessoryName:String,
-//                              accessoryPrice:Double,
-//                              accessoryCount:Int,
-//                              totalPrice: Double,
-//                              isIncrease: Bool,
-//                              index: Int,
-//                              didResult: @escaping (String) -> ()) {
-//        var value: Double = 0.0
-//        if isIncrease {
-//            value = totalPrice + accessoryPrice
-//        } else {
-//            value = totalPrice - accessoryPrice
-//        }
-//        // let newValue = String(value).replacingOccurrences(of: ".", with: ",")
-//
-//        didResult(String(value))
-//    }
+    /// get accessories  list
+     func getAccessories(carID: String, completion: @escaping ([Accessories]?) -> Void) {
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getAccessories(carID: carID))) { [self] (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let accessories = BkdConverter<BaseResponseModel<[Accessories]>>.parseJson(data: data as Any) else {
+                    print("error")
+                    return
+                }
+                completion(accessories.content)
+            case .failure(let error):
+                print(error.description)
+            
+                break
+            }
+        }
+    }
 }

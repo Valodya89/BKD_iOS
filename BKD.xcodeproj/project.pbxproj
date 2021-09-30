@@ -139,6 +139,8 @@
 		5658BDFD26FBECCF00A5B122 /* AddDamage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5658BDFC26FBECCF00A5B122 /* AddDamage.storyboard */; };
 		5658D76826C9BB5700CD6A3F /* CustomLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5658D76726C9BB5700CD6A3F /* CustomLocationModel.swift */; };
 		5658D79326CCA50000CD6A3F /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5658D79226CCA50000CD6A3F /* CategoryViewModel.swift */; };
+		5659AC2F2704B97F00278560 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659AC2E2704B97F00278560 /* UICollectionView.swift */; };
+		5659AC3327056E4900278560 /* SFProDisplayRegularItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5659AC3227056E4400278560 /* SFProDisplayRegularItalic.ttf */; };
 		5659B02B2699F5020059D28C /* PhoneCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659B02A2699F5020059D28C /* PhoneCodeModel.swift */; };
 		565A7AB02653FE26006C63D0 /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565A7AAE2653FE26006C63D0 /* SearchHeaderView.swift */; };
 		565A7AB12653FE26006C63D0 /* SearchHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565A7AAF2653FE26006C63D0 /* SearchHeaderView.xib */; };
@@ -472,6 +474,8 @@
 		5658BDFC26FBECCF00A5B122 /* AddDamage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddDamage.storyboard; sourceTree = "<group>"; };
 		5658D76726C9BB5700CD6A3F /* CustomLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLocationModel.swift; sourceTree = "<group>"; };
 		5658D79226CCA50000CD6A3F /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
+		5659AC2E2704B97F00278560 /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
+		5659AC3227056E4400278560 /* SFProDisplayRegularItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SFProDisplayRegularItalic.ttf; sourceTree = "<group>"; };
 		5659B02A2699F5020059D28C /* PhoneCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneCodeModel.swift; sourceTree = "<group>"; };
 		565A7AAE2653FE26006C63D0 /* SearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderView.swift; sourceTree = "<group>"; };
 		565A7AAF2653FE26006C63D0 /* SearchHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchHeaderView.xib; sourceTree = "<group>"; };
@@ -792,6 +796,7 @@
 				565731D82672DE810012ADD0 /* UINavigationControllerExtention.swift */,
 				565BFDC0269F92310044D081 /* UIApplicationExtention.swift */,
 				565BFDF626A064360044D081 /* String.swift */,
+				5659AC2E2704B97F00278560 /* UICollectionView.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -1102,6 +1107,7 @@
 		564E134E265211D1008CE884 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				5659AC3227056E4400278560 /* SFProDisplayRegularItalic.ttf */,
 				56573201267339B50012ADD0 /* FontsFree-Net-SFProDisplay-Medium.ttf */,
 				5660F7F1266C217F0082F038 /* Mulish-Bold.ttf */,
 				560252942664372300FB204C /* Mulish-Regular.ttf */,
@@ -2820,7 +2826,7 @@
 				568E6F4C2642FC4B000CB6A9 /* Resources */,
 				565F8C65268D390600E21C71 /* Embed Frameworks */,
 				995B321BDC49670283C49A78 /* [CP] Embed Pods Frameworks */,
-				70A2094758486EB96AC333E7 /* [CP] Copy Pods Resources */,
+				6F94FBF9DBE635DE56070A88 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2954,6 +2960,7 @@
 				562585E026F176D500EC9284 /* RegisterNumberTableCell.xib in Resources */,
 				566B3761269503360021BCAA /* CalendarTableViewCell.xib in Resources */,
 				565A7ACF26548025006C63D0 /* SearchResult.xib in Resources */,
+				5659AC3327056E4900278560 /* SFProDisplayRegularItalic.ttf in Resources */,
 				5691A614265C50F20008081D /* CustomLocation.storyboard in Resources */,
 				56CFDE6C2693723400D731CD /* RegistrationBot.storyboard in Resources */,
 				565F8C4A268D17C200E21C71 /* Carousel.storyboard in Resources */,
@@ -2988,7 +2995,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		70A2094758486EB96AC333E7 /* [CP] Copy Pods Resources */ = {
+		6F94FBF9DBE635DE56070A88 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3253,6 +3260,7 @@
 				5640396326F0207F0064256C /* PayLaterViewController.swift in Sources */,
 				5656324626585FFF00B78562 /* CarEquipmentCollectionViewCell.swift in Sources */,
 				564BE885270223B70037DF39 /* DateAndLocationView.swift in Sources */,
+				5659AC2F2704B97F00278560 /* UICollectionView.swift in Sources */,
 				560048702697F78C009943B5 /* BkdAgreementViewController.swift in Sources */,
 				564E13692652F0CF008CE884 /* PrivacyPoliceView.swift in Sources */,
 			);
