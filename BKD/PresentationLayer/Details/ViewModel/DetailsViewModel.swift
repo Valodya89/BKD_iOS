@@ -13,7 +13,7 @@ class DetailsViewModel: NSObject {
     let validator = Validator()
     var workingTimes: WorkingTimes?
     
-    func updateSearchInfo(tariff: Tariff,
+    func updateSearchInfo(tariff: TariffState,
                           search: Search,
                        optionIndex: Int,
                        currSearchModel: SearchModel) -> SearchModel {
@@ -191,6 +191,136 @@ class DetailsViewModel: NSObject {
            })
         
     }
+    
+    
+    /// get tariff list
+     func getTariff(completion: @escaping ([Tariff]?) -> Void) {
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getTariff)) {  (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let tariff = BkdConverter<BaseResponseModel<[Tariff]>>.parseJson(data: data as Any) else {
+                    print("error")
+                    return
+                }
+                completion(tariff.content)
+            case .failure(let error):
+                print(error.description)
+            
+                break
+            }
+        }
+    }
+    
+
+    ///Change tariff list for using
+    func changeTariffListForUse(tariffs:[Tariff], carValue: Double) -> [TariffSlideModel]? {
+        var tariffSlideList:[TariffSlideModel] = []
+        ///Hourly
+        let hourlyModel = getTariffSlideModel(type: Constant.Keys.hourly,
+                                              tariffs: tariffs,
+                                              carValue: carValue,
+                                              tariffKey: Constant.Texts.hourly,
+                                              bckgColor: color_hourly!,
+                                              typeColor: .white)
+        if hourlyModel != nil {
+                tariffSlideList.append(hourlyModel!)
+        }
+        
+        ///Dayli
+        let dailyModel = getTariffSlideModel(type: Constant.Keys.daily,
+                                             tariffs: tariffs,
+                                             carValue: carValue,
+                                             tariffKey: Constant.Texts.daily,
+                                             bckgColor: color_days!,
+                                             typeColor: color_main!)
+        if dailyModel != nil {
+            tariffSlideList.append(dailyModel!)
+        }
+        
+        ///Weekly
+        let weeklyModel = getTariffSlideModel(type: Constant.Keys.weekly,
+                                             tariffs: tariffs,
+                                             carValue: carValue,
+                                             tariffKey: Constant.Texts.weekly,
+                                             bckgColor: color_weeks!,
+                                              typeColor: .white)
+        if weeklyModel != nil {
+            tariffSlideList.append(weeklyModel!)
+        }
+        
+        ///Monthly
+        let monthlyModel = getTariffSlideModel(type: Constant.Keys.monthly,
+                                             tariffs: tariffs,
+                                             carValue: carValue,
+                                             tariffKey: Constant.Texts.monthly,
+                                             bckgColor: color_monthly!,
+                                             typeColor: color_main!)
+        if monthlyModel != nil {
+            tariffSlideList.append(monthlyModel!)
+        }
+        
+        ///Flexible
+        if let model = tariffs.first(where: { $0.type == Constant.Keys.flexible }) {
+            
+            var flexibleModel = TariffSlideModel (type: Constant.Texts.flexible, bckgColor: color_flexible, typeColor: .white)
+            flexibleModel.options = nil
+            flexibleModel.value = String(carValue)
+            flexibleModel.fuelConsumption = model.fuelCompensation
+            tariffSlideList.append(flexibleModel)
+        }
+       
+        return tariffSlideList
+    }
+    
+    
+    ///Get tariffs by type
+    func getTariffByType(type: String, tariffKey: String, tariffs:[Tariff]) -> [String : [Tariff]]? {
+        var tariffList:[Tariff] = []
+       
+        tariffs.forEach { tariff in
+            if tariff.type == type {
+                tariffList.append(tariff)
+            }
+        }
+        tariffList = tariffList.sorted(by: { $0.duration < $1.duration })
+        if tariffList.count > 0 {
+            
+            let tariffsByType:[String : [Tariff]] = [tariffKey : tariffList]
+           return tariffsByType
+        }
+        return nil
+    }
+    
+    ///Get tariffSlide modell
+    func getTariffSlideModel(type: String,
+                             tariffs:[Tariff],
+                             carValue: Double,
+                             tariffKey: String,
+                             bckgColor: UIColor,
+                             typeColor: UIColor) -> TariffSlideModel? {
+
+        let tariffSorted = getTariffByType(type: type,
+                                           tariffKey: tariffKey,
+                                           tariffs: tariffs)
+        if let tariffSorted = tariffSorted {
+            var tariffModel = TariffSlideModel (type: tariffKey, bckgColor: bckgColor,typeColor: typeColor)
+            var options: [TariffSlideModel] = []
+            let tariffArr:[Tariff] = tariffSorted[tariffKey]!
+            
+            tariffArr.forEach{ tariff in
+                
+                let price = tariff.duration * carValue
+                let option = TariffSlideModel(type: tariffKey, name: tariff.name, bckgColor: bckgColor,typeColor: typeColor, value: String(price - ((price * tariff.percentage)/100)) )
+                options.append(option)
+            }
+            tariffModel.options = options
+            tariffModel.tariff = tariffSorted[tariffKey]
+            return tariffModel
+        }
+        return nil
+    }
+    
    
 }
 

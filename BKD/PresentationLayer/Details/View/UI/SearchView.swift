@@ -146,7 +146,7 @@ class SearchView: UIView, UITextFieldDelegate {
     }
     
     /// Set return time info
-    func setReturnTimeInfo(searchModel: SearchModel, tariff: Tariff) {
+    func setReturnTimeInfo(searchModel: SearchModel, tariff: TariffState) {
         mReturnTimeTxtFl.font =  UIFont.init(name: (mReturnTimeTxtFl.font?.fontName)!, size: 18.0)
         mReturnTimeTxtFl.textColor = (tariff == .flexible) ? color_entered_date : color_search_passive
        mReturnTimeTxtFl.text = searchModel.returnTime!.getHour()
@@ -173,7 +173,7 @@ class SearchView: UIView, UITextFieldDelegate {
     }
     
     ///configure search passive fields
-    func configureSearchPassiveFields(tariff: Tariff) {
+    func configureSearchPassiveFields(tariff: TariffState) {
         var isPassive = true
         if tariff != .flexible {
             isPassive = false
@@ -273,7 +273,7 @@ class SearchView: UIView, UITextFieldDelegate {
     }
     
     ///Update search fields
-    func updateSearchFields(searchModel:SearchModel, tariff: Tariff){
+    func updateSearchFields(searchModel:SearchModel, tariff: TariffState){
         setPickUpDateInfo(searchModel: searchModel)
         setReturnDateInfo(searchModel: searchModel)
         setPickUpTimeInfo(searchModel: searchModel)
@@ -283,7 +283,7 @@ class SearchView: UIView, UITextFieldDelegate {
     }
     
     /// will update time fields depend on tariff option
-    func updateSearchTimes(searchModel:SearchModel, tariff:Tariff) {
+    func updateSearchTimes(searchModel:SearchModel, tariff:TariffState) {
         setReturnTimeInfo(searchModel: searchModel, tariff: tariff)
             
             if let _ = searchModel.returnDate {
@@ -312,7 +312,7 @@ class SearchView: UIView, UITextFieldDelegate {
     }
     
     ///Update search filled fields
-    func updateSearchFilledFields(tariff:Tariff,
+    func updateSearchFilledFields(tariff:TariffState,
                                   searchModel:SearchModel){
         
         if tariff == .hourly &&  searchModel.pickUpTime != nil {

@@ -61,6 +61,9 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     let detailsViewModel:DetailsViewModel = DetailsViewModel()
     var workingTimes: WorkingTimes?
+    var tariffSlideList:[TariffSlideModel]?
+    var tariffs: [Tariff]?
+
     
     var pickerState: DatePicker?
     var pickerList: [String]?
@@ -71,7 +74,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     var isSearchEdit = false
     var isClickMore = false
-    var currentTariff: Tariff = .hourly
+    var currentTariff: TariffState = .hourly
     var search: Search = .date
     var currentTariffOptionIndex: Int = 0
     
@@ -134,6 +137,8 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         configureDelegates()
         addTariffSliedView()
         goToLocationController()
+        getTariffList()
+
         
     }
     
@@ -231,6 +236,25 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             vehicleModel?.customLocationTotalPrice = detailsViewModel.getCustomLocationTotalPrice(searchV: mSearchV)
         }
      }
+    
+    
+    ///Get tariff list
+    private func getTariffList() {
+        detailsViewModel.getTariff { result in
+            guard let _ = result else {
+                BKDAlert().showAlertOk(on: self,
+                                       message: Constant.Texts.errorRequest,
+                                       okTitle: Constant.Texts.ok, okAction: nil)
+                return
+            }
+            self.tariffs = result!
+            self.tariffSlideList = self.detailsViewModel.changeTariffListForUse(tariffs: result!, carValue: self.vehicleModel?.vehicleValue  ?? 0.0)
+            self.tariffSlideVC.tariffSlideList = self.tariffSlideList
+            self.tariffSlideVC.mTariffSlideCollectionV.reloadData()
+            self.mTariffCarouselV.tariffSlideList = self.tariffSlideList
+            self.mTariffCarouselV.tariffCarousel.reloadData()
+        }
+    }
     
     private func configureTransparentView()  {
         backgroundV.frame = self.view.bounds
@@ -434,7 +458,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     ///Will show tariff cards
     private func showTariffCards () {
             self.mTariffCarouselV.tariffCarousel.reloadData()
-            self.tariffSlideVC.tariffSlideArr = TariffSlideData.tariffSlideModel
+        self.tariffSlideVC.tariffSlideList = self.tariffSlideList
             self.tariffSlideVC.mTariffSlideCollectionV.reloadData()
             UIView.animate(withDuration: 0.5) { [self] in
                 self.tariffSlideVC.view.frame.origin.y += 500
@@ -712,7 +736,7 @@ extension DetailsViewController: DetailsAndTailLiftViewDelegate {
 //MARK: ----------------------------
 extension DetailsViewController: TariffSlideViewControllerDelegate {
     
-    func didPressTariffOption(tariff: Tariff, optionIndex: Int) {
+    func didPressTariffOption(tariff: TariffState, optionIndex: Int) {
         
         scrollContentHeight = 0.0
         setScrollVoiewHeight()
@@ -746,8 +770,11 @@ extension DetailsViewController: TariffSlideViewControllerDelegate {
 //MARK: TariffCarouselViewDelegate
 //MARK: ----------------------------
 extension DetailsViewController: TariffCarouselViewDelegate {
-    
-    func didPressConfirm(tariff: Tariff, optionIndex: Int, optionstr: String) {
+    func didPressFuelConsuption(isCheck: Bool) {
+        
+    }
+ 
+    func didPressConfirm(tariff: TariffState, optionIndex: Int, optionstr: String) {
         currentTariff = tariff
         if isSearchEdit && tariff != .flexible {
             showAlertChangeTariff(optionIndex: optionIndex, option: optionstr)
@@ -761,14 +788,15 @@ extension DetailsViewController: TariffCarouselViewDelegate {
     }
     
     
-    func willChangeTariffOption(tariff: Tariff, optionIndex: Int) {
+    func willChangeTariffOption(tariff: TariffState, optionIndex: Int) {
         search = (tariff == .hourly) ? .time : .date
        updateSearchFields(optionIndex: optionIndex)
         currentTariffOptionIndex = optionIndex
     }
 
-    func didPressMore() {
+    func didPressMore(tariffIndex:Int, optionIndex: Int) {
         let moreVC = UIStoryboard(name: Constant.Storyboards.more, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.more) as! MoreViewController
+        moreVC.tariffModel = tariffSlideList![tariffIndex].tariff?[optionIndex]
         self.navigationController?.pushViewController(moreVC, animated: true)
     }
     

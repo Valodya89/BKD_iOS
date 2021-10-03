@@ -8,10 +8,13 @@
 import UIKit
 
 class MoreViewController: UIViewController {
-    //MARK: Outlets
+    //MARK: --Outlets
     @IBOutlet weak var mMoreTbV: UITableView!
     @IBOutlet weak var mBackBarBtn: UIBarButtonItem!
-        @IBOutlet weak var mBkdBarBtn: UIBarButtonItem!
+    @IBOutlet weak var mBkdBarBtn: UIBarButtonItem!
+    
+    //MARK: -- Variables
+    public var tariffModel: Tariff?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +37,8 @@ class MoreViewController: UIViewController {
         mMoreTbV.delegate = self
         mMoreTbV.dataSource = self
     }
+    
+    
     
 //MARK: ACTIONS
 //MARK: ---------------------
@@ -61,7 +66,7 @@ extension MoreViewController: UITableViewDelegate, UITableViewDataSource {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: RentalConditionsTableViewCell.identifier, for: indexPath) as! RentalConditionsTableViewCell
             let model = RentalConditionsData.rentalConditionsModel[indexPath.row]
-            cell.setCellInfo(item:model, index: indexPath.row)
+            cell.setCellInfo(item:model, tariff: tariffModel, index: indexPath.row)
             return cell
             
         } else { // BKD Advantages cell

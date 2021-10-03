@@ -78,38 +78,38 @@ struct CategoryCarouselData  {
 
 //MARK: TariffSlideData
 //MARK: --------------------
-struct TariffSlideData {
-    static var tariffSlideModel: [TariffSlideModel] = [TariffSlideModel (title: "Hourly",
-                                                                         bckgColor: color_hourly!,
-                                                                         titleColor: color_main!,
-                                                                         options:[TariffSlideModel(title: "Hourly", option: "2 Hours",
-                                                                                                   bckgColor: color_hourly!,
-                                                                                                   titleColor: color_main!, value: "€ 25,5"),
-                                                                                  TariffSlideModel(title: "Hourly", option: "3 Hours", bckgColor: color_hourly!,titleColor: color_main!, value: "€ 35,5"),
-                                                                                  TariffSlideModel(title: "Hourly", option: "4 Hours", bckgColor: color_hourly!,titleColor: color_main!, value: "€ 45,5"),
-                                                                                  TariffSlideModel(title: "Hourly", option: "5 Hours", bckgColor: color_hourly!,titleColor: color_main!, value: "€ 55,5"),
-                                                                                  TariffSlideModel(title: "Hourly", option: "6 Hours", bckgColor: color_hourly!,titleColor: color_main!, value: "€ 65,5"),
-                                                                                  TariffSlideModel(title: "Hourly", option: "10 Hours", bckgColor: color_hourly!, titleColor: color_main!, value: "€ 75,5")]),
-                                                       TariffSlideModel (title: "Daily",
-                                                                         bckgColor: color_days!,titleColor: .white,
-                                                                         options:[TariffSlideModel(title: "Daily", option: "2 Days", bckgColor: color_days!,titleColor: .white, value: "€ 25,5"),
-                                                                                                                       TariffSlideModel(title: "Daily", option: "3 Days", bckgColor: color_days!,titleColor: .white, value: "€ 35,5"),
-                                                                                                                       TariffSlideModel(title: "Daily", option: "4 Days", bckgColor: color_days!,titleColor: .white, value: "€ 45,5"),
-                                                                                                                       TariffSlideModel(title: "Daily", option: "5 Days", bckgColor: color_days!,titleColor: .white, value: "€ 55,5"),
-                                                                                                                       TariffSlideModel(title: "Daily", option: "6 Days", bckgColor: color_days!,titleColor: .white, value: "€ 65,5")]),
-                                                                               TariffSlideModel (title: "Weekly",
-                                                                         bckgColor: color_weeks!,titleColor: color_main!,
-                                                                         options:[TariffSlideModel(title: "Weekly", option: "1 Week", bckgColor: color_weeks!,titleColor: color_main!, value: "€ 25,5"),
-                                                                                   TariffSlideModel(title: "Weekly", option: "2 Weeks",
-                                                                                                    bckgColor: color_weeks!,titleColor: color_main!, value: "€ 35,5"),
-                                                                                   TariffSlideModel(title: "Weekly", option: "3 Weeks", bckgColor: color_weeks!,titleColor: color_main!, value: "€ 45,5")]),
-                                                                               TariffSlideModel (title: "Monthly",
-                                                                                                 bckgColor:color_monthly!, titleColor: .white,
-                                                                                                 options:[TariffSlideModel(title: "Monthly", option: "1 Month", bckgColor: color_monthly!,titleColor: .white, value: "€ 25,5")]),
-                                                                               TariffSlideModel (title: "Flexible",
-                                                                                                 bckgColor:color_flexible!, titleColor: color_main! )
-                ]
-}
+//struct TariffSlideData {
+//    static var tariffSlideModel: [TariffSlideModel] = [TariffSlideModel (title: "Hourly",
+//                                                                         bckgColor: color_hourly!,
+//                                                                         titleColor: color_main!,
+//                                                                         options:[TariffSlideModel(title: "Hourly", option: "2 Hours",
+//                                                                                                   bckgColor: color_hourly!,
+//                                                                                                   titleColor: color_main!, value: "€ 25,5"),
+//                                                                                  TariffSlideModel(title: "Hourly", option: "3 Hours", bckgColor: color_hourly!,titleColor: color_main!, value: "€ 35,5"),
+//                                                                                  TariffSlideModel(title: "Hourly", option: "4 Hours", bckgColor: color_hourly!,titleColor: color_main!, value: "€ 45,5"),
+//                                                                                  TariffSlideModel(title: "Hourly", option: "5 Hours", bckgColor: color_hourly!,titleColor: color_main!, value: "€ 55,5"),
+//                                                                                  TariffSlideModel(title: "Hourly", option: "6 Hours", bckgColor: color_hourly!,titleColor: color_main!, value: "€ 65,5"),
+//                                                                                  TariffSlideModel(title: "Hourly", option: "10 Hours", bckgColor: color_hourly!, titleColor: color_main!, value: "€ 75,5")]),
+//                                                       TariffSlideModel (title: "Daily",
+//                                                                         bckgColor: color_days!,titleColor: .white,
+//                                                                         options:[TariffSlideModel(title: "Daily", option: "2 Days", bckgColor: color_days!,titleColor: .white, value: "€ 25,5"),
+//                                                                                                                       TariffSlideModel(title: "Daily", option: "3 Days", bckgColor: color_days!,titleColor: .white, value: "€ 35,5"),
+//                                                                                                                       TariffSlideModel(title: "Daily", option: "4 Days", bckgColor: color_days!,titleColor: .white, value: "€ 45,5"),
+//                                                                                                                       TariffSlideModel(title: "Daily", option: "5 Days", bckgColor: color_days!,titleColor: .white, value: "€ 55,5"),
+//                                                                                                                       TariffSlideModel(title: "Daily", option: "6 Days", bckgColor: color_days!,titleColor: .white, value: "€ 65,5")]),
+//                                                                               TariffSlideModel (title: "Weekly",
+//                                                                         bckgColor: color_weeks!,titleColor: color_main!,
+//                                                                         options:[TariffSlideModel(title: "Weekly", option: "1 Week", bckgColor: color_weeks!,titleColor: color_main!, value: "€ 25,5"),
+//                                                                                   TariffSlideModel(title: "Weekly", option: "2 Weeks",
+//                                                                                                    bckgColor: color_weeks!,titleColor: color_main!, value: "€ 35,5"),
+//                                                                                   TariffSlideModel(title: "Weekly", option: "3 Weeks", bckgColor: color_weeks!,titleColor: color_main!, value: "€ 45,5")]),
+//                                                                               TariffSlideModel (title: "Monthly",
+//                                                                                                 bckgColor:color_monthly!, titleColor: .white,
+//                                                                                                 options:[TariffSlideModel(title: "Monthly", option: "1 Month", bckgColor: color_monthly!,titleColor: .white, value: "€ 25,5")]),
+//                                                                               TariffSlideModel (title: "Flexible",
+//                                                                                                 bckgColor:color_flexible!, titleColor: color_main! )
+//                ]
+//}
 
 
 //MARK: RentalConditionsData

@@ -40,6 +40,7 @@
 		562585E326F1860800EC9284 /* AdditionalDriverTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562585E226F1860800EC9284 /* AdditionalDriverTableView.swift */; };
 		562585E726F1867800EC9284 /* AditionalDriverTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562585E526F1867800EC9284 /* AditionalDriverTableCell.swift */; };
 		562585E826F1867800EC9284 /* AditionalDriverTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 562585E626F1867800EC9284 /* AditionalDriverTableCell.xib */; };
+		562F89C42705F7360027CB9A /* Tariff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562F89C32705F7360027CB9A /* Tariff.swift */; };
 		56316316267A822200ED2144 /* MyDriverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56316315267A822200ED2144 /* MyDriverCollectionViewCell.swift */; };
 		5640394E26EF854B0064256C /* ReservationWithStartRideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5640394C26EF854B0064256C /* ReservationWithStartRideCollectionViewCell.swift */; };
 		5640394F26EF854B0064256C /* ReservationWithStartRideCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5640394D26EF854B0064256C /* ReservationWithStartRideCollectionViewCell.xib */; };
@@ -375,6 +376,7 @@
 		562585E226F1860800EC9284 /* AdditionalDriverTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalDriverTableView.swift; sourceTree = "<group>"; };
 		562585E526F1867800EC9284 /* AditionalDriverTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AditionalDriverTableCell.swift; sourceTree = "<group>"; };
 		562585E626F1867800EC9284 /* AditionalDriverTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AditionalDriverTableCell.xib; sourceTree = "<group>"; };
+		562F89C32705F7360027CB9A /* Tariff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tariff.swift; sourceTree = "<group>"; };
 		56316315267A822200ED2144 /* MyDriverCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDriverCollectionViewCell.swift; sourceTree = "<group>"; };
 		5640394C26EF854B0064256C /* ReservationWithStartRideCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationWithStartRideCollectionViewCell.swift; sourceTree = "<group>"; };
 		5640394D26EF854B0064256C /* ReservationWithStartRideCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReservationWithStartRideCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1389,6 +1391,7 @@
 				5657E85226713BD400788D62 /* DetailsModel.swift */,
 				565731DD2672FDC80012ADD0 /* DetailsAndTailLiftModel.swift */,
 				565731FC267332B10012ADD0 /* TariffSlideModel.swift */,
+				562F89C32705F7360027CB9A /* Tariff.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3255,6 +3258,7 @@
 				5618888F264A63CA00BDDB33 /* LocationDropDownView.swift in Sources */,
 				5660E61E26FE0DB4009BB73F /* OnRideModel.swift in Sources */,
 				56A2AFEC2694CFC9001BA7C5 /* SearchPhoneCodeViewController.swift in Sources */,
+				562F89C42705F7360027CB9A /* Tariff.swift in Sources */,
 				560252E2266535CF00FB204C /* Result.swift in Sources */,
 				5669F5FC26FC170D00FF73F7 /* ContactActionSheetView.swift in Sources */,
 				5640396326F0207F0064256C /* PayLaterViewController.swift in Sources */,

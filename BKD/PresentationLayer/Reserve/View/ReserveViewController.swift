@@ -64,7 +64,7 @@ class ReserveViewController: UIViewController {
 
     var reserveViewModel = ReserveViewModel()
     public var vehicleModel: VehicleModel?
-    var currentTariff: Tariff = .hourly
+    var currentTariff: TariffState = .hourly
     var lastContentOffset:CGFloat = 0.0
     var totalPrice: Double = 0.0
     

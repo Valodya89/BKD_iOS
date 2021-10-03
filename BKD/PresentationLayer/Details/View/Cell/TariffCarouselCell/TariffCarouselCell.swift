@@ -7,7 +7,8 @@
 
 import UIKit
 protocol TariffCarouselCellDelegate: AnyObject {
-    func didPressMore()
+    func didPressMore(tariffIndex: Int, optionIndex: Int)
+    func didPressFuelConsuption(isCheck: Bool)
     func showSearchView(optionIndex: Int)
     func willChangeOption(optionIndex: Int)
 
@@ -58,6 +59,7 @@ class TariffCarouselCell: UIView {
     //MARK: Variable
     var selectedSegmentIndex = 0
     var isConfirm = false
+    var item: TariffSlideModel?
     weak var delegate: TariffCarouselCellDelegate?
 
     
@@ -71,7 +73,9 @@ class TariffCarouselCell: UIView {
         commonInit()
     }
     
-    private func commonInit() {       Bundle.main.loadNibNamed(Constant.NibNames.tariffCarousel, owner: self, options: nil)
+    private func commonInit() {
+        
+        Bundle.main.loadNibNamed(Constant.NibNames.tariffCarousel, owner: self, options: nil)
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -91,14 +95,34 @@ class TariffCarouselCell: UIView {
     
     ///Set segments to segment control
     func setSegmentControlSegment(index: Int, segmentC: UISegmentedControl) {
-        let currOptions = tariffOptionsArr[index]
-        if currOptions.count > 0  {
-            for i in (0..<Int(currOptions.count)) {
-                segmentC.setTitle(currOptions[i], forSegmentAt: i)
+        let currTariffs = item?.tariff
+        
+        if currTariffs?.count ?? 0 > 0  {
+            for i in (0..<Int(currTariffs!.count)) {
+                let tariff:Tariff = currTariffs![i]
+                
+                if tariff.type == Constant.Keys.hourly {
+                    segmentC.setTitle(String(Int(tariff.duration)) + Constant.Texts.h , forSegmentAt: i)
+                } else if tariff.type == Constant.Keys.daily {
+                    segmentC.setTitle(String(Int(tariff.duration/24)) + Constant.Texts.d , forSegmentAt: i)
+                } else if tariff.type == Constant.Keys.weekly {
+                    segmentC.setTitle(String(Int(tariff.duration/(24 * 7))) + Constant.Texts.w , forSegmentAt: i)
+                } else if tariff.type == Constant.Keys.monthly {
+                    segmentC.setTitle(String(Int(tariff.duration/(24 * 30))) + Constant.Texts.m , forSegmentAt: i)
+                }
             }
             segmentC.selectedSegmentIndex = selectedSegmentIndex
             segmentC.addTarget(self, action: #selector(didChangeSegment(sender:)), for: .allEvents)
         }
+        
+//        let currOptions = tariffOptionsArr[index]
+//        if currOptions.count > 0  {
+//            for i in (0..<Int(currOptions.count)) {
+//                segmentC.setTitle(currOptions[i], forSegmentAt: i)
+//            }
+//            segmentC.selectedSegmentIndex = selectedSegmentIndex
+//            segmentC.addTarget(self, action: #selector(didChangeSegment(sender:)), for: .allEvents)
+//        }
     }
     
     
@@ -106,17 +130,24 @@ class TariffCarouselCell: UIView {
     func setUnselectedCellsInfo(item:TariffSlideModel, index: Int) {
         mUnselectedBckgV.isHidden = false
         mSelectedBckgV.isHidden = true
-        mUnselectedBckgV.backgroundColor = item.bckgColor.withAlphaComponent(0.6)
-        mUnselectedTitleLb.text = item.title
+        mUnselectedBckgV.backgroundColor = item.bckgColor!.withAlphaComponent(0.6)
+        mUnselectedTitleLb.text = item.type
         mUnselectedTitleLb.textColor = index % 2 == 1 ? color_main : .white
     }
     
     /// set info to open cell 
     func setSelectedCellInfo(item:TariffSlideModel, index: Int)  {
+        updateFuelConsumptionCheckBox(isSelected: item.fuelConsumption)
+        mMoreBtn.tag = index
         mUnselectedBckgV.isHidden = true
         mSelectedBckgV.isHidden = false
-        mTitleLb.text = item.title
-        mPriceLb.text = "99,9"
+        mTitleLb.text = item.type
+        if let value = item.value {
+            mPriceLb.text = value
+        }
+        if let options = item.options {
+            mPriceLb.text = options[selectedSegmentIndex].value
+    }
         mSelectedBckgV.backgroundColor = item.bckgColor
                    
         mKwLb.textColor = index % 2 == 1 ? color_main : color_entered_date
@@ -126,11 +157,12 @@ class TariffCarouselCell: UIView {
         if index == 0 { //Hourly cell
             setHourlyCellInfo()
         } else {
-            setCommonCellsInfo(index: index)
+            configureCommonCells(index: index)
         }
         if index == 4 || index == 0 { //hourly or Flexible cells
-            setHourlyAndFlexibleCellsCommonInfo(index: index)
+            configureHourlyAndFlexibleCells(index: index)
         }
+        
     }
     
     ///set hourly cell info
@@ -145,15 +177,15 @@ class TariffCarouselCell: UIView {
         }
         setSegmentControlSegment(index: 0, segmentC: mHoursSegmentC)
         mHoursSegmentC.backgroundColor = color_main!.withAlphaComponent(0.26)
-//        mHoursSegmentC.addTarget(self, action: #selector(didChangeSegment(sender:)), for: .allEvents)
+
         mMoreBtn.setTitleColor(.white, for: .normal)
         
         UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
         UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: color_menu!], for: .selected)
     }
     
-    ///set info to the Flexible Cell
-     func setFlexibleCellInfo() {
+    ///configure Flexible Cell
+     func configureFlexibleCell() {
       
         
         mStartingPriceLb.isHidden = false
@@ -179,8 +211,8 @@ class TariffCarouselCell: UIView {
 
     }
     
-    ///set info to cells which have common design
-   func setCommonCellsInfo(index: Int) {
+    ///configure cells which has common style
+   func configureCommonCells(index: Int) {
         mConfirmBckgV.backgroundColor = UIColor(ciColor: .white).withAlphaComponent(0.25)
         
       //UILables
@@ -225,7 +257,8 @@ class TariffCarouselCell: UIView {
     }
    }
     
-    func setHourlyAndFlexibleCellsCommonInfo(index: Int) {
+    ///configure Hourly And Flexible Cells
+    func configureHourlyAndFlexibleCells(index: Int) {
         mPriceLb.textColor = .white
         mEuroLb.textColor = .white
         mVatLb.textColor = .white
@@ -233,9 +266,18 @@ class TariffCarouselCell: UIView {
         mWeeklySegmentC.isHidden = true
         mHoursSegmentC.setDividerImage(UIImage().colored(with: .clear, size: CGSize(width: 1, height: 15)), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
         if index == 4 { // Flexible
-            setFlexibleCellInfo()
+            configureFlexibleCell()
         }
         
+    }
+    
+    ///Update FuelConsumption CheckBox button
+    func updateFuelConsumptionCheckBox(isSelected: Bool) {
+        if isSelected {
+            mFlexibleFuelCheckBoxBtn.setImage(img_check_box, for: .normal)
+        } else {
+            mFlexibleFuelCheckBoxBtn.setImage(img_uncheck_box, for: .normal)
+        }
     }
     
     @objc func didChangeSegment(sender: UISegmentedControl) {
@@ -243,6 +285,11 @@ class TariffCarouselCell: UIView {
         if isConfirm {
             delegate?.willChangeOption(optionIndex: selectedSegmentIndex)
         }
+        guard let options = item?.options  else {return}
+        if selectedSegmentIndex < item?.tariff?.count ?? 0 {
+        mPriceLb.text = options[selectedSegmentIndex].value
+        }
+
     }
     
     //MARK: ACTIONS
@@ -251,15 +298,18 @@ class TariffCarouselCell: UIView {
         if sender.image(for: .normal) == img_check_box  {
             mDepositLb.font = font_bot_placeholder
             sender.setImage(img_uncheck_box, for: .normal)
+            delegate?.didPressFuelConsuption(isCheck: false)
         } else {
             mDepositLb.font = font_alert_title
             sender.setImage(img_check_box, for: .normal)
+            delegate?.didPressFuelConsuption(isCheck: true)
         }
     }
     
     
     @IBAction func more(_ sender: UIButton) {
-        delegate?.didPressMore()
+        delegate?.didPressMore(tariffIndex: sender.tag,
+                               optionIndex: selectedSegmentIndex)
     }
     
     @IBAction func confirm(_ sender: UIButton) {

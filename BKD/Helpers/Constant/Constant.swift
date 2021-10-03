@@ -114,6 +114,7 @@ struct Constant {
     
     struct Texts {
         //Main
+        static let euro = "€"
         static let inclVat = "(incl, VAT)"
         static let continueTxt = "Continue"
         static let pickUpDate = "Pick up date"
@@ -152,6 +153,10 @@ struct Constant {
         
         
         //Detail
+        static let h = "h"
+        static let d = "d"
+        static let w = "w"
+        static let m = "m"
         static let conditioning = "Conditioning"
         static let gps = "GPS"
         static let towBar = "Tow Bar"
@@ -173,6 +178,9 @@ struct Constant {
         static let keyDiesel = "DIESEL"
         static let transmissionManual = "Manual"
         static let transmissionAutomatic = "Automatic"
+        static let errorRequest = "Failed request"
+        
+
 
         //Accessories
        static let loginAccessories = "To add accessories, you need to sign in" //???
@@ -188,7 +196,7 @@ struct Constant {
         //Register
         static let accountExist = "Account already exists"
         static let failedRequest = "Request failed please try again"
-        static let  reciveEmail = "You will receive the email in"
+        static let reciveEmail = "You will receive the email in"
         static let touchIdNotice = "Please autorize with touch id!"
         static let touchIdError = "You can´t use this feature"
         static let touchIdFailed = "Failed to  Authenticate. Please try again."
@@ -216,7 +224,6 @@ struct Constant {
         static let open = "Open"
         static let takePhoto = "Take a photo"
         static let search = "Search"
-        static let m = "m"
         static let mCuadrad = "m²"
         static let ok = "ok"
         
@@ -328,6 +335,15 @@ struct Constant {
 
     }
     
+    struct Keys {
+        
+        //Tariff
+        static let hourly = "HOURLY"
+        static let daily = "DAILY"
+        static let weekly = "WEEKLY"
+        static let monthly = "MONTHLY"
+        static let flexible = "FLEXIBLE"
+    }
     
     struct Notifications {
         static let LanguageUpdate = NSNotification.Name(rawValue: "BKD.Notification.Language")

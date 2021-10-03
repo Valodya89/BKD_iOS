@@ -5,6 +5,8 @@
 //  Created by Albert on 15.05.21.
 //
 
+
+//https://dev-rents.bkdrental.com/tariff/list
 import Foundation
 
 enum AuthAPI: APIProtocol {
@@ -21,6 +23,7 @@ enum AuthAPI: APIProtocol {
     case getWorkingTimes
     case getPhoneCodes
     case getCountries
+    case getTariff
     case getAccessories(carID: String)
     case signUp(username: String,
                 password: String)
@@ -106,6 +109,8 @@ enum AuthAPI: APIProtocol {
             return "phone-code/list"
         case .getCountries:
             return "country/list"
+        case .getTariff:
+            return "tariff/list"
         case .getAccessories(let carID):
             return "car/\(carID)/accessories"
         case .signUp:
@@ -151,6 +156,7 @@ enum AuthAPI: APIProtocol {
              .getCustomLocation,
              .addPersonalData,
              .getChatID,
+             .getTariff,
              .getAccessories,
              .sendMessage,
              .addIdentityExpiration,

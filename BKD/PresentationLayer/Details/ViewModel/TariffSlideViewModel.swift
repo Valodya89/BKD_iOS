@@ -11,7 +11,7 @@ class TariffSlideViewModel: NSObject {
 //static let shared = TariffSlideViewModel()
     
 /// get current option index
-func getCurrentOption(model: TariffSlideModel, tariff: Tariff) -> Int {
+func getCurrentOption(model: TariffSlideModel, tariff: TariffState) -> Int {
     var optionsArr:[String] = []
     switch tariff {
         case .hourly:
@@ -36,7 +36,7 @@ func getCurrentOption(model: TariffSlideModel, tariff: Tariff) -> Int {
     
     func getIndexOfOption(optionsArr: [String], model: TariffSlideModel) -> Int {
         for (index, item) in optionsArr.enumerated() {
-            let optionNameArr = model.option!.components(separatedBy: " ")
+            let optionNameArr = model.name!.components(separatedBy: " ")
             let firstStr: String = optionNameArr[0]
             let newStr = firstStr + optionNameArr[1].prefix(1)
             if item.caseInsensitiveCompare(newStr) == .orderedSame {
@@ -46,7 +46,7 @@ func getCurrentOption(model: TariffSlideModel, tariff: Tariff) -> Int {
         return 0
     }
     
-    func getOptionString(tariff:Tariff, index: Int) -> String {
+    func getOptionString(tariff:TariffState, index: Int) -> String {
         var optionsArr:[String] = []
         var optionStr: String = ""
         var option: String = ""
@@ -76,4 +76,7 @@ func getCurrentOption(model: TariffSlideModel, tariff: Tariff) -> Int {
         
         return option.dropLast() + " " + optionStr
     }
+    
+        
+   
 }

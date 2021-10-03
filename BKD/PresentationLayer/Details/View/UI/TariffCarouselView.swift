@@ -10,18 +10,21 @@ import iCarousel
 import AVFoundation
 
 protocol TariffCarouselViewDelegate: AnyObject {
-    func didPressMore()
-    func didPressConfirm(tariff: Tariff, optionIndex: Int, optionstr: String)
-    func willChangeTariffOption(tariff: Tariff, optionIndex: Int)
+    func didPressMore(tariffIndex: Int, optionIndex: Int)
+    func didPressFuelConsuption(isCheck: Bool)
+    func didPressConfirm(tariff: TariffState, optionIndex: Int, optionstr: String)
+    func willChangeTariffOption(tariff: TariffState, optionIndex: Int)
 }
 
 class TariffCarouselView: UIView {
-    // var didChangeCategory: ((Int) -> Void)?
     
+   public var tariffSlideList:[TariffSlideModel]?
+
     private var tariffCarouselCellV: TariffCarouselCell?
     private let tariffSlideViewModel = TariffSlideViewModel()
     weak var delegate: TariffCarouselViewDelegate?
     var selectedSegmentIndex: Int?
+    
     let tariffCarousel: iCarousel = {
         let view = iCarousel()
         view.type = .invertedTimeMachine
@@ -58,13 +61,14 @@ class TariffCarouselView: UIView {
 extension TariffCarouselView: iCarouselDataSource, iCarouselDelegate {
     
     func numberOfItems(in carousel: iCarousel) -> Int {
-        return TariffSlideData.tariffSlideModel.count
+        return tariffSlideList?.count ?? 0
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
-        let carouselModel = TariffSlideData.tariffSlideModel[index]
+        let carouselModel = tariffSlideList![index]
         let view: TariffCarouselCell = carouselCellView()
         view.delegate = self
+        view.item = carouselModel
         if index != carousel.currentItemIndex {
             view.setUnselectedCellsInfo(item: carouselModel, index: index)
         } else {
@@ -82,7 +86,6 @@ extension TariffCarouselView: iCarouselDataSource, iCarouselDelegate {
     }
 
     func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
-        //        didChangeCategory?(carousel.currentItemIndex)
         carousel.reloadData()
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.prepare()
@@ -95,20 +98,25 @@ extension TariffCarouselView: iCarouselDataSource, iCarouselDelegate {
 //MARK: TariffCarouselCellDelegate
 //MARK: ----------------------------
 extension TariffCarouselView: TariffCarouselCellDelegate {
+    
     func willChangeOption(optionIndex: Int) {
         var optionIndex = optionIndex
-        if Tariff.allCases[tariffCarousel.currentItemIndex] == .monthly {
+        if TariffState.allCases[tariffCarousel.currentItemIndex] == .monthly {
             optionIndex = 0
         }
-        delegate?.willChangeTariffOption(tariff: Tariff.allCases[tariffCarousel.currentItemIndex], optionIndex: optionIndex)
+        delegate?.willChangeTariffOption(tariff: TariffState.allCases[tariffCarousel.currentItemIndex], optionIndex: optionIndex)
     }
     
     func showSearchView(optionIndex: Int) {
-        let optionstr = tariffSlideViewModel.getOptionString(tariff: Tariff.allCases[tariffCarousel.currentItemIndex], index: optionIndex)
-        delegate?.didPressConfirm(tariff: Tariff.allCases[tariffCarousel.currentItemIndex], optionIndex: optionIndex, optionstr: optionstr)
+        let optionstr = tariffSlideViewModel.getOptionString(tariff: TariffState.allCases[tariffCarousel.currentItemIndex], index: optionIndex)
+        delegate?.didPressConfirm(tariff: TariffState.allCases[tariffCarousel.currentItemIndex], optionIndex: optionIndex, optionstr: optionstr)
     }
     
-    func didPressMore() {
-        delegate?.didPressMore()
+    func didPressMore(tariffIndex: Int, optionIndex: Int) {
+        delegate?.didPressMore(tariffIndex: tariffIndex, optionIndex: optionIndex)
+    }
+    
+    func didPressFuelConsuption(isCheck: Bool) {
+        delegate?.didPressFuelConsuption(isCheck: isCheck)
     }
 }

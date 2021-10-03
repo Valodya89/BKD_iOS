@@ -83,7 +83,7 @@ class EditReservetionAdvancedViewController: BaseViewController {
     public var registerNumberArr:[String]?
     
     var reserveViewModel = ReserveViewModel()
-    var currentTariff: Tariff = .hourly
+    var currentTariff: TariffState = .hourly
     var lastContentOffset:CGFloat = 0.0
     var totalPrice: Double = 0.0
     

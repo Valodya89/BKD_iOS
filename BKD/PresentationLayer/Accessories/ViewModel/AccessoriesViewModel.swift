@@ -26,7 +26,7 @@ class AccessoriesViewModel: NSObject {
     
     /// get accessories  list
      func getAccessories(carID: String, completion: @escaping ([Accessories]?) -> Void) {
-        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getAccessories(carID: carID))) { [self] (result) in
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getAccessories(carID: carID))) {  (result) in
             
             switch result {
             case .success(let data):
