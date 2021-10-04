@@ -422,7 +422,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
         }
         
         mOnRideTableV.didPressMap = {
-            self.goToSeeMap(parking: nil)
+            self.goToSeeMap(parking: testParking)
         }
     }
 }

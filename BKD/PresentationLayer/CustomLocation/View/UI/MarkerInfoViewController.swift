@@ -45,8 +45,6 @@ class MarkerInfoViewController: UIViewController, StoryboardInitializable {
         mBackgroundV.layer.cornerRadius = 20
         mContinueBtn.layer.cornerRadius = 7
         mContinueBtn.setBorder(color: color_navigationBar!, width: 1)
-    
-//        mValueBackgV.setGradient(startColor:color_gradient_end!, endColor: color_gradient_start!)
         
     }
     private func clickContinue() {

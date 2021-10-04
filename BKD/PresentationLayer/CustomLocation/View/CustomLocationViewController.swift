@@ -18,7 +18,7 @@ protocol CustomLocationViewControllerDelegate: AnyObject {
     func getCustomLocation(_ locationPlace: String)
 }
 
-class CustomLocationViewController: UIViewController {
+class CustomLocationViewController: BaseViewController {
     
     
     //MARK: - Outlets
@@ -50,8 +50,11 @@ class CustomLocationViewController: UIViewController {
     var customLocation:CustomLocation?
 
     private lazy  var markerInfoVC = MarkerInfoViewController.initFromStoryboard(name: Constant.Storyboards.customLocation)
+    private lazy  var addNewMarkerVC = MarkNewAddressViewController.initFromStoryboard(name: Constant.Storyboards.customLocation)
+    
     weak var delegate: CustomLocationViewControllerDelegate?
     
+    public var isAddDamageAddress: Bool = false
     //MARK: - Life cycles
     //MARK ---------------------
     override func viewDidLoad() {
@@ -65,9 +68,13 @@ class CustomLocationViewController: UIViewController {
                                          y: 0,
                                          width: mMarkerInfoBckgV.bounds.width,
                                          height: mMarkerInfoBckgV.bounds.height)
+        addNewMarkerVC.view.frame = CGRect(x: 0, y: 30,
+                                            width: mMarkerInfoBckgV.bounds.width,
+                                             height: mMarkerInfoBckgV.bounds.height - 30)
         
         if UIScreen.main.nativeBounds.height <= 1334 {
             self.markerInfoVC.mContinueBottom.constant = -15
+
         }
     }
     
@@ -76,10 +83,15 @@ class CustomLocationViewController: UIViewController {
     
         mRightBarBtn.image = img_bkd
         restrictedZones = ApplicationSettings.shared.restrictedZones
-        addMarkerInfoView()
+        if isAddDamageAddress {
+            addNewAddressMarkerView()
+        } else {
+            addMarkerInfoView()
+            addRestrictedZones()
+
+        }
         configureDelegates()
         configureMapView()
-        addRestrictedZones()
     }
     
     
@@ -103,6 +115,7 @@ class CustomLocationViewController: UIViewController {
     private func configureDelegates() {
         
         markerInfoVC.delegate = self
+        addNewMarkerVC.delegate = self
         locationManager.delegate = self
         mMapV.delegate = self
     }
@@ -120,6 +133,13 @@ class CustomLocationViewController: UIViewController {
         addChild(markerInfoVC)
         mMarkerInfoBckgV.addSubview(markerInfoVC.view)
         markerInfoVC.didMove(toParent: self)
+    }
+    
+    ///Add new marker information  view
+    private func addNewAddressMarkerView(){
+        addChild(addNewMarkerVC)
+        mMarkerInfoBckgV.addSubview(addNewMarkerVC.view)
+        addNewMarkerVC.didMove(toParent: self)
     }
    
     
@@ -182,16 +202,37 @@ class CustomLocationViewController: UIViewController {
         })        
     }
     
+    ///Show information of marked location
+    private func showAddNewAddressMarkerInfo() {
+        showAddressNameByGeocoder()
+        mUserLocationBckgV.isHidden = true        
+        addNewMarkerVC.mNewAddressLb.textColor = color_navigationBar
+        UIView.animate(withDuration: 0.3, animations: { [self] in
+            mMarkInfoBackgBottom.constant = 0
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    
     ///Show address name
     private func showAddressNameByGeocoder() {
         
         let geocoder = GMSGeocoder()
         geocoder.reverseGeocodeCoordinate(mapViewCenterCoordinate) { response, _ in
             guard let address1 = response?.firstResult()?.lines?.first else {
-                self.markerInfoVC.mUserAddressLb.text = Constant.Texts.errAddress
+                if self.isAddDamageAddress {
+                    self.addNewMarkerVC.mNewAddressLb.text = Constant.Texts.errAddress
+                } else {
+                    self.markerInfoVC.mUserAddressLb.text = Constant.Texts.errAddress
+                }
                 return
             }
-            self.markerInfoVC.mUserAddressLb.text = address1
+            
+            if self.isAddDamageAddress {
+                self.addNewMarkerVC.mNewAddressLb.text = address1
+            } else {
+                self.markerInfoVC.mUserAddressLb.text = address1
+            }
        }
     }
     
@@ -234,8 +275,12 @@ class CustomLocationViewController: UIViewController {
         
         self.addMarker(longitude: coordinate.longitude, latitude: coordinate.latitude, marker: marker)
         mapViewCenterCoordinate = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        showMarkerInfo()
-        let _ = isInRestractZone(coordinate: coordinate)
+        if isAddDamageAddress {
+           showAddNewAddressMarkerInfo()
+        } else {
+            showMarkerInfo()
+            let _ = isInRestractZone(coordinate: coordinate)
+        }
     }
     
     
@@ -392,3 +437,8 @@ extension CustomLocationViewController: GMSAutocompleteViewControllerDelegate {
     }
 }
 
+
+extension CustomLocationViewController: MarkNewAddressViewControllerDelegate  {
+    
+    
+}

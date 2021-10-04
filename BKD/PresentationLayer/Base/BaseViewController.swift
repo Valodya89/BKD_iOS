@@ -56,9 +56,10 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     
     
     ///Open custom location map screen
-    func goToCustomLocationMapController (on viewController: UIViewController) {
+    func goToCustomLocationMapController (on viewController: UIViewController, isAddDamageAddress: Bool) {
         let customLocationContr = UIStoryboard(name: Constant.Storyboards.customLocation, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.customLocation) as! CustomLocationViewController
         customLocationContr.delegate = viewController as? CustomLocationViewControllerDelegate
+        customLocationContr.isAddDamageAddress = isAddDamageAddress
         self.navigationController?.pushViewController(customLocationContr, animated: true)
     }
     

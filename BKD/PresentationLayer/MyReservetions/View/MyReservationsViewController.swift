@@ -322,7 +322,7 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
            // self.showAlertForSwitchDriver()
         }
         cell.pressedSeeMap = {
-            self.goToSeeMap(parking: nil)
+            self.goToSeeMap(parking: testParking)
         }
         return cell
     }

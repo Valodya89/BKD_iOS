@@ -381,9 +381,7 @@ let documentStateArr = ["IF",
                         "DLF",
                         "DLB",
                         "DLS"]
-
-
- 
+let testParking = Parking(id: "73483478", name: "Testing address", longitude: 44.495332, latitude: 40.194582)
 
 
 

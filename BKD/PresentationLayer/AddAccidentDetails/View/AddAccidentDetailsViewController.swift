@@ -253,7 +253,7 @@ extension AddAccidentDetailsViewController: DateAndLocationViewDelegate {
     }
         
     func openMap() {
-        self.goToSeeMap(parking: nil)
+        self.goToCustomLocationMapController(on: self, isAddDamageAddress: true)
     }
 }
 
@@ -363,8 +363,17 @@ extension AddAccidentDetailsViewController: UIImagePickerControllerDelegate, UIN
         } else {
             updateAccidentFormList(img: image, isTakePhoto: false)
         }
-        
+    }
+}
+
+
+//MARK: -- CustomLocationViewControllerDelegate
+//MARK: -------------------------------------------
+extension AddAccidentDetailsViewController: CustomLocationViewControllerDelegate {
+    func getCustomLocation(_ locationPlace: String) {
+        mDateAndLocationV.location = locationPlace
+        mDateAndLocationV.mLocationTxtFl.text = locationPlace
     }
     
-   
+    
 }

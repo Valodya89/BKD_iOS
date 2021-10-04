@@ -69,8 +69,6 @@ class SeeMapViewController: BaseViewController {
     func configureMapView() {
         
         guard let parking = parking else { return }
-//        let camera = GMSCameraPosition.camera(withLatitude: parking.latitude, longitude: parking.longitude, zoom: zoom)
-       // mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)
         mapView = GMSMapView(frame: self.view.bounds)
 
         self.view.addSubview(mapView!)

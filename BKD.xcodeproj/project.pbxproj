@@ -218,6 +218,7 @@
 		56664D9C269DC36A00FDBD22 /* VerificationCode.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56664D9B269DC36A00FDBD22 /* VerificationCode.storyboard */; };
 		56664DC2269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56664DC1269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift */; };
 		56664DCA269E368C00FDBD22 /* TimeCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56664DC9269E368C00FDBD22 /* TimeCompare.swift */; };
+		5668376F270B5F3600C8D8FF /* MarkNewAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5668376E270B5F3600C8D8FF /* MarkNewAddressViewController.swift */; };
 		5669F5FC26FC170D00FF73F7 /* ContactActionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669F5FB26FC170D00FF73F7 /* ContactActionSheetView.swift */; };
 		566B3760269503360021BCAA /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B375E269503360021BCAA /* CalendarTableViewCell.swift */; };
 		566B3761269503360021BCAA /* CalendarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 566B375F269503360021BCAA /* CalendarTableViewCell.xib */; };
@@ -554,6 +555,7 @@
 		56664D9B269DC36A00FDBD22 /* VerificationCode.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = VerificationCode.storyboard; sourceTree = "<group>"; };
 		56664DC1269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTimeCodeTextFiled.swift; sourceTree = "<group>"; };
 		56664DC9269E368C00FDBD22 /* TimeCompare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCompare.swift; sourceTree = "<group>"; };
+		5668376E270B5F3600C8D8FF /* MarkNewAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkNewAddressViewController.swift; sourceTree = "<group>"; };
 		5669F5FB26FC170D00FF73F7 /* ContactActionSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactActionSheetView.swift; sourceTree = "<group>"; };
 		566B375E269503360021BCAA /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		566B375F269503360021BCAA /* CalendarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarTableViewCell.xib; sourceTree = "<group>"; };
@@ -686,6 +688,7 @@
 			isa = PBXGroup;
 			children = (
 				5602529B2664465200FB204C /* MarkerInfoViewController.swift */,
+				5668376E270B5F3600C8D8FF /* MarkNewAddressViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -3046,6 +3049,7 @@
 				9393BAEF26D78846003878BF /* SocketServiceProtocol.swift in Sources */,
 				56533ECF2678B94D0012BF4A /* MoreModel.swift in Sources */,
 				562585E726F1867800EC9284 /* AditionalDriverTableCell.swift in Sources */,
+				5668376F270B5F3600C8D8FF /* MarkNewAddressViewController.swift in Sources */,
 				566354F4268B72950003E2EB /* PriceTableView.swift in Sources */,
 				565F810026A7C1E700ADB9FE /* PaymentTypes.swift in Sources */,
 				56CFDE682693721C00D731CD /* RegistartionBotViewController.swift in Sources */,

@@ -394,7 +394,7 @@ class MainViewController: BaseViewController {
                              okTitle: Constant.Texts.agree,cancelAction: {
                                 checkedBtn.setImage(img_uncheck_box, for: .normal)
                              }, okAction: { [self] in
-                                 self.goToCustomLocationMapController(on: self)
+                                 self.goToCustomLocationMapController(on: self, isAddDamageAddress: false)
                              })
     }
     
@@ -761,8 +761,7 @@ extension MainViewController: SearchHeaderViewDelegate {
     
     
     func didSelectCustomLocation(_ btn: UIButton) {
-//        self.showAlertCustomLocation(checkedBtn: btn)
-        self.goToCustomLocationMapController(on: self)
+        self.goToCustomLocationMapController(on: self, isAddDamageAddress: false)
     }
     
     

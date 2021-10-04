@@ -392,13 +392,6 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    ///Will open custom location map controller
-    func goToCustomLocationMapController () {
-        let customLocationContr = UIStoryboard(name: Constant.Storyboards.customLocation, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.customLocation) as! CustomLocationViewController
-        customLocationContr.delegate = self
-        self.navigationController?.pushViewController(customLocationContr, animated: true)
-    }
-    
     ///Will open  custom location map controller
     func goToReserveController() {
         
@@ -530,7 +523,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
                              okTitle: Constant.Texts.agree,cancelAction: {
                                 checkedBtn.setImage(img_uncheck_box, for: .normal)
                              }, okAction: { [self] in
-                                self.goToCustomLocationMapController()
+                                self.goToCustomLocationMapController(on: self, isAddDamageAddress: false)
                              })
     }
     
