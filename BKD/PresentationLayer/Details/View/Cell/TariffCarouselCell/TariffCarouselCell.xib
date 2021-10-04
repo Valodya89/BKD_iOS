@@ -39,7 +39,6 @@
                 <outlet property="mHoursSegmentC" destination="hya-Tr-Piy" id="7Ir-h9-tOt"/>
                 <outlet property="mKwImgV" destination="GuP-uh-hny" id="lbK-St-p9p"/>
                 <outlet property="mKwLb" destination="QXR-QH-YY9" id="edt-Zo-h03"/>
-                <outlet property="mMonthlyBtn" destination="92C-Fk-a2N" id="HnK-sD-CDx"/>
                 <outlet property="mMoreBtn" destination="jm2-GI-IiD" id="a8G-Cb-1v8"/>
                 <outlet property="mOffertEuroLb" destination="r9a-Fo-06a" id="Lx6-zh-Udu"/>
                 <outlet property="mOffertPriceBckgV" destination="tp9-CG-pRm" id="hTE-GD-hpW"/>
@@ -220,7 +219,7 @@
                                 <constraint firstItem="iDL-wH-hU5" firstAttribute="centerY" secondItem="147-k1-jB5" secondAttribute="centerY" multiplier="1.2" id="r9m-MU-qwu"/>
                             </constraints>
                         </view>
-                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hya-Tr-Piy">
+                        <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hya-Tr-Piy">
                             <rect key="frame" x="6" y="154.5" width="183" height="21"/>
                             <color key="backgroundColor" name="submenu"/>
                             <segments>
@@ -237,19 +236,6 @@
                                 <action selector="hours:" destination="-1" eventType="valueChanged" id="s9z-uF-ZMt"/>
                             </connections>
                         </segmentedControl>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="92C-Fk-a2N">
-                            <rect key="frame" x="6" y="154.5" width="31" height="20"/>
-                            <color key="backgroundColor" name="menu"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="31" id="3y7-6k-W9P"/>
-                            </constraints>
-                            <state key="normal" title="1m">
-                                <color key="titleColor" name="main"/>
-                            </state>
-                            <connections>
-                                <action selector="monthly:" destination="-1" eventType="touchUpInside" id="Qmv-ZV-yb9"/>
-                            </connections>
-                        </button>
                         <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Jtd-p3-Nt9">
                             <rect key="frame" x="45.5" y="154.5" width="104" height="21"/>
                             <constraints>
@@ -417,16 +403,13 @@
                         <constraint firstItem="Jtd-p3-Nt9" firstAttribute="centerX" secondItem="dBY-wO-kjQ" secondAttribute="centerX" id="cyo-WT-zHV"/>
                         <constraint firstItem="hya-Tr-Piy" firstAttribute="centerY" secondItem="dBY-wO-kjQ" secondAttribute="centerY" multiplier="1.43" id="e2I-U2-hIT"/>
                         <constraint firstItem="Kq4-cZ-c0h" firstAttribute="width" relation="greaterThanOrEqual" secondItem="dBY-wO-kjQ" secondAttribute="width" multiplier="0.52" id="egu-le-XKV"/>
-                        <constraint firstItem="92C-Fk-a2N" firstAttribute="top" secondItem="hya-Tr-Piy" secondAttribute="top" id="gBp-Uq-72m"/>
                         <constraint firstItem="2Nm-PQ-0vU" firstAttribute="height" secondItem="dBY-wO-kjQ" secondAttribute="height" multiplier="0.26" id="gPV-tY-vWz"/>
                         <constraint firstItem="Jtd-p3-Nt9" firstAttribute="bottom" secondItem="hya-Tr-Piy" secondAttribute="bottom" id="hYT-Xz-Crb"/>
                         <constraint firstItem="hya-Tr-Piy" firstAttribute="height" secondItem="dBY-wO-kjQ" secondAttribute="height" multiplier="0.0869565" id="ksK-Ww-0sJ"/>
-                        <constraint firstItem="92C-Fk-a2N" firstAttribute="leading" secondItem="hya-Tr-Piy" secondAttribute="leading" id="oHy-bI-WSO"/>
                         <constraint firstItem="tQS-ly-TEQ" firstAttribute="width" secondItem="dBY-wO-kjQ" secondAttribute="width" id="p2F-Qs-Dyw"/>
                         <constraint firstItem="Jtd-p3-Nt9" firstAttribute="centerY" secondItem="hya-Tr-Piy" secondAttribute="centerY" id="p3M-n8-ru9"/>
                         <constraint firstItem="147-k1-jB5" firstAttribute="top" secondItem="dBY-wO-kjQ" secondAttribute="top" id="pfH-7H-UcY"/>
                         <constraint firstItem="Kq4-cZ-c0h" firstAttribute="centerX" secondItem="dBY-wO-kjQ" secondAttribute="centerX" id="uaR-ai-8lM"/>
-                        <constraint firstItem="92C-Fk-a2N" firstAttribute="bottom" secondItem="hya-Tr-Piy" secondAttribute="bottom" id="xYF-eP-a06"/>
                     </constraints>
                 </view>
             </subviews>
@@ -457,9 +440,6 @@
         </namedColor>
         <namedColor name="main_26%">
             <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="0.25999999046325684" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="menu">
-            <color red="0.91399997472763062" green="0.78799998760223389" blue="0.41999998688697815" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="more">
             <color red="0.9137254901960784" green="0.78823529411764703" blue="0.41960784313725491" alpha="0.4050000011920929" colorSpace="custom" customColorSpace="sRGB"/>

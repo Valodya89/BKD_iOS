@@ -279,7 +279,7 @@ class DetailsViewModel: NSObject {
         var tariffList:[Tariff] = []
        
         tariffs.forEach { tariff in
-            if tariff.type == type {
+            if tariff.type == type &&  tariff.active == true {
                 tariffList.append(tariff)
             }
         }

@@ -36,7 +36,6 @@ class TariffCarouselCell: UIView {
     @IBOutlet weak var mUnselectedBckgV: UIView!
     @IBOutlet weak var mSelectedBckgV: UIView!
     @IBOutlet weak var mUnselectedTitleLb: UILabel!
-    @IBOutlet weak var mMonthlyBtn: UIButton!
     @IBOutlet weak var mStartingPriceLb: UILabel!
     @IBOutlet weak var mPriceDeleteLineV: UIView!
     
@@ -61,6 +60,8 @@ class TariffCarouselCell: UIView {
     var isConfirm = false
     var item: TariffSlideModel?
     weak var delegate: TariffCarouselCellDelegate?
+    
+    var segmentControl: UISegmentedControl?
 
     
     override init(frame: CGRect) {
@@ -85,46 +86,44 @@ class TariffCarouselCell: UIView {
         self.mSelectedBckgV.layer.cornerRadius = 5
         self.mUnselectedBckgV.layer.cornerRadius = 5
         mMoreBtn.layer.cornerRadius = 4
-        mMonthlyBtn.layer.cornerRadius = 9
         mMoreBtn.setBorder(color: color_menu!, width: 0.7)
         mKwImgV.setTintColor(color: color_main!.withAlphaComponent(0.49))
         mUnselectedTitleLb.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
-        mHoursSegmentC.isHidden = false
-
     }
     
-    ///Set segments to segment control
-    func setSegmentControlSegment(index: Int, segmentC: UISegmentedControl) {
+    
+    ///Configure segment control
+    func configureSegmentControl() {
+        
         let currTariffs = item?.tariff
+        var segmentControlItems:[String] = []
         
         if currTariffs?.count ?? 0 > 0  {
             for i in (0..<Int(currTariffs!.count)) {
                 let tariff:Tariff = currTariffs![i]
                 
                 if tariff.type == Constant.Keys.hourly {
-                    segmentC.setTitle(String(Int(tariff.duration)) + Constant.Texts.h , forSegmentAt: i)
+                    segmentControlItems.append(String(Int(tariff.duration)) + Constant.Texts.h)
                 } else if tariff.type == Constant.Keys.daily {
-                    segmentC.setTitle(String(Int(tariff.duration/24)) + Constant.Texts.d , forSegmentAt: i)
+                    segmentControlItems.append(String(Int(tariff.duration)) + Constant.Texts.d)
                 } else if tariff.type == Constant.Keys.weekly {
-                    segmentC.setTitle(String(Int(tariff.duration/(24 * 7))) + Constant.Texts.w , forSegmentAt: i)
+                    segmentControlItems.append(String(Int(tariff.duration)) + Constant.Texts.w)
                 } else if tariff.type == Constant.Keys.monthly {
-                    segmentC.setTitle(String(Int(tariff.duration/(24 * 30))) + Constant.Texts.m , forSegmentAt: i)
+                    segmentControlItems.append(String(Int(tariff.duration)) + Constant.Texts.m)
                 }
             }
-            segmentC.selectedSegmentIndex = selectedSegmentIndex
-            segmentC.addTarget(self, action: #selector(didChangeSegment(sender:)), for: .allEvents)
+            
+            if  segmentControlItems.count > 0 {
+            segmentControl = UISegmentedControl(items: segmentControlItems)
+                segmentControl?.frame =  CGRect(x: mHoursSegmentC.frame.origin.x, y: mHoursSegmentC.frame.origin.y,  width:CGFloat(segmentControlItems.count * 31), height: mHoursSegmentC.frame.size.height)
+                self.addSubview(segmentControl ?? UISegmentedControl())
+            segmentControl?.selectedSegmentIndex = selectedSegmentIndex
+            segmentControl?.addTarget(self, action: #selector(didChangeSegment(sender:)), for: .allEvents)
+                }
         }
-        
-//        let currOptions = tariffOptionsArr[index]
-//        if currOptions.count > 0  {
-//            for i in (0..<Int(currOptions.count)) {
-//                segmentC.setTitle(currOptions[i], forSegmentAt: i)
-//            }
-//            segmentC.selectedSegmentIndex = selectedSegmentIndex
-//            segmentC.addTarget(self, action: #selector(didChangeSegment(sender:)), for: .allEvents)
-//        }
     }
     
+
     
     ///set info to close cells
     func setUnselectedCellsInfo(item:TariffSlideModel, index: Int) {
@@ -169,19 +168,28 @@ class TariffCarouselCell: UIView {
      func setHourlyCellInfo() {
         // will check if it dark mode or not
         if self.traitCollection.userInterfaceStyle == .light {
+            
             mConfirmBckgV.setGradient(startColor:color_Offline_bckg!.withAlphaComponent(0.2), endColor:color_Offline_bckg!.withAlphaComponent(0.7))
             mConfirmBtn.setTitleColor(.white, for: .normal)
+            
         } else {
             mConfirmBckgV.backgroundColor =  UIColor(ciColor: .white).withAlphaComponent(0.25)
             mConfirmBtn.setTitleColor(color_main!, for: .normal)
         }
-        setSegmentControlSegment(index: 0, segmentC: mHoursSegmentC)
-        mHoursSegmentC.backgroundColor = color_main!.withAlphaComponent(0.26)
+         mMoreBtn.setTitleColor(.white, for: .normal)
 
-        mMoreBtn.setTitleColor(.white, for: .normal)
-        
+         configureSegmentControl()
+         segmentControl?.backgroundColor = color_main!.withAlphaComponent(0.26)
+         segmentControl?.setDividerImage(UIImage().colored(with: .clear, size: CGSize(width: 1, height: 15)), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
+
         UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
         UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: color_menu!], for: .selected)
+         if #available(iOS 13.0, *) {
+             segmentControl?.selectedSegmentTintColor = .white.withAlphaComponent(0.1)
+         } else {
+             // Fallback on earlier versions
+         }
+
     }
     
     ///configure Flexible Cell
@@ -228,33 +236,28 @@ class TariffCarouselCell: UIView {
         mMoreBtn.backgroundColor = UIColor(ciColor: .white).withAlphaComponent(0.4)
         mMoreBtn.layer.borderColor = index == 2 ? color_weekly!.cgColor : color_main!.cgColor
         
-        //segmentControll
-    
-        setSegmentControlSegment(index: index, segmentC: mHoursSegmentC)
-        mHoursSegmentC.backgroundColor = UIColor(ciColor: .white).withAlphaComponent(0.49)
-        mHoursSegmentC.setBorder(color: index == 1 ? .white : .clear, width: 0.5)
-        if #available(iOS 13.0, *) {
-            mHoursSegmentC.selectedSegmentTintColor = color_menu!
-        } else {
-            // Fallback on earlier versions
-        }
-        mWeeklySegmentC.backgroundColor  = color_main!.withAlphaComponent(0.26)
+        //segmentControl
+       configureSegmentControl()
+       
+       segmentControl?.setBorder(color: index == 1 ? .white : .clear, width: 0.5)
+         if #available(iOS 13.0, *) {
+             segmentControl?.selectedSegmentTintColor = index == 2 ? color_main! : color_menu!
+         } else {
+             // Fallback on earlier versions
+         }
+      
         
         UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: index == 2 ? color_menu! : color_main!], for: .normal)
         UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: index == 2 ? .white : color_main!], for: .selected)
-        mHoursSegmentC.setDividerImage(UIImage().colored(with: color_segment_separator!, size: CGSize(width: 1, height: 15)), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
-        
-    mWeeklySegmentC.isHidden = index == 2 ? false : true
-    mHoursSegmentC.isHidden = index == 2 ? true : false
-    if index == 2 {
-        setSegmentControlSegment(index: index, segmentC: mWeeklySegmentC)
-    }
-    
-    if index == 3 {
-        mMonthlyBtn.isHidden = false
-        mWeeklySegmentC.isHidden = true
-        mHoursSegmentC.isHidden = true
-    }
+      
+       if index == 3 {
+           segmentControl?.backgroundColor = .white.withAlphaComponent(0.49)
+           segmentControl?.setDividerImage(UIImage().colored(with: .clear, size: CGSize(width: 0.01, height: 1)), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
+       } else {
+           segmentControl?.backgroundColor = index == 2 ? color_main!.withAlphaComponent(0.26) : UIColor(ciColor: .white).withAlphaComponent(0.49)
+           segmentControl?.setDividerImage(UIImage().colored(with: index == 1 ? color_segment_separator! : .clear, size: CGSize(width: 1, height: 15)), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
+       }
+            
    }
     
     ///configure Hourly And Flexible Cells
@@ -262,9 +265,7 @@ class TariffCarouselCell: UIView {
         mPriceLb.textColor = .white
         mEuroLb.textColor = .white
         mVatLb.textColor = .white
-        mMonthlyBtn.isHidden = true
-        mWeeklySegmentC.isHidden = true
-        mHoursSegmentC.setDividerImage(UIImage().colored(with: .clear, size: CGSize(width: 1, height: 15)), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
+    
         if index == 4 { // Flexible
             configureFlexibleCell()
         }
@@ -324,7 +325,5 @@ class TariffCarouselCell: UIView {
         
     }
     
-    @IBAction func monthly(_ sender: UIButton) {
-    }
     
 }
