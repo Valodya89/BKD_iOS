@@ -277,15 +277,17 @@ class DetailsViewModel: NSObject {
     ///Get tariffs by type
     func getTariffByType(type: String, tariffKey: String, tariffs:[Tariff]) -> [String : [Tariff]]? {
         var tariffList:[Tariff] = []
-       
+       var i = 0
         tariffs.forEach { tariff in
             if tariff.type == type &&  tariff.active == true {
+                if i < 6 {
                 tariffList.append(tariff)
+                }
+                i += 1
             }
         }
         tariffList = tariffList.sorted(by: { $0.duration < $1.duration })
         if tariffList.count > 0 {
-            
             let tariffsByType:[String : [Tariff]] = [tariffKey : tariffList]
            return tariffsByType
         }
