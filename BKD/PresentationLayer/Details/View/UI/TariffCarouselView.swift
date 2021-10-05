@@ -19,6 +19,7 @@ protocol TariffCarouselViewDelegate: AnyObject {
 class TariffCarouselView: UIView {
     
    public var tariffSlideList:[TariffSlideModel]?
+   public var vehicleModel:VehicleModel?
 
     private var tariffCarouselCellV: TariffCarouselCell?
     private let tariffSlideViewModel = TariffSlideViewModel()
@@ -73,7 +74,7 @@ extension TariffCarouselView: iCarouselDataSource, iCarouselDelegate {
             view.setUnselectedCellsInfo(item: carouselModel, index: index)
         } else {
             view.selectedSegmentIndex = selectedSegmentIndex ?? 0
-            view.setSelectedCellInfo(item: carouselModel, index: index)
+            view.setSelectedCellInfo(item: carouselModel, vehicleModel: vehicleModel ?? VehicleModel(), index: index)
         }
         return view
     }
@@ -86,11 +87,16 @@ extension TariffCarouselView: iCarouselDataSource, iCarouselDelegate {
     }
 
     func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
+        
         carousel.reloadData()
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.prepare()
         generator.impactOccurred()
         AudioServicesPlaySystemSound(1157)
+    }
+    
+    func carouselDidEndScrollingAnimation(_ carousel: iCarousel) {
+        selectedSegmentIndex = 0
     }
 }
 

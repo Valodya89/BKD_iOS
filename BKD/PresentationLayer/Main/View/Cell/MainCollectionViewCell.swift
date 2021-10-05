@@ -29,6 +29,7 @@ static let identifier = "MainCollectionViewCell"
     @IBOutlet weak var mFiatImgV: UIImageView!
     @IBOutlet weak var mTowBarIngV: UIImageView!
     
+    @IBOutlet weak var mDeleteLineV: UIView!
     @IBOutlet weak var mCardLb: UILabel!
     @IBOutlet weak var mCubeLb: UILabel!
     @IBOutlet weak var mKgLb: UILabel!
@@ -111,9 +112,18 @@ static let identifier = "MainCollectionViewCell"
       }
         vehicleModel.vehicleType = carType?.first?.name
         
-        let price: Double = mOffertBackgV.isHidden ? (mValueLb.text!  as NSString).doubleValue : (mOffertPriceLb.text!  as NSString).doubleValue
-        vehicleModel.vehicleValue = price
-        
+         //set Price
+         vehicleModel.priceForHour = carModel.priceForHour
+         vehicleModel.priceForDay = carModel.priceForDay
+         vehicleModel.priceForWeek = carModel.priceForWeek
+         vehicleModel.specialPriceForHour = carModel.specialPriceForHour
+         vehicleModel.specialPriceForDay = carModel.specialPriceForDay
+         vehicleModel.specialPriceForWeek = carModel.specialPriceForWeek
+         vehicleModel.specialPriceForMonth = carModel.specialPriceForMonth
+         vehicleModel.hasSpecialPrice = carModel.hasSpecialPrice
+         vehicleModel.depositPrice = carModel.depositPrice
+         vehicleModel.priceForKm = carModel.priceForKm
+         
         if vehicleModel.ifTailLift  {
             vehicleModel.tailLiftList = mainViewModel.getTailLiftList(carModel: carModel)
         }
@@ -132,8 +142,8 @@ static let identifier = "MainCollectionViewCell"
         mCubeLb.text = ""
         mKgLb.text = ""
         mCarSizeLb.text = ""
-        mOffertBackgV.isHidden = false
-        mIgnorValueContentV.isHidden = false
+        mOffertBackgV.isHidden = true
+        mDeleteLineV.isHidden = true
         mValueBckgV.isHidden = false
         mIgnorValueLb.text = ""
         mOffertPriceLb.text = ""
@@ -142,6 +152,8 @@ static let identifier = "MainCollectionViewCell"
         mTowBarIngV.isHidden = false
         mInactiveCarNameLb.isHidden = true
         mBlurV.isHidden = true
+        mIgnorValueContentV.isHidden = true
+
     }
     
     /// Set cell info
@@ -152,15 +164,21 @@ static let identifier = "MainCollectionViewCell"
         mCubeLb.text = String(item.volume) + Constant.Texts.mCuadrad
         mKgLb.text = String(item.loadCapacity) + Constant.Texts.kg
         mCarSizeLb.text = item.exterior?.getExterior()
-        mOffertBackgV.isHidden = !item.hasSpecialPrice
-        mIgnorValueContentV.isHidden = !item.hasSpecialPrice
-        mValueBckgV.isHidden = item.hasSpecialPrice
-        if item.hasSpecialPrice {
-            mIgnorValueLb.text = "€  \(item.price) / " + Constant.Texts.day
-            mOffertPriceLb.text = String(item.specialPrice ?? 0.0)
-        } else {
-            mValueLb.text = String(item.price)
-        }
+        updatePriceFiled(item:item)
+//        mOffertBackgV.isHidden = !item.hasSpecialPrice
+//        mIgnorValueContentV.isHidden = !item.hasSpecialPrice
+//        mValueBckgV.isHidden = item.hasSpecialPrice
+//        if item.hasSpecialPrice &&  item.specialPriceForHour > 0.0 {
+//            let specialPrice = item.priceForHour - ((item.priceForHour * item.specialPriceForHour)/100)
+//            mIgnorValueLb.text = "€  \(specialPrice) / " + Constant.Texts.day
+//            mOffertPriceLb.text = String(item.specialPriceForHour)
+//            mIgnorValueContentV.isHidden = false
+//            mOffertBackgV.isHidden = false
+//            mValueLb.isHidden = true
+//        } else {
+//            mValueLb.isHidden = false
+//            mValueLb.text = String(item.priceForHour)
+//        }
         mTowBarLb.isHidden = !item.towbar
         mTowBarIngV.isHidden = !item.towbar
         mBlurV.isHidden = item.active
@@ -176,6 +194,26 @@ static let identifier = "MainCollectionViewCell"
         mBlurV.isHidden = isActiveCar
         mInactiveCarNameLb.isHidden = isActiveCar
         
+    }
+    
+    
+    func updatePriceFiled(item: CarsModel) {
+
+        if item.hasSpecialPrice &&  item.specialPriceForHour > 0.0 {
+            let specialPrice = item.priceForHour - ((item.priceForHour * item.specialPriceForHour)/100)
+            mOffertPriceLb.text = String(specialPrice)
+            mOffertBackgV.isHidden = false
+            
+            mIgnorValueContentV.isHidden = false
+            mIgnorValueLb.text = "€  \(item.priceForHour) / " + Constant.Texts.day
+            mValueBckgV.isHidden = true
+        } else {
+            mValueLb.text = String(item.priceForHour)
+            mValueBckgV.isHidden = false
+
+            mOffertBackgV.isHidden = true
+            mIgnorValueContentV.isHidden = true
+        }
     }
 
 }

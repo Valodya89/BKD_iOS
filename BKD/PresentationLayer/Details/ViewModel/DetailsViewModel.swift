@@ -214,23 +214,28 @@ class DetailsViewModel: NSObject {
     
 
     ///Change tariff list for using
-    func changeTariffListForUse(tariffs:[Tariff], carValue: Double) -> [TariffSlideModel]? {
+    func changeTariffListForUse(tariffs:[Tariff],
+                                vehicleModel: VehicleModel) -> [TariffSlideModel]? {
         var tariffSlideList:[TariffSlideModel] = []
         ///Hourly
         let hourlyModel = getTariffSlideModel(type: Constant.Keys.hourly,
                                               tariffs: tariffs,
-                                              carValue: carValue,
+                                              price: vehicleModel.priceForHour,
+                                              specialPricePercentage: vehicleModel.specialPriceForHour,
+                                              hasSpecialPrice: vehicleModel.hasSpecialPrice,
                                               tariffKey: Constant.Texts.hourly,
                                               bckgColor: color_hourly!,
                                               typeColor: .white)
         if hourlyModel != nil {
-                tariffSlideList.append(hourlyModel!)
+            tariffSlideList.append(hourlyModel!)
         }
         
         ///Dayli
         let dailyModel = getTariffSlideModel(type: Constant.Keys.daily,
                                              tariffs: tariffs,
-                                             carValue: carValue,
+                                             price: vehicleModel.priceForDay,
+                                             specialPricePercentage: vehicleModel.specialPriceForHour,
+                                             hasSpecialPrice: vehicleModel.hasSpecialPrice,
                                              tariffKey: Constant.Texts.daily,
                                              bckgColor: color_days!,
                                              typeColor: color_main!)
@@ -241,7 +246,9 @@ class DetailsViewModel: NSObject {
         ///Weekly
         let weeklyModel = getTariffSlideModel(type: Constant.Keys.weekly,
                                              tariffs: tariffs,
-                                             carValue: carValue,
+                                              price: vehicleModel.priceForWeek,
+                                              specialPricePercentage: vehicleModel.specialPriceForWeek,
+                                              hasSpecialPrice: vehicleModel.hasSpecialPrice,
                                              tariffKey: Constant.Texts.weekly,
                                              bckgColor: color_weeks!,
                                               typeColor: .white)
@@ -252,7 +259,9 @@ class DetailsViewModel: NSObject {
         ///Monthly
         let monthlyModel = getTariffSlideModel(type: Constant.Keys.monthly,
                                              tariffs: tariffs,
-                                             carValue: carValue,
+                                               price: vehicleModel.priceForMonth,
+                                               specialPricePercentage: vehicleModel.specialPriceForMonth,
+                                               hasSpecialPrice: vehicleModel.hasSpecialPrice,
                                              tariffKey: Constant.Texts.monthly,
                                              bckgColor: color_monthly!,
                                              typeColor: color_main!)
@@ -261,12 +270,11 @@ class DetailsViewModel: NSObject {
         }
         
         ///Flexible
-        if let model = tariffs.first(where: { $0.type == Constant.Keys.flexible }) {
+        if let _ = tariffs.first(where: { $0.type == Constant.Keys.flexible }) {
             
             var flexibleModel = TariffSlideModel (type: Constant.Texts.flexible, bckgColor: color_flexible, typeColor: .white)
             flexibleModel.options = nil
-            flexibleModel.value = String(carValue)
-            flexibleModel.fuelConsumption = model.fuelCompensation
+            flexibleModel.value = String(vehicleModel.priceForHour)
             tariffSlideList.append(flexibleModel)
         }
        
@@ -297,7 +305,9 @@ class DetailsViewModel: NSObject {
     ///Get tariffSlide modell
     func getTariffSlideModel(type: String,
                              tariffs:[Tariff],
-                             carValue: Double,
+                             price: Double,
+                             specialPricePercentage: Double,
+                             hasSpecialPrice: Bool,
                              tariffKey: String,
                              bckgColor: UIColor,
                              typeColor: UIColor) -> TariffSlideModel? {
@@ -312,8 +322,14 @@ class DetailsViewModel: NSObject {
             
             tariffArr.forEach{ tariff in
                 
-                let price = tariff.duration * carValue
-                let option = TariffSlideModel(type: tariffKey, name: tariff.name, bckgColor: bckgColor,typeColor: typeColor, value: String(price - ((price * tariff.percentage)/100)) )
+                var price = tariff.duration * price
+                price = price - ((price * tariff.percentage)/100)
+                var specialPrice:Double = 0.0
+                if hasSpecialPrice && specialPricePercentage > 0.0 {
+                    specialPrice = price - ((price * specialPricePercentage)/100)
+                }
+                let option = TariffSlideModel(type: tariffKey, name: tariff.name, bckgColor: bckgColor,typeColor: typeColor, value: String(format: "%.3f", price), specialValue: String(format: "%.3f", specialPrice))
+               
                 options.append(option)
             }
             tariffModel.options = options

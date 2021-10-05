@@ -10,36 +10,10 @@ import UIKit
 class TariffSlideViewModel: NSObject {
 //static let shared = TariffSlideViewModel()
     
-/// get current option index
-func getCurrentOption(model: TariffSlideModel, tariff: TariffState) -> Int {
-    var optionsArr:[String] = []
-    switch tariff {
-        case .hourly:
-            optionsArr = tariffOptionsArr[0]
-            break
-        case .daily:
-            optionsArr = tariffOptionsArr[1]
-            break
-        case .weekly:
-            optionsArr = tariffOptionsArr[2]
-            break
-        case .monthly:
-            optionsArr = tariffOptionsArr[3]
-            break
-        case .flexible:
-            break
-
-        }
-    return getIndexOfOption(optionsArr: optionsArr, model: model)
-   
-}
-    
-    func getIndexOfOption(optionsArr: [String], model: TariffSlideModel) -> Int {
-        for (index, item) in optionsArr.enumerated() {
-            let optionNameArr = model.name!.components(separatedBy: " ")
-            let firstStr: String = optionNameArr[0]
-            let newStr = firstStr + optionNameArr[1].prefix(1)
-            if item.caseInsensitiveCompare(newStr) == .orderedSame {
+    /// get current option index
+    func getIndexOfOption(tariffArr: [Tariff], model: TariffSlideModel) -> Int {
+        for (index, item) in tariffArr.enumerated() {
+            if model.name == item.name {
                 return index
             }
         }

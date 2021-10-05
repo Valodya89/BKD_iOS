@@ -179,7 +179,7 @@ struct Constant {
         static let transmissionManual = "Manual"
         static let transmissionAutomatic = "Automatic"
         static let errorRequest = "Failed request"
-        
+        static let kwVat = "KW€/%.2f inch VAT"
 
 
         //Accessories

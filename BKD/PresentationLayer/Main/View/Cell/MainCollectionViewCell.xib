@@ -55,7 +55,7 @@
                                                         <color key="textColor" name="offert_red"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a89-iF-ad5">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a89-iF-ad5">
                                                         <rect key="frame" x="15" y="0.0" width="57" height="26"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="20"/>
                                                         <color key="textColor" name="offert_red"/>
@@ -91,8 +91,8 @@
                                             <constraint firstItem="OCh-XV-eDu" firstAttribute="centerY" secondItem="Y8o-Fq-X9X" secondAttribute="centerY" multiplier="0.48" id="Nb9-Gm-60s"/>
                                             <constraint firstItem="Ass-0a-j2q" firstAttribute="centerY" secondItem="Y8o-Fq-X9X" secondAttribute="centerY" multiplier="1.3" id="PzY-zY-kmj"/>
                                             <constraint firstItem="Ass-0a-j2q" firstAttribute="height" relation="greaterThanOrEqual" secondItem="Y8o-Fq-X9X" secondAttribute="height" multiplier="0.2347" id="R3J-Ug-ipv"/>
-                                            <constraint firstItem="Ass-0a-j2q" firstAttribute="centerX" secondItem="Y8o-Fq-X9X" secondAttribute="centerX" multiplier="1.25" id="YiI-f7-4lg"/>
                                             <constraint firstItem="OCh-XV-eDu" firstAttribute="width" secondItem="Y8o-Fq-X9X" secondAttribute="width" multiplier="0.87" id="dpy-Rw-fSp"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ass-0a-j2q" secondAttribute="trailing" constant="-5.5" id="mgL-Nu-ndm"/>
                                             <constraint firstItem="Ass-0a-j2q" firstAttribute="width" relation="greaterThanOrEqual" secondItem="Y8o-Fq-X9X" secondAttribute="width" multiplier="0.82" id="uvG-Hs-jLw"/>
                                         </constraints>
                                     </view>
@@ -232,32 +232,42 @@
                                                         <color key="textColor" name="navigationBar"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyc-b6-DSl">
-                                                        <rect key="frame" x="12.5" y="0.0" width="49" height="29"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyc-b6-DSl">
+                                                        <rect key="frame" x="12.5" y="0.0" width="47" height="29"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                         <color key="textColor" name="navigationBar"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bqo-Xi-o7T">
-                                                        <rect key="frame" x="61.5" y="0.0" width="33" height="29"/>
+                                                        <rect key="frame" x="59.5" y="0.0" width="33" height="29"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
                                                         <color key="textColor" name="navigationBar"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xnf-XR-73d">
+                                                        <rect key="frame" x="1" y="14" width="100" height="1"/>
+                                                        <color key="backgroundColor" name="entered_date"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="1" id="tDj-8S-EyU"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="Bqo-Xi-o7T" firstAttribute="height" relation="greaterThanOrEqual" secondItem="hyc-b6-DSl" secondAttribute="height" id="1Pq-u4-OcT"/>
                                                     <constraint firstItem="Qwi-rY-Vuc" firstAttribute="leading" secondItem="PKC-gk-7Gr" secondAttribute="leading" id="8yz-XP-gDL"/>
                                                     <constraint firstItem="Bqo-Xi-o7T" firstAttribute="centerY" secondItem="hyc-b6-DSl" secondAttribute="centerY" id="G7F-01-o7X"/>
+                                                    <constraint firstItem="xnf-XR-73d" firstAttribute="centerY" secondItem="PKC-gk-7Gr" secondAttribute="centerY" id="PrS-SJ-2iI"/>
                                                     <constraint firstItem="hyc-b6-DSl" firstAttribute="width" relation="greaterThanOrEqual" secondItem="PKC-gk-7Gr" secondAttribute="width" multiplier="0.461832" id="Rfl-r0-EKu"/>
                                                     <constraint firstItem="Qwi-rY-Vuc" firstAttribute="height" secondItem="PKC-gk-7Gr" secondAttribute="height" multiplier="0.979" id="UUH-2D-9Dq"/>
+                                                    <constraint firstItem="xnf-XR-73d" firstAttribute="width" secondItem="PKC-gk-7Gr" secondAttribute="width" multiplier="0.980392" id="W2d-el-orm"/>
                                                     <constraint firstItem="hyc-b6-DSl" firstAttribute="leading" secondItem="Qwi-rY-Vuc" secondAttribute="trailing" id="WTe-K5-YzL"/>
                                                     <constraint firstItem="Bqo-Xi-o7T" firstAttribute="leading" secondItem="hyc-b6-DSl" secondAttribute="trailing" id="a2L-5S-hV1"/>
                                                     <constraint firstItem="Qwi-rY-Vuc" firstAttribute="centerY" secondItem="PKC-gk-7Gr" secondAttribute="centerY" id="fHm-9y-FPJ"/>
                                                     <constraint firstItem="hyc-b6-DSl" firstAttribute="height" secondItem="PKC-gk-7Gr" secondAttribute="height" id="g1F-4u-C7A"/>
                                                     <constraint firstItem="Qwi-rY-Vuc" firstAttribute="width" secondItem="PKC-gk-7Gr" secondAttribute="width" multiplier="0.121951" id="rcB-gS-Kqq"/>
                                                     <constraint firstItem="hyc-b6-DSl" firstAttribute="centerY" secondItem="PKC-gk-7Gr" secondAttribute="centerY" id="wiG-jR-s3F"/>
+                                                    <constraint firstItem="xnf-XR-73d" firstAttribute="centerX" secondItem="PKC-gk-7Gr" secondAttribute="centerX" id="xzM-Zz-roL"/>
                                                 </constraints>
                                             </view>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tow_bar" translatesAutoresizingMaskIntoConstraints="NO" id="8us-ba-OdA">
@@ -279,7 +289,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aaN-2M-j9V">
                                                 <rect key="frame" x="259.5" y="14.5" width="102" height="29"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€  49.99 / day" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxh-SI-dxX">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€  0.0 / day" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxh-SI-dxX">
                                                         <rect key="frame" x="-9.5" y="0.0" width="120.5" height="29"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                         <color key="textColor" name="entered_date"/>
@@ -422,6 +432,7 @@
                 <outlet property="mCardLb" destination="ER0-gf-YNu" id="tnm-w0-TEY"/>
                 <outlet property="mCubeImgV" destination="imq-0S-60S" id="CNC-Se-1fn"/>
                 <outlet property="mCubeLb" destination="BxO-yr-6ze" id="8pu-Pf-BtH"/>
+                <outlet property="mDeleteLineV" destination="xnf-XR-73d" id="dvK-pC-oO6"/>
                 <outlet property="mFiatImgV" destination="rpR-HU-Exf" id="LZY-EL-eaS"/>
                 <outlet property="mGradientV" destination="HyX-BS-8nI" id="xrC-uY-JFW"/>
                 <outlet property="mIgnorValueContentV" destination="aaN-2M-j9V" id="3RR-Pg-OJj"/>

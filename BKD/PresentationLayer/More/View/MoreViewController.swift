@@ -14,7 +14,7 @@ class MoreViewController: UIViewController {
     @IBOutlet weak var mBkdBarBtn: UIBarButtonItem!
     
     //MARK: -- Variables
-    public var tariffModel: Tariff?
+    public var vehicleModel: VehicleModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +66,7 @@ extension MoreViewController: UITableViewDelegate, UITableViewDataSource {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: RentalConditionsTableViewCell.identifier, for: indexPath) as! RentalConditionsTableViewCell
             let model = RentalConditionsData.rentalConditionsModel[indexPath.row]
-            cell.setCellInfo(item:model, tariff: tariffModel, index: indexPath.row)
+            cell.setCellInfo(item:model, vehicleModel: vehicleModel, index: indexPath.row)
             return cell
             
         } else { // BKD Advantages cell

@@ -135,17 +135,19 @@ class TariffCarouselCell: UIView {
     }
     
     /// set info to open cell 
-    func setSelectedCellInfo(item:TariffSlideModel, index: Int)  {
+    func setSelectedCellInfo(item:TariffSlideModel, vehicleModel: VehicleModel, index: Int)  {
         updateFuelConsumptionCheckBox(isSelected: item.fuelConsumption)
         mMoreBtn.tag = index
         mUnselectedBckgV.isHidden = true
         mSelectedBckgV.isHidden = false
         mTitleLb.text = item.type
+        mKwLb.text = String(format: Constant.Texts.kwVat, vehicleModel.priceForKm)
         if let value = item.value {
             mPriceLb.text = value
         }
         if let options = item.options {
             mPriceLb.text = options[selectedSegmentIndex].value
+            updateSpecialPrice(option:options[selectedSegmentIndex])
     }
         mSelectedBckgV.backgroundColor = item.bckgColor
                    
@@ -225,6 +227,7 @@ class TariffCarouselCell: UIView {
         
       //UILables
         mPriceLb.textColor = index % 2 == 1 ? color_main : color_entered_date
+       mPriceDeleteLineV.backgroundColor = mPriceLb.textColor
         mEuroLb.textColor = index % 2 == 1 ? color_main : color_entered_date
         mVatLb.textColor = index % 2 == 1 ? color_main : color_entered_date
         mTitleLb.textColor = index == 2 ?  color_weekly : color_main
@@ -265,6 +268,8 @@ class TariffCarouselCell: UIView {
         mPriceLb.textColor = .white
         mEuroLb.textColor = .white
         mVatLb.textColor = .white
+        mPriceDeleteLineV.backgroundColor = mPriceLb.textColor
+
     
         if index == 4 { // Flexible
             configureFlexibleCell()
@@ -281,6 +286,21 @@ class TariffCarouselCell: UIView {
         }
     }
     
+    func updateSpecialPrice(option: TariffSlideModel) {
+        let specialValue:Double = Double(option.specialValue ?? "0.0") ?? 0.0
+        if  specialValue > 0.0 {
+            mOffertPriceBckgV.isHidden = false
+            mOffertPriceLb.text = option.specialValue
+            mPriceDeleteLineV.isHidden = false
+            mPriceCenterY.constant = -5
+        } else {
+            mOffertPriceBckgV.isHidden = true
+           // mOffertPriceLb.text = specialValue
+            mPriceDeleteLineV.isHidden = true
+            mPriceCenterY.constant = 0
+        }
+    }
+    
     @objc func didChangeSegment(sender: UISegmentedControl) {
         selectedSegmentIndex = sender.selectedSegmentIndex
         if isConfirm {
@@ -289,6 +309,7 @@ class TariffCarouselCell: UIView {
         guard let options = item?.options  else {return}
         if selectedSegmentIndex < item?.tariff?.count ?? 0 {
         mPriceLb.text = options[selectedSegmentIndex].value
+            updateSpecialPrice(option: options[selectedSegmentIndex])
         }
 
     }

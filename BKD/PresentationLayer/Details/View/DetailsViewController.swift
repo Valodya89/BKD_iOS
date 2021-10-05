@@ -126,6 +126,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         if isSearchEdit {
             mSearchWithValueStackV.searchModel = searchModel
             mSearchWithValueStackV.setupView()
+            mTariffCarouselV.vehicleModel = vehicleModel
             mTariffCarouselV.tariffCarousel.currentItemIndex = 4
             mTariffCarouselV.tariffCarousel.reloadData()
             currentTariff = .flexible
@@ -240,7 +241,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     ///Get tariff list
     private func getTariffList() {
-        detailsViewModel.getTariff { result in
+        detailsViewModel.getTariff { [self] result in
             guard let _ = result else {
                 BKDAlert().showAlertOk(on: self,
                                        message: Constant.Texts.errorRequest,
@@ -248,10 +249,11 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
                 return
             }
             self.tariffs = result!
-            self.tariffSlideList = self.detailsViewModel.changeTariffListForUse(tariffs: result!, carValue: self.vehicleModel?.vehicleValue  ?? 0.0)
+            self.tariffSlideList = self.detailsViewModel.changeTariffListForUse(tariffs: result!, vehicleModel: self.vehicleModel ?? VehicleModel()) 
             self.tariffSlideVC.tariffSlideList = self.tariffSlideList
             self.tariffSlideVC.mTariffSlideCollectionV.reloadData()
             self.mTariffCarouselV.tariffSlideList = self.tariffSlideList
+            self.mTariffCarouselV.vehicleModel = self.vehicleModel
             self.mTariffCarouselV.tariffCarousel.reloadData()
         }
     }
@@ -789,7 +791,7 @@ extension DetailsViewController: TariffCarouselViewDelegate {
 
     func didPressMore(tariffIndex:Int, optionIndex: Int) {
         let moreVC = UIStoryboard(name: Constant.Storyboards.more, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.more) as! MoreViewController
-        moreVC.tariffModel = tariffSlideList![tariffIndex].tariff?[optionIndex]
+        moreVC.vehicleModel = vehicleModel
         self.navigationController?.pushViewController(moreVC, animated: true)
     }
     

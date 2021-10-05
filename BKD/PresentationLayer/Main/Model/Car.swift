@@ -19,9 +19,21 @@ struct CarsModel: Codable {
     let loadCapacity: Double
     let type: String
     let driverLicenseType: String
-    let price: Double
+    
+    
+    //Prices
+    let depositPrice: Double
+    let priceForHour: Double
+    let priceForDay: Double
+    let priceForWeek: Double
+    let priceForMonth: Double
     let hasSpecialPrice: Bool
-    let specialPrice: Double?
+    let specialPriceForHour: Double
+    let specialPriceForDay: Double
+    let specialPriceForWeek: Double
+    let specialPriceForMonth: Double
+    let priceForKm: Double
+    let priceForFuelIncluded: Double
     
     //Detail
     let seats: Double
@@ -49,6 +61,11 @@ struct CarsModel: Codable {
     let logo: Logo?
     let reservations: Reservation?
     let supportedAccessories: [String]?
+    
+    
+    
+    
+   
     
 }
 

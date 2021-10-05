@@ -26,6 +26,8 @@ struct TariffSlideModel {
     public var bckgColor: UIColor?
     public var typeColor: UIColor?
     public var value: String?
+    public var specialValue: String?
+
     public var fuelConsumption: Bool = false
     public var isOpenOptions: Bool = false
     public var isItOption: Bool = false

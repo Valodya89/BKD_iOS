@@ -25,14 +25,14 @@ class RentalConditionsTableViewCell: UITableViewCell {
     }
     
     // set info to the cell
-    func setCellInfo(item: RentalConditionsModel, tariff: Tariff?,  index: Int) {
+    func setCellInfo(item: RentalConditionsModel, vehicleModel: VehicleModel?,  index: Int) {
         mImgV.image =  item.img
         mTitleLb.text = item.title
         if index == 1 {
             mValueBckgV.isHidden = true
             mSeparatorV.isHidden = false
         } else {
-            mValueLb.text = String(tariff?.deposit ?? 0.0)
+            mValueLb.text = String(vehicleModel?.depositPrice ?? 0.0)
             
 
             if index == 4 {

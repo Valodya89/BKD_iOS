@@ -146,7 +146,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tp9-CG-pRm" userLabel="offery prive View">
-                            <rect key="frame" x="43.5" y="72" width="108.5" height="34.5"/>
+                            <rect key="frame" x="43.5" y="62" width="108.5" height="34.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r9a-Fo-06a">
                                     <rect key="frame" x="0.0" y="7" width="13" height="20.5"/>
@@ -398,7 +398,7 @@
                         <constraint firstItem="Kq4-cZ-c0h" firstAttribute="height" secondItem="dBY-wO-kjQ" secondAttribute="height" multiplier="0.104348" id="ViQ-KS-Z09"/>
                         <constraint firstItem="tp9-CG-pRm" firstAttribute="height" secondItem="Kq4-cZ-c0h" secondAttribute="height" multiplier="1.4375" id="Xc7-gL-KaW"/>
                         <constraint firstAttribute="bottom" secondItem="tQS-ly-TEQ" secondAttribute="bottom" id="ZOA-ms-IOS"/>
-                        <constraint firstItem="tp9-CG-pRm" firstAttribute="top" secondItem="Kq4-cZ-c0h" secondAttribute="bottom" constant="5" id="ak3-kA-oYQ"/>
+                        <constraint firstItem="tp9-CG-pRm" firstAttribute="top" secondItem="Kq4-cZ-c0h" secondAttribute="bottom" constant="-5" id="ak3-kA-oYQ"/>
                         <constraint firstItem="hya-Tr-Piy" firstAttribute="width" secondItem="dBY-wO-kjQ" secondAttribute="width" multiplier="0.938462" id="be3-Qw-Glh"/>
                         <constraint firstItem="Jtd-p3-Nt9" firstAttribute="centerX" secondItem="dBY-wO-kjQ" secondAttribute="centerX" id="cyo-WT-zHV"/>
                         <constraint firstItem="hya-Tr-Piy" firstAttribute="centerY" secondItem="dBY-wO-kjQ" secondAttribute="centerY" multiplier="1.43" id="e2I-U2-hIT"/>

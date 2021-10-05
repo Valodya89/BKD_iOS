@@ -14,11 +14,8 @@ struct Tariff: Codable {
     let name: String
     let duration: Double
     let percentage: Double
-    let depositApplies: Bool
-    let fuelCompensation: Bool
     let deposit: Double
     let active: Bool
-    let vatincluded: Bool
 }
 
 

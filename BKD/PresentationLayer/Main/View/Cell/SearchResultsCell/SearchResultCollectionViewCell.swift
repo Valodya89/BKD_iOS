@@ -140,8 +140,17 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
       }
         vehicleModel.vehicleType = carType?.first?.name
         
-        let price: Double = mOffertBckgV.isHidden ? (mValueLb.text!  as NSString).doubleValue : (mOffertValueLB.text!  as NSString).doubleValue
-        vehicleModel.vehicleValue = price
+         //set Price
+         vehicleModel.priceForHour = carModel.priceForHour
+         vehicleModel.priceForDay = carModel.priceForDay
+         vehicleModel.priceForWeek = carModel.priceForWeek
+         vehicleModel.specialPriceForHour = carModel.specialPriceForHour
+         vehicleModel.specialPriceForDay = carModel.specialPriceForDay
+         vehicleModel.specialPriceForWeek = carModel.specialPriceForWeek
+         vehicleModel.specialPriceForMonth = carModel.specialPriceForMonth
+         vehicleModel.hasSpecialPrice = carModel.hasSpecialPrice
+         vehicleModel.depositPrice = carModel.depositPrice
+         vehicleModel.priceForKm = carModel.priceForKm
         
         if vehicleModel.ifTailLift  {
             vehicleModel.tailLiftList = mainViewModel.getTailLiftList(carModel: carModel)
@@ -165,24 +174,19 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         if item.logo != nil {
             self.mCarLogoImgV.sd_setImage(with: item.logo!.getURL() ?? URL(string: ""), placeholderImage: nil)
             self.mFlipCarLogoImgV.sd_setImage(with: item.logo!.getURL() ?? URL(string: ""), placeholderImage: nil)
-
-//            self.mCarLogoImgV.kf.setImage(with: item.logo!.getURL() ?? URL(string: ""))
-//            self.mFlipCarLogoImgV.kf.setImage(with: item.logo!.getURL() ?? URL(string: ""))
         }
         
-        if item.hasSpecialPrice {
-            self.mOffertValueLB.text = String(item.specialPrice!) + Constant.Texts.inclVat
-            self.mValueLb.text = String(item.price) + Constant.Texts.inclVat
+        if item.hasSpecialPrice && item.specialPriceForHour > 0.0 {
+            self.mOffertValueLB.text = String(item.specialPriceForHour) + Constant.Texts.inclVat
+            self.mValueLb.text = String(item.priceForHour) + Constant.Texts.inclVat
         } else {
-            self.mGradientValueLb.text = String(item.price) + Constant.Texts.inclVat
+            self.mGradientValueLb.text = String(item.priceForHour) + Constant.Texts.inclVat
         }
         
         self.mCarNameLb.text = item.name
         self.mFlipCarNameLb.text = item.name
         
         self.mCarImgV.sd_setImage(with: item.image.getURL()!, placeholderImage: nil)
-        
-        //self.mCarImgV.kf.setImage(with: item.image.getURL()!)
         self.mOffertBckgV.isHidden = !item.hasSpecialPrice
         self.mGradientV.isHidden = item.hasSpecialPrice
         self.mCardLb.text = item.driverLicenseType

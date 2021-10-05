@@ -27,6 +27,7 @@ class TariffSlideViewController: UIViewController, StoryboardInitializable {
     var cellSpace: CGFloat = 5
     var isOpenDetails = false
     var tariffSlideList:[TariffSlideModel]?
+    var currTariff:[Tariff] = []
     
     let tariffSlideViewModel: TariffSlideViewModel = TariffSlideViewModel()
     weak var delegate: TariffSlideViewControllerDelegate?
@@ -84,8 +85,8 @@ class TariffSlideViewController: UIViewController, StoryboardInitializable {
     }
     
     /// will selecte tariff option cell
-    private func selectTariffOption(model: TariffSlideModel) {
-        let optionIndex = tariffSlideViewModel.getCurrentOption(model: model, tariff: TariffState(rawValue: model.type ?? "")!)
+    private func selectTariffOption(model: TariffSlideModel, currTariff: [Tariff]) {
+        let optionIndex = tariffSlideViewModel.getIndexOfOption(tariffArr: currTariff, model: model)
         
         delegate?.didPressTariffOption(tariff: TariffState(rawValue: model.type!)!, optionIndex: optionIndex)
     }
@@ -118,9 +119,12 @@ extension TariffSlideViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let currModel = tariffSlideList?[indexPath.item]
+        if  currModel?.options?.count ?? 0 > 0 {
+            currTariff = currModel?.tariff ?? []
+        }
         guard let options =  currModel?.options else {
             //select tariff option
-            selectTariffOption(model: currModel!)
+            selectTariffOption(model: currModel!, currTariff: currTariff)
             return
         }
         
