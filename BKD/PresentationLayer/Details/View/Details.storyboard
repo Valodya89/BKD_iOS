@@ -813,7 +813,7 @@
                                                         </constraints>
                                                     </view>
                                                 </subviews>
-                                                <color key="backgroundColor" name="background"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="6xv-c8-JYQ" firstAttribute="trailing" secondItem="qgI-kZ-ytz" secondAttribute="trailing" id="6BR-T0-359"/>
                                                     <constraint firstItem="6xv-c8-JYQ" firstAttribute="leading" secondItem="qgI-kZ-ytz" secondAttribute="leading" id="Bis-Ok-2cd"/>
@@ -1044,6 +1044,36 @@
                                                     <constraint firstAttribute="bottom" secondItem="4fX-SI-LES" secondAttribute="bottom" id="oY1-p0-NAu"/>
                                                 </constraints>
                                             </view>
+                                            <view hidden="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k52-kv-b2C">
+                                                <rect key="frame" x="16" y="855" width="166" height="42"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="compare" translatesAutoresizingMaskIntoConstraints="NO" id="4fu-71-laG">
+                                                        <rect key="frame" x="14" y="10.5" width="20" height="21"/>
+                                                    </imageView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WET-EA-XSn">
+                                                        <rect key="frame" x="0.0" y="0.0" width="166" height="42"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="    Compare">
+                                                            <fontDescription key="titleFontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="18"/>
+                                                            <color key="baseForegroundColor" name="selected_filter_field"/>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="compare:" destination="DBc-z5-met" eventType="touchUpInside" id="3nQ-5c-Lc8"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" name="menu"/>
+                                                <constraints>
+                                                    <constraint firstItem="4fu-71-laG" firstAttribute="width" secondItem="k52-kv-b2C" secondAttribute="width" multiplier="0.120482" id="0D6-bk-nM8"/>
+                                                    <constraint firstItem="WET-EA-XSn" firstAttribute="width" secondItem="k52-kv-b2C" secondAttribute="width" id="Ape-ba-8K7"/>
+                                                    <constraint firstItem="4fu-71-laG" firstAttribute="centerX" secondItem="k52-kv-b2C" secondAttribute="centerX" multiplier="0.29" id="DbJ-ls-7Ha"/>
+                                                    <constraint firstItem="4fu-71-laG" firstAttribute="height" secondItem="k52-kv-b2C" secondAttribute="height" multiplier="0.5" id="HzN-2d-Klj"/>
+                                                    <constraint firstItem="4fu-71-laG" firstAttribute="centerY" secondItem="k52-kv-b2C" secondAttribute="centerY" id="VmJ-uf-Kq3"/>
+                                                    <constraint firstItem="WET-EA-XSn" firstAttribute="centerX" secondItem="k52-kv-b2C" secondAttribute="centerX" id="eSA-7W-ooZ"/>
+                                                    <constraint firstItem="WET-EA-XSn" firstAttribute="centerY" secondItem="k52-kv-b2C" secondAttribute="centerY" id="l9j-ED-bUx"/>
+                                                    <constraint firstItem="WET-EA-XSn" firstAttribute="height" secondItem="k52-kv-b2C" secondAttribute="height" id="wxu-ES-Bed"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" name="background"/>
                                         <constraints>
@@ -1054,6 +1084,7 @@
                                             <constraint firstItem="wnn-gI-Uj7" firstAttribute="bottom" secondItem="LGn-HH-yqQ" secondAttribute="top" constant="-2" id="4Si-7d-0Jt"/>
                                             <constraint firstItem="wnn-gI-Uj7" firstAttribute="width" secondItem="qgI-kZ-ytz" secondAttribute="width" id="4rn-yZ-Ojv"/>
                                             <constraint firstItem="r84-Se-m90" firstAttribute="centerX" secondItem="yXl-YX-ZL5" secondAttribute="centerX" id="6jx-6I-b4N"/>
+                                            <constraint firstItem="k52-kv-b2C" firstAttribute="centerX" secondItem="yXl-YX-ZL5" secondAttribute="centerX" multiplier="0.479" id="7W2-FA-CLZ"/>
                                             <constraint firstItem="Rkc-pZ-qaf" firstAttribute="top" secondItem="r84-Se-m90" secondAttribute="bottom" multiplier="1.04" id="8LH-iL-riN"/>
                                             <constraint firstItem="xro-9k-UXd" firstAttribute="leading" secondItem="Rkc-pZ-qaf" secondAttribute="leading" id="8qr-jd-idA"/>
                                             <constraint firstItem="Rkc-pZ-qaf" firstAttribute="width" secondItem="yXl-YX-ZL5" secondAttribute="width" multiplier="0.922705" id="BOG-1d-ds4"/>
@@ -1073,11 +1104,13 @@
                                             <constraint firstItem="Rkc-pZ-qaf" firstAttribute="bottom" secondItem="W6S-sP-DFk" secondAttribute="top" multiplier="0.9389" id="afl-kI-2oj"/>
                                             <constraint firstItem="EBU-7z-cw1" firstAttribute="width" secondItem="yXl-YX-ZL5" secondAttribute="width" multiplier="0.922705" id="bHq-JQ-yJq"/>
                                             <constraint firstItem="3ev-Ww-Owb" firstAttribute="centerX" secondItem="yXl-YX-ZL5" secondAttribute="centerX" id="bab-mB-NvV"/>
+                                            <constraint firstItem="k52-kv-b2C" firstAttribute="top" secondItem="lTX-qV-DSn" secondAttribute="top" id="ccu-Ax-wFs"/>
                                             <constraint firstItem="y0o-Vl-H0J" firstAttribute="top" secondItem="nXv-KW-SjD" secondAttribute="bottom" id="dEE-pf-0SL"/>
                                             <constraint firstItem="lTX-qV-DSn" firstAttribute="centerX" secondItem="yXl-YX-ZL5" secondAttribute="centerX" id="hfu-Ev-hb8"/>
                                             <constraint firstItem="h0G-ic-ldI" firstAttribute="centerX" secondItem="yXl-YX-ZL5" secondAttribute="centerX" id="huO-N8-kU6"/>
                                             <constraint firstItem="3ev-Ww-Owb" firstAttribute="top" secondItem="yXl-YX-ZL5" secondAttribute="top" constant="4" id="k0h-8z-Kf2"/>
                                             <constraint firstItem="lTX-qV-DSn" firstAttribute="leading" secondItem="yXl-YX-ZL5" secondAttribute="leading" id="kwv-ta-9NW"/>
+                                            <constraint firstItem="k52-kv-b2C" firstAttribute="width" secondItem="yXl-YX-ZL5" secondAttribute="width" multiplier="0.400966" id="me4-g2-e1k"/>
                                             <constraint firstAttribute="trailing" secondItem="h0G-ic-ldI" secondAttribute="trailing" constant="16" id="qo0-9E-RWT"/>
                                             <constraint firstItem="Okr-s1-AZr" firstAttribute="top" secondItem="3ev-Ww-Owb" secondAttribute="bottom" multiplier="0.89" id="qvy-0c-6Gp"/>
                                             <constraint firstItem="wnn-gI-Uj7" firstAttribute="centerX" secondItem="qgI-kZ-ytz" secondAttribute="centerX" id="sah-kM-rPv"/>
@@ -1137,6 +1170,7 @@
                             <constraint firstItem="BfL-pG-VHs" firstAttribute="width" secondItem="XlO-an-gdp" secondAttribute="width" multiplier="0.81" id="Rdy-zt-RZL"/>
                             <constraint firstItem="r84-Se-m90" firstAttribute="height" secondItem="XlO-an-gdp" secondAttribute="height" multiplier="0.0767327" id="S7n-BK-TeJ"/>
                             <constraint firstItem="E9x-7g-Xbn" firstAttribute="trailing" secondItem="0jG-3f-cf4" secondAttribute="trailing" id="UuO-Fi-6Gf"/>
+                            <constraint firstItem="k52-kv-b2C" firstAttribute="height" secondItem="XlO-an-gdp" secondAttribute="height" multiplier="0.0519802" id="WV2-oz-dRu"/>
                             <constraint firstItem="BfL-pG-VHs" firstAttribute="height" secondItem="XlO-an-gdp" secondAttribute="height" multiplier="0.0615" id="cjW-u6-v80"/>
                             <constraint firstItem="E9x-7g-Xbn" firstAttribute="bottom" secondItem="BfL-pG-VHs" secondAttribute="bottom" id="crm-bX-ZO5"/>
                             <constraint firstItem="Okr-s1-AZr" firstAttribute="height" secondItem="XlO-an-gdp" secondAttribute="height" multiplier="0.328" id="i6K-EM-yhR"/>
@@ -1163,6 +1197,7 @@
                         <outlet property="mCarInfoV" destination="r84-Se-m90" id="LQv-ha-DQf"/>
                         <outlet property="mCarLogoImgV" destination="pDo-dE-0U9" id="Yfa-at-3bV"/>
                         <outlet property="mCarNameLb" destination="Lxf-m8-zfj" id="Cx7-Jk-FqY"/>
+                        <outlet property="mCompareContentV" destination="k52-kv-b2C" id="jOa-qU-v0j"/>
                         <outlet property="mDetailAndTailLiftBottom" destination="afl-kI-2oj" id="2ev-GA-hFw"/>
                         <outlet property="mDetailHeight" destination="GDd-0R-D2h" id="9QP-MT-c9f"/>
                         <outlet property="mDetailsAndTailLiftV" destination="Rkc-pZ-qaf" id="w79-Eg-4GV"/>
@@ -1259,6 +1294,7 @@
         <image name="car_kg" width="21" height="20"/>
         <image name="car_m" width="24" height="20"/>
         <image name="card" width="24" height="16"/>
+        <image name="compare" width="20" height="21.5"/>
         <image name="cube" width="17" height="16"/>
         <image name="dropDown_blue" width="17" height="9"/>
         <image name="edit" width="54" height="53"/>
@@ -1291,6 +1327,9 @@
         </namedColor>
         <namedColor name="navigation_bar">
             <color red="0.10999999940395355" green="0.20000000298023224" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="selected_filter_field">
+            <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

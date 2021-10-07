@@ -219,6 +219,12 @@
 		56664DC2269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56664DC1269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift */; };
 		56664DCA269E368C00FDBD22 /* TimeCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56664DC9269E368C00FDBD22 /* TimeCompare.swift */; };
 		5668376F270B5F3600C8D8FF /* MarkNewAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5668376E270B5F3600C8D8FF /* MarkNewAddressViewController.swift */; };
+		56683776270CF70500C8D8FF /* CompareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56683775270CF70500C8D8FF /* CompareViewController.swift */; };
+		56683778270CF71800C8D8FF /* Compare.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56683777270CF71800C8D8FF /* Compare.storyboard */; };
+		5668377A270DD95A00C8D8FF /* DropDownTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56683779270DD95A00C8D8FF /* DropDownTableView.swift */; };
+		5668377C270DDB1E00C8D8FF /* CompareVehicleInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5668377B270DDB1E00C8D8FF /* CompareVehicleInfoView.swift */; };
+		56683786270E216300C8D8FF /* CompareCategoryTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56683784270E216300C8D8FF /* CompareCategoryTableCell.swift */; };
+		56683787270E216300C8D8FF /* CompareCategoryTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56683785270E216300C8D8FF /* CompareCategoryTableCell.xib */; };
 		5669F5FC26FC170D00FF73F7 /* ContactActionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669F5FB26FC170D00FF73F7 /* ContactActionSheetView.swift */; };
 		566B3760269503360021BCAA /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B375E269503360021BCAA /* CalendarTableViewCell.swift */; };
 		566B3761269503360021BCAA /* CalendarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 566B375F269503360021BCAA /* CalendarTableViewCell.xib */; };
@@ -556,6 +562,12 @@
 		56664DC1269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTimeCodeTextFiled.swift; sourceTree = "<group>"; };
 		56664DC9269E368C00FDBD22 /* TimeCompare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCompare.swift; sourceTree = "<group>"; };
 		5668376E270B5F3600C8D8FF /* MarkNewAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkNewAddressViewController.swift; sourceTree = "<group>"; };
+		56683775270CF70500C8D8FF /* CompareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareViewController.swift; sourceTree = "<group>"; };
+		56683777270CF71800C8D8FF /* Compare.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Compare.storyboard; sourceTree = "<group>"; };
+		56683779270DD95A00C8D8FF /* DropDownTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownTableView.swift; sourceTree = "<group>"; };
+		5668377B270DDB1E00C8D8FF /* CompareVehicleInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareVehicleInfoView.swift; sourceTree = "<group>"; };
+		56683784270E216300C8D8FF /* CompareCategoryTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareCategoryTableCell.swift; sourceTree = "<group>"; };
+		56683785270E216300C8D8FF /* CompareCategoryTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompareCategoryTableCell.xib; sourceTree = "<group>"; };
 		5669F5FB26FC170D00FF73F7 /* ContactActionSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactActionSheetView.swift; sourceTree = "<group>"; };
 		566B375E269503360021BCAA /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		566B375F269503360021BCAA /* CalendarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarTableViewCell.xib; sourceTree = "<group>"; };
@@ -1918,6 +1930,67 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		56683770270CF6C600C8D8FF /* Compare */ = {
+			isa = PBXGroup;
+			children = (
+				56683773270CF6DF00C8D8FF /* Model */,
+				56683772270CF6D500C8D8FF /* ViewModel */,
+				56683771270CF6CE00C8D8FF /* View */,
+			);
+			path = Compare;
+			sourceTree = "<group>";
+		};
+		56683771270CF6CE00C8D8FF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				56683774270CF6EE00C8D8FF /* UI */,
+				56683775270CF70500C8D8FF /* CompareViewController.swift */,
+				56683777270CF71800C8D8FF /* Compare.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		56683772270CF6D500C8D8FF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		56683773270CF6DF00C8D8FF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		56683774270CF6EE00C8D8FF /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				5668377D270E1CC400C8D8FF /* Cell */,
+				56683779270DD95A00C8D8FF /* DropDownTableView.swift */,
+				5668377B270DDB1E00C8D8FF /* CompareVehicleInfoView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		5668377D270E1CC400C8D8FF /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				56683783270E210700C8D8FF /* CompareCategoryTableCell */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		56683783270E210700C8D8FF /* CompareCategoryTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				56683784270E216300C8D8FF /* CompareCategoryTableCell.swift */,
+				56683785270E216300C8D8FF /* CompareCategoryTableCell.xib */,
+			);
+			path = CompareCategoryTableCell;
+			sourceTree = "<group>";
+		};
 		566B375D269503030021BCAA /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1988,6 +2061,7 @@
 		568E70942644BD2D000CB6A9 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				56683770270CF6C600C8D8FF /* Compare */,
 				564BE8682701F4D30037DF39 /* AddAccidentDetails */,
 				5658BDF426FBEC6900A5B122 /* OnRide */,
 				56CF782226F3DF4D0092F555 /* StartRide */,
@@ -2917,11 +2991,13 @@
 				56ADD81326F2CED400C0ECC3 /* ReservationHistoryCell.xib in Resources */,
 				5656324726585FFF00B78562 /* CarEquipmentCollectionViewCell.xib in Resources */,
 				568E706F264481B0000CB6A9 /* LeftTableViewCell.xib in Resources */,
+				56683787270E216300C8D8FF /* CompareCategoryTableCell.xib in Resources */,
 				566354EC268AF8EF0003E2EB /* PriceTableViewCell.xib in Resources */,
 				5692658A26F3B71C00004E81 /* WaithingAdminApplovalCell.xib in Resources */,
 				56AD18D726916077006A53C1 /* Registration.storyboard in Resources */,
 				565A7AE426555EFF006C63D0 /* CategoryTableViewCell.xib in Resources */,
 				56664D9C269DC36A00FDBD22 /* VerificationCode.storyboard in Resources */,
+				56683778270CF71800C8D8FF /* Compare.storyboard in Resources */,
 				562585D626F0F5D100EC9284 /* PaymentStatusUITableViewCell.xib in Resources */,
 				561888A3264ABDFC00BDDB33 /* DropDownTableViewCell.xib in Resources */,
 				5660E61826FE0376009BB73F /* AdvancedWithOnRideCell.xib in Resources */,
@@ -3046,6 +3122,7 @@
 				5602532C26670A0100FB204C /* OnlineChatViewController.swift in Sources */,
 				56533F092679BDBE0012BF4A /* MyDriversViewController.swift in Sources */,
 				565863BB26C76B3C003C19A2 /* CashViewController.swift in Sources */,
+				56683786270E216300C8D8FF /* CompareCategoryTableCell.swift in Sources */,
 				9393BAEF26D78846003878BF /* SocketServiceProtocol.swift in Sources */,
 				56533ECF2678B94D0012BF4A /* MoreModel.swift in Sources */,
 				562585E726F1867800EC9284 /* AditionalDriverTableCell.swift in Sources */,
@@ -3074,6 +3151,7 @@
 				56AD19022692AD2D006A53C1 /* MyBkdModel.swift in Sources */,
 				564BE8892702B8670037DF39 /* AddAccidentDetailViewModel.swift in Sources */,
 				5691A639265D53140008081D /* Extentions.swift in Sources */,
+				56683776270CF70500C8D8FF /* CompareViewController.swift in Sources */,
 				9393BAFA26D7F2B8003878BF /* ChatInfo.swift in Sources */,
 				565BFE0326A12CA10044D081 /* Parking.swift in Sources */,
 				5656082626785C32009578FA /* MoreViewController.swift in Sources */,
@@ -3088,6 +3166,7 @@
 				56CF782F26F3E1490092F555 /* OdometerCheckViewController.swift in Sources */,
 				5602536F2669AE1C00FB204C /* OfflineViewController.swift in Sources */,
 				5640395A26EFEF5A0064256C /* ReservetionWithDistancePriceCell.swift in Sources */,
+				5668377A270DD95A00C8D8FF /* DropDownTableView.swift in Sources */,
 				56188889264A61ED00BDDB33 /* TextField.swift in Sources */,
 				56B9F33D26825FF0003449AD /* TariffSlideViewModel.swift in Sources */,
 				56AD191D2693251C006A53C1 /* CheckEmailViewModel.swift in Sources */,
@@ -3205,6 +3284,7 @@
 				566B3760269503360021BCAA /* CalendarTableViewCell.swift in Sources */,
 				56CC7D8526AA07F2006DB7B8 /* BancontactCollectionViewCell.swift in Sources */,
 				56AD18D126916061006A53C1 /* RegistrationViewController.swift in Sources */,
+				5668377C270DDB1E00C8D8FF /* CompareVehicleInfoView.swift in Sources */,
 				93CDB1F326C1CBD5009F9B6C /* PaymentViewModel.swift in Sources */,
 				5656F196268936E000E70BAB /* MyDriversModel.swift in Sources */,
 				565A7AE326555EFF006C63D0 /* CategoryTableViewCell.swift in Sources */,

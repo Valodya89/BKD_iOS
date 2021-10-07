@@ -43,7 +43,7 @@ struct Constant {
         static let editReservation = "EditReservation"
         static let editReservetionAdvanced = "EditReservetionAdvanced"
         static let addAccidentDetails = "AddAccidentDetails"
-
+        static let compare = "Compare"
 
 
 
@@ -410,6 +410,8 @@ let height115 = UIScreen.main.bounds.height * 0.142
 let height274 = UIScreen.main.bounds.height * 0.339
 let height130 = UIScreen.main.bounds.height * 0.160
 let height273 = UIScreen.main.bounds.height * 0.337
+let height68 = UIScreen.main.bounds.height * 0.084
+
 
 // 0.158416
 //h* 16 /37

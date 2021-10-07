@@ -56,6 +56,9 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var mReserveLeading: NSLayoutConstraint!
     @IBOutlet weak var mDetailHeight: NSLayoutConstraint!
     
+    ///Compare
+    @IBOutlet weak var mCompareContentV: UIView!
+    
     //MARK: - Varables
     private lazy  var tariffSlideVC = TariffSlideViewController.initFromStoryboard(name: Constant.Storyboards.details)
     
@@ -122,6 +125,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = #imageLiteral(resourceName: "bkd").withRenderingMode(.alwaysOriginal)
         workingTimes = ApplicationSettings.shared.workingTimes
+        mCompareContentV.layer.cornerRadius = 8
 
         if isSearchEdit {
             mSearchWithValueStackV.searchModel = searchModel
@@ -148,11 +152,16 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         if scrollContentHeight == 0.0 {
             // will show only tariff cards
             scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height
+            mCompareContentV.isHidden = false
         }
         if isSearchEdit && self.mSearchV.isHidden  {// will show tariff cards and search edit view
             scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height + mSearchWithValueStackV.bounds.height
+            mCompareContentV.isHidden = true
+
         } else if !self.mSearchV.isHidden { // will show tariff cards and search view
             scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height + mSearchV.bounds.height
+            mCompareContentV.isHidden = true
+
         }
         mScrollV.contentSize.height = scrollContentHeight
     }
@@ -469,8 +478,10 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     private func showTariffCardWithDelay() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
             self.mTariffCarouselV.isHidden = false
+            self.mCompareContentV.isHidden = (self.mSearchV.isHidden && self.mSearchWithValueStackV.isHidden) ? false : true
             UIView.animate(withDuration: 0.5) { [self] in
                 self.mTariffCarouselV.alpha = 1.0
+                self.mCompareContentV.alpha = (self.mSearchV.isHidden && self.mSearchWithValueStackV.isHidden) ? 1.0 : 0.0
             }
         }
     }
@@ -480,10 +491,12 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             UIView.animate(withDuration: 0.5) { [self] in
                 self.tariffSlideVC.view.frame.origin.y -= 500
                 mTariffCarouselV.alpha = 0.0
+                self.mCompareContentV.alpha = 0.0
                 mSearchV.alpha = 0.0
                 self.tariffSlideVC.view.layoutIfNeeded()
             } completion: { [self]_ in
                 self.mTariffCarouselV.isHidden = true
+                self.mCompareContentV.isHidden = true
                 mSearchV.isHidden = true
                 scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height
             }
@@ -595,6 +608,8 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         }
         if mSearchV.isHidden  {
             mSearchV.isHidden = false
+            mCompareContentV.isHidden = true
+
             mScrollV.contentSize.height = mScrollV.contentSize.height + mSearchV.bounds.height
             UIView.animate(withDuration: 0.7) { [self] in
                 self.scrollToBottom(distance: 0.0)
@@ -683,6 +698,10 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    @IBAction func compare(_ sender: UIButton) {
+        let compareVC = CompareViewController.initFromStoryboard(name: Constant.Storyboards.compare)
+      self.navigationController?.pushViewController(compareVC, animated: true)
+    }
 }
 
 
@@ -897,6 +916,8 @@ extension DetailsViewController: SearchWithValueViewDelegate {
         mSearchV.updateSearchFields(searchModel: searchModel, tariff: currentTariff)
         
         self.mSearchV.isHidden = false
+        mCompareContentV.isHidden = true
+
         UIView.animate(withDuration: 0.7) { [self] in
             self.scrollToBottom(distance: self.mSearchV.bounds.height - self.mSearchWithValueStackV.bounds.height)
             self.mSearchV.alpha = 1

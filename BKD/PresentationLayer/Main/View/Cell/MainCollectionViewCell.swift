@@ -165,20 +165,7 @@ static let identifier = "MainCollectionViewCell"
         mKgLb.text = String(item.loadCapacity) + Constant.Texts.kg
         mCarSizeLb.text = item.exterior?.getExterior()
         updatePriceFiled(item:item)
-//        mOffertBackgV.isHidden = !item.hasSpecialPrice
-//        mIgnorValueContentV.isHidden = !item.hasSpecialPrice
-//        mValueBckgV.isHidden = item.hasSpecialPrice
-//        if item.hasSpecialPrice &&  item.specialPriceForHour > 0.0 {
-//            let specialPrice = item.priceForHour - ((item.priceForHour * item.specialPriceForHour)/100)
-//            mIgnorValueLb.text = "€  \(specialPrice) / " + Constant.Texts.day
-//            mOffertPriceLb.text = String(item.specialPriceForHour)
-//            mIgnorValueContentV.isHidden = false
-//            mOffertBackgV.isHidden = false
-//            mValueLb.isHidden = true
-//        } else {
-//            mValueLb.isHidden = false
-//            mValueLb.text = String(item.priceForHour)
-//        }
+
         mTowBarLb.isHidden = !item.towbar
         mTowBarIngV.isHidden = !item.towbar
         mBlurV.isHidden = item.active
