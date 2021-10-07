@@ -700,6 +700,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     @IBAction func compare(_ sender: UIButton) {
         let compareVC = CompareViewController.initFromStoryboard(name: Constant.Storyboards.compare)
+        compareVC.vehicleModel = vehicleModel
       self.navigationController?.pushViewController(compareVC, animated: true)
     }
 }
@@ -809,9 +810,7 @@ extension DetailsViewController: TariffCarouselViewDelegate {
     }
 
     func didPressMore(tariffIndex:Int, optionIndex: Int) {
-        let moreVC = UIStoryboard(name: Constant.Storyboards.more, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.more) as! MoreViewController
-        moreVC.vehicleModel = vehicleModel
-        self.navigationController?.pushViewController(moreVC, animated: true)
+        self.goToMore(vehicleModel: vehicleModel, carModel: nil)
     }
     
     ///update search fields

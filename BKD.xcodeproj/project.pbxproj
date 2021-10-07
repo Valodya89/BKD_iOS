@@ -225,6 +225,7 @@
 		5668377C270DDB1E00C8D8FF /* CompareVehicleInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5668377B270DDB1E00C8D8FF /* CompareVehicleInfoView.swift */; };
 		56683786270E216300C8D8FF /* CompareCategoryTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56683784270E216300C8D8FF /* CompareCategoryTableCell.swift */; };
 		56683787270E216300C8D8FF /* CompareCategoryTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56683785270E216300C8D8FF /* CompareCategoryTableCell.xib */; };
+		56683789270F3C3F00C8D8FF /* CompareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56683788270F3C3F00C8D8FF /* CompareViewModel.swift */; };
 		5669F5FC26FC170D00FF73F7 /* ContactActionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669F5FB26FC170D00FF73F7 /* ContactActionSheetView.swift */; };
 		566B3760269503360021BCAA /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B375E269503360021BCAA /* CalendarTableViewCell.swift */; };
 		566B3761269503360021BCAA /* CalendarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 566B375F269503360021BCAA /* CalendarTableViewCell.xib */; };
@@ -568,6 +569,7 @@
 		5668377B270DDB1E00C8D8FF /* CompareVehicleInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareVehicleInfoView.swift; sourceTree = "<group>"; };
 		56683784270E216300C8D8FF /* CompareCategoryTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareCategoryTableCell.swift; sourceTree = "<group>"; };
 		56683785270E216300C8D8FF /* CompareCategoryTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompareCategoryTableCell.xib; sourceTree = "<group>"; };
+		56683788270F3C3F00C8D8FF /* CompareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareViewModel.swift; sourceTree = "<group>"; };
 		5669F5FB26FC170D00FF73F7 /* ContactActionSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactActionSheetView.swift; sourceTree = "<group>"; };
 		566B375E269503360021BCAA /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		566B375F269503360021BCAA /* CalendarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarTableViewCell.xib; sourceTree = "<group>"; };
@@ -1953,6 +1955,7 @@
 		56683772270CF6D500C8D8FF /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				56683788270F3C3F00C8D8FF /* CompareViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -3122,6 +3125,7 @@
 				5602532C26670A0100FB204C /* OnlineChatViewController.swift in Sources */,
 				56533F092679BDBE0012BF4A /* MyDriversViewController.swift in Sources */,
 				565863BB26C76B3C003C19A2 /* CashViewController.swift in Sources */,
+				56683789270F3C3F00C8D8FF /* CompareViewModel.swift in Sources */,
 				56683786270E216300C8D8FF /* CompareCategoryTableCell.swift in Sources */,
 				9393BAEF26D78846003878BF /* SocketServiceProtocol.swift in Sources */,
 				56533ECF2678B94D0012BF4A /* MoreModel.swift in Sources */,

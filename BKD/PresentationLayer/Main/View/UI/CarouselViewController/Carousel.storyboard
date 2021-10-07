@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19158" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19141"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -39,7 +39,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="101" height="111"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="car.png" translatesAutoresizingMaskIntoConstraints="NO" id="4Ut-32-6TS">
-                                                            <rect key="frame" x="25.5" y="15.5" width="50" height="30"/>
+                                                            <rect key="frame" x="20" y="5.5" width="61" height="55.5"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Car name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xa8-Q1-sSJ">
                                                             <rect key="frame" x="5" y="83.5" width="91" height="16.5"/>
@@ -53,10 +53,10 @@
                                                         <constraint firstItem="Xa8-Q1-sSJ" firstAttribute="height" secondItem="Vih-61-BmY" secondAttribute="height" multiplier="0.15" id="4NC-Ev-Nqn"/>
                                                         <constraint firstItem="Xa8-Q1-sSJ" firstAttribute="centerX" secondItem="Vih-61-BmY" secondAttribute="centerX" id="Ebi-yW-8Is"/>
                                                         <constraint firstItem="Xa8-Q1-sSJ" firstAttribute="width" secondItem="Vih-61-BmY" secondAttribute="width" multiplier="0.9" id="Sgp-3D-1UU"/>
-                                                        <constraint firstItem="4Ut-32-6TS" firstAttribute="height" secondItem="Vih-61-BmY" secondAttribute="height" multiplier="0.27" id="WCl-3b-9zU"/>
+                                                        <constraint firstItem="4Ut-32-6TS" firstAttribute="height" secondItem="Vih-61-BmY" secondAttribute="height" multiplier="0.5" id="WCl-3b-9zU"/>
                                                         <constraint firstItem="Xa8-Q1-sSJ" firstAttribute="centerY" secondItem="Vih-61-BmY" secondAttribute="centerY" multiplier="1.65" id="die-It-rm0"/>
-                                                        <constraint firstItem="4Ut-32-6TS" firstAttribute="centerY" secondItem="Vih-61-BmY" secondAttribute="centerY" multiplier="0.55" id="ngg-wU-E7e"/>
-                                                        <constraint firstItem="4Ut-32-6TS" firstAttribute="width" secondItem="Vih-61-BmY" secondAttribute="width" multiplier="0.49505" id="tbC-mQ-Qqt"/>
+                                                        <constraint firstItem="4Ut-32-6TS" firstAttribute="centerY" secondItem="Vih-61-BmY" secondAttribute="centerY" multiplier="0.6" id="ngg-wU-E7e"/>
+                                                        <constraint firstItem="4Ut-32-6TS" firstAttribute="width" secondItem="Vih-61-BmY" secondAttribute="width" multiplier="0.6" id="tbC-mQ-Qqt"/>
                                                         <constraint firstItem="4Ut-32-6TS" firstAttribute="centerX" secondItem="Vih-61-BmY" secondAttribute="centerX" id="td7-SM-Zlm"/>
                                                     </constraints>
                                                 </view>

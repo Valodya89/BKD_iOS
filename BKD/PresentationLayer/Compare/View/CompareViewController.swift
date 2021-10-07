@@ -7,6 +7,14 @@
 
 import UIKit
 
+
+enum TableState {
+    case category
+    case firstVehicle
+    case secondVehicle
+    case close
+}
+
 class CompareViewController: BaseViewController {
 
    //MARK: -- Outlets
@@ -34,13 +42,18 @@ class CompareViewController: BaseViewController {
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     
     //MARK: -- Variables
-    var isOpenCategory: Bool = false
+    let compareViewModel = CompareViewModel()
+    public var vehicleModel:VehicleModel?
+    private var currVehicleInfoV: CompareVehicleInfoView?
+    private var isOpenTable: Bool = false
     
+    
+    //MARK: -- Life cicle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        
     }
+    
     
     func setupView() {
         mRightBarBtn.image = img_bkd
@@ -48,8 +61,26 @@ class CompareViewController: BaseViewController {
         mCategoryContentV.setShadow(color: color_shadow!)
         mFirstVehicleContentV.layer.cornerRadius = 8
         mSecondVehicleContentV.layer.cornerRadius = 8
-
         mCategoryTableV.categoryList = ApplicationSettings.shared.carTypes
+        mFirstVehicleInfoV.delegate = self
+        mSecondVehicleInfoV.delegate = self
+        configureFirstVehicleUI()
+        handlerCategory()
+        handlerFirstVehicle()
+        handlerSecondVehicle()
+    }
+    
+    
+    
+    //Configure first vehicle UI
+    func configureFirstVehicleUI() {
+        mCategoryBtn.setTitle(vehicleModel?.vehicleType, for: .normal)
+        let categoryId = compareViewModel.getCurrentCarType(typeName: vehicleModel?.vehicleType ?? "")
+        let carList: [CarsModel]? = ApplicationSettings.shared.carsList?[categoryId]!
+        self.mVehicleTableV.carList = carList
+        self.mFirstVehicleInfoV.carModel =  compareViewModel.getCurrentCarModel(carsList: carList, carId: vehicleModel?.vehicleId)
+        self.mFirstVehicleBtn.setTitle(vehicleModel?.vehicleName, for: .normal)
+        self.mFirstVehicleInfoV.configureUI()
     }
 
     ///Drop down or drop up image view
@@ -58,25 +89,116 @@ class CompareViewController: BaseViewController {
         dropDownImgV.rotateImage(rotationAngle: rotationAngle)
     }
     
+    //Close tables if it´s open
+    func closeTable(){
+        checkFirstTable()
+        checkSecondTabel()
+    }
+    
+    //Check if open first vehicle Table view
+    func checkFirstTable() {
+        if mVehicleTableV.tableState == .firstVehicle && isOpenTable {
+            animateDropDown(willOpen: !isOpenTable, dropDownImgV: mFirstVehicleDropDownImgV)
+            mVehicleTableV.updateTableHeight(willOpen: !isOpenTable)
+            mVehicleTableV.tableState = .close
+            isOpenTable = !isOpenTable
+        }
+    }
+    
+    //Check if open second vehicle Table view
+    func checkSecondTabel() {
+        if mVehicleTableV.tableState == .secondVehicle && isOpenTable {
+            animateDropDown(willOpen: !isOpenTable, dropDownImgV: mSecondVehicleDropDownImgV)
+            mVehicleTableV.updateTableHeight(willOpen: !isOpenTable)
+            mVehicleTableV.tableState = .close
+            isOpenTable = !isOpenTable
+        }
+    }
+    
+    
+   
+    
     //MARK: -- Actions
     @IBAction func back(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
     }
     
     @IBAction func category(_ sender: UIButton) {
-        mCategoryTableV.isCategory = true
+        closeTable()
+        mCategoryTableV.tableState = .category
         mCategoryTableV.reloadData()
 
-        mCategoryTableV.updateTableHeight(willOpen: !isOpenCategory)
-        animateDropDown(willOpen: !isOpenCategory, dropDownImgV: mCategoryDropDownImgV)
-        isOpenCategory = !isOpenCategory
+        mCategoryTableV.updateTableHeight(willOpen: !isOpenTable)
+        animateDropDown(willOpen: !isOpenTable, dropDownImgV:mCategoryDropDownImgV )
+        isOpenTable = !isOpenTable
     }
     
     @IBAction func firstVehicle(_ sender: UIButton) {
+        checkSecondTabel()
+        mVehicleTableV.tableState = .firstVehicle
+        mVehicleTableV.reloadData()
         
+        mVehicleTableV.updateTableHeight(willOpen: !isOpenTable)
+        animateDropDown(willOpen: !isOpenTable, dropDownImgV: mFirstVehicleDropDownImgV)
+        isOpenTable = !isOpenTable
     }
     
     @IBAction func secondVehicle(_ sender: UIButton) {
-        
+        checkFirstTable()
+            mVehicleTableV.tableState = .secondVehicle
+            mVehicleTableV.reloadData()
+            
+            mVehicleTableV.updateTableHeight(willOpen: !isOpenTable)
+            animateDropDown(willOpen: !isOpenTable, dropDownImgV: mSecondVehicleDropDownImgV)
+            isOpenTable = !isOpenTable
+    }
+    
+    ///Did select category
+    func handlerCategory() {
+        mCategoryTableV.didSelectCategory = { currCategory in
+            guard let category = currCategory else {return}
+            let carList = ApplicationSettings.shared.carsList?[category.id]
+            self.mVehicleTableV.carList = carList as? [CarsModel]
+            self.animateDropDown(willOpen: false, dropDownImgV: self.mCategoryDropDownImgV)
+            self.isOpenTable = false
+            self.mCategoryBtn.setTitle(category.name, for: .normal)
+            self.mSecondVehicleBtn.setTitle(Constant.Texts.vehicle2, for: .normal)
+            self.mSecondVehicleInfoV.isHidden = true
+        }
+    }    
+    
+    //Did select First vehicle
+    func handlerFirstVehicle() {
+        mVehicleTableV.didSelectFirstVehicle = { carModel in
+            guard let carModel = carModel else {return}
+            self.animateDropDown(willOpen: false, dropDownImgV: self.mFirstVehicleDropDownImgV)
+            self.isOpenTable = false
+            self.mFirstVehicleInfoV.carModel = carModel
+            self.mFirstVehicleBtn.setTitle(carModel.name, for: .normal)
+            self.mFirstVehicleInfoV.configureUI()
+            self.mFirstVehicleInfoV.isHidden = false
+        }
+    }
+    
+    //Did select second vehicle
+    func handlerSecondVehicle() {
+        mVehicleTableV.didSelectSecondVehicle = { carModel in
+            guard let carModel = carModel else {return}
+            self.animateDropDown(willOpen: false, dropDownImgV: self.mSecondVehicleDropDownImgV)
+            self.isOpenTable = false
+            self.mSecondVehicleInfoV.carModel = carModel
+            self.mSecondVehicleBtn.setTitle(carModel.name, for: .normal)
+            self.mSecondVehicleInfoV.configureUI()
+            self.mSecondVehicleInfoV.isHidden = false
+        }
+    }
+    
+}
+
+//MARK: -- CompareVehicleInfoViewDelegate
+//MARK: ----------------------------------
+extension CompareViewController: CompareVehicleInfoViewDelegate {
+    func didSelectMore(carModel: CarsModel) {
+        self.goToMore(vehicleModel:nil, carModel:carModel)
     }
 }

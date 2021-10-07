@@ -25,6 +25,7 @@ class CompareCategoryTableCell: UITableViewCell {
         // Initialization code
     }
 
+    //Set category cell info
     func setCategoryCellInfo(item: CarTypes) {
         mTitleLb.text = item.name
         if item.image != nil {
@@ -33,11 +34,10 @@ class CompareCategoryTableCell: UITableViewCell {
     }
     
     
-    func setVehicleCellInfo(item: CarModel) {
-//        mTitleLb.text = item.name
-//        if item.image != nil {
-//            mImgV.sd_setImage(with:item.image!.getURL()!, placeholderImage: nil)
-//        }
+    //Set vehicle cell info
+    func setVehicleCellInfo(item: CarsModel) {
+        mTitleLb.text = item.name
+       // mImgV.sd_setImage(with:item.image.getURL()!, placeholderImage: nil)
     }
     
 }

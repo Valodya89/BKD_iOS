@@ -122,4 +122,13 @@ class BaseViewController: UIViewController, StoryboardInitializable {
         self.navigationController?.pushViewController(accessoriesVC, animated: true)
     }
     
+    
+    /// Go to more screen
+    func goToMore(vehicleModel: VehicleModel?, carModel: CarsModel?) {
+        let moreVC = MoreViewController.initFromStoryboard(name: Constant.Storyboards.more)
+        moreVC.vehicleModel = vehicleModel
+        moreVC.carModel = carModel
+        self.navigationController?.pushViewController(moreVC, animated: true)
+    }
+    
 }

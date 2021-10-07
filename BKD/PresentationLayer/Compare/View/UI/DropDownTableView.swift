@@ -12,10 +12,13 @@ class DropDownTableView: UITableView, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var mTableHeight: NSLayoutConstraint!
     
     public var categoryList: [CarTypes]?
-    public var carList: [CarModel]?
-
-    public var isCategory:Bool = false
+    public var carList: [CarsModel]?
+    public var tableState:TableState = .close
     
+    var didSelectCategory:((CarTypes?)->Void)?
+    var didSelectFirstVehicle:((CarsModel?)->Void)?
+    var didSelectSecondVehicle:((CarsModel?)->Void)?
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,13 +26,12 @@ class DropDownTableView: UITableView, UITableViewDelegate, UITableViewDataSource
     }
     
     func setupView() {
-        self.setBorder(color: color_shadow!, width: 0.25)
+        self.setBorder(color: color_shadow!, width: 0.5)
         self.layer.cornerRadius = 3
         self.delegate = self
         self.dataSource = self
         self.register(CompareCategoryTableCell.nib(), forCellReuseIdentifier: CompareCategoryTableCell.identifier)
         self.separatorStyle = .none
-        self.allowsSelection = false
     }
     
     ///Update table height
@@ -42,15 +44,19 @@ class DropDownTableView: UITableView, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return isCategory ? categoryList?.count ?? 0 : carList?.count ?? 0
+        if tableState == .category {
+            return categoryList?.count ?? 0
+        }
+        return carList?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CompareCategoryTableCell.identifier, for: indexPath) as! CompareCategoryTableCell
-        if isCategory {
+        switch tableState {
+        case .category:
             cell.setCategoryCellInfo(item: categoryList![indexPath.row])
-        } else {
+        case .close: break
+        default:
             cell.setVehicleCellInfo(item: carList![indexPath.row])
         }
         return cell
@@ -60,4 +66,17 @@ class DropDownTableView: UITableView, UITableViewDelegate, UITableViewDataSource
            return height68
        }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch tableState {
+        case .category:
+            didSelectCategory?(categoryList?[indexPath.row])
+        case .firstVehicle:
+            didSelectFirstVehicle?(carList?[indexPath.row])
+        case .secondVehicle:
+            didSelectSecondVehicle?(carList?[indexPath.row])
+        case .close: break
+        }
+        updateTableHeight(willOpen: false)
+
+    }
 }

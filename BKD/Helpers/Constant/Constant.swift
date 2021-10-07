@@ -301,6 +301,9 @@ struct Constant {
         static let leftSide = "Left side"
         static let confirmAccidentDetails = "Do you confirm the accident details and all the provided information assurance?"
         static let yes = "Yes"
+        
+        //Compare
+        static let vehicle2 = "Vehicle 2"
 
         
         //Verify
@@ -516,6 +519,11 @@ let img_add_selecte = UIImage(named: "added")
 let img_invisible = UIImage(named: "invisible")
 let img_visible = UIImage(named: "visible")
 let img_dropDown_light = UIImage(named: "dropDown_blue")
+let img_card = UIImage(named: "14")
+let img_cube = UIImage(named: "15")
+let img_kg = UIImage(named: "16")
+let img_carM = UIImage(named: "17")
+
 
  //Payment
 let img_bancontact = UIImage(named: "bancontact")

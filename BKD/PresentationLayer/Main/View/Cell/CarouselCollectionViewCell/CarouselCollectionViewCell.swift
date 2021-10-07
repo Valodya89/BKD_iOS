@@ -18,7 +18,6 @@ class CarouselCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         self.layer.cornerRadius = 2
         self.setShadow(color: color_shadow!)
-        // Initialization code
     }
 
     
@@ -29,11 +28,11 @@ class CarouselCollectionViewCell: UICollectionViewCell {
             if index == currentPage {
                 self.backgroundColor = color_menu
                 self.mCategoryNameLb.textColor = color_selected_filter_fields
-                self.mCategoryImg.setTintColor(color: color_selected_filter_fields!)
+                //self.mCategoryImg.setTintColor(color: color_selected_filter_fields!)
             } else {
                 self.backgroundColor = color_carousel
                 self.mCategoryNameLb.textColor = .white
-                self.mCategoryImg.setTintColor(color: color_carousel_img_tint!)
+               // self.mCategoryImg.setTintColor(color: color_carousel_img_tint!)
             }
 
     }

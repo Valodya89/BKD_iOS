@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MoreViewController: UIViewController {
+class MoreViewController: BaseViewController {
     //MARK: --Outlets
     @IBOutlet weak var mMoreTbV: UITableView!
     @IBOutlet weak var mBackBarBtn: UIBarButtonItem!
@@ -15,7 +15,8 @@ class MoreViewController: UIViewController {
     
     //MARK: -- Variables
     public var vehicleModel: VehicleModel?
-    
+    public var carModel: CarsModel?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -66,7 +67,15 @@ extension MoreViewController: UITableViewDelegate, UITableViewDataSource {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: RentalConditionsTableViewCell.identifier, for: indexPath) as! RentalConditionsTableViewCell
             let model = RentalConditionsData.rentalConditionsModel[indexPath.row]
-            cell.setCellInfo(item:model, vehicleModel: vehicleModel, index: indexPath.row)
+            
+            if vehicleModel != nil {
+                cell.setCellInfo(item:model, vehicleModel: vehicleModel, index: indexPath.row)
+                
+            } else if carModel != nil {
+                cell.setCarsCellInfo(item:model, carModel: carModel, index: indexPath.row)
+            }
+                
+            
             return cell
             
         } else { // BKD Advantages cell
