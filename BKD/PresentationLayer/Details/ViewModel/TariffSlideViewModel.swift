@@ -20,33 +20,33 @@ class TariffSlideViewModel: NSObject {
         return 0
     }
     
-    func getOptionString(tariff:TariffState, index: Int) -> String {
-        var optionsArr:[String] = []
+    func getOptionString(tariff:TariffState, tariffSlideList: [TariffSlideModel], index: Int) -> String {
+        var optionsArr:[Tariff] = []
         var optionStr: String = ""
         var option: String = ""
         var index = index
         switch tariff {
         case .hourly:
-            optionsArr = tariffOptionsArr[0]
+            optionsArr = tariffSlideList[0].tariff!
             optionStr = Constant.Texts.hours
             break
         case .daily:
-            optionsArr = tariffOptionsArr[1]
+            optionsArr = tariffSlideList[1].tariff!
             optionStr = Constant.Texts.days
             break
         case .weekly:
-            optionsArr = tariffOptionsArr[2]
+            optionsArr = tariffSlideList[2].tariff!
             optionStr = Constant.Texts.weeks
             break
         case .monthly:
-            optionsArr = tariffOptionsArr[3]
+            optionsArr = tariffSlideList[3].tariff!
             optionStr = Constant.Texts.month
             index = 0
             break
         case .flexible:
             return ""
         }
-        option = optionsArr[index]
+        option = String(optionsArr[index].duration)
         
         return option.dropLast() + " " + optionStr
     }

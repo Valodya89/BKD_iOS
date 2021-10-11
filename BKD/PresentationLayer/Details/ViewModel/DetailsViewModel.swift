@@ -13,7 +13,8 @@ class DetailsViewModel: NSObject {
     let validator = Validator()
     var workingTimes: WorkingTimes?
     
-    func updateSearchInfo(tariff: TariffState,
+    func updateSearchInfo(tariffSlideList:[TariffSlideModel],
+                          tariff: TariffState,
                           search: Search,
                        optionIndex: Int,
                        currSearchModel: SearchModel) -> SearchModel {
@@ -22,33 +23,58 @@ class DetailsViewModel: NSObject {
         searchModel = currSearchModel
         switch tariff {
             case .hourly:
-                searchModel = updateHourlyTariff(search: search,
+                searchModel = updateHourlyTariff(tariffSlideList:tariffSlideList,
+                                                 search: search,
                                    optionIndex: optionIndex,
                                    searchModel: searchModel)
                
                 break
             case .daily:
-                searchModel = updateDailyTariff(search: search,
+                searchModel = updateDailyTariff(tariffSlideList:tariffSlideList,
                                                 optionIndex: optionIndex,
                                                 searchModel: searchModel)
                 break
             case .weekly:
-                searchModel = updateWeeklyTariff(search: search,
+                searchModel = updateWeeklyTariff(tariffSlideList:tariffSlideList,
                                                 optionIndex: optionIndex,
                                                 searchModel: searchModel)
                 break
             case .monthly:
-                searchModel = updateMonthlyTariff(search: search,
+                searchModel = updateMonthlyTariff(tariffSlideList:tariffSlideList,
                                                 optionIndex: optionIndex,
                                                 searchModel: searchModel)
                 break
             case .flexible:
-               // optionsArr = tariffOptionsArr[4]
                 break
             
         }
         return searchModel
     }
+    
+    
+    //Update serach info for flexible tariff
+    func updateSearchInfoForFlexible(search: Search,
+                       currSearchModel: SearchModel) -> SearchModel {
+        
+        var searchModel = SearchModel()
+        searchModel = currSearchModel
+        
+        if let pickUpTime = searchModel.pickUpTime,
+           let returnTime = searchModel.returnTime {
+            
+            if ((searchModel.returnDate?.isSameDates(date: searchModel.pickUpDate)) == true) {
+                
+                if pickUpTime.isSameHours(hour: returnTime) ||
+                    pickUpTime < returnTime {
+                    searchModel.returnDate = searchModel.pickUpDate!.addDays(1)
+                }
+            }
+        }
+        return searchModel
+    }
+        
+        
+
     
     ///return tariff option value
     func getOptionFromString(item: String) -> Int {
@@ -60,35 +86,36 @@ class DetailsViewModel: NSObject {
     }
    
     ///Update hourly tariff
-   private func updateHourlyTariff(search: Search,
+    private func updateHourlyTariff(tariffSlideList:[TariffSlideModel],
+                                    search: Search,
                              optionIndex: Int,
                              searchModel: SearchModel) -> SearchModel {
     
     var searchModel = searchModel
-    let optionsArr:[String] = tariffOptionsArr[0]
+        let optionsArr:[Tariff] = tariffSlideList[0].tariff ?? []
     if search == .date {
         searchModel.returnDate = searchModel.pickUpDate
         if let _ = searchModel.pickUpTime {
-            searchModel.returnDate = searchModel.pickUpDate!.addHours(getOptionFromString(item: optionsArr[optionIndex]))
+            searchModel.returnDate = searchModel.pickUpDate!.addHours(Int(optionsArr[optionIndex].duration))
         }
     } else {
         if let _ = searchModel.pickUpTime {
-            searchModel.returnTime = searchModel.pickUpTime!.addHours(getOptionFromString(item: optionsArr[optionIndex]))
+            searchModel.returnTime = searchModel.pickUpTime!.addHours(Int(optionsArr[optionIndex].duration))
         }
         if let pickUpDate = searchModel.pickUpDate {
-            searchModel.returnDate = pickUpDate.addHours(getOptionFromString(item: optionsArr[optionIndex]))
+            searchModel.returnDate = pickUpDate.addHours(Int(optionsArr[optionIndex].duration))
             }
         }
         return searchModel
    }
    
     ///Update daily tariff
-    private func updateDailyTariff(search: Search,
+    private func updateDailyTariff(tariffSlideList:[TariffSlideModel],
                               optionIndex: Int,
                               searchModel: SearchModel) -> SearchModel {
         var searchModel = searchModel
-        let optionsArr:[String] = tariffOptionsArr[1]
-        searchModel.returnDate = searchModel.pickUpDate?.addDays(getOptionFromString(item: optionsArr[optionIndex]))
+        let optionsArr:[Tariff] = tariffSlideList[1].tariff ?? []
+        searchModel.returnDate = searchModel.pickUpDate?.addDays( Int(optionsArr[optionIndex].duration))
         if let _ = searchModel.pickUpTime {
             searchModel.returnTime = searchModel.pickUpTime
         }
@@ -96,12 +123,12 @@ class DetailsViewModel: NSObject {
     }
     
     ///Update weekly tariff
-    private func updateWeeklyTariff(search: Search,
+    private func updateWeeklyTariff(tariffSlideList:[TariffSlideModel],
                               optionIndex: Int,
                               searchModel: SearchModel) -> SearchModel {
         var searchModel = searchModel
-        let optionsArr:[String] = tariffOptionsArr[2]
-        searchModel.returnDate = searchModel.pickUpDate?.addWeeks(getOptionFromString(item: optionsArr[optionIndex]))
+        let optionsArr:[Tariff] = tariffSlideList[2].tariff ?? []
+        searchModel.returnDate = searchModel.pickUpDate?.addWeeks(Int(optionsArr[optionIndex].duration))
         if let _ = searchModel.pickUpTime {
             searchModel.returnTime = searchModel.pickUpTime
         }
@@ -109,12 +136,12 @@ class DetailsViewModel: NSObject {
     }
     
     ///Update monthly tariff
-    private func updateMonthlyTariff(search: Search,
+    private func updateMonthlyTariff(tariffSlideList:[TariffSlideModel],
                               optionIndex: Int,
                               searchModel: SearchModel) -> SearchModel {
         var searchModel = searchModel
-        let optionsArr:[String] = tariffOptionsArr[3]
-        searchModel.returnDate = searchModel.pickUpDate?.addMonths(getOptionFromString(item: optionsArr[optionIndex]))
+        let optionsArr:[Tariff] = tariffSlideList[3].tariff ?? []
+        searchModel.returnDate = searchModel.pickUpDate?.addMonths(Int(optionsArr[optionIndex].duration))
         if let _ = searchModel.pickUpTime {
             searchModel.returnTime = searchModel.pickUpTime
         }
@@ -337,6 +364,16 @@ class DetailsViewModel: NSObject {
             return tariffModel
         }
         return nil
+    }
+    
+    
+    //Get time string of flexible tariff
+    func getTimeOfFlexible(time: String) -> String {
+        
+        let timeArr = time.split(separator: "-")
+        var newTime:String = String(timeArr[timeArr.count - 1])
+        newTime = newTime.replacingOccurrences(of: " ", with: "", options: NSString.CompareOptions.literal, range: nil)
+        return newTime
     }
     
    

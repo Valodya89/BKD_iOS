@@ -11,7 +11,6 @@ import AVFoundation
 
 protocol TariffCarouselViewDelegate: AnyObject {
     func didPressMore(tariffIndex: Int, optionIndex: Int)
-    func didPressFuelConsuption(isCheck: Bool)
     func didPressConfirm(tariff: TariffState, optionIndex: Int, optionstr: String)
     func willChangeTariffOption(tariff: TariffState, optionIndex: Int)
 }
@@ -106,15 +105,13 @@ extension TariffCarouselView: iCarouselDataSource, iCarouselDelegate {
 extension TariffCarouselView: TariffCarouselCellDelegate {
     
     func willChangeOption(optionIndex: Int) {
-        var optionIndex = optionIndex
-        if TariffState.allCases[tariffCarousel.currentItemIndex] == .monthly {
-            optionIndex = 0
-        }
         delegate?.willChangeTariffOption(tariff: TariffState.allCases[tariffCarousel.currentItemIndex], optionIndex: optionIndex)
     }
     
     func showSearchView(optionIndex: Int) {
-        let optionstr = tariffSlideViewModel.getOptionString(tariff: TariffState.allCases[tariffCarousel.currentItemIndex], index: optionIndex)
+        let optionstr = tariffSlideViewModel.getOptionString(tariff: TariffState.allCases[tariffCarousel.currentItemIndex],
+                                                             tariffSlideList:tariffSlideList ?? [],
+                                                             index: optionIndex)
         delegate?.didPressConfirm(tariff: TariffState.allCases[tariffCarousel.currentItemIndex], optionIndex: optionIndex, optionstr: optionstr)
     }
     
@@ -122,7 +119,4 @@ extension TariffCarouselView: TariffCarouselCellDelegate {
         delegate?.didPressMore(tariffIndex: tariffIndex, optionIndex: optionIndex)
     }
     
-    func didPressFuelConsuption(isCheck: Bool) {
-        delegate?.didPressFuelConsuption(isCheck: isCheck)
-    }
 }

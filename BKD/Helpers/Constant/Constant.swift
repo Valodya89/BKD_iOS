@@ -148,8 +148,7 @@ struct Constant {
         static let rentalConditions = "Rental conditions"
         static let bkdAdvantages = "BKD Advantages"
         static let select = "Select"
-        static let fuelConsumption = "Fuel consumption"
-        static let depositApplies = "Deposit applies"
+      
         
         
         //Detail
@@ -180,7 +179,9 @@ struct Constant {
         static let transmissionAutomatic = "Automatic"
         static let errorRequest = "Failed request"
         static let kwVat = "KW€/%.2f inch VAT"
-
+        static let fuelConsumption = "Fuel consumption"
+        static let fuelNotUncluded = "Fuel consumption not included"
+        static let depositApplies = "Deposit applies"
 
         //Accessories
        static let loginAccessories = "To add accessories, you need to sign in" //???
@@ -356,10 +357,6 @@ struct Constant {
 }
 
 
-let tariffOptionsArr =  [["2h", "3h", "4h", "5h", "6h", "10h"],
-                         ["1d", "2d", "3d", "4d", "5d", "6d"],
-                         ["1w", "2w", "3w"],
-                         ["1m"], []]
 
 let countryList = ["Dutch", "French", "English"]
 let sidesList = [Constant.Texts.frontSide,
@@ -384,7 +381,11 @@ let documentStateArr = ["IF",
                         "DLF",
                         "DLB",
                         "DLS"]
-let testParking = Parking(id: "73483478", name: "Testing address", longitude: 44.495332, latitude: 40.194582)
+let testParking = Parking(id: "73483478",
+                          name: "Testing address",
+                          longitude: 44.495332,
+                          latitude: 40.194582)
+let flexibleTimeList = ["07:30", "17:30 - 18:00"]
 
 
 

@@ -370,30 +370,42 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             if currentTariff != .flexible {
                 search = .date
                 searchModel.pickUpDate = datePicker.date
-                let newSearchModel = detailsViewModel.updateSearchInfo(tariff:
-                                                                        currentTariff, search: search,
+                let newSearchModel = detailsViewModel.updateSearchInfo(tariffSlideList: tariffSlideList!,
+                                                                       tariff:
+                                                                        currentTariff,
+                                                                       search: search,
                                                                        optionIndex: currentTariffOptionIndex, currSearchModel: searchModel)
                 mSearchV.updateSearchDate(searchModel:newSearchModel)
                 searchModel = newSearchModel
+            } else {
+                
             }
     }
     
     ///Will update time fields depend on tariff option
     func updateSearchTimes() {
+        var newSearchModel = SearchModel()
         if currentTariff != .flexible {
             search = .time
             let timeStr = pickerList![ pickerV.selectedRow(inComponent: 0)]
             searchModel.pickUpTime = timeStr.stringToDate()
             mSearchV.mReturnTimeTxtFl.font =  UIFont.init(name: (responderTxtFl.font?.fontName)!, size: 18.0)
             
-            let newSearchModel = detailsViewModel.updateSearchInfo(tariff:
-                                                                    currentTariff,
-                                                                   search: search,
-                                                                   optionIndex: currentTariffOptionIndex, currSearchModel: searchModel)
+            newSearchModel = detailsViewModel.updateSearchInfo(tariffSlideList: tariffSlideList!,
+                                                               tariff:
+                                                                currentTariff,
+                                                               search: search,
+                                                               optionIndex: currentTariffOptionIndex, currSearchModel: searchModel)
             mSearchV.updateSearchTimes(searchModel: newSearchModel,
                                        tariff: currentTariff)
-            searchModel = newSearchModel
+            
+        } else {
+            newSearchModel = detailsViewModel.updateSearchInfoForFlexible(search: search,
+                                                                          currSearchModel: searchModel)
+            mSearchV.updateSearchDate(searchModel: newSearchModel)
         }
+        searchModel = newSearchModel
+        
     }
     
     ///Will open  location controller
@@ -644,13 +656,23 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             searchModel.returnDate = datePicker.date
 
         default:
-            let timeStr = pickerList![ pickerV.selectedRow(inComponent: 0)]
-            chanckReservationTime(timeStr: timeStr)
+            var timeStr = ""
+           if currentTariff != .flexible {
+                timeStr = pickerList![ pickerV.selectedRow(inComponent: 0)]
+                chanckReservationTime(timeStr: timeStr)
+           } else {
+               timeStr = detailsViewModel.getTimeOfFlexible(time: pickerList![ pickerV.selectedRow(inComponent: 0)])
+           }
+
             
             if pickerState == .pickUpTime {
                 searchModel.pickUpTime = timeStr.stringToDate()
             } else{
                 searchModel.returnTime = timeStr.stringToDate()
+            }
+            
+            if currentTariff == .flexible {
+                showSelectedDate(dayBtn: nil, monthBtn: nil, timeStr: pickerList![ pickerV.selectedRow(inComponent: 0)])
             }
             
         }
@@ -785,9 +807,7 @@ extension DetailsViewController: TariffSlideViewControllerDelegate {
 //MARK: TariffCarouselViewDelegate
 //MARK: ----------------------------
 extension DetailsViewController: TariffCarouselViewDelegate {
-    func didPressFuelConsuption(isCheck: Bool) {
-        
-    }
+  
  
     func didPressConfirm(tariff: TariffState, optionIndex: Int, optionstr: String) {
         currentTariff = tariff
@@ -815,7 +835,8 @@ extension DetailsViewController: TariffCarouselViewDelegate {
     
     ///update search fields
     private func updateSearchFields(optionIndex: Int) {
-        searchModel = detailsViewModel.updateSearchInfo(tariff: currentTariff,
+        searchModel = detailsViewModel.updateSearchInfo(tariffSlideList:tariffSlideList!,
+                                                        tariff: currentTariff,
                                           search: search,
                                           optionIndex: optionIndex,
                                           currSearchModel: searchModel)
@@ -837,8 +858,11 @@ extension DetailsViewController: SearchViewDelegate {
         scrollToBottom(distance: mSearchV.bounds.height)
 
         if pickerState == .pickUpTime || pickerState == .returnTime {
-            
-            pickerList = ApplicationSettings.shared.pickerList
+            if currentTariff == .flexible {
+                pickerList = flexibleTimeList
+            } else {
+                pickerList = ApplicationSettings.shared.pickerList
+            }
             textFl.inputView = pickerV
             textFl.inputAccessoryView = creatToolBar()
 
@@ -855,6 +879,10 @@ extension DetailsViewController: SearchViewDelegate {
             }
             self.datePicker.datePickerMode = .date
             self.datePicker.minimumDate =  Date()
+            
+            if let pickUpDate =  searchModel.pickUpDate {
+                self.datePicker.minimumDate =  pickUpDate
+            }
             self.datePicker.timeZone = TimeZone(secondsFromGMT: 0)
             self.datePicker.locale = Locale(identifier: "en")
         }

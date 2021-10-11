@@ -8,7 +8,6 @@
 import UIKit
 protocol TariffCarouselCellDelegate: AnyObject {
     func didPressMore(tariffIndex: Int, optionIndex: Int)
-    func didPressFuelConsuption(isCheck: Bool)
     func showSearchView(optionIndex: Int)
     func willChangeOption(optionIndex: Int)
 
@@ -32,7 +31,6 @@ class TariffCarouselCell: UIView {
     @IBOutlet weak var mConfirmBtn: UIButton!
     
     @IBOutlet weak var mHoursSegmentC: UISegmentedControl!
-    @IBOutlet weak var mWeeklySegmentC: UISegmentedControl!
     @IBOutlet weak var mUnselectedBckgV: UIView!
     @IBOutlet weak var mSelectedBckgV: UIView!
     @IBOutlet weak var mUnselectedTitleLb: UILabel!
@@ -50,10 +48,8 @@ class TariffCarouselCell: UIView {
     @IBOutlet weak var mDetailsCenterY: NSLayoutConstraint!
     @IBOutlet weak var mPriceCenterY: NSLayoutConstraint!
     
-    @IBOutlet weak var mFlexibleFuelCheckBoxBtn: UIButton!
-    //flexible
+    @IBOutlet weak var mFreeKmLb: UILabel!
     
-    @IBOutlet weak var mFlexiblestatv: UIStackView!
     
     //MARK: Variable
     var selectedSegmentIndex = 0
@@ -136,7 +132,6 @@ class TariffCarouselCell: UIView {
     
     /// set info to open cell 
     func setSelectedCellInfo(item:TariffSlideModel, vehicleModel: VehicleModel, index: Int)  {
-        updateFuelConsumptionCheckBox(isSelected: item.fuelConsumption)
         mMoreBtn.tag = index
         mUnselectedBckgV.isHidden = true
         mSelectedBckgV.isHidden = false
@@ -197,21 +192,18 @@ class TariffCarouselCell: UIView {
     ///configure Flexible Cell
      func configureFlexibleCell() {
       
-        
+        mFreeKmLb.isHidden = false
         mStartingPriceLb.isHidden = false
         mHoursSegmentC.isHidden = true
         mPriceCenterX.constant = 45
         mPriceCenterY.constant = 20
         mDetailsCenterY.constant = 52
          
-         mFlexibleFuelCheckBoxBtn.isHidden = false
-         mFlexibleFuelCheckBoxBtn.setTitle("", for: .normal)
-         mDepositLb.text = Constant.Texts.fuelConsumption
+         mDepositLb.text =  Constant.Texts.fuelNotUncluded
          mFuelConsumptionLb.text = Constant.Texts.depositApplies
          mDepositImgV.image = UIImage(named: "12")
          mFuelConsumptionImgV.image = UIImage(named: "13")
-         mFuelConsumptionLb.font = font_alert_title
-         mKwLb.font = font_alert_title
+         mDepositLb.font = font_alert_title
          
          mConfirmBtn.setTitle(Constant.Texts.select, for: .normal)
          mKwImgV.setTintColor(color: .white.withAlphaComponent(0.6))
@@ -277,15 +269,7 @@ class TariffCarouselCell: UIView {
         
     }
     
-    ///Update FuelConsumption CheckBox button
-    func updateFuelConsumptionCheckBox(isSelected: Bool) {
-        if isSelected {
-            mFlexibleFuelCheckBoxBtn.setImage(img_check_box, for: .normal)
-        } else {
-            mFlexibleFuelCheckBoxBtn.setImage(img_uncheck_box, for: .normal)
-        }
-    }
-    
+
     func updateSpecialPrice(option: TariffSlideModel) {
         let specialValue:Double = Double(option.specialValue ?? "0.0") ?? 0.0
         if  specialValue > 0.0 {
@@ -316,19 +300,6 @@ class TariffCarouselCell: UIView {
     
     //MARK: ACTIONS
     //MARK: --------------------
-    @IBAction func flexibleFuelCheckBox(_ sender: UIButton) {
-        if sender.image(for: .normal) == img_check_box  {
-            mDepositLb.font = font_bot_placeholder
-            sender.setImage(img_uncheck_box, for: .normal)
-            delegate?.didPressFuelConsuption(isCheck: false)
-        } else {
-            mDepositLb.font = font_alert_title
-            sender.setImage(img_check_box, for: .normal)
-            delegate?.didPressFuelConsuption(isCheck: true)
-        }
-    }
-    
-    
     @IBAction func more(_ sender: UIButton) {
         delegate?.didPressMore(tariffIndex: sender.tag,
                                optionIndex: selectedSegmentIndex)
