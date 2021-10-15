@@ -45,6 +45,7 @@ class DetailsViewModel: NSObject {
                                                 searchModel: searchModel)
                 break
             case .flexible:
+            searchModel = SearchModel()
                 break
             
         }
@@ -73,9 +74,7 @@ class DetailsViewModel: NSObject {
         return searchModel
     }
         
-        
-
-    
+            
     ///return tariff option value
     func getOptionFromString(item: String) -> Int {
         let option = item.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
@@ -247,9 +246,8 @@ class DetailsViewModel: NSObject {
         ///Hourly
         let hourlyModel = getTariffSlideModel(type: Constant.Keys.hourly,
                                               tariffs: tariffs,
-                                              price: vehicleModel.priceForHour,
-                                              specialPricePercentage: vehicleModel.specialPriceForHour,
-                                              hasSpecialPrice: vehicleModel.hasSpecialPrice,
+                                              vehicleModel: vehicleModel,
+                                              price: vehicleModel.priceHour,
                                               tariffKey: Constant.Texts.hourly,
                                               bckgColor: color_hourly!,
                                               typeColor: .white)
@@ -260,9 +258,8 @@ class DetailsViewModel: NSObject {
         ///Dayli
         let dailyModel = getTariffSlideModel(type: Constant.Keys.daily,
                                              tariffs: tariffs,
-                                             price: vehicleModel.priceForDay,
-                                             specialPricePercentage: vehicleModel.specialPriceForHour,
-                                             hasSpecialPrice: vehicleModel.hasSpecialPrice,
+                                             vehicleModel: vehicleModel,
+                                             price: vehicleModel.priceDay,
                                              tariffKey: Constant.Texts.daily,
                                              bckgColor: color_days!,
                                              typeColor: color_main!)
@@ -273,9 +270,8 @@ class DetailsViewModel: NSObject {
         ///Weekly
         let weeklyModel = getTariffSlideModel(type: Constant.Keys.weekly,
                                              tariffs: tariffs,
-                                              price: vehicleModel.priceForWeek,
-                                              specialPricePercentage: vehicleModel.specialPriceForWeek,
-                                              hasSpecialPrice: vehicleModel.hasSpecialPrice,
+                                              vehicleModel: vehicleModel,
+                                              price: vehicleModel.priceWeek,
                                              tariffKey: Constant.Texts.weekly,
                                              bckgColor: color_weeks!,
                                               typeColor: .white)
@@ -286,9 +282,8 @@ class DetailsViewModel: NSObject {
         ///Monthly
         let monthlyModel = getTariffSlideModel(type: Constant.Keys.monthly,
                                              tariffs: tariffs,
-                                               price: vehicleModel.priceForMonth,
-                                               specialPricePercentage: vehicleModel.specialPriceForMonth,
-                                               hasSpecialPrice: vehicleModel.hasSpecialPrice,
+                                               vehicleModel: vehicleModel,
+                                               price: vehicleModel.priceMonth,
                                              tariffKey: Constant.Texts.monthly,
                                              bckgColor: color_monthly!,
                                              typeColor: color_main!)
@@ -301,7 +296,12 @@ class DetailsViewModel: NSObject {
             
             var flexibleModel = TariffSlideModel (type: Constant.Texts.flexible, bckgColor: color_flexible, typeColor: .white)
             flexibleModel.options = nil
-            flexibleModel.value = String(vehicleModel.priceForHour)
+            var price = vehicleModel.priceForFlexible
+            if vehicleModel.hasDiscount {
+                price = price - (price * (vehicleModel.discountPercents/100))
+            }
+            flexibleModel.value = String(price)
+
             tariffSlideList.append(flexibleModel)
         }
        
@@ -331,10 +331,9 @@ class DetailsViewModel: NSObject {
     
     ///Get tariffSlide modell
     func getTariffSlideModel(type: String,
-                             tariffs:[Tariff],
-                             price: Double,
-                             specialPricePercentage: Double,
-                             hasSpecialPrice: Bool,
+                             tariffs: [Tariff],
+                             vehicleModel: VehicleModel,
+                             price: Price?,
                              tariffKey: String,
                              bckgColor: UIColor,
                              typeColor: UIColor) -> TariffSlideModel? {
@@ -349,13 +348,20 @@ class DetailsViewModel: NSObject {
             
             tariffArr.forEach{ tariff in
                 
-                var price = tariff.duration * price
-                price = price - ((price * tariff.percentage)/100)
-                var specialPrice:Double = 0.0
-                if hasSpecialPrice && specialPricePercentage > 0.0 {
-                    specialPrice = price - ((price * specialPricePercentage)/100)
+                var value = tariff.duration * (price?.price)!
+                if tariff.percentage > 0.0 {
+                    value = value - (value * (tariff.percentage/100))
                 }
-                let option = TariffSlideModel(type: tariffKey, name: tariff.name, bckgColor: bckgColor,typeColor: typeColor, value: String(format: "%.3f", price), specialValue: String(format: "%.3f", specialPrice))
+//                var specialPrice:Double = 0.0
+//                if price?.hasSpecialPrice == true {
+//                    specialPrice = value - (value * (price!.specialPrice/100))
+//                }
+                var discounPrice: Double = 0.0
+                if vehicleModel.hasDiscount {
+                    discounPrice = value - (value * (vehicleModel.discountPercents/100))
+                }
+                
+                let option = TariffSlideModel(type: tariffKey, name: tariff.name, bckgColor: bckgColor,typeColor: typeColor, value: String(format: "%.2f", value), specialValue: String(format: "%.2f", discounPrice))
                
                 options.append(option)
             }
@@ -374,6 +380,44 @@ class DetailsViewModel: NSObject {
         var newTime:String = String(timeArr[timeArr.count - 1])
         newTime = newTime.replacingOccurrences(of: " ", with: "", options: NSString.CompareOptions.literal, range: nil)
         return newTime
+    }
+    
+    //Get Start flexible time list
+    func getStartFlexibleTimes(flexibleTimes: [FlexibleTimes]?) -> [String]? {
+        var flexibleStartTimes:[String]? = []
+        
+        flexibleTimes?.forEach({ flexibleTime in
+            if flexibleTime.active {
+                if flexibleTime.type == Constant.Keys.start && flexibleTime.start != nil  {
+                    flexibleStartTimes?.append(flexibleTime.start!)
+                    
+                } else if flexibleTime.type == Constant.Keys.start_interval &&
+                    flexibleTime.start != nil &&
+                    flexibleTime.end != nil {
+                    flexibleStartTimes?.append(flexibleTime.start! + "-" + flexibleTime.end!)
+                }
+            }
+        })
+        return flexibleStartTimes
+    }
+    
+    //Get End flexible time list
+    func getEndFlexibleTimes(flexibleTimes: [FlexibleTimes]?) -> [String]? {
+        var flexibleStartTimes:[String]? = []
+        
+        flexibleTimes?.forEach({ flexibleTime in
+            if flexibleTime.active {
+                if flexibleTime.type == Constant.Keys.end && flexibleTime.end != nil  {
+                    flexibleStartTimes?.append(flexibleTime.end!)
+                    
+                } else if flexibleTime.type == Constant.Keys.end_interval &&
+                    flexibleTime.start != nil &&
+                    flexibleTime.end != nil {
+                    flexibleStartTimes?.append(flexibleTime.start! + "-" + flexibleTime.end!)
+                }
+            }
+        })
+        return flexibleStartTimes
     }
     
    

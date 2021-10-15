@@ -305,8 +305,8 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
             setPickUpLocationInfo(searchModel: searchModel)
         } else if locationReturn == LocationReturn.returnCustomLocation {
             searchModel.returnLocation = place
-                        searchModel.isRetuCustomLocation = true
-                        setReturnLocationInfo(searchModel: searchModel)
+            searchModel.isRetuCustomLocation = true
+            setReturnLocationInfo(searchModel: searchModel)
             isPickUpLocation = false
         }
         didResult(isPickUpLocation)

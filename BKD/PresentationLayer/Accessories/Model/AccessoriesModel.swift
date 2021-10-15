@@ -17,6 +17,18 @@ struct Accessories: Codable {
     let image: AccesoreImageResponse
 }
 
+//struct AccessoriesResulr {
+//    let id: String
+//    let name: String
+//    let price: Double
+//    let maxCount: Double
+//    let active: Bool
+//    let image: AccesoreImageResponse
+//    
+//    init(accessories: Accessories) {
+//        self.id = accessories.id
+//    }
+//}
 struct AccesoreImageResponse: Codable {
     let id: String
     let node: String

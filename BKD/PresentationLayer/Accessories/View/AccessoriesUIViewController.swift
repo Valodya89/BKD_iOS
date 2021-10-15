@@ -24,15 +24,15 @@ class AccessoriesUIViewController: BaseViewController {
     @IBOutlet weak var mConfirmV: ConfirmView!
     @IBOutlet weak var mTotalPriceBottom: NSLayoutConstraint!
     
-    //MARK: -- VAriables
-    public var isEditReservation:Bool = false
-    var accessoriesList:[Accessories]?
+    //MARK: -- Variables
+    public var isEditReservation: Bool = false
+    var accessoriesList: [Accessories]?
     var accessoriesEditList: [AccessoriesEditModel]?
     let accessoriesViewModel = AccessoriesViewModel()
-    var totalPrice:Double = 0
-    weak var delegate:AccessoriesUIViewControllerDelegate?
+    var totalPrice: Double = 0
+    weak var delegate: AccessoriesUIViewControllerDelegate?
     
-    public var vehicleModel:VehicleModel?
+    public var vehicleModel: VehicleModel?
 
     
     //MARK: life cycle
@@ -56,7 +56,7 @@ class AccessoriesUIViewController: BaseViewController {
     func getAccessories() {
         accessoriesViewModel.getAccessories(carID: vehicleModel?.vehicleId ?? "") { result in
             guard let _ = result else {return}
-            self.accessoriesList = result
+            self.accessoriesList = self.accessoriesViewModel.getActiveAccessoryList(accessories: result!)
             self.accessoriesEditList = Array(repeating: AccessoriesEditModel(accessoryCount: 0, isAdded: false, totalPrice: 0), count: self.accessoriesList!.count)
             self.mAccessoriesCollectionV.reloadData()        }
     }

@@ -120,7 +120,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     ///Set  values to vehicle model
      func setVehicleModel(carModel: CarsModel) -> VehicleModel {
         
-        var vehicleModel = VehicleModel()
+         var vehicleModel = VehicleModel()
          vehicleModel.vehicleId = carModel.id
         vehicleModel.vehicleName = carModel.name
         vehicleModel.ifHasTowBar = true
@@ -141,16 +141,17 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         vehicleModel.vehicleType = carType?.first?.name
         
          //set Price
-         vehicleModel.priceForHour = carModel.priceForHour
-         vehicleModel.priceForDay = carModel.priceForDay
-         vehicleModel.priceForWeek = carModel.priceForWeek
-         vehicleModel.specialPriceForHour = carModel.specialPriceForHour
-         vehicleModel.specialPriceForDay = carModel.specialPriceForDay
-         vehicleModel.specialPriceForWeek = carModel.specialPriceForWeek
-         vehicleModel.specialPriceForMonth = carModel.specialPriceForMonth
-         vehicleModel.hasSpecialPrice = carModel.hasSpecialPrice
+         vehicleModel.priceForFlexible = carModel.priceForFlexible
+         vehicleModel.priceHour = carModel.priceHour
+         vehicleModel.priceDay = carModel.priceDay
+         vehicleModel.priceWeek = carModel.priceWeek
+         vehicleModel.priceMonth = carModel.priceMonth
          vehicleModel.depositPrice = carModel.depositPrice
          vehicleModel.priceForKm = carModel.priceForKm
+         vehicleModel.hasDiscount = carModel.hasDiscount
+         vehicleModel.discountPercents = carModel.discountPercents
+         vehicleModel.freeKiloMeters = carModel.freeKiloMeters
+         
         
         if vehicleModel.ifTailLift  {
             vehicleModel.tailLiftList = mainViewModel.getTailLiftList(carModel: carModel)
@@ -176,19 +177,23 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
             self.mFlipCarLogoImgV.sd_setImage(with: item.logo!.getURL() ?? URL(string: ""), placeholderImage: nil)
         }
         
-        if item.hasSpecialPrice && item.specialPriceForHour > 0.0 {
-            self.mOffertValueLB.text = String(item.specialPriceForHour) + Constant.Texts.inclVat
-            self.mValueLb.text = String(item.priceForHour) + Constant.Texts.inclVat
+        if item.priceDay?.hasSpecialPrice == true &&
+            item.priceDay != nil {
+            
+            let specialPrice = item.priceDay!
+                .price - (item.priceDay!.price * (item.priceDay!.specialPrice/100))
+            self.mOffertValueLB.text = String(specialPrice) + Constant.Texts.inclVat
+            self.mValueLb.text = String(item.priceDay!.price) + Constant.Texts.inclVat
         } else {
-            self.mGradientValueLb.text = String(item.priceForHour) + Constant.Texts.inclVat
+            self.mGradientValueLb.text = String(item.priceDay?.price ?? 0.0) + Constant.Texts.inclVat
         }
         
         self.mCarNameLb.text = item.name
         self.mFlipCarNameLb.text = item.name
         
         self.mCarImgV.sd_setImage(with: item.image.getURL()!, placeholderImage: nil)
-        self.mOffertBckgV.isHidden = !item.hasSpecialPrice
-        self.mGradientV.isHidden = item.hasSpecialPrice
+        self.mOffertBckgV.isHidden = !(item.priceDay?.hasSpecialPrice ?? false)
+        self.mGradientV.isHidden = (item.priceDay?.hasSpecialPrice ?? false)
         self.mCardLb.text = item.driverLicenseType
         self.mCubeLb.text = String(item.volume) + Constant.Texts.mCuadrad
         self.mKgLb.text = String(item.loadCapacity) + Constant.Texts.kg

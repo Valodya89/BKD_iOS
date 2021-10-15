@@ -10,7 +10,7 @@ protocol TariffCarouselCellDelegate: AnyObject {
     func didPressMore(tariffIndex: Int, optionIndex: Int)
     func showSearchView(optionIndex: Int)
     func willChangeOption(optionIndex: Int)
-
+    
 }
 
 class TariffCarouselCell: UIView {
@@ -58,7 +58,7 @@ class TariffCarouselCell: UIView {
     weak var delegate: TariffCarouselCellDelegate?
     
     var segmentControl: UISegmentedControl?
-
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -110,16 +110,16 @@ class TariffCarouselCell: UIView {
             }
             
             if  segmentControlItems.count > 0 {
-            segmentControl = UISegmentedControl(items: segmentControlItems)
+                segmentControl = UISegmentedControl(items: segmentControlItems)
                 segmentControl?.frame =  CGRect(x: mHoursSegmentC.frame.origin.x, y: mHoursSegmentC.frame.origin.y,  width:CGFloat(segmentControlItems.count * 31), height: mHoursSegmentC.frame.size.height)
                 self.addSubview(segmentControl ?? UISegmentedControl())
-            segmentControl?.selectedSegmentIndex = selectedSegmentIndex
-            segmentControl?.addTarget(self, action: #selector(didChangeSegment(sender:)), for: .allEvents)
-                }
+                segmentControl?.selectedSegmentIndex = selectedSegmentIndex
+                segmentControl?.addTarget(self, action: #selector(didChangeSegment(sender:)), for: .allEvents)
+            }
         }
     }
     
-
+    
     
     ///set info to close cells
     func setUnselectedCellsInfo(item:TariffSlideModel, index: Int) {
@@ -130,7 +130,7 @@ class TariffCarouselCell: UIView {
         mUnselectedTitleLb.textColor = index % 2 == 1 ? color_main : .white
     }
     
-    /// set info to open cell 
+    /// set info to open cell
     func setSelectedCellInfo(item:TariffSlideModel, vehicleModel: VehicleModel, index: Int)  {
         mMoreBtn.tag = index
         mUnselectedBckgV.isHidden = true
@@ -143,26 +143,27 @@ class TariffCarouselCell: UIView {
         if let options = item.options {
             mPriceLb.text = options[selectedSegmentIndex].value
             updateSpecialPrice(option:options[selectedSegmentIndex])
-    }
+        }
         mSelectedBckgV.backgroundColor = item.bckgColor
-                   
+        
         mKwLb.textColor = index % 2 == 1 ? color_main : color_entered_date
         mDepositLb.textColor = index % 2 == 1 ? color_main : color_entered_date
         mFuelConsumptionLb.textColor = index % 2 == 1 ? color_main : color_entered_date
-
+        
         if index == 0 { //Hourly cell
             setHourlyCellInfo()
         } else {
             configureCommonCells(index: index)
         }
         if index == 4 || index == 0 { //hourly or Flexible cells
+            mFreeKmLb.text = String(vehicleModel.freeKiloMeters) + Constant.Texts.freeKm
             configureHourlyAndFlexibleCells(index: index)
         }
         
     }
     
     ///set hourly cell info
-     func setHourlyCellInfo() {
+    func setHourlyCellInfo() {
         // will check if it dark mode or not
         if self.traitCollection.userInterfaceStyle == .light {
             
@@ -173,53 +174,53 @@ class TariffCarouselCell: UIView {
             mConfirmBckgV.backgroundColor =  UIColor(ciColor: .white).withAlphaComponent(0.25)
             mConfirmBtn.setTitleColor(color_main!, for: .normal)
         }
-         mMoreBtn.setTitleColor(.white, for: .normal)
-
-         configureSegmentControl()
-         segmentControl?.backgroundColor = color_main!.withAlphaComponent(0.26)
-         segmentControl?.setDividerImage(UIImage().colored(with: .clear, size: CGSize(width: 1, height: 15)), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
-
+        mMoreBtn.setTitleColor(.white, for: .normal)
+        
+        configureSegmentControl()
+        segmentControl?.backgroundColor = color_main!.withAlphaComponent(0.26)
+        segmentControl?.setDividerImage(UIImage().colored(with: .clear, size: CGSize(width: 1, height: 15)), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
+        
         UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
         UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: color_menu!], for: .selected)
-         if #available(iOS 13.0, *) {
-             segmentControl?.selectedSegmentTintColor = .white.withAlphaComponent(0.1)
-         } else {
-             // Fallback on earlier versions
-         }
-
+        if #available(iOS 13.0, *) {
+            segmentControl?.selectedSegmentTintColor = .white.withAlphaComponent(0.1)
+        } else {
+            // Fallback on earlier versions
+        }
+        
     }
     
     ///configure Flexible Cell
-     func configureFlexibleCell() {
-      
+    func configureFlexibleCell(index:Int) {
+        
         mFreeKmLb.isHidden = false
         mStartingPriceLb.isHidden = false
         mHoursSegmentC.isHidden = true
         mPriceCenterX.constant = 45
         mPriceCenterY.constant = 20
         mDetailsCenterY.constant = 52
-         
-         mDepositLb.text =  Constant.Texts.fuelNotUncluded
-         mFuelConsumptionLb.text = Constant.Texts.depositApplies
-         mDepositImgV.image = UIImage(named: "12")
-         mFuelConsumptionImgV.image = UIImage(named: "13")
-         mDepositLb.font = font_alert_title
-         
-         mConfirmBtn.setTitle(Constant.Texts.select, for: .normal)
-         mKwImgV.setTintColor(color: .white.withAlphaComponent(0.6))
-         mDepositImgV.setTintColor(color: UIColor(ciColor: .white).withAlphaComponent(0.49))
-         mFuelConsumptionImgV.setTintColor(color: .white)
-         mTitleLb.textColor = .white
-
+        
+        mDepositLb.text =  Constant.Texts.fuelNotUncluded
+        mFuelConsumptionLb.text = Constant.Texts.depositApplies
+        mDepositImgV.image = UIImage(named: "12")
+        mFuelConsumptionImgV.image = UIImage(named: "13")
+        mDepositLb.font = font_alert_title
+        
+        mConfirmBtn.setTitle(Constant.Texts.select, for: .normal)
+        mKwImgV.setTintColor(color: .white.withAlphaComponent(0.6))
+        mDepositImgV.setTintColor(color: UIColor(ciColor: .white).withAlphaComponent(0.49))
+        mFuelConsumptionImgV.setTintColor(color: .white)
+        mTitleLb.textColor = .white
+        
     }
     
     ///configure cells which has common style
-   func configureCommonCells(index: Int) {
+    func configureCommonCells(index: Int) {
         mConfirmBckgV.backgroundColor = UIColor(ciColor: .white).withAlphaComponent(0.25)
         
-      //UILables
+        //UILables
         mPriceLb.textColor = index % 2 == 1 ? color_main : color_entered_date
-       mPriceDeleteLineV.backgroundColor = mPriceLb.textColor
+        mPriceDeleteLineV.backgroundColor = mPriceLb.textColor
         mEuroLb.textColor = index % 2 == 1 ? color_main : color_entered_date
         mVatLb.textColor = index % 2 == 1 ? color_main : color_entered_date
         mTitleLb.textColor = index == 2 ?  color_weekly : color_main
@@ -227,33 +228,33 @@ class TariffCarouselCell: UIView {
         //UIButtons
         mConfirmBtn.setTitleColor(index == 2 ? color_alert_txt! : color_main, for: .normal)
         mMoreBtn.setTitleColor(color_main, for: .normal)
-
+        
         mMoreBtn.backgroundColor = UIColor(ciColor: .white).withAlphaComponent(0.4)
         mMoreBtn.layer.borderColor = index == 2 ? color_weekly!.cgColor : color_main!.cgColor
         
         //segmentControl
-       configureSegmentControl()
-       
-       segmentControl?.setBorder(color: index == 1 ? .white : .clear, width: 0.5)
-         if #available(iOS 13.0, *) {
-             segmentControl?.selectedSegmentTintColor = index == 2 ? color_main! : color_menu!
-         } else {
-             // Fallback on earlier versions
-         }
-      
+        configureSegmentControl()
+        
+        segmentControl?.setBorder(color: index == 1 ? .white : .clear, width: 0.5)
+        if #available(iOS 13.0, *) {
+            segmentControl?.selectedSegmentTintColor = index == 2 ? color_main! : color_menu!
+        } else {
+            // Fallback on earlier versions
+        }
+        
         
         UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: index == 2 ? color_menu! : color_main!], for: .normal)
         UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: index == 2 ? .white : color_main!], for: .selected)
-      
-       if index == 3 {
-           segmentControl?.backgroundColor = .white.withAlphaComponent(0.49)
-           segmentControl?.setDividerImage(UIImage().colored(with: .clear, size: CGSize(width: 0.01, height: 1)), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
-       } else {
-           segmentControl?.backgroundColor = index == 2 ? color_main!.withAlphaComponent(0.26) : UIColor(ciColor: .white).withAlphaComponent(0.49)
-           segmentControl?.setDividerImage(UIImage().colored(with: index == 1 ? color_segment_separator! : .clear, size: CGSize(width: 1, height: 15)), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
-       }
-            
-   }
+        
+        if index == 3 {
+            segmentControl?.backgroundColor = .white.withAlphaComponent(0.49)
+            segmentControl?.setDividerImage(UIImage().colored(with: .clear, size: CGSize(width: 0.01, height: 1)), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
+        } else {
+            segmentControl?.backgroundColor = index == 2 ? color_main!.withAlphaComponent(0.26) : UIColor(ciColor: .white).withAlphaComponent(0.49)
+            segmentControl?.setDividerImage(UIImage().colored(with: index == 1 ? color_segment_separator! : .clear, size: CGSize(width: 1, height: 15)), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
+        }
+        
+    }
     
     ///configure Hourly And Flexible Cells
     func configureHourlyAndFlexibleCells(index: Int) {
@@ -261,15 +262,15 @@ class TariffCarouselCell: UIView {
         mEuroLb.textColor = .white
         mVatLb.textColor = .white
         mPriceDeleteLineV.backgroundColor = mPriceLb.textColor
-
-    
+        
+        
         if index == 4 { // Flexible
-            configureFlexibleCell()
+            configureFlexibleCell(index:index)
         }
         
     }
     
-
+    
     func updateSpecialPrice(option: TariffSlideModel) {
         let specialValue:Double = Double(option.specialValue ?? "0.0") ?? 0.0
         if  specialValue > 0.0 {
@@ -279,7 +280,7 @@ class TariffCarouselCell: UIView {
             mPriceCenterY.constant = -5
         } else {
             mOffertPriceBckgV.isHidden = true
-           // mOffertPriceLb.text = specialValue
+            // mOffertPriceLb.text = specialValue
             mPriceDeleteLineV.isHidden = true
             mPriceCenterY.constant = 0
         }
@@ -292,10 +293,10 @@ class TariffCarouselCell: UIView {
         }
         guard let options = item?.options  else {return}
         if selectedSegmentIndex < item?.tariff?.count ?? 0 {
-        mPriceLb.text = options[selectedSegmentIndex].value
+            mPriceLb.text = options[selectedSegmentIndex].value
             updateSpecialPrice(option: options[selectedSegmentIndex])
         }
-
+        
     }
     
     //MARK: ACTIONS

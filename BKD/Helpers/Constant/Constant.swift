@@ -182,6 +182,7 @@ struct Constant {
         static let fuelConsumption = "Fuel consumption"
         static let fuelNotUncluded = "Fuel consumption not included"
         static let depositApplies = "Deposit applies"
+        static let freeKm = "km free for each day"
 
         //Accessories
        static let loginAccessories = "To add accessories, you need to sign in" //???
@@ -347,6 +348,10 @@ struct Constant {
         static let weekly = "WEEKLY"
         static let monthly = "MONTHLY"
         static let flexible = "FLEXIBLE"
+        static let start = "START"
+        static let start_interval = "START_INTERVAL"
+        static let end = "END"
+        static let end_interval = "END_INTERVAL"
     }
     
     struct Notifications {

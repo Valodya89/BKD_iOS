@@ -14,3 +14,13 @@ struct  WorkingTimes: Codable {
     let workEnd: String
     let metadata: [String : String]
 }
+
+
+
+struct  FlexibleTimes: Codable {
+    let id: String
+    let type: String
+    let start: String?
+    let end: String?
+    let active: Bool
+}

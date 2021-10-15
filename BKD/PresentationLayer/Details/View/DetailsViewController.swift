@@ -64,6 +64,8 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     let detailsViewModel:DetailsViewModel = DetailsViewModel()
     var workingTimes: WorkingTimes?
+    var startFlexibleTimeList: [String]?
+    var endFlexibleTimeList: [String]?
     var tariffSlideList:[TariffSlideModel]?
     var tariffs: [Tariff]?
 
@@ -143,7 +145,6 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         addTariffSliedView()
         goToLocationController()
         getTariffList()
-
         
     }
     
@@ -161,9 +162,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         } else if !self.mSearchV.isHidden { // will show tariff cards and search view
             scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height + mSearchV.bounds.height
             mCompareContentV.isHidden = true
-
         }
-        mScrollV.contentSize.height = scrollContentHeight
     }
     
     
@@ -283,6 +282,9 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         mAccessoriesBtn.layer.cornerRadius = 8
         mAdditionalDriverBtn.layer.cornerRadius = 8
         mReserveBckgV.isHidden = isClickMore
+        
+        startFlexibleTimeList = detailsViewModel.getStartFlexibleTimes(flexibleTimes: ApplicationSettings.shared.flexibleTimes)
+        endFlexibleTimeList = detailsViewModel.getEndFlexibleTimes(flexibleTimes: ApplicationSettings.shared.flexibleTimes)
         if !isClickMore {
             configureReserveView(isActive: isSearchEdit)
         }
@@ -367,19 +369,24 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     /// will update date fields depend on tariff option
         func updateSearchDates() {
+            var newSearchModel = SearchModel()
             if currentTariff != .flexible {
                 search = .date
                 searchModel.pickUpDate = datePicker.date
-                let newSearchModel = detailsViewModel.updateSearchInfo(tariffSlideList: tariffSlideList!,
+                newSearchModel = detailsViewModel.updateSearchInfo(tariffSlideList: tariffSlideList!,
                                                                        tariff:
                                                                         currentTariff,
                                                                        search: search,
                                                                        optionIndex: currentTariffOptionIndex, currSearchModel: searchModel)
-                mSearchV.updateSearchDate(searchModel:newSearchModel)
-                searchModel = newSearchModel
+                mSearchV.updateSearchDate(tariff: currentTariff, searchModel:newSearchModel)
             } else {
-                
+                newSearchModel = detailsViewModel.updateSearchInfoForFlexible(search: search,
+                                                                              currSearchModel: searchModel)
+                mSearchV.updateSearchDate(tariff: currentTariff,
+                                          searchModel: newSearchModel)
             }
+            searchModel = newSearchModel
+
     }
     
     ///Will update time fields depend on tariff option
@@ -402,7 +409,8 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         } else {
             newSearchModel = detailsViewModel.updateSearchInfoForFlexible(search: search,
                                                                           currSearchModel: searchModel)
-            mSearchV.updateSearchDate(searchModel: newSearchModel)
+            mSearchV.updateSearchDate(tariff: currentTariff,
+                                      searchModel: newSearchModel)
         }
         searchModel = newSearchModel
         
@@ -859,7 +867,7 @@ extension DetailsViewController: SearchViewDelegate {
 
         if pickerState == .pickUpTime || pickerState == .returnTime {
             if currentTariff == .flexible {
-                pickerList = flexibleTimeList
+                pickerList = (pickerState == .pickUpTime) ? startFlexibleTimeList : endFlexibleTimeList
             } else {
                 pickerList = ApplicationSettings.shared.pickerList
             }

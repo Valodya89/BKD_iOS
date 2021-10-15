@@ -42,4 +42,14 @@ class AccessoriesViewModel: NSObject {
             }
         }
     }
+    
+    func getActiveAccessoryList(accessories:[Accessories]) -> [Accessories] {
+        var activeAccessories:[Accessories] = []
+        accessories.forEach { accessory in
+            if accessory.active {
+                activeAccessories.append(accessory)
+            }
+        }
+        return activeAccessories
+    }
 }

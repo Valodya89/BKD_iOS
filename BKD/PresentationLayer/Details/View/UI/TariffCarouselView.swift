@@ -69,6 +69,7 @@ extension TariffCarouselView: iCarouselDataSource, iCarouselDelegate {
         let view: TariffCarouselCell = carouselCellView()
         view.delegate = self
         view.item = carouselModel
+        
         if index != carousel.currentItemIndex {
             view.setUnselectedCellsInfo(item: carouselModel, index: index)
         } else {

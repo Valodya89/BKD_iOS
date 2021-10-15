@@ -439,7 +439,7 @@ class EditBySearchView: UIView, UITextFieldDelegate {
             delegate?.didDeselectCustomLocation(tag: sender.tag)
             
         } else {
-            // sender.setImage(img_check_box, for: .normal)
+            locationPickUp = .none
             locationReturn = .returnCustomLocation
             delegate?.didSelectCustomLocation(mCheckBoxReturnCustomLocBtn)
         }

@@ -16,6 +16,8 @@ final class ApplicationSettings {
     private(set) var phoneCodes: [PhoneCode]?
     private(set) var pickerList: [String]?
     private(set) var workingTimes: WorkingTimes?
+    private(set) var flexibleTimes: [FlexibleTimes]?
+
     private(set) var restrictedZones: [RestrictedZones]?
     var carsList:[String : [CarsModel]?]?
     var carTypes:[CarTypes]?
@@ -31,9 +33,9 @@ final class ApplicationSettings {
         getAvalableTimeList()
         getWorkingTimes()
         getRestrictedZones()
-        
+        getFlexibleTimes()
+
     }
-    
 }
 
 extension ApplicationSettings {
@@ -135,6 +137,24 @@ extension ApplicationSettings {
             case .failure(let error):
                 print(error.description)
             
+                break
+            }
+        }
+    }
+    
+    /// get flexible time list
+    @objc private func getFlexibleTimes() {
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getFlexibleTimes)) { [self] (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let flexibleTimes = BkdConverter<BaseResponseModel<[FlexibleTimes]>>.parseJson(data: data as Any) else {
+                    print("error")
+                    return
+                }
+                self.flexibleTimes = flexibleTimes.content
+            case .failure(let error):
+                print(error.description)
                 break
             }
         }

@@ -92,7 +92,7 @@ static let identifier = "MainCollectionViewCell"
     ///Set  values to vehicle model
      func setVehicleModel(carModel: CarsModel) -> VehicleModel {
         var vehicleModel = VehicleModel()
-         vehicleModel.vehicleId = carModel.id
+        vehicleModel.vehicleId = carModel.id
         vehicleModel.vehicleName = mCarNameLb.text
         vehicleModel.ifHasTowBar = true
         vehicleModel.vehicleImg = mCarImgV.image
@@ -113,16 +113,16 @@ static let identifier = "MainCollectionViewCell"
         vehicleModel.vehicleType = carType?.first?.name
         
          //set Price
-         vehicleModel.priceForHour = carModel.priceForHour
-         vehicleModel.priceForDay = carModel.priceForDay
-         vehicleModel.priceForWeek = carModel.priceForWeek
-         vehicleModel.specialPriceForHour = carModel.specialPriceForHour
-         vehicleModel.specialPriceForDay = carModel.specialPriceForDay
-         vehicleModel.specialPriceForWeek = carModel.specialPriceForWeek
-         vehicleModel.specialPriceForMonth = carModel.specialPriceForMonth
-         vehicleModel.hasSpecialPrice = carModel.hasSpecialPrice
+         vehicleModel.priceForFlexible = carModel.priceForFlexible
+         vehicleModel.priceHour = carModel.priceHour
+         vehicleModel.priceDay = carModel.priceDay
+         vehicleModel.priceWeek = carModel.priceWeek
+         vehicleModel.priceMonth = carModel.priceMonth
          vehicleModel.depositPrice = carModel.depositPrice
          vehicleModel.priceForKm = carModel.priceForKm
+         vehicleModel.hasDiscount = carModel.hasDiscount
+         vehicleModel.discountPercents = carModel.discountPercents
+         vehicleModel.freeKiloMeters = carModel.freeKiloMeters
          
         if vehicleModel.ifTailLift  {
             vehicleModel.tailLiftList = mainViewModel.getTailLiftList(carModel: carModel)
@@ -185,19 +185,23 @@ static let identifier = "MainCollectionViewCell"
     
     
     func updatePriceFiled(item: CarsModel) {
-
-        if item.hasSpecialPrice &&  item.specialPriceForHour > 0.0 {
-            let specialPrice = item.priceForHour - ((item.priceForHour * item.specialPriceForHour)/100)
-            mOffertPriceLb.text = String(specialPrice)
+        
+        if item.priceDay?.hasSpecialPrice == true &&
+            item.priceDay != nil {
+            
+            let specialPrice = item.priceDay!.price - (item.priceDay!.price * (item.priceDay!.specialPrice/100))
+            mOffertPriceLb.text = String(format: "%.2f", specialPrice)
             mOffertBackgV.isHidden = false
             
             mIgnorValueContentV.isHidden = false
-            mIgnorValueLb.text = "€  \(item.priceForHour) / " + Constant.Texts.day
+            mIgnorValueLb.text = "€  \(item.priceDay!.price) / " + Constant.Texts.day
             mValueBckgV.isHidden = true
+            
         } else {
-            mValueLb.text = String(item.priceForHour)
+            
+            mValueLb.text = String(item.priceDay?.price ?? 0.0)
             mValueBckgV.isHidden = false
-
+            
             mOffertBackgV.isHidden = true
             mIgnorValueContentV.isHidden = true
         }

@@ -82,19 +82,8 @@ class SearchView: UIView, UITextFieldDelegate {
     
     func setUpView() {
         setBorder()
-
         mPickUpDataTxtFl.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
-        mDayPickUpBtn.isHidden = true
-        mMonthPickUpBtn.isHidden = true
-        mPickUpDataTxtFl.text = Constant.Texts.pickUpDate
-        mDayReturnDateBtn.isHidden = true
-        mMonthReturnDateBtn.isHidden = true
-        mReturnDateTxtFl.text =  Constant.Texts.returnDate
-        mReturnTimeTxtFl.textColor = color_choose_date!
-        mPickUpTimeTxtFl.textColor = color_choose_date!
-        mPickUpLocationBtn.tintColor = color_choose_date!
-        mReturnLocationBtn.tintColor = color_choose_date!
-        
+        setDefaultValue()
         // border
         mLocationDropDownView.clipsToBounds = true
         mLocationDropDownView.layer.borderWidth = 0.3
@@ -118,6 +107,32 @@ class SearchView: UIView, UITextFieldDelegate {
         mReturnLocationBtn.addBorder(color: color_navigationBar!, width: 1.0)
     }
     
+    func setDefaultValue() {
+        mDayPickUpBtn.isHidden = true
+        mMonthPickUpBtn.isHidden = true
+        mDayReturnDateBtn.isHidden = true
+        mMonthReturnDateBtn.isHidden = true
+        mReturnTimeTxtFl.textColor = color_choose_date!
+        mPickUpTimeTxtFl.textColor = color_choose_date!
+        mPickUpLocationBtn.tintColor = color_choose_date!
+        mReturnLocationBtn.tintColor = color_choose_date!
+        
+        mReturnTimeTxtFl.font = font_placeholder!
+        mPickUpTimeTxtFl.font = font_placeholder!
+        mPickUpLocationBtn.titleLabel?.font = font_placeholder!
+        mReturnLocationBtn.titleLabel?.font = font_placeholder!
+        
+        mPickUpDataTxtFl.text = Constant.Texts.pickUpDate
+        mReturnDateTxtFl.text =  Constant.Texts.returnDate
+        mPickUpTimeTxtFl.text = Constant.Texts.pickUpTime
+        mReturnTimeTxtFl.text =  Constant.Texts.returnTime
+        mPickUpLocationBtn.setTitle(Constant.Texts.pickUpLocation, for: .normal)
+        mReturnLocationBtn.setTitle(Constant.Texts.returnLocation, for: .normal)
+        mCheckBoxPickUpCustomLocBtn.setImage(img_uncheck_box, for: .normal)
+        mCheckBoxReturnCustomLocBtn.setImage(img_uncheck_box, for: .normal)
+
+    }
+    
     /// Set pick up date info
     func setPickUpDateInfo(searchModel: SearchModel)  {
         showDateInfoViews(dayBtn: mDayPickUpBtn,
@@ -130,12 +145,15 @@ class SearchView: UIView, UITextFieldDelegate {
     
     /// Set return date info
     func setReturnDateInfo(searchModel: SearchModel) {
+        
+        guard let returnDate = searchModel.returnDate else {return}
         showDateInfoViews(dayBtn: mDayReturnDateBtn,
                           monthBtn:
                             mMonthReturnDateBtn,
                           txtFl: mReturnDateTxtFl)
-        mDayReturnDateBtn.setTitle(String(searchModel.returnDate!.getDay()), for: .normal)
-        mMonthReturnDateBtn.setTitle(searchModel.returnDate!.getMonthAndWeek(lng: "en"), for: .normal)
+
+        mDayReturnDateBtn.setTitle(String(returnDate.getDay()), for: .normal)
+        mMonthReturnDateBtn.setTitle(returnDate.getMonthAndWeek(lng: "en"), for: .normal)
     }
     
     /// Set pick up timr info
@@ -304,12 +322,16 @@ class SearchView: UIView, UITextFieldDelegate {
     
     
     /// will update date fields depend on tariff option
-    func updateSearchDate(searchModel:SearchModel) {
+    func updateSearchDate(tariff:TariffState,
+                          searchModel:SearchModel) {
         setReturnDateInfo(searchModel: searchModel)
-        if let _ = searchModel.pickUpTime {
+        if searchModel.pickUpTime != nil && tariff != .flexible  {
+            
             mReturnTimeTxtFl.text = searchModel.returnTime!.getHour()
         }
     }
+    
+  
     
     ///Update search filled fields
     func updateSearchFilledFields(tariff:TariffState,
@@ -318,7 +340,9 @@ class SearchView: UIView, UITextFieldDelegate {
         if tariff == .hourly &&  searchModel.pickUpTime != nil {
             updateSearchTimes(searchModel: searchModel, tariff:tariff)
         } else if searchModel.pickUpDate != nil {
-            updateSearchDate(searchModel: searchModel)
+            updateSearchDate(tariff: tariff, searchModel: searchModel)
+        } else if tariff == .flexible {
+            setDefaultValue()
         }
     }
     
@@ -332,8 +356,8 @@ class SearchView: UIView, UITextFieldDelegate {
             setPickUpLocationInfo(searchModel: searchModel)
         } else if locationReturn == LocationReturn.returnCustomLocation {
             searchModel.returnLocation = place
-                        searchModel.isRetuCustomLocation = true
-                        setReturnLocationInfo(searchModel: searchModel)
+            searchModel.isRetuCustomLocation = true
+            setReturnLocationInfo(searchModel: searchModel)
             isPickUpLocation = false
         }
         didResult(isPickUpLocation)
@@ -432,6 +456,7 @@ class SearchView: UIView, UITextFieldDelegate {
 
         } else {
            // sender.setImage(img_check_box, for: .normal)
+            locationPickUp = .none
             locationReturn = .returnCustomLocation
             delegate?.didSelectCustomLocation(mCheckBoxReturnCustomLocBtn)
         }

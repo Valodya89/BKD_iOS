@@ -21,6 +21,7 @@ enum AuthAPI: APIProtocol {
     case getCarsByType(criteria: [String : Any])
     case getCarsByFilter(criteria: [[String : Any]])
     case getWorkingTimes
+    case getFlexibleTimes
     case getPhoneCodes
     case getCountries
     case getTariff
@@ -105,6 +106,8 @@ enum AuthAPI: APIProtocol {
             return "car/search"
         case .getWorkingTimes:
             return "settings/default"
+        case .getFlexibleTimes:
+            return "flexible-times/list"
         case .getPhoneCodes:
             return "phone-code/list"
         case .getCountries:

@@ -226,6 +226,13 @@
 		56683786270E216300C8D8FF /* CompareCategoryTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56683784270E216300C8D8FF /* CompareCategoryTableCell.swift */; };
 		56683787270E216300C8D8FF /* CompareCategoryTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56683785270E216300C8D8FF /* CompareCategoryTableCell.xib */; };
 		56683789270F3C3F00C8D8FF /* CompareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56683788270F3C3F00C8D8FF /* CompareViewModel.swift */; };
+		56683793271640DD00C8D8FF /* LocalizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5668378B271640DB00C8D8FF /* LocalizationModel.swift */; };
+		56683794271640DD00C8D8FF /* String+Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5668378D271640DB00C8D8FF /* String+Localizable.swift */; };
+		56683795271640DD00C8D8FF /* UILocalizedNavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5668378F271640DB00C8D8FF /* UILocalizedNavigationItem.swift */; };
+		56683796271640DD00C8D8FF /* UILocalizedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56683790271640DB00C8D8FF /* UILocalizedButton.swift */; };
+		56683797271640DD00C8D8FF /* UILocalizedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56683791271640DB00C8D8FF /* UILocalizedTextField.swift */; };
+		56683798271640DD00C8D8FF /* UILocalizedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56683792271640DB00C8D8FF /* UILocalizedLabel.swift */; };
+		5668379A2716716100C8D8FF /* CarResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566837992716716100C8D8FF /* CarResult.swift */; };
 		5669F5FC26FC170D00FF73F7 /* ContactActionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669F5FB26FC170D00FF73F7 /* ContactActionSheetView.swift */; };
 		566B3760269503360021BCAA /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B375E269503360021BCAA /* CalendarTableViewCell.swift */; };
 		566B3761269503360021BCAA /* CalendarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 566B375F269503360021BCAA /* CalendarTableViewCell.xib */; };
@@ -570,6 +577,13 @@
 		56683784270E216300C8D8FF /* CompareCategoryTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareCategoryTableCell.swift; sourceTree = "<group>"; };
 		56683785270E216300C8D8FF /* CompareCategoryTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompareCategoryTableCell.xib; sourceTree = "<group>"; };
 		56683788270F3C3F00C8D8FF /* CompareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareViewModel.swift; sourceTree = "<group>"; };
+		5668378B271640DB00C8D8FF /* LocalizationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizationModel.swift; sourceTree = "<group>"; };
+		5668378D271640DB00C8D8FF /* String+Localizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Localizable.swift"; sourceTree = "<group>"; };
+		5668378F271640DB00C8D8FF /* UILocalizedNavigationItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILocalizedNavigationItem.swift; sourceTree = "<group>"; };
+		56683790271640DB00C8D8FF /* UILocalizedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILocalizedButton.swift; sourceTree = "<group>"; };
+		56683791271640DB00C8D8FF /* UILocalizedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILocalizedTextField.swift; sourceTree = "<group>"; };
+		56683792271640DB00C8D8FF /* UILocalizedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILocalizedLabel.swift; sourceTree = "<group>"; };
+		566837992716716100C8D8FF /* CarResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarResult.swift; sourceTree = "<group>"; };
 		5669F5FB26FC170D00FF73F7 /* ContactActionSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactActionSheetView.swift; sourceTree = "<group>"; };
 		566B375E269503360021BCAA /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		566B375F269503360021BCAA /* CalendarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarTableViewCell.xib; sourceTree = "<group>"; };
@@ -1994,6 +2008,35 @@
 			path = CompareCategoryTableCell;
 			sourceTree = "<group>";
 		};
+		5668378A271640DB00C8D8FF /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				5668378B271640DB00C8D8FF /* LocalizationModel.swift */,
+				5668378C271640DB00C8D8FF /* Extensions */,
+				5668378E271640DB00C8D8FF /* Utilities */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		5668378C271640DB00C8D8FF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5668378D271640DB00C8D8FF /* String+Localizable.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5668378E271640DB00C8D8FF /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				5668378F271640DB00C8D8FF /* UILocalizedNavigationItem.swift */,
+				56683790271640DB00C8D8FF /* UILocalizedButton.swift */,
+				56683791271640DB00C8D8FF /* UILocalizedTextField.swift */,
+				56683792271640DB00C8D8FF /* UILocalizedLabel.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		566B375D269503030021BCAA /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -2052,6 +2095,7 @@
 			isa = PBXGroup;
 			children = (
 				5603424D26AC5B4200FDD5EA /* BKD.entitlements */,
+				5668378A271640DB00C8D8FF /* Localization */,
 				56409537264B247E001DC92D /* Manageres */,
 				5618873C2645EAF400BDDB33 /* Helpers */,
 				568E70962644BD7D000CB6A9 /* SupportFiles */,
@@ -2137,6 +2181,7 @@
 				565BFDFA26A0C3800044D081 /* CarTypes.swift */,
 				565BFE0226A12CA10044D081 /* Parking.swift */,
 				565F807326A3C46600ADB9FE /* WorkingTimes.swift */,
+				566837992716716100C8D8FF /* CarResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2909,7 +2954,7 @@
 				568E6F4C2642FC4B000CB6A9 /* Resources */,
 				565F8C65268D390600E21C71 /* Embed Frameworks */,
 				995B321BDC49670283C49A78 /* [CP] Embed Pods Frameworks */,
-				C9541B0FABCEF54B25D8C9DD /* [CP] Copy Pods Resources */,
+				B8FCFF4A7CCD3CECC27F87B9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3097,7 +3142,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C9541B0FABCEF54B25D8C9DD /* [CP] Copy Pods Resources */ = {
+		B8FCFF4A7CCD3CECC27F87B9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3127,9 +3172,11 @@
 				565863BB26C76B3C003C19A2 /* CashViewController.swift in Sources */,
 				56683789270F3C3F00C8D8FF /* CompareViewModel.swift in Sources */,
 				56683786270E216300C8D8FF /* CompareCategoryTableCell.swift in Sources */,
+				56683798271640DD00C8D8FF /* UILocalizedLabel.swift in Sources */,
 				9393BAEF26D78846003878BF /* SocketServiceProtocol.swift in Sources */,
 				56533ECF2678B94D0012BF4A /* MoreModel.swift in Sources */,
 				562585E726F1867800EC9284 /* AditionalDriverTableCell.swift in Sources */,
+				56683797271640DD00C8D8FF /* UILocalizedTextField.swift in Sources */,
 				5668376F270B5F3600C8D8FF /* MarkNewAddressViewController.swift in Sources */,
 				566354F4268B72950003E2EB /* PriceTableView.swift in Sources */,
 				565F810026A7C1E700ADB9FE /* PaymentTypes.swift in Sources */,
@@ -3163,6 +3210,7 @@
 				568E704826446E2D000CB6A9 /* MyReservationsViewController.swift in Sources */,
 				56AD192626934D7E006A53C1 /* EmailVerificationViewController.swift in Sources */,
 				56AD18EC2691622C006A53C1 /* SignInViewController.swift in Sources */,
+				56683795271640DD00C8D8FF /* UILocalizedNavigationItem.swift in Sources */,
 				56B9F34226826DE1003449AD /* DetailsViewModel.swift in Sources */,
 				56AD19222693421C006A53C1 /* TermsConditionsViewController.swift in Sources */,
 				5656083926785E2C009578FA /* RentalConditionsTableViewCell.swift in Sources */,
@@ -3171,6 +3219,7 @@
 				5602536F2669AE1C00FB204C /* OfflineViewController.swift in Sources */,
 				5640395A26EFEF5A0064256C /* ReservetionWithDistancePriceCell.swift in Sources */,
 				5668377A270DD95A00C8D8FF /* DropDownTableView.swift in Sources */,
+				56683793271640DD00C8D8FF /* LocalizationModel.swift in Sources */,
 				56188889264A61ED00BDDB33 /* TextField.swift in Sources */,
 				56B9F33D26825FF0003449AD /* TariffSlideViewModel.swift in Sources */,
 				56AD191D2693251C006A53C1 /* CheckEmailViewModel.swift in Sources */,
@@ -3226,6 +3275,7 @@
 				565731DE2672FDC80012ADD0 /* DetailsAndTailLiftModel.swift in Sources */,
 				562585D826F1040200EC9284 /* PaymentStausModel.swift in Sources */,
 				568E703126443D90000CB6A9 /* CategoryViewController.swift in Sources */,
+				56683796271640DD00C8D8FF /* UILocalizedButton.swift in Sources */,
 				93CDB1EE26C17C69009F9B6C /* TokenResponse.swift in Sources */,
 				9393BAED26D78833003878BF /* SocketService.swift in Sources */,
 				56B9F2D5267E8CEE003449AD /* SearchView.swift in Sources */,
@@ -3271,6 +3321,7 @@
 				5657E840267108A300788D62 /* DetailsViewController.swift in Sources */,
 				565F8C2B268D027400E21C71 /* UPCarouselFlowLayout.swift in Sources */,
 				565BFD93269F57CF0044D081 /* BkdError.swift in Sources */,
+				56683794271640DD00C8D8FF /* String+Localizable.swift in Sources */,
 				5640396026F01D530064256C /* ReservetionWithPayRentalPriceCell.swift in Sources */,
 				5660E61926FE0376009BB73F /* AdvancedWithOnRideCell.swift in Sources */,
 				565A9F642703616F00C3C36B /* AccidentFormModel.swift in Sources */,
@@ -3352,6 +3403,7 @@
 				5640396326F0207F0064256C /* PayLaterViewController.swift in Sources */,
 				5656324626585FFF00B78562 /* CarEquipmentCollectionViewCell.swift in Sources */,
 				564BE885270223B70037DF39 /* DateAndLocationView.swift in Sources */,
+				5668379A2716716100C8D8FF /* CarResult.swift in Sources */,
 				5659AC2F2704B97F00278560 /* UICollectionView.swift in Sources */,
 				560048702697F78C009943B5 /* BkdAgreementViewController.swift in Sources */,
 				564E13692652F0CF008CE884 /* PrivacyPoliceView.swift in Sources */,

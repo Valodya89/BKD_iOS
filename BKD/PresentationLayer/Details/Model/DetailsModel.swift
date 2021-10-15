@@ -23,20 +23,17 @@ struct VehicleModel {
     public var vehicleDiscountValue: Double = 0.0
     
     //Prices
+    public var priceForFlexible: Double = 0.0
+    public var priceHour: Price? = nil
+    public var priceDay: Price? = nil
+    public var priceWeek: Price? = nil
+    public var priceMonth: Price? = nil
+    public var hasDiscount: Bool = false
+    public var discountPercents: Double = 0.0
+    public var freeKiloMeters: Double = 0.0
+    
     public var depositPrice: Double = 0.0
-    public var priceForHour: Double = 0.0
-    public var priceForDay: Double = 0.0
-    public var priceForWeek: Double = 0.0
-    public var priceForMonth: Double = 0.0
-    public var hasSpecialPrice: Bool = false
-    public var specialPriceForHour: Double = 0.0
-    public var specialPriceForDay: Double = 0.0
-    public var specialPriceForWeek: Double = 0.0
-    public var specialPriceForMonth: Double = 0.0
-    public var specialPrice: Double = 0.0
     public var priceForKm: Double = 0.0
-    public var priceForFuelIncluded: Double = 0.0
-
 
     //Vehicle general short info
     public var drivingLicense: String?
