@@ -141,9 +141,12 @@ extension OnlineChatViewController: MessagesLayoutDelegate, MessagesDataSource, 
         let closure = { [self] (view: MessageContainerView) in
             if self.isFromCurrentSender(message: message) {
                 view.backgroundColor = .clear
-                view.roundCornersWithBorder(corners: [.topLeft, .bottomLeft, .topRight], radius: 10, borderColor: color_navigationBar!, borderWidth: 1)
+//                view.roundCornersWithBorder(corners: [.topLeft, .bottomLeft, .topRight], radius: 10, borderColor: color_navigationBar!, borderWidth: 1)
+                view.layer.cornerRadius = 10
+                view.setBorder(color: color_navigationBar!, width: 1)
             } else {
-                view.roundCorners(corners: [.topLeft, .bottomRight, .topRight], radius: 10)
+//                view.roundCorners(corners: [.topLeft, .bottomRight, .topRight], radius: 10)
+                view.layer.cornerRadius = 10
                 view.layer.borderColor = color_menu?.cgColor
                 view.backgroundColor = color_menu!
             }
