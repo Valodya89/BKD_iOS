@@ -48,16 +48,17 @@ final class ChatViewModel {
         var type = ""
         var identifier = ""
         if keychain.isUserLoggedIn() {
-            name = "Ruben"
+            name = keychain.getUsername() ?? ""
             type = "USER"
             identifier = keychain.getAccessToken() ?? ""
         } else {
-            name = "Ruben"
+            name = "Guest"
             type = "DEVICE"
             identifier = UIDevice.current.identifierForVendor?.uuidString ?? ""
         }
         
-        network.request(with: URLBuilder(from: AuthAPI.getChatID(name: name, type: type, identifier: identifier))) { [self] (result) in
+        network.request(with: URLBuilder(from: AuthAPI.getChatID(name: name, type: type, identifier: identifier))) { [weak self] (result) in
+            guard let self = self else { return }
             switch result {
             case .success(let data):
                 guard let chatInfoResponse = BkdConverter<BaseResponseModel<ChatInfo>>.parseJson(data: data as Any)?.content else { return }
