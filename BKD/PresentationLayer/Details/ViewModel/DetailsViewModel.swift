@@ -348,7 +348,7 @@ class DetailsViewModel: NSObject {
             
             tariffArr.forEach{ tariff in
                 
-                var value = tariff.duration * (price?.price)!
+                var value = tariff.duration * (price?.price ?? 0.0)
                 if tariff.percentage > 0.0 {
                     value = value - (value * (tariff.percentage/100))
                 }
