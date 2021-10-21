@@ -220,10 +220,15 @@
                                     <outlet property="delegate" destination="baS-Zk-gBJ" id="Lcb-fC-Kav"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sHY-T6-SYe">
+                                <rect key="frame" x="87" y="340" width="240" height="345"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="19O-fH-HD0"/>
                         <color key="backgroundColor" name="background"/>
                         <constraints>
+                            <constraint firstItem="sHY-T6-SYe" firstAttribute="height" secondItem="kYK-fv-ZhM" secondAttribute="height" multiplier="0.42698" id="9Jm-v5-vUZ"/>
                             <constraint firstItem="ilV-lK-Jwv" firstAttribute="leading" secondItem="19O-fH-HD0" secondAttribute="leading" id="CDc-JV-fw4"/>
                             <constraint firstItem="19O-fH-HD0" firstAttribute="trailing" secondItem="ilV-lK-Jwv" secondAttribute="trailing" id="GGj-OF-HHF"/>
                             <constraint firstItem="19O-fH-HD0" firstAttribute="bottom" secondItem="ilV-lK-Jwv" secondAttribute="bottom" id="XSB-Bj-ZJ6"/>

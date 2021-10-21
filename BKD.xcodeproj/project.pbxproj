@@ -2954,7 +2954,7 @@
 				568E6F4C2642FC4B000CB6A9 /* Resources */,
 				565F8C65268D390600E21C71 /* Embed Frameworks */,
 				995B321BDC49670283C49A78 /* [CP] Embed Pods Frameworks */,
-				B8FCFF4A7CCD3CECC27F87B9 /* [CP] Copy Pods Resources */,
+				F5C3B4D1F825012ACEB9D847 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3142,7 +3142,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B8FCFF4A7CCD3CECC27F87B9 /* [CP] Copy Pods Resources */ = {
+		F5C3B4D1F825012ACEB9D847 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

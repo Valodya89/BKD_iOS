@@ -37,7 +37,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yXl-YX-ZL5" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1165"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1059"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ev-Ww-Owb">
                                                 <rect key="frame" x="16" y="4" width="382" height="47"/>
@@ -474,7 +474,7 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EBU-7z-cw1" customClass="TariffCarouselView" customModule="BKD" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EBU-7z-cw1" customClass="TariffCarouselView" customModule="BKD" customModuleProvider="target">
                                                 <rect key="frame" x="-67" y="584.5" width="382" height="230"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -1044,7 +1044,7 @@
                                                     <constraint firstAttribute="bottom" secondItem="4fX-SI-LES" secondAttribute="bottom" id="oY1-p0-NAu"/>
                                                 </constraints>
                                             </view>
-                                            <view hidden="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k52-kv-b2C">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k52-kv-b2C">
                                                 <rect key="frame" x="16" y="855" width="166" height="42"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="compare" translatesAutoresizingMaskIntoConstraints="NO" id="4fu-71-laG">
@@ -1079,7 +1079,7 @@
                                         <constraints>
                                             <constraint firstItem="EBU-7z-cw1" firstAttribute="top" secondItem="W6S-sP-DFk" secondAttribute="bottom" multiplier="1.055" id="26G-nN-LlJ"/>
                                             <constraint firstItem="xro-9k-UXd" firstAttribute="top" secondItem="Rkc-pZ-qaf" secondAttribute="bottom" id="2fV-93-xoK"/>
-                                            <constraint firstAttribute="bottom" secondItem="lTX-qV-DSn" secondAttribute="bottom" multiplier="1.1" id="3a5-Iy-n4u"/>
+                                            <constraint firstAttribute="bottom" secondItem="lTX-qV-DSn" secondAttribute="bottom" id="3a5-Iy-n4u"/>
                                             <constraint firstItem="y0o-Vl-H0J" firstAttribute="centerX" secondItem="yXl-YX-ZL5" secondAttribute="centerX" id="3bN-b2-HFP"/>
                                             <constraint firstItem="wnn-gI-Uj7" firstAttribute="bottom" secondItem="LGn-HH-yqQ" secondAttribute="top" constant="-2" id="4Si-7d-0Jt"/>
                                             <constraint firstItem="wnn-gI-Uj7" firstAttribute="width" secondItem="qgI-kZ-ytz" secondAttribute="width" id="4rn-yZ-Ojv"/>
@@ -1228,14 +1228,14 @@
             <objects>
                 <viewController storyboardIdentifier="TariffSlideViewController" id="M2l-SZ-iUk" customClass="TariffSlideViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Wsh-Z6-c6V">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="66"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="170"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4pr-yr-PpJ">
                                 <rect key="frame" x="16" y="0.0" width="382" height="66"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="kTJ-PK-b3w">
-                                    <size key="itemSize" width="128" height="66"/>
+                                    <size key="itemSize" width="72" height="66"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -1244,16 +1244,16 @@
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="zt9-Ba-cpj"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="background"/>
                         <constraints>
-                            <constraint firstItem="4pr-yr-PpJ" firstAttribute="height" secondItem="Wsh-Z6-c6V" secondAttribute="height" id="5s5-Ad-MRj"/>
+                            <constraint firstItem="4pr-yr-PpJ" firstAttribute="height" secondItem="Wsh-Z6-c6V" secondAttribute="height" multiplier="0.389" id="5s5-Ad-MRj"/>
                             <constraint firstItem="4pr-yr-PpJ" firstAttribute="centerX" secondItem="Wsh-Z6-c6V" secondAttribute="centerX" id="8Y7-4d-RZ9"/>
                             <constraint firstItem="4pr-yr-PpJ" firstAttribute="width" secondItem="Wsh-Z6-c6V" secondAttribute="width" multiplier="0.922" id="LOq-xm-iAs"/>
-                            <constraint firstItem="4pr-yr-PpJ" firstAttribute="centerY" secondItem="Wsh-Z6-c6V" secondAttribute="centerY" id="a2t-OM-TVN"/>
+                            <constraint firstAttribute="top" secondItem="4pr-yr-PpJ" secondAttribute="top" id="UhD-QU-Ka6"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="414" height="66"/>
+                    <size key="freeformSize" width="414" height="170"/>
                     <connections>
                         <outlet property="mTariffSlideCollectionV" destination="4pr-yr-PpJ" id="1I3-eY-wXA"/>
                         <outlet property="mTariffSlideWidth" destination="LOq-xm-iAs" id="lOK-5H-LNc"/>

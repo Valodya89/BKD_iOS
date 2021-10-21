@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19158" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19141"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -40,7 +40,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="72" height="66"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Lu-Hk-uhd">
-                                        <rect key="frame" x="3.5" y="7.5" width="65" height="21"/>
+                                        <rect key="frame" x="3.5" y="12" width="65" height="21"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="14"/>
                                         <color key="textColor" name="navigationBar"/>
                                         <nil key="highlightedColor"/>
@@ -56,8 +56,8 @@
                                 <constraints>
                                     <constraint firstItem="tUE-y4-HfH" firstAttribute="height" secondItem="5gc-H0-LSl" secondAttribute="height" multiplier="0.318182" id="6iJ-eU-kOE"/>
                                     <constraint firstItem="6Lu-Hk-uhd" firstAttribute="centerX" secondItem="5gc-H0-LSl" secondAttribute="centerX" id="90E-tl-E0b"/>
-                                    <constraint firstItem="tUE-y4-HfH" firstAttribute="centerY" secondItem="5gc-H0-LSl" secondAttribute="centerY" multiplier="1.47" id="Bac-zi-O5c"/>
-                                    <constraint firstItem="6Lu-Hk-uhd" firstAttribute="centerY" secondItem="5gc-H0-LSl" secondAttribute="centerY" multiplier="0.55" id="JUj-8u-wFK"/>
+                                    <constraint firstItem="tUE-y4-HfH" firstAttribute="top" secondItem="5gc-H0-LSl" secondAttribute="centerY" multiplier="1.15" id="Bac-zi-O5c"/>
+                                    <constraint firstItem="6Lu-Hk-uhd" firstAttribute="bottom" secondItem="5gc-H0-LSl" secondAttribute="centerY" id="JUj-8u-wFK"/>
                                     <constraint firstItem="tUE-y4-HfH" firstAttribute="width" secondItem="5gc-H0-LSl" secondAttribute="width" multiplier="0.9" id="OuR-1a-QC7"/>
                                     <constraint firstItem="6Lu-Hk-uhd" firstAttribute="height" secondItem="5gc-H0-LSl" secondAttribute="height" multiplier="0.318182" id="Pfm-qa-ago"/>
                                     <constraint firstItem="tUE-y4-HfH" firstAttribute="centerX" secondItem="5gc-H0-LSl" secondAttribute="centerX" id="qwl-Yl-Tzp"/>
@@ -71,9 +71,9 @@
                             <constraint firstItem="5gc-H0-LSl" firstAttribute="width" secondItem="vIB-xU-DuD" secondAttribute="width" id="NQV-2z-ixt"/>
                             <constraint firstItem="5gc-H0-LSl" firstAttribute="centerX" secondItem="vIB-xU-DuD" secondAttribute="centerX" id="QpM-Ye-l3r"/>
                             <constraint firstItem="Jqh-YY-CxP" firstAttribute="height" secondItem="vIB-xU-DuD" secondAttribute="height" id="Xlj-kL-F7v"/>
+                            <constraint firstAttribute="bottom" secondItem="5gc-H0-LSl" secondAttribute="bottom" id="bXc-7g-X1w"/>
+                            <constraint firstItem="5gc-H0-LSl" firstAttribute="top" secondItem="vIB-xU-DuD" secondAttribute="top" id="naY-qy-nwX"/>
                             <constraint firstItem="Jqh-YY-CxP" firstAttribute="centerX" secondItem="vIB-xU-DuD" secondAttribute="centerX" id="pA2-SF-jqn"/>
-                            <constraint firstItem="5gc-H0-LSl" firstAttribute="centerY" secondItem="vIB-xU-DuD" secondAttribute="centerY" id="sxs-Xn-JBo"/>
-                            <constraint firstItem="5gc-H0-LSl" firstAttribute="height" secondItem="vIB-xU-DuD" secondAttribute="height" id="tQR-AH-DKQ"/>
                             <constraint firstItem="Jqh-YY-CxP" firstAttribute="centerY" secondItem="vIB-xU-DuD" secondAttribute="centerY" id="vuU-iK-cXs"/>
                         </constraints>
                     </view>

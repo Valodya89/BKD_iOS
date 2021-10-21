@@ -60,6 +60,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var mCompareContentV: UIView!
     
     //MARK: - Varables
+
     private lazy  var tariffSlideVC = TariffSlideViewController.initFromStoryboard(name: Constant.Storyboards.details)
     
     let detailsViewModel:DetailsViewModel = DetailsViewModel()
@@ -95,6 +96,8 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     private var previousContentPosition: CGPoint?
     private var scrollContentHeight: CGFloat = 0.0
     private var isScrolled = false
+    private var isTariffSlide = true
+
     
     //MARK: Life cycle
     override func viewDidLoad() {
@@ -104,14 +107,15 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        setScrollVoiewHeight()
+       // setScrollViewHeight()
         setTableViewsHeight()
         setTariffSlideViewFrame()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+       // mScrollV.contentOffset.y = 0.0
+       // showTariffCards(y: self.view.frame.height - height170 - height42)
         mReserveLeading.constant = -50.0
         mReserveBckgV.roundCorners(corners: [.topRight, .topLeft], radius: 20)
         mSearchV.animateLocationList(isShow: false)
@@ -145,25 +149,23 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         addTariffSliedView()
         goToLocationController()
         getTariffList()
-        
     }
     
-    /// Set height of scroll view
-    func setScrollVoiewHeight() {
-        if scrollContentHeight == 0.0 {
-            // will show only tariff cards
-            scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height
-            mCompareContentV.isHidden = false
-        }
-        if isSearchEdit && self.mSearchV.isHidden  {// will show tariff cards and search edit view
-            scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height + mSearchWithValueStackV.bounds.height
-            mCompareContentV.isHidden = true
-
-        } else if !self.mSearchV.isHidden { // will show tariff cards and search view
-            scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height + mSearchV.bounds.height
-            mCompareContentV.isHidden = true
-        }
-    }
+//    /// Set height of scroll view
+//    func setScrollViewHeight() {
+//        if scrollContentHeight == 0.0 {
+//            // will show only tariff cards
+//            scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height
+//            mCompareContentV.isHidden = false
+//        } else  if isSearchEdit && self.mSearchV.isHidden  {// will show tariff cards and search edit view
+//            scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height + mSearchWithValueStackV.bounds.height
+//            mCompareContentV.isHidden = true
+//
+//        } else if !self.mSearchV.isHidden { // will show tariff cards and search view
+//            scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height + mSearchV.bounds.height
+//            mCompareContentV.isHidden = true
+//        }
+//    }
     
     
     /// set height to details or tailLift tableView
@@ -186,7 +188,6 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     ///Set frame to Tariff Slide View
     func setTariffSlideViewFrame() {
         var bottomPadding:CGFloat  = 0
-        let tariffSlideHeight = self.view.bounds.height * 0.08168
         if #available(iOS 13.0, *) {
             let window = UIApplication.shared.windows[0]
             bottomPadding = window.safeAreaInsets.bottom
@@ -199,7 +200,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             tariffSlideVC.view.frame = CGRect(x: 0,
                                               y: tariffSlideY,
                                               width: self.view.bounds.width,
-                                              height: tariffSlideHeight)
+                                              height: height170)
         }
     }
     
@@ -317,6 +318,8 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         addChild(tariffSlideVC)
         self.view.addSubview(tariffSlideVC.view)
         tariffSlideVC.didMove(toParent: self)
+        self.view.bringSubviewToFront(mReserveBckgV)
+
     }
     
     ///creat tool bar
@@ -332,16 +335,17 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     }
     
     /// ScrollView will scroll to bottom
-    private func scrollToBottom(distance: CGFloat) {
-        let y = mScrollV.contentSize.height - mScrollV.bounds.height + mScrollV.contentInset.bottom + distance
+    private func scrollToBottom(y: CGFloat?) {
+//        let scrollY = y != nil ? y : mScrollV.contentSize.height - mScrollV.bounds.height + mScrollV.contentInset.bottom + distance
         previousContentPosition = mScrollV.contentOffset
-        scrollContentHeight = mScrollV.contentSize.height
+       // scrollContentHeight = mScrollV.contentSize.height
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: { [self] in
-                self.mScrollV.contentOffset.y = y
+            UIView.animate(withDuration: 0.5, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: { [self] in
+                self.mScrollV.contentOffset.y = y!
             }, completion: nil)
         }
-        showTariffCardWithDelay()
+        //showTariffCardWithDelay()
+       // updateCompareView(isShow: true)
     }
     
     ///Scroll view will back to previous position
@@ -479,48 +483,57 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    ///Will show tariff cards
-    private func showTariffCards () {
-            self.mTariffCarouselV.tariffCarousel.reloadData()
-        self.tariffSlideVC.tariffSlideList = self.tariffSlideList
-            self.tariffSlideVC.mTariffSlideCollectionV.reloadData()
-            UIView.animate(withDuration: 0.5) { [self] in
-                self.tariffSlideVC.view.frame.origin.y += 500
-                self.tariffSlideVC.view.layoutIfNeeded()
-            } completion: { [self] _ in
-                if isSearchEdit && currentTariff == .flexible {
-                    self.animateSearchEdit(isShow: true)
-                }
-            }
-        showTariffCardWithDelay()
-    }
+
    
-    private func showTariffCardWithDelay() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-            self.mTariffCarouselV.isHidden = false
-            self.mCompareContentV.isHidden = (self.mSearchV.isHidden && self.mSearchWithValueStackV.isHidden) ? false : true
-            UIView.animate(withDuration: 0.5) { [self] in
-                self.mTariffCarouselV.alpha = 1.0
-                self.mCompareContentV.alpha = (self.mSearchV.isHidden && self.mSearchWithValueStackV.isHidden) ? 1.0 : 0.0
+    private func updateCompareView(isShow: Bool) {
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+//            self.mCompareContentV.isHidden = isShow ? false : true
+//            self.mSearchV.isHidden
+//            UIView.animate(withDuration: 0.5) { [self] in
+//                self.mCompareContentV.alpha = isShow ? 1.0 : 0.0
+//            }
+//        }
+        if isShow && isSearchEdit {
+            mCompareContentV.isHidden = true
+            mCompareContentV.alpha = 0.0
+        } else {
+        
+        UIView.animate(withDuration: 0.5) {
+            if isShow {
+                self.mCompareContentV.isHidden = !isShow
+                self.mCompareContentV.alpha = 1.0
+                self.mSearchV.alpha = 0.0
+            } else {
+                self.mCompareContentV.alpha = 0.0
+                self.mSearchV.isHidden = isShow
+                self.mSearchV.alpha = 1.0
+            }
+        } completion: { _ in
+            if !isShow {
+                self.mCompareContentV.isHidden = !isShow
+            } else {
+                self.mSearchV.isHidden = isShow
             }
         }
+        }
+
     }
     
-    ///Will hide tariff cards
-    private func hideTariffCards() {
-            UIView.animate(withDuration: 0.5) { [self] in
-                self.tariffSlideVC.view.frame.origin.y -= 500
-                mTariffCarouselV.alpha = 0.0
-                self.mCompareContentV.alpha = 0.0
-                mSearchV.alpha = 0.0
-                self.tariffSlideVC.view.layoutIfNeeded()
-            } completion: { [self]_ in
-                self.mTariffCarouselV.isHidden = true
-                self.mCompareContentV.isHidden = true
-                mSearchV.isHidden = true
-                scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height
-            }
-    }
+//    ///Will hide tariff cards
+//    private func hideTariffCards() {
+//            UIView.animate(withDuration: 0.5) { [self] in
+//                self.tariffSlideVC.view.frame.origin.y -= 500
+//                //mTariffCarouselV.alpha = 0.0
+//                self.mCompareContentV.alpha = 0.0
+//                mSearchV.alpha = 0.0
+//                self.tariffSlideVC.view.layoutIfNeeded()
+//            } completion: { [self]_ in
+//               // self.mTariffCarouselV.isHidden = true
+//                self.mCompareContentV.isHidden = true
+//                mSearchV.isHidden = true
+//                scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height
+//            }
+//    }
     
     ///Show Tarif lift or Detail tableView
     private func showTableView(view: UIView, imgRotate: UIImageView?) {
@@ -577,6 +590,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     }
     
     func showAlertMoreThanMonth(optionIndex: Int) {
+
         BKDAlert().showAlert(on: self,
                              title: nil,
                              message: Constant.Texts.messageMoreThanMonth,
@@ -592,8 +606,9 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
                                 }
                                 self.confirmPressed(optionIndex: optionIndex)
                              })
-        
+       // hideTariffCards(y: 1000)
     }
+    
     func showAlertChangeTariff(optionIndex: Int, option: String)  {
         BKDAlert().showAlert(on: self,
                              title: Constant.Texts.titleChangeTariff,
@@ -618,9 +633,12 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     //MARK: - Hendler Methodes
     /// Confirm button pressed
     private func confirmPressed(optionIndex: Int) {
+       // isTariffSlide = false
+        isScrolled = true
         currentTariffOptionIndex = optionIndex
         updateSearchFields(optionIndex: optionIndex)
         mSearchV.configureSearchPassiveFields(tariff: currentTariff)
+        
         if isSearchEdit {
             animateSearchEdit(isShow: !isSearchEdit)
         }  else {
@@ -631,10 +649,17 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             mCompareContentV.isHidden = true
 
             mScrollV.contentSize.height = mScrollV.contentSize.height + mSearchV.bounds.height
-            UIView.animate(withDuration: 0.7) { [self] in
-                self.scrollToBottom(distance: 0.0)
-                self.mSearchV.alpha = 1
-            }
+            self.scrollToBottom(y: height405)
+            updateCompareView(isShow: false)
+
+//            UIView.animate(withDuration: 0.7) { [self] in
+//                self.scrollToBottom(y: height405)
+//                //self.mCompareContentV.alpha = 0
+//                self.mSearchV.alpha = 1
+//            } completion: { _ in
+//               // self.mCompareContentV.isHidden = true
+//                self.mSearchV.isHidden = false
+//            }
         }
     }
     
@@ -750,7 +775,7 @@ extension DetailsViewController: DetailsAndTailLiftViewDelegate {
         if willOpen  {
             mDetailsTbV.detailList = vehicleModel?.detailList ?? []
             mDetailsTbV.reloadData()
-            scrollToBottom(distance: (vehicleModel?.ifTailLift ?? false) ? 0.0 : -(self.view.bounds.height * 0.247))
+            scrollToBottom(y: height345)
             if self.mTailLiftTableBckgV.alpha == 1 {
                 hideTableView(view: mTailLiftTableBckgV, imgRotate: self.mDetailsAndTailLiftV.mTailLiftDropDownImgV)
                 // will show Details tableView and close TailLift tableView
@@ -765,7 +790,7 @@ extension DetailsViewController: DetailsAndTailLiftViewDelegate {
     }
     
     func didPressTailLift(willOpen: Bool) {
-        scrollToBottom(distance: 0.0)
+        scrollToBottom(y: height345)
         // will show TailLift tableView
         if willOpen {
             mTailLiftTbV.tailLiftList = vehicleModel?.tailLiftList ?? []
@@ -782,10 +807,14 @@ extension DetailsViewController: DetailsAndTailLiftViewDelegate {
 extension DetailsViewController: TariffSlideViewControllerDelegate {
     
     func didPressTariffOption(tariff: TariffState, optionIndex: Int) {
-        
-        scrollContentHeight = 0.0
-        setScrollVoiewHeight()
-        scrollToBottom(distance: 0.0)
+        isTariffSlide = false
+        isScrolled = true
+       // scrollContentHeight = 0.0
+       // setScrollViewHeight()
+        scrollToBottom(y: height345)
+        updateCompareView(isShow: true)
+        hideTariffCards(y: 1000)
+
         currentTariff = tariff
         if isSearchEdit {
             animateSearchEdit(isShow: true)
@@ -819,6 +848,7 @@ extension DetailsViewController: TariffCarouselViewDelegate {
  
     func didPressConfirm(tariff: TariffState, optionIndex: Int, optionstr: String) {
         currentTariff = tariff
+        isScrolled = true
         if isSearchEdit && tariff != .flexible {
             showAlertChangeTariff(optionIndex: optionIndex, option: optionstr)
         } else {
@@ -863,7 +893,7 @@ extension DetailsViewController: SearchViewDelegate {
         self.view.addSubview(self.backgroundV)
         textFl.inputAccessoryView = creatToolBar()
         responderTxtFl = textFl
-        scrollToBottom(distance: mSearchV.bounds.height)
+        scrollToBottom(y: height345)
 
         if pickerState == .pickUpTime || pickerState == .returnTime {
             if currentTariff == .flexible {
@@ -954,7 +984,7 @@ extension DetailsViewController: SearchWithValueViewDelegate {
         mCompareContentV.isHidden = true
 
         UIView.animate(withDuration: 0.7) { [self] in
-            self.scrollToBottom(distance: self.mSearchV.bounds.height - self.mSearchWithValueStackV.bounds.height)
+            self.scrollToBottom(y: height345)
             self.mSearchV.alpha = 1
             self.mSearchWithValueStackV.alpha = 0.0
         } completion: { _ in
@@ -998,28 +1028,110 @@ extension DetailsViewController: CarPhotosViewDeleagte {
 //MARK: UIScrollViewDelegate
 //MARK: ----------------------------
 extension DetailsViewController: UIScrollViewDelegate {
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        print(scrollView.contentOffset.y)
+//        if ( scrollView.contentOffset.y == 0) {
+//            // move up
+//            if isScrolled {
+//                isScrolled = !isScrolled
+//                if isSearchEdit && currentTariff == .flexible {
+//                    self.animateSearchEdit(isShow: false)
+//                }
+//               // hideTableViewIfOpen()
+//                hideTariffCards()
+//            }
+//        } else if (scrollView.contentOffset.y > 0) {
+//            // move down
+//            if !isScrolled {
+//                isScrolled = !isScrolled
+//                showTariffCards()
+//            }
+//        }
+//
+//    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset.y)
-        if ( scrollView.contentOffset.y == 0) {
-            // move up
-            if isScrolled {
-                isScrolled = !isScrolled
-                if isSearchEdit && currentTariff == .flexible {
-                    self.animateSearchEdit(isShow: false)
-                }
-               // hideTableViewIfOpen()
-                hideTariffCards()
-            }
-        } else if (scrollView.contentOffset.y > 0) {
-            // move down
-            if !isScrolled {
-                isScrolled = !isScrolled
-                showTariffCards()
+       // if (self.lastContentOffset > scrollView.contentOffset.y) {
+        if (self.lastContentOffset > 0.0 && self.tariffSlideVC.view.frame.origin.y < view.frame.size.height + 10) {
+            isScrolled = true
+            print("move up")
+            print("self.lastContentOffset = \(self.lastContentOffset)")
+            hideTariffCards(y: self.lastContentOffset)
+            
+            
+//            if isScrolled {
+//               // isScrolled = !isScrolled
+//                if isSearchEdit && currentTariff == .flexible {
+//                    self.animateSearchEdit(isShow: false)
+//                }
+//            }
+            
+        }
+          //if (self.lastContentOffset < 0.0) {
+        else if (self.lastContentOffset < 0.0 /*scrollView.contentOffset.y + 20*/) {
+            print("move down")
+            print(scrollView.contentOffset.y)
+            let distanceFromBottom = scrollView.contentSize.height - scrollView.contentOffset.y
+            print("distanceFromBottom = \(distanceFromBottom)")
+
+            if scrollView.contentOffset.y > -2.5 && isTariffSlide {
+                isTariffSlide = false
+                showTariffCards(y: self.view.frame.height - height170 - height42)
             }
         }
-        
+        // update the new position acquired
+        self.lastContentOffset = scrollView.contentOffset.y
+        print("self.tariffSlideVC.view.frame.origin.y = \(self.tariffSlideVC.view.frame.origin.y)")
     }
     
+//    func  scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+//        print("scrollViewWillBeginDragging")
+//
+//        if (self.tariffSlideVC.view.frame.origin.y > view.frame.size.height - 50) {
+//            print("move up")
+//           // hideTariffCards(y: -500)
+//        }
+//        else {
+//            print("move down")
+//           // print(scrollView.contentOffset.y)
+//           // hideTariffCards(y: 500)
+//        }
+//    }
+    
+    ///Will hide tariff cards
+    private func hideTariffCards(y : CGFloat) {
+        UIView.animate(withDuration: 1.0) { [self] in
+                self.tariffSlideVC.view.frame.origin.y += y
+                self.tariffSlideVC.view.layoutIfNeeded()
+            } completion: { [self]_ in
+                isScrolled = !isScrolled
+                isTariffSlide = true
+                updateCompareView(isShow: true)
+            }
+    }
+    
+    
+    ///Will show tariff cards
+    private func showTariffCards (y: CGFloat) {
+            self.mTariffCarouselV.tariffCarousel.reloadData()
+        self.tariffSlideVC.tariffSlideList = self.tariffSlideList
+            self.tariffSlideVC.mTariffSlideCollectionV.reloadData()
+            UIView.animate(withDuration: 0.7) { [self] in
+                self.tariffSlideVC.view.frame.origin.y = y
+                self.tariffSlideVC.view.layoutIfNeeded()
+            } completion: { [self] _ in
+                isTariffSlide = true
+                if isSearchEdit && currentTariff == .flexible {
+                    self.animateSearchEdit(isShow: true)
+                }
+                isScrolled = !isScrolled
+                self.mScrollV.contentSize = CGSize(width: self.mScrollV.contentSize.width, height: 957)
+
+                updateCompareView(isShow: true)
+            }
+       // showTariffCardWithDelay()
+        
+    }
 }
 
 
