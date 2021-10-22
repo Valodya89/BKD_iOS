@@ -43,8 +43,9 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
     }
     
     func setUpView() {
+        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
         tabBarController?.tabBar.isHidden = true
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
+        
         mRightBarBtn.image = img_bkd
         setBorderToTextFileds()
         mPasswordVisibleBtn.setImage(#imageLiteral(resourceName: "invisible"), for: .normal)

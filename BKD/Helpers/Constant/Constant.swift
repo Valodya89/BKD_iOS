@@ -410,16 +410,19 @@ let main_subwidth = UIScreen.main.bounds.width * 0.158416
 let reservation_no_carNumber_height = UIScreen.main.bounds.height * 0.306931
 let reservation_with_carNumber_height = UIScreen.main.bounds.height * 0.391089
 let height42 = UIScreen.main.bounds.height * 0.0519
+let height50 = UIScreen.main.bounds.height * 0.061
 let height307 = UIScreen.main.bounds.height * 0.379
 let height245 = UIScreen.main.bounds.height * 0.303
 let height240 = UIScreen.main.bounds.height * 0.297
 let height285 = UIScreen.main.bounds.height * 0.352
+let height345 = UIScreen.main.bounds.height * 0.426
 let height405 = UIScreen.main.bounds.height * 0.501
 let height115 = UIScreen.main.bounds.height * 0.142
 let height274 = UIScreen.main.bounds.height * 0.339
 let height130 = UIScreen.main.bounds.height * 0.160
 let height273 = UIScreen.main.bounds.height * 0.337
 let height68 = UIScreen.main.bounds.height * 0.084
+let height170 = UIScreen.main.bounds.height * 0.21
 
 
 // 0.158416

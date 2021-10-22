@@ -44,6 +44,7 @@ class SeeMapViewController: BaseViewController {
     
     
     func setUpView() {
+        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
         configureNavigationBar()
         configureMapView()
         addChildView()

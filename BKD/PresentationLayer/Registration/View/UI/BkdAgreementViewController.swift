@@ -33,7 +33,7 @@ class BkdAgreementViewController: BaseViewController {
     
     func setUpView() {
         mRightBarBtn.image = img_bkd
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.setNavigationBarBackground(color: .white)
         mAgreeV.mConfirmLb.text = Constant.Texts.agree
         handlerAgree()
     }

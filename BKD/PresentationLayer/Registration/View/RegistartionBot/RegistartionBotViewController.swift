@@ -72,6 +72,7 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
     }
     
     func setUpView() {
+        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
         currentPhoneCode = applicationSettings.phoneCodes?.first
         currentCountry = countryList?.first
         mRightBarBtn.image = img_bkd

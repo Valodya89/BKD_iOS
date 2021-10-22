@@ -55,6 +55,7 @@ class MyReservationsViewController: BaseViewController {
     }
     
     func setupView() {
+        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
         menu = SideMenuNavigationController(rootViewController: LeftViewController())
         self.setmenu(menu: menu)
         mNoReservationContentV.isHidden = ReservationWithReservedPaidData.reservationWithReservedPaidModel.count > 0

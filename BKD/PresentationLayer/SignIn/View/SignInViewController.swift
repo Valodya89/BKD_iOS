@@ -62,6 +62,7 @@ final class SignInViewController: UIViewController, StoryboardInitializable {
     }
     
     private func setUpView() {
+        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
         mRightBarBtn.image = img_bkd
         mVisibilityPasswortBtn.setImage(#imageLiteral(resourceName: "invisible"), for: .normal)
         

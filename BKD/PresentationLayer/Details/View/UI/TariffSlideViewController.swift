@@ -40,10 +40,7 @@ class TariffSlideViewController: UIViewController, StoryboardInitializable {
         
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-    }
+   
     
     ///Configure CollectionView
     private func configureCollectionView(){
@@ -145,12 +142,12 @@ extension TariffSlideViewController: UICollectionViewDelegate, UICollectionViewD
     
     //MARK: UICollectionViewDelegateFlowLayout
     //MARK: -------------------------------------
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: self.view.bounds.width * 0.173913,
-                      height: self.view.bounds.height)
-        
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        
+//        return CGSize(width: self.view.bounds.width * 0.173913,
+//                      height: self.view.bounds.height)
+//        
+//    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return cellSpace

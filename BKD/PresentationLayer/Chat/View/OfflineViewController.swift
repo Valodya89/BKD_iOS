@@ -73,6 +73,7 @@ final class OfflineViewController: UIViewController, StoryboardInitializable  {
     
     
     func setupView() {
+        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
         configureView()
         configureDelegate()
     }

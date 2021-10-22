@@ -39,6 +39,7 @@ class NewDamageViewController: UIViewController, StoryboardInitializable {
     }
     
     func setupView() {
+        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
         mContentV.layer.borderWidth = 1.0
         mContentV.layer.borderColor = color_shadow!.cgColor
         mCancelBtn.layer.cornerRadius = 8
