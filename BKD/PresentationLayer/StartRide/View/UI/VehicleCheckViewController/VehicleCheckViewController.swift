@@ -58,6 +58,7 @@ class VehicleCheckViewController: UIViewController, StoryboardInitializable {
     }
     
     func setupView() {
+        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         configurePageControl()
         mRightBarBtn.image = img_bkd

@@ -76,6 +76,7 @@ final class ChangePhoneNumberViewController: UIViewController, StoryboardInitial
     }
     
     private func setUpView() {
+        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
         self.tabBarController?.tabBar.isHidden = true
         mRightBarBtn.image = img_bkd
         mSendBtn.layer.cornerRadius = 8

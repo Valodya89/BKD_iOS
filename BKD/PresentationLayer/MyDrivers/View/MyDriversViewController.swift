@@ -39,6 +39,7 @@ class MyDriversViewController: BaseViewController {
     }
     
     func setupView() {
+        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = img_bkd
        

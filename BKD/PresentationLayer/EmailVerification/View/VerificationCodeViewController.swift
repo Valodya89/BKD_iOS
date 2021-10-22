@@ -46,6 +46,7 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
     }
     
     func setUpView() {
+        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
         NotificationCenter.default.addObserver(self, selector: #selector(VerificationCodeViewController.handleDeepLink), name: Constant.Notifications.signUpEmailVerify, object: nil)
         mRightBarBtn.image = img_bkd
         mAlertV.layer.cornerRadius = 8

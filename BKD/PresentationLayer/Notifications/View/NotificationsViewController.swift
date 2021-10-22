@@ -11,7 +11,7 @@ class NotificationsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
         // Do any additional setup after loading the view.
     }
     

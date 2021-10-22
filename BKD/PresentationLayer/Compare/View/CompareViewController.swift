@@ -56,6 +56,7 @@ class CompareViewController: BaseViewController {
     
     
     func setupView() {
+        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
         mRightBarBtn.image = img_bkd
         mCategoryContentV.layer.cornerRadius = 3
         mCategoryContentV.setShadow(color: color_shadow!)

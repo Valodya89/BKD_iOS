@@ -42,6 +42,7 @@ class PhoneVerificationViewController: UIViewController, StoryboardInitializable
     }
     
     func setUpView() {
+        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
         mVerifySecondBtn.disable()
         startTimer()
     }

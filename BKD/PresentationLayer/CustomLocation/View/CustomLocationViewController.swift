@@ -80,7 +80,7 @@ class CustomLocationViewController: BaseViewController {
     
     
     func setUpView() {
-    
+        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
         mRightBarBtn.image = img_bkd
         restrictedZones = ApplicationSettings.shared.restrictedZones
         if isAddDamageAddress {

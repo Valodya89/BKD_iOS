@@ -100,18 +100,13 @@ class ReserveViewController: UIViewController {
     }
     
     func setupView() {
+        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
         mRightBarBtn.image = img_bkd
         mConfirmBtn.layer.cornerRadius = 10
         mConfirmBtn.addBorder(color: color_navigationBar!, width: 1)
         mTotalPriceBackgV.layer.cornerRadius = 3
         mTotalPriceBackgV.setShadow(color: color_shadow!)
         mRentInfoBckgV.setShadow(color: color_shadow!)
-       
-        
-        
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
-      //  mScrollV.delegate = self
-        
         configureView()
     }
     

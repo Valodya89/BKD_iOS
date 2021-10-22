@@ -128,7 +128,8 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     
     func setupView() {
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        
         mRightBarBtn.image = #imageLiteral(resourceName: "bkd").withRenderingMode(.alwaysOriginal)
         workingTimes = ApplicationSettings.shared.workingTimes
         mCompareContentV.layer.cornerRadius = 8

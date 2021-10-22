@@ -66,6 +66,7 @@ class OdometerCheckViewController: UIViewController, StoryboardInitializable {
     }
     
     func setupView() {
+        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
         mRightBarBtn.image = img_bkd
         mOpenCameraBtn.layer.cornerRadius = view.bounds.height * 0.0235149
         mOpenCameraBtn.addBorder(color:color_navigationBar!, width: 1.0)

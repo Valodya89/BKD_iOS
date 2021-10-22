@@ -31,6 +31,7 @@ class AddDamageViewController: BaseViewController {
     }
     
     func setupView() {
+        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = img_bkd
         mAddAccidentDetailsBtn.layer.cornerRadius = 5
