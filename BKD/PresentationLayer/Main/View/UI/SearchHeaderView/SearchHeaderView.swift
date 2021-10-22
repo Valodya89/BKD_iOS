@@ -249,7 +249,8 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     func updatePickUpDate(datePicker: UIDatePicker) {
         mDayPickUpBtn.isHidden = false
         mMonthPickUpBtn.isHidden = false
-        mPickUpDataTxtFl.text = ""
+        //mPickUpDataTxtFl.text = ""
+        mPickUpDataTxtFl.textColor = .clear
         mDayPickUpBtn.setTitle(datePicker.date.getDay(), for: .normal)
 
         mMonthPickUpBtn?.setTitle(datePicker.date.getMonthAndWeek(lng: "en"), for: .normal)
@@ -261,7 +262,8 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     func updateReturnDate(datePicker: UIDatePicker) {
         mDayReturnDateBtn.isHidden = false
         mMonthReturnDateBtn.isHidden = false
-        mReturnDateTxtFl.text = ""
+       // mReturnDateTxtFl.text = ""
+        mReturnDateTxtFl.textColor = .clear
         mDayReturnDateBtn.setTitle(datePicker.date.getDay(), for: .normal)
 
         mMonthReturnDateBtn?.setTitle(datePicker.date.getMonthAndWeek(lng: "en"), for: .normal)
@@ -270,9 +272,13 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     
     //Update time field
     func updateTime(responderTxtFl: UITextField, text: String) {
-        
-        responderTxtFl.text = text
-        mTimeLb.textColor = color_search_placeholder
+        DispatchQueue.main.async {
+            responderTxtFl.text = text
+            responderTxtFl.textColor = color_entered_date
+            responderTxtFl.font = font_search_title
+            self.mTimeLb.textColor = color_search_placeholder
+        }
+       
 
     }
     

@@ -190,7 +190,6 @@ class BKDAlert: NSObject {
         targetView.addSubview(alertView)
         alertView.addSubview(buttonOk!)
         alertView.addSubview(buttonCancel!)
-       // alertView.center = targetView.center
         alertView.popupAnimation()
 
     }

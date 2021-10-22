@@ -69,6 +69,7 @@ class CompareViewController: BaseViewController {
         handlerCategory()
         handlerFirstVehicle()
         handlerSecondVehicle()
+        handlerTableCell()
     }
     
     
@@ -100,17 +101,29 @@ class CompareViewController: BaseViewController {
     func checkFirstTable() {
         if mVehicleTableV.tableState == .firstVehicle && isOpenTable {
             animateDropDown(willOpen: !isOpenTable, dropDownImgV: mFirstVehicleDropDownImgV)
-            mVehicleTableV.updateTableHeight(willOpen: !isOpenTable)
+            updateTableHeight(willOpen: !isOpenTable,
+                              view: mVehicleTableV)
             mVehicleTableV.tableState = .close
             isOpenTable = !isOpenTable
         }
+    }
+    
+    ///Update table height
+    public func updateTableHeight(willOpen:Bool, view: DropDownTableView)  {
+        
+        UIView.animate(withDuration: 0.5) {
+            view.mTableHeight.constant = willOpen ? view.contentSize.height : 0.0
+            self.view.layoutIfNeeded()
+
+        }
+
     }
     
     //Check if open second vehicle Table view
     func checkSecondTabel() {
         if mVehicleTableV.tableState == .secondVehicle && isOpenTable {
             animateDropDown(willOpen: !isOpenTable, dropDownImgV: mSecondVehicleDropDownImgV)
-            mVehicleTableV.updateTableHeight(willOpen: !isOpenTable)
+            updateTableHeight(willOpen: !isOpenTable, view: mVehicleTableV)
             mVehicleTableV.tableState = .close
             isOpenTable = !isOpenTable
         }
@@ -129,7 +142,8 @@ class CompareViewController: BaseViewController {
         mCategoryTableV.tableState = .category
         mCategoryTableV.reloadData()
 
-        mCategoryTableV.updateTableHeight(willOpen: !isOpenTable)
+        updateTableHeight(willOpen: !isOpenTable,
+                          view: mCategoryTableV)
         animateDropDown(willOpen: !isOpenTable, dropDownImgV:mCategoryDropDownImgV )
         isOpenTable = !isOpenTable
     }
@@ -139,8 +153,10 @@ class CompareViewController: BaseViewController {
         mVehicleTableV.tableState = .firstVehicle
         mVehicleTableV.reloadData()
         
-        mVehicleTableV.updateTableHeight(willOpen: !isOpenTable)
-        animateDropDown(willOpen: !isOpenTable, dropDownImgV: mFirstVehicleDropDownImgV)
+        updateTableHeight(willOpen: !isOpenTable,
+                          view: mVehicleTableV)
+        animateDropDown(willOpen: !isOpenTable,
+                        dropDownImgV: mFirstVehicleDropDownImgV)
         isOpenTable = !isOpenTable
     }
     
@@ -149,7 +165,8 @@ class CompareViewController: BaseViewController {
             mVehicleTableV.tableState = .secondVehicle
             mVehicleTableV.reloadData()
             
-            mVehicleTableV.updateTableHeight(willOpen: !isOpenTable)
+        updateTableHeight(willOpen: !isOpenTable,
+                          view: mVehicleTableV)
             animateDropDown(willOpen: !isOpenTable, dropDownImgV: mSecondVehicleDropDownImgV)
             isOpenTable = !isOpenTable
     }
@@ -191,6 +208,16 @@ class CompareViewController: BaseViewController {
             self.mSecondVehicleBtn.setTitle(carModel.name, for: .normal)
             self.mSecondVehicleInfoV.configureUI()
             self.mSecondVehicleInfoV.isHidden = false
+        }
+    }
+    
+    //Did select table cell
+    func handlerTableCell() {
+        mVehicleTableV.didCloseTable = {
+            self.updateTableHeight(willOpen: false, view: self.mVehicleTableV)
+        }
+        mCategoryTableV.didCloseTable = {
+            self.updateTableHeight(willOpen: false, view: self.mCategoryTableV)
         }
     }
     

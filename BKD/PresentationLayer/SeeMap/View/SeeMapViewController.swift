@@ -34,8 +34,8 @@ class SeeMapViewController: BaseViewController {
         setUpView()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         addressVC.view.frame = CGRect(x: mAddreassBckgV.frame.origin.x,
                                        y:  mAddreassBckgV.frame.origin.y,
                                        width: mAddreassBckgV.bounds.size.width,
@@ -44,7 +44,7 @@ class SeeMapViewController: BaseViewController {
     
     
     func setUpView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        tabBarController?.tabBar.backgroundColor = color_background
         configureNavigationBar()
         configureMapView()
         addChildView()
@@ -53,6 +53,7 @@ class SeeMapViewController: BaseViewController {
   
     
     private func configureNavigationBar() {
+        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
         // menu
         menu = SideMenuNavigationController(rootViewController: LeftViewController())
         self.setmenu(menu: menu)
@@ -102,6 +103,8 @@ class SeeMapViewController: BaseViewController {
         addChild(addressVC)
         view.addSubview(addressVC.view)
         addressVC.didMove(toParent: self)
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
     }
     
     private func addMarker(longitude: Double, latitude: Double , marker: GMSMarker) {

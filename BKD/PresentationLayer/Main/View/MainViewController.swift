@@ -154,6 +154,7 @@ class MainViewController: BaseViewController {
         return toolBar
     }
     
+    //Add Carousel child controller
     func addCarousel() {
         addChild(carouselVC)
         carouselVC.view.frame = (searchHeaderV?.mCarouselV.bounds)!
@@ -267,7 +268,7 @@ class MainViewController: BaseViewController {
         }
     }
     
-    /// if there is any search result it will show car CollectionView else it will show avalable categories TableView
+    /// if there is any search result will show car CollectionView else will show avalable categories TableView
     private func animateSearchResultContainer (isThereResult : Bool) {
         carTypes = ApplicationSettings.shared.carTypes
         carsList = ApplicationSettings.shared.carsList
@@ -338,6 +339,10 @@ class MainViewController: BaseViewController {
               let returnDate = searchHeaderV?.returnDate,
               let pickUpTime = searchHeaderV?.pickUpTime,
               let returnTime = searchHeaderV?.returnTime else {
+                  if (searchHeaderV?.pickUpTime != nil || searchHeaderV?.returnTime != nil) &&
+                        (pickerState == .returnTime || pickerState == .pickUpTime )  {
+                      searchHeaderV?.updateTime(responderTxtFl: responderTxtFl, text: pickerList![ pickerV.selectedRow(inComponent: 0)])
+                  }
             return
             
         }
@@ -345,8 +350,14 @@ class MainViewController: BaseViewController {
 
                 if !result {
                     BKDAlert().showAlertOk(on: self, message: Constant.Texts.lessThan30Minutes, okTitle: "ok", okAction: {
+                        if self.pickerState == .pickUpTime {
+                            self.searchHeaderV?.updateTime(responderTxtFl: self.responderTxtFl, text: self.pickerList![ self.pickerV.selectedRow(inComponent: 0)])
+                        }
                         self.searchHeaderV?.resetReturnTime()
                     })
+                } else if self.pickerState == .returnTime || self.pickerState == .pickUpTime {
+                    
+                    self.searchHeaderV?.updateTime(responderTxtFl: self.responderTxtFl, text: self.pickerList![ self.pickerV.selectedRow(inComponent: 0)])
                 }
             }
     }
@@ -399,7 +410,7 @@ class MainViewController: BaseViewController {
                              })
     }
     
-    
+    //show filter cell
     func  showFilter()  {
         searchResultV?.didPressFilter = { [weak self] isShowFilter, needsUpdateFilterCell in
             self?.isPressedFilter = isShowFilter
@@ -414,7 +425,6 @@ class MainViewController: BaseViewController {
                self?.needsUpdateFilterCell = needsUpdateFilterCell
                  self?.mCarCollectionV.reloadItems(at: [IndexPath(item: 0, section: 0)])
             }
-           
         }
     }
     
@@ -548,7 +558,7 @@ class MainViewController: BaseViewController {
                 //check if more then half hour
                 searchHeaderV?.returnTime = timeStr.stringToDate()
             }
-            searchHeaderV?.updateTime(responderTxtFl: responderTxtFl, text: pickerList![ pickerV.selectedRow(inComponent: 0)])
+//            searchHeaderV?.updateTime(responderTxtFl: responderTxtFl, text: pickerList![ pickerV.selectedRow(inComponent: 0)])
             self.checkReservetionTime()
 
         }
