@@ -17,6 +17,7 @@ final class ApplicationSettings {
     private(set) var pickerList: [String]?
     private(set) var workingTimes: WorkingTimes?
     private(set) var flexibleTimes: [FlexibleTimes]?
+    private(set) var countryList: [Country]?
 
     private(set) var restrictedZones: [RestrictedZones]?
     var carsList:[String : [CarsModel]?]?
@@ -34,7 +35,7 @@ final class ApplicationSettings {
         getWorkingTimes()
         getRestrictedZones()
         getFlexibleTimes()
-
+        getCountryList()
     }
 }
 
@@ -167,7 +168,13 @@ extension ApplicationSettings {
         }
     }
 
-    
+    ///Get country list
+    func getCountryList() {
+        RegistrationBotViewModel().getCountryList { [weak self] (response) in
+            guard let self = self else { return }
+            self.countryList = response
+        }
+    }
 }
 
 extension ApplicationSettings {

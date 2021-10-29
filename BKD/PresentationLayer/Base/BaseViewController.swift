@@ -28,7 +28,8 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     
    
     //Go to registeration bot screen
-    func goToRegistrationBot(isDriverRegister:Bool, tableData: [RegistrationBotModel]) {
+    func goToRegistrationBot(isDriverRegister:Bool,
+                             tableData: [RegistrationBotModel]) {
         
         let registrationBotVC = RegistartionBotViewController.initFromStoryboard(name: Constant.Storyboards.registrationBot)
         registrationBotVC.tableData = tableData

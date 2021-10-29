@@ -8,6 +8,7 @@
 import UIKit
 import SideMenu
 
+
 final class MyBKDViewController: BaseViewController {
     
     //MARK:Outlet
@@ -17,27 +18,32 @@ final class MyBKDViewController: BaseViewController {
     @IBOutlet weak private var mPrivacyPolicyLb: UILabel!
     
     //MARK: Variables
+    var mainDriver: MainDriver?
     private lazy var signInVC = SignInViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
     private lazy var viewModel = MyBKDViewModel()
     private var menu: SideMenuNavigationController?
+    var isBackFromRegistrationBot = false
     
-    
+    //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        addSignInChild()
-        handlerSignIn()
+        if !isBackFromRegistrationBot {
+            addSignInChild()
+            handlerSignIn()
+        }
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        isBackFromRegistrationBot = false
     }
     
-    
     private func setUpView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = img_bkd
         menu = SideMenuNavigationController(rootViewController: LeftViewController())
@@ -48,9 +54,8 @@ final class MyBKDViewController: BaseViewController {
     ///Add child ViewController
     private func addSignInChild() {
         if viewModel.isUserSignIn {
-            signInVC.willMove(toParent: nil)
-            signInVC.view.removeFromSuperview()
-            signInVC.removeFromParent()
+            removeChild(vc: signInVC)
+            getMainDriver()
         } else {
             addChild(signInVC)
             signInVC.view.frame = self.view.bounds
@@ -66,9 +71,41 @@ final class MyBKDViewController: BaseViewController {
         vc.removeFromParent()
     }
     
+    ///Log out account
     private func logOut() {
         viewModel.logout()
         addSignInChild()
+    }
+    
+    ///Get main driver
+    func getMainDriver() {
+        viewModel.getMainDriver { response in
+            guard let response = response else {
+                self.goToRegistrationBot(isDriverRegister: false,
+                                         tableData: [RegistrationBotData.registrationBotModel[0]],
+                                         mainDriver: nil)
+                return
+            }
+            self.mainDriver = response
+            if self.mainDriver?.state != "AGREEMENT_ACCEPTED" {
+                self.goToRegistrationBot(isDriverRegister: false,
+                                         tableData: [RegistrationBotData.registrationBotModel[0]],
+                                         mainDriver: self.mainDriver)
+            }
+        }
+    }
+    
+    //Go to registeration bot screen
+    func goToRegistrationBot(isDriverRegister:Bool,
+                             tableData: [RegistrationBotModel],
+                             mainDriver: MainDriver?) {
+        
+        let registrationBotVC = RegistartionBotViewController.initFromStoryboard(name: Constant.Storyboards.registrationBot)
+        registrationBotVC.delegate = self
+        registrationBotVC.tableData = tableData
+        registrationBotVC.isDriverRegister = isDriverRegister
+        registrationBotVC.mainDriver = mainDriver
+        self.navigationController?.pushViewController(registrationBotVC, animated: true)
     }
     
     //MARK: ACTIONS
@@ -76,9 +113,11 @@ final class MyBKDViewController: BaseViewController {
         present(menu!, animated: true, completion: nil)
     }
     
+    ///Handler sign in
     func handlerSignIn() {
         signInVC.didSignIn = { [self] in
             self.removeChild(vc: self.signInVC)
+            self.getMainDriver()
         }
     }
 }
@@ -105,5 +144,13 @@ extension MyBKDViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 2 {
             logOut()
         }
+    }
+}
+
+//MARK: RegistartionBotViewControllerDelegate
+//MARK: ------------------------------------------
+extension MyBKDViewController: RegistartionBotViewControllerDelegate {
+    func backToMyBKD() {
+        isBackFromRegistrationBot = true
     }
 }

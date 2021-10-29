@@ -68,7 +68,11 @@ class TakePhotoTableViewCell: UITableViewCell {
         if ((item.userRegisterInfo?.isFilled) != nil) && item.userRegisterInfo?.isFilled == true {
             if item.viewDescription != "openDoc" {
                     self.mPhotoImgV.isHidden = false
+                if item.userRegisterInfo?.imageURL != nil {
+                    self.mPhotoImgV.sd_setImage(with: item.userRegisterInfo?.imageURL, placeholderImage: nil)
+                } else {
                     self.mPhotoImgV.image = (item.userRegisterInfo?.photo)!
+                }
                 isOpenDoc = false
             } else {
                 isOpenDoc = true

@@ -18,7 +18,7 @@ class AdditionalDriverForWaithingApprovalCell: UITableViewCell {
     @IBOutlet weak var mAdditionalDriverLb: UILabel!
     @IBOutlet weak var mDriverFullNameLb: UILabel!
     
-    //MARK: -- Lifecicle
+    //MARK: -- Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

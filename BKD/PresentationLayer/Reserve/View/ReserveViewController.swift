@@ -100,7 +100,7 @@ class ReserveViewController: UIViewController {
     }
     
     func setupView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         mRightBarBtn.image = img_bkd
         mConfirmBtn.layer.cornerRadius = 10
         mConfirmBtn.addBorder(color: color_navigationBar!, width: 1)

@@ -53,7 +53,7 @@ class OdometerCheckViewController: UIViewController, StoryboardInitializable {
     var odometerState: OdometerState = .none
     
     
-    //MARK: -- Life cicle
+    //MARK: -- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -66,7 +66,7 @@ class OdometerCheckViewController: UIViewController, StoryboardInitializable {
     }
     
     func setupView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         mRightBarBtn.image = img_bkd
         mOpenCameraBtn.layer.cornerRadius = view.bounds.height * 0.0235149
         mOpenCameraBtn.addBorder(color:color_navigationBar!, width: 1.0)

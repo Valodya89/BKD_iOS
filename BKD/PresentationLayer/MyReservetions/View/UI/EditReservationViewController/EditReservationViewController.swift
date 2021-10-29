@@ -51,7 +51,7 @@ class EditReservationViewController: BaseViewController {
 
 
 
-    //MARK: -- Life cicle
+    //MARK: -- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()

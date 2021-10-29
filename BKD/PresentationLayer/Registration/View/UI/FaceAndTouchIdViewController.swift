@@ -19,6 +19,8 @@ class FaceAndTouchIdViewController: UIViewController, StoryboardInitializable {
     override func viewDidLoad() {
         super.viewDidLoad()
         mRightBarBtn.image = img_bkd
+        signIn()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,6 +37,21 @@ class FaceAndTouchIdViewController: UIViewController, StoryboardInitializable {
         mAgreeBtn.setBorder(color: color_menu!, width: 1)
     }
     
+    ///Sigin user for get token
+    func signIn()  {
+        let keychainManager = KeychainManager()
+        SignInViewModel().signIn(username: keychainManager.getUsername() ?? "", password: keychainManager.getPasswor() ?? "") { [weak self] (status) in
+            guard let self = self else { return }
+            switch status {
+            case .success:
+                break
+            default:
+                self.showAlertMessage(Constant.Texts.errToken)
+                break
+            }
+        }
+    }
+    
     ///Go to registartion bot screen
     private func goToRegistartaionBot(){
         let registrationBotVC = RegistartionBotViewController.initFromStoryboard(name: Constant.Storyboards.registrationBot)
@@ -48,47 +65,47 @@ class FaceAndTouchIdViewController: UIViewController, StoryboardInitializable {
         
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             
-                let reason = Constant.Texts.touchIdNotice
-                context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [weak self] (success, error) in
-                    guard let self = self else {return}
-                    DispatchQueue.main.async {
+            let reason = Constant.Texts.touchIdNotice
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [weak self] (success, error) in
+                guard let self = self else {return}
+                DispatchQueue.main.async {
+                    
+                    if let err = error {
                         
-                        if let err = error {
-                                                
-                                                switch err._code {
-                                                    
-                                                case LAError.Code.systemCancel.rawValue:
-                                                    self.notifyUser("Session cancelled",
-                                                                    err: err.localizedDescription)
-                                                    
-                                                case LAError.Code.userCancel.rawValue:
-                                                    self.notifyUser("Please try again",
-                                                                    err: err.localizedDescription)
-                                                    
-                                                case LAError.Code.userFallback.rawValue:
-                                                    self.notifyUser("Authentication",
-                                                                    err: "Password option selected")
-                                                    // Custom code to obtain password here
-                                                    
-                                                default:
-                                                    self.notifyUser("Authentication failed",
-                                                                    err: err.localizedDescription)
-                                                }
-                                                
-                                            } else {
-                                                self.goToRegistartaionBot()
-//                                                self.notifyUser("Authentication Successful",
-//                                                                err: "You now have full access")
-                                            }
-
-//                    guard  success, error == nil else {
-//                        //failed
-//                        BKDAlert.init().showAlertOk(on: self, message: Constant.Texts.touchIdFailed, okTitle: Constant.Texts.ok) {
-//                        }
-//                        return
-//                    }
-//                    // success
-//                    self.goToRegistartaionBot()
+                        switch err._code {
+                            
+                        case LAError.Code.systemCancel.rawValue:
+                            self.notifyUser("Session cancelled",
+                                            err: err.localizedDescription)
+                            
+                        case LAError.Code.userCancel.rawValue:
+                            self.notifyUser("Please try again",
+                                            err: err.localizedDescription)
+                            
+                        case LAError.Code.userFallback.rawValue:
+                            self.notifyUser("Authentication",
+                                            err: "Password option selected")
+                            // Custom code to obtain password here
+                            
+                        default:
+                            self.notifyUser("Authentication failed",
+                                            err: err.localizedDescription)
+                        }
+                        
+                    } else {
+                           self.goToRegistartaionBot()
+//                                                                        self.notifyUser("Authentication Successful",
+                        //                                                                err: "You now have full access")
+                    }
+                    
+                    //                    guard  success, error == nil else {
+                    //                        //failed
+                    //                        BKDAlert.init().showAlertOk(on: self, message: Constant.Texts.touchIdFailed, okTitle: Constant.Texts.ok) {
+                    //                        }
+                    //                        return
+                    //                    }
+                    //                    // success
+                    //                    self.goToRegistartaionBot()
                 }
             }
             
@@ -99,13 +116,15 @@ class FaceAndTouchIdViewController: UIViewController, StoryboardInitializable {
     
     func notifyUser(_ msg: String, err: String?) {
         let alert = UIAlertController(title: msg, message: err, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "OK", style: .cancel)
+        let cancelAction = UIAlertAction(title: Constant.Texts.ok, style: .cancel)
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
     }
     
-//MARK: ACTIONS
+    
+    //MARK: ACTIONS
     @IBAction func cancel(_ sender: UIButton) {
+        
         self.goToRegistartaionBot()
     }
     
@@ -116,8 +135,8 @@ class FaceAndTouchIdViewController: UIViewController, StoryboardInitializable {
         clickAgree()    }
     
     @IBAction func back(_ sender: UIBarButtonItem) {
-
+        
         navigationController?.popToViewController(ofClass: RegistrationViewController.self)
-
+        
     }
 }

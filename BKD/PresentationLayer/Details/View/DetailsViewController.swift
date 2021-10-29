@@ -128,7 +128,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     
     func setupView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         
         mRightBarBtn.image = #imageLiteral(resourceName: "bkd").withRenderingMode(.alwaysOriginal)
         workingTimes = ApplicationSettings.shared.workingTimes

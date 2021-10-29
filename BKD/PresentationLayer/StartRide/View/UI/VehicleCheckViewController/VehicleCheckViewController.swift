@@ -32,7 +32,7 @@ class VehicleCheckViewController: UIViewController, StoryboardInitializable {
     var currentPageIndex = 0
     
     
-    //MARK: --Life cicle
+    //MARK: --Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBarController?.tabBar.isHidden = true
@@ -58,7 +58,7 @@ class VehicleCheckViewController: UIViewController, StoryboardInitializable {
     }
     
     func setupView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         configurePageControl()
         mRightBarBtn.image = img_bkd

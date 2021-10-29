@@ -25,5 +25,12 @@ extension String {
         print(date)
         return date
     }
+    
+    func stringToDateWithoutTime() -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date = dateFormatter.date(from:self)!
+        return date
+    }
 }
 

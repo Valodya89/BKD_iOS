@@ -31,6 +31,80 @@ enum RegistrationState: String {
 
 class RegistrationBotViewModel: NSObject {
     
+    ///Set registration bot information
+    func setRegisterBotInfo(mainDriver: MainDriver, countryList: [Country]?, completion: @escaping ([RegistrationBotModel]) -> Void) {
+        
+        var tableData: [RegistrationBotModel] = []
+        for i in 0 ..< RegistrationBotData.registrationBotModel.count {
+            tableData.append(RegistrationBotData.registrationBotModel[i])
+            if tableData[i].userRegisterInfo?.string == Constant.Texts.start {
+                tableData[i].userRegisterInfo?.isFilled = true
+            }
+             else if tableData[i].userRegisterInfo?.placeholder == Constant.Texts.name {
+                 tableData[i].userRegisterInfo?.string = mainDriver.name
+                 tableData[i].userRegisterInfo?.isFilled = true
+            }
+            else if tableData[i].userRegisterInfo?.placeholder == Constant.Texts.surname {
+                tableData[i].userRegisterInfo?.string = mainDriver.surname
+                tableData[i].userRegisterInfo?.isFilled = true
+            }
+            else if tableData[i].viewDescription == Constant.Texts.phone {
+                tableData[i].userRegisterInfo = UserRegisterInfo( string: mainDriver.phoneNumber, isFilled: true)
+            }
+            else if tableData[i].userRegisterInfo?.placeholder == Constant.Texts.dateOfBirth {
+                let components = mainDriver.dateOfBirth!.components(separatedBy: "T")
+
+                tableData[i].userRegisterInfo?.date = components[0].stringToDateWithoutTime()
+            }
+            else if tableData[i].userRegisterInfo?.placeholder ==  Constant.Texts.streetName {
+                tableData[i].userRegisterInfo?.string = mainDriver.street
+                tableData[i].userRegisterInfo?.isFilled = true
+            }
+            else if tableData[i].userRegisterInfo?.placeholder ==  Constant.Texts.houseNumber {
+                tableData[i].userRegisterInfo?.string = mainDriver.house
+                tableData[i].userRegisterInfo?.isFilled = true
+            }
+            else if tableData[i].userRegisterInfo?.placeholder ==  Constant.Texts.mailboxNumber {
+                tableData[i].userRegisterInfo?.string = mainDriver.mailBox
+                tableData[i].userRegisterInfo?.isFilled = true
+            }
+            else if tableData[i].userRegisterInfo?.placeholder ==  Constant.Texts.country {
+                let country = countryList?.filter { $0.id == mainDriver.countryId }
+                tableData[i].userRegisterInfo?.string =  country?.first?.country
+                tableData[i].userRegisterInfo?.isFilled = true
+            }
+            else if tableData[i].userRegisterInfo?.placeholder ==  Constant.Texts.zipNumber {
+                tableData[i].userRegisterInfo?.string = mainDriver.zip
+                tableData[i].userRegisterInfo?.isFilled = true
+            }
+            else if tableData[i].userRegisterInfo?.placeholder ==  Constant.Texts.city {
+                tableData[i].userRegisterInfo?.string = mainDriver.city
+                tableData[i].userRegisterInfo?.isFilled = true
+            }
+            else if tableData[i].viewDescription ==  Constant.Texts.nationalRegister {
+                tableData[i].userRegisterInfo = UserRegisterInfo( string: mainDriver.nationalRegisterNumber, isOtherNational: false,  isFilled: true)
+                if mainDriver.state == "PERSONAL_DATA" {
+                    completion(tableData)
+                    return
+                }
+            }
+            else if tableData[i].viewDescription ==  Constant.Texts.take_photo &&
+                tableData[i - 1].msgToFillBold == Constant.Texts.IF_text {
+                if mainDriver.identityFront != nil {
+                    tableData[i].userRegisterInfo = UserRegisterInfo(imageURL: mainDriver.identityFront!.getURL()!, isFilled: true)
+                }
+                if mainDriver.state == "IDENTITY_FRONT" {
+                    completion(tableData)
+                    return
+                }
+            }
+            
+        }
+        
+        completion(tableData)
+    }
+    
+    
     
     /// get country list
     func getCountryList(completion: @escaping ([Country]) -> Void) {
@@ -51,15 +125,35 @@ class RegistrationBotViewModel: NSObject {
         }
     }
     
-    /// add Personla Data
-    func addPersonlaData(personlaData: PersonalData,
-                         completion: @escaping (PersonalDriver?) -> Void) {
-        
-        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addPersonalData(name: personlaData.name!, surname: personlaData.surname!, phoneNumber: personlaData.phoneNumber!, dateOfBirth: personlaData.dateOfBirth!, street: personlaData.street!, house: personlaData.house!, mailBox: personlaData.mailBox ?? "", countryId: personlaData.countryId!, zip: personlaData.zip!, city: personlaData.city!, nationalRegisterNumber: personlaData.nationalRegisterNumber!))) { (result) in
+    
+    ///Creat user or driver
+    func creatDriver(type: String, completion: @escaping (MainDriver?) -> Void) {
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.createDriver(driverType: type))) { (result) in
             
             switch result {
             case .success(let data):
-                guard let result = BkdConverter<BaseResponseModel<PersonalDriver>>.parseJson(data: data as Any) else {
+                guard let mainDriver = BkdConverter<BaseResponseModel<MainDriver>>.parseJson(data: data as Any) else {
+                    print("error")
+                    return
+                }
+                completion(mainDriver.content!)
+            case .failure(let error):
+                print(error.description)
+                break
+            }
+        }
+    }
+    
+    /// add Personla Data
+    func addPersonlaData(id: String,  personlaData: PersonalData,
+                         completion: @escaping (MainDriver?) -> Void) {
+        
+
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addPersonalData(id: id, name: personlaData.name!, surname: personlaData.surname!, phoneNumber: personlaData.phoneNumber!, dateOfBirth: personlaData.dateOfBirth!, street: personlaData.street!, house: personlaData.house!, mailBox: personlaData.mailBox ?? "", countryId: personlaData.countryId!, zip: personlaData.zip!, city: personlaData.city!, nationalRegisterNumber: personlaData.nationalRegisterNumber!))) { (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let result = BkdConverter<BaseResponseModel<MainDriver>>.parseJson(data: data as Any) else {
                     print("error")
                     completion(nil)
                     return
@@ -129,20 +223,23 @@ class RegistrationBotViewModel: NSObject {
     }
     
     ///Upload image
-    func imageUpload(image: UIImage, state: String, completion: @escaping (String?) -> Void)  {
+    func imageUpload(image: UIImage,
+                     id: String,
+                     state: String,
+                     completion: @escaping (MainDriver?) -> Void)  {
             
-        SessionNetwork.init().request(with: URLBuilder(from: ImageUploadAPI.upload(image: image, state: state))) { result in
+        SessionNetwork.init().request(with: URLBuilder(from: ImageUploadAPI.upload(image: image, id: id, state: state))) { result in
             
             switch result {
             case .success(let data):
-                guard let result = BkdConverter<BaseResponseModel<EmptyModel>>.parseJson(data: data as Any) else {
+                guard let result = BkdConverter<BaseResponseModel<MainDriver>>.parseJson(data: data as Any) else {
                     print("error")
                     completion(nil)
                     return
                 }
                 print(result.message as Any)
-                completion(result.message as String)
-               // completion(result.content!)
+               // completion(result.message as String)
+                completion(result.content!)
 
             case .failure(let error):
                 print(error.description)

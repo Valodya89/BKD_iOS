@@ -312,6 +312,11 @@ struct Constant {
         static let selectMailApp = "Select Mail App"
         static let  googleMail = "Googleg Mail"
         static let  yahooMail = "Yahoo Mail"
+    
+        //Registration Bot
+        static let start = "Start"
+        static let take_photo = "takePhoto"
+        static let IF_text = "front side photo of your Identity card"
         
         //Error Messages
         static let errChangePassword = "Failed to change password, please try again"
@@ -336,6 +341,7 @@ struct Constant {
         static let manual = "MANUAL"
         static let resetPassword = "PASSWORD_RESET"
         static let verification = "VERIFICATION"
+        static let creat_main_driver = "MAIN"
 
 
     }
@@ -390,7 +396,6 @@ let testParking = Parking(id: "73483478",
                           name: "Testing address",
                           longitude: 44.495332,
                           latitude: 40.194582)
-let flexibleTimeList = ["07:30", "17:30 - 18:00"]
 
 
 

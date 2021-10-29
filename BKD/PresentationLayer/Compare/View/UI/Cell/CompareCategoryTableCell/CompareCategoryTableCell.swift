@@ -19,7 +19,7 @@ class CompareCategoryTableCell: UITableViewCell {
     
     //MARK: -- Variables
     
-    //MARK: -- Life cicle
+    //MARK: -- Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

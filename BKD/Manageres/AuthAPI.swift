@@ -26,6 +26,7 @@ enum AuthAPI: APIProtocol {
     case getCountries
     case getTariff
     case getAccessories(carID: String)
+    case getMainDriver
     case signUp(username: String,
                 password: String)
     case verifyAccounts(username: String,
@@ -39,7 +40,9 @@ enum AuthAPI: APIProtocol {
     case recoverPassword(username: String,
                          password: String,
                          code: String)
-    case addPersonalData(name: String,
+    case createDriver(driverType: String)
+    case addPersonalData(id: String,
+                         name: String,
                          surname: String,
                          phoneNumber: String,
                          dateOfBirth: String,
@@ -64,6 +67,7 @@ enum AuthAPI: APIProtocol {
         case .getWorkingTimes,
              .getPhoneCodes,
              .getCountries,
+             .getMainDriver,
              .signUp,
              .verifyAccounts,
              .resendCode,
@@ -71,6 +75,7 @@ enum AuthAPI: APIProtocol {
              .forgotPassword,
              .recoverPassword,
              .getChatID,
+             .createDriver,
              .addIdentityExpiration,
              .addDriverLicenseDates:
             return BKDBaseURLs.account.rawValue
@@ -116,6 +121,8 @@ enum AuthAPI: APIProtocol {
             return "tariff/list"
         case .getAccessories(let carID):
             return "car/\(carID)/accessories"
+        case .getMainDriver:
+            return "api/driver"
         case .signUp:
             return "accounts/create"
         case .verifyAccounts:
@@ -128,8 +135,11 @@ enum AuthAPI: APIProtocol {
             return "oauth/token"
         case .forgotPassword:
             return "accounts/send-code"
-        case .addPersonalData:
-            return "api/driver/personal"
+        case .createDriver(let driverType):
+            return "api/driver/\(driverType)"
+        case let .addPersonalData(id, _,_,_,_,_,_,
+                                  _,_,_,_,_):
+            return "api/driver/\(id)/personal"
         case .recoverPassword:
             return "accounts/recover-password"
         case .getChatID:
@@ -150,6 +160,7 @@ enum AuthAPI: APIProtocol {
         switch self {
         case .getCarsByType,
              .getCarsByFilter,
+             .getMainDriver,
              .signUp,
              .verifyAccounts,
              .resendCode,
@@ -162,6 +173,7 @@ enum AuthAPI: APIProtocol {
              .getTariff,
              .getAccessories,
              .sendMessage,
+             .createDriver,
              .addIdentityExpiration,
              .addDriverLicenseDates:
             return ["Content-Type": "application/json"]
@@ -203,7 +215,7 @@ enum AuthAPI: APIProtocol {
     
     var body: [String : Any]? {
         switch self {
-        
+
         case let .getCarsByType(criteria):
             return [
                 "criteria" : [criteria]
@@ -242,7 +254,7 @@ enum AuthAPI: APIProtocol {
                 "password": password,
                 "code": code
             ]
-        case let .addPersonalData(name, surname, phoneNumber, dateOfBirth, street, house, mailBox, countryId, zip, city, nationalRegisterNumber):
+        case let .addPersonalData( _, name, surname, phoneNumber, dateOfBirth, street, house, mailBox, countryId, zip, city, nationalRegisterNumber):
             return [
                 "name": name,
                 "surname": surname,
@@ -307,6 +319,7 @@ enum AuthAPI: APIProtocol {
              .addPersonalData,
              .getChatID,
              .sendMessage,
+             .createDriver,
              .addIdentityExpiration,
              .addDriverLicenseDates:
             return .post
@@ -322,3 +335,4 @@ enum AuthAPI: APIProtocol {
         }
     }
 }
+

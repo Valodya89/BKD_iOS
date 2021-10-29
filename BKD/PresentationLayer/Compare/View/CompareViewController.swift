@@ -48,7 +48,7 @@ class CompareViewController: BaseViewController {
     private var isOpenTable: Bool = false
     
     
-    //MARK: -- Life cicle
+    //MARK: -- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -56,7 +56,7 @@ class CompareViewController: BaseViewController {
     
     
     func setupView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         mRightBarBtn.image = img_bkd
         mCategoryContentV.layer.cornerRadius = 3
         mCategoryContentV.setShadow(color: color_shadow!)

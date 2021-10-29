@@ -52,7 +52,7 @@ class DateAndLocationView: UIView, UITextFieldDelegate {
     var time: Date?
     var location:String?
     
-    //MARK: -- Life cicle
+    //MARK: -- Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()

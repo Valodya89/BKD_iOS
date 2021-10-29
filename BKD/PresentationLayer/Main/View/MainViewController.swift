@@ -74,7 +74,7 @@ class MainViewController: BaseViewController {
     
     
     func setupView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_search_title!, NSAttributedString.Key.foregroundColor: UIColor.white]
         backgroundV.frame = self.view.bounds
         backgroundV.backgroundColor = .black

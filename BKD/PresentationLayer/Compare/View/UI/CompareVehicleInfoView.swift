@@ -31,7 +31,7 @@ class CompareVehicleInfoView: UIView {
     public var carModel:CarsModel?
     weak var delegate: CompareVehicleInfoViewDelegate?
     
-    //MARK: -- Life cicle
+    //MARK: -- Lifecycle
     override func awakeFromNib() {
          super.awakeFromNib()
         setupView()

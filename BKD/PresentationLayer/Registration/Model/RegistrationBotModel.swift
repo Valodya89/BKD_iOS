@@ -17,6 +17,7 @@ struct RegistrationBotModel {
 
 struct UserRegisterInfo {
     public var photo: UIImage?
+    public var imageURL: URL?
     public var string: String?
     public var date: Date?
     public var isOtherNational: Bool = false

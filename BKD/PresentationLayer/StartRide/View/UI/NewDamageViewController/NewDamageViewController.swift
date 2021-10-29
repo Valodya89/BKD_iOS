@@ -26,7 +26,7 @@ class NewDamageViewController: UIViewController, StoryboardInitializable {
     //MARK: -- Variabl
     weak var delegate: NewDamageViewControllerDelegate?
     
-    //MARK: -- Life cicle
+    //MARK: -- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -39,7 +39,7 @@ class NewDamageViewController: UIViewController, StoryboardInitializable {
     }
     
     func setupView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         mContentV.layer.borderWidth = 1.0
         mContentV.layer.borderColor = color_shadow!.cgColor
         mCancelBtn.layer.cornerRadius = 8

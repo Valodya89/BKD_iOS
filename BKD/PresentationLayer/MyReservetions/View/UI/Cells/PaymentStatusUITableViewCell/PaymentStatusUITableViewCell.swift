@@ -30,7 +30,7 @@ class PaymentStatusUITableViewCell: UITableViewCell  {
     var didPressPay:((Bool)-> Void)?
     var isPayLater = false
     
-    //MARK: Life cicle
+    //MARK: -- Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         mPayBtn.layer.cornerRadius = 8

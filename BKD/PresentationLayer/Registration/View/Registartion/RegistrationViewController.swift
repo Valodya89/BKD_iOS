@@ -43,7 +43,7 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
     }
     
     func setUpView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         tabBarController?.tabBar.isHidden = true
         
         mRightBarBtn.image = img_bkd

@@ -49,7 +49,7 @@ class ReservetionWithDistancePriceCell: UICollectionViewCell {
     //MARK: -- Variable
     var payDistancePrice:(()->Void)?
     
-    //MARK: -- Life cicle
+    //MARK: -- Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()

@@ -23,7 +23,7 @@ class DamageSidesTableView: UITableView, UITableViewDelegate, UITableViewDataSou
     weak var damageSidesDelegate: DamageSidesTableViewDelegate?
     
     
-    //MARK: -- Life cicle
+    //MARK: -- Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()

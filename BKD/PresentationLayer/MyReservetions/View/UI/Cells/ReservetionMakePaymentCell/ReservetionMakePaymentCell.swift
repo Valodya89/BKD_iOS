@@ -40,7 +40,7 @@ class ReservetionMakePaymentCell: UICollectionViewCell {
     //MARK: -- VAriable
     var makePayment:(()-> Void)?
     
-    //MARK: -- Life cicle
+    //MARK: -- Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()

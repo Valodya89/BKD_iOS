@@ -177,6 +177,7 @@
 		565BFDFB26A0C3800044D081 /* CarTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565BFDFA26A0C3800044D081 /* CarTypes.swift */; };
 		565BFDFF26A0D3960044D081 /* RestrictedZones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565BFDFE26A0D3960044D081 /* RestrictedZones.swift */; };
 		565BFE0326A12CA10044D081 /* Parking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565BFE0226A12CA10044D081 /* Parking.swift */; };
+		565D142827296AD0000760AE /* MainDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D142727296AD0000760AE /* MainDriver.swift */; };
 		565F807426A3C46600ADB9FE /* WorkingTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F807326A3C46600ADB9FE /* WorkingTimes.swift */; };
 		565F807826A4FE8600ADB9FE /* RegistrationBotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F807726A4FE8600ADB9FE /* RegistrationBotViewModel.swift */; };
 		565F807C26A510AA00ADB9FE /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F807B26A510AA00ADB9FE /* Country.swift */; };
@@ -528,6 +529,7 @@
 		565BFDFA26A0C3800044D081 /* CarTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarTypes.swift; sourceTree = "<group>"; };
 		565BFDFE26A0D3960044D081 /* RestrictedZones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrictedZones.swift; sourceTree = "<group>"; };
 		565BFE0226A12CA10044D081 /* Parking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parking.swift; sourceTree = "<group>"; };
+		565D142727296AD0000760AE /* MainDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDriver.swift; sourceTree = "<group>"; };
 		565F807326A3C46600ADB9FE /* WorkingTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingTimes.swift; sourceTree = "<group>"; };
 		565F807726A4FE8600ADB9FE /* RegistrationBotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationBotViewModel.swift; sourceTree = "<group>"; };
 		565F807B26A510AA00ADB9FE /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
@@ -2594,6 +2596,7 @@
 				565F807F26A5159000ADB9FE /* City.swift */,
 				565F80A726A5FD7D00ADB9FE /* PersonalData.swift */,
 				5656A9D526D8303E00A71375 /* PersonalDriver.swift */,
+				565D142727296AD0000760AE /* MainDriver.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2946,7 +2949,7 @@
 				568E6F4C2642FC4B000CB6A9 /* Resources */,
 				565F8C65268D390600E21C71 /* Embed Frameworks */,
 				995B321BDC49670283C49A78 /* [CP] Embed Pods Frameworks */,
-				36C6BA6A53DB7FB619B2D4D4 /* [CP] Copy Pods Resources */,
+				A3F12B7C2D718EB5FA945FB0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3117,23 +3120,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		36C6BA6A53DB7FB619B2D4D4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		995B321BDC49670283C49A78 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3149,6 +3135,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A3F12B7C2D718EB5FA945FB0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3270,6 +3273,7 @@
 				56683796271640DD00C8D8FF /* UILocalizedButton.swift in Sources */,
 				93CDB1EE26C17C69009F9B6C /* TokenResponse.swift in Sources */,
 				9393BAED26D78833003878BF /* SocketService.swift in Sources */,
+				565D142827296AD0000760AE /* MainDriver.swift in Sources */,
 				56B9F2D5267E8CEE003449AD /* SearchView.swift in Sources */,
 				56A2AFE62694C827001BA7C5 /* PhoneNumberTableViewCell.swift in Sources */,
 				5658D76826C9BB5700CD6A3F /* CustomLocationModel.swift in Sources */,

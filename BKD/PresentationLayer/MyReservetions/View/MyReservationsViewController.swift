@@ -32,7 +32,7 @@ class MyReservationsViewController: BaseViewController {
     var drivers:[MyDriversModel]? = MyDriversData.myDriversModel
 
 
-    //MARK: -- Life cicle
+    //MARK: -- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -55,7 +55,7 @@ class MyReservationsViewController: BaseViewController {
     }
     
     func setupView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         menu = SideMenuNavigationController(rootViewController: LeftViewController())
         self.setmenu(menu: menu)
         mNoReservationContentV.isHidden = ReservationWithReservedPaidData.reservationWithReservedPaidModel.count > 0

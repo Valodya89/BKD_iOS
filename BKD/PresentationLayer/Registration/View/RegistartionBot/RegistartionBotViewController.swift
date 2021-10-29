@@ -14,6 +14,9 @@ enum PickerType {
     case nationalCountry
 }
 
+protocol RegistartionBotViewControllerDelegate: AnyObject {
+    func backToMyBKD()
+}
 final class RegistartionBotViewController: UIViewController, StoryboardInitializable {
     
     //MARK: Outlets
@@ -29,7 +32,8 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
     
     
     //MARK: Variables
-    let registrationBotViewModel = RegistrationBotViewModel()
+    weak var delegate: RegistartionBotViewControllerDelegate?
+    lazy var registrationBotViewModel = RegistrationBotViewModel()
     var tableData:[RegistrationBotModel] = []
     private let applicationSettings: ApplicationSettings = .shared
     var currentPhoneCode: PhoneCode?
@@ -52,13 +56,32 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
     private var currentIndex = 0
     private var imageUploadCounter = 0
     private var activeTextField: UITextField?
-    
+    public var mainDriver: MainDriver?
+
 
     //MARK: - Life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        countryList = ApplicationSettings.shared.countryList
+        if countryList == nil {
+            getCountryList()
+        }
+        creatUser()
         setUpView()
-        getCountryList()
+        setUpConfirmView()
+        configureTableView()
+        if mainDriver == nil {
+            startTimer()
+        } else {
+            registrationBotViewModel.setRegisterBotInfo(mainDriver: mainDriver!, countryList: countryList) { registrationBotResult in
+                self.tableData = registrationBotResult
+                self.mTableV.reloadData()
+                self.tableScrollToBottom()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
+                    self.insertTableCell()
+                }
+            }
+        }
     }
         
     override func viewWillAppear(_ animated: Bool) {
@@ -72,13 +95,12 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
     }
     
     func setUpView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         currentPhoneCode = applicationSettings.phoneCodes?.first
         currentCountry = countryList?.first
         mRightBarBtn.image = img_bkd
         mThankYouBtn.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_dark_register!, borderWidth: 1)
-        setUpConfirmView()
-        configureTableView()
+        
     }
     
     
@@ -88,6 +110,7 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
         mConfirmBckgV.roundCorners(corners: [.topRight, .topLeft], radius: 20)
     }
     
+    ///Add Keyboard notifications
     func registerForKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
@@ -97,6 +120,7 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
                                                object: nil)
     }
     
+    ///Configure table view
     func configureTableView() {
         mTableV.register(InfoMessageTableViewCell.nib(), forCellReuseIdentifier: InfoMessageTableViewCell.identifier)
         mTableV.register(ExamplePhotoTableViewCell.nib(), forCellReuseIdentifier: ExamplePhotoTableViewCell.identifier)
@@ -108,9 +132,10 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
         mTableV.register(TakePhotoTableViewCell.nib(), forCellReuseIdentifier: TakePhotoTableViewCell.identifier)
         mTableV.estimatedRowHeight = UITableView.automaticDimension
 
-        startTimer()
     }
     
+    
+    ///Get country list
     func getCountryList() {
         registrationBotViewModel.getCountryList { [weak self] (response) in
             guard let self = self else { return }
@@ -120,32 +145,24 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
         }
     }
     
-    
-    ///Sigin user for get token
-    func signIn()  {
-        let keychainManager = KeychainManager()
-        SignInViewModel().signIn(username: keychainManager.getUsername() ?? "", password: keychainManager.getPasswor() ?? "") { [weak self] (status) in
-            guard let self = self else { return }
-            switch status {
-            case .success:
-                self.tableData[self.currentIndex].userRegisterInfo?.isFilled =  true
-                self.insertTableCell()
-                break
-            default:
-                self.showAlertMessage(Constant.Texts.errToken)
-                break
-            }
+    ///Sent requesst for creat user account
+    func creatUser() {
+        registrationBotViewModel.creatDriver(type: Constant.Texts.creat_main_driver) { request in
+            print (request)
+            guard let _ = request else {return}
+            self.mainDriver = request!
         }
     }
     
-    
+    //Send personal data
     func sendPersonalData(personalData: PersonalData) {
-        registrationBotViewModel.addPersonlaData(personlaData: personalData) { [self] (result) in
+        registrationBotViewModel.addPersonlaData(id: mainDriver!.id, personlaData: personalData) { [self] (result) in
             print(result)
             guard let result = result else {
                 self.showAlertMessage(Constant.Texts.errPersonalData)
                 return }
-            self.registrationState = RegistrationState(rawValue: result.driver.state ?? "")!
+            mainDriver = result
+            self.registrationState = RegistrationState(rawValue: mainDriver?.state ?? "")!
         }
     }
 
@@ -176,7 +193,6 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
         } else {
             stopTimer()
         }
-        
     }
     
     /// Insert table cell
@@ -307,6 +323,7 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
     }
     
     @IBAction func beck(_ sender: UIBarButtonItem) {
+        delegate?.backToMyBKD()
         navigationController?.popViewController(animated: true)
     }
     
@@ -419,17 +436,17 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
     private func calendarCell(indexPath: IndexPath, model: RegistrationBotModel, isExpireDate: Bool) -> CalendarTableViewCell {
         
         let cell = mTableV.dequeueReusableCell(withIdentifier: CalendarTableViewCell.identifier, for: indexPath) as! CalendarTableViewCell
+        cell.delegate = self
         cell.setCellInfo(item: model)
         cell.isExpireDate = isExpireDate
-        cell.delegate = self
         return cell
     }
     
     private func mailBoxCell(indexPath: IndexPath, model: RegistrationBotModel) -> MailBoxNumberTableViewCell{
         
         let cell = mTableV.dequeueReusableCell(withIdentifier: MailBoxNumberTableViewCell.identifier, for: indexPath) as! MailBoxNumberTableViewCell
-        cell.setCellInfo(item: model)
         cell.delegate = self
+        cell.setCellInfo(item: model)
         return cell
     }
     
@@ -472,7 +489,9 @@ extension RegistartionBotViewController: UserFillFieldTableViewCellDelegate {
     }
     
     func didPressStart() {
-        signIn()
+        self.tableData[self.currentIndex].userRegisterInfo?.isFilled =  true
+        self.insertTableCell()
+       // signIn()
     }
 
     func didReturnTxtField(txt: String?) {
@@ -736,23 +755,25 @@ extension RegistartionBotViewController: UIImagePickerControllerDelegate, UINavi
        
         
         let newImage = image.resizeImage(targetSize: CGSize(width: 50, height: 50))
-        registrationBotViewModel.imageUpload(image: newImage, state: uploadState) { [self] (result) in
-            if result == "SUCCESS" {
-                DispatchQueue.main.async { [self] in
-                    tableData[self.currentIndex].userRegisterInfo = UserRegisterInfo(photo: image, isFilled: true)
-                    mTableV.reloadRows(at: [IndexPath(row: self.currentIndex, section: 0)], with: .automatic)
-                    self.insertTableCell()
-                }
-                self.isTakePhoto = false
-                self.imageUploadCounter += 1
-                if uploadState == "IB" {
-                    self.registrationState = .IDENTITY_BACK
-                } else if uploadState == "DLB" {
-                    self.registrationState = .DRIVING_LICENSE_BACK
-                }
-            } else {
-                self.showAlertMessage(Constant.Texts.errImageUpload)
-            }            
+        registrationBotViewModel.imageUpload(image: newImage,
+                                             id: mainDriver?.id ?? "",
+                                             state: "IF") { [self] (result) in
+//            if result == "SUCCESS" {
+//                DispatchQueue.main.async { [self] in
+//                    tableData[self.currentIndex].userRegisterInfo = UserRegisterInfo(photo: image, isFilled: true)
+//                    mTableV.reloadRows(at: [IndexPath(row: self.currentIndex, section: 0)], with: .automatic)
+//                    self.insertTableCell()
+//                }
+//                self.isTakePhoto = false
+//                self.imageUploadCounter += 1
+//                if uploadState == "IB" {
+//                    self.registrationState = .IDENTITY_BACK
+//                } else if uploadState == "DLB" {
+//                    self.registrationState = .DRIVING_LICENSE_BACK
+//                }
+//            } else {
+//                self.showAlertMessage(Constant.Texts.errImageUpload)
+//            }            
         }
     }
   

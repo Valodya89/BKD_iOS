@@ -191,7 +191,7 @@ struct  RegistrationBotData {
         
         RegistrationBotModel(msgToFill: "Hello. I’m the BKD robot. I help new users register fast and fun."),
         RegistrationBotModel(msgToFill: "Please, have with you your ID and Driving license. You must be at least 23 years old, have a valid Driving license for at least 2 years."),
-        RegistrationBotModel(viewDescription: Constant.Texts.button, userRegisterInfo: UserRegisterInfo(string: "Start")),
+        RegistrationBotModel(viewDescription: Constant.Texts.button, userRegisterInfo: UserRegisterInfo(string: Constant.Texts.start)),
          RegistrationBotModel(msgToFill: "Let’s start with some personal details. Firstly, your First name.", msgToFillBold: "First name."),
         RegistrationBotModel(msgToFill: "P.S. You should use your real names on BKD."),
         RegistrationBotModel(viewDescription: Constant.Texts.txtFl, userRegisterInfo: UserRegisterInfo(placeholder: Constant.Texts.name)),
@@ -219,7 +219,7 @@ struct  RegistrationBotData {
         RegistrationBotModel(viewDescription: Constant.Texts.nationalRegister),
         RegistrationBotModel(msgToFill: "Last Registration Step is to attach Documents."),
         RegistrationBotModel(msgToFill: "Documents should be captured fully, as well as the information on them must be easily readable."),
-        RegistrationBotModel(msgToFill: "First, take the front side photo of your Identity card (Photo holder side).", msgToFillBold: "front side photo of your Identity card"),
+        RegistrationBotModel(msgToFill: "First, take the front side photo of your Identity card (Photo holder side).", msgToFillBold: Constant.Texts.IF_text),
         RegistrationBotModel(viewDescription: "takePhoto"),
         RegistrationBotModel(msgToFill: "Now, take the back side photo of your Identity card.", msgToFillBold: "back side photo of your Identity card"),
         RegistrationBotModel(viewDescription: "takePhoto"),

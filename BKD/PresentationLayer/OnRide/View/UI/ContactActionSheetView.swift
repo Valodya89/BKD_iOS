@@ -17,7 +17,7 @@ class ContactActionSheetView: UIView {
     var callByNumber:((String)-> Void)?
     var cancel:(()-> Void)?
     
-    //MARK: -- Life cicle
+    //MARK: -- Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()

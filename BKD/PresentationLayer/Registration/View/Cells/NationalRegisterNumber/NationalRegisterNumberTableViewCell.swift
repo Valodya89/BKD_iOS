@@ -104,8 +104,7 @@ class NationalRegisterNumberTableViewCell: UITableViewCell {
     
     /// Set cell info
     func  setCellInfo(item: RegistrationBotModel) {
-//        let placehoder  = RegistrationViewModel().getPhonePlaceholder(format: (selectedCountry?.nationalDocumentMask!)!)
-//        mTextFl.setPlaceholder(string: placehoder, font: font_chat_placeholder!, color: color_email!)
+
         
         if ((item.userRegisterInfo?.isFilled) != nil) && item.userRegisterInfo?.isFilled == true {
                 textFiledFilled(txt: (item.userRegisterInfo?.string)!)

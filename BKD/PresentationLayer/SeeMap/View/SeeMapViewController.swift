@@ -53,7 +53,7 @@ class SeeMapViewController: BaseViewController {
   
     
     private func configureNavigationBar() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         // menu
         menu = SideMenuNavigationController(rootViewController: LeftViewController())
         self.setmenu(menu: menu)

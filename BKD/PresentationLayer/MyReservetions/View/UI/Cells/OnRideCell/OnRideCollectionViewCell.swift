@@ -51,7 +51,7 @@ class OnRideCollectionViewCell: UICollectionViewCell {
     var pressedSeeMap:(()->Void)?
     
     
-    //MARK: -- Life cicle
+    //MARK: -- Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
