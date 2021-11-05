@@ -19,6 +19,11 @@ class MyDriverCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mSelectBtn: UIButton!
     @IBOutlet weak var mShadowBckgV: UIView!
     
+    //Admin approval
+    @IBOutlet weak var mAdminApprovalWaitingContentyV: UIView!
+    @IBOutlet weak var mStatusLb: UILabel!
+    @IBOutlet weak var mAdminApprovalWaitingLb: UILabel!
+    
     weak var delegate: MyDriverCollectionViewCellDelegate?
 
     
@@ -36,11 +41,12 @@ func setupView() {
         mSelectBtn.tag = index
         mSelectBtn.addTarget(self, action: #selector(selectDriver(sender:)), for: .touchUpInside)
         mFullNameLb.text = item.fullname
-        mLicenseLb.text = item.licenciNumber
+        mLicenseLb.text = Constant.Texts.licenseNumber + " " + item.licenciNumber
         if item.isSelected {
             mSelectBtn.backgroundColor = color_navigationBar!
             mSelectBtn.setTitleColor(color_menu!, for: .normal)
         }
+        mAdminApprovalWaitingContentyV.isHidden = !item.isWaitingForAdmin
 }
 
 @objc func selectDriver(sender:UIButton) {

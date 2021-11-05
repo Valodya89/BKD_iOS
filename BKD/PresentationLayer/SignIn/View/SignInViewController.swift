@@ -45,6 +45,9 @@ final class SignInViewController: BaseViewController {
         mSignInLeading.constant = 0
         mSignInBckgV.isUserInteractionEnabled = false
         self.mSignInBckgV.alpha =  0.8
+        mErrorLb.isHidden = true
+        mPasswordTxtFl.layer.borderColor = color_navigationBar!.cgColor
+        mEmailAddressTextFl.layer.borderColor = color_navigationBar!.cgColor
     }
     
     override func viewDidLayoutSubviews() {
@@ -58,7 +61,6 @@ final class SignInViewController: BaseViewController {
         mPasswordTxtFl.setBorder(color: color_navigationBar!, width: 1)
         mEmailAddressTextFl.setBorder(color: color_navigationBar!, width: 1)
         mSignInBtn.addBorder(color:color_navigationBar!, width: 1.0)
-//        mRegisterBtn.setGradientWithCornerRadius(cornerRadius: 8.0, startColor: color_gradient_register_start!, endColor: color_gradient_register_end!)
     }
     
     private func setUpView() {

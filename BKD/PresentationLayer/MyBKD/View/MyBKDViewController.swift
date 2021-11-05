@@ -32,8 +32,15 @@ final class MyBKDViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         if !isBackFromRegistrationBot {
-            addSignInChild()
+            if viewModel.isUserSignIn {
+                removeChild(vc: signInVC)
+                self.getMainDriver()
+                //signIn()
+            } else {
+                addSignInChild()
+            }
             handlerSignIn()
         }
     }
@@ -53,15 +60,10 @@ final class MyBKDViewController: BaseViewController {
     
     ///Add child ViewController
     private func addSignInChild() {
-        if viewModel.isUserSignIn {
-            removeChild(vc: signInVC)
-            getMainDriver()
-        } else {
             addChild(signInVC)
             signInVC.view.frame = self.view.bounds
             self.view.addSubview(signInVC.view)
             signInVC.didMove(toParent: self)
-        }
     }
     
     ///Remove child ViewController
@@ -70,6 +72,19 @@ final class MyBKDViewController: BaseViewController {
         vc.view.removeFromSuperview()
         vc.removeFromParent()
     }
+   
+//    ///SignIn user
+//    private func signIn() {
+//        SignInViewModel().signIn(username: viewModel.userName,
+//                                 password: viewModel.password) {[weak self] status in
+//            guard let self = self else { return }
+//            if status == .success {
+//                self.getMainDriver()
+//            } else {
+//                self.addSignInChild()
+//            }
+//        }
+//    }
     
     ///Log out account
     private func logOut() {
@@ -80,18 +95,19 @@ final class MyBKDViewController: BaseViewController {
     ///Get main driver
     func getMainDriver() {
         viewModel.getMainDriver { response in
-            guard let response = response else {
+            if response == nil || (response?.id ?? "").count <= 0 || (response?.state ?? "") == Constant.Texts.state_created  {
                 self.goToRegistrationBot(isDriverRegister: false,
                                          tableData: [RegistrationBotData.registrationBotModel[0]],
                                          mainDriver: nil)
-                return
+            } else {
+                self.mainDriver = response
+                if self.mainDriver?.state != Constant.Texts.state_agree {
+                    self.goToRegistrationBot(isDriverRegister: false,
+                                             tableData: [RegistrationBotData.registrationBotModel[0]],
+                                             mainDriver: self.mainDriver)
+                }
             }
-            self.mainDriver = response
-            if self.mainDriver?.state != "AGREEMENT_ACCEPTED" {
-                self.goToRegistrationBot(isDriverRegister: false,
-                                         tableData: [RegistrationBotData.registrationBotModel[0]],
-                                         mainDriver: self.mainDriver)
-            }
+            
         }
     }
     

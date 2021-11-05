@@ -46,12 +46,31 @@ class TakePhotoTableViewCell: UITableViewCell {
     }
     
     func setUpView() {
-        mTackePhotoBackgV.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_dark_register!, borderWidth: 1)
-        mOpenContentV.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_dark_register!, borderWidth: 1)
+        
+        mTackePhotoBackgV.layer.cornerRadius = mTackePhotoBackgV.frame.height/2
+        mTackePhotoBackgV.setBorder(color: color_navigationBar!, width: 1.0)
+        mOpenContentV.layer.cornerRadius = mTackePhotoBackgV.frame.height/2
+        mOpenContentV.setBorder(color: color_navigationBar!, width: 1.0)
+        mCameraImgV.setTintColor(color: color_alert_txt!)
+        mAgreeImgV.setTintColor(color: color_alert_txt!)
+//        mTackePhotoBackgV.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_navigationBar!, borderWidth: 1)
+//        mOpenContentV.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_navigationBar!, borderWidth: 1)
         mPhotoImgV.layer.cornerRadius = 3
+        
+//        mTackePhotoBackgV.bringSubviewToFront(mTakePhotoLb)
+//        mTackePhotoBackgV.bringSubviewToFront(mCameraImgV)
+//        mOpenContentV.bringSubviewToFront(mOpenLb)
+//        mOpenContentV.bringSubviewToFront(mAgreeImgV)
+
+        
+       
     }
     
     override func prepareForReuse() {
+        mTackePhotoBackgV.setBorder(color: color_navigationBar!, width: 1.0)
+        mOpenContentV.setBorder(color: color_navigationBar!, width: 1.0)
+//        mTackePhotoBackgV.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_navigationBar!, borderWidth: 1)
+//        mOpenContentV.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_navigationBar!, borderWidth: 1)
         mTackePhotoBackgV.backgroundColor = .clear
         mPhotoImgV.image = nil
         mPhotoImgV.isHidden = true
@@ -60,6 +79,12 @@ class TakePhotoTableViewCell: UITableViewCell {
         mCameraImgV.setTintColor(color: color_alert_txt!)
         mAgreeImgV.setTintColor(color: color_alert_txt!)
         self.isUserInteractionEnabled = true
+        
+        
+//        mTackePhotoBackgV.bringSubviewToFront(mTakePhotoLb)
+//        mTackePhotoBackgV.bringSubviewToFront(mCameraImgV)
+//        mOpenContentV.bringSubviewToFront(mOpenLb)
+//        mOpenContentV.bringSubviewToFront(mAgreeImgV)
     }
     
     
@@ -97,23 +122,35 @@ class TakePhotoTableViewCell: UITableViewCell {
         if isOpenDoc {
             mOpenLb.textColor = .white
             mAgreeImgV.setTintColor(color: .white)
-            mOpenContentV.backgroundColor = color_dark_register!
+//            mOpenContentV.setBorderColorToCAShapeLayer(color: .clear)
+//            mOpenContentV.setBackgroundColorToCAShapeLayer(color: color_dark_register!)
+            mOpenContentV.layer.borderWidth = 0.0
+            mOpenContentV.backgroundColor = color_navigationBar! // color_dark_register!
         } else {
             mTakePhotoLb.textColor = .white
             mCameraImgV.setTintColor(color: .white)
-            mTackePhotoBackgV.backgroundColor = color_dark_register!
-            mTackePhotoBackgV.layer.cornerRadius = 10
+//            mTackePhotoBackgV.setBorderColorToCAShapeLayer(color: .clear)
+//            mTackePhotoBackgV.setBackgroundColorToCAShapeLayer(color: color_dark_register!)
+            mTackePhotoBackgV.layer.borderWidth = 0.0
+            mTackePhotoBackgV.backgroundColor = color_navigationBar!
+            
         }
     }
     
     
-    private func docDidAgree(img: UIImage) {
-        mTakePhotoLb.textColor = .white
-        mCameraImgV.setTintColor(color: .white)
-        mTakePhotoBtn.isUserInteractionEnabled = false
-        mTackePhotoBackgV.backgroundColor = color_dark_register!
-        mTackePhotoBackgV.layer.cornerRadius = 10
-    }
+//    private func docDidAgree(img: UIImage) {
+//        mTakePhotoLb.textColor = .white
+//        mCameraImgV.setTintColor(color: .white)
+//        mTakePhotoBtn.isUserInteractionEnabled = false
+//        mTackePhotoBackgV.setBorderColorToCAShapeLayer(color: .clear)
+//        mTackePhotoBackgV.setBackgroundColorToCAShapeLayer(color: color_dark_register!)
+//        self.layoutIfNeeded()
+//        self.setNeedsLayout()
+////        mTackePhotoBackgV.backgroundColor = color_dark_register!
+////        mTackePhotoBackgV.layer.borderWidth = 0.0
+//
+//       // mTackePhotoBackgV.layer.cornerRadius = 10
+//    }
     
 
     

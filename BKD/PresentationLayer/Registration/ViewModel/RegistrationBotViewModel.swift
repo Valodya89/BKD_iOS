@@ -19,13 +19,18 @@ enum RegistrationState: String {
     case AGREEMENT_ACCEPTED
 }
 
-//enum DocumentState: String {
+enum ImageUploadState: String {
+    case IF = "IF"
+    case IB = "IB"
+    case DLF = "DLF"
+    case DLB = "DLB"
+    case DLS = "DLS"
 //    case DLF = "0"
 //    case DLB = "1"
 //    case DLS = "2"
 //    case IF = "3"
 //    case IB = "4"
-//}
+}
 
 
 
@@ -83,25 +88,115 @@ class RegistrationBotViewModel: NSObject {
             }
             else if tableData[i].viewDescription ==  Constant.Texts.nationalRegister {
                 tableData[i].userRegisterInfo = UserRegisterInfo( string: mainDriver.nationalRegisterNumber, isOtherNational: false,  isFilled: true)
-                if mainDriver.state == "PERSONAL_DATA" {
+                if mainDriver.state == Constant.Texts.state_pers_data {
                     completion(tableData)
                     return
                 }
             }
-            else if tableData[i].viewDescription ==  Constant.Texts.take_photo &&
+            else if tableData[i].viewDescription ==  Constant.Keys.take_photo &&
                 tableData[i - 1].msgToFillBold == Constant.Texts.IF_text {
                 if mainDriver.identityFront != nil {
                     tableData[i].userRegisterInfo = UserRegisterInfo(imageURL: mainDriver.identityFront!.getURL()!, isFilled: true)
                 }
-                if mainDriver.state == "IDENTITY_FRONT" {
+                if mainDriver.state == Constant.Texts.state_IF {
                     completion(tableData)
                     return
                 }
             }
-            
+            else if tableData[i].viewDescription ==  Constant.Keys.take_photo &&
+                tableData[i - 1].msgToFillBold == Constant.Texts.IB_text {
+                if mainDriver.identityBack != nil {
+                    tableData[i].userRegisterInfo = UserRegisterInfo(imageURL: mainDriver.identityBack!.getURL()!, isFilled: true)
+                }
+                if mainDriver.state == Constant.Texts.state_IB {
+                    completion(tableData)
+                    return
+                }
+            }
+            else if tableData[i].viewDescription ==  Constant.Texts.expiryDate {
+                let components = mainDriver.identityExpirationDate!.components(separatedBy: "T")
+                tableData[i].userRegisterInfo = UserRegisterInfo(date:components[0].stringToDateWithoutTime(), isFilled: true)
+                if mainDriver.state == Constant.Texts.state_IEX {
+                    completion(tableData)
+                    return
+                }
+            }
+            else if tableData[i].viewDescription ==  Constant.Keys.take_photo &&
+                tableData[i - 1].msgToFillBold == Constant.Texts.DLF_text {
+                if mainDriver.drivingLicenseFront != nil {
+                    tableData[i].userRegisterInfo = UserRegisterInfo(imageURL: mainDriver.drivingLicenseFront!.getURL()!, isFilled: true)
+                }
+                if mainDriver.state == Constant.Texts.state_DLF {
+                    completion(tableData)
+                    return
+                }
+            }
+            else if tableData[i].viewDescription ==  Constant.Keys.take_photo &&
+                tableData[i - 1].msgToFillBold == Constant.Texts.DLB_text {
+                if mainDriver.drivingLicenseBack != nil {
+                    tableData[i].userRegisterInfo = UserRegisterInfo(imageURL: mainDriver.drivingLicenseBack!.getURL()!, isFilled: true)
+                }
+                if mainDriver.state == Constant.Texts.state_DLB {
+                    completion(tableData)
+                    return
+                }
+            }
+            else if tableData[i].viewDescription ==  Constant.Texts.issueDateDrivingLicense {
+                let components = mainDriver.drivingLicenseIssueDate!.components(separatedBy: "T")
+                tableData[i].userRegisterInfo = UserRegisterInfo(date:components[0].stringToDateWithoutTime(), isFilled: true)
+            }
+            else if tableData[i].viewDescription ==  Constant.Texts.expiryDateDrivingLicense {
+                if mainDriver.drivingLicenseExpirationDate != nil {
+                    let components = mainDriver.drivingLicenseExpirationDate!.components(separatedBy: "T")
+                    tableData[i].userRegisterInfo = UserRegisterInfo(date:components[0].stringToDateWithoutTime(), isFilled: true)
+                }
+                if mainDriver.state == Constant.Texts.state_DL_date {
+                    completion(tableData)
+                    return
+                }
+            }
+            else if tableData[i].viewDescription ==  Constant.Keys.take_photo &&
+                tableData[i - 1].examplePhoto != nil {
+                if mainDriver.drivingLicenseSelfie != nil {
+                    tableData[i].userRegisterInfo = UserRegisterInfo(imageURL: mainDriver.drivingLicenseSelfie!.getURL()!, isFilled: true)
+                }
+                if mainDriver.state == Constant.Texts.state_DLS {
+                    completion(tableData)
+                    return
+                }
+            }
+            else if tableData[i].viewDescription ==  Constant.Keys.open_doc {
+                if mainDriver.agreementApplied {
+                    tableData[i].userRegisterInfo = UserRegisterInfo(isFilled: true)
+                }
+                if mainDriver.state == Constant.Texts.state_agree {
+                    completion(tableData)
+                    return
+                }
+            }
+                
+        
         }
         
         completion(tableData)
+    }
+    
+    ///Get image upload state
+    func getImageUploadState(state: String) -> ImageUploadState{
+        switch state {
+        case Constant.Texts.state_pers_data:
+            return ImageUploadState.IF
+        case Constant.Texts.state_IF:
+            return ImageUploadState.IB
+        case Constant.Texts.state_IEX:
+            return ImageUploadState.DLF
+        case Constant.Texts.state_DLF:
+            return ImageUploadState.DLB
+        case Constant.Texts.state_DL_date:
+            return ImageUploadState.DLS
+        default:
+            return ImageUploadState.DLS
+        }
     }
     
     
@@ -173,21 +268,20 @@ class RegistrationBotViewModel: NSObject {
     ///add identity experation date
     //Optional("ACCOUNTS_wrong_feeling_state_identity_back_empty")
 
-    func addIdentityExpiration(experationDate: String,
-                               completion: @escaping (String?) -> Void) {
+    func addIdentityExpiration(id:String, experationDate: String,
+                               completion: @escaping (MainDriver?) -> Void) {
         
-        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addIdentityExpiration(expirationDate: experationDate))) { (result) in
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addIdentityExpiration(id: id, expirationDate: experationDate))) { (result) in
             
             switch result {
             case .success(let data):
-                guard let result = BkdConverter<BaseResponseModel<EmptyModel>>.parseJson(data: data as Any) else {
+                guard let result = BkdConverter<BaseResponseModel<MainDriver>>.parseJson(data: data as Any) else {
                     print("error")
                     completion(nil)
                     return
                 }
-                print(result.message as Any)
-                completion(result.message as String)
-               // completion(result.content!)
+                print(result.content as Any)
+                completion(result.content!)
 
             case .failure(let error):
                 print(error.description)
@@ -198,21 +292,21 @@ class RegistrationBotViewModel: NSObject {
     }
     
     ///add the date of the driver's license
-    func addDriverLicenseDates(driverLicenseDateData: DriverLiceseDateData,
-                               completion: @escaping (String?) -> Void) {
+    func addDriverLicenseDates(id:String,
+                               driverLicenseDateData: DriverLiceseDateData,
+                               completion: @escaping (MainDriver?) -> Void) {
         
-        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addDriverLicenseDates(issueDate: driverLicenseDateData.issueDate ?? "", expirationDate: driverLicenseDateData.expirationDate ?? ""))) { (result) in
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addDriverLicenseDates(id:id, issueDate: driverLicenseDateData.issueDate ?? "", expirationDate: driverLicenseDateData.expirationDate ?? ""))) { (result) in
             
             switch result {
             case .success(let data):
-                guard let result = BkdConverter<BaseResponseModel<EmptyModel>>.parseJson(data: data as Any) else {
+                guard let result = BkdConverter<BaseResponseModel<MainDriver>>.parseJson(data: data as Any) else {
                     print("error")
                     completion(nil)
                     return
                 }
-                print(result.message as Any)
-                completion(result.message as String)
-               // completion(result.content!)
+                print(result.content as Any)
+                completion(result.content!)
 
             case .failure(let error):
                 print(error.description)
@@ -229,7 +323,6 @@ class RegistrationBotViewModel: NSObject {
                      completion: @escaping (MainDriver?) -> Void)  {
             
         SessionNetwork.init().request(with: URLBuilder(from: ImageUploadAPI.upload(image: image, id: id, state: state))) { result in
-            
             switch result {
             case .success(let data):
                 guard let result = BkdConverter<BaseResponseModel<MainDriver>>.parseJson(data: data as Any) else {
@@ -238,7 +331,27 @@ class RegistrationBotViewModel: NSObject {
                     return
                 }
                 print(result.message as Any)
-               // completion(result.message as String)
+                completion(result.content!)
+            case .failure(let error):
+                print(error.description)
+                completion(nil)
+                break
+            }
+            
+        }
+    }
+    
+    //Accept agreement
+    func acceptAgreement(id: String, completion: @escaping (MainDriver?) -> Void) {
+        SessionNetwork.init().request(with: URLBuilder(from: AuthAPI.acceptAgreement(id: id))) { result in
+            switch result {
+            case .success(let data):
+                guard let result = BkdConverter<BaseResponseModel<MainDriver>>.parseJson(data: data as Any) else {
+                    print("error")
+                    completion(nil)
+                    return
+                }
+                print(result.message as Any)
                 completion(result.content!)
 
             case .failure(let error):
@@ -246,7 +359,6 @@ class RegistrationBotViewModel: NSObject {
                 completion(nil)
                 break
             }
-            
         }
     }
     

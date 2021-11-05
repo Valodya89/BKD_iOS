@@ -1,13 +1,13 @@
 //
-//  MainDriver.swift
+//  MyDriver.swift
 //  BKD
 //
-//  Created by Karine Karapetyan on 27-10-21.
+//  Created by Karine Karapetyan on 02-11-21.
 //
 
-import UIKit
+import Foundation
 
-struct MainDriver: Codable {
+struct MyDriver: Codable {
     
     let id: String
     let state: String
@@ -38,12 +38,3 @@ struct MainDriver: Codable {
 }
 
 
-struct ImageResponse: Codable {
-    let id: String
-    let node: String
-    
-    func getURL() -> URL? {
-        let avatar = "https://\(node).bkdrental.com/files?id=\(id)"
-        return URL(string: avatar)
-    }
-}

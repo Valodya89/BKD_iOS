@@ -15,6 +15,13 @@ final class MyBKDViewModel: NSObject {
         return keychainManager.isUserLoggedIn()
     }
     
+    var userName: String {
+        return keychainManager.getUsername() ?? ""
+    }
+    var password: String {
+        return keychainManager.getPasswor() ?? ""
+    }
+    
     func logout() {
         keychainManager.removeData()
     }

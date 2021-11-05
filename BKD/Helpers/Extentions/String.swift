@@ -32,5 +32,34 @@ extension String {
         let date = dateFormatter.date(from:self)!
         return date
     }
+    
+    ///Is contain only latters
+//    func containsOnlyLetters() -> Bool {
+//       for chr in self {
+//          if (!(chr >= "a" && chr <= "z") && !(chr >= "A" && chr <= "Z") ) {
+//             return false
+//          }
+//       }
+//       return true
+//    }
+    
+    
+    
+    ///Is  number
+    var isNumeric : Bool {
+        return NumberFormatter().number(from: self) != nil
+    }
+
 }
 
+
+extension Character {
+    ///Is character
+    var isCharacter: Bool {
+        
+        if (!(self >= "a" && self <= "z") && !(self >= "A" && self <= "Z") ) {
+            return false
+        }
+        return true
+    }
+}

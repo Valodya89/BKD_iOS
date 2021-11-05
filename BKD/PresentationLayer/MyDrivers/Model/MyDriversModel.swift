@@ -12,6 +12,8 @@ struct MyDriversModel {
     public var licenciNumber: String
     public var price: Double
     public var isSelected: Bool = false
+    public var isWaitingForAdmin: Bool = false
     public var totalPrice: Double?
+    public var driver: MainDriver?
 
 }

@@ -83,7 +83,7 @@ class ReservationWithRegisterNumberCollectionViewCell: UICollectionViewCell {
         mRegistrationNumberContentV.isHidden = !item.isRegisterNumber
 
         if item.isActiveStartRide {
-            mStartRideBtn.setTitleColor(color_navigationBar, for: .normal)
+            mStartRideBtn.setTitleColor(color_selected_filter_fields, for: .normal)
         }
     }
     

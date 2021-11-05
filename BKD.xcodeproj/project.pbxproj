@@ -203,6 +203,8 @@
 		565F9B0026C87D2F00064AD4 /* KaartlazerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F9AFF26C87D2F00064AD4 /* KaartlazerViewController.swift */; };
 		565F9B0B26C8AEA100064AD4 /* ReservetionMakePaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F9B0926C8AEA100064AD4 /* ReservetionMakePaymentCell.swift */; };
 		565F9B0C26C8AEA100064AD4 /* ReservetionMakePaymentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565F9B0A26C8AEA100064AD4 /* ReservetionMakePaymentCell.xib */; };
+		565FD8432731C2A700E2B33A /* MyDriversViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565FD8422731C2A700E2B33A /* MyDriversViewModel.swift */; };
+		565FD8452731C3C400E2B33A /* MyDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565FD8442731C3C400E2B33A /* MyDriver.swift */; };
 		5660E61826FE0376009BB73F /* AdvancedWithOnRideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5660E61626FE0376009BB73F /* AdvancedWithOnRideCell.xib */; };
 		5660E61926FE0376009BB73F /* AdvancedWithOnRideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5660E61726FE0376009BB73F /* AdvancedWithOnRideCell.swift */; };
 		5660E61C26FE0BED009BB73F /* OnRideTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5660E61B26FE0BED009BB73F /* OnRideTableView.swift */; };
@@ -555,6 +557,8 @@
 		565F9AFF26C87D2F00064AD4 /* KaartlazerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaartlazerViewController.swift; sourceTree = "<group>"; };
 		565F9B0926C8AEA100064AD4 /* ReservetionMakePaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservetionMakePaymentCell.swift; sourceTree = "<group>"; };
 		565F9B0A26C8AEA100064AD4 /* ReservetionMakePaymentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReservetionMakePaymentCell.xib; sourceTree = "<group>"; };
+		565FD8422731C2A700E2B33A /* MyDriversViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDriversViewModel.swift; sourceTree = "<group>"; };
+		565FD8442731C3C400E2B33A /* MyDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDriver.swift; sourceTree = "<group>"; };
 		5660E61626FE0376009BB73F /* AdvancedWithOnRideCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdvancedWithOnRideCell.xib; sourceTree = "<group>"; };
 		5660E61726FE0376009BB73F /* AdvancedWithOnRideCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedWithOnRideCell.swift; sourceTree = "<group>"; };
 		5660E61B26FE0BED009BB73F /* OnRideTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnRideTableView.swift; sourceTree = "<group>"; };
@@ -1268,6 +1272,7 @@
 			isa = PBXGroup;
 			children = (
 				5656F195268936E000E70BAB /* MyDriversModel.swift */,
+				565FD8442731C3C400E2B33A /* MyDriver.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1275,6 +1280,7 @@
 		56533F072679BD9E0012BF4A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				565FD8422731C2A700E2B33A /* MyDriversViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2949,7 +2955,7 @@
 				568E6F4C2642FC4B000CB6A9 /* Resources */,
 				565F8C65268D390600E21C71 /* Embed Frameworks */,
 				995B321BDC49670283C49A78 /* [CP] Embed Pods Frameworks */,
-				A3F12B7C2D718EB5FA945FB0 /* [CP] Copy Pods Resources */,
+				8735764FC929BC761E9B5936 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3120,6 +3126,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		8735764FC929BC761E9B5936 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		995B321BDC49670283C49A78 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3135,23 +3158,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A3F12B7C2D718EB5FA945FB0 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3207,6 +3213,7 @@
 				56AD18EC2691622C006A53C1 /* SignInViewController.swift in Sources */,
 				56683795271640DD00C8D8FF /* UILocalizedNavigationItem.swift in Sources */,
 				56B9F34226826DE1003449AD /* DetailsViewModel.swift in Sources */,
+				565FD8432731C2A700E2B33A /* MyDriversViewModel.swift in Sources */,
 				56AD19222693421C006A53C1 /* TermsConditionsViewController.swift in Sources */,
 				5656083926785E2C009578FA /* RentalConditionsTableViewCell.swift in Sources */,
 				562585DF26F176D500EC9284 /* RegisterNumberTableCell.swift in Sources */,
@@ -3219,6 +3226,7 @@
 				56B9F33D26825FF0003449AD /* TariffSlideViewModel.swift in Sources */,
 				56AD191D2693251C006A53C1 /* CheckEmailViewModel.swift in Sources */,
 				5658BDFB26FBECC000A5B122 /* AddDamageViewController.swift in Sources */,
+				565FD8452731C3C400E2B33A /* MyDriver.swift in Sources */,
 				5640952D264AE529001DC92D /* DropDownModel.swift in Sources */,
 				562585DB26F175CB00EC9284 /* RegisterNumberUITableView.swift in Sources */,
 				566B37BD2697A6D40021BCAA /* TakePhotoTableViewCell.swift in Sources */,

@@ -246,8 +246,8 @@ struct Constant {
         static let mailbox = "mailbox"
         static let nationalRegister = "national register" 
         static let calendar = "calendar"
-        static let expityDate = "calendar_expire"
-        static let expityDateDrivingLicense = "calendar_expire_driving_license"
+        static let expiryDate = "calendar_expire"
+        static let expiryDateDrivingLicense = "calendar_expire_driving_license"
         static let issueDateDrivingLicense = "calendar_issue_driving_license"
         
         //Payment
@@ -291,6 +291,8 @@ struct Constant {
         //Additional driver
         static let addDriverAlert = "Additional driver servide is %.2f euro per driver. You need to wait for Admin approval to have an additional drier for your account. No payment will be needed unless the Admin approves the driver addition."
         static let addDriverService = "Additional driver service is %.2f euro per driver. Please, confirm that you want to turn on the service."
+        static let licenseNumber =  "Driving license number"
+
         
         //Add accident details
         static let selectSide = "Select vehicle side"
@@ -315,8 +317,11 @@ struct Constant {
     
         //Registration Bot
         static let start = "Start"
-        static let take_photo = "takePhoto"
         static let IF_text = "front side photo of your Identity card"
+        static let IB_text = "back side photo of your Identity card"
+        static let DLF_text = "front side photo of your valid Driving license"
+        static let DLB_text = "back side photo of your valid Driving license"
+        static let license_issue_text = "Issue date of the Driving license"
         
         //Error Messages
         static let errChangePassword = "Failed to change password, please try again"
@@ -331,6 +336,7 @@ struct Constant {
         static let errImageUpload = "Failed to load image!"
         static let errIDExpirationDate = "Failed to add ID expiration date!"
         static let errDrivLicenseDate = "Failed to add issue and expired driver license dates."
+        static let errAcceptAgreement = "Failed to accept agreement."
 
         
         //Request texts
@@ -342,7 +348,17 @@ struct Constant {
         static let resetPassword = "PASSWORD_RESET"
         static let verification = "VERIFICATION"
         static let creat_main_driver = "MAIN"
-
+        static let creat_additional_driver = "ADDITIONAl"
+        static let state_created = "CREATED"
+        static let state_pers_data = "PERSONAL_DATA"
+        static let state_IF = "IDENTITY_FRONT"
+        static let state_IB = "IDENTITY_BACK"
+        static let state_IEX = "IDENTITY_EXPIRATION"
+        static let state_DLF = "DRIVING_LICENSE_FRONT"
+        static let state_DLB = "DRIVING_LICENSE_BACK"
+        static let state_DL_date = "DRIVING_LICENSE_DATES"
+        static let state_DLS = "DRIVING_LICENSE_SELFIE"
+        static let state_agree = "AGREEMENT_ACCEPTED"
 
     }
     
@@ -358,6 +374,10 @@ struct Constant {
         static let start_interval = "START_INTERVAL"
         static let end = "END"
         static let end_interval = "END_INTERVAL"
+        static let take_photo = "takePhoto"
+        static let open_doc = "openDoc"
+
+        
     }
     
     struct Notifications {

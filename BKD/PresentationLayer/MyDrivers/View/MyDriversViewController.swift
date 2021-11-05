@@ -23,19 +23,27 @@ class MyDriversViewController: BaseViewController {
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mTotalPriceContentbottom: NSLayoutConstraint!
-    
+ 
     //Confirm
     @IBOutlet weak var mConfirmV: ConfirmView!
     
     //MARK: --Variables
     weak var delegate: MyDriversViewControllerDelegate?
+    lazy var myDriversViewModel: MyDriversViewModel = MyDriversViewModel()
     public var isEditReservation:Bool = false
     var totalPrice:Double = 0
+    var additionalDrivers: [MyDriversModel] = []
 
     //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        getMyDriverList()
+
     }
     
     func setupView() {
@@ -61,7 +69,18 @@ class MyDriversViewController: BaseViewController {
     func configureViewForEdit() {
         if isEditReservation {
             mConfirmV.isHidden = !isEditReservation
-            mTotalPriceContentbottom.constant = -76
+            mTotalPriceContentbottom.constant = 76
+        }
+    }
+    
+    ///Get my driver list
+    private func getMyDriverList () {
+        myDriversViewModel.getMyDrivers { (result) in
+            guard let result = result else {
+                return
+            }
+            self.additionalDrivers = self.myDriversViewModel.setActiveDriverList(allDrivers: result)
+            self.mMyDriverCollectionV.reloadData()
         }
     }
     
@@ -80,11 +99,11 @@ class MyDriversViewController: BaseViewController {
     //MARK: ACTIONS
     //MARK: ----------------
     @IBAction func addDriver(_ sender: UIButton) {
-        BKDAlert().showAlert(on: self, message: String(format: Constant.Texts.addDriverAlert, 0.00) , cancelTitle: Constant.Texts.cancel, okTitle: Constant.Texts.confirm, cancelAction: nil) {
+//        BKDAlert().showAlert(on: self, message: String(format: Constant.Texts.addDriverAlert, 0.00) , cancelTitle: Constant.Texts.cancel, okTitle: Constant.Texts.confirm, cancelAction: nil) {
             
             self.goToRegistrationBot(isDriverRegister: true,
                                      tableData: [RegistrationBotData.registrationDriverModel[0]])
-        }
+       // }
     }
     
     @IBAction func back(_ sender: UIBarButtonItem) {

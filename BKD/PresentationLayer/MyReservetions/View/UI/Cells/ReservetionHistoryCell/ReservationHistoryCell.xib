@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19158" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19141"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -213,7 +212,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrb-du-dVp">
-                                                <rect key="frame" x="44" y="-2.5" width="152.5" height="30.5"/>
+                                                <rect key="frame" x="44" y="-2.5" width="156.5" height="30.5"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="BKD Agreement">
                                                     <fontDescription key="titleFontDescription" name="Mulish-Light" family="Mulish" pointSize="18"/>
@@ -345,7 +344,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" name="background"/>
+                                <color key="backgroundColor" name="subview_background"/>
                                 <constraints>
                                     <constraint firstItem="4Az-Pl-OmE" firstAttribute="width" secondItem="kbB-uu-N3I" secondAttribute="width" multiplier="0.86" id="0Hw-Vu-LDr"/>
                                     <constraint firstItem="rsM-r0-shv" firstAttribute="height" secondItem="kbB-uu-N3I" secondAttribute="height" multiplier="0.22" id="0vP-7r-aGA"/>
@@ -369,7 +368,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="background"/>
                         <constraints>
                             <constraint firstItem="kbB-uu-N3I" firstAttribute="height" secondItem="Xcw-gb-lEn" secondAttribute="height" multiplier="0.98" id="5bk-61-cmw"/>
                             <constraint firstItem="kbB-uu-N3I" firstAttribute="centerY" secondItem="Xcw-gb-lEn" secondAttribute="centerY" id="6xe-Wv-Kdm"/>
@@ -380,6 +379,7 @@
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" name="background"/>
             <constraints>
                 <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="Xcw-gb-lEn" secondAttribute="trailing" id="5yU-b8-Yw8"/>
                 <constraint firstItem="Xcw-gb-lEn" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" id="7hY-bv-UlI"/>
@@ -436,11 +436,11 @@
         <namedColor name="navigation_bar">
             <color red="0.10999999940395355" green="0.20000000298023224" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="subview_background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="uncheck_start">
             <color red="0.85490196078431369" green="0.85490196078431369" blue="0.85490196078431369" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

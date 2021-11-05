@@ -11,8 +11,8 @@ import SwiftMaskTextfield
 
 
 protocol NationalRegisterNumberTableViewCellDelegate: AnyObject {
-    func didPressOtherCountryNational(isClicked: Bool)
-    func didReturnTxt(txt: String?)
+    func didPressOtherCountryNational(isClicked: Bool, index: Int)
+    func didReturnTxt(txt: String?, index: Int)
     func willOpenPicker(textFl: UITextField)
 }
 
@@ -74,20 +74,20 @@ class NationalRegisterNumberTableViewCell: UITableViewCell {
     
     func  setUpView() {
         mOtherCountryBtn.titleLabel?.textAlignment = .center
-        mTextFl.roundCornersWithBorder(corners: [.topLeft, .topRight, .bottomRight ], radius: 8.0, borderColor: color_dark_register!, borderWidth: 1)
-        mOtherCountryBtn.roundCornersWithBorder(corners: [.allCorners ], radius: 36.0, borderColor: color_dark_register!, borderWidth: 1)
-        mCountryBckV.roundCornersWithBorder(corners: [.topLeft, .topRight, .bottomRight ], radius: 8.0, borderColor: color_dark_register!, borderWidth: 1)
-        mDropDownImgV.setTintColor(color: color_dark_register!)
+        mOtherCountryBtn.layer.cornerRadius = mOtherCountryBtn.frame.height/2
+        mOtherCountryBtn.setBorder(color: color_navigationBar!, width: 1.0)
+        mTextFl.roundCornersWithBorder(corners: [.topLeft, .topRight, .bottomRight ], radius: 8.0, borderColor: color_navigationBar!, borderWidth: 1)
+        mCountryBckV.roundCornersWithBorder(corners: [.topLeft, .topRight, .bottomRight ], radius: 8.0, borderColor: color_navigationBar!, borderWidth: 1)
+        mDropDownImgV.setTintColor(color: color_navigationBar!)
         mCountryTxtFl.setPlaceholder(string: Constant.Texts.country, font: font_bot_placeholder!, color: color_email!)
         mCountryTxtFl.padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         
     }
     
     override func prepareForReuse() {
-        mDropDownImgV.setTintColor(color: color_dark_register!)
+        mDropDownImgV.setTintColor(color: color_navigationBar!)
         mOtherCountryBtn.backgroundColor = .clear
-        mOtherCountryBtn.layer.cornerRadius = 10
-        mOtherCountryBtn.setTitleColor(color_dark_register!, for: .normal)
+        mOtherCountryBtn.setTitleColor(color_navigationBar!, for: .normal)
         mTextFl.inputView = nil
         mTextFl.inputAccessoryView = nil
         mCountryLb.text = Constant.Texts.country
@@ -96,16 +96,16 @@ class NationalRegisterNumberTableViewCell: UITableViewCell {
         mCountryTxtFl.isHidden = false
         mCountryBckV.isHidden = true
         mCountryBckV.backgroundColor = .clear
-        self.isUserInteractionEnabled = true
+        //self.isUserInteractionEnabled = true
         mOtherCountryBtn.setTitleColor(color_navigationBar!, for: .normal)
         
     }
     
     
     /// Set cell info
-    func  setCellInfo(item: RegistrationBotModel) {
-
-        
+    func  setCellInfo(item: RegistrationBotModel, index: Int) {
+        mTextFl.tag = index
+        mCountryTxtFl.tag = index
         if ((item.userRegisterInfo?.isFilled) != nil) && item.userRegisterInfo?.isFilled == true {
                 textFiledFilled(txt: (item.userRegisterInfo?.string)!)
         } else if ((item.userRegisterInfo?.isOtherNational) != nil) && item.userRegisterInfo?.isOtherNational == true {
@@ -114,21 +114,45 @@ class NationalRegisterNumberTableViewCell: UITableViewCell {
             if let country = item.userRegisterInfo?.nationalString  {
                 countryChoosen(country: country)
             }
+        } else if item.userRegisterInfo?.isFilled == nil ||
+                    !(item.userRegisterInfo?.isFilled ?? false) {
+            mTextFl.setPlaceholder(string: (selectedCountry?.nationalDocumentMask ?? "")!, font: mTextFl.font!, color: color_email!)
+//            mTextFl.text = (selectedCountry?.nationalDocumentMask ?? "")!
+//            mTextFl.textColor = color_navigationBar!
         }
-            
     }
+    
+//    /// Set cell info
+//    func  setCellInfo(item: RegistrationBotModel) {
+//
+//
+//        if ((item.userRegisterInfo?.isFilled) != nil) && item.userRegisterInfo?.isFilled == true {
+//                textFiledFilled(txt: (item.userRegisterInfo?.string)!)
+//        } else if ((item.userRegisterInfo?.isOtherNational) != nil) && item.userRegisterInfo?.isOtherNational == true {
+//
+//            otherCountryPressed()
+//            if let country = item.userRegisterInfo?.nationalString  {
+//                countryChoosen(country: country)
+//            }
+//        }
+//
+//    }
     
     func textFiledFilled(txt: String) {
         mTextFl.text = txt
         mTextFl.textColor = .white
-        self.isUserInteractionEnabled = false
-        mTextFl.setBackgroundColorToCAShapeLayer(color: color_dark_register!)
+//self.isUserInteractionEnabled = false
+        mTextFl.setBorderColorToCAShapeLayer(color: .clear)
+        mTextFl.setBackgroundColorToCAShapeLayer(color: color_navigationBar!)
     }
     
     func countryChoosen(country: String) {
         DispatchQueue.main.async { [self] in
+            mTextFl.text = nil
+            mTextFl.setPlaceholder(string: (selectedCountry?.nationalDocumentMask ?? "")!, font: mTextFl.font!, color: color_email!)
             mCountryLb.isHidden = false
-            mCountryBckV.backgroundColor = color_dark_register!
+            mCountryBckV.setBorderColorToCAShapeLayer(color: .clear)
+            mCountryBckV.backgroundColor = color_navigationBar!
             mCountryLb.text = country
             mDropDownImgV.setTintColor(color: .white)
             mCountryLb.textColor = .white
@@ -137,20 +161,25 @@ class NationalRegisterNumberTableViewCell: UITableViewCell {
             mCountryTxtFl.text = ""
             mCountryBckV.bringSubviewToFront(mDropDownImgV)
         }
+        self.layoutIfNeeded()
+        self.setNeedsLayout()
+        
     }
     
     /// other country national register button pressed
     private func otherCountryPressed() {
         mCountryBckV.isHidden = false
         mOtherCountryBtn.setTitleColor(color_selected_start, for: .normal)
-        mOtherCountryBtn.backgroundColor = color_dark_register!
-        mOtherCountryBtn.layer.cornerRadius = 10
+        mOtherCountryBtn.layer.borderColor = color_navigationBar!.cgColor
+        mOtherCountryBtn.backgroundColor = color_navigationBar!
+        self.layoutIfNeeded()
+        self.setNeedsLayout()
     }
     
 
     
     @IBAction func otherCountry(_ sender: UIButton) {
-            delegate?.didPressOtherCountryNational(isClicked: mCountryBckV.isHidden)
+        delegate?.didPressOtherCountryNational(isClicked: mCountryBckV.isHidden, index: mTextFl.tag)
     }
 }
 
@@ -160,7 +189,11 @@ class NationalRegisterNumberTableViewCell: UITableViewCell {
 extension NationalRegisterNumberTableViewCell: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField == mCountryTxtFl {
+//        let newPosition = textField.beginningOfDocument
+//        textField.selectedTextRange = textField.textRange(from: newPosition, to: newPosition)
+//
+        
+       if textField == mCountryTxtFl {
             mCountryLb.isHidden = false
             delegate?.willOpenPicker(textFl: textField)
         }else {
@@ -172,11 +205,57 @@ extension NationalRegisterNumberTableViewCell: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         if textField.text?.count ?? 0 > 0 {
-            delegate?.didReturnTxt(txt: textField.text)
+            delegate?.didReturnTxt(txt: textField.text, index: mTextFl.tag)
             textFiledFilled(txt: textField.text!)
         }
         return false
     }
+    
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string:  String) -> Bool {
+//        
+//        guard let text = textField.text else { return false }
+//        if textField.text?.count < selectedCountry?.nationalDocumentMask?.count {
+//            
+//            let newString = (text as NSString).replacingCharacters(in: range, with: string)
+//            
+//            textField.text = formattedRegisterNumber(location: range.location, registerNumber: newString)
+//        }
+//        return false
+//    }
+    
+    func formattedRegisterNumber(location: Int, registerNumber: String) -> String {
+        var result  = registerNumber
+        let mask: String = selectedCountry?.nationalDocumentMask ?? ""
+        let char = mask[mask.index(mask.startIndex, offsetBy: location)]
+        let newChar = registerNumber[registerNumber.index(registerNumber.startIndex, offsetBy: location)]
+       
+   // AB1234567
+        if char.isCharacter && newChar.isCharacter {
+            return registerNumber
+        } else if String(char).isNumeric && String(newChar).isNumeric {
+            return registerNumber
+        } else if !char.isCharacter && !String(char).isNumeric {
+            result = String(result.dropLast()) + String(char)
+            return formattedRegisterNumber(location: location + 1, registerNumber: result)
+        }
+        return String(result.dropLast())
+    }
+    
+//    func formattedRegisterNumber(registerNumber: String) -> String {
+////        let cleanPhoneNumber = number.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+//        let mask = "## ### ###"
+//        var result = ""
+//        var index = cleanPhoneNumber.startIndex
+//        for ch in mask! where index < cleanPhoneNumber.endIndex {
+//            if ch == "#" {
+//                result.append(cleanPhoneNumber[index])
+//                index = cleanPhoneNumber.index(after: index)
+//            } else {
+//                result.append(ch)
+//            }
+//        }
+//        return result
+//    }
     
 //    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 //        if string == "" {
