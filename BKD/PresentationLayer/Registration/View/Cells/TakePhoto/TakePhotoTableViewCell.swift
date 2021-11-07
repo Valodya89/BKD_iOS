@@ -9,7 +9,7 @@ import UIKit
 
 
 protocol TakePhotoTableViewCellDelegate: AnyObject {
-    func didPressTackePhoto(isOpenDoc: Bool)
+    func didPressTackePhoto(isOpenDoc: Bool, index: Int)
 }
 class TakePhotoTableViewCell: UITableViewCell {
     
@@ -89,7 +89,11 @@ class TakePhotoTableViewCell: UITableViewCell {
     
     
     /// Set cell info
-    func  setCellInfo(item: RegistrationBotModel) {
+    func  setCellInfo(item: RegistrationBotModel, index: Int) {
+        
+        mTakePhotoBtn.tag = index
+        mOpenBtn.tag = index
+        
         if ((item.userRegisterInfo?.isFilled) != nil) && item.userRegisterInfo?.isFilled == true {
             if item.viewDescription != "openDoc" {
                     self.mPhotoImgV.isHidden = false
@@ -118,7 +122,7 @@ class TakePhotoTableViewCell: UITableViewCell {
         
         mOpenContentV.isHidden = !isOpenDoc
         mStackV.isHidden = isOpenDoc
-        self.isUserInteractionEnabled = false
+        //self.isUserInteractionEnabled = false
         if isOpenDoc {
             mOpenLb.textColor = .white
             mAgreeImgV.setTintColor(color: .white)
@@ -133,7 +137,6 @@ class TakePhotoTableViewCell: UITableViewCell {
 //            mTackePhotoBackgV.setBackgroundColorToCAShapeLayer(color: color_dark_register!)
             mTackePhotoBackgV.layer.borderWidth = 0.0
             mTackePhotoBackgV.backgroundColor = color_navigationBar!
-            
         }
     }
     
@@ -155,11 +158,11 @@ class TakePhotoTableViewCell: UITableViewCell {
 
     
     @IBAction func takePhoto(_ sender: UIButton) {
-        delegate?.didPressTackePhoto(isOpenDoc: false)
+        delegate?.didPressTackePhoto(isOpenDoc: false, index: sender.tag)
     }
     
     @IBAction func open(_ sender: UIButton) {
-        delegate?.didPressTackePhoto(isOpenDoc: true)
+        delegate?.didPressTackePhoto(isOpenDoc: true, index: sender.tag)
     }
 }
 

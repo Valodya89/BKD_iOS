@@ -151,7 +151,6 @@ class NationalRegisterNumberTableViewCell: UITableViewCell {
             mTextFl.text = nil
             mTextFl.setPlaceholder(string: (selectedCountry?.nationalDocumentMask ?? "")!, font: mTextFl.font!, color: color_email!)
             mCountryLb.isHidden = false
-            mCountryBckV.setBorderColorToCAShapeLayer(color: .clear)
             mCountryBckV.backgroundColor = color_navigationBar!
             mCountryLb.text = country
             mDropDownImgV.setTintColor(color: .white)
@@ -168,6 +167,7 @@ class NationalRegisterNumberTableViewCell: UITableViewCell {
     
     /// other country national register button pressed
     private func otherCountryPressed() {
+        mTextFl.setPlaceholder(string: (selectedCountry?.nationalDocumentMask ?? "")!, font: mTextFl.font!, color: color_email!)
         mCountryBckV.isHidden = false
         mOtherCountryBtn.setTitleColor(color_selected_start, for: .normal)
         mOtherCountryBtn.layer.borderColor = color_navigationBar!.cgColor

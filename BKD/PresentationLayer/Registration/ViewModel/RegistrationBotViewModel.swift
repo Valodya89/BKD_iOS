@@ -7,17 +7,17 @@
 
 import UIKit
 
-enum RegistrationState: String {
-    case PERSONAL_DATA
-    case IDENTITY_FRONT
-    case IDENTITY_BACK
-    case IDENTITY_EXPIRATION
-    case DRIVING_LICENSE_FRONT
-    case DRIVING_LICENSE_BACK
-    case DRIVING_LICENSE_DATES
-    case DRIVING_LICENSE_SELFIE
-    case AGREEMENT_ACCEPTED
-}
+//enum RegistrationState: String {
+//    case PERSONAL_DATA
+//    case IDENTITY_FRONT
+//    case IDENTITY_BACK
+//    case IDENTITY_EXPIRATION
+//    case DRIVING_LICENSE_FRONT
+//    case DRIVING_LICENSE_BACK
+//    case DRIVING_LICENSE_DATES
+//    case DRIVING_LICENSE_SELFIE
+//    case AGREEMENT_ACCEPTED
+//}
 
 enum ImageUploadState: String {
     case IF = "IF"
@@ -25,11 +25,6 @@ enum ImageUploadState: String {
     case DLF = "DLF"
     case DLB = "DLB"
     case DLS = "DLS"
-//    case DLF = "0"
-//    case DLB = "1"
-//    case DLS = "2"
-//    case IF = "3"
-//    case IB = "4"
 }
 
 
@@ -182,22 +177,40 @@ class RegistrationBotViewModel: NSObject {
     }
     
     ///Get image upload state
-    func getImageUploadState(state: String) -> ImageUploadState{
-        switch state {
-        case Constant.Texts.state_pers_data:
+//    func getImageUploadState(state: String) -> ImageUploadState{
+//        switch state {
+//        case Constant.Texts.state_pers_data:
+//            return ImageUploadState.IF
+//        case Constant.Texts.state_IF:
+//            return ImageUploadState.IB
+//        case Constant.Texts.state_IEX:
+//            return ImageUploadState.DLF
+//        case Constant.Texts.state_DLF:
+//            return ImageUploadState.DLB
+//        case Constant.Texts.state_DL_date:
+//            return ImageUploadState.DLS
+//        default:
+//            return ImageUploadState.DLS
+//        }
+//    }
+    
+    func getImageUploadState(index: Int) -> ImageUploadState{
+        switch index {
+        case 31:
             return ImageUploadState.IF
-        case Constant.Texts.state_IF:
+        case 33:
             return ImageUploadState.IB
-        case Constant.Texts.state_IEX:
+        case 37:
             return ImageUploadState.DLF
-        case Constant.Texts.state_DLF:
+        case 39:
             return ImageUploadState.DLB
-        case Constant.Texts.state_DL_date:
+        case 46:
             return ImageUploadState.DLS
         default:
             return ImageUploadState.DLS
         }
     }
+
     
     
     
@@ -331,7 +344,7 @@ class RegistrationBotViewModel: NSObject {
                     return
                 }
                 print(result.message as Any)
-                completion(result.content!)
+                completion(result.content)
             case .failure(let error):
                 print(error.description)
                 completion(nil)

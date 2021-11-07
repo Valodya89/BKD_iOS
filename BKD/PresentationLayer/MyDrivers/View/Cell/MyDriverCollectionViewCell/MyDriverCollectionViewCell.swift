@@ -46,6 +46,7 @@ func setupView() {
             mSelectBtn.backgroundColor = color_navigationBar!
             mSelectBtn.setTitleColor(color_menu!, for: .normal)
         }
+        mSelectBtn.isHidden = item.isWaitingForAdmin
         mAdminApprovalWaitingContentyV.isHidden = !item.isWaitingForAdmin
 }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
@@ -49,7 +49,7 @@
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </imageView>
                                                         </subviews>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="backgroundColor" name="subview_background"/>
                                                         <constraints>
                                                             <constraint firstItem="sGk-ks-2al" firstAttribute="centerX" secondItem="ezd-5C-D1R" secondAttribute="centerX" id="BGp-ue-i9X"/>
                                                             <constraint firstItem="sGk-ks-2al" firstAttribute="centerY" secondItem="ezd-5C-D1R" secondAttribute="centerY" id="aAV-RA-d1L"/>
@@ -250,7 +250,7 @@
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
-                                                        <color key="backgroundColor" name="background"/>
+                                                        <color key="backgroundColor" name="subview_background"/>
                                                         <constraints>
                                                             <constraint firstItem="xXA-bh-y4u" firstAttribute="width" secondItem="ugy-8y-Ba6" secondAttribute="width" multiplier="0.0026178" id="2yM-vE-cDs"/>
                                                             <constraint firstAttribute="trailing" secondItem="XMa-pe-3qZ" secondAttribute="trailing" id="4i5-gs-55F"/>
@@ -500,6 +500,12 @@
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="agree" translatesAutoresizingMaskIntoConstraints="NO" id="dxP-7V-37c">
                                                                 <rect key="frame" x="0.0" y="5" width="24.5" height="26"/>
+                                                                <color key="tintColor" name="navigationBar"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                                                        <color key="value" name="navigationBar"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                             </imageView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pjw-Yx-lBC">
                                                                 <rect key="frame" x="32" y="-3.5" width="156.5" height="43"/>

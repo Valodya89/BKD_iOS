@@ -101,7 +101,7 @@ final class MyBKDViewController: BaseViewController {
                                          mainDriver: nil)
             } else {
                 self.mainDriver = response
-                if self.mainDriver?.state != Constant.Texts.state_agree {
+                if self.mainDriver?.state != Constant.Texts.state_agree && self.mainDriver?.state != Constant.Texts.state_accepted  {
                     self.goToRegistrationBot(isDriverRegister: false,
                                              tableData: [RegistrationBotData.registrationBotModel[0]],
                                              mainDriver: self.mainDriver)

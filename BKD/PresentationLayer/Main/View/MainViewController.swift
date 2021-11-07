@@ -57,11 +57,14 @@ class MainViewController: BaseViewController {
     private var isNoSearchResult: Bool = false
     private var needsUpdateFilterCell: Bool = false
 
+    
+    
 
 
     //MARK: - Life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarController?.setTabBarBackgroundColor(color: color_background!)
         setupView()
 
     }

@@ -41,10 +41,30 @@ class MyDriversViewModel: NSObject {
                 let myDriverModel = MyDriversModel(fullname: driver.name! + " " + driver.surname!,
                                                    licenciNumber: "XX",
                                                    price: 0.0,
+                                                   isWaitingForAdmin: true,
+                                                   driver: driver)
+                myDriverList.append(myDriverModel)
+            } else if driver.state == Constant.Texts.state_accepted {
+                let myDriverModel = MyDriversModel(fullname: driver.name! + " " + driver.surname!,
+                                                   licenciNumber: "XX",
+                                                   price: 0.0,
+                                                   isWaitingForAdmin: false,
                                                    driver: driver)
                 myDriverList.append(myDriverModel)
             }
         }
        return myDriverList
+    }
+    
+    ///Get driver which will continue to fill
+    func getDriverToContinueToFill(allDrivers: [MainDriver], completion: @escaping (MainDriver?) -> Void){
+        allDrivers.forEach { currDriver in
+            if currDriver.state != Constant.Texts.state_agree && currDriver.state != Constant.Texts.state_accepted && currDriver.state != Constant.Texts.state_created  {
+                
+                completion(currDriver)
+            }
+        }
+        completion(nil)
+
     }
 }

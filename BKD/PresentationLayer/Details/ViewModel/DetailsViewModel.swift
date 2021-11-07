@@ -333,7 +333,7 @@ class DetailsViewModel: NSObject {
     func getTariffSlideModel(type: String,
                              tariffs: [Tariff],
                              vehicleModel: VehicleModel,
-                             price: Price?,
+                             price: Double?,
                              tariffKey: String,
                              bckgColor: UIColor,
                              typeColor: UIColor) -> TariffSlideModel? {
@@ -348,7 +348,7 @@ class DetailsViewModel: NSObject {
             
             tariffArr.forEach{ tariff in
                 
-                var value = tariff.duration * (price?.price ?? 0.0)
+                var value = tariff.duration * (price ?? 0.0)
                 if tariff.percentage > 0.0 {
                     value = value - (value * (tariff.percentage/100))
                 }

@@ -138,7 +138,6 @@ extension PhoneNumberTableViewCell: UITextFieldDelegate {
             delegate?.didReturnTxtField(text: textField.text!, code: mCodeLb.text!, index: textField.tag)
             textFiledFilled(txt: textField.text!)
         } else {
-            
             mCodeLb.textColor = color_email!
             mCodeLb.font = font_chat_placeholder!
         }

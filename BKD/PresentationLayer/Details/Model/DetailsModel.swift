@@ -24,10 +24,10 @@ struct VehicleModel {
     
     //Prices
     public var priceForFlexible: Double = 0.0
-    public var priceHour: Price? = nil
-    public var priceDay: Price? = nil
-    public var priceWeek: Price? = nil
-    public var priceMonth: Price? = nil
+    public var priceHour: Double?
+    public var priceDay: Double?
+    public var priceWeek: Double?
+    public var priceMonth: Double?
     public var hasDiscount: Bool = false
     public var discountPercents: Double = 0.0
     public var freeKiloMeters: Double = 0.0

@@ -261,3 +261,18 @@ extension UIPageControl {
     }
   }
 }
+
+
+extension UITabBarController {
+    
+    func setTabBarBackgroundColor(color: UIColor) {
+        
+        if #available(iOS 15.0, *) {
+            let appearance = UITabBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = color
+            self.tabBar.standardAppearance = appearance
+            self.tabBar.scrollEdgeAppearance = self.tabBar.standardAppearance
+        }
+    }
+}

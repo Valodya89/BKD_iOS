@@ -186,20 +186,20 @@ static let identifier = "MainCollectionViewCell"
     
     func updatePriceFiled(item: CarsModel) {
         
-        if item.priceDay?.hasSpecialPrice == true &&
-            item.priceDay != nil {
+        if item.hasDiscount == true &&
+            item.priceDay != nil{
             
-            let specialPrice = item.priceDay!.price - (item.priceDay!.price * (item.priceDay!.specialPrice/100))
+            let specialPrice = item.priceDay! - (item.priceDay! * (item.discountPercents/100))
             mOffertPriceLb.text = String(format: "%.2f", specialPrice)
             mOffertBackgV.isHidden = false
             
             mIgnorValueContentV.isHidden = false
-            mIgnorValueLb.text = "€  \(item.priceDay!.price) / " + Constant.Texts.day
+            mIgnorValueLb.text = "€  \(item.priceDay!) / " + Constant.Texts.day
             mValueBckgV.isHidden = true
             
         } else {
             
-            mValueLb.text = String(item.priceDay?.price ?? 0.0)
+            mValueLb.text = String(item.priceDay ?? 0.0)
             mValueBckgV.isHidden = false
             
             mOffertBackgV.isHidden = true

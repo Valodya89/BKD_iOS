@@ -51,8 +51,8 @@ class ReserveViewModel: NSObject {
     func getPrices(vehicleModel:VehicleModel) -> Array<Any>? {
         var prices:[PriceModel] = []
        
-        if vehicleModel.priceHour!.price > 0.0 {
-            prices.append(PriceModel(priceTitle: "Price", price: vehicleModel.priceHour?.price))
+        if vehicleModel.priceHour ?? 0.0 > 0.0 {
+            prices.append(PriceModel(priceTitle: "Price", price: vehicleModel.priceHour!))
         }
         if vehicleModel.vehicleOffertValue > 0.0 {
             prices.append(PriceModel(priceTitle: "Special offer", price: vehicleModel.vehicleOffertValue, discountPrecent: vehicleModel.vehicleDiscountValue))

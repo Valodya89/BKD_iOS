@@ -154,7 +154,6 @@ class UserFillFieldTableViewCell: UITableViewCell {
         if item.viewDescription == Constant.Texts.button {
             mStartBtn.isHidden = false
             mBorderV.isHidden = true
-            //mTextLb.isHidden = true
             if ((item.userRegisterInfo?.isFilled) != nil) && item.userRegisterInfo?.isFilled == true {
                 pressStart()
             }
@@ -169,7 +168,6 @@ class UserFillFieldTableViewCell: UITableViewCell {
             
             if placeholder == Constant.Texts.country {
                 mDropDownImgV.setTintColor(color: .white)
-               // mDropDownPlaceholderLb.text = placeholder
                 mDropDownImgV.isHidden = false
             }
         }
@@ -187,9 +185,6 @@ class UserFillFieldTableViewCell: UITableViewCell {
     private func textFiledFilled(txt: String) {
         mTextFl.text = txt
         mTextFl.backgroundColor = color_navigationBar
-//        mTextLb.text = txt
-//        mTextLb.isHidden = false
-       // mBorderV.isHidden = true
        
         if placeholder == Constant.Texts.country {
             mTextFl.tintColor = .white
@@ -197,7 +192,6 @@ class UserFillFieldTableViewCell: UITableViewCell {
             mDropDownImgV.setTintColor(color: .white)
             self.layoutIfNeeded()
             self.setNeedsLayout()
-           // mBorderV.bringSubviewToFront(mDropDownImgV)
         }
     }
     
@@ -232,7 +226,6 @@ extension UserFillFieldTableViewCell: UITextFieldDelegate {
         if placeholder == Constant.Texts.country {
             textField.becomeFirstResponder()
 
-           // mDropDownPlaceholderLb.isHidden = false
             delegate?.willOpenPicker(textFl: textField, viewType: viewType!)
             textField.tintColor = .clear
         } else if placeholder == Constant.Texts.city {

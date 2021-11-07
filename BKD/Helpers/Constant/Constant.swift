@@ -359,6 +359,7 @@ struct Constant {
         static let state_DL_date = "DRIVING_LICENSE_DATES"
         static let state_DLS = "DRIVING_LICENSE_SELFIE"
         static let state_agree = "AGREEMENT_ACCEPTED"
+        static let state_accepted = "ACCEPTED"
 
     }
     

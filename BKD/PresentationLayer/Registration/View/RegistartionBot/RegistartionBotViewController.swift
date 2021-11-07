@@ -44,17 +44,15 @@ final class RegistartionBotViewController: BaseViewController {
     var personalData: PersonalData = PersonalData()
     var driverLicenseDateData: DriverLiceseDateData = DriverLiceseDateData()
     
-    var pickerType:PickerType = .date
-    var registrationState: RegistrationState = .PERSONAL_DATA
-    
+    var pickerType:PickerType = .date    
     var timer: Timer?
     var datePicker = UIDatePicker()
     var pickerV = UIPickerView()
     var isTakePhoto:Bool = false
     var isDriverRegister: Bool = false
     var isEdit: Bool = false
+    private var takePhotoCurrentIndex:Int  = 0
     private var currentIndex = 0
-    private var imageUploadCounter = 0
     private var activeTextField: UITextField?
     public var mainDriver: MainDriver?
 
@@ -77,7 +75,7 @@ final class RegistartionBotViewController: BaseViewController {
                 : Constant.Texts.creat_main_driver)
             startTimer()
         } else {
-            if !isDriverRegister {
+           // if !isDriverRegister {
                 registrationBotViewModel.setRegisterBotInfo(mainDriver: mainDriver!, countryList: countryList) { registrationBotResult in
                     
                     self.tableData = registrationBotResult
@@ -87,7 +85,7 @@ final class RegistartionBotViewController: BaseViewController {
                         self.insertTableCell()
                     }
                 }
-            }
+           // }
         }
     }
         
@@ -162,15 +160,31 @@ final class RegistartionBotViewController: BaseViewController {
     }
     
     //Send personal data
-    func sendPersonalData(personalData: PersonalData, index: Int) {
+    func sendPersonalData(personalData: PersonalData, index: Int, isEditData: Bool) {
         registrationBotViewModel.addPersonlaData(id: mainDriver?.id ?? "", personlaData: personalData) { [self] (result) in
             guard let result = result else {
                 self.showAlertMessage(Constant.Texts.errPersonalData)
                 return }
             mainDriver = result
-            self.registrationState = RegistrationState(rawValue: mainDriver?.state ?? "")!
-            fillInTableCell(txt: personalData.nationalRegisterNumber!, index: index)
-            insertTableCell()
+            if !isEditData {
+                fillInTableCell(txt: personalData.nationalRegisterNumber!, index: index)
+                insertTableCell()
+            } else {
+                self.sendAgreement()
+            }
+        }
+    }
+    
+   
+    /// Send request accept agreement
+    private func sendAgreement() {
+        registrationBotViewModel.acceptAgreement(id: mainDriver?.id ?? "") { (result) in
+            if result != nil {
+                self.tableData = self.isDriverRegister ? RegistrationBotData.completedDriverAccountModel : RegistrationBotData.completedAccountModel
+                self.animationConfirm()
+            } else {
+                self.showAlertMessage(Constant.Texts.errAcceptAgreement)
+            }
         }
     }
 
@@ -323,20 +337,14 @@ final class RegistartionBotViewController: BaseViewController {
     //MARK: ACTIONS
     //MARK: -----------------
     @IBAction func confirm(_ sender: UIButton) {
-        registrationBotViewModel.acceptAgreement(id: mainDriver?.id ?? "") { (result) in
-            if result != nil {
-                self.tableData = self.isDriverRegister ? RegistrationBotData.completedDriverAccountModel : RegistrationBotData.completedAccountModel
-                self.animationConfirm()
-            } else {
-                self.showAlertMessage(Constant.Texts.errAcceptAgreement)
-            }
-        }
+        sendPersonalData(personalData: personalData,
+                         index: 0,
+                         isEditData: true)        
     }
     
     @IBAction func thankYou(_ sender: UIButton) {
         UserDefaults.standard.set(true, forKey: key_isLogin)
         sender.setTitleColor(color_menu!, for: .normal)
-        //sender.layer.cornerRadius = 10
         sender.setBorderColorToCAShapeLayer(color: .clear)
         sender.backgroundColor = color_navigationBar!//color_dark_register
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
@@ -404,8 +412,6 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
             case Constant.Texts.calendar,
                  Constant.Texts.issueDateDrivingLicense:
                 return calendarCell(indexPath: indexPath,model: model, isExpiryDate: false)
-//            case Constant.Texts.issueDateDrivingLicense:
-//                return calendarCell(indexPath: indexPath, model: model, isExpiryDate: false)
             case Constant.Texts.expiryDate,
                  Constant.Texts.expiryDateDrivingLicense:
                 return calendarCell(indexPath: indexPath,model: model, isExpiryDate: true)
@@ -439,8 +445,8 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
     private func userFillFieldCell(indexPath: IndexPath, model: RegistrationBotModel) -> UserFillFieldTableViewCell {
         
     let cell = mTableV.dequeueReusableCell(withIdentifier: UserFillFieldTableViewCell.identifier, for: indexPath) as! UserFillFieldTableViewCell
+        cell.delegate = self
         cell.setCellInfo(item: model, index: indexPath.row)
-      cell.delegate = self
       return cell
     }
     
@@ -489,7 +495,7 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
         
         let cell = mTableV.dequeueReusableCell(withIdentifier: TakePhotoTableViewCell.identifier, for: indexPath) as! TakePhotoTableViewCell
         cell.delegate = self
-        cell.setCellInfo(item: model)
+        cell.setCellInfo(item: model, index: indexPath.row)
         return cell
     }
     
@@ -515,7 +521,6 @@ extension RegistartionBotViewController: UserFillFieldTableViewCellDelegate {
     func didPressStart() {
         self.tableData[self.currentIndex].userRegisterInfo?.isFilled =  true
         self.insertTableCell()
-       // signIn()
     }
 
     func didReturnTxtField(txt: String?, index: Int) {
@@ -527,7 +532,6 @@ extension RegistartionBotViewController: UserFillFieldTableViewCellDelegate {
        // countryList
         textFl.inputView = pickerV
         textFl.inputAccessoryView = creatToolBar(index: textFl.tag)
-        //textFl.isHidden = true
         
         if #available(iOS 14.0, *) {
             datePicker.preferredDatePickerStyle = .wheels
@@ -621,17 +625,15 @@ extension RegistartionBotViewController: CalendarTableViewCellDelegate {
          case .dateOfBirth:
             personalData.dateOfBirth = calendarData
         case .expiryDate:
-            if mainDriver?.state == Constant.Texts.state_IB {
                 addIdentityExpirationDate(expiryDate: calendarData)
-            }
         case .issueDateDrivingLicense:
             driverLicenseDateData.issueDate = calendarData
-            
-        case .expiryDateDrivingLicense:
-            if mainDriver?.state == Constant.Texts.state_DLB {
-                driverLicenseDateData.expirationDate = calendarData
+            if driverLicenseDateData.expirationDate != nil {
                 addDriverLicenseDate()
             }
+        case .expiryDateDrivingLicense:
+                driverLicenseDateData.expirationDate = calendarData
+                addDriverLicenseDate()
         default:
             break
         }
@@ -694,9 +696,7 @@ extension RegistartionBotViewController: NationalRegisterNumberTableViewCellDele
     func didReturnTxt(txt: String?, index: Int) {
         
         personalData.nationalRegisterNumber = txt
-        if registrationState == .PERSONAL_DATA {
-            sendPersonalData(personalData: personalData, index: index)
-        }
+        sendPersonalData(personalData: personalData, index: index, isEditData: false)
     }
     
     func willOpenPicker(textFl: UITextField) {
@@ -716,7 +716,8 @@ extension RegistartionBotViewController: NationalRegisterNumberTableViewCellDele
 //MARK: --------------------------------
 extension RegistartionBotViewController: TakePhotoTableViewCellDelegate {
     
-    func didPressTackePhoto(isOpenDoc: Bool) {
+    func didPressTackePhoto(isOpenDoc: Bool, index: Int) {
+        takePhotoCurrentIndex = index
         if isOpenDoc {
             let bkdAgreementVC = UIStoryboard(name: Constant.Storyboards.registrationBot, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.bkdAgreement) as! BkdAgreementViewController
             bkdAgreementVC.delegate = self
@@ -735,6 +736,7 @@ extension RegistartionBotViewController: BkdAgreementViewControllerDelegate {
         self.mConfirmBckgV.isHidden = false
         self.tableData[self.currentIndex].userRegisterInfo  = UserRegisterInfo(isFilled: true)
         self.mTableV.reloadRows(at: [IndexPath(row: self.currentIndex, section: 0)], with: .automatic)
+        isEdit = false
         self.insertTableCell()
     }
     
@@ -747,7 +749,7 @@ extension RegistartionBotViewController: SearchPhoneCodeViewControllerDelegate {
     
     func didSelectCountry(_ country: PhoneCode) {
         currentPhoneCode = country
-        mTableV.reloadRows(at: [IndexPath(row: currentIndex, section: 0)], with: .automatic)
+        mTableV.reloadRows(at: [IndexPath(row: 9, section: 0)], with: .automatic)
     }
 }
 
@@ -774,8 +776,7 @@ extension RegistartionBotViewController: UIImagePickerControllerDelegate, UINavi
     
     //Upload image to database
     private func uploadImage(image: UIImage) {
-        let uploadState = registrationBotViewModel.getImageUploadState(state: mainDriver?.state ?? "")
-        
+        let uploadState = registrationBotViewModel.getImageUploadState( index: takePhotoCurrentIndex)
         let newImage = image.resizeImage(targetSize: CGSize(width: 350, height: 350))
         registrationBotViewModel.imageUpload(image: newImage,
                                              id: mainDriver?.id ?? "",
@@ -783,11 +784,11 @@ extension RegistartionBotViewController: UIImagePickerControllerDelegate, UINavi
             if result != nil {
                 mainDriver = result!
                 DispatchQueue.main.async { [self] in
-                    tableData[self.currentIndex].userRegisterInfo = UserRegisterInfo(photo: image, isFilled: true)
-                    mTableV.reloadRows(at: [IndexPath(row: self.currentIndex, section: 0)], with: .automatic)
+                    tableData[self.takePhotoCurrentIndex].userRegisterInfo = UserRegisterInfo(photo: image, isFilled: true)
+                    mTableV.reloadRows(at: [IndexPath(row: self.takePhotoCurrentIndex, section: 0)], with: .automatic)
+                    isEdit = (self.takePhotoCurrentIndex < currentIndex)
                     self.insertTableCell()
                 }
-                registrationState = RegistrationState(rawValue: mainDriver?.state ?? "")!
                 self.isTakePhoto = false
 
             } else {
@@ -860,14 +861,5 @@ extension RegistartionBotViewController: GMSAutocompleteViewControllerDelegate {
   func wasCancelled(_ viewController: GMSAutocompleteViewController) {
     dismiss(animated: true, completion: nil)
   }
-    
-//  // Turn the network activity indicator on and off again.
-//  func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
-//    UIApplication.shared.isNetworkActivityIndicatorVisible = true
-//  }
-//
-//  func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
-//    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-//  }
 }
 
