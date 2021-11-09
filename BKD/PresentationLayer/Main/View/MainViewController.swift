@@ -7,6 +7,7 @@
 
 import UIKit
 import SideMenu
+import CoreLocation
 
 
 let timePrice: Double = 59.99
@@ -783,16 +784,20 @@ extension MainViewController: SearchHeaderViewDelegate {
 //MARK: CustomLocationUIViewControllerDelegate
 //MARK: ----------------------------
 extension MainViewController: CustomLocationViewControllerDelegate {
-    func getCustomLocation(_ locationPlace: String) {
+    func getCustomLocation(_ locationPlace: String, coordinate: CLLocationCoordinate2D) {
         searchHeaderV?.updateCustomLocationFields(place: locationPlace, didResult: { [weak self] (isPickUpLocation) in
             if isPickUpLocation {
                 self?.searchHeaderV?.pickUpLocation = locationPlace
                 self?.searchModel.isPickUpCustomLocation = true
                 self?.searchModel.pickUpLocation = locationPlace
+                self?.searchModel.pickUpLocationLongitude = coordinate.longitude
+                self?.searchModel.pickUpLocationLatitude = coordinate.latitude
             } else {
                 self?.searchHeaderV?.returnLocation = locationPlace
                 self?.searchModel.isRetuCustomLocation = true
                 self?.searchModel.returnLocation = locationPlace
+                self?.searchModel.returnLocationLongitude = coordinate.longitude
+                self?.searchModel.returnLocationLatitude = coordinate.latitude
             }
         })
     }

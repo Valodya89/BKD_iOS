@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 enum Search {
     case date
@@ -15,7 +16,7 @@ enum Search {
 }
 
 var additionalAccessories: [AccessoriesModel] = AccessoriesData.accessoriesModel
-var additionalDrivers: [MyDriversModel] = MyDriversData.myDriversModel
+//var additionalDrivers: [MyDriversModel] = MyDriversData.myDriversModel
 
 class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
@@ -90,13 +91,13 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     private let scrollPadding: CGFloat = 60
     private let tableAnimationDuration = 0.5
-
-    private  var tariffSlideY: CGFloat = 0
+    private var tariffSlideY: CGFloat = 0
     private var lastContentOffset: CGFloat = 0
     private var previousContentPosition: CGPoint?
     private var scrollContentHeight: CGFloat = 0.0
     private var isScrolled = false
     private var isTariffSlide = true
+    private var accessoriesEditList: [AccessoriesEditModel]?
 
     
     //MARK: Life cycle
@@ -238,7 +239,8 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         //var vehicleModel = VehicleModel()
         vehicleModel?.vehicleName = mCarNameLb.text
         vehicleModel?.additionalAccessories = additionalAccessories
-        vehicleModel?.additionalDrivers = additionalDrivers
+       // vehicleModel?.additionalDrivers = additionalDrivers
+         
 //        searchModel.pickUpLocation = mSearchV.mPickUpLocationBtn.title(for: .normal)
 //        searchModel.returnLocation = mSearchV.mReturnLocationBtn.title(for: .normal)
         vehicleModel?.searchModel = searchModel
@@ -725,6 +727,11 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         
     }
     
+    ///Add car rent
+    private func addRent() {
+        
+    }
+    
     
     //MARK: -Actions
     //MARK: --------------------
@@ -732,14 +739,15 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     ///Navigation controller will back to pravius controller
     @IBAction func back(_ sender: UIBarButtonItem) {
         additionalAccessories = AccessoriesData.accessoriesModel
-        additionalDrivers = MyDriversData.myDriversModel
+       // additionalDrivers = MyDriversData.myDriversModel
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func accessories(_ sender: UIButton) {
         self.goToAccessories(on: self,
                              vehicleModel: vehicleModel,
-                             isEditReservation: false)
+                             isEditReservation: false,
+                             accessoriesEditList: accessoriesEditList)
     }
     
     
@@ -749,9 +757,19 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     @IBAction func reserve(_ sender: UIButton) {
         animationReserve()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [self] in
-            self.goToReserveController()
+        detailsViewModel.addRent(id: vehicleModel?.vehicleId ?? "",
+                                 searchModel: searchModel,
+                                 accessories: accessoriesEditList,
+                                 additionalDrivers: nil) { result in
+            guard result != nil else {
+                self.showAlertMessage(Constant.Texts.errReservation)
+                return
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [self] in
+                self.goToReserveController()
+            }
         }
+
     }
     
     @IBAction func compare(_ sender: UIButton) {
@@ -956,14 +974,19 @@ extension DetailsViewController: SearchViewDelegate {
 //MARK: CustomLocationUIViewControllerDelegate
 //MARK: ----------------------------
 extension DetailsViewController: CustomLocationViewControllerDelegate {
-    func getCustomLocation(_ locationPlace: String) {
+    func getCustomLocation(_ locationPlace: String, coordinate: CLLocationCoordinate2D) {
          mSearchV.updateCustomLocationFields(place: locationPlace, didResult: { [weak self] (isPickUpLocation) in
             if isPickUpLocation {
                 self?.searchModel.isPickUpCustomLocation = true
                 self?.searchModel.pickUpLocation = locationPlace
+                self?.searchModel.pickUpLocationLongitude = coordinate.longitude
+                self?.searchModel.pickUpLocationLatitude = coordinate.latitude
+
             } else {
                 self?.searchModel.isRetuCustomLocation = true
                 self?.searchModel.returnLocation = locationPlace
+                self?.searchModel.returnLocationLongitude = coordinate.longitude
+                self?.searchModel.returnLocationLatitude = coordinate.latitude
             }
             self?.isActiveReserve()
 
@@ -1011,10 +1034,15 @@ extension DetailsViewController: MyDriversViewControllerDelegate {
 //MARK: AccessoriesUIViewControllerDelegate
 //MARK: ----------------------------
 extension DetailsViewController: AccessoriesUIViewControllerDelegate {
-    func addedAccessories(_ isAdd: Bool, totalPrice: Double) {
+    
+    func addedAccessories(_ isAdd: Bool,
+                          totalPrice: Double,
+                          accessoriesEditList: [AccessoriesEditModel]?) {
+        
         mAccessoriesBtn.alpha = isAdd ? 1.0 : 0.67
         vehicleModel?.ifHasAccessories = isAdd
         vehicleModel?.accessoriesTotalPrice = totalPrice
+        self.accessoriesEditList = accessoriesEditList
     }
 }
 

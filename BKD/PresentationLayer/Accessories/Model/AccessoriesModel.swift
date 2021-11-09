@@ -42,6 +42,7 @@ struct AccesoreImageResponse: Codable {
 
 
 struct AccessoriesEditModel {
+    public var accessoryId: String?
     public var accessoryCount: Int?
     public var isAdded: Bool = false
     public var totalPrice: Double?

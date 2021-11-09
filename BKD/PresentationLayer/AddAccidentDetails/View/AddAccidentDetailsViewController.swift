@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import CoreLocation
+
 
 class AddAccidentDetailsViewController: BaseViewController {
     
@@ -371,7 +373,7 @@ extension AddAccidentDetailsViewController: UIImagePickerControllerDelegate, UIN
 //MARK: -- CustomLocationViewControllerDelegate
 //MARK: -------------------------------------------
 extension AddAccidentDetailsViewController: CustomLocationViewControllerDelegate {
-    func getCustomLocation(_ locationPlace: String) {
+    func getCustomLocation(_ locationPlace: String, coordinate: CLLocationCoordinate2D) {
         mDateAndLocationV.location = locationPlace
         mDateAndLocationV.mLocationTxtFl.text = locationPlace
     }

@@ -39,20 +39,21 @@ class MyDriversViewModel: NSObject {
         allDrivers.forEach { driver in
             if driver.state == Constant.Texts.state_agree {
                 let myDriverModel = MyDriversModel(fullname: driver.name! + " " + driver.surname!,
-                                                   licenciNumber: "XX",
-                                                   price: 0.0,
-                                                   isWaitingForAdmin: true,
-                                                   driver: driver)
+                                    licenciNumber: driver.drivingLicenseNumber!,
+                                    price: 0.0,
+                                    isWaitingForAdmin: true,
+                                    driver: driver)
                 myDriverList.append(myDriverModel)
             } else if driver.state == Constant.Texts.state_accepted {
                 let myDriverModel = MyDriversModel(fullname: driver.name! + " " + driver.surname!,
-                                                   licenciNumber: "XX",
-                                                   price: 0.0,
-                                                   isWaitingForAdmin: false,
-                                                   driver: driver)
+                                  licenciNumber: driver.drivingLicenseNumber!,
+                                   price: 0.0,
+                                   isWaitingForAdmin: false,
+                                   driver: driver)
                 myDriverList.append(myDriverModel)
             }
         }
+        print (myDriverList)
        return myDriverList
     }
     

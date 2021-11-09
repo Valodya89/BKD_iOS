@@ -238,7 +238,8 @@ struct Constant {
         static let mailboxNumber = "Mailbox number"
         static let zipNumber = "Zip number"
         static let dateOfBirth = "Date of birth"
-        
+        static let drivingLicenseNumber = "Driving license number"
+
         //Personal date types
         static let button = "button"
         static let txtFl = "txtFl"
@@ -337,6 +338,7 @@ struct Constant {
         static let errIDExpirationDate = "Failed to add ID expiration date!"
         static let errDrivLicenseDate = "Failed to add issue and expired driver license dates."
         static let errAcceptAgreement = "Failed to accept agreement."
+        static let errReservation = "Failed to reservation."
 
         
         //Request texts

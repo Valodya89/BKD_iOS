@@ -36,12 +36,20 @@ func setupView() {
     mSelectBtn.roundCornersWithBorder(corners: .allCorners, radius: 36, borderColor: color_navigationBar!, borderWidth: 1)
     mShadowBckgV.setShadow(color: color_shadow!)
 }
+    
+    override func prepareForReuse() {
+        mSelectBtn.roundCornersWithBorder(corners: .allCorners, radius: 36, borderColor: color_navigationBar!, borderWidth: 1)
+        mSelectBtn.backgroundColor = .clear
+        mLicenseLb.text = nil
+        mFullNameLb.text = nil
+    }
 
     func setCellInfo(item: MyDriversModel, index: Int) {
         mSelectBtn.tag = index
         mSelectBtn.addTarget(self, action: #selector(selectDriver(sender:)), for: .touchUpInside)
         mFullNameLb.text = item.fullname
-        mLicenseLb.text = Constant.Texts.licenseNumber + " " + item.licenciNumber
+        mLicenseLb.text = item.licenciNumber
+       // mLicenseLb.text = Constant.Texts.licenseNumber + " " + item.licenciNumber
         if item.isSelected {
             mSelectBtn.backgroundColor = color_navigationBar!
             mSelectBtn.setTitleColor(color_menu!, for: .normal)

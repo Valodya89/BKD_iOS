@@ -9,7 +9,9 @@ import UIKit
 
 
 protocol AccessoriesUIViewControllerDelegate: AnyObject {
-    func addedAccessories(_ isAdd: Bool, totalPrice: Double)
+    func addedAccessories(_ isAdd: Bool,
+                          totalPrice: Double,
+                          accessoriesEditList: [AccessoriesEditModel]?)
 }
 class AccessoriesUIViewController: BaseViewController {
     
@@ -27,11 +29,11 @@ class AccessoriesUIViewController: BaseViewController {
     //MARK: -- Variables
     public var isEditReservation: Bool = false
     var accessoriesList: [Accessories]?
-    var accessoriesEditList: [AccessoriesEditModel]?
     let accessoriesViewModel = AccessoriesViewModel()
     var totalPrice: Double = 0
     weak var delegate: AccessoriesUIViewControllerDelegate?
     
+    public var accessoriesEditList: [AccessoriesEditModel]?
     public var vehicleModel: VehicleModel?
 
     
@@ -40,6 +42,7 @@ class AccessoriesUIViewController: BaseViewController {
         super.viewDidLoad()
         setupView()
     }
+    
     func setupView() {
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -58,7 +61,10 @@ class AccessoriesUIViewController: BaseViewController {
         accessoriesViewModel.getAccessories(carID: vehicleModel?.vehicleId ?? "") { result in
             guard let _ = result else {return}
             self.accessoriesList = self.accessoriesViewModel.getActiveAccessoryList(accessories: result!)
-            self.accessoriesEditList = Array(repeating: AccessoriesEditModel(accessoryCount: 0, isAdded: false, totalPrice: 0), count: self.accessoriesList!.count)
+            
+            if self.accessoriesEditList == nil {
+                self.accessoriesEditList = Array(repeating: AccessoriesEditModel(accessoryCount: 0, isAdded: false, totalPrice: 0.0), count: self.accessoriesList!.count)
+            }
             self.mAccessoriesCollectionV.reloadData()        }
     }
     
@@ -92,7 +98,7 @@ class AccessoriesUIViewController: BaseViewController {
     //MARK: -- ACTION
     @IBAction func back(_ sender: Any) {
         
-        self.delegate?.addedAccessories(self.mPriceLb.text == "0.0" ? false : true , totalPrice: totalPrice)
+        self.delegate?.addedAccessories(self.mPriceLb.text == "0.0" ? false : true , totalPrice: totalPrice, accessoriesEditList: accessoriesEditList)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -147,9 +153,10 @@ extension AccessoriesUIViewController: AccessoriesCollectionViewCellDelegate {
         
     }
 
-    func didPressAdd(isAdd: Bool, cellIndex: Int) {
+    func didPressAdd(isAdd: Bool, cellIndex: Int, id: String?) {
         if KeychainManager().isUserLoggedIn() {
             accessoriesEditList![cellIndex].isAdded = isAdd
+            accessoriesEditList![cellIndex].accessoryId = id
         } else {
             showAlertSignIn()
         }

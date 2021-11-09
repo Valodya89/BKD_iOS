@@ -143,6 +143,8 @@
 		5659AC2F2704B97F00278560 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659AC2E2704B97F00278560 /* UICollectionView.swift */; };
 		5659AC3327056E4900278560 /* SFProDisplayRegularItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5659AC3227056E4400278560 /* SFProDisplayRegularItalic.ttf */; };
 		5659B02B2699F5020059D28C /* PhoneCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659B02A2699F5020059D28C /* PhoneCodeModel.swift */; };
+		565A665B273A10B3008C7EF9 /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565A665A273A10B2008C7EF9 /* Reservation.swift */; };
+		565A665D273A3527008C7EF9 /* MyReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565A665C273A3527008C7EF9 /* MyReservationViewModel.swift */; };
 		565A7AB02653FE26006C63D0 /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565A7AAE2653FE26006C63D0 /* SearchHeaderView.swift */; };
 		565A7AB12653FE26006C63D0 /* SearchHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565A7AAF2653FE26006C63D0 /* SearchHeaderView.xib */; };
 		565A7AC726548009006C63D0 /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565A7AC626548009006C63D0 /* SearchResultView.swift */; };
@@ -497,6 +499,8 @@
 		5659AC2E2704B97F00278560 /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		5659AC3227056E4400278560 /* SFProDisplayRegularItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SFProDisplayRegularItalic.ttf; sourceTree = "<group>"; };
 		5659B02A2699F5020059D28C /* PhoneCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneCodeModel.swift; sourceTree = "<group>"; };
+		565A665A273A10B2008C7EF9 /* Reservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
+		565A665C273A3527008C7EF9 /* MyReservationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReservationViewModel.swift; sourceTree = "<group>"; };
 		565A7AAE2653FE26006C63D0 /* SearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderView.swift; sourceTree = "<group>"; };
 		565A7AAF2653FE26006C63D0 /* SearchHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchHeaderView.xib; sourceTree = "<group>"; };
 		565A7AC626548009006C63D0 /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = "<group>"; };
@@ -1697,6 +1701,7 @@
 		565F80BD26A667AE00ADB9FE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				565A665A273A10B2008C7EF9 /* Reservation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2384,6 +2389,7 @@
 		568E70B22644BFAE000CB6A9 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				565A665C273A3527008C7EF9 /* MyReservationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -3389,6 +3395,7 @@
 				565F80C426A667D900ADB9FE /* ReservationCompletedViewController.swift in Sources */,
 				562585D526F0F5D100EC9284 /* PaymentStatusUITableViewCell.swift in Sources */,
 				5656081A2678541B009578FA /* ImagesBottomCollectionViewCell.swift in Sources */,
+				565A665B273A10B3008C7EF9 /* Reservation.swift in Sources */,
 				565BFDF726A064360044D081 /* String.swift in Sources */,
 				5648C5C8268842D9000B4E2A /* AccessoriesViewModel.swift in Sources */,
 				565F80FC26A7BE1600ADB9FE /* SelectPaymentViewController.swift in Sources */,
@@ -3411,6 +3418,7 @@
 				5659AC2F2704B97F00278560 /* UICollectionView.swift in Sources */,
 				560048702697F78C009943B5 /* BkdAgreementViewController.swift in Sources */,
 				564E13692652F0CF008CE884 /* PrivacyPoliceView.swift in Sources */,
+				565A665D273A3527008C7EF9 /* MyReservationViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

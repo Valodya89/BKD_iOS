@@ -160,12 +160,16 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     }
     
     ///Go to accessories  screen
-    func goToAccessories(on viewController: UIViewController?, vehicleModel:VehicleModel?, isEditReservation: Bool) {
+    func goToAccessories(on viewController: UIViewController?,
+                         vehicleModel:VehicleModel?,
+                         isEditReservation: Bool,
+                         accessoriesEditList: [AccessoriesEditModel]?) {
         
         let accessoriesVC = UIStoryboard(name: Constant.Storyboards.accessories, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.accessories) as! AccessoriesUIViewController
+        accessoriesVC.delegate = viewController as? AccessoriesUIViewControllerDelegate
         accessoriesVC.vehicleModel = vehicleModel
         accessoriesVC.isEditReservation = isEditReservation
-        accessoriesVC.delegate = viewController as? AccessoriesUIViewControllerDelegate
+        accessoriesVC.accessoriesEditList = accessoriesEditList
         self.navigationController?.pushViewController(accessoriesVC, animated: true)
     }
     

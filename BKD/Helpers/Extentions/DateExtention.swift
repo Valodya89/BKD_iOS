@@ -8,6 +8,12 @@
 import UIKit
 
 extension Date {
+    var millisecondsSince1970:Int64 {
+            return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
+        }
+
+    
+    
     func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
         return calendar.dateComponents(Set(components), from: self)
     }

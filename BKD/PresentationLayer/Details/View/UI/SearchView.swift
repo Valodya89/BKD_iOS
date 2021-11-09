@@ -310,13 +310,13 @@ class SearchView: UIView, UITextFieldDelegate {
                                     mMonthReturnDateBtn,
                                   txtFl: mReturnDateTxtFl)
 //                mDayReturnDateBtn.setTitle(String(searchModel.returnTime!.get(.day)), for: .normal)
-                if tariff == .hourly {
-                    mDayReturnDateBtn.setTitle(searchModel.returnTime!.getDay(), for: .normal)
-                    mMonthReturnDateBtn.setTitle(searchModel.returnTime!.getMonthAndWeek(lng: "en"), for: .normal)
-                } else {
+//                if tariff == .hourly {
+//                    mDayReturnDateBtn.setTitle(searchModel.returnTime!.getDay(), for: .normal)
+//                    mMonthReturnDateBtn.setTitle(searchModel.returnTime!.getMonthAndWeek(lng: "en"), for: .normal)
+//                } else {
                     mDayReturnDateBtn.setTitle(searchModel.returnDate!.getDay(), for: .normal)
                     mMonthReturnDateBtn.setTitle(searchModel.returnDate!.getMonthAndWeek(lng: "en"), for: .normal)
-                }
+                //}
             }
     }
     

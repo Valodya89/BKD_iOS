@@ -25,7 +25,7 @@ enum ViewType: String, CaseIterable {
     case zip = "zip"
     //case city = "city"
     case nationalRegisterNumber = "nationalRegisterNumber"
-    
+    case drivingLicenseNumber = "drivingLicenseNumber"
    
     
     case expiryDate = "Expiry date"
@@ -94,7 +94,10 @@ class UserFillFieldTableViewCell: UITableViewCell {
                 viewType = .zip
             } else if placeholder == Constant.Texts.city {
                 viewType = .city
+            } else if placeholder == Constant.Texts.drivingLicenseNumber {
+                viewType = .drivingLicenseNumber
             }
+            
         }
     }
 
@@ -112,6 +115,8 @@ class UserFillFieldTableViewCell: UITableViewCell {
         mTextFl.text = ""
        // mTextLb.text = ""
         mDropDownPlaceholderLb.text = ""
+        mDropDownImgV.setTintColor(color: color_alert_txt!)
+
         placeholder = ""
         mTextFl.isHidden = false
         mStartBtn.isHidden = true
@@ -121,18 +126,18 @@ class UserFillFieldTableViewCell: UITableViewCell {
         mDropDownPlaceholderLb.isHidden = true
         mTextFl.inputAccessoryView = nil
         mTextFl.inputView = nil
-        mTextFl.textColor = color_navigationBar!
-       // mTextLb.textColor = .white
-       // mTextLb.backgroundColor = color_navigationBar!
+        mTextFl.keyboardType = .default
+        mTextFl.textColor = color_alert_txt!
         mTextFl.backgroundColor = .clear
+        mTextFl.tintColor = color_navigationBar!
+        
         mDropDownPlaceholderLb.backgroundColor = .clear
         mBorderV.setBackgroundColorToCAShapeLayer(color: .clear)
         mBorderV.bringSubviewToFront(mTextFl)
         mBorderV.bringSubviewToFront(mDropDownImgV)
      //  mTextLb.roundCorners(corners: [.topLeft, .topRight, .bottomRight], radius: 8.0)
         mDropDownImgV.image = img_dropDown_light
-        mTextFl.keyboardType = .default
-        mTextFl.textColor = color_alert_txt!
+       
     }
     
     
@@ -167,7 +172,6 @@ class UserFillFieldTableViewCell: UITableViewCell {
             }
             
             if placeholder == Constant.Texts.country {
-                mDropDownImgV.setTintColor(color: .white)
                 mDropDownImgV.isHidden = false
             }
         }
@@ -185,14 +189,14 @@ class UserFillFieldTableViewCell: UITableViewCell {
     private func textFiledFilled(txt: String) {
         mTextFl.text = txt
         mTextFl.backgroundColor = color_navigationBar
-       
         if placeholder == Constant.Texts.country {
-            mTextFl.tintColor = .white
             mDropDownImgV.isHidden = false
             mDropDownImgV.setTintColor(color: .white)
             self.layoutIfNeeded()
             self.setNeedsLayout()
         }
+        mTextFl.textColor = .white
+
     }
     
     @IBAction func start(_ sender: UIButton) {

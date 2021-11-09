@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 
 protocol EditReservationDelegate: AnyObject {
@@ -229,7 +230,10 @@ class EditReservationViewController: BaseViewController {
     
     @IBAction func accessories(_ sender: UIButton) {
         
-        goToAccessories(on: nil, vehicleModel: nil, isEditReservation: true)
+        goToAccessories(on: nil,
+                        vehicleModel: nil,
+                        isEditReservation: true,
+                        accessoriesEditList: nil)
     }
     
     
@@ -339,15 +343,19 @@ extension EditReservationViewController: EditBySearchViewDelegate {
 //MARK: ----------------------------
 extension EditReservationViewController: CustomLocationViewControllerDelegate {
     
-    func getCustomLocation(_ locationPlace: String) {
+    func getCustomLocation(_ locationPlace: String, coordinate: CLLocationCoordinate2D) {
          mEditBySearchV.updateCustomLocationFields(place: locationPlace, didResult: { [weak self] (isPickUpLocation) in
             if isPickUpLocation {
                 self?.searchModel.isPickUpCustomLocation = true
                 self?.searchModel.pickUpLocation = locationPlace
+                self?.searchModel.pickUpLocationLongitude = coordinate.longitude
+                self?.searchModel.pickUpLocationLatitude = coordinate.latitude
                 self?.mEditBySearchV.pickUpLocation = locationPlace
             } else {
                 self?.searchModel.isRetuCustomLocation = true
                 self?.searchModel.returnLocation = locationPlace
+                self?.searchModel.returnLocationLongitude = coordinate.longitude
+                self?.searchModel.returnLocationLatitude = coordinate.latitude
                 self?.mEditBySearchV.returnLocation = locationPlace
 
             }

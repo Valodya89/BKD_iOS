@@ -79,6 +79,10 @@ final class RegistartionBotViewController: BaseViewController {
                 registrationBotViewModel.setRegisterBotInfo(mainDriver: mainDriver!, countryList: countryList) { registrationBotResult in
                     
                     self.tableData = registrationBotResult
+                    if self.mainDriver?.state  != Constant.Texts.state_created {
+                        self.personalData = self.registrationBotViewModel.getPersonalData(driver: self.mainDriver) ?? PersonalData()
+                        self.driverLicenseDateData = self.registrationBotViewModel.getDriverLicenseDateData(driver: self.mainDriver) ?? DriverLiceseDateData()
+                    }
                     self.mTableV.reloadData()
                     self.tableScrollToBottom()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
@@ -339,7 +343,7 @@ final class RegistartionBotViewController: BaseViewController {
     @IBAction func confirm(_ sender: UIButton) {
         sendPersonalData(personalData: personalData,
                          index: 0,
-                         isEditData: true)        
+                         isEditData: true)
     }
     
     @IBAction func thankYou(_ sender: UIButton) {
@@ -348,10 +352,8 @@ final class RegistartionBotViewController: BaseViewController {
         sender.setBorderColorToCAShapeLayer(color: .clear)
         sender.backgroundColor = color_navigationBar!//color_dark_register
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
-           
         self.tabBarController?.selectedIndex = 0
-            self.navigationController?.popToRootViewController(animated: false)
-            
+        self.navigationController?.popToViewController(ofClass: self.isDriverRegister ? MyDriversViewController.self : MyBKDViewController.self, animated: true)
         }
     }
     
@@ -569,6 +571,11 @@ extension RegistartionBotViewController: UserFillFieldTableViewCellDelegate {
             personalData.city = data
         case .nationalRegister:
             personalData.nationalRegisterNumber = data
+        case .drivingLicenseNumber:
+            driverLicenseDateData.drivingLicenseNumber = data
+            if driverLicenseDateData.expirationDate != nil &&  driverLicenseDateData.issueDate != nil  {
+                addDriverLicenseDate()
+            }
         default: break
         }
     }

@@ -8,6 +8,7 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import CoreLocation
 
 enum PlacesError: Error {
     case failedToFind
@@ -15,7 +16,7 @@ enum PlacesError: Error {
 }
 
 protocol CustomLocationViewControllerDelegate: AnyObject {
-    func getCustomLocation(_ locationPlace: String)
+    func getCustomLocation(_ locationPlace: String, coordinate: CLLocationCoordinate2D)
 }
 
 class CustomLocationViewController: BaseViewController {
@@ -338,7 +339,7 @@ class CustomLocationViewController: BaseViewController {
 extension CustomLocationViewController: MarkerInfoViewControllerDelegate {
     
     func didPressContinue(place: String) {
-        self.delegate?.getCustomLocation(place)
+        self.delegate?.getCustomLocation(place, coordinate: mapViewCenterCoordinate)
         self.navigationController?.popViewController(animated: true)
     }
     

@@ -9,8 +9,11 @@ import UIKit
 protocol AccessoriesCollectionViewCellDelegate: AnyObject {
     func increaseOrDecreaseAccessory(accessoryPrice:Double,
                      isIncrease: Bool)
-    func didPressAdd(isAdd: Bool, cellIndex: Int)
-    func didChangeCount(cellIndex: Int, count: Int)
+    func didPressAdd(isAdd: Bool,
+                     cellIndex: Int,
+                     id: String?)
+    func didChangeCount(cellIndex: Int,
+                        count: Int)
 }
 class AccessoriesCollectionViewCell: UICollectionViewCell {
     static let identifier = "AccessoriesCollectionViewCell"
@@ -30,7 +33,8 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
     
     //MARK: -- Variables
     weak var delegate: AccessoriesCollectionViewCellDelegate?
-    let accessoriesViewModel = AccessoriesViewModel()
+    //let accessoriesViewModel = AccessoriesViewModel()
+    var accessoryId: String?
     var maxCount: Double?
     
     
@@ -46,6 +50,7 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
     }
     
     func setCellInfo(item: Accessories, editItem: AccessoriesEditModel, index: Int) {
+        accessoryId = item.id
         maxCount = item.maxCount
         mAddBtn.tag = index
         mIncreaseBtn.tag = index
@@ -62,6 +67,7 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
         if editItem.isAdded {
             mAddImgV.image = img_add_selecte
             mAddBtn.setTitleColor(color_menu, for: .normal)
+            mAccessorieCountLb.text = String(editItem.accessoryCount ?? 1)
         } else {
             mAddImgV.image = img_add_unselece
             mAddBtn.setTitleColor(color_alert_txt!, for: .normal)
@@ -106,7 +112,9 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
         increaseOrDecreaseAccessory(accessoryPrice:Double(count!) * price!,
                                     accessoryCount: count!,
                                     isIncrease: isIncrease)
-        delegate?.didPressAdd(isAdd: isIncrease, cellIndex: sender.tag)
+        delegate?.didPressAdd(isAdd: isIncrease,
+                              cellIndex: sender.tag,
+                              id: accessoryId)
     }
     
     

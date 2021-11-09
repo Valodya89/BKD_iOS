@@ -27,6 +27,7 @@ struct MainDriver: Codable {
     let identityExpirationDate: String?
     let identityFront: ImageResponse?
     let identityBack: ImageResponse?
+    let drivingLicenseNumber: String?
     let drivingLicenseIssueDate: String?
     let drivingLicenseExpirationDate: String?
     let drivingLicenseFront: ImageResponse?

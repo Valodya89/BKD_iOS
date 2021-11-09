@@ -420,9 +420,148 @@ class DetailsViewModel: NSObject {
         return flexibleStartTimes
     }
     
+    ///Get accessories for add rent request
+    func getAccessoriesToRequest(accessories: [AccessoriesEditModel]?) -> [[String : Any]?] {
+        var accessoryArr: [[String : Any]?] = []
+        accessories?.forEach({ accessory in
+            if accessory.isAdded {
+                let dic  = ["id" : accessory.accessoryId ?? "",
+                            "count": accessory.accessoryCount ?? 0] as [String : Any]
+                accessoryArr.append(dic)
+            }
+        })
+        return accessoryArr
+    }
+    
+    ///Get accessories for add rent request
+    func getAdditionalDriversToRequest(additionalDrivers: [MainDriver]?) -> [String?] {
+        var driversArr: [String?] = []
+        additionalDrivers?.forEach({ driver in
+            driversArr.append(driver.id)
+        })
+        return driversArr
+    }
+    
+    
+    ///Get location for add rent request
+    func getLocationToRequest(search: SearchModel,
+                              isPickUpLocation: Bool) -> [String : Any] {
+        
+        //"var locationDic: [String : Any]?
+        if isPickUpLocation {
+            if search.isPickUpCustomLocation {
+                return ["type": "CUSTOM",
+                        "customLocation": [
+                            "name": search.pickUpLocation ?? "",
+                            "longitude": search.pickUpLocationLongitude ?? 0.0,
+                            "latitude": search.pickUpLocationLatitude ?? 0.0
+                                ]
+                            ]
+            }
+        } else {
+            if search.isRetuCustomLocation {
+                return ["type": "CUSTOM",
+                                "customLocation": [
+                                    "name": search.returnLocation ?? "",
+                                    "longitude": search.returnLocationLongitude ?? 0.0,
+                                    "latitude": search.returnLocationLatitude ?? 0.0
+                                ]
+                            ]
+            }
+        }
+        
+        return [:]
+    }
+    
+    ///Add Rent car
+    func addRent(id: String,
+                 searchModel: SearchModel,
+                 accessories: [AccessoriesEditModel]?,
+                 additionalDrivers: [MainDriver]?,
+                 completion: @escaping (Rent?) -> Void) {
+        
+        let accessoriesArr = getAccessoriesToRequest(accessories: accessories)
+        let additionalDriversArr = getAdditionalDriversToRequest(additionalDrivers: additionalDrivers)
+        let pickupLocation = getLocationToRequest(search: searchModel, isPickUpLocation: true)
+        let returnLocation = getLocationToRequest(search: searchModel, isPickUpLocation: false)
+
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addRent(carId: id,
+                                                                                  startDate: (searchModel.pickUpTime ?? Date()).timeIntervalSince1970,
+                            endDate: (searchModel.returnTime ?? Date()).timeIntervalSince1970,
+                            accessories: accessoriesArr,
+                            additionalDrivers: additionalDriversArr,
+                            pickupLocation: pickupLocation,
+                            returnLocation: returnLocation))) { (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let result = BkdConverter<BaseResponseModel<Rent>>.parseJson(data: data as Any) else {
+                    print("error")
+                    completion(nil)
+                    return
+                }
+                print(result.content as Any)
+                completion(result.content)
+
+            case .failure(let error):
+                print(error.description)
+                completion(nil)
+                break
+            }
+        }
+    }
+   
+    
    
 }
 
 
-
-
+//"content": {
+//        "id": "6189d8bc3a0352528762d090",
+//        "userId": "60febc56266f574fec954af2",
+//        "startDate": 1636395213876,
+//        "endDate": 1636395213876,
+//        "accessories": [
+//            {
+//                "id": "61506ec81464ab42a0e2f31e",
+//                "count": 1
+//            }
+//        ],
+//        "pickupLocation": {
+//            "type": "CUSTOM",
+//            "customLocation": {
+//                "name": "Masivi city",
+//                "longitude": 45.5,
+//                "latitude": 47.8
+//            },
+//            "parking": null
+//        },
+//        "returnLocation": {
+//            "type": "CUSTOM",
+//            "customLocation": {
+//                "name": "Masivi city",
+//                "longitude": 45.5,
+//                "latitude": 47.8
+//            },
+//            "parking": null
+//        },
+//        "carDetails": {
+//            "id": "61815f3296b3233b4995c625",
+//            "registrationNumber": null,
+//            "logo": {
+//                "id": "14122AFE1F760709174A3F2B166B05AB51B1D7286ECAC4678C5B2F485A99F02605F320DD234F89BAAFC16476569668ED",
+//                "node": "dev-node1"
+//            },
+//            "model": "M3",
+//            "type": null
+//        },
+//        "driver": {
+//            "id": "60febc56266f574fec954af2",
+//            "name": "Valodya",
+//            "surname": "Galstyan",
+//            "drivingLicenseNumber": null
+//        },
+//        "additionalDrivers": []
+//    }
+//}
+//

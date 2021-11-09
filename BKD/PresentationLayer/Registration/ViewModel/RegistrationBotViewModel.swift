@@ -116,6 +116,10 @@ class RegistrationBotViewModel: NSObject {
                     return
                 }
             }
+            else if tableData[i].userRegisterInfo?.placeholder ==  Constant.Texts.drivingLicenseNumber {
+                tableData[i].userRegisterInfo?.string = mainDriver.drivingLicenseNumber
+                tableData[i].userRegisterInfo?.isFilled = true
+            }
             else if tableData[i].viewDescription ==  Constant.Keys.take_photo &&
                 tableData[i - 1].msgToFillBold == Constant.Texts.DLF_text {
                 if mainDriver.drivingLicenseFront != nil {
@@ -176,35 +180,41 @@ class RegistrationBotViewModel: NSObject {
         completion(tableData)
     }
     
-    ///Get image upload state
-//    func getImageUploadState(state: String) -> ImageUploadState{
-//        switch state {
-//        case Constant.Texts.state_pers_data:
-//            return ImageUploadState.IF
-//        case Constant.Texts.state_IF:
-//            return ImageUploadState.IB
-//        case Constant.Texts.state_IEX:
-//            return ImageUploadState.DLF
-//        case Constant.Texts.state_DLF:
-//            return ImageUploadState.DLB
-//        case Constant.Texts.state_DL_date:
-//            return ImageUploadState.DLS
-//        default:
-//            return ImageUploadState.DLS
-//        }
-//    }
+    ///Get personal data for driver draft
+    func getPersonalData(driver: MainDriver?) -> PersonalData? {
+        
+        let personalData:PersonalData? = PersonalData(name: driver?.name,
+                                                      surname: driver?.surname,
+                                                      phoneNumber: driver?.phoneNumber,
+                                                      dateOfBirth: driver?.dateOfBirth,
+                                                      street: driver?.street,
+                                                      house: driver?.house,
+                                                      mailBox: driver?.mailBox, countryId: driver?.countryId,
+                                                      zip: driver?.zip,
+                                                      city: driver?.city,
+                                                      nationalRegisterNumber: driver?.nationalRegisterNumber)
+        return personalData
+    }
     
+    ///Get driver license data for driver draft
+    func getDriverLicenseDateData(driver: MainDriver?) -> DriverLiceseDateData? {
+        
+        return DriverLiceseDateData(issueDate: driver?.drivingLicenseIssueDate, expirationDate: driver?.identityExpirationDate, drivingLicenseNumber: driver?.drivingLicenseNumber)
+    }
+    
+   
+    ///Get state if image uploading
     func getImageUploadState(index: Int) -> ImageUploadState{
         switch index {
         case 31:
             return ImageUploadState.IF
         case 33:
             return ImageUploadState.IB
-        case 37:
-            return ImageUploadState.DLF
         case 39:
+            return ImageUploadState.DLF
+        case 41:
             return ImageUploadState.DLB
-        case 46:
+        case 48:
             return ImageUploadState.DLS
         default:
             return ImageUploadState.DLS
@@ -309,7 +319,10 @@ class RegistrationBotViewModel: NSObject {
                                driverLicenseDateData: DriverLiceseDateData,
                                completion: @escaping (MainDriver?) -> Void) {
         
-        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addDriverLicenseDates(id:id, issueDate: driverLicenseDateData.issueDate ?? "", expirationDate: driverLicenseDateData.expirationDate ?? ""))) { (result) in
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addDriverLicenseDates(id:id,
+                                          issueDate: driverLicenseDateData.issueDate ?? "",
+                                          expirationDate: driverLicenseDateData.expirationDate ?? "",
+                                          drivingLicenseNumber: driverLicenseDateData.drivingLicenseNumber ?? ""))) { (result) in
             
             switch result {
             case .success(let data):
