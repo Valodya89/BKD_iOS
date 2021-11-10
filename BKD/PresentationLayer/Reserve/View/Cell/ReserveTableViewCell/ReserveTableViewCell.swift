@@ -35,9 +35,9 @@ class ReserveTableViewCell: UITableViewCell {
     
     func setAccessoriesCell(item: AccessoriesEditModel, index: Int)  {
         mFullNameLb.isHidden = true
-        mAccessoriesNameLb.text = item.accessoryName
-        mAccessoriesCountLb.text = "x" + String(item.accessoryCount!)
-        mAccessoriesImgV.image = item.accessoryImg
+        mAccessoriesNameLb.text = item.name
+        mAccessoriesCountLb.text = "x" + String(item.count ?? 1)
+        mAccessoriesImgV.sd_setImage(with:  item.imageUrl ?? URL(string: ""), placeholderImage: nil)
         
     }
     

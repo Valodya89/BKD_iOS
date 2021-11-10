@@ -56,16 +56,24 @@ func setupView() {
         }
         mSelectBtn.isHidden = item.isWaitingForAdmin
         mAdminApprovalWaitingContentyV.isHidden = !item.isWaitingForAdmin
+        
+        if item.isSelected {
+            mSelectBtn.backgroundColor = color_navigationBar!
+            mSelectBtn.setTitleColor(color_menu, for: .normal)
+        } else {
+            mSelectBtn.backgroundColor = .clear
+            mSelectBtn.setTitleColor(color_navigationBar, for: .normal)
+        }
 }
 
 @objc func selectDriver(sender:UIButton) {
     if sender.backgroundColor == color_navigationBar! { //deselecte
-        sender.backgroundColor = .clear
-        sender.setTitleColor(color_navigationBar, for: .normal)
+//        sender.backgroundColor = .clear
+//        sender.setTitleColor(color_navigationBar, for: .normal)
         delegate?.didPressSelect(isSelected: false, cellIndex: sender.tag)
     } else { //selecte
-        sender.backgroundColor = color_navigationBar!
-        sender.setTitleColor(color_menu, for: .normal)
+//        sender.backgroundColor = color_navigationBar!
+//        sender.setTitleColor(color_menu, for: .normal)
         delegate?.didPressSelect(isSelected: true, cellIndex: sender.tag)
     }
 }

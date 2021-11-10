@@ -43,11 +43,15 @@ class AccessoriesViewModel: NSObject {
         }
     }
     
-    func getActiveAccessoryList(accessories:[Accessories]) -> [Accessories] {
-        var activeAccessories:[Accessories] = []
+    func getActiveAccessoryList(accessories:[Accessories]) -> [AccessoriesEditModel] {
+        var activeAccessories:[AccessoriesEditModel] = []
         accessories.forEach { accessory in
             if accessory.active {
-                activeAccessories.append(accessory)
+                let accesoryedit = AccessoriesEditModel(id: accessory.id,
+                                                        imageUrl: accessory.image.getURL() ,
+                                                        name: accessory.name,
+                                                        maxCount: accessory.maxCount, price: accessory.price)
+                activeAccessories.append(accesoryedit)
             }
         }
         return activeAccessories

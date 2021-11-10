@@ -15,8 +15,6 @@ enum Search {
     case customLocation
 }
 
-//var additionalAccessories: [AccessoriesModel] = AccessoriesData.accessoriesModel
-//var additionalDrivers: [MyDriversModel] = MyDriversData.myDriversModel
 
 class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
@@ -59,6 +57,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     ///Compare
     @IBOutlet weak var mCompareContentV: UIView!
+    @IBOutlet weak var mCompareTop: NSLayoutConstraint!
     
     //MARK: - Varables
 
@@ -115,6 +114,9 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
        // setScrollViewHeight()
         setTableViewsHeight()
         setTariffSlideViewFrame()
+        if isSearchEdit {
+            mCompareTop.constant = 70
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -146,6 +148,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             mTariffCarouselV.tariffCarousel.currentItemIndex = 4
             mTariffCarouselV.tariffCarousel.reloadData()
             currentTariff = .flexible
+            animateSearchEdit(isShow: true)
         }
         
         configureViews()
@@ -484,6 +487,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         let alphaValue = isShow ? 1.0 : 0.0
         if isShow {
             self.mSearchWithValueStackV.isHidden = !isShow
+            self.mSearchV.isHidden = isShow
         }
         UIView.animate(withDuration: 0.5) { [self] in
             self.mSearchWithValueStackV.alpha = CGFloat(alphaValue)
@@ -513,28 +517,28 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
 //                self.mCompareContentV.alpha = isShow ? 1.0 : 0.0
 //            }
 //        }
-        if isShow && isSearchEdit {
-            mCompareContentV.isHidden = true
-            mCompareContentV.alpha = 0.0
-        } else {
-        
-        UIView.animate(withDuration: 0.5) {
-            if isShow {
-                self.mCompareContentV.isHidden = !isShow
-                self.mCompareContentV.alpha = 1.0
-                self.mSearchV.alpha = 0.0
-            } else {
-                self.mCompareContentV.alpha = 0.0
-                self.mSearchV.isHidden = isShow
-                self.mSearchV.alpha = 1.0
+//        if isShow && isSearchEdit {
+//            mCompareContentV.isHidden = true
+//            mCompareContentV.alpha = 0.0
+//        } else {
+        if !isShow {
+            UIView.animate(withDuration: 0.5) {
+                if isShow {
+                    self.mCompareContentV.isHidden = !isShow
+                    self.mCompareContentV.alpha = 1.0
+                    self.mSearchV.alpha = 0.0
+                } else {
+                    self.mCompareContentV.alpha = 0.0
+                    self.mSearchV.isHidden = isShow
+                    self.mSearchV.alpha = 1.0
+                }
+            } completion: { _ in
+                if !isShow {
+                    self.mCompareContentV.isHidden = !isShow
+                } else {
+                    self.mSearchV.isHidden = isShow
+                }
             }
-        } completion: { _ in
-            if !isShow {
-                self.mCompareContentV.isHidden = !isShow
-            } else {
-                self.mSearchV.isHidden = isShow
-            }
-        }
         }
 
     }
@@ -771,7 +775,9 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     
     @IBAction func additionalDriver(_ sender: UIButton) {
-        self.goToAdditionalDriver(on: self, isEditReservation: false)
+        self.goToAdditionalDriver(on: self,
+                                  isEditReservation: false,
+                                  additionalDrivers: vehicleModel?.additionalDrivers)
     }
     
     @IBAction func reserve(_ sender: UIButton) {
@@ -1041,7 +1047,7 @@ extension DetailsViewController: SearchWithValueViewDelegate {
         mCompareContentV.isHidden = true
 
         UIView.animate(withDuration: 0.7) { [self] in
-            self.scrollToBottom(y: height345)
+            self.scrollToBottom(y: height405)
             self.mSearchV.alpha = 1
             self.mSearchWithValueStackV.alpha = 0.0
         } completion: { _ in
@@ -1056,11 +1062,11 @@ extension DetailsViewController: SearchWithValueViewDelegate {
 //MARK: AccessoriesUIViewControllerDelegate
 //MARK: ----------------------------
 extension DetailsViewController: MyDriversViewControllerDelegate {
-    func selectedDrivers(_ isSelecte: Bool, totalPrice: Double) {
+    
+    func selectedDrivers(_ isSelecte: Bool, additionalDrivers: [MyDriversModel]?) {
         mAdditionalDriverBtn.alpha = isSelecte ? 1.0 : 0.67
         vehicleModel?.ifHasAditionalDriver = isSelecte
-        vehicleModel?.driversTotalPrice = totalPrice
-
+        vehicleModel?.additionalDrivers = additionalDrivers
     }
 }
 
@@ -1074,7 +1080,6 @@ extension DetailsViewController: AccessoriesUIViewControllerDelegate {
         
         mAccessoriesBtn.alpha = isAdd ? 1.0 : 0.67
         vehicleModel?.ifHasAccessories = isAdd
-        vehicleModel?.accessoriesTotalPrice = totalPrice
         self.accessoriesEditList = accessoriesEditList
     }
 }
@@ -1169,6 +1174,7 @@ extension DetailsViewController: UIScrollViewDelegate {
                 isScrolled = !isScrolled
                 isTariffSlide = true
                 updateCompareView(isShow: true)
+                mSearchV.isHidden = true
             }
     }
     

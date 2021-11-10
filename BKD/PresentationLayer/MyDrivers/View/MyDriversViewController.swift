@@ -7,8 +7,10 @@
 
 import UIKit
 
+let driverPrice = 9.99
+
 protocol MyDriversViewControllerDelegate: AnyObject {
-    func selectedDrivers(_ isSelecte: Bool, totalPrice: Double)
+    func selectedDrivers(_ isSelecte: Bool, additionalDrivers: [MyDriversModel]?)
 }
 
 class MyDriversViewController: BaseViewController {
@@ -30,26 +32,33 @@ class MyDriversViewController: BaseViewController {
     //MARK: --Variables
     weak var delegate: MyDriversViewControllerDelegate?
     lazy var myDriversViewModel: MyDriversViewModel = MyDriversViewModel()
-    public var isEditReservation:Bool = false
-    var totalPrice:Double = 0
+    var totalPrice:Double = PriceManager.shared.additionalDriversPrice ?? 0.0
     var driver: MainDriver?
-    var additionalDrivers: [MyDriversModel] = []
+    
+    public var isEditReservation:Bool = false
+    public var additionalDrivers: [MyDriversModel]?
     
 
     //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        if additionalDrivers == nil {
+            getMyDriverList()
+        } else {
+            mPriceLb.text = String(format: "%.2f", Float(PriceManager.shared.additionalDriversPrice ?? 0.0))
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        getMyDriverList()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         PriceManager.shared.additionalDriversPrice = totalPrice
+        self.delegate?.selectedDrivers(totalPrice > 0.0 ? true : false , additionalDrivers: additionalDrivers)
     }
     
     func setupView() {
@@ -107,15 +116,26 @@ class MyDriversViewController: BaseViewController {
         self.navigationController?.pushViewController(registrationBotVC, animated: true)
     }
     
-    private func showAlertSelecteDriver() {
+    private func showAlertSelecteDriver(index: Int) {
         BKDAlert().showAlert(on: self,
-                             message: String(format: Constant.Texts.addDriverAlert, 9.99), cancelTitle: Constant.Texts.cancel,
+                             message: String(format: Constant.Texts.addDriverAlert, driverPrice), cancelTitle: Constant.Texts.cancel,
                              okTitle: Constant.Texts.confirm) {
             
         } okAction: {
             self.mConfirmV.enableView()
+            self.totalPrice += driverPrice
+            self.updateTotalPrice(index: index,
+                             isSelected: true)
         }
 
+    }
+    
+    ///Update total price
+    private func updateTotalPrice(index: Int, isSelected: Bool) {
+        mPriceLb.text = String(totalPrice)
+        additionalDrivers?[index].isSelected = isSelected
+        additionalDrivers?[index].totalPrice = totalPrice
+        mMyDriverCollectionV.reloadData()
     }
 
     
@@ -135,7 +155,7 @@ class MyDriversViewController: BaseViewController {
     }
     
     @IBAction func back(_ sender: UIBarButtonItem) {
-        self.delegate?.selectedDrivers(totalPrice > 0.0 ? true : false , totalPrice: totalPrice)
+//        self.delegate?.selectedDrivers(totalPrice > 0.0 ? true : false , additionalDrivers: additionalDrivers)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -152,16 +172,16 @@ class MyDriversViewController: BaseViewController {
 extension MyDriversViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return additionalDrivers.count
+        return additionalDrivers?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyDriverCollectionViewCell.identifier, for: indexPath) as!  MyDriverCollectionViewCell
-        let item = additionalDrivers[indexPath.item]
+        let item = additionalDrivers?[indexPath.item]
         cell.delegate = self
-        cell.setCellInfo(item:item, index: indexPath.item)
-        if item.isSelected {
-            totalPrice += item.price
+        cell.setCellInfo(item:item!, index: indexPath.item)
+        if item!.isSelected {
+            totalPrice += item!.price
             self.mPriceLb.text = String(totalPrice)
         }
         return cell
@@ -182,24 +202,22 @@ extension MyDriversViewController: MyDriverCollectionViewCellDelegate {
     
     func didPressSelect(isSelected: Bool, cellIndex: Int) {
         
-        let driverPrice = additionalDrivers[cellIndex].price
         if isSelected {
-            if isEditReservation {
-                showAlertSelecteDriver()
-            } else {
-                totalPrice += driverPrice
-            }
-            
+           // if isEditReservation {
+            showAlertSelecteDriver(index: cellIndex)
+//            } else {
+//                totalPrice += driverPrice
+//            }
+//
         } else {
             if isEditReservation {
                 mConfirmV.enableView()
             } else {
                 totalPrice -= driverPrice
             }
+            updateTotalPrice(index: cellIndex, isSelected: isSelected)
         }
-        mPriceLb.text = String(totalPrice)
-        additionalDrivers[cellIndex].isSelected = isSelected
-        additionalDrivers[cellIndex].totalPrice = totalPrice
+       
     }
     
     
