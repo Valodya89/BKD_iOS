@@ -6,12 +6,15 @@
 //
 
 import UIKit
+
 protocol AccessoriesCollectionViewCellDelegate: AnyObject {
     func increaseOrDecreaseAccessory(accessoryPrice:Double,
                      isIncrease: Bool)
     func didPressAdd(isAdd: Bool,
                      cellIndex: Int,
-                     id: String?)
+                     id: String?,
+                     name: String?,
+                     image: UIImage?)
     func didChangeCount(cellIndex: Int,
                         count: Int)
 }
@@ -114,7 +117,9 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
                                     isIncrease: isIncrease)
         delegate?.didPressAdd(isAdd: isIncrease,
                               cellIndex: sender.tag,
-                              id: accessoryId)
+                              id: accessoryId,
+                              name: mTitleLb.text,
+                              image: mAddImgV.image)
     }
     
     

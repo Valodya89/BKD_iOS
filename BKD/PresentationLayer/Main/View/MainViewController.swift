@@ -639,7 +639,6 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             let cell = collectionView.cellForItem(at: indexPath) as! SearchResultCollectionViewCell
             var vehicleModel =
                 cell.setVehicleModel(carModel: cars[indexPath.row])
-            vehicleModel.customLocationTotalPrice = SearchHeaderViewModel().getCustomLocationTotalPrice(searchV:searchHeaderV!)
             goToDetailPage(vehicleModel: vehicleModel,
                            isSearchEdit: true, isClickMore: false)
             }
@@ -691,7 +690,7 @@ extension MainViewController: SearchResultCellDelegate {
     private func openDetails(tag: Int, isMore: Bool) {
         let cell = mCarCollectionV.cellForItem(at: IndexPath(item: tag, section: 0)) as! SearchResultCollectionViewCell
         var vehicleModel =  cell.setVehicleModel(carModel: cars[tag])
-        vehicleModel.customLocationTotalPrice = SearchHeaderViewModel().getCustomLocationTotalPrice(searchV:searchHeaderV!)
+        
         goToDetailPage(vehicleModel: vehicleModel,
                        isSearchEdit: true, isClickMore: isMore)
     }
@@ -735,14 +734,29 @@ extension MainViewController: SearchHeaderViewDelegate {
     }
     
     /// Selecet location
-    func didSelectLocation(_ locationStr: String, _ btnTag: Int) {
+    func didSelectLocation(_ parking: Parking, _ btnTag: Int) {
         if ((isPressedEdit) == true) {
             if btnTag == 4 { //pick up location
-                searchHeaderV?.pickUpLocation = locationStr
+                searchHeaderV?.pickUpLocation = parking.name
+                PriceManager.shared.pickUpCustomLocationPrice = nil
             } else {
-                searchHeaderV?.returnLocation = locationStr
+                searchHeaderV?.returnLocation = parking.name
+                PriceManager.shared.returnCustomLocationPrice = nil
             }
         }
+    }
+    
+    func didDeselectCustomLocation(tag: Int) {
+        if tag == 6 { //pick up custom location
+            searchModel.isPickUpCustomLocation = false
+            searchModel.pickUpLocation = nil
+            PriceManager.shared.pickUpCustomLocationPrice = nil
+        } else {//return custom location
+            searchModel.isRetuCustomLocation = false
+            searchModel.returnLocation = nil
+            PriceManager.shared.returnCustomLocationPrice = nil
+        }
+        //isActiveReserve()
     }
    
     func willOpenPicker(textFl: UITextField, pickerState: DatePicker) {
@@ -784,7 +798,7 @@ extension MainViewController: SearchHeaderViewDelegate {
 //MARK: CustomLocationUIViewControllerDelegate
 //MARK: ----------------------------
 extension MainViewController: CustomLocationViewControllerDelegate {
-    func getCustomLocation(_ locationPlace: String, coordinate: CLLocationCoordinate2D) {
+    func getCustomLocation(_ locationPlace: String, coordinate: CLLocationCoordinate2D, price: Double?) {
         searchHeaderV?.updateCustomLocationFields(place: locationPlace, didResult: { [weak self] (isPickUpLocation) in
             if isPickUpLocation {
                 self?.searchHeaderV?.pickUpLocation = locationPlace
@@ -792,12 +806,14 @@ extension MainViewController: CustomLocationViewControllerDelegate {
                 self?.searchModel.pickUpLocation = locationPlace
                 self?.searchModel.pickUpLocationLongitude = coordinate.longitude
                 self?.searchModel.pickUpLocationLatitude = coordinate.latitude
+                PriceManager.shared.pickUpCustomLocationPrice = price
             } else {
                 self?.searchHeaderV?.returnLocation = locationPlace
                 self?.searchModel.isRetuCustomLocation = true
                 self?.searchModel.returnLocation = locationPlace
                 self?.searchModel.returnLocationLongitude = coordinate.longitude
                 self?.searchModel.returnLocationLatitude = coordinate.latitude
+                PriceManager.shared.returnCustomLocationPrice = price
             }
         })
     }

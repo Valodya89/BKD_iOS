@@ -8,7 +8,6 @@
 import UIKit
 
 class SearchHeaderViewModel: NSObject {
-    //static let shared = MainViewModel()
     var searchDateModel = SearchDateModel()
 
     let validator = Validator()
@@ -31,18 +30,6 @@ class SearchHeaderViewModel: NSObject {
                                            pickUpLocation: pickUpLocation,
                                            returnLocation: returnLocation)
         didResult(validator.checkSearchDatas(searchDateModel: searchDateModel))
-    }
-    
-    ///Get custom location total price
-    func getCustomLocationTotalPrice(searchV: SearchHeaderView) -> Double {
-        var total: Double = 0.0
-        if LocationPickUp.pickUpCustomLocation == searchV.locationPickUp {
-            total += customLocationPrice
-         }
-         if LocationReturn.returnCustomLocation == searchV.locationReturn {
-            total += customLocationPrice
-          }
-        return total
     }
     
     

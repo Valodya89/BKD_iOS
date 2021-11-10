@@ -373,7 +373,7 @@ extension AddAccidentDetailsViewController: UIImagePickerControllerDelegate, UIN
 //MARK: -- CustomLocationViewControllerDelegate
 //MARK: -------------------------------------------
 extension AddAccidentDetailsViewController: CustomLocationViewControllerDelegate {
-    func getCustomLocation(_ locationPlace: String, coordinate: CLLocationCoordinate2D) {
+    func getCustomLocation(_ locationPlace: String, coordinate: CLLocationCoordinate2D, price: Double?) {
         mDateAndLocationV.location = locationPlace
         mDateAndLocationV.mLocationTxtFl.text = locationPlace
     }

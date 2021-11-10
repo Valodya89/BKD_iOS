@@ -14,8 +14,8 @@ struct Rent: Codable {
      let startDate: Date
      let endDate: Date
      let accessories: [AccessoriesToRent]?
-     let pickupLocation: LocationToRent
-     let returnLocation: LocationToRent
+     let pickupLocation: LocationToRent?
+     let returnLocation: LocationToRent?
      let carDetails: CarDetailsToRent
      let driver: DriverToRent
      let additionalDrivers: [AdditionalDriversToRent]?
@@ -31,7 +31,7 @@ struct AccessoriesToRent: Codable {
 struct LocationToRent: Codable {
     let type: String
     let customLocation: CustomLocationToRent?
-    let parking: String?
+    let parking: Parking?
 }
 
 struct CustomLocationToRent: Codable {

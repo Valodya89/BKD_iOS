@@ -16,7 +16,7 @@ class LocationDropDownView: UIView, UITableViewDataSource, UITableViewDelegate {
     var parkingList:[Parking] = []
 
     var didSelectSeeMap: ((Parking) -> Void)?
-    var didSelectLocation: ((String) -> Void)?
+    var didSelectLocation: ((Parking) -> Void)?
     var hiddenLocationList: (() -> Void)?
 
 
@@ -73,7 +73,7 @@ class LocationDropDownView: UIView, UITableViewDataSource, UITableViewDelegate {
         let seconds = 0.15
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds) { [self] in
             self.hiddenLocationList?()
-            self.didSelectLocation?(cell.mLocationNameLb.text!)
+            self.didSelectLocation?(parkingList[indexPath.row])
         }
     }
 

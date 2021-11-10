@@ -18,7 +18,7 @@ enum LocationReturn {
 
 protocol SearchViewDelegate: AnyObject {
     func willOpenPicker (textFl: UITextField, pickerState: DatePicker)
-    func didSelectLocation (_ text:String, _ tag:Int)
+    func didSelectLocation (_ parking:Parking, _ tag:Int)
     func didSelectCustomLocation(_ btn:UIButton)
     func didDeselectCustomLocation(tag: Int)
 }
@@ -228,10 +228,10 @@ class SearchView: UIView, UITextFieldDelegate {
     }
     
     private func didSelectLocationFromList () {
-        mLocationDropDownView.didSelectLocation = { [weak self] txt in
-            self?.delegate?.didSelectLocation(txt, (self?.currLocationBtn.tag)!)
+        mLocationDropDownView.didSelectLocation = { [weak self] parking in
+            self?.delegate?.didSelectLocation(parking, (self?.currLocationBtn.tag)!)
             
-            self?.currLocationBtn.setTitle(txt, for: .normal)
+            self?.currLocationBtn.setTitle(parking.name, for: .normal)
             self?.currLocationBtn.titleLabel!.font = font_selected_filter
             self?.currLocationBtn.setTitleColor(color_entered_date, for: .normal)
             self!.currLocationDropImgV.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
@@ -240,11 +240,12 @@ class SearchView: UIView, UITextFieldDelegate {
                 self?.locationPickUp = .pickUpLocation
                 UserDefaults.standard.set(self?.currLocationBtn.title(for: .normal), forKey: key_pickUpLocation)
                 self?.mCheckBoxPickUpCustomLocBtn.setImage(#imageLiteral(resourceName: "uncheck_box"), for: .normal)
-                
+                PriceManager.shared.pickUpCustomLocationPrice = nil
             } else { // return location
                 self?.locationReturn = .returnLocation
                 UserDefaults.standard.set(self?.currLocationBtn.title(for: .normal), forKey: key_returnLocation)
                 self?.mCheckBoxReturnCustomLocBtn.setImage(#imageLiteral(resourceName: "uncheck_box"), for: .normal)
+                PriceManager.shared.returnCustomLocationPrice = nil
             }
 
             self?.pickUPDropisClose = true

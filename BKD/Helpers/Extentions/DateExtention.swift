@@ -199,7 +199,7 @@ extension Date {
     ///Compare two hours
     func isSameHours(hour: Date?) -> Bool {
         guard let _ = hour  else { return true }
-        let order = Calendar.current.compare(self, to: hour!, toGranularity: .day)
+        let order = Calendar.current.compare(self, to: hour!, toGranularity: .hour)
 
         switch order {
         case .orderedSame:

@@ -64,6 +64,8 @@ class ReserveViewController: UIViewController {
 
     var reserveViewModel = ReserveViewModel()
     public var vehicleModel: VehicleModel?
+    public var currentTariffOption: TariffSlideModel?
+
     var currentTariff: TariffState = .hourly
     var lastContentOffset:CGFloat = 0.0
     var totalPrice: Double = 0.0
@@ -137,17 +139,31 @@ class ReserveViewController: UIViewController {
             
         
         
-        self.mReserveInfoTableV.accessories = reserveViewModel.getAdditionalAccessories(vehicleModel: vehicleModel!) as? [AccessoriesModel]
+        self.mReserveInfoTableV.accessories = reserveViewModel.getAdditionalAccessories(vehicleModel: vehicleModel!) as? [AccessoriesEditModel]
+        
         self.mReserveInfoTableV.drivers = reserveViewModel.getAdditionalDrivers(vehicleModel: vehicleModel!) as? [MyDriversModel]
         mReserveInfoTableV.reloadData()
         
-        mPriceTableV.pricesArr = reserveViewModel.getPrices(vehicleModel: vehicleModel!) as! [PriceModel]
+        mPriceTableV.pricesArr = PriceManager.shared.getPrices()
         mPriceTableV.reloadData()
 
-        
-        totalPrice = reserveViewModel.getTotalPrice(totalPrices: mPriceTableV.pricesArr)
+        totalPrice = PriceManager.shared.getTotalPrice(totalPrices: mPriceTableV.pricesArr)
         mTotalPriceValueLb.text = String(format: "%.2f",totalPrice)
         
+    }
+    
+    
+    ///Add reservation
+    private func addReservation() {
+        reserveViewModel.addRent(id: vehicleModel?.vehicleId ?? "",
+                                 searchModel: vehicleModel?.searchModel ?? SearchModel(),
+                                 accessories: vehicleModel?.additionalAccessories,
+                                 additionalDrivers: nil) { result in
+            guard result != nil else {
+                self.showAlertMessage(Constant.Texts.errReservation)
+                return
+            }
+        }
     }
     
     /// Animate Confirm click
@@ -157,7 +173,8 @@ class ReserveViewController: UIViewController {
             self.mConfirmBckgV.layoutIfNeeded()
 
         } completion: { _ in
-            self.checkIsUserSignIn()
+            self.addReservation()
+            //self.checkIsUserSignIn()
         }
     }
     

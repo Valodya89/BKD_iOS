@@ -262,7 +262,12 @@ struct Constant {
         static let generatedCode = "Generated Code"
         
         //My Reservation
+        static let price = "Price"
+        static let specialOffer = "Special offer"
+        static let customLocation = "Custom location"
+        static let additionalService = "Additional service"
         static let totalPrice = "Total price"
+        
         static let oldTotalPrice = "Old total price"
         static let newTotalPrice = "New total price"
         static let cancelWithFreeReservations = "Are you sure you want to cancel your reservation? You have only 3 free reservations in a month. You will be fully refunded, as it’s your %st/%nd time in the current month."
@@ -445,6 +450,8 @@ let height240 = UIScreen.main.bounds.height * 0.297
 let height285 = UIScreen.main.bounds.height * 0.352
 let height345 = UIScreen.main.bounds.height * 0.426
 let height405 = UIScreen.main.bounds.height * 0.501
+let height550 = UIScreen.main.bounds.height * 0.680
+
 let height115 = UIScreen.main.bounds.height * 0.142
 let height274 = UIScreen.main.bounds.height * 0.339
 let height130 = UIScreen.main.bounds.height * 0.160

@@ -47,13 +47,11 @@ struct VehicleModel {
     
     public var accessoriesTotalPrice: Double = 0.0
     public var driversTotalPrice: Double = 0.0
-    public var customLocationTotalPrice: Double = 0.0
-    public var noWorkingTimeTotalPrice: Double = 0.0
 
     public var tailLiftList: [TailLiftModel]?
     public var detailList: [DetailsModel]?
     public var searchModel: SearchModel?
-    public var additionalAccessories: [AccessoriesModel]?
+    public var additionalAccessories: [AccessoriesEditModel]?
     public var additionalDrivers: [MyDriversModel]?
     public var images: [CarImageResponse]?
     public var carImagesList:[UIImage]?

@@ -17,8 +17,9 @@ enum DatePicker {
 
 protocol SearchHeaderViewDelegate: AnyObject {
     func willOpenPicker (textFl: UITextField, pickerState: DatePicker)
-    func didSelectLocation (_ locationStr: String, _ btnTag: Int)
+    func didSelectLocation (_ parking: Parking, _ btnTag: Int)
     func didSelectCustomLocation(_ btn:UIButton)
+    func didDeselectCustomLocation(tag: Int)
     func didSelectSearch()
     func hideEditView()
 }
@@ -363,9 +364,9 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     }
     
     private func didSelectLocationFromList () {
-        mLocationDropDownView.didSelectLocation = { [weak self] txt in
-            self?.delegate?.didSelectLocation(txt, (self?.currLocationBtn.tag)!)
-            self?.currLocationBtn.setTitle(txt, for: .normal)
+        mLocationDropDownView.didSelectLocation = { [weak self] parking in
+            self?.delegate?.didSelectLocation(parking, (self?.currLocationBtn.tag)!)
+            self?.currLocationBtn.setTitle(parking.name, for: .normal)
             self?.currLocationBtn.titleLabel!.font = font_selected_filter
             self?.currLocationBtn.setTitleColor(color_entered_date, for: .normal)
             self!.currLocationDropImgV.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
@@ -502,6 +503,8 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
             mPickUpLocationBtn.setTitleColor(color_choose_date!, for: .normal)
             mPickUpLocationBtn.titleLabel?.font = font_placeholder
             locationPickUp = .none
+            delegate?.didDeselectCustomLocation(tag: sender.tag)
+
         } else {
            // sender.setImage(img_check_box, for: .normal)
             locationPickUp = .pickUpCustomLocation
@@ -520,8 +523,10 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
             mReturnLocationBtn.titleLabel?.font = font_placeholder
             sender.setImage(img_uncheck_box, for: .normal)
             locationReturn = .none
+            delegate?.didDeselectCustomLocation(tag: sender.tag)
         } else {
            // sender.setImage(img_check_box, for: .normal)
+            locationPickUp = .none
             locationReturn = .returnCustomLocation
             delegate?.didSelectCustomLocation(mCheckBoxReturnCustomLocBtn)
         }

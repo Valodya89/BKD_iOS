@@ -16,7 +16,9 @@ enum PlacesError: Error {
 }
 
 protocol CustomLocationViewControllerDelegate: AnyObject {
-    func getCustomLocation(_ locationPlace: String, coordinate: CLLocationCoordinate2D)
+    func getCustomLocation(_ locationPlace: String,
+                           coordinate: CLLocationCoordinate2D,
+                           price: Double?)
 }
 
 class CustomLocationViewController: BaseViewController {
@@ -116,7 +118,7 @@ class CustomLocationViewController: BaseViewController {
     private func configureDelegates() {
         
         markerInfoVC.delegate = self
-        addNewMarkerVC.delegate = self
+        //addNewMarkerVC.delegate = self
         locationManager.delegate = self
         mMapV.delegate = self
     }
@@ -338,8 +340,8 @@ class CustomLocationViewController: BaseViewController {
 //MARK ---------------------
 extension CustomLocationViewController: MarkerInfoViewControllerDelegate {
     
-    func didPressContinue(place: String) {
-        self.delegate?.getCustomLocation(place, coordinate: mapViewCenterCoordinate)
+    func didPressContinue(place: String, price: Double?) {
+        self.delegate?.getCustomLocation(place, coordinate: mapViewCenterCoordinate, price: price)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -439,7 +441,11 @@ extension CustomLocationViewController: GMSAutocompleteViewControllerDelegate {
 }
 
 
-extension CustomLocationViewController: MarkNewAddressViewControllerDelegate  {
-    
-    
-}
+//extension CustomLocationViewController: MarkNewAddressViewControllerDelegate  {
+//    func didPressContinue(place: String) {
+//
+//    }
+//
+//
+//
+//}

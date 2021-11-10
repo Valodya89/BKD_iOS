@@ -42,6 +42,10 @@ class AccessoriesUIViewController: BaseViewController {
         super.viewDidLoad()
         setupView()
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        PriceManager.shared.additionalDriversPrice = totalPrice
+    }
     
     func setupView() {
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
@@ -148,20 +152,26 @@ extension AccessoriesUIViewController: UICollectionViewDelegate, UICollectionVie
 //MARK: ------------------------
 extension AccessoriesUIViewController: AccessoriesCollectionViewCellDelegate {
     
-    func didChangeCount(cellIndex: Int, count: Int) {
-            accessoriesEditList![cellIndex].accessoryCount = count
-        
-    }
-
-    func didPressAdd(isAdd: Bool, cellIndex: Int, id: String?) {
+    func didPressAdd(isAdd: Bool, cellIndex: Int,
+                     id: String?, name: String?,
+                     image: UIImage?) {
         if KeychainManager().isUserLoggedIn() {
             accessoriesEditList![cellIndex].isAdded = isAdd
             accessoriesEditList![cellIndex].accessoryId = id
+            accessoriesEditList![cellIndex].accessoryName = name
+            accessoriesEditList![cellIndex].accessoryImg = image
         } else {
             showAlertSignIn()
         }
     }
     
+    
+    
+    func didChangeCount(cellIndex: Int, count: Int) {
+            accessoriesEditList![cellIndex].accessoryCount = count
+        
+    }
+
     
     ///increase or decrease Accessory
     func increaseOrDecreaseAccessory(accessoryPrice: Double,

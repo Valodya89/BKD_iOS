@@ -33,7 +33,7 @@ class ReserveTableViewCell: UITableViewCell {
         
     }
     
-    func setAccessoriesCell(item: AccessoriesModel, index: Int)  {
+    func setAccessoriesCell(item: AccessoriesEditModel, index: Int)  {
         mFullNameLb.isHidden = true
         mAccessoriesNameLb.text = item.accessoryName
         mAccessoriesCountLb.text = "x" + String(item.accessoryCount!)

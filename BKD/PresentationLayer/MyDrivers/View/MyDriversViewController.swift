@@ -45,7 +45,11 @@ class MyDriversViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         getMyDriverList()
-
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        PriceManager.shared.additionalDriversPrice = totalPrice
     }
     
     func setupView() {

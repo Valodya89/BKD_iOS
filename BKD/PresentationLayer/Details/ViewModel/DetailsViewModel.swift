@@ -8,7 +8,6 @@
 import UIKit
 
 class DetailsViewModel: NSObject {
- //static let shared = DetailsViewModel()
     
     let validator = Validator()
     var workingTimes: WorkingTimes?
@@ -64,9 +63,8 @@ class DetailsViewModel: NSObject {
            let returnTime = searchModel.returnTime {
             
             if ((searchModel.returnDate?.isSameDates(date: searchModel.pickUpDate)) == true) {
-                
-                if pickUpTime.isSameHours(hour: returnTime) ||
-                    pickUpTime < returnTime {
+           
+                if pickUpTime > returnTime {
                     searchModel.returnDate = searchModel.pickUpDate!.addDays(1)
                 }
             }
@@ -154,6 +152,24 @@ class DetailsViewModel: NSObject {
         workingTimes = ApplicationSettings.shared.workingTimes
         guard let _ = workingTimes else { return }
         didResult(validator.checkReservationTime(time:time, workingTimes: workingTimes!))
+    }
+    
+    
+    
+    
+    
+    /// Set no working hours price
+    func setNoWorkingHoursPrice(search: SearchModel, price: Double) {
+        
+        let pickupTime = search.pickUpTime?.getHour()
+        let returnTime = search.returnTime?.getHour()
+
+        isReservetionInWorkingHours(time: pickupTime?.stringToDate()) { (result) in
+            PriceManager.shared.pickUpNoWorkingTimePrice = !result ? price : nil
+        }
+        isReservetionInWorkingHours(time: returnTime?.stringToDate()) { (result) in
+            PriceManager.shared.returnNoWorkingTimePrice = !result ? price : nil
+        }
     }
     
     /// Check if reserve will  be acteve
@@ -297,10 +313,13 @@ class DetailsViewModel: NSObject {
             var flexibleModel = TariffSlideModel (type: Constant.Texts.flexible, bckgColor: color_flexible, typeColor: .white)
             flexibleModel.options = nil
             var price = vehicleModel.priceForFlexible
+            flexibleModel.value = String(price)
             if vehicleModel.hasDiscount {
                 price = price - (price * (vehicleModel.discountPercents/100))
+                flexibleModel.discountPercent = vehicleModel.discountPercents
+
             }
-            flexibleModel.value = String(price)
+            flexibleModel.specialValue = String(price)
 
             tariffSlideList.append(flexibleModel)
         }
@@ -361,7 +380,7 @@ class DetailsViewModel: NSObject {
                     discounPrice = value - (value * (vehicleModel.discountPercents/100))
                 }
                 
-                let option = TariffSlideModel(type: tariffKey, name: tariff.name, bckgColor: bckgColor,typeColor: typeColor, value: String(format: "%.2f", value), specialValue: String(format: "%.2f", discounPrice))
+                let option = TariffSlideModel(type: tariffKey, name: tariff.name, bckgColor: bckgColor,typeColor: typeColor, value: String(format: "%.2f", value), specialValue: String(format: "%.2f", discounPrice), discountPercent: vehicleModel.hasDiscount ? vehicleModel.discountPercents : nil)
                
                 options.append(option)
             }
@@ -420,97 +439,43 @@ class DetailsViewModel: NSObject {
         return flexibleStartTimes
     }
     
-    ///Get accessories for add rent request
-    func getAccessoriesToRequest(accessories: [AccessoriesEditModel]?) -> [[String : Any]?] {
-        var accessoryArr: [[String : Any]?] = []
-        accessories?.forEach({ accessory in
-            if accessory.isAdded {
-                let dic  = ["id" : accessory.accessoryId ?? "",
-                            "count": accessory.accessoryCount ?? 0] as [String : Any]
-                accessoryArr.append(dic)
-            }
-        })
-        return accessoryArr
-    }
     
-    ///Get accessories for add rent request
-    func getAdditionalDriversToRequest(additionalDrivers: [MainDriver]?) -> [String?] {
-        var driversArr: [String?] = []
-        additionalDrivers?.forEach({ driver in
-            driversArr.append(driver.id)
-        })
-        return driversArr
-    }
-    
-    
-    ///Get location for add rent request
-    func getLocationToRequest(search: SearchModel,
-                              isPickUpLocation: Bool) -> [String : Any] {
+    ///Get flexible price
+    func getFlexiblePrice(search: SearchModel, option: TariffSlideModel, vehicle: VehicleModel) -> TariffSlideModel? {
         
-        //"var locationDic: [String : Any]?
-        if isPickUpLocation {
-            if search.isPickUpCustomLocation {
-                return ["type": "CUSTOM",
-                        "customLocation": [
-                            "name": search.pickUpLocation ?? "",
-                            "longitude": search.pickUpLocationLongitude ?? 0.0,
-                            "latitude": search.pickUpLocationLatitude ?? 0.0
-                                ]
-                            ]
-            }
-        } else {
-            if search.isRetuCustomLocation {
-                return ["type": "CUSTOM",
-                                "customLocation": [
-                                    "name": search.returnLocation ?? "",
-                                    "longitude": search.returnLocationLongitude ?? 0.0,
-                                    "latitude": search.returnLocationLatitude ?? 0.0
-                                ]
-                            ]
-            }
-        }
-        
-        return [:]
-    }
-    
-    ///Add Rent car
-    func addRent(id: String,
-                 searchModel: SearchModel,
-                 accessories: [AccessoriesEditModel]?,
-                 additionalDrivers: [MainDriver]?,
-                 completion: @escaping (Rent?) -> Void) {
-        
-        let accessoriesArr = getAccessoriesToRequest(accessories: accessories)
-        let additionalDriversArr = getAdditionalDriversToRequest(additionalDrivers: additionalDrivers)
-        let pickupLocation = getLocationToRequest(search: searchModel, isPickUpLocation: true)
-        let returnLocation = getLocationToRequest(search: searchModel, isPickUpLocation: false)
-
-        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addRent(carId: id,
-                                                                                  startDate: (searchModel.pickUpTime ?? Date()).timeIntervalSince1970,
-                            endDate: (searchModel.returnTime ?? Date()).timeIntervalSince1970,
-                            accessories: accessoriesArr,
-                            additionalDrivers: additionalDriversArr,
-                            pickupLocation: pickupLocation,
-                            returnLocation: returnLocation))) { (result) in
+        if search.pickUpDate != nil && search.returnDate != nil {
             
-            switch result {
-            case .success(let data):
-                guard let result = BkdConverter<BaseResponseModel<Rent>>.parseJson(data: data as Any) else {
-                    print("error")
-                    completion(nil)
-                    return
-                }
-                print(result.content as Any)
-                completion(result.content)
-
-            case .failure(let error):
-                print(error.description)
-                completion(nil)
-                break
+            let pickupDay = Double(search.pickUpDate!.getDay())!
+            let returnDay = Double(search.returnDate!.getDay())!
+            var daysCount = ((returnDay - pickupDay) <= 0 ) ? 1 : (returnDay - pickupDay)
+            
+            if search.pickUpTime!.millisecondsSince1970 < search.returnTime!.millisecondsSince1970  && (search.returnTime!.millisecondsSince1970 - search.pickUpTime!.millisecondsSince1970) > 250000  {
+                daysCount += 1
             }
+                       
+            let price = daysCount * vehicle.priceForFlexible
+            var specialPrice:Double?
+            if option.discountPercent ?? 0 > 0 {
+                 specialPrice = price - (price * (option.discountPercent!/100))
+            }
+            return
+            TariffSlideModel(type: option.type,
+                             name: option.name,
+                             bckgColor: option.bckgColor,
+                             typeColor: option.typeColor,
+                             value: String(price),
+                             specialValue: String(specialPrice ?? 0.0),
+                             discountPercent: option.discountPercent,
+                             flexibleStaringPrice: vehicle.priceForFlexible,
+                             fuelConsumption: option.fuelConsumption,
+                             isOpenOptions: option.isOpenOptions,
+                             isItOption: option.isItOption,
+                             isSelected: true,
+                             options: option.options,
+                             tariff: option.tariff)
         }
+        return option
     }
-   
     
    
 }
