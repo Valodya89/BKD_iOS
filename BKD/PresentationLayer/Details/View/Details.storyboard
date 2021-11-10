@@ -1198,6 +1198,7 @@
                         <outlet property="mCarLogoImgV" destination="pDo-dE-0U9" id="Yfa-at-3bV"/>
                         <outlet property="mCarNameLb" destination="Lxf-m8-zfj" id="Cx7-Jk-FqY"/>
                         <outlet property="mCompareContentV" destination="k52-kv-b2C" id="jOa-qU-v0j"/>
+                        <outlet property="mCompareTop" destination="ccu-Ax-wFs" id="sVF-h8-5zR"/>
                         <outlet property="mDetailAndTailLiftBottom" destination="afl-kI-2oj" id="2ev-GA-hFw"/>
                         <outlet property="mDetailHeight" destination="GDd-0R-D2h" id="9QP-MT-c9f"/>
                         <outlet property="mDetailsAndTailLiftV" destination="Rkc-pZ-qaf" id="w79-Eg-4GV"/>
