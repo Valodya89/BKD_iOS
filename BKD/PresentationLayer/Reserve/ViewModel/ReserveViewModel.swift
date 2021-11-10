@@ -15,6 +15,7 @@ class ReserveViewModel: NSObject {
         completion(keychain.isUserLoggedIn())
     }
 
+    ///Get additional accessoties list
     func getAdditionalAccessories(vehicleModel: VehicleModel) -> Array<Any>?  {
         var accessories:[AccessoriesEditModel]?
         if (vehicleModel.ifHasAccessories == true) {
@@ -32,7 +33,9 @@ class ReserveViewModel: NSObject {
     }
     
     
-    func getAdditionalDrivers(vehicleModel:VehicleModel) -> Array<Any>?  {
+    ///Get additional drivers list
+    func getAdditionalDrivers(vehicleModel:VehicleModel) -> [MyDriversModel]?  {
+        
         var drivers:[MyDriversModel]?
         if (vehicleModel.ifHasAditionalDriver == true) {
             drivers = []
@@ -54,8 +57,8 @@ class ReserveViewModel: NSObject {
         var accessoryArr: [[String : Any]?] = []
         accessories?.forEach({ accessory in
             if accessory.isAdded {
-                let dic  = ["id" : accessory.accessoryId ?? "",
-                            "count": accessory.accessoryCount ?? 0] as [String : Any]
+                let dic  = ["id" : accessory.id ?? "",
+                            "count": accessory.count ?? 0] as [String : Any]
                 accessoryArr.append(dic)
             }
         })
@@ -63,10 +66,10 @@ class ReserveViewModel: NSObject {
     }
     
     ///Get accessories for add rent request
-    func getAdditionalDriversToRequest(additionalDrivers: [MainDriver]?) -> [String?] {
+    func getAdditionalDriversToRequest(additionalDrivers: [MyDriversModel]?) -> [String?] {
         var driversArr: [String?] = []
         additionalDrivers?.forEach({ driver in
-            driversArr.append(driver.id)
+            driversArr.append(driver.driver?.id)
         })
         return driversArr
     }
@@ -115,20 +118,22 @@ class ReserveViewModel: NSObject {
     }
     
     ///Add Rent car
-    func addRent(id: String,
-                 searchModel: SearchModel,
-                 accessories: [AccessoriesEditModel]?,
-                 additionalDrivers: [MainDriver]?,
+//    func addRent(id: String,
+//                 searchModel: SearchModel,
+//                 accessories: [AccessoriesEditModel]?,
+//                 additionalDrivers: [MainDriver]?,
+//                 completion: @escaping (Rent?) -> Void) {
+    func addRent(vehicleModel: VehicleModel,
                  completion: @escaping (Rent?) -> Void) {
         
-        let accessoriesArr = getAccessoriesToRequest(accessories: accessories)
-        let additionalDriversArr = getAdditionalDriversToRequest(additionalDrivers: additionalDrivers)
-        let pickupLocation = getLocationToRequest(search: searchModel, isPickUpLocation: true)
-        let returnLocation = getLocationToRequest(search: searchModel, isPickUpLocation: false)
+        let accessoriesArr = getAccessoriesToRequest(accessories: vehicleModel.additionalAccessories)
+        let additionalDriversArr = getAdditionalDriversToRequest(additionalDrivers: vehicleModel.additionalDrivers)
+        let pickupLocation = getLocationToRequest(search: vehicleModel.searchModel!, isPickUpLocation: true)
+        let returnLocation = getLocationToRequest(search: vehicleModel.searchModel!, isPickUpLocation: false)
 
-        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addRent(carId: id,
-                                                                                  startDate: (searchModel.pickUpTime ?? Date()).timeIntervalSince1970,
-                            endDate: (searchModel.returnTime ?? Date()).timeIntervalSince1970,
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addRent(carId: vehicleModel.vehicleId ?? "",
+                                                                                  startDate: (vehicleModel.searchModel?.pickUpTime ?? Date()).timeIntervalSince1970,
+                            endDate: (vehicleModel.searchModel?.returnTime ?? Date()).timeIntervalSince1970,
                             accessories: accessoriesArr,
                             additionalDrivers: additionalDriversArr,
                             pickupLocation: pickupLocation,

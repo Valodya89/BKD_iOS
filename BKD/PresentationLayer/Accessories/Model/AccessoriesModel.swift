@@ -17,18 +17,6 @@ struct Accessories: Codable {
     let image: AccesoreImageResponse
 }
 
-//struct AccessoriesResulr {
-//    let id: String
-//    let name: String
-//    let price: Double
-//    let maxCount: Double
-//    let active: Bool
-//    let image: AccesoreImageResponse
-//    
-//    init(accessories: Accessories) {
-//        self.id = accessories.id
-//    }
-//}
 struct AccesoreImageResponse: Codable {
     let id: String
     let node: String
@@ -42,21 +30,14 @@ struct AccesoreImageResponse: Codable {
 
 
 struct AccessoriesEditModel {
-    public var accessoryId: String?
-    public var accessoryImg: UIImage?
-    public var accessoryName: String?
-    public var accessoryCount: Int?
+    public var id: String?
+    public var imageUrl: URL?
+    public var name: String?
+    public var count: Int?
+    public var maxCount: Double?
     public var isAdded: Bool = false
+    public var price: Double?    
     public var totalPrice: Double?
 
 }
 
-struct AccessoriesModel {
-    public var accessoryImg: UIImage?
-    public var accessoryName: String?
-    public var accessoryPrice: Double?
-    public var accessoryCount: Int?
-    public var isAdded: Bool = false
-    public var totalPrice: Double?
-
-}

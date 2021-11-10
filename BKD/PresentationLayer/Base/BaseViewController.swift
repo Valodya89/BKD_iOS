@@ -152,10 +152,13 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     
     
     ///Go to additional driver screen
-    func goToAdditionalDriver(on viewController: UIViewController?,  isEditReservation: Bool) {
+    func goToAdditionalDriver(on viewController: UIViewController?,
+                              isEditReservation: Bool,
+                              additionalDrivers: [MyDriversModel]?) {
         let myDriverVC = UIStoryboard(name: Constant.Storyboards.myDrivers, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.myDrivers) as! MyDriversViewController
         myDriverVC.isEditReservation = isEditReservation
         myDriverVC.delegate = viewController as? MyDriversViewControllerDelegate
+        myDriverVC.additionalDrivers = additionalDrivers
         self.navigationController?.pushViewController(myDriverVC, animated: true)
     }
     

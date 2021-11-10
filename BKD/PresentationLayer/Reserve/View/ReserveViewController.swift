@@ -141,7 +141,7 @@ class ReserveViewController: UIViewController {
         
         self.mReserveInfoTableV.accessories = reserveViewModel.getAdditionalAccessories(vehicleModel: vehicleModel!) as? [AccessoriesEditModel]
         
-        self.mReserveInfoTableV.drivers = reserveViewModel.getAdditionalDrivers(vehicleModel: vehicleModel!) as? [MyDriversModel]
+        self.mReserveInfoTableV.drivers = reserveViewModel.getAdditionalDrivers(vehicleModel: vehicleModel!)
         mReserveInfoTableV.reloadData()
         
         mPriceTableV.pricesArr = PriceManager.shared.getPrices()
@@ -155,10 +155,7 @@ class ReserveViewController: UIViewController {
     
     ///Add reservation
     private func addReservation() {
-        reserveViewModel.addRent(id: vehicleModel?.vehicleId ?? "",
-                                 searchModel: vehicleModel?.searchModel ?? SearchModel(),
-                                 accessories: vehicleModel?.additionalAccessories,
-                                 additionalDrivers: nil) { result in
+        reserveViewModel.addRent(vehicleModel: vehicleModel ?? VehicleModel()) { result in
             guard result != nil else {
                 self.showAlertMessage(Constant.Texts.errReservation)
                 return

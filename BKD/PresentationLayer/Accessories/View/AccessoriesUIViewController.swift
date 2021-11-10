@@ -28,7 +28,6 @@ class AccessoriesUIViewController: BaseViewController {
     
     //MARK: -- Variables
     public var isEditReservation: Bool = false
-    var accessoriesList: [Accessories]?
     let accessoriesViewModel = AccessoriesViewModel()
     var totalPrice: Double = 0
     weak var delegate: AccessoriesUIViewControllerDelegate?
@@ -41,10 +40,13 @@ class AccessoriesUIViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         PriceManager.shared.additionalDriversPrice = totalPrice
+        self.delegate?.addedAccessories(self.mPriceLb.text == "0.0" ? false : true , totalPrice: totalPrice, accessoriesEditList: accessoriesEditList)
     }
     
     func setupView() {
@@ -64,10 +66,12 @@ class AccessoriesUIViewController: BaseViewController {
     func getAccessories() {
         accessoriesViewModel.getAccessories(carID: vehicleModel?.vehicleId ?? "") { result in
             guard let _ = result else {return}
-            self.accessoriesList = self.accessoriesViewModel.getActiveAccessoryList(accessories: result!)
+            
             
             if self.accessoriesEditList == nil {
-                self.accessoriesEditList = Array(repeating: AccessoriesEditModel(accessoryCount: 0, isAdded: false, totalPrice: 0.0), count: self.accessoriesList!.count)
+                self.accessoriesEditList = self.accessoriesViewModel.getActiveAccessoryList(accessories: result!)
+            } else {
+                self.mPriceLb.text = String(format: "%.2f", Float(PriceManager.shared.accessoriesPrice ?? 0.0))
             }
             self.mAccessoriesCollectionV.reloadData()        }
     }
@@ -102,7 +106,7 @@ class AccessoriesUIViewController: BaseViewController {
     //MARK: -- ACTION
     @IBAction func back(_ sender: Any) {
         
-        self.delegate?.addedAccessories(self.mPriceLb.text == "0.0" ? false : true , totalPrice: totalPrice, accessoriesEditList: accessoriesEditList)
+//        self.delegate?.addedAccessories(self.mPriceLb.text == "0.0" ? false : true , totalPrice: totalPrice, accessoriesEditList: accessoriesEditList)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -119,20 +123,17 @@ class AccessoriesUIViewController: BaseViewController {
 //MARK: -----------------
 extension AccessoriesUIViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return accessoriesList?.count ?? 0
+        return accessoriesEditList?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AccessoriesCollectionViewCell.identifier, for: indexPath) as!  AccessoriesCollectionViewCell
-        guard  let _ = accessoriesList else {
-            return cell
-        }
-        let item = accessoriesList![indexPath.row]
+
         let editItem = accessoriesEditList![indexPath.row]
-        cell.setCellInfo(item: item, editItem: editItem,  index: indexPath.row)
+        cell.setCellInfo(editItem: editItem,  index: indexPath.row)
         
         if editItem.isAdded {
-            totalPrice += Double(editItem.accessoryCount!) * item.price
+            totalPrice += Double(editItem.count ?? 0) * editItem.price!
             self.mPriceLb.text = String(totalPrice)
 
         }
@@ -157,9 +158,7 @@ extension AccessoriesUIViewController: AccessoriesCollectionViewCellDelegate {
                      image: UIImage?) {
         if KeychainManager().isUserLoggedIn() {
             accessoriesEditList![cellIndex].isAdded = isAdd
-            accessoriesEditList![cellIndex].accessoryId = id
-            accessoriesEditList![cellIndex].accessoryName = name
-            accessoriesEditList![cellIndex].accessoryImg = image
+            accessoriesEditList![cellIndex].id = id
         } else {
             showAlertSignIn()
         }
@@ -168,7 +167,7 @@ extension AccessoriesUIViewController: AccessoriesCollectionViewCellDelegate {
     
     
     func didChangeCount(cellIndex: Int, count: Int) {
-            accessoriesEditList![cellIndex].accessoryCount = count
+            accessoriesEditList![cellIndex].count = count
         
     }
 

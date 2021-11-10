@@ -15,8 +15,6 @@ enum Search {
     case customLocation
 }
 
-//var additionalAccessories: [AccessoriesModel] = AccessoriesData.accessoriesModel
-//var additionalDrivers: [MyDriversModel] = MyDriversData.myDriversModel
 
 class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
@@ -771,7 +769,9 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     
     @IBAction func additionalDriver(_ sender: UIButton) {
-        self.goToAdditionalDriver(on: self, isEditReservation: false)
+        self.goToAdditionalDriver(on: self,
+                                  isEditReservation: false,
+                                  additionalDrivers: vehicleModel?.additionalDrivers)
     }
     
     @IBAction func reserve(_ sender: UIButton) {
@@ -1056,11 +1056,11 @@ extension DetailsViewController: SearchWithValueViewDelegate {
 //MARK: AccessoriesUIViewControllerDelegate
 //MARK: ----------------------------
 extension DetailsViewController: MyDriversViewControllerDelegate {
-    func selectedDrivers(_ isSelecte: Bool, totalPrice: Double) {
+    
+    func selectedDrivers(_ isSelecte: Bool, additionalDrivers: [MyDriversModel]?) {
         mAdditionalDriverBtn.alpha = isSelecte ? 1.0 : 0.67
         vehicleModel?.ifHasAditionalDriver = isSelecte
-        vehicleModel?.driversTotalPrice = totalPrice
-
+        vehicleModel?.additionalDrivers = additionalDrivers
     }
 }
 
@@ -1074,7 +1074,6 @@ extension DetailsViewController: AccessoriesUIViewControllerDelegate {
         
         mAccessoriesBtn.alpha = isAdd ? 1.0 : 0.67
         vehicleModel?.ifHasAccessories = isAdd
-        vehicleModel?.accessoriesTotalPrice = totalPrice
         self.accessoriesEditList = accessoriesEditList
     }
 }

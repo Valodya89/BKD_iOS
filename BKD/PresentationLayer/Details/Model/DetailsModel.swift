@@ -45,8 +45,8 @@ struct VehicleModel {
     public var ifHasAccessories: Bool = false
     public var ifHasAditionalDriver: Bool = false
     
-    public var accessoriesTotalPrice: Double = 0.0
-    public var driversTotalPrice: Double = 0.0
+//    public var accessoriesTotalPrice: Double = 0.0
+//    public var driversTotalPrice: Double = 0.0
 
     public var tailLiftList: [TailLiftModel]?
     public var detailList: [DetailsModel]?

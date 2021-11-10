@@ -52,9 +52,9 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
       //  mAccessoriesBackgImgV.setShadow(color: color_shadow!)
     }
     
-    func setCellInfo(item: Accessories, editItem: AccessoriesEditModel, index: Int) {
-        accessoryId = item.id
-        maxCount = item.maxCount
+    func setCellInfo(editItem: AccessoriesEditModel, index: Int) {
+        accessoryId = editItem.id
+        maxCount = editItem.maxCount
         mAddBtn.tag = index
         mIncreaseBtn.tag = index
         mDecreaseBtn.tag = index
@@ -62,39 +62,19 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
         mIncreaseBtn.addTarget(self, action: #selector(increase(sender:)), for: .touchUpInside)
         mDecreaseBtn.addTarget(self, action: #selector(decrease(sender:)), for: .touchUpInside)
         
-        self.mAccessorieImgV.sd_setImage(with:  item.image.getURL() ?? URL(string: ""), placeholderImage: nil)
-        mTitleLb.text = item.name
-        mPriceLb.text = String(item.price)
+        self.mAccessorieImgV.sd_setImage(with:  editItem.imageUrl ?? URL(string: ""), placeholderImage: nil)
+        mTitleLb.text = editItem.name
+        mPriceLb.text = String(editItem.price ?? 0.0)
         mAccessorieCountLb.text = String(1)
 
         if editItem.isAdded {
             mAddImgV.image = img_add_selecte
             mAddBtn.setTitleColor(color_menu, for: .normal)
-            mAccessorieCountLb.text = String(editItem.accessoryCount ?? 1)
+            mAccessorieCountLb.text = String(editItem.count ?? 1)
         } else {
             mAddImgV.image = img_add_unselece
             mAddBtn.setTitleColor(color_alert_txt!, for: .normal)
         }
-        
-        
-        
-//        mAccessorieImgV.image = item.accessoryImg
-//        mTitleLb.text = item.accessoryName
-//        mPriceLb.text = String(item.accessoryPrice!)
-//        mAccessorieCountLb.text = String(item.accessoryCount!)
-//        mAddBtn.tag = index
-//        mIncreaseBtn.tag = index
-//        mDecreaseBtn.tag = index
-//        if item.isAdded {
-//            mAddImgV.image = img_add_selecte
-//            mAddBtn.setTitleColor(color_menu, for: .normal)
-//        } else {
-//            mAddImgV.image = img_add_unselece
-//            mAddBtn.setTitleColor(color_alert_txt!, for: .normal)
-//        }
-        
-        
-        
     }
     
     
@@ -119,7 +99,7 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
                               cellIndex: sender.tag,
                               id: accessoryId,
                               name: mTitleLb.text,
-                              image: mAddImgV.image)
+                              image: mAccessorieImgV.image)
     }
     
     

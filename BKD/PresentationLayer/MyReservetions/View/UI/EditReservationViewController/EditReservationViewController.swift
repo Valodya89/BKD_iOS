@@ -224,7 +224,9 @@ class EditReservationViewController: BaseViewController {
         
     @IBAction func additionalDriver(_ sender: UIButton) {
         
-        self.goToAdditionalDriver(on: nil, isEditReservation: true)
+        self.goToAdditionalDriver(on: nil,
+                                  isEditReservation: true,
+                                  additionalDrivers: nil)
     }
     
     
