@@ -35,7 +35,7 @@ class CategoryViewController: UIViewController {
     
     
     func setUpView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         //CollectionView
         mCategoryTableV.register(CategoryTableViewCell.nib(),
                                           forCellReuseIdentifier: CategoryTableViewCell.identifier)

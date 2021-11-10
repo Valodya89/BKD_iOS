@@ -8,8 +8,8 @@
 import UIKit
 protocol TariffCarouselCellDelegate: AnyObject {
     func didPressMore(tariffIndex: Int, optionIndex: Int)
-    func showSearchView(optionIndex: Int)
-    func willChangeOption(optionIndex: Int)
+    func showSearchView(optionIndex: Int, options: [TariffSlideModel]?)
+    func willChangeOption(optionIndex: Int, options: [TariffSlideModel]?)
     
 }
 
@@ -194,11 +194,25 @@ class TariffCarouselCell: UIView {
     func configureFlexibleCell(index:Int) {
         
         mFreeKmLb.isHidden = false
-        mStartingPriceLb.isHidden = false
+       // mStartingPriceLb.isHidden = false
         mHoursSegmentC.isHidden = true
-        mPriceCenterX.constant = 45
+//        mPriceCenterX.constant = 45
         mPriceCenterY.constant = 20
         mDetailsCenterY.constant = 52
+        
+            if let value = item?.value {
+        //mStartingPriceLb.isHidden = true
+                mPriceLb.text = value
+                PriceManager.shared.carPrice = Double(value ?? "0")
+            }
+            if let offert = item?.specialValue {
+                
+                updateSpecialPrice(option: item ?? TariffSlideModel())
+                PriceManager.shared.carOffertPrice = Double(offert)
+                PriceManager.shared.carDiscountPrecent = item?.discountPercent
+//                mOffertPriceLb.text = offert
+//                mOffertPriceLb.isHidden = false
+            }
         
         mDepositLb.text =  Constant.Texts.fuelNotUncluded
         mFuelConsumptionLb.text = Constant.Texts.depositApplies
@@ -211,7 +225,6 @@ class TariffCarouselCell: UIView {
         mDepositImgV.setTintColor(color: UIColor(ciColor: .white).withAlphaComponent(0.49))
         mFuelConsumptionImgV.setTintColor(color: .white)
         mTitleLb.textColor = .white
-        
     }
     
     ///configure cells which has common style
@@ -289,13 +302,21 @@ class TariffCarouselCell: UIView {
     @objc func didChangeSegment(sender: UISegmentedControl) {
         selectedSegmentIndex = sender.selectedSegmentIndex
         if isConfirm {
-            delegate?.willChangeOption(optionIndex: selectedSegmentIndex)
+            delegate?.willChangeOption(optionIndex: selectedSegmentIndex,
+                                       options: item?.options)
         }
         guard let options = item?.options  else {return}
         if selectedSegmentIndex < item?.tariff?.count ?? 0 {
             mPriceLb.text = options[selectedSegmentIndex].value
             updateSpecialPrice(option: options[selectedSegmentIndex])
+            
+            if isConfirm {
+                PriceManager.shared.carPrice = Double(options[selectedSegmentIndex].value ?? "0")
+                PriceManager.shared.carOffertPrice = Double(options[selectedSegmentIndex].specialValue ?? "0")
+                PriceManager.shared.carDiscountPrecent = options[selectedSegmentIndex].discountPercent
+            }
         }
+        
         
     }
     
@@ -310,7 +331,20 @@ class TariffCarouselCell: UIView {
         if !isConfirm {
             isConfirm = true
             sender.setTitleColor(mTitleLb.text == Constant.Texts.daily ? .white : color_menu, for: .normal)
-            delegate?.showSearchView(optionIndex: selectedSegmentIndex)
+            
+            mPriceLb.isHidden = false
+            mOffertPriceLb.isHidden = false
+            mStartingPriceLb.isHidden = true
+            
+            guard let options = item?.options else {
+                delegate?.showSearchView(optionIndex: selectedSegmentIndex, options: item?.options ?? [item!])
+               return
+            }
+            PriceManager.shared.carPrice = Double(options[selectedSegmentIndex].value ?? "0")
+            PriceManager.shared.carOffertPrice = Double(options[selectedSegmentIndex].specialValue ?? "0")
+            PriceManager.shared.carDiscountPrecent = options[selectedSegmentIndex].discountPercent
+            delegate?.showSearchView(optionIndex: selectedSegmentIndex, options: options)
+            
         }
     }
     

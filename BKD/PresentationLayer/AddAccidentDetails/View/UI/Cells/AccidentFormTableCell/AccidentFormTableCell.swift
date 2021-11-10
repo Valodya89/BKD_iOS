@@ -36,7 +36,7 @@ class AccidentFormTableCell: UITableViewCell {
     var didPressAddMore:((Int)->Void)?
     
     
-    //MARK: --Life cicle
+    //MARK: --Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()

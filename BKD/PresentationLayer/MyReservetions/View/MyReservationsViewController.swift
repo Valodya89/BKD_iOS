@@ -27,12 +27,13 @@ class MyReservationsViewController: BaseViewController {
     
     
     //MARK -- Variables
+    lazy var myReservationViewModel: MyReservationViewModel = MyReservationViewModel()
     var menu: SideMenuNavigationController?
     var isReservationHistory: Bool = false
     var drivers:[MyDriversModel]? = MyDriversData.myDriversModel
 
 
-    //MARK: -- Life cicle
+    //MARK: -- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -42,6 +43,8 @@ class MyReservationsViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
+        getRent()
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -55,7 +58,7 @@ class MyReservationsViewController: BaseViewController {
     }
     
     func setupView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         menu = SideMenuNavigationController(rootViewController: LeftViewController())
         self.setmenu(menu: menu)
         mNoReservationContentV.isHidden = ReservationWithReservedPaidData.reservationWithReservedPaidModel.count > 0
@@ -76,7 +79,12 @@ class MyReservationsViewController: BaseViewController {
         self.mReservCollectionV.register(ReservationHistoryCell.nib(), forCellWithReuseIdentifier: ReservationHistoryCell.identifier)
     }
     
-   
+    ///Get reservations
+    private func getRent() {
+        myReservationViewModel.getReservations { result in
+            guard let result = result else {return}
+        }
+    }
     
     ///Open agree Screen
     private func goToAgreement() {

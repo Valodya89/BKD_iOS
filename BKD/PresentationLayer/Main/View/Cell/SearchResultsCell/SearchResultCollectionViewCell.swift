@@ -177,23 +177,21 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
             self.mFlipCarLogoImgV.sd_setImage(with: item.logo!.getURL() ?? URL(string: ""), placeholderImage: nil)
         }
         
-        if item.priceDay?.hasSpecialPrice == true &&
-            item.priceDay != nil {
+        if item.priceDay != nil && item.hasDiscount &&  item.discountPercents > 0.0 {
             
-            let specialPrice = item.priceDay!
-                .price - (item.priceDay!.price * (item.priceDay!.specialPrice/100))
+            let specialPrice = item.priceDay! - (item.priceDay! * (item.discountPercents/100))
             self.mOffertValueLB.text = String(specialPrice) + Constant.Texts.inclVat
-            self.mValueLb.text = String(item.priceDay!.price) + Constant.Texts.inclVat
+            self.mValueLb.text = String(item.priceDay!) + Constant.Texts.inclVat
         } else {
-            self.mGradientValueLb.text = String(item.priceDay?.price ?? 0.0) + Constant.Texts.inclVat
+            self.mGradientValueLb.text = String(item.priceDay!) + Constant.Texts.inclVat
         }
         
         self.mCarNameLb.text = item.name
         self.mFlipCarNameLb.text = item.name
         
         self.mCarImgV.sd_setImage(with: item.image.getURL()!, placeholderImage: nil)
-        self.mOffertBckgV.isHidden = !(item.priceDay?.hasSpecialPrice ?? false)
-        self.mGradientV.isHidden = (item.priceDay?.hasSpecialPrice ?? false)
+        self.mOffertBckgV.isHidden = !(item.hasDiscount)
+        self.mGradientV.isHidden = (item.hasDiscount)
         self.mCardLb.text = item.driverLicenseType
         self.mCubeLb.text = String(item.volume) + Constant.Texts.mCuadrad
         self.mKgLb.text = String(item.loadCapacity) + Constant.Texts.kg

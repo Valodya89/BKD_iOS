@@ -1120,10 +1120,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="yXl-YX-ZL5" firstAttribute="width" secondItem="dId-g3-nh7" secondAttribute="width" id="1Ex-k9-J9R"/>
                                     <constraint firstItem="yXl-YX-ZL5" firstAttribute="leading" secondItem="2dE-sj-eQk" secondAttribute="leading" id="KYC-tc-lQc"/>
                                     <constraint firstItem="yXl-YX-ZL5" firstAttribute="top" secondItem="2dE-sj-eQk" secondAttribute="top" id="NoD-Zt-yg1"/>
                                     <constraint firstItem="yXl-YX-ZL5" firstAttribute="trailing" secondItem="2dE-sj-eQk" secondAttribute="trailing" id="a1V-p4-Th6"/>
-                                    <constraint firstItem="yXl-YX-ZL5" firstAttribute="width" secondItem="dId-g3-nh7" secondAttribute="width" id="eLR-pu-hw0"/>
                                     <constraint firstItem="yXl-YX-ZL5" firstAttribute="bottom" secondItem="2dE-sj-eQk" secondAttribute="bottom" id="khI-At-8J9"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="2dE-sj-eQk"/>

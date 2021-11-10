@@ -8,7 +8,6 @@
 import UIKit
 
 final class MainViewModel: NSObject {
-   // static let shared = MainViewModel()
     var searchModel = SearchModel()
     let validator = Validator()
     

@@ -27,11 +27,11 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
     var email:String = ""
  
     
-    //MARK: - Life cicle
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
-        sendEmailVerification()
+      //  sendEmailVerification()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -46,7 +46,7 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
     }
     
     func setUpView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         NotificationCenter.default.addObserver(self, selector: #selector(VerificationCodeViewController.handleDeepLink), name: Constant.Notifications.signUpEmailVerify, object: nil)
         mRightBarBtn.image = img_bkd
         mAlertV.layer.cornerRadius = 8
@@ -60,22 +60,22 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
         sendAccountVerification(code: notification.object as? String ?? "")
     }
     
-    ///Send email verification for signup
-    func sendEmailVerification() {
-        SignInViewModel().forgotPassword(username:  email, action: Constant.Texts.verification) { (status) in
-            switch status {
-            case .accountNoSuchUser:
-                self.showErrorAlertMessage(Constant.Texts.errEmailVerifyNoUser)
-                break
-            case .success:
-                print("sendEmailVerification success")
-                break
-            default:
-                self.showAlertMessage(Constant.Texts.errEmailVerify)
-                break
-            }
-        }
-    }
+//    ///Send email verification for signup
+//    func sendEmailVerification() {
+//        SignInViewModel().forgotPassword(username:  email, action: Constant.Texts.verification) { (status) in
+//            switch status {
+//            case .accountNoSuchUser:
+//                self.showErrorAlertMessage(Constant.Texts.errEmailVerifyNoUser)
+//                break
+//            case .success:
+//                print("sendEmailVerification success")
+//                break
+//            default:
+//                self.showAlertMessage(Constant.Texts.errEmailVerify)
+//                break
+//            }
+//        }
+//    }
     
     ///Send account verification for active account
     func sendAccountVerification(code: String){

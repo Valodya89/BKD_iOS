@@ -60,7 +60,7 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
     }
     
     func setUpView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         mRightBarBtn.image = img_bkd
         mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
         mPaymentTbV.delegate = self

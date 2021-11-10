@@ -17,7 +17,8 @@ enum AuthAPI: APIProtocol {
     case getRestrictedZones
     case getParking
     case getExteriorSize
-    case getCustomLocation(longitude:Double, latitude: Double)
+    case getCustomLocation(longitude:Double,
+                           latitude: Double)
     case getCarsByType(criteria: [String : Any])
     case getCarsByFilter(criteria: [[String : Any]])
     case getWorkingTimes
@@ -26,6 +27,8 @@ enum AuthAPI: APIProtocol {
     case getCountries
     case getTariff
     case getAccessories(carID: String)
+    case getMainDriver
+    case getAdditionalDrivers
     case signUp(username: String,
                 password: String)
     case verifyAccounts(username: String,
@@ -39,7 +42,9 @@ enum AuthAPI: APIProtocol {
     case recoverPassword(username: String,
                          password: String,
                          code: String)
-    case addPersonalData(name: String,
+    case createDriver(driverType: String)
+    case addPersonalData(id: String,
+                         name: String,
                          surname: String,
                          phoneNumber: String,
                          dateOfBirth: String,
@@ -50,20 +55,38 @@ enum AuthAPI: APIProtocol {
                          zip: String,
                          city: String,
                          nationalRegisterNumber: String)
-    case getChatID(name: String, type: String, identifier: String)
-    case getMessages(chatID: String)
-    case sendMessage(chatID: String, message: String, userIdentifier: String)
-    case addIdentityExpiration(expirationDate: String)
-    case addDriverLicenseDates(issueDate: String,
+    case addIdentityExpiration(id: String,
                                expirationDate: String)
-
-
+    case addDriverLicenseDates(id: String,
+                               issueDate: String,
+                               expirationDate: String,
+                               drivingLicenseNumber: String)
+    case acceptAgreement(id: String)
+    case addRent(carId: String,
+                 startDate: Double,
+                 endDate: Double,
+                 accessories: [[String : Any]?] ,
+                 additionalDrivers: [String?],
+                 pickupLocation: [String : Any],
+                 returnLocation: [String : Any])
+    case getRents
+    case getChatID(name: String,
+                   type: String,
+                   identifier: String)
+    case getMessages(chatID: String)
+    case sendMessage(chatID: String,
+                     message: String,
+                     userIdentifier: String)
     
+
+
     var base: String {
         switch self {
         case .getWorkingTimes,
              .getPhoneCodes,
              .getCountries,
+             .getMainDriver,
+             .getAdditionalDrivers,
              .signUp,
              .verifyAccounts,
              .resendCode,
@@ -71,8 +94,10 @@ enum AuthAPI: APIProtocol {
              .forgotPassword,
              .recoverPassword,
              .getChatID,
+             .createDriver,
              .addIdentityExpiration,
-             .addDriverLicenseDates:
+             .addDriverLicenseDates,
+             .acceptAgreement:
             return BKDBaseURLs.account.rawValue
         case .getAuthRefreshToken,
              .getToken:
@@ -116,6 +141,10 @@ enum AuthAPI: APIProtocol {
             return "tariff/list"
         case .getAccessories(let carID):
             return "car/\(carID)/accessories"
+        case .getMainDriver:
+            return "api/driver"
+        case .getAdditionalDrivers:
+            return "api/driver/additional"
         case .signUp:
             return "accounts/create"
         case .verifyAccounts:
@@ -128,20 +157,29 @@ enum AuthAPI: APIProtocol {
             return "oauth/token"
         case .forgotPassword:
             return "accounts/send-code"
-        case .addPersonalData:
-            return "api/driver/personal"
+        case .createDriver(let driverType):
+            return "api/driver/\(driverType)"
+        case let .addPersonalData(id, _,_,_,_,_,_,
+                                  _,_,_,_,_):
+            return "api/driver/\(id)/personal"
         case .recoverPassword:
             return "accounts/recover-password"
+        case .getRents:
+            return "api/rents"
         case .getChatID:
             return "/chat/start"
         case .getMessages(let chatID):
             return "/chat/\(chatID)/message"
         case let .sendMessage(chatID, _, _):
             return "/chat/\(chatID)/message"
-        case .addIdentityExpiration:
-            return "api/driver/identity-expiration"
-        case .addDriverLicenseDates:
-            return "api/driver/driving-license-dates"
+        case let.addIdentityExpiration(id, _):
+            return "api/driver/\(id)/identity-expiration"
+        case let.addDriverLicenseDates(id, _, _, _):
+            return "api/driver/\(id)/driving-license-dates"
+        case let .acceptAgreement(id):
+            return "api/driver/\(id)/agreement/accept"
+        case .addRent:
+            return "api/rents"
         }
         
     }
@@ -150,6 +188,8 @@ enum AuthAPI: APIProtocol {
         switch self {
         case .getCarsByType,
              .getCarsByFilter,
+             .getMainDriver,
+             .getAdditionalDrivers,
              .signUp,
              .verifyAccounts,
              .resendCode,
@@ -162,8 +202,12 @@ enum AuthAPI: APIProtocol {
              .getTariff,
              .getAccessories,
              .sendMessage,
+             .createDriver,
              .addIdentityExpiration,
-             .addDriverLicenseDates:
+             .addDriverLicenseDates,
+             .acceptAgreement,
+             .addRent,
+             .getRents:
             return ["Content-Type": "application/json"]
         case .getAuthRefreshToken:
             fallthrough
@@ -203,7 +247,7 @@ enum AuthAPI: APIProtocol {
     
     var body: [String : Any]? {
         switch self {
-        
+
         case let .getCarsByType(criteria):
             return [
                 "criteria" : [criteria]
@@ -242,7 +286,18 @@ enum AuthAPI: APIProtocol {
                 "password": password,
                 "code": code
             ]
-        case let .addPersonalData(name, surname, phoneNumber, dateOfBirth, street, house, mailBox, countryId, zip, city, nationalRegisterNumber):
+        case let .getChatID(name, type, identifier):
+            return [
+                "userViewName": name,
+                "type": type,
+                "userIdentifier": identifier
+            ]
+        case let .sendMessage(_, message, userIdentifier):
+            return [
+                "message": message,
+                "userIdentifier": userIdentifier
+            ]
+        case let .addPersonalData( _, name, surname, phoneNumber, dateOfBirth, street, house, mailBox, countryId, zip, city, nationalRegisterNumber):
             return [
                 "name": name,
                 "surname": surname,
@@ -256,26 +311,33 @@ enum AuthAPI: APIProtocol {
                 "city": city,
                 "nationalRegisterNumber": nationalRegisterNumber
             ]
-        case let .getChatID(name, type, identifier):
-            return [
-                "userViewName": name,
-                "type": type,
-                "userIdentifier": identifier
-            ]
-        case let .sendMessage(_, message, userIdentifier):
-            return [
-                "message": message,
-                "userIdentifier": userIdentifier
-            ]
-        case let .addIdentityExpiration(expirationDate):
+        case let .addIdentityExpiration(_, expirationDate):
             return [
                 "expirationDate": expirationDate,
             ]
-        case let .addDriverLicenseDates(issueDate,
-                                   expirationDate):
+        case let .addDriverLicenseDates(_, issueDate,
+                                   expirationDate,
+                                   drivingLicenseNumber):
             return [
                 "issueDate": issueDate,
-                "expirationDate": expirationDate
+                "expirationDate": expirationDate,
+                "drivingLicenseNumber": drivingLicenseNumber
+            ]
+        case let .addRent(carId,
+                          startDate,
+                          endDate,
+                          accessories,
+                          additionalDrivers,
+                          pickupLocation,
+                          returnLocation):
+            return [
+                "carId": carId,
+                "startDate": startDate,
+                "endDate": endDate,
+                "accessories": accessories,
+                "additionalDrivers": additionalDrivers,
+                "pickupLocation": pickupLocation,
+                "returnLocation": returnLocation
             ]
         default:
             return nil
@@ -307,8 +369,11 @@ enum AuthAPI: APIProtocol {
              .addPersonalData,
              .getChatID,
              .sendMessage,
+             .createDriver,
              .addIdentityExpiration,
-             .addDriverLicenseDates:
+             .addDriverLicenseDates,
+             .acceptAgreement,
+             .addRent:
             return .post
         case .verifyAccounts,
              .recoverPassword:
@@ -322,3 +387,4 @@ enum AuthAPI: APIProtocol {
         }
     }
 }
+

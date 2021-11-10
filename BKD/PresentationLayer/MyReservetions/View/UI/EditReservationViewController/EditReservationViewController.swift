@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 
 protocol EditReservationDelegate: AnyObject {
@@ -51,7 +52,7 @@ class EditReservationViewController: BaseViewController {
 
 
 
-    //MARK: -- Life cicle
+    //MARK: -- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -229,7 +230,10 @@ class EditReservationViewController: BaseViewController {
     
     @IBAction func accessories(_ sender: UIButton) {
         
-        goToAccessories(on: nil, vehicleModel: nil, isEditReservation: true)
+        goToAccessories(on: nil,
+                        vehicleModel: nil,
+                        isEditReservation: true,
+                        accessoriesEditList: nil)
     }
     
     
@@ -293,14 +297,18 @@ extension EditReservationViewController: EditBySearchViewDelegate {
         }
     }
     
-    func didSelectLocation(_ text: String, _ tag: Int) {
+    func didSelectLocation(_ parking: Parking, _ tag: Int) {
         if tag == 4 { //pick up location
-            searchModel.pickUpLocation = text
-            
+            searchModel.pickUpLocation = parking.name
+            searchModel.pickUpLocationId = parking.id
+            searchModel.isPickUpCustomLocation = false
+            PriceManager.shared.pickUpCustomLocationPrice = nil
         } else {// return location
-            searchModel.returnLocation = text
-            mEditBySearchV.returnLocation = text
-
+            searchModel.returnLocation = parking.name
+            searchModel.returnLocationId = parking.id
+            mEditBySearchV.returnLocation = parking.name
+            searchModel.isRetuCustomLocation = false
+            PriceManager.shared.returnCustomLocationPrice = nil
         }
         //isActiveReserve()
         
@@ -316,10 +324,12 @@ extension EditReservationViewController: EditBySearchViewDelegate {
             searchModel.isPickUpCustomLocation = false
             searchModel.pickUpLocation = nil
             mEditBySearchV.pickUpLocation = nil
+            PriceManager.shared.pickUpCustomLocationPrice = nil
         } else {//return custom location
             searchModel.isRetuCustomLocation = false
             searchModel.returnLocation = nil
             mEditBySearchV.returnLocation = nil
+            PriceManager.shared.returnCustomLocationPrice = nil
         }
     }
     
@@ -339,17 +349,22 @@ extension EditReservationViewController: EditBySearchViewDelegate {
 //MARK: ----------------------------
 extension EditReservationViewController: CustomLocationViewControllerDelegate {
     
-    func getCustomLocation(_ locationPlace: String) {
+    func getCustomLocation(_ locationPlace: String, coordinate: CLLocationCoordinate2D, price: Double?) {
          mEditBySearchV.updateCustomLocationFields(place: locationPlace, didResult: { [weak self] (isPickUpLocation) in
             if isPickUpLocation {
                 self?.searchModel.isPickUpCustomLocation = true
                 self?.searchModel.pickUpLocation = locationPlace
+                self?.searchModel.pickUpLocationLongitude = coordinate.longitude
+                self?.searchModel.pickUpLocationLatitude = coordinate.latitude
                 self?.mEditBySearchV.pickUpLocation = locationPlace
+                //PriceManager.shared.pickUpCustomLocationPrice = price
             } else {
                 self?.searchModel.isRetuCustomLocation = true
                 self?.searchModel.returnLocation = locationPlace
+                self?.searchModel.returnLocationLongitude = coordinate.longitude
+                self?.searchModel.returnLocationLatitude = coordinate.latitude
                 self?.mEditBySearchV.returnLocation = locationPlace
-
+               // PriceManager.shared.returnCustomLocationPrice = price
             }
 
         })

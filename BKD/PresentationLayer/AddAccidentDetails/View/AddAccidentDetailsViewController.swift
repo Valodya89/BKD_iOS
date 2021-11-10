@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import CoreLocation
+
 
 class AddAccidentDetailsViewController: BaseViewController {
     
@@ -34,7 +36,7 @@ class AddAccidentDetailsViewController: BaseViewController {
     var currIndexOfAccidentForm: Int = 0
 
     
-    //MARK: -- Life cicle
+    //MARK: -- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -50,7 +52,7 @@ class AddAccidentDetailsViewController: BaseViewController {
     
     
     func setupView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = img_bkd
         mConfirmV.needsCheck = true
@@ -371,7 +373,7 @@ extension AddAccidentDetailsViewController: UIImagePickerControllerDelegate, UIN
 //MARK: -- CustomLocationViewControllerDelegate
 //MARK: -------------------------------------------
 extension AddAccidentDetailsViewController: CustomLocationViewControllerDelegate {
-    func getCustomLocation(_ locationPlace: String) {
+    func getCustomLocation(_ locationPlace: String, coordinate: CLLocationCoordinate2D, price: Double?) {
         mDateAndLocationV.location = locationPlace
         mDateAndLocationV.mLocationTxtFl.text = locationPlace
     }

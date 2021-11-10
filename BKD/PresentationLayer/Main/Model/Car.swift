@@ -22,10 +22,10 @@ struct CarsModel: Codable {
     
     //Prices
     let priceForFlexible: Double
-    let priceHour: Price?
-    let priceDay: Price?
-    let priceWeek: Price?
-    let priceMonth: Price?
+    let priceHour: Double?
+    let priceDay: Double?
+    let priceWeek: Double?
+    let priceMonth: Double?
     let hasDiscount: Bool
     let discountPercents: Double
     let freeKiloMeters: Double
@@ -95,13 +95,13 @@ struct CarExterior: Codable {
 }
 
 
-struct Price: Codable {
-    
-    let price: Double
-    let hasSpecialPrice: Bool
-    let specialPrice: Double
-               
-}
+//struct Price: Codable {
+//
+//    let price: Double
+//    let hasSpecialPrice: Bool
+//    let specialPrice: Double
+//
+//}
 
 struct Reservation: Codable {
         public var innerArray: [String: Inner]

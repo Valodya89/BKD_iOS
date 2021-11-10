@@ -29,7 +29,7 @@ class PhoneVerificationViewController: UIViewController, StoryboardInitializable
     private var counter = 59
     
     
-    //MARK: - Life cicle
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
@@ -42,7 +42,7 @@ class PhoneVerificationViewController: UIViewController, StoryboardInitializable
     }
     
     func setUpView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         mVerifySecondBtn.disable()
         startTimer()
     }

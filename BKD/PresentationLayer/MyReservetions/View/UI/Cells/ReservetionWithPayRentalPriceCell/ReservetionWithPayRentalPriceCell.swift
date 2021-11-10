@@ -36,7 +36,7 @@ class ReservetionWithPayRentalPriceCell: UICollectionViewCell {
     
     //MARK: -- Variables
     var payRentalPrice:(()-> Void)?
-    //MARK: -- Life cicle
+    //MARK: -- Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()

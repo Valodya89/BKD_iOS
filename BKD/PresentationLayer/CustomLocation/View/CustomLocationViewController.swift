@@ -8,6 +8,7 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import CoreLocation
 
 enum PlacesError: Error {
     case failedToFind
@@ -15,7 +16,9 @@ enum PlacesError: Error {
 }
 
 protocol CustomLocationViewControllerDelegate: AnyObject {
-    func getCustomLocation(_ locationPlace: String)
+    func getCustomLocation(_ locationPlace: String,
+                           coordinate: CLLocationCoordinate2D,
+                           price: Double?)
 }
 
 class CustomLocationViewController: BaseViewController {
@@ -44,7 +47,7 @@ class CustomLocationViewController: BaseViewController {
 
     // The currently selected place.
     var currentMarker: GMSMarker?
-    var placesClient: GMSPlacesClient!
+   // var placesClient: GMSPlacesClient!
     var mapViewCenterCoordinate = CLLocationCoordinate2D(latitude: 0.0 , longitude: 0.0)
     private var locationManager = CLLocationManager()
     var customLocation:CustomLocation?
@@ -80,7 +83,7 @@ class CustomLocationViewController: BaseViewController {
     
     
     func setUpView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         mRightBarBtn.image = img_bkd
         restrictedZones = ApplicationSettings.shared.restrictedZones
         if isAddDamageAddress {
@@ -115,7 +118,7 @@ class CustomLocationViewController: BaseViewController {
     private func configureDelegates() {
         
         markerInfoVC.delegate = self
-        addNewMarkerVC.delegate = self
+        //addNewMarkerVC.delegate = self
         locationManager.delegate = self
         mMapV.delegate = self
     }
@@ -337,8 +340,8 @@ class CustomLocationViewController: BaseViewController {
 //MARK ---------------------
 extension CustomLocationViewController: MarkerInfoViewControllerDelegate {
     
-    func didPressContinue(place: String) {
-        self.delegate?.getCustomLocation(place)
+    func didPressContinue(place: String, price: Double?) {
+        self.delegate?.getCustomLocation(place, coordinate: mapViewCenterCoordinate, price: price)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -384,7 +387,7 @@ extension CustomLocationViewController: GMSAutocompleteViewControllerDelegate {
   // Handle the user's selection.
   func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
     
-    resolveLocation(place: place) { result  in
+      self.resolveLocation(place: place) { result  in
         switch result {
         case .success(let coordinate):
             self.updateMapByCoordinate(coordinate: coordinate)
@@ -420,25 +423,29 @@ extension CustomLocationViewController: GMSAutocompleteViewControllerDelegate {
   }
 
     
-///Resolve Location
- private func resolveLocation(place: GMSPlace, completion: @escaping (Result<CLLocationCoordinate2D, Error> ) -> Void) {
-        
-        placesClient.fetchPlace(fromPlaceID: place.placeID ?? "",
-                                placeFields: .coordinate,
-                                sessionToken: nil) { (googlePlace, error) in
-            guard let googlePlace = googlePlace, error == nil else {
-                completion(.failure(PlacesError.failedToGetCordinates))
-                return
-            }
-            let coordinate = CLLocationCoordinate2DMake(googlePlace.coordinate.latitude,
-                                                        googlePlace.coordinate.longitude)
-            completion(.success(coordinate))
-        }
-    }
+/////Resolve Location
+// private func resolveLocation(place: GMSPlace, completion: @escaping (Result<CLLocationCoordinate2D, Error> ) -> Void) {
+//
+//        placesClient.fetchPlace(fromPlaceID: place.placeID ?? "",
+//                                placeFields: .coordinate,
+//                                sessionToken: nil) { (googlePlace, error) in
+//            guard let googlePlace = googlePlace, error == nil else {
+//                completion(.failure(PlacesError.failedToGetCordinates))
+//                return
+//            }
+//            let coordinate = CLLocationCoordinate2DMake(googlePlace.coordinate.latitude,
+//                                                        googlePlace.coordinate.longitude)
+//            completion(.success(coordinate))
+//        }
+//    }
 }
 
 
-extension CustomLocationViewController: MarkNewAddressViewControllerDelegate  {
-    
-    
-}
+//extension CustomLocationViewController: MarkNewAddressViewControllerDelegate  {
+//    func didPressContinue(place: String) {
+//
+//    }
+//
+//
+//
+//}

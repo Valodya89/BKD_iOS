@@ -45,7 +45,7 @@ class DamageSideTableCell: UITableViewCell, UITextFieldDelegate {
     var didPressTakePhoto:((Int)->Void)?
     var didPressAddMore:((Int)->Void)?
     
-    //MARK: --Life cicle
+    //MARK: --Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()

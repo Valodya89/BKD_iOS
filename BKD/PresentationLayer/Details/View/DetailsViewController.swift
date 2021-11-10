@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 enum Search {
     case date
@@ -14,8 +15,8 @@ enum Search {
     case customLocation
 }
 
-var additionalAccessories: [AccessoriesModel] = AccessoriesData.accessoriesModel
-var additionalDrivers: [MyDriversModel] = MyDriversData.myDriversModel
+//var additionalAccessories: [AccessoriesModel] = AccessoriesData.accessoriesModel
+//var additionalDrivers: [MyDriversModel] = MyDriversData.myDriversModel
 
 class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
@@ -68,7 +69,10 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     var startFlexibleTimeList: [String]?
     var endFlexibleTimeList: [String]?
     var tariffSlideList:[TariffSlideModel]?
-    var tariffs: [Tariff]?
+    var currentTariffOption: TariffSlideModel?
+    var flexibleTariffOption: TariffSlideModel?
+
+    //var tariffs: [Tariff]?
 
     
     var pickerState: DatePicker?
@@ -90,13 +94,14 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     private let scrollPadding: CGFloat = 60
     private let tableAnimationDuration = 0.5
-
-    private  var tariffSlideY: CGFloat = 0
+    private var tariffSlideY: CGFloat = 0
     private var lastContentOffset: CGFloat = 0
     private var previousContentPosition: CGPoint?
     private var scrollContentHeight: CGFloat = 0.0
     private var isScrolled = false
     private var isTariffSlide = true
+    private var isFlexibleSelected = false
+    private var accessoriesEditList: [AccessoriesEditModel]?
 
     
     //MARK: Life cycle
@@ -128,7 +133,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     
     func setupView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         
         mRightBarBtn.image = #imageLiteral(resourceName: "bkd").withRenderingMode(.alwaysOriginal)
         workingTimes = ApplicationSettings.shared.workingTimes
@@ -235,17 +240,14 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     ///Set  values to vehicle model
      func setVehicleModel(){
-        //var vehicleModel = VehicleModel()
         vehicleModel?.vehicleName = mCarNameLb.text
-        vehicleModel?.additionalAccessories = additionalAccessories
-        vehicleModel?.additionalDrivers = additionalDrivers
+        vehicleModel?.additionalAccessories = accessoriesEditList
+       // vehicleModel?.additionalDrivers = additionalDrivers
+         
 //        searchModel.pickUpLocation = mSearchV.mPickUpLocationBtn.title(for: .normal)
 //        searchModel.returnLocation = mSearchV.mReturnLocationBtn.title(for: .normal)
         vehicleModel?.searchModel = searchModel
-        vehicleModel?.noWorkingTimeTotalPrice = detailsViewModel.getNoWorkingTimeTotalPrice(searchModel: searchModel, timePrice: timePrice)
-        if !isSearchEdit {
-            vehicleModel?.customLocationTotalPrice = detailsViewModel.getCustomLocationTotalPrice(searchV: mSearchV)
-        }
+    
      }
     
     
@@ -258,7 +260,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
                                        okTitle: Constant.Texts.ok, okAction: nil)
                 return
             }
-            self.tariffs = result!
+           // self.tariffs = result!
             self.tariffSlideList = self.detailsViewModel.changeTariffListForUse(tariffs: result!, vehicleModel: self.vehicleModel ?? VehicleModel()) 
             self.tariffSlideVC.tariffSlideList = self.tariffSlideList
             self.tariffSlideVC.mTariffSlideCollectionV.reloadData()
@@ -363,6 +365,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             responderTxtFl.text = timeStr
             responderTxtFl.textColor = color_entered_date
             updateSearchTimes()
+            updateFlexiblePrice(search: searchModel)
             
         } else { // date
         dayBtn?.setTitle(String(datePicker.date.getDay()), for: .normal)
@@ -389,6 +392,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
                                                                               currSearchModel: searchModel)
                 mSearchV.updateSearchDate(tariff: currentTariff,
                                           searchModel: newSearchModel)
+                updateFlexiblePrice(search: newSearchModel)
             }
             searchModel = newSearchModel
 
@@ -421,6 +425,20 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         
     }
     
+   
+    ///Update flexible price
+    func updateFlexiblePrice(search: SearchModel) {
+        if search.pickUpDate != nil && search.returnDate != nil &&  search.pickUpTime != nil &&
+            search.returnTime != nil &&
+            currentTariff == .flexible  {
+            flexibleTariffOption = detailsViewModel.getFlexiblePrice(search: search, option: currentTariffOption!, vehicle: vehicleModel!)
+            
+            guard let tariffSlideList = mTariffCarouselV.tariffSlideList else {return}
+            
+            mTariffCarouselV.tariffSlideList![tariffSlideList.count - 1] = flexibleTariffOption!
+            mTariffCarouselV.tariffCarousel.reloadData()
+        }
+    }
     ///Will open  location controller
     func goToLocationController() {
         mSearchV!.mLocationDropDownView.didSelectSeeMap = { [weak self] result  in
@@ -435,6 +453,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         setVehicleModel()
         reserve.vehicleModel = vehicleModel
         reserve.currentTariff = currentTariff
+        reserve.currentTariffOption  = currentTariffOption
         self.navigationController?.pushViewController(reserve, animated: true)
     }
     
@@ -590,7 +609,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
                              })
     }
     
-    func showAlertMoreThanMonth(optionIndex: Int) {
+    func showAlertMoreThanMonth(optionIndex: Int, options: [TariffSlideModel]?) {
 
         BKDAlert().showAlert(on: self,
                              title: nil,
@@ -605,12 +624,14 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
                                 if isSearchEdit {
                                     isSearchEdit = false
                                 }
-                                self.confirmPressed(optionIndex: optionIndex)
+                                 self.confirmPressed(optionIndex: optionIndex, options: options)
                              })
        // hideTariffCards(y: 1000)
     }
     
-    func showAlertChangeTariff(optionIndex: Int, option: String)  {
+    func showAlertChangeTariff(optionIndex: Int,
+                               option: String,
+                               options: [TariffSlideModel]?)  {
         BKDAlert().showAlert(on: self,
                              title: Constant.Texts.titleChangeTariff,
                              message: Constant.Texts.messageChangeTariff + option + " ? " + Constant.Texts.messageChangeTariffSeconst,
@@ -622,9 +643,9 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
 
                              }, okAction: { [self] in
                                 if currentTariff == .monthly {
-                                    showAlertMoreThanMonth(optionIndex: 0)
+                                    showAlertMoreThanMonth(optionIndex: 0,options: options)
                                 } else {
-                                    self.confirmPressed(optionIndex: optionIndex)
+                                    self.confirmPressed(optionIndex: optionIndex, options: options)
                                     isSearchEdit = false
                                 }
                              })
@@ -633,10 +654,14 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     //MARK: - Hendler Methodes
     /// Confirm button pressed
-    private func confirmPressed(optionIndex: Int) {
+    private func confirmPressed(optionIndex: Int,
+                                options: [TariffSlideModel]?) {
        // isTariffSlide = false
         isScrolled = true
         currentTariffOptionIndex = optionIndex
+        currentTariffOption = options?[optionIndex]
+        isFlexibleSelected = (currentTariffOption?.type == Constant.Texts.flexible) ? true : false
+
         updateSearchFields(optionIndex: optionIndex)
         mSearchV.configureSearchPassiveFields(tariff: currentTariff)
         
@@ -676,18 +701,20 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             mSearchV.showDateInfoViews(dayBtn: mSearchV!.mDayPickUpBtn,
                               monthBtn: mSearchV!.mMonthPickUpBtn,
                               txtFl: responderTxtFl)
+            searchModel.pickUpDate = datePicker.date
+
             showSelectedDate(dayBtn: mSearchV!.mDayPickUpBtn,
                              monthBtn: mSearchV!.mMonthPickUpBtn, timeStr: nil)
             
-                searchModel.pickUpDate = datePicker.date
                         
         case .returnDate:
             mSearchV.showDateInfoViews(dayBtn: mSearchV!.mDayReturnDateBtn,
                          monthBtn: mSearchV!.mMonthReturnDateBtn,
                          txtFl: responderTxtFl)
+            searchModel.returnDate = datePicker.date
+
             showSelectedDate(dayBtn: mSearchV!.mDayReturnDateBtn,
                              monthBtn: mSearchV!.mMonthReturnDateBtn, timeStr: nil)
-            searchModel.returnDate = datePicker.date
 
         default:
             var timeStr = ""
@@ -731,15 +758,15 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     ///Navigation controller will back to pravius controller
     @IBAction func back(_ sender: UIBarButtonItem) {
-        additionalAccessories = AccessoriesData.accessoriesModel
-        additionalDrivers = MyDriversData.myDriversModel
+       // additionalDrivers = MyDriversData.myDriversModel
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func accessories(_ sender: UIButton) {
         self.goToAccessories(on: self,
                              vehicleModel: vehicleModel,
-                             isEditReservation: false)
+                             isEditReservation: false,
+                             accessoriesEditList: accessoriesEditList)
     }
     
     
@@ -749,9 +776,11 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     @IBAction func reserve(_ sender: UIButton) {
         animationReserve()
+        detailsViewModel.setNoWorkingHoursPrice(search: searchModel, price: timePrice)
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [self] in
-            self.goToReserveController()
-        }
+                self.goToReserveController()
+            }
     }
     
     @IBAction func compare(_ sender: UIButton) {
@@ -847,25 +876,35 @@ extension DetailsViewController: TariffSlideViewControllerDelegate {
 extension DetailsViewController: TariffCarouselViewDelegate {
   
  
-    func didPressConfirm(tariff: TariffState, optionIndex: Int, optionstr: String) {
+    func didPressConfirm(tariff: TariffState,
+                         optionIndex: Int,
+                         optionstr: String,
+                         options: [TariffSlideModel]? ) {
         currentTariff = tariff
         isScrolled = true
         if isSearchEdit && tariff != .flexible {
-            showAlertChangeTariff(optionIndex: optionIndex, option: optionstr)
+            showAlertChangeTariff(optionIndex: optionIndex,
+                                  option: optionstr, options: options)
         } else {
             if tariff == .monthly {
-                showAlertMoreThanMonth(optionIndex: optionIndex)
+                showAlertMoreThanMonth(optionIndex: optionIndex,
+                                       options: options)
             } else {
-                confirmPressed(optionIndex: optionIndex)
+                confirmPressed(optionIndex: optionIndex,
+                               options: options)
             }
         }
     }
     
     
-    func willChangeTariffOption(tariff: TariffState, optionIndex: Int) {
+    func willChangeTariffOption(tariff: TariffState,
+                                optionIndex: Int,
+                                options: [TariffSlideModel]? ) {
+        
         search = (tariff == .hourly) ? .time : .date
        updateSearchFields(optionIndex: optionIndex)
         currentTariffOptionIndex = optionIndex
+        currentTariffOption = options?[optionIndex]
     }
 
     func didPressMore(tariffIndex:Int, optionIndex: Int) {
@@ -894,7 +933,7 @@ extension DetailsViewController: SearchViewDelegate {
         self.view.addSubview(self.backgroundV)
         textFl.inputAccessoryView = creatToolBar()
         responderTxtFl = textFl
-        scrollToBottom(y: height345)
+        scrollToBottom(y: height550)
 
         if pickerState == .pickUpTime || pickerState == .returnTime {
             if currentTariff == .flexible {
@@ -928,11 +967,17 @@ extension DetailsViewController: SearchViewDelegate {
     }
     
     
-    func didSelectLocation(_ text: String, _ tag: Int) {
+    func didSelectLocation(_ parking: Parking, _ tag: Int) {
         if tag == 4 { //pick up location
-            searchModel.pickUpLocation = text
+            searchModel.pickUpLocation = parking.name
+            searchModel.pickUpLocationId = parking.id
+            searchModel.isPickUpCustomLocation = false
+            PriceManager.shared.pickUpCustomLocationPrice = nil
         } else {// return location
-            searchModel.returnLocation = text
+            searchModel.returnLocation = parking.name
+            searchModel.returnLocationId = parking.id
+            searchModel.isRetuCustomLocation = false
+            PriceManager.shared.returnCustomLocationPrice = nil
         }
         isActiveReserve()
     }
@@ -945,9 +990,14 @@ extension DetailsViewController: SearchViewDelegate {
         if tag == 6 { //pick up custom location
             searchModel.isPickUpCustomLocation = false
             searchModel.pickUpLocation = nil
+            searchModel.pickUpLocationId = nil
+            PriceManager.shared.pickUpCustomLocationPrice = nil
+
         } else {//return custom location
             searchModel.isRetuCustomLocation = false
             searchModel.returnLocation = nil
+            searchModel.returnLocationId = nil
+            PriceManager.shared.returnCustomLocationPrice = nil
         }
         isActiveReserve()
     }
@@ -956,14 +1006,20 @@ extension DetailsViewController: SearchViewDelegate {
 //MARK: CustomLocationUIViewControllerDelegate
 //MARK: ----------------------------
 extension DetailsViewController: CustomLocationViewControllerDelegate {
-    func getCustomLocation(_ locationPlace: String) {
+    func getCustomLocation(_ locationPlace: String, coordinate: CLLocationCoordinate2D, price: Double?) {
          mSearchV.updateCustomLocationFields(place: locationPlace, didResult: { [weak self] (isPickUpLocation) in
             if isPickUpLocation {
                 self?.searchModel.isPickUpCustomLocation = true
                 self?.searchModel.pickUpLocation = locationPlace
+                self?.searchModel.pickUpLocationLongitude = coordinate.longitude
+                self?.searchModel.pickUpLocationLatitude = coordinate.latitude
+                PriceManager.shared.pickUpCustomLocationPrice = price
             } else {
                 self?.searchModel.isRetuCustomLocation = true
                 self?.searchModel.returnLocation = locationPlace
+                self?.searchModel.returnLocationLongitude = coordinate.longitude
+                self?.searchModel.returnLocationLatitude = coordinate.latitude
+                PriceManager.shared.returnCustomLocationPrice = price
             }
             self?.isActiveReserve()
 
@@ -1011,10 +1067,15 @@ extension DetailsViewController: MyDriversViewControllerDelegate {
 //MARK: AccessoriesUIViewControllerDelegate
 //MARK: ----------------------------
 extension DetailsViewController: AccessoriesUIViewControllerDelegate {
-    func addedAccessories(_ isAdd: Bool, totalPrice: Double) {
+    
+    func addedAccessories(_ isAdd: Bool,
+                          totalPrice: Double,
+                          accessoriesEditList: [AccessoriesEditModel]?) {
+        
         mAccessoriesBtn.alpha = isAdd ? 1.0 : 0.67
         vehicleModel?.ifHasAccessories = isAdd
         vehicleModel?.accessoriesTotalPrice = totalPrice
+        self.accessoriesEditList = accessoriesEditList
     }
 }
 

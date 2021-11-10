@@ -7,6 +7,7 @@
 
 import UIKit
 import SideMenu
+import CoreLocation
 
 
 let timePrice: Double = 59.99
@@ -57,11 +58,14 @@ class MainViewController: BaseViewController {
     private var isNoSearchResult: Bool = false
     private var needsUpdateFilterCell: Bool = false
 
+    
+    
 
 
     //MARK: - Life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarController?.setTabBarBackgroundColor(color: color_background!)
         setupView()
 
     }
@@ -74,7 +78,7 @@ class MainViewController: BaseViewController {
     
     
     func setupView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_search_title!, NSAttributedString.Key.foregroundColor: UIColor.white]
         backgroundV.frame = self.view.bounds
         backgroundV.backgroundColor = .black
@@ -154,6 +158,7 @@ class MainViewController: BaseViewController {
         return toolBar
     }
     
+    //Add Carousel child controller
     func addCarousel() {
         addChild(carouselVC)
         carouselVC.view.frame = (searchHeaderV?.mCarouselV.bounds)!
@@ -267,7 +272,7 @@ class MainViewController: BaseViewController {
         }
     }
     
-    /// if there is any search result it will show car CollectionView else it will show avalable categories TableView
+    /// if there is any search result will show car CollectionView else will show avalable categories TableView
     private func animateSearchResultContainer (isThereResult : Bool) {
         carTypes = ApplicationSettings.shared.carTypes
         carsList = ApplicationSettings.shared.carsList
@@ -338,6 +343,10 @@ class MainViewController: BaseViewController {
               let returnDate = searchHeaderV?.returnDate,
               let pickUpTime = searchHeaderV?.pickUpTime,
               let returnTime = searchHeaderV?.returnTime else {
+                  if (searchHeaderV?.pickUpTime != nil || searchHeaderV?.returnTime != nil) &&
+                        (pickerState == .returnTime || pickerState == .pickUpTime )  {
+                      searchHeaderV?.updateTime(responderTxtFl: responderTxtFl, text: pickerList![ pickerV.selectedRow(inComponent: 0)])
+                  }
             return
             
         }
@@ -345,8 +354,14 @@ class MainViewController: BaseViewController {
 
                 if !result {
                     BKDAlert().showAlertOk(on: self, message: Constant.Texts.lessThan30Minutes, okTitle: "ok", okAction: {
+                        if self.pickerState == .pickUpTime {
+                            self.searchHeaderV?.updateTime(responderTxtFl: self.responderTxtFl, text: self.pickerList![ self.pickerV.selectedRow(inComponent: 0)])
+                        }
                         self.searchHeaderV?.resetReturnTime()
                     })
+                } else if self.pickerState == .returnTime || self.pickerState == .pickUpTime {
+                    
+                    self.searchHeaderV?.updateTime(responderTxtFl: self.responderTxtFl, text: self.pickerList![ self.pickerV.selectedRow(inComponent: 0)])
                 }
             }
     }
@@ -399,7 +414,7 @@ class MainViewController: BaseViewController {
                              })
     }
     
-    
+    //show filter cell
     func  showFilter()  {
         searchResultV?.didPressFilter = { [weak self] isShowFilter, needsUpdateFilterCell in
             self?.isPressedFilter = isShowFilter
@@ -414,7 +429,6 @@ class MainViewController: BaseViewController {
                self?.needsUpdateFilterCell = needsUpdateFilterCell
                  self?.mCarCollectionV.reloadItems(at: [IndexPath(item: 0, section: 0)])
             }
-           
         }
     }
     
@@ -548,7 +562,7 @@ class MainViewController: BaseViewController {
                 //check if more then half hour
                 searchHeaderV?.returnTime = timeStr.stringToDate()
             }
-            searchHeaderV?.updateTime(responderTxtFl: responderTxtFl, text: pickerList![ pickerV.selectedRow(inComponent: 0)])
+//            searchHeaderV?.updateTime(responderTxtFl: responderTxtFl, text: pickerList![ pickerV.selectedRow(inComponent: 0)])
             self.checkReservetionTime()
 
         }
@@ -625,7 +639,6 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             let cell = collectionView.cellForItem(at: indexPath) as! SearchResultCollectionViewCell
             var vehicleModel =
                 cell.setVehicleModel(carModel: cars[indexPath.row])
-            vehicleModel.customLocationTotalPrice = SearchHeaderViewModel().getCustomLocationTotalPrice(searchV:searchHeaderV!)
             goToDetailPage(vehicleModel: vehicleModel,
                            isSearchEdit: true, isClickMore: false)
             }
@@ -677,7 +690,7 @@ extension MainViewController: SearchResultCellDelegate {
     private func openDetails(tag: Int, isMore: Bool) {
         let cell = mCarCollectionV.cellForItem(at: IndexPath(item: tag, section: 0)) as! SearchResultCollectionViewCell
         var vehicleModel =  cell.setVehicleModel(carModel: cars[tag])
-        vehicleModel.customLocationTotalPrice = SearchHeaderViewModel().getCustomLocationTotalPrice(searchV:searchHeaderV!)
+        
         goToDetailPage(vehicleModel: vehicleModel,
                        isSearchEdit: true, isClickMore: isMore)
     }
@@ -721,14 +734,29 @@ extension MainViewController: SearchHeaderViewDelegate {
     }
     
     /// Selecet location
-    func didSelectLocation(_ locationStr: String, _ btnTag: Int) {
+    func didSelectLocation(_ parking: Parking, _ btnTag: Int) {
         if ((isPressedEdit) == true) {
             if btnTag == 4 { //pick up location
-                searchHeaderV?.pickUpLocation = locationStr
+                searchHeaderV?.pickUpLocation = parking.name
+                PriceManager.shared.pickUpCustomLocationPrice = nil
             } else {
-                searchHeaderV?.returnLocation = locationStr
+                searchHeaderV?.returnLocation = parking.name
+                PriceManager.shared.returnCustomLocationPrice = nil
             }
         }
+    }
+    
+    func didDeselectCustomLocation(tag: Int) {
+        if tag == 6 { //pick up custom location
+            searchModel.isPickUpCustomLocation = false
+            searchModel.pickUpLocation = nil
+            PriceManager.shared.pickUpCustomLocationPrice = nil
+        } else {//return custom location
+            searchModel.isRetuCustomLocation = false
+            searchModel.returnLocation = nil
+            PriceManager.shared.returnCustomLocationPrice = nil
+        }
+        //isActiveReserve()
     }
    
     func willOpenPicker(textFl: UITextField, pickerState: DatePicker) {
@@ -770,16 +798,22 @@ extension MainViewController: SearchHeaderViewDelegate {
 //MARK: CustomLocationUIViewControllerDelegate
 //MARK: ----------------------------
 extension MainViewController: CustomLocationViewControllerDelegate {
-    func getCustomLocation(_ locationPlace: String) {
+    func getCustomLocation(_ locationPlace: String, coordinate: CLLocationCoordinate2D, price: Double?) {
         searchHeaderV?.updateCustomLocationFields(place: locationPlace, didResult: { [weak self] (isPickUpLocation) in
             if isPickUpLocation {
                 self?.searchHeaderV?.pickUpLocation = locationPlace
                 self?.searchModel.isPickUpCustomLocation = true
                 self?.searchModel.pickUpLocation = locationPlace
+                self?.searchModel.pickUpLocationLongitude = coordinate.longitude
+                self?.searchModel.pickUpLocationLatitude = coordinate.latitude
+                PriceManager.shared.pickUpCustomLocationPrice = price
             } else {
                 self?.searchHeaderV?.returnLocation = locationPlace
                 self?.searchModel.isRetuCustomLocation = true
                 self?.searchModel.returnLocation = locationPlace
+                self?.searchModel.returnLocationLongitude = coordinate.longitude
+                self?.searchModel.returnLocationLatitude = coordinate.latitude
+                PriceManager.shared.returnCustomLocationPrice = price
             }
         })
     }

@@ -59,7 +59,7 @@ class ReservationCompletedViewController: BaseViewController {
     }
     
     func setUpView()  {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         configUI()
     }
     

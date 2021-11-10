@@ -200,13 +200,13 @@ class MyReservetionAdvancedViewController: BaseViewController {
             return
         }
 
-        self.mReserveInfoTableV.accessories = reserveViewModel.getAdditionalAccessories(vehicleModel: vehicleModel) as? [AccessoriesModel]
+        self.mReserveInfoTableV.accessories = reserveViewModel.getAdditionalAccessories(vehicleModel: vehicleModel) as? [AccessoriesEditModel]
         mReserveInfoTableV.reloadData()
                 
         mAdditionalDriverTableV.drivers = reserveViewModel.getAdditionalDrivers(vehicleModel: vehicleModel) as? [MyDriversModel]
         mAdditionalDriverTableV.reloadData()
             
-        mNewPriceTableV.pricesArr = reserveViewModel.getPrices(vehicleModel: vehicleModel) as! [PriceModel]
+        mNewPriceTableV.pricesArr = PriceManager.shared.getPrices()
         mNewPriceTableV.reloadData()
         
     }
@@ -252,7 +252,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
     
     func configureTotalPriceSteckView() {
         //Total price
-        totalPrice = reserveViewModel.getTotalPrice(totalPrices: mNewPriceTableV.pricesArr)
+        totalPrice = PriceManager.shared.getTotalPrice(totalPrices: mNewPriceTableV.pricesArr)
         mTotalPriceStackV.mNewTotalPriceLb.text = String(format: "%.2f",totalPrice)
         if isEdited {
             mTotalPriceStackV.showOldAndNewTotalPrices(oldPrice: totalPrice, newPrice: 00.0)

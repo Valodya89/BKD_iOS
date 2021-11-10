@@ -18,7 +18,7 @@ class DropDownTableView: UITableView, UITableViewDelegate, UITableViewDataSource
     var didSelectCategory:((CarTypes?)->Void)?
     var didSelectFirstVehicle:((CarsModel?)->Void)?
     var didSelectSecondVehicle:((CarsModel?)->Void)?
-
+    var didCloseTable:(()-> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,15 +32,6 @@ class DropDownTableView: UITableView, UITableViewDelegate, UITableViewDataSource
         self.dataSource = self
         self.register(CompareCategoryTableCell.nib(), forCellReuseIdentifier: CompareCategoryTableCell.identifier)
         self.separatorStyle = .none
-    }
-    
-    ///Update table height
-    public func updateTableHeight(willOpen:Bool) {
-        
-        UIView.animate(withDuration: 0.5) {
-            self.mTableHeight.constant = willOpen ? self.contentSize.height : 0.0
-            self.layoutIfNeeded()
-        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -76,7 +67,6 @@ class DropDownTableView: UITableView, UITableViewDelegate, UITableViewDataSource
             didSelectSecondVehicle?(carList?[indexPath.row])
         case .close: break
         }
-        updateTableHeight(willOpen: false)
-
+        didCloseTable?()
     }
 }

@@ -20,7 +20,7 @@ class AccidentFormTableView: UITableView, UITableViewDelegate, UITableViewDataSo
     weak var accidentFormDelegate: AccidentFormTableViewDelegate?
     
     
-    //MARK: -- Life cicle
+    //MARK: -- Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()

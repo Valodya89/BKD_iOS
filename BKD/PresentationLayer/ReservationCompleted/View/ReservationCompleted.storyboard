@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19158" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19141"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -46,7 +46,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMe-C8-DGp">
                                                 <rect key="frame" x="17" y="3" width="14" height="20"/>
-                                                <state key="normal" image="uncheck_mailbox"/>
+                                                <state key="normal" image="uncheck_box"/>
                                                 <connections>
                                                     <action selector="deposit:" destination="Xbn-ca-vvG" eventType="touchUpInside" id="3r9-5D-f9h"/>
                                                 </connections>
@@ -85,7 +85,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BDY-o0-6yw">
                                                 <rect key="frame" x="17" y="3" width="14" height="20"/>
-                                                <state key="normal" image="uncheck_mailbox"/>
+                                                <state key="normal" image="uncheck_box"/>
                                                 <connections>
                                                     <action selector="depositRental:" destination="Xbn-ca-vvG" eventType="touchUpInside" id="gJL-uv-BNW"/>
                                                 </connections>
@@ -124,7 +124,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kYF-Ll-hqA">
                                                 <rect key="frame" x="17" y="3" width="14" height="20"/>
-                                                <state key="normal" image="uncheck_mailbox"/>
+                                                <state key="normal" image="uncheck_box"/>
                                                 <connections>
                                                     <action selector="payLater:" destination="Xbn-ca-vvG" eventType="touchUpInside" id="o67-r2-Vvx"/>
                                                 </connections>
@@ -370,7 +370,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDJ-KA-jql">
                                                 <rect key="frame" x="17" y="4.5" width="14" height="31.5"/>
-                                                <state key="normal" image="uncheck_mailbox"/>
+                                                <state key="normal" image="uncheck_box"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDL-nY-wwx">
                                                 <rect key="frame" x="47" y="2.5" width="62" height="35"/>
@@ -406,7 +406,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1U2-18-E9v">
                                                 <rect key="frame" x="17" y="4" width="14" height="32"/>
-                                                <state key="normal" image="uncheck_mailbox"/>
+                                                <state key="normal" image="uncheck_box"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit + Rental price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2oJ-3J-VGE">
                                                 <rect key="frame" x="47" y="2.5" width="174.5" height="35"/>
@@ -442,7 +442,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhS-3S-uuS">
                                                 <rect key="frame" x="17" y="0.0" width="14" height="0.0"/>
-                                                <state key="normal" image="uncheck_mailbox"/>
+                                                <state key="normal" image="uncheck_box"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay later" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IU9-gO-fwK">
                                                 <rect key="frame" x="47" y="0.0" width="68.5" height="0.0"/>
@@ -601,7 +601,7 @@
         <image name="search_gradient" width="178" height="42"/>
         <image name="search_left" width="17" height="8"/>
         <image name="search_right" width="17" height="8"/>
-        <image name="uncheck_mailbox" width="14" height="14"/>
+        <image name="uncheck_box" width="14" height="14.5"/>
         <namedColor name="background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

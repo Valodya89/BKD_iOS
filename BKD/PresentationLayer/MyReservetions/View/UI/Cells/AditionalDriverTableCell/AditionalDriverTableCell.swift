@@ -22,7 +22,7 @@ class AditionalDriverTableCell: UITableViewCell {
     @IBOutlet weak var mDriverNumberLb: UILabel!
     
     var isSwitchDriver = false
-    //MARK: -- Life cicle
+    //MARK: -- Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()

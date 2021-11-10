@@ -10,7 +10,7 @@ import UIKit
 protocol EditBySearchViewDelegate: AnyObject {
     
     func willOpenPicker (textFl: UITextField, pickerState: DatePicker)
-    func didSelectLocation (_ text:String, _ tag:Int)
+    func didSelectLocation (_ parking: Parking, _ tag:Int)
     func didSelectCustomLocation(_ btn:UIButton)
     func didDeselectCustomLocation(tag: Int)
     func editReservation(isEdited: Bool)
@@ -245,10 +245,10 @@ class EditBySearchView: UIView, UITextFieldDelegate {
     }
     
     private func didSelectLocationFromList () {
-        mLocationDropDownView.didSelectLocation = { [weak self] txt in
-            self?.delegate?.didSelectLocation(txt, (self?.currLocationBtn.tag)!)
+        mLocationDropDownView.didSelectLocation = { [weak self] parking in
+            self?.delegate?.didSelectLocation(parking, (self?.currLocationBtn.tag)!)
             
-            self?.currLocationBtn.setTitle(txt, for: .normal)
+            self?.currLocationBtn.setTitle(parking.name, for: .normal)
             self?.currLocationBtn.titleLabel!.font = font_selected_filter
             self?.currLocationBtn.setTitleColor(color_entered_date, for: .normal)
             self!.currLocationDropImgV.rotateImage(rotationAngle: CGFloat(Double.pi * -2))

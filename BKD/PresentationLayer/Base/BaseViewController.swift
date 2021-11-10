@@ -7,10 +7,14 @@
 
 import UIKit
 import SideMenu
+import GooglePlaces
+
 
 
 class BaseViewController: UIViewController, StoryboardInitializable {
     
+    lazy var placesClient: GMSPlacesClient = GMSPlacesClient.shared()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +30,52 @@ class BaseViewController: UIViewController, StoryboardInitializable {
         menu?.presentDuration = 0.8
     }
     
-   
+    ///show Autocomplete ViewController
+    func showAutocompleteViewController(viewController: UIViewController) {
+          
+          let autocompleteController = GMSAutocompleteViewController()
+        autocompleteController.delegate = viewController as? GMSAutocompleteViewControllerDelegate
+          autocompleteController.tableCellBackgroundColor = color_background!
+          autocompleteController.secondaryTextColor = color_alert_txt!
+          autocompleteController.primaryTextColor = color_navigationBar!
+
+          // Specify the place data types to return.
+          let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
+                                                      UInt(GMSPlaceField.placeID.rawValue))
+          autocompleteController.placeFields = fields
+
+          // Specify a filter.
+          let filter = GMSAutocompleteFilter()
+          
+          //search by country
+//            filter.type = .establishment
+//            filter.countries = ["AM"]
+         // filter.type = .address
+          autocompleteController.autocompleteFilter = filter
+          // Display the autocomplete view controller.
+          present(autocompleteController, animated: true, completion: nil)
+     }
+    
+    
+    ///Resolve Location
+    func resolveLocation(place: GMSPlace, completion: @escaping (Result<CLLocationCoordinate2D, Error> ) -> Void) {
+        
+        placesClient.fetchPlace(fromPlaceID: place.placeID ?? "",
+                                placeFields: .coordinate,
+                                sessionToken: nil) { (googlePlace, error) in
+            guard let googlePlace = googlePlace, error == nil else {
+                completion(.failure(PlacesError.failedToGetCordinates))
+                return
+            }
+            let coordinate = CLLocationCoordinate2DMake(googlePlace.coordinate.latitude,
+                                                        googlePlace.coordinate.longitude)
+            completion(.success(coordinate))
+        }
+    }
+    
     //Go to registeration bot screen
-    func goToRegistrationBot(isDriverRegister:Bool, tableData: [RegistrationBotModel]) {
+    func goToRegistrationBot(isDriverRegister:Bool,
+                             tableData: [RegistrationBotModel]) {
         
         let registrationBotVC = RegistartionBotViewController.initFromStoryboard(name: Constant.Storyboards.registrationBot)
         registrationBotVC.tableData = tableData
@@ -43,7 +90,7 @@ class BaseViewController: UIViewController, StoryboardInitializable {
         bkdAgreementVC.delegate = viewController as? BkdAgreementViewControllerDelegate
         bkdAgreementVC.isAdvanced = isAdvanced
         bkdAgreementVC.isEditAdvanced = isEditAdvanced
-
+        
         self.navigationController?.pushViewController(bkdAgreementVC, animated: true)
     }
     
@@ -113,12 +160,16 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     }
     
     ///Go to accessories  screen
-    func goToAccessories(on viewController: UIViewController?, vehicleModel:VehicleModel?, isEditReservation: Bool) {
+    func goToAccessories(on viewController: UIViewController?,
+                         vehicleModel:VehicleModel?,
+                         isEditReservation: Bool,
+                         accessoriesEditList: [AccessoriesEditModel]?) {
         
         let accessoriesVC = UIStoryboard(name: Constant.Storyboards.accessories, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.accessories) as! AccessoriesUIViewController
+        accessoriesVC.delegate = viewController as? AccessoriesUIViewControllerDelegate
         accessoriesVC.vehicleModel = vehicleModel
         accessoriesVC.isEditReservation = isEditReservation
-        accessoriesVC.delegate = viewController as? AccessoriesUIViewControllerDelegate
+        accessoriesVC.accessoriesEditList = accessoriesEditList
         self.navigationController?.pushViewController(accessoriesVC, animated: true)
     }
     

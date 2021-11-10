@@ -22,7 +22,7 @@ class MoreViewController: BaseViewController {
         setupView()
     }
     func setupView()  {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         mBkdBarBtn.image = img_bkd
         configureTableView()
         configureDelegates()

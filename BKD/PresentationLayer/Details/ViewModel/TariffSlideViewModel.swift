@@ -8,7 +8,6 @@
 import UIKit
 
 class TariffSlideViewModel: NSObject {
-//static let shared = TariffSlideViewModel()
     
     /// get current option index
     func getIndexOfOption(tariffArr: [Tariff], model: TariffSlideModel) -> Int {

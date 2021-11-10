@@ -41,7 +41,7 @@ final class OnlineChatViewController: MessagesViewController, StoryboardInitiali
     // MARK: - Functions
     
     private func setupView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         configureMessagesViewController()
         configureDelegate()
         getMessages()

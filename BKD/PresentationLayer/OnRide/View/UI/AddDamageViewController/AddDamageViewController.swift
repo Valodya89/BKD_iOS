@@ -24,14 +24,14 @@ class AddDamageViewController: BaseViewController {
     
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     
-    //MARK: -- Lide cicle
+    //MARK: -- Lidecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
     
     func setupView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = img_bkd
         mAddAccidentDetailsBtn.layer.cornerRadius = 5

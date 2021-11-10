@@ -8,6 +8,12 @@
 import UIKit
 
 extension Date {
+    var millisecondsSince1970:Int64 {
+            return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
+        }
+
+    
+    
     func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
         return calendar.dateComponents(Set(components), from: self)
     }
@@ -193,7 +199,7 @@ extension Date {
     ///Compare two hours
     func isSameHours(hour: Date?) -> Bool {
         guard let _ = hour  else { return true }
-        let order = Calendar.current.compare(self, to: hour!, toGranularity: .day)
+        let order = Calendar.current.compare(self, to: hour!, toGranularity: .hour)
 
         switch order {
         case .orderedSame:

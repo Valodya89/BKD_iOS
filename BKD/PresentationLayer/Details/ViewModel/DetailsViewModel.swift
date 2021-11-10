@@ -8,7 +8,6 @@
 import UIKit
 
 class DetailsViewModel: NSObject {
- //static let shared = DetailsViewModel()
     
     let validator = Validator()
     var workingTimes: WorkingTimes?
@@ -64,9 +63,8 @@ class DetailsViewModel: NSObject {
            let returnTime = searchModel.returnTime {
             
             if ((searchModel.returnDate?.isSameDates(date: searchModel.pickUpDate)) == true) {
-                
-                if pickUpTime.isSameHours(hour: returnTime) ||
-                    pickUpTime < returnTime {
+           
+                if pickUpTime > returnTime {
                     searchModel.returnDate = searchModel.pickUpDate!.addDays(1)
                 }
             }
@@ -154,6 +152,24 @@ class DetailsViewModel: NSObject {
         workingTimes = ApplicationSettings.shared.workingTimes
         guard let _ = workingTimes else { return }
         didResult(validator.checkReservationTime(time:time, workingTimes: workingTimes!))
+    }
+    
+    
+    
+    
+    
+    /// Set no working hours price
+    func setNoWorkingHoursPrice(search: SearchModel, price: Double) {
+        
+        let pickupTime = search.pickUpTime?.getHour()
+        let returnTime = search.returnTime?.getHour()
+
+        isReservetionInWorkingHours(time: pickupTime?.stringToDate()) { (result) in
+            PriceManager.shared.pickUpNoWorkingTimePrice = !result ? price : nil
+        }
+        isReservetionInWorkingHours(time: returnTime?.stringToDate()) { (result) in
+            PriceManager.shared.returnNoWorkingTimePrice = !result ? price : nil
+        }
     }
     
     /// Check if reserve will  be acteve
@@ -297,10 +313,13 @@ class DetailsViewModel: NSObject {
             var flexibleModel = TariffSlideModel (type: Constant.Texts.flexible, bckgColor: color_flexible, typeColor: .white)
             flexibleModel.options = nil
             var price = vehicleModel.priceForFlexible
+            flexibleModel.value = String(price)
             if vehicleModel.hasDiscount {
                 price = price - (price * (vehicleModel.discountPercents/100))
+                flexibleModel.discountPercent = vehicleModel.discountPercents
+
             }
-            flexibleModel.value = String(price)
+            flexibleModel.specialValue = String(price)
 
             tariffSlideList.append(flexibleModel)
         }
@@ -333,7 +352,7 @@ class DetailsViewModel: NSObject {
     func getTariffSlideModel(type: String,
                              tariffs: [Tariff],
                              vehicleModel: VehicleModel,
-                             price: Price?,
+                             price: Double?,
                              tariffKey: String,
                              bckgColor: UIColor,
                              typeColor: UIColor) -> TariffSlideModel? {
@@ -348,7 +367,7 @@ class DetailsViewModel: NSObject {
             
             tariffArr.forEach{ tariff in
                 
-                var value = tariff.duration * (price?.price ?? 0.0)
+                var value = tariff.duration * (price ?? 0.0)
                 if tariff.percentage > 0.0 {
                     value = value - (value * (tariff.percentage/100))
                 }
@@ -361,7 +380,7 @@ class DetailsViewModel: NSObject {
                     discounPrice = value - (value * (vehicleModel.discountPercents/100))
                 }
                 
-                let option = TariffSlideModel(type: tariffKey, name: tariff.name, bckgColor: bckgColor,typeColor: typeColor, value: String(format: "%.2f", value), specialValue: String(format: "%.2f", discounPrice))
+                let option = TariffSlideModel(type: tariffKey, name: tariff.name, bckgColor: bckgColor,typeColor: typeColor, value: String(format: "%.2f", value), specialValue: String(format: "%.2f", discounPrice), discountPercent: vehicleModel.hasDiscount ? vehicleModel.discountPercents : nil)
                
                 options.append(option)
             }
@@ -420,9 +439,94 @@ class DetailsViewModel: NSObject {
         return flexibleStartTimes
     }
     
+    
+    ///Get flexible price
+    func getFlexiblePrice(search: SearchModel, option: TariffSlideModel, vehicle: VehicleModel) -> TariffSlideModel? {
+        
+        if search.pickUpDate != nil && search.returnDate != nil {
+            
+            let pickupDay = Double(search.pickUpDate!.getDay())!
+            let returnDay = Double(search.returnDate!.getDay())!
+            var daysCount = ((returnDay - pickupDay) <= 0 ) ? 1 : (returnDay - pickupDay)
+            
+            if search.pickUpTime!.millisecondsSince1970 < search.returnTime!.millisecondsSince1970  && (search.returnTime!.millisecondsSince1970 - search.pickUpTime!.millisecondsSince1970) > 250000  {
+                daysCount += 1
+            }
+                       
+            let price = daysCount * vehicle.priceForFlexible
+            var specialPrice:Double?
+            if option.discountPercent ?? 0 > 0 {
+                 specialPrice = price - (price * (option.discountPercent!/100))
+            }
+            return
+            TariffSlideModel(type: option.type,
+                             name: option.name,
+                             bckgColor: option.bckgColor,
+                             typeColor: option.typeColor,
+                             value: String(price),
+                             specialValue: String(specialPrice ?? 0.0),
+                             discountPercent: option.discountPercent,
+                             flexibleStaringPrice: vehicle.priceForFlexible,
+                             fuelConsumption: option.fuelConsumption,
+                             isOpenOptions: option.isOpenOptions,
+                             isItOption: option.isItOption,
+                             isSelected: true,
+                             options: option.options,
+                             tariff: option.tariff)
+        }
+        return option
+    }
+    
    
 }
 
 
-
-
+//"content": {
+//        "id": "6189d8bc3a0352528762d090",
+//        "userId": "60febc56266f574fec954af2",
+//        "startDate": 1636395213876,
+//        "endDate": 1636395213876,
+//        "accessories": [
+//            {
+//                "id": "61506ec81464ab42a0e2f31e",
+//                "count": 1
+//            }
+//        ],
+//        "pickupLocation": {
+//            "type": "CUSTOM",
+//            "customLocation": {
+//                "name": "Masivi city",
+//                "longitude": 45.5,
+//                "latitude": 47.8
+//            },
+//            "parking": null
+//        },
+//        "returnLocation": {
+//            "type": "CUSTOM",
+//            "customLocation": {
+//                "name": "Masivi city",
+//                "longitude": 45.5,
+//                "latitude": 47.8
+//            },
+//            "parking": null
+//        },
+//        "carDetails": {
+//            "id": "61815f3296b3233b4995c625",
+//            "registrationNumber": null,
+//            "logo": {
+//                "id": "14122AFE1F760709174A3F2B166B05AB51B1D7286ECAC4678C5B2F485A99F02605F320DD234F89BAAFC16476569668ED",
+//                "node": "dev-node1"
+//            },
+//            "model": "M3",
+//            "type": null
+//        },
+//        "driver": {
+//            "id": "60febc56266f574fec954af2",
+//            "name": "Valodya",
+//            "surname": "Galstyan",
+//            "drivingLicenseNumber": null
+//        },
+//        "additionalDrivers": []
+//    }
+//}
+//

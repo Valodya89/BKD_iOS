@@ -36,7 +36,7 @@ class AdvancedWithOnRideCell: UITableViewCell  {
     var didPressMap:(()-> Void)?
 
     
-    //MARK: Life cicle
+    //MARK: Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         mAddDamageBtn.layer.cornerRadius = 8

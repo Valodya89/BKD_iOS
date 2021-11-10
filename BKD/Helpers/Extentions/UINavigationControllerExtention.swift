@@ -30,7 +30,7 @@ extension UINavigationController: UIGestureRecognizerDelegate {
         if #available(iOS 15.0, *) {
             let appearance = UINavigationBarAppearance()
             appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = color_navigationBar
+            appearance.backgroundColor = color
             appearance.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
             self.navigationBar.standardAppearance = appearance
             self.navigationBar.scrollEdgeAppearance = self.navigationBar.standardAppearance

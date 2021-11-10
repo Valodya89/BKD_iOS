@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -42,13 +42,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9W2-WS-jNf">
-                                        <rect key="frame" x="356.5" y="0.0" width="25.5" height="50"/>
+                                        <rect key="frame" x="356" y="0.0" width="26" height="50"/>
                                         <fontDescription key="fontDescription" name="Mulish-Regular" family="Mulish" pointSize="18"/>
                                         <color key="textColor" name="navigationBar"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcv-9G-DF0">
-                                        <rect key="frame" x="329" y="0.0" width="10.5" height="50"/>
+                                        <rect key="frame" x="328" y="0.0" width="11" height="50"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
                                         <color key="textColor" name="navigationBar"/>
                                         <nil key="highlightedColor"/>
@@ -90,6 +90,7 @@
             <color key="backgroundColor" name="background"/>
             <connections>
                 <outlet property="mDiscountPrecentLb" destination="PlN-hn-Grz" id="kEn-we-QyT"/>
+                <outlet property="mEuroLb" destination="kcv-9G-DF0" id="jVf-Ee-aNz"/>
                 <outlet property="mPriceLb" destination="9W2-WS-jNf" id="KfY-DF-3sA"/>
                 <outlet property="mPriceTitleLb" destination="hDZ-gL-mDH" id="WJ9-47-EQ4"/>
             </connections>

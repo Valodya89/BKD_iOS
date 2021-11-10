@@ -9,7 +9,7 @@ import UIKit
 
 class ReserveTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
-    var accessories:[AccessoriesModel]? = nil
+    var accessories:[AccessoriesEditModel]? = nil
     var drivers:[MyDriversModel]? = nil
     
     override func awakeFromNib() {

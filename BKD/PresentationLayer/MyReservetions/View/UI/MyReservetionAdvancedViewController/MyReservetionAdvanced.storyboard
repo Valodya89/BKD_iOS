@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19158" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19141"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -49,7 +49,7 @@
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </imageView>
                                                         </subviews>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="backgroundColor" name="subview_background"/>
                                                         <constraints>
                                                             <constraint firstItem="sGk-ks-2al" firstAttribute="centerX" secondItem="ezd-5C-D1R" secondAttribute="centerX" id="BGp-ue-i9X"/>
                                                             <constraint firstItem="sGk-ks-2al" firstAttribute="centerY" secondItem="ezd-5C-D1R" secondAttribute="centerY" id="aAV-RA-d1L"/>
@@ -250,7 +250,7 @@
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
-                                                        <color key="backgroundColor" name="background"/>
+                                                        <color key="backgroundColor" name="subview_background"/>
                                                         <constraints>
                                                             <constraint firstItem="xXA-bh-y4u" firstAttribute="width" secondItem="ugy-8y-Ba6" secondAttribute="width" multiplier="0.0026178" id="2yM-vE-cDs"/>
                                                             <constraint firstAttribute="trailing" secondItem="XMa-pe-3qZ" secondAttribute="trailing" id="4i5-gs-55F"/>
@@ -496,13 +496,19 @@
                                                 <rect key="frame" x="0.0" y="870" width="414" height="138"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sdH-bU-ycy">
-                                                        <rect key="frame" x="24" y="32" width="366" height="36"/>
+                                                        <rect key="frame" x="32" y="32" width="350" height="36"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="agree" translatesAutoresizingMaskIntoConstraints="NO" id="dxP-7V-37c">
                                                                 <rect key="frame" x="0.0" y="5" width="24.5" height="26"/>
+                                                                <color key="tintColor" name="navigationBar"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                                                        <color key="value" name="navigationBar"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                             </imageView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pjw-Yx-lBC">
-                                                                <rect key="frame" x="49.5" y="-3.5" width="152.5" height="43"/>
+                                                                <rect key="frame" x="32" y="-3.5" width="156.5" height="43"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="BKD Agreement">
                                                                     <fontDescription key="titleFontDescription" name="Mulish-Light" family="Mulish" pointSize="18"/>
@@ -518,11 +524,11 @@
                                                             <constraint firstItem="dxP-7V-37c" firstAttribute="centerY" secondItem="sdH-bU-ycy" secondAttribute="centerY" id="2jY-fa-z3a"/>
                                                             <constraint firstItem="dxP-7V-37c" firstAttribute="height" secondItem="sdH-bU-ycy" secondAttribute="height" multiplier="0.722222" id="5nY-Ed-4xd"/>
                                                             <constraint firstItem="Pjw-Yx-lBC" firstAttribute="height" secondItem="sdH-bU-ycy" secondAttribute="height" multiplier="1.19231" id="MyM-Tt-lKX"/>
+                                                            <constraint firstItem="Pjw-Yx-lBC" firstAttribute="leading" secondItem="dxP-7V-37c" secondAttribute="trailing" multiplier="1.3" id="N7v-0m-kkj"/>
                                                             <constraint firstItem="Pjw-Yx-lBC" firstAttribute="centerY" secondItem="sdH-bU-ycy" secondAttribute="centerY" id="bZc-PV-Cba"/>
                                                             <constraint firstAttribute="height" constant="36" id="hRY-ya-CW3"/>
                                                             <constraint firstItem="dxP-7V-37c" firstAttribute="leading" secondItem="sdH-bU-ycy" secondAttribute="leading" id="jqr-79-uVR"/>
-                                                            <constraint firstItem="Pjw-Yx-lBC" firstAttribute="leading" secondItem="sdH-bU-ycy" secondAttribute="centerX" multiplier="0.27" id="mb3-Kz-JI2"/>
-                                                            <constraint firstItem="dxP-7V-37c" firstAttribute="width" secondItem="sdH-bU-ycy" secondAttribute="width" multiplier="0.067" id="uDz-Lp-v4z"/>
+                                                            <constraint firstItem="dxP-7V-37c" firstAttribute="width" secondItem="sdH-bU-ycy" secondAttribute="width" multiplier="0.07" id="uDz-Lp-v4z"/>
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="10L-7O-rt5">

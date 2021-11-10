@@ -18,7 +18,7 @@ class RegisterNumberTableCell: UITableViewCell {
     @IBOutlet weak var mRegisterNumberTitleLb: UILabel!
     @IBOutlet weak var mRegisterNumberLb: UILabel!
     
-    //MARK: -- Life cicle
+    //MARK: -- Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

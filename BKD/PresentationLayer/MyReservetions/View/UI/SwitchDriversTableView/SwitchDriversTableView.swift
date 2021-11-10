@@ -18,7 +18,7 @@ class SwitchDriversTableView: UITableView, UITableViewDelegate, UITableViewDataS
     var switchDriversList:[MyDriversModel] = MyDriversData.myDriversModel
     
     
-    //MARK: -- Life cicle
+    //MARK: -- Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()

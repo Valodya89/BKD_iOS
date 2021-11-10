@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MailBoxNumberTableViewCellDelegate: AnyObject {
-    func didReturn(text: String?, noMailBox:Bool)
+    func didReturn(text: String?, noMailBox:Bool, index: Int)
 }
 
 class MailBoxNumberTableViewCell: UITableViewCell {
@@ -29,8 +29,8 @@ class MailBoxNumberTableViewCell: UITableViewCell {
     }
     
     func setUpView() {
-        mCheehckBoxBtn.setImage(#imageLiteral(resourceName: "uncheck_mailbox"), for: .normal)
-        mMAilBoxNumberTxtFl.setBorder(color: color_dark_register!, width:1)
+        mCheehckBoxBtn.setImage(img_uncheck_box!, for: .normal)
+        mMAilBoxNumberTxtFl.setBorder(color: color_navigationBar!, width:1)
         mMAilBoxNumberTxtFl.delegate = self
     }
     
@@ -38,12 +38,15 @@ class MailBoxNumberTableViewCell: UITableViewCell {
             
         }
       
-    func setCellInfo(item: RegistrationBotModel)  {
+    func setCellInfo(item: RegistrationBotModel, index: Int)  {
+        mCheckBoxTitleLb.tag = index
         if item.userRegisterInfo?.isFilled == true {
-            if let txt = item.userRegisterInfo?.string  {
-                textFiledFilled(txt: txt)
+            if (item.userRegisterInfo?.string ?? "").count > 0  {
+                textFiledFilled(txt: (item.userRegisterInfo?.string)!)
             } else {
+                mMAilBoxNumberTxtFl.isUserInteractionEnabled = false
                 mCheehckBoxBtn.setImage(#imageLiteral(resourceName: "check"), for: .normal)
+                mMAilBoxNumberTxtFl.setPlaceholder(string: item.userRegisterInfo?.placeholder ?? "", font: font_bot_placeholder!, color: color_email!)
             }
         } else {
             mMAilBoxNumberTxtFl.setPlaceholder(string: item.userRegisterInfo?.placeholder ?? "", font: font_bot_placeholder!, color: color_email!)
@@ -52,23 +55,28 @@ class MailBoxNumberTableViewCell: UITableViewCell {
     }
     
     @IBAction func mailCheckBox(_ sender: UIButton) {
-        if sender.image(for: .normal) == UIImage(named: "uncheck_mailbox") {
-            sender.setImage(#imageLiteral(resourceName: "check"), for: .normal)
-            mMAilBoxNumberTxtFl.isUserInteractionEnabled = false
-            sender.isUserInteractionEnabled = false
-            delegate?.didReturn(text: nil, noMailBox: true)
+        if sender.image(for: .normal) == img_uncheck_box! {
+            sender.setImage(img_check_box, for: .normal)
+            mMAilBoxNumberTxtFl.isHidden = true
+           // mMAilBoxNumberTxtFl.isUserInteractionEnabled = false
+            //sender.isUserInteractionEnabled = false
+            delegate?.didReturn(text: nil, noMailBox: true, index: mCheckBoxTitleLb.tag)
         } else {
-            sender.setImage(#imageLiteral(resourceName: "uncheck_box"), for: .normal)
+            sender.setImage(img_uncheck_box!, for: .normal)
+            mMAilBoxNumberTxtFl.isHidden = false
+            mMAilBoxNumberTxtFl.text = nil
+            mMAilBoxNumberTxtFl.backgroundColor = .clear
         }
+        
     }
     
     
     private func textFiledFilled(txt: String) {
         mMAilBoxNumberTxtFl.text = txt
         mMAilBoxNumberTxtFl.textColor = .white
-        mMAilBoxNumberTxtFl.isUserInteractionEnabled = false
-        mMAilBoxNumberTxtFl.backgroundColor = color_dark_register!
-        mMAilBoxNumberTxtFl.layer.borderColor = color_dark_register!.cgColor
+       // mMAilBoxNumberTxtFl.isUserInteractionEnabled = false
+        mMAilBoxNumberTxtFl.backgroundColor = color_navigationBar!
+        mMAilBoxNumberTxtFl.layer.borderColor = color_navigationBar!.cgColor
 
     }
 }
@@ -82,7 +90,7 @@ extension MailBoxNumberTableViewCell: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         if textField.text?.count ?? 0 > 0 {
-            delegate?.didReturn(text:textField.text, noMailBox: false)
+            delegate?.didReturn(text:textField.text, noMailBox: false, index: mCheckBoxTitleLb.tag)
             textFiledFilled(txt: textField.text!)
         }
         return false

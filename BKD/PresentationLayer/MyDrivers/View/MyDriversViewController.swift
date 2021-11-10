@@ -23,14 +23,18 @@ class MyDriversViewController: BaseViewController {
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mTotalPriceContentbottom: NSLayoutConstraint!
-    
+ 
     //Confirm
     @IBOutlet weak var mConfirmV: ConfirmView!
     
     //MARK: --Variables
     weak var delegate: MyDriversViewControllerDelegate?
+    lazy var myDriversViewModel: MyDriversViewModel = MyDriversViewModel()
     public var isEditReservation:Bool = false
     var totalPrice:Double = 0
+    var driver: MainDriver?
+    var additionalDrivers: [MyDriversModel] = []
+    
 
     //MARK: life cycle
     override func viewDidLoad() {
@@ -38,8 +42,18 @@ class MyDriversViewController: BaseViewController {
         setupView()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        getMyDriverList()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        PriceManager.shared.additionalDriversPrice = totalPrice
+    }
+    
     func setupView() {
-        navigationController?.setNavigationBarBackground(color: color_navigationBar!)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = img_bkd
        
@@ -61,8 +75,36 @@ class MyDriversViewController: BaseViewController {
     func configureViewForEdit() {
         if isEditReservation {
             mConfirmV.isHidden = !isEditReservation
-            mTotalPriceContentbottom.constant = -76
+            mTotalPriceContentbottom.constant = 76
         }
+    }
+    
+    ///Get my driver list
+    private func getMyDriverList () {
+        myDriversViewModel.getMyDrivers { (result) in
+            guard let result = result else {
+                return
+            }
+            self.additionalDrivers = self.myDriversViewModel.setActiveDriverList(allDrivers: result)
+            self.mMyDriverCollectionV.reloadData()
+            self.myDriversViewModel.getDriverToContinueToFill(allDrivers: result) { driver in
+                guard let driver = driver else {return}
+                self.driver = driver
+            }
+        }
+    }
+    
+    
+    //Go to registeration bot screen
+    func goToRegistrationBot(isDriverRegister:Bool,
+                             tableData: [RegistrationBotModel],
+                             mainDriver: MainDriver?) {
+        
+        let registrationBotVC = RegistartionBotViewController.initFromStoryboard(name: Constant.Storyboards.registrationBot)
+        registrationBotVC.tableData = tableData
+        registrationBotVC.isDriverRegister = isDriverRegister
+        registrationBotVC.mainDriver = mainDriver
+        self.navigationController?.pushViewController(registrationBotVC, animated: true)
     }
     
     private func showAlertSelecteDriver() {
@@ -80,11 +122,16 @@ class MyDriversViewController: BaseViewController {
     //MARK: ACTIONS
     //MARK: ----------------
     @IBAction func addDriver(_ sender: UIButton) {
-        BKDAlert().showAlert(on: self, message: String(format: Constant.Texts.addDriverAlert, 0.00) , cancelTitle: Constant.Texts.cancel, okTitle: Constant.Texts.confirm, cancelAction: nil) {
-            
+        if driver != nil {
             self.goToRegistrationBot(isDriverRegister: true,
-                                     tableData: [RegistrationBotData.registrationDriverModel[0]])
+                                     tableData: [RegistrationBotData.registrationBotModel[0]],
+                                     mainDriver: self.driver)
+        } else {
+            self.goToRegistrationBot(isDriverRegister: true,
+                                     tableData: [RegistrationBotData.registrationDriverModel[0]],
+                                     mainDriver: nil)
         }
+        
     }
     
     @IBAction func back(_ sender: UIBarButtonItem) {
@@ -111,13 +158,12 @@ extension MyDriversViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyDriverCollectionViewCell.identifier, for: indexPath) as!  MyDriverCollectionViewCell
         let item = additionalDrivers[indexPath.item]
+        cell.delegate = self
         cell.setCellInfo(item:item, index: indexPath.item)
         if item.isSelected {
             totalPrice += item.price
             self.mPriceLb.text = String(totalPrice)
-
         }
-        cell.delegate = self
         return cell
     }
     

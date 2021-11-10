@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19158" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vGy-s1-gA7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vGy-s1-gA7">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19141"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -220,15 +220,10 @@
                                     <outlet property="delegate" destination="baS-Zk-gBJ" id="Lcb-fC-Kav"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sHY-T6-SYe">
-                                <rect key="frame" x="87" y="340" width="240" height="345"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="19O-fH-HD0"/>
                         <color key="backgroundColor" name="background"/>
                         <constraints>
-                            <constraint firstItem="sHY-T6-SYe" firstAttribute="height" secondItem="kYK-fv-ZhM" secondAttribute="height" multiplier="0.42698" id="9Jm-v5-vUZ"/>
                             <constraint firstItem="ilV-lK-Jwv" firstAttribute="leading" secondItem="19O-fH-HD0" secondAttribute="leading" id="CDc-JV-fw4"/>
                             <constraint firstItem="19O-fH-HD0" firstAttribute="trailing" secondItem="ilV-lK-Jwv" secondAttribute="trailing" id="GGj-OF-HHF"/>
                             <constraint firstItem="19O-fH-HD0" firstAttribute="bottom" secondItem="ilV-lK-Jwv" secondAttribute="bottom" id="XSB-Bj-ZJ6"/>
@@ -255,7 +250,7 @@
             </objects>
             <point key="canvasLocation" x="1399" y="638"/>
         </scene>
-        <!--My Reservation-->
+        <!--Notification-->
         <scene sceneID="WGX-km-U7w">
             <objects>
                 <viewController id="ceI-lw-dx8" customClass="NotificationsViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
@@ -265,7 +260,7 @@
                         <viewLayoutGuide key="safeArea" id="pmx-4J-saQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="My Reservation" id="3IS-eZ-wTf">
+                    <navigationItem key="navigationItem" title="Notification" id="3IS-eZ-wTf">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="menu" id="Z62-eQ-Ljg"/>
                     </navigationItem>
                 </viewController>
@@ -548,7 +543,7 @@ IAo
             </objects>
             <point key="canvasLocation" x="-491.304347826087" y="2155.5803571428569"/>
         </scene>
-        <!--My Reservations View Controller-->
+        <!--My Reservation-->
         <scene sceneID="se2-Sf-Oqw">
             <objects>
                 <viewController storyboardIdentifier="MyReservationsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4kt-qQ-nUS" customClass="MyReservationsViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
@@ -617,7 +612,7 @@ IAo
                             </visualEffectView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="goa-9s-Ya0" customClass="SwitchDriversTableView" customModule="BKD" customModuleProvider="target">
                                 <rect key="frame" x="16" y="1095" width="382" height="130"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="background"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="130" id="YNe-Pj-tBY"/>
                                 </constraints>
@@ -647,7 +642,7 @@ IAo
                             <constraint firstItem="tap-qR-AYC" firstAttribute="centerY" secondItem="KTz-7d-pnZ" secondAttribute="centerY" multiplier="0.595" id="uj9-tI-tTO"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="8A8-hj-iL3">
+                    <navigationItem key="navigationItem" title="My Reservation" id="8A8-hj-iL3">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="menu" id="EOZ-qK-xTe">
                             <color key="tintColor" red="0.91426187749999999" green="0.78907972569999996" blue="0.41917234660000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>

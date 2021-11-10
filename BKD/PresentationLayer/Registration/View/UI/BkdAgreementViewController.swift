@@ -25,7 +25,7 @@ class BkdAgreementViewController: BaseViewController {
     var isMyReservationCell:Bool = false
     var isPayLater:Bool = false
     
-    //MARK: --Life cicle
+    //MARK: --Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
@@ -33,7 +33,7 @@ class BkdAgreementViewController: BaseViewController {
     
     func setUpView() {
         mRightBarBtn.image = img_bkd
-        navigationController?.setNavigationBarBackground(color: .white)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         mAgreeV.mConfirmLb.text = Constant.Texts.agree
         handlerAgree()
     }

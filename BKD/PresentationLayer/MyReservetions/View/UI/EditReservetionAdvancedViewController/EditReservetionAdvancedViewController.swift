@@ -179,13 +179,13 @@ class EditReservetionAdvancedViewController: BaseViewController {
             return
         }
 
-        self.mReserveInfoTableV.accessories = reserveViewModel.getAdditionalAccessories(vehicleModel: vehicleModel) as? [AccessoriesModel]
+        self.mReserveInfoTableV.accessories = reserveViewModel.getAdditionalAccessories(vehicleModel: vehicleModel) as? [AccessoriesEditModel]
         mReserveInfoTableV.reloadData()
                 
         mAdditionalDriverTableV.drivers = reserveViewModel.getAdditionalDrivers(vehicleModel: vehicleModel) as? [MyDriversModel]
         mAdditionalDriverTableV.reloadData()
             
-        mNewPriceTableV.pricesArr = reserveViewModel.getPrices(vehicleModel: vehicleModel) as! [PriceModel]
+        mNewPriceTableV.pricesArr = PriceManager.shared.getPrices()
         mNewPriceTableV.reloadData()
         
     }
