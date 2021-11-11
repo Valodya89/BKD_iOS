@@ -113,16 +113,9 @@ class ReserveViewModel: NSObject {
                             ]
             }
         }
-        
-        return [:]
     }
     
     ///Add Rent car
-//    func addRent(id: String,
-//                 searchModel: SearchModel,
-//                 accessories: [AccessoriesEditModel]?,
-//                 additionalDrivers: [MainDriver]?,
-//                 completion: @escaping (Rent?) -> Void) {
     func addRent(vehicleModel: VehicleModel,
                  completion: @escaping (Rent?) -> Void) {
         

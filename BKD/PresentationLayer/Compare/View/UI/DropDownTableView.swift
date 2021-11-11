@@ -42,13 +42,14 @@ class DropDownTableView: UITableView, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: CompareCategoryTableCell.identifier, for: indexPath) as! CompareCategoryTableCell
         switch tableState {
         case .category:
             cell.setCategoryCellInfo(item: categoryList![indexPath.row])
         case .close: break
         default:
-            cell.setVehicleCellInfo(item: carList![indexPath.row])
+            cell.setVehicleCellInfo(item: carList![indexPath.row] )
         }
         return cell
     }

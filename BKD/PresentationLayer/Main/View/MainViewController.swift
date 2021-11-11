@@ -51,15 +51,11 @@ class MainViewController: BaseViewController {
     private var searchResultHeight: CGFloat = 0.0
     private var searchHeaderEditHeight: CGFloat = 0.0
 
-
     private var isSearchResultPage: Bool = false
     private var isPressedFilter: Bool = false
     private var isPressedEdit: Bool = false
     private var isNoSearchResult: Bool = false
     private var needsUpdateFilterCell: Bool = false
-
-    
-    
 
 
     //MARK: - Life cycles
@@ -75,7 +71,6 @@ class MainViewController: BaseViewController {
         self.tabBarController?.tabBar.isHidden = false
         
    }
-    
     
     func setupView() {
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
@@ -737,9 +732,11 @@ extension MainViewController: SearchHeaderViewDelegate {
     func didSelectLocation(_ parking: Parking, _ btnTag: Int) {
         if ((isPressedEdit) == true) {
             if btnTag == 4 { //pick up location
+                searchModel.pickUpLocationId = parking.id
                 searchHeaderV?.pickUpLocation = parking.name
                 PriceManager.shared.pickUpCustomLocationPrice = nil
             } else {
+                searchModel.returnLocationId = parking.id
                 searchHeaderV?.returnLocation = parking.name
                 PriceManager.shared.returnCustomLocationPrice = nil
             }
