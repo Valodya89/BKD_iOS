@@ -336,7 +336,12 @@ class SearchView: UIView, UITextFieldDelegate {
     
     ///Update search filled fields
     func updateSearchFilledFields(tariff:TariffState,
-                                  searchModel:SearchModel){
+                                  searchModel:SearchModel,
+                                  isEdit: Bool){
+        if tariff == .flexible && isEdit {
+          updateSearchFields(searchModel: searchModel,
+                             tariff: tariff)
+        }
         
         if tariff == .hourly &&  searchModel.pickUpTime != nil {
             updateSearchTimes(searchModel: searchModel, tariff:tariff)

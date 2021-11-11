@@ -58,20 +58,48 @@ class DetailsViewModel: NSObject {
         
         var searchModel = SearchModel()
         searchModel = currSearchModel
+        if checkIfNeedToAddADay(searchModel: searchModel) {
+            searchModel.returnDate = searchModel.pickUpDate!.addDays(1)
+        }
         
+//        if let pickUpTime = searchModel.pickUpTime,
+//           let returnTime = searchModel.returnTime {
+            
+//            if ((searchModel.returnDate?.isSameDates(date: searchModel.pickUpDate)) == true) {
+//                let hourPickup = pickUpTime.getTimeByCompanent(compatent: .hour)
+//                let minutPickup = pickUpTime.getTimeByCompanent(compatent: .minute)
+//                let hourReturn = returnTime.getTimeByCompanent(compatent: .hour)
+//                let minutReturn = returnTime.getTimeByCompanent(compatent: .minute)
+//
+//                if (hourPickup > hourReturn) || (hourPickup == hourReturn && minutPickup >= minutReturn)
+//                     {
+//                    searchModel.returnDate = searchModel.pickUpDate!.addDays(1)
+//                }
+//            }
+//        }
+        return searchModel
+    }
+        
+    
+    ///Check if need to add a day depend on time
+    func checkIfNeedToAddADay(searchModel: SearchModel) -> Bool {
         if let pickUpTime = searchModel.pickUpTime,
            let returnTime = searchModel.returnTime {
             
             if ((searchModel.returnDate?.isSameDates(date: searchModel.pickUpDate)) == true) {
-           
-                if pickUpTime > returnTime {
-                    searchModel.returnDate = searchModel.pickUpDate!.addDays(1)
+                let hourPickup = pickUpTime.getTimeByCompanent(compatent: .hour)
+                let minutPickup = pickUpTime.getTimeByCompanent(compatent: .minute)
+                let hourReturn = returnTime.getTimeByCompanent(compatent: .hour)
+                let minutReturn = returnTime.getTimeByCompanent(compatent: .minute)
+                
+                if (hourPickup > hourReturn) || (hourPickup == hourReturn && minutPickup >= minutReturn)
+                     {
+                   return true
                 }
             }
         }
-        return searchModel
+        return false
     }
-        
             
     ///return tariff option value
     func getOptionFromString(item: String) -> Int {
@@ -92,7 +120,7 @@ class DetailsViewModel: NSObject {
         let optionsArr:[Tariff] = tariffSlideList[0].tariff ?? []
     if search == .date {
         searchModel.returnDate = searchModel.pickUpDate
-        if let _ = searchModel.pickUpTime {
+        if let _ = searchModel.pickUpTime, let _ = searchModel.pickUpDate   {
             searchModel.returnDate = searchModel.pickUpDate!.addHours(Int(optionsArr[optionIndex].duration))
         }
     } else {
@@ -441,7 +469,10 @@ class DetailsViewModel: NSObject {
     
     
     ///Get flexible price
-    func getFlexiblePrice(search: SearchModel, option: TariffSlideModel, vehicle: VehicleModel) -> TariffSlideModel? {
+    func getFlexiblePrice(search: SearchModel,
+                          option: TariffSlideModel,
+                          vehicle: VehicleModel,
+                          isSelected: Bool) -> TariffSlideModel? {
         
         if search.pickUpDate != nil && search.returnDate != nil {
             
@@ -449,8 +480,11 @@ class DetailsViewModel: NSObject {
             let returnDay = Double(search.returnDate!.getDay())!
             var daysCount = ((returnDay - pickupDay) <= 0 ) ? 1 : (returnDay - pickupDay)
             
-            if search.pickUpTime!.millisecondsSince1970 < search.returnTime!.millisecondsSince1970  && (search.returnTime!.millisecondsSince1970 - search.pickUpTime!.millisecondsSince1970) > 250000  {
-                daysCount += 1
+            
+            if returnDay - pickupDay > 0 {
+                if  search.pickUpTime!.millisecondsSince1970 < search.returnTime!.millisecondsSince1970  && (search.returnTime!.millisecondsSince1970 - search.pickUpTime!.millisecondsSince1970) > 250000  {
+                    daysCount += 1
+                }
             }
                        
             let price = daysCount * vehicle.priceForFlexible
@@ -470,7 +504,7 @@ class DetailsViewModel: NSObject {
                              fuelConsumption: option.fuelConsumption,
                              isOpenOptions: option.isOpenOptions,
                              isItOption: option.isItOption,
-                             isSelected: true,
+                             isSelected: isSelected,
                              options: option.options,
                              tariff: option.tariff)
         }

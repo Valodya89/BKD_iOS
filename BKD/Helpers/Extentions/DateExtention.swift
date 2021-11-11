@@ -101,6 +101,17 @@ extension Date {
         return dateFormatter.string(from: self)
     }
     
+    ///Return date time depend of componet 
+    func getTimeByCompanent(compatent : Calendar.Component) -> Int {
+        var calendar = Calendar.current
+        calendar.timeZone = (NSTimeZone(name: "UTC") as TimeZone?)!
+//        let hour = calendar.component(.hour, from: self)
+//        let minute = calendar.component(.minute, from: self)
+//        let second = calendar.component(.second, from: self)
+
+       // print("\(hour):\(minute):\(second)")
+        return calendar.component(compatent, from: self)
+    }
     
     ///Check if time in range
     func dateIsInRange(startTime: Date, endTime: Date) -> Bool {

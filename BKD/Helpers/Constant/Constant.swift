@@ -183,6 +183,7 @@ struct Constant {
         static let fuelNotUncluded = "Fuel consumption not included"
         static let depositApplies = "Deposit applies"
         static let freeKm = "km free for each day"
+//        static let editReserveAlert = "Are you sure you want to change your reservation?"
 
         //Accessories
        static let loginAccessories = "To add accessories, you need to sign in" //???
@@ -458,6 +459,7 @@ let height130 = UIScreen.main.bounds.height * 0.160
 let height273 = UIScreen.main.bounds.height * 0.337
 let height68 = UIScreen.main.bounds.height * 0.084
 let height170 = UIScreen.main.bounds.height * 0.21
+let height1055 = UIScreen.main.bounds.height * 1.305
 
 
 // 0.158416

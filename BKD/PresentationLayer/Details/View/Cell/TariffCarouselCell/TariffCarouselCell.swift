@@ -203,7 +203,7 @@ class TariffCarouselCell: UIView {
             if let value = item?.value {
         //mStartingPriceLb.isHidden = true
                 mPriceLb.text = value
-                PriceManager.shared.carPrice = Double(value ?? "0")
+                PriceManager.shared.carPrice = Double(value)
             }
             if let offert = item?.specialValue {
                 
@@ -225,6 +225,15 @@ class TariffCarouselCell: UIView {
         mDepositImgV.setTintColor(color: UIColor(ciColor: .white).withAlphaComponent(0.49))
         mFuelConsumptionImgV.setTintColor(color: .white)
         mTitleLb.textColor = .white
+        mConfirmBtn.setTitleColor(item?.isSelected ?? false ? color_menu : color_main, for: .normal)
+        if item?.isSelected == false  {
+            let flexible  = (item?.flexibleStaringPrice ?? Double(item?.value ?? "0"))!
+            mPriceLb.text = String(flexible)
+            if let discountPercent = PriceManager.shared.carDiscountPrecent {
+                mOffertPriceLb.text = String(flexible - (flexible * (discountPercent/100)))
+            }
+            
+        }
     }
     
     ///configure cells which has common style
@@ -329,6 +338,7 @@ class TariffCarouselCell: UIView {
     
     @IBAction func confirm(_ sender: UIButton) {
         if !isConfirm {
+            
             isConfirm = true
             sender.setTitleColor(mTitleLb.text == Constant.Texts.daily ? .white : color_menu, for: .normal)
             

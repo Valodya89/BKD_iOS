@@ -22,14 +22,15 @@ class CompareCategoryTableCell: UITableViewCell {
     //MARK: -- Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     //Set category cell info
     func setCategoryCellInfo(item: CarTypes) {
+        
         mTitleLb.text = item.name
         if item.image != nil {
-            mImgV.sd_setImage(with:item.image!.getURL()!, placeholderImage: nil)
+            mImgV.sd_setImage( with:item.image!.getURL()!,
+                               placeholderImage: nil)
         }
     }
     
@@ -37,7 +38,8 @@ class CompareCategoryTableCell: UITableViewCell {
     //Set vehicle cell info
     func setVehicleCellInfo(item: CarsModel) {
         mTitleLb.text = item.name
-       // mImgV.sd_setImage(with:item.image.getURL()!, placeholderImage: nil)
+        mImgV.sd_setImage(with:item.image.getURL()!,
+                          placeholderImage: nil)
     }
     
 }

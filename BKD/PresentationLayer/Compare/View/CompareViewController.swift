@@ -53,8 +53,7 @@ class CompareViewController: BaseViewController {
         super.viewDidLoad()
         setupView()
     }
-    
-    
+        
     func setupView() {
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
         mRightBarBtn.image = img_bkd
@@ -62,9 +61,10 @@ class CompareViewController: BaseViewController {
         mCategoryContentV.setShadow(color: color_shadow!)
         mFirstVehicleContentV.layer.cornerRadius = 8
         mSecondVehicleContentV.layer.cornerRadius = 8
-        mCategoryTableV.categoryList = ApplicationSettings.shared.carTypes
+        
         mFirstVehicleInfoV.delegate = self
         mSecondVehicleInfoV.delegate = self
+        
         configureFirstVehicleUI()
         handlerCategory()
         handlerFirstVehicle()
@@ -76,12 +76,16 @@ class CompareViewController: BaseViewController {
     
     //Configure first vehicle UI
     func configureFirstVehicleUI() {
+        
         mCategoryBtn.setTitle(vehicleModel?.vehicleType, for: .normal)
         let categoryId = compareViewModel.getCurrentCarType(typeName: vehicleModel?.vehicleType ?? "")
         let carList: [CarsModel]? = ApplicationSettings.shared.carsList?[categoryId]!
+        
         self.mVehicleTableV.carList = carList
+        mCategoryTableV.categoryList = ApplicationSettings.shared.carTypes
         self.mFirstVehicleInfoV.carModel =  compareViewModel.getCurrentCarModel(carsList: carList, carId: vehicleModel?.vehicleId)
         self.mFirstVehicleBtn.setTitle(vehicleModel?.vehicleName, for: .normal)
+ 
         self.mFirstVehicleInfoV.configureUI()
     }
 
@@ -111,12 +115,12 @@ class CompareViewController: BaseViewController {
     ///Update table height
     public func updateTableHeight(willOpen:Bool, view: DropDownTableView)  {
         
+        let contentHeigt = view.contentSize.height
+         
         UIView.animate(withDuration: 0.5) {
-            view.mTableHeight.constant = willOpen ? view.contentSize.height : 0.0
+            view.mTableHeight.constant = willOpen ? (contentHeigt < height68 ? height68 : contentHeigt) : 0.0
             self.view.layoutIfNeeded()
-
         }
-
     }
     
     //Check if open second vehicle Table view
@@ -128,9 +132,7 @@ class CompareViewController: BaseViewController {
             isOpenTable = !isOpenTable
         }
     }
-    
-    
-   
+       
     
     //MARK: -- Actions
     @IBAction func back(_ sender: UIBarButtonItem) {
@@ -149,26 +151,31 @@ class CompareViewController: BaseViewController {
     }
     
     @IBAction func firstVehicle(_ sender: UIButton) {
-        checkSecondTabel()
-        mVehicleTableV.tableState = .firstVehicle
-        mVehicleTableV.reloadData()
-        
-        updateTableHeight(willOpen: !isOpenTable,
-                          view: mVehicleTableV)
-        animateDropDown(willOpen: !isOpenTable,
-                        dropDownImgV: mFirstVehicleDropDownImgV)
-        isOpenTable = !isOpenTable
+        if mVehicleTableV.carList?.count ?? 0 > 0 {
+            
+            checkSecondTabel()
+            mVehicleTableV.tableState = .firstVehicle
+            mVehicleTableV.reloadData()
+            updateTableHeight(willOpen: !isOpenTable,
+                              view: mVehicleTableV)
+            animateDropDown(willOpen: !isOpenTable,
+                            dropDownImgV: mFirstVehicleDropDownImgV)
+            isOpenTable = !isOpenTable
+        }
     }
     
     @IBAction func secondVehicle(_ sender: UIButton) {
-        checkFirstTable()
+        if mVehicleTableV.carList?.count ?? 0 > 0 {
+            
+            checkFirstTable()
             mVehicleTableV.tableState = .secondVehicle
             mVehicleTableV.reloadData()
             
-        updateTableHeight(willOpen: !isOpenTable,
-                          view: mVehicleTableV)
+            updateTableHeight(willOpen: !isOpenTable,
+                              view: mVehicleTableV)
             animateDropDown(willOpen: !isOpenTable, dropDownImgV: mSecondVehicleDropDownImgV)
             isOpenTable = !isOpenTable
+        }
     }
     
     ///Did select category
@@ -200,6 +207,7 @@ class CompareViewController: BaseViewController {
     
     //Did select second vehicle
     func handlerSecondVehicle() {
+        
         mVehicleTableV.didSelectSecondVehicle = { carModel in
             guard let carModel = carModel else {return}
             self.animateDropDown(willOpen: false, dropDownImgV: self.mSecondVehicleDropDownImgV)

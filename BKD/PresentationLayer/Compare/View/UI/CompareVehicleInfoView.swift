@@ -55,6 +55,7 @@ class CompareVehicleInfoView: UIView {
         mTowBarContentV.isHidden = !car.towbar
         mPriceLb.text = String(car.priceDay ?? 0.0)
         mDetailsTableV.detailList = compareViewModel.getCarInfoList(carModel: car)
+        
         mDetailsTableV.reloadData()
     }
     

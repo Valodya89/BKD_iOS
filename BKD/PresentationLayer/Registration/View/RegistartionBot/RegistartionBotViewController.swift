@@ -377,6 +377,7 @@ final class RegistartionBotViewController: BaseViewController {
             guard let _ = countryList else { return }
             fillInTableCell(txt: countryList![ pickerV.selectedRow(inComponent: 0)].country ?? "", index: sender.tag)
             personalData.countryId = countryList![ pickerV.selectedRow(inComponent: 0)].id
+            mTableV.reloadData()
             
         }
 
