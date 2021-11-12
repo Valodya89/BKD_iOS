@@ -187,7 +187,7 @@ struct Constant {
 
         //Accessories
        static let loginAccessories = "To add accessories, you need to sign in" //???
-        
+        static let signInToContinue = "To continue, you need to sign in"
         
         //Tail Lift
         static let kg = "kg"

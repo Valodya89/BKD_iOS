@@ -165,9 +165,12 @@ final class RegistartionBotViewController: BaseViewController {
     
     //Send personal data
     func sendPersonalData(personalData: PersonalData, index: Int, isEditData: Bool) {
-        registrationBotViewModel.addPersonlaData(id: mainDriver?.id ?? "", personlaData: personalData) { [self] (result) in
+        registrationBotViewModel.addPersonlaData(id: mainDriver?.id ?? "", personlaData: personalData) { [self] (result, err) in
             guard let result = result else {
-                self.showAlertMessage(Constant.Texts.errPersonalData)
+                if err == "401" {
+                    self.showAlertSignIn()
+                } else {
+                    self.showAlertMessage(Constant.Texts.errPersonalData) }
                 return }
             mainDriver = result
             if !isEditData {
@@ -182,11 +185,13 @@ final class RegistartionBotViewController: BaseViewController {
    
     /// Send request accept agreement
     private func sendAgreement() {
-        registrationBotViewModel.acceptAgreement(id: mainDriver?.id ?? "") { (result) in
+        registrationBotViewModel.acceptAgreement(id: mainDriver?.id ?? "") { (result, err) in
             if result != nil {
                 self.tableData = self.isDriverRegister ? RegistrationBotData.completedDriverAccountModel : RegistrationBotData.completedAccountModel
                 self.animationConfirm()
-            } else {
+            } else if err == "401" {
+                    self.showAlertSignIn()
+                } else {
                 self.showAlertMessage(Constant.Texts.errAcceptAgreement)
             }
         }
@@ -788,7 +793,7 @@ extension RegistartionBotViewController: UIImagePickerControllerDelegate, UINavi
         let newImage = image.resizeImage(targetSize: CGSize(width: 350, height: 350))
         registrationBotViewModel.imageUpload(image: newImage,
                                              id: mainDriver?.id ?? "",
-                                             state: uploadState.rawValue) { [self] (result) in
+                                             state: uploadState.rawValue) { [self] (result, err) in
             if result != nil {
                 mainDriver = result!
                 DispatchQueue.main.async { [self] in
@@ -799,6 +804,8 @@ extension RegistartionBotViewController: UIImagePickerControllerDelegate, UINavi
                 }
                 self.isTakePhoto = false
 
+            } else  if err == "401" {
+                self.showAlertSignIn()
             } else {
                 self.showAlertMessage(Constant.Texts.errImageUpload)
             }

@@ -185,4 +185,17 @@ class BaseViewController: UIViewController, StoryboardInitializable {
         self.navigationController?.pushViewController(moreVC, animated: true)
     }
     
+    ///Show alert for sign in account
+    func showAlertSignIn() {
+        BKDAlert().showAlert(on: self,
+                             title: nil,
+                             message: Constant.Texts.signInToContinue,
+                             messageSecond: nil,
+                             cancelTitle: Constant.Texts.cancel,
+                             okTitle: Constant.Texts.signIn,
+                             cancelAction: nil) {
+            self.goToSignInPage()
+        }
+    }
+    
 }

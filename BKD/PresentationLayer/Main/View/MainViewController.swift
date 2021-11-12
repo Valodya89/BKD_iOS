@@ -683,8 +683,8 @@ extension MainViewController: SearchResultCellDelegate {
     }
     
     private func openDetails(tag: Int, isMore: Bool) {
-        let cell = mCarCollectionV.cellForItem(at: IndexPath(item: tag, section: 0)) as! SearchResultCollectionViewCell
-        var vehicleModel =  cell.setVehicleModel(carModel: cars[tag])
+            let cell = mCarCollectionV.cellForItem(at: IndexPath(item: isPressedFilter ? (tag + 1) : tag, section: 0)) as! SearchResultCollectionViewCell
+        let vehicleModel =  cell.setVehicleModel(carModel: cars[tag])
         
         goToDetailPage(vehicleModel: vehicleModel,
                        isSearchEdit: true, isClickMore: isMore)

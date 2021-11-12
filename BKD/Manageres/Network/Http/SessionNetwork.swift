@@ -93,7 +93,8 @@ final class SessionNetwork: SessionProtocol {
                     
                     guard (200 ..< 299) ~= response.statusCode else {
                         if response.statusCode == 401 {
-                            SessionExpiredAlert.showAlert()
+                           // SessionExpiredAlert.showAlert()
+                            completion(.failure(.invalidStatusCode(code: response.statusCode)))
                             return
                         }
                         completion(.failure(.invalidStatusCode(code: response.statusCode)))

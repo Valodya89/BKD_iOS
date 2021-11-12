@@ -11,21 +11,21 @@ import SwiftUI
 class MyDriversViewModel: NSObject {
     
     ///Get driver list
-    func getMyDrivers(completion: @escaping ([MainDriver]?) -> Void) {
+    func getMyDrivers(completion: @escaping ([MainDriver]?, String?) -> Void) {
         SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getAdditionalDrivers)) { (result) in
             
             switch result {
             case .success(let data):
                 guard let myDriver = BkdConverter<BaseResponseModel<[MainDriver]>>.parseJson(data: data as Any) else {
                     print("error")
-                    completion(nil)
+                    completion(nil,nil)
                     return
                 }
                 print(myDriver.message as Any)
-                completion(myDriver.content)
+                completion(myDriver.content, nil)
             case .failure(let error):
                 print(error.description)
-                completion(nil)
+                completion(nil, error.description)
 
                 break
             }

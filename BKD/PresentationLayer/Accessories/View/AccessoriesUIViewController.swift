@@ -64,10 +64,13 @@ class AccessoriesUIViewController: BaseViewController {
     
     ///Get accessories list
     func getAccessories() {
-        accessoriesViewModel.getAccessories(carID: vehicleModel?.vehicleId ?? "") { result in
-            guard let _ = result else {return}
-            
-            
+        accessoriesViewModel.getAccessories(carID: vehicleModel?.vehicleId ?? "") { result, error in
+            guard let _ = result else {
+                if let _ = error {
+                    self.showAlertSignIn()
+                }
+                return
+            }
             if self.accessoriesEditList == nil {
                 self.accessoriesEditList = self.accessoriesViewModel.getActiveAccessoryList(accessories: result!)
             } else {
@@ -90,18 +93,18 @@ class AccessoriesUIViewController: BaseViewController {
         mAccessoriesCollectionV.dataSource = self
     }
     
-    ///Show alert for sign in account
-    private func showAlertSignIn() {
-        BKDAlert().showAlert(on: self,
-                             title: nil,
-                             message: Constant.Texts.loginAccessories,
-                             messageSecond: nil,
-                             cancelTitle: Constant.Texts.cancel,
-                             okTitle: Constant.Texts.signIn,
-                             cancelAction: nil) {
-            self.goToSignInPage()
-        }
-    }
+//    ///Show alert for sign in account
+//    private func showAlertSignIn() {
+//        BKDAlert().showAlert(on: self,
+//                             title: nil,
+//                             message: Constant.Texts.loginAccessories,
+//                             messageSecond: nil,
+//                             cancelTitle: Constant.Texts.cancel,
+//                             okTitle: Constant.Texts.signIn,
+//                             cancelAction: nil) {
+//            self.goToSignInPage()
+//        }
+//    }
     
     //MARK: -- ACTION
     @IBAction func back(_ sender: Any) {
@@ -160,7 +163,7 @@ extension AccessoriesUIViewController: AccessoriesCollectionViewCellDelegate {
             accessoriesEditList![cellIndex].isAdded = isAdd
             accessoriesEditList![cellIndex].id = id
         } else {
-            showAlertSignIn()
+            self.showAlertSignIn()
         }
     }
     

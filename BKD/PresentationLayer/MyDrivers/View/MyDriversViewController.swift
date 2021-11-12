@@ -90,8 +90,11 @@ class MyDriversViewController: BaseViewController {
     
     ///Get my driver list
     private func getMyDriverList () {
-        myDriversViewModel.getMyDrivers { (result) in
+        myDriversViewModel.getMyDrivers { (result, error) in
             guard let result = result else {
+                if let _ = error {
+                    self.showAlertSignIn()
+                }
                 return
             }
             self.additionalDrivers = self.myDriversViewModel.setActiveDriverList(allDrivers: result)

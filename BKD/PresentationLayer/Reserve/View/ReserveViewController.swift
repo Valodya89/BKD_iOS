@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReserveViewController: UIViewController {
+class ReserveViewController: BaseViewController {
     //MARK: - Outlet
     //Car
     @IBOutlet weak var mCarBckgV: UIView!
@@ -155,11 +155,12 @@ class ReserveViewController: UIViewController {
     
     ///Add reservation
     private func addReservation() {
-        reserveViewModel.addRent(vehicleModel: vehicleModel ?? VehicleModel()) { result in
-            guard result != nil else {
-                self.showAlertMessage(Constant.Texts.errReservation)
-                return
-            }
+        reserveViewModel.addRent(vehicleModel: vehicleModel ?? VehicleModel()) { result, error in
+                if let _ = error {
+                    self.showAlertSignIn()
+                } else if result == nil {
+                    self.showAlertMessage(Constant.Texts.errReservation)
+                }
         }
     }
     

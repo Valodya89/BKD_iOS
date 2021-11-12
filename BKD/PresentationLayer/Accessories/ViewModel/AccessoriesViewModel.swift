@@ -25,19 +25,20 @@ class AccessoriesViewModel: NSObject {
     }
     
     /// get accessories  list
-     func getAccessories(carID: String, completion: @escaping ([Accessories]?) -> Void) {
+     func getAccessories(carID: String, completion: @escaping ([Accessories]?, String?) -> Void) {
         SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getAccessories(carID: carID))) {  (result) in
             
             switch result {
             case .success(let data):
                 guard let accessories = BkdConverter<BaseResponseModel<[Accessories]>>.parseJson(data: data as Any) else {
                     print("error")
+                    completion(nil, nil)
                     return
                 }
-                completion(accessories.content)
+                completion(accessories.content, nil)
             case .failure(let error):
                 print(error.description)
-            
+                completion(nil,error.description)
                 break
             }
         }

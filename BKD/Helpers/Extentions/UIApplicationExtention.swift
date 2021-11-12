@@ -15,9 +15,16 @@ extension UIApplication {
             while let presentedViewController = topController.presentedViewController {
                 topController = presentedViewController
             }
+            
+//        while let pushViewController = topController.navigationController?.pushViewController(topController, animated: true)
+//            {
+//                           // topController = pushViewController
+//                        }
             return topController
         }
 
         return nil
     }
 }
+
+

@@ -117,7 +117,7 @@ class ReserveViewModel: NSObject {
     
     ///Add Rent car
     func addRent(vehicleModel: VehicleModel,
-                 completion: @escaping (Rent?) -> Void) {
+                 completion: @escaping (Rent?, String?) -> Void) {
         
         let accessoriesArr = getAccessoriesToRequest(accessories: vehicleModel.additionalAccessories)
         let additionalDriversArr = getAdditionalDriversToRequest(additionalDrivers: vehicleModel.additionalDrivers)
@@ -136,15 +136,15 @@ class ReserveViewModel: NSObject {
             case .success(let data):
                 guard let result = BkdConverter<BaseResponseModel<Rent>>.parseJson(data: data as Any) else {
                     print("error")
-                    completion(nil)
+                    completion(nil, nil)
                     return
                 }
                 print(result.content as Any)
-                completion(result.content)
+                completion(result.content, nil)
 
             case .failure(let error):
                 print(error.description)
-                completion(nil)
+                completion(nil, error.description)
                 break
             }
         }

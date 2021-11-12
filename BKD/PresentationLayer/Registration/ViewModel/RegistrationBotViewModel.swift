@@ -264,7 +264,7 @@ class RegistrationBotViewModel: NSObject {
     
     /// add Personla Data
     func addPersonlaData(id: String,  personlaData: PersonalData,
-                         completion: @escaping (MainDriver?) -> Void) {
+                         completion: @escaping (MainDriver?, String?) -> Void) {
         
 
         SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addPersonalData(id: id, name: personlaData.name!, surname: personlaData.surname!, phoneNumber: personlaData.phoneNumber!, dateOfBirth: personlaData.dateOfBirth!, street: personlaData.street!, house: personlaData.house!, mailBox: personlaData.mailBox ?? "", countryId: personlaData.countryId!, zip: personlaData.zip!, city: personlaData.city!, nationalRegisterNumber: personlaData.nationalRegisterNumber!))) { (result) in
@@ -273,15 +273,15 @@ class RegistrationBotViewModel: NSObject {
             case .success(let data):
                 guard let result = BkdConverter<BaseResponseModel<MainDriver>>.parseJson(data: data as Any) else {
                     print("error")
-                    completion(nil)
+                    completion(nil, nil)
                     return
                 }
                 print(result.message as Any)
-                completion(result.content!)
+                completion(result.content!, nil)
 
             case .failure(let error):
                 print(error.description)
-                completion(nil)
+                completion(nil, error.description)
                 break
             }
         }
@@ -346,21 +346,21 @@ class RegistrationBotViewModel: NSObject {
     func imageUpload(image: UIImage,
                      id: String,
                      state: String,
-                     completion: @escaping (MainDriver?) -> Void)  {
+                     completion: @escaping (MainDriver?, String?) -> Void)  {
             
         SessionNetwork.init().request(with: URLBuilder(from: ImageUploadAPI.upload(image: image, id: id, state: state))) { result in
             switch result {
             case .success(let data):
                 guard let result = BkdConverter<BaseResponseModel<MainDriver>>.parseJson(data: data as Any) else {
                     print("error")
-                    completion(nil)
+                    completion(nil, nil)
                     return
                 }
                 print(result.message as Any)
-                completion(result.content)
+                completion(result.content, nil)
             case .failure(let error):
                 print(error.description)
-                completion(nil)
+                completion(nil, error.description)
                 break
             }
             
@@ -368,21 +368,21 @@ class RegistrationBotViewModel: NSObject {
     }
     
     //Accept agreement
-    func acceptAgreement(id: String, completion: @escaping (MainDriver?) -> Void) {
+    func acceptAgreement(id: String, completion: @escaping (MainDriver?, String?) -> Void) {
         SessionNetwork.init().request(with: URLBuilder(from: AuthAPI.acceptAgreement(id: id))) { result in
             switch result {
             case .success(let data):
                 guard let result = BkdConverter<BaseResponseModel<MainDriver>>.parseJson(data: data as Any) else {
                     print("error")
-                    completion(nil)
+                    completion(nil, nil)
                     return
                 }
                 print(result.message as Any)
-                completion(result.content!)
+                completion(result.content!, nil)
 
             case .failure(let error):
                 print(error.description)
-                completion(nil)
+                completion(nil, error.description)
                 break
             }
         }
