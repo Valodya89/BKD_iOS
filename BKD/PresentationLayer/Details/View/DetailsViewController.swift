@@ -70,6 +70,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     var tariffSlideList:[TariffSlideModel]?
     var currentTariffOption: TariffSlideModel?
     var flexibleTariffOption: TariffSlideModel?
+    var containerViewForFariffSlide: UIView = UIView()
     
     var pickerState: DatePicker?
     var pickerList: [String]?
@@ -106,6 +107,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTariffSlideViewFrame()
         setupView()
     }
     
@@ -153,7 +155,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             currentTariff = .flexible
             animateSearchEdit(isShow: true)
         }
-        
+        self.mTariffCarouselV.alpha = 0.0
         configureViews()
         setDetailDatas()
         configureTransparentView()
@@ -190,14 +192,19 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         if UIScreen.main.nativeBounds.height <= 1334 {
             bottomPadding = 22
         }
-        if !isSetScrollFrame {
-            isSetScrollFrame = true
-            tariffSlideY = (self.view.bounds.height * 0.742574) - bottomPadding
-            tariffSlideVC.view.frame = CGRect(x: 0,
-                                              y: tariffSlideY,
-                                              width: self.view.bounds.width,
-                                              height: height170)
-        }
+       // if !isSetScrollFrame {
+        isSetScrollFrame = true
+        tariffSlideY = (self.view.bounds.height * 0.742574) - bottomPadding
+        tariffSlideVC.view.frame = CGRect(x: 0,
+                                          y: 0,
+                                          width: self.view.bounds.width,
+                                          height: height170 )
+        containerViewForFariffSlide.frame = CGRect(x: 0,
+                                                   y: tariffSlideY,
+                                                   width: self.view.bounds.width,
+                                                   height: height170 )
+        
+       // }
     }
     
     ///Set full Detail datas
@@ -303,8 +310,10 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     /// Add child view
     func addTariffSliedView() {
+        self.containerViewForFariffSlide.backgroundColor = .clear.withAlphaComponent(0.0)
+        self.view.addSubview(self.containerViewForFariffSlide)
         addChild(tariffSlideVC)
-        self.view.addSubview(tariffSlideVC.view)
+        self.containerViewForFariffSlide.addSubview(tariffSlideVC.view)
         tariffSlideVC.didMove(toParent: self)
         self.view.bringSubviewToFront(mReserveBckgV)
 
@@ -808,7 +817,7 @@ extension DetailsViewController: TariffSlideViewControllerDelegate {
         isScrolled = true
         scrollToBottom(y: mScrollV.contentSize.height - mScrollV.bounds.size.height + mScrollV.contentInset.bottom)
         updateCompareView(isShow: true)
-        hideTariffCards(y: 1000)
+        //hideTariffCards(y: 1000)
 
         currentTariff = tariff
         if isSearchEdit {
@@ -1054,28 +1063,73 @@ extension DetailsViewController: CarPhotosViewDeleagte {
 //MARK: ----------------------------
 extension DetailsViewController: UIScrollViewDelegate {
     
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
-        if (self.lastContentOffset > 0.0 && self.tariffSlideVC.view.frame.origin.y < view.frame.size.height + 10) {
-            isScrolled = true
-            print("move up")
-            print("self.lastContentOffset = \(self.lastContentOffset)")
-            hideTariffCards(y: self.lastContentOffset)
-        }
-        else if (self.lastContentOffset < 0.0 /*scrollView.contentOffset.y + 20*/) {
-            print("move down")
-            print(scrollView.contentOffset.y)
-            let distanceFromBottom = scrollView.contentSize.height - scrollView.contentOffset.y
-            print("distanceFromBottom = \(distanceFromBottom)")
-
-            if scrollView.contentOffset.y > -2.5 && isTariffSlide {
-                isTariffSlide = false
-                showTariffCards(y: self.view.frame.height - height170 - height42)
+        
+        print("ofset y = ",scrollView.contentOffset.y)
+        if scrollView.contentOffset.y <= 0 {
+            // TariffSlide is showed
+            containerViewForFariffSlide.frame.origin.y = tariffSlideY
+            self.containerViewForFariffSlide.alpha = 1.0
+            self.mTariffCarouselV.alpha = 0.0
+            if scrollView.contentOffset.y > -5 {
+                self.mTariffCarouselV.tariffCarousel.reloadData()
             }
+            isTariffSlide = true
+            if isSearchEdit {
+                self.animateSearchEdit(isShow: true)
+            }
+            isScrolled = false
+            self.resetView()
+        } else if scrollView.contentOffset.y > 0 && scrollView.contentOffset.y <= height170 {
+            containerViewForFariffSlide.frame.origin.y = tariffSlideY + scrollView.contentOffset.y
+            self.containerViewForFariffSlide.alpha = 1 - (scrollView.contentOffset.y / height170)
+            self.mTariffCarouselV.alpha = (scrollView.contentOffset.y / height170)
+        } else {
+            // TariffSlide is hided
+            
+            self.tariffSlideVC.tariffSlideList = self.tariffSlideList
+            self.tariffSlideVC.mTariffSlideCollectionV.reloadData()
+            
+            containerViewForFariffSlide.frame.origin.y = tariffSlideY + height170
+            self.containerViewForFariffSlide.alpha = 0.0
+            isScrolled = !isScrolled
+            isTariffSlide = true
+            updateCompareView(isShow: true)
+            self.mTariffCarouselV.alpha = 1.0
         }
-        // update the new position acquired
-        self.lastContentOffset = scrollView.contentOffset.y
-        print("self.tariffSlideVC.view.frame.origin.y = \(self.tariffSlideVC.view.frame.origin.y)")
+        print("tariffSlideVC.view.frame.origin.y = \(containerViewForFariffSlide.frame.origin.y)")
+        
+        self.view.layoutIfNeeded()
+        self.containerViewForFariffSlide.layoutIfNeeded()
+        
+//        if (self.lastContentOffset > 0.0 && self.tariffSlideVC.view.frame.origin.y < view.frame.size.height + 10) {
+//            isScrolled = true
+//            print("move up")
+//            print("self.lastContentOffset = \(self.lastContentOffset)")
+//            hideTariffCards(y: self.lastContentOffset)
+//        }
+//        else if (self.lastContentOffset < 0.0 /*scrollView.contentOffset.y + 20*/) {
+//            print("move down")
+//            print(scrollView.contentOffset.y)
+//            let distanceFromBottom = scrollView.contentSize.height - scrollView.contentOffset.y
+//            print("distanceFromBottom = \(distanceFromBottom)")
+//
+//            if scrollView.contentOffset.y > -2.5 && isTariffSlide {
+//                isTariffSlide = false
+//                showTariffCards(y: self.view.frame.height - height170 - height42)
+//            }
+//        }
+//        // update the new position acquired
+//        self.lastContentOffset = scrollView.contentOffset.y
+//        print("self.tariffSlideVC.view.frame.origin.y = \(self.tariffSlideVC.view.frame.origin.y)")
     }
     
     ///Will hide tariff cards
@@ -1094,7 +1148,7 @@ extension DetailsViewController: UIScrollViewDelegate {
     ///Will show tariff cards
     private func showTariffCards (y: CGFloat) {
             self.mTariffCarouselV.tariffCarousel.reloadData()
-        self.tariffSlideVC.tariffSlideList = self.tariffSlideList
+            self.tariffSlideVC.tariffSlideList = self.tariffSlideList
             self.tariffSlideVC.mTariffSlideCollectionV.reloadData()
             UIView.animate(withDuration: 0.7) { [self] in
                 self.tariffSlideVC.view.frame.origin.y = y
