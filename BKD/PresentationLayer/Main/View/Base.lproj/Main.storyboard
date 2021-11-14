@@ -33,6 +33,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                                 <color key="backgroundColor" name="background"/>
                             </tableView>
+                            <view contentMode="scaleToFill" id="hgO-ot-Ek2">
+                                <rect key="frame" x="0.0" y="-6" width="414" height="35"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" name="background"/>
+                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Igf-W7-Esb">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                                 <color key="backgroundColor" name="background"/>
@@ -79,11 +84,6 @@
                                     <constraint firstItem="9eI-UP-HPX" firstAttribute="height" secondItem="uBi-RC-Pej" secondAttribute="height" multiplier="0.882353" id="iVs-d8-53P"/>
                                     <constraint firstItem="uBi-RC-Pej" firstAttribute="centerX" secondItem="nOJ-Gd-nKd" secondAttribute="centerX" id="sHO-Pb-XAQ"/>
                                 </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" id="hgO-ot-Ek2">
-                                <rect key="frame" x="0.0" y="-6" width="414" height="35"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" name="background"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aZo-0j-S7r"/>

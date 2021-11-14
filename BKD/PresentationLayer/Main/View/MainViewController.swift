@@ -16,7 +16,7 @@ let customLocationPrice: Double = 42.99
 
 class MainViewController: BaseViewController {
     
-    //MARK: - Outlets
+    //MARK: -- Outlets
     @IBOutlet weak var mAvalableCategoriesTbV: UITableView!
     @IBOutlet weak var mCarCollectionV: UICollectionView!
     @IBOutlet weak var mChatWithUsBckgV: UIView!
@@ -25,7 +25,7 @@ class MainViewController: BaseViewController {
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
     
-    //MARK: - Variables
+    //MARK: -- Variables
     private lazy  var carouselVC = CarouselViewController.initFromStoryboard(name: Constant.Storyboards.carousel)
     private let mainViewModel: MainViewModel = MainViewModel()
     lazy var searchModel: SearchModel = SearchModel()
@@ -58,7 +58,7 @@ class MainViewController: BaseViewController {
     private var needsUpdateFilterCell: Bool = false
 
 
-    //MARK: - Life cycles
+    //MARK: -- Life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.setTabBarBackgroundColor(color: color_background!)
@@ -72,6 +72,7 @@ class MainViewController: BaseViewController {
         
    }
     
+//MARK: -- Set
     func setupView() {
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_search_title!, NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -86,7 +87,7 @@ class MainViewController: BaseViewController {
         self.setmenu(menu: menu)
         mRightBarBtn.image = UIImage(named:"bkd")?.withRenderingMode(.alwaysOriginal)
 
-       addHeaderViews()
+        configureHeaderViews()
         addCarousel()
         configureCarsCollectionView()
         configureAvalableCategoriesTableView()
@@ -96,6 +97,18 @@ class MainViewController: BaseViewController {
         self.showFilter()
         self.updateCategory()
         
+    }
+    
+    ///set CollationView Posittion
+    private func setCollationViewPosittion(top: CGFloat) {
+        self.mCarCollectionV.contentInset = .init(top: top, left: 0, bottom: 0, right: 0)
+        self.mCarCollectionV.setContentOffset(.init(x: 0, y: -top), animated: false)
+    }
+    
+    ///set TableView Posittion
+    private func setTableViewPosittion(top: CGFloat) {
+        self.mAvalableCategoriesTbV.contentInset = .init(top: top, left: 0, bottom: 0, right: 0)
+        self.mAvalableCategoriesTbV.setContentOffset(.init(x: 0, y: -top), animated: false)
     }
     
     // set info to setSearch model
@@ -108,7 +121,7 @@ class MainViewController: BaseViewController {
         searchModel.returnLocation = searchResultV?.mReturnLocationLb.text
     }
     
-    
+   //MARK: -- Configure UI
     private func configureDelegates() {
         mCarCollectionV.delegate = self
         mCarCollectionV.dataSource = self
@@ -118,10 +131,28 @@ class MainViewController: BaseViewController {
     }
     
     private func configureCarsCollectionView() {
-        self.mCarCollectionV.contentInset = UIEdgeInsets(top: (searchHeaderV?.frame.size.height)!, left: 0, bottom: 0, right: 0)
+        self.mCarCollectionV.contentInset = UIEdgeInsets(top: top_searchResult, left: 0, bottom: 0, right: 0)//n
+//        self.mCarCollectionV.contentInset = UIEdgeInsets(top: (searchHeaderV?.frame.size.height)!, left: 0, bottom: 0, right: 0)
         self.mCarCollectionV.register(MainCollectionViewCell.nib(), forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
         self.mCarCollectionV.register(SearchResultCollectionViewCell.nib(), forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
         self.mCarCollectionV.register(FilterSearchResultCell.nib(), forCellWithReuseIdentifier: FilterSearchResultCell.identifier)
+    }
+    
+    
+   ///Configure search header view
+    private func configureHeaderViews() {
+        //add top views
+        searchHeaderV = SearchHeaderView()
+        searchHeaderHeight = (view.frame.height * 0.455) + (searchHeaderV?.mCarouselV.bounds.height)! //view.frame.height * 0.5928
+        collactionViewTop = searchHeaderHeight
+        searchHeaderV!.frame = CGRect(x: 0, y: top_searchResult, width: self.view.bounds.width, height: searchHeaderHeight)
+        mCarCollectionV.addSubview(searchHeaderV!)//n
+    //self.view.addSubview(searchHeaderV!)
+        
+        searchResultV = SearchResultView()
+        searchResultHeight = view.frame.height * 0.123762
+        searchResultV!.frame = CGRect(x: 0, y: -200, width: self.view.bounds.width, height: searchResultHeight)
+        self.view.addSubview(searchResultV!)
     }
     
     private func configureAvalableCategoriesTableView () {
@@ -131,14 +162,12 @@ class MainViewController: BaseViewController {
     }
     
     
-    private func setCollationViewPosittion(top: CGFloat) {
-        self.mCarCollectionV.contentInset = .init(top: top, left: 0, bottom: 0, right: 0)
-        self.mCarCollectionV.setContentOffset(.init(x: 0, y: -top), animated: false)
-    }
-    
-    private func setTableViewPosittion(top: CGFloat) {
-        self.mAvalableCategoriesTbV.contentInset = .init(top: top, left: 0, bottom: 0, right: 0)
-        self.mAvalableCategoriesTbV.setContentOffset(.init(x: 0, y: -top), animated: false)
+    //Add Carousel child controller
+    func addCarousel() {
+        addChild(carouselVC)
+        carouselVC.view.frame = (searchHeaderV?.mCarouselV.bounds)!
+        searchHeaderV?.mCarouselV.addSubview(carouselVC.view)
+        carouselVC.didMove(toParent: self)
     }
     
     ///creat tool bar
@@ -152,31 +181,6 @@ class MainViewController: BaseViewController {
         toolBar.setItems([flexibleSpace, done], animated: false)
         return toolBar
     }
-    
-    //Add Carousel child controller
-    func addCarousel() {
-        addChild(carouselVC)
-        carouselVC.view.frame = (searchHeaderV?.mCarouselV.bounds)!
-        
-        searchHeaderV?.mCarouselV.addSubview(carouselVC.view)
-        carouselVC.didMove(toParent: self)
-    }
-    
-    
-    private func addHeaderViews() {
-        //add top views
-        searchHeaderV = SearchHeaderView()
-        searchHeaderHeight = (view.frame.height * 0.455) + (searchHeaderV?.mCarouselV.bounds.height)! //view.frame.height * 0.5928
-        collactionViewTop = searchHeaderHeight
-        searchHeaderV!.frame = CGRect(x: 0, y: top_searchResult, width: self.view.bounds.width, height: searchHeaderHeight)
-        self.view.addSubview(searchHeaderV!)
-        
-        searchResultV = SearchResultView()
-        searchResultHeight = view.frame.height * 0.123762
-        searchResultV!.frame = CGRect(x: 0, y: -200, width: self.view.bounds.width, height: searchResultHeight)
-        self.view.addSubview(searchResultV!)
-    }
-    
     
     /// Update search result fiels
     private func updateSearchResultFields() {
@@ -204,8 +208,8 @@ class MainViewController: BaseViewController {
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }
     
-    //MARK: Animations
-    //MARK: -----------------------------
+    //MARK: -- Animations
+
     //Will be hide search header and  show search result
     private func animateSearchResult(){
         self.updateSearchResultFields()
@@ -214,7 +218,10 @@ class MainViewController: BaseViewController {
             UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseOut], animations: { [self] in
                 self.searchHeaderV?.frame = CGRect(x: 0, y: -900, width: self.searchHeaderV!.bounds.width, height: self.searchHeaderV!.bounds.height)
                 self.searchResultV!.frame = CGRect(x: 0, y: top_searchResult, width: self.searchResultV!.bounds.width, height: searchResultHeight)
-                self.setCollationViewPosittion(top: searchResultHeight + top_searchResult)
+                //n
+                self.setCollationViewPosittion(top: searchResultHeight)
+                mCarCollectionV.reloadData()
+//                self.setCollationViewPosittion(top: searchResultHeight + top_searchResult)
                 self.searchHeaderV?.alpha = 0
             }, completion: { [self] _ in
                 self.searchHeaderV?.isHidden = true
@@ -239,10 +246,11 @@ class MainViewController: BaseViewController {
             })
         }
     }
+    
     //Will be show search header for edit fields
     private func animateSearchHeader(){
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseOut], animations: { [self] in
+            UIView.animate(withDuration: 0.7, delay: 0, options: [.curveEaseOut], animations: { [self] in
                 if self.isPressedFilter == true  {
                     self.isPressedFilter = !self.isPressedFilter
                     self.searchResultV!.isPressedFilter = self.isPressedFilter
@@ -251,7 +259,9 @@ class MainViewController: BaseViewController {
                 }
                 if self.isPressedEdit == true {
                     collactionViewTop = (view.frame.height * 0.5928) + 70
-                    self.setCollationViewPosittion(top: collactionViewTop)
+                    self.setCollationViewPosittion(top: top_searchResult)//n
+                    mCarCollectionV.reloadData()
+                    //  self.setCollationViewPosittion(top: collactionViewTop)
                 } else {
                     collactionViewTop = view.frame.height * 0.5928
                     self.setCollationViewPosittion(top: searchHeaderHeight)
@@ -298,8 +308,7 @@ class MainViewController: BaseViewController {
     }
     
   
-   //MARK: - Checkings
-    //MARK: -----------------------------
+   //MARK: -- Checkings
     ///check if reservation date more than a month
     func checkMonthReservation() {
         var pickUpDate: Date? = searchHeaderV?.pickUpDate
@@ -366,8 +375,8 @@ class MainViewController: BaseViewController {
     func months(from date: Date, toDate: Date) -> Int {
             return Calendar.current.dateComponents([.month], from: date, to: toDate).month ?? 0
         }
-    //MARK: - Alert Methods
-    //MARK: ---------------------------
+    
+    //MARK: -- Alert Methods
     func showAlertMoreThanMonth() {
         BKDAlert().showAlert(on: self,
                              title: nil,
@@ -435,9 +444,7 @@ class MainViewController: BaseViewController {
     }
 
     
-  //MARK: - Selected Closures
-    //MARK ------------------------------
-
+  //MARK: -- Selected Closures
     
     func selectedEdit() {
         searchResultV?.didPressEdit = { [weak self] in
@@ -508,8 +515,7 @@ class MainViewController: BaseViewController {
     }
     
     
-    //MARK: - Actions
-    //MARK: ----------------------------
+    //MARK: -- Actions
     @IBAction func menu(_ sender: UIBarButtonItem) {
         if isSearchResultPage || isNoSearchResult  {
             selectedBack(isBackFromResult: true)
@@ -572,11 +578,9 @@ class MainViewController: BaseViewController {
 }
 
 
-//MARK:UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
-//MARK: -----------------------
+//MARK: -- UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    //MARK: UICollectionViewDataSource
-    //MARK: -------------------------------
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if isPressedFilter {
             return cars.count + 1
@@ -619,8 +623,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
 
-    //MARK: UICollectionViewDelegate
-    //MARK: -------------------------------
+    //MARK: -- UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         //Main screen
@@ -641,9 +644,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
 
-    //MARK: UICollectionViewDelegateFlowLayout
-    //MARK: -------------------------------
-    
+    //MARK: -- UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -653,6 +654,22 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         return CGSize(width: collectionView.bounds.width, height: view.frame.height * 0.441832)
     }
     
+    //n
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if isSearchResultPage && !isPressedEdit{
+            return  CGSize(width: collectionView.bounds.width, height: searchHeaderEditHeight)
+        }
+        
+            return (searchHeaderV?.frame.size)!
+
+//        if ((searchHeaderV?.isHidden) == true) {
+//            return (searchHeaderV?.frame.size)!
+//        } else {
+           // return  CGSize(width: collectionView.bounds.width, height: searchHeaderEditHeight)
+
+        //}
+    }
+
     ///Search resul cell
     private func initSearchResultCell(index: Int, collectionView: UICollectionView) -> SearchResultCollectionViewCell{
         
@@ -667,15 +684,11 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
 }
 
 
-//MARK: SearchResultCellDelegate
-//MARK: ----------------------------
+//MARK: -- SearchResultCellDelegate
 extension MainViewController: SearchResultCellDelegate {
     
     func didPressMore(tag: Int) {
         openDetails(tag: tag, isMore: true)
-
-//        let detailsVC = UIStoryboard(name: Constant.Storyboards.details, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.details) as! DetailsViewController
-//        self.navigationController?.pushViewController(detailsVC, animated: true)
     }
     
     func didPressReserve(tag: Int) {
@@ -691,13 +704,13 @@ extension MainViewController: SearchResultCellDelegate {
     }
 }
 
-//MARK: SearchHeaderViewDelegate
-//MARK: ----------------------------
+//MARK: -- SearchHeaderViewDelegate
 extension MainViewController: SearchHeaderViewDelegate {
     
     func hideEditView() {
         if !isNoSearchResult {
             navigationController!.navigationBar.topItem?.title = Constant.Texts.searchResult
+            isPressedEdit = false
             animateSearchResult()
         } else {
             navigationController!.navigationBar.topItem?.title = ""
@@ -792,9 +805,9 @@ extension MainViewController: SearchHeaderViewDelegate {
     
     
 }
-//MARK: CustomLocationUIViewControllerDelegate
-//MARK: ----------------------------
+//MARK: -- CustomLocationUIViewControllerDelegate
 extension MainViewController: CustomLocationViewControllerDelegate {
+    
     func getCustomLocation(_ locationPlace: String, coordinate: CLLocationCoordinate2D, price: Double?) {
         searchHeaderV?.updateCustomLocationFields(place: locationPlace, didResult: { [weak self] (isPickUpLocation) in
             if isPickUpLocation {
@@ -817,8 +830,7 @@ extension MainViewController: CustomLocationViewControllerDelegate {
 }
 
 
-//MARK: UITableViewDataSource
-//MARK: -----------------------------
+//MARK: -- UITableViewDataSource
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -843,24 +855,22 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 
-// MARK: - UIScrollView Delegate
-//MARK:-----------------------
+// MARK: -- UIScrollView Delegate
 extension MainViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         /// Change top view position and alpha
-        
-        if (searchHeaderV?.frame.origin.y)! <= 12 {
-            searchHeaderV!.frame.origin.y = -abs(collactionViewTop + scrollView.contentOffset.y) + 12
-            
-        }
+        //n1
+//        if (searchHeaderV?.frame.origin.y)! <= 12 {
+//            searchHeaderV!.frame.origin.y = -abs(collactionViewTop + scrollView.contentOffset.y) + 12
+//
+//        }
         
     }
    
 }
 
 
-//MARK: UIPickerViewDelegate
-//MARK: --------------------------------
+//MARK: -- UIPickerViewDelegate
 extension MainViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

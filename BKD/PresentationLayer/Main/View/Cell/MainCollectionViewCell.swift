@@ -14,6 +14,7 @@ static let identifier = "MainCollectionViewCell"
         return UINib(nibName: identifier, bundle: nil)
     }
     
+    //MARK: -- Outlets
     @IBOutlet weak var mOffertPriceLb: UILabel!
     @IBOutlet weak var mInfoBckV: UIView!
     @IBOutlet weak var mOffertBackgV: UIView!
@@ -45,13 +46,19 @@ static let identifier = "MainCollectionViewCell"
     @IBOutlet weak var mGradientV: UIView!
     @IBOutlet weak var mInactiveCarNameLb: UILabel!
     
-    @IBAction func mSwitch(_ sender: Any) {
-    }
-    
+    //MARK: -- Variable
     let mainViewModel: MainViewModel = MainViewModel()
+    
+    //MARK: -- Life cycle
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setup()
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        mValueBckV.setGradient(startColor: color_gradient_start!, endColor: color_gradient_end!)
+        mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -60,9 +67,7 @@ static let identifier = "MainCollectionViewCell"
         mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
     }
     
-    
     func setup() {
-     
         // corner radius
         mInfoBckV.layer.cornerRadius = 10
         mValueBckV.clipsToBounds = true
@@ -78,14 +83,12 @@ static let identifier = "MainCollectionViewCell"
         mValueBckV.setGradient(startColor: color_gradient_start!, endColor: color_gradient_end!)
         mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
         
-        
         let amountText = NSMutableAttributedString.init(string: mValueLb.text!)
 
         // set the custom font and color for the 0,1 range in string
         amountText.setAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14),
                                   NSAttributedString.Key.foregroundColor: UIColor(named: "value") as Any],
                                      range: NSMakeRange(0, 1))
-       
         mValueLb.attributedText = amountText
     }
 
@@ -180,7 +183,6 @@ static let identifier = "MainCollectionViewCell"
         let isActiveCar: Bool = mainViewModel.isCarActiveNow(start: start, end: end)
         mBlurV.isHidden = isActiveCar
         mInactiveCarNameLb.isHidden = isActiveCar
-        
     }
     
     
