@@ -96,8 +96,10 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     }
     var returnDate: Date? {
         didSet {
-            if !(returnDate?.isSameDates(date: oldValue))! {
-                enableSearch()
+            if returnDate != nil {
+                if !(returnDate?.isSameDates(date: oldValue))! {
+                    enableSearch()
+                }
             }
         }
     }
@@ -343,6 +345,15 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         mReturnTimeTxtFl.font = font_placeholder
         mReturnTimeTxtFl.textColor = color_choose_date
         returnTime = nil
+    }
+    
+    func resetReturnDate() {
+        mReturnDateTxtFl.text = Constant.Texts.returnDate
+        mReturnDateTxtFl.font = font_placeholder
+        mReturnDateTxtFl.textColor = color_choose_date
+        mDayReturnDateBtn.setTitle("", for: .normal)
+        mMonthReturnDateBtn?.setTitle("", for: .normal)
+        returnDate = nil
     }
 
     

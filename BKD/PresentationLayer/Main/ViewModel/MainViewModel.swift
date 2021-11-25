@@ -85,6 +85,11 @@ final class MainViewModel: NSObject {
                                                        returnTime: returnTime))
     }
     
+    ///Check if reservation more then 90 days
+    func  isReservetionMore90Days(search: SearchModel) -> Bool {
+       return validator.checkReservation90Days(search: search)
+    }
+    
     ///Chack if car is active now
     func isCarActiveNow(start:Date, end:Date) -> Bool {
         let now = Date()
@@ -93,6 +98,8 @@ final class MainViewModel: NSObject {
         return !result
     }
    
+    
+    
     
     /// Get Tail lift info
     func getTailLiftList(carModel: CarsModel) -> [TailLiftModel] {
@@ -226,10 +233,16 @@ final class MainViewModel: NSObject {
             }
         }
     }
+
     
-    
-//    func getSearchResultCars(cars: [CarsModel]) -> [CarsModel] {
-//        
+//    func minDateToPickerDate(pickUpDate: Date?, returnDate: Date?) ->  Date {
+//        if let _ = pickUpDate {
+//            return  pickUpDate!
+//        }
+//        if let _ = returnDate {
+//            return  returnDate!
+//        }
+//        return Date()
 //    }
     
 }

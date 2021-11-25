@@ -181,6 +181,9 @@
 		565BFE0326A12CA10044D081 /* Parking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565BFE0226A12CA10044D081 /* Parking.swift */; };
 		565C099B273B4F5B00183878 /* PriceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565C099A273B4F5B00183878 /* PriceManager.swift */; };
 		565D142827296AD0000760AE /* MainDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D142727296AD0000760AE /* MainDriver.swift */; };
+		565EECA82747D258001DB53B /* UIImageExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565EECA72747D258001DB53B /* UIImageExtention.swift */; };
+		565EECAA2747D2AC001DB53B /* UITextFieldExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565EECA92747D2AC001DB53B /* UITextFieldExtention.swift */; };
+		565EECAC2747D2F4001DB53B /* UILabelExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565EECAB2747D2F4001DB53B /* UILabelExtention.swift */; };
 		565F807426A3C46600ADB9FE /* WorkingTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F807326A3C46600ADB9FE /* WorkingTimes.swift */; };
 		565F807826A4FE8600ADB9FE /* RegistrationBotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F807726A4FE8600ADB9FE /* RegistrationBotViewModel.swift */; };
 		565F807C26A510AA00ADB9FE /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565F807B26A510AA00ADB9FE /* Country.swift */; };
@@ -539,6 +542,9 @@
 		565BFE0226A12CA10044D081 /* Parking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parking.swift; sourceTree = "<group>"; };
 		565C099A273B4F5B00183878 /* PriceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceManager.swift; sourceTree = "<group>"; };
 		565D142727296AD0000760AE /* MainDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDriver.swift; sourceTree = "<group>"; };
+		565EECA72747D258001DB53B /* UIImageExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtention.swift; sourceTree = "<group>"; };
+		565EECA92747D2AC001DB53B /* UITextFieldExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtention.swift; sourceTree = "<group>"; };
+		565EECAB2747D2F4001DB53B /* UILabelExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtention.swift; sourceTree = "<group>"; };
 		565F807326A3C46600ADB9FE /* WorkingTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingTimes.swift; sourceTree = "<group>"; };
 		565F807726A4FE8600ADB9FE /* RegistrationBotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationBotViewModel.swift; sourceTree = "<group>"; };
 		565F807B26A510AA00ADB9FE /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
@@ -844,6 +850,9 @@
 				565BFDC0269F92310044D081 /* UIApplicationExtention.swift */,
 				565BFDF626A064360044D081 /* String.swift */,
 				5659AC2E2704B97F00278560 /* UICollectionView.swift */,
+				565EECA72747D258001DB53B /* UIImageExtention.swift */,
+				565EECA92747D2AC001DB53B /* UITextFieldExtention.swift */,
+				565EECAB2747D2F4001DB53B /* UILabelExtention.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -2983,7 +2992,7 @@
 				568E6F4C2642FC4B000CB6A9 /* Resources */,
 				565F8C65268D390600E21C71 /* Embed Frameworks */,
 				995B321BDC49670283C49A78 /* [CP] Embed Pods Frameworks */,
-				C28C3266F881628FD0135356 /* [CP] Copy Pods Resources */,
+				7B98BD46E7C6BC785E0BDC6D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3154,6 +3163,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		7B98BD46E7C6BC785E0BDC6D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		995B321BDC49670283C49A78 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3169,23 +3195,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C28C3266F881628FD0135356 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3248,6 +3257,7 @@
 				562585DF26F176D500EC9284 /* RegisterNumberTableCell.swift in Sources */,
 				56CF782F26F3E1490092F555 /* OdometerCheckViewController.swift in Sources */,
 				5602536F2669AE1C00FB204C /* OfflineViewController.swift in Sources */,
+				565EECA82747D258001DB53B /* UIImageExtention.swift in Sources */,
 				5640395A26EFEF5A0064256C /* ReservetionWithDistancePriceCell.swift in Sources */,
 				5668377A270DD95A00C8D8FF /* DropDownTableView.swift in Sources */,
 				56683793271640DD00C8D8FF /* LocalizationModel.swift in Sources */,
@@ -3290,6 +3300,7 @@
 				565BFD87269F55550044D081 /* URLBuilderProtocol.swift in Sources */,
 				564ED6402700652300FA9714 /* ConfirmView.swift in Sources */,
 				565BFD86269F55550044D081 /* SessionProtocol.swift in Sources */,
+				565EECAC2747D2F4001DB53B /* UILabelExtention.swift in Sources */,
 				566B7E8A269DC036007C9241 /* VerificationCodeViewController.swift in Sources */,
 				56AD18EA2691622C006A53C1 /* NewPasswordViewController.swift in Sources */,
 				565F810526A7D08600ADB9FE /* PaymenTypeTableViewCell.swift in Sources */,
@@ -3348,6 +3359,7 @@
 				56ADD81426F2CED400C0ECC3 /* ReservationHistoryCell.swift in Sources */,
 				564E12D9264D7617008CE884 /* Constant.swift in Sources */,
 				560252F42665950700FB204C /* CustomLocationViewModel.swift in Sources */,
+				565EECAA2747D2AC001DB53B /* UITextFieldExtention.swift in Sources */,
 				5656323B265841BE00B78562 /* FilterSearchResultCell.swift in Sources */,
 				565BFD8B269F555F0044D081 /* URLBuilder.swift in Sources */,
 				565BFDDB269F973F0044D081 /* BaseResponseModel.swift in Sources */,

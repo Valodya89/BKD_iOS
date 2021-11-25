@@ -24,6 +24,7 @@ struct TariffSlideModel {
     public var isOpenOptions: Bool = false
     public var isItOption: Bool = false
     public var isSelected:Bool = false
+    public var segmentIndex:Int?
     public var options: [TariffSlideModel]?
     public var tariff: [Tariff]?
 }

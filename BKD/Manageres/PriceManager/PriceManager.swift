@@ -52,8 +52,9 @@ final class PriceManager {
         if totalLocation > 0 {
             prices.append(PriceModel(priceTitle: Constant.Texts.customLocation, price: totalLocation))
         }
+        
         let totalNoWorkibngTotal = getNoWorkingTimesTotalPrice() ?? 0
-        if totalLocation > 0 {
+        if totalNoWorkibngTotal > 0 {
             prices.append(PriceModel(priceTitle: Constant.Texts.additionalService, price: totalNoWorkibngTotal))
         }
         

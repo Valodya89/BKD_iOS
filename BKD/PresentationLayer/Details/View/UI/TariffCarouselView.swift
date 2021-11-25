@@ -16,19 +16,21 @@ protocol TariffCarouselViewDelegate: AnyObject {
                          optionstr: String,
                          options: [TariffSlideModel]?)
     func willChangeTariffOption(tariff: TariffState,
+                                optionstr: String,
                                 optionIndex: Int,
                                 options: [TariffSlideModel]?)
 }
 
 class TariffCarouselView: UIView {
     
-   public var tariffSlideList:[TariffSlideModel]?
-   public var vehicleModel:VehicleModel?
+   public var tariffSlideList: [TariffSlideModel]?
+   public var vehicleModel: VehicleModel?
 
     private var tariffCarouselCellV: TariffCarouselCell?
     private let tariffSlideViewModel = TariffSlideViewModel()
     weak var delegate: TariffCarouselViewDelegate?
     var selectedSegmentIndex: Int?
+   // public var currentItemIndex: Int?
     
     let tariffCarousel: iCarousel = {
         let view = iCarousel()
@@ -39,7 +41,6 @@ class TariffCarouselView: UIView {
     
     override func awakeFromNib() {
         superview?.awakeFromNib()
-        
         setUpView()
     }
     
@@ -95,7 +96,7 @@ extension TariffCarouselView: iCarouselDataSource, iCarouselDelegate {
     }
 
     func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
-        
+        print(carousel.currentItemIndex)
         carousel.reloadData()
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.prepare()
@@ -114,7 +115,11 @@ extension TariffCarouselView: iCarouselDataSource, iCarouselDelegate {
 extension TariffCarouselView: TariffCarouselCellDelegate {
     
     func willChangeOption(optionIndex: Int, options: [TariffSlideModel]?) {
+        let optionstr = tariffSlideViewModel.getOptionString(tariff: TariffState.allCases[tariffCarousel.currentItemIndex],
+                                                             tariffSlideList:tariffSlideList ?? [],
+                                                             index: optionIndex)
         delegate?.willChangeTariffOption(tariff: TariffState.allCases[tariffCarousel.currentItemIndex],
+                                         optionstr: optionstr,
                                          optionIndex: optionIndex,
                                          options: options)
     }

@@ -148,6 +148,7 @@ struct Constant {
         static let rentalConditions = "Rental conditions"
         static let bkdAdvantages = "BKD Advantages"
         static let select = "Select"
+        static let max90Days = "Sorry, you can´t reserve a car for more than 90 days!"
       
         
         
@@ -432,6 +433,7 @@ let top_searchResult: CGFloat = 12.0
 let top_avalableCategoryTbv: CGFloat = 30.0
 let cornerRadius_equipment: CGFloat = 15.0
 let zoom: Float = 18.0
+let monthDays: Double = 30
 let detail_cell_height: CGFloat = 28
 let mydriver_cell_height: CGFloat = 66
 let tailLift_cell_height: CGFloat = 40
@@ -446,6 +448,7 @@ let reservation_with_carNumber_height = UIScreen.main.bounds.height * 0.391089
 let height42 = UIScreen.main.bounds.height * 0.0519
 let height50 = UIScreen.main.bounds.height * 0.061
 let height307 = UIScreen.main.bounds.height * 0.379
+let height200 = UIScreen.main.bounds.height * 0.247
 let height245 = UIScreen.main.bounds.height * 0.303
 let height240 = UIScreen.main.bounds.height * 0.297
 let height285 = UIScreen.main.bounds.height * 0.352

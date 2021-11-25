@@ -138,10 +138,30 @@ func checkReservationReturnTime(pickUpDate: Date,
         let diff = Int(returnTime.timeIntervalSince1970 - pickUpTime.timeIntervalSince1970)
         let hours = diff / 3600
         let minutes = (diff - hours * 3600) / 60
-        return minutes > 30
+        return (minutes >= 29 || hours > 0 )
     }
     return true
 }
+    
+    
+    ///Check if reservation more then 90 days
+    func checkReservation90Days(search: SearchModel) -> Bool {
+        
+        guard let pickUpDate = search.pickUpDate,
+              let returnDate = search.returnDate,
+              let pickupTime = search.pickUpTime,
+              let returnTime = search.returnTime else {
+                  return false
+              }
+        let hours = Date().getHoursFromDates(start: pickUpDate,
+                                             end: returnDate,
+                                             startTime: pickupTime,
+                                             endTime: returnTime)
+        let days = Date().getDaysFromDates(start: pickUpDate,
+                                           end: returnDate,
+                                           hours: hours)
+        return days > 90
+    }
 
 //MARK: CUSTOM LOCATION PAGE  CHECKING
     //MARK: ------------------------

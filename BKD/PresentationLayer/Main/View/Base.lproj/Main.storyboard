@@ -212,6 +212,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I0y-eZ-Ldc">
+                                <rect key="frame" x="87" y="340" width="240" height="200"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ilV-lK-Jwv">
                                 <rect key="frame" x="0.0" y="12" width="414" height="713"/>
                                 <color key="backgroundColor" name="background"/>
@@ -227,6 +231,7 @@
                             <constraint firstItem="ilV-lK-Jwv" firstAttribute="leading" secondItem="19O-fH-HD0" secondAttribute="leading" id="CDc-JV-fw4"/>
                             <constraint firstItem="19O-fH-HD0" firstAttribute="trailing" secondItem="ilV-lK-Jwv" secondAttribute="trailing" id="GGj-OF-HHF"/>
                             <constraint firstItem="19O-fH-HD0" firstAttribute="bottom" secondItem="ilV-lK-Jwv" secondAttribute="bottom" id="XSB-Bj-ZJ6"/>
+                            <constraint firstItem="I0y-eZ-Ldc" firstAttribute="height" secondItem="kYK-fv-ZhM" secondAttribute="height" multiplier="0.247525" id="YAA-x0-sEj"/>
                             <constraint firstItem="ilV-lK-Jwv" firstAttribute="top" secondItem="19O-fH-HD0" secondAttribute="top" constant="12" id="jle-7P-Cjg"/>
                         </constraints>
                     </view>
@@ -291,12 +296,6 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Chc-h8-gvA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="1GL-m3-pPT">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <viewLayoutGuide key="safeArea" id="a3g-4i-0eX"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                </view>
             </objects>
             <point key="canvasLocation" x="488" y="638"/>
         </scene>

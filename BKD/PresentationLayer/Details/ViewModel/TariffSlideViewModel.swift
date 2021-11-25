@@ -50,6 +50,21 @@ class TariffSlideViewModel: NSObject {
         return option.dropLast() + " " + optionStr
     }
     
-        
+    
+    ///Get Tariff state index
+    func getTariffStateIndex(tariffState: TariffState) -> NSInteger {
+        switch tariffState {
+        case .hourly:
+            return 0
+        case .daily:
+            return 1
+        case .weekly:
+            return 2
+        case .monthly:
+            return 3
+        case .flexible:
+            return NSInteger(4)
+        }
+    }
    
 }

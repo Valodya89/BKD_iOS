@@ -53,6 +53,7 @@ class TariffCarouselCell: UIView {
     
     //MARK: Variable
     var selectedSegmentIndex = 0
+    var previousSegmentIndex = 0
     var isConfirm = false
     var item: TariffSlideModel?
     weak var delegate: TariffCarouselCellDelegate?
@@ -90,11 +91,11 @@ class TariffCarouselCell: UIView {
     
     ///Configure segment control
     func configureSegmentControl() {
-        
         let currTariffs = item?.tariff
         var segmentControlItems:[String] = []
         
         if currTariffs?.count ?? 0 > 0  {
+            
             for i in (0..<Int(currTariffs!.count)) {
                 let tariff:Tariff = currTariffs![i]
                 
@@ -113,6 +114,9 @@ class TariffCarouselCell: UIView {
                 segmentControl = UISegmentedControl(items: segmentControlItems)
                 segmentControl?.frame =  CGRect(x: mHoursSegmentC.frame.origin.x, y: mHoursSegmentC.frame.origin.y,  width:CGFloat(segmentControlItems.count * 31), height: mHoursSegmentC.frame.size.height)
                 self.addSubview(segmentControl ?? UISegmentedControl())
+                
+                selectedSegmentIndex = item?.segmentIndex ?? 0
+                previousSegmentIndex = selectedSegmentIndex
                 segmentControl?.selectedSegmentIndex = selectedSegmentIndex
                 segmentControl?.addTarget(self, action: #selector(didChangeSegment(sender:)), for: .allEvents)
             }
@@ -123,6 +127,7 @@ class TariffCarouselCell: UIView {
     
     ///set info to close cells
     func setUnselectedCellsInfo(item:TariffSlideModel, index: Int) {
+        selectedSegmentIndex = item.segmentIndex ?? 0
         mUnselectedBckgV.isHidden = false
         mSelectedBckgV.isHidden = true
         mUnselectedBckgV.backgroundColor = item.bckgColor!.withAlphaComponent(0.6)
@@ -132,6 +137,7 @@ class TariffCarouselCell: UIView {
     
     /// set info to open cell
     func setSelectedCellInfo(item:TariffSlideModel, vehicleModel: VehicleModel, index: Int)  {
+        selectedSegmentIndex = item.segmentIndex ?? 0
         mMoreBtn.tag = index
         mUnselectedBckgV.isHidden = true
         mSelectedBckgV.isHidden = false
@@ -154,6 +160,7 @@ class TariffCarouselCell: UIView {
             setHourlyCellInfo()
         } else {
             configureCommonCells(index: index)
+            confirmTariff()
         }
         if index == 4 || index == 0 { //hourly or Flexible cells
             mFreeKmLb.text = String(vehicleModel.freeKiloMeters) + Constant.Texts.freeKm
@@ -176,6 +183,7 @@ class TariffCarouselCell: UIView {
         }
         mMoreBtn.setTitleColor(.white, for: .normal)
         
+        //Segment controll
         configureSegmentControl()
         segmentControl?.backgroundColor = color_main!.withAlphaComponent(0.26)
         segmentControl?.setDividerImage(UIImage().colored(with: .clear, size: CGSize(width: 1, height: 15)), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
@@ -187,7 +195,8 @@ class TariffCarouselCell: UIView {
         } else {
             // Fallback on earlier versions
         }
-        
+        confirmTariff()
+
     }
     
     ///configure Flexible Cell
@@ -225,6 +234,7 @@ class TariffCarouselCell: UIView {
         mDepositImgV.setTintColor(color: UIColor(ciColor: .white).withAlphaComponent(0.49))
         mFuelConsumptionImgV.setTintColor(color: .white)
         mTitleLb.textColor = .white
+        
         mConfirmBtn.setTitleColor(item?.isSelected ?? false ? color_menu : color_main, for: .normal)
         if item?.isSelected == false  {
             let flexible  = (item?.flexibleStaringPrice ?? Double(item?.value ?? "0"))!
@@ -292,6 +302,24 @@ class TariffCarouselCell: UIView {
         
     }
     
+    ///Confirm tariff
+    private  func confirmTariff() {
+
+        if item?.options?[selectedSegmentIndex].isSelected == true {
+            isConfirm = true
+            mPriceLb.text = item?.options?[selectedSegmentIndex].value
+            
+            PriceManager.shared.carPrice =  Double(mPriceLb.text ?? "0")
+
+            if let offert = item?.options?[selectedSegmentIndex].specialValue {
+                mOffertPriceLb.text = offert
+                PriceManager.shared.carOffertPrice =  Double(offert)
+                PriceManager.shared.carDiscountPrecent = item?.options?[selectedSegmentIndex].discountPercent
+            }
+            
+            mConfirmBtn.setTitleColor((item?.options?[selectedSegmentIndex].type != Constant.Texts.daily) ? color_menu : .white , for: .normal)
+        } 
+    }
     
     func updateSpecialPrice(option: TariffSlideModel) {
         let specialValue:Double = Double(option.specialValue ?? "0.0") ?? 0.0
@@ -310,9 +338,12 @@ class TariffCarouselCell: UIView {
     
     @objc func didChangeSegment(sender: UISegmentedControl) {
         selectedSegmentIndex = sender.selectedSegmentIndex
-        if isConfirm {
+        confirmTariff()
+
+        if isConfirm && previousSegmentIndex != selectedSegmentIndex {
             delegate?.willChangeOption(optionIndex: selectedSegmentIndex,
                                        options: item?.options)
+            previousSegmentIndex = selectedSegmentIndex
         }
         guard let options = item?.options  else {return}
         if selectedSegmentIndex < item?.tariff?.count ?? 0 {

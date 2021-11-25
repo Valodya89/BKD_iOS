@@ -113,6 +113,18 @@ extension Date {
         return calendar.component(compatent, from: self)
     }
     
+    ///Count days in month
+    func daysInMonth(_ monthNumber: Int? = nil, _ year: Int? = nil) -> Int {
+        var dateComponents = DateComponents()
+        dateComponents.year = self.get(.year)
+        dateComponents.month = self.get(.month)
+           if
+               let d = Calendar.current.date(from: dateComponents),
+               let interval = Calendar.current.dateInterval(of: .month, for: d),
+               let days = Calendar.current.dateComponents([.day], from: interval.start, to: interval.end).day
+           { return days } else { return -1 }
+       }
+    
     ///Check if time in range
     func dateIsInRange(startTime: Date, endTime: Date) -> Bool {
         let now = NSDate()
@@ -224,5 +236,77 @@ extension Date {
     func isBetween(start: Date,  end: Date) -> Bool {
             return (min(start, end) ... max(start, end)).contains(self)
         }
+    
+    
+    /// Combine date with dateTime
+    func combineDate(date: Date, withTime time: Date) -> Date? {
+        
+        var calendar = NSCalendar.current
+        calendar.timeZone = (NSTimeZone(name: "UTC") as TimeZone?)!
 
+           let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
+           let timeComponents = calendar.dateComponents([.hour, .minute, .second], from: time)
+
+           var components = DateComponents()
+           components.year = dateComponents.year
+           components.month = dateComponents.month
+           components.day = dateComponents.day
+           components.hour = timeComponents.hour
+           components.minute = timeComponents.minute
+           components.second = timeComponents.second
+
+           return calendar.date(from: components)!
+       }
+    
+    
+    ///Count the hours to date
+    func getHoursFromDates(start: Date, end: Date,
+                           startTime: Date, endTime: Date) -> Double {
+        
+        //combine date with time date
+        let pickupDate = Date().combineDate(date: start, withTime: startTime)
+        let returnDate = Date().combineDate(date: end, withTime: endTime)
+  
+        let pickupTime = Double(pickupDate?.timeIntervalSince1970 ?? 0)
+        let retrunTime = Double(returnDate?.timeIntervalSince1970 ?? 0)
+        let differenceTime = retrunTime - pickupTime
+        var hours = (differenceTime/3600).truncatingRemainder(dividingBy: 3600)
+        //ceil hour (if hour is 1.5 (1 hour and 30 minute) it get 2 hours)
+        hours = ceil((hours * 10).rounded() / 10)
+        return hours
+    }
+    
+    ///Count the days to date
+    func getDaysFromDates(start: Date, end: Date, hours: Double) -> Double {
+        
+        let years = Double(end.distance(from: start, only: .year))
+        let months = Double(end.distance(from: start, only: .month))
+        if (months <= 0 && years == 1 && (12 + months > 3)) { //if days more then 3 month and dates in diffirent years
+            return 1000
+        } else if (months > 4) { // if days more then 3 months
+            return 1000
+        }
+        //Count days
+        var days = hours / 24
+        if hours <= 24 {
+            days = 1
+        } else {
+            days = ceil(hours / 24) //if result is 1 day and 2 hours it get 2 days
+        }
+        return days
+    }
+    //        var months = Double(search.returnDate!.distance(from: search.pickUpDate!, only: .month))
+    //        months = 12 + months
+    //
+    //        //Count days
+    //        var days = differenceInTimes / 24
+    //        if differenceInTimes <= 24 {
+    //            differenceInDays = 1
+    //        } else {
+    //            differenceInDays = ceil(differenceInTimes / 24)
+    //        }
+    //        days = differenceInDays
+    //        if months >= 1 && months < 12 {
+    //            days = differenceInDays + 300
+    //        }
 }

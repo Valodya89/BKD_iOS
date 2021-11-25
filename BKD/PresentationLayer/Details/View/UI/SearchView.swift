@@ -135,12 +135,13 @@ class SearchView: UIView, UITextFieldDelegate {
     
     /// Set pick up date info
     func setPickUpDateInfo(searchModel: SearchModel)  {
+        guard let pickup = searchModel.pickUpDate else {return}
         showDateInfoViews(dayBtn: mDayPickUpBtn,
                           monthBtn:
                             mMonthPickUpBtn,
                           txtFl: mPickUpDataTxtFl)
-        mDayPickUpBtn.setTitle(String((searchModel.pickUpDate!.getDay())), for: .normal)
-        mMonthPickUpBtn.setTitle(searchModel.pickUpDate!.getMonthAndWeek(lng: "en"), for: .normal)
+        mDayPickUpBtn.setTitle(String((pickup.getDay())), for: .normal)
+        mMonthPickUpBtn.setTitle(pickup.getMonthAndWeek(lng: "en"), for: .normal)
     }
     
     /// Set return date info
@@ -158,20 +159,25 @@ class SearchView: UIView, UITextFieldDelegate {
     
     /// Set pick up timr info
     func setPickUpTimeInfo(searchModel: SearchModel) {
+        
+        guard let pickUpTime = searchModel.pickUpTime else {return}
+
         mPickUpTimeTxtFl.font =  UIFont.init(name: (mPickUpTimeTxtFl.font?.fontName)!, size: 18.0)
         mPickUpTimeTxtFl.textColor = color_entered_date
-        mPickUpTimeTxtFl.text = searchModel.pickUpTime!.getHour()
+        mPickUpTimeTxtFl.text = pickUpTime.getHour()
     }
     
     /// Set return time info
     func setReturnTimeInfo(searchModel: SearchModel, tariff: TariffState) {
+        guard let returnTime = searchModel.returnTime else {return}
         mReturnTimeTxtFl.font =  UIFont.init(name: (mReturnTimeTxtFl.font?.fontName)!, size: 18.0)
         mReturnTimeTxtFl.textColor = (tariff == .flexible) ? color_entered_date : color_search_passive
-       mReturnTimeTxtFl.text = searchModel.returnTime!.getHour()
+       mReturnTimeTxtFl.text = returnTime.getHour()
     }
     
     /// Set pick up location info
     func setPickUpLocationInfo(searchModel: SearchModel) {
+        
         mPickUpLocationBtn.setTitleColor(color_entered_date!, for: .normal)
         mPickUpLocationBtn.titleLabel?.font = font_search_title
         mPickUpLocationBtn.setTitle(searchModel.pickUpLocation, for: .normal)
@@ -289,6 +295,20 @@ class SearchView: UIView, UITextFieldDelegate {
         dayBtn.isHidden = false
         monthBtn.isHidden = false
         txtFl.text = ""
+    }
+    
+    func resetReturnTime() {
+        mReturnTimeTxtFl.text = Constant.Texts.returnTime
+        mReturnTimeTxtFl.font = font_placeholder
+        mReturnTimeTxtFl.textColor = color_choose_date
+    }
+    
+    func resetReturnDate() {
+        mReturnDateTxtFl.text = Constant.Texts.returnDate
+        mReturnDateTxtFl.font = font_placeholder
+        mReturnDateTxtFl.textColor = color_choose_date
+        mDayReturnDateBtn.setTitle("", for: .normal)
+        mMonthReturnDateBtn?.setTitle("", for: .normal)
     }
     
     ///Update search fields

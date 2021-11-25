@@ -111,7 +111,7 @@ class MainViewController: BaseViewController {
         self.mAvalableCategoriesTbV.setContentOffset(.init(x: 0, y: -top), animated: false)
     }
     
-    // set info to setSearch model
+    // set info to search model
     private func setSearchModel(){
         searchModel.pickUpDate = searchHeaderV?.pickUpDate
         searchModel.returnDate = searchHeaderV?.returnDate
@@ -309,6 +309,20 @@ class MainViewController: BaseViewController {
     
   
    //MARK: -- Checkings
+    
+    ///check if reservation date more than 90 days
+    func checkIfReservationMoreThan90Days() -> Bool {
+        setSearchModel()
+        if  mainViewModel.isReservetionMore90Days(search: searchModel) {
+                BKDAlert().showAlertOk(on: self, message: Constant.Texts.max90Days, okTitle: Constant.Texts.ok) {
+                    self.searchHeaderV?.resetReturnDate()
+                    self.searchHeaderV?.resetReturnTime()
+            }
+            return true
+        }
+        return false
+    }
+    
     ///check if reservation date more than a month
     func checkMonthReservation() {
         var pickUpDate: Date? = searchHeaderV?.pickUpDate
@@ -334,7 +348,6 @@ class MainViewController: BaseViewController {
                 self.showAlertWorkingHours()
             } else {
                 self.checkReservetionHalfHour()
-
             }
         }
     }
@@ -536,6 +549,7 @@ class MainViewController: BaseViewController {
     }
     
     
+    ///Handler done of tool bar
     @objc func donePressed() {
         
         responderTxtFl.resignFirstResponder()
@@ -545,14 +559,19 @@ class MainViewController: BaseViewController {
         switch pickerState {
         case .pickUpDate:
             searchHeaderV?.pickUpDate = datePicker.date
-            searchHeaderV!.updatePickUpDate(datePicker: datePicker)
-            self.checkReservetionHalfHour()
+            if  !checkIfReservationMoreThan90Days() {
+                searchHeaderV!.updatePickUpDate(datePicker: datePicker)
+                self.checkReservetionHalfHour()
+            }
 
         case .returnDate:
-            checkMonthReservation()
             searchHeaderV?.returnDate = datePicker.date
-            searchHeaderV?.updateReturnDate(datePicker: datePicker)
-            self.checkReservetionHalfHour()
+            if  !checkIfReservationMoreThan90Days() {
+                checkMonthReservation()
+
+                searchHeaderV?.updateReturnDate(datePicker: datePicker)
+                self.checkReservetionHalfHour()
+            }
 
         default:
             guard let _ = pickerList else { return }
@@ -563,9 +582,9 @@ class MainViewController: BaseViewController {
                 //check if more then half hour
                 searchHeaderV?.returnTime = timeStr.stringToDate()
             }
-//            searchHeaderV?.updateTime(responderTxtFl: responderTxtFl, text: pickerList![ pickerV.selectedRow(inComponent: 0)])
-            self.checkReservetionTime()
-
+            if  !checkIfReservationMoreThan90Days() {
+                self.checkReservetionTime()
+            }
         }
         
         //Checking the filling of any fields and removing the error color from the field
@@ -794,6 +813,7 @@ extension MainViewController: SearchHeaderViewDelegate {
             }
             self.datePicker.datePickerMode = .date
             self.datePicker.minimumDate =  Date()
+            self.datePicker.maximumDate =  Date().addMonths(12)
             self.datePicker.locale = Locale(identifier: "en")
         }
     }
