@@ -137,8 +137,6 @@ class ReserveViewController: BaseViewController {
             mReturnDateLb.text = String((vehicleModel?.searchModel?.returnDate?.getDay())!)
         }
             
-        
-        
         self.mReserveInfoTableV.accessories = reserveViewModel.getAdditionalAccessories(vehicleModel: vehicleModel!) as? [AccessoriesEditModel]
         
         self.mReserveInfoTableV.drivers = reserveViewModel.getAdditionalDrivers(vehicleModel: vehicleModel!)
@@ -159,7 +157,10 @@ class ReserveViewController: BaseViewController {
                 if let _ = error {
                     self.showAlertSignIn()
                 } else if result == nil {
-                    self.showAlertMessage(Constant.Texts.errReservation)
+                    self.showAlert()
+//                    self.showAlertMessage(Constant.Texts.errRegistrationBot)
+                } else {
+                    self.clickConfirm()
                 }
         }
     }
@@ -171,7 +172,6 @@ class ReserveViewController: BaseViewController {
             self.mConfirmBckgV.layoutIfNeeded()
 
         } completion: { _ in
-            self.addReservation()
             //self.checkIsUserSignIn()
         }
     }
@@ -196,17 +196,37 @@ class ReserveViewController: BaseViewController {
         }
     }
     
+   
+    ///Show alert
+    private func showAlert() {
+        BKDAlert().showAlert(on: self,
+                             title: nil,
+                             message: Constant.Texts.errRegistrationBot,
+                             messageSecond: nil,
+                             cancelTitle: Constant.Texts.cancel,
+                             okTitle: Constant.Texts.ok,
+                             cancelAction: nil) {
+            self.goToMyBkd()
+        }
+    }
+    
     private func checkPhoneNumberVerification() -> Bool {
         return false
     }
 
     
-    
+   
+    ///Go to verification screen
     private func goToPhoneVerification() {
         let changePhoneNumberVC = ChangePhoneNumberViewController.initFromStoryboard(name: Constant.Storyboards.changePhoneNumber)
       self.navigationController?.pushViewController(changePhoneNumberVC, animated: true)
     }
     
+    ///Go to myBkd screen
+    private func goToMyBkd() {
+        self.tabBarController?.selectedIndex = 4
+        self.navigationController?.popToViewController(ofClass: MyBKDViewController.self, animated: true)
+    }
 //MARK: - Actions
 //MARK: -------------------
     
@@ -215,12 +235,10 @@ class ReserveViewController: BaseViewController {
     }
     
     @IBAction func confirm(_ sender: UIButton) {
-        clickConfirm()
-    }
+        addReservation()    }
     
     @IBAction func confirmSwipe(_ sender: UISwipeGestureRecognizer) {
-        clickConfirm()
-    }
+        addReservation()    }
 
 }
 

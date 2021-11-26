@@ -799,6 +799,7 @@ extension RegistartionBotViewController: UIImagePickerControllerDelegate, UINavi
                 DispatchQueue.main.async { [self] in
                     tableData[self.takePhotoCurrentIndex].userRegisterInfo = UserRegisterInfo(photo: image, isFilled: true)
                     mTableV.reloadRows(at: [IndexPath(row: self.takePhotoCurrentIndex, section: 0)], with: .automatic)
+                  //  mTableV.reloadData()
                     isEdit = (self.takePhotoCurrentIndex < currentIndex)
                     self.insertTableCell()
                 }

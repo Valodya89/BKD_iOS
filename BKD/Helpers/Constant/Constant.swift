@@ -346,6 +346,7 @@ struct Constant {
         static let errDrivLicenseDate = "Failed to add issue and expired driver license dates."
         static let errAcceptAgreement = "Failed to accept agreement."
         static let errReservation = "Failed to reservation."
+        static let errRegistrationBot = "Please, complete user registration"
 
         
         //Request texts

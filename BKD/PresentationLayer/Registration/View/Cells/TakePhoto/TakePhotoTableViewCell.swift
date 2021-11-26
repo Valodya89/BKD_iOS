@@ -51,6 +51,7 @@ class TakePhotoTableViewCell: UITableViewCell {
         mTackePhotoBackgV.setBorder(color: color_navigationBar!, width: 1.0)
         mOpenContentV.layer.cornerRadius = mTackePhotoBackgV.frame.height/2
         mOpenContentV.setBorder(color: color_navigationBar!, width: 1.0)
+        mCameraImgV.image = UIImage(named: "camera")
         mCameraImgV.setTintColor(color: color_alert_txt!)
         mAgreeImgV.setTintColor(color: color_alert_txt!)
 //        mTackePhotoBackgV.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_navigationBar!, borderWidth: 1)
@@ -69,6 +70,7 @@ class TakePhotoTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         mTackePhotoBackgV.setBorder(color: color_navigationBar!, width: 1.0)
         mOpenContentV.setBorder(color: color_navigationBar!, width: 1.0)
+
 //        mTackePhotoBackgV.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_navigationBar!, borderWidth: 1)
 //        mOpenContentV.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_navigationBar!, borderWidth: 1)
         mTackePhotoBackgV.backgroundColor = .clear
@@ -76,6 +78,7 @@ class TakePhotoTableViewCell: UITableViewCell {
         mPhotoImgV.isHidden = true
         mTakePhotoLb.textColor = color_alert_txt!
         mOpenLb.textColor = color_alert_txt!
+        mCameraImgV.image = UIImage(named: "camera")
         mCameraImgV.setTintColor(color: color_alert_txt!)
         mAgreeImgV.setTintColor(color: color_alert_txt!)
         self.isUserInteractionEnabled = true
@@ -132,7 +135,11 @@ class TakePhotoTableViewCell: UITableViewCell {
             mOpenContentV.backgroundColor = color_navigationBar! // color_dark_register!
         } else {
             mTakePhotoLb.textColor = .white
-            mCameraImgV.setTintColor(color: .white)
+           // mCameraImgV.setTintColor(color: .white)
+            
+            mCameraImgV.image = UIImage(named: "camera_white")
+                        
+            
 //            mTackePhotoBackgV.setBorderColorToCAShapeLayer(color: .clear)
 //            mTackePhotoBackgV.setBackgroundColorToCAShapeLayer(color: color_dark_register!)
             mTackePhotoBackgV.layer.borderWidth = 0.0
