@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19158" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19141"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -46,9 +46,9 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
                                 <color key="textColor" name="navigationBar"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kQW-qx-kY2">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kQW-qx-kY2">
                                 <rect key="frame" x="0.0" y="136.5" width="414" height="637.5"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="background"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PaymenTypeTableViewCell" rowHeight="100" id="ZNR-Kv-EjC" customClass="PaymenTypeTableViewCell" customModule="BKD" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="100"/>
@@ -59,7 +59,7 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EzH-dL-bz2">
                                                     <rect key="frame" x="16" y="0.0" width="382" height="79"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" name="subview_background"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                     <state key="normal">
                                                         <color key="titleColor" name="navigationBar"/>
@@ -67,8 +67,10 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
                                                 </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l5a-zG-7Lr">
                                                     <rect key="frame" x="16" y="0.0" width="382" height="79"/>
+                                                    <color key="backgroundColor" name="subview_background"/>
                                                 </imageView>
                                             </subviews>
+                                            <color key="backgroundColor" name="background"/>
                                             <constraints>
                                                 <constraint firstItem="EzH-dL-bz2" firstAttribute="centerX" secondItem="GxL-Mg-FgN" secondAttribute="centerX" id="0R6-vr-ec3"/>
                                                 <constraint firstItem="l5a-zG-7Lr" firstAttribute="centerY" secondItem="EzH-dL-bz2" secondAttribute="centerY" id="51M-zT-00n"/>
@@ -81,6 +83,7 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
                                                 <constraint firstAttribute="bottom" secondItem="EzH-dL-bz2" secondAttribute="bottom" constant="13" id="cGc-O7-jbs"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="background"/>
                                         <connections>
                                             <outlet property="mCardImgV" destination="l5a-zG-7Lr" id="Lep-Ig-u0x"/>
                                             <outlet property="mPaymentBtn" destination="EzH-dL-bz2" id="iVt-Zg-pun"/>
@@ -97,20 +100,159 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000000000000004" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8Xf-5q-ubS">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <gestureRecognizers/>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="fMz-rk-pGH" appends="YES" id="q7j-ca-Cjv"/>
+                                    </connections>
                                 </view>
+                                <gestureRecognizers/>
                                 <blurEffect style="regular"/>
                             </visualEffectView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U57-rJ-Vs9" customClass="BancontactView" customModule="BKD" customModuleProvider="target">
+                                <rect key="frame" x="16" y="949" width="382" height="225"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jxq-5H-zHJ">
+                                        <rect key="frame" x="0.0" y="44" width="382" height="181"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose your bank" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y5s-4I-Aon">
+                                                <rect key="frame" x="57.5" y="9" width="267" height="27"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="22"/>
+                                                <color key="textColor" name="filter_fields"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="52" translatesAutoresizingMaskIntoConstraints="NO" id="bRM-W2-ayh">
+                                                <rect key="frame" x="31" y="75.5" width="320" height="57"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ioQ-G1-j0F">
+                                                        <rect key="frame" x="0.0" y="0.0" width="72" height="57"/>
+                                                        <state key="normal" image="ing"/>
+                                                        <connections>
+                                                            <action selector="ingBanc:" destination="U57-rJ-Vs9" eventType="touchUpInside" id="gbi-rZ-q53"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cA8-Ku-zv2">
+                                                        <rect key="frame" x="124" y="0.0" width="72" height="57"/>
+                                                        <state key="normal" image="bnp"/>
+                                                        <connections>
+                                                            <action selector="bnpBank:" destination="U57-rJ-Vs9" eventType="touchUpInside" id="nx7-k4-S27"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKy-iS-4qi">
+                                                        <rect key="frame" x="248" y="0.0" width="72" height="57"/>
+                                                        <state key="normal" image="kbc"/>
+                                                        <connections>
+                                                            <action selector="kbcBank:" destination="U57-rJ-Vs9" eventType="touchUpInside" id="WLE-pz-cc4"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="oKy-iS-4qi" firstAttribute="height" secondItem="bRM-W2-ayh" secondAttribute="height" id="4Ge-1m-TAK"/>
+                                                    <constraint firstItem="oKy-iS-4qi" firstAttribute="centerY" secondItem="bRM-W2-ayh" secondAttribute="centerY" id="Nf3-CL-nRI"/>
+                                                    <constraint firstItem="ioQ-G1-j0F" firstAttribute="height" secondItem="bRM-W2-ayh" secondAttribute="height" id="Ocx-SP-2md"/>
+                                                    <constraint firstItem="cA8-Ku-zv2" firstAttribute="centerY" secondItem="bRM-W2-ayh" secondAttribute="centerY" id="ZuH-Ju-3AH"/>
+                                                    <constraint firstItem="cA8-Ku-zv2" firstAttribute="height" secondItem="bRM-W2-ayh" secondAttribute="height" id="tdd-9o-cZl"/>
+                                                    <constraint firstItem="ioQ-G1-j0F" firstAttribute="centerY" secondItem="bRM-W2-ayh" secondAttribute="centerY" id="yeb-9M-Tz1"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" name="subview_background"/>
+                                        <constraints>
+                                            <constraint firstItem="Y5s-4I-Aon" firstAttribute="height" secondItem="Jxq-5H-zHJ" secondAttribute="height" multiplier="0.149171" id="0KX-Tk-M4a"/>
+                                            <constraint firstItem="bRM-W2-ayh" firstAttribute="centerY" secondItem="Jxq-5H-zHJ" secondAttribute="centerY" multiplier="1.15" id="DGE-jZ-Xeh"/>
+                                            <constraint firstItem="bRM-W2-ayh" firstAttribute="width" secondItem="Jxq-5H-zHJ" secondAttribute="width" multiplier="0.837696" id="Lwq-pY-6Lt"/>
+                                            <constraint firstItem="bRM-W2-ayh" firstAttribute="height" secondItem="Jxq-5H-zHJ" secondAttribute="height" multiplier="0.314917" id="Oxd-bg-iEG"/>
+                                            <constraint firstItem="Y5s-4I-Aon" firstAttribute="centerY" secondItem="Jxq-5H-zHJ" secondAttribute="centerY" multiplier="0.25" id="VgT-r4-hdH"/>
+                                            <constraint firstItem="bRM-W2-ayh" firstAttribute="centerX" secondItem="Jxq-5H-zHJ" secondAttribute="centerX" id="ZzP-4b-M4Y"/>
+                                            <constraint firstItem="Y5s-4I-Aon" firstAttribute="width" secondItem="Jxq-5H-zHJ" secondAttribute="width" multiplier="0.7" id="mwg-QN-7Oh"/>
+                                            <constraint firstItem="Y5s-4I-Aon" firstAttribute="centerX" secondItem="Jxq-5H-zHJ" secondAttribute="centerX" id="qMD-ts-Ye6"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="Jxq-5H-zHJ" firstAttribute="centerX" secondItem="U57-rJ-Vs9" secondAttribute="centerX" id="9Az-CO-MwP"/>
+                                    <constraint firstItem="Jxq-5H-zHJ" firstAttribute="width" secondItem="U57-rJ-Vs9" secondAttribute="width" id="Y6G-ZH-IrH"/>
+                                    <constraint firstAttribute="bottom" secondItem="Jxq-5H-zHJ" secondAttribute="bottom" id="qTg-9b-VKb"/>
+                                    <constraint firstItem="Jxq-5H-zHJ" firstAttribute="height" secondItem="U57-rJ-Vs9" secondAttribute="height" multiplier="0.804444" id="x8Y-BW-25A"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="mContentV" destination="Jxq-5H-zHJ" id="ajV-ef-4oy"/>
+                                    <outlet property="mContentVBottom" destination="vnd-AB-1eS" id="R16-IS-3Ge"/>
+                                    <outlet property="mTitleLb" destination="Y5s-4I-Aon" id="7ii-HW-ZKT"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kmU-TZ-oUJ" customClass="BancontactTypeView" customModule="BKD">
+                                <rect key="frame" x="16" y="996" width="382" height="178"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WYx-hJ-2yi">
+                                        <rect key="frame" x="0.0" y="48" width="382" height="130"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="je9-pS-y0U">
+                                                <rect key="frame" x="116" y="25" width="150" height="41"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
+                                                <state key="normal" title="Mobile bancink">
+                                                    <color key="titleColor" name="navigationBar"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="mobileBanking:" destination="kmU-TZ-oUJ" eventType="touchUpInside" id="ql0-qQ-n7f"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TOf-qo-a5b">
+                                                <rect key="frame" x="116" y="70.5" width="150" height="41"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
+                                                <state key="normal" title="Bancontact">
+                                                    <color key="titleColor" name="navigationBar"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="bancontact:" destination="kmU-TZ-oUJ" eventType="touchUpInside" id="HYR-hc-geR"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" name="subview_background"/>
+                                        <constraints>
+                                            <constraint firstItem="TOf-qo-a5b" firstAttribute="width" secondItem="WYx-hJ-2yi" secondAttribute="width" multiplier="0.39267" id="GWQ-ht-WaC"/>
+                                            <constraint firstItem="je9-pS-y0U" firstAttribute="centerY" secondItem="WYx-hJ-2yi" secondAttribute="centerY" multiplier="0.7" id="Lsz-St-6w2"/>
+                                            <constraint firstItem="TOf-qo-a5b" firstAttribute="centerY" secondItem="WYx-hJ-2yi" secondAttribute="centerY" multiplier="1.4" id="TOg-PX-WBv"/>
+                                            <constraint firstItem="je9-pS-y0U" firstAttribute="centerX" secondItem="WYx-hJ-2yi" secondAttribute="centerX" id="X7u-5e-Jgy"/>
+                                            <constraint firstItem="TOf-qo-a5b" firstAttribute="height" secondItem="WYx-hJ-2yi" secondAttribute="height" multiplier="0.315385" id="fmU-bm-yfR"/>
+                                            <constraint firstItem="je9-pS-y0U" firstAttribute="height" secondItem="WYx-hJ-2yi" secondAttribute="height" multiplier="0.315385" id="sua-KL-o9L"/>
+                                            <constraint firstItem="je9-pS-y0U" firstAttribute="width" secondItem="WYx-hJ-2yi" secondAttribute="width" multiplier="0.39267" id="u1p-S2-yAw"/>
+                                            <constraint firstItem="TOf-qo-a5b" firstAttribute="centerX" secondItem="WYx-hJ-2yi" secondAttribute="centerX" id="yEV-ys-3GD"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="WYx-hJ-2yi" secondAttribute="bottom" id="9n3-eV-EZe"/>
+                                    <constraint firstItem="WYx-hJ-2yi" firstAttribute="width" secondItem="kmU-TZ-oUJ" secondAttribute="width" id="doR-mT-j2d"/>
+                                    <constraint firstItem="WYx-hJ-2yi" firstAttribute="height" secondItem="kmU-TZ-oUJ" secondAttribute="height" multiplier="0.732" id="mL0-MQ-c45"/>
+                                    <constraint firstItem="WYx-hJ-2yi" firstAttribute="centerX" secondItem="kmU-TZ-oUJ" secondAttribute="centerX" id="ydG-H2-bEz"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="mContentV" destination="WYx-hJ-2yi" id="dkl-go-d2f"/>
+                                    <outlet property="mContentVBottom" destination="91v-9M-Wzp" id="xLK-Hy-Fi3"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BSU-vw-Mw1"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="background"/>
+                        <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="U57-rJ-Vs9" firstAttribute="width" secondItem="rfv-c2-eiK" secondAttribute="width" multiplier="0.922705" id="3PQ-BY-TkF"/>
+                            <constraint firstItem="kmU-TZ-oUJ" firstAttribute="width" secondItem="rfv-c2-eiK" secondAttribute="width" multiplier="0.922705" id="43Z-px-auD"/>
                             <constraint firstItem="kQW-qx-kY2" firstAttribute="leading" secondItem="BSU-vw-Mw1" secondAttribute="leading" id="5Fc-mt-2w6"/>
                             <constraint firstItem="BSU-vw-Mw1" firstAttribute="bottom" secondItem="ZHl-N1-8F0" secondAttribute="bottom" id="5WG-Vk-d66"/>
+                            <constraint firstItem="BSU-vw-Mw1" firstAttribute="bottom" secondItem="kmU-TZ-oUJ" secondAttribute="bottom" constant="-400" id="91v-9M-Wzp"/>
                             <constraint firstItem="ZHl-N1-8F0" firstAttribute="leading" secondItem="BSU-vw-Mw1" secondAttribute="leading" id="F7l-3W-mXT"/>
                             <constraint firstItem="acs-Ri-7at" firstAttribute="top" secondItem="BSU-vw-Mw1" secondAttribute="centerY" multiplier="0.053" id="Ldy-ZJ-r5u"/>
                             <constraint firstItem="BSU-vw-Mw1" firstAttribute="bottom" secondItem="kQW-qx-kY2" secondAttribute="bottom" id="LkY-EY-Vip"/>
                             <constraint firstItem="tsT-wT-iVq" firstAttribute="height" secondItem="rfv-c2-eiK" secondAttribute="height" multiplier="0.0272277" id="NvV-Dq-BdY"/>
+                            <constraint firstItem="kmU-TZ-oUJ" firstAttribute="height" secondItem="rfv-c2-eiK" secondAttribute="height" multiplier="0.22" id="OmO-EL-WzE"/>
+                            <constraint firstItem="kmU-TZ-oUJ" firstAttribute="centerX" secondItem="BSU-vw-Mw1" secondAttribute="centerX" id="PSY-EF-rGC"/>
                             <constraint firstItem="BSU-vw-Mw1" firstAttribute="trailing" secondItem="kQW-qx-kY2" secondAttribute="trailing" id="PdK-ik-hcI"/>
+                            <constraint firstItem="U57-rJ-Vs9" firstAttribute="centerX" secondItem="BSU-vw-Mw1" secondAttribute="centerX" id="SZs-6U-4H4"/>
                             <constraint firstItem="BSU-vw-Mw1" firstAttribute="trailing" secondItem="ZHl-N1-8F0" secondAttribute="trailing" id="WrR-TI-UfT"/>
                             <constraint firstItem="tsT-wT-iVq" firstAttribute="width" secondItem="rfv-c2-eiK" secondAttribute="width" multiplier="0.8" id="gJK-Vl-w8B"/>
                             <constraint firstItem="tsT-wT-iVq" firstAttribute="top" secondItem="acs-Ri-7at" secondAttribute="bottom" multiplier="1.22" id="gmf-lM-dQB"/>
@@ -119,7 +261,12 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
                             <constraint firstItem="acs-Ri-7at" firstAttribute="centerX" secondItem="BSU-vw-Mw1" secondAttribute="centerX" id="pFb-2V-ceb"/>
                             <constraint firstItem="tsT-wT-iVq" firstAttribute="centerX" secondItem="BSU-vw-Mw1" secondAttribute="centerX" multiplier="0.882" id="pVd-yA-r0s"/>
                             <constraint firstItem="kQW-qx-kY2" firstAttribute="top" secondItem="tsT-wT-iVq" secondAttribute="bottom" multiplier="2.9" id="qvO-OH-vi4"/>
+                            <constraint firstItem="BSU-vw-Mw1" firstAttribute="bottom" secondItem="U57-rJ-Vs9" secondAttribute="bottom" constant="-400" id="vnd-AB-1eS"/>
+                            <constraint firstItem="U57-rJ-Vs9" firstAttribute="height" secondItem="rfv-c2-eiK" secondAttribute="height" multiplier="0.278465" id="ycX-DI-XjF"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="DVT-Ni-C3B" appends="YES" id="rHV-rt-1jy"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="tCY-lp-3Sz">
                         <barButtonItem key="leftBarButtonItem" image="back" id="4cv-06-TQz">
@@ -130,6 +277,9 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
                         <barButtonItem key="rightBarButtonItem" image="bkd" id="fo6-yI-lWs"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="mBancontactTypeBottom" destination="91v-9M-Wzp" id="8Nt-T4-0RA"/>
+                        <outlet property="mBancontactTypeV" destination="kmU-TZ-oUJ" id="DHg-Ie-auX"/>
+                        <outlet property="mBancontactV" destination="U57-rJ-Vs9" id="XOz-AK-KfZ"/>
                         <outlet property="mBlurV" destination="ZHl-N1-8F0" id="E3r-Fe-wZE"/>
                         <outlet property="mDepositInfoLb" destination="acs-Ri-7at" id="UEW-oQ-Mnw"/>
                         <outlet property="mDepositLbHeight" destination="a4j-wy-b9k" id="z5l-Ng-Ro1"/>
@@ -139,6 +289,16 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="htZ-GT-2Ba" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="down" id="DVT-Ni-C3B">
+                    <connections>
+                        <action selector="swipeBancontact:" destination="Ia9-oM-TDf" id="fCX-sy-JZz"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <tapGestureRecognizer id="fMz-rk-pGH">
+                    <connections>
+                        <action selector="TapGesture:" destination="Ia9-oM-TDf" id="aV3-QJ-Pzl"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1098.5507246376812" y="212.94642857142856"/>
         </scene>
@@ -234,11 +394,23 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
     <resources>
         <image name="back" width="12" height="21"/>
         <image name="bkd" width="76" height="23.5"/>
+        <image name="bnp" width="72" height="57"/>
+        <image name="ing" width="72" height="57"/>
+        <image name="kbc" width="72" height="57"/>
+        <namedColor name="background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="filter_fields">
+            <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="navigationBar">
             <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="navigation_bar">
             <color red="0.10999999940395355" green="0.20000000298023224" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="subview_background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
