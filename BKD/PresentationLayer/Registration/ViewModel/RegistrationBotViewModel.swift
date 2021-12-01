@@ -31,6 +31,8 @@ enum ImageUploadState: String {
 
 class RegistrationBotViewModel: NSObject {
     
+    private var keychainManager = KeychainManager()
+    
     ///Set registration bot information
     func setRegisterBotInfo(mainDriver: MainDriver, countryList: [Country]?, completion: @escaping ([RegistrationBotModel]) -> Void) {
         
@@ -387,7 +389,16 @@ class RegistrationBotViewModel: NSObject {
             }
         }
     }
-    
+   
+    ///Save user phone number to keychain
+    func saveUserPhoneNumber(phoneCodeId: String?, number: String?) {
+        if let phoneCodeId = phoneCodeId {
+            keychainManager.savePhoneCodeId(id: phoneCodeId)
+        }
+        if let number = number {
+            keychainManager.savePhoneNumber(number: number)
+        }
+    }
     
 }
 

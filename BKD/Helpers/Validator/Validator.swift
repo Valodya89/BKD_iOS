@@ -114,10 +114,10 @@ func checkReservationMonth(pickupDate: Date?, returnDate: Date?) -> Bool {
 
 
 /// if the booking time during working hours
-func checkReservationTime(time: Date?, workingTimes: WorkingTimes) -> Bool {
+func checkReservationTime(time: Date?, settings: Settings) -> Bool {
     guard let _ = time else { return false}
-    let startTimeDate = workingTimes.workStart.stringToDate()
-    let endTimeDate = workingTimes.workEnd.stringToDate()
+    let startTimeDate = settings.workStart.stringToDate()
+    let endTimeDate = settings.workEnd.stringToDate()
     
     print(startTimeDate.getString())
     print(endTimeDate.getString())

@@ -86,15 +86,6 @@ class MyReservationsViewController: BaseViewController {
         }
     }
     
-    ///Open agree Screen
-    private func goToAgreement() {
-        
-        let bkdAgreementVC = UIStoryboard(name: Constant.Storyboards.registrationBot, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.bkdAgreement) as! BkdAgreementViewController
-        bkdAgreementVC.isMyReservationCell = true
-        self.navigationController?.pushViewController(bkdAgreementVC, animated: true)
-    }
-    
-    
     ///Go to my reservation ViewController
     func goToMyReservation(myReservationState: MyReservationState,
                            paymentStatusArr: [PaymentStatusModel]?,
@@ -368,7 +359,8 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         cell.setCellInfo(item: item, index: indexPath.item)
         
         cell.payDistancePrice = {
-            self.goToAgreement()
+            self.goToAgreement(on: self, isAdvanced: false,
+                               isEditAdvanced: true, urlString: nil)
         }
         return cell
     }
@@ -380,7 +372,8 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         
         cell.setInfoCell(item: item, index: indexPath.item)
         cell.payRentalPrice = {
-            self.goToAgreement()
+            self.goToAgreement(on: self, isAdvanced: false,
+                               isEditAdvanced: true, urlString: nil)
         }
         return cell
     }

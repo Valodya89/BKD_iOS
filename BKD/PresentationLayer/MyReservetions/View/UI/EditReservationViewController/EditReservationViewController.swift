@@ -41,7 +41,7 @@ class EditReservationViewController: BaseViewController {
     weak var delegate: EditReservationDelegate?
     public var isExtendReservation: Bool = false
     
-    var workingTimes: WorkingTimes?
+    var settings: Settings?
     var searchModel:SearchModel = SearchModel()
     var pickerState: DatePicker?
     var datePicker = UIDatePicker()
@@ -60,7 +60,7 @@ class EditReservationViewController: BaseViewController {
     
     func setupView() {
         tabBarController?.tabBar.isHidden = true
-        workingTimes = ApplicationSettings.shared.workingTimes
+        settings = ApplicationSettings.shared.settings
         mRightBarBtn.image = img_bkd
         mAccessoriesBtn.layer.cornerRadius = 8
         mAdditionalDriverBtn.layer.cornerRadius = 8
@@ -188,7 +188,7 @@ class EditReservationViewController: BaseViewController {
     func showAlertWorkingHours() {
         BKDAlert().showAlert(on: self,
                              title:String(format: Constant.Texts.titleWorkingTime, timePrice),
-                             message: Constant.Texts.messageWorkingTime + "(\(workingTimes?.workStart ?? "") -  \(workingTimes?.workEnd ?? "")).",
+                             message: Constant.Texts.messageWorkingTime + "(\(settings?.workStart ?? "") -  \(settings?.workEnd ?? "")).",
                              messageSecond: nil,
                              cancelTitle: Constant.Texts.cancel,
                              okTitle: Constant.Texts.agree,cancelAction:nil,

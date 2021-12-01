@@ -14,7 +14,6 @@ enum SignUpStatus: String, CaseIterable {
     case wrongVerifvCode = "ACCOUNTS_wrong_verification_code"
     case success = "SUCCESS"
     case error = "error"
-    
 }
 
 class RegistrationViewModel: NSObject {

@@ -135,8 +135,8 @@
                                                 <color key="textColor" name="navigationBar"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Є   350" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCh-KM-Hn7">
-                                                <rect key="frame" x="349" y="2.5" width="49" height="21"/>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€   350" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCh-KM-Hn7">
+                                                <rect key="frame" x="350.5" y="2.5" width="47.5" height="21"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" name="email"/>
                                                 <nil key="highlightedColor"/>
@@ -347,10 +347,10 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="106.47321428571428"/>
         </scene>
-        <!--View Controller-->
+        <!--Free Reservation Over View Controller-->
         <scene sceneID="j8B-9r-EZJ">
             <objects>
-                <viewController id="dOz-5e-dB8" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FreeReservationOverViewController" id="dOz-5e-dB8" customClass="FreeReservationOverViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WFw-yy-bFT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -371,6 +371,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDJ-KA-jql">
                                                 <rect key="frame" x="17" y="4.5" width="14" height="31.5"/>
                                                 <state key="normal" image="uncheck_box"/>
+                                                <connections>
+                                                    <action selector="deposit:" destination="dOz-5e-dB8" eventType="touchUpInside" id="m2G-Zv-Kd8"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDL-nY-wwx">
                                                 <rect key="frame" x="47" y="2.5" width="62" height="35"/>
@@ -378,8 +381,8 @@
                                                 <color key="textColor" name="navigationBar"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Є   350" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8U-vg-tcy">
-                                                <rect key="frame" x="349" y="3.5" width="49" height="33.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€   350" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8U-vg-tcy">
+                                                <rect key="frame" x="350.5" y="3.5" width="47.5" height="33.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" name="email"/>
                                                 <nil key="highlightedColor"/>
@@ -407,6 +410,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1U2-18-E9v">
                                                 <rect key="frame" x="17" y="4" width="14" height="32"/>
                                                 <state key="normal" image="uncheck_box"/>
+                                                <connections>
+                                                    <action selector="depositRentalPrice:" destination="dOz-5e-dB8" eventType="touchUpInside" id="xpc-hY-x41"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit + Rental price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2oJ-3J-VGE">
                                                 <rect key="frame" x="47" y="2.5" width="174.5" height="35"/>
@@ -414,8 +420,8 @@
                                                 <color key="textColor" name="navigationBar"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Є   350 + 105.7" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H8P-0y-0hC">
-                                                <rect key="frame" x="295.5" y="3.5" width="102.5" height="33"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€   350 + 105.7" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H8P-0y-0hC">
+                                                <rect key="frame" x="297" y="3.5" width="101" height="33"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" name="email"/>
                                                 <nil key="highlightedColor"/>
@@ -476,7 +482,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
-                            <view userInteractionEnabled="NO" alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KaY-Mh-Tk2">
+                            <view userInteractionEnabled="NO" alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KaY-Mh-Tk2" customClass="ConfirmView" customModule="BKD" customModuleProvider="target">
                                 <rect key="frame" x="73.5" y="658" width="267" height="42"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_gradient" translatesAutoresizingMaskIntoConstraints="NO" id="FS9-Qq-sGg">
@@ -491,25 +497,39 @@
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_left" translatesAutoresizingMaskIntoConstraints="NO" id="JB4-R4-fpV">
                                                         <rect key="frame" x="50" y="15" width="25.5" height="11.5"/>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jI8-FN-5uv">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y6h-cz-0uR">
                                                         <rect key="frame" x="0.0" y="0.0" width="125.5" height="42"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="12"/>
+                                                        <color key="textColor" name="navigationBar"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jI8-FN-5uv">
+                                                        <rect key="frame" x="0.0" y="0.0" width="125.5" height="42"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <gestureRecognizers/>
                                                         <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="12"/>
-                                                        <state key="normal" title="Continue">
+                                                        <state key="normal">
                                                             <color key="titleColor" name="navigationBar"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="confirm:" destination="KaY-Mh-Tk2" eventType="touchUpInside" id="PxC-kY-nuo"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstItem="JB4-R4-fpV" firstAttribute="centerY" secondItem="YgI-PZ-DbW" secondAttribute="centerY" id="1ro-FT-lBl"/>
+                                                    <constraint firstItem="Y6h-cz-0uR" firstAttribute="top" secondItem="jI8-FN-5uv" secondAttribute="top" id="2CB-wa-kKX"/>
                                                     <constraint firstItem="JB4-R4-fpV" firstAttribute="height" secondItem="YgI-PZ-DbW" secondAttribute="height" multiplier="0.282353" id="2y9-hy-Tjz"/>
                                                     <constraint firstItem="JB4-R4-fpV" firstAttribute="width" secondItem="YgI-PZ-DbW" secondAttribute="width" multiplier="0.201258" id="A71-1h-Juq"/>
                                                     <constraint firstItem="jI8-FN-5uv" firstAttribute="centerY" secondItem="YgI-PZ-DbW" secondAttribute="centerY" id="EyJ-7b-tIF"/>
+                                                    <constraint firstItem="Y6h-cz-0uR" firstAttribute="leading" secondItem="jI8-FN-5uv" secondAttribute="leading" id="RiP-Rj-Xoz"/>
+                                                    <constraint firstItem="Y6h-cz-0uR" firstAttribute="bottom" secondItem="jI8-FN-5uv" secondAttribute="bottom" id="SyE-n4-by1"/>
                                                     <constraint firstItem="JB4-R4-fpV" firstAttribute="centerX" secondItem="YgI-PZ-DbW" secondAttribute="centerX" id="bXR-3b-hJB"/>
                                                     <constraint firstItem="jI8-FN-5uv" firstAttribute="height" secondItem="YgI-PZ-DbW" secondAttribute="height" id="djh-A7-bwu"/>
+                                                    <constraint firstItem="Y6h-cz-0uR" firstAttribute="trailing" secondItem="jI8-FN-5uv" secondAttribute="trailing" id="hzi-Hy-fCM"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jI8-FN-5uv" secondAttribute="trailing" id="j1c-O0-Miu"/>
                                                     <constraint firstItem="jI8-FN-5uv" firstAttribute="width" secondItem="YgI-PZ-DbW" secondAttribute="width" id="r9V-aZ-lhy"/>
                                                     <constraint firstItem="jI8-FN-5uv" firstAttribute="leading" secondItem="YgI-PZ-DbW" secondAttribute="leading" id="uC5-14-7Z1"/>
@@ -547,6 +567,13 @@
                                     <constraint firstItem="7uy-Rx-uPM" firstAttribute="height" secondItem="KaY-Mh-Tk2" secondAttribute="height" id="jSx-UJ-uqy"/>
                                     <constraint firstItem="7uy-Rx-uPM" firstAttribute="centerX" secondItem="KaY-Mh-Tk2" secondAttribute="centerX" id="k0L-NU-H7a"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="mConfirmBtn" destination="jI8-FN-5uv" id="OdP-V0-GyP"/>
+                                    <outlet property="mConfirmBtnLeading" destination="uC5-14-7Z1" id="FG9-DU-zSi"/>
+                                    <outlet property="mConfirmLb" destination="Y6h-cz-0uR" id="Ikr-0Y-O3f"/>
+                                    <outlet property="mGradientImgV" destination="FS9-Qq-sGg" id="Ypn-Av-t20"/>
+                                    <outletCollection property="gestureRecognizers" destination="vv1-GM-0l8" appends="YES" id="i8S-7z-CcH"/>
+                                </connections>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4F4-3E-OPd"/>
@@ -567,11 +594,31 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="KEl-7d-c5R">
-                        <barButtonItem key="leftBarButtonItem" image="back" id="TCy-nr-6zI"/>
+                        <barButtonItem key="leftBarButtonItem" image="back" id="TCy-nr-6zI">
+                            <connections>
+                                <action selector="back:" destination="dOz-5e-dB8" id="ftb-zA-Trb"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="bkd" id="KSS-qI-IGe"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mConfirmV" destination="KaY-Mh-Tk2" id="aCB-ze-wN2"/>
+                        <outlet property="mDepositCheckBtn" destination="lDJ-KA-jql" id="Kp9-Tc-OsQ"/>
+                        <outlet property="mDepositLb" destination="NDL-nY-wwx" id="7QB-RH-GQz"/>
+                        <outlet property="mDepositPriceLb" destination="Z8U-vg-tcy" id="YC4-dZ-02c"/>
+                        <outlet property="mDepositRentalLb" destination="2oJ-3J-VGE" id="uFK-dj-fIw"/>
+                        <outlet property="mDepositRentalPriceCheckBtn" destination="1U2-18-E9v" id="GAq-BJ-Zan"/>
+                        <outlet property="mDepositRentalPriceLb" destination="H8P-0y-0hC" id="wZO-3n-vXp"/>
+                        <outlet property="mNoticeLb" destination="fyH-1f-46P" id="xMg-3L-1Yd"/>
+                        <outlet property="mRightBarBtn" destination="KSS-qI-IGe" id="OAC-X9-Rvu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xjR-5M-CH1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="vv1-GM-0l8">
+                    <connections>
+                        <action selector="swipe:" destination="KaY-Mh-Tk2" id="pIz-Wd-geR"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="974" y="799"/>
         </scene>

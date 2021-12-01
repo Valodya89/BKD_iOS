@@ -21,6 +21,8 @@ final class KeychainManager {
     let expiresInKey = "RefreshToken"
     let userName = "UserName"
     let password = "Password"
+    let phoneCodeId = "PhoneCodeId"
+    let phoneNumber = "PhoneNumber"
 
     
     // MARK: - Functions
@@ -71,6 +73,24 @@ final class KeychainManager {
         }
     }
     
+    /// Save phone code in keychain
+    func savePhoneCodeId(id: String) {
+        do {
+            try keychain.set(id, key: phoneCodeId)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    /// Save phone number in keychain
+    func savePhoneNumber(number: String) {
+        do {
+            try keychain.set(number, key: phoneNumber)
+        } catch let error {
+            print(error)
+        }
+    }
+    
     /// Check user token
     func isUserLoggedIn() -> Bool {
         return keychain[accessTokenKey] != nil
@@ -106,6 +126,18 @@ final class KeychainManager {
     func getPasswor() -> String? {
         let passw = try? keychain.getString(password)
         return passw
+    }
+    
+    /// Get phone code id from keychain
+    func getPhoneCodeId() -> String? {
+        let phoneId = try? keychain.getString(phoneCodeId)
+        return phoneId
+    }
+    
+    /// Get phone number from keychain
+    func getPhoneNumber() -> String? {
+        let number = try? keychain.getString(phoneNumber)
+        return number
     }
     
     /// Delete token from keychain

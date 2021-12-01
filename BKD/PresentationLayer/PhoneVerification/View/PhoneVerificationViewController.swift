@@ -23,11 +23,15 @@ class PhoneVerificationViewController: UIViewController, StoryboardInitializable
     
     
     //MARK: Variables
-    lazy var verificationCodeViewModel = VerificationCodeViewModel()
+    lazy var phoneVerificationViewModel = PhoneVerificationViewModel()
     var phone:String = ""
     private weak var timer:Timer?
     private var counter = 59
     
+    public var phoneNumber: String?
+    public var phoneCode: String?
+    public var vehicleModel: VehicleModel?
+
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -59,8 +63,15 @@ class PhoneVerificationViewController: UIViewController, StoryboardInitializable
     
     /// Send verification code
     func sendVerification(){
-        //WARNING:
-        self.goToReservationCompleted()
+        phoneVerificationViewModel.verifyPhoneNumber(phoneCode: phoneCode ?? "", number: phoneNumber ?? "", code: mCodeTxtFl.text ?? "") { [weak self] (result, err) in
+            if result != nil {
+                self?.goToReservationCompleted()
+            } else {
+                self?.showError()
+            } 
+        }
+        
+        // self.goToReservationCompleted()
 
 //        VerificationCodeViewModel().putVerification(username: email, code: mCodeTxtFl.text!) { [self] (status) in
 //
@@ -76,9 +87,11 @@ class PhoneVerificationViewController: UIViewController, StoryboardInitializable
     
     /// Send verification again
     func resendVerification(){
-        VerificationCodeViewModel().resendVerificationCode(username: phone) { (status) in
-            self.startTimer()
+        mCodeTxtFl.defaultCharacter = "-"
+       // mCodeTxtFl.text = "_"
 
+        ChangePhoneNumberViewModel().sendCodeSms(phoneCode: phoneCode ?? "", phoneNumber: phoneNumber ?? "") { response, err in
+            self.startTimer()
         }
     }
     
@@ -115,6 +128,7 @@ class PhoneVerificationViewController: UIViewController, StoryboardInitializable
     ///Open Reservation completed screen
     private func goToReservationCompleted() {
         let reservationCompletedVC = ReservationCompletedViewController.initFromStoryboard(name: Constant.Storyboards.reservationCompleted)
+        reservationCompletedVC.vehicleModel = vehicleModel
         self.navigationController?.pushViewController(reservationCompletedVC, animated: true)
         
     }

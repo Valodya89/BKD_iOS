@@ -64,7 +64,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     private lazy  var tariffSlideVC = TariffSlideViewController.initFromStoryboard(name: Constant.Storyboards.details)
     
     let detailsViewModel:DetailsViewModel = DetailsViewModel()
-    var workingTimes: WorkingTimes?
+    var settings: Settings?
     var startFlexibleTimeList: [String]?
     var endFlexibleTimeList: [String]?
     var tariffSlideList:[TariffSlideModel]?
@@ -139,7 +139,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
         
         mRightBarBtn.image = #imageLiteral(resourceName: "bkd").withRenderingMode(.alwaysOriginal)
-        workingTimes = ApplicationSettings.shared.workingTimes
+        settings = ApplicationSettings.shared.settings
         mCompareContentV.layer.cornerRadius = 8
 
         staringScrollContentHeight = height1055 + 50
@@ -226,12 +226,13 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         getCarImagesList()
     }
     
-    
     ///Set  values to vehicle model
      func setVehicleModel(){
+        let tariffIndex = detailsViewModel.getTariffIndex(tariff: currentTariff)
         vehicleModel?.vehicleName = mCarNameLb.text
         vehicleModel?.additionalAccessories = accessoriesEditList
         vehicleModel?.searchModel = searchModel
+        vehicleModel?.depositPrice = (tariffSlideList?[tariffIndex].tariff?[currentTariffOptionIndex].deposit) ?? 0.0
      }
     
 //MARK: -- Get
@@ -617,7 +618,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     func showAlertWorkingHours() {
         BKDAlert().showAlert(on: self,
                              title:String(format: Constant.Texts.titleWorkingTime, timePrice),
-                             message: Constant.Texts.messageWorkingTime + "(\(workingTimes?.workStart ?? "") -  \(workingTimes?.workEnd ?? "")).",
+                             message: Constant.Texts.messageWorkingTime + "(\(settings?.workStart ?? "") -  \(settings?.workEnd ?? "")).",
                              messageSecond: nil,
                              cancelTitle: Constant.Texts.cancel,
                              okTitle: Constant.Texts.agree,cancelAction:nil,
@@ -936,6 +937,7 @@ extension DetailsViewController: TariffCarouselViewDelegate {
     }
 
     func didPressMore(tariffIndex:Int, optionIndex: Int) {
+        vehicleModel?.depositPrice = (tariffSlideList?[tariffIndex].tariff?[optionIndex].deposit) ?? 0.0
         self.goToMore(vehicleModel: vehicleModel, carModel: nil)
     }
     

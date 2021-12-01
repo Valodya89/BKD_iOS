@@ -374,7 +374,8 @@ class MyReservetionAdvancedViewController: BaseViewController {
     @IBAction func agreement(_ sender: UIButton) {
         self.goToAgreement(on: self,
                            isAdvanced: false,
-                           isEditAdvanced: false)
+                           isEditAdvanced: false,
+                           urlString: nil)
     }
     
     @IBAction func edit(_ sender: UIButton) {
@@ -406,7 +407,8 @@ class MyReservetionAdvancedViewController: BaseViewController {
             } else {
                 self.goToAgreement(on: self,
                                    isAdvanced: true,
-                                   isEditAdvanced: false)
+                                   isEditAdvanced: false,
+                                   urlString: nil)
             }
         }
     }

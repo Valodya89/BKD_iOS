@@ -177,11 +177,11 @@ struct MyBkdData {
 
 
   
-struct PhoneCodeData {
-    static let phoneCodeModel: [PhoneCodeModel] = [PhoneCodeModel(country: "Dutch", code: "+31", flag: #imageLiteral(resourceName: "dutch"), phoneFormat: "##-###-####", validFormPattern: 9),
-        PhoneCodeModel(country: "Franch", code: "+33", flag: #imageLiteral(resourceName: "french"), phoneFormat: "##-##-##-##-##", validFormPattern: 10),
-        PhoneCodeModel(country: "English", code: "+44", flag: #imageLiteral(resourceName: "english"), phoneFormat: "####-####-##", validFormPattern: 10)]
-}
+//struct PhoneCodeData {
+//    static let phoneCodeModel: [PhoneCodeModel] = [PhoneCodeModel(country: "Dutch", code: "+31", flag: #imageLiteral(resourceName: "dutch"), phoneFormat: "##-###-####", validFormPattern: 9),
+//        PhoneCodeModel(country: "Franch", code: "+33", flag: #imageLiteral(resourceName: "french"), phoneFormat: "##-##-##-##-##", validFormPattern: 10),
+//        PhoneCodeModel(country: "English", code: "+44", flag: #imageLiteral(resourceName: "english"), phoneFormat: "####-####-##", validFormPattern: 10)]
+//}
 
 
 

@@ -15,14 +15,13 @@ final class ApplicationSettings {
     
     private(set) var phoneCodes: [PhoneCode]?
     private(set) var pickerList: [String]?
-    private(set) var workingTimes: WorkingTimes?
+    private(set) var settings:  Settings?
     private(set) var flexibleTimes: [FlexibleTimes]?
     private(set) var countryList: [Country]?
 
     private(set) var restrictedZones: [RestrictedZones]?
     var carsList:[String : [CarsModel]?]?
     var carTypes:[CarTypes]?
-    
 
     
     private init() {
@@ -32,7 +31,7 @@ final class ApplicationSettings {
         }
         fetchPhoneCodes()
         getAvalableTimeList()
-        getWorkingTimes()
+        getSettings()
         getRestrictedZones()
         getFlexibleTimes()
         getCountryList()
@@ -124,17 +123,17 @@ extension ApplicationSettings {
     
     
     /// get working time list
-    @objc private func getWorkingTimes() {
-        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getWorkingTimes)) { [self] (result) in
+    @objc private func getSettings() {
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getSettings)) { [self] (result) in
             
             switch result {
             case .success(let data):
-                guard let workingTime = BkdConverter<BaseResponseModel<WorkingTimes>>.parseJson(data: data as Any) else {
+                guard let settings = BkdConverter<BaseResponseModel<Settings>>.parseJson(data: data as Any) else {
                     print("error")
                     return
                 }
-                self.workingTimes = workingTime.content
-               // completion(workingTimes.content)
+                self.settings = settings.content
+               // completion(settings.content)
             case .failure(let error):
                 print(error.description)
             

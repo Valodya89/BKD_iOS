@@ -84,13 +84,16 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     }
     
     ///Open agree Screen
-    func goToAgreement(on viewController: UIViewController, isAdvanced:Bool, isEditAdvanced: Bool) {
+    func goToAgreement(on viewController: UIViewController,
+                       isAdvanced:Bool,
+                       isEditAdvanced: Bool,
+                       urlString: String?) {
         
         let bkdAgreementVC = UIStoryboard(name: Constant.Storyboards.registrationBot, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.bkdAgreement) as! BkdAgreementViewController
         bkdAgreementVC.delegate = viewController as? BkdAgreementViewControllerDelegate
         bkdAgreementVC.isAdvanced = isAdvanced
         bkdAgreementVC.isEditAdvanced = isEditAdvanced
-        
+        bkdAgreementVC.urlString = urlString
         self.navigationController?.pushViewController(bkdAgreementVC, animated: true)
     }
     

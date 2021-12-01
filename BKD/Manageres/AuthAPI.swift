@@ -21,7 +21,7 @@ enum AuthAPI: APIProtocol {
                            latitude: Double)
     case getCarsByType(criteria: [String : Any])
     case getCarsByFilter(criteria: [[String : Any]])
-    case getWorkingTimes
+    case getSettings
     case getFlexibleTimes
     case getPhoneCodes
     case getCountries
@@ -34,6 +34,11 @@ enum AuthAPI: APIProtocol {
     case verifyAccounts(username: String,
                         code: String)
     case resendCode(username: String)
+    case sendCodeSms(phoneCode: String,
+                     phoneNumber: String)
+    case verifyPhoneCode(phoneCode: String,
+                         phoneNumber: String,
+                         code: String)
     case getAuthRefreshToken(refreshToken: String)
     case getToken(username: String,
                   password: String)
@@ -69,6 +74,7 @@ enum AuthAPI: APIProtocol {
                  additionalDrivers: [String?],
                  pickupLocation: [String : Any],
                  returnLocation: [String : Any])
+    case payLater
     case getRents
     case getChatID(name: String,
                    type: String,
@@ -78,11 +84,13 @@ enum AuthAPI: APIProtocol {
                      message: String,
                      userIdentifier: String)
     
+    
+    
 
 
     var base: String {
         switch self {
-        case .getWorkingTimes,
+        case .getSettings,
              .getPhoneCodes,
              .getCountries,
              .getMainDriver,
@@ -90,6 +98,8 @@ enum AuthAPI: APIProtocol {
              .signUp,
              .verifyAccounts,
              .resendCode,
+             .sendCodeSms,
+             .verifyPhoneCode,
              .addPersonalData,
              .forgotPassword,
              .recoverPassword,
@@ -97,15 +107,14 @@ enum AuthAPI: APIProtocol {
              .createDriver,
              .addIdentityExpiration,
              .addDriverLicenseDates,
-             .acceptAgreement:
+             .acceptAgreement,
+             .getMessages,
+             .sendMessage,
+             .payLater:
             return BKDBaseURLs.account.rawValue
         case .getAuthRefreshToken,
              .getToken:
             return BKDBaseURLs.auth.rawValue
-        case .getMessages:
-            return BKDBaseURLs.account.rawValue
-        case .sendMessage:
-            return BKDBaseURLs.account.rawValue
         default:
             return BKDBaseURLs.rent.rawValue
         }
@@ -129,7 +138,7 @@ enum AuthAPI: APIProtocol {
             return "parking/custom-location"
         case .getCarsByType, .getCarsByFilter:
             return "car/search"
-        case .getWorkingTimes:
+        case .getSettings:
             return "settings/default"
         case .getFlexibleTimes:
             return "flexible-times/list"
@@ -151,6 +160,10 @@ enum AuthAPI: APIProtocol {
             return "accounts/verify"
         case .resendCode:
             return "accounts/send-code"
+        case .sendCodeSms:
+            return "api/user/phone/send-code"
+        case .verifyPhoneCode:
+            return "api/user/phone/verify"
         case .getAuthRefreshToken:
             fallthrough
         case .getToken:
@@ -180,6 +193,10 @@ enum AuthAPI: APIProtocol {
             return "api/driver/\(id)/agreement/accept"
         case .addRent:
             return "api/rents"
+        case .payLater:
+            return "api/driver/pay-later"
+            
+        
         }
         
     }
@@ -193,6 +210,8 @@ enum AuthAPI: APIProtocol {
              .signUp,
              .verifyAccounts,
              .resendCode,
+             .sendCodeSms,
+             .verifyPhoneCode,
              .forgotPassword,
              .recoverPassword,
              .getExteriorSize,
@@ -207,7 +226,8 @@ enum AuthAPI: APIProtocol {
              .addDriverLicenseDates,
              .acceptAgreement,
              .addRent,
-             .getRents:
+             .getRents,
+             .payLater:
             return ["Content-Type": "application/json"]
         case .getAuthRefreshToken:
             fallthrough
@@ -269,6 +289,19 @@ enum AuthAPI: APIProtocol {
         case let .resendCode(username):
             return [
                 "username": username
+            ]
+        case let .sendCodeSms(phoneCode, phoneNumber):
+            return [
+                "phoneCode": phoneCode,
+                "phoneNumber": phoneNumber
+            ]
+        case let .verifyPhoneCode(phoneCode,
+                                  phoneNumber,
+                                  code):
+            return [
+                "phoneCode": phoneCode,
+                "phoneNumber": phoneNumber,
+                "code": code
             ]
         case .getAuthRefreshToken(let refreshToken):
             return [
@@ -339,6 +372,8 @@ enum AuthAPI: APIProtocol {
                 "pickupLocation": pickupLocation,
                 "returnLocation": returnLocation
             ]
+            
+        
         default:
             return nil
         }
@@ -369,16 +404,19 @@ enum AuthAPI: APIProtocol {
              .addPersonalData,
              .getChatID,
              .sendMessage,
+             .sendCodeSms,
              .createDriver,
              .addIdentityExpiration,
              .addDriverLicenseDates,
              .acceptAgreement,
-             .addRent:
+             .addRent,
+             .payLater:
             return .post
         case .verifyAccounts,
              .recoverPassword:
             return .put
         case .resendCode,
+             .verifyPhoneCode,
              .forgotPassword:
             return .patch
             

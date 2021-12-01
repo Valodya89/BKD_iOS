@@ -75,8 +75,6 @@ extension MoreViewController: UITableViewDelegate, UITableViewDataSource {
             } else if carModel != nil {
                 cell.setCarsCellInfo(item:model, carModel: carModel, index: indexPath.row)
             }
-                
-            
             return cell
             
         } else { // BKD Advantages cell

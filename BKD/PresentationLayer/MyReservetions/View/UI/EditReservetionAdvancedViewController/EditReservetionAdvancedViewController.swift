@@ -273,7 +273,8 @@ class EditReservetionAdvancedViewController: BaseViewController {
     
     func handlerConfirm() {
         mConfirmV.didPressConfirm = {
-            self.goToAgreement(on: self, isAdvanced: false, isEditAdvanced: true)
+            self.goToAgreement(on: self, isAdvanced: false,
+                               isEditAdvanced: true, urlString: nil)
         }
     }
     
@@ -286,7 +287,8 @@ class EditReservetionAdvancedViewController: BaseViewController {
             } else {
                 self.goToAgreement(on: self,
                                    isAdvanced: false,
-                                   isEditAdvanced: true)
+                                   isEditAdvanced: true,
+                                   urlString: nil)
             }
         }
     }

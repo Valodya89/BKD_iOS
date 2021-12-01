@@ -44,7 +44,7 @@ final class RegistartionBotViewController: BaseViewController {
     var personalData: PersonalData = PersonalData()
     var driverLicenseDateData: DriverLiceseDateData = DriverLiceseDateData()
     
-    var pickerType:PickerType = .date    
+    var pickerType: PickerType = .date
     var timer: Timer?
     var datePicker = UIDatePicker()
     var pickerV = UIPickerView()
@@ -352,10 +352,14 @@ final class RegistartionBotViewController: BaseViewController {
     }
     
     @IBAction func thankYou(_ sender: UIButton) {
+        
+        registrationBotViewModel.saveUserPhoneNumber(phoneCodeId: currentPhoneCode?.id, number: personalData.phoneNumber)
+        
         UserDefaults.standard.set(true, forKey: key_isLogin)
         sender.setTitleColor(color_menu!, for: .normal)
         sender.setBorderColorToCAShapeLayer(color: .clear)
         sender.backgroundColor = color_navigationBar!//color_dark_register
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
         self.tabBarController?.selectedIndex = 0
         self.navigationController?.popToViewController(ofClass: self.isDriverRegister ? MyDriversViewController.self : MyBKDViewController.self, animated: true)
@@ -732,17 +736,16 @@ extension RegistartionBotViewController: TakePhotoTableViewCellDelegate {
     func didPressTackePhoto(isOpenDoc: Bool, index: Int) {
         takePhotoCurrentIndex = index
         if isOpenDoc {
-            let bkdAgreementVC = UIStoryboard(name: Constant.Storyboards.registrationBot, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.bkdAgreement) as! BkdAgreementViewController
-            bkdAgreementVC.delegate = self
-            self.navigationController?.pushViewController(bkdAgreementVC, animated: true)
+            
+            self.goToAgreement(on: self, isAdvanced: false,
+                               isEditAdvanced: false, urlString: ApplicationSettings.shared.settings?.registrationAgreementUrl)
         } else {
             takePhotoPressed()
         }
     }
 }
 
-//MARK: - BkdAgreementViewControllerDelegate
-//MARK: ----------------------------
+//MARK: -- BkdAgreementViewControllerDelegate
 extension RegistartionBotViewController: BkdAgreementViewControllerDelegate {
     
     func agreeTermsAndConditions() {
@@ -756,8 +759,7 @@ extension RegistartionBotViewController: BkdAgreementViewControllerDelegate {
 }
 
 
-//MARK: - SearchPhoneCodeViewControllerDelegate
-//MARK: --------------------------------------
+//MARK: -- SearchPhoneCodeViewControllerDelegate
 extension RegistartionBotViewController: SearchPhoneCodeViewControllerDelegate {
     
     func didSelectCountry(_ country: PhoneCode) {
@@ -766,8 +768,7 @@ extension RegistartionBotViewController: SearchPhoneCodeViewControllerDelegate {
     }
 }
 
-//MARK: - UIImagePickerControllerDelegate
-//MARK: --------------------------------
+//MARK: -- UIImagePickerControllerDelegate
 extension RegistartionBotViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     
@@ -815,8 +816,7 @@ extension RegistartionBotViewController: UIImagePickerControllerDelegate, UINavi
   
 }
 
-//MARK: UIPickerViewDelegate
-//MARK: --------------------------------
+//MARK: -- UIPickerViewDelegate
 extension RegistartionBotViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -833,6 +833,7 @@ extension RegistartionBotViewController: UIPickerViewDelegate, UIPickerViewDataS
 }
 
 
+//MARK: -- GMSAutocompleteViewControllerDelegate
 extension RegistartionBotViewController: GMSAutocompleteViewControllerDelegate {
 
   // Handle the user's selection.

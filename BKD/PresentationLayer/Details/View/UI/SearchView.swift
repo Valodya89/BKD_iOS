@@ -317,8 +317,13 @@ class SearchView: UIView, UITextFieldDelegate {
         setReturnDateInfo(searchModel: searchModel)
         setPickUpTimeInfo(searchModel: searchModel)
         setReturnTimeInfo(searchModel: searchModel, tariff: tariff)
-        setPickUpLocationInfo(searchModel: searchModel)
-        setReturnLocationInfo(searchModel: searchModel)
+        if let _ = searchModel.pickUpLocation {
+            setPickUpLocationInfo(searchModel: searchModel)
+        }
+        if let _ = searchModel.returnLocation {
+            setReturnLocationInfo(searchModel: searchModel)
+
+        }
     }
     
     /// will update time fields depend on tariff option

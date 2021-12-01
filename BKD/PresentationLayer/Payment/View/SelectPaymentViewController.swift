@@ -28,6 +28,7 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
     //MARK: - Variables
     private let viewModel = PaymentViewModel()
     var paymentTypes = PaymentTypeData.paymentTypeModel
+    var paymentType: PaymentTypesResponse?
     public var isDeposit:Bool = false
     
     //MARK: - Local properties
@@ -83,7 +84,7 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
     /// Selected bancontact type
     func selectBancontactType() {
         mBancontactTypeV.didPressBancontact = {
-            self.goToWebScreen(paymentType: .creditCard)
+            self.getPaymentUrl(paymentType: .bancontact, amount: "5.7")
         }
         
         mBancontactTypeV.didPressMobileBancking = {
@@ -97,15 +98,19 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
     ///Selected bancontact card type
     func selectBancontactCard() {
         mBancontactV.didPressBancontactCard = { cardType in
-            switch cardType {
-            case .ing:
-                self.goToWebScreen(paymentType: .creditCard)
-                //SelectPaymentViewController.openCustomApp(by: kCustomURLScheme)
-            case .bnp:
-            self.goToWebScreen(paymentType: .creditCard)
-            case .kbc:
-                self.goToWebScreen(paymentType: .creditCard)
-            }
+            self.getPaymentUrl(paymentType: cardType, amount: "5.7")
+
+//            switch cardType {
+//            case .ing:
+//                break
+//                //self.goToWebScreen(paymentType: .creditCard)
+//                //SelectPaymentViewController.openCustomApp(by: kCustomURLScheme)
+//            case .bnp: break
+//            //self.goToWebScreen(paymentType: .creditCard)
+//            case .kbc: break
+//               // self.goToWebScreen(paymentType: .creditCard)
+//            default: break
+//            }
         }
     }
     
@@ -163,9 +168,17 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
     }
     
 
-    
-    func getCreditCardURL() {
-        viewModel.getAttachedCardURL { [weak self] result in
+    ///Get payment type list
+    func getPaymentTypes() {
+        viewModel.getPaymentTypes { response in
+            guard let response = response else {return}
+            self.paymentType = response
+        }
+    }
+   
+    ///Get payment url
+    func getPaymentUrl(paymentType: BancontactCard, amount: String) {
+        viewModel.getPaymentUrl(paymentType: paymentType, amount: amount) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let attachedCardURL):
@@ -175,6 +188,18 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
             }
         }
     }
+    
+//    func getCreditCardURL() {
+//        viewModel.getAttachedCardURL { [weak self] result in
+//            guard let self = self else { return }
+//            switch result {
+//            case .success(let attachedCardURL):
+//                self.goToWebScreen(urlString: attachedCardURL)
+//            case .failure(let error):
+//                print("ERROR: \(error.message)")
+//            }
+//        }
+//    }
     
     ///Hide Bancontact view
     private func hideBancontact() {
@@ -247,8 +272,8 @@ extension SelectPaymentViewController: UITableViewDelegate, UITableViewDataSourc
             self.mPaymentTbV.reloadData()
             
             switch paymentType {
-            case .creditCard:
-                self.getCreditCardURL()
+//            case .creditCard:
+//                self.getCreditCardURL()
             case .bancontact:
                // self.goToWebScreen(paymentType: .bancontact)
 
@@ -257,8 +282,8 @@ extension SelectPaymentViewController: UITableViewDelegate, UITableViewDataSourc
                 self.animateBancontactTypeView(isShow: true, bottom: self.mBancontactTypeBottom)
             case .applePay:
                 self.selectApplePay()
-            case .payPal:
-                self.goToWebScreen(paymentType: .payPal)
+//            case .payPal:
+//                self.goToWebScreen(paymentType: .payPal)
             }
             
         }

@@ -11,7 +11,7 @@ import PhoneNumberKit
 
 final class ChangePhoneNumberViewController: UIViewController, StoryboardInitializable {
     
-    //MARK: - Outlets
+    //MARK: -- Outlets
     @IBOutlet weak var mInfoLb: UILabel!
     @IBOutlet weak var mSendBtn: UIButton!
     @IBOutlet weak var mChangeNumberBtn: UIButton!
@@ -24,6 +24,9 @@ final class ChangePhoneNumberViewController: UIViewController, StoryboardInitial
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     
 
+    //MARK: -- Variables
+    lazy var changePhoneNumberViewModel = ChangePhoneNumberViewModel()
+    public var vehicleModel: VehicleModel?
     private var selectedCountry: PhoneCode?
     private var validFormPattern: Int = 0
     private let phoneNumberKit = PhoneNumberKit()
@@ -40,7 +43,7 @@ final class ChangePhoneNumberViewController: UIViewController, StoryboardInitial
             }
         }
     }
-    
+        
     
 //    var phoneNumber: String? {
 //        get {
@@ -69,10 +72,8 @@ final class ChangePhoneNumberViewController: UIViewController, StoryboardInitial
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let phoneCode = ApplicationSettings.shared.phoneCodes?.first {
-            setPhoneCode(phoneCode)
-        }
         setUpView()
+        configureUI()
     }
     
     private func setUpView() {
@@ -84,6 +85,29 @@ final class ChangePhoneNumberViewController: UIViewController, StoryboardInitial
         mPhoneNumberContentV.setBorder(color: color_email!, width: 1)
         mDropDownImgV.setTintColor(color: color_email!)
         mNumberTxtFl.delegate = self
+        
+    }
+    
+    ///Configure UI
+    func configureUI() {
+        selectedCountry = changePhoneNumberViewModel.getPhoneCode()
+        if let _ = selectedCountry {
+            setPhoneCode(selectedCountry!)
+        } else if let phoneCode = ApplicationSettings.shared.phoneCodes?.first {
+            setPhoneCode(phoneCode)
+        }
+        phoneNumber =  changePhoneNumberViewModel.getPhoneNumber()?.replacingOccurrences(of: selectedCountry?.code ?? "", with: "")
+        mNumberTxtFl.text = phoneNumber
+
+    }
+   
+    ///Send Code SMS
+    private func sendPhoneCode() {
+        phoneNumber = mNumberTxtFl.text
+        changePhoneNumberViewModel.sendCodeSms(phoneCode: selectedCountry?.code ?? "", phoneNumber: phoneNumber ?? "") { response, err in
+            guard let _ = response else {return}
+            self.goToPhoneVerification()
+        }
     }
     
     private func setToPhoneNumberActiveColor(_ color: UIColor) {
@@ -103,6 +127,9 @@ final class ChangePhoneNumberViewController: UIViewController, StoryboardInitial
     ///Open phone verification screen
     private func goToPhoneVerification() {
         let phoneVerification = PhoneVerificationViewController.initFromStoryboard(name: Constant.Storyboards.phoneVerification)
+        phoneVerification.phoneCode = selectedCountry?.code
+        phoneVerification.phoneNumber = phoneNumber
+        phoneVerification.vehicleModel = vehicleModel
         self.navigationController?.pushViewController(phoneVerification, animated: true)
     }
     
@@ -125,7 +152,7 @@ final class ChangePhoneNumberViewController: UIViewController, StoryboardInitial
         validFormPattern = (selectedCountry?.mask!.count)!
     }
     
-    // MARK: - Actions
+    // MARK: -- Actions
     @IBAction func didChangeFiled() {
         didUpdateStatus(mNumberTxtFl.text?.count == validFormPattern)
     }
@@ -135,12 +162,11 @@ final class ChangePhoneNumberViewController: UIViewController, StoryboardInitial
     }
     
     @IBAction func send(_ sender: Any) {
-        //WARNING:
-        goToPhoneVerification()
+        sendPhoneCode()
     }
     
     @IBAction func changeNumber(_ sender: UIButton) {
-        
+        goToSearchPhoneCode()
     }
     
     @IBAction func searchCountry(_ sender: UIButton) {

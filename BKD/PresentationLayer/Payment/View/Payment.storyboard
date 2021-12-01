@@ -191,7 +191,7 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="je9-pS-y0U">
                                                 <rect key="frame" x="116" y="25" width="150" height="41"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
-                                                <state key="normal" title="Mobile bancink">
+                                                <state key="normal" title="Mobile banking">
                                                     <color key="titleColor" name="navigationBar"/>
                                                 </state>
                                                 <connections>
@@ -201,7 +201,7 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TOf-qo-a5b">
                                                 <rect key="frame" x="116" y="70.5" width="150" height="41"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
-                                                <state key="normal" title="Bancontact">
+                                                <state key="normal" title="Bancontact card">
                                                     <color key="titleColor" name="navigationBar"/>
                                                 </state>
                                                 <connections>

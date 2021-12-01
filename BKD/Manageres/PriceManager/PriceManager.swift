@@ -19,7 +19,8 @@ final class PriceManager {
     var carDiscountPrecent: Double?
     var accessoriesPrice: Double?
     var additionalDriversPrice: Double?
-    
+    var totalPrice: Double?
+
     ///Calculate custom location total price
     func getCustomLocationTotalPrice() -> Double? {
         let total = Float(pickUpCustomLocationPrice ?? 0) + Float(returnCustomLocationPrice ?? 0)
@@ -78,6 +79,8 @@ final class PriceManager {
         if carOffertPrice ?? 0 > 0 && carDiscountPrecent ?? 0 > 0 {
             total -= carPrice ?? 0
         }
+        self.totalPrice = total
+        
      return total
     }
     

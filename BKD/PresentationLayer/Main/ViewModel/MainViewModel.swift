@@ -13,11 +13,11 @@ final class MainViewModel: NSObject {
     
     var isOnline: Bool {
         return true
-        guard let workingTimes = ApplicationSettings.shared.workingTimes else { return false }
+        guard let settings = ApplicationSettings.shared.settings else { return false }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
-        guard let start = dateFormatter.date(from: workingTimes.workStart) else { return false }
-        guard let end = dateFormatter.date(from: workingTimes.workEnd) else { return false }
+        guard let start = dateFormatter.date(from: settings.workStart) else { return false }
+        guard let end = dateFormatter.date(from: settings.workEnd) else { return false }
         guard let current = dateFormatter.date(from: dateFormatter.string(from: Date())) else { return false }
         return (start...end).contains(current)
     }
@@ -67,9 +67,9 @@ final class MainViewModel: NSObject {
     }
     
     /// Check if reservetion during working hours
-    func  isReservetionInWorkingHours(time: Date?, workingTimes: WorkingTimes,
+    func  isReservetionInWorkingHours(time: Date?, settings: Settings,
                                      didResult: @escaping (Bool) -> ()) {
-        didResult(validator.checkReservationTime(time: time, workingTimes:workingTimes))
+        didResult(validator.checkReservationTime(time: time, settings:settings))
     }
     
      

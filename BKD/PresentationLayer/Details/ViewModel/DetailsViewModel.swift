@@ -11,7 +11,7 @@ import SwiftUI
 class DetailsViewModel: NSObject {
     
     let validator = Validator()
-    var workingTimes: WorkingTimes?
+    var settings: Settings?
     var currTariffState: TariffState?
     var differenceInTimes: Double = 0
     var differenceInMinutes: Double = 0
@@ -102,6 +102,17 @@ class DetailsViewModel: NSObject {
         }
         return 0
     }
+   
+    ///Get tariff index
+    func getTariffIndex(tariff: TariffState) -> Int {
+        switch tariff {
+        case .hourly: return 0
+        case .daily: return 1
+        case .weekly: return 2
+        case .monthly: return 3
+        default: return 4
+        }
+    }
     
     ///Update hourly tariff
     private func updateHourlyTariff(tariffSlideList:[TariffSlideModel],
@@ -170,9 +181,9 @@ class DetailsViewModel: NSObject {
     /// Check if reserve time in working hours
     func isReservetionInWorkingHours(time: Date?,
                                      didResult: @escaping (Bool) -> ()) {
-        workingTimes = ApplicationSettings.shared.workingTimes
-        guard let _ = workingTimes else { return }
-        didResult(validator.checkReservationTime(time:time, workingTimes: workingTimes!))
+        settings = ApplicationSettings.shared.settings
+        guard let _ = settings else { return }
+        didResult(validator.checkReservationTime(time:time, settings: settings!))
     }
     
     
@@ -213,12 +224,12 @@ class DetailsViewModel: NSObject {
     ///Total cost of reservations outside working hours
     func getNoWorkingTimeTotalPrice(searchModel: SearchModel, timePrice:Double) -> Double {
         var total: Double = 0.0
-        guard let _ = workingTimes else { return 0.0 }
+        guard let _ = settings else { return 0.0 }
         
-        if !validator.checkReservationTime(time:searchModel.pickUpTime, workingTimes: workingTimes!) {
+        if !validator.checkReservationTime(time:searchModel.pickUpTime, settings: settings!) {
             total += timePrice
         }
-        if !validator.checkReservationTime(time:searchModel.returnTime, workingTimes: workingTimes!) {
+        if !validator.checkReservationTime(time:searchModel.returnTime, settings: settings!) {
             total += timePrice
         }
         return total

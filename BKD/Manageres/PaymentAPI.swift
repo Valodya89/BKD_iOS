@@ -13,6 +13,9 @@ enum PaymentAPI: APIProtocol {
     case attachCard
     case payWithAttachedCard
     case deleteCard
+    case getPaymentTypes
+    case molliePayment(amount: String,
+                       paymentMethod: String)
     
     var base: String {
         return BKDBaseURLs.payment.rawValue
@@ -28,6 +31,10 @@ enum PaymentAPI: APIProtocol {
             return "api/cards/attached/deposit"
         case .deleteCard:
             return "api/cards/"
+        case .getPaymentTypes:
+            return "api/mollie/payment-type"
+        case .molliePayment:
+            return "api/mollie/payment"
         }
     }
     
@@ -36,7 +43,9 @@ enum PaymentAPI: APIProtocol {
         case .getWallet,
              .attachCard,
              .payWithAttachedCard,
-             .deleteCard:
+             .deleteCard,
+             .getPaymentTypes,
+             .molliePayment:
             return ["Content-Type": "application/json"]
         }
     }
@@ -51,6 +60,10 @@ enum PaymentAPI: APIProtocol {
             return [:]
         case .deleteCard:
             return [:]
+        case .getPaymentTypes:
+            return [:]
+        case .molliePayment:
+            return [:]
         }
     }
     
@@ -64,6 +77,13 @@ enum PaymentAPI: APIProtocol {
             return nil
         case .deleteCard:
             return nil
+        case .getPaymentTypes:
+            return nil
+        case let .molliePayment(amount, paymentMethod):
+            return [
+                "amount" : amount,
+                "paymentMethod" : paymentMethod
+            ]
         }
     }
     
@@ -77,14 +97,20 @@ enum PaymentAPI: APIProtocol {
             return nil
         case .deleteCard:
             return nil
+        case .getPaymentTypes:
+            return nil
+        case .molliePayment:
+            return nil
         }
     }
     
     var method: RequestMethod {
         switch self {
-        case .getWallet:
+        case .getWallet,
+             .getPaymentTypes:
             return .get
-        case .attachCard:
+        case .attachCard,
+             .molliePayment:
             return .post
         case .payWithAttachedCard:
             return .post

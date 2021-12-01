@@ -38,7 +38,7 @@ class MainViewController: BaseViewController {
     private var carTypes:[CarTypes]?
     private var carsList:[String : [CarsModel]?]?
     private var pickerList: [String]?
-    var workingTimes: WorkingTimes?
+    var settings: Settings?
     var currentCarType: CarTypes?
 
     var datePicker = UIDatePicker()
@@ -341,9 +341,9 @@ class MainViewController: BaseViewController {
    
     /// check if reservetion time in range
     func checkReservetionTime() {
-        workingTimes = ApplicationSettings.shared.workingTimes
-        guard let _ = workingTimes else { return }
-        mainViewModel.isReservetionInWorkingHours(time: searchHeaderV?.pickUpTime, workingTimes: workingTimes! ) { [self] (result) in
+        settings = ApplicationSettings.shared.settings
+        guard let _ = settings else { return }
+        mainViewModel.isReservetionInWorkingHours(time: searchHeaderV?.pickUpTime, settings: settings! ) { [self] (result) in
             if !result {
                 self.showAlertWorkingHours()
             } else {
@@ -408,7 +408,7 @@ class MainViewController: BaseViewController {
     func showAlertWorkingHours() {
         BKDAlert().showAlert(on: self,
                              title:String(format: Constant.Texts.titleWorkingTime, timePrice),
-                             message: Constant.Texts.messageWorkingTime + "(\(workingTimes?.workStart ?? "") -  \(workingTimes?.workEnd ?? "")).",
+                             message: Constant.Texts.messageWorkingTime + "(\(settings?.workStart ?? "") -  \(settings?.workEnd ?? "")).",
                              messageSecond: nil,
                              cancelTitle: Constant.Texts.cancel,
                              okTitle: Constant.Texts.agree,cancelAction: { [self] in

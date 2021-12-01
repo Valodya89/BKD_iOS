@@ -1,5 +1,5 @@
 //
-//  WorkingTimes.swift
+//  Settings.swift
 //  BKD
 //
 //  Created by Karine Karapetyan on 17-07-21.
@@ -7,9 +7,10 @@
 
 import UIKit
 
-struct  WorkingTimes: Codable {
+struct  Settings: Codable {
     let id: String
-   // let agreementUrl
+    let registrationAgreementUrl: String
+    let reservationAgreementUrl: String
     let workStart: String
     let workEnd: String
     let metadata: [String : String]

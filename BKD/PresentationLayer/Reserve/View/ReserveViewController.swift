@@ -172,7 +172,7 @@ class ReserveViewController: BaseViewController {
             self.mConfirmBckgV.layoutIfNeeded()
 
         } completion: { _ in
-            //self.checkIsUserSignIn()
+            self.goToPhoneVerification()
         }
     }
     
@@ -182,17 +182,13 @@ class ReserveViewController: BaseViewController {
         reserveViewModel.isUserSignIn { [weak self] isUserSignIn in
             guard let self = self else { return }
             
-            //WARNING:
-            self.goToPhoneVerification()
-//            if !isUserSignIn {
-//                self.goToSignInPage()
-//            } else {
-//                if self.checkPhoneNumberVerification() {
-//                    self.goToResrvetionCompletedPage()
-//                } else {
-//
-//                }
-//            }
+            if !isUserSignIn {
+                self.goToSignInPage()
+            } else {
+                self.goToAgreement(on: self, isAdvanced: false,
+                                   isEditAdvanced: false,
+                                   urlString: ApplicationSettings.shared.settings?.reservationAgreementUrl)
+            }
         }
     }
     
@@ -219,6 +215,7 @@ class ReserveViewController: BaseViewController {
     ///Go to verification screen
     private func goToPhoneVerification() {
         let changePhoneNumberVC = ChangePhoneNumberViewController.initFromStoryboard(name: Constant.Storyboards.changePhoneNumber)
+        changePhoneNumberVC.vehicleModel = vehicleModel
       self.navigationController?.pushViewController(changePhoneNumberVC, animated: true)
     }
     
@@ -227,19 +224,28 @@ class ReserveViewController: BaseViewController {
         self.tabBarController?.selectedIndex = 4
         self.navigationController?.popToViewController(ofClass: MyBKDViewController.self, animated: true)
     }
-//MARK: - Actions
-//MARK: -------------------
-    
+//MARK: -- Actions
     @IBAction func back(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func confirm(_ sender: UIButton) {
-        addReservation()    }
+        checkIsUserSignIn()
+        
+    }
     
     @IBAction func confirmSwipe(_ sender: UISwipeGestureRecognizer) {
-        addReservation()    }
+        checkIsUserSignIn()
+        
+    }
 
 }
 
+//MARK: -- BkdAgreementViewControllerDelegate
+extension ReserveViewController: BkdAgreementViewControllerDelegate {
+    func agreeTermsAndConditions() {
+        addReservation()
+    }
+
+}
  

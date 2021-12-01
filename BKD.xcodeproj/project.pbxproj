@@ -40,6 +40,7 @@
 		562585E326F1860800EC9284 /* AdditionalDriverTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562585E226F1860800EC9284 /* AdditionalDriverTableView.swift */; };
 		562585E726F1867800EC9284 /* AditionalDriverTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562585E526F1867800EC9284 /* AditionalDriverTableCell.swift */; };
 		562585E826F1867800EC9284 /* AditionalDriverTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 562585E626F1867800EC9284 /* AditionalDriverTableCell.xib */; };
+		5629E50627556634009BEC68 /* ChangePhoneNumberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629E50527556634009BEC68 /* ChangePhoneNumberViewModel.swift */; };
 		562F89C42705F7360027CB9A /* Tariff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562F89C32705F7360027CB9A /* Tariff.swift */; };
 		56316316267A822200ED2144 /* MyDriverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56316315267A822200ED2144 /* MyDriverCollectionViewCell.swift */; };
 		5640394E26EF854B0064256C /* ReservationWithStartRideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5640394C26EF854B0064256C /* ReservationWithStartRideCollectionViewCell.swift */; };
@@ -252,6 +253,11 @@
 		566B37BD2697A6D40021BCAA /* TakePhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B37BB2697A6D30021BCAA /* TakePhotoTableViewCell.swift */; };
 		566B37BE2697A6D40021BCAA /* TakePhotoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 566B37BC2697A6D30021BCAA /* TakePhotoTableViewCell.xib */; };
 		566B7E8A269DC036007C9241 /* VerificationCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566B7E89269DC036007C9241 /* VerificationCodeViewController.swift */; };
+		567915F527563433008C8F84 /* PaymentTypesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567915F427563433008C8F84 /* PaymentTypesResponse.swift */; };
+		567915F7275674AF008C8F84 /* PhoneVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567915F6275674AF008C8F84 /* PhoneVerificationViewModel.swift */; };
+		567915F92756775B008C8F84 /* PhoneVerify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567915F82756775B008C8F84 /* PhoneVerify.swift */; };
+		567915FB27569B81008C8F84 /* ReservationCompletedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567915FA27569B80008C8F84 /* ReservationCompletedViewModel.swift */; };
+		567915FD27569ED0008C8F84 /* FreeReservationOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567915FC27569ED0008C8F84 /* FreeReservationOverViewController.swift */; };
 		568E6F592642FC4B000CB6A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568E6F572642FC4B000CB6A9 /* Main.storyboard */; };
 		568E6F5E2642FC50000CB6A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568E6F5C2642FC50000CB6A9 /* LaunchScreen.storyboard */; };
 		568E701226438C08000CB6A9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E701126438C08000CB6A9 /* MainViewController.swift */; };
@@ -401,6 +407,7 @@
 		562585E226F1860800EC9284 /* AdditionalDriverTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalDriverTableView.swift; sourceTree = "<group>"; };
 		562585E526F1867800EC9284 /* AditionalDriverTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AditionalDriverTableCell.swift; sourceTree = "<group>"; };
 		562585E626F1867800EC9284 /* AditionalDriverTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AditionalDriverTableCell.xib; sourceTree = "<group>"; };
+		5629E50527556634009BEC68 /* ChangePhoneNumberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhoneNumberViewModel.swift; sourceTree = "<group>"; };
 		562F89C32705F7360027CB9A /* Tariff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tariff.swift; sourceTree = "<group>"; };
 		56316315267A822200ED2144 /* MyDriverCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDriverCollectionViewCell.swift; sourceTree = "<group>"; };
 		5640394C26EF854B0064256C /* ReservationWithStartRideCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationWithStartRideCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -613,6 +620,11 @@
 		566B37BB2697A6D30021BCAA /* TakePhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakePhotoTableViewCell.swift; sourceTree = "<group>"; };
 		566B37BC2697A6D30021BCAA /* TakePhotoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TakePhotoTableViewCell.xib; sourceTree = "<group>"; };
 		566B7E89269DC036007C9241 /* VerificationCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationCodeViewController.swift; sourceTree = "<group>"; };
+		567915F427563433008C8F84 /* PaymentTypesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTypesResponse.swift; sourceTree = "<group>"; };
+		567915F6275674AF008C8F84 /* PhoneVerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewModel.swift; sourceTree = "<group>"; };
+		567915F82756775B008C8F84 /* PhoneVerify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerify.swift; sourceTree = "<group>"; };
+		567915FA27569B80008C8F84 /* ReservationCompletedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCompletedViewModel.swift; sourceTree = "<group>"; };
+		567915FC27569ED0008C8F84 /* FreeReservationOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeReservationOverViewController.swift; sourceTree = "<group>"; };
 		568E6F4E2642FC4B000CB6A9 /* BKD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BKD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		568E6F582642FC4B000CB6A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		568E6F5D2642FC50000CB6A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -1681,6 +1693,7 @@
 		565F80B026A638DE00ADB9FE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				567915F82756775B008C8F84 /* PhoneVerify.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1697,6 +1710,7 @@
 		565F80B226A638EB00ADB9FE /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				5629E50527556634009BEC68 /* ChangePhoneNumberViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1714,6 +1728,7 @@
 		565F80BC26A667A700ADB9FE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				567915FC27569ED0008C8F84 /* FreeReservationOverViewController.swift */,
 				565F80C326A667D900ADB9FE /* ReservationCompletedViewController.swift */,
 				565F80C926A6690B00ADB9FE /* ReservationCompleted.storyboard */,
 			);
@@ -1731,6 +1746,7 @@
 		565F80BE26A667B500ADB9FE /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				567915FA27569B80008C8F84 /* ReservationCompletedViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1764,6 +1780,7 @@
 			children = (
 				565F80FF26A7C1E700ADB9FE /* PaymentTypes.swift */,
 				93CDB1F426C1CE1F009F9B6C /* AttachedCardResponse.swift */,
+				567915F427563433008C8F84 /* PaymentTypesResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1797,6 +1814,7 @@
 		565F80DE26A74D2100ADB9FE /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				567915F6275674AF008C8F84 /* PhoneVerificationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2992,7 +3010,7 @@
 				568E6F4C2642FC4B000CB6A9 /* Resources */,
 				565F8C65268D390600E21C71 /* Embed Frameworks */,
 				995B321BDC49670283C49A78 /* [CP] Embed Pods Frameworks */,
-				30061F976EC688AC4D8758DD /* [CP] Copy Pods Resources */,
+				41064FDCF8989280E6C06FB8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3163,7 +3181,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		30061F976EC688AC4D8758DD /* [CP] Copy Pods Resources */ = {
+		41064FDCF8989280E6C06FB8 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3205,6 +3223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				565632522658B11E00B78562 /* EquipmentModel.swift in Sources */,
+				567915FB27569B81008C8F84 /* ReservationCompletedViewModel.swift in Sources */,
 				5602532C26670A0100FB204C /* OnlineChatViewController.swift in Sources */,
 				56533F092679BDBE0012BF4A /* MyDriversViewController.swift in Sources */,
 				565863BB26C76B3C003C19A2 /* CashViewController.swift in Sources */,
@@ -3296,6 +3315,8 @@
 				56316316267A822200ED2144 /* MyDriverCollectionViewCell.swift in Sources */,
 				565A7AB02653FE26006C63D0 /* SearchHeaderView.swift in Sources */,
 				564E12FE264EAF04008CE884 /* PaddingUILable.swift in Sources */,
+				567915FD27569ED0008C8F84 /* FreeReservationOverViewController.swift in Sources */,
+				5629E50627556634009BEC68 /* ChangePhoneNumberViewModel.swift in Sources */,
 				56CC7D8126A9FED1006DB7B8 /* BancontactView.swift in Sources */,
 				565BFD87269F55550044D081 /* URLBuilderProtocol.swift in Sources */,
 				564ED6402700652300FA9714 /* ConfirmView.swift in Sources */,
@@ -3378,6 +3399,7 @@
 				565BFDB5269F5B850044D081 /* BKDBaseURL.swift in Sources */,
 				56CFDE762693920E00D731CD /* RegistrationBotModel.swift in Sources */,
 				564BE87F2702225E0037DF39 /* DamageSidesTableView.swift in Sources */,
+				567915F527563433008C8F84 /* PaymentTypesResponse.swift in Sources */,
 				568E70172643919B000CB6A9 /* LeftViewController.swift in Sources */,
 				935D479C26D973F200D000A6 /* ChatViewModel.swift in Sources */,
 				5656F1A82689650600E70BAB /* ReserveViewModel.swift in Sources */,
@@ -3438,11 +3460,13 @@
 				565F80AC26A62EE200ADB9FE /* MyBKDViewModel.swift in Sources */,
 				565731F8267332620012ADD0 /* TariffSlideViewController.swift in Sources */,
 				565F808526A59C3800ADB9FE /* VerificationCodeViewModel.swift in Sources */,
+				567915F7275674AF008C8F84 /* PhoneVerificationViewModel.swift in Sources */,
 				565F80E426A74D6000ADB9FE /* PhoneVerificationViewController.swift in Sources */,
 				5691A61B265C71EC0008081D /* ExteriorCollectionViewCell.swift in Sources */,
 				5618888F264A63CA00BDDB33 /* LocationDropDownView.swift in Sources */,
 				5660E61E26FE0DB4009BB73F /* OnRideModel.swift in Sources */,
 				56A2AFEC2694CFC9001BA7C5 /* SearchPhoneCodeViewController.swift in Sources */,
+				567915F92756775B008C8F84 /* PhoneVerify.swift in Sources */,
 				562F89C42705F7360027CB9A /* Tariff.swift in Sources */,
 				560252E2266535CF00FB204C /* Result.swift in Sources */,
 				5669F5FC26FC170D00FF73F7 /* ContactActionSheetView.swift in Sources */,

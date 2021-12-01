@@ -38,7 +38,9 @@ class ReservationCompletedViewController: BaseViewController {
     @IBOutlet weak var mVisualEffectV: UIVisualEffectView!
     
     //MARK: - Variables
+    lazy var reservationCompletedViewModel =  ReservationCompletedViewModel()
     var paymentOption:PaymentOption = .none
+    public var vehicleModel:VehicleModel?
     
     
     //MARK: - Life cycle
@@ -56,6 +58,7 @@ class ReservationCompletedViewController: BaseViewController {
         super.viewWillAppear(animated)
         mConfirmLeading.constant = 0.0
         mVisualEffectV.isHidden = true
+        resetChecks()
     }
     
     func setUpView()  {
@@ -73,6 +76,22 @@ class ReservationCompletedViewController: BaseViewController {
         mPreReservetionTitleLb.textAlignment = .center
         mConfirmBtn.layer.cornerRadius = 8
         mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
+        mDepositPriceLb.text = Constant.Texts.euro + " " + String(vehicleModel?.depositPrice ?? 0.0)
+        mDepositRentalPriceLb.text = Constant.Texts.euro + " " + String(vehicleModel?.depositPrice ?? 0.0) + " + " + String(format: "%.2f",PriceManager.shared.totalPrice ?? 0.0)
+    }
+    
+    
+    ///Pay later
+    private func payLater() {
+        reservationCompletedViewModel.payLater { [weak self] (status) in
+            if status == .countLimited {
+                self?.goToFreeReservationOverScreen()
+            } else {
+                self?.showAlertOfPayLater(message: "Test")
+            }
+       // print (result)
+
+        }
     }
     
     //Animate confirm
@@ -85,6 +104,12 @@ class ReservationCompletedViewController: BaseViewController {
         }
     }
     
+    //Open freeReservationOver  screen
+     func goToFreeReservationOverScreen() {
+        let freeReservationCompletedVC = FreeReservationOverViewController.initFromStoryboard(name: Constant.Storyboards.reservationCompleted)
+         freeReservationCompletedVC.vehicleModel = vehicleModel
+        self.navigationController?.pushViewController(freeReservationCompletedVC, animated: true)
+    }
     
     //Uncheck all buttons
     private func resetChecks() {
@@ -100,7 +125,7 @@ class ReservationCompletedViewController: BaseViewController {
         mConfirmContentV.alpha = enable ? 1 : 0.8
     }
     
-    private func showAlertOfPayLater() {
+    private func showAlertOfPayLater(message: String?) {
         self.mVisualEffectV.isHidden = false
         let bkdAlert = BKDAlert()
         bkdAlert.backgroundView.isHidden = true
@@ -162,7 +187,7 @@ class ReservationCompletedViewController: BaseViewController {
             isEnableConfirm(enable: true)
             sender.setImage(#imageLiteral(resourceName: "check"), for: .normal)
             paymentOption = .payLater
-            showAlertOfPayLater()
+            payLater()
         }
         
     }
