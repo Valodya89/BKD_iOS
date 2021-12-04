@@ -9,6 +9,16 @@ import UIKit
 import WebKit
 
 
+enum AgreementType {
+    case advanced
+    case editAdvanced
+    case myReservationCell
+    case payLater
+    case reserve
+    case none
+    
+}
+
 protocol BkdAgreementViewControllerDelegate: AnyObject {
     func agreeTermsAndConditions()
 }
@@ -25,14 +35,16 @@ class BkdAgreementViewController: BaseViewController {
     //MARK: -- Variables
     weak var delegate: BkdAgreementViewControllerDelegate?
     
-    var isMyReservationCell:Bool = false
-    var isPayLater:Bool = false
+    //var isMyReservationCell:Bool = false
+   // var isPayLater:Bool = false
    // private var urlString = ""
     private var htmlString = ""
     
-    public var isAdvanced:Bool = false
-    public var isEditAdvanced:Bool = false
+   // public var isAdvanced:Bool = false
+   // public var isEditAdvanced:Bool = false
     public var urlString: String? = nil
+    public var agreementType: AgreementType?
+    public var vehicleModel: VehicleModel?
     
     //MARK: --Lifecycle
     override func viewDidLoad() {
@@ -87,18 +99,64 @@ class BkdAgreementViewController: BaseViewController {
     
     func handlerAgree() {
         mAgreeV.didPressConfirm  = {
-            if self.isAdvanced ||
-                self.isMyReservationCell ||
-                self.isPayLater ||
-                self.isEditAdvanced  {
+            switch self.agreementType {
                 
-                self.goToSelectPayment()
-                
-            } else {
+            case .advanced,
+                    .myReservationCell,
+                    .payLater,
+                    .editAdvanced:
+                break
+                //self.goToSelectPayment(vehicleModel: <#VehicleModel#>, paymentOption: <#PaymentOption#>)
+            case .reserve:
+                self.addReservation()
+            default:
                 self.delegate?.agreeTermsAndConditions()
                 self.navigationController?.popViewController(animated: true)
             }
+            
         }
+    }
+    
+    ///Add reservation
+    private func addReservation() {
+        ReserveViewModel().addRent(vehicleModel: vehicleModel ?? VehicleModel()) { result, error in
+                if let _ = error {
+                    self.showAlertSignIn()
+                } else if result == nil {
+                    self.showAlert()
+                } else {
+                    //self.rent = result
+                    self.vehicleModel?.rent = result!
+                    self.goToPhoneVerification()
+                   // self.clickConfirm()
+                }
+        }
+    }
+    
+    ///Show alert
+    private func showAlert() {
+        BKDAlert().showAlert(on: self,
+                             title: nil,
+                             message: Constant.Texts.errRegistrationBot,
+                             messageSecond: nil,
+                             cancelTitle: Constant.Texts.cancel,
+                             okTitle: Constant.Texts.ok,
+                             cancelAction: nil) {
+            self.goToMyBkd()
+        }
+    }
+    
+    ///Go to myBkd screen
+    private func goToMyBkd() {
+        self.tabBarController?.selectedIndex = 4
+        self.navigationController?.popToViewController(ofClass: MyBKDViewController.self, animated: true)
+    }
+    
+    ///Go to verification screen
+    private func goToPhoneVerification() {
+        let changePhoneNumberVC = ChangePhoneNumberViewController.initFromStoryboard(name: Constant.Storyboards.changePhoneNumber)
+        changePhoneNumberVC.vehicleModel = vehicleModel
+      self.navigationController?.pushViewController(changePhoneNumberVC, animated: true)
     }
 }
 

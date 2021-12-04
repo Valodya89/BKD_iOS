@@ -59,7 +59,7 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EzH-dL-bz2">
                                                     <rect key="frame" x="16" y="0.0" width="382" height="79"/>
-                                                    <color key="backgroundColor" name="subview_background"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                     <state key="normal">
                                                         <color key="titleColor" name="navigationBar"/>
@@ -67,7 +67,7 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
                                                 </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l5a-zG-7Lr">
                                                     <rect key="frame" x="16" y="0.0" width="382" height="79"/>
-                                                    <color key="backgroundColor" name="subview_background"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" name="background"/>
@@ -284,6 +284,7 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
                         <outlet property="mDepositInfoLb" destination="acs-Ri-7at" id="UEW-oQ-Mnw"/>
                         <outlet property="mDepositLbHeight" destination="a4j-wy-b9k" id="z5l-Ng-Ro1"/>
                         <outlet property="mGradientV" destination="8Xf-5q-ubS" id="Ucp-Te-FgL"/>
+                        <outlet property="mMaskePaymentLb" destination="tsT-wT-iVq" id="8gL-Ah-Qw1"/>
                         <outlet property="mPaymentTbV" destination="kQW-qx-kY2" id="faM-8w-bPK"/>
                         <outlet property="mRightBarBtn" destination="fo6-yI-lWs" id="bxq-h9-yaZ"/>
                     </connections>

@@ -16,19 +16,22 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
     //MARK: - Outlet
     @IBOutlet weak var mPaymentTbV: UITableView!
     @IBOutlet weak var mGradientV: UIView!
+    @IBOutlet weak var mMaskePaymentLb: UILabel!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mDepositInfoLb: UILabel!
     @IBOutlet weak var mDepositLbHeight: NSLayoutConstraint!
     @IBOutlet weak var mBlurV: UIVisualEffectView!
     @IBOutlet weak var mBancontactTypeV: BancontactTypeView!
     @IBOutlet weak var mBancontactV: BancontactView!
-
     @IBOutlet weak var mBancontactTypeBottom: NSLayoutConstraint!
     
     //MARK: - Variables
     private let viewModel = PaymentViewModel()
     var paymentTypes = PaymentTypeData.paymentTypeModel
     var paymentType: PaymentTypesResponse?
+    var userWallet: UserWallet?
+    public var vehicleModel: VehicleModel?
+    public var paymentOption: PaymentOption?
     public var isDeposit:Bool = false
     
     //MARK: - Local properties
@@ -70,21 +73,34 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
     }
     
     func setUpView() {
+        configureUI()
+        configureDelegate()
+        selectBancontactType()
+        selectBancontactCard()
+        getUserWallet()
+    }
+    
+    ///configure UI
+    func configureUI() {
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
         mRightBarBtn.image = img_bkd
         mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
-        mPaymentTbV.delegate = self
-        mPaymentTbV.dataSource = self
-        selectBancontactType()
-        selectBancontactCard()
+        mMaskePaymentLb.text = String(format: Constant.Texts.makePayment, paymentOption == .depositRental ? ((vehicleModel?.depositPrice ?? 0.0) + (vehicleModel?.totalPrice ?? 0.0) ) : vehicleModel?.depositPrice ?? 0.0 )
     }
     
+    ///configure delegate
+    func configureDelegate() {
+        mPaymentTbV.delegate = self
+        mPaymentTbV.dataSource = self
+    }
 
     
     /// Selected bancontact type
     func selectBancontactType() {
         mBancontactTypeV.didPressBancontact = {
-            self.getPaymentUrl(paymentType: .bancontact, amount: "5.7")
+            self.getPaymentUrl(isBancontact: true,
+                               bancontactType: .bancontact,
+                               otherPaymentType: nil)
         }
         
         mBancontactTypeV.didPressMobileBancking = {
@@ -98,19 +114,9 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
     ///Selected bancontact card type
     func selectBancontactCard() {
         mBancontactV.didPressBancontactCard = { cardType in
-            self.getPaymentUrl(paymentType: cardType, amount: "5.7")
-
-//            switch cardType {
-//            case .ing:
-//                break
-//                //self.goToWebScreen(paymentType: .creditCard)
-//                //SelectPaymentViewController.openCustomApp(by: kCustomURLScheme)
-//            case .bnp: break
-//            //self.goToWebScreen(paymentType: .creditCard)
-//            case .kbc: break
-//               // self.goToWebScreen(paymentType: .creditCard)
-//            default: break
-//            }
+            self.getPaymentUrl(isBancontact: true,
+                               bancontactType: cardType,
+                               otherPaymentType: nil)
         }
     }
     
@@ -162,6 +168,7 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
     
     ///Open Payment Web Screen
     private func goToWebScreen(urlString: String) {
+        
         let paymentWebVC = PaymentWebViewController.initFromStoryboard(name: Constant.Storyboards.payment)
         paymentWebVC.setData(urlString: urlString)
         navigationController?.pushViewController(paymentWebVC, animated: true)
@@ -170,15 +177,38 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
 
     ///Get payment type list
     func getPaymentTypes() {
+        
         viewModel.getPaymentTypes { response in
             guard let response = response else {return}
             self.paymentType = response
         }
     }
+    
+    ///Get user wallet
+    func getUserWallet() {
+        
+        viewModel.getWallet { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let userWallet):
+                self.userWallet = userWallet
+            case .failure(let error):
+                print("ERROR: \(error.message)")
+            }
+        }
+    }
    
     ///Get payment url
-    func getPaymentUrl(paymentType: BancontactCard, amount: String) {
-        viewModel.getPaymentUrl(paymentType: paymentType, amount: amount) { [weak self] result in
+    func getPaymentUrl(isBancontact:  Bool,
+                       bancontactType: BancontactCard?,
+                       otherPaymentType: PaymentType?) {
+        
+        viewModel.getPaymentUrl(isBancontact:  isBancontact,
+                                bancontactType: bancontactType,
+                                otherPaymentType: otherPaymentType,
+                                paymentOption: paymentOption ?? .none,
+                                vehicleModel: vehicleModel ?? VehicleModel()) { [weak self] result in
+            
             guard let self = self else { return }
             switch result {
             case .success(let attachedCardURL):
@@ -189,18 +219,23 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
         }
     }
     
-//    func getCreditCardURL() {
-//        viewModel.getAttachedCardURL { [weak self] result in
-//            guard let self = self else { return }
-//            switch result {
-//            case .success(let attachedCardURL):
-//                self.goToWebScreen(urlString: attachedCardURL)
-//            case .failure(let error):
-//                print("ERROR: \(error.message)")
-//            }
-//        }
-//    }
     
+    ///Gret pay pal url
+    func getPayPalUrl() {
+        viewModel.getPayPalUrl(paymentOption: paymentOption ?? .none,
+                               vehicleModel: vehicleModel ?? VehicleModel()) {  [weak self] result in
+            
+            guard let self = self else { return }
+            switch result {
+            case .success(let attachedCardURL):
+                self.goToWebScreen(urlString: attachedCardURL)
+            case .failure(let error):
+                print("ERROR: \(error.message)")
+            }
+        }
+    }
+    
+
     ///Hide Bancontact view
     private func hideBancontact() {
         mBlurV.isHidden = true
@@ -219,21 +254,7 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
     @IBAction func TapGesture(_ sender: UITapGestureRecognizer) {
         hideBancontact()
     }
-    //    @IBAction func swipeBancontact(_ sender: UISwipeGestureRecognizer) {
-//        mBlurV.isHidden = true
-//        //mGradientV.isHidden = true
-//        self.animateBancontactTypeView(isShow: false, bottom: self.mBancontactTypeBottom )
-//        self.paymentTypes = PaymentTypeData.paymentTypeModel
-//        self.mPaymentTbV.reloadData()
-//    }
-//
-//    @IBAction func swipeBancontactV(_ sender: UISwipeGestureRecognizer) {
-//        mBlurV.isHidden = true
-//        self.paymentTypes = PaymentTypeData.paymentTypeModel
-//        self.mPaymentTbV.reloadData()
-//        self.animateBancontactTypeView(isShow: false, bottom: self.mBancontactV.mContentVBottom )
-//    }
-//    
+    
     @IBAction func back(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
     }
@@ -263,7 +284,7 @@ extension SelectPaymentViewController: UITableViewDelegate, UITableViewDataSourc
         })
     }
     
-    ///
+    /// Open web page for payment
     private func openPaymentScreen(cell: PaymenTypeTableViewCell) {
         cell.didPressPayment = { [self] paymentType, index in
             
@@ -272,18 +293,22 @@ extension SelectPaymentViewController: UITableViewDelegate, UITableViewDataSourc
             self.mPaymentTbV.reloadData()
             
             switch paymentType {
-//            case .creditCard:
-//                self.getCreditCardURL()
-            case .bancontact:
-               // self.goToWebScreen(paymentType: .bancontact)
+            case .creditCard,
+                 .applePay,
+                 .kaartlazer:
+                
+                getPaymentUrl(isBancontact: false,
+                              bancontactType: nil,
+                              otherPaymentType: paymentType)
+                
+            case .payPal:
+                getPayPalUrl()
 
+            case .bancontact:
                 mBlurV.isHidden = false
-                //mGradientV.isHidden = false
                 self.animateBancontactTypeView(isShow: true, bottom: self.mBancontactTypeBottom)
-            case .applePay:
-                self.selectApplePay()
-//            case .payPal:
-//                self.goToWebScreen(paymentType: .payPal)
+                break
+           
             }
             
         }

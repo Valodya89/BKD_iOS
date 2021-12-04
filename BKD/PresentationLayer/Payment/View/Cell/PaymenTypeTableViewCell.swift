@@ -6,10 +6,11 @@
 //
 
 enum PaymentType: Int {
+    case creditCard
     case bancontact
     case applePay
-//    case payPal
-//    case creditCard
+    case payPal
+    case kaartlazer
 }
 
 import UIKit
@@ -58,7 +59,7 @@ static let identifier = "PaymenTypeTableViewCell"
         }
         if item.isClicked {
            
-            didTouchCell()
+            didTouchCell(item: item)
         } else {
             mCardImgV.isHidden = true
             mPaymentBtn.removeCAShapeLayer()
@@ -66,22 +67,29 @@ static let identifier = "PaymenTypeTableViewCell"
         }
     }
     
-    private func didTouchCell() {
-        mCardImgV.isHidden = false
+    private func didTouchCell(item: PaymentTypes) {
+        mCardImgV.isHidden = (item.title == nil) ? false : true
 //        mPaymentBtn.removeCAShapeLayer()
 //        mPaymentBtn.roundCornersWithBorder(corners: .allCorners, radius: 5, borderColor: color_menu!, borderWidth: 1)
-        DispatchQueue.main.async {
+      //  DispatchQueue.main.async {
+        if item.title == nil {
             self.mPaymentBtn.setBackgroundColorToCAShapeLayer(color: color_menu!)
             self.mPaymentBtn.setBorderColorToCAShapeLayer(color: color_menu!)
-        }
+        } else {
+//            mCardImgV.image = nil
+//            mPaymentBtn.bringSubviewToFront(mCardImgV)
+            self.mCardImgV.setBackgroundColorToCAShapeLayer(color: color_menu!)
+            self.mCardImgV.setBorderColorToCAShapeLayer(color: color_menu!)
+       }
+       // }
         
     }
     
     @objc func pressedPayment(sender: UIButton) {
-        
-        self.didPressPayment?(PaymentType(rawValue: sender.tag)!,
-                              sender.tag)
-        
+
+            self.didPressPayment?(PaymentType(rawValue: sender.tag)!,
+                                  sender.tag)
+         
     }
 
 }

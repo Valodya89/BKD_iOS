@@ -258,6 +258,7 @@
 		567915F92756775B008C8F84 /* PhoneVerify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567915F82756775B008C8F84 /* PhoneVerify.swift */; };
 		567915FB27569B81008C8F84 /* ReservationCompletedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567915FA27569B80008C8F84 /* ReservationCompletedViewModel.swift */; };
 		567915FD27569ED0008C8F84 /* FreeReservationOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567915FC27569ED0008C8F84 /* FreeReservationOverViewController.swift */; };
+		567915FF275A9500008C8F84 /* UserWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567915FE275A9500008C8F84 /* UserWallet.swift */; };
 		568E6F592642FC4B000CB6A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568E6F572642FC4B000CB6A9 /* Main.storyboard */; };
 		568E6F5E2642FC50000CB6A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568E6F5C2642FC50000CB6A9 /* LaunchScreen.storyboard */; };
 		568E701226438C08000CB6A9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E701126438C08000CB6A9 /* MainViewController.swift */; };
@@ -625,6 +626,7 @@
 		567915F82756775B008C8F84 /* PhoneVerify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerify.swift; sourceTree = "<group>"; };
 		567915FA27569B80008C8F84 /* ReservationCompletedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCompletedViewModel.swift; sourceTree = "<group>"; };
 		567915FC27569ED0008C8F84 /* FreeReservationOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeReservationOverViewController.swift; sourceTree = "<group>"; };
+		567915FE275A9500008C8F84 /* UserWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWallet.swift; sourceTree = "<group>"; };
 		568E6F4E2642FC4B000CB6A9 /* BKD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BKD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		568E6F582642FC4B000CB6A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		568E6F5D2642FC50000CB6A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -1781,6 +1783,7 @@
 				565F80FF26A7C1E700ADB9FE /* PaymentTypes.swift */,
 				93CDB1F426C1CE1F009F9B6C /* AttachedCardResponse.swift */,
 				567915F427563433008C8F84 /* PaymentTypesResponse.swift */,
+				567915FE275A9500008C8F84 /* UserWallet.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3010,7 +3013,7 @@
 				568E6F4C2642FC4B000CB6A9 /* Resources */,
 				565F8C65268D390600E21C71 /* Embed Frameworks */,
 				995B321BDC49670283C49A78 /* [CP] Embed Pods Frameworks */,
-				41064FDCF8989280E6C06FB8 /* [CP] Copy Pods Resources */,
+				E7501204FDB3B143C4CA669F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3181,23 +3184,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		41064FDCF8989280E6C06FB8 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		995B321BDC49670283C49A78 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3213,6 +3199,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E7501204FDB3B143C4CA669F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3289,6 +3292,7 @@
 				562585DB26F175CB00EC9284 /* RegisterNumberUITableView.swift in Sources */,
 				566B37BD2697A6D40021BCAA /* TakePhotoTableViewCell.swift in Sources */,
 				564ED63D270052F900FA9714 /* EditReservetionAdvancedViewController.swift in Sources */,
+				567915FF275A9500008C8F84 /* UserWallet.swift in Sources */,
 				5691A5FC265C28860008081D /* AddressNameViewController.swift in Sources */,
 				56ADD80D26F2C65800C0ECC3 /* EditReservationViewController.swift in Sources */,
 				56B9F2ED26806488003449AD /* SearchResultModelView.swift in Sources */,

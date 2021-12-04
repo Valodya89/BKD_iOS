@@ -737,8 +737,10 @@ extension RegistartionBotViewController: TakePhotoTableViewCellDelegate {
         takePhotoCurrentIndex = index
         if isOpenDoc {
             
-            self.goToAgreement(on: self, isAdvanced: false,
-                               isEditAdvanced: false, urlString: ApplicationSettings.shared.settings?.registrationAgreementUrl)
+            self.goToAgreement(on: self,
+                               agreementType: .none,
+                               vehicleModel: nil,
+                               urlString: ApplicationSettings.shared.settings?.registrationAgreementUrl)
         } else {
             takePhotoPressed()
         }

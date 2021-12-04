@@ -33,6 +33,7 @@ struct VehicleModel {
     public var freeKiloMeters: Double = 0.0
     
     public var depositPrice: Double = 0.0
+    public var totalPrice: Double = 0.0
     public var priceForKm: Double = 0.0
 
     //Vehicle general short info
@@ -55,5 +56,7 @@ struct VehicleModel {
     public var additionalDrivers: [MyDriversModel]?
     public var images: [CarImageResponse]?
     public var carImagesList:[UIImage]?
+    
+    public var rent: Rent?
 }
 

@@ -373,8 +373,8 @@ class MyReservetionAdvancedViewController: BaseViewController {
     
     @IBAction func agreement(_ sender: UIButton) {
         self.goToAgreement(on: self,
-                           isAdvanced: false,
-                           isEditAdvanced: false,
+                           agreementType: .none,
+                           vehicleModel: nil,
                            urlString: nil)
     }
     
@@ -406,8 +406,8 @@ class MyReservetionAdvancedViewController: BaseViewController {
                 self.goToPayLater()
             } else {
                 self.goToAgreement(on: self,
-                                   isAdvanced: true,
-                                   isEditAdvanced: false,
+                                   agreementType: .advanced,
+                                   vehicleModel: nil,
                                    urlString: nil)
             }
         }

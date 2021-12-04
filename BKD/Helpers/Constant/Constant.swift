@@ -262,6 +262,7 @@ struct Constant {
         static let mobileBancking = "Mobile banking"
         static let bancontactCard = "Bancontact card"
         static let generatedCode = "Generated Code"
+        static let makePayment = "Make %.2f  Payment via"
         
         //My Reservation
         static let price = "Price"

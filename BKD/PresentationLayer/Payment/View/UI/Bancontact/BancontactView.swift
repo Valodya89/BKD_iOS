@@ -10,6 +10,7 @@ enum BancontactCard: Int {
     case bnp
     case kbc
     case bancontact
+
 }
 import UIKit
 

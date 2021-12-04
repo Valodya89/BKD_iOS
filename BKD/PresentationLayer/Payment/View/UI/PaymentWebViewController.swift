@@ -84,12 +84,37 @@ final class PaymentWebViewController: UIViewController, StoryboardInitializable 
 
 // MARK: - WKNavigation Delegate
 
+
 extension PaymentWebViewController: WKNavigationDelegate {
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        print("request.url = ", navigationAction.request.url)
+        print("request = ", navigationAction.request)
+        if let host = navigationAction.request.url?.absoluteString {
+            if host == "https://dev-ipay.bkdrental.com/ipay/return" {
+                decisionHandler(.allow)
+                return
+            }
+        }
+
+        decisionHandler(.allow)
+    }
+ //https://dev-ipay.bkdrental.com/ipay/return
+    
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+//        webView.evaluateJavaScript("document.getElementById(\"my-id\").innerHTML", completionHandler: { (jsonRaw: Any?, error: Error?) in
+//            guard let jsonString = jsonRaw as? String else { return }
+//            //let json = JSON(parseJSON: jsonString)
+//            // do stuff
+//            print(jsonString)
+//        })
+    }
+    
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        print("navv === ",navigation.description)
+        print("web ==== ", webView.url)
 //        showLTActivityIndicator()
     }
     
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-//        dismissLTActivityIndicator()
-    }
 }

@@ -359,8 +359,10 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         cell.setCellInfo(item: item, index: indexPath.item)
         
         cell.payDistancePrice = {
-            self.goToAgreement(on: self, isAdvanced: false,
-                               isEditAdvanced: true, urlString: nil)
+            self.goToAgreement(on: self,
+                               agreementType: .editAdvanced,
+                               vehicleModel: nil,
+                               urlString: nil)
         }
         return cell
     }
@@ -372,8 +374,10 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         
         cell.setInfoCell(item: item, index: indexPath.item)
         cell.payRentalPrice = {
-            self.goToAgreement(on: self, isAdvanced: false,
-                               isEditAdvanced: true, urlString: nil)
+            self.goToAgreement(on: self,
+                               agreementType: .editAdvanced,
+                               vehicleModel: nil,
+                               urlString: nil)
         }
         return cell
     }

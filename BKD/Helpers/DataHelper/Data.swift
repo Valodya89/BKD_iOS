@@ -310,10 +310,11 @@ struct  RegistrationBotData {
 
 //MARK: - Payment
 struct PaymentTypeData {
-  static  let paymentTypeModel: [PaymentTypes] = [ /*PaymentTypes(title: nil, image: UIImage(named: "credit_card")),*/
+  static  let paymentTypeModel: [PaymentTypes] = [ PaymentTypes(title: nil, image: UIImage(named: "credit_card")),
         PaymentTypes(title: nil, image: UIImage(named: "bancontact")),
-        PaymentTypes(title: nil, image: UIImage(named: "apple_pay"))/*,
-        PaymentTypes(title: nil, image: UIImage(named: "paypal"))*/
+        PaymentTypes(title: nil, image: UIImage(named: "apple_pay")),
+        PaymentTypes(title: nil, image: UIImage(named: "paypal")),
+        PaymentTypes(title: "Kaartlazer", image: nil)
        
     ]
 }

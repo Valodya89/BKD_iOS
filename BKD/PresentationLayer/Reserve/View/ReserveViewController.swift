@@ -65,11 +65,10 @@ class ReserveViewController: BaseViewController {
     var reserveViewModel = ReserveViewModel()
     public var vehicleModel: VehicleModel?
     public var currentTariffOption: TariffSlideModel?
-
+    var rent: Rent?
     var currentTariff: TariffState = .hourly
     var lastContentOffset:CGFloat = 0.0
     var totalPrice: Double = 0.0
-    
     
     //MARK: - Life cycle
     override func viewDidLoad() {
@@ -147,23 +146,25 @@ class ReserveViewController: BaseViewController {
 
         totalPrice = PriceManager.shared.getTotalPrice(totalPrices: mPriceTableV.pricesArr)
         mTotalPriceValueLb.text = String(format: "%.2f",totalPrice)
+        vehicleModel?.totalPrice = totalPrice
         
     }
     
     
-    ///Add reservation
-    private func addReservation() {
-        reserveViewModel.addRent(vehicleModel: vehicleModel ?? VehicleModel()) { result, error in
-                if let _ = error {
-                    self.showAlertSignIn()
-                } else if result == nil {
-                    self.showAlert()
-//                    self.showAlertMessage(Constant.Texts.errRegistrationBot)
-                } else {
-                    self.clickConfirm()
-                }
-        }
-    }
+//    ///Add reservation
+//    private func addReservation() {
+//        reserveViewModel.addRent(vehicleModel: vehicleModel ?? VehicleModel()) { result, error in
+//                if let _ = error {
+//                    self.showAlertSignIn()
+//                } else if result == nil {
+//                    self.showAlert()
+//                } else {
+//                    self.rent = result
+//                    self.vehicleModel?.rent = result!
+//                   // self.clickConfirm()
+//                }
+//        }
+//    }
     
     /// Animate Confirm click
     private func clickConfirm() {
@@ -172,7 +173,11 @@ class ReserveViewController: BaseViewController {
             self.mConfirmBckgV.layoutIfNeeded()
 
         } completion: { _ in
-            self.goToPhoneVerification()
+            self.goToAgreement(on: self,
+                               agreementType: .reserve,
+                               vehicleModel: self.vehicleModel,
+                               urlString: ApplicationSettings.shared.settings?.reservationAgreementUrl)
+//            self.isAgree ? self.goToPhoneVerification() :         self.addReservation()
         }
     }
     
@@ -185,45 +190,16 @@ class ReserveViewController: BaseViewController {
             if !isUserSignIn {
                 self.goToSignInPage()
             } else {
-                self.goToAgreement(on: self, isAdvanced: false,
-                                   isEditAdvanced: false,
-                                   urlString: ApplicationSettings.shared.settings?.reservationAgreementUrl)
+                self.clickConfirm()
             }
-        }
-    }
-    
-   
-    ///Show alert
-    private func showAlert() {
-        BKDAlert().showAlert(on: self,
-                             title: nil,
-                             message: Constant.Texts.errRegistrationBot,
-                             messageSecond: nil,
-                             cancelTitle: Constant.Texts.cancel,
-                             okTitle: Constant.Texts.ok,
-                             cancelAction: nil) {
-            self.goToMyBkd()
         }
     }
     
     private func checkPhoneNumberVerification() -> Bool {
         return false
     }
+    
 
-    
-   
-    ///Go to verification screen
-    private func goToPhoneVerification() {
-        let changePhoneNumberVC = ChangePhoneNumberViewController.initFromStoryboard(name: Constant.Storyboards.changePhoneNumber)
-        changePhoneNumberVC.vehicleModel = vehicleModel
-      self.navigationController?.pushViewController(changePhoneNumberVC, animated: true)
-    }
-    
-    ///Go to myBkd screen
-    private func goToMyBkd() {
-        self.tabBarController?.selectedIndex = 4
-        self.navigationController?.popToViewController(ofClass: MyBKDViewController.self, animated: true)
-    }
 //MARK: -- Actions
     @IBAction func back(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
@@ -244,7 +220,6 @@ class ReserveViewController: BaseViewController {
 //MARK: -- BkdAgreementViewControllerDelegate
 extension ReserveViewController: BkdAgreementViewControllerDelegate {
     func agreeTermsAndConditions() {
-        addReservation()
     }
 
 }

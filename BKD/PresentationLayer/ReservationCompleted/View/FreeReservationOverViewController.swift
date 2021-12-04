@@ -92,7 +92,8 @@ class FreeReservationOverViewController: BaseViewController {
     
     func handlerContinue() {
         mConfirmV.didPressConfirm = {
-            self.goToSelectPayment()
+            self.goToSelectPayment(vehicleModel: self.vehicleModel ?? VehicleModel(),
+                                   paymentOption: self.paymentOption)
         }
     }
     

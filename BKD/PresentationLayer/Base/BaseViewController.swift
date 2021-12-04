@@ -85,15 +85,17 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     
     ///Open agree Screen
     func goToAgreement(on viewController: UIViewController,
-                       isAdvanced:Bool,
-                       isEditAdvanced: Bool,
+                       agreementType: AgreementType,
+                       vehicleModel: VehicleModel?,
                        urlString: String?) {
         
         let bkdAgreementVC = UIStoryboard(name: Constant.Storyboards.registrationBot, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.bkdAgreement) as! BkdAgreementViewController
         bkdAgreementVC.delegate = viewController as? BkdAgreementViewControllerDelegate
-        bkdAgreementVC.isAdvanced = isAdvanced
-        bkdAgreementVC.isEditAdvanced = isEditAdvanced
+        bkdAgreementVC.agreementType = agreementType
+//        bkdAgreementVC.isAdvanced = isAdvanced
+//        bkdAgreementVC.isEditAdvanced = isEditAdvanced
         bkdAgreementVC.urlString = urlString
+        bkdAgreementVC.vehicleModel = vehicleModel
         self.navigationController?.pushViewController(bkdAgreementVC, animated: true)
     }
     
@@ -134,8 +136,12 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     
     
     //Open SelectPayment screen
-     func goToSelectPayment() {
+    func goToSelectPayment(vehicleModel:VehicleModel,
+                           paymentOption: PaymentOption) {
+        
         let selectPaymentVC = SelectPaymentViewController.initFromStoryboard(name: Constant.Storyboards.payment)
+        selectPaymentVC.vehicleModel = vehicleModel
+        selectPaymentVC.paymentOption = paymentOption
         self.navigationController?.pushViewController(selectPaymentVC, animated: true)
     }
     

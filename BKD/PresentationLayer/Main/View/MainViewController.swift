@@ -63,8 +63,8 @@ class MainViewController: BaseViewController {
         super.viewDidLoad()
         self.tabBarController?.setTabBarBackgroundColor(color: color_background!)
         setupView()
-
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)

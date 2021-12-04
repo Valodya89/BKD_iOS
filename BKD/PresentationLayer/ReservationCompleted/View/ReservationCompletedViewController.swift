@@ -39,8 +39,8 @@ class ReservationCompletedViewController: BaseViewController {
     
     //MARK: - Variables
     lazy var reservationCompletedViewModel =  ReservationCompletedViewModel()
-    var paymentOption:PaymentOption = .none
-    public var vehicleModel:VehicleModel?
+    var paymentOption: PaymentOption = .none
+    public var vehicleModel: VehicleModel?
     
     
     //MARK: - Life cycle
@@ -78,6 +78,7 @@ class ReservationCompletedViewController: BaseViewController {
         mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
         mDepositPriceLb.text = Constant.Texts.euro + " " + String(vehicleModel?.depositPrice ?? 0.0)
         mDepositRentalPriceLb.text = Constant.Texts.euro + " " + String(vehicleModel?.depositPrice ?? 0.0) + " + " + String(format: "%.2f",PriceManager.shared.totalPrice ?? 0.0)
+        vehicleModel?.totalPrice = PriceManager.shared.totalPrice ?? 0.0
     }
     
     
@@ -100,7 +101,8 @@ class ReservationCompletedViewController: BaseViewController {
             self.mConfirmLeading.constant = self.mConfirmContentV.bounds.width - self.mConfirmBtn.frame.size.width
             self.mConfirmContentV.layoutIfNeeded()
         } completion: { _ in
-            self.goToSelectPayment()
+            self.goToSelectPayment(vehicleModel: self.vehicleModel ?? VehicleModel(),
+                                   paymentOption: self.paymentOption)
         }
     }
     
@@ -132,7 +134,8 @@ class ReservationCompletedViewController: BaseViewController {
         bkdAlert.showAlert(on: self, title: nil, message: Constant.Texts.payAlert, messageSecond: nil, cancelTitle: Constant.Texts.gotIt, okTitle: Constant.Texts.payNow) {
             self.mVisualEffectV.isHidden = true
         } okAction: {
-            self.goToSelectPayment()
+            self.goToSelectPayment(vehicleModel: self.vehicleModel ?? VehicleModel(),
+                                   paymentOption: self.paymentOption)
         }
     }
     

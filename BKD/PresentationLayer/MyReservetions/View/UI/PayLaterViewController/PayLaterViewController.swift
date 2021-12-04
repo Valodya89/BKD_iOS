@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PayLaterViewController: UIViewController, StoryboardInitializable {
+class PayLaterViewController: BaseViewController {
     
     @IBOutlet weak var mDescriptionLb: UILabel!
     @IBOutlet weak var mDepositCheckBtn: UIButton!
@@ -58,19 +58,20 @@ class PayLaterViewController: UIViewController, StoryboardInitializable {
             self.mContinueContentV.layoutIfNeeded()
         } completion: { _ in
             
-            self.goToAgreement()
+            self.goToAgreement(on: self,
+                               agreementType: .payLater, vehicleModel: nil, urlString: nil)
         }
     }
     
     
     
-    ///Open agree Screen
-    private func goToAgreement() {
-        
-        let bkdAgreementVC = UIStoryboard(name: Constant.Storyboards.registrationBot, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.bkdAgreement) as! BkdAgreementViewController
-        bkdAgreementVC.isPayLater = true
-        self.navigationController?.pushViewController(bkdAgreementVC, animated: true)
-    }
+//    ///Open agree Screen
+//    private func goToAgreement() {
+//
+//        let bkdAgreementVC = UIStoryboard(name: Constant.Storyboards.registrationBot, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.bkdAgreement) as! BkdAgreementViewController
+//        bkdAgreementVC.isPayLater = true
+//        self.navigationController?.pushViewController(bkdAgreementVC, animated: true)
+//    }
     
     //Uncheck all buttons
     private func resetChecks() {
