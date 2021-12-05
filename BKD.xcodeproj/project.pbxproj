@@ -316,6 +316,7 @@
 		56B9F31326806A2E003449AD /* SearchEditModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F31226806A2E003449AD /* SearchEditModel.swift */; };
 		56B9F33D26825FF0003449AD /* TariffSlideViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F33C26825FF0003449AD /* TariffSlideViewModel.swift */; };
 		56B9F34226826DE1003449AD /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F34126826DE1003449AD /* DetailsViewModel.swift */; };
+		56C5B7F0275D0103009F173F /* ReservationCompleted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C5B7EF275D0102009F173F /* ReservationCompleted.swift */; };
 		56C8E172267C1D100061890C /* ReserveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C8E170267C1D100061890C /* ReserveTableViewCell.swift */; };
 		56C8E173267C1D100061890C /* ReserveTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56C8E171267C1D100061890C /* ReserveTableViewCell.xib */; };
 		56CC7D7326A87A9F006DB7B8 /* PaymentWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CC7D7226A87A9F006DB7B8 /* PaymentWebViewController.swift */; };
@@ -686,6 +687,7 @@
 		56B9F31226806A2E003449AD /* SearchEditModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEditModel.swift; sourceTree = "<group>"; };
 		56B9F33C26825FF0003449AD /* TariffSlideViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffSlideViewModel.swift; sourceTree = "<group>"; };
 		56B9F34126826DE1003449AD /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		56C5B7EF275D0102009F173F /* ReservationCompleted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCompleted.swift; sourceTree = "<group>"; };
 		56C8E170267C1D100061890C /* ReserveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveTableViewCell.swift; sourceTree = "<group>"; };
 		56C8E171267C1D100061890C /* ReserveTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReserveTableViewCell.xib; sourceTree = "<group>"; };
 		56CC7D7226A87A9F006DB7B8 /* PaymentWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentWebViewController.swift; sourceTree = "<group>"; };
@@ -1741,6 +1743,7 @@
 			isa = PBXGroup;
 			children = (
 				565A665A273A10B2008C7EF9 /* Reservation.swift */,
+				56C5B7EF275D0102009F173F /* ReservationCompleted.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3298,6 +3301,7 @@
 				56B9F2ED26806488003449AD /* SearchResultModelView.swift in Sources */,
 				565BFD8F269F56510044D081 /* SessionNetwork.swift in Sources */,
 				56CD830B267CF45600B2799F /* ReserveTableView.swift in Sources */,
+				56C5B7F0275D0103009F173F /* ReservationCompleted.swift in Sources */,
 				5640395126EFA2590064256C /* ReservationWithReservedPaidModel.swift in Sources */,
 				568E706E264481B0000CB6A9 /* LeftTableViewCell.swift in Sources */,
 				566B3767269545540021BCAA /* MailBoxNumberTableViewCell.swift in Sources */,

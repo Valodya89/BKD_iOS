@@ -56,6 +56,7 @@ class BkdAgreementViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        mAgreeV.mConfirmBtnLeading.constant = 0
         loadWebView()
     }
     

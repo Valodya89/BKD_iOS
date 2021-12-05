@@ -96,8 +96,10 @@ final class ChangePhoneNumberViewController: UIViewController, StoryboardInitial
         } else if let phoneCode = ApplicationSettings.shared.phoneCodes?.first {
             setPhoneCode(phoneCode)
         }
+        
         phoneNumber =  changePhoneNumberViewModel.getPhoneNumber()?.replacingOccurrences(of: selectedCountry?.code ?? "", with: "")
         mNumberTxtFl.text = phoneNumber
+        mInfoLb.text = String(format: Constant.Texts.phoneVerificationInfo, selectedCountry?.code ?? "", phoneNumber ?? "")
 
     }
    
@@ -150,10 +152,13 @@ final class ChangePhoneNumberViewController: UIViewController, StoryboardInitial
         mCodeLb.text = phoneCode.code
         mNumberTxtFl.formatPattern = phoneCode.mask ?? ""
         validFormPattern = (selectedCountry?.mask!.count)!
+        mInfoLb.text = String(format: Constant.Texts.phoneVerificationInfo, selectedCountry?.code ?? "", phoneNumber ?? "")
     }
     
     // MARK: -- Actions
     @IBAction func didChangeFiled() {
+    phoneNumber = mNumberTxtFl.text
+        mInfoLb.text = String(format: Constant.Texts.phoneVerificationInfo, selectedCountry?.code ?? "", phoneNumber ?? "")
         didUpdateStatus(mNumberTxtFl.text?.count == validFormPattern)
     }
     

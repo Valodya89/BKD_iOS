@@ -84,11 +84,11 @@ class ReservationCompletedViewController: BaseViewController {
     
     ///Pay later
     private func payLater() {
-        reservationCompletedViewModel.payLater { [weak self] (status) in
+        reservationCompletedViewModel.payLater { [weak self] (status, result) in
             if status == .countLimited {
                 self?.goToFreeReservationOverScreen()
-            } else {
-                self?.showAlertOfPayLater(message: "Test")
+            } else if result != nil {
+                self?.showAlertOfPayLater(message: self?.reservationCompletedViewModel.getFreeReservationMessage(payLaterCount: result?.payLaterCount ?? 0))
             }
        // print (result)
 
@@ -131,7 +131,7 @@ class ReservationCompletedViewController: BaseViewController {
         self.mVisualEffectV.isHidden = false
         let bkdAlert = BKDAlert()
         bkdAlert.backgroundView.isHidden = true
-        bkdAlert.showAlert(on: self, title: nil, message: Constant.Texts.payAlert, messageSecond: nil, cancelTitle: Constant.Texts.gotIt, okTitle: Constant.Texts.payNow) {
+        bkdAlert.showAlert(on: self, title: nil, message: message, messageSecond: nil, cancelTitle: Constant.Texts.gotIt, okTitle: Constant.Texts.payNow) {
             self.mVisualEffectV.isHidden = true
         } okAction: {
             self.goToSelectPayment(vehicleModel: self.vehicleModel ?? VehicleModel(),
