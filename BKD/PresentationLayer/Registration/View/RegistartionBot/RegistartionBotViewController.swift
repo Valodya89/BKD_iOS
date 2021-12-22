@@ -793,7 +793,7 @@ extension RegistartionBotViewController: UIImagePickerControllerDelegate, UINavi
     //Upload image to database
     private func uploadImage(image: UIImage) {
         let uploadState = registrationBotViewModel.getImageUploadState( index: takePhotoCurrentIndex)
-        let newImage = image.resizeImage(targetSize: CGSize(width: 350, height: 350))
+        let newImage = image.resizeImage(targetSize: CGSize(width: 500, height: 500))
         registrationBotViewModel.imageUpload(image: newImage,
                                              id: mainDriver?.id ?? "",
                                              state: uploadState.rawValue) { [self] (result, err) in

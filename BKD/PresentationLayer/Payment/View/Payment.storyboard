@@ -313,19 +313,27 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xkm-ZO-dPf">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Zkf-w8-MA0">
+                                <rect key="frame" x="197" y="352.5" width="20" height="20"/>
+                                <color key="color" name="navigation_bar"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7qz-xx-fjy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Zkf-w8-MA0" firstAttribute="height" secondItem="r9q-Sx-kh4" secondAttribute="height" multiplier="0.0247525" id="B95-lE-uwr"/>
                             <constraint firstItem="Xkm-ZO-dPf" firstAttribute="leading" secondItem="7qz-xx-fjy" secondAttribute="leading" id="DBP-Yr-vUM"/>
+                            <constraint firstItem="Zkf-w8-MA0" firstAttribute="centerX" secondItem="7qz-xx-fjy" secondAttribute="centerX" id="H0I-YO-gxi"/>
                             <constraint firstItem="Xkm-ZO-dPf" firstAttribute="top" secondItem="7qz-xx-fjy" secondAttribute="top" id="NuX-Zf-Bi0"/>
+                            <constraint firstItem="Zkf-w8-MA0" firstAttribute="centerY" secondItem="7qz-xx-fjy" secondAttribute="centerY" id="ToI-TP-BSw"/>
                             <constraint firstItem="7qz-xx-fjy" firstAttribute="bottom" secondItem="Xkm-ZO-dPf" secondAttribute="bottom" id="aqw-j0-fxb"/>
+                            <constraint firstItem="Zkf-w8-MA0" firstAttribute="width" secondItem="r9q-Sx-kh4" secondAttribute="width" multiplier="0.0483092" id="iIX-Ej-1n2"/>
                             <constraint firstItem="7qz-xx-fjy" firstAttribute="trailing" secondItem="Xkm-ZO-dPf" secondAttribute="trailing" id="pdS-Qp-30I"/>
                         </constraints>
                     </view>
@@ -344,6 +352,7 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="mActivityV" destination="Zkf-w8-MA0" id="JGQ-iD-PDG"/>
                         <outlet property="mLeftBarBtn" destination="TLo-bp-rVr" id="NzR-NH-cRm"/>
                         <outlet property="mRightBarBtn" destination="So3-BG-zbH" id="pCT-iO-wzy"/>
                         <outlet property="mWebV" destination="Xkm-ZO-dPf" id="zQe-DQ-Dhi"/>

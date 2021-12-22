@@ -148,16 +148,16 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
     
     
     
- ///TEST
-    /// Selected Apple Pay
-    func selectApplePay() {
-        let applePaymentController = PKPaymentAuthorizationViewController(paymentRequest: paymentRequest)
-        if applePaymentController != nil  {
-            applePaymentController! .delegate = self
-            present(applePaymentController!, animated: true)
-        }
-        
-    }
+// ///TEST
+//    /// Selected Apple Pay
+//    func selectApplePay() {
+//        let applePaymentController = PKPaymentAuthorizationViewController(paymentRequest: paymentRequest)
+//        if applePaymentController != nil  {
+//            applePaymentController! .delegate = self
+//            present(applePaymentController!, animated: true)
+//        }
+//
+//    }
     
     ///Open Payment Web Screen
     private func goToWebScreen(paymentType: PaymentType) {

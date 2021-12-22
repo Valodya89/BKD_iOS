@@ -100,9 +100,10 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     }
     
     ///Open SeeMap Screen
-    func goToSeeMap(parking: Parking?) {
+    func goToSeeMap(parking: Parking?, customLocation: CustomLocationToRent?) {
         let seeMapContr = UIStoryboard(name: Constant.Storyboards.seeMap, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.seeMap) as! SeeMapViewController
         seeMapContr.parking = parking
+        seeMapContr.customLocationToRent = customLocation
         self.navigationController?.pushViewController(seeMapContr, animated: true)
     }
     
@@ -129,8 +130,9 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     
     
     ///Go to VehicleCheck ViewController
-    func goToVehicleCheck() {
+    func goToVehicleCheck(rent: Rent?) {
         let vehicleCheckVC = VehicleCheckViewController.initFromStoryboard(name: Constant.Storyboards.vehicleCheck)
+        vehicleCheckVC.currRentModel = rent
         self.navigationController?.pushViewController(vehicleCheckVC, animated: true)
     }
     
@@ -194,6 +196,13 @@ class BaseViewController: UIViewController, StoryboardInitializable {
         self.navigationController?.pushViewController(moreVC, animated: true)
     }
     
+    ///Open OdometerCheck controller
+    func goToOdometerCheck(rent: Rent?) {
+        let odometerCheckVC = OdometerCheckViewController.initFromStoryboard(name: Constant.Storyboards.odometerCheck)
+        odometerCheckVC.currRentModel = rent
+        self.navigationController?.pushViewController(odometerCheckVC, animated: true)
+    }
+    
     ///Show alert for sign in account
     func showAlertSignIn() {
         BKDAlert().showAlert(on: self,
@@ -206,5 +215,6 @@ class BaseViewController: UIViewController, StoryboardInitializable {
             self.goToSignInPage()
         }
     }
+    
     
 }

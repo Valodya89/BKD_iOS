@@ -165,7 +165,7 @@ class EditReservationViewController: BaseViewController {
     ///will be show the selected location to map from the list of tables
     func showLocation() {
         mEditBySearchV!.mLocationDropDownView.didSelectSeeMap = { [weak self] parkingModel  in
-            self?.goToSeeMap(parking: parkingModel)
+            self?.goToSeeMap(parking: parkingModel, customLocation: nil)
         }
     }
     

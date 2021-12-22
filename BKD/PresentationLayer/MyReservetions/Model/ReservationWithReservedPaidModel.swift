@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MyReservationState {
+enum MyReservationState: String {
     case startRide
     case stopRide
     case payDistancePrice

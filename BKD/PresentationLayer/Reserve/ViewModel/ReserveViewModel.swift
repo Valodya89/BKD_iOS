@@ -123,10 +123,14 @@ class ReserveViewModel: NSObject {
         let additionalDriversArr = getAdditionalDriversToRequest(additionalDrivers: vehicleModel.additionalDrivers)
         let pickupLocation = getLocationToRequest(search: vehicleModel.searchModel!, isPickUpLocation: true)
         let returnLocation = getLocationToRequest(search: vehicleModel.searchModel!, isPickUpLocation: false)
-
+        let startDate = (Date().combineDate(date: vehicleModel.searchModel?.pickUpDate ?? Date(), withTime: vehicleModel.searchModel?.pickUpTime ?? Date())
+        )!.timeIntervalSince1970
+        let endDate = (Date().combineDate(date: vehicleModel.searchModel?.returnDate ?? Date(), withTime: vehicleModel.searchModel?.returnTime ?? Date())
+        )!.timeIntervalSince1970
+        
         SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addRent(carId: vehicleModel.vehicleId ?? "",
-                                                                                  startDate: (vehicleModel.searchModel?.pickUpTime ?? Date()).timeIntervalSince1970,
-                            endDate: (vehicleModel.searchModel?.returnTime ?? Date()).timeIntervalSince1970,
+                            startDate: startDate,
+                            endDate: endDate,
                             accessories: accessoriesArr,
                             additionalDrivers: additionalDriversArr,
                             pickupLocation: pickupLocation,

@@ -360,14 +360,14 @@ class MyReservetionAdvancedViewController: BaseViewController {
     @IBAction func startRideSwipe(_ sender: UISwipeGestureRecognizer) {
         animationStartRide()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [self] in
-            self.goToVehicleCheck()
+            self.goToVehicleCheck(rent: nil)
         }
     }
     
     @IBAction func startRide(_ sender: UIButton) {
         animationStartRide()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [self] in
-            self.goToVehicleCheck()
+            self.goToVehicleCheck(rent: nil)
         }
     }
     
@@ -423,8 +423,8 @@ class MyReservetionAdvancedViewController: BaseViewController {
             self.showAlertForSwitchDriver()
         }
         
-        mOnRideTableV.didPressMap = {
-            self.goToSeeMap(parking: testParking)
+        mOnRideTableV.didPressMap = { index in
+            self.goToSeeMap(parking: testParking, customLocation: nil)
         }
     }
 }

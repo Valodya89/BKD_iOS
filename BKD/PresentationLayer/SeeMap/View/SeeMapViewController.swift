@@ -24,7 +24,8 @@ class SeeMapViewController: BaseViewController {
     var mapView: GMSMapView?
     var mapViewCenterCoordinate = CLLocationCoordinate2D(latitude: 0.0 , longitude: 0.0)
     
-    var parking: Parking?
+    public var parking: Parking?
+    public var customLocationToRent: CustomLocationToRent?
 
     private lazy  var addressVC = AddressNameViewController.initFromStoryboard(name: Constant.Storyboards.seeMap)
 
@@ -69,15 +70,26 @@ class SeeMapViewController: BaseViewController {
     
     /// configure map view
     func configureMapView() {
+            mapView = GMSMapView(frame: self.view.bounds)
+            self.view.addSubview(mapView!)
+        var longitude = 0.0
+        var latitude = 0.0
         
-        guard let parking = parking else { return }
-        mapView = GMSMapView(frame: self.view.bounds)
-
-        self.view.addSubview(mapView!)
-        addMarker(longitude: parking.longitude, latitude: parking.latitude, marker: marker)
-        mapView!.isMyLocationEnabled = true
-        self.mapView!.animate(toZoom: 4)
-        self.view.bringSubviewToFront(mSwipeGestureBckgV)
+        if let parking = parking {
+            longitude = parking.longitude
+            latitude = parking.latitude
+        } else if let customLocation = customLocationToRent {
+            longitude = customLocation.longitude
+            latitude = customLocation.latitude
+        }
+        addMarker(longitude: longitude, latitude: latitude, marker: marker)
+            mapView!.isMyLocationEnabled = true
+        
+//        let camera: GMSCameraPosition =  GMSCameraPosition(target: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), zoom: zoom, bearing: 0, viewingAngle: 0)
+//        self.mapView!.animate(to: camera)
+        
+            self.mapView!.animate(toZoom: 4)
+            self.view.bringSubviewToFront(mSwipeGestureBckgV)
     }
     
     func  configureLocation()  {

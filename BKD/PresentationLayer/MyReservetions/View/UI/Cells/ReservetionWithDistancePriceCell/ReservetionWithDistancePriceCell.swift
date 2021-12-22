@@ -76,7 +76,7 @@ class ReservetionWithDistancePriceCell: UICollectionViewCell {
     }
 
     
-    func  setCellInfo(item: ReservationWithReservedPaidModel , index: Int) {
+    func  setCellInfo(item: Rent , index: Int) {
         mPayDistancePriceBtn.tag = index
         mPayDistancePriceBtn.addTarget(self, action: #selector(payDistancePrice(sender:)), for: .touchUpInside)
         

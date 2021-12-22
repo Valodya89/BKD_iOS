@@ -55,15 +55,18 @@ class VehicleDimageCollectionCell: UICollectionViewCell {
     }
     
     
-    func setCellInfo(item: StartRideModel, index: Int, isAddCell: Bool) {
+    func setCellInfo(item: Defect, index: Int, isAddCell: Bool) {
         mAddBtn.addTarget(self, action: #selector(pressAdd(sender:)), for: .touchUpInside)
-        mDamageNameLb.text = item.damageName
-        mDamageImgV.image = item.damageImg
+      
         mDamageContentV.isHidden = isAddCell
         mAddDAmageContentV.isHidden = !isAddCell
-        if item.damageImg == img_camera {
+        if item.image == nil {
             mDamageImgV.contentMode = .center
+            mDamageNameLb.text = item.comment
+            mDamageImgV.sd_setImage(with:  item.image?.getURL() ?? URL(string: ""), placeholderImage: nil)
         } else {
+            mDamageNameLb.text = item.comment
+            mDamageImgV.sd_setImage(with:  item.image?.getURL() ?? URL(string: ""), placeholderImage: nil)
             mDamageImgV.contentMode = .scaleAspectFit
         }
     }

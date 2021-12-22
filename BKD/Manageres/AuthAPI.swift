@@ -83,6 +83,14 @@ enum AuthAPI: APIProtocol {
     case sendMessage(chatID: String,
                      message: String,
                      userIdentifier: String)
+    case checkDefect(id: String)
+    case checkOdometer(id: String)
+    case start(id: String)
+    case addAccident(id: String,
+                     statDate: Double,
+                     address: String,
+                     longitude: Double,
+                     latitude: Double)
     
     
     
@@ -195,8 +203,14 @@ enum AuthAPI: APIProtocol {
             return "api/rents"
         case .payLater:
             return "api/driver/pay-later"
-            
-        
+        case .checkDefect(let id):
+            return "api/rents/\(id)/start/defect-check"
+        case .checkOdometer(let id):
+            return "api/rents/\(id)/start/odometer-check"
+        case .start(let id):
+            return "api/rents/\(id)/start"
+        case let .addAccident(id, _, _, _, _):
+            return "api/rents/\(id)/accident"
         }
         
     }
@@ -204,6 +218,7 @@ enum AuthAPI: APIProtocol {
     var header: [String : String] {
         switch self {
         case .getCarsByType,
+             .getCarList,
              .getCarsByFilter,
              .getMainDriver,
              .getAdditionalDrivers,
@@ -227,7 +242,11 @@ enum AuthAPI: APIProtocol {
              .acceptAgreement,
              .addRent,
              .getRents,
-             .payLater:
+             .payLater,
+             .checkDefect,
+             .checkOdometer,
+             .start,
+             .addAccident:
             return ["Content-Type": "application/json"]
         case .getAuthRefreshToken:
             fallthrough
@@ -372,6 +391,16 @@ enum AuthAPI: APIProtocol {
                 "pickupLocation": pickupLocation,
                 "returnLocation": returnLocation
             ]
+        case let .addAccident(_, statDate,
+                              address,
+                              longitude,
+                              latitude):
+            return [
+                "statDate": statDate,
+                "address": address,
+                "longitude": longitude,
+                "latitude": latitude
+            ]
             
         
         default:
@@ -417,9 +446,12 @@ enum AuthAPI: APIProtocol {
             return .put
         case .resendCode,
              .verifyPhoneCode,
-             .forgotPassword:
+             .forgotPassword,
+             .checkDefect,
+             .checkOdometer,
+             .start,
+             .addAccident:
             return .patch
-            
         default:
             return .get
         }

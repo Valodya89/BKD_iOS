@@ -482,6 +482,7 @@ class DetailsViewModel: NSObject {
             
             
             if returnDay - pickupDay > 0 {
+                
                 if  search.pickUpTime!.millisecondsSince1970 < search.returnTime!.millisecondsSince1970  && (search.returnTime!.millisecondsSince1970 - search.pickUpTime!.millisecondsSince1970) > 250000  {
                     daysCount += 1
                 }

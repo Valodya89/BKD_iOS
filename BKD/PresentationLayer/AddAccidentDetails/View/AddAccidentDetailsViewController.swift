@@ -34,7 +34,9 @@ class AddAccidentDetailsViewController: BaseViewController {
     var isDamageSide = true
     var currIndexOfDamageSide: Int = 0
     var currIndexOfAccidentForm: Int = 0
+    var accidentCoordinate: CLLocationCoordinate2D?
 
+    public var currRentModel: Rent?
     
     //MARK: -- Lifecycle
     override func viewDidLoad() {
@@ -67,7 +69,32 @@ class AddAccidentDetailsViewController: BaseViewController {
         pickerV.delegate = self
     }
     
+    ///Add accident damage
+    func addAccidentDamageWithSide(image: UIImage, side: String) {
+        addAccidentDetailViewModel.addAccidentWithSide(image: image, id: currRentModel?.id ?? "", side: side) { result, err in
+            guard let rent = result else { return }
+            print (rent)
+        }
+    }
     
+    ///Add accident form
+    func addForm(image: UIImage) {
+        addAccidentDetailViewModel.addAccidentForm(image: image, id: currRentModel?.id ?? "") { result, err in
+            guard let rent = result else { return }
+            print (rent)
+        }
+    }
+    
+    ///Add accident
+    func addAccident() {
+        addAccidentDetailViewModel.addAccident(id: currRentModel?.id ?? "",
+                                               date: mDateAndLocationV.date ?? Date(),
+                                               time:mDateAndLocationV.time ?? Date(),
+                                               address: mDateAndLocationV.location ?? "", coordinate: accidentCoordinate!) { result in
+            guard let _ = result else {return}
+            print (result!)
+        }
+    }
     
     ///creat tool bar
     func creatToolBar() -> UIToolbar {
@@ -96,6 +123,7 @@ class AddAccidentDetailsViewController: BaseViewController {
         case .time :
             mDateAndLocationV.mDropDownImgV.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
             mDateAndLocationV.updateTime(datePicker: datePicker)
+        case  .location: break
         default:
             let side = sidesList[pickerV.selectedRow(inComponent: 0)]
             
@@ -185,7 +213,7 @@ class AddAccidentDetailsViewController: BaseViewController {
         BKDAlert().showAlert(on: self, message: Constant.Texts.confirmAccidentDetails, cancelTitle: Constant.Texts.cancel, okTitle: Constant.Texts.yes) {
             
         } okAction: {
-            
+            self.addAccident()
         }
     }
     
@@ -284,11 +312,12 @@ extension AddAccidentDetailsViewController: DamageSidesTableViewDelegate {
     
     
     func willOpenPicker(textFl: UITextField) {
-        
+        dateAndLocationState = .none
         textFl.inputView = pickerV
         textFl.inputAccessoryView = creatToolBar()
         responderTxtFl = textFl
         self.currIndexOfDamageSide = textFl.tag
+        
     }
         
 }
@@ -373,9 +402,11 @@ extension AddAccidentDetailsViewController: UIImagePickerControllerDelegate, UIN
 //MARK: -- CustomLocationViewControllerDelegate
 //MARK: -------------------------------------------
 extension AddAccidentDetailsViewController: CustomLocationViewControllerDelegate {
+    
     func getCustomLocation(_ locationPlace: String, coordinate: CLLocationCoordinate2D, price: Double?) {
         mDateAndLocationV.location = locationPlace
         mDateAndLocationV.mLocationTxtFl.text = locationPlace
+        accidentCoordinate = coordinate
     }
     
     

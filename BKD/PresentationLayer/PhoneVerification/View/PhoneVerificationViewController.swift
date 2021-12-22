@@ -20,7 +20,7 @@ class PhoneVerificationViewController: UIViewController, StoryboardInitializable
     @IBOutlet weak var mResendCodeBtn: UIButton!
     @IBOutlet weak var mButtonsStackV: UIStackView!
     @IBOutlet weak var mTimerLb: UILabel!
-    
+    @IBOutlet weak var mInfoLb: UILabel!
     
     //MARK: Variables
     lazy var phoneVerificationViewModel = PhoneVerificationViewModel()
@@ -47,6 +47,7 @@ class PhoneVerificationViewController: UIViewController, StoryboardInitializable
     
     func setUpView() {
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
+        mInfoLb.text = String(format: Constant.Texts.phoneVerificationInfo, phoneCode ?? "", phoneNumber ?? "")
         mVerifySecondBtn.disable()
         startTimer()
     }

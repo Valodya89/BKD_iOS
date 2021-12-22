@@ -118,7 +118,7 @@ class CustomLocationViewController: BaseViewController {
     private func configureDelegates() {
         
         markerInfoVC.delegate = self
-        //addNewMarkerVC.delegate = self
+        addNewMarkerVC.delegate = self
         locationManager.delegate = self
         mMapV.delegate = self
     }
@@ -441,11 +441,13 @@ extension CustomLocationViewController: GMSAutocompleteViewControllerDelegate {
 }
 
 
-//extension CustomLocationViewController: MarkNewAddressViewControllerDelegate  {
-//    func didPressContinue(place: String) {
-//
-//    }
-//
-//
-//
-//}
+extension CustomLocationViewController: MarkNewAddressViewControllerDelegate  {
+    
+    func didPressContinue(place: String) {
+        self.delegate?.getCustomLocation(place, coordinate: mapViewCenterCoordinate, price: nil)
+        self.navigationController?.popViewController(animated: true)
+    }
+
+
+
+}

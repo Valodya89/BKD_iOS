@@ -48,9 +48,9 @@ class MyDriversViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if additionalDrivers == nil {
-            getMyDriverList()
-        } else {
+        getMyDriverList()
+
+        if additionalDrivers != nil {
             mPriceLb.text = String(format: "%.2f", Float(PriceManager.shared.additionalDriversPrice ?? 0.0))
         }
         

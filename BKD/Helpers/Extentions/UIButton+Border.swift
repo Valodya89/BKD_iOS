@@ -75,12 +75,15 @@ extension UIButton {
     }
     
     func enable(){
-        self.isEnabled = true
+        //self.isEnabled = true
+        self.isUserInteractionEnabled = true
+
         self.alpha = 1
     }
     
     func disable() {
-        self.isEnabled = false
+       // self.isEnabled = false
+        self.isUserInteractionEnabled = false
         self.alpha = 0.8
     }
    

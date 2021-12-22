@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import CoreLocation
+
 
 class AddAccidentDetailViewModel {
 
@@ -120,4 +122,94 @@ class AddAccidentDetailViewModel {
         return (isError: true, list: damagesSideList)
     }
 
+    ///Get start accident date
+    func getStartAccidanteDate(date: Date, time: Date) -> Double {
+        let startDate = Date().combineDate(date: date, withTime: time)
+        
+        return startDate?.timeIntervalSince1970 ?? 0.0
+    }
+    
+    ///Add accident
+    func addAccident(id: String,
+                     date: Date,
+                     time: Date,
+                     address: String,
+                     coordinate: CLLocationCoordinate2D,
+                     completion: @escaping (AddAccident?) -> Void) {
+        //Result<AddAccident?, BkdError>
+        let statDate = getStartAccidanteDate(date: date, time: time)
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addAccident(id: id, statDate: statDate, address: address, longitude: coordinate.longitude, latitude: coordinate.latitude))) { (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let result = BkdConverter<BaseResponseModel<AddAccident>>.parseJson(data: data as Any) else {
+                    print("error")
+                    completion(nil)
+                    return
+                }
+                print(result.content as Any)
+                completion(result.content)
+
+            case .failure(let error):
+                print(error.description)
+                completion(nil)
+                break
+            }
+        }
+    }
+    
+    ///Add accident damege wit side
+    func addAccidentWithSide(image: UIImage,
+                     id: String,
+                     side: String,
+                     completion: @escaping (Rent?, String?) -> Void)  {
+            
+        let resizeImg = image.resizeImage(targetSize: CGSize(width: 500, height: 500))
+        SessionNetwork.init().request(with: URLBuilder(from: ImageUploadAPI.addAccidentDamge(image: resizeImg, id: id, side: side))) { result in
+            
+            switch result {
+            case .success(let data):
+                guard let result = BkdConverter<BaseResponseModel<Rent>>.parseJson(data: data as Any) else {
+                    print("error")
+                    completion(nil, nil)
+                    return
+                }
+                print(result.message as Any)
+                completion(result.content, nil)
+            case .failure(let error):
+                print(error.description)
+                completion(nil, error.description)
+                break
+            }
+            
+        }
+    }
+    
+    
+    ///Add accident form
+    func addAccidentForm(image: UIImage,
+                     id: String,
+                     completion: @escaping (Rent?, String?) -> Void)  {
+            
+        let resizeImg = image.resizeImage(targetSize: CGSize(width: 500, height: 500))
+        SessionNetwork.init().request(with: URLBuilder(from: ImageUploadAPI.addAccidentForm(image: resizeImg, id: id))) { result in
+            
+            switch result {
+            case .success(let data):
+                guard let result = BkdConverter<BaseResponseModel<Rent>>.parseJson(data: data as Any) else {
+                    print("error")
+                    completion(nil, nil)
+                    return
+                }
+                print(result.message as Any)
+                completion(result.content, nil)
+            case .failure(let error):
+                print(error.description)
+                completion(nil, error.description)
+                break
+            }
+            
+        }
+    }
+    
 }

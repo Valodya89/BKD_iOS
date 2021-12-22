@@ -48,7 +48,7 @@ class ReservationWithRegisterNumberCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mStartRideBtn: UIButton!
     @IBOutlet weak var mShadowContentV: UIView!
     
-    var didPressStartRide:(() -> Void)?
+    var didPressStartRide:((Int) -> Void)?
 
     
     override func awakeFromNib() {
@@ -76,19 +76,53 @@ class ReservationWithRegisterNumberCollectionViewCell: UICollectionViewCell {
     }
     
     
-    func setInfoCell(item: ReservationWithReservedPaidModel, index: Int) {
+    func setInfoCell(item: Rent, index: Int) {
         mStartRideBtn.tag = index
         mStartRideBtn.addTarget(self, action: #selector(startRide(sender:)), for: .touchUpInside)
         
-        mRegistrationNumberContentV.isHidden = !item.isRegisterNumber
-
-        if item.isActiveStartRide {
+       // mRegistrationNumberContentV.isHidden = (item.carDetails.registrationNumber != nil) ? false : true
+        mRegistrationNumberContentV.isHidden = false
+        mRegistrationNumberLb.text = item.carDetails.registrationNumber ?? "XX-XX-XX"
+        //Get difference between now and start ride date
+        let duration = Date().getDistanceByComponent(.minute, toDate: Date(timeIntervalSince1970: item.startDate)).minute
+        if duration! <= 15 {
             mStartRideBtn.setTitleColor(color_selected_filter_fields, for: .normal)
         }
+        
+        //Car info
+        mLogoImgV.sd_setImage(with:  item.carDetails.logo.getURL() ?? URL(string: ""), placeholderImage: nil)
+        let currCar: CarsModel? = ApplicationSettings.shared.allCars?.filter( {$0.id == item.carDetails.id}).first
+        mCarNameLb.text = currCar?.name
+        mCarTypeLb.text = (ApplicationSettings.shared.carTypes?.filter( {$0.id == currCar?.type} ).first)?.name
+        
+
+        //Pick up location
+        if item.pickupLocation.type == Constant.Keys.custom,
+           let pickupLocation = item.pickupLocation.customLocation {
+            mPickupAddressLb.text = pickupLocation.name
+        } else if let pickupParkin = item.pickupLocation.parking {
+            mPickupAddressLb.text = pickupParkin.name
+        }
+        //Return location
+        if item.returnLocation.type == Constant.Keys.custom,
+           let returnLocation = item.returnLocation.customLocation {
+            mReturnAddressLb.text = returnLocation.name
+        } else if let returnParkin = item.returnLocation.parking {
+            mReturnAddressLb.text = returnParkin.name
+        }
+        //Date
+        let startDate = Date().doubleToDate(doubleDate: item.startDate)
+        let endDate = Date().doubleToDate(doubleDate: item.endDate)
+        mPickupDayLb.text = startDate.getDay()
+        mPickupMonthLb.text =  startDate.getMonth(lng: "en")
+        mPickupTimeLb.text = startDate.getHour()
+        mReturnDayLb.text = endDate.getDay()
+        mReturnMonthLb.text = endDate.getMonth(lng: "en")
+        mReturnTimeLb.text = endDate.getHour()
     }
     
     @objc func startRide(sender: UIButton) {
-        didPressStartRide?()
+        didPressStartRide?(sender.tag)
     }
     
     

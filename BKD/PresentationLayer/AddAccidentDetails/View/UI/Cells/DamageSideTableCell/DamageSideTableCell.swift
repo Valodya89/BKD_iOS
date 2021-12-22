@@ -80,6 +80,9 @@ class DamageSideTableCell: UITableViewCell, UITextFieldDelegate {
         mTakePhotoContentV.isHidden = true
         mAddMoreContentV.isHidden = true
         mDemageImgV.image = nil
+        
+        mTakePhotoContentV.isUserInteractionEnabled = false
+        mTakePhotoContentV.alpha = 7.5
     }
     
     /// Set cell informaton
@@ -97,11 +100,14 @@ class DamageSideTableCell: UITableViewCell, UITextFieldDelegate {
         if let side = item.damageSide {
             mSelectSideDropDownImgV.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
             mSelectSideTxtFl.text = side
+            mTakePhotoContentV.isUserInteractionEnabled = true
+            mTakePhotoContentV.alpha = 1.0
         }
         
         if let img = item.damageImg {
             mDemageImgV.image = img
             mDemageImgContentV.isHidden = false
+            
             if index == itemList.count - 1 {
                 mAddAndTakePhotoContentV.isHidden = false
                 mAddMoreContentV.isHidden = false

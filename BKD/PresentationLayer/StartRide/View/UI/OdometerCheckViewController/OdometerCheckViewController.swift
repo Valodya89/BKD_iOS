@@ -50,13 +50,18 @@ class OdometerCheckViewController: UIViewController, StoryboardInitializable {
     
     
     //MARK: -- Variables
+    public var currRentModel: Rent?
+    
+    private var rentCar: CarsModel?
     var odometerState: OdometerState = .none
+    lazy var odometerCheckViewModel = OdomoeterCheckViewModel()
     
     
     //MARK: -- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        configureUI()
 
     }
   
@@ -76,16 +81,68 @@ class OdometerCheckViewController: UIViewController, StoryboardInitializable {
         mOdomateImgV.layer.cornerRadius = 3
         mOdomateNumberTxtFl.setPlaceholder(string: Constant.Texts.odometerNumber, font: font_search_cell!, color: color_chat_placeholder!)
         mOdomateNumberTxtFl.delegate = self
-
+        handlerStartNoew()
     }
 
+    ///Configure UI
+    func configureUI() {
+        rentCar = ApplicationSettings.shared.allCars?.filter( {$0.id == currRentModel?.carDetails.id}).first
+        mKmPriceLb.text = String(format: "%.2f", rentCar?.priceForKm ?? 0.0) 
+        guard let odometer = currRentModel?.startOdometer else {return}
+        mLastOdometeNumberLb.text = odometer.value
+        if RentState.init(rawValue: currRentModel?.state ?? "") == .START_ODOMETER_CHECK {
+            self.startRideAlert()
+        }
+    }
+    
+    
+    ///Add Odometer
+    func addOdometer() {
+        odometerCheckViewModel.addOdometer(image: mOdomateImgV.image ?? UIImage(),
+                                           id: currRentModel?.id ?? "",
+                                           value: mOdomateNumberTxtFl.text!) { result, err in
+            guard let rent = result else {return}
+            self.checkOdometer()
+            print (rent)
+        }
+    }
+    
+    ///Check odometer
+    func checkOdometer() {
+        odometerCheckViewModel.checkOdometer(id: currRentModel?.id ?? "") { result, err in
+            guard let rent = result else {return}
+            if RentState.init(rawValue: rent.state ?? "") == .START_ODOMETER_CHECK {
+                self.startRideAlert()
+                
+            }
+        }
+    }
+    
+    ///Start ride
+    func startRide() {
+        odometerCheckViewModel.startRide(id: currRentModel?.id ?? "") { result, err in
+            guard let rent = result else {return}
+            if RentState.init(rawValue: rent.state ?? "") == .STARTED {
+                self.navigationController?.popViewController(animated: true)
+
+            }
+        }
+    }
+    
     ///Enable StartNow button
     private func enableStartNow() {
-        if odometerState == .confirmLastCheck || (odometerState == .inputManually && mOdomateNumberTxtFl.text?.count ?? 0 > 0) {
+        if odometerState == .confirmLastCheck || (odometerState == .inputManually && (mOdomateNumberTxtFl.text?.count ?? 0) > 0 && mOdomateImgV.image != nil) {
             mStartNowV.enableView()
         } else {
             mStartNowV.disableView()
         }
+    }
+    
+    ///Enable open camera button
+    private func enableOpenCamera() {
+        mOpenCameraContentV.isUserInteractionEnabled = (mOdomateNumberTxtFl.text?.count ?? 0) > 0
+        mOpenCameraContentV.alpha = ((mOdomateNumberTxtFl.text?.count ?? 0) > 0) ? 1.0 : 0.75
+
     }
     
     /// show odometer views for fill manually
@@ -126,9 +183,10 @@ class OdometerCheckViewController: UIViewController, StoryboardInitializable {
     private func startRideAlert() {
         BKDAlert().showAlert(on: self, title: nil, message: Constant.Texts.startRideAlert, messageSecond: nil, cancelTitle: Constant.Texts.back, okTitle: Constant.Texts.startNow) {
             self.mStartNowV.initConfirm()
+            self.navigationController?.popViewController(animated: true)
 
         } okAction: {
-            
+            self.startRide()
         }
     }
     
@@ -144,6 +202,9 @@ class OdometerCheckViewController: UIViewController, StoryboardInitializable {
             odometerState = .confirmLastCheck
             updateManuallyOdometerView(isShow: false)
             updateOdometerImage(isShow: false)
+            mOdomateNumberTxtFl.text = nil
+            mOdomateImgV.image = nil
+            enableOpenCamera()
         }
         enableStartNow()
     }
@@ -175,7 +236,12 @@ class OdometerCheckViewController: UIViewController, StoryboardInitializable {
     
     private func handlerStartNoew() {
         mStartNowV.didPressConfirm = {
-            self.startRideAlert()
+            if self.odometerState == .inputManually {
+                self.addOdometer()
+            } else {
+                self.checkOdometer()
+            }
+            
         }
     }
 }
@@ -198,6 +264,7 @@ extension OdometerCheckViewController: UIImagePickerControllerDelegate, UINaviga
              return  }
         mOdomateImgV.image = image
         updateOdometerImage(isShow: true)
+        enableStartNow()
        
     }
 }
@@ -209,6 +276,7 @@ extension OdometerCheckViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        enableOpenCamera()
         enableStartNow()
         return false
     }

@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUI
 
-class VehicleCheckViewController: UIViewController, StoryboardInitializable {
+class VehicleCheckViewController: BaseViewController {
     
    //MARK: --Outlets
     @IBOutlet weak var mStepTitleLb: UILabel!
@@ -26,9 +26,10 @@ class VehicleCheckViewController: UIViewController, StoryboardInitializable {
     @IBOutlet weak var mAddDamageCenterY: NSLayoutConstraint!
     
     //MARK: --Variables
-
+    public var currRentModel: Rent?
     private lazy  var addDamageVC = NewDamageViewController.initFromStoryboard(name: Constant.Storyboards.newDamage)
-    var pageDataSours:[StartRideModel] = StartRideData.startRideModel
+    private lazy var vehicleCheckViewModel = VehicleCheckViewModel()
+    var pageDataSours:[Defect?]?
     var currentPageIndex = 0
     
     
@@ -38,6 +39,9 @@ class VehicleCheckViewController: UIViewController, StoryboardInitializable {
         tabBarController?.tabBar.isHidden = true
         setupView()
         configCollectionView()
+        configureUI()
+        configurePageControl()
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -60,13 +64,25 @@ class VehicleCheckViewController: UIViewController, StoryboardInitializable {
     func setupView() {
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        configurePageControl()
         mRightBarBtn.image = img_bkd
-        mFinishCheckBtn.disable()
         mPageCollcetionV.register(VehicleDimageCollectionCell.nib(), forCellWithReuseIdentifier: VehicleDimageCollectionCell.identifier)
         
     }
-   
+    
+    ///Configure UI
+    func configureUI() {
+        guard let defects = currRentModel?.startDefects else {return}
+
+        pageDataSours = defects
+        let defect = Defect(comment: "", image: nil)
+        pageDataSours?.append(defect)
+        mPageCollcetionV.reloadData()
+        if pageDataSours!.count > 1 {
+            mFinishCheckBtn.disable()
+        }
+
+    }
+    
     /// configure pageCollcetion view user interface
     private func configCollectionView() {
 
@@ -83,7 +99,7 @@ class VehicleCheckViewController: UIViewController, StoryboardInitializable {
     
     ///Configure page control
     func configurePageControl() {
-        mPageControl.numberOfPages = pageDataSours.count
+        mPageControl.numberOfPages = pageDataSours?.count ?? 1
 
         if #available(iOS 14.0, *) {
             mPageControl.preferredIndicatorImage = UIImage(named: "unselect_radiobutton")
@@ -92,6 +108,34 @@ class VehicleCheckViewController: UIViewController, StoryboardInitializable {
             mPageControl.currentPageIndicatorTintColor = color_chat_placeholder!
         }
     }
+    
+    ///Add defect
+    func addDefect() {
+        vehicleCheckViewModel.addDefect(image: addDamageVC.mDamageImgV.image ?? UIImage(),
+                                        id: currRentModel?.id ?? "",
+                                        state: "defects",
+                                        description: addDamageVC.mDemageTxtFl.text ?? "") { result, err in
+            guard let startDefects = result?.startDefects else {return}
+            self.pageDataSours = startDefects
+            self.pageDataSours?.append(Defect(comment: "", image: nil))
+            self.mPageCollcetionV.reloadData()
+            
+            print( result)
+        }
+
+    }
+    
+    ///Check defect
+    func checkDefecte() {
+        vehicleCheckViewModel.defectCheck(id: currRentModel?.id ?? "") { result, err in
+            guard let rent = result else {return}
+            if RentState.init(rawValue: rent.state ?? "") == .START_DEFECT_CHECK {
+                self.goToOdometerCheck(rent: rent)
+            }
+        }
+    }
+    
+    
     
     ///register For KeyboardNotifications
    private func registerForKeyboardNotifications() {
@@ -153,12 +197,6 @@ class VehicleCheckViewController: UIViewController, StoryboardInitializable {
         picker.delegate = self
         present(picker, animated: true)
     }
-    
-    ///Open OdometerCheck controller
-    func goToOdometerCheck() {
-        let odometerCheckVC = OdometerCheckViewController.initFromStoryboard(name: Constant.Storyboards.odometerCheck)
-        self.navigationController?.pushViewController(odometerCheckVC, animated: true)
-    }
    
 
    //MARK: -- Actions
@@ -169,7 +207,7 @@ class VehicleCheckViewController: UIViewController, StoryboardInitializable {
     
     
     @IBAction func finishCheck(_ sender: Any) {
-        goToOdometerCheck()
+        checkDefecte()
     }
     
 }
@@ -179,15 +217,16 @@ extension VehicleCheckViewController: UICollectionViewDelegateFlowLayout, UIColl
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        mPageControl.numberOfPages = pageDataSours.count
-        mPageControl.isHidden = !(pageDataSours.count > 1)
-        return pageDataSours.count
+        mPageControl.numberOfPages = pageDataSours?.count ?? 0
+        mPageControl.isHidden = !((pageDataSours?.count ?? 0) > 1)
+        return pageDataSours?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VehicleDimageCollectionCell.identifier, for: indexPath) as!  VehicleDimageCollectionCell
-        let item = pageDataSours[indexPath.item]
-        cell.setCellInfo(item:item, index: indexPath.item, isAddCell: indexPath.item == pageDataSours.count - 1)
+        let item = pageDataSours?[indexPath.item]
+       
+        cell.setCellInfo(item:item!, index: indexPath.item, isAddCell: indexPath.item == (pageDataSours?.count ?? 0) - 1)
         cell.didPressAdd = {
             self.openCamera()
         }
@@ -222,7 +261,7 @@ extension VehicleCheckViewController: UICollectionViewDelegateFlowLayout, UIColl
     
    //Enable or disable finish check button
     private func enableFinishCheck() {
-        if mPageControl?.currentPage == pageDataSours.count - 1 {
+        if mPageControl?.currentPage == (pageDataSours?.count ?? 0) - 1 {
             mAdditionalChargesLb.isHidden = false
             mFinishCheckBtn.enable()
         } else {
@@ -271,13 +310,13 @@ extension VehicleCheckViewController: NewDamageViewControllerDelegate {
     func didPressConfirm() {
         addDamageVC.mConfirmBtn.backgroundColor = .clear
         removeAddDamageChildViewController()
-        
-        let startRide = StartRideModel(damageImg: addDamageVC.mDamageImgV.image, damageName: addDamageVC.mDemageTxtFl.text)
-        if pageDataSours[0].damageImg == img_camera {
-            pageDataSours[0] = startRide
-        } else {
-            pageDataSours.insert(startRide, at: pageDataSours.count - 1)
-        }
-        mPageCollcetionV.reloadData()
+       addDefect()
+//        let startRide = StartRideModel(damageImg: addDamageVC.mDamageImgV.image, damageName: addDamageVC.mDemageTxtFl.text)
+//        if pageDataSours[0].damageImg == img_camera {
+//            pageDataSours[0] = startRide
+//        } else {
+//            pageDataSours.insert(startRide, at: pageDataSours.count - 1)
+//        }
+//        mPageCollcetionV.reloadData()
     }
 }

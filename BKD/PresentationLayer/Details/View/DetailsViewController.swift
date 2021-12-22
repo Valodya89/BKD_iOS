@@ -471,7 +471,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     ///Will open  location controller
     func goToLocationController() {
         mSearchV!.mLocationDropDownView.didSelectSeeMap = { [weak self] result  in
-            self?.goToSeeMap(parking: result)
+            self?.goToSeeMap(parking: result, customLocation: nil)
         }
     }
     

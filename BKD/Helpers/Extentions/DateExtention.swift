@@ -12,7 +12,14 @@ extension Date {
             return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
         }
 
+    init(milliseconds:Int64) {
+            self = Date(timeIntervalSince1970: TimeInterval(milliseconds))
+        }
     
+    func doubleToDate(doubleDate: Double) -> Date {
+        let date = Date(timeIntervalSince1970: doubleDate)
+        return date
+    }
     
     func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
         return calendar.dateComponents(Set(components), from: self)
@@ -85,6 +92,12 @@ extension Date {
         return components.month! > 0 ?  true : false
     }
     
+    ///Get distance bitween to date by component
+    func getDistanceByComponent(_ component: Calendar.Component, toDate: Date) -> DateComponents {
+
+        let difference = Calendar.current.dateComponents([component], from: self, to: toDate)
+        return difference
+    }
     
     /// Format date
     func getDateByFormat() -> String {

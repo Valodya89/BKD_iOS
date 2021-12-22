@@ -144,6 +144,10 @@
 		5659AC2F2704B97F00278560 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659AC2E2704B97F00278560 /* UICollectionView.swift */; };
 		5659AC3327056E4900278560 /* SFProDisplayRegularItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5659AC3227056E4400278560 /* SFProDisplayRegularItalic.ttf */; };
 		5659B02B2699F5020059D28C /* PhoneCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659B02A2699F5020059D28C /* PhoneCodeModel.swift */; };
+		5659E638277226A70084BCAF /* VehicleCheckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659E637277226A70084BCAF /* VehicleCheckViewModel.swift */; };
+		5659E63A27726E810084BCAF /* OdometerCheckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659E63927726E800084BCAF /* OdometerCheckViewModel.swift */; };
+		5659E640277290340084BCAF /* StopRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659E63F277290340084BCAF /* StopRideViewController.swift */; };
+		5659E6422772904C0084BCAF /* StopRide.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5659E6412772904C0084BCAF /* StopRide.storyboard */; };
 		565A665B273A10B3008C7EF9 /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565A665A273A10B2008C7EF9 /* Reservation.swift */; };
 		565A665D273A3527008C7EF9 /* MyReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565A665C273A3527008C7EF9 /* MyReservationViewModel.swift */; };
 		565A7AB02653FE26006C63D0 /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565A7AAE2653FE26006C63D0 /* SearchHeaderView.swift */; };
@@ -325,6 +329,7 @@
 		56CC7D8526AA07F2006DB7B8 /* BancontactCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CC7D8426AA07F2006DB7B8 /* BancontactCollectionViewCell.swift */; };
 		56CD830B267CF45600B2799F /* ReserveTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CD830A267CF45600B2799F /* ReserveTableView.swift */; };
 		56CD8313267CF56800B2799F /* ReserveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CD8312267CF56800B2799F /* ReserveModel.swift */; };
+		56CDD3E22770982600BD8F1A /* AddAccident.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CDD3E12770982600BD8F1A /* AddAccident.swift */; };
 		56CF781B26F3BD1C0092F555 /* AdditionalDriverWaithingApplovalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF781926F3BD1B0092F555 /* AdditionalDriverWaithingApplovalCell.swift */; };
 		56CF781C26F3BD1C0092F555 /* AdditionalDriverWaithingApplovalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56CF781A26F3BD1B0092F555 /* AdditionalDriverWaithingApplovalCell.xib */; };
 		56CF782026F3C72C0092F555 /* AdditionalDriverForWaithingApprovalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF781E26F3C72C0092F555 /* AdditionalDriverForWaithingApprovalCell.swift */; };
@@ -513,6 +518,10 @@
 		5659AC2E2704B97F00278560 /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		5659AC3227056E4400278560 /* SFProDisplayRegularItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SFProDisplayRegularItalic.ttf; sourceTree = "<group>"; };
 		5659B02A2699F5020059D28C /* PhoneCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneCodeModel.swift; sourceTree = "<group>"; };
+		5659E637277226A70084BCAF /* VehicleCheckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCheckViewModel.swift; sourceTree = "<group>"; };
+		5659E63927726E800084BCAF /* OdometerCheckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OdometerCheckViewModel.swift; sourceTree = "<group>"; };
+		5659E63F277290340084BCAF /* StopRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopRideViewController.swift; sourceTree = "<group>"; };
+		5659E6412772904C0084BCAF /* StopRide.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StopRide.storyboard; sourceTree = "<group>"; };
 		565A665A273A10B2008C7EF9 /* Reservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
 		565A665C273A3527008C7EF9 /* MyReservationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReservationViewModel.swift; sourceTree = "<group>"; };
 		565A7AAE2653FE26006C63D0 /* SearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderView.swift; sourceTree = "<group>"; };
@@ -696,6 +705,7 @@
 		56CC7D8426AA07F2006DB7B8 /* BancontactCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BancontactCollectionViewCell.swift; sourceTree = "<group>"; };
 		56CD830A267CF45600B2799F /* ReserveTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveTableView.swift; sourceTree = "<group>"; };
 		56CD8312267CF56800B2799F /* ReserveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveModel.swift; sourceTree = "<group>"; };
+		56CDD3E12770982600BD8F1A /* AddAccident.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccident.swift; sourceTree = "<group>"; };
 		56CF781926F3BD1B0092F555 /* AdditionalDriverWaithingApplovalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionalDriverWaithingApplovalCell.swift; sourceTree = "<group>"; };
 		56CF781A26F3BD1B0092F555 /* AdditionalDriverWaithingApplovalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdditionalDriverWaithingApplovalCell.xib; sourceTree = "<group>"; };
 		56CF781E26F3C72C0092F555 /* AdditionalDriverForWaithingApprovalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalDriverForWaithingApprovalCell.swift; sourceTree = "<group>"; };
@@ -1062,6 +1072,7 @@
 			children = (
 				564BE88627026BA80037DF39 /* DamagesSideModel.swift */,
 				565A9F632703616F00C3C36B /* AccidentFormModel.swift */,
+				56CDD3E12770982600BD8F1A /* AddAccident.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1572,6 +1583,39 @@
 				5658BDFC26FBECCF00A5B122 /* AddDamage.storyboard */,
 			);
 			path = AddDamageViewController;
+			sourceTree = "<group>";
+		};
+		5659E63B27728FCF0084BCAF /* StopRide */ = {
+			isa = PBXGroup;
+			children = (
+				5659E63E27728FFD0084BCAF /* Model */,
+				5659E63D27728FF60084BCAF /* ViewModel */,
+				5659E63C27728FED0084BCAF /* View */,
+			);
+			path = StopRide;
+			sourceTree = "<group>";
+		};
+		5659E63C27728FED0084BCAF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5659E63F277290340084BCAF /* StopRideViewController.swift */,
+				5659E6412772904C0084BCAF /* StopRide.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5659E63D27728FF60084BCAF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		5659E63E27728FFD0084BCAF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		565A7AAD2653FDCB006C63D0 /* SearchHeaderView */ = {
@@ -2163,6 +2207,7 @@
 				56683770270CF6C600C8D8FF /* Compare */,
 				564BE8682701F4D30037DF39 /* AddAccidentDetails */,
 				5658BDF426FBEC6900A5B122 /* OnRide */,
+				5659E63B27728FCF0084BCAF /* StopRide */,
 				56CF782226F3DF4D0092F555 /* StartRide */,
 				565F80DB26A74D0800ADB9FE /* PhoneVerification */,
 				565F80CD26A703AA00ADB9FE /* Payment */,
@@ -2837,6 +2882,8 @@
 		56CF782526F3DF750092F555 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				5659E637277226A70084BCAF /* VehicleCheckViewModel.swift */,
+				5659E63927726E800084BCAF /* OdometerCheckViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -3141,6 +3188,7 @@
 				5640396526F020930064256C /* PayLater.storyboard in Resources */,
 				565863BD26C76B5D003C19A2 /* Cash.storyboard in Resources */,
 				565A7AD72654C49B006C63D0 /* CategoryCollectionViewCell.xib in Resources */,
+				5659E6422772904C0084BCAF /* StopRide.storyboard in Resources */,
 				562585CE26F0E2C400EC9284 /* MyReservetionAdvanced.storyboard in Resources */,
 				566B37BE2697A6D40021BCAA /* TakePhotoTableViewCell.xib in Resources */,
 				565A7AB12653FE26006C63D0 /* SearchHeaderView.xib in Resources */,
@@ -3312,6 +3360,7 @@
 				566354EB268AF8EF0003E2EB /* PriceTableViewCell.swift in Sources */,
 				564E12E1264D787A008CE884 /* MenuModel.swift in Sources */,
 				565731D92672DE810012ADD0 /* UINavigationControllerExtention.swift in Sources */,
+				5659E63A27726E810084BCAF /* OdometerCheckViewModel.swift in Sources */,
 				5658D79326CCA50000CD6A3F /* CategoryViewModel.swift in Sources */,
 				56CC7D7326A87A9F006DB7B8 /* PaymentWebViewController.swift in Sources */,
 				569C8C9626F2603C001D65EF /* TotalPriceStackView.swift in Sources */,
@@ -3324,6 +3373,7 @@
 				565A7AB02653FE26006C63D0 /* SearchHeaderView.swift in Sources */,
 				564E12FE264EAF04008CE884 /* PaddingUILable.swift in Sources */,
 				567915FD27569ED0008C8F84 /* FreeReservationOverViewController.swift in Sources */,
+				5659E640277290340084BCAF /* StopRideViewController.swift in Sources */,
 				5629E50627556634009BEC68 /* ChangePhoneNumberViewModel.swift in Sources */,
 				56CC7D8126A9FED1006DB7B8 /* BancontactView.swift in Sources */,
 				565BFD87269F55550044D081 /* URLBuilderProtocol.swift in Sources */,
@@ -3352,6 +3402,7 @@
 				9393BAED26D78833003878BF /* SocketService.swift in Sources */,
 				565D142827296AD0000760AE /* MainDriver.swift in Sources */,
 				56B9F2D5267E8CEE003449AD /* SearchView.swift in Sources */,
+				5659E638277226A70084BCAF /* VehicleCheckViewModel.swift in Sources */,
 				56A2AFE62694C827001BA7C5 /* PhoneNumberTableViewCell.swift in Sources */,
 				5658D76826C9BB5700CD6A3F /* CustomLocationModel.swift in Sources */,
 				56573ADD268FBE4000B39136 /* SignInViewModel.swift in Sources */,
@@ -3476,6 +3527,7 @@
 				56A2AFEC2694CFC9001BA7C5 /* SearchPhoneCodeViewController.swift in Sources */,
 				567915F92756775B008C8F84 /* PhoneVerify.swift in Sources */,
 				562F89C42705F7360027CB9A /* Tariff.swift in Sources */,
+				56CDD3E22770982600BD8F1A /* AddAccident.swift in Sources */,
 				560252E2266535CF00FB204C /* Result.swift in Sources */,
 				5669F5FC26FC170D00FF73F7 /* ContactActionSheetView.swift in Sources */,
 				56A5D6D4273EED6B001108BB /* MainViewControllerExtension.swift in Sources */,

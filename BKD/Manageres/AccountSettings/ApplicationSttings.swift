@@ -22,6 +22,7 @@ final class ApplicationSettings {
     private(set) var restrictedZones: [RestrictedZones]?
     var carsList:[String : [CarsModel]?]?
     var carTypes:[CarTypes]?
+    var allCars:[CarsModel]?
 
     
     private init() {
@@ -35,6 +36,7 @@ final class ApplicationSettings {
         getRestrictedZones()
         getFlexibleTimes()
         getCountryList()
+        getAllCars()
     }
 }
 
@@ -64,6 +66,25 @@ extension ApplicationSettings {
     func getCarTypes()  {
         MainViewModel().getCarTypes { [self] (result) in
             carTypes = result
+        }
+    }
+    
+    /// get avalable time list
+    func getAllCars() {
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getCarList)) { [self] (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let result = BkdConverter<BaseResponseModel<[CarsModel]>>.parseJson(data: data as Any) else {
+                    print("error")
+                    return
+                }
+                self.allCars =  result.content!
+            case .failure(let error):
+                print(error.description)
+            
+                break
+            }
         }
     }
     

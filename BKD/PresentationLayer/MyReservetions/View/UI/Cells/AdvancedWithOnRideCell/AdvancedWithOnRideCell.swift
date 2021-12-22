@@ -33,7 +33,7 @@ class AdvancedWithOnRideCell: UITableViewCell  {
     //MARK: --Varible
     var didPressAddDamage:(()-> Void)?
     var didPressSwitchDriver:(()-> Void)?
-    var didPressMap:(()-> Void)?
+    var didPressMap:((Int)-> Void)?
 
     
     //MARK: Lifecycle
@@ -73,6 +73,6 @@ class AdvancedWithOnRideCell: UITableViewCell  {
         didPressAddDamage?()
     }
     @IBAction func map(_ sender: UIButton) {
-        didPressMap?()
+        didPressMap?(sender.tag)
     }
 }

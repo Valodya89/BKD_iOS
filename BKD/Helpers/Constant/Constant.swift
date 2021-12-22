@@ -252,8 +252,11 @@ struct Constant {
         static let expiryDate = "calendar_expire"
         static let expiryDateDrivingLicense = "calendar_expire_driving_license"
         static let issueDateDrivingLicense = "calendar_issue_driving_license"
+        
         //Phone verification
         static let phoneVerificationInfo = "First step to make the reservation is to verify your phone number. We will send a verification code to %@%@ number, indicated during the Reservation."
+    
+        
         //Payment
         static let invalidCode = "Verification code is invalid"
         static let payAlert = "You should pay 24 hours before the reservation. If not, the Pre-Reservation will be automatically cancelled. There %@ only %f free %@ of the Pre-Reservation in a month."
@@ -392,6 +395,7 @@ struct Constant {
         static let end_interval = "END_INTERVAL"
         static let take_photo = "takePhoto"
         static let open_doc = "openDoc"
+        static let custom = "CUSTOM"
 
         
     }

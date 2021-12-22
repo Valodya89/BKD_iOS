@@ -63,6 +63,11 @@ class MainViewController: BaseViewController {
         super.viewDidLoad()
         self.tabBarController?.setTabBarBackgroundColor(color: color_background!)
         setupView()
+        
+        
+        
+//        self.goToSelectPayment(vehicleModel:  VehicleModel(),
+//                               paymentOption: .deposit)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -452,7 +457,7 @@ class MainViewController: BaseViewController {
     ///will be show the selected location to map from the list of tables
     func showLocation() {
         searchHeaderV!.mLocationDropDownView.didSelectSeeMap = { [weak self] parkingModel  in
-            self?.goToSeeMap(parking: parkingModel)
+            self?.goToSeeMap(parking: parkingModel, customLocation: nil)
         }
     }
 

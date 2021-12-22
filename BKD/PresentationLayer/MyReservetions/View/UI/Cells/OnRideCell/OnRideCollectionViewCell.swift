@@ -47,8 +47,8 @@ class OnRideCollectionViewCell: UICollectionViewCell {
     //MARK: -- Varables
     var pressedStopRide:(()-> Void)?
     var pressedAddDamages:(()-> Void)?
-    var pressedSwitchDriver:(()-> Void)?
-    var pressedSeeMap:(()->Void)?
+    var pressedSwitchDriver:((Int)-> Void)?
+    var pressedSeeMap:((Int)->Void)?
     
     
     //MARK: -- Lifecycle
@@ -85,7 +85,7 @@ class OnRideCollectionViewCell: UICollectionViewCell {
         return onRideModel
     }
     
-    func setInfoCell(item: ReservationWithReservedPaidModel, index: Int) {
+    func setInfoCell(item: Rent, index: Int) {
         mStopRideBtn.tag = index
         mStopRideBtn.addTarget(self, action: #selector(pressedStopRide(sender:)), for: .touchUpInside)
         mAddDamagesBtn.tag = index
@@ -95,6 +95,36 @@ class OnRideCollectionViewCell: UICollectionViewCell {
         
         mLocationBtn.tag = index
         mLocationBtn.addTarget(self, action: #selector(seeMap(sender:)), for: .touchUpInside)
+        
+        //Switch Driver
+        mSwitchDriverBtn.isHidden = item.additionalDrivers?.count == 0
+
+        //Car info
+        mIconImg.sd_setImage(with:  item.carDetails.logo.getURL() ?? URL(string: ""), placeholderImage: nil)
+        let currCar: CarsModel? = ApplicationSettings.shared.allCars?.filter( {$0.id == item.carDetails.id}).first
+        mCarNameLb.text = currCar?.name
+        mCarTypeLb.text = (ApplicationSettings.shared.carTypes?.filter( {$0.id == currCar?.type} ).first)?.name
+        
+//Driver info
+        mDriverNameLb.text = (item.currentDriver?.name ?? "") + " " + (item.currentDriver?.surname ?? "")
+        mDriverLicenseNumberLb.text = item.currentDriver?.drivingLicenseNumber
+      
+        //Return location
+        if item.returnLocation.type == Constant.Keys.custom,
+           let returnLocation = item.returnLocation.customLocation {
+            mBkdOfficeLb.text = returnLocation.name
+        } else if let returnParkin = item.returnLocation.parking {
+            mBkdOfficeLb.text = returnParkin.name
+        }
+//        //Date
+//        let startDate = Date().doubleToDate(doubleDate: item.startDate)
+//        let endDate = Date().doubleToDate(doubleDate: item.endDate)
+//        mPickupDayLb.text = startDate.getDay()
+//        mPickupMonthLb.text =  startDate.getMonth(lng: "en")
+//        mPickupTimeLb.text = startDate.getHour()
+//        mReturnDayLb.text = endDate.getDay()
+//        mReturnMonthLb.text = endDate.getMonth(lng: "en")
+//        mReturnTimeLb.text = endDate.getHour()
     }
     
     @objc func pressedStopRide(sender: UIButton) {
@@ -106,10 +136,10 @@ class OnRideCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func switchDriver(sender: UIButton) {
-        pressedSwitchDriver?()
+        pressedSwitchDriver?(sender.tag)
     }
     
     @objc func seeMap(sender: UIButton) {
-        pressedSeeMap?()
+        pressedSeeMap?(sender.tag)
     }
 }
