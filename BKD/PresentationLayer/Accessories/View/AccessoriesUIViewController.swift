@@ -71,6 +71,7 @@ class AccessoriesUIViewController: BaseViewController {
                 }
                 return
             }
+            ApplicationSettings.shared.accessories = result!
             if self.accessoriesEditList == nil {
                 self.accessoriesEditList = self.accessoriesViewModel.getActiveAccessoryList(accessories: result!)
             } else {

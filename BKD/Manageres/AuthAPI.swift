@@ -86,6 +86,11 @@ enum AuthAPI: APIProtocol {
     case checkDefect(id: String)
     case checkOdometer(id: String)
     case start(id: String)
+    case checkDefectToFinish(id: String)
+    case checkOdometerToFinish(id: String)
+    case finish(id: String)
+    case changeDriver(id: String,
+                      driverId: String)
     case addAccident(id: String,
                      statDate: Double,
                      address: String,
@@ -209,6 +214,15 @@ enum AuthAPI: APIProtocol {
             return "api/rents/\(id)/start/odometer-check"
         case .start(let id):
             return "api/rents/\(id)/start"
+        case .checkDefectToFinish(let id):
+            return "api/rents/\(id)/finish/defect-check"
+        case .checkOdometerToFinish(let id):
+            return "api/rents/\(id)/finish/odometer-check"
+        case .finish(let id):
+            return "api/rents/\(id)/finish"
+        case let .changeDriver(id, driverId):
+            return "api/rents/\(id)/driver/\(driverId)"
+        
         case let .addAccident(id, _, _, _, _):
             return "api/rents/\(id)/accident"
         }
@@ -246,6 +260,10 @@ enum AuthAPI: APIProtocol {
              .checkDefect,
              .checkOdometer,
              .start,
+             .checkDefectToFinish,
+             .checkOdometerToFinish,
+             .finish,
+             .changeDriver,
              .addAccident:
             return ["Content-Type": "application/json"]
         case .getAuthRefreshToken:
@@ -450,6 +468,10 @@ enum AuthAPI: APIProtocol {
              .checkDefect,
              .checkOdometer,
              .start,
+             .checkDefectToFinish,
+             .checkOdometerToFinish,
+             .finish,
+             .changeDriver,
              .addAccident:
             return .patch
         default:

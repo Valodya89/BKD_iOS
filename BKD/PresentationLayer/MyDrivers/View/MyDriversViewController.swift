@@ -48,12 +48,11 @@ class MyDriversViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getMyDriverList()
-
-        if additionalDrivers != nil {
+        if additionalDrivers == nil {
+            getMyDriverList()
+        } else {
             mPriceLb.text = String(format: "%.2f", Float(PriceManager.shared.additionalDriversPrice ?? 0.0))
         }
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -103,8 +102,9 @@ class MyDriversViewController: BaseViewController {
                 }
                 return
             }
-            self.additionalDrivers = self.myDriversViewModel.setActiveDriverList(allDrivers: result)
+            self.additionalDrivers = self.myDriversViewModel.setActiveDriverList(allDrivers: result, additionalDriver: self.additionalDrivers)
             self.mMyDriverCollectionV.reloadData()
+            self.mPriceLb.text = String(format: "%.2f", Float(PriceManager.shared.additionalDriversPrice ?? 0.0))
             self.myDriversViewModel.getDriverToContinueToFill(allDrivers: result) { driver in
                 guard let driver = driver else {return}
                 self.driver = driver

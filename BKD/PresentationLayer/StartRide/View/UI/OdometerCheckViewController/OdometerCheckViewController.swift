@@ -123,8 +123,7 @@ class OdometerCheckViewController: UIViewController, StoryboardInitializable {
         odometerCheckViewModel.startRide(id: currRentModel?.id ?? "") { result, err in
             guard let rent = result else {return}
             if RentState.init(rawValue: rent.state ?? "") == .STARTED {
-                self.navigationController?.popViewController(animated: true)
-
+                self.navigationController?.popToViewController(ofClass: MyReservationsViewController.self)
             }
         }
     }
@@ -183,7 +182,7 @@ class OdometerCheckViewController: UIViewController, StoryboardInitializable {
     private func startRideAlert() {
         BKDAlert().showAlert(on: self, title: nil, message: Constant.Texts.startRideAlert, messageSecond: nil, cancelTitle: Constant.Texts.back, okTitle: Constant.Texts.startNow) {
             self.mStartNowV.initConfirm()
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popToViewController(ofClass: MyReservationsViewController.self)
 
         } okAction: {
             self.startRide()
@@ -248,8 +247,7 @@ class OdometerCheckViewController: UIViewController, StoryboardInitializable {
 
 
 
-//MARK: - UIImagePickerControllerDelegate
-//MARK: --------------------------------
+//MARK: -- UIImagePickerControllerDelegate
 extension OdometerCheckViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     
@@ -270,8 +268,7 @@ extension OdometerCheckViewController: UIImagePickerControllerDelegate, UINaviga
 }
 
 
-//MARK: UITextFieldDelegate
-//MARK: ---------------------------
+//MARK: -- UITextFieldDelegate
 extension OdometerCheckViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -284,5 +281,4 @@ extension OdometerCheckViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.becomeFirstResponder()
     }
-
 }

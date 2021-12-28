@@ -24,6 +24,8 @@ class AddDamageViewController: BaseViewController {
     
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     
+    public var currRentModel: Rent?
+    
     //MARK: -- Lidecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +93,7 @@ class AddDamageViewController: BaseViewController {
     
     @IBAction func AddAccidentDetails(_ sender: UIButton) {
         let addAccidentDetailsVC = AddAccidentDetailsViewController.initFromStoryboard(name: Constant.Storyboards.addAccidentDetails)
+        addAccidentDetailsVC.currRentModel = currRentModel
         self.navigationController?.pushViewController(addAccidentDetailsVC, animated: true)
         
     }

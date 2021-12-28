@@ -36,9 +36,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
     @IBOutlet weak var mReturnDateLb: UILabel!
     @IBOutlet weak var mReturnMonthLb: UILabel!
     @IBOutlet weak var mReturnTimeLb: UILabel!
-    
-
-    
+        
     //Navigation
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
     @IBOutlet weak var mNavigationItem: UINavigationItem!
@@ -69,7 +67,6 @@ class MyReservetionAdvancedViewController: BaseViewController {
     @IBOutlet weak var mNewPriceTableV: PriceTableView!
     @IBOutlet weak var mNewPriceTableHeight: NSLayoutConstraint!
    
-    
     ///Buttons
     @IBOutlet weak var mEditContentV: UIView!
     @IBOutlet weak var mAgreementBtn: UIButton!
@@ -90,7 +87,9 @@ class MyReservetionAdvancedViewController: BaseViewController {
     public var onRideArr: [OnRideModel]?
     public var driversArr:[MyDriversModel]?
     public var registerNumberArr:[String]?
+    public var currRent: Rent?
     
+    lazy var myReservAdvancedViewModel = MyReservetionAdvancedViewModel()
     var reserveViewModel = ReserveViewModel()
     var currentTariff: TariffState = .hourly
     var lastContentOffset:CGFloat = 0.0
@@ -153,59 +152,93 @@ class MyReservetionAdvancedViewController: BaseViewController {
         mCancelBtn.layer.cornerRadius = 8
         mCancelBtn.setBorder(color: color_menu!, width: 1.0)
                 
-        configureView()
+        configureUI()
         configureOnRide()
         configureTotalPriceSteckView()
         handlerTotalPrice()
         
     }
     
-    
-    func configureView() {
-//        //Car descriptions
-//        mCarImgV.image = vehicleModel?.vehicleImg?.resizeImage(targetSize: CGSize(width:self.view.bounds.width * 0.729, height:self.view.bounds.height * 0.173))
-//        mCarDescriptionlb.text = vehicleModel?.vehicleType
-//        mFiatImgV.image = vehicleModel?.vehicleLogo
-//        mCarMarkLb.text = vehicleModel?.vehicleName
-//        mTowBarBckgV.isHidden = !((vehicleModel?.ifHasTowBar) == true)
-//        //Rent descriptions
-//        mPickUpParkingLb.text = vehicleModel?.searchModel?.pickUpLocation
-//        mReturnParkingLb.text = vehicleModel?.searchModel?.returnLocation
-//        mPickUpMonthLb.text = String((vehicleModel?.searchModel?.pickUpDate?.getMonth(lng: "en"))!)
-//        mReturnMonthLb.text = String((vehicleModel?.searchModel?.returnDate?.getMonth(lng: "en"))!)
-//        mPickUpTimeLb.text = vehicleModel?.searchModel?.pickUpTime?.getHour()
-//        mReturnTimeLb.text = vehicleModel?.searchModel?.returnTime?.getHour()
-//        if currentTariff == .hourly{
-//            mPickUpDateLb.text = String((vehicleModel?.searchModel?.pickUpTime?.getDay())!)
-//            mReturnDateLb.text = String((vehicleModel?.searchModel?.returnTime?.getDay())!)
-//        } else {
-//            mPickUpDateLb.text = String((vehicleModel?.searchModel?.pickUpDate?.getDay())!)
-//            mReturnDateLb.text = String((vehicleModel?.searchModel?.returnDate?.getDay())!)
-//        }
-//
+  ///Configure UI
+    func configureUI() {
+        //Car info
+        let currCar: CarsModel? = ApplicationSettings.shared.allCars?.filter( {$0.id == (currRent?.carDetails.id ?? "")}).first
+        if currCar != nil {
+            mCarImgV.sd_setImage(with:  currCar!.image.getURL() ?? URL(string: ""), placeholderImage: nil)
+            mTowBarBckgV.isHidden = !currCar!.towbar
+            mFiatImgV.sd_setImage(with:  currCar!.logo?.getURL() ?? URL(string: ""), placeholderImage: nil)
+            
+            mCarMarkLb.text = currCar!.name
+            mCarDescriptionlb.text = (ApplicationSettings.shared.carTypes?.filter( {$0.id == currCar!.type} ).first)?.name
+        }
+        
+        //Pick up location
+        if currRent?.pickupLocation.type == Constant.Keys.custom,
+           let pickupLocation = currRent?.pickupLocation.customLocation {
+            mPickUpParkingLb.text = pickupLocation.name
+        } else if let pickupParkin = currRent?.pickupLocation.parking {
+            mPickUpParkingLb.text = pickupParkin.name
+        }
+        //Return location
+        if currRent?.returnLocation.type == Constant.Keys.custom,
+           let returnLocation = currRent?.returnLocation.customLocation {
+            mReturnParkingLb.text = returnLocation.name
+        } else if let returnParkin = currRent?.returnLocation.parking {
+            mReturnParkingLb.text = returnParkin.name
+        }
+        
+        //Date
+        let startDate = Date().doubleToDate(doubleDate: currRent?.startDate ?? 0.0)
+        let endDate = Date().doubleToDate(doubleDate: currRent?.endDate ?? 0.0)
+        mPickUpDateLb.text = startDate.getDay()
+        mPickUpMonthLb.text =  startDate.getMonth(lng: "en")
+        mPickUpTimeLb.text = startDate.getHour()
+        mReturnDateLb.text = endDate.getDay()
+        mReturnMonthLb.text = endDate.getMonth(lng: "en")
+        mReturnTimeLb.text = endDate.getHour()
+       
+        //Register number
+        mRegisterNumberTableV
+//        //Driver info
+//        mDriverNameLb.text = (item.currentDriver?.name ?? "") + " " + (item.currentDriver?.surname ?? "")
+//        mDriverLicenseNumberLb.text = item.currentDriver?.drivingLicenseNumber
+        
+
+        
+        
+        
+        
+        //Switch Driver
+//        mSwitchDriverBtn.isHidden = item.additionalDrivers?.count == 0
+
+
+        
         //Reservation informations
         if registerNumberArr != nil {
             mRegisterNumberTableV.registerNumberArr =  registerNumberArr
             mRegisterNumberTableV.reloadData()
         }
-
+        
         if paymentStatusArr != nil {
             mPaymentStatusTableV.statusArr = paymentStatusArr
             mPaymentStatusTableV.reloadData()
             handlerPayment()
         }
         
+        //Accessories
+        if (currRent?.accessories?.count ?? 0) > 0 {
+            self.mReserveInfoTableV.accessories = myReservAdvancedViewModel.getRentAccessories(accessoriesToRent: currRent?.accessories)
+            mReserveInfoTableV.reloadData()
 
-        guard let vehicleModel = vehicleModel else {
-            return
         }
 
-        self.mReserveInfoTableV.accessories = reserveViewModel.getAdditionalAccessories(vehicleModel: vehicleModel) as? [AccessoriesEditModel]
-        mReserveInfoTableV.reloadData()
+
+
                 
         mAdditionalDriverTableV.drivers = reserveViewModel.getAdditionalDrivers(vehicleModel: vehicleModel) as? [MyDriversModel]
         mAdditionalDriverTableV.reloadData()
             
+        //New price
         mNewPriceTableV.pricesArr = PriceManager.shared.getPrices()
         mNewPriceTableV.reloadData()
         
@@ -416,7 +449,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
     ///Handler on ride tableCell´s buttons
     func handlerOnRide() {
         mOnRideTableV.didPressAddDamage = {
-            self.goToAddDamage()
+            self.goToAddDamage(rent: nil)
         }
          
         mOnRideTableV.didPressSwitchDriver = {

@@ -33,6 +33,13 @@ enum RentState: String {
 
 class MyReservationViewModel: NSObject {
     
+    ///Get Additional driver current list
+    func getAdditionalDrives(rent: Rent) -> [DriverToRent] {
+        var additionalDrivers = rent.additionalDrivers
+        additionalDrivers?.insert(rent.driver, at: 0)
+        additionalDrivers?.removeAll(where: { $0.id == (rent.currentDriver!.id) })
+        return additionalDrivers ?? []
+    }
     
     ///Get car´s reservations
     func getReservations( completion: @escaping ([Rent]?) -> Void) {
@@ -57,5 +64,29 @@ class MyReservationViewModel: NSObject {
         }
     }
    
+    ///Get car´s reservations
+    func changeDriver(rentId: String,
+                      driverId: String,
+                      completion: @escaping (Rent?) -> Void) {
 
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.changeDriver(id: rentId, driverId: driverId))) { (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let result = BkdConverter<BaseResponseModel<Rent>>.parseJson(data: data as Any) else {
+                    print("error")
+                    completion(nil)
+                    return
+                }
+                print(result.content as Any)
+                completion(result.content)
+
+            case .failure(let error):
+                print(error.description)
+                completion(nil)
+                break
+            }
+        }
+    }
+   
 }

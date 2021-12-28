@@ -169,9 +169,9 @@ struct MyDriversData {
 
 struct MyBkdData {
     static let myBkdModel: [MyBkdModel] = [
-        MyBkdModel(img: #imageLiteral(resourceName: "profile"), title: "My Account"),
-        MyBkdModel(img: #imageLiteral(resourceName: "setting"), title: "Settings"),
-        MyBkdModel(img: #imageLiteral(resourceName: "logout"), title: "Log out")
+        MyBkdModel(img: #imageLiteral(resourceName: "personal_info"), title: "My personal information"),
+        MyBkdModel(img: #imageLiteral(resourceName: "my_drivers"), title: "My Drivers"),
+        MyBkdModel(img: #imageLiteral(resourceName: "account"), title: "My account")
     ]
 }
 

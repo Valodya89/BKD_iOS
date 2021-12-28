@@ -45,8 +45,8 @@ class OnRideCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mShadowContentV: UIView!
     
     //MARK: -- Varables
-    var pressedStopRide:(()-> Void)?
-    var pressedAddDamages:(()-> Void)?
+    var pressedStopRide:((Int)-> Void)?
+    var pressedAddDamages:((Int)-> Void)?
     var pressedSwitchDriver:((Int)-> Void)?
     var pressedSeeMap:((Int)->Void)?
     
@@ -128,11 +128,11 @@ class OnRideCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func pressedStopRide(sender: UIButton) {
-        pressedStopRide?()
+        pressedStopRide?(sender.tag)
     }
     
     @objc func addDamages(sender: UIButton) {
-        pressedAddDamages?()
+        pressedAddDamages?(sender.tag)
     }
     
     @objc func switchDriver(sender: UIButton) {

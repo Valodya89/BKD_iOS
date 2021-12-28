@@ -311,12 +311,5 @@ extension VehicleCheckViewController: NewDamageViewControllerDelegate {
         addDamageVC.mConfirmBtn.backgroundColor = .clear
         removeAddDamageChildViewController()
        addDefect()
-//        let startRide = StartRideModel(damageImg: addDamageVC.mDamageImgV.image, damageName: addDamageVC.mDemageTxtFl.text)
-//        if pageDataSours[0].damageImg == img_camera {
-//            pageDataSours[0] = startRide
-//        } else {
-//            pageDataSours.insert(startRide, at: pageDataSours.count - 1)
-//        }
-//        mPageCollcetionV.reloadData()
     }
 }

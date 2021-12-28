@@ -171,7 +171,6 @@ class DateAndLocationView: UIView, UITextFieldDelegate {
                 location = textField.text
             }
         }
-        
         return true
     }
     

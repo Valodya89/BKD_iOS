@@ -15,7 +15,9 @@ final class MyBKDViewController: BaseViewController {
     @IBOutlet weak private var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak private var mLeftBarBtn: UIBarButtonItem!
     @IBOutlet weak private var mTableV: UITableView!
-    @IBOutlet weak private var mPrivacyPolicyLb: UILabel!
+   
+    @IBOutlet weak var mWaithinfForAdminV: UIView!
+    @IBOutlet weak var mLogOutBtn: UIButton!
     
     //MARK: Variables
     var mainDriver: MainDriver?
@@ -32,7 +34,7 @@ final class MyBKDViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        configureUI()
         if !isBackFromRegistrationBot {
             if viewModel.isUserSignIn {
                 removeChild(vc: signInVC)
@@ -54,8 +56,17 @@ final class MyBKDViewController: BaseViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = img_bkd
         menu = SideMenuNavigationController(rootViewController: LeftViewController())
+        mWaithinfForAdminV.layer.cornerRadius = 8
         self.setmenu(menu: menu)
-        mPrivacyPolicyLb.font = font_details_title
+    }
+    
+    ///Configure UI
+    func configureUI() {
+        mWaithinfForAdminV.isHidden = false
+        mWaithinfForAdminV.popupAnimation()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1 ) {
+            self.mWaithinfForAdminV.isHidden = true
+         }
     }
     
     ///Add child ViewController
@@ -129,6 +140,10 @@ final class MyBKDViewController: BaseViewController {
         present(menu!, animated: true, completion: nil)
     }
     
+    @IBAction func mLogout(_ sender: UIButton) {
+        logOut()
+    }
+    
     ///Handler sign in
     func handlerSignIn() {
         signInVC.didSignIn = { [self] in
@@ -157,8 +172,12 @@ extension MyBKDViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 2 {
-            logOut()
+        switch indexPath.row {
+        case 0:
+            self.goToMyPersonalInfo()
+        case 1: break
+        default:
+            break
         }
     }
 }

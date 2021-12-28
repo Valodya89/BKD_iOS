@@ -69,7 +69,9 @@ class ReserveViewModel: NSObject {
     func getAdditionalDriversToRequest(additionalDrivers: [MyDriversModel]?) -> [String?] {
         var driversArr: [String?] = []
         additionalDrivers?.forEach({ driver in
-            driversArr.append(driver.driver?.id)
+            if driver.isSelected {
+                driversArr.append(driver.driver?.id)
+            }
         })
         return driversArr
     }

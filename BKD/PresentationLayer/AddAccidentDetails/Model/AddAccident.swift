@@ -16,16 +16,12 @@ struct AddAccident: Codable {
     let longitude: Double
     let latitude: Double
     let damages: [Damage?]
-    let form: [Form?]
+    let form: [Logo?]
 }
 
 
 struct Damage: Codable {
-     let comment: String
+     let cardSide: String
      let image: Logo
     }
 
-struct Form: Codable {
-     let comment: String
-     let image: Logo
-    }

@@ -37,6 +37,7 @@ class AddAccidentDetailsViewController: BaseViewController {
     var accidentCoordinate: CLLocationCoordinate2D?
 
     public var currRentModel: Rent?
+    var accidentId: String?
     
     //MARK: -- Lifecycle
     override func viewDidLoad() {
@@ -58,6 +59,8 @@ class AddAccidentDetailsViewController: BaseViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = img_bkd
         mConfirmV.needsCheck = true
+        mDamageSideTbV.disableView()
+        mAccidentFormTbV.disableView()
         handlerConfirm()
     }
     
@@ -69,22 +72,6 @@ class AddAccidentDetailsViewController: BaseViewController {
         pickerV.delegate = self
     }
     
-    ///Add accident damage
-    func addAccidentDamageWithSide(image: UIImage, side: String) {
-        addAccidentDetailViewModel.addAccidentWithSide(image: image, id: currRentModel?.id ?? "", side: side) { result, err in
-            guard let rent = result else { return }
-            print (rent)
-        }
-    }
-    
-    ///Add accident form
-    func addForm(image: UIImage) {
-        addAccidentDetailViewModel.addAccidentForm(image: image, id: currRentModel?.id ?? "") { result, err in
-            guard let rent = result else { return }
-            print (rent)
-        }
-    }
-    
     ///Add accident
     func addAccident() {
         addAccidentDetailViewModel.addAccident(id: currRentModel?.id ?? "",
@@ -92,9 +79,37 @@ class AddAccidentDetailsViewController: BaseViewController {
                                                time:mDateAndLocationV.time ?? Date(),
                                                address: mDateAndLocationV.location ?? "", coordinate: accidentCoordinate!) { result in
             guard let _ = result else {return}
+            self.mDamageSideTbV.enableView()
+            self.accidentId = result!.id
             print (result!)
         }
     }
+    
+    ///Add accident damage
+    func addAccidentDamageWithSide(image: UIImage) {
+        let currDamageSide = mDamageSideTbV.damageSideArr.last
+        addAccidentDetailViewModel.addAccidentWithSide(image: image, id: accidentId ?? "", side: currDamageSide?.damageSide ?? "") { result, err in
+            guard let accident = result else { return }
+            if accident.damages.count > 0 {
+                self.mAccidentFormTbV.enableView()
+                self.updateDamageSideList(side:nil,
+                                          img: image,
+                                          isTakePhoto: false)
+            }
+        }
+    }
+    
+    ///Add accident form
+    func addForm(image: UIImage) {
+        addAccidentDetailViewModel.addAccidentForm(image: image, id: accidentId ?? "") { result, err in
+            guard let accident = result else { return }
+            if accident.form.count > 0 {
+                self.updateAccidentFormList(img: image, isTakePhoto: false)
+            }
+        }
+    }
+    
+  
     
     ///creat tool bar
     func creatToolBar() -> UIToolbar {
@@ -120,10 +135,15 @@ class AddAccidentDetailsViewController: BaseViewController {
    
         case .date:
             mDateAndLocationV.updateDateInfo(datePicker: datePicker)
+            checkDamageData()
         case .time :
             mDateAndLocationV.mDropDownImgV.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
             mDateAndLocationV.updateTime(datePicker: datePicker)
-        case  .location: break
+            checkDamageData()
+
+        case  .location:
+            checkDamageData()
+            break
         default:
             let side = sidesList[pickerV.selectedRow(inComponent: 0)]
             
@@ -134,6 +154,14 @@ class AddAccidentDetailsViewController: BaseViewController {
         
     }
     
+    ///Check id fill all damege data info
+    func checkDamageData() {
+        if let _ = mDateAndLocationV.date,
+           let _ = mDateAndLocationV.time,
+           let _ = mDateAndLocationV.location {
+             addAccident()
+        }
+    }
     
     ///Update damage side list
     func updateDamageSideList(side: String?,
@@ -389,11 +417,9 @@ extension AddAccidentDetailsViewController: UIImagePickerControllerDelegate, UIN
              return  }
         
         if isDamageSide {
-            updateDamageSideList(side:nil,
-                                 img: image,
-                                 isTakePhoto: false)
+            addAccidentDamageWithSide(image: image)
         } else {
-            updateAccidentFormList(img: image, isTakePhoto: false)
+            addForm(image: image)
         }
     }
 }
@@ -407,6 +433,7 @@ extension AddAccidentDetailsViewController: CustomLocationViewControllerDelegate
         mDateAndLocationV.location = locationPlace
         mDateAndLocationV.mLocationTxtFl.text = locationPlace
         accidentCoordinate = coordinate
+        checkDamageData()
     }
     
     

@@ -44,8 +44,9 @@ struct Constant {
         static let editReservetionAdvanced = "EditReservetionAdvanced"
         static let addAccidentDetails = "AddAccidentDetails"
         static let compare = "Compare"
-
-
+        static let odometerCheckStopRide = "OdometerCheckStopRide"
+        static let stopRide = "StopRide"
+        static let myPersonalInfo = "MyPersonalInformation"
 
     }
     struct NibNames {
@@ -97,7 +98,9 @@ struct Constant {
         static let vehicleCheck = "VehicleCheckViewController"
         static let newDamage = "NewDamageViewController"
         static let odometerCheck = "OdometerCheckViewController"
-
+        static let odometerCheckStopRide = "OdometerCheckStopRideUIViewController"
+        static let stopRide = "StopRideViewController"
+        static let myPersonalInfo = "MyPersonalInformationViewController"
     }
     
     struct DeepLinks {
@@ -300,9 +303,13 @@ struct Constant {
         static let startRideAlert = "By clicking “Start now” button you confirm that you got your keys and are to start the ride."
         static let activeStartRide = "You will get vehicle Registration numbers 15 minutes before the Reservation Pick up time, and will be able to start the ride."
         
-        //On ride
+        //Stop ride
         static let stopRide = "Stop Ride"
-        static let confirmSwitchDriver = "Please, confirm that you want to switch to [%@] driver."
+        static let confirmSwitchDriver = "Please, confirm that you want to switch to ´%@´ driver."
+        static let stopRideInfo = "If you want to stop your ride, you need to have the vehicle parked in the Return location and have the Odometer checked."
+        static let stopRideInfoBold = "parked in the Return location and have the Odometer checked."
+        static let finishRide_alert = "By clicking ´Finish Ride´ button, you confirm that you have parked the vehicle in the Return location and returned the keys to a BKD officer. Within 24 hours we will check the vehicle and Odometer details, and notify you on the amount of the Pending payment."
+        static let finishRide = "Finish ride"
         
         //Additional driver
         static let addDriverAlert = "Additional driver servide is %.2f euro per driver. You need to wait for Admin approval to have an additional drier for your account. No payment will be needed unless the Admin approves the driver addition."
@@ -573,6 +580,7 @@ let img_unselected_filter = UIImage(named: "show_car_param")
 let img_map_marker = UIImage(named: "marker")
 let img_check_box = UIImage(named: "check")
 let img_uncheck_box = UIImage(named: "uncheck_box")
+let img_err_uncheck_box = UIImage(named: "err_uncheck_box")
 let img_add_unselece = UIImage(named: "add")
 let img_add_selecte = UIImage(named: "added")
 let img_invisible = UIImage(named: "invisible")

@@ -58,6 +58,7 @@ class MyReservationsViewController: BaseViewController {
         
     }
     
+    
     func setupView() {
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
         menu = SideMenuNavigationController(rootViewController: LeftViewController())
@@ -86,71 +87,17 @@ class MyReservationsViewController: BaseViewController {
             guard let result = result else {return}
             self.myReservations = result
             self.mReservCollectionV.reloadData()
-            /*
-             {
-                      "id": "61c0cc79f19e7772672c5d6a",
-                      "state": "COMPLETED",
-                      "deposit": null,
-                      "rent": null,
-                      "distance": null,
-                      "userId": "60febc56266f574fec954af2",
-                      "startDate": 1636395213876,
-                      "endDate": 1636395213876,
-                      "accessories": [
-                          {
-                              "id": "61506ec81464ab42a0e2f31e",
-                              "count": 1
-                          }
-                      ],
-                      "pickupLocation": {
-                          "type": "CUSTOM",
-                          "customLocation": {
-                              "name": "Masivi city",
-                              "longitude": 45.5,
-                              "latitude": 47.8
-                          },
-                          "parking": null
-                      },
-                      "returnLocation": {
-                          "type": "CUSTOM",
-                          "customLocation": {
-                              "name": "Masivi city",
-                              "longitude": 45.5,
-                              "latitude": 47.8
-                          },
-                          "parking": null
-                      },
-                      "carDetails": {
-                          "id": "61815f3296b3233b4995c625",
-                          "registrationNumber": null,
-                          "logo": {
-                              "id": "14122AFE1F760709174A3F2B166B05AB51B1D7286ECAC4678C5B2F485A99F02605F320DD234F89BAAFC16476569668ED",
-                              "node": "dev-node1"
-                          },
-                          "model": "M3",
-                          "type": null
-                      },
-                      "driver": {
-                          "id": "60febc56266f574fec954af2",
-                          "name": "Valodya",
-                          "surname": "Galstyan",
-                          "drivingLicenseNumber": "sdfsdfsd256s1dfsd5"
-                      },
-                      "currentDriver": {
-                          "id": "60febc56266f574fec954af2",
-                          "name": "Valodya",
-                          "surname": "Galstyan",
-                          "drivingLicenseNumber": "sdfsdfsd256s1dfsd5"
-                      },
-                      "additionalDrivers": [],
-                      "startDefects": [],
-                      "endDefects": [],
-                      "startOdometer": null,
-                      "endOdometer": null,
-                      "hasAccident": true
-                  }
-              ],
-             */
+        }
+    }
+    
+    ///Switch driver
+    func changeDriver(index: Int, driverId: String ) {
+        let currRent = self.myReservations![index]
+        self.myReservationViewModel.changeDriver(rentId: currRent.id, driverId: driverId) { result in
+            guard let rent =  result else {return}
+            self.hideSwitchTable()
+            self.myReservations?[index] = rent
+            self.mReservCollectionV.reloadItems(at: [IndexPath(item: index, section: 0)])
             
         }
     }
@@ -159,19 +106,24 @@ class MyReservationsViewController: BaseViewController {
     func goToMyReservation(myReservationState: MyReservationState,
                            paymentStatusArr: [PaymentStatusModel]?,
                            registerNumberArr:[String]?,
-                           onRideArr:[OnRideModel]?) {
+                           onRideArr:[OnRideModel]?, rent: Rent) {
         
         let myReservetionAdvancedVC = MyReservetionAdvancedViewController.initFromStoryboard(name: Constant.Storyboards.myReservetionAdvanced)
         myReservetionAdvancedVC.myReservationState = myReservationState
         myReservetionAdvancedVC.paymentStatusArr = paymentStatusArr
         myReservetionAdvancedVC.registerNumberArr = registerNumberArr
         myReservetionAdvancedVC.onRideArr = onRideArr
+        myReservetionAdvancedVC.currRent = rent
         self.navigationController?.pushViewController(myReservetionAdvancedVC, animated: true)
     }
     
     
     ///Show switch drivers table view
-    private func animateSwitchDriversTable() {                self.mSwitchDriversTbV.isScrollEnabled = false
+    private func animateSwitchDriversTable(additionalDrivers: [DriverToRent] ) {
+        
+        self.mSwitchDriversTbV.switchDriversList = additionalDrivers
+        self.mSwitchDriversTbV.reloadData()
+        self.mSwitchDriversTbV.isScrollEnabled = false
         mVissualEffectV.isHidden = false
         UIView.animate(withDuration: 0.5) {
             self.mSwitchDriversBottom.constant = 10
@@ -184,25 +136,26 @@ class MyReservationsViewController: BaseViewController {
     }
     
     ///Hide switch drivers table view
-    private func hideSwitchTable(driver: DriverToRent?){
+    private func hideSwitchTable(){
         UIView.animate(withDuration: 0.5) {
             self.mSwitchDriversBottom.constant = -500
             self.view.layoutIfNeeded()
             self.view.setNeedsLayout()
         } completion: { _ in
             self.mVissualEffectV.isHidden = true
-            guard let driver = driver else {return}
-            self.showAlertForSwitchDriver(driver: driver)
         }
     }
     
     ///Show alert for switch driver
-    private func showAlertForSwitchDriver(driver: DriverToRent?) {
+    private func showAlertForSwitchDriver(index: Int,
+                                          driver: DriverToRent?) {
         BKDAlert().showAlert(on: self,
-                             message: String(format: Constant.Texts.confirmSwitchDriver, ""),
+                             message: String(format: Constant.Texts.confirmSwitchDriver, driver?.getFullName() ?? ""),
                              cancelTitle: Constant.Texts.cancel,
                              okTitle: Constant.Texts.confirm,
                              cancelAction: nil) {
+            self.changeDriver(index: index,
+                              driverId: driver?.id ?? "")
         }
     }
         
@@ -233,7 +186,7 @@ class MyReservationsViewController: BaseViewController {
     }
     
     @IBAction func swipeSwitchTable(_ sender: UISwipeGestureRecognizer) {
-        hideSwitchTable(driver: nil)
+        hideSwitchTable()
     }
     
 }
@@ -346,7 +299,7 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
             goToMyReservation(myReservationState: myResrevationState,
                               paymentStatusArr: paymentArr,
                               registerNumberArr: registerNumberArr,
-                              onRideArr: onRideArr )
+                              onRideArr: onRideArr, rent: item )
             
         }
     }
@@ -420,19 +373,31 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         let cell = mReservCollectionV.dequeueReusableCell(withReuseIdentifier: OnRideCollectionViewCell.identifier, for: indexPath) as!  OnRideCollectionViewCell
         
         cell.setInfoCell(item: item, index: indexPath.item)
-        cell.pressedStopRide = {
-            self.goToVehicleCheck(rent: item)
-        }
-        cell.pressedAddDamages = {
-            self.goToAddDamage()
-        }
-        cell.pressedSwitchDriver = { index in
-            if item.additionalDrivers?.count == 0 {
-                self.showAlertForSwitchDriver(driver: nil)
-            } else {
-                self.animateSwitchDriversTable()
+        
+        ///Handler stop ride button
+        cell.pressedStopRide = { index in
+            let currItem = self.myReservations![index]
+            if RentState.init(rawValue: currItem.state ?? "") == .END_DEFECT_CHECK || RentState.init(rawValue: currItem.state ?? "") == .END_ODOMETER_CHECK {
+                self.goToStopRideOdometereCheck(rent: currItem)
+            } else if RentState.init(rawValue: currItem.state ?? "") == .STARTED {
+                self.goToStopRide(rent: currItem)
             }
-           // self.showAlertForSwitchDriver()
+        }
+        
+        cell.pressedAddDamages = { index in
+            self.goToAddDamage(rent: self.myReservations![index])
+        }
+        //Handler switch driver button
+        cell.pressedSwitchDriver = { index in
+            
+            let additionalDrivers = self.myReservationViewModel.getAdditionalDrives(rent: self.myReservations![index])
+            self.mSwitchDriversTbV.index = index
+            if additionalDrivers.count == 1 {
+                self.showAlertForSwitchDriver(index: index,
+                                              driver: additionalDrivers[0])
+            } else {
+                self.animateSwitchDriversTable(additionalDrivers: additionalDrivers)
+            }
         }
         cell.pressedSeeMap = { index in
             self.goToSeeMap(parking: item.returnLocation.parking, customLocation: item.returnLocation.customLocation)
@@ -514,8 +479,10 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
 //MARK: ----------------------------------
 extension MyReservationsViewController: SwitchDriversTableViewDelegate {
     
-    func didPressCell(item: MyDriversModel) {
-       // hideSwitchTable(driver: item.fullname)
+    func didPressCell(index: Int, item: DriverToRent) {
+        showAlertForSwitchDriver(index: index,
+                                 driver: item)
+        
     }
 
         

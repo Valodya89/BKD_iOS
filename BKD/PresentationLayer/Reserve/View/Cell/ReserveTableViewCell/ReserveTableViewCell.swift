@@ -38,13 +38,7 @@ class ReserveTableViewCell: UITableViewCell {
         mAccessoriesNameLb.text = item.name
         mAccessoriesCountLb.text = "x" + String(item.count ?? 1)
         mAccessoriesImgV.sd_setImage(with:  item.imageUrl ?? URL(string: ""), placeholderImage: nil)
-        
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
-    }
     
 }

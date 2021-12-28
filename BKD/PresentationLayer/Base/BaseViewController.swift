@@ -123,8 +123,9 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     }
     
     ///Go to Add damage ViewController
-    func goToAddDamage() {
+    func goToAddDamage(rent: Rent?) {
         let addDamageVC = AddDamageViewController.initFromStoryboard(name: Constant.Storyboards.addDamage)
+        addDamageVC.currRentModel = rent
         self.navigationController?.pushViewController(addDamageVC, animated: true)
     }
     
@@ -136,6 +137,19 @@ class BaseViewController: UIViewController, StoryboardInitializable {
         self.navigationController?.pushViewController(vehicleCheckVC, animated: true)
     }
     
+    ///Go to Stop ride ViewController
+    func goToStopRide(rent: Rent?) {
+        let stopRideVC = StopRideViewController.initFromStoryboard(name: Constant.Storyboards.stopRide)
+        stopRideVC.currRentModel = rent
+        self.navigationController?.pushViewController(stopRideVC, animated: true)
+    }
+    
+    ///Go to Stop ride odometer check ViewController
+    func goToStopRideOdometereCheck(rent: Rent?) {
+        let stopRideOdometerVC = OdometerCheckStopRideUIViewController.initFromStoryboard(name: Constant.Storyboards.odometerCheckStopRide)
+        stopRideOdometerVC.currRentModel = rent
+        self.navigationController?.pushViewController(stopRideOdometerVC, animated: true)
+    }
     
     //Open SelectPayment screen
     func goToSelectPayment(vehicleModel:VehicleModel,
@@ -201,6 +215,12 @@ class BaseViewController: UIViewController, StoryboardInitializable {
         let odometerCheckVC = OdometerCheckViewController.initFromStoryboard(name: Constant.Storyboards.odometerCheck)
         odometerCheckVC.currRentModel = rent
         self.navigationController?.pushViewController(odometerCheckVC, animated: true)
+    }
+    
+    ///Open my personal information controller
+    func goToMyPersonalInfo() {
+        let personalInfoVC = MyPersonalInformationViewController.initFromStoryboard(name: Constant.Storyboards.myPersonalInfo)
+        self.navigationController?.pushViewController(personalInfoVC, animated: true)
     }
     
     ///Show alert for sign in account

@@ -59,7 +59,7 @@ final class OdomoeterCheckViewModel {
         }
     }
     
-    ///Check Odometer
+    ///Start Ride
     func startRide(id: String,
                 completion: @escaping (Rent?, String?) -> Void)  {
 

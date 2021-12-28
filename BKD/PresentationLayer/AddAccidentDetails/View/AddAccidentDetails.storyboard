@@ -157,9 +157,16 @@
                                                                 <rect key="frame" x="351" y="5.5" width="30" height="31.5"/>
                                                                 <color key="tintColor" name="navigationBar"/>
                                                                 <state key="normal" title="Button"/>
-                                                                <buttonConfiguration key="configuration" style="plain" image="see_map"/>
+                                                                <buttonConfiguration key="configuration" style="plain" image="see_map" title=" "/>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q8k-x4-SUt">
+                                                                <rect key="frame" x="0.0" y="0.0" width="385" height="42"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title=" "/>
                                                                 <connections>
-                                                                    <action selector="map:" destination="m54-Fd-ESL" eventType="touchUpInside" id="9jb-X2-kCj"/>
+                                                                    <action selector="map:" destination="m54-Fd-ESL" eventType="touchUpInside" id="Xu8-Tb-Gm6"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -168,11 +175,15 @@
                                                             <constraint firstItem="K9P-SH-bdR" firstAttribute="height" secondItem="iwn-Uc-Fgp" secondAttribute="height" multiplier="0.75" id="3qX-Ip-bx1"/>
                                                             <constraint firstItem="K9P-SH-bdR" firstAttribute="centerY" secondItem="iwn-Uc-Fgp" secondAttribute="centerY" id="5Kc-SK-6Jk"/>
                                                             <constraint firstItem="E7S-y7-iv6" firstAttribute="leading" secondItem="iwn-Uc-Fgp" secondAttribute="leading" id="7dy-WI-Lbc"/>
+                                                            <constraint firstItem="q8k-x4-SUt" firstAttribute="leading" secondItem="iwn-Uc-Fgp" secondAttribute="leading" id="FEv-S9-hk8"/>
                                                             <constraint firstItem="E7S-y7-iv6" firstAttribute="top" secondItem="iwn-Uc-Fgp" secondAttribute="top" id="HFo-dJ-IoX"/>
                                                             <constraint firstItem="K9P-SH-bdR" firstAttribute="width" secondItem="iwn-Uc-Fgp" secondAttribute="width" multiplier="0.078" id="KVW-2c-dQW"/>
                                                             <constraint firstItem="K9P-SH-bdR" firstAttribute="leading" secondItem="E7S-y7-iv6" secondAttribute="trailing" id="LKj-7q-L0p"/>
+                                                            <constraint firstAttribute="trailing" secondItem="q8k-x4-SUt" secondAttribute="trailing" id="QYz-6O-T7m"/>
                                                             <constraint firstAttribute="trailing" secondItem="K9P-SH-bdR" secondAttribute="trailing" multiplier="1.01" id="SOM-ot-HuE"/>
                                                             <constraint firstAttribute="bottom" secondItem="E7S-y7-iv6" secondAttribute="bottom" id="fUz-La-In7"/>
+                                                            <constraint firstItem="q8k-x4-SUt" firstAttribute="top" secondItem="iwn-Uc-Fgp" secondAttribute="top" id="fmP-cd-Y4E"/>
+                                                            <constraint firstAttribute="bottom" secondItem="q8k-x4-SUt" secondAttribute="bottom" id="n7h-sb-m2S"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -198,7 +209,7 @@
                                                     <outlet property="mDropDownImgV" destination="dix-D4-tEa" id="Ku9-Eh-Io8"/>
                                                     <outlet property="mLocationTxtFl" destination="E7S-y7-iv6" id="93C-Fg-8SQ"/>
                                                     <outlet property="mLocationV" destination="iwn-Uc-Fgp" id="E2E-c6-f9P"/>
-                                                    <outlet property="mMapBtn" destination="K9P-SH-bdR" id="yDW-Z7-qm0"/>
+                                                    <outlet property="mMapBtn" destination="q8k-x4-SUt" id="9Gf-F5-6hU"/>
                                                     <outlet property="mMonthBtn" destination="awQ-6p-EET" id="Du3-zV-WQ5"/>
                                                     <outlet property="mTimeBtn" destination="R8V-g1-Q5E" id="4vu-oj-5Ff"/>
                                                     <outlet property="mTimeTxtFl" destination="sSc-ui-O1k" id="SSD-Fq-8S9"/>

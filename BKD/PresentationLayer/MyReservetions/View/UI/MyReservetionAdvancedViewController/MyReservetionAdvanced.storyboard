@@ -38,7 +38,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFq-7a-JoW" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1109"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hUb-PV-4h1">
+                                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="hUb-PV-4h1">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="167"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ezd-5C-D1R">

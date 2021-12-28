@@ -8,14 +8,15 @@
 import UIKit
 
 protocol SwitchDriversTableViewDelegate: AnyObject {
-    func didPressCell(item: MyDriversModel)
+    func didPressCell(index: Int, item: DriverToRent)
 }
 
 class SwitchDriversTableView: UITableView, UITableViewDelegate, UITableViewDataSource  {
     
     //MARK: -- Variables
+    public var index: Int = 0
     weak var switchDriversDelegate: SwitchDriversTableViewDelegate?
-    var switchDriversList:[MyDriversModel] = MyDriversData.myDriversModel
+    var switchDriversList:[DriverToRent]? //MyDriversData.myDriversModel
     
     
     //MARK: -- Lifecycle
@@ -37,14 +38,14 @@ class SwitchDriversTableView: UITableView, UITableViewDelegate, UITableViewDataS
     //MARK: UITableViewDataSource
     //MARK: ----------------------------------
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return  switchDriversList.count
+        return  switchDriversList?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AditionalDriverTableCell.identifier, for: indexPath) as! AditionalDriverTableCell
-        let item = switchDriversList[indexPath.row]
+        let item = switchDriversList?[indexPath.row]
         cell.isSwitchDriver = true
-        cell.setCellInfo(item: item , index: indexPath.row)
+        cell.setCellInfoForSwitchDriver(item: item! , index: indexPath.row)
         cell.mAdditionalDriverLb.isHidden = true
         
        
@@ -52,7 +53,8 @@ class SwitchDriversTableView: UITableView, UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switchDriversDelegate?.didPressCell(item: switchDriversList[indexPath.row])
+        switchDriversDelegate?.didPressCell(index: index,
+                                            item: switchDriversList![indexPath.row])
     }
 }
 

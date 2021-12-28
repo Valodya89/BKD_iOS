@@ -34,7 +34,8 @@ class MyDriversViewModel: NSObject {
     
    
     ///Set additional driver list
-    func setActiveDriverList(allDrivers: [MainDriver])-> [MyDriversModel] {
+    func setActiveDriverList(allDrivers: [MainDriver],
+                             additionalDriver: [MyDriversModel]?) -> [MyDriversModel] {
         var  myDriverList: [MyDriversModel] = []
         allDrivers.forEach { driver in
             if driver.state == Constant.Texts.state_agree {

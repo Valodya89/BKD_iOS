@@ -11,7 +11,20 @@ import CoreLocation
 
 class AddAccidentDetailViewModel {
 
-
+    ///Get damage side
+    func getDamageSide(side: String) -> String {
+        switch side {
+        case Constant.Texts.frontSide:
+            return "FRONT"
+        case Constant.Texts.backSide:
+            return "BACK"
+        case Constant.Texts.rightSide:
+            return "RIGHT"
+        default:
+            return "LEFT"
+        }
+    }
+    
     ///Update damage side list
     func updateDamageSideList(side: String?,
                               img: UIImage?,
@@ -162,14 +175,16 @@ class AddAccidentDetailViewModel {
     func addAccidentWithSide(image: UIImage,
                      id: String,
                      side: String,
-                     completion: @escaping (Rent?, String?) -> Void)  {
+                     completion: @escaping (AddAccident?, String?) -> Void)  {
             
-        let resizeImg = image.resizeImage(targetSize: CGSize(width: 500, height: 500))
-        SessionNetwork.init().request(with: URLBuilder(from: ImageUploadAPI.addAccidentDamge(image: resizeImg, id: id, side: side))) { result in
+        let resizeImg = image.resizeImage(targetSize: CGSize(width: 1000, height: 1000))
+        let damageSide = getDamageSide(side: side)
+        
+        SessionNetwork.init().request(with: URLBuilder(from: ImageUploadAPI.addAccidentDamge(image: resizeImg, id: id, side: damageSide))) { result in
             
             switch result {
             case .success(let data):
-                guard let result = BkdConverter<BaseResponseModel<Rent>>.parseJson(data: data as Any) else {
+                guard let result = BkdConverter<BaseResponseModel<AddAccident>>.parseJson(data: data as Any) else {
                     print("error")
                     completion(nil, nil)
                     return
@@ -189,14 +204,14 @@ class AddAccidentDetailViewModel {
     ///Add accident form
     func addAccidentForm(image: UIImage,
                      id: String,
-                     completion: @escaping (Rent?, String?) -> Void)  {
+                     completion: @escaping (AddAccident?, String?) -> Void)  {
             
-        let resizeImg = image.resizeImage(targetSize: CGSize(width: 500, height: 500))
+        let resizeImg = image.resizeImage(targetSize: CGSize(width: 1000, height: 1000))
         SessionNetwork.init().request(with: URLBuilder(from: ImageUploadAPI.addAccidentForm(image: resizeImg, id: id))) { result in
             
             switch result {
             case .success(let data):
-                guard let result = BkdConverter<BaseResponseModel<Rent>>.parseJson(data: data as Any) else {
+                guard let result = BkdConverter<BaseResponseModel<AddAccident>>.parseJson(data: data as Any) else {
                     print("error")
                     completion(nil, nil)
                     return

@@ -24,7 +24,7 @@ struct Rent: Codable {
      let carDetails: CarDetailsToRent
      let driver: DriverToRent
      let currentDriver: DriverToRent?
-     let additionalDrivers: [AdditionalDriversToRent]?
+     let additionalDrivers: [DriverToRent]?
      let startDefects: [Defect?]
      let endDefects: [Defect?]
      let startOdometer: Odometer?
@@ -72,18 +72,22 @@ struct DriverToRent: Codable {
     let name: String?
     let surname: String?
     let drivingLicenseNumber: String?
-}
-
-struct CurrentDriver: Codable {
-    let id: String
-    let name: String
-    let surname: String
-    let drivingLicenseNumber: String
-}
-
-struct AdditionalDriversToRent: Codable {
     
+    func getFullName() -> String{
+        return (name ?? "") + " " + (surname ?? "")
+    }
 }
+
+//struct CurrentDriver: Codable {
+//    let id: String
+//    let name: String
+//    let surname: String
+//    let drivingLicenseNumber: String
+//}
+//
+//struct AdditionalDriversToRent: Codable {
+//
+//}
 
 struct Defect: Codable {
      let comment: String?

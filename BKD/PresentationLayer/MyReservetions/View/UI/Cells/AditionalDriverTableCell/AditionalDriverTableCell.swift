@@ -59,4 +59,21 @@ class AditionalDriverTableCell: UITableViewCell {
        mDriverNumberLb.text = item.licenciNumber
    }
     
+    
+    ///Set cell info to switch driver
+    func setCellInfoForSwitchDriver(item: DriverToRent, index: Int) {
+        if isSwitchDriver {
+            mAdditionalDriverLb.isHidden = false
+            mAdditionalDriverHeight.constant = 0
+            setupView()
+        } else {
+            mAdditionalDriverLb.isHidden = (index != 0)
+            if index != 0 {
+                mAdditionalDriverHeight.constant = 0
+            }
+        }
+        
+        mDriverNameLb.text = item.getFullName()
+        mDriverNumberLb.text = item.drivingLicenseNumber
+    }
 }
