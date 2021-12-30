@@ -176,6 +176,7 @@ extension MyBKDViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: MyBkdTableViewCell.identifier, for: indexPath) as! MyBkdTableViewCell
         let item = MyBkdData.myBkdModel[indexPath.row]
         cell.mImageV.image = item.img
