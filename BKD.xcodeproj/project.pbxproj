@@ -194,14 +194,20 @@
 		565D142827296AD0000760AE /* MainDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D142727296AD0000760AE /* MainDriver.swift */; };
 		565D4E412778DC7D00A14951 /* MyPersonalInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D4E402778DC7D00A14951 /* MyPersonalInformationViewController.swift */; };
 		565D4E432778DC9200A14951 /* MyPersonalInformation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 565D4E422778DC9100A14951 /* MyPersonalInformation.storyboard */; };
-		565D4E462778E6C200A14951 /* myPersonalInfoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D4E452778E6C200A14951 /* myPersonalInfoTableView.swift */; };
-		565D4E4B2778E70500A14951 /* myPersonalInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D4E492778E70500A14951 /* myPersonalInfoTableViewCell.swift */; };
-		565D4E4C2778E70500A14951 /* myPersonalInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565D4E4A2778E70500A14951 /* myPersonalInfoTableViewCell.xib */; };
+		565D4E462778E6C200A14951 /* MyPersonalInfoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D4E452778E6C200A14951 /* MyPersonalInfoTableView.swift */; };
 		565D4E502778EA3F00A14951 /* MyAccountsDriversViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D4E4F2778EA3F00A14951 /* MyAccountsDriversViewController.swift */; };
 		565D4E522778EBB900A14951 /* MyAccountsDrivers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 565D4E512778EBB900A14951 /* MyAccountsDrivers.storyboard */; };
-		565D4E562778EEFD00A14951 /* MyAccountsDriversTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D4E542778EEFD00A14951 /* MyAccountsDriversTableCell.swift */; };
-		565D4E572778EEFD00A14951 /* MyAccountsDriversTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565D4E552778EEFD00A14951 /* MyAccountsDriversTableCell.xib */; };
 		565D4E59277AA26100A14951 /* MyReservetionAdvancedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D4E58277AA26100A14951 /* MyReservetionAdvancedViewModel.swift */; };
+		565D4E5E277BEA2D00A14951 /* MyDriverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D4E5C277BEA2C00A14951 /* MyDriverTableViewCell.swift */; };
+		565D4E5F277BEA2D00A14951 /* MyDriverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565D4E5D277BEA2C00A14951 /* MyDriverTableViewCell.xib */; };
+		565D4E61277BF88100A14951 /* MyAccountsDriversViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D4E60277BF88100A14951 /* MyAccountsDriversViewModel.swift */; };
+		565D4E64277BFE8600A14951 /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D4E63277BFE8500A14951 /* MyAccountViewController.swift */; };
+		565D4E66277BFE9700A14951 /* MyAccount.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 565D4E65277BFE9700A14951 /* MyAccount.storyboard */; };
+		565D4E69277C168700A14951 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D4E68277C168700A14951 /* EditViewController.swift */; };
+		565D4E6D277C62BE00A14951 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D4E6B277C62BD00A14951 /* PhotosTableViewCell.swift */; };
+		565D4E6E277C62BE00A14951 /* PhotosTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565D4E6C277C62BD00A14951 /* PhotosTableViewCell.xib */; };
+		565D4E72277C681300A14951 /* MailBoxNumberTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D4E70277C681300A14951 /* MailBoxNumberTableCell.swift */; };
+		565D4E73277C681300A14951 /* MailBoxNumberTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565D4E71277C681300A14951 /* MailBoxNumberTableCell.xib */; };
 		565EECA82747D258001DB53B /* UIImageExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565EECA72747D258001DB53B /* UIImageExtention.swift */; };
 		565EECAA2747D2AC001DB53B /* UITextFieldExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565EECA92747D2AC001DB53B /* UITextFieldExtention.swift */; };
 		565EECAC2747D2F4001DB53B /* UILabelExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565EECAB2747D2F4001DB53B /* UILabelExtention.swift */; };
@@ -330,6 +336,10 @@
 		56ADD80F26F2C66900C0ECC3 /* EditReservation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56ADD80E26F2C66900C0ECC3 /* EditReservation.storyboard */; };
 		56ADD81326F2CED400C0ECC3 /* ReservationHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56ADD81126F2CED400C0ECC3 /* ReservationHistoryCell.xib */; };
 		56ADD81426F2CED400C0ECC3 /* ReservationHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD81226F2CED400C0ECC3 /* ReservationHistoryCell.swift */; };
+		56B41E45277C9C9C00F10A41 /* MyPersonalInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B41E44277C9C9C00F10A41 /* MyPersonalInformationViewModel.swift */; };
+		56B41E47277C9EF100F10A41 /* MainDriverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B41E46277C9EF100F10A41 /* MainDriverModel.swift */; };
+		56B41E4D277D04A300F10A41 /* PersonalInfoTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B41E4B277D04A300F10A41 /* PersonalInfoTableCell.swift */; };
+		56B41E4E277D04A300F10A41 /* PersonalInfoTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56B41E4C277D04A300F10A41 /* PersonalInfoTableCell.xib */; };
 		56B9F2D5267E8CEE003449AD /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F2D4267E8CEE003449AD /* SearchView.swift */; };
 		56B9F2E326805021003449AD /* SearchWithValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F2E226805020003449AD /* SearchWithValueView.swift */; };
 		56B9F2ED26806488003449AD /* SearchResultModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F2EC26806488003449AD /* SearchResultModelView.swift */; };
@@ -584,14 +594,20 @@
 		565D142727296AD0000760AE /* MainDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDriver.swift; sourceTree = "<group>"; };
 		565D4E402778DC7D00A14951 /* MyPersonalInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPersonalInformationViewController.swift; sourceTree = "<group>"; };
 		565D4E422778DC9100A14951 /* MyPersonalInformation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPersonalInformation.storyboard; sourceTree = "<group>"; };
-		565D4E452778E6C200A14951 /* myPersonalInfoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myPersonalInfoTableView.swift; sourceTree = "<group>"; };
-		565D4E492778E70500A14951 /* myPersonalInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myPersonalInfoTableViewCell.swift; sourceTree = "<group>"; };
-		565D4E4A2778E70500A14951 /* myPersonalInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = myPersonalInfoTableViewCell.xib; sourceTree = "<group>"; };
+		565D4E452778E6C200A14951 /* MyPersonalInfoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPersonalInfoTableView.swift; sourceTree = "<group>"; };
 		565D4E4F2778EA3F00A14951 /* MyAccountsDriversViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountsDriversViewController.swift; sourceTree = "<group>"; };
 		565D4E512778EBB900A14951 /* MyAccountsDrivers.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyAccountsDrivers.storyboard; sourceTree = "<group>"; };
-		565D4E542778EEFD00A14951 /* MyAccountsDriversTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountsDriversTableCell.swift; sourceTree = "<group>"; };
-		565D4E552778EEFD00A14951 /* MyAccountsDriversTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyAccountsDriversTableCell.xib; sourceTree = "<group>"; };
 		565D4E58277AA26100A14951 /* MyReservetionAdvancedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReservetionAdvancedViewModel.swift; sourceTree = "<group>"; };
+		565D4E5C277BEA2C00A14951 /* MyDriverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDriverTableViewCell.swift; sourceTree = "<group>"; };
+		565D4E5D277BEA2C00A14951 /* MyDriverTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyDriverTableViewCell.xib; sourceTree = "<group>"; };
+		565D4E60277BF88100A14951 /* MyAccountsDriversViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountsDriversViewModel.swift; sourceTree = "<group>"; };
+		565D4E63277BFE8500A14951 /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
+		565D4E65277BFE9700A14951 /* MyAccount.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyAccount.storyboard; sourceTree = "<group>"; };
+		565D4E68277C168700A14951 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		565D4E6B277C62BD00A14951 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
+		565D4E6C277C62BD00A14951 /* PhotosTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotosTableViewCell.xib; sourceTree = "<group>"; };
+		565D4E70277C681300A14951 /* MailBoxNumberTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailBoxNumberTableCell.swift; sourceTree = "<group>"; };
+		565D4E71277C681300A14951 /* MailBoxNumberTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MailBoxNumberTableCell.xib; sourceTree = "<group>"; };
 		565EECA72747D258001DB53B /* UIImageExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtention.swift; sourceTree = "<group>"; };
 		565EECA92747D2AC001DB53B /* UITextFieldExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtention.swift; sourceTree = "<group>"; };
 		565EECAB2747D2F4001DB53B /* UILabelExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtention.swift; sourceTree = "<group>"; };
@@ -722,6 +738,10 @@
 		56ADD80E26F2C66900C0ECC3 /* EditReservation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditReservation.storyboard; sourceTree = "<group>"; };
 		56ADD81126F2CED400C0ECC3 /* ReservationHistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReservationHistoryCell.xib; sourceTree = "<group>"; };
 		56ADD81226F2CED400C0ECC3 /* ReservationHistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationHistoryCell.swift; sourceTree = "<group>"; };
+		56B41E44277C9C9C00F10A41 /* MyPersonalInformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPersonalInformationViewModel.swift; sourceTree = "<group>"; };
+		56B41E46277C9EF100F10A41 /* MainDriverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDriverModel.swift; sourceTree = "<group>"; };
+		56B41E4B277D04A300F10A41 /* PersonalInfoTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoTableCell.swift; sourceTree = "<group>"; };
+		56B41E4C277D04A300F10A41 /* PersonalInfoTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalInfoTableCell.xib; sourceTree = "<group>"; };
 		56B9F2D4267E8CEE003449AD /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		56B9F2E226805020003449AD /* SearchWithValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWithValueView.swift; sourceTree = "<group>"; };
 		56B9F2EC26806488003449AD /* SearchResultModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultModelView.swift; sourceTree = "<group>"; };
@@ -1802,9 +1822,11 @@
 		565D4E442778E68D00A14951 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				565D4E67277C166F00A14951 /* Edit */,
+				565D4E62277BFE5200A14951 /* MyAccount */,
 				565D4E4D2778E9FC00A14951 /* MyDrivers */,
 				565D4E3F2778DC4500A14951 /* MyPersonalInformation */,
-				565D4E452778E6C200A14951 /* myPersonalInfoTableView.swift */,
+				565D4E452778E6C200A14951 /* MyPersonalInfoTableView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1812,20 +1834,13 @@
 		565D4E472778E6C700A14951 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				565D4E532778EED000A14951 /* MyAccountsDriversTableCell */,
+				56B41E4A277D048100F10A41 /* PersonalInfoTableCell */,
+				565D4E6F277C67ED00A14951 /* MailBoxNumberTableCell */,
+				565D4E6A277C627A00A14951 /* PhotosTableCrll */,
+				565D4E5B277BEA0C00A14951 /* MyDriverTableCell */,
 				56AD19062692B9F6006A53C1 /* MyBkdTableViewCell.swift */,
-				565D4E482778E6D500A14951 /* myPersonalInfoTableCell */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		565D4E482778E6D500A14951 /* myPersonalInfoTableCell */ = {
-			isa = PBXGroup;
-			children = (
-				565D4E492778E70500A14951 /* myPersonalInfoTableViewCell.swift */,
-				565D4E4A2778E70500A14951 /* myPersonalInfoTableViewCell.xib */,
-			);
-			path = myPersonalInfoTableCell;
 			sourceTree = "<group>";
 		};
 		565D4E4D2778E9FC00A14951 /* MyDrivers */ = {
@@ -1845,13 +1860,48 @@
 			path = MyAccountsDrivers;
 			sourceTree = "<group>";
 		};
-		565D4E532778EED000A14951 /* MyAccountsDriversTableCell */ = {
+		565D4E5B277BEA0C00A14951 /* MyDriverTableCell */ = {
 			isa = PBXGroup;
 			children = (
-				565D4E542778EEFD00A14951 /* MyAccountsDriversTableCell.swift */,
-				565D4E552778EEFD00A14951 /* MyAccountsDriversTableCell.xib */,
+				565D4E5C277BEA2C00A14951 /* MyDriverTableViewCell.swift */,
+				565D4E5D277BEA2C00A14951 /* MyDriverTableViewCell.xib */,
 			);
-			path = MyAccountsDriversTableCell;
+			path = MyDriverTableCell;
+			sourceTree = "<group>";
+		};
+		565D4E62277BFE5200A14951 /* MyAccount */ = {
+			isa = PBXGroup;
+			children = (
+				565D4E63277BFE8500A14951 /* MyAccountViewController.swift */,
+				565D4E65277BFE9700A14951 /* MyAccount.storyboard */,
+			);
+			path = MyAccount;
+			sourceTree = "<group>";
+		};
+		565D4E67277C166F00A14951 /* Edit */ = {
+			isa = PBXGroup;
+			children = (
+				565D4E68277C168700A14951 /* EditViewController.swift */,
+			);
+			path = Edit;
+			sourceTree = "<group>";
+		};
+		565D4E6A277C627A00A14951 /* PhotosTableCrll */ = {
+			isa = PBXGroup;
+			children = (
+				565D4E6B277C62BD00A14951 /* PhotosTableViewCell.swift */,
+				565D4E6C277C62BD00A14951 /* PhotosTableViewCell.xib */,
+			);
+			path = PhotosTableCrll;
+			sourceTree = "<group>";
+		};
+		565D4E6F277C67ED00A14951 /* MailBoxNumberTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				565D4E70277C681300A14951 /* MailBoxNumberTableCell.swift */,
+				565D4E71277C681300A14951 /* MailBoxNumberTableCell.xib */,
+			);
+			path = MailBoxNumberTableCell;
 			sourceTree = "<group>";
 		};
 		565F808326A59C1700ADB9FE /* ViewModel */ = {
@@ -2077,7 +2127,6 @@
 				562585E126F185D800EC9284 /* AdditionalDriverTableView */,
 				562585D926F1759700EC9284 /* RegisterNumberUITableView */,
 				562585CF26F0F56B00EC9284 /* PaymentStatusUITableView */,
-				562585CA26F0E2C400EC9284 /* MyReservetionAdvancedViewController */,
 				5640396126F0203A0064256C /* PayLaterViewController */,
 				565F9B0226C8ADD500064AD4 /* Cells */,
 			);
@@ -2597,6 +2646,7 @@
 			isa = PBXGroup;
 			children = (
 				565F9B0126C8ADC100064AD4 /* UI */,
+				562585CA26F0E2C400EC9284 /* MyReservetionAdvancedViewController */,
 				568E704726446E2D000CB6A9 /* MyReservationsViewController.swift */,
 			);
 			path = View;
@@ -2645,6 +2695,7 @@
 			isa = PBXGroup;
 			children = (
 				56AD19012692AD2D006A53C1 /* MyBkdModel.swift */,
+				56B41E46277C9EF100F10A41 /* MainDriverModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2653,6 +2704,8 @@
 			isa = PBXGroup;
 			children = (
 				565F80AB26A62EE200ADB9FE /* MyBKDViewModel.swift */,
+				565D4E60277BF88100A14951 /* MyAccountsDriversViewModel.swift */,
+				56B41E44277C9C9C00F10A41 /* MyPersonalInformationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2906,6 +2959,15 @@
 				56ADD81226F2CED400C0ECC3 /* ReservationHistoryCell.swift */,
 			);
 			path = ReservetionHistoryCell;
+			sourceTree = "<group>";
+		};
+		56B41E4A277D048100F10A41 /* PersonalInfoTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				56B41E4B277D04A300F10A41 /* PersonalInfoTableCell.swift */,
+				56B41E4C277D04A300F10A41 /* PersonalInfoTableCell.xib */,
+			);
+			path = PersonalInfoTableCell;
 			sourceTree = "<group>";
 		};
 		56C8E16E267C1CAD0061890C /* Cell */ = {
@@ -3247,7 +3309,6 @@
 				565F80E026A74D4C00ADB9FE /* PhoneVerification.storyboard in Resources */,
 				56A2AFF02694CFE1001BA7C5 /* SearchPhoneCode.storyboard in Resources */,
 				56C8E173267C1D100061890C /* ReserveTableViewCell.xib in Resources */,
-				565D4E572778EEFD00A14951 /* MyAccountsDriversTableCell.xib in Resources */,
 				560252952664376900FB204C /* Mulish-Regular.ttf in Resources */,
 				564E137A26531F8F008CE884 /* Mulish-SemiBold.ttf in Resources */,
 				5640395F26F01D530064256C /* ReservetionWithPayRentalPriceCell.xib in Resources */,
@@ -3267,12 +3328,13 @@
 				560FE64A267BE7BE0068BC85 /* Reserve.storyboard in Resources */,
 				56CF781C26F3BD1C0092F555 /* AdditionalDriverWaithingApplovalCell.xib in Resources */,
 				5691A61C265C71EC0008081D /* ExteriorCollectionViewCell.xib in Resources */,
+				565D4E6E277C62BE00A14951 /* PhotosTableViewCell.xib in Resources */,
 				564E1358265211FF008CE884 /* Mulish-Light.ttf in Resources */,
 				568E70C326454DB1000CB6A9 /* AboutUs.storyboard in Resources */,
 				565D4E522778EBB900A14951 /* MyAccountsDrivers.storyboard in Resources */,
 				565F80D826A7042100ADB9FE /* Payment.storyboard in Resources */,
 				565F80CA26A6690B00ADB9FE /* ReservationCompleted.storyboard in Resources */,
-				565D4E4C2778E70500A14951 /* myPersonalInfoTableViewCell.xib in Resources */,
+				565D4E66277BFE9700A14951 /* MyAccount.storyboard in Resources */,
 				568E70CB26455286000CB6A9 /* MainCollectionViewCell.xib in Resources */,
 				564ED63E270052F900FA9714 /* EditReservetionAdvanced.storyboard in Resources */,
 				56573202267339B50012ADD0 /* FontsFree-Net-SFProDisplay-Medium.ttf in Resources */,
@@ -3283,9 +3345,12 @@
 				566354EC268AF8EF0003E2EB /* PriceTableViewCell.xib in Resources */,
 				5692658A26F3B71C00004E81 /* WaithingAdminApplovalCell.xib in Resources */,
 				56AD18D726916077006A53C1 /* Registration.storyboard in Resources */,
+				56B41E4E277D04A300F10A41 /* PersonalInfoTableCell.xib in Resources */,
+				565D4E5F277BEA2D00A14951 /* MyDriverTableViewCell.xib in Resources */,
 				565A7AE426555EFF006C63D0 /* CategoryTableViewCell.xib in Resources */,
 				56664D9C269DC36A00FDBD22 /* VerificationCode.storyboard in Resources */,
 				56683778270CF71800C8D8FF /* Compare.storyboard in Resources */,
+				565D4E73277C681300A14951 /* MailBoxNumberTableCell.xib in Resources */,
 				562585D626F0F5D100EC9284 /* PaymentStatusUITableViewCell.xib in Resources */,
 				561888A3264ABDFC00BDDB33 /* DropDownTableViewCell.xib in Resources */,
 				5660E61826FE0376009BB73F /* AdvancedWithOnRideCell.xib in Resources */,
@@ -3417,6 +3482,7 @@
 				565863BB26C76B3C003C19A2 /* CashViewController.swift in Sources */,
 				565C099B273B4F5B00183878 /* PriceManager.swift in Sources */,
 				56683789270F3C3F00C8D8FF /* CompareViewModel.swift in Sources */,
+				565D4E5E277BEA2D00A14951 /* MyDriverTableViewCell.swift in Sources */,
 				56683786270E216300C8D8FF /* CompareCategoryTableCell.swift in Sources */,
 				56683798271640DD00C8D8FF /* UILocalizedLabel.swift in Sources */,
 				9393BAEF26D78846003878BF /* SocketServiceProtocol.swift in Sources */,
@@ -3443,10 +3509,12 @@
 				565A9F672703D33500C3C36B /* SwitchDriversTableView.swift in Sources */,
 				56AD190D26931AB2006A53C1 /* CheckEmailViewController.swift in Sources */,
 				56C8E172267C1D100061890C /* ReserveTableViewCell.swift in Sources */,
+				56B41E47277C9EF100F10A41 /* MainDriverModel.swift in Sources */,
 				565BFDFB26A0C3800044D081 /* CarTypes.swift in Sources */,
 				5602534C2667413A00FB204C /* BaseViewController.swift in Sources */,
 				565F8C1F268CF4C700E21C71 /* CarouselCollectionViewCell.swift in Sources */,
 				56533EE3267925FE0012BF4A /* AccessoriesUIViewController.swift in Sources */,
+				565D4E72277C681300A14951 /* MailBoxNumberTableCell.swift in Sources */,
 				56AD19022692AD2D006A53C1 /* MyBkdModel.swift in Sources */,
 				564BE8892702B8670037DF39 /* AddAccidentDetailViewModel.swift in Sources */,
 				5691A639265D53140008081D /* Extentions.swift in Sources */,
@@ -3466,13 +3534,14 @@
 				5656083926785E2C009578FA /* RentalConditionsTableViewCell.swift in Sources */,
 				562585DF26F176D500EC9284 /* RegisterNumberTableCell.swift in Sources */,
 				56CF782F26F3E1490092F555 /* OdometerCheckViewController.swift in Sources */,
-				565D4E462778E6C200A14951 /* myPersonalInfoTableView.swift in Sources */,
+				565D4E462778E6C200A14951 /* MyPersonalInfoTableView.swift in Sources */,
 				5602536F2669AE1C00FB204C /* OfflineViewController.swift in Sources */,
 				565EECA82747D258001DB53B /* UIImageExtention.swift in Sources */,
 				5640395A26EFEF5A0064256C /* ReservetionWithDistancePriceCell.swift in Sources */,
 				5668377A270DD95A00C8D8FF /* DropDownTableView.swift in Sources */,
 				56683793271640DD00C8D8FF /* LocalizationModel.swift in Sources */,
 				56188889264A61ED00BDDB33 /* TextField.swift in Sources */,
+				565D4E6D277C62BE00A14951 /* PhotosTableViewCell.swift in Sources */,
 				56B9F33D26825FF0003449AD /* TariffSlideViewModel.swift in Sources */,
 				56AD191D2693251C006A53C1 /* CheckEmailViewModel.swift in Sources */,
 				5658BDFB26FBECC000A5B122 /* AddDamageViewController.swift in Sources */,
@@ -3491,7 +3560,7 @@
 				5640395126EFA2590064256C /* ReservationWithReservedPaidModel.swift in Sources */,
 				565D4E59277AA26100A14951 /* MyReservetionAdvancedViewModel.swift in Sources */,
 				568E706E264481B0000CB6A9 /* LeftTableViewCell.swift in Sources */,
-				565D4E562778EEFD00A14951 /* MyAccountsDriversTableCell.swift in Sources */,
+				565D4E64277BFE8600A14951 /* MyAccountViewController.swift in Sources */,
 				566B3767269545540021BCAA /* MailBoxNumberTableViewCell.swift in Sources */,
 				564BE8762702068D0037DF39 /* DamageSideTableCell.swift in Sources */,
 				562585D126F0F5A500EC9284 /* PaymentStatusUITableView.swift in Sources */,
@@ -3522,6 +3591,7 @@
 				565EECAC2747D2F4001DB53B /* UILabelExtention.swift in Sources */,
 				566B7E8A269DC036007C9241 /* VerificationCodeViewController.swift in Sources */,
 				56AD18EA2691622C006A53C1 /* NewPasswordViewController.swift in Sources */,
+				56B41E45277C9C9C00F10A41 /* MyPersonalInformationViewModel.swift in Sources */,
 				565F810526A7D08600ADB9FE /* PaymenTypeTableViewCell.swift in Sources */,
 				565F8C45268D12EA00E21C71 /* CarouselViewController.swift in Sources */,
 				564E1306264EE294008CE884 /* UIViewExtention.swift in Sources */,
@@ -3536,6 +3606,7 @@
 				56664DC2269DCC0000FDBD22 /* OneTimeCodeTextFiled.swift in Sources */,
 				565731DE2672FDC80012ADD0 /* DetailsAndTailLiftModel.swift in Sources */,
 				562585D826F1040200EC9284 /* PaymentStausModel.swift in Sources */,
+				565D4E61277BF88100A14951 /* MyAccountsDriversViewModel.swift in Sources */,
 				568E703126443D90000CB6A9 /* CategoryViewController.swift in Sources */,
 				56683796271640DD00C8D8FF /* UILocalizedButton.swift in Sources */,
 				93CDB1EE26C17C69009F9B6C /* TokenResponse.swift in Sources */,
@@ -3608,9 +3679,9 @@
 				56AD18D126916061006A53C1 /* RegistrationViewController.swift in Sources */,
 				5668377C270DDB1E00C8D8FF /* CompareVehicleInfoView.swift in Sources */,
 				93CDB1F326C1CBD5009F9B6C /* PaymentViewModel.swift in Sources */,
+				565D4E69277C168700A14951 /* EditViewController.swift in Sources */,
 				5656F196268936E000E70BAB /* MyDriversModel.swift in Sources */,
 				565A7AE326555EFF006C63D0 /* CategoryTableViewCell.swift in Sources */,
-				565D4E4B2778E70500A14951 /* myPersonalInfoTableViewCell.swift in Sources */,
 				564BE882270222870037DF39 /* AccidentFormTableView.swift in Sources */,
 				568E701226438C08000CB6A9 /* MainViewController.swift in Sources */,
 				5656A9C926D69F7900A71375 /* GooglePlacesManager.swift in Sources */,
@@ -3628,6 +3699,7 @@
 				565BFD9F269F590A0044D081 /* KeychainManager.swift in Sources */,
 				56CF783C26F578620092F555 /* StartRideModel.swift in Sources */,
 				5648C5B6268803F7000B4E2A /* AccessoriesModel.swift in Sources */,
+				56B41E4D277D04A300F10A41 /* PersonalInfoTableCell.swift in Sources */,
 				5659E6452773E4A70084BCAF /* OdometerCheckStopRideUIViewController.swift in Sources */,
 				5657E84E26711AE800788D62 /* CarPhotosView.swift in Sources */,
 				565731F32673188F0012ADD0 /* TailLiftTableView.swift in Sources */,

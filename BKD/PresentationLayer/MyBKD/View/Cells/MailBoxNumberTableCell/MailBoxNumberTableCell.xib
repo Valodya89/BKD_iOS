@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MailBoxNumberTableCell" rowHeight="53" id="KGk-i7-Jjw" customClass="MailBoxNumberTableCell" customModule="BKD" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="53"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="53"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMR-tX-nya">
+                        <rect key="frame" x="16" y="0.0" width="207" height="21"/>
+                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                        <color key="textColor" name="email"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="787" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jOL-qT-FUz" customClass="TextField" customModule="BKD" customModuleProvider="target">
+                        <rect key="frame" x="16" y="21" width="100" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="X4M-zU-Oct"/>
+                        </constraints>
+                        <color key="textColor" name="navigationBar"/>
+                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ree-Y0-FI4">
+                        <rect key="frame" x="253" y="0.0" width="145" height="53"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I don’t live in a building" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kZK-YA-3xL">
+                                <rect key="frame" x="45" y="0.0" width="100" height="53"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="ywb-TY-xX6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
+                                <color key="textColor" name="navigationBar"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XKN-PW-tD1">
+                                <rect key="frame" x="11.5" y="0.0" width="33.5" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="uncheck_box" title=" "/>
+                                <connections>
+                                    <action selector="checkBox:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="y5k-GU-RaR"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="XKN-PW-tD1" firstAttribute="height" secondItem="ree-Y0-FI4" secondAttribute="height" multiplier="0.584906" id="EaV-Wt-x3Q"/>
+                            <constraint firstItem="kZK-YA-3xL" firstAttribute="centerY" secondItem="ree-Y0-FI4" secondAttribute="centerY" id="HMQ-HP-k6h"/>
+                            <constraint firstItem="kZK-YA-3xL" firstAttribute="height" secondItem="ree-Y0-FI4" secondAttribute="height" id="Urb-pY-oIW"/>
+                            <constraint firstItem="XKN-PW-tD1" firstAttribute="width" secondItem="ree-Y0-FI4" secondAttribute="width" multiplier="0.229508" id="V9U-Y1-hbf"/>
+                            <constraint firstItem="XKN-PW-tD1" firstAttribute="top" secondItem="ree-Y0-FI4" secondAttribute="top" id="oub-4v-CbK"/>
+                            <constraint firstItem="XKN-PW-tD1" firstAttribute="trailing" secondItem="kZK-YA-3xL" secondAttribute="leading" id="s2v-hd-ZFA"/>
+                            <constraint firstAttribute="trailing" secondItem="kZK-YA-3xL" secondAttribute="trailing" id="uKv-oQ-KVF"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" name="background"/>
+                <constraints>
+                    <constraint firstItem="yMR-tX-nya" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="5uP-IW-dZe"/>
+                    <constraint firstItem="ree-Y0-FI4" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" id="B5G-zK-Xin"/>
+                    <constraint firstItem="yMR-tX-nya" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" multiplier="0.577" id="MmX-Kp-kkK"/>
+                    <constraint firstItem="yMR-tX-nya" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.5" id="PuU-UV-xUV"/>
+                    <constraint firstAttribute="bottom" secondItem="jOL-qT-FUz" secondAttribute="bottom" id="Zn8-TE-VhD"/>
+                    <constraint firstAttribute="trailing" secondItem="ree-Y0-FI4" secondAttribute="trailing" constant="16" id="cGB-Ql-0YR"/>
+                    <constraint firstItem="yMR-tX-nya" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.396226" id="enL-bm-00F"/>
+                    <constraint firstItem="jOL-qT-FUz" firstAttribute="top" secondItem="yMR-tX-nya" secondAttribute="bottom" id="hGJ-YU-PIj"/>
+                    <constraint firstItem="jOL-qT-FUz" firstAttribute="leading" secondItem="yMR-tX-nya" secondAttribute="leading" id="htc-CC-W5C"/>
+                    <constraint firstItem="ree-Y0-FI4" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.35" id="olb-LK-ihb"/>
+                    <constraint firstItem="ree-Y0-FI4" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="rKh-W2-9oZ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" name="background"/>
+            <connections>
+                <outlet property="mCheckBoxBtn" destination="XKN-PW-tD1" id="Xsq-Jz-qGw"/>
+                <outlet property="mFildNameLb" destination="yMR-tX-nya" id="trq-KA-M02"/>
+                <outlet property="mIDondLiveInBuildingLb" destination="kZK-YA-3xL" id="x8m-PE-bDM"/>
+                <outlet property="mTxtFl" destination="jOL-qT-FUz" id="avr-v7-S2V"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="76.674107142857139"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="uncheck_box" width="14" height="14.5"/>
+        <namedColor name="background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="email">
+            <color red="0.53725490196078429" green="0.59607843137254901" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="navigationBar">
+            <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

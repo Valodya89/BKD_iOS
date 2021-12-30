@@ -51,7 +51,7 @@
                                         <rect key="frame" x="0.0" y="108.5" width="375" height="399"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1Qj-yE-qDi">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="399"/>
+                                                <rect key="frame" x="25" y="0.0" width="350" height="399"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xxP-dW-KCh">
                                                     <size key="itemSize" width="324" height="128"/>
@@ -70,7 +70,7 @@
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="1Qj-yE-qDi" secondAttribute="trailing" id="0KH-pk-1g4"/>
                                             <constraint firstAttribute="bottom" secondItem="1Qj-yE-qDi" secondAttribute="bottom" id="GsT-tp-Ww7"/>
-                                            <constraint firstItem="1Qj-yE-qDi" firstAttribute="leading" secondItem="mdN-Ck-cKa" secondAttribute="leading" id="Zrf-QR-Ofc"/>
+                                            <constraint firstItem="1Qj-yE-qDi" firstAttribute="leading" secondItem="mdN-Ck-cKa" secondAttribute="leading" constant="25" id="Zrf-QR-Ofc"/>
                                             <constraint firstItem="1Qj-yE-qDi" firstAttribute="top" secondItem="mdN-Ck-cKa" secondAttribute="top" id="uph-Fq-GsY"/>
                                         </constraints>
                                     </view>
@@ -158,6 +158,7 @@
                         <outlet property="mFinishCheckBtn" destination="pXP-A7-NnM" id="hnx-x8-IAD"/>
                         <outlet property="mLeftBarBtn" destination="zrr-lV-mTI" id="MWy-RT-Hru"/>
                         <outlet property="mPageCollcetionV" destination="1Qj-yE-qDi" id="xhm-vR-zJj"/>
+                        <outlet property="mPageCollectionVLeading" destination="Zrf-QR-Ofc" id="PAX-jz-2zb"/>
                         <outlet property="mPageContentV" destination="mdN-Ck-cKa" id="eTz-PG-emw"/>
                         <outlet property="mPageControl" destination="S2Q-Aw-uvN" id="piK-Gn-Xeh"/>
                         <outlet property="mRightBarBtn" destination="mHs-5p-22p" id="lZM-4t-QBC"/>

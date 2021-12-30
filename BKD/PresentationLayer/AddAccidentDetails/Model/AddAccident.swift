@@ -17,6 +17,7 @@ struct AddAccident: Codable {
     let latitude: Double
     let damages: [Damage?]
     let form: [Logo?]
+    let approved: Bool
 }
 
 

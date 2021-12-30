@@ -71,7 +71,7 @@ class AccessoriesUIViewController: BaseViewController {
                 }
                 return
             }
-            ApplicationSettings.shared.accessories = result!
+           
             if self.accessoriesEditList == nil {
                 self.accessoriesEditList = self.accessoriesViewModel.getActiveAccessoryList(accessories: result!)
             } else {
@@ -163,6 +163,7 @@ extension AccessoriesUIViewController: AccessoriesCollectionViewCellDelegate {
         if KeychainManager().isUserLoggedIn() {
             accessoriesEditList![cellIndex].isAdded = isAdd
             accessoriesEditList![cellIndex].id = id
+            accessoriesEditList![cellIndex].count =  accessoriesEditList![cellIndex].count ?? 1
         } else {
             self.showAlertSignIn()
         }

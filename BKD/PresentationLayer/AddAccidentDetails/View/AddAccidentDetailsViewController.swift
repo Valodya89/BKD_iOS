@@ -35,13 +35,15 @@ class AddAccidentDetailsViewController: BaseViewController {
     var currIndexOfDamageSide: Int = 0
     var currIndexOfAccidentForm: Int = 0
     var accidentCoordinate: CLLocationCoordinate2D?
-
+    var isCancelAccident = false
     public var currRentModel: Rent?
     var accidentId: String?
     
     //MARK: -- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        let gesture = UISwipeGestureRecognizer(target: self, action: #selector(dismiss(fromGesture:)))
+        self.view.addGestureRecognizer(gesture)
         setupView()
         configureDelegates()
     }
@@ -53,8 +55,10 @@ class AddAccidentDetailsViewController: BaseViewController {
 
     }
     
-    
+
     func setupView() {
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = img_bkd
@@ -109,7 +113,21 @@ class AddAccidentDetailsViewController: BaseViewController {
         }
     }
     
-  
+  ///Approve accident
+    func approveAccident() {
+        addAccidentDetailViewModel.approveAccident(id: accidentId ?? "") { result in
+            guard let _ = result else { return }
+            self.navigationController?.popToViewController(ofClass: MyReservationsViewController.self)
+        }
+    }
+    
+    ///Approve accident
+      func cancelAccident() {
+          addAccidentDetailViewModel.cancelAccident(id: accidentId ?? "") { result in
+              guard let _ = result else { return }
+              self.navigationController?.popToViewController(ofClass: MyReservationsViewController.self)
+          }
+      }
     
     ///creat tool bar
     func creatToolBar() -> UIToolbar {
@@ -239,17 +257,37 @@ class AddAccidentDetailsViewController: BaseViewController {
     ///Show alert forn confirm info of accident details
     func showAlertForConfirm() {
         BKDAlert().showAlert(on: self, message: Constant.Texts.confirmAccidentDetails, cancelTitle: Constant.Texts.cancel, okTitle: Constant.Texts.yes) {
-            
+            self.isCancelAccident = true
+            self.mConfirmV.initConfirm()
         } okAction: {
-            self.addAccident()
+            self.isCancelAccident = false
+            self.approveAccident()
+        }
+    }
+    
+    ///Show cancel care accident
+    func showCancelAccidentAlert() {
+        if isCancelAccident {
+            BKDAlert().showAlert(on: self, message: Constant.Texts.cancelAccident, cancelTitle: Constant.Texts.cancel, okTitle: Constant.Texts.yes) {
+            } okAction: {
+                self.cancelAccident()
+            }
+        } else {
+            navigationController?.popViewController(animated: true)
         }
     }
     
     //MARK: -- Actions
     @IBAction func back(_ sender: UIBarButtonItem) {
-        navigationController?.popViewController(animated: true)
+            showCancelAccidentAlert()
+    }
+  
+    ///Dismis Viewcontroller
+    @objc func dismiss(fromGesture gesture: UISwipeGestureRecognizer) {
+            showCancelAccidentAlert()
     }
     
+    ///Handler confirm button
     func handlerConfirm() {
         mConfirmV.willCheckConfirm = {
             var isError = false

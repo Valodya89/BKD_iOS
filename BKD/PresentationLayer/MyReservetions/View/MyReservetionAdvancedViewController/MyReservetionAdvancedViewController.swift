@@ -8,6 +8,8 @@
 import UIKit
 
 class MyReservetionAdvancedViewController: BaseViewController {
+
+    
     //MARK: - Outlet
     //Car
     @IBOutlet weak var mCarBckgV: UIView!
@@ -79,7 +81,14 @@ class MyReservetionAdvancedViewController: BaseViewController {
     @IBOutlet weak var mStartRideContentV: UIView!
     @IBOutlet weak var mStartRideBtn: UIButton!
     @IBOutlet weak var mStartRideVLeading: NSLayoutConstraint!
-
+    
+    ///Switch driver
+    @IBOutlet weak var mSwitchDriverTbV: SwitchDriversTableView!
+    @IBOutlet weak var mSwitchDriversBottom: NSLayoutConstraint!
+    @IBOutlet weak var mSwitchDriversTbHeight: NSLayoutConstraint!
+    @IBOutlet weak var mGradientV: UIView!
+    @IBOutlet weak var mVissualEffectV: UIVisualEffectView!
+    
     //MARK: - Variables
     public var vehicleModel: VehicleModel?
     public var myReservationState: MyReservationState?
@@ -90,6 +99,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
     public var currRent: Rent?
     
     lazy var myReservAdvancedViewModel = MyReservetionAdvancedViewModel()
+    lazy var myReservationViewModel = MyReservationViewModel()
     var reserveViewModel = ReserveViewModel()
     var currentTariff: TariffState = .hourly
     var lastContentOffset:CGFloat = 0.0
@@ -122,6 +132,8 @@ class MyReservetionAdvancedViewController: BaseViewController {
        
         mAdditionalDriverTableHeight.constant = mAdditionalDriverTableV.contentSize.height
         
+        
+        
         mRegisterNumberTableHeight.constant = mRegisterNumberTableV.contentSize.height
         
         mOnRideTableHeight.constant = mOnRideTableV.contentSize.height
@@ -134,6 +146,11 @@ class MyReservetionAdvancedViewController: BaseViewController {
         mCarImgBckgV.setShadow(color: color_shadow!)
         configureStartRideView(isActive: false)
 
+        if mSwitchDriverTbV.contentSize.height > 260 {
+            mSwitchDriversTbHeight.constant = 260
+        } else {
+            mSwitchDriversTbHeight.constant = mSwitchDriverTbV.contentSize.height
+        }
     }
     
     
@@ -151,7 +168,9 @@ class MyReservetionAdvancedViewController: BaseViewController {
         mEditBtn.setBorder(color: color_menu!, width: 1.0)
         mCancelBtn.layer.cornerRadius = 8
         mCancelBtn.setBorder(color: color_menu!, width: 1.0)
-                
+        mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
+        mSwitchDriverTbV.switchDriversDelegate = self
+        
         configureUI()
         configureOnRide()
         configureTotalPriceSteckView()
@@ -198,27 +217,13 @@ class MyReservetionAdvancedViewController: BaseViewController {
         mReturnTimeLb.text = endDate.getHour()
        
         //Register number
-        mRegisterNumberTableV
-//        //Driver info
-//        mDriverNameLb.text = (item.currentDriver?.name ?? "") + " " + (item.currentDriver?.surname ?? "")
-//        mDriverLicenseNumberLb.text = item.currentDriver?.drivingLicenseNumber
-        
-
-        
-        
-        
-        
-        //Switch Driver
-//        mSwitchDriverBtn.isHidden = item.additionalDrivers?.count == 0
-
-
+        mRegisterNumberTableV.registerNumberArr = registerNumberArr
         
         //Reservation informations
         if registerNumberArr != nil {
             mRegisterNumberTableV.registerNumberArr =  registerNumberArr
             mRegisterNumberTableV.reloadData()
         }
-        
         if paymentStatusArr != nil {
             mPaymentStatusTableV.statusArr = paymentStatusArr
             mPaymentStatusTableV.reloadData()
@@ -227,33 +232,39 @@ class MyReservetionAdvancedViewController: BaseViewController {
         
         //Accessories
         if (currRent?.accessories?.count ?? 0) > 0 {
-            self.mReserveInfoTableV.accessories = myReservAdvancedViewModel.getRentAccessories(accessoriesToRent: currRent?.accessories)
-            mReserveInfoTableV.reloadData()
-
-        }
-
-
-
+            myReservAdvancedViewModel.getRentAccessories(rent: currRent!, complition: { result in
                 
-        mAdditionalDriverTableV.drivers = reserveViewModel.getAdditionalDrivers(vehicleModel: vehicleModel) as? [MyDriversModel]
-        mAdditionalDriverTableV.reloadData()
+                guard let result = result else {return}
+                self.mReserveInfoTableV.accessories = result
+                self.mReserveInfoTableV.reloadData()
+                self.mReserveTableHeight.constant = self.mReserveInfoTableV.contentSize.height
+            })
+    }
+
+        //Additional drivers list
+        if (currRent?.additionalDrivers?.count ?? 0) > 0 {
+            mAdditionalDriverTableV.drivers =  currRent?.additionalDrivers
+            mAdditionalDriverTableV.reloadData()
+            mAdditionalDriverTableHeight.constant = mAdditionalDriverTableV.contentSize.height
+        }
+        
+        
+        
             
-        //New price
-        mNewPriceTableV.pricesArr = PriceManager.shared.getPrices()
-        mNewPriceTableV.reloadData()
+//        //New price
+//        mNewPriceTableV.pricesArr = PriceManager.shared.getPrices()
+//        mNewPriceTableV.reloadData()
         
     }
     
     ///Configure on ride case
     func configureOnRide() {
         if myReservationState == .stopRide {
+            mOnRideTableV.rent = currRent
             mOnRideTableV.onRideArr = onRideArr
             mOnRideTableV.reloadData()
             handlerOnRide()
             
-            mAdditionalDriverTableV.drivers = [MyDriversModel(fullname: "Name Surname", licenciNumber: "XXXXXXXX", price: 0.0, isSelected: false, totalPrice: 0.0)]
-            mAdditionalDriverTableV.reloadData()
-
             mTotalPriceStackV.mNewTotalPriceContentV.isHidden = true
             mEditBtn.isHidden = true
             mCancelBtn.isHidden = true
@@ -304,6 +315,15 @@ class MyReservetionAdvancedViewController: BaseViewController {
         mStartRideContentV.roundCorners(corners: [.topRight, .topLeft], radius: 20)
     }
     
+    ///Switch driver
+    func changeDriver(driverId: String ) {
+        myReservationViewModel.changeDriver(rentId: currRent?.id ?? "", driverId: driverId) { result in
+            guard let rent =  result else {return}
+            self.hideSwitchTable()
+            self.currRent = rent
+            
+        }
+    }
     
     ///Handel Total price View
     func handlerTotalPrice() {
@@ -316,15 +336,12 @@ class MyReservetionAdvancedViewController: BaseViewController {
                 self?.view.layoutIfNeeded()
             }
         }
-        
-       
-        
+                
         mTotalPriceStackV.willOpenNewTotalPrice = { [weak self] in
             UIView.animate(withDuration: 0.3) {
                 self?.mNewPriceTableV.isHidden = false
                 self?.mNewPriceTableHeight.constant = self?.mNewPriceTableV.contentSize.height ?? 0.0
             }
-
         }
     }
     
@@ -369,18 +386,53 @@ class MyReservetionAdvancedViewController: BaseViewController {
         }
     }
     
+    //MARK: -- Switch driver methods
+    ///Show switch drivers table view
+    private func animateSwitchDriversTable(additionalDrivers: [DriverToRent] ) {
+
+        self.mSwitchDriverTbV.switchDriversList = additionalDrivers
+        self.mSwitchDriverTbV.reloadData()
+        self.mSwitchDriverTbV.isScrollEnabled = false
+        mVissualEffectV.isHidden = false
+        UIView.animate(withDuration: 0.5) {
+            self.mSwitchDriversBottom.constant = 10
+            self.view.layoutIfNeeded()
+        } completion: { _ in
+            if self.mSwitchDriverTbV.contentSize.height >  self.mSwitchDriversTbHeight.constant {
+                self.mSwitchDriverTbV.isScrollEnabled = true
+            }
+        }
+    }
+
+    ///Hide switch drivers table view
+    private func hideSwitchTable(){
+        UIView.animate(withDuration: 0.5) {
+            self.mSwitchDriversBottom.constant = -500
+            self.view.layoutIfNeeded()
+            self.view.setNeedsLayout()
+        } completion: { _ in
+            self.mVissualEffectV.isHidden = true
+        }
+    }
     
+    //MARK: -- Alerts
     ///Show alert for switch driver
-    private func showAlertForSwitchDriver() {
+    private func showAlertForSwitchDriver(driver: DriverToRent?) {
         BKDAlert().showAlert(on: self,
-                             message: String(format: Constant.Texts.confirmSwitchDriver, "Name Surname"),
+                             message: String(format: Constant.Texts.confirmSwitchDriver, driver?.getFullName() ?? ""),
                              cancelTitle: Constant.Texts.cancel,
                              okTitle: Constant.Texts.confirm,
                              cancelAction: nil) {
-            
+            self.changeDriver(driverId: driver?.id ?? "")
         }
-        
     }
+        
+        ///Show alert for inactive start ride
+        private func showAlertForInactiveStartRide() {
+            BKDAlert().showAlert(on: self, message: Constant.Texts.activeStartRide, cancelTitle: nil, okTitle: Constant.Texts.gotIt, cancelAction: nil) {
+            }
+    }
+    
     
 //MARK: - Actions
 //MARK: -------------------
@@ -431,6 +483,9 @@ class MyReservetionAdvancedViewController: BaseViewController {
         }
     }
     
+    @IBAction func switchDriverSwipe(_ sender: UISwipeGestureRecognizer) {
+        hideSwitchTable()
+    }
     
     ///Handler payment tableCell´s button
     func handlerPayment() {
@@ -453,24 +508,38 @@ class MyReservetionAdvancedViewController: BaseViewController {
         }
          
         mOnRideTableV.didPressSwitchDriver = {
-            self.showAlertForSwitchDriver()
+            let driversList =  self.myReservationViewModel.getAdditionalDrives(rent: self.currRent!)
+            if driversList.count == 1 {
+                self.showAlertForSwitchDriver(driver: driversList[0])
+            } else {
+                self.animateSwitchDriversTable(additionalDrivers: driversList)
+            }
         }
         
         mOnRideTableV.didPressMap = { index in
-            self.goToSeeMap(parking: testParking, customLocation: nil)
+            self.goToSeeMap(parking: self.currRent?.returnLocation.parking, customLocation: self.currRent?.returnLocation.customLocation)
+           
         }
     }
 }
 
  
 
-//MARK: - BkdAgreementViewControllerDelegate
-//MARK: ----------------------------
+//MARK: -- BkdAgreementViewControllerDelegate
 extension MyReservetionAdvancedViewController: BkdAgreementViewControllerDelegate {
     func agreeTermsAndConditions() {
         if registerNumberArr?.count ?? 0 > 0 {
             updateStartRide(isActive: true)
         }
+    }
+}
+
+
+//MARK: -- SwitchDriversTableViewDelegate
+extension MyReservetionAdvancedViewController: SwitchDriversTableViewDelegate {
+    
+    func didPressCell(index: Int, item: DriverToRent) {
+        showAlertForSwitchDriver(driver: item)
     }
 }
 

@@ -182,8 +182,11 @@ class EditReservetionAdvancedViewController: BaseViewController {
         self.mReserveInfoTableV.accessories = reserveViewModel.getAdditionalAccessories(vehicleModel: vehicleModel) as? [AccessoriesEditModel]
         mReserveInfoTableV.reloadData()
                 
-        mAdditionalDriverTableV.drivers = reserveViewModel.getAdditionalDrivers(vehicleModel: vehicleModel) as? [MyDriversModel]
-        mAdditionalDriverTableV.reloadData()
+//        //Additional drivers list
+//        if (currRent?.additionalDrivers?.count ?? 0) > 0 {
+//            mAdditionalDriverTableV.drivers =  currRent?.additionalDrivers
+//            mAdditionalDriverTableV.reloadData()
+//        }
             
         mNewPriceTableV.pricesArr = PriceManager.shared.getPrices()
         mNewPriceTableV.reloadData()

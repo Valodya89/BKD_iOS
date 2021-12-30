@@ -47,6 +47,8 @@ struct Constant {
         static let odometerCheckStopRide = "OdometerCheckStopRide"
         static let stopRide = "StopRide"
         static let myPersonalInfo = "MyPersonalInformation"
+        static let myAccountsDrivers = "MyAccountsDrivers"
+        static let myAccount = "MyAccount"
 
     }
     struct NibNames {
@@ -236,6 +238,7 @@ struct Constant {
         
         static let name = "First Name"
         static let surname = "Last Name"
+        static let phoneNumber = "Phone number"
         static let streetName = "Street Name"
         static let houseNumber = "House number"
         static let country = "Country"
@@ -244,6 +247,20 @@ struct Constant {
         static let zipNumber = "Zip number"
         static let dateOfBirth = "Date of birth"
         static let drivingLicenseNumber = "Driving license number"
+        static let nationalRegisterNum = "National register number"
+        static let otherCountryRegisterNum = "Other Country National Register Number"
+        static let identityCard = "Identity card"
+        static let frontSideIdCard = "Front side of Identity card"
+        static let backSideIdCard = "Back side of Identity card"
+        static let expiryDateIdCard = "Expiry date of Identity card"
+        static let  drivingLicense = "Driving license"
+        static let frontDrivingLic = "Front side of Driving license"
+        static let backDrivingLic = "Back side of Driving license"
+        static let issueDrivingLic = "Issue date of Driving license"
+        static let expiryDrivingLic = "Expiry date of Driving license"
+        static let selfieDrivingLic = "Selfie with Driving license"
+        
+        
 
         //Personal date types
         static let button = "button"
@@ -327,6 +344,7 @@ struct Constant {
         static let rightSide = "Right side"
         static let leftSide = "Left side"
         static let confirmAccidentDetails = "Do you confirm the accident details and all the provided information assurance?"
+        static let cancelAccident = "Are you sure you want to back? The accident and all information provided will be deleted."
         static let yes = "Yes"
         
         //Compare
@@ -346,6 +364,11 @@ struct Constant {
         static let DLB_text = "back side photo of your valid Driving license"
         static let license_issue_text = "Issue date of the Driving license"
         
+        
+        //My Account
+        static let newEmail = "New email address"
+        static let currPassword = "Current password"
+
         //Error Messages
         static let errChangePassword = "Failed to change password, please try again"
         static let errAccountVerify = "Failed to verify account"
@@ -362,6 +385,8 @@ struct Constant {
         static let errAcceptAgreement = "Failed to accept agreement."
         static let errReservation = "Failed to reservation."
         static let errRegistrationBot = "Please, complete user registration"
+        
+        
 
         
         //Request texts
@@ -553,6 +578,7 @@ let color_gradient_register_start = UIColor(named: "register_gradient_start")
 let color_gradient_register_end = UIColor(named: "register_gradient_end")
 let color_dark_register = UIColor(named:"navigation_bar")
 let color_selected_start = UIColor (named: "selected_start")
+let color_driving_license = UIColor(named: "driving_license")
 
 //Fonts
 let font_selected_filter = UIFont(name: "SFProDisplay-Regular", size: 18)

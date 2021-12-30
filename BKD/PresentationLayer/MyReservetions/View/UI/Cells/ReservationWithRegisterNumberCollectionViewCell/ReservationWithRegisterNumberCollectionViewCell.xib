@@ -226,7 +226,7 @@
                                             <constraint firstItem="In4-it-OT6" firstAttribute="top" secondItem="zGF-mR-AXe" secondAttribute="bottom" multiplier="1.2" id="Hfr-If-NOk"/>
                                             <constraint firstItem="In4-it-OT6" firstAttribute="width" relation="greaterThanOrEqual" secondItem="029-ll-tb3" secondAttribute="width" multiplier="0.109948" id="MYP-EJ-2it"/>
                                             <constraint firstItem="zGF-mR-AXe" firstAttribute="centerY" secondItem="029-ll-tb3" secondAttribute="centerY" multiplier="0.5" id="Sz8-jc-TTh"/>
-                                            <constraint firstItem="zGF-mR-AXe" firstAttribute="height" secondItem="029-ll-tb3" secondAttribute="height" multiplier="0.3" id="VnW-Uj-d33"/>
+                                            <constraint firstItem="zGF-mR-AXe" firstAttribute="height" relation="greaterThanOrEqual" secondItem="029-ll-tb3" secondAttribute="height" multiplier="0.3" id="VnW-Uj-d33"/>
                                             <constraint firstItem="zGF-mR-AXe" firstAttribute="leading" secondItem="029-ll-tb3" secondAttribute="centerX" multiplier="0.105" id="dJ7-bX-IPc"/>
                                             <constraint firstItem="In4-it-OT6" firstAttribute="leading" secondItem="zGF-mR-AXe" secondAttribute="leading" id="hvn-zZ-LJb"/>
                                         </constraints>

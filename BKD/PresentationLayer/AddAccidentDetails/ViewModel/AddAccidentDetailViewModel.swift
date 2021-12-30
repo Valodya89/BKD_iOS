@@ -227,4 +227,51 @@ class AddAccidentDetailViewModel {
         }
     }
     
+    ///Approve accident
+    func approveAccident(id: String,
+                     completion: @escaping (AddAccident?) -> Void) {
+
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.approveAccident(id: id))) { (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let result = BkdConverter<BaseResponseModel<AddAccident>>.parseJson(data: data as Any) else {
+                    print("error")
+                    completion(nil)
+                    return
+                }
+                print(result.content as Any)
+                completion(result.content)
+
+            case .failure(let error):
+                print(error.description)
+                completion(nil)
+                break
+            }
+        }
+    }
+    
+    ///Cancel accident
+    func cancelAccident(id: String,
+                     completion: @escaping (AddAccident?) -> Void) {
+
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.cancelAccident(id: id))) { (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let result = BkdConverter<BaseResponseModel<AddAccident>>.parseJson(data: data as Any) else {
+                    print("error")
+                    completion(nil)
+                    return
+                }
+                print(result.content as Any)
+                completion(result.content)
+
+            case .failure(let error):
+                print(error.description)
+                completion(nil)
+                break
+            }
+        }
+    }
 }

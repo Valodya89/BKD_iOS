@@ -33,7 +33,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXZ-e4-8gD">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="1202"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="1168"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFq-7a-JoW" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1109"/>
@@ -61,12 +61,12 @@
                                                         <rect key="frame" x="298" y="100" width="54" height="48.5"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NiB-Ul-MCn">
-                                                                <rect key="frame" x="10.5" y="4" width="33" height="24"/>
+                                                                <rect key="frame" x="10.5" y="4" width="33" height="24.5"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                 <state key="normal" image="tow_bar"/>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tow Bar " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XE4-La-JRr">
-                                                                <rect key="frame" x="3.5" y="28" width="47" height="16"/>
+                                                                <rect key="frame" x="3.5" y="28.5" width="47" height="16"/>
                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="13"/>
                                                                 <color key="textColor" name="navigationBar"/>
                                                                 <nil key="highlightedColor"/>
@@ -87,6 +87,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="height" constant="167" id="CEY-t1-Je3"/>
                                                     <constraint firstItem="ezd-5C-D1R" firstAttribute="centerY" secondItem="hUb-PV-4h1" secondAttribute="centerY" id="CKx-mr-RuB"/>
                                                     <constraint firstItem="540-J2-y0O" firstAttribute="centerY" secondItem="hUb-PV-4h1" secondAttribute="centerY" multiplier="1.49" id="P3c-oY-oHY"/>
                                                     <constraint firstItem="540-J2-y0O" firstAttribute="width" relation="greaterThanOrEqual" secondItem="hUb-PV-4h1" secondAttribute="width" multiplier="0.13" id="ex4-x5-9x4"/>
@@ -159,19 +160,19 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nt8-CO-BRL">
-                                                                        <rect key="frame" x="0.0" y="23" width="21" height="26"/>
+                                                                        <rect key="frame" x="0.0" y="23" width="21" height="26.5"/>
                                                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                                                                         <color key="textColor" name="navigationBar"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z0g-Yc-cvH">
-                                                                        <rect key="frame" x="29" y="26" width="42" height="12"/>
+                                                                        <rect key="frame" x="29" y="26.5" width="42" height="12"/>
                                                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="10"/>
                                                                         <color key="textColor" name="navigationBar"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RAK-1W-8eb">
-                                                                        <rect key="frame" x="29" y="38" width="42" height="15.5"/>
+                                                                        <rect key="frame" x="29" y="38.5" width="42" height="15"/>
                                                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="10"/>
                                                                         <color key="textColor" name="navigationBar"/>
                                                                         <nil key="highlightedColor"/>
@@ -198,7 +199,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xXA-bh-y4u">
-                                                                <rect key="frame" x="190.5" y="8" width="1" height="44"/>
+                                                                <rect key="frame" x="190.5" y="8.5" width="1" height="43.5"/>
                                                                 <color key="backgroundColor" name="email"/>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XMa-pe-3qZ">
@@ -211,19 +212,19 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jTH-vr-g8Y">
-                                                                        <rect key="frame" x="0.0" y="23" width="22" height="26"/>
+                                                                        <rect key="frame" x="0.0" y="23" width="22" height="26.5"/>
                                                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                                                                         <color key="textColor" name="navigationBar"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOU-0z-TOp">
-                                                                        <rect key="frame" x="30" y="26" width="27.5" height="12"/>
+                                                                        <rect key="frame" x="30" y="26.5" width="27.5" height="12"/>
                                                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="10"/>
                                                                         <color key="textColor" name="navigationBar"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fea-cr-HAT">
-                                                                        <rect key="frame" x="30" y="38" width="27.5" height="15.5"/>
+                                                                        <rect key="frame" x="30" y="38.5" width="27.5" height="15"/>
                                                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="10"/>
                                                                         <color key="textColor" name="navigationBar"/>
                                                                         <nil key="highlightedColor"/>
@@ -323,7 +324,7 @@
                                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                             </tableView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="EAN-0K-4uc" customClass="TotalPriceStackView" customModule="BKD" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="799" width="382" height="71"/>
+                                                <rect key="frame" x="16" y="799.5" width="382" height="71"/>
                                                 <subviews>
                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ho-hm-i9r">
                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="71"/>
@@ -335,10 +336,10 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vQi-Tg-tg7">
-                                                                <rect key="frame" x="14.5" y="35.5" width="191" height="28.5"/>
+                                                                <rect key="frame" x="14.5" y="35.5" width="191" height="28"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQf-fF-8pH">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="11" height="28.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="11" height="28"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="11" id="5Qq-Q5-Tag"/>
                                                                         </constraints>
@@ -347,7 +348,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o98-qv-OdM">
-                                                                        <rect key="frame" x="18.5" y="0.0" width="172.5" height="28.5"/>
+                                                                        <rect key="frame" x="18.5" y="0.0" width="172.5" height="28"/>
                                                                         <fontDescription key="fontDescription" name="Mulish-SemiBold" family="Mulish" pointSize="18"/>
                                                                         <color key="textColor" name="navigationBar"/>
                                                                         <nil key="highlightedColor"/>
@@ -407,10 +408,10 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lkf-nL-jH4">
-                                                                <rect key="frame" x="14.5" y="35.5" width="191" height="28.5"/>
+                                                                <rect key="frame" x="14.5" y="35.5" width="191" height="28"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oBU-Mt-xr8">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="11" height="28.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="11" height="28"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="11" id="0XZ-EK-5ll"/>
                                                                         </constraints>
@@ -419,7 +420,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VsW-lL-NGL">
-                                                                        <rect key="frame" x="18.5" y="0.0" width="172.5" height="28.5"/>
+                                                                        <rect key="frame" x="18.5" y="0.0" width="172.5" height="28"/>
                                                                         <fontDescription key="fontDescription" name="Mulish-SemiBold" family="Mulish" pointSize="18"/>
                                                                         <color key="textColor" name="navigationBar"/>
                                                                         <nil key="highlightedColor"/>
@@ -446,7 +447,7 @@
                                                                 </connections>
                                                             </button>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropDown_blue" translatesAutoresizingMaskIntoConstraints="NO" id="8JA-qG-7wr">
-                                                                <rect key="frame" x="342" y="30.5" width="25" height="10.5"/>
+                                                                <rect key="frame" x="342" y="30" width="25" height="10.5"/>
                                                             </imageView>
                                                         </subviews>
                                                         <color key="backgroundColor" name="subview_background"/>
@@ -493,10 +494,10 @@
                                                 </connections>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3h7-8f-uMC">
-                                                <rect key="frame" x="0.0" y="870" width="414" height="138"/>
+                                                <rect key="frame" x="0.0" y="870.5" width="414" height="138"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sdH-bU-ycy">
-                                                        <rect key="frame" x="32" y="32" width="350" height="36"/>
+                                                        <rect key="frame" x="32" y="31.5" width="350" height="36"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="agree" translatesAutoresizingMaskIntoConstraints="NO" id="dxP-7V-37c">
                                                                 <rect key="frame" x="0.0" y="5" width="24.5" height="26"/>
@@ -532,7 +533,7 @@
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="10L-7O-rt5">
-                                                        <rect key="frame" x="31" y="98" width="165.5" height="41.5"/>
+                                                        <rect key="frame" x="31" y="97.5" width="165.5" height="42"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Edit">
                                                             <fontDescription key="titleFontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
@@ -543,7 +544,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZk-Gf-I53">
-                                                        <rect key="frame" x="216.5" y="98" width="166" height="41.5"/>
+                                                        <rect key="frame" x="216.5" y="97.5" width="166" height="42"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Cancel">
                                                             <fontDescription key="titleFontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
@@ -570,7 +571,7 @@
                                                 </constraints>
                                             </view>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="glw-ew-tml">
-                                                <rect key="frame" x="104" y="974.5" width="206" height="42"/>
+                                                <rect key="frame" x="104" y="975" width="206" height="42"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="42" id="s8f-2U-yEb"/>
@@ -668,20 +669,48 @@
                                     <outletCollection property="gestureRecognizers" destination="qfv-eg-jVh" appends="YES" id="Z69-uZ-1C3"/>
                                 </connections>
                             </view>
+                            <visualEffectView hidden="YES" opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kk2-v1-kEY">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="1168"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000001192092896" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="3Ry-Dv-or2">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="1168"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <gestureRecognizers/>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="aDN-x7-5Ae" appends="YES" id="95V-l7-emd"/>
+                                    </connections>
+                                </view>
+                                <gestureRecognizers/>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="k4Y-V0-VRQ" customClass="SwitchDriversTableView" customModule="BKD" customModuleProvider="target">
+                                <rect key="frame" x="16" y="1538" width="382" height="130"/>
+                                <color key="backgroundColor" name="background"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="N9J-pq-EIk"/>
+                                </constraints>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YKV-84-ekL"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="background"/>
                         <constraints>
                             <constraint firstItem="Yi7-vT-6Ig" firstAttribute="height" secondItem="Y5i-7p-TRf" secondAttribute="height" multiplier="0.043" id="4sO-hz-ITT"/>
+                            <constraint firstItem="YKV-84-ekL" firstAttribute="bottom" secondItem="Kk2-v1-kEY" secondAttribute="bottom" id="5Oc-vS-V3T"/>
                             <constraint firstItem="glw-ew-tml" firstAttribute="width" secondItem="Y5i-7p-TRf" secondAttribute="width" multiplier="0.497" id="Cwf-W6-MA2"/>
+                            <constraint firstItem="YKV-84-ekL" firstAttribute="bottom" secondItem="k4Y-V0-VRQ" secondAttribute="bottom" constant="-500" id="DEX-7e-Enj"/>
                             <constraint firstItem="gXZ-e4-8gD" firstAttribute="leading" secondItem="YKV-84-ekL" secondAttribute="leading" id="Ng2-xU-v0I"/>
+                            <constraint firstItem="Kk2-v1-kEY" firstAttribute="top" secondItem="YKV-84-ekL" secondAttribute="top" id="WfF-PK-gHE"/>
                             <constraint firstItem="YKV-84-ekL" firstAttribute="trailing" secondItem="gXZ-e4-8gD" secondAttribute="trailing" id="YMD-ym-clY"/>
                             <constraint firstItem="Mao-Gh-H6o" firstAttribute="width" secondItem="Y5i-7p-TRf" secondAttribute="width" multiplier="0.81" id="YOj-bq-k5d"/>
+                            <constraint firstItem="YKV-84-ekL" firstAttribute="trailing" secondItem="Kk2-v1-kEY" secondAttribute="trailing" id="aPL-cV-WIF"/>
                             <constraint firstItem="Mao-Gh-H6o" firstAttribute="leading" secondItem="YKV-84-ekL" secondAttribute="leading" constant="-50" id="aw4-UL-bzE"/>
-                            <constraint firstAttribute="bottom" secondItem="gXZ-e4-8gD" secondAttribute="bottom" id="c1r-KL-ueN"/>
+                            <constraint firstItem="YKV-84-ekL" firstAttribute="bottom" secondItem="gXZ-e4-8gD" secondAttribute="bottom" id="c1r-KL-ueN"/>
                             <constraint firstItem="Yi7-vT-6Ig" firstAttribute="width" secondItem="Y5i-7p-TRf" secondAttribute="width" multiplier="0.096" id="mQV-At-7XA"/>
+                            <constraint firstItem="Kk2-v1-kEY" firstAttribute="leading" secondItem="YKV-84-ekL" secondAttribute="leading" id="nBy-MF-Z8Z"/>
                             <constraint firstItem="gXZ-e4-8gD" firstAttribute="top" secondItem="YKV-84-ekL" secondAttribute="top" id="nrk-Rh-Z8i"/>
                             <constraint firstItem="glw-ew-tml" firstAttribute="centerX" secondItem="YKV-84-ekL" secondAttribute="centerX" id="pIc-Xa-zRo"/>
+                            <constraint firstItem="k4Y-V0-VRQ" firstAttribute="centerX" secondItem="YKV-84-ekL" secondAttribute="centerX" id="pL7-J8-wyn"/>
+                            <constraint firstItem="k4Y-V0-VRQ" firstAttribute="width" secondItem="Y5i-7p-TRf" secondAttribute="width" multiplier="0.922705" id="rNE-vN-ffd"/>
                             <constraint firstItem="YKV-84-ekL" firstAttribute="bottom" secondItem="Mao-Gh-H6o" secondAttribute="bottom" id="tio-hX-8Or"/>
                         </constraints>
                     </view>
@@ -712,6 +741,7 @@
                         <outlet property="mEditContentVHeight" destination="3h7-8f-uMC" id="7Yo-4i-tL4"/>
                         <outlet property="mExtendReservationBtn" destination="glw-ew-tml" id="2wf-YV-uDE"/>
                         <outlet property="mFiatImgV" destination="Yi7-vT-6Ig" id="a1I-jd-80H"/>
+                        <outlet property="mGradientV" destination="3Ry-Dv-or2" id="OWP-sX-NnG"/>
                         <outlet property="mLeftBarBtn" destination="T3t-CD-5UZ" id="xPP-z0-GZj"/>
                         <outlet property="mNavigationItem" destination="ShH-fF-1Mi" id="lkW-Xl-FI9"/>
                         <outlet property="mNewPriceTableHeight" destination="rRL-Ia-17f" id="IVg-pf-SG6"/>
@@ -740,16 +770,25 @@
                         <outlet property="mStartRideBtn" destination="vhi-S3-Tmu" id="bdj-ZX-hvW"/>
                         <outlet property="mStartRideContentV" destination="Mao-Gh-H6o" id="znD-cx-j6g"/>
                         <outlet property="mStartRideVLeading" destination="aw4-UL-bzE" id="2df-Rh-8dx"/>
+                        <outlet property="mSwitchDriverTbV" destination="k4Y-V0-VRQ" id="wmi-ig-CDP"/>
+                        <outlet property="mSwitchDriversBottom" destination="DEX-7e-Enj" id="o17-CJ-P8A"/>
+                        <outlet property="mSwitchDriversTbHeight" destination="N9J-pq-EIk" id="Oq7-M5-DuX"/>
                         <outlet property="mTotalPriceStackV" destination="EAN-0K-4uc" id="bsC-gd-1NR"/>
                         <outlet property="mTowBarBckgV" destination="540-J2-y0O" id="7qr-lD-1fd"/>
                         <outlet property="mTowBarBtn" destination="NiB-Ul-MCn" id="hlJ-kp-B04"/>
                         <outlet property="mTowBarLb" destination="XE4-La-JRr" id="Qhu-TZ-GhT"/>
+                        <outlet property="mVissualEffectV" destination="Kk2-v1-kEY" id="P9s-1j-dOs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M2B-GG-3V4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="right" id="qfv-eg-jVh">
                     <connections>
                         <action selector="startRideSwipe:" destination="ImY-qT-Pts" id="lnB-c7-hkC"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="down" id="aDN-x7-5Ae">
+                    <connections>
+                        <action selector="switchDriverSwipe:" destination="ImY-qT-Pts" id="fSV-k3-WcI"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>

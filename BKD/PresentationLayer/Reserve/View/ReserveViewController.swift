@@ -150,22 +150,6 @@ class ReserveViewController: BaseViewController {
         
     }
     
-    
-//    ///Add reservation
-//    private func addReservation() {
-//        reserveViewModel.addRent(vehicleModel: vehicleModel ?? VehicleModel()) { result, error in
-//                if let _ = error {
-//                    self.showAlertSignIn()
-//                } else if result == nil {
-//                    self.showAlert()
-//                } else {
-//                    self.rent = result
-//                    self.vehicleModel?.rent = result!
-//                   // self.clickConfirm()
-//                }
-//        }
-//    }
-    
     /// Animate Confirm click
     private func clickConfirm() {
         UIView.animate(withDuration: 0.5) { [self] in

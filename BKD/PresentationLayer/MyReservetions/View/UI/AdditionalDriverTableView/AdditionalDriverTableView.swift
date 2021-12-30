@@ -9,7 +9,7 @@ import UIKit
 
 class AdditionalDriverTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
-    var drivers:[MyDriversModel]? = nil
+    var drivers:[DriverToRent]? = nil
 
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -43,7 +43,7 @@ class AditionalDriverTableCell: UITableViewCell {
    }
    
    
-   func setCellInfo(item: MyDriversModel, index: Int) {
+   func setCellInfo(item: DriverToRent, index: Int) {
        if isSwitchDriver {
            mAdditionalDriverLb.isHidden = false
            mAdditionalDriverHeight.constant = 0
@@ -55,8 +55,8 @@ class AditionalDriverTableCell: UITableViewCell {
            }
        }
        
-       mDriverNameLb.text = item.fullname
-       mDriverNumberLb.text = item.licenciNumber
+       mDriverNameLb.text = item.getFullName()
+       mDriverNumberLb.text = item.drivingLicenseNumber
    }
     
     

@@ -21,6 +21,7 @@ class VehicleCheckViewController: BaseViewController {
     @IBOutlet weak var mAddDamageContentV: UIView!
     @IBOutlet weak var mPageCollcetionV: UICollectionView!
     
+    @IBOutlet weak var mPageCollectionVLeading: NSLayoutConstraint!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
     @IBOutlet weak var mAddDamageCenterY: NSLayoutConstraint!
@@ -78,6 +79,7 @@ class VehicleCheckViewController: BaseViewController {
         pageDataSours?.append(defect)
         mPageCollcetionV.reloadData()
         if pageDataSours!.count > 1 {
+            mPageCollectionVLeading.constant = 0
             mFinishCheckBtn.disable()
         }
 
@@ -119,7 +121,7 @@ class VehicleCheckViewController: BaseViewController {
             self.pageDataSours = startDefects
             self.pageDataSours?.append(Defect(comment: "", image: nil))
             self.mPageCollcetionV.reloadData()
-            
+            self.mPageCollectionVLeading.constant = 0
             print( result)
         }
 

@@ -64,12 +64,12 @@ final class StopRideViewModel {
     ///Add odometer to finish
     func addOdometerToFinish(image: UIImage,
                              id: String,
-                             description: String,
+                             value: String,
                      completion: @escaping (Rent?, String?) -> Void)  {
         
         let resizeImg = image.resizeImage(targetSize: CGSize(width: 500, height: 500))
         
-        SessionNetwork.init().request(with: URLBuilder(from: ImageUploadAPI.addOdometerToFinish(image: resizeImg, id: id, description: description))) { result in
+        SessionNetwork.init().request(with: URLBuilder(from: ImageUploadAPI.addOdometerToFinish(image: resizeImg, id: id, value: value))) { result in
             
             switch result {
             case .success(let data):

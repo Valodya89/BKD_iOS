@@ -87,7 +87,7 @@ class OdometerCheckStopRideUIViewController: BaseViewController {
     func addOdometer(image: UIImage) {
         stopRideViewModel.addOdometerToFinish(image: image,
                                            id: currRentModel?.id ?? "",
-                                              description: mOdometerTxtFl.text!) { result, err in
+                                    value: mOdometerTxtFl.text!) { result, err in
             guard let _ = result else {return}
             self.mTakePhotoCotentV.isHidden = true
             self.mOdometerImgV.isHidden = false

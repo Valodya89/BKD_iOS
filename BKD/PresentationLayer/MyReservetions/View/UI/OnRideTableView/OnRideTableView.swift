@@ -14,6 +14,7 @@ class OnRideTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     var didPressMap:((Int)->Void)?
 
     var onRideArr:[OnRideModel]? = nil
+    public var rent: Rent?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,7 +35,7 @@ class OnRideTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AdvancedWithOnRideCell.identifier, for: indexPath) as! AdvancedWithOnRideCell
-        cell.setCellInfo(item: onRideArr![indexPath.row])
+        cell.setCellInfo(item: onRideArr![indexPath.row], rent: rent!)
         cell.didPressAddDamage = {
             self.didPressAddDamage?()
         }

@@ -17,6 +17,7 @@ final class MyBKDViewController: BaseViewController {
     @IBOutlet weak private var mTableV: UITableView!
    
     @IBOutlet weak var mWaithinfForAdminV: UIView!
+    @IBOutlet weak var mVerificationPendingLb: UILabel!
     @IBOutlet weak var mLogOutBtn: UIButton!
     
     //MARK: Variables
@@ -29,6 +30,7 @@ final class MyBKDViewController: BaseViewController {
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavigationControll(navControll: navigationController, barBtn: mRightBarBtn)
         setUpView()
     }
     
@@ -52,9 +54,6 @@ final class MyBKDViewController: BaseViewController {
     }
     
     private func setUpView() {
-        navigationController?.setNavigationBarBackground(color: color_dark_register!)
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
-        mRightBarBtn.image = img_bkd
         menu = SideMenuNavigationController(rootViewController: LeftViewController())
         mWaithinfForAdminV.layer.cornerRadius = 8
         self.setmenu(menu: menu)
@@ -62,11 +61,7 @@ final class MyBKDViewController: BaseViewController {
     
     ///Configure UI
     func configureUI() {
-        mWaithinfForAdminV.isHidden = false
-        mWaithinfForAdminV.popupAnimation()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1 ) {
-            self.mWaithinfForAdminV.isHidden = true
-         }
+       
     }
     
     ///Add child ViewController
@@ -117,9 +112,28 @@ final class MyBKDViewController: BaseViewController {
                                              tableData: [RegistrationBotData.registrationBotModel[0]],
                                              mainDriver: self.mainDriver)
                 }
+                self.checkVerificationPending()
+                
             }
             
         }
+    }
+    
+    //Check if verification is pending
+    func checkVerificationPending() {
+        if self.mainDriver?.state == Constant.Texts.state_agree {
+            mVerificationPendingLb.textColor = color_error!
+            showWaithingForAdminView()
+        }
+    }
+    
+    ///Pop up Waithing For Admin view
+    func showWaithingForAdminView() {
+        mWaithinfForAdminV.isHidden = false
+        mWaithinfForAdminV.popupAnimation()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1 ) {
+            self.mWaithinfForAdminV.isHidden = true
+         }
     }
     
     //Go to registeration bot screen
@@ -166,7 +180,9 @@ extension MyBKDViewController: UITableViewDelegate, UITableViewDataSource {
         let item = MyBkdData.myBkdModel[indexPath.row]
         cell.mImageV.image = item.img
         cell.mTitleLb.text = item.title
-        cell.mImageV.setTintColor(color: color_email!)
+        if indexPath.row == 2 {
+            cell.mImageV.setTintColor(color: color_email!)
+        }
         
         return cell
     }
@@ -174,10 +190,11 @@ extension MyBKDViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            self.goToMyPersonalInfo()
-        case 1: break
+            self.goToMyPersonalInfo(mainDriver: mainDriver)
+        case 1:
+            self.goToMyAccountDrivers()
         default:
-            break
+            self.goToMyAccount()
         }
     }
 }

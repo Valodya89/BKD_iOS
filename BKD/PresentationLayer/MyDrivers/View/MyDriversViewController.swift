@@ -42,6 +42,7 @@ class MyDriversViewController: BaseViewController {
     //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavigationControll(navControll: navigationController, barBtn: mRightBarBtn)
         setupView()
         
     }
@@ -67,10 +68,6 @@ class MyDriversViewController: BaseViewController {
     }
     
     func setupView() {
-        navigationController?.setNavigationBarBackground(color: color_dark_register!)
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
-        mRightBarBtn.image = img_bkd
-       
         mTotalPriceBckgV.setShadow(color: color_shadow!)
         mAddDriverBckgV.layer.cornerRadius = mAddDriverBckgV.frame.height/2
         mAddBtn.layer.cornerRadius = mAddBtn.frame.size.width/2

@@ -26,7 +26,7 @@ enum ImageUploadAPI: ImageUplaoder {
                    description: String)
     case addOdometerToFinish(image: UIImage,
                              id: String,
-                             description: String)
+                             value: String)
     case addAccidentDamge(image: UIImage,
                           id: String,
                           side: String)
@@ -95,7 +95,7 @@ enum ImageUploadAPI: ImageUplaoder {
         case let .addDefectToFinish(_, id, _):
             return "api/rents/\(id)/finish/defects"
         case let .addOdometerToFinish(_, id, _):
-            return "dev-rents.bkdrental.com/api/rents/\(id)/finish/defects"
+            return "api/rents/\(id)/finish/odometer"
         case let .addAccidentDamge(_, id, _):
             return "api/accident/\(id)/damage"
         case let .addAccidentForm(_, id):
@@ -130,9 +130,9 @@ enum ImageUploadAPI: ImageUplaoder {
             return [
                 "description": description
             ]
-        case let .addOdometerToFinish(_, _, description):
+        case let .addOdometerToFinish(_, _, value):
             return [
-                "description": description
+                "value": value
             ]
         case let .addAccidentDamge(_, _, side):
             return [

@@ -96,7 +96,9 @@ enum AuthAPI: APIProtocol {
                      address: String,
                      longitude: Double,
                      latitude: Double)
-    
+    case approveAccident(id: String)
+    case cancelAccident(id: String)
+
     
     
 
@@ -222,9 +224,12 @@ enum AuthAPI: APIProtocol {
             return "api/rents/\(id)/finish"
         case let .changeDriver(id, driverId):
             return "api/rents/\(id)/driver/\(driverId)"
-        
         case let .addAccident(id, _, _, _, _):
             return "api/rents/\(id)/accident"
+        case .approveAccident(let id):
+            return "api/accident/\(id)/approve"
+        case .cancelAccident(let id):
+            return "api/accident/\(id)/cancel"
         }
         
     }
@@ -264,7 +269,9 @@ enum AuthAPI: APIProtocol {
              .checkOdometerToFinish,
              .finish,
              .changeDriver,
-             .addAccident:
+             .addAccident,
+             .approveAccident,
+             .cancelAccident:
             return ["Content-Type": "application/json"]
         case .getAuthRefreshToken:
             fallthrough
@@ -460,7 +467,9 @@ enum AuthAPI: APIProtocol {
              .payLater:
             return .post
         case .verifyAccounts,
-             .recoverPassword:
+             .recoverPassword,
+             .approveAccident,
+             .cancelAccident:
             return .put
         case .resendCode,
              .verifyPhoneCode,

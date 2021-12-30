@@ -82,9 +82,11 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
         let count = Int(mAccessorieCountLb.text ?? "0")
         let price = Double(mPriceLb.text ?? "0")
         var isIncrease = true
+        
         if sender.titleColor(for: .normal) == color_alert_txt { //select
             mAddImgV.image = img_add_selecte
             sender.setTitleColor(color_menu, for: .normal)
+            
             
         } else {// unselect
             isIncrease = false

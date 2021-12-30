@@ -30,6 +30,14 @@ class BaseViewController: UIViewController, StoryboardInitializable {
         menu?.presentDuration = 0.8
     }
     
+    ///Configure navigtion bar
+    func configureNavigationControll(navControll: UINavigationController?, barBtn: UIBarButtonItem) {
+        
+        navControll?.setNavigationBarBackground(color: color_dark_register!)
+        navControll?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
+        barBtn.image = img_bkd
+    }
+    
     ///show Autocomplete ViewController
     func showAutocompleteViewController(viewController: UIViewController) {
           
@@ -72,6 +80,13 @@ class BaseViewController: UIViewController, StoryboardInitializable {
             completion(.success(coordinate))
         }
     }
+    
+    ///Go to email address comtroller
+    func goToEmailAddress() {
+        let emailAddressVC = EmailAddressViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
+        self.navigationController?.pushViewController(emailAddressVC, animated: true)
+    }
+    
     
     //Go to registeration bot screen
     func goToRegistrationBot(isDriverRegister:Bool,
@@ -218,11 +233,23 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     }
     
     ///Open my personal information controller
-    func goToMyPersonalInfo() {
+    func goToMyPersonalInfo(mainDriver: MainDriver?) {
         let personalInfoVC = MyPersonalInformationViewController.initFromStoryboard(name: Constant.Storyboards.myPersonalInfo)
+        personalInfoVC.mainDriver = mainDriver
         self.navigationController?.pushViewController(personalInfoVC, animated: true)
     }
     
+    ///Open my accounts driversriver information controller
+    func goToMyAccountDrivers() {
+        let myAccountDriversVC = MyAccountsDriversViewController.initFromStoryboard(name: Constant.Storyboards.myAccountsDrivers)
+        self.navigationController?.pushViewController(myAccountDriversVC, animated: true)
+    }
+    
+    ///Open my accounts  controller
+    func goToMyAccount() {
+        let myAccountVC = MyAccountViewController.initFromStoryboard(name: Constant.Storyboards.myAccount)
+        self.navigationController?.pushViewController(myAccountVC, animated: true)
+    }
     ///Show alert for sign in account
     func showAlertSignIn() {
         BKDAlert().showAlert(on: self,

@@ -39,7 +39,7 @@ final class SignInViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
-        
+        MyBKDViewModel().logout()
         mPasswordTxtFl.text = ""
         mEmailAddressTextFl.text = ""
         mSignInLeading.constant = 0
@@ -129,7 +129,7 @@ final class SignInViewController: BaseViewController {
         } completion: { _ in
             UserDefaults.standard.setValue(true, forKey: key_isLogin)
             self.didSignIn?()
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popToViewController(ofClass: MyBKDViewController.self)
         }
     }
     
@@ -157,9 +157,7 @@ final class SignInViewController: BaseViewController {
     
     @IBAction func forgotPassword(_ sender: UIButton) {
         dissmisKeyboar()
-        let emailAddressVC = EmailAddressViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
-        self.navigationController?.pushViewController(emailAddressVC, animated: true)
-        
+        self.goToEmailAddress()
     }
     
     @IBAction func signIn(_ sender: UIButton) {
@@ -191,8 +189,7 @@ final class SignInViewController: BaseViewController {
 }
 
 
-//MARK: UITextFieldDelegate
-// -----------------------------
+//MARK: -- UITextFieldDelegate
 extension SignInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == mEmailAddressTextFl {

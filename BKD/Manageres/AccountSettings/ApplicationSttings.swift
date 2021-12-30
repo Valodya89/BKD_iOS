@@ -23,7 +23,6 @@ final class ApplicationSettings {
     var carsList: [String : [CarsModel]?]?
     var carTypes: [CarTypes]?
     var allCars: [CarsModel]?
-    var accessories: [Accessories]?
     
     private init() {
         NotificationCenter.default.addObserver(self, selector: #selector(fetchPhoneCodes), name: Constant.Notifications.LanguageUpdate, object: nil)

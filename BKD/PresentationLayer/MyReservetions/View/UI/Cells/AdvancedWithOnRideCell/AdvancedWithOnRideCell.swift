@@ -53,14 +53,18 @@ class AdvancedWithOnRideCell: UITableViewCell  {
     
     
     /// Set cell information
-    func setCellInfo(item: OnRideModel) {
+    func setCellInfo(item: OnRideModel, rent: Rent) {
         
         mStatusNameLb.text = item.status
         mSwitchDriverBtn.isHidden = !item.isActiveSwitchDriverBtn
-        guard let location =  item.locationName else {
-            return
+   
+        //Return location
+        if rent.returnLocation.type == Constant.Keys.custom,
+           let returnLocation = rent.returnLocation.customLocation {
+            mLocationNameLb.text = returnLocation.name
+        } else if let returnParkin = rent.returnLocation.parking {
+            mLocationNameLb.text = returnParkin.name
         }
-        mLocationNameLb.text = location
     }
     
   //MARK: -- Actions

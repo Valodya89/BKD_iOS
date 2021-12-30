@@ -55,7 +55,6 @@ class MyReservationsViewController: BaseViewController {
         } else {
             mSwitchDriversTbHeight.constant = mSwitchDriversTbV.contentSize.height
         }
-        
     }
     
     
@@ -146,6 +145,7 @@ class MyReservationsViewController: BaseViewController {
         }
     }
     
+    //MARK: -- Alerts
     ///Show alert for switch driver
     private func showAlertForSwitchDriver(index: Int,
                                           driver: DriverToRent?) {
@@ -322,12 +322,12 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         case .COMPLETED,
              .START_DEFECT_CHECK,
              .START_ODOMETER_CHECK /*.startRide*/:
-            if item.carDetails.registrationNumber != nil /*item.isRegisterNumber*/ {
+          //  if item.carDetails.registrationNumber != nil /*item.isRegisterNumber*/ {
                 return CGSize(width: collectionView.bounds.width,
                               height: height307)
-            }
-            return CGSize(width: collectionView.bounds.width,
-                          height: height245)
+//            }
+//            return CGSize(width: collectionView.bounds.width,
+//                          height: height245)
 //        case .maykePayment:
 //            return CGSize(width: collectionView.bounds.width,
 //                          height: height240)
@@ -476,14 +476,10 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
 }
 
 //MARK: -- SwitchDriversTableViewDelegate
-//MARK: ----------------------------------
 extension MyReservationsViewController: SwitchDriversTableViewDelegate {
     
     func didPressCell(index: Int, item: DriverToRent) {
         showAlertForSwitchDriver(index: index,
                                  driver: item)
-        
     }
-
-        
 }
