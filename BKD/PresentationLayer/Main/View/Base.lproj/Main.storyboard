@@ -254,16 +254,109 @@
                     <view key="view" contentMode="scaleToFill" id="A1I-cU-SsK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eSb-DZ-myz">
+                                <rect key="frame" x="308.5" y="15" width="95" height="36"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Cancel">
+                                    <fontDescription key="titleFontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
+                                    <color key="baseForegroundColor" name="navigationBar"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="cancel:" destination="ceI-lw-dx8" eventType="touchUpInside" id="na9-Pb-L1b"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LR5-F5-Y5C">
+                                <rect key="frame" x="308.5" y="15" width="95" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="83" id="Kjt-bQ-Lg7"/>
+                                    <constraint firstAttribute="height" constant="36" id="pGE-nc-mb0"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Select">
+                                    <fontDescription key="titleFontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
+                                    <color key="baseForegroundColor" name="navigationBar"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="selectNotif:" destination="ceI-lw-dx8" eventType="touchUpInside" id="8vJ-fH-SNG"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3mq-zR-NAn">
+                                <rect key="frame" x="16" y="15" width="92" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="91" id="tvx-CQ-JGl"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Select all">
+                                    <fontDescription key="titleFontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
+                                    <color key="baseForegroundColor" name="navigationBar"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="selectAllNotification:" destination="ceI-lw-dx8" eventType="touchUpInside" id="5dL-MR-FDH"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6cA-ue-mah">
+                                <rect key="frame" x="0.0" y="96.5" width="414" height="628.5"/>
+                                <color key="backgroundColor" name="background"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="ceI-lw-dx8" id="TSE-bl-ana"/>
+                                    <outlet property="delegate" destination="ceI-lw-dx8" id="gbD-Wy-BP0"/>
+                                </connections>
+                            </tableView>
+                            <button hidden="YES" opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3FK-7l-f3a">
+                                <rect key="frame" x="57" y="615" width="300" height="42"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Delete">
+                                    <fontDescription key="titleFontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="20"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="deleteNotification:" destination="ceI-lw-dx8" eventType="touchUpInside" id="scY-AL-mc4"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="pmx-4J-saQ"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="background"/>
+                        <constraints>
+                            <constraint firstItem="3FK-7l-f3a" firstAttribute="bottom" secondItem="pmx-4J-saQ" secondAttribute="bottom" multiplier="0.906" id="3jw-WS-VIs"/>
+                            <constraint firstItem="3FK-7l-f3a" firstAttribute="centerX" secondItem="pmx-4J-saQ" secondAttribute="centerX" id="DBf-Bj-BTa"/>
+                            <constraint firstItem="6cA-ue-mah" firstAttribute="width" secondItem="A1I-cU-SsK" secondAttribute="width" id="IAD-Fm-Qx0"/>
+                            <constraint firstItem="pmx-4J-saQ" firstAttribute="bottom" secondItem="6cA-ue-mah" secondAttribute="bottom" id="K1I-vM-EhV"/>
+                            <constraint firstItem="LR5-F5-Y5C" firstAttribute="top" secondItem="pmx-4J-saQ" secondAttribute="top" constant="15" id="K66-eH-XgZ"/>
+                            <constraint firstItem="6cA-ue-mah" firstAttribute="top" secondItem="3mq-zR-NAn" secondAttribute="bottom" multiplier="1.9" id="NCM-ZK-jpg"/>
+                            <constraint firstItem="eSb-DZ-myz" firstAttribute="centerX" secondItem="LR5-F5-Y5C" secondAttribute="centerX" id="O9B-m5-Yxi"/>
+                            <constraint firstItem="LR5-F5-Y5C" firstAttribute="centerX" secondItem="pmx-4J-saQ" secondAttribute="centerX" multiplier="1.72" id="UQS-P3-J5D"/>
+                            <constraint firstItem="3FK-7l-f3a" firstAttribute="width" secondItem="A1I-cU-SsK" secondAttribute="width" multiplier="0.724638" id="XaG-t5-0Sb"/>
+                            <constraint firstItem="eSb-DZ-myz" firstAttribute="centerY" secondItem="LR5-F5-Y5C" secondAttribute="centerY" id="aOG-SK-46g"/>
+                            <constraint firstItem="3mq-zR-NAn" firstAttribute="leading" secondItem="pmx-4J-saQ" secondAttribute="leading" constant="16" id="atz-oY-E2e"/>
+                            <constraint firstItem="eSb-DZ-myz" firstAttribute="width" secondItem="LR5-F5-Y5C" secondAttribute="width" id="b3G-16-tiL"/>
+                            <constraint firstItem="3mq-zR-NAn" firstAttribute="height" secondItem="LR5-F5-Y5C" secondAttribute="height" multiplier="0.99" id="bNC-TO-G98"/>
+                            <constraint firstItem="3FK-7l-f3a" firstAttribute="height" secondItem="A1I-cU-SsK" secondAttribute="height" multiplier="0.052" id="byI-va-pdb"/>
+                            <constraint firstItem="eSb-DZ-myz" firstAttribute="height" secondItem="LR5-F5-Y5C" secondAttribute="height" id="c8I-1D-V5q"/>
+                            <constraint firstItem="pmx-4J-saQ" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="3mq-zR-NAn" secondAttribute="trailing" constant="306" id="q2M-uX-Dq9"/>
+                            <constraint firstItem="6cA-ue-mah" firstAttribute="centerX" secondItem="pmx-4J-saQ" secondAttribute="centerX" id="vEf-cT-gBp"/>
+                            <constraint firstItem="3mq-zR-NAn" firstAttribute="centerY" secondItem="LR5-F5-Y5C" secondAttribute="centerY" id="vkq-wp-zAk"/>
+                            <constraint firstItem="LR5-F5-Y5C" firstAttribute="width" secondItem="A1I-cU-SsK" secondAttribute="width" multiplier="0.23" id="z4z-9h-b1I"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Notification" id="3IS-eZ-wTf">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="menu" id="Z62-eQ-Ljg"/>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="bkd" id="dd1-on-ZCL"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mCancelBtn" destination="eSb-DZ-myz" id="2cg-pa-A6Q"/>
+                        <outlet property="mDeleteBtn" destination="3FK-7l-f3a" id="Djy-tl-pZs"/>
+                        <outlet property="mMenuBarBtn" destination="Z62-eQ-Ljg" id="WSu-Fb-9BF"/>
+                        <outlet property="mNotificationTbV" destination="6cA-ue-mah" id="iem-fK-eoc"/>
+                        <outlet property="mRightBarBtn" destination="dd1-on-ZCL" id="vn0-tP-8Jg"/>
+                        <outlet property="mSelectAllBtn" destination="3mq-zR-NAn" id="whd-0b-fYa"/>
+                        <outlet property="mSelectBtn" destination="LR5-F5-Y5C" id="30d-al-WS7"/>
+                        <outlet property="mTableBottom" destination="K1I-vM-EhV" id="OBI-DT-1ov"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ut1-rp-hQv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-491" y="1408"/>
+            <point key="canvasLocation" x="-491.304347826087" y="1407.5892857142856"/>
         </scene>
         <!--Category-->
         <scene sceneID="ZYS-CM-wq8">
@@ -299,7 +392,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verification pending" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kna-ue-p5R">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verification pending" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kna-ue-p5R">
                                 <rect key="frame" x="16.5" y="16" width="381" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="zFE-rt-Ccf"/>

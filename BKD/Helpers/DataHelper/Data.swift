@@ -7,8 +7,7 @@
 
 import UIKit
 
-//MARK: DropDownData
-//MARK: --------------------
+//MARK: -- DropDownData
 struct DropDownData {
     static let dropDownModel: [DropDownModel] = [
         DropDownModel(locationName: "BKD Office", seeMap: "See Map"),
@@ -26,8 +25,7 @@ struct DropDownData {
     ]
 }
 
-//MARK: MenuData
-//MARK: --------------------
+//MARK: -- MenuData
 struct MenuData {
     
     static let menuModel: [MenuModel] = [
@@ -40,8 +38,7 @@ struct MenuData {
     ]
 }
 
-//MARK: EquipmentData
-//MARK: --------------------
+//MARK: -- EquipmentData
 struct EquipmentData {
    static let equipmentModel: [EquipmentModel] = [ EquipmentModel(equipmentImg: UIImage(named: "selected_tow_bar")!, equipmentName: "Tow Bar", didSelect: false),
                                                     EquipmentModel(equipmentImg: UIImage(named: "tail_lift")!, equipmentName: "Tail Lift", didSelect: false),
@@ -51,8 +48,7 @@ struct EquipmentData {
 
 
 
-//MARK: CarsData
-//MARK: --------------------
+//MARK: -- CarsData
 struct CarsData {
     static let carModel:[CarModel] = [CarModel(carImage: #imageLiteral(resourceName: "fiat_telento")),
                                       CarModel(carImage: #imageLiteral(resourceName: "vans")),
@@ -62,8 +58,7 @@ struct CarsData {
 }
 
 
-//MARK: CategoryCarouselData
-//MARK: --------------------
+//MARK: -- CategoryCarouselData
 struct CategoryCarouselData  {
     static let categoryCarouselModel: [CategoryCarouselModel] = [ CategoryCarouselModel(categoryName: "Trucks", CategoryImg: UIImage(named: "trucks_category")),
                                                                   CategoryCarouselModel(categoryName: "Frigo Vans", CategoryImg: UIImage(named: "frigo_vans_category")),
@@ -76,40 +71,6 @@ struct CategoryCarouselData  {
 
 
 
-//MARK: TariffSlideData
-//MARK: --------------------
-//struct TariffSlideData {
-//    static var tariffSlideModel: [TariffSlideModel] = [TariffSlideModel (title: "Hourly",
-//                                                                         bckgColor: color_hourly!,
-//                                                                         titleColor: color_main!,
-//                                                                         options:[TariffSlideModel(title: "Hourly", option: "2 Hours",
-//                                                                                                   bckgColor: color_hourly!,
-//                                                                                                   titleColor: color_main!, value: "€ 25,5"),
-//                                                                                  TariffSlideModel(title: "Hourly", option: "3 Hours", bckgColor: color_hourly!,titleColor: color_main!, value: "€ 35,5"),
-//                                                                                  TariffSlideModel(title: "Hourly", option: "4 Hours", bckgColor: color_hourly!,titleColor: color_main!, value: "€ 45,5"),
-//                                                                                  TariffSlideModel(title: "Hourly", option: "5 Hours", bckgColor: color_hourly!,titleColor: color_main!, value: "€ 55,5"),
-//                                                                                  TariffSlideModel(title: "Hourly", option: "6 Hours", bckgColor: color_hourly!,titleColor: color_main!, value: "€ 65,5"),
-//                                                                                  TariffSlideModel(title: "Hourly", option: "10 Hours", bckgColor: color_hourly!, titleColor: color_main!, value: "€ 75,5")]),
-//                                                       TariffSlideModel (title: "Daily",
-//                                                                         bckgColor: color_days!,titleColor: .white,
-//                                                                         options:[TariffSlideModel(title: "Daily", option: "2 Days", bckgColor: color_days!,titleColor: .white, value: "€ 25,5"),
-//                                                                                                                       TariffSlideModel(title: "Daily", option: "3 Days", bckgColor: color_days!,titleColor: .white, value: "€ 35,5"),
-//                                                                                                                       TariffSlideModel(title: "Daily", option: "4 Days", bckgColor: color_days!,titleColor: .white, value: "€ 45,5"),
-//                                                                                                                       TariffSlideModel(title: "Daily", option: "5 Days", bckgColor: color_days!,titleColor: .white, value: "€ 55,5"),
-//                                                                                                                       TariffSlideModel(title: "Daily", option: "6 Days", bckgColor: color_days!,titleColor: .white, value: "€ 65,5")]),
-//                                                                               TariffSlideModel (title: "Weekly",
-//                                                                         bckgColor: color_weeks!,titleColor: color_main!,
-//                                                                         options:[TariffSlideModel(title: "Weekly", option: "1 Week", bckgColor: color_weeks!,titleColor: color_main!, value: "€ 25,5"),
-//                                                                                   TariffSlideModel(title: "Weekly", option: "2 Weeks",
-//                                                                                                    bckgColor: color_weeks!,titleColor: color_main!, value: "€ 35,5"),
-//                                                                                   TariffSlideModel(title: "Weekly", option: "3 Weeks", bckgColor: color_weeks!,titleColor: color_main!, value: "€ 45,5")]),
-//                                                                               TariffSlideModel (title: "Monthly",
-//                                                                                                 bckgColor:color_monthly!, titleColor: .white,
-//                                                                                                 options:[TariffSlideModel(title: "Monthly", option: "1 Month", bckgColor: color_monthly!,titleColor: .white, value: "€ 25,5")]),
-//                                                                               TariffSlideModel (title: "Flexible",
-//                                                                                                 bckgColor:color_flexible!, titleColor: color_main! )
-//                ]
-//}
 
 
 //MARK: RentalConditionsData
@@ -123,8 +84,7 @@ struct RentalConditionsData {
         RentalConditionsModel(img: #imageLiteral(resourceName: "card"), title: "Minimum Belgian driving license active period:", value: "2 years")]
 }
 
-//MARK: BkdAdvantagesData
-//MARK: --------------------
+//MARK: -- BkdAdvantagesData
 struct BkdAdvantagesData {
     static let bkdAdvantagesModel: [BkdAdvantagesModel] = [BkdAdvantagesModel(title1: "Available 24/7",
                                                                               title2: "Personalized approach",
@@ -146,12 +106,6 @@ struct ReserveData {
 }
 
 
-//struct AccessoriesData {
-//    static let accessoriesModel: [AccessoriesModel] = [
-//        AccessoriesModel(accessoryImg: #imageLiteral(resourceName: "straps"), accessoryName: "Tension straps for rent", accessoryPrice: 6.25, accessoryCount: 1),
-//        AccessoriesModel(accessoryImg: #imageLiteral(resourceName: "tape_dispenser"), accessoryName: "Tape dispenser for sale", accessoryPrice: 5.25, accessoryCount: 1)
-//    ]
-//}
 
 struct MyDriversData {
     static let myDriversModel : [MyDriversModel] = [ MyDriversModel(fullname: "Jon Smit",
@@ -174,16 +128,6 @@ struct MyBkdData {
         MyBkdModel(img: #imageLiteral(resourceName: "account"), title: "My account")
     ]
 }
-
-
-  
-//struct PhoneCodeData {
-//    static let phoneCodeModel: [PhoneCodeModel] = [PhoneCodeModel(country: "Dutch", code: "+31", flag: #imageLiteral(resourceName: "dutch"), phoneFormat: "##-###-####", validFormPattern: 9),
-//        PhoneCodeModel(country: "Franch", code: "+33", flag: #imageLiteral(resourceName: "french"), phoneFormat: "##-##-##-##-##", validFormPattern: 10),
-//        PhoneCodeModel(country: "English", code: "+44", flag: #imageLiteral(resourceName: "english"), phoneFormat: "####-####-##", validFormPattern: 10)]
-//}
-
-
 
 struct  RegistrationBotData {
     static let registrationBotModel: [RegistrationBotModel] = [
@@ -319,7 +263,7 @@ struct PaymentTypeData {
     ]
 }
 
-//MARK: - ReservationWithReservedPaidModel
+//MARK: -- ReservationWithReservedPaidModel
 
 struct ReservationWithReservedPaidData {
     static let reservationWithReservedPaidModel:[ReservationWithReservedPaidModel] = [ReservationWithReservedPaidModel(isActiveStartRide: false, isRegisterNumber: false, myReservationState: MyReservationState.startRide),
@@ -332,7 +276,7 @@ struct ReservationWithReservedPaidData {
     ]
 }
 
-//MARK: PaymentStatusModel
+//MARK: -- PaymentStatusModel
 struct PaymentStatusData {
     static let paymentStatusModel:[PaymentStatusModel] = [PaymentStatusModel(status: "Reserved & Paid", paymentType: "via Office Terminal - Confirmed"),
             PaymentStatusModel(status: "Rental price paid", paymentType: "via Apple pay"),
@@ -341,7 +285,7 @@ struct PaymentStatusData {
 }
 
 
-//MARK: --StartRideData
+//MARK: -- StartRideData
 struct StartRideData {
     static let startRideModel:[StartRideModel] = [
         StartRideModel (damageImg: UIImage(named: "camera") ?? UIImage(), damageName: "Damage Name"),
@@ -355,4 +299,10 @@ struct PriceData {
     static let priceModel:[PriceModel] = [PriceModel(priceTitle: "Price", price: 5.00),
           PriceModel(priceTitle: "Accsessories", price: 0.00),
            PriceModel(priceTitle: "Additional driver", price: 0.00)]
+}
+
+
+//MARK: -- Notification
+struct NotificationData {
+    static let notificationModel: [NotificationModel] = [NotificationModel(text: "Notification can be of various types.", date: "20/03/21", time: "10:00"), NotificationModel(text: "Notifications can be of various types but for the user it is only the message text. ", date: "14/02/21", time: "15:00"), NotificationModel(text: "Notifications can be of various types but for the user it is only the message text that is different in meaning and it expresses the Notification type itself.", date: "17/05/21", time: "13:00"), NotificationModel(text: "Notifications can be of various types but for the user it is only the message text. ", date: "14/02/21", time: "15:00"),]
 }

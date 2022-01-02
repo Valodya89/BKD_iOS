@@ -93,7 +93,6 @@ extension MyAccountsDriversViewController: UITableViewDelegate, UITableViewDataS
         if editingStyle == .delete {
             myDrivers?.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            
         }
     }
     

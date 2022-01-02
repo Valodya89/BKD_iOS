@@ -129,6 +129,7 @@ final class MyBKDViewController: BaseViewController {
     
     ///Pop up Waithing For Admin view
     func showWaithingForAdminView() {
+        mVerificationPendingLb.isHidden = false
         mWaithinfForAdminV.isHidden = false
         mWaithinfForAdminV.popupAnimation()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1 ) {

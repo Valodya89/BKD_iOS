@@ -368,6 +368,10 @@ struct Constant {
         //My Account
         static let newEmail = "New email address"
         static let currPassword = "Current password"
+        
+        //Notification
+        static let deleteNotif = "Are you sure You want to delete this notification?"
+        static let delete = "Delete"
 
         //Error Messages
         static let errChangePassword = "Failed to change password, please try again"
@@ -550,6 +554,7 @@ let color_menu = UIColor(named: "menu")
 let color_carousel = UIColor(named: "carousel")
 let color_carousel_img_tint = UIColor(named: "category_img_tint")
 
+
 let color_filter_fields = UIColor(named: "filter_fields")
 let color_selected_filter_fields = UIColor(named: "selected_filter_field")
 let color_alert_bckg = UIColor(named: "alert_bckg")
@@ -579,6 +584,7 @@ let color_gradient_register_end = UIColor(named: "register_gradient_end")
 let color_dark_register = UIColor(named:"navigation_bar")
 let color_selected_start = UIColor (named: "selected_start")
 let color_driving_license = UIColor(named: "driving_license")
+let color_select_notif = UIColor(named: "notification_select")
 
 //Fonts
 let font_selected_filter = UIFont(name: "SFProDisplay-Regular", size: 18)
