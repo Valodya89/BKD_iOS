@@ -41,7 +41,22 @@
                         <color key="textColor" name="navigationBar"/>
                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                         <textInputTraits key="textInputTraits"/>
+                        <connections>
+                            <outlet property="delegate" destination="KGk-i7-Jjw" id="J9U-FV-CMR"/>
+                        </connections>
                     </textField>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7q-2d-9Ff">
+                        <rect key="frame" x="14" y="57" width="386" height="1"/>
+                        <color key="backgroundColor" name="driving_license"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="JNC-mI-SIV"/>
+                        </constraints>
+                    </view>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gSs-SI-jer">
+                        <rect key="frame" x="375" y="18" width="40" height="40"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="delete" title=" "/>
+                    </button>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efp-Fm-qnO">
                         <rect key="frame" x="303" y="0.0" width="95" height="63"/>
                         <subviews>
@@ -73,7 +88,7 @@
                         </constraints>
                     </view>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fz1-O2-jdG">
-                        <rect key="frame" x="327.5" y="19.5" width="67" height="24"/>
+                        <rect key="frame" x="327.5" y="34" width="67" height="24"/>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" title="Verify">
                             <fontDescription key="titleFontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
@@ -86,24 +101,33 @@
                     <constraint firstItem="cgA-4L-7kr" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.932" id="33P-FE-iIb"/>
                     <constraint firstItem="3Qm-AL-re1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="3Ng-KQ-yYP"/>
                     <constraint firstItem="efp-Fm-qnO" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="4Zh-iK-6uP"/>
+                    <constraint firstItem="l7q-2d-9Ff" firstAttribute="leading" secondItem="cgA-4L-7kr" secondAttribute="leading" id="9SI-sC-B5A"/>
+                    <constraint firstItem="gSs-SI-jer" firstAttribute="width" secondItem="cgA-4L-7kr" secondAttribute="width" multiplier="0.103627" id="B4U-Gd-LaN"/>
+                    <constraint firstItem="gSs-SI-jer" firstAttribute="trailing" secondItem="cgA-4L-7kr" secondAttribute="trailing" constant="15" id="CvK-JA-Iv6"/>
+                    <constraint firstItem="l7q-2d-9Ff" firstAttribute="bottom" secondItem="cgA-4L-7kr" secondAttribute="bottom" id="FLc-2N-AaM"/>
                     <constraint firstAttribute="trailing" secondItem="fz1-O2-jdG" secondAttribute="trailing" multiplier="1.05" id="I87-be-lAo"/>
                     <constraint firstItem="cgA-4L-7kr" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Rb8-ox-nxz"/>
+                    <constraint firstItem="fz1-O2-jdG" firstAttribute="bottom" secondItem="cgA-4L-7kr" secondAttribute="bottom" id="RdC-82-Atc"/>
                     <constraint firstItem="efp-Fm-qnO" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" id="SWk-s9-HGY"/>
                     <constraint firstItem="fz1-O2-jdG" firstAttribute="width" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.161836" id="Wm6-Uq-h9a"/>
                     <constraint firstAttribute="bottom" secondItem="cgA-4L-7kr" secondAttribute="bottom" constant="5" id="ZBx-bF-SYv"/>
+                    <constraint firstItem="gSs-SI-jer" firstAttribute="bottom" secondItem="cgA-4L-7kr" secondAttribute="bottom" id="ZDX-A6-GQ5"/>
                     <constraint firstAttribute="bottom" secondItem="efp-Fm-qnO" secondAttribute="bottom" id="aP1-l3-ww0"/>
                     <constraint firstAttribute="trailing" secondItem="efp-Fm-qnO" secondAttribute="trailing" multiplier="1.04" id="b7U-1f-H3j"/>
                     <constraint firstItem="3Qm-AL-re1" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.923" id="bbJ-My-pdj"/>
                     <constraint firstItem="efp-Fm-qnO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="fxj-f0-aVf"/>
                     <constraint firstItem="cgA-4L-7kr" firstAttribute="top" secondItem="3Qm-AL-re1" secondAttribute="bottom" id="g9T-x1-ejg"/>
                     <constraint firstItem="fz1-O2-jdG" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.377358" id="jGp-F5-bYy"/>
-                    <constraint firstItem="fz1-O2-jdG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="qaG-UV-V3q"/>
+                    <constraint firstItem="gSs-SI-jer" firstAttribute="height" secondItem="cgA-4L-7kr" secondAttribute="height" multiplier="1.25" id="kK9-Zj-d3Y"/>
+                    <constraint firstItem="l7q-2d-9Ff" firstAttribute="trailing" secondItem="cgA-4L-7kr" secondAttribute="trailing" id="lcZ-fJ-jBv"/>
                     <constraint firstItem="3Qm-AL-re1" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="zTA-7T-bn8"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" name="background"/>
             <connections>
+                <outlet property="mDeleteBtn" destination="gSs-SI-jer" id="NVQ-f1-OiZ"/>
+                <outlet property="mEditLineV" destination="l7q-2d-9Ff" id="Amb-Sr-PQE"/>
                 <outlet property="mFieldNameLb" destination="3Qm-AL-re1" id="dKn-XC-guI"/>
                 <outlet property="mTxtFl" destination="cgA-4L-7kr" id="3YL-Bk-WpG"/>
                 <outlet property="mVerifiedV" destination="efp-Fm-qnO" id="SPj-EM-hsu"/>
@@ -113,6 +137,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="delete" width="10" height="10"/>
         <image name="verified" width="17" height="17"/>
         <namedColor name="background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

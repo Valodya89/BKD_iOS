@@ -20,6 +20,7 @@ class PhotosTableViewCell: UITableViewCell {
     @IBOutlet weak var mPhotoImgV: UIImageView!
     @IBOutlet weak var mChangePhotoBtn: UIButton!
     
+    public var isEdit: Bool = false
     var didPressChangePhoto:((Int)->Void)?
     
     override func awakeFromNib() {
@@ -31,7 +32,8 @@ class PhotosTableViewCell: UITableViewCell {
     }
 
     //Set cell information
-    func setCellInfo(item: MainDriverModel, index: Int, isEdit: Bool) {
+    func setCellInfo(item: MainDriverModel, index: Int) {
+        
        mChangePhotoBtn.tag = index
        mChangePhotoBtn.addTarget(self, action: #selector(changePhoto(sender:)), for: .touchUpInside)
        mPhotoTypeLb.isHidden = (item.fieldName == nil)
@@ -39,8 +41,17 @@ class PhotosTableViewCell: UITableViewCell {
            mPhotoTypeLb.text = fieldName
        }
        mPhotoSideLb.text = item.imageSide
-       mPhotoImgV.sd_setImage( with: item.imageURL,
-                          placeholderImage: nil)
+       mChangePhotoBtn.isHidden = !isEdit
+        if item.fieldName == Constant.Texts.selfieDrivingLic {
+            mPhotoSideLb.isHidden = true
+        }
+        
+        if let img = item.editImg {
+            mPhotoImgV.image = img
+        } else if let url = item.imageURL {
+            mPhotoImgV.sd_setImage( with: url,
+                               placeholderImage: nil)
+        }
     }
     
     ///Handler change photo button

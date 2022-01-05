@@ -24,20 +24,27 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMR-tX-nya">
-                        <rect key="frame" x="16" y="0.0" width="207" height="21"/>
+                        <rect key="frame" x="16" y="0.0" width="231.5" height="21"/>
                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                         <color key="textColor" name="email"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="787" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jOL-qT-FUz" customClass="TextField" customModule="BKD" customModuleProvider="target">
-                        <rect key="frame" x="16" y="21" width="100" height="32"/>
-                        <constraints>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="X4M-zU-Oct"/>
-                        </constraints>
+                        <rect key="frame" x="16" y="21" width="231.5" height="32"/>
                         <color key="textColor" name="navigationBar"/>
                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
-                        <textInputTraits key="textInputTraits"/>
+                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                        <connections>
+                            <outlet property="delegate" destination="KGk-i7-Jjw" id="yhf-Zw-46d"/>
+                        </connections>
                     </textField>
+                    <view hidden="YES" alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="58b-4q-DEv">
+                        <rect key="frame" x="16" y="51" width="231.5" height="1"/>
+                        <color key="backgroundColor" name="driving_license"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="kfA-hR-2KS"/>
+                        </constraints>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ree-Y0-FI4">
                         <rect key="frame" x="253" y="0.0" width="145" height="53"/>
                         <subviews>
@@ -51,7 +58,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XKN-PW-tD1">
-                                <rect key="frame" x="11.5" y="0.0" width="33.5" height="31"/>
+                                <rect key="frame" x="5" y="0.0" width="40" height="40"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="uncheck_box" title=" "/>
                                 <connections>
@@ -61,27 +68,45 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="XKN-PW-tD1" firstAttribute="height" secondItem="ree-Y0-FI4" secondAttribute="height" multiplier="0.584906" id="EaV-Wt-x3Q"/>
+                            <constraint firstItem="XKN-PW-tD1" firstAttribute="height" secondItem="ree-Y0-FI4" secondAttribute="height" multiplier="0.75" id="EaV-Wt-x3Q"/>
                             <constraint firstItem="kZK-YA-3xL" firstAttribute="centerY" secondItem="ree-Y0-FI4" secondAttribute="centerY" id="HMQ-HP-k6h"/>
                             <constraint firstItem="kZK-YA-3xL" firstAttribute="height" secondItem="ree-Y0-FI4" secondAttribute="height" id="Urb-pY-oIW"/>
-                            <constraint firstItem="XKN-PW-tD1" firstAttribute="width" secondItem="ree-Y0-FI4" secondAttribute="width" multiplier="0.229508" id="V9U-Y1-hbf"/>
+                            <constraint firstItem="XKN-PW-tD1" firstAttribute="width" secondItem="ree-Y0-FI4" secondAttribute="width" multiplier="0.275" id="V9U-Y1-hbf"/>
                             <constraint firstItem="XKN-PW-tD1" firstAttribute="top" secondItem="ree-Y0-FI4" secondAttribute="top" id="oub-4v-CbK"/>
                             <constraint firstItem="XKN-PW-tD1" firstAttribute="trailing" secondItem="kZK-YA-3xL" secondAttribute="leading" id="s2v-hd-ZFA"/>
                             <constraint firstAttribute="trailing" secondItem="kZK-YA-3xL" secondAttribute="trailing" id="uKv-oQ-KVF"/>
                         </constraints>
                     </view>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5j8-wW-dU8">
+                        <rect key="frame" x="209.5" y="22" width="38" height="31"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="31" id="8L7-jE-M89"/>
+                            <constraint firstAttribute="width" constant="38" id="T16-RA-FzE"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="delete" title=" "/>
+                        <connections>
+                            <action selector="deleteField:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="R1L-iB-hxT"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" name="background"/>
                 <constraints>
+                    <constraint firstItem="58b-4q-DEv" firstAttribute="leading" secondItem="jOL-qT-FUz" secondAttribute="leading" id="3mw-0n-dyS"/>
                     <constraint firstItem="yMR-tX-nya" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="5uP-IW-dZe"/>
                     <constraint firstItem="ree-Y0-FI4" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" id="B5G-zK-Xin"/>
-                    <constraint firstItem="yMR-tX-nya" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" multiplier="0.577" id="MmX-Kp-kkK"/>
-                    <constraint firstItem="yMR-tX-nya" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.5" id="PuU-UV-xUV"/>
+                    <constraint firstItem="58b-4q-DEv" firstAttribute="width" secondItem="jOL-qT-FUz" secondAttribute="width" id="HuX-An-Z2P"/>
+                    <constraint firstItem="yMR-tX-nya" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="centerX" multiplier="0.077" id="MmX-Kp-kkK"/>
+                    <constraint firstItem="yMR-tX-nya" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.559" id="PuU-UV-xUV"/>
+                    <constraint firstItem="5j8-wW-dU8" firstAttribute="bottom" secondItem="jOL-qT-FUz" secondAttribute="bottom" id="XQQ-2l-SNs"/>
                     <constraint firstAttribute="bottom" secondItem="jOL-qT-FUz" secondAttribute="bottom" id="Zn8-TE-VhD"/>
                     <constraint firstAttribute="trailing" secondItem="ree-Y0-FI4" secondAttribute="trailing" constant="16" id="cGB-Ql-0YR"/>
+                    <constraint firstItem="jOL-qT-FUz" firstAttribute="width" secondItem="yMR-tX-nya" secondAttribute="width" id="djT-8F-6EA"/>
                     <constraint firstItem="yMR-tX-nya" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.396226" id="enL-bm-00F"/>
                     <constraint firstItem="jOL-qT-FUz" firstAttribute="top" secondItem="yMR-tX-nya" secondAttribute="bottom" id="hGJ-YU-PIj"/>
                     <constraint firstItem="jOL-qT-FUz" firstAttribute="leading" secondItem="yMR-tX-nya" secondAttribute="leading" id="htc-CC-W5C"/>
+                    <constraint firstItem="5j8-wW-dU8" firstAttribute="trailing" secondItem="jOL-qT-FUz" secondAttribute="trailing" id="leA-fq-ZHS"/>
+                    <constraint firstItem="58b-4q-DEv" firstAttribute="bottom" secondItem="jOL-qT-FUz" secondAttribute="bottom" constant="-1" id="n2X-Kz-7zx"/>
                     <constraint firstItem="ree-Y0-FI4" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.35" id="olb-LK-ihb"/>
                     <constraint firstItem="ree-Y0-FI4" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="rKh-W2-9oZ"/>
                 </constraints>
@@ -90,6 +115,8 @@
             <color key="backgroundColor" name="background"/>
             <connections>
                 <outlet property="mCheckBoxBtn" destination="XKN-PW-tD1" id="Xsq-Jz-qGw"/>
+                <outlet property="mDeleteBtn" destination="5j8-wW-dU8" id="w8R-vP-pwj"/>
+                <outlet property="mEditLineV" destination="58b-4q-DEv" id="wCj-QQ-eAi"/>
                 <outlet property="mFildNameLb" destination="yMR-tX-nya" id="trq-KA-M02"/>
                 <outlet property="mIDondLiveInBuildingLb" destination="kZK-YA-3xL" id="x8m-PE-bDM"/>
                 <outlet property="mTxtFl" destination="jOL-qT-FUz" id="avr-v7-S2V"/>
@@ -98,9 +125,13 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="delete" width="10" height="10"/>
         <image name="uncheck_box" width="14" height="14.5"/>
         <namedColor name="background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="driving_license">
+            <color red="0.7686274509803922" green="0.7686274509803922" blue="0.7686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="email">
             <color red="0.53725490196078429" green="0.59607843137254901" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

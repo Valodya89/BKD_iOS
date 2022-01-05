@@ -7,6 +7,30 @@
 
 import UIKit
 
+enum PersonalInfoState: String {
+    case name
+    case surname
+    case phoneNum
+    case birthday
+    case street
+    case housNum
+    case mailBox
+    case country
+    case zipNum
+    case city
+    case nationalRegNum
+    case frontIdCard
+    case backIdCard
+    case expiryIdCard
+    case frontDrivLic
+    case backDrivLic
+    case issueDrivLic
+    case expiryDrivLic
+    case selfie
+    
+    
+}
+
 final class MyPersonalInformationViewModel {
     
     ///Get main driver list
@@ -41,6 +65,25 @@ final class MyPersonalInformationViewModel {
         mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.selfieDrivingLic, imageURL:mainDriver.drivingLicenseSelfie?.getURL(), isPhoto: true))
         
         return mainDriverList
+    }
+    
+    ///Get country name by id
+    func getCountryName(id: String) -> String? {
         
+        let country = ApplicationSettings.shared.countryList?.filter {
+            $0.id == id
+        }
+        print(country ?? "")
+       return country?.first?.country
+    }
+    
+    ///Get date string
+    func getDate(dateValue: String) -> String {
+        let dateString = dateValue.components(separatedBy: "T")
+        if dateString.count > 1 {
+            let date = dateString[0].stringToDateWithoutTime()
+            return date!.getDay() + " " + date!.getMonth(lng: "en") + " " + date!.getYear()
+        }
+        return dateValue
     }
 }

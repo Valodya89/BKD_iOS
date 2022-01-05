@@ -9,7 +9,7 @@ import UIKit
 import SwiftMaskTextfield
 import PhoneNumberKit
 
-final class ChangePhoneNumberViewController: UIViewController, StoryboardInitializable {
+final class ChangePhoneNumberViewController: BaseViewController {
     
     //MARK: -- Outlets
     @IBOutlet weak var mInfoLb: UILabel!
@@ -121,9 +121,10 @@ final class ChangePhoneNumberViewController: UIViewController, StoryboardInitial
     
     ///Open search phoneCode screen
     private func goToSearchPhoneCode() {
-        let searchPhoneCodeVC = SearchPhoneCodeViewController.initFromStoryboard(name: Constant.Storyboards.searchPhoneCode)
-        searchPhoneCodeVC.delegate = self
-        self.present(searchPhoneCodeVC, animated: true, completion: nil)
+        self.goToSearchPhoneCode()
+//        let searchPhoneCodeVC = SearchPhoneCodeViewController.initFromStoryboard(name: Constant.Storyboards.searchPhoneCode)
+//        searchPhoneCodeVC.delegate = self
+//        self.present(searchPhoneCodeVC, animated: true, completion: nil)
     }
 
     ///Open phone verification screen

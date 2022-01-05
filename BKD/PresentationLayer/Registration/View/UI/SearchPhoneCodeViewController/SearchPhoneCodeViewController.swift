@@ -71,8 +71,7 @@ extension SearchPhoneCodeViewController: UITableViewDelegate, UITableViewDataSou
                 if self.phoneCodes.count > 0 {
                     self.delegate?.didSelectCountry(self.phoneCodes[indexPath.row])
                 }
-            
-        }
+            }
         }
         
     }

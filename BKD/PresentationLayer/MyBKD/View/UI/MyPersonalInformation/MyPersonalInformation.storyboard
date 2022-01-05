@@ -84,7 +84,7 @@
                                     <constraint firstItem="6am-9B-Z4h" firstAttribute="centerY" secondItem="khy-R2-Yz2" secondAttribute="centerY" id="xdG-MK-TCf"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="MYW-26-ajg" customClass="MyPersonalInfoTableView" customModule="BKD" customModuleProvider="target">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="MYW-26-ajg" customClass="MyPersonalInfoTableView" customModule="BKD" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="52" width="414" height="722"/>
                                 <color key="backgroundColor" name="background"/>
                             </tableView>

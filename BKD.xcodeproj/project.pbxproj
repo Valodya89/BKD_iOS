@@ -344,6 +344,8 @@
 		56B41E53277E373A00F10A41 /* NavigationTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56B41E51277E373900F10A41 /* NavigationTableCell.xib */; };
 		56B41E57277E426700F10A41 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B41E56277E426700F10A41 /* Notification.swift */; };
 		56B41E5927821C5D00F10A41 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B41E5827821C5D00F10A41 /* NotificationsViewModel.swift */; };
+		56B41E5D27846ACF00F10A41 /* ConfirmOrCancelTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B41E5B27846ACF00F10A41 /* ConfirmOrCancelTableCell.swift */; };
+		56B41E5E27846AD000F10A41 /* ConfirmOrCancelTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56B41E5C27846ACF00F10A41 /* ConfirmOrCancelTableCell.xib */; };
 		56B9F2D5267E8CEE003449AD /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F2D4267E8CEE003449AD /* SearchView.swift */; };
 		56B9F2E326805021003449AD /* SearchWithValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F2E226805020003449AD /* SearchWithValueView.swift */; };
 		56B9F2ED26806488003449AD /* SearchResultModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F2EC26806488003449AD /* SearchResultModelView.swift */; };
@@ -750,6 +752,8 @@
 		56B41E51277E373900F10A41 /* NavigationTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NavigationTableCell.xib; sourceTree = "<group>"; };
 		56B41E56277E426700F10A41 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		56B41E5827821C5D00F10A41 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
+		56B41E5B27846ACF00F10A41 /* ConfirmOrCancelTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmOrCancelTableCell.swift; sourceTree = "<group>"; };
+		56B41E5C27846ACF00F10A41 /* ConfirmOrCancelTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfirmOrCancelTableCell.xib; sourceTree = "<group>"; };
 		56B9F2D4267E8CEE003449AD /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		56B9F2E226805020003449AD /* SearchWithValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWithValueView.swift; sourceTree = "<group>"; };
 		56B9F2EC26806488003449AD /* SearchResultModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultModelView.swift; sourceTree = "<group>"; };
@@ -1842,6 +1846,7 @@
 		565D4E472778E6C700A14951 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				56B41E5A278469FC00F10A41 /* ConfirmOrCancelTableCell */,
 				56B41E4A277D048100F10A41 /* PersonalInfoTableCell */,
 				565D4E6F277C67ED00A14951 /* MailBoxNumberTableCell */,
 				565D4E6A277C627A00A14951 /* PhotosTableCrll */,
@@ -2990,6 +2995,15 @@
 			path = NavigationTableCell;
 			sourceTree = "<group>";
 		};
+		56B41E5A278469FC00F10A41 /* ConfirmOrCancelTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				56B41E5B27846ACF00F10A41 /* ConfirmOrCancelTableCell.swift */,
+				56B41E5C27846ACF00F10A41 /* ConfirmOrCancelTableCell.xib */,
+			);
+			path = ConfirmOrCancelTableCell;
+			sourceTree = "<group>";
+		};
 		56C8E16E267C1CAD0061890C /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -3326,6 +3340,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56B41E5E27846AD000F10A41 /* ConfirmOrCancelTableCell.xib in Resources */,
 				565F80E026A74D4C00ADB9FE /* PhoneVerification.storyboard in Resources */,
 				56A2AFF02694CFE1001BA7C5 /* SearchPhoneCode.storyboard in Resources */,
 				56C8E173267C1D100061890C /* ReserveTableViewCell.xib in Resources */,
@@ -3582,6 +3597,7 @@
 				5640395126EFA2590064256C /* ReservationWithReservedPaidModel.swift in Sources */,
 				565D4E59277AA26100A14951 /* MyReservetionAdvancedViewModel.swift in Sources */,
 				568E706E264481B0000CB6A9 /* LeftTableViewCell.swift in Sources */,
+				56B41E5D27846ACF00F10A41 /* ConfirmOrCancelTableCell.swift in Sources */,
 				565D4E64277BFE8600A14951 /* MyAccountViewController.swift in Sources */,
 				566B3767269545540021BCAA /* MailBoxNumberTableViewCell.swift in Sources */,
 				564BE8762702068D0037DF39 /* DamageSideTableCell.swift in Sources */,

@@ -81,6 +81,13 @@ class BaseViewController: UIViewController, StoryboardInitializable {
         }
     }
     
+    ///Open search phoneCode screen
+    func goToSearchPhoneCode(viewCont: UIViewController) {
+        let searchPhoneCodeVC = SearchPhoneCodeViewController.initFromStoryboard(name: Constant.Storyboards.searchPhoneCode)
+        searchPhoneCodeVC.delegate = viewCont as! SearchPhoneCodeViewControllerDelegate
+        viewCont.present(searchPhoneCodeVC, animated: true, completion: nil)
+    }
+    
     ///Go to email address comtroller
     func goToEmailAddress() {
         let emailAddressVC = EmailAddressViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
@@ -263,5 +270,27 @@ class BaseViewController: UIViewController, StoryboardInitializable {
         }
     }
     
+    
+    ///Open upload images actionshit
+    func openActionshitOfImages(viewContr: MyPersonalInformationViewController) {
+        let alert = UIAlertController(title: Constant.Texts.selecteImg, message: "", preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction (title: Constant.Texts.camera, style: .default) { [self] (action) in
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                viewContr.presentPicker(sourceType: .camera)
+            }
+        }
+        
+        let photoLibraryAction = UIAlertAction (title: Constant.Texts.photoLibrary, style: .default) { [self] (action) in
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                viewContr.presentPicker(sourceType: .photoLibrary)
+            }
+        }
+        let cancelAction = UIAlertAction (title: Constant.Texts.cancel, style: .cancel)
+        
+        alert.addAction(cameraAction)
+        alert.addAction(photoLibraryAction)
+        alert.addAction(cancelAction)
+        viewContr.present(alert, animated: true)
+    }
     
 }

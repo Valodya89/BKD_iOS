@@ -31,7 +31,7 @@ final class RegistartionBotViewController: BaseViewController {
     
     
     
-    //MARK: Variables
+    //MARK: -- Variables
     weak var delegate: RegistartionBotViewControllerDelegate?
     lazy var registrationBotViewModel = RegistrationBotViewModel()
     var tableData: [RegistrationBotModel] = []
@@ -57,7 +57,7 @@ final class RegistartionBotViewController: BaseViewController {
     public var mainDriver: MainDriver?
 
 
-    //MARK: - Life cycles
+    //MARK: -- Life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -197,8 +197,7 @@ final class RegistartionBotViewController: BaseViewController {
         }
     }
 
-    //MARK: TIMER
-    //MARK -------------------
+    //MARK: -- TIMER
     
     /// Start timer for update table cell
     func startTimer() {
@@ -310,8 +309,7 @@ final class RegistartionBotViewController: BaseViewController {
         return toolBar
     }
     
-    //MARK: Keyboard NSNotification
-    //MARK: ---------------------------
+    //MARK: -- Keyboard NSNotification
     
     @objc func keyboardWillShow (notification: NSNotification) {
         
@@ -343,8 +341,7 @@ final class RegistartionBotViewController: BaseViewController {
     }
     
     
-    //MARK: ACTIONS
-    //MARK: -----------------
+    //MARK: -- ACTIONS
     @IBAction func confirm(_ sender: UIButton) {
         sendPersonalData(personalData: personalData,
                          index: 0,
@@ -397,8 +394,7 @@ final class RegistartionBotViewController: BaseViewController {
     }
 }
 
-//MARK: UITableViewDataSource
-//MARK: ---------------------------
+//MARK: -- UITableViewDataSource
 extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSource {
     
     
@@ -444,8 +440,7 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     
-    //MARK: TABLE CELLS
-    //MARK: ---------------------
+    //MARK: -- Table cells
     private func infoMessageCell(indexPath: IndexPath, model: RegistrationBotModel) -> InfoMessageTableViewCell{
         let cell = mTableV.dequeueReusableCell(withIdentifier: InfoMessageTableViewCell.identifier, for: indexPath) as! InfoMessageTableViewCell
         cell.setCellInfo(items: tableData, index: indexPath.row)
@@ -522,8 +517,7 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
 
 
 
-//MARK: - UserFillFieldTableViewCellDelegate
-//MARK: --------------------------------
+//MARK: -- UserFillFieldTableViewCellDelegate
 extension RegistartionBotViewController: UserFillFieldTableViewCellDelegate {
     
     func didBeginEdithingTxtField(txtFl: UITextField) {
@@ -592,14 +586,14 @@ extension RegistartionBotViewController: UserFillFieldTableViewCellDelegate {
 }
  
 
-//MARK: - PhoneNumberTableViewCellDelegate
-//MARK: --------------------------------
+//MARK: -- PhoneNumberTableViewCellDelegate
 extension RegistartionBotViewController: PhoneNumberTableViewCellDelegate {
     
     func didPressCountryCode() {
-        let searchPhoneCodeVC = SearchPhoneCodeViewController.initFromStoryboard(name: Constant.Storyboards.searchPhoneCode)
-        searchPhoneCodeVC.delegate = self
-        self.present(searchPhoneCodeVC, animated: true, completion: nil)
+        self.goToSearchPhoneCode(viewCont: self)
+//        let searchPhoneCodeVC = SearchPhoneCodeViewController.initFromStoryboard(name: Constant.Storyboards.searchPhoneCode)
+//        searchPhoneCodeVC.delegate = self
+//        self.present(searchPhoneCodeVC, animated: true, completion: nil)
     }
     
     func didReturnTxtField(text: String, code: String, index: Int) {
@@ -610,8 +604,7 @@ extension RegistartionBotViewController: PhoneNumberTableViewCellDelegate {
 }
 
 
-//MARK: - CalendarTableViewCellDelegate
-//MARK: --------------------------------
+//MARK: -- CalendarTableViewCellDelegate
 extension RegistartionBotViewController: CalendarTableViewCellDelegate {
     
     func willOpenPicker(textFl: UITextField, isExpiryDate: Bool) {
@@ -682,8 +675,7 @@ extension RegistartionBotViewController: CalendarTableViewCellDelegate {
 
 
 
-//MARK: - MailBoxNumberTableViewCellDelegate
-//MARK: --------------------------------
+//MARK: -- MailBoxNumberTableViewCellDelegate
 extension RegistartionBotViewController: MailBoxNumberTableViewCellDelegate {
     
     func didReturn(text: String?, noMailBox: Bool, index: Int) {
@@ -700,8 +692,7 @@ extension RegistartionBotViewController: MailBoxNumberTableViewCellDelegate {
 
 
 
-//MARK: - NationalRegisterNumberTableViewCellDelegate
-//MARK: -------------------------------------------
+//MARK: -- NationalRegisterNumberTableViewCellDelegate
 extension RegistartionBotViewController: NationalRegisterNumberTableViewCellDelegate {
     
     func didPressOtherCountryNational(isClicked: Bool, index: Int) {
@@ -729,8 +720,7 @@ extension RegistartionBotViewController: NationalRegisterNumberTableViewCellDele
 
 
 
-//MARK: - TakePhotoTableViewCellDelegate
-//MARK: --------------------------------
+//MARK: -- TakePhotoTableViewCellDelegate
 extension RegistartionBotViewController: TakePhotoTableViewCellDelegate {
     
     func didPressTackePhoto(isOpenDoc: Bool, index: Int) {
@@ -815,7 +805,6 @@ extension RegistartionBotViewController: UIImagePickerControllerDelegate, UINavi
             }
         }
     }
-  
 }
 
 //MARK: -- UIPickerViewDelegate

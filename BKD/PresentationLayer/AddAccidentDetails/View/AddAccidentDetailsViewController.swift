@@ -322,7 +322,6 @@ class AddAccidentDetailsViewController: BaseViewController {
 
 
 //MARK: -- DateAndLocationViewDelegate
-//MARK: ---------------------------------
 extension AddAccidentDetailsViewController: DateAndLocationViewDelegate {
     func willOpenPicker(textFl: UITextField, dateAndLocationState: DateAndLocationState) {
         
@@ -356,7 +355,6 @@ extension AddAccidentDetailsViewController: DateAndLocationViewDelegate {
 
 
 //MARK: -- DamageSidesTableViewDelegate
-//MARK: ---------------------------------
 extension AddAccidentDetailsViewController: DamageSidesTableViewDelegate {
     
     func didPressTakePhoto(index: Int) {
@@ -383,15 +381,12 @@ extension AddAccidentDetailsViewController: DamageSidesTableViewDelegate {
         textFl.inputAccessoryView = creatToolBar()
         responderTxtFl = textFl
         self.currIndexOfDamageSide = textFl.tag
-        
     }
-        
 }
 
 
 
 //MARK: -- AccidentFormTableViewDelegate
-//MARK: ---------------------------------
 extension AddAccidentDetailsViewController: AccidentFormTableViewDelegate{
     
     func pressedTakePhoto(index: Int) {
@@ -407,15 +402,13 @@ extension AddAccidentDetailsViewController: AccidentFormTableViewDelegate{
         mAccidentFormTbV.reloadData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2 ) {
             self.view.setNeedsLayout()
-
         }
     }
      
 }
 
 
-//MARK: UIPickerViewDelegate
-//MARK: --------------------------------
+//MARK: -- UIPickerViewDelegate
 extension AddAccidentDetailsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -431,8 +424,7 @@ extension AddAccidentDetailsViewController: UIPickerViewDelegate, UIPickerViewDa
 }
 
 
-//MARK: - UIImagePickerControllerDelegate
-//MARK: --------------------------------
+//MARK: -- UIImagePickerControllerDelegate
 extension AddAccidentDetailsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     
@@ -464,7 +456,6 @@ extension AddAccidentDetailsViewController: UIImagePickerControllerDelegate, UIN
 
 
 //MARK: -- CustomLocationViewControllerDelegate
-//MARK: -------------------------------------------
 extension AddAccidentDetailsViewController: CustomLocationViewControllerDelegate {
     
     func getCustomLocation(_ locationPlace: String, coordinate: CLLocationCoordinate2D, price: Double?) {
