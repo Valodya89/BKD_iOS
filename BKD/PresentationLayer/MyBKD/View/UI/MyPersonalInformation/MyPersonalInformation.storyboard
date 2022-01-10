@@ -88,6 +88,10 @@
                                 <rect key="frame" x="0.0" y="52" width="414" height="722"/>
                                 <color key="backgroundColor" name="background"/>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="U4l-Br-iGC">
+                                <rect key="frame" x="188.5" y="368.5" width="37" height="37"/>
+                                <color key="color" name="navigationBar"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="background"/>
@@ -99,6 +103,8 @@
                             <constraint firstItem="Of0-cv-EDM" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="o6i-wm-mmy"/>
                             <constraint firstItem="MYW-26-ajg" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" id="oWn-7C-9Hg"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Of0-cv-EDM" secondAttribute="trailing" id="sZ2-D1-oCg"/>
+                            <constraint firstItem="U4l-Br-iGC" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="wlH-nX-EH1"/>
+                            <constraint firstItem="U4l-Br-iGC" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="xOQ-q1-vaT"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My personal information " id="uZf-vu-XOa">
@@ -110,6 +116,7 @@
                         <barButtonItem key="rightBarButtonItem" image="bkd" id="Md9-Vy-pDo"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="mActivityInd" destination="U4l-Br-iGC" id="yHU-Yj-3AD"/>
                         <outlet property="mEdifBtn" destination="rBz-sB-3jd" id="RnN-oJ-Fx2"/>
                         <outlet property="mPersonalInfoTbV" destination="MYW-26-ajg" id="eop-6z-5P0"/>
                         <outlet property="mRightBarBtn" destination="Md9-Vy-pDo" id="Wkr-kc-BUb"/>
@@ -159,6 +166,9 @@
         </namedColor>
         <namedColor name="driving_license">
             <color red="0.7686274509803922" green="0.7686274509803922" blue="0.7686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="navigationBar">
+            <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="navigation_bar">
             <color red="0.10999999940395355" green="0.20000000298023224" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

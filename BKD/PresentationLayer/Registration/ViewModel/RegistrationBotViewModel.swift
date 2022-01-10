@@ -265,7 +265,8 @@ class RegistrationBotViewModel: NSObject {
     }
     
     /// add Personla Data
-    func addPersonlaData(id: String,  personlaData: PersonalData,
+    func addPersonlaData(id: String,
+                         personlaData: PersonalData,
                          completion: @escaping (MainDriver?, String?) -> Void) {
         
 
@@ -349,8 +350,9 @@ class RegistrationBotViewModel: NSObject {
                      id: String,
                      state: String,
                      completion: @escaping (MainDriver?, String?) -> Void)  {
-            
-        SessionNetwork.init().request(with: URLBuilder(from: ImageUploadAPI.upload(image: image, id: id, state: state))) { result in
+        
+        let newImage = image.resizeImage(targetSize: CGSize(width: 500, height: 500))
+        SessionNetwork.init().request(with: URLBuilder(from: ImageUploadAPI.upload(image: newImage, id: id, state: state))) { result in
             switch result {
             case .success(let data):
                 guard let result = BkdConverter<BaseResponseModel<MainDriver>>.parseJson(data: data as Any) else {

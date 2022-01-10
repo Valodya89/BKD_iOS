@@ -118,7 +118,7 @@ struct Constant {
     }
     
     struct Texts {
-        //Main
+        //MARK: -- Main
         static let euro = "€"
         static let inclVat = "(incl, VAT)"
         static let continueTxt = "Continue"
@@ -157,7 +157,7 @@ struct Constant {
       
         
         
-        //Detail
+        //MARK: -- Detail
         static let h = "h"
         static let d = "d"
         static let w = "w"
@@ -191,18 +191,18 @@ struct Constant {
         static let freeKm = "km free for each day"
 //        static let editReserveAlert = "Are you sure you want to change your reservation?"
 
-        //Accessories
+        //MARK: -- Accessories
        static let loginAccessories = "To add accessories, you need to sign in" //???
         static let signInToContinue = "To continue, you need to sign in"
         
-        //Tail Lift
+        //MARK: -- Tail Lift
         static let kg = "kg"
         static let cm = "cm"
         static let tailLiftCapacity = "Tail lift lifting capacity"
         static let tailLiftLength = "Tail lift length"
         static let loadingFloorHeight = "Loading floor height"
         
-        //Register
+        //MARK: -- Register
         static let accountExist = "Account already exists"
         static let failedRequest = "Request failed please try again"
         static let reciveEmail = "You will receive the email in"
@@ -249,20 +249,8 @@ struct Constant {
         static let drivingLicenseNumber = "Driving license number"
         static let nationalRegisterNum = "National register number"
         static let otherCountryRegisterNum = "Other Country National Register Number"
-        static let identityCard = "Identity card"
-        static let frontSideIdCard = "Front side of Identity card"
-        static let backSideIdCard = "Back side of Identity card"
-        static let expiryDateIdCard = "Expiry date of Identity card"
-        static let  drivingLicense = "Driving license"
-        static let frontDrivingLic = "Front side of Driving license"
-        static let backDrivingLic = "Back side of Driving license"
-        static let issueDrivingLic = "Issue date of Driving license"
-        static let expiryDrivingLic = "Expiry date of Driving license"
-        static let selfieDrivingLic = "Selfie with Driving license"
-        
-        
 
-        //Personal date types
+        //MARK: -- Personal date types
         static let button = "button"
         static let txtFl = "txtFl"
         static let phone = "phone"
@@ -273,11 +261,11 @@ struct Constant {
         static let expiryDateDrivingLicense = "calendar_expire_driving_license"
         static let issueDateDrivingLicense = "calendar_issue_driving_license"
         
-        //Phone verification
+        //MARK: -- Phone verification
         static let phoneVerificationInfo = "First step to make the reservation is to verify your phone number. We will send a verification code to %@%@ number, indicated during the Reservation."
     
         
-        //Payment
+        //MARK: -- Payment
         static let invalidCode = "Verification code is invalid"
         static let payAlert = "You should pay 24 hours before the reservation. If not, the Pre-Reservation will be automatically cancelled. There %@ only %f free %@ of the Pre-Reservation in a month."
         static let cancellations = "cancellations"
@@ -291,7 +279,7 @@ struct Constant {
         static let generatedCode = "Generated Code"
         static let makePayment = "Make %.2f  Payment via"
         
-        //My Reservation
+        //MARK: -- My Reservation
         static let price = "Price"
         static let specialOffer = "Special offer"
         static let customLocation = "Custom location"
@@ -309,7 +297,7 @@ struct Constant {
         
         
         
-        //Start Ride
+        //MARK: -- Start Ride
        static let confirmStartNow =  "By clicking “Start now” button you confirm that you got your keys and are to start the ride."
         static let startNow = "Start Now"
         static let vehicleOdometerPlaceholder = "Vehicle Odometer numbers"
@@ -320,7 +308,7 @@ struct Constant {
         static let startRideAlert = "By clicking “Start now” button you confirm that you got your keys and are to start the ride."
         static let activeStartRide = "You will get vehicle Registration numbers 15 minutes before the Reservation Pick up time, and will be able to start the ride."
         
-        //Stop ride
+        //MARK: -- Stop ride
         static let stopRide = "Stop Ride"
         static let confirmSwitchDriver = "Please, confirm that you want to switch to ´%@´ driver."
         static let stopRideInfo = "If you want to stop your ride, you need to have the vehicle parked in the Return location and have the Odometer checked."
@@ -328,13 +316,13 @@ struct Constant {
         static let finishRide_alert = "By clicking ´Finish Ride´ button, you confirm that you have parked the vehicle in the Return location and returned the keys to a BKD officer. Within 24 hours we will check the vehicle and Odometer details, and notify you on the amount of the Pending payment."
         static let finishRide = "Finish ride"
         
-        //Additional driver
+        //MARK: -- Additional driver
         static let addDriverAlert = "Additional driver servide is %.2f euro per driver. You need to wait for Admin approval to have an additional drier for your account. No payment will be needed unless the Admin approves the driver addition."
         static let addDriverService = "Additional driver service is %.2f euro per driver. Please, confirm that you want to turn on the service."
         static let licenseNumber =  "Driving license number"
 
         
-        //Add accident details
+        //MARK: -- Add accident details
         static let selectSide = "Select vehicle side"
         static let selectDate = "Select date"
         static let selectTime = "Select time"
@@ -347,16 +335,16 @@ struct Constant {
         static let cancelAccident = "Are you sure you want to back? The accident and all information provided will be deleted."
         static let yes = "Yes"
         
-        //Compare
+        //MARK: -- Compare
         static let vehicle2 = "Vehicle 2"
 
         
-        //Verify
+        //MARK: -- Verify
         static let selectMailApp = "Select Mail App"
         static let  googleMail = "Googleg Mail"
         static let  yahooMail = "Yahoo Mail"
     
-        //Registration Bot
+        //MARK: -- Registration Bot
         static let start = "Start"
         static let IF_text = "front side photo of your Identity card"
         static let IB_text = "back side photo of your Identity card"
@@ -365,15 +353,28 @@ struct Constant {
         static let license_issue_text = "Issue date of the Driving license"
         
         
-        //My Account
+        //MARK: -- My Account
         static let newEmail = "New email address"
         static let currPassword = "Current password"
         
-        //Notification
+        //MARK: -- My personal information
+        static let confitmEdit = "You need to wait for Admin approval to have your Personal Information edited. Are you sure you want to continue?"
+        static let identityCard = "Identity card"
+        static let frontSideIdCard = "Front side of Identity card"
+        static let backSideIdCard = "Back side of Identity card"
+        static let expiryDateIdCard = "Expiry date of Identity card"
+        static let  drivingLicense = "Driving license"
+        static let frontDrivingLic = "Front side of Driving license"
+        static let backDrivingLic = "Back side of Driving license"
+        static let issueDrivingLic = "Issue date of Driving license"
+        static let expiryDrivingLic = "Expiry date of Driving license"
+        static let selfieDrivingLic = "Selfie with Driving license"
+        
+        //MARK: -- Notification
         static let deleteNotif = "Are you sure You want to delete this notification?"
         static let delete = "Delete"
 
-        //Error Messages
+        //MARK: -- Error Messages
         static let errChangePassword = "Failed to change password, please try again"
         static let errAccountVerify = "Failed to verify account"
         static let errEmailVerifyNoUser = "Failed to send verification email, there is no such user"
@@ -392,8 +393,7 @@ struct Constant {
         
         
 
-        
-        //Request texts
+        //MARK: -- Request texts
         static let type = "type"
         static let exterior = "exterior"
         static let transmission = "transmission"

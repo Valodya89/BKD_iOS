@@ -9,6 +9,11 @@ import UIKit
 import SwiftMaskTextfield
 import PhoneNumberKit
 
+
+protocol  ChangePhoneNumberViewControllerDelegate: AnyObject {
+    func didChangeNumber(phone: String)
+}
+
 final class ChangePhoneNumberViewController: BaseViewController {
     
     //MARK: -- Outlets
@@ -25,8 +30,10 @@ final class ChangePhoneNumberViewController: BaseViewController {
     
 
     //MARK: -- Variables
+    weak var delegate:  ChangePhoneNumberViewControllerDelegate?
     lazy var changePhoneNumberViewModel = ChangePhoneNumberViewModel()
     public var vehicleModel: VehicleModel?
+    public var newPhoneNumber: String?
     private var selectedCountry: PhoneCode?
     private var validFormPattern: Int = 0
     private let phoneNumberKit = PhoneNumberKit()
@@ -119,14 +126,6 @@ final class ChangePhoneNumberViewController: BaseViewController {
         mNumberTxtFl.textColor = color
     }
     
-    ///Open search phoneCode screen
-    private func goToSearchPhoneCode() {
-        self.goToSearchPhoneCode()
-//        let searchPhoneCodeVC = SearchPhoneCodeViewController.initFromStoryboard(name: Constant.Storyboards.searchPhoneCode)
-//        searchPhoneCodeVC.delegate = self
-//        self.present(searchPhoneCodeVC, animated: true, completion: nil)
-    }
-
     ///Open phone verification screen
     private func goToPhoneVerification() {
         let phoneVerification = PhoneVerificationViewController.initFromStoryboard(name: Constant.Storyboards.phoneVerification)
@@ -164,6 +163,7 @@ final class ChangePhoneNumberViewController: BaseViewController {
     }
     
     @IBAction func back(_ sender: UIBarButtonItem) {
+        delegate?.didChangeNumber(phone: (selectedCountry?.code ?? "") + (phoneNumber ?? ""))
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -172,11 +172,11 @@ final class ChangePhoneNumberViewController: BaseViewController {
     }
     
     @IBAction func changeNumber(_ sender: UIButton) {
-        goToSearchPhoneCode()
+        self.goToSearchPhoneCode(viewCont: self)
     }
     
     @IBAction func searchCountry(_ sender: UIButton) {
-        goToSearchPhoneCode()
+        self.goToSearchPhoneCode(viewCont: self)
     }
 }
 

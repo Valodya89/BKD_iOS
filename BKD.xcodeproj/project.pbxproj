@@ -346,6 +346,8 @@
 		56B41E5927821C5D00F10A41 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B41E5827821C5D00F10A41 /* NotificationsViewModel.swift */; };
 		56B41E5D27846ACF00F10A41 /* ConfirmOrCancelTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B41E5B27846ACF00F10A41 /* ConfirmOrCancelTableCell.swift */; };
 		56B41E5E27846AD000F10A41 /* ConfirmOrCancelTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56B41E5C27846ACF00F10A41 /* ConfirmOrCancelTableCell.xib */; };
+		56B41E622785EC9300F10A41 /* PhonbeNumberTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B41E602785EC9100F10A41 /* PhonbeNumberTableCell.swift */; };
+		56B41E632785EC9300F10A41 /* PhonbeNumberTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56B41E612785EC9100F10A41 /* PhonbeNumberTableCell.xib */; };
 		56B9F2D5267E8CEE003449AD /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F2D4267E8CEE003449AD /* SearchView.swift */; };
 		56B9F2E326805021003449AD /* SearchWithValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F2E226805020003449AD /* SearchWithValueView.swift */; };
 		56B9F2ED26806488003449AD /* SearchResultModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F2EC26806488003449AD /* SearchResultModelView.swift */; };
@@ -754,6 +756,8 @@
 		56B41E5827821C5D00F10A41 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
 		56B41E5B27846ACF00F10A41 /* ConfirmOrCancelTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmOrCancelTableCell.swift; sourceTree = "<group>"; };
 		56B41E5C27846ACF00F10A41 /* ConfirmOrCancelTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfirmOrCancelTableCell.xib; sourceTree = "<group>"; };
+		56B41E602785EC9100F10A41 /* PhonbeNumberTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonbeNumberTableCell.swift; sourceTree = "<group>"; };
+		56B41E612785EC9100F10A41 /* PhonbeNumberTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhonbeNumberTableCell.xib; sourceTree = "<group>"; };
 		56B9F2D4267E8CEE003449AD /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		56B9F2E226805020003449AD /* SearchWithValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWithValueView.swift; sourceTree = "<group>"; };
 		56B9F2EC26806488003449AD /* SearchResultModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultModelView.swift; sourceTree = "<group>"; };
@@ -1846,10 +1850,11 @@
 		565D4E472778E6C700A14951 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				56B41E5A278469FC00F10A41 /* ConfirmOrCancelTableCell */,
 				56B41E4A277D048100F10A41 /* PersonalInfoTableCell */,
+				56B41E5F2785EC7400F10A41 /* PhonbeNumberTableCell */,
 				565D4E6F277C67ED00A14951 /* MailBoxNumberTableCell */,
 				565D4E6A277C627A00A14951 /* PhotosTableCrll */,
+				56B41E5A278469FC00F10A41 /* ConfirmOrCancelTableCell */,
 				565D4E5B277BEA0C00A14951 /* MyDriverTableCell */,
 				56AD19062692B9F6006A53C1 /* MyBkdTableViewCell.swift */,
 			);
@@ -3004,6 +3009,15 @@
 			path = ConfirmOrCancelTableCell;
 			sourceTree = "<group>";
 		};
+		56B41E5F2785EC7400F10A41 /* PhonbeNumberTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				56B41E602785EC9100F10A41 /* PhonbeNumberTableCell.swift */,
+				56B41E612785EC9100F10A41 /* PhonbeNumberTableCell.xib */,
+			);
+			path = PhonbeNumberTableCell;
+			sourceTree = "<group>";
+		};
 		56C8E16E267C1CAD0061890C /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -3394,6 +3408,7 @@
 				56A2AFE02693F221001BA7C5 /* ExamplePhotoTableViewCell.xib in Resources */,
 				564E136A2652F0CF008CE884 /* PrivacyPoliceView.xib in Resources */,
 				5665400D2673A0A5008ACD31 /* TariffSlideCollectionViewCell.xib in Resources */,
+				56B41E632785EC9300F10A41 /* PhonbeNumberTableCell.xib in Resources */,
 				566B3768269545540021BCAA /* MailBoxNumberTableViewCell.xib in Resources */,
 				56CF783426F4F56E0092F555 /* VehicleCheck.storyboard in Resources */,
 				5665404826759E79008ACD31 /* TariffCarouselCell.xib in Resources */,
@@ -3679,6 +3694,7 @@
 				561888A2264ABDFC00BDDB33 /* DropDownTableViewCell.swift in Sources */,
 				565F807C26A510AA00ADB9FE /* Country.swift in Sources */,
 				565A7AD62654C49B006C63D0 /* CategoryCollectionViewCell.swift in Sources */,
+				56B41E622785EC9300F10A41 /* PhonbeNumberTableCell.swift in Sources */,
 				56AD18F226928861006A53C1 /* RegistrationViewModel.swift in Sources */,
 				56AD19072692B9F6006A53C1 /* MyBkdTableViewCell.swift in Sources */,
 				565BFDB1269F5AD80044D081 /* AuthAPI.swift in Sources */,

@@ -57,67 +57,20 @@
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" image="delete" title=" "/>
                     </button>
-                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efp-Fm-qnO">
-                        <rect key="frame" x="303" y="0.0" width="95" height="63"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="verified" translatesAutoresizingMaskIntoConstraints="NO" id="Uju-b6-b7R">
-                                <rect key="frame" x="11" y="23" width="17" height="17"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="17" id="5fB-Ma-sqp"/>
-                                    <constraint firstAttribute="height" constant="17" id="Biy-dj-eTt"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verified" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wsb-y1-ufv">
-                                <rect key="frame" x="38" y="16.5" width="57" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="57" id="Fr9-Qr-P3y"/>
-                                    <constraint firstAttribute="height" constant="30" id="LkP-cN-ucm"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
-                                <color key="textColor" name="driving_license"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="Wsb-y1-ufv" firstAttribute="leading" secondItem="Uju-b6-b7R" secondAttribute="trailing" constant="10" id="Ayi-ZP-C89"/>
-                            <constraint firstItem="Uju-b6-b7R" firstAttribute="leading" secondItem="efp-Fm-qnO" secondAttribute="leading" constant="11" id="XVG-J2-2v0"/>
-                            <constraint firstItem="Wsb-y1-ufv" firstAttribute="centerY" secondItem="Uju-b6-b7R" secondAttribute="centerY" id="gUu-f2-Pb6"/>
-                            <constraint firstItem="Wsb-y1-ufv" firstAttribute="centerY" secondItem="efp-Fm-qnO" secondAttribute="centerY" id="r1a-cA-4Xu"/>
-                            <constraint firstAttribute="trailing" secondItem="Wsb-y1-ufv" secondAttribute="trailing" id="zCp-2D-Xyt"/>
-                        </constraints>
-                    </view>
-                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fz1-O2-jdG">
-                        <rect key="frame" x="327.5" y="34" width="67" height="24"/>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain" title="Verify">
-                            <fontDescription key="titleFontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
-                            <color key="baseForegroundColor" name="navigationBar"/>
-                        </buttonConfiguration>
-                    </button>
                 </subviews>
                 <color key="backgroundColor" name="background"/>
                 <constraints>
                     <constraint firstItem="cgA-4L-7kr" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.932" id="33P-FE-iIb"/>
                     <constraint firstItem="3Qm-AL-re1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="3Ng-KQ-yYP"/>
-                    <constraint firstItem="efp-Fm-qnO" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="4Zh-iK-6uP"/>
                     <constraint firstItem="l7q-2d-9Ff" firstAttribute="leading" secondItem="cgA-4L-7kr" secondAttribute="leading" id="9SI-sC-B5A"/>
                     <constraint firstItem="gSs-SI-jer" firstAttribute="width" secondItem="cgA-4L-7kr" secondAttribute="width" multiplier="0.103627" id="B4U-Gd-LaN"/>
                     <constraint firstItem="gSs-SI-jer" firstAttribute="trailing" secondItem="cgA-4L-7kr" secondAttribute="trailing" constant="15" id="CvK-JA-Iv6"/>
                     <constraint firstItem="l7q-2d-9Ff" firstAttribute="bottom" secondItem="cgA-4L-7kr" secondAttribute="bottom" id="FLc-2N-AaM"/>
-                    <constraint firstAttribute="trailing" secondItem="fz1-O2-jdG" secondAttribute="trailing" multiplier="1.05" id="I87-be-lAo"/>
                     <constraint firstItem="cgA-4L-7kr" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Rb8-ox-nxz"/>
-                    <constraint firstItem="fz1-O2-jdG" firstAttribute="bottom" secondItem="cgA-4L-7kr" secondAttribute="bottom" id="RdC-82-Atc"/>
-                    <constraint firstItem="efp-Fm-qnO" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" id="SWk-s9-HGY"/>
-                    <constraint firstItem="fz1-O2-jdG" firstAttribute="width" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.161836" id="Wm6-Uq-h9a"/>
                     <constraint firstAttribute="bottom" secondItem="cgA-4L-7kr" secondAttribute="bottom" constant="5" id="ZBx-bF-SYv"/>
                     <constraint firstItem="gSs-SI-jer" firstAttribute="bottom" secondItem="cgA-4L-7kr" secondAttribute="bottom" id="ZDX-A6-GQ5"/>
-                    <constraint firstAttribute="bottom" secondItem="efp-Fm-qnO" secondAttribute="bottom" id="aP1-l3-ww0"/>
-                    <constraint firstAttribute="trailing" secondItem="efp-Fm-qnO" secondAttribute="trailing" multiplier="1.04" id="b7U-1f-H3j"/>
                     <constraint firstItem="3Qm-AL-re1" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.923" id="bbJ-My-pdj"/>
-                    <constraint firstItem="efp-Fm-qnO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="fxj-f0-aVf"/>
                     <constraint firstItem="cgA-4L-7kr" firstAttribute="top" secondItem="3Qm-AL-re1" secondAttribute="bottom" id="g9T-x1-ejg"/>
-                    <constraint firstItem="fz1-O2-jdG" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.377358" id="jGp-F5-bYy"/>
                     <constraint firstItem="gSs-SI-jer" firstAttribute="height" secondItem="cgA-4L-7kr" secondAttribute="height" multiplier="1.25" id="kK9-Zj-d3Y"/>
                     <constraint firstItem="l7q-2d-9Ff" firstAttribute="trailing" secondItem="cgA-4L-7kr" secondAttribute="trailing" id="lcZ-fJ-jBv"/>
                     <constraint firstItem="3Qm-AL-re1" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="zTA-7T-bn8"/>
@@ -130,15 +83,12 @@
                 <outlet property="mEditLineV" destination="l7q-2d-9Ff" id="Amb-Sr-PQE"/>
                 <outlet property="mFieldNameLb" destination="3Qm-AL-re1" id="dKn-XC-guI"/>
                 <outlet property="mTxtFl" destination="cgA-4L-7kr" id="3YL-Bk-WpG"/>
-                <outlet property="mVerifiedV" destination="efp-Fm-qnO" id="SPj-EM-hsu"/>
-                <outlet property="mVerifyBtn" destination="fz1-O2-jdG" id="Hpd-Na-ePv"/>
             </connections>
             <point key="canvasLocation" x="139" y="77"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="delete" width="10" height="10"/>
-        <image name="verified" width="17" height="17"/>
         <namedColor name="background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

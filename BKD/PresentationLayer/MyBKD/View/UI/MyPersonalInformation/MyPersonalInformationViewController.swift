@@ -16,10 +16,11 @@ class MyPersonalInformationViewController: BaseViewController {
     @IBOutlet weak var mVerifiedLb: UILabel!
     @IBOutlet weak var mVerifiedImgV: UIImageView!
     @IBOutlet weak var mPersonalInfoTbV: MyPersonalInfoTableView!
+    @IBOutlet weak var mActivityInd: UIActivityIndicatorView!
     @IBOutlet weak var mEdifBtn: UIButton!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
          
-    lazy var myPersonalInfoViewModel =  MyPersonalInformationViewModel()
+    lazy var myPersonalInfoVM =  MyPersonalInformationViewModel()
     var isTakePhoto:Bool = false
     var currIndex = 0
     public var mainDriver: MainDriver?
@@ -28,6 +29,7 @@ class MyPersonalInformationViewController: BaseViewController {
     //MARK: -- Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        mActivityInd.startAnimating()
         self.configureNavigationControll(navControll: navigationController, barBtn: mRightBarBtn)
         getMainDriverList()
         handlerChangePhoto()
@@ -35,6 +37,9 @@ class MyPersonalInformationViewController: BaseViewController {
         handlerConfirm()
         handlerCountry()
         handlerCity()
+        handlerPhoneNumber()
+        handlerVerify()
+        editingCompleted()
     }
     
     ///Configure UI
@@ -50,36 +55,14 @@ class MyPersonalInformationViewController: BaseViewController {
     func getMainDriverList() {
         guard let mainDriver = self.mainDriver else {return}
         self.configureUI()
-        self.mPersonalInfoTbV.mainDriverList = self.myPersonalInfoViewModel.getMainDriverList(mainDriver: mainDriver)
-        self.mPersonalInfoTbV.editMainDriverList = self.mPersonalInfoTbV.mainDriverList
-        self.mPersonalInfoTbV.reloadData()
+        
+        self.myPersonalInfoVM.getMainDriverList(mainDriver: mainDriver) { list in
+            self.mPersonalInfoTbV.editMainDriverList = list
+            self.mPersonalInfoTbV.mainDriverList = self.mPersonalInfoTbV.editMainDriverList
+            self.mPersonalInfoTbV.reloadData()
+            self.mActivityInd.stopAnimating()
+        }
     }
-
-    
-    
-    ///Will creat actionshit for camera and photo library
-    func photoPressed() {
-        self.openActionshitOfImages(viewContr: self)
-//        let alert = UIAlertController(title: Constant.Texts.selecteImg, message: "", preferredStyle: .actionSheet)
-//        let cameraAction = UIAlertAction (title: Constant.Texts.camera, style: .default) { [self] (action) in
-//            if UIImagePickerController.isSourceTypeAvailable(.camera) {
-//                self.presentPicker(sourceType: .camera)
-//            }
-//        }
-//
-//        let photoLibraryAction = UIAlertAction (title: Constant.Texts.photoLibrary, style: .default) { [self] (action) in
-//            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-//                self.presentPicker(sourceType: .photoLibrary)
-//            }
-//        }
-//        let cancelAction = UIAlertAction (title: Constant.Texts.cancel, style: .cancel)
-//
-//        alert.addAction(cameraAction)
-//        alert.addAction(photoLibraryAction)
-//        alert.addAction(cancelAction)
-//        self.present(alert, animated: true)
-    }
-    
     
     ///Will present image Picker controller
      func presentPicker (sourceType: UIImagePickerController.SourceType) {
@@ -88,6 +71,42 @@ class MyPersonalInformationViewController: BaseViewController {
         picker.sourceType = sourceType
         picker.delegate = self
         present(picker, animated: true)
+    }
+    
+    ///Show alert forn confirm info of accident details
+    func showAlertForConfirm() {
+        BKDAlert().showAlert(on: self, message: Constant.Texts.confitmEdit, cancelTitle: Constant.Texts.cancel, okTitle: Constant.Texts.change) {
+            self.editCancel()
+        } okAction: {
+            self.confirmEditing()
+        }
+    }
+    
+    ///Send request to confirm editing
+    func confirmEditing() {
+        mActivityInd.startAnimating()
+        self.mEdifBtn.setImage(img_edit, for: .normal)
+        self.mPersonalInfoTbV.isEdit = false
+        mPersonalInfoTbV.isPhoneEdited = myPersonalInfoVM.isPhoneNumberEdited(newMainDrivers: mPersonalInfoTbV.editMainDriverList!, oldMainDrivers: mPersonalInfoTbV.mainDriverList!)
+        self.myPersonalInfoVM.confirmEditedInfo(driverId: self.mainDriver?.id ?? "",
+                                                       newMainDrivers: self.mPersonalInfoTbV.editMainDriverList!,
+                                                       oldMainDrivers: self.mPersonalInfoTbV.mainDriverList!)
+    }
+    
+    ///Editing completed
+    func editingCompleted() {
+        myPersonalInfoVM.didConfirmEditing = {
+            self.mPersonalInfoTbV.reloadData()
+            self.mActivityInd.stopAnimating()
+
+        }
+    }
+   
+    ///Cancel edit
+    func editCancel(){
+        self.mEdifBtn.setImage(img_edit, for: .normal)
+        self.mPersonalInfoTbV.isEdit = false
+        self.mPersonalInfoTbV.reloadData()
     }
     
     // MARK: -- Actions
@@ -105,25 +124,27 @@ class MyPersonalInformationViewController: BaseViewController {
     func handlerChangePhoto() {
         mPersonalInfoTbV.didPressChangePhoto = { index in
             self.currIndex = index
-            self.photoPressed()
+            self.openActionshitOfImages(viewContr: self)
         }
     }
     
     ///Handler cancel
     func handlerCancel() {
         mPersonalInfoTbV.didPressCancel = {
-            self.mEdifBtn.setImage(img_edit, for: .normal)
-            self.mPersonalInfoTbV.isEdit = false
-            self.mPersonalInfoTbV.reloadData()
+            self.editCancel()
         }
     }
     
     ///Handler confirm
     func handlerConfirm() {
         mPersonalInfoTbV.didPressConfirm = {
-            self.mEdifBtn.setImage(img_edit, for: .normal)
-            self.mPersonalInfoTbV.isEdit = false
-            self.mPersonalInfoTbV.reloadData()
+
+            if self.myPersonalInfoVM.areFilledFields(mainDrivers: self.mPersonalInfoTbV.editMainDriverList) {
+                self.showAlertForConfirm()
+            } else {
+                self.mPersonalInfoTbV.reloadData()
+            }
+            
         }
     }
     
@@ -140,8 +161,33 @@ class MyPersonalInformationViewController: BaseViewController {
             self.showAutocompleteViewController(viewController: self)
         }
     }
+    
+    ///Handler phone verify button
+    func handlerVerify() {
+        mPersonalInfoTbV.willOpenPhoneVerify = { phoneNumber in
+            self.goToPhoneVerification(vehicleModel: nil, phoneNumber: phoneNumber)
+        }
+    }
+    
+    ///Handler phone Number filed
+    func handlerPhoneNumber() {
+        mPersonalInfoTbV.willOpenPhoneCodes = {
+            self.goToSearchPhoneCode(viewCont: self)
+        }
+    }
 }
 
+//MARK: -- SearchPhoneCodeViewControllerDelegate
+extension MyPersonalInformationViewController: SearchPhoneCodeViewControllerDelegate {
+    
+    func didSelectCountry(_ country: PhoneCode) {
+//        let phoneNumber = mPersonalInfoTbV.editMainDriverList?[2].fieldValue
+//        let phoneObj = MyPersonalInformationViewModel().getCurrnetPhoneCode(number: phoneNumber ?? "")
+//        let newNumber = phoneNumber?.replacingOccurrences(of: phoneObj?.code ?? "", with: country.code)
+        mPersonalInfoTbV.editMainDriverList?[2].fieldValue = country.code
+        mPersonalInfoTbV.reloadData()
+    }
+}
 
 
 //MARK: -- UIImagePickerControllerDelegate
@@ -165,7 +211,7 @@ extension MyPersonalInformationViewController: UIImagePickerControllerDelegate, 
     }
     
     func uploadImage(image: UIImage) {
-        mPersonalInfoTbV.mainDriverList?[currIndex].editImg = image
+        mPersonalInfoTbV.editMainDriverList?[currIndex].editImg = image
         mPersonalInfoTbV.reloadRows(at: [IndexPath(row: currIndex, section: 0)], with: .automatic)
     }
 }
@@ -195,7 +241,7 @@ extension MyPersonalInformationViewController: GMSAutocompleteViewControllerDele
                   } else {
                       cityname = place.name ?? ""
                   }
-                  self.mPersonalInfoTbV.mainDriverList?[9].fieldValue = cityname
+                  self.mPersonalInfoTbV.editMainDriverList?[9].fieldValue = cityname
                   self.mPersonalInfoTbV.reloadData()
               })
           case .failure( _ ):

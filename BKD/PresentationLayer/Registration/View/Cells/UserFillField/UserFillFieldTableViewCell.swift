@@ -14,7 +14,6 @@ enum ViewType: String, CaseIterable {
     case phone = "phone"
     case textFl = "txtFl"
     case nationalRegister = "national register"
-    
     case name = "name"
     case surname = "surname"
     case dateOfBirth = "dateOfBirth"

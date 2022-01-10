@@ -232,6 +232,14 @@ class BaseViewController: UIViewController, StoryboardInitializable {
         self.navigationController?.pushViewController(moreVC, animated: true)
     }
     
+    ///Go to verification screen
+    func goToPhoneVerification(vehicleModel: VehicleModel?, phoneNumber: String?) {
+        let changePhoneNumberVC = ChangePhoneNumberViewController.initFromStoryboard(name: Constant.Storyboards.changePhoneNumber)
+        changePhoneNumberVC.vehicleModel = vehicleModel
+        changePhoneNumberVC.newPhoneNumber = phoneNumber
+      self.navigationController?.pushViewController(changePhoneNumberVC, animated: true)
+    }
+    
     ///Open OdometerCheck controller
     func goToOdometerCheck(rent: Rent?) {
         let odometerCheckVC = OdometerCheckViewController.initFromStoryboard(name: Constant.Storyboards.odometerCheck)

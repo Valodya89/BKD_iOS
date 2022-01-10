@@ -31,6 +31,10 @@ class PhotosTableViewCell: UITableViewCell {
         mChangePhotoBtn.setBorder(color: color_navigationBar!, width: 2)
     }
 
+    override func prepareForReuse() {
+        mPhotoImgV.image = nil
+        mPhotoSideLb.isHidden = false
+    }
     //Set cell information
     func setCellInfo(item: MainDriverModel, index: Int) {
         
@@ -48,9 +52,8 @@ class PhotosTableViewCell: UITableViewCell {
         
         if let img = item.editImg {
             mPhotoImgV.image = img
-        } else if let url = item.imageURL {
-            mPhotoImgV.sd_setImage( with: url,
-                               placeholderImage: nil)
+        } else if let image = item.image {
+            mPhotoImgV.image = image
         }
     }
     

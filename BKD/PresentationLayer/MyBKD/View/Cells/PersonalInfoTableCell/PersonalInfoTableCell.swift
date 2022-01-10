@@ -12,10 +12,12 @@ import SwiftUI
 
 protocol PersonalInfoTableCellDelegate: AnyObject {
     
+    func editFiled(index: Int, value: String)
     func willOpenPicker(textFl: UITextField, isExpiryDate: Bool)
     func willOpenCountryPicker(textFl: TextField)
     func willOpenCityView()
-    func didPressVerify()
+    func willOpenPhoneCodesView()
+    func didPressVerify(phone: String)
 }
 
 
@@ -24,30 +26,26 @@ class PersonalInfoTableCell: UITableViewCell {
     static func nib() -> UINib {
             return UINib(nibName: identifier, bundle: nil)
         }
-    
-    @IBOutlet weak var mVerifyBtn: UIButton!
-    @IBOutlet weak var mVerifiedV: UIView!
+   //MARK: -- Outlets
     @IBOutlet weak var mTxtFl: TextField!
     @IBOutlet weak var mDeleteBtn: UIButton!
     @IBOutlet weak var mFieldNameLb: UILabel!
     @IBOutlet weak var mEditLineV: UIView!
     
+   //MARK: -- Variables
     public var isEdit: Bool = false
     public var item: MainDriverModel?
     weak var delegate: PersonalInfoTableCellDelegate?
     lazy var personalInfoViewModel = MyPersonalInformationViewModel()
     
+    //MARK: -- Life cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        mVerifyBtn.layer.cornerRadius = 8
-        mVerifyBtn.setBorder(color: color_menu!, width: 1)
-        
     }
 
     override func prepareForReuse() {
         mFieldNameLb.text = nil
         mTxtFl.text = nil
-        mVerifiedV.isHidden = true
         mEditLineV.isHidden = true
         mDeleteBtn.isHidden = true
         mTxtFl.tintColor = color_navigationBar!
@@ -56,18 +54,17 @@ class PersonalInfoTableCell: UITableViewCell {
     ///Set cell information
     func setCellInfo(index: Int) {
         guard let item = item else {return}
-        mTxtFl.tintColor = color_navigationBar!
-        mTxtFl.isEnabled = isEdit
-        mTxtFl.tag = index
+        
         mDeleteBtn.tag = index
         mDeleteBtn.addTarget(self, action: #selector(deleteFiled(sender:)), for: .touchUpInside)
         
+        mTxtFl.tintColor = color_navigationBar!
+        mTxtFl.isEnabled = isEdit
+        mTxtFl.tag = index
         mFieldNameLb.text = item.fieldName
-
-        if item.fieldName == Constant.Texts.phoneNumber {
-            //If verified
-            mVerifiedV.isHidden = false
-        }
+        let isEmptyField = item.fieldValue!.count > 0
+        mEditLineV.isHidden = isEmptyField
+        mEditLineV.backgroundColor = (isEmptyField) ? color_driving_license! : color_error!
         
         //set date filed
         if item.isDate {
@@ -85,21 +82,26 @@ class PersonalInfoTableCell: UITableViewCell {
     ///Handler delete
     @objc func deleteFiled(sender: UIButton) {
         mTxtFl.text = nil
+        delegate?.editFiled(index: mTxtFl.tag, value: "")
     }
     
     ///Open picker date
     func openPickerView(textFl: TextField) {
         if item?.fieldName == Constant.Texts.dateOfBirth ||
             item?.fieldName == Constant.Texts.issueDrivingLic {
+            
             textFl.tintColor = .clear
             delegate?.willOpenPicker(textFl: textFl, isExpiryDate: false)
+            
         } else if item?.fieldName == Constant.Texts.expiryDateIdCard ||
                     item?.fieldName == Constant.Texts.expiryDrivingLic {
+            
             textFl.tintColor = .clear
             delegate?.willOpenPicker(textFl: textFl, isExpiryDate: true)
-
         }
     }
+    
+    
 }
 
 
@@ -114,23 +116,12 @@ extension PersonalInfoTableCell: UITextFieldDelegate {
         textField.resignFirstResponder()
         mDeleteBtn.isHidden = isEdit
         mEditLineV.isHidden = isEdit
-        if mFieldNameLb.text == Constant.Texts.phoneNumber { //phone number
-            if item?.fieldValue != textField.text {
-                mVerifyBtn.isHidden = false
-            } else {
-                mVerifiedV.isHidden = !isEdit
-            }
-        }
         return false
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        if mFieldNameLb.text == Constant.Texts.phoneNumber {
-            
-            delegate?.didPressVerify()
-            mVerifiedV.isHidden = isEdit
-        } else if  mFieldNameLb.text == Constant.Texts.country {
+        if  mFieldNameLb.text == Constant.Texts.country {
             
             delegate?.willOpenCountryPicker(textFl: textField as! TextField)
         } else if mFieldNameLb.text == Constant.Texts.city {
@@ -147,16 +138,21 @@ extension PersonalInfoTableCell: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        guard let text = textField.text,
-//              let textRange = Range(range, in: text) else {
-//            return true
-//        }
+
         let text = textField.text ?? ""
         let textRange = Range(range, in: text)
         let updatingString = text.replacingCharacters(in: textRange!, with: string)
+    
         if updatingString.count > 0 {
             mEditLineV.backgroundColor = color_driving_license!
         }
+        
+        delegate?.editFiled(index: textField.tag, value: updatingString)
         return true
-    } 
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        print(textField.tag)
+       // delegate?.reloadFiled()
+    }
 }

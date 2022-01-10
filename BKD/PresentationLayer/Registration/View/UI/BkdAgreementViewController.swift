@@ -128,7 +128,7 @@ class BkdAgreementViewController: BaseViewController {
                 } else {
                     //self.rent = result
                     self.vehicleModel?.rent = result!
-                    self.goToPhoneVerification()
+                    self.goToPhoneVerification(vehicleModel: self.vehicleModel, phoneNumber: nil)
                    // self.clickConfirm()
                 }
         }
@@ -153,12 +153,6 @@ class BkdAgreementViewController: BaseViewController {
         self.navigationController?.popToViewController(ofClass: MyBKDViewController.self, animated: true)
     }
     
-    ///Go to verification screen
-    private func goToPhoneVerification() {
-        let changePhoneNumberVC = ChangePhoneNumberViewController.initFromStoryboard(name: Constant.Storyboards.changePhoneNumber)
-        changePhoneNumberVC.vehicleModel = vehicleModel
-      self.navigationController?.pushViewController(changePhoneNumberVC, animated: true)
-    }
 }
 
 

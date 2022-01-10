@@ -11,6 +11,7 @@ import UIKit
 class MyPersonalInfoTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
     public var isEdit: Bool = false
+    public var isPhoneEdited: Bool = false
     public var mainDriverList: [MainDriverModel]?
     public var editMainDriverList: [MainDriverModel]?
     var didPressChangePhoto:((Int)->Void)?
@@ -18,7 +19,8 @@ class MyPersonalInfoTableView: UITableView, UITableViewDelegate, UITableViewData
     var didPressConfirm:(()->Void)?
     var willOpenCountry:(()-> Void)?
     var willOpenCity:(()-> Void)?
-    var willOpenPhoneVerify:(()-> Void)?
+    var willOpenPhoneCodes:(()-> Void)?
+    var willOpenPhoneVerify:((String)-> Void)?
 
     var datePicker = UIDatePicker()
     var pickerV = UIPickerView()
@@ -52,6 +54,7 @@ class MyPersonalInfoTableView: UITableView, UITableViewDelegate, UITableViewData
         self.register(PersonalInfoTableCell.nib(), forCellReuseIdentifier: PersonalInfoTableCell.identifier)
         self.register(MailBoxNumberTableCell.nib(), forCellReuseIdentifier: MailBoxNumberTableCell.identifier)
         self.register(PhotosTableViewCell.nib(), forCellReuseIdentifier: PhotosTableViewCell.identifier)
+        self.register(PhonbeNumberTableCell.nib(), forCellReuseIdentifier: PhonbeNumberTableCell.identifier)
         self.register(ConfirmOrCancelTableCell.nib(), forCellReuseIdentifier: ConfirmOrCancelTableCell.identifier)
     }
     
@@ -80,38 +83,42 @@ class MyPersonalInfoTableView: UITableView, UITableViewDelegate, UITableViewData
     ///Pressed done button
     @objc func donePressed(sender: UIBarButtonItem) {
         responderTxtFl.resignFirstResponder()
+        
         if sender.tag == 7 {
             currentCountry = countryList?[ pickerV.selectedRow(inComponent: 0)]
-            mainDriverList?[sender.tag].fieldValue = currentCountry?.id
+            editMainDriverList?[sender.tag].fieldValue = currentCountry?.id
         } else {
-            let date:Date? = datePicker.date
-            let dateStr = (date?.getDay())! + " " + (date?.getMonth(lng: "en"))! + " " + (date?.getYear())!
-            mainDriverList?[sender.tag].fieldValue = dateStr
+            let dateStr = datePicker.date.getDateByFormat() 
+            editMainDriverList?[sender.tag].fieldValue = dateStr
         }
+        //datePicker = nil
         self.reloadData()
     }
 
-    
+   
     //MARK: -- UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if mainDriverList?.count ?? 0 > 0 && isEdit {
-            return mainDriverList!.count + 1
+        if editMainDriverList?.count ?? 0 > 0 && isEdit {
+            return editMainDriverList!.count + 1
         }
-        return mainDriverList?.count ?? 0
+        return editMainDriverList?.count ?? 0
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var item: MainDriverModel = MainDriverModel()
-        if indexPath.row < mainDriverList?.count ?? 0  {
-            item = mainDriverList![indexPath.row]
+        if indexPath.row < editMainDriverList?.count ?? 0  {
+            item = editMainDriverList![indexPath.row]
         }
         if item.isMailBox {
             return mailBoxTableViewCell(item: item, indexPath: indexPath)
         } else if item.isPhoto {
             return photosTableViewCell(item: item,
                                        indexPath: indexPath)
-        } else if indexPath.row == mainDriverList?.count && isEdit {
+        } else if item.isPhone {
+            return phoneNumberTableViewCell(item: item, indexPath: indexPath)
+        }
+        else if indexPath.row == editMainDriverList?.count && isEdit {
             return confirmTableViewCell(indexPath: indexPath)
         }
         return personalInfoTableViewCell(item: item, indexPath: indexPath)
@@ -130,6 +137,28 @@ class MyPersonalInfoTableView: UITableView, UITableViewDelegate, UITableViewData
         return cell
     }
     
+    
+    ///Init phone number table cell
+    func phoneNumberTableViewCell(item: MainDriverModel, indexPath: IndexPath) -> PhonbeNumberTableCell {
+        let cell =
+        self.dequeueReusableCell(withIdentifier: PhonbeNumberTableCell
+                                        .identifier, for: indexPath) as! PhonbeNumberTableCell
+        
+        cell.delegate = self
+        let currentPhoneCode = MyPersonalInformationViewModel().getCurrnetPhoneCode(number: item.fieldValue ?? "")
+        if let _ = currentPhoneCode {
+            cell.selectedCountry = currentPhoneCode
+            cell.mTxtFl.formatPattern = currentPhoneCode?.mask ?? ""
+            cell.validFormPattern = (currentPhoneCode?.mask!.count)!
+        }
+        
+        cell.isEdit = isEdit
+        cell.isEditedPhone = isPhoneEdited
+        cell.item = item
+        cell.setCellInfo(index: indexPath.row)
+        return cell
+    }
+    
     ///Init mail box table cell
     func mailBoxTableViewCell(item: MainDriverModel, indexPath: IndexPath) -> MailBoxNumberTableCell {
         let cell =
@@ -138,7 +167,7 @@ class MyPersonalInfoTableView: UITableView, UITableViewDelegate, UITableViewData
         cell.isEdit = isEdit
         cell.setCellInfo(item: item, index: indexPath.row)
         cell.didChangeMailbox = { txt in
-            self.mainDriverList![indexPath.row].fieldValue = txt
+            self.editMainDriverList![indexPath.row].fieldValue = txt
         }
         return cell
     }
@@ -164,7 +193,7 @@ class MyPersonalInfoTableView: UITableView, UITableViewDelegate, UITableViewData
                                         .identifier, for: indexPath) as! ConfirmOrCancelTableCell
         cell.setCellInfo(index: indexPath.row)
         cell.didPressCancel = {
-            self.mainDriverList = self.editMainDriverList
+            self.editMainDriverList = self.mainDriverList
             self.reloadData()
             self.didPressCancel?()
         }
@@ -179,10 +208,17 @@ class MyPersonalInfoTableView: UITableView, UITableViewDelegate, UITableViewData
 //MARK: -- PersonalInfoTableCellDelegate
 extension MyPersonalInfoTableView: PersonalInfoTableCellDelegate {
     
-    func didPressVerify() {
-        <#code#>
+    func editFiled(index: Int, value: String) {
+        editMainDriverList?[index].fieldValue = value
     }
     
+    func didPressVerify(phone: String) {
+        willOpenPhoneVerify?(phone)
+    }
+    
+    func willOpenPhoneCodesView() {
+        willOpenPhoneCodes?()
+    }
     
     func willOpenCityView() {
         self.willOpenCity?()
@@ -197,7 +233,7 @@ extension MyPersonalInfoTableView: PersonalInfoTableCellDelegate {
     
     
     func willOpenPicker(textFl: UITextField, isExpiryDate: Bool) {
-        
+        datePicker = UIDatePicker()
         responderTxtFl = textFl
         textFl.inputView = datePicker
         textFl.inputAccessoryView = creatToolBar(index: textFl.tag)
@@ -216,6 +252,17 @@ extension MyPersonalInfoTableView: PersonalInfoTableCellDelegate {
             datePicker.minimumDate = nil
             datePicker.maximumDate = Date()
         }
+    }
+}
+
+
+//MARK: -- PhonbeNumberTableCellDelegate
+extension MyPersonalInfoTableView: PhonbeNumberTableCellDelegate {
+    
+    func editPhoneNumber(index: Int,
+                         code: String,
+                         phone: String) {
+        editMainDriverList?[index].fieldValue = code + phone
     }
 }
 

@@ -47,14 +47,9 @@ class PhoneNumberTableViewCell: UITableViewCell {
             
             if (newValue.isNumber() == false)  {
                 mPhoneNumberTxtFl.text = String(newValue.dropLast())
-                
             }
-            
-            
 
-            guard let phoneNumber = try? phoneNumberKit.parse(newValue, ignoreType: true) else { return }
-//            mCodeLb.text = "+" + String(phoneNumber.countryCode)
-//            mPhoneNumberTxtFl.text = String(phoneNumber.nationalNumber)
+            guard let phoneNum = try? phoneNumberKit.parse(newValue, ignoreType: true) else { return }
         }
     }
     
@@ -103,7 +98,6 @@ class PhoneNumberTableViewCell: UITableViewCell {
         mPhoneNumberTxtFl.textColor = .white
         mCodeLb.textColor = .white
         mDropDownImgV.setTintColor(color: .white)
-       // mPhoneNumberBckgV.isUserInteractionEnabled = false
         mPhoneNumberBckgV.bringSubviewToFront(mCodeLb)
         mPhoneNumberBckgV.bringSubviewToFront(mPhoneNumberTxtFl)
         mPhoneNumberBckgV.bringSubviewToFront(mFlagImgV)
@@ -131,8 +125,7 @@ extension PhoneNumberTableViewCell: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        textField.endEditing(true)
-//        return true
+
         if textField.text?.count == validFormPattern {
             textField.resignFirstResponder()
             delegate?.didReturnTxtField(text: textField.text!, code: mCodeLb.text!, index: textField.tag)
@@ -151,6 +144,5 @@ extension PhoneNumberTableViewCell: UITextFieldDelegate {
         let fullText = textField.text! + string
         phoneNumber = fullText
         return fullText.count <= validFormPattern
-
     }
 }
