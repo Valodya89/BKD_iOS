@@ -7,7 +7,7 @@
 
 import UIKit
 
-class VerificationCodeViewController: UIViewController, StoryboardInitializable {
+class VerificationCodeViewController: BaseViewController {
 
    //MARK: Outlets
     
@@ -15,9 +15,7 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
     @IBOutlet weak var mInfoLb: UILabel!
     @IBOutlet weak var mAlertContentV: UIView!
     @IBOutlet weak var mAlertV: UIView!
-    
     @IBOutlet weak var mThankBtn: UIButton!
-    
     @IBOutlet weak var mOpenEmailOrContinueBtn: UIButton!
     @IBOutlet weak var mContinueV: UIView!
     @IBOutlet weak var mContinueLeading: NSLayoutConstraint!
@@ -25,13 +23,14 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
     //MARK: Variables
     lazy var verificationCodeViewModel = VerificationCodeViewModel()
     var email:String = ""
- 
+    var isChangeEmailVerify = false
     
-    //MARK: - Life cicle
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
-        sendEmailVerification()
+        setNotifications()
+      //  sendEmailVerification()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -40,8 +39,18 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
     }
     
     
-    func setUpView() {
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        mOpenEmailOrContinueBtn.addBorder(color:color_navigationBar!, width: 1.0)
+    }
+    
+    func setNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(VerificationCodeViewController.handleDeepLink), name: Constant.Notifications.signUpEmailVerify, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(VerificationCodeViewController.handleEmailDeepLink), name: Constant.Notifications.changeEmailVerify, object: nil)
+    }
+    
+    func setUpView() {
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         mRightBarBtn.image = img_bkd
         mAlertV.layer.cornerRadius = 8
         mAlertContentV.backgroundColor = color_background?.withAlphaComponent(0.5)
@@ -54,22 +63,13 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
         sendAccountVerification(code: notification.object as? String ?? "")
     }
     
-    ///Send email verification for signup
-    func sendEmailVerification() {
-        SignInViewModel().forgotPassword(username:  email, action: Constant.Texts.verification) { (status) in
-            switch status {
-            case .accountNoSuchUser:
-                self.showErrorAlertMessage(Constant.Texts.errEmailVerifyNoUser)
-                break
-            case .success:
-                print("sendEmailVerification success")
-                break
-            default:
-                self.showAlertMessage(Constant.Texts.errEmailVerify)
-                break
-            }
-        }
+    
+    @objc private func handleEmailDeepLink(notification: Notification) {
+        self.dismiss(animated: true, completion: nil)
+        isChangeEmailVerify = true
+        sendEmailVerification(code: notification.object as? String ?? "")
     }
+
     
     ///Send account verification for active account
     func sendAccountVerification(code: String){
@@ -81,6 +81,20 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
                 showAlert()
             default:
                 self.showErrorAlertMessage(Constant.Texts.errAccountVerify)
+                break
+            }
+        }
+    }
+    
+    ///Send email verification for change email
+    func sendEmailVerification(code: String){
+
+        verificationCodeViewModel.emailVerification(email: email, code: code) { [self] (status) in
+            switch status {
+            case .success:
+                showAlert()
+            default:
+                self.showErrorAlertMessage(Constant.Texts.errEmailVerify)
                 break
             }
         }
@@ -130,7 +144,7 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
             self.mContinueV.layoutIfNeeded()
         } completion: { [self] _ in
             if self.mOpenEmailOrContinueBtn.title(for: .normal) == Constant.Texts.continueTxt {
-                 self.goToFaceAndTouchId()
+                    self.goToFaceAndTouchId()
             } else {
                 self.showActionSheet(texts: emailAppNames)
             }
@@ -150,8 +164,13 @@ class VerificationCodeViewController: UIViewController, StoryboardInitializable 
     
     
     @IBAction func thankYou(_ sender: UIButton) {
-        mAlertV.isHidden = true
-        mAlertContentV.isHidden = true
+        if isChangeEmailVerify {
+            navigationController?.popToViewController(ofClass: MyAccountViewController.self)
+        } else {
+            mAlertV.isHidden = true
+            mAlertContentV.isHidden = true
+        }
+       
     }
     
     

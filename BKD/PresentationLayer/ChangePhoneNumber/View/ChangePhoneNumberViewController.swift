@@ -9,9 +9,14 @@ import UIKit
 import SwiftMaskTextfield
 import PhoneNumberKit
 
-final class ChangePhoneNumberViewController: UIViewController, StoryboardInitializable {
+
+protocol  ChangePhoneNumberViewControllerDelegate: AnyObject {
+    func didChangeNumber(phone: String)
+}
+
+final class ChangePhoneNumberViewController: BaseViewController {
     
-    //MARK: - Outlets
+    //MARK: -- Outlets
     @IBOutlet weak var mInfoLb: UILabel!
     @IBOutlet weak var mSendBtn: UIButton!
     @IBOutlet weak var mChangeNumberBtn: UIButton!
@@ -24,6 +29,11 @@ final class ChangePhoneNumberViewController: UIViewController, StoryboardInitial
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     
 
+    //MARK: -- Variables
+    weak var delegate:  ChangePhoneNumberViewControllerDelegate?
+    lazy var changePhoneNumberViewModel = ChangePhoneNumberViewModel()
+    public var vehicleModel: VehicleModel?
+    public var newPhoneNumber: String?
     private var selectedCountry: PhoneCode?
     private var validFormPattern: Int = 0
     private let phoneNumberKit = PhoneNumberKit()
@@ -40,7 +50,7 @@ final class ChangePhoneNumberViewController: UIViewController, StoryboardInitial
             }
         }
     }
-    
+        
     
 //    var phoneNumber: String? {
 //        get {
@@ -69,13 +79,12 @@ final class ChangePhoneNumberViewController: UIViewController, StoryboardInitial
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let phoneCode = ApplicationSettings.shared.phoneCodes?.first {
-            setPhoneCode(phoneCode)
-        }
         setUpView()
+        configureUI()
     }
     
     private func setUpView() {
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         self.tabBarController?.tabBar.isHidden = true
         mRightBarBtn.image = img_bkd
         mSendBtn.layer.cornerRadius = 8
@@ -83,6 +92,31 @@ final class ChangePhoneNumberViewController: UIViewController, StoryboardInitial
         mPhoneNumberContentV.setBorder(color: color_email!, width: 1)
         mDropDownImgV.setTintColor(color: color_email!)
         mNumberTxtFl.delegate = self
+        
+    }
+    
+    ///Configure UI
+    func configureUI() {
+        selectedCountry = changePhoneNumberViewModel.getPhoneCode()
+        if let _ = selectedCountry {
+            setPhoneCode(selectedCountry!)
+        } else if let phoneCode = ApplicationSettings.shared.phoneCodes?.first {
+            setPhoneCode(phoneCode)
+        }
+        
+        phoneNumber =  changePhoneNumberViewModel.getPhoneNumber()?.replacingOccurrences(of: selectedCountry?.code ?? "", with: "")
+        mNumberTxtFl.text = phoneNumber
+        mInfoLb.text = String(format: Constant.Texts.phoneVerificationInfo, selectedCountry?.code ?? "", phoneNumber ?? "")
+
+    }
+   
+    ///Send Code SMS
+    private func sendPhoneCode() {
+        phoneNumber = mNumberTxtFl.text
+        changePhoneNumberViewModel.sendCodeSms(phoneCode: selectedCountry?.code ?? "", phoneNumber: phoneNumber ?? "") { response, err in
+            guard let _ = response else {return}
+            self.goToPhoneVerification()
+        }
     }
     
     private func setToPhoneNumberActiveColor(_ color: UIColor) {
@@ -92,16 +126,12 @@ final class ChangePhoneNumberViewController: UIViewController, StoryboardInitial
         mNumberTxtFl.textColor = color
     }
     
-    ///Open search phoneCode screen
-    private func goToSearchPhoneCode() {
-        let searchPhoneCodeVC = SearchPhoneCodeViewController.initFromStoryboard(name: Constant.Storyboards.searchPhoneCode)
-        searchPhoneCodeVC.delegate = self
-        self.present(searchPhoneCodeVC, animated: true, completion: nil)
-    }
-
     ///Open phone verification screen
     private func goToPhoneVerification() {
         let phoneVerification = PhoneVerificationViewController.initFromStoryboard(name: Constant.Storyboards.phoneVerification)
+        phoneVerification.phoneCode = selectedCountry?.code
+        phoneVerification.phoneNumber = phoneNumber
+        phoneVerification.vehicleModel = vehicleModel
         self.navigationController?.pushViewController(phoneVerification, animated: true)
     }
     
@@ -122,28 +152,31 @@ final class ChangePhoneNumberViewController: UIViewController, StoryboardInitial
         mCodeLb.text = phoneCode.code
         mNumberTxtFl.formatPattern = phoneCode.mask ?? ""
         validFormPattern = (selectedCountry?.mask!.count)!
+        mInfoLb.text = String(format: Constant.Texts.phoneVerificationInfo, selectedCountry?.code ?? "", phoneNumber ?? "")
     }
     
-    // MARK: - Actions
+    // MARK: -- Actions
     @IBAction func didChangeFiled() {
+    phoneNumber = mNumberTxtFl.text
+        mInfoLb.text = String(format: Constant.Texts.phoneVerificationInfo, selectedCountry?.code ?? "", phoneNumber ?? "")
         didUpdateStatus(mNumberTxtFl.text?.count == validFormPattern)
     }
     
     @IBAction func back(_ sender: UIBarButtonItem) {
+        delegate?.didChangeNumber(phone: (selectedCountry?.code ?? "") + (phoneNumber ?? ""))
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func send(_ sender: Any) {
-        //WARNING:
-        goToPhoneVerification()
+        sendPhoneCode()
     }
     
     @IBAction func changeNumber(_ sender: UIButton) {
-        
+        self.goToSearchPhoneCode(viewCont: self)
     }
     
     @IBAction func searchCountry(_ sender: UIButton) {
-        goToSearchPhoneCode()
+        self.goToSearchPhoneCode(viewCont: self)
     }
 }
 

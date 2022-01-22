@@ -114,11 +114,12 @@ func checkReservationMonth(pickupDate: Date?, returnDate: Date?) -> Bool {
 
 
 /// if the booking time during working hours
-func checkReservationTime(time: Date?, workingTimes: WorkingTimes) -> Bool {
+func checkReservationTime(time: Date?, settings: Settings) -> Bool {
     guard let _ = time else { return false}
-    let startTimeDate = workingTimes.workStart.stringToDate()
-    let endTimeDate = workingTimes.workEnd.stringToDate()
     
+    let startTimeDate = settings.workStart.stringToDate()
+    let endTimeDate = settings.workEnd.stringToDate()
+
     print(startTimeDate.getString())
     print(endTimeDate.getString())
 
@@ -138,13 +139,32 @@ func checkReservationReturnTime(pickUpDate: Date,
         let diff = Int(returnTime.timeIntervalSince1970 - pickUpTime.timeIntervalSince1970)
         let hours = diff / 3600
         let minutes = (diff - hours * 3600) / 60
-        return minutes > 30
+        return (minutes >= 29 || hours > 0 )
     }
     return true
 }
+    
+    
+    ///Check if reservation more then 90 days
+    func checkReservation90Days(search: SearchModel) -> Bool {
+        
+        guard let pickUpDate = search.pickUpDate,
+              let returnDate = search.returnDate,
+              let pickupTime = search.pickUpTime,
+              let returnTime = search.returnTime else {
+                  return false
+              }
+        let hours = Date().getHoursFromDates(start: pickUpDate,
+                                             end: returnDate,
+                                             startTime: pickupTime,
+                                             endTime: returnTime)
+        let days = Date().getDaysFromDates(start: pickUpDate,
+                                           end: returnDate,
+                                           hours: hours)
+        return days > 90
+    }
 
-//MARK: CUSTOM LOCATION PAGE  CHECKING
-    //MARK: ------------------------
+//MARK: -- Custom location checking
     
     ///if new marker position in Inactive Coordinate
     func checkMarkerInInactiveCoordinate(fromCoordinate: CLLocationCoordinate2D,

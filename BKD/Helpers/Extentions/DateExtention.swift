@@ -8,6 +8,19 @@
 import UIKit
 
 extension Date {
+    var millisecondsSince1970:Int64 {
+            return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
+        }
+
+    init(milliseconds:Int64) {
+            self = Date(timeIntervalSince1970: TimeInterval(milliseconds))
+        }
+    
+    func doubleToDate(doubleDate: Double) -> Date {
+        let date = Date(timeIntervalSince1970: doubleDate)
+        return date
+    }
+    
     func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
         return calendar.dateComponents(Set(components), from: self)
     }
@@ -17,10 +30,19 @@ extension Date {
     }
     
    
+    ///Get day as string
+    func getDay() -> String {
+        let formatter = DateFormatter()
+        formatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+        formatter.dateFormat = "d"
+        let day = formatter.string(from: self)
+        return day
+    }
     
     ///Get month and week as string
     func getMonthAndWeek(lng: String) -> String {
         let formatter = DateFormatter()
+        formatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
         formatter.locale = NSLocale(localeIdentifier: lng) as Locale
         formatter.dateFormat = "MMM"
         let month = formatter.string(from: self)
@@ -32,6 +54,7 @@ extension Date {
     ///Get month as string
     func getMonth(lng: String) -> String {
         let formatter = DateFormatter()
+        formatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
         formatter.locale = NSLocale(localeIdentifier: lng) as Locale
         formatter.dateFormat = "MMM"
         let month = formatter.string(from: self)
@@ -53,6 +76,13 @@ extension Date {
         return forrmater.string(from: self)
     }
     
+    //Get hour as string without timzone
+    func getTime()-> String {
+        let forrmater = DateFormatter()
+        forrmater.dateFormat = "HH:mm"
+        return forrmater.string(from: self)
+    }
+    
     ///Get components month
     func getComponentsMonth(fromDate: Date?, toDate: Date?) -> Bool {
         guard let fromDate = fromDate, let toDate = toDate else {
@@ -62,6 +92,12 @@ extension Date {
         return components.month! > 0 ?  true : false
     }
     
+    ///Get distance bitween to date by component
+    func getDistanceByComponent(_ component: Calendar.Component, toDate: Date) -> DateComponents {
+
+        let difference = Calendar.current.dateComponents([component], from: self, to: toDate)
+        return difference
+    }
     
     /// Format date
     func getDateByFormat() -> String {
@@ -78,6 +114,29 @@ extension Date {
         return dateFormatter.string(from: self)
     }
     
+    ///Return date time depend of componet 
+    func getTimeByCompanent(compatent : Calendar.Component) -> Int {
+        var calendar = Calendar.current
+        calendar.timeZone = (NSTimeZone(name: "UTC") as TimeZone?)!
+//        let hour = calendar.component(.hour, from: self)
+//        let minute = calendar.component(.minute, from: self)
+//        let second = calendar.component(.second, from: self)
+
+       // print("\(hour):\(minute):\(second)")
+        return calendar.component(compatent, from: self)
+    }
+    
+    ///Count days in month
+    func daysInMonth(_ monthNumber: Int? = nil, _ year: Int? = nil) -> Int {
+        var dateComponents = DateComponents()
+        dateComponents.year = self.get(.year)
+        dateComponents.month = self.get(.month)
+           if
+               let d = Calendar.current.date(from: dateComponents),
+               let interval = Calendar.current.dateInterval(of: .month, for: d),
+               let days = Calendar.current.dateComponents([.day], from: interval.start, to: interval.end).day
+           { return days } else { return -1 }
+       }
     
     ///Check if time in range
     func dateIsInRange(startTime: Date, endTime: Date) -> Bool {
@@ -176,7 +235,7 @@ extension Date {
     ///Compare two hours
     func isSameHours(hour: Date?) -> Bool {
         guard let _ = hour  else { return true }
-        let order = Calendar.current.compare(self, to: hour!, toGranularity: .day)
+        let order = Calendar.current.compare(self, to: hour!, toGranularity: .hour)
 
         switch order {
         case .orderedSame:
@@ -190,5 +249,64 @@ extension Date {
     func isBetween(start: Date,  end: Date) -> Bool {
             return (min(start, end) ... max(start, end)).contains(self)
         }
+    
+    
+    /// Combine date with dateTime
+    func combineDate(date: Date, withTime time: Date) -> Date? {
+        
+        var calendar = NSCalendar.current
+        calendar.timeZone = (NSTimeZone(name: "UTC") as TimeZone?)!
 
+           let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
+           let timeComponents = calendar.dateComponents([.hour, .minute, .second], from: time)
+
+           var components = DateComponents()
+           components.year = dateComponents.year
+           components.month = dateComponents.month
+           components.day = dateComponents.day
+           components.hour = timeComponents.hour
+           components.minute = timeComponents.minute
+           components.second = timeComponents.second
+
+           return calendar.date(from: components)!
+       }
+    
+    
+    ///Count the hours to date
+    func getHoursFromDates(start: Date, end: Date,
+                           startTime: Date, endTime: Date) -> Double {
+        
+        //combine date with time date
+        let pickupDate = Date().combineDate(date: start, withTime: startTime)
+        let returnDate = Date().combineDate(date: end, withTime: endTime)
+  
+        let pickupTime = Double(pickupDate?.timeIntervalSince1970 ?? 0)
+        let retrunTime = Double(returnDate?.timeIntervalSince1970 ?? 0)
+        let differenceTime = retrunTime - pickupTime
+        var hours = (differenceTime/3600).truncatingRemainder(dividingBy: 3600)
+        //ceil hour (if hour is 1.5 (1 hour and 30 minute) it get 2 hours)
+        hours = ceil((hours * 10).rounded() / 10)
+        return hours
+    }
+    
+    ///Count the days to date
+    func getDaysFromDates(start: Date, end: Date, hours: Double) -> Double {
+        
+        let years = Double(end.distance(from: start, only: .year))
+        let months = Double(end.distance(from: start, only: .month))
+        if (months <= 0 && years == 1 && (12 + months > 3)) { //if days more then 3 month and dates in diffirent years
+            return 1000
+        } else if (months > 4) { // if days more then 3 months
+            return 1000
+        }
+        //Count days
+        var days = hours / 24
+        if hours <= 24 {
+            days = 1
+        } else {
+            days = ceil(hours / 24) //if result is 1 day and 2 hours it get 2 days
+        }
+        return days
+    }
+    
 }

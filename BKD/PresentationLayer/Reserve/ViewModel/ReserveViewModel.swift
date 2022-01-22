@@ -15,14 +15,15 @@ class ReserveViewModel: NSObject {
         completion(keychain.isUserLoggedIn())
     }
 
-    func getAdditionalAccessories(vehicleModel:VehicleModel) -> Array<Any>?  {
-        var accessories:[AccessoriesModel]?
+    ///Get additional accessoties list
+    func getAdditionalAccessories(vehicleModel: VehicleModel) -> Array<Any>?  {
+        var accessories:[AccessoriesEditModel]?
         if (vehicleModel.ifHasAccessories == true) {
             accessories = []
-            let additionalAccessories: [AccessoriesModel]? = vehicleModel.additionalAccessories
+            let additionalAccessories: [AccessoriesEditModel]? = vehicleModel.additionalAccessories
             
             for i in (0..<Int(additionalAccessories!.count)) {
-                let model: AccessoriesModel = additionalAccessories![i]
+                let model: AccessoriesEditModel = additionalAccessories![i]
                 if model.isAdded {
                     accessories?.append(model)
                 }
@@ -32,7 +33,9 @@ class ReserveViewModel: NSObject {
     }
     
     
-    func getAdditionalDrivers(vehicleModel:VehicleModel) -> Array<Any>?  {
+    ///Get additional drivers list
+    func getAdditionalDrivers(vehicleModel:VehicleModel) -> [MyDriversModel]?  {
+        
         var drivers:[MyDriversModel]?
         if (vehicleModel.ifHasAditionalDriver == true) {
             drivers = []
@@ -48,36 +51,109 @@ class ReserveViewModel: NSObject {
         return drivers
     }
     
-    func getPrices(vehicleModel:VehicleModel) -> Array<Any>? {
-        var prices:[PriceModel] = []
-       
-        if vehicleModel.vehicleValue > 0.0 {
-            prices.append(PriceModel(priceTitle: "Price", price: vehicleModel.vehicleValue))
-        }
-        if vehicleModel.vehicleOffertValue > 0.0 {
-            prices.append(PriceModel(priceTitle: "Special offer", price: vehicleModel.vehicleOffertValue, discountPrecent: vehicleModel.vehicleDiscountValue))
-        }
-        if vehicleModel.noWorkingTimeTotalPrice > 0.0 {
-            prices.append(PriceModel(priceTitle: "Additional service", price: vehicleModel.noWorkingTimeTotalPrice))
-        }
-        if vehicleModel.customLocationTotalPrice > 0.0 {
-            prices.append(PriceModel(priceTitle: "Custom location", price: vehicleModel.customLocationTotalPrice))
-        }
-        if vehicleModel.accessoriesTotalPrice > 0.0 {
-            prices.append(PriceModel(priceTitle: "Accessories", price: vehicleModel.accessoriesTotalPrice))
-        }
-        if vehicleModel.driversTotalPrice > 0.0 {
-            prices.append(PriceModel(priceTitle: "Additional driver", price: vehicleModel.driversTotalPrice))
-        }
-        return prices
+    
+    ///Get accessories for add rent request
+    func getAccessoriesToRequest(accessories: [AccessoriesEditModel]?) -> [[String : Any]?] {
+        var accessoryArr: [[String : Any]?] = []
+        accessories?.forEach({ accessory in
+            if accessory.isAdded {
+                let dic  = ["id" : accessory.id ?? "",
+                            "count": accessory.count ?? 0] as [String : Any]
+                accessoryArr.append(dic)
+            }
+        })
+        return accessoryArr
     }
     
-    func getTotalPrice(totalPrices:[PriceModel]) -> Double {
-        var total: Double = 0
-        for item  in totalPrices {
-            let item = item as PriceModel
-            total += item.price!
-        }
-     return total
+    ///Get accessories for add rent request
+    func getAdditionalDriversToRequest(additionalDrivers: [MyDriversModel]?) -> [String?] {
+        var driversArr: [String?] = []
+        additionalDrivers?.forEach({ driver in
+            if driver.isSelected {
+                driversArr.append(driver.driver?.id)
+            }
+        })
+        return driversArr
     }
+    
+    
+    ///Get location for add rent request
+    func getLocationToRequest(search: SearchModel,
+                              isPickUpLocation: Bool) -> [String : Any] {
+        
+        //"var locationDic: [String : Any]?
+        if isPickUpLocation {
+            if search.isPickUpCustomLocation {
+                return ["type": "CUSTOM",
+                        "customLocation": [
+                            "name": search.pickUpLocation ?? "",
+                            "longitude": search.pickUpLocationLongitude ?? 0.0,
+                            "latitude": search.pickUpLocationLatitude ?? 0.0
+                                ]
+                            ]
+            } else {
+                return ["type": "PARKING",
+                        "parking": [
+                            "id": search.pickUpLocationId ?? ""
+                                ]
+                            ]
+            }
+        } else {
+            if search.isRetuCustomLocation {
+                return ["type": "CUSTOM",
+                                "customLocation": [
+                                    "name": search.returnLocation ?? "",
+                                    "longitude": search.returnLocationLongitude ?? 0.0,
+                                    "latitude": search.returnLocationLatitude ?? 0.0
+                                ]
+                            ]
+            } else {
+                return ["type": "PARKING",
+                        "parking": [
+                            "id": search.returnLocationId ?? ""
+                                ]
+                            ]
+            }
+        }
+    }
+    
+    ///Add Rent car
+    func addRent(vehicleModel: VehicleModel,
+                 completion: @escaping (Rent?, String?) -> Void) {
+        
+        let accessoriesArr = getAccessoriesToRequest(accessories: vehicleModel.additionalAccessories)
+        let additionalDriversArr = getAdditionalDriversToRequest(additionalDrivers: vehicleModel.additionalDrivers)
+        let pickupLocation = getLocationToRequest(search: vehicleModel.searchModel!, isPickUpLocation: true)
+        let returnLocation = getLocationToRequest(search: vehicleModel.searchModel!, isPickUpLocation: false)
+        let startDate = (Date().combineDate(date: vehicleModel.searchModel?.pickUpDate ?? Date(), withTime: vehicleModel.searchModel?.pickUpTime ?? Date())
+        )!.timeIntervalSince1970
+        let endDate = (Date().combineDate(date: vehicleModel.searchModel?.returnDate ?? Date(), withTime: vehicleModel.searchModel?.returnTime ?? Date())
+        )!.timeIntervalSince1970
+        
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addRent(carId: vehicleModel.vehicleId ?? "",
+                            startDate: startDate,
+                            endDate: endDate,
+                            accessories: accessoriesArr,
+                            additionalDrivers: additionalDriversArr,
+                            pickupLocation: pickupLocation,
+                            returnLocation: returnLocation))) { (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let result = BkdConverter<BaseResponseModel<Rent>>.parseJson(data: data as Any) else {
+                    print("error")
+                    completion(nil, nil)
+                    return
+                }
+                print(result.content as Any)
+                completion(result.content, nil)
+
+            case .failure(let error):
+                print(error.description)
+                completion(nil, error.description)
+                break
+            }
+        }
+    }
+   
 }

@@ -10,4 +10,5 @@ import UIKit
 struct PaymentTypes {
     public let title: String?
     public let image: UIImage?
+    public var isClicked: Bool = false
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 enum Search {
     case date
@@ -14,13 +15,13 @@ enum Search {
     case customLocation
 }
 
-var additionalAccessories: [AccessoriesModel] = AccessoriesData.accessoriesModel
-var additionalDrivers: [MyDriversModel] = MyDriversData.myDriversModel
+
 class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
-    //MARK: - Outlet
+    //MARK: -- Outlet
     
     @IBOutlet weak var mCarNameLb: UILabel!
+    @IBOutlet weak var mCarLogoImgV: UIImageView!
     @IBOutlet weak var mCarDetailLb: UILabel!
     @IBOutlet weak var carPhotosView: CarPhotosView!
     @IBOutlet weak var mCarInfoV: CarInfoView!
@@ -54,11 +55,22 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var mReserveLeading: NSLayoutConstraint!
     @IBOutlet weak var mDetailHeight: NSLayoutConstraint!
     
-    //MARK: - Varables
+    ///Compare
+    @IBOutlet weak var mCompareContentV: UIView!
+    @IBOutlet weak var mCompareTop: NSLayoutConstraint!
+    
+    //MARK: -- Varables
+
     private lazy  var tariffSlideVC = TariffSlideViewController.initFromStoryboard(name: Constant.Storyboards.details)
     
-    let detailsViewModel:DetailsViewModel = DetailsViewModel()
-    var workingTimes: WorkingTimes?
+    let detailsVM:DetailsViewModel = DetailsViewModel()
+    var settings: Settings?
+    var startFlexibleTimeList: [String]?
+    var endFlexibleTimeList: [String]?
+    var tariffSlideList:[TariffSlideModel]?
+    var currentTariffOption: TariffSlideModel?
+    var flexibleTariffOption: TariffSlideModel?
+    var containerViewForFariffSlide: UIView = UIView()
     
     var pickerState: DatePicker?
     var pickerList: [String]?
@@ -69,7 +81,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     var isSearchEdit = false
     var isClickMore = false
-    var currentTariff: Tariff = .hourly
+    var currentTariff: TariffState = .hourly
     var search: Search = .date
     var currentTariffOptionIndex: Int = 0
     
@@ -77,74 +89,78 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     let backgroundV =  UIView()
     var responderTxtFl = UITextField()
     
+    private var staringScrollContentHeight: CGFloat = 0
     private let scrollPadding: CGFloat = 60
     private let tableAnimationDuration = 0.5
-
-    private  var tariffSlideY: CGFloat = 0
+    private var tariffSlideY: CGFloat = 0
     private var lastContentOffset: CGFloat = 0
     private var previousContentPosition: CGPoint?
     private var scrollContentHeight: CGFloat = 0.0
     private var isScrolled = false
+    private var isTariffSlide = true
+    private var isFlexibleSelected = false
+    private var isSetScrollFrame = false
+    private var accessoriesEditList: [AccessoriesEditModel]?
+
     
-    //MARK: Life cycle
+    //MARK: -- Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTariffSlideViewFrame()
         setupView()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        setScrollVoiewHeight()
+        
+        
+        print ("viewDidLayoutSubviews")
+        print ("self.tariffSlideVC.view.frame.origin.y = \(self.tariffSlideVC.view.frame.origin.y)")
         setTableViewsHeight()
         setTariffSlideViewFrame()
-
+        if isSearchEdit {
+            mCompareTop.constant = mSearchV.isHidden ? 70 : height200
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         mReserveLeading.constant = -50.0
-        mReserveBckgV.roundCorners(corners: [.topRight, .topLeft], radius: 20)
         mSearchV.animateLocationList(isShow: false)
-
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        configureReserveView(isActive: mReserveBckgV.isUserInteractionEnabled)
+    }
+    
+    //MARK: -- Set
     func setupView() {
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
+        
         mRightBarBtn.image = #imageLiteral(resourceName: "bkd").withRenderingMode(.alwaysOriginal)
-        workingTimes = ApplicationSettings.shared.workingTimes
+        settings = ApplicationSettings.shared.settings
+        mCompareContentV.layer.cornerRadius = 8
 
+        staringScrollContentHeight = height1055 + 50
+        
         if isSearchEdit {
             mSearchWithValueStackV.searchModel = searchModel
             mSearchWithValueStackV.setupView()
-            mTariffCarouselV.tariffCarousel.currentItemIndex = 4
-            mTariffCarouselV.tariffCarousel.reloadData()
-            currentTariff = .flexible
+            animateSearchEdit(isShow: true)
         }
-        
-        
+        self.mTariffCarouselV.alpha = 0.0
         configureViews()
         setDetailDatas()
         configureTransparentView()
         configureDelegates()
         addTariffSliedView()
         goToLocationController()
+        getTariffList()
         
+        
+        self.reloadTariffCarusel(tariffSlideList: self.tariffSlideList)
     }
-    
-    /// set height of scroll view
-    func setScrollVoiewHeight() {
-        if scrollContentHeight == 0.0 {
-            // will show only tariff cards
-            scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height
-        }
-        if isSearchEdit && self.mSearchV.isHidden  {// will show tariff cards and search edit view
-            scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height + mSearchWithValueStackV.bounds.height
-        } else if !self.mSearchV.isHidden { // will show tariff cards and search view
-            scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height + mSearchV.bounds.height
-        }
-        mScrollV.contentSize.height = scrollContentHeight
-    }
-    
     
     /// set height to details or tailLift tableView
     func  setTableViewsHeight() {
@@ -162,10 +178,10 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    ///set frame to Tariff Slide View
+    
+    ///Set frame to Tariff Slide View
     func setTariffSlideViewFrame() {
         var bottomPadding:CGFloat  = 0
-        let tariffSlideHeight = self.view.bounds.height * 0.08168
         if #available(iOS 13.0, *) {
             let window = UIApplication.shared.windows[0]
             bottomPadding = window.safeAreaInsets.bottom
@@ -173,13 +189,19 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         if UIScreen.main.nativeBounds.height <= 1334 {
             bottomPadding = 22
         }
-        if !isScrolled {
-            tariffSlideY = (self.view.bounds.height * 0.742574) - bottomPadding
-            tariffSlideVC.view.frame = CGRect(x: 0,
-                                              y: tariffSlideY,
-                                              width: self.view.bounds.width,
-                                              height: tariffSlideHeight)
-        }
+       // if !isSetScrollFrame {
+        isSetScrollFrame = true
+        tariffSlideY = (self.view.bounds.height * 0.742574) - bottomPadding
+        tariffSlideVC.view.frame = CGRect(x: 0,
+                                          y: 0,
+                                          width: self.view.bounds.width,
+                                          height: height170 )
+        containerViewForFariffSlide.frame = CGRect(x: 0,
+                                                   y: tariffSlideY,
+                                                   width: self.view.bounds.width,
+                                                   height: height170 )
+        
+       // }
     }
     
     ///Set full Detail datas
@@ -187,6 +209,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
 
         mCarNameLb.text = vehicleModel?.vehicleName
         mCarDetailLb.text = vehicleModel?.vehicleType
+        mCarLogoImgV.image = vehicleModel?.vehicleLogo
         carPhotosView.mTowBarBckgV.isHidden = vehicleModel?.ifHasTowBar != nil ? !vehicleModel!.ifHasTowBar : true
         mCarInfoV.mCardLb.text = vehicleModel?.drivingLicense
         mCarInfoV.mKgLb.text = vehicleModel?.vehicleWeight
@@ -200,29 +223,62 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             mDetailHeight.constant = self.view.bounds.height * 0.0185644
             self.view.layoutIfNeeded()
         }
-            
+        getCarImagesList()
     }
-    
     
     ///Set  values to vehicle model
      func setVehicleModel(){
-        //var vehicleModel = VehicleModel()
+        let tariffIndex = detailsVM.getTariffIndex(tariff: currentTariff)
         vehicleModel?.vehicleName = mCarNameLb.text
-        vehicleModel?.ifHasTowBar = true
-        vehicleModel?.vehicleType = "Double cabin"
-        vehicleModel?.ifTailLift = false
-        vehicleModel?.additionalAccessories = additionalAccessories
-        vehicleModel?.additionalDrivers = additionalDrivers
-//        searchModel.pickUpLocation = mSearchV.mPickUpLocationBtn.title(for: .normal)
-//        searchModel.returnLocation = mSearchV.mReturnLocationBtn.title(for: .normal)
+        vehicleModel?.additionalAccessories = accessoriesEditList
         vehicleModel?.searchModel = searchModel
-        vehicleModel?.noWorkingTimeTotalPrice = detailsViewModel.getNoWorkingTimeTotalPrice(searchModel: searchModel, timePrice: timePrice)
-        if !isSearchEdit {
-            vehicleModel?.customLocationTotalPrice = detailsViewModel.getCustomLocationTotalPrice(searchV: mSearchV)
-        }
-        
+        vehicleModel?.depositPrice = (tariffSlideList?[tariffIndex].tariff?[currentTariffOptionIndex].deposit) ?? 0.0
      }
     
+//MARK: -- Get
+    ///get car´s images List
+    private func getCarImagesList() {
+        detailsVM.getCarImageList(item: vehicleModel ?? VehicleModel()) { (imagesRetsult) in
+            self.carPhotosView.carImagesList = imagesRetsult ?? []
+            self.carPhotosView.mScrollRightBtn.isHidden =  self.carPhotosView.carImagesList.count > 1 ? false : true
+            self.carPhotosView.mImagePagingCollectionV.reloadData()
+            self.carPhotosView.mImagesBottomCollectionV.reloadData()
+        }
+    }
+    
+    ///Get tariff list
+    private func getTariffList() {
+        detailsVM.getTariff { [self] result in
+            guard let _ = result else {
+                BKDAlert().showAlertOk(on: self,
+                                       message: Constant.Texts.errorRequest,
+                                       okTitle: Constant.Texts.ok, okAction: nil)
+                return
+            }
+            self.tariffSlideList = self.detailsVM.changeTariffListForUse(tariffs: result!, vehicleModel: self.vehicleModel ?? VehicleModel())
+            self.tariffSlideVC.tariffSlideList = self.tariffSlideList
+            self.tariffSlideVC.mTariffSlideCollectionV.reloadData()
+            if isSearchEdit {
+                  self.detailsVM.getCurrentTariff(search: searchModel,
+                                                         vehicleModel: vehicleModel!,
+                                                         tariffSlideList: self.tariffSlideList,
+                                                         completion: { slideList, tariffState in
+                      tariffSlideList = slideList
+                      currentTariff = tariffState
+                      self.reloadTariffCarusel(tariffSlideList: self.tariffSlideList)
+                      self.mTariffCarouselV.tariffCarousel.currentItemIndex = TariffSlideViewModel().getTariffStateIndex(tariffState: currentTariff)
+                      
+                })
+            } else {
+                self.reloadTariffCarusel(tariffSlideList: self.tariffSlideList)
+
+            }
+                self.mTariffCarouselV.vehicleModel = self.vehicleModel
+        }
+    }
+  
+    
+    //MARK: -- Configure
     private func configureTransparentView()  {
         backgroundV.frame = self.view.bounds
         backgroundV.backgroundColor = .black
@@ -239,6 +295,9 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         mAccessoriesBtn.layer.cornerRadius = 8
         mAdditionalDriverBtn.layer.cornerRadius = 8
         mReserveBckgV.isHidden = isClickMore
+        
+        startFlexibleTimeList = detailsVM.getStartFlexibleTimes(flexibleTimes: ApplicationSettings.shared.flexibleTimes)
+        endFlexibleTimeList = detailsVM.getEndFlexibleTimes(flexibleTimes: ApplicationSettings.shared.flexibleTimes)
         if !isClickMore {
             configureReserveView(isActive: isSearchEdit)
         }
@@ -247,6 +306,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     ///configure reserve view
     private func configureReserveView(isActive: Bool) {
+        mReserveBckgV.removeCAShapeLayer()
         mReserveBckgV.setGradientWithCornerRadius(cornerRadius: 0.0, startColor:isActive ? color_reserve_start! : color_reserve_inactive_start!,
                                                   endColor:isActive ? color_reserve_end!: color_reserve_inactive_end! )
         mReserveBckgV.roundCorners(corners: [.topRight, .topLeft], radius: 20)
@@ -268,10 +328,27 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     /// Add child view
     func addTariffSliedView() {
+        self.containerViewForFariffSlide.backgroundColor = .clear.withAlphaComponent(0.0)
+        self.view.addSubview(self.containerViewForFariffSlide)
         addChild(tariffSlideVC)
-        self.view.addSubview(tariffSlideVC.view)
+        self.containerViewForFariffSlide.addSubview(tariffSlideVC.view)
         tariffSlideVC.didMove(toParent: self)
+        self.view.bringSubviewToFront(mReserveBckgV)
+
     }
+    
+//    ///Reset view
+//    func resetView() {
+//
+//        if isSearchEdit {
+//            mCompareTop.constant = 70
+//            animateSearchEdit(isShow: true)
+//        }
+//        mCompareContentV.alpha = 1
+//        mCompareContentV.isHidden = false
+//        mSearchV.isHidden = true
+//        mScrollV.contentSize = CGSize(width: mScrollV.contentSize.width, height: staringScrollContentHeight)
+//    }
     
     ///creat tool bar
     func creatToolBar() -> UIToolbar {
@@ -286,16 +363,20 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     }
     
     /// ScrollView will scroll to bottom
-    private func scrollToBottom(distance: CGFloat) {
-        let y = mScrollV.contentSize.height - mScrollV.bounds.height + mScrollV.contentInset.bottom + distance
+    private func scrollToBottom() {
+        mScrollV.contentSize.height = mSearchV.isHidden ? staringScrollContentHeight + 30 :  staringScrollContentHeight + height50
+        //(mScrollV.contentSize.height + mSearchV.bounds.height)
+        scrollToBottom(y: mScrollV.contentSize.height - mScrollV.bounds.size.height + mScrollV.contentInset.bottom)
+    }
+    
+    /// ScrollView will scroll to bottom
+    private func scrollToBottom(y: CGFloat?) {
         previousContentPosition = mScrollV.contentOffset
-        scrollContentHeight = mScrollV.contentSize.height
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: { [self] in
-                self.mScrollV.contentOffset.y = y
+            UIView.animate(withDuration: 0.5, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: { [self] in
+                self.mScrollV.contentOffset.y = y!
             }, completion: nil)
         }
-        showTariffCardWithDelay()
     }
     
     ///Scroll view will back to previous position
@@ -312,9 +393,10 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             responderTxtFl.text = timeStr
             responderTxtFl.textColor = color_entered_date
             updateSearchTimes()
+            updateFlexiblePrice(search: searchModel)
             
         } else { // date
-            dayBtn?.setTitle(String(datePicker.date.get(.day)), for: .normal)
+        dayBtn?.setTitle(String(datePicker.date.getDay()), for: .normal)
             monthBtn?.setTitle(datePicker.date.getMonthAndWeek(lng: "en"), for: .normal)
             updateSearchDates()
         }
@@ -323,70 +405,97 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     /// will update date fields depend on tariff option
         func updateSearchDates() {
+            var newSearchModel = SearchModel()
             if currentTariff != .flexible {
                 search = .date
                 searchModel.pickUpDate = datePicker.date
-                let newSearchModel = detailsViewModel.updateSearchInfo(tariff:
-                                                                        currentTariff, search: search,
+                newSearchModel = detailsVM.updateSearchInfo(tariffSlideList: tariffSlideList!,
+                                                                       tariff:
+                                                                        currentTariff,
+                                                                       search: search,
                                                                        optionIndex: currentTariffOptionIndex, currSearchModel: searchModel)
-                mSearchV.updateSearchDate(searchModel:newSearchModel)
-                searchModel = newSearchModel
+                mSearchV.updateSearchDate(tariff: currentTariff, searchModel:newSearchModel)
+            } else {
+                newSearchModel = detailsVM.updateSearchInfoForFlexible(search: search,
+                                                                              currSearchModel: searchModel)
+                mSearchV.updateSearchDate(tariff: currentTariff,
+                                          searchModel: newSearchModel)
+                updateFlexiblePrice(search: newSearchModel)
             }
+            searchModel = newSearchModel
+
     }
     
-    /// will update time fields depend on tariff option
+    ///Will update time fields depend on tariff option
     func updateSearchTimes() {
+        var newSearchModel = SearchModel()
         if currentTariff != .flexible {
             search = .time
             let timeStr = pickerList![ pickerV.selectedRow(inComponent: 0)]
             searchModel.pickUpTime = timeStr.stringToDate()
             mSearchV.mReturnTimeTxtFl.font =  UIFont.init(name: (responderTxtFl.font?.fontName)!, size: 18.0)
             
-            let newSearchModel = detailsViewModel.updateSearchInfo(tariff:
-                                                                    currentTariff,
-                                                                   search: search,
-                                                                   optionIndex: currentTariffOptionIndex, currSearchModel: searchModel)
+            newSearchModel = detailsVM.updateSearchInfo(tariffSlideList: tariffSlideList!,
+                                                               tariff:
+                                                                currentTariff,
+                                                               search: search,
+                                                               optionIndex: currentTariffOptionIndex, currSearchModel: searchModel)
             mSearchV.updateSearchTimes(searchModel: newSearchModel,
                                        tariff: currentTariff)
-            searchModel = newSearchModel
+            
+        } else {
+            newSearchModel = detailsVM.updateSearchInfoForFlexible(search: search,
+                                                                          currSearchModel: searchModel)
+            mSearchV.updateSearchDate(tariff: currentTariff,
+                                      searchModel: newSearchModel)
         }
+        searchModel = newSearchModel
+        
     }
     
-    ///will open  location controller
+   
+    ///Update flexible price
+    func updateFlexiblePrice(search: SearchModel) {
+        if search.pickUpDate != nil && search.returnDate != nil &&  search.pickUpTime != nil &&
+            search.returnTime != nil &&
+            currentTariff == .flexible &&
+            currentTariffOption != nil  {
+            flexibleTariffOption = detailsVM.getFlexiblePrice(search: search, option: currentTariffOption!, vehicle: vehicleModel!, isSelected: isFlexibleSelected)
+            
+            guard let tariffSlideList = mTariffCarouselV.tariffSlideList else {return}
+            
+            mTariffCarouselV.tariffSlideList![tariffSlideList.count - 1] = flexibleTariffOption!
+            mTariffCarouselV.tariffCarousel.reloadData()
+        }
+    }
+    ///Will open  location controller
     func goToLocationController() {
         mSearchV!.mLocationDropDownView.didSelectSeeMap = { [weak self] result  in
-            let seeMapContr = UIStoryboard(name: Constant.Storyboards.seeMap, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.seeMap) as! SeeMapViewController
-            seeMapContr.parking = result
-            self?.navigationController?.pushViewController(seeMapContr, animated: true)
+            self?.goToSeeMap(parking: result, customLocation: nil)
         }
     }
     
-    ///will open custom location map controller
-    func goToCustomLocationMapController () {
-        let customLocationContr = UIStoryboard(name: Constant.Storyboards.customLocation, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.customLocation) as! CustomLocationViewController
-        customLocationContr.delegate = self
-        self.navigationController?.pushViewController(customLocationContr, animated: true)
-    }
-    
-    ///will open  custom location map controller
+    ///Will open  custom location map controller
     func goToReserveController() {
+        
         let reserve = UIStoryboard(name: Constant.Storyboards.reserve, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.reserve) as! ReserveViewController
         setVehicleModel()
         reserve.vehicleModel = vehicleModel
+        reserve.currentTariff = currentTariff
+        reserve.currentTariffOption  = currentTariffOption
         self.navigationController?.pushViewController(reserve, animated: true)
     }
     
     
     private func isActiveReserve() {
-        detailsViewModel.isReserveActive(searchModel: searchModel) { [self] (isActive) in
+        detailsVM.isReserveActive(searchModel: searchModel) { [self] (isActive) in
             //remove CAGradientLayer
             self.mReserveBckgV.layer.sublayers?.filter{ $0 is CAGradientLayer }.forEach{ $0.removeFromSuperlayer() }
             configureReserveView(isActive: isActive)
         }
     }
     
-    ///MARK: ANTIMATION METHODS
-    ///
+    //MARK: -- Animations
     ///Will animate reserve
     func animationReserve() {
         self.mReserveLeading.constant = self.view.bounds.width - self.mReserveBckgV.bounds.width + 25
@@ -394,75 +503,74 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded()
         } completion: { _ in
-           // self.mReserveBckgV.roundCorners(corners: [.topLeft], radius: 20)
         }
     }
     
-    ///will show or hide SearchEdit view with animation
+    ///Will show or hide SearchEdit view with animation
     func animateSearchEdit(isShow: Bool) {
         let alphaValue = isShow ? 1.0 : 0.0
         if isShow {
             self.mSearchWithValueStackV.isHidden = !isShow
+            self.mSearchV.isHidden = isShow
         }
         UIView.animate(withDuration: 0.5) { [self] in
             self.mSearchWithValueStackV.alpha = CGFloat(alphaValue)
         } completion: {[self] _ in
             if !isShow {
                 self.mSearchWithValueStackV.isHidden = !isShow
+                self.mCompareTop.constant = height200
             }
         }
     }
     
-    /// will be hidden search view
-    private func hideSearchView() {
-        UIView.animate(withDuration: 0.7) { [self] in
-            self.mSearchV.alpha = 0.0
-        } completion: { [self]  _ in
-            self.mSearchV.isHidden = true
-        }
-    }
     
-    ///will show tariff cards
-    private func showTariffCards () {
-            self.mTariffCarouselV.tariffCarousel.reloadData()
-            self.tariffSlideVC.tariffSlideArr = TariffSlideData.tariffSlideModel
-            self.tariffSlideVC.mTariffSlideCollectionV.reloadData()
-            UIView.animate(withDuration: 0.5) { [self] in
-                self.tariffSlideVC.view.frame.origin.y += 500
-                self.tariffSlideVC.view.layoutIfNeeded()
-            } completion: { [self] _ in
-                if isSearchEdit && currentTariff == .flexible {
-                    self.animateSearchEdit(isShow: true)
+    ///Animate search content view
+    private func animateSearchView(isShow: Bool) {
+            UIView.animate(withDuration: 0.5) {
+                self.mSearchV.alpha = isShow ? 1.0 : 0.0
+            } completion: { _ in
+                if isShow {
+                    self.mSearchV.isHidden = !isShow
                 }
-            }
-        showTariffCardWithDelay()
-        
-    }
-   
-    private func showTariffCardWithDelay() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-            self.mTariffCarouselV.isHidden = false
-            UIView.animate(withDuration: 0.5) { [self] in
-                self.mTariffCarouselV.alpha = 1.0
-            }
         }
     }
     
-    /// will hide tariff cards
-    private func hideTariffCards() {
-            UIView.animate(withDuration: 0.5) { [self] in
-                self.tariffSlideVC.view.frame.origin.y -= 500
-                mTariffCarouselV.alpha = 0.0
-                mSearchV.alpha = 0.0
-                self.tariffSlideVC.view.layoutIfNeeded()
-            } completion: { [self]_ in
-                self.mTariffCarouselV.isHidden = true
-                mSearchV.isHidden = true
-                scrollContentHeight = mScrollV.bounds.height + mTariffCarouselV.bounds.height
+    ///Update compare view posittion
+    private func updateCompareView() {
+        
+            UIView.animate(withDuration: 0.5) {
+                self.mCompareContentV.alpha = 0.0
+                self.mCompareTop.constant = height200
+            } completion: { _ in
+                self.mCompareContentV.alpha = 1.0
             }
+        view.layoutIfNeeded()
     }
     
-    /// show Tarif lift or Detail tableView
+    
+//    private func updateCompareView(isShow: Bool) {
+//        if !isShow {
+//            UIView.animate(withDuration: 0.5) {
+//                if isShow {
+//                    self.mCompareContentV.isHidden = !isShow
+//                    self.mCompareContentV.alpha = 1.0
+//                    self.mSearchV.alpha = 0.0
+//                } else {
+//                    self.mCompareContentV.alpha = 0.0
+//                    self.mSearchV.isHidden = isShow
+//                    self.mSearchV.alpha = 1.0
+//                }
+//            } completion: { _ in
+//                if !isShow {
+//                    self.mCompareContentV.isHidden = !isShow
+//                } else {
+//                    self.mSearchV.isHidden = isShow
+//                }
+//            }
+//        }
+//    }
+    
+    ///Show Tarif lift or Detail tableView
     private func showTableView(view: UIView, imgRotate: UIImageView?) {
             UIView.transition(with: view, duration: tableAnimationDuration, options: [.transitionCurlDown,.allowUserInteraction], animations: {
                 if let _ = imgRotate {
@@ -473,7 +581,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             }, completion: nil)
     }
     
-    /// close Tarif lift or Detail tableView
+    ///Close Tarif lift or Detail tableView
     private func hideTableView(view: UIView, imgRotate: UIImageView?) {
         UIView.transition(with: view, duration: tableAnimationDuration, options: [.transitionCurlUp,.allowUserInteraction], animations: {
             if let _ = imgRotate {
@@ -485,27 +593,33 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         })
     }
     
+    ///Reload Tariff cells
+    private func reloadTariffCarusel(tariffSlideList: [TariffSlideModel]?) {
+        mTariffCarouselV.tariffSlideList = tariffSlideList
+        mTariffCarouselV.tariffCarousel.reloadData()
+    }
     
-    //MARK: ALERT
-    //MARK: -------------------
-    
+    //MARK: -- Alerts
+    ///Alert for custom location
     func showAlertCustomLocation(checkedBtn: UIButton) {
+        let locationPrice = CGFloat(ApplicationSettings.shared.settings?.customLocationMinimalValue ?? 0)
         BKDAlert().showAlert(on: self,
-                             title: String(format: Constant.Texts.titleCustomLocation, customLocationPrice),
+                             title: String(format: Constant.Texts.titleCustomLocation, locationPrice),
                              message: Constant.Texts.messageCustomLocation,
                              messageSecond: Constant.Texts.messageCustomLocation2,
                              cancelTitle: Constant.Texts.cancel,
                              okTitle: Constant.Texts.agree,cancelAction: {
                                 checkedBtn.setImage(img_uncheck_box, for: .normal)
                              }, okAction: { [self] in
-                                self.goToCustomLocationMapController()
+                                self.goToCustomLocationMapController(on: self, isAddDamageAddress: false)
                              })
     }
     
+    ///Alert for no working hours
     func showAlertWorkingHours() {
         BKDAlert().showAlert(on: self,
                              title:String(format: Constant.Texts.titleWorkingTime, timePrice),
-                             message: Constant.Texts.messageWorkingTime + "(\(workingTimes?.workStart ?? "") -  \(workingTimes?.workEnd ?? "")).",
+                             message: Constant.Texts.messageWorkingTime + "(\(settings?.workStart ?? "") -  \(settings?.workEnd ?? "")).",
                              messageSecond: nil,
                              cancelTitle: Constant.Texts.cancel,
                              okTitle: Constant.Texts.agree,cancelAction:nil,
@@ -515,8 +629,10 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
 
                              })
     }
-    
-    func showAlertMoreThanMonth(optionIndex: Int) {
+ 
+    ///Alert for more then a month
+    func showAlertMoreThanMonth(optionIndex: Int, options: [TariffSlideModel]?) {
+
         BKDAlert().showAlert(on: self,
                              title: nil,
                              message: Constant.Texts.messageMoreThanMonth,
@@ -527,16 +643,19 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
                                 mTariffCarouselV.tariffCarousel.reloadData()
 
                              }, okAction: { [self] in
-                                if isSearchEdit {
-                                    isSearchEdit = false
-                                }
-                                self.confirmPressed(optionIndex: optionIndex)
+                                 self.confirmPressed(optionIndex: optionIndex, options: options)
                              })
-        
     }
-    func showAlertChangeTariff(optionIndex: Int, option: String)  {
+    
+    ///Alert for change tariff
+    func showAlertChangeTariff(optionIndex: Int,
+                               option: String,
+                               options: [TariffSlideModel]?)  {
+        
+        let pickup = searchModel.pickUpDate!.getDay() + searchModel.pickUpDate!.getMonthAndWeek(lng: "en") + "/" + searchModel.pickUpTime!.getHour()
+        let retrunDate = searchModel.returnDate!.getDay() + searchModel.returnDate!.getMonthAndWeek(lng: "en") + "/" + searchModel.returnTime!.getHour()
         BKDAlert().showAlert(on: self,
-                             title: Constant.Texts.titleChangeTariff,
+                             title: pickup + "   " + retrunDate,
                              message: Constant.Texts.messageChangeTariff + option + " ? " + Constant.Texts.messageChangeTariffSeconst,
                              messageSecond: nil,
                              cancelTitle: Constant.Texts.cancel,
@@ -546,69 +665,18 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
 
                              }, okAction: { [self] in
                                 if currentTariff == .monthly {
-                                    showAlertMoreThanMonth(optionIndex: 0)
+                                    showAlertMoreThanMonth(optionIndex: 0,options: options)
                                 } else {
-                                    self.confirmPressed(optionIndex: optionIndex)
-                                    isSearchEdit = false
+                                    self.confirmPressed(optionIndex: optionIndex, options: options)
+                                    mCompareTop.constant = 0
                                 }
                              })
     }
     
-    
-    //MARK: - Hendler Methodes
-    /// Confirm button pressed
-    private func confirmPressed(optionIndex: Int) {
-        currentTariffOptionIndex = optionIndex
-        updateSearchFields(optionIndex: optionIndex)
-        mSearchV.configureSearchPassiveFields(tariff: currentTariff)
-        if isSearchEdit {
-            animateSearchEdit(isShow: !isSearchEdit)
-        }  else {
-            isSearchEdit = false
-        }
-        if mSearchV.isHidden  {
-            mSearchV.isHidden = false
-            mScrollV.contentSize.height = mScrollV.contentSize.height + mSearchV.bounds.height
-            UIView.animate(withDuration: 0.7) { [self] in
-                self.scrollToBottom(distance: 0.0)
-                self.mSearchV.alpha = 1
-            }
-        }
-    }
-    
-    @objc func donePressed() {
-        responderTxtFl.resignFirstResponder()
-        scrollToBack()
-        DispatchQueue.main.async() {
-            self.backgroundV.removeFromSuperview()
-        }
-        
-        
-        switch pickerState {
-        case .pickUpDate:
-            mSearchV.showDateInfoViews(dayBtn: mSearchV!.mDayPickUpBtn,
-                              monthBtn: mSearchV!.mMonthPickUpBtn,
-                              txtFl: responderTxtFl)
-            showSelectedDate(dayBtn: mSearchV!.mDayPickUpBtn,
-                             monthBtn: mSearchV!.mMonthPickUpBtn, timeStr: nil)
-            
-        case .returnDate:
-            mSearchV.showDateInfoViews(dayBtn: mSearchV!.mDayReturnDateBtn,
-                         monthBtn: mSearchV!.mMonthReturnDateBtn,
-                         txtFl: responderTxtFl)
-            showSelectedDate(dayBtn: mSearchV!.mDayReturnDateBtn,
-                             monthBtn: mSearchV!.mMonthReturnDateBtn, timeStr: nil)
-            
-        default:
-            let timeStr = pickerList![ pickerV.selectedRow(inComponent: 0)]
-            chanckReservationTime(timeStr: timeStr)
-        }
-        
-    }
-    
+    //MARK: -- Checked
     ///check is reservation time during working time
     private func chanckReservationTime(timeStr: String?) {
-        detailsViewModel.isReservetionInWorkingHours(time: timeStr?.stringToDate()) { [self] (result) in
+        detailsVM.isReservetionInWorkingHours(time: timeStr?.stringToDate()) { [self] (result) in
             if !result {
                 self.showAlertWorkingHours()
             } else {
@@ -618,55 +686,167 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         
     }
     
+    ///check if reservation date more than 90 days
+  private  func checkIfReservationMoreThan90Days() -> Bool {
+        if  MainViewModel().isReservetionMore90Days(search: searchModel) && currentTariff == .flexible {
+                BKDAlert().showAlertOk(on: self, message: Constant.Texts.max90Days, okTitle: Constant.Texts.ok) {
+                    self.mSearchV.resetReturnDate()
+                    self.mSearchV.resetReturnTime()
+                    self.searchModel.returnDate = nil
+                    self.searchModel.returnTime = nil
+
+            }
+            return true
+        }
+        return false
+    }
     
-    //MARK: -Actions
-    //MARK: --------------------
+    //MARK: -- Hendler Methodes
+    /// Confirm button pressed
+    private func confirmPressed(optionIndex: Int,
+                                options: [TariffSlideModel]?) {
+        isScrolled = true
+        currentTariffOptionIndex = optionIndex
+        currentTariffOption = options?[optionIndex]
+        isFlexibleSelected = (currentTariff == .flexible) ? true : false
+        if currentTariff != .flexible &&  flexibleTariffOption != nil {
+            flexibleTariffOption = detailsVM.getFlexiblePrice(search: searchModel, option: flexibleTariffOption!, vehicle: vehicleModel!, isSelected: false)
+            mTariffCarouselV.tariffSlideList![tariffSlideList!.count - 1] = flexibleTariffOption!
+        }
+
+        tariffSlideList = detailsVM.updateTariffSlideList(tariffSlideList: tariffSlideList,
+                                                                 optionIndex: optionIndex,
+                                                                 options: options,
+                                                                 tariff: currentTariff)
+        reloadTariffCarusel(tariffSlideList: tariffSlideList)
+        
+        if isSearchEdit {
+            animateSearchEdit(isShow: !isSearchEdit)
+        }
+            isSearchEdit = false
+        
+        updateSearchFields(optionIndex: optionIndex)
+        mSearchV.configureSearchPassiveFields(tariff: currentTariff)
+        isActiveReserve()
+        if mSearchV.isHidden  {
+            mSearchV.isHidden = false
+            mScrollV.frame.size = CGSize(width: mScrollV.bounds.width, height: mScrollV.contentSize.height)
+
+            scrollToBottom()
+            animateSearchView(isShow: true)
+            updateCompareView()
+        }
+    }
+    
+    
+    ///Handler done button of toolBar
+    @objc func donePressed() {
+        responderTxtFl.resignFirstResponder()
+        scrollToBack()
+        DispatchQueue.main.async() {
+            self.backgroundV.removeFromSuperview()
+        }
+        
+        switch pickerState {
+        case .pickUpDate:
+            mSearchV.showDateInfoViews(dayBtn: mSearchV!.mDayPickUpBtn,
+                              monthBtn: mSearchV!.mMonthPickUpBtn,
+                              txtFl: responderTxtFl)
+            searchModel.pickUpDate = datePicker.date
+            if !checkIfReservationMoreThan90Days() {
+                showSelectedDate(dayBtn: mSearchV!.mDayPickUpBtn,
+                                 monthBtn: mSearchV!.mMonthPickUpBtn, timeStr: nil)
+            }
+
+                        
+        case .returnDate:
+            mSearchV.showDateInfoViews(dayBtn: mSearchV!.mDayReturnDateBtn,
+                         monthBtn: mSearchV!.mMonthReturnDateBtn,
+                         txtFl: responderTxtFl)
+            searchModel.returnDate = datePicker.date
+            if !checkIfReservationMoreThan90Days() {
+                showSelectedDate(dayBtn: mSearchV!.mDayReturnDateBtn,
+                                 monthBtn: mSearchV!.mMonthReturnDateBtn, timeStr: nil)
+            }
+            
+
+        default:
+            var timeStr = ""
+           if currentTariff != .flexible {
+                timeStr = pickerList![ pickerV.selectedRow(inComponent: 0)]
+                chanckReservationTime(timeStr: timeStr)
+           } else {
+               timeStr = detailsVM.getTimeOfFlexible(time: pickerList![ pickerV.selectedRow(inComponent: 0)])
+           }
+
+            
+            if pickerState == .pickUpTime {
+                searchModel.pickUpTime = timeStr.stringToDate()
+            } else{
+                searchModel.returnTime = timeStr.stringToDate()
+            }
+            
+            if currentTariff == .flexible {
+                if !checkIfReservationMoreThan90Days() {
+                    showSelectedDate(dayBtn: nil, monthBtn: nil, timeStr: pickerList![ pickerV.selectedRow(inComponent: 0)])
+                }
+            }
+            
+        }
+        
+    }
+    
+    
+    //MARK: -- Actions
     
     ///Navigation controller will back to pravius controller
     @IBAction func back(_ sender: UIBarButtonItem) {
-        additionalAccessories = AccessoriesData.accessoriesModel
-        additionalDrivers = MyDriversData.myDriversModel
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func accessories(_ sender: UIButton) {
-        let accessoriesVC = UIStoryboard(name: Constant.Storyboards.accessories, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.accessories) as! AccessoriesUIViewController
-        accessoriesVC.delegate = self
-        self.navigationController?.pushViewController(accessoriesVC, animated: true)
+        self.goToAccessories(on: self,
+                             vehicleModel: vehicleModel,
+                             rent: nil,
+                             isEditReservation: false,
+                             accessoriesEditList: accessoriesEditList)
     }
     
     
     @IBAction func additionalDriver(_ sender: UIButton) {
-        let myDriverVC = UIStoryboard(name: Constant.Storyboards.myDrivers, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.myDrivers) as! MyDriversViewController
-        myDriverVC.delegate = self
-        self.navigationController?.pushViewController(myDriverVC, animated: true)
+        self.goToAdditionalDriver(on: self,
+                                  isEditReservation: false,
+                                  additionalDrivers: vehicleModel?.additionalDrivers)
     }
     
     @IBAction func reserve(_ sender: UIButton) {
         animationReserve()
+        detailsVM.setNoWorkingHoursPrice(search: searchModel, price: timePrice)
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [self] in
-            self.goToReserveController()
-        }
+                self.goToReserveController()
+            }
     }
     
+    @IBAction func compare(_ sender: UIButton) {
+        let compareVC = CompareViewController.initFromStoryboard(name: Constant.Storyboards.compare)
+        compareVC.vehicleModel = vehicleModel
+      self.navigationController?.pushViewController(compareVC, animated: true)
+    }
 }
 
 
-
-
-
-
-
-//MARK: DetailsAndTailLiftViewDelegate
-//MARK: ----------------------------------
+//MARK: -- DetailsAndTailLiftViewDelegate
 extension DetailsViewController: DetailsAndTailLiftViewDelegate {
     
     func didPressDetails(willOpen: Bool) {
         
         if willOpen  {
+            scrollToBottom(y: height245)
             mDetailsTbV.detailList = vehicleModel?.detailList ?? []
             mDetailsTbV.reloadData()
-            scrollToBottom(distance: (vehicleModel?.ifTailLift ?? false) ? 0.0 : -(self.view.bounds.height * 0.247))
+           
+
             if self.mTailLiftTableBckgV.alpha == 1 {
                 hideTableView(view: mTailLiftTableBckgV, imgRotate: self.mDetailsAndTailLiftV.mTailLiftDropDownImgV)
                 // will show Details tableView and close TailLift tableView
@@ -681,11 +861,12 @@ extension DetailsViewController: DetailsAndTailLiftViewDelegate {
     }
     
     func didPressTailLift(willOpen: Bool) {
-        scrollToBottom(distance: 0.0)
         // will show TailLift tableView
         if willOpen {
+            scrollToBottom(y: height170)
             mTailLiftTbV.tailLiftList = vehicleModel?.tailLiftList ?? []
             mTailLiftTbV.reloadData()
+            
             showTableView(view: mTailLiftTableBckgV, imgRotate: nil)
         } else if !willOpen { // will hide TailLift tableView
             hideTableView(view: mTailLiftTableBckgV, imgRotate: nil)
@@ -693,84 +874,97 @@ extension DetailsViewController: DetailsAndTailLiftViewDelegate {
     }
 }
 
-//MARK: TariffSlideViewControllerDelegate
-//MARK: ----------------------------
+//MARK: -- TariffSlideViewControllerDelegate
 extension DetailsViewController: TariffSlideViewControllerDelegate {
     
-    func didPressTariffOption(tariff: Tariff, optionIndex: Int) {
-        
-        //scrollContentHeight = 0.0
-        setScrollVoiewHeight()
-        scrollToBottom(distance: 0.0)
+    func didPressTariffOption(tariff: TariffState, optionIndex: Int) {
+        isTariffSlide = false
+        isScrolled = true
+        scrollToBottom(y: mScrollV.contentSize.height - mScrollV.bounds.size.height + mScrollV.contentInset.bottom)
+        if mSearchV.isHidden {
+            self.mCompareTop.constant = 0
+        }
+
         currentTariff = tariff
         if isSearchEdit {
             animateSearchEdit(isShow: true)
         }
-        switch tariff {
-        case .hourly:
-            mTariffCarouselV.tariffCarousel.currentItemIndex = 0
-            break
-        case .daily:
-            mTariffCarouselV.tariffCarousel.currentItemIndex = 1
-            break
-        case .weekly:
-            mTariffCarouselV.tariffCarousel.currentItemIndex = 2
-            break
-        case .monthly:
-            mTariffCarouselV.tariffCarousel.currentItemIndex = 3
-            break
-        case .flexible:
-            mTariffCarouselV.tariffCarousel.currentItemIndex = 4
-            break
-        }
-        mTariffCarouselV.selectedSegmentIndex = optionIndex
-        mTariffCarouselV.tariffCarousel.reloadData()
+        mTariffCarouselV.tariffCarousel.currentItemIndex =         TariffSlideViewModel().getTariffStateIndex(tariffState: tariff)
+
+        tariffSlideList?[mTariffCarouselV.tariffCarousel.currentItemIndex].options?[optionIndex].isOpenOptions = true
+        tariffSlideList?[mTariffCarouselV.tariffCarousel.currentItemIndex].segmentIndex = optionIndex
+        reloadTariffCarusel(tariffSlideList: tariffSlideList)
     }
 }
 
-//MARK: TariffCarouselViewDelegate
-//MARK: ----------------------------
+//MARK: -- TariffCarouselViewDelegate
 extension DetailsViewController: TariffCarouselViewDelegate {
-    
-    func didPressConfirm(tariff: Tariff, optionIndex: Int, optionstr: String) {
+  
+ 
+    func didPressConfirm(tariff: TariffState,
+                         optionIndex: Int,
+                         optionstr: String,
+                         options: [TariffSlideModel]? ) {
         currentTariff = tariff
-        if isSearchEdit && tariff != .flexible {
-            showAlertChangeTariff(optionIndex: optionIndex, option: optionstr)
+        isScrolled = true
+        
+        if isSearchEdit {
+            showAlertChangeTariff(optionIndex: optionIndex,
+                                  option: optionstr, options: options)
         } else {
             if tariff == .monthly {
-                showAlertMoreThanMonth(optionIndex: optionIndex)
+                showAlertMoreThanMonth(optionIndex: optionIndex,
+                                       options: options)
             } else {
-                confirmPressed(optionIndex: optionIndex)
+                confirmPressed(optionIndex: optionIndex,
+                               options: options)
             }
         }
     }
     
     
-    func willChangeTariffOption(tariff: Tariff, optionIndex: Int) {
+    func willChangeTariffOption(tariff: TariffState,
+                                optionstr: String,
+                                optionIndex: Int,
+                                options: [TariffSlideModel]? ) {
+        
         search = (tariff == .hourly) ? .time : .date
        updateSearchFields(optionIndex: optionIndex)
         currentTariffOptionIndex = optionIndex
+        currentTariffOption = options?[optionIndex]
+        if isSearchEdit && tariff != .flexible {
+            showAlertChangeTariff(optionIndex: optionIndex,
+                                  option: optionstr, options: options)
+        }
     }
 
-    func didPressMore() {
-        let moreVC = UIStoryboard(name: Constant.Storyboards.more, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.more) as! MoreViewController
-        self.navigationController?.pushViewController(moreVC, animated: true)
+    func didPressMore(tariffIndex:Int, optionIndex: Int) {
+        vehicleModel?.depositPrice = (tariffSlideList?[tariffIndex].tariff?[optionIndex].deposit) ?? 0.0
+        self.goToMore(vehicleModel: vehicleModel, carModel: nil)
     }
     
     ///update search fields
     private func updateSearchFields(optionIndex: Int) {
-        searchModel = detailsViewModel.updateSearchInfo(tariff: currentTariff,
+        if !isSearchEdit {
+        searchModel = detailsVM.updateSearchInfo(tariffSlideList:tariffSlideList!,
+                                                        tariff: currentTariff,
                                           search: search,
                                           optionIndex: optionIndex,
                                           currSearchModel: searchModel)
-        mSearchV.updateSearchFilledFields(tariff: currentTariff,
-                                          searchModel: searchModel)
+        }
+       // if isSearchEdit  {
+            mSearchV.updateSearchFields(searchModel: searchModel,
+                                        tariff: currentTariff)
+//        } else {
+//            mSearchV.updateSearchFilledFields(tariff: currentTariff,
+//                                              searchModel: searchModel,
+//                                              isEdit: isSearchEdit)
+//        }
     }
     
 }
 
-//MARK: SearchViewDelegate
-//MARK: --------------------
+//MARK: -- SearchViewDelegate
 extension DetailsViewController: SearchViewDelegate {
 
     func willOpenPicker(textFl: UITextField, pickerState: DatePicker) {
@@ -778,11 +972,14 @@ extension DetailsViewController: SearchViewDelegate {
         self.view.addSubview(self.backgroundV)
         textFl.inputAccessoryView = creatToolBar()
         responderTxtFl = textFl
-        scrollToBottom(distance: mSearchV.bounds.height)
+        scrollToBottom(y: height550)
 
         if pickerState == .pickUpTime || pickerState == .returnTime {
-            
-            pickerList = ApplicationSettings.shared.pickerList
+            if currentTariff == .flexible {
+                pickerList = (pickerState == .pickUpTime) ? startFlexibleTimeList : endFlexibleTimeList
+            } else {
+                pickerList = ApplicationSettings.shared.pickerList
+            }
             textFl.inputView = pickerV
             textFl.inputAccessoryView = creatToolBar()
 
@@ -799,17 +996,29 @@ extension DetailsViewController: SearchViewDelegate {
             }
             self.datePicker.datePickerMode = .date
             self.datePicker.minimumDate =  Date()
+            self.datePicker.maximumDate =  Date().addMonths(12)
+
+            if let pickUpDate =  searchModel.pickUpDate {
+                self.datePicker.minimumDate =  pickUpDate
+            }
+            
             self.datePicker.timeZone = TimeZone(secondsFromGMT: 0)
             self.datePicker.locale = Locale(identifier: "en")
         }
     }
     
     
-    func didSelectLocation(_ text: String, _ tag: Int) {
+    func didSelectLocation(_ parking: Parking, _ tag: Int) {
         if tag == 4 { //pick up location
-            searchModel.pickUpLocation = text
+            searchModel.pickUpLocation = parking.name
+            searchModel.pickUpLocationId = parking.id
+            searchModel.isPickUpCustomLocation = false
+            PriceManager.shared.pickUpCustomLocationPrice = nil
         } else {// return location
-            searchModel.returnLocation = text
+            searchModel.returnLocation = parking.name
+            searchModel.returnLocationId = parking.id
+            searchModel.isRetuCustomLocation = false
+            PriceManager.shared.returnCustomLocationPrice = nil
         }
         isActiveReserve()
     }
@@ -822,25 +1031,36 @@ extension DetailsViewController: SearchViewDelegate {
         if tag == 6 { //pick up custom location
             searchModel.isPickUpCustomLocation = false
             searchModel.pickUpLocation = nil
+            searchModel.pickUpLocationId = nil
+            PriceManager.shared.pickUpCustomLocationPrice = nil
+
         } else {//return custom location
             searchModel.isRetuCustomLocation = false
             searchModel.returnLocation = nil
+            searchModel.returnLocationId = nil
+            PriceManager.shared.returnCustomLocationPrice = nil
         }
         isActiveReserve()
     }
 }
 
-//MARK: CustomLocationUIViewControllerDelegate
-//MARK: ----------------------------
+//MARK: -- CustomLocationUIViewControllerDelegate
+
 extension DetailsViewController: CustomLocationViewControllerDelegate {
-    func getCustomLocation(_ locationPlace: String) {
+    func getCustomLocation(_ locationPlace: String, coordinate: CLLocationCoordinate2D, price: Double?) {
          mSearchV.updateCustomLocationFields(place: locationPlace, didResult: { [weak self] (isPickUpLocation) in
             if isPickUpLocation {
                 self?.searchModel.isPickUpCustomLocation = true
                 self?.searchModel.pickUpLocation = locationPlace
+                self?.searchModel.pickUpLocationLongitude = coordinate.longitude
+                self?.searchModel.pickUpLocationLatitude = coordinate.latitude
+                PriceManager.shared.pickUpCustomLocationPrice = price
             } else {
                 self?.searchModel.isRetuCustomLocation = true
                 self?.searchModel.returnLocation = locationPlace
+                self?.searchModel.returnLocationLongitude = coordinate.longitude
+                self?.searchModel.returnLocationLatitude = coordinate.latitude
+                PriceManager.shared.returnCustomLocationPrice = price
             }
             self?.isActiveReserve()
 
@@ -848,89 +1068,122 @@ extension DetailsViewController: CustomLocationViewControllerDelegate {
     }
 }
 
-//MARK: SearchWithValueViewDelegate
-//MARK: ----------------------------
+//MARK: -- SearchWithValueViewDelegate
 extension DetailsViewController: SearchWithValueViewDelegate {
+    
     func didPressEdit() {
-        currentTariff = .flexible
-        mSearchV.searchModel = searchModel
-        mSearchV.setUpView()
-        mSearchV.configureSearchPassiveFields(tariff: currentTariff)
-        mSearchV.updateSearchFields(searchModel: searchModel, tariff: currentTariff)
         
+       // self.currentTariff = .flexible
+        self.mSearchV.searchModel = self.searchModel
+        self.mSearchV.setUpView()
+        self.mSearchV.configureSearchPassiveFields(tariff: self.currentTariff)
+        self.mSearchV.updateSearchFields(searchModel: self.searchModel, tariff: self.currentTariff)
+        
+        //self.updateCompareView(isShow: false)
+        animateSearchView(isShow: true)
+        updateCompareView()
+        self.animateSearchEdit(isShow: false)
+        self.scrollToBottom()
         self.mSearchV.isHidden = false
-        UIView.animate(withDuration: 0.7) { [self] in
-            self.scrollToBottom(distance: self.mSearchV.bounds.height - self.mSearchWithValueStackV.bounds.height)
-            self.mSearchV.alpha = 1
-            self.mSearchWithValueStackV.alpha = 0.0
-        } completion: { _ in
-            self.mSearchWithValueStackV.isHidden = true
-            
-        }
     }
     
 }
 
 
-//MARK: AccessoriesUIViewControllerDelegate
-//MARK: ----------------------------
+//MARK: -- AccessoriesUIViewControllerDelegate
 extension DetailsViewController: MyDriversViewControllerDelegate {
-    func selectedDrivers(_ isSelecte: Bool, totalPrice: Double) {
+    
+    func selectedDrivers(_ isSelecte: Bool, additionalDrivers: [MyDriversModel]?) {
         mAdditionalDriverBtn.alpha = isSelecte ? 1.0 : 0.67
         vehicleModel?.ifHasAditionalDriver = isSelecte
-        vehicleModel?.driversTotalPrice = totalPrice
-
+        vehicleModel?.additionalDrivers = additionalDrivers
     }
 }
 
-//MARK: AccessoriesUIViewControllerDelegate
-//MARK: ----------------------------
+//MARK: -- AccessoriesUIViewControllerDelegate
 extension DetailsViewController: AccessoriesUIViewControllerDelegate {
-    func addedAccessories(_ isAdd: Bool, totalPrice: Double) {
+    
+    func addedAccessories(_ isAdd: Bool,
+                          totalPrice: Double,
+                          accessoriesEditList: [AccessoriesEditModel]?) {
+        
         mAccessoriesBtn.alpha = isAdd ? 1.0 : 0.67
         vehicleModel?.ifHasAccessories = isAdd
-        vehicleModel?.accessoriesTotalPrice = totalPrice
+        self.accessoriesEditList = accessoriesEditList
     }
 }
 
-//MARK: CarPhotosViewDeleagte
-//MARK: ----------------------------
+//MARK: -- CarPhotosViewDeleagte
 extension DetailsViewController: CarPhotosViewDeleagte {
     func didChangeCarImage(_ img: UIImage) {
         vehicleModel?.vehicleImg = img
     }
 }
 
-//MARK: UIScrollViewDelegate
-//MARK: ----------------------------
+//MARK: -- UIScrollViewDelegate
 extension DetailsViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset.y)
-        if ( scrollView.contentOffset.y == 0) {
-            // move up
-            if isScrolled {
-                isScrolled = !isScrolled
-                if isSearchEdit && currentTariff == .flexible {
-                    self.animateSearchEdit(isShow: false)
-                }
-               // hideTableViewIfOpen()
-                hideTariffCards()
-            }
-        } else if (scrollView.contentOffset.y > 0) {
-            // move down
-            if !isScrolled {
-                isScrolled = !isScrolled
-                showTariffCards()
-            }
-        }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
     }
     
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        print("ofset y = ",scrollView.contentOffset.y)
+        if scrollView.contentOffset.y <= 0 {
+            // TariffSlide is showed
+            containerViewForFariffSlide.frame.origin.y = tariffSlideY
+            self.containerViewForFariffSlide.alpha = 1.0
+            self.mTariffCarouselV.alpha = 0.0
+            if scrollView.contentOffset.y > -5 {
+                if currentTariff == .flexible {
+                    isFlexibleSelected = false
+                    updateFlexiblePrice(search: searchModel)
+                }
+//                if !isSearchEdit {
+//                    tariffSlideList = detailsViewModel.updateTariffSlideList(tariffSlideList: tariffSlideList, optionIndex: 0, options: nil, tariff: currentTariff)
+//                }
+//                reloadTariffCarusel(tariffSlideList: tariffSlideList)
+                
+            }
+            isTariffSlide = true
+//            if isSearchEdit {
+//                self.animateSearchEdit(isShow: true)
+//            }
+            isScrolled = false
+           // self.resetView()
+        } else if scrollView.contentOffset.y > 0 && scrollView.contentOffset.y <= height170 {
+            containerViewForFariffSlide.frame.origin.y = tariffSlideY + scrollView.contentOffset.y
+            self.containerViewForFariffSlide.alpha = 1 - (scrollView.contentOffset.y / height170)
+            self.mTariffCarouselV.alpha = (scrollView.contentOffset.y / height170)
+        } else {
+            // TariffSlide is hided
+            
+            self.tariffSlideVC.tariffSlideList = self.tariffSlideList
+            self.tariffSlideVC.mTariffSlideCollectionV.reloadData()
+            
+            containerViewForFariffSlide.frame.origin.y = tariffSlideY + height170
+            self.containerViewForFariffSlide.alpha = 0.0
+            isScrolled = !isScrolled
+            isTariffSlide = true
+            //updateCompareView(isShow: true)
+           // updateCompareView()
+            self.mTariffCarouselV.alpha = 1.0
+        }
+        print("tariffSlideVC.view.frame.origin.y = \(containerViewForFariffSlide.frame.origin.y)")
+        
+        self.view.layoutIfNeeded()
+        self.containerViewForFariffSlide.layoutIfNeeded()
+    }
+
 }
 
 
-//MARK: UIPickerViewDelegate
-//MARK: --------------------------------
+//MARK: -- UIPickerViewDelegate
 extension DetailsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

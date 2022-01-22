@@ -16,5 +16,5 @@ target 'BKD' do
 	pod 'SideMenu'
  	pod 'KeychainAccess'
 	pod 'SwiftStomp'
-
+	pod 'SDWebImage'
 end

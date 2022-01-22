@@ -19,6 +19,7 @@ protocol APIProtocol {
 
 protocol ImageUplaoder: APIProtocol {
     var image: UIImage? { get }
+    var filePathKey:String? { get}
 }
 
 protocol MultipyImageLoad: APIProtocol {

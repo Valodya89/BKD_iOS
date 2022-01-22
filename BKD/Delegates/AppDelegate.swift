@@ -26,6 +26,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ApplicationSettings.construct()
         KeychainManager().resetIfNeed()
         
+
+        
+        let pageControl = UIPageControl.appearance()
+        pageControl.currentPageIndicatorTintColor = UIColor.init(patternImage: UIImage(named: "selecte_page")!)
+        pageControl.pageIndicatorTintColor = UIColor.init(patternImage: UIImage(named: "unselecte_page")!)
+//        
         return true
     }
     
@@ -43,7 +49,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if view == Constant.Texts.verification {
             notification = Notification(name: Constant.Notifications.signUpEmailVerify, object: code)
             
-        } else {///Reset password
+        } else if view == Constant.Texts.changeEmail { //Change email
+            notification = Notification(name: Constant.Notifications.changeEmailVerify, object: code)
+            
+        }else {///Reset password
             notification = Notification(name: Constant.Notifications.resetPassEmailVerify, object: code)
         }
 

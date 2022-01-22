@@ -51,10 +51,15 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         mBlurBackgV.isHidden = item.active
         mBlurCarNameLb.isHidden = item.active
         mInfoBckgV.isHidden = !item.active
-        UIImage.loadFrom(url: item.image.getURL()!) { image in
-            guard let _ = image else {return}
-            self.mCarImgV.image = image
-        }
+        
+        self.mCarImgV.sd_setImage(with:  item.image.getURL() ?? URL(string: ""), placeholderImage: nil)
+        
+        
+     //   self.mCarImgV.kf.setImage(with: item.image.getURL() ?? URL(string: ""))
+//        UIImage.loadFrom(url: item.image.getURL()!) { image in
+//            guard let _ = image else {return}
+//            self.mCarImgV.image = image
+//        }
     }
 
 }

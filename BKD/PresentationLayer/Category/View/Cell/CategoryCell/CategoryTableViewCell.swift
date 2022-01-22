@@ -13,6 +13,7 @@ class CategoryTableViewCell: UITableViewCell {
     static func nib() -> UINib {
         return UINib(nibName: identifier, bundle: nil)
     }
+    
     @IBOutlet weak var mCategoryNameLb: UILabel!
     @IBOutlet weak var mCategoryCollectionV: UICollectionView!
     var collectionData: [CarsModel]?

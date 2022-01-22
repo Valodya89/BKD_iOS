@@ -8,6 +8,7 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import CoreLocation
 
 enum PlacesError: Error {
     case failedToFind
@@ -15,10 +16,12 @@ enum PlacesError: Error {
 }
 
 protocol CustomLocationViewControllerDelegate: AnyObject {
-    func getCustomLocation(_ locationPlace: String)
+    func getCustomLocation(_ locationPlace: String,
+                           coordinate: CLLocationCoordinate2D,
+                           price: Double?)
 }
 
-class CustomLocationViewController: UIViewController {
+class CustomLocationViewController: BaseViewController {
     
     
     //MARK: - Outlets
@@ -28,6 +31,8 @@ class CustomLocationViewController: UIViewController {
     @IBOutlet weak var mMarkerInfoBckgV: UIView!
     @IBOutlet weak var mUserLocationBckgV: UIView!
     @IBOutlet weak var mSwipeGestureBckgV: UIView!
+    @IBOutlet weak var mSearchBtn: UIButton!
+    @IBOutlet weak var mSearchLb: UILabel!
     @IBOutlet weak var mMarkInfoBackgBottom: NSLayoutConstraint!
     
     //MARK: - Variables
@@ -37,93 +42,59 @@ class CustomLocationViewController: UIViewController {
 
     let customLocationViewModel = CustomLocationViewModel()
     var restrictedZones:[RestrictedZones]?
-    let searchTbV = UITableView()
     let marker = GMSMarker()
 
 
     // The currently selected place.
-    var selectedPlace: GMSPlace?
     var currentMarker: GMSMarker?
-    var placesClient: GMSPlacesClient!
+   // var placesClient: GMSPlacesClient!
     var mapViewCenterCoordinate = CLLocationCoordinate2D(latitude: 0.0 , longitude: 0.0)
     private var locationManager = CLLocationManager()
-    private var isChangeTableHeight = false
-    private var searchTableHeight: CGFloat = 0.0
-    private var searchTableData: String = String()
     var customLocation:CustomLocation?
-    
-    private lazy  var searchCustomLocationCV = SearchCustomLocationUIViewController.initFromStoryboard(name: Constant.Storyboards.customLocation)
+
     private lazy  var markerInfoVC = MarkerInfoViewController.initFromStoryboard(name: Constant.Storyboards.customLocation)
+    private lazy  var addNewMarkerVC = MarkNewAddressViewController.initFromStoryboard(name: Constant.Storyboards.customLocation)
+    
     weak var delegate: CustomLocationViewControllerDelegate?
     
+    public var isAddDamageAddress: Bool = false
     //MARK: - Life cycles
     //MARK ---------------------
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        resultsViewController = GMSAutocompleteResultsViewController()
-//           resultsViewController?.delegate = self
-//
-//           searchController = UISearchController(searchResultsController: resultsViewController)
-//           searchController?.searchResultsUpdater = resultsViewController
-//
-//         //  let subView = UIView(frame: CGRect(x: 0, y: 0.0, width: 350.0, height: 45.0))
-//
-//          // subView.addSubview((searchController?.searchBar)!)
-//          // view.addSubview(subView)
-//        view.addSubview((searchController?.searchBar)!)
-//           searchController?.searchBar.sizeToFit()
-//           searchController?.hidesNavigationBarDuringPresentation = false
-//
-//           // When UISearchController presents the results view, present it in
-//           // this view controller, not one further up the chain.
-//        definesPresentationContext = true
-
-        
         setUpView()
     }
-    
-   
-    
+        
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        if  !isChangeTableHeight {
-            searchCustomLocationCV.view.frame = CGRect(x: 0,
-                                                       y: view.frame.size.height * 0.0099,
-                                                       width: view.frame.size.width,
-                                                       height: view.frame.height * 0.0655)
-            
-                markerInfoVC.view.frame = CGRect(x: 0,
-                                                 y: 0,
-                                                 width: mMarkerInfoBckgV.bounds.width,
-                                                 height: mMarkerInfoBckgV.bounds.height)
-            self.searchTbV.frame = CGRect(x: self.searchCustomLocationCV.mSearchBckgV.frame.origin.x,
-                                          y: self.searchCustomLocationCV.view.frame.size.height + self.searchCustomLocationCV.view.frame.origin.y + 6,
-                                          width: self.searchCustomLocationCV.mSearchBckgV.frame.size.width,
-                                          height:0.0)
-        } else {
-            UIView.animate(withDuration: 0.3, animations: { [self] in
-                self.searchTbV.frame = CGRect(x: self.searchCustomLocationCV.mSearchBckgV.frame.origin.x,
-                                              y: self.searchCustomLocationCV.view.frame.size.height + self.searchCustomLocationCV.view.frame.origin.y + 6,
-                                              width: self.searchCustomLocationCV.mSearchBckgV.frame.size.width,
-                                              height: self.searchTableHeight)
-            }, completion: nil)
-            
-        }
+        markerInfoVC.view.frame = CGRect(x: 0,
+                                         y: 0,
+                                         width: mMarkerInfoBckgV.bounds.width,
+                                         height: mMarkerInfoBckgV.bounds.height)
+        addNewMarkerVC.view.frame = CGRect(x: 0, y: 30,
+                                            width: mMarkerInfoBckgV.bounds.width,
+                                             height: mMarkerInfoBckgV.bounds.height - 30)
+        
         if UIScreen.main.nativeBounds.height <= 1334 {
             self.markerInfoVC.mContinueBottom.constant = -15
+
         }
     }
+    
+    
     func setUpView() {
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         mRightBarBtn.image = img_bkd
         restrictedZones = ApplicationSettings.shared.restrictedZones
-        addChildView()
-        addMarkerInfoView()
+        if isAddDamageAddress {
+            addNewAddressMarkerView()
+        } else {
+            addMarkerInfoView()
+            addRestrictedZones()
+
+        }
         configureDelegates()
         configureMapView()
-        //configureTableView()
-        addRestrictedZones()
-        
     }
     
     
@@ -145,12 +116,11 @@ class CustomLocationViewController: UIViewController {
     
     /// configure Delegates
     private func configureDelegates() {
-        searchCustomLocationCV.delegate = self
+        
         markerInfoVC.delegate = self
+        addNewMarkerVC.delegate = self
         locationManager.delegate = self
         mMapV.delegate = self
-//       searchTbV.delegate = self
-//       searchTbV.dataSource = self
     }
     
     /// configure map view
@@ -161,28 +131,18 @@ class CustomLocationViewController: UIViewController {
         self.view.bringSubviewToFront(mSwipeGestureBckgV)
     }
     
-//    /// configure table view
-//    private func configureTableView() {
-//
-//        searchTbV.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-//        searchTbV.backgroundColor = color_background
-//        searchTbV.dataSource = self
-//        searchTbV.delegate = self
-//        searchTbV.translatesAutoresizingMaskIntoConstraints = true
-//        searchTbV.rowHeight = UITableView.automaticDimension
-//        self.view.addSubview(searchTbV)
-//    }
-    
-    private func addChildView(){
-        addChild(searchCustomLocationCV)
-        view.addSubview(searchCustomLocationCV.view)
-        searchCustomLocationCV.didMove(toParent: self)
-    }
-    
+    ///Add marker information  view
     private func addMarkerInfoView(){
         addChild(markerInfoVC)
         mMarkerInfoBckgV.addSubview(markerInfoVC.view)
         markerInfoVC.didMove(toParent: self)
+    }
+    
+    ///Add new marker information  view
+    private func addNewAddressMarkerView(){
+        addChild(addNewMarkerVC)
+        mMarkerInfoBckgV.addSubview(addNewMarkerVC.view)
+        addNewMarkerVC.didMove(toParent: self)
     }
    
     
@@ -190,22 +150,13 @@ class CustomLocationViewController: UIViewController {
     private func addRestrictedZones(){
         guard let restrictedZones = restrictedZones  else { return }
         for restrictedZone in restrictedZones {
-            drawRangeCircle(cord2D: CLLocationCoordinate2D(latitude:restrictedZone.latitude, longitude: restrictedZone.longitude),
+            drawRestractZone(cord2D: CLLocationCoordinate2D(latitude:restrictedZone.latitude, longitude: restrictedZone.longitude),
                             radius: restrictedZone.radius)
         }
     }
     
-//    private func addPlace(longitude: Double, latitude: Double ,
-//                          place: GMSPlace) {
-//        // Creates a marker in the center of the map.
-//        let marker = GMSMarker()
-//        marker.position = mapViewCenterCoordinate
-//        marker.title = "location"
-//        marker.snippet = place.name
-//        marker.map = self.mMapV
-//        marker.icon = img_map_marker
-//    }
     
+    ///Add marker on the map
     private func addMarker(longitude: Double, latitude: Double , marker: GMSMarker) {
         // Creates a marker in the center of the map.
         marker.position = CLLocationCoordinate2D(latitude: longitude, longitude: latitude)
@@ -216,6 +167,7 @@ class CustomLocationViewController: UIViewController {
         currentMarker = marker
     }
     
+    ///Delete marker
     private func  deleteMarker() {
         self.view.layoutIfNeeded()
         currentMarker?.map = nil
@@ -223,18 +175,22 @@ class CustomLocationViewController: UIViewController {
         
     }
     
-    private func drawRangeCircle(cord2D: CLLocationCoordinate2D, radius: Double) {
+    ///Draw restract Zone on the map
+    private func drawRestractZone(cord2D: CLLocationCoordinate2D, radius: Double) {
         
         let circ = GMSCircle(position: cord2D, radius: CLLocationDistance(radius))
         circ.fillColor = color_map_circle!.withAlphaComponent(0.2)
         circ.strokeColor = .clear
         circ.map = mMapV
     }
+    
+    ///Move camera position
     private func moveCameraPosition(cord2D: CLLocationCoordinate2D) {
-        let camera: GMSCameraPosition =  GMSCameraPosition(target: CLLocationCoordinate2D(latitude: cord2D.latitude, longitude: cord2D.longitude), zoom: 18, bearing: 0, viewingAngle: 0)
+        let camera: GMSCameraPosition =  GMSCameraPosition(target: CLLocationCoordinate2D(latitude: cord2D.latitude, longitude: cord2D.longitude), zoom: zoom, bearing: 0, viewingAngle: 0)
         self.mMapV!.animate(to: camera)
     }
     
+    ///Show information of marked location
     private func showMarkerInfo() {
         showAddressNameByGeocoder()
         mUserLocationBckgV.isHidden = true
@@ -243,33 +199,51 @@ class CustomLocationViewController: UIViewController {
         markerInfoVC.mUserAddressLb.textColor = color_navigationBar
         markerInfoVC.mContinueBackgV.isUserInteractionEnabled = true
         markerInfoVC.mContinueBackgV.alpha = 1.0
-        //markerInfoVC.mContinueBackgV.isHidden = false
         UIView.animate(withDuration: 0.3, animations: { [self] in
             mMarkInfoBackgBottom.constant = 0
             self.view.layoutIfNeeded()
         })        
     }
     
+    ///Show information of marked location
+    private func showAddNewAddressMarkerInfo() {
+        showAddressNameByGeocoder()
+        mUserLocationBckgV.isHidden = true        
+        addNewMarkerVC.mNewAddressLb.textColor = color_navigationBar
+        UIView.animate(withDuration: 0.3, animations: { [self] in
+            mMarkInfoBackgBottom.constant = 0
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    
+    ///Show address name
     private func showAddressNameByGeocoder() {
         
         let geocoder = GMSGeocoder()
         geocoder.reverseGeocodeCoordinate(mapViewCenterCoordinate) { response, _ in
             guard let address1 = response?.firstResult()?.lines?.first else {
-                self.markerInfoVC.mUserAddressLb.text = Constant.Texts.cantDetectAddress
+                if self.isAddDamageAddress {
+                    self.addNewMarkerVC.mNewAddressLb.text = Constant.Texts.errAddress
+                } else {
+                    self.markerInfoVC.mUserAddressLb.text = Constant.Texts.errAddress
+                }
                 return
             }
-            self.markerInfoVC.mUserAddressLb.text = address1
+            
+            if self.isAddDamageAddress {
+                self.addNewMarkerVC.mNewAddressLb.text = address1
+            } else {
+                self.markerInfoVC.mUserAddressLb.text = address1
+            }
        }
     }
     
-    
+    ///Show curren t location
     func showCurrentLocation() {
         let locationObj = locationManager.location!
         let coord = locationObj.coordinate
-        let lattitude = coord.latitude
-        let longitude = coord.longitude
-        let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: lattitude, longitude: longitude, zoom: zoom)
-        self.mMapV!.animate(to: camera)
+        moveCameraPosition(cord2D: coord)
     }
     
     
@@ -294,6 +268,7 @@ class CustomLocationViewController: UIViewController {
                 return true
             }
         }
+        
         getCustomLocationPrice(longitude: coordinate.longitude, latitude: coordinate.latitude)
         return false
     }
@@ -303,13 +278,46 @@ class CustomLocationViewController: UIViewController {
         
         self.addMarker(longitude: coordinate.longitude, latitude: coordinate.latitude, marker: marker)
         mapViewCenterCoordinate = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        showMarkerInfo()
-        let _ = isInRestractZone(coordinate: coordinate)
+        if isAddDamageAddress {
+           showAddNewAddressMarkerInfo()
+        } else {
+            showMarkerInfo()
+            let _ = isInRestractZone(coordinate: coordinate)
+        }
     }
+    
+    
+    ///show Autocomplete View Controller
+    func showAutocompleteViewController() {
+        
+        let autocompleteController = GMSAutocompleteViewController()
+        autocompleteController.delegate = self
+        autocompleteController.tableCellBackgroundColor = color_background!
+        autocompleteController.secondaryTextColor = color_main!
+        autocompleteController.primaryTextColor = color_navigationBar!
+
+        // Specify the place data types to return.
+        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
+                                                    UInt(GMSPlaceField.placeID.rawValue))
+        autocompleteController.placeFields = fields
+
+        // Specify a filter.
+        let filter = GMSAutocompleteFilter()
+        
+        //search by country
+        filter.type = .establishment
+        filter.countries = ["AM"]
+       // filter.type = .address
+        autocompleteController.autocompleteFilter = filter
+
+        // Display the autocomplete view controller.
+        present(autocompleteController, animated: true, completion: nil)
+   }
     
     
     //MARK: ACTIONS
     //MARK ---------------------
+
     @IBAction func back(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -320,52 +328,20 @@ class CustomLocationViewController: UIViewController {
     @IBAction func backSwipe(_ sender: UISwipeGestureRecognizer) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func search(_ sender: UIButton) {
+        showAutocompleteViewController()
+    }
 }
 
 
-//MARK: SearchCustomLocationUIViewControllerDelegate
-//MARK ---------------------
-extension CustomLocationViewController: SearchCustomLocationUIViewControllerDelegate {
-    func showAutocompleteViewController() {
-        let autocompleteController = GMSAutocompleteViewController()
-        autocompleteController.delegate = self
-
-        // Specify the place data types to return.
-        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
-                                                    UInt(GMSPlaceField.placeID.rawValue))
-        autocompleteController.placeFields = fields
-
-        // Specify a filter.
-        let filter = GMSAutocompleteFilter()
-        filter.type = .address
-        autocompleteController.autocompleteFilter = filter
-
-        // Display the autocomplete view controller.
-        present(autocompleteController, animated: true, completion: nil)
-   }
-    
-    func updateTableViewHeight(tableHeight: CGFloat, tableData: String) {
-        isChangeTableHeight = true
-        searchTableHeight = tableHeight
-        searchTbV.reloadData()
-        self.view.setNeedsLayout()
-       // goToPlaces()
-    }
-    
-    func goToPlaces()  {
-//        let acControllers = GMSAutocompleteViewController()
-//        acControllers.delegate = self
-//        present(acControllers, animated: true, completion: nil)
-    }
-    
-    
-}
 
 //MARK: MarkerInfoViewControllerDelegate
 //MARK ---------------------
 extension CustomLocationViewController: MarkerInfoViewControllerDelegate {
-    func didPressContinue(place: String) {
-        self.delegate?.getCustomLocation(place)
+    
+    func didPressContinue(place: String, price: Double?) {
+        self.delegate?.getCustomLocation(place, coordinate: mapViewCenterCoordinate, price: price)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -376,32 +352,7 @@ extension CustomLocationViewController: MarkerInfoViewControllerDelegate {
     func didPressDeleteLocation() {
         deleteMarker()
     }
-    
 }
-
-//////MARK: UITableViewDelegate
-//////MARK ---------------------
-//extension CustomLocationViewController: UITableViewDelegate, UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return searchTableData.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-//        cell.textLabel?.text = "this is my test"
-//        cell.textLabel?.font = font_search_cell
-//        cell.textLabel?.textColor = color_navigationBar
-//        cell.backgroundColor = color_background
-//        return cell
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//    }
-//
-//}
-
-
 
 
 //MARK: GMSMapViewDelegate
@@ -435,9 +386,18 @@ extension CustomLocationViewController: GMSAutocompleteViewControllerDelegate {
 
   // Handle the user's selection.
   func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-    print("Place name: \(place.name)")
-    print("Place ID: \(place.placeID)")
-    print("Place attributions: \(place.attributions)")
+    
+      self.resolveLocation(place: place) { result  in
+        switch result {
+        case .success(let coordinate):
+            self.updateMapByCoordinate(coordinate: coordinate)
+            self.moveCameraPosition(cord2D: coordinate)
+            print(coordinate)
+        case .failure( _ ):
+            self.showAlertMessage(Constant.Texts.errLocation)
+        }
+    }
+    
     dismiss(animated: true, completion: nil)
   }
 
@@ -448,8 +408,10 @@ extension CustomLocationViewController: GMSAutocompleteViewControllerDelegate {
 
   // User canceled the operation.
   func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+    
     dismiss(animated: true, completion: nil)
   }
+    
 
   // Turn the network activity indicator on and off again.
   func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
@@ -460,49 +422,9 @@ extension CustomLocationViewController: GMSAutocompleteViewControllerDelegate {
     UIApplication.shared.isNetworkActivityIndicatorVisible = false
   }
 
-}
-
-
-
-
-//// Handle the user's selection.
-//extension CustomLocationViewController: GMSAutocompleteResultsViewControllerDelegate {
-//  func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
-//                         didAutocompleteWith place: GMSPlace) {
-//    searchController?.isActive = false
-//    // Do something with the selected place.
-//    print("Place name: \(place.name)")
-//    print("Place address: \(place.formattedAddress)")
-//    print("Place attributions: \(place.attributions)")
-//
-//    resolveLocation(place: place) { result  in
-//        switch result {
-//        case .success(let coordinate):
-//            self.updateMapByCoordinate(coordinate: coordinate)
-//            self.moveCameraPosition(cord2D: coordinate)
-//            print(coordinate)
-//        case .failure(let _ ):
-//            self.showAlertMessage(Constant.Texts.errLocation)
-//        }
-//    }
-//  }
-//
-//  func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
-//                         didFailAutocompleteWithError error: Error){
-//    // TODO: handle the error.
-//    print("Error: ", error.localizedDescription)
-//  }
-//
-//  // Turn the network activity indicator on and off again.
-//  func didRequestAutocompletePredictions(forResultsController resultsController: GMSAutocompleteResultsViewController) {
-//    UIApplication.shared.isNetworkActivityIndicatorVisible = true
-//  }
-//
-//  func didUpdateAutocompletePredictions(forResultsController resultsController: GMSAutocompleteResultsViewController) {
-//    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-//  }
-//
-//    func resolveLocation(place: GMSPlace, completion: @escaping (Result<CLLocationCoordinate2D, Error> ) -> Void) {
+    
+/////Resolve Location
+// private func resolveLocation(place: GMSPlace, completion: @escaping (Result<CLLocationCoordinate2D, Error> ) -> Void) {
 //
 //        placesClient.fetchPlace(fromPlaceID: place.placeID ?? "",
 //                                placeFields: .coordinate,
@@ -512,9 +434,20 @@ extension CustomLocationViewController: GMSAutocompleteViewControllerDelegate {
 //                return
 //            }
 //            let coordinate = CLLocationCoordinate2DMake(googlePlace.coordinate.latitude,
-//                                           googlePlace.coordinate.longitude)
+//                                                        googlePlace.coordinate.longitude)
 //            completion(.success(coordinate))
-//
 //        }
 //    }
-//}
+}
+
+
+extension CustomLocationViewController: MarkNewAddressViewControllerDelegate  {
+    
+    func didPressContinue(place: String) {
+        self.delegate?.getCustomLocation(place, coordinate: mapViewCenterCoordinate, price: nil)
+        self.navigationController?.popViewController(animated: true)
+    }
+
+
+
+}

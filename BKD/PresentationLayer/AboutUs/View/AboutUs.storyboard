@@ -1,27 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--About Us-->
         <scene sceneID="eTn-cn-1Em">
             <objects>
-                <viewController id="n6M-zm-Ttp" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AboutUsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="n6M-zm-Ttp" customClass="AboutUsViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IIm-iJ-nj3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TH9-oV-yUl">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="dRh-Ws-1ag">
+                                <rect key="frame" x="197" y="377" width="20" height="20"/>
+                                <color key="color" name="navigationBar"/>
+                            </activityIndicatorView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="G4q-uI-nfN"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="TH9-oV-yUl" firstAttribute="height" secondItem="G4q-uI-nfN" secondAttribute="height" id="71h-te-oD1"/>
+                            <constraint firstItem="TH9-oV-yUl" firstAttribute="width" secondItem="G4q-uI-nfN" secondAttribute="width" id="QIl-y8-y2m"/>
+                            <constraint firstItem="TH9-oV-yUl" firstAttribute="centerX" secondItem="G4q-uI-nfN" secondAttribute="centerX" id="aBg-wh-6Gj"/>
+                            <constraint firstItem="TH9-oV-yUl" firstAttribute="centerY" secondItem="G4q-uI-nfN" secondAttribute="centerY" id="cFI-hX-Wo9"/>
+                            <constraint firstItem="dRh-Ws-1ag" firstAttribute="centerY" secondItem="TH9-oV-yUl" secondAttribute="centerY" id="vii-qJ-KPr"/>
+                            <constraint firstItem="dRh-Ws-1ag" firstAttribute="centerX" secondItem="TH9-oV-yUl" secondAttribute="centerX" id="zjl-NO-Kxr"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="jzp-aL-p9E">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="INl-1z-6DH"/>
+                    <navigationItem key="navigationItem" title="About Us" id="jzp-aL-p9E">
+                        <barButtonItem key="leftBarButtonItem" image="back" id="INl-1z-6DH">
+                            <connections>
+                                <action selector="menu:" destination="n6M-zm-Ttp" id="ZKr-k5-T6Q"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="bkd" id="p8Q-oO-Sck"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mActivityV" destination="dRh-Ws-1ag" id="PlX-n4-X5x"/>
+                        <outlet property="mRightbarBtn" destination="p8Q-oO-Sck" id="vjg-ii-jwp"/>
+                        <outlet property="mWebV" destination="TH9-oV-yUl" id="Aom-ZR-UvR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KT6-1m-bIM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -35,6 +68,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="uhl-4i-mso">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -47,6 +85,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="back" width="12" height="21"/>
+        <image name="bkd" width="76" height="23.5"/>
+        <namedColor name="navigationBar">
+            <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

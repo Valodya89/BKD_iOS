@@ -22,7 +22,7 @@ class SearchPhoneCodeTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         backgroundColor = .clear
         layer.cornerRadius = 0
-        mCountryLb.textColor = color_dark_register!
+        mCountryLb.textColor = color_navigationBar!
     }
     
     
@@ -30,13 +30,6 @@ class SearchPhoneCodeTableViewCell: UITableViewCell {
         mCountryLb.text = item.country
         mCodeLb.text = item.code
         mFlagImgV.image = item.imageFlag
-        
-        if isSelected {
-            layer.cornerRadius = 8
-            backgroundColor = color_dark_register!
-            mCountryLb.textColor = color_menu!
-
-        }
     
     }
     

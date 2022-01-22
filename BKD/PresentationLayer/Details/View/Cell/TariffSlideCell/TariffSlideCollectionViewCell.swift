@@ -31,19 +31,19 @@ class TariffSlideCollectionViewCell: UICollectionViewCell {
     /// set tarif slide info
     func setTariffSlideCellInfo(item: TariffSlideModel, index: Int) {
         mDetailsBckgV.isHidden = true
-        mTitleLb.text = item.title
+        mTitleLb.text = item.type
         containerV.backgroundColor = item.bckgColor
         isUserInteractionEnabled = true
-        mTitleLb.textColor = item.titleColor
+        mTitleLb.textColor = item.typeColor
     }
     
     /// set info for open slide
     func setOptionsTariffSlideCellInfo(item: TariffSlideModel, index: Int) {
         mDetailsBckgV.isHidden = false
-        mDetailTitleLb.text = item.option
-        mDetailValueLb.text = item.value
-        mDetailValueLb.textColor = item.titleColor
-        mDetailTitleLb.textColor = item.titleColor
+        mDetailTitleLb.text = item.name
+        mDetailValueLb.text = Constant.Texts.euro + " " + (item.value ?? "")!
+        mDetailValueLb.textColor = item.typeColor
+        mDetailTitleLb.textColor = item.typeColor
         mDetailsBckgV.backgroundColor = item.bckgColor
     }
 }

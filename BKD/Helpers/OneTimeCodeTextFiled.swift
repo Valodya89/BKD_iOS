@@ -24,7 +24,7 @@ class OneTimeCodeTextField: UITextField {
         return recognizer
     }()
     
-    func configure(with slotCount: Int = 6) {
+    func configure(with slotCount: Int = 5) {
         guard isConfigured == false else { return }
         isConfigured.toggle()
         

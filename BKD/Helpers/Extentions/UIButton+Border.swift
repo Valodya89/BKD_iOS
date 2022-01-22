@@ -68,19 +68,22 @@ extension UIButton {
 
         self.backgroundColor = color
         self.setTitleColor(titleColor, for: .normal)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4 ) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2 ) {
             self.setTitleColor(oldTitleColor, for: .normal)
             self.backgroundColor = oldBckgColor
          }
     }
     
     func enable(){
-        self.isEnabled = true
+        //self.isEnabled = true
+        self.isUserInteractionEnabled = true
+
         self.alpha = 1
     }
     
     func disable() {
-        self.isEnabled = false
+       // self.isEnabled = false
+        self.isUserInteractionEnabled = false
         self.alpha = 0.8
     }
    

@@ -9,7 +9,7 @@ import UIKit
 
 class ReserveTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
-    var accessories:[AccessoriesModel]? = nil
+    var accessories:[AccessoriesEditModel]? = nil
     var drivers:[MyDriversModel]? = nil
     
     override func awakeFromNib() {
@@ -44,8 +44,7 @@ class ReserveTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
                 cell.mHeadreLb.text = Constant.Texts.additionalDriver
            }
             cell.setDriversCell(item: (drivers?[indexPath.row])!, index: indexPath.row)
-            
-            
+            cell.separatorInset = UIEdgeInsets.zero
         } else if accessories?.count ?? 0 > 0 &&
                     drivers?.count ?? 0 > 0 &&
                     (indexPath.row < (accessories!.count + drivers!.count)) {

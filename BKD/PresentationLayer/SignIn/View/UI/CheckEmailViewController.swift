@@ -33,6 +33,11 @@ class CheckEmailViewController: UIViewController, StoryboardInitializable {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        mOpenEmailBtn.addBorder(color:color_navigationBar!, width: 1.0)
+    }
 
     func  setUpView() {
         NotificationCenter.default.addObserver(self, selector: #selector(CheckEmailViewController.handleDeepLink), name: Constant.Notifications.resetPassEmailVerify, object: nil)

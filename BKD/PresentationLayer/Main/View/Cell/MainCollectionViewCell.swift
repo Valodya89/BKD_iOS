@@ -14,6 +14,7 @@ static let identifier = "MainCollectionViewCell"
         return UINib(nibName: identifier, bundle: nil)
     }
     
+    //MARK: -- Outlets
     @IBOutlet weak var mOffertPriceLb: UILabel!
     @IBOutlet weak var mInfoBckV: UIView!
     @IBOutlet weak var mOffertBackgV: UIView!
@@ -29,6 +30,7 @@ static let identifier = "MainCollectionViewCell"
     @IBOutlet weak var mFiatImgV: UIImageView!
     @IBOutlet weak var mTowBarIngV: UIImageView!
     
+    @IBOutlet weak var mDeleteLineV: UIView!
     @IBOutlet weak var mCardLb: UILabel!
     @IBOutlet weak var mCubeLb: UILabel!
     @IBOutlet weak var mKgLb: UILabel!
@@ -44,17 +46,28 @@ static let identifier = "MainCollectionViewCell"
     @IBOutlet weak var mGradientV: UIView!
     @IBOutlet weak var mInactiveCarNameLb: UILabel!
     
-    @IBAction func mSwitch(_ sender: Any) {
-    }
-    
+    //MARK: -- Variable
     let mainViewModel: MainViewModel = MainViewModel()
+    
+    //MARK: -- Life cycle
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setup()
     }
     
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        mValueBckV.setGradient(startColor: color_gradient_start!, endColor: color_gradient_end!)
+        mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        mValueBckV.setGradient(startColor: color_gradient_start!, endColor: color_gradient_end!)
+        mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
+    }
+    
     func setup() {
-     
         // corner radius
         mInfoBckV.layer.cornerRadius = 10
         mValueBckV.clipsToBounds = true
@@ -70,23 +83,21 @@ static let identifier = "MainCollectionViewCell"
         mValueBckV.setGradient(startColor: color_gradient_start!, endColor: color_gradient_end!)
         mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
         
-        
         let amountText = NSMutableAttributedString.init(string: mValueLb.text!)
 
         // set the custom font and color for the 0,1 range in string
         amountText.setAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14),
                                   NSAttributedString.Key.foregroundColor: UIColor(named: "value") as Any],
                                      range: NSMakeRange(0, 1))
-       
         mValueLb.attributedText = amountText
     }
 
     ///Set  values to vehicle model
      func setVehicleModel(carModel: CarsModel) -> VehicleModel {
         var vehicleModel = VehicleModel()
+        vehicleModel.vehicleId = carModel.id
         vehicleModel.vehicleName = mCarNameLb.text
         vehicleModel.ifHasTowBar = true
-        vehicleModel.vehicleType = "Double cabin"
         vehicleModel.vehicleImg = mCarImgV.image
         vehicleModel.drivingLicense = mCardLb.text
         vehicleModel.vehicleCube = mCubeLb.text
@@ -95,9 +106,27 @@ static let identifier = "MainCollectionViewCell"
         vehicleModel.ifTailLift = carModel.tailgate
         vehicleModel.ifHasAccessories = false
         vehicleModel.ifHasAditionalDriver = false
-        let price: Double = mOffertBackgV.isHidden ? (mValueLb.text!  as NSString).doubleValue : (mOffertPriceLb.text!  as NSString).doubleValue
-        vehicleModel.vehicleValue = price
+        vehicleModel.vehicleLogo = mFiatImgV.image
+        vehicleModel.vehicleImg = mCarImgV.image
+        vehicleModel.images = carModel.images
+
+        let carType = ApplicationSettings.shared.carTypes?.filter{
+              $0.id == carModel.type
+      }
+        vehicleModel.vehicleType = carType?.first?.name
         
+         //set Price
+         vehicleModel.priceForFlexible = carModel.priceForFlexible
+         vehicleModel.priceHour = carModel.priceHour
+         vehicleModel.priceDay = carModel.priceDay
+         vehicleModel.priceWeek = carModel.priceWeek
+         vehicleModel.priceMonth = carModel.priceMonth
+         vehicleModel.depositPrice = carModel.depositPrice
+         vehicleModel.priceForKm = carModel.priceForKm
+         vehicleModel.hasDiscount = carModel.hasDiscount
+         vehicleModel.discountPercents = carModel.discountPercents
+         vehicleModel.freeKiloMeters = carModel.freeKiloMeters
+         
         if vehicleModel.ifTailLift  {
             vehicleModel.tailLiftList = mainViewModel.getTailLiftList(carModel: carModel)
         }
@@ -106,14 +135,18 @@ static let identifier = "MainCollectionViewCell"
     }
     
     override func prepareForReuse() {
+        
+        //gradient
+        mValueBckV.setGradient(startColor: color_gradient_start!, endColor: color_gradient_end!)
+        mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
         mCarImgV.image = nil
         mCarNameLb.text = ""
         mCardLb.text = ""
         mCubeLb.text = ""
         mKgLb.text = ""
         mCarSizeLb.text = ""
-        mOffertBackgV.isHidden = false
-        mIgnorValueContentV.isHidden = false
+        mOffertBackgV.isHidden = true
+        mDeleteLineV.isHidden = true
         mValueBckgV.isHidden = false
         mIgnorValueLb.text = ""
         mOffertPriceLb.text = ""
@@ -122,28 +155,20 @@ static let identifier = "MainCollectionViewCell"
         mTowBarIngV.isHidden = false
         mInactiveCarNameLb.isHidden = true
         mBlurV.isHidden = true
+        mIgnorValueContentV.isHidden = true
+
     }
     
     /// Set cell info
     func setCellInfo(item: CarsModel) {
-        UIImage.loadFrom(url: item.image.getURL()!) { image in
-            self.mCarImgV.image = image
-        }
-       
+        self.mCarImgV.sd_setImage(with:item.image.getURL()!, placeholderImage: nil)
         mCarNameLb.text = item.name
         mCardLb.text = item.driverLicenseType
         mCubeLb.text = String(item.volume) + Constant.Texts.mCuadrad
         mKgLb.text = String(item.loadCapacity) + Constant.Texts.kg
         mCarSizeLb.text = item.exterior?.getExterior()
-        mOffertBackgV.isHidden = !item.hasSpecialPrice
-        mIgnorValueContentV.isHidden = !item.hasSpecialPrice
-        mValueBckgV.isHidden = item.hasSpecialPrice
-        if item.hasSpecialPrice {
-            mIgnorValueLb.text = "€  \(item.price) / " + Constant.Texts.day
-            mOffertPriceLb.text = String(item.specialPrice ?? 0.0)
-        } else {
-            mValueLb.text = String(item.price)
-        }
+        updatePriceFiled(item:item)
+
         mTowBarLb.isHidden = !item.towbar
         mTowBarIngV.isHidden = !item.towbar
         mBlurV.isHidden = item.active
@@ -151,15 +176,37 @@ static let identifier = "MainCollectionViewCell"
         mInactiveCarNameLb.text = item.name
         
         if item.logo != nil {
-            UIImage.loadFrom(url: (item.logo!.getURL() ?? URL(string: ""))!) { image in
-                self.mFiatImgV.image = image
-            }
+            mFiatImgV.sd_setImage(with:item.logo!.getURL()!, placeholderImage: nil)
         }
+                
         guard let start = item.reservations?.getStart(), let end = item.reservations?.getEnd()  else { return }
         let isActiveCar: Bool = mainViewModel.isCarActiveNow(start: start, end: end)
         mBlurV.isHidden = isActiveCar
         mInactiveCarNameLb.isHidden = isActiveCar
+    }
+    
+    
+    func updatePriceFiled(item: CarsModel) {
         
+        if item.hasDiscount == true &&
+            item.priceDay != nil{
+            
+            let specialPrice = item.priceDay! - (item.priceDay! * (item.discountPercents/100))
+            mOffertPriceLb.text = String(format: "%.2f", specialPrice)
+            mOffertBackgV.isHidden = false
+            
+            mIgnorValueContentV.isHidden = false
+            mIgnorValueLb.text = "€  \(item.priceDay!) / " + Constant.Texts.day
+            mValueBckgV.isHidden = true
+            
+        } else {
+            
+            mValueLb.text = String(item.priceDay ?? 0.0)
+            mValueBckgV.isHidden = false
+            
+            mOffertBackgV.isHidden = true
+            mIgnorValueContentV.isHidden = true
+        }
     }
 
 }

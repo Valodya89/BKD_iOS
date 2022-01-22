@@ -112,7 +112,7 @@ open class UPCarouselFlowLayout: UICollectionViewFlowLayout {
                 if indexPath.row < attributes.indexPath.row {
                     var rotationAndPerspectiveTransform = CATransform3DIdentity;
                     rotationAndPerspectiveTransform.m34 = 1 / 500;
-                    rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, CGFloat(45.0 * M_PI / 180.0), 0.0, 1.0, 0.0);
+                    rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, CGFloat(45.0 * .pi / 180.0), 0.0, 1.0, 0.0);
                     var val = 0.0;
                     switch diff {
                     case 1:
@@ -155,7 +155,7 @@ open class UPCarouselFlowLayout: UICollectionViewFlowLayout {
                     }
                    
                  
-                    var transform = CATransform3DTranslate(rotationAndPerspectiveTransform, CGFloat(val), 0, 0)
+                    let transform = CATransform3DTranslate(rotationAndPerspectiveTransform, CGFloat(val), 0, 0)
                     transformRotation = transform
                     print("index = \(attributes.indexPath.row) value \(val) diff = \(diff)")
                 } else {
@@ -202,8 +202,8 @@ open class UPCarouselFlowLayout: UICollectionViewFlowLayout {
                     }
                     var rotationAndPerspectiveTransform = CATransform3DIdentity;
                     rotationAndPerspectiveTransform.m34 = 1 / -500;
-                    rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, CGFloat(45.0 * M_PI / 180.0), 0.0, 1.0, 0.0);
-                    var transform = CATransform3DTranslate(rotationAndPerspectiveTransform, CGFloat( val), 0, 0)
+                    rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, CGFloat(45.0 * .pi / 180.0), 0.0, 1.0, 0.0);
+                    let transform = CATransform3DTranslate(rotationAndPerspectiveTransform, CGFloat( val), 0, 0)
                     transformRotation = transform
                     print("11index = \(attributes.indexPath.row) value \(val) diff = \(diff)")
 

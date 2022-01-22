@@ -24,7 +24,8 @@ class SeeMapViewController: BaseViewController {
     var mapView: GMSMapView?
     var mapViewCenterCoordinate = CLLocationCoordinate2D(latitude: 0.0 , longitude: 0.0)
     
-    var parking: Parking?
+    public var parking: Parking?
+    public var customLocationToRent: CustomLocationToRent?
 
     private lazy  var addressVC = AddressNameViewController.initFromStoryboard(name: Constant.Storyboards.seeMap)
 
@@ -34,8 +35,8 @@ class SeeMapViewController: BaseViewController {
         setUpView()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         addressVC.view.frame = CGRect(x: mAddreassBckgV.frame.origin.x,
                                        y:  mAddreassBckgV.frame.origin.y,
                                        width: mAddreassBckgV.bounds.size.width,
@@ -44,6 +45,7 @@ class SeeMapViewController: BaseViewController {
     
     
     func setUpView() {
+        tabBarController?.tabBar.backgroundColor = color_background
         configureNavigationBar()
         configureMapView()
         addChildView()
@@ -52,6 +54,7 @@ class SeeMapViewController: BaseViewController {
   
     
     private func configureNavigationBar() {
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         // menu
         menu = SideMenuNavigationController(rootViewController: LeftViewController())
         self.setmenu(menu: menu)
@@ -67,17 +70,26 @@ class SeeMapViewController: BaseViewController {
     
     /// configure map view
     func configureMapView() {
+            mapView = GMSMapView(frame: self.view.bounds)
+            self.view.addSubview(mapView!)
+        var longitude = 0.0
+        var latitude = 0.0
         
-        guard let parking = parking else { return }
-//        let camera = GMSCameraPosition.camera(withLatitude: parking.latitude, longitude: parking.longitude, zoom: zoom)
-       // mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)
-        mapView = GMSMapView(frame: self.view.bounds)
-
-        self.view.addSubview(mapView!)
-        addMarker(longitude: parking.longitude, latitude: parking.latitude, marker: marker)
-        mapView!.isMyLocationEnabled = true
-        self.mapView!.animate(toZoom: 4)
-        self.view.bringSubviewToFront(mSwipeGestureBckgV)
+        if let parking = parking {
+            longitude = parking.longitude
+            latitude = parking.latitude
+        } else if let customLocation = customLocationToRent {
+            longitude = customLocation.longitude
+            latitude = customLocation.latitude
+        }
+        addMarker(longitude: longitude, latitude: latitude, marker: marker)
+            mapView!.isMyLocationEnabled = true
+        
+//        let camera: GMSCameraPosition =  GMSCameraPosition(target: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), zoom: zoom, bearing: 0, viewingAngle: 0)
+//        self.mapView!.animate(to: camera)
+        
+            self.mapView!.animate(toZoom: 4)
+            self.view.bringSubviewToFront(mSwipeGestureBckgV)
     }
     
     func  configureLocation()  {
@@ -103,6 +115,8 @@ class SeeMapViewController: BaseViewController {
         addChild(addressVC)
         view.addSubview(addressVC.view)
         addressVC.didMove(toParent: self)
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
     }
     
     private func addMarker(longitude: Double, latitude: Double , marker: GMSMarker) {
@@ -118,7 +132,7 @@ class SeeMapViewController: BaseViewController {
         let geocoder = GMSGeocoder()
         geocoder.reverseGeocodeCoordinate(mapViewCenterCoordinate) { response, _ in
             guard let address = response?.firstResult()?.lines?.first else {
-                self.addressVC.mAddressNameLb.text = "Can't detect address"
+                self.addressVC.mAddressNameLb.text = Constant.Texts.errAddress
                 return
             }
             self.addressVC.mAddressNameLb.text = address
@@ -130,9 +144,7 @@ class SeeMapViewController: BaseViewController {
         let coord = locationObj.coordinate
         let lattitude = coord.latitude
         let longitude = coord.longitude
-        let center = CLLocationCoordinate2D(latitude: locationObj.coordinate.latitude, longitude: locationObj.coordinate.longitude)
-       // showAddressNameByGeocoder(mapViewCenterCoordinate: center)
-        let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: lattitude, longitude: longitude, zoom: zoom)
+        let camera: GMSCameraPosition =  GMSCameraPosition(target: CLLocationCoordinate2D(latitude: lattitude, longitude: longitude), zoom: zoom, bearing: 0, viewingAngle: 0)
         self.mapView!.animate(to: camera)
     }
     
@@ -152,16 +164,16 @@ extension SeeMapViewController: AddressNameViewControllerDelegate {
     }
     
     func didPressRoute() {
-                                    var url = "yandexnavi://build_route_on_map?lat_to=\(mapViewCenterCoordinate.latitude)&lon_to=\(mapViewCenterCoordinate.longitude)"
-                                    if UIApplication.shared.canOpenURL(URL(string: url)!) {
-                                        UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
-                                    } else {
-                                        url = "https://itunes.apple.com/ru/app/yandex.navigator/id474500851"
-                                        if UIApplication.shared.canOpenURL(URL(string: url)!) {
-                                            UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
-                                        }
-                                    }
-
+        var url = "yandexnavi://build_route_on_map?lat_to=\(mapViewCenterCoordinate.latitude)&lon_to=\(mapViewCenterCoordinate.longitude)"
+        if UIApplication.shared.canOpenURL(URL(string: url)!) {
+            UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
+        } else {
+            url = "https://itunes.apple.com/ru/app/yandex.navigator/id474500851"
+            if UIApplication.shared.canOpenURL(URL(string: url)!) {
+                UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
+            }
+        }
+        
     }
     
     func didPressUserLocation() {

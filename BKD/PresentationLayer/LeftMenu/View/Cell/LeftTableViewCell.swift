@@ -10,11 +10,13 @@ import UIKit
 class LeftTableViewCell: UITableViewCell {
 
     static let identifier = "LeftTableViewCell"
-        
-        static func nib() -> UINib {
+    static func nib() -> UINib {
             return UINib(nibName: identifier, bundle: nil)
-            
-        }
+    }
+    
+    
+    
+    @IBOutlet weak var mSubmenuTbV: SubMenuTableView!
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var lbl: UILabel!
     @IBOutlet weak var mCustomerServiceV: UIView!
@@ -25,6 +27,8 @@ class LeftTableViewCell: UITableViewCell {
     @IBOutlet weak var mContactUsBtn: UIButton!
     @IBOutlet weak var dropDownBtn: UIButton!
     @IBOutlet weak var mNotificationSwictch: UISwitch!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         lbl.font = UIFont(name: Constant.FontNames.sfproDodplay_light, size: 18)
@@ -55,6 +59,7 @@ class LeftTableViewCell: UITableViewCell {
     
     @IBAction func english(_ sender: Any) {
     }
+    
     @IBAction func notifications(_ sender: UIButton) {
     }
 }

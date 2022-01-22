@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyDriverTableViewCell" rowHeight="102" id="KGk-i7-Jjw" customClass="MyDriverTableViewCell" customModule="BKD" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qrW-6Q-xtj">
+                        <rect key="frame" x="0.0" y="1.5" width="320" height="86"/>
+                        <color key="backgroundColor" name="background"/>
+                    </view>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="hv3-gQ-gEX">
+                        <rect key="frame" x="16" y="9" width="284" height="71"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verification pending" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhz-Qj-gch">
+                                <rect key="frame" x="0.0" y="0.0" width="284" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" id="IYb-t1-WqJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                                <color key="textColor" name="offert_red"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Surname " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FEZ-PT-4Dc">
+                                <rect key="frame" x="0.0" y="23" width="284" height="21.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20.5" id="rTD-GJ-Lxl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
+                                <color key="textColor" name="navigationBar"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XXXXXXXXX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qqy-Xv-VIx">
+                                <rect key="frame" x="0.0" y="50.5" width="284" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20.5" id="1tR-Ao-2vK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                <color key="textColor" name="email"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="FEZ-PT-4Dc" firstAttribute="width" secondItem="hv3-gQ-gEX" secondAttribute="width" id="84e-ya-cbK"/>
+                            <constraint firstItem="lhz-Qj-gch" firstAttribute="width" secondItem="hv3-gQ-gEX" secondAttribute="width" id="FsT-j2-3Zc"/>
+                            <constraint firstItem="Qqy-Xv-VIx" firstAttribute="width" secondItem="hv3-gQ-gEX" secondAttribute="width" id="sHC-O2-6VY"/>
+                        </constraints>
+                    </stackView>
+                </subviews>
+                <color key="backgroundColor" name="background"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="hv3-gQ-gEX" secondAttribute="bottom" constant="9" id="Jwm-9I-syt"/>
+                    <constraint firstItem="hv3-gQ-gEX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="PVX-lL-WX1"/>
+                    <constraint firstAttribute="trailing" secondItem="hv3-gQ-gEX" secondAttribute="trailing" constant="20" id="XbB-cr-bWt"/>
+                    <constraint firstItem="qrW-6Q-xtj" firstAttribute="height" secondItem="hv3-gQ-gEX" secondAttribute="height" multiplier="1.21429" id="eE0-dQ-ibC"/>
+                    <constraint firstItem="hv3-gQ-gEX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="ekw-ve-Wg9"/>
+                    <constraint firstItem="qrW-6Q-xtj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="erm-47-nT6"/>
+                    <constraint firstAttribute="trailing" secondItem="qrW-6Q-xtj" secondAttribute="trailing" id="vv0-bh-PSj"/>
+                    <constraint firstItem="qrW-6Q-xtj" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="xxK-jV-gqr"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" name="background"/>
+            <connections>
+                <outlet property="mFullNameLb" destination="FEZ-PT-4Dc" id="9zP-og-Wqb"/>
+                <outlet property="mLicenseLb" destination="Qqy-Xv-VIx" id="eJ9-mg-aFj"/>
+                <outlet property="mShadowV" destination="qrW-6Q-xtj" id="Qvf-hf-dZi"/>
+                <outlet property="mVerificationLb" destination="lhz-Qj-gch" id="Mws-dV-cDN"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="97.433035714285708"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="email">
+            <color red="0.53725490196078429" green="0.59607843137254901" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="navigationBar">
+            <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="offert_red">
+            <color red="1" green="0.29411764705882354" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

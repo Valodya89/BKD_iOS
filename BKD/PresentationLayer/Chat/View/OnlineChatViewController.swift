@@ -31,16 +31,22 @@ final class OnlineChatViewController: MessagesViewController, StoryboardInitiali
         setupView()
     }
     
-    // MARK: - IBActions
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        tabBarController?.tabBar.isHidden = true
+//    }
+    
+    // MARK: -- IBActions
     
     @IBAction func dismiss(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
     }
     
     
-    // MARK: - Functions
+    // MARK: -- Functions
     
     private func setupView() {
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         configureMessagesViewController()
         configureDelegate()
         getMessages()
@@ -135,15 +141,18 @@ extension OnlineChatViewController: MessagesLayoutDelegate, MessagesDataSource, 
     }
     
     
-    //MARK: MessagesDisplayDelegate
+    //MARK: -- MessagesDisplayDelegate
     func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
         
         let closure = { [self] (view: MessageContainerView) in
             if self.isFromCurrentSender(message: message) {
                 view.backgroundColor = .clear
-                view.roundCornersWithBorder(corners: [.topLeft, .bottomLeft, .topRight], radius: 10, borderColor: color_navigationBar!, borderWidth: 1)
+//                view.roundCornersWithBorder(corners: [.topLeft, .bottomLeft, .topRight], radius: 10, borderColor: color_navigationBar!, borderWidth: 1)
+                view.layer.cornerRadius = 10
+                view.setBorder(color: color_navigationBar!, width: 1)
             } else {
-                view.roundCorners(corners: [.topLeft, .bottomRight, .topRight], radius: 10)
+//                view.roundCorners(corners: [.topLeft, .bottomRight, .topRight], radius: 10)
+                view.layer.cornerRadius = 10
                 view.layer.borderColor = color_menu?.cgColor
                 view.backgroundColor = color_menu!
             }
@@ -163,14 +172,14 @@ extension OnlineChatViewController: MessagesLayoutDelegate, MessagesDataSource, 
     }
     
     
-    //MARK: MessagesLayoutDelegate
+    //MARK: -- MessagesLayoutDelegate
     
     func cellTopLabelHeight(for message: MessageKit.MessageType, at indexPath: IndexPath, in messagesCollectionView: MessageKit.MessagesCollectionView) -> CGFloat {
         return 40
     }
 }
 
-//MARK: - MessageInputBarDelegate
+//MARK: -- MessageInputBarDelegate
 
 extension OnlineChatViewController: InputBarAccessoryViewDelegate {
     func inputBar(_ inputBar: InputBarAccessoryView, textViewTextDidChangeTo text: String) {

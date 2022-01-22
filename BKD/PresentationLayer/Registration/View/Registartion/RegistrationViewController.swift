@@ -37,9 +37,15 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
         mContinueLeading.constant = 0
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        setBorderToTextFileds() 
+    }
+    
     func setUpView() {
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         tabBarController?.tabBar.isHidden = true
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
+        
         mRightBarBtn.image = img_bkd
         setBorderToTextFileds()
         mPasswordVisibleBtn.setImage(#imageLiteral(resourceName: "invisible"), for: .normal)
@@ -65,7 +71,7 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
         mErrorLb.isHidden = true
     }
     
-    /// set Atributte to lable
+    /// Set Atributte to lable
     private func setAttribute() {
         let text = Constant.Texts.agreeTerms
         let attriString = NSMutableAttributedString(string: text)
@@ -225,8 +231,7 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
 }
 
 
-//MARK: UITextFieldDelegate
-// -----------------------------
+//MARK: -- UITextFieldDelegate
 extension RegistrationViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

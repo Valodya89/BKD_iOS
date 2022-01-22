@@ -53,7 +53,9 @@ final class URLBuilder: URLBuilderProtocol {
             let imageData = image.jpegData(compressionQuality: 1.0)
             request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
             guard let data = imageData else { fatalError("Something went wrong image data should not be nil.")}
-            request.httpBody = createBodyWithParameters(parameters: api.body as? [String: String] ?? [:], filePathKey: "avatar", imageDataKey: data, boundary: boundary) as Data
+//            request.httpBody = createBodyWithParameters(parameters: api.body as? [String: String] ?? [:], filePathKey: "document", imageDataKey: data, boundary: boundary) as Data
+            
+            request.httpBody = createBodyWithParameters(parameters: api.body as? [String: String] ?? [:], filePathKey: imageUplader.filePathKey, imageDataKey: data, boundary: boundary) as Data
         }
         
         if let multipleImageUplader = api as? MultipyImageLoad {

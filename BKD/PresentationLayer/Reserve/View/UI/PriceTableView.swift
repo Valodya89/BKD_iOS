@@ -9,7 +9,7 @@ import UIKit
 
 class PriceTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
-    var pricesArr: [PriceModel] = []
+    var pricesArr: [PriceModel] = PriceData.priceModel
 
     
     override func awakeFromNib() {

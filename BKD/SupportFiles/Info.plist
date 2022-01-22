@@ -26,13 +26,22 @@
 				<string>bkdrental</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.kitefaster.customUrlApp</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>kitefasterCustomUrlScheme</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>googlechromes</string>
 		<string>comgooglemaps</string>
+		<string>kitfasterCustomUrlScheme</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

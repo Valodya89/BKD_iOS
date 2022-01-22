@@ -61,11 +61,17 @@ extension SearchPhoneCodeViewController: UITableViewDelegate, UITableViewDataSou
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.reloadData()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4 ) {        self.dismiss(animated: true) {
-            self.delegate?.didSelectCountry(self.phoneCodes[indexPath.row])
-        }
+        let cell: SearchPhoneCodeTableViewCell = tableView.cellForRow(at:indexPath) as!   SearchPhoneCodeTableViewCell
+        cell.layer.cornerRadius = 8
+        cell.backgroundColor = color_dark_register!
+        cell.mCountryLb.textColor = color_menu!
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4 ) {
+            self.dismiss(animated: true) {
+                if self.phoneCodes.count > 0 {
+                    self.delegate?.didSelectCountry(self.phoneCodes[indexPath.row])
+                }
+            }
         }
         
     }
@@ -76,7 +82,11 @@ extension SearchPhoneCodeViewController: UITableViewDelegate, UITableViewDataSou
     
     func search(text: String) {
         let phoneCodesStore: [PhoneCode] = applicationSettings.phoneCodes!
-        self.phoneCodes = phoneCodesStore.filter { if text.isEmpty { return true }; return $0.country?.lowercased().contains(text.lowercased()) ?? false }
+        self.phoneCodes = phoneCodesStore.filter {
+            if text.isEmpty {
+                return true
+                
+            }; return $0.country?.lowercased().contains(text.lowercased()) ?? false }
         mSearchTableV.reloadData()
     }
     

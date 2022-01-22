@@ -25,15 +25,14 @@ class RentalConditionsTableViewCell: UITableViewCell {
     }
     
     // set info to the cell
-    func setCellInfo(item: RentalConditionsModel, index: Int) {
+    func setCellInfo(item: RentalConditionsModel, vehicleModel: VehicleModel?,  index: Int) {
         mImgV.image =  item.img
         mTitleLb.text = item.title
-        mValueLb.text = item.value
         if index == 1 {
             mValueBckgV.isHidden = true
             mSeparatorV.isHidden = false
         } else {
-            mValueLb.text = item.value
+            mValueLb.text = String(vehicleModel?.depositPrice ?? 0.0)
             
 
             if index == 4 {
@@ -42,13 +41,30 @@ class RentalConditionsTableViewCell: UITableViewCell {
         }
         if index != 0 && index != 1 {
             mEuroLb.isHidden = true
+            mValueLb.text = item.value
+
         }
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    // set info to the cell
+    func setCarsCellInfo(item: RentalConditionsModel, carModel: CarsModel?,  index: Int) {
+        mImgV.image =  item.img
+        mTitleLb.text = item.title
+        if index == 1 {
+            mValueBckgV.isHidden = true
+            mSeparatorV.isHidden = false
+        } else {
+            mValueLb.text = String(carModel?.depositPrice ?? 0.0)
 
-        // Configure the view for the selected state
+            if index == 4 {
+                mImgV.setTintColor(color: color_email!)
+            }
+        }
+        if index != 0 && index != 1 {
+            mEuroLb.isHidden = true
+            mValueLb.text = item.value
+
+        }
     }
     
 }

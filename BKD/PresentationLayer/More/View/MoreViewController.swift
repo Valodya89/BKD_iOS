@@ -7,17 +7,22 @@
 
 import UIKit
 
-class MoreViewController: UIViewController {
-    //MARK: Outlets
+class MoreViewController: BaseViewController {
+    //MARK: --Outlets
     @IBOutlet weak var mMoreTbV: UITableView!
     @IBOutlet weak var mBackBarBtn: UIBarButtonItem!
-        @IBOutlet weak var mBkdBarBtn: UIBarButtonItem!
+    @IBOutlet weak var mBkdBarBtn: UIBarButtonItem!
     
+    //MARK: -- Variables
+    public var vehicleModel: VehicleModel?
+    public var carModel: CarsModel?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
     func setupView()  {
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         mBkdBarBtn.image = img_bkd
         configureTableView()
         configureDelegates()
@@ -34,6 +39,8 @@ class MoreViewController: UIViewController {
         mMoreTbV.delegate = self
         mMoreTbV.dataSource = self
     }
+    
+    
     
 //MARK: ACTIONS
 //MARK: ---------------------
@@ -61,7 +68,13 @@ extension MoreViewController: UITableViewDelegate, UITableViewDataSource {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: RentalConditionsTableViewCell.identifier, for: indexPath) as! RentalConditionsTableViewCell
             let model = RentalConditionsData.rentalConditionsModel[indexPath.row]
-            cell.setCellInfo(item:model, index: indexPath.row)
+            
+            if vehicleModel != nil {
+                cell.setCellInfo(item:model, vehicleModel: vehicleModel, index: indexPath.row)
+                
+            } else if carModel != nil {
+                cell.setCarsCellInfo(item:model, carModel: carModel, index: indexPath.row)
+            }
             return cell
             
         } else { // BKD Advantages cell

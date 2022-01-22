@@ -46,6 +46,8 @@ class OfficeTerminalViewController: UIViewController {
     }
     
     @IBAction func back(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
+
     }
     
     @IBAction func askAdmin(_ sender: UIButton) {

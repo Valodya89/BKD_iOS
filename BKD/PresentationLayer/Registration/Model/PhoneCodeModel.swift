@@ -8,13 +8,8 @@
 import UIKit
 
 struct PhoneCodeModel {
-    public var country: String?
-    public var code : String?
-    public var flag: UIImage?
-    public var phoneFormat: String?
-    public var validFormPattern: Int?
-
-
+    public var phoneCode: PhoneCode?
+    public var phoneNumber : String?
 }
 
 

@@ -15,11 +15,14 @@ final class ApplicationSettings {
     
     private(set) var phoneCodes: [PhoneCode]?
     private(set) var pickerList: [String]?
-    private(set) var workingTimes: WorkingTimes?
-    private(set) var restrictedZones: [RestrictedZones]?
-    var carsList:[String : [CarsModel]?]?
-    var carTypes:[CarTypes]?
+    private(set) var settings:  Settings?
+    private(set) var flexibleTimes: [FlexibleTimes]?
+    private(set) var countryList: [Country]?
 
+    private(set) var restrictedZones: [RestrictedZones]?
+    var carsList: [String : [CarsModel]?]?
+    var carTypes: [CarTypes]?
+    var allCars: [CarsModel]?
     
     private init() {
         NotificationCenter.default.addObserver(self, selector: #selector(fetchPhoneCodes), name: Constant.Notifications.LanguageUpdate, object: nil)
@@ -28,10 +31,12 @@ final class ApplicationSettings {
         }
         fetchPhoneCodes()
         getAvalableTimeList()
-        getWorkingTimes()
+        getSettings()
         getRestrictedZones()
+        getFlexibleTimes()
+        getCountryList()
+        getAllCars()
     }
-    
 }
 
 extension ApplicationSettings {
@@ -60,6 +65,25 @@ extension ApplicationSettings {
     func getCarTypes()  {
         MainViewModel().getCarTypes { [self] (result) in
             carTypes = result
+        }
+    }
+    
+    /// get avalable time list
+    func getAllCars() {
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getCarList)) { [self] (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let result = BkdConverter<BaseResponseModel<[CarsModel]>>.parseJson(data: data as Any) else {
+                    print("error")
+                    return
+                }
+                self.allCars =  result.content!
+            case .failure(let error):
+                print(error.description)
+            
+                break
+            }
         }
     }
     
@@ -119,20 +143,38 @@ extension ApplicationSettings {
     
     
     /// get working time list
-    @objc private func getWorkingTimes() {
-        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getWorkingTimes)) { [self] (result) in
+    @objc private func getSettings() {
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getSettings)) { [self] (result) in
             
             switch result {
             case .success(let data):
-                guard let workingTime = BkdConverter<BaseResponseModel<WorkingTimes>>.parseJson(data: data as Any) else {
+                guard let settings = BkdConverter<BaseResponseModel<Settings>>.parseJson(data: data as Any) else {
                     print("error")
                     return
                 }
-                self.workingTimes = workingTime.content
-               // completion(workingTimes.content)
+                self.settings = settings.content
+               // completion(settings.content)
             case .failure(let error):
                 print(error.description)
             
+                break
+            }
+        }
+    }
+    
+    /// get flexible time list
+    @objc private func getFlexibleTimes() {
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getFlexibleTimes)) { [self] (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let flexibleTimes = BkdConverter<BaseResponseModel<[FlexibleTimes]>>.parseJson(data: data as Any) else {
+                    print("error")
+                    return
+                }
+                self.flexibleTimes = flexibleTimes.content
+            case .failure(let error):
+                print(error.description)
                 break
             }
         }
@@ -144,9 +186,14 @@ extension ApplicationSettings {
             self?.restrictedZones = result
         }
     }
-    
-    
-    
+
+    ///Get country list
+    func getCountryList() {
+        RegistrationBotViewModel().getCountryList { [weak self] (response) in
+            guard let self = self else { return }
+            self.countryList = response
+        }
+    }
 }
 
 extension ApplicationSettings {

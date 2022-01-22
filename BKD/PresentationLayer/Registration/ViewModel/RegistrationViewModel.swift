@@ -11,10 +11,9 @@ struct EmptyModel: Decodable {
 enum SignUpStatus: String, CaseIterable {
     case accountExist = "ACCOUNTS_user_already_exists"
     case accountNoSuchUser = "ACCOUNTS_no_such_user"
-case wrongVerifvCode = "ACCOUNTS_wrong_verification_code"
+    case wrongVerifvCode = "ACCOUNTS_wrong_verification_code"
     case success = "SUCCESS"
     case error = "error"
-    
 }
 
 class RegistrationViewModel: NSObject {
@@ -31,8 +30,8 @@ class RegistrationViewModel: NSObject {
     }
     
     /// Get phone format for tetxtFiled placeholder
-    func getPhonePlaceholder(format: String) -> String {
-//        let str = format.replacingOccurrences(of: "-", with: " ", options: .literal, range: nil)
+    func getPhonePlaceholder(format: String?) -> String {
+        guard let format = format else { return ""}
         
          let placeholder = format.replacingOccurrences(of: "#", with: "-", options: .literal, range: nil)
         return placeholder
@@ -58,6 +57,9 @@ class RegistrationViewModel: NSObject {
             }
         }
     }
+    
+    
+    
     
     
 }

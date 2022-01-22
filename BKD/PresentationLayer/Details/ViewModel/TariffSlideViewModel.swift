@@ -8,72 +8,63 @@
 import UIKit
 
 class TariffSlideViewModel: NSObject {
-//static let shared = TariffSlideViewModel()
     
-/// get current option index
-func getCurrentOption(model: TariffSlideModel, tariff: Tariff) -> Int {
-    var optionsArr:[String] = []
-    switch tariff {
-        case .hourly:
-            optionsArr = tariffOptionsArr[0]
-            break
-        case .daily:
-            optionsArr = tariffOptionsArr[1]
-            break
-        case .weekly:
-            optionsArr = tariffOptionsArr[2]
-            break
-        case .monthly:
-            optionsArr = tariffOptionsArr[3]
-            break
-        case .flexible:
-            break
-
-        }
-    return getIndexOfOption(optionsArr: optionsArr, model: model)
-   
-}
-    
-    func getIndexOfOption(optionsArr: [String], model: TariffSlideModel) -> Int {
-        for (index, item) in optionsArr.enumerated() {
-            let optionNameArr = model.option!.components(separatedBy: " ")
-            let firstStr: String = optionNameArr[0]
-            let newStr = firstStr + optionNameArr[1].prefix(1)
-            if item.caseInsensitiveCompare(newStr) == .orderedSame {
+    /// get current option index
+    func getIndexOfOption(tariffArr: [Tariff], model: TariffSlideModel) -> Int {
+        for (index, item) in tariffArr.enumerated() {
+            if model.name == item.name {
                 return index
             }
         }
         return 0
     }
     
-    func getOptionString(tariff:Tariff, index: Int) -> String {
-        var optionsArr:[String] = []
+    func getOptionString(tariff:TariffState, tariffSlideList: [TariffSlideModel], index: Int) -> String {
+        var optionsArr:[Tariff] = []
         var optionStr: String = ""
         var option: String = ""
         var index = index
         switch tariff {
         case .hourly:
-            optionsArr = tariffOptionsArr[0]
+            optionsArr = tariffSlideList[0].tariff!
             optionStr = Constant.Texts.hours
             break
         case .daily:
-            optionsArr = tariffOptionsArr[1]
+            optionsArr = tariffSlideList[1].tariff!
             optionStr = Constant.Texts.days
             break
         case .weekly:
-            optionsArr = tariffOptionsArr[2]
+            optionsArr = tariffSlideList[2].tariff!
             optionStr = Constant.Texts.weeks
             break
         case .monthly:
-            optionsArr = tariffOptionsArr[3]
+            optionsArr = tariffSlideList[3].tariff!
             optionStr = Constant.Texts.month
             index = 0
             break
         case .flexible:
             return ""
         }
-        option = optionsArr[index]
+        option = String(optionsArr[index].duration)
         
         return option.dropLast() + " " + optionStr
     }
+    
+    
+    ///Get Tariff state index
+    func getTariffStateIndex(tariffState: TariffState) -> NSInteger {
+        switch tariffState {
+        case .hourly:
+            return 0
+        case .daily:
+            return 1
+        case .weekly:
+            return 2
+        case .monthly:
+            return 3
+        case .flexible:
+            return NSInteger(4)
+        }
+    }
+   
 }

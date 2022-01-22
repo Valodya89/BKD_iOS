@@ -6,56 +6,158 @@
 //
 
 import UIKit
+import WebKit
+
+
+enum AgreementType {
+    case advanced
+    case editAdvanced
+    case myReservationCell
+    case payLater
+    case reserve
+    case none
+    
+}
 
 protocol BkdAgreementViewControllerDelegate: AnyObject {
     func agreeTermsAndConditions()
 }
 
-class BkdAgreementViewController: UIViewController, StoryboardInitializable {
+class BkdAgreementViewController: BaseViewController {
+    
+    //MARK: -- Outlets
+    @IBOutlet weak var mAgreeV: ConfirmView!
+    @IBOutlet weak private var mWebV: WKWebView!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
+    @IBOutlet weak var mActivityIndicator: UIActivityIndicatorView!
     
-    @IBOutlet weak var mAgreeBtn: UIButton!
-    @IBOutlet weak var mAgreeBckgV: UIView!
-    @IBOutlet weak var mAgreeLeading: NSLayoutConstraint!
     
+    //MARK: -- Variables
     weak var delegate: BkdAgreementViewControllerDelegate?
     
+    private var htmlString = ""
+    public var urlString: String? = nil
+    public var agreementType: AgreementType?
+    public var vehicleModel: VehicleModel?
+    
+    //MARK: --Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
+        configWebView()
+
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        mAgreeV.mConfirmBtnLeading.constant = 0
+        loadWebView()
+    }
+    
+    //MARK: -- Set
     func setUpView() {
         mRightBarBtn.image = img_bkd
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
-        mAgreeBtn.layer.cornerRadius = 8
-        mAgreeBtn.layer.cornerRadius = 8
-        mAgreeBtn.addBorder(color:color_navigationBar!, width: 1.0)
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
+        mAgreeV.mConfirmLb.text = Constant.Texts.agree
+        handlerAgree()
     }
-
-    ///Agree button move to right  with animation
-    private func agreeClicked() {
-        UIView.animate(withDuration: 0.5) { [self] in
-            self.mAgreeLeading.constant = self.mAgreeBckgV.bounds.width - self.mAgreeBtn.frame.size.width
-            self.mAgreeBckgV.layoutIfNeeded()
-        } completion: { _ in
-            self.delegate?.agreeTermsAndConditions()
-            self.navigationController?.popViewController(animated: true)
+    
+//    /// Set page data with URL
+//    func setData(urlString: String) {
+//        self.urlString = urlString
+//    }
+    
+    /// Set page data with htmlString
+    func setData(htmlString: String) {
+        self.htmlString = htmlString
+    }
+    
+    /// Configure webView
+    private func configWebView() {
+        mWebV.navigationDelegate = self
+    }
+    
+    /// Load webView with url or htmlString
+    private func loadWebView() {
+        if let validURL = URL(string: urlString ?? "") {
+            let request = URLRequest(url: validURL)
+            mWebV.load(request)
+        } else {
+            mWebV.loadHTMLString(htmlString, baseURL: nil)
         }
     }
     
-    
-    
-    @IBAction func agree(_ sender: UIButton) {
-        agreeClicked()
-    }
-    
-    @IBAction func agreeSwipeGesture(_ sender: UISwipeGestureRecognizer) {
-        agreeClicked()
-    }
-    
+  //MARK: -- Actions
     @IBAction func back(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
     }
     
+    func handlerAgree() {
+        mAgreeV.didPressConfirm  = {
+            switch self.agreementType {
+                
+            case .advanced,
+                    .myReservationCell,
+                    .payLater,
+                    .editAdvanced:
+                break
+                //self.goToSelectPayment(vehicleModel: <#VehicleModel#>, paymentOption: <#PaymentOption#>)
+            case .reserve:
+                self.addReservation()
+            default:
+                self.delegate?.agreeTermsAndConditions()
+                self.navigationController?.popViewController(animated: true)
+            }
+            
+        }
+    }
+    
+    ///Add reservation
+    private func addReservation() {
+        ReserveViewModel().addRent(vehicleModel: vehicleModel ?? VehicleModel()) { result, error in
+                if let _ = error {
+                    self.showAlertSignIn()
+                } else if result == nil {
+                    self.showAlert()
+                } else {
+                    //self.rent = result
+                    self.vehicleModel?.rent = result!
+                    self.goToPhoneVerification(vehicleModel: self.vehicleModel, phoneNumber: nil)
+                   // self.clickConfirm()
+                }
+        }
+    }
+    
+    ///Show alert
+    private func showAlert() {
+        BKDAlert().showAlert(on: self,
+                             title: nil,
+                             message: Constant.Texts.errRegistrationBot,
+                             messageSecond: nil,
+                             cancelTitle: Constant.Texts.cancel,
+                             okTitle: Constant.Texts.ok,
+                             cancelAction: nil) {
+            self.goToMyBkd()
+        }
+    }
+    
+    ///Go to myBkd screen
+    private func goToMyBkd() {
+        self.tabBarController?.selectedIndex = 4
+        self.navigationController?.popToViewController(ofClass: MyBKDViewController.self, animated: true)
+    }
+    
+}
+
+
+// MARK: -- WKNavigation Delegate
+extension BkdAgreementViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        mActivityIndicator.startAnimating()
+        
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        mActivityIndicator.stopAnimating()
+    }
 }

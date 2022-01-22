@@ -8,16 +8,16 @@
 import UIKit
 
 final class MainViewModel: NSObject {
-   // static let shared = MainViewModel()
     var searchModel = SearchModel()
     let validator = Validator()
+    
     var isOnline: Bool {
         return true
-        guard let workingTimes = ApplicationSettings.shared.workingTimes else { return false }
+        guard let settings = ApplicationSettings.shared.settings else { return false }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
-        guard let start = dateFormatter.date(from: workingTimes.workStart) else { return false }
-        guard let end = dateFormatter.date(from: workingTimes.workEnd) else { return false }
+        guard let start = dateFormatter.date(from: settings.workStart) else { return false }
+        guard let end = dateFormatter.date(from: settings.workEnd) else { return false }
         guard let current = dateFormatter.date(from: dateFormatter.string(from: Date())) else { return false }
         return (start...end).contains(current)
     }
@@ -67,9 +67,9 @@ final class MainViewModel: NSObject {
     }
     
     /// Check if reservetion during working hours
-    func  isReservetionInWorkingHours(time: Date?, workingTimes: WorkingTimes,
+    func  isReservetionInWorkingHours(time: Date?, settings: Settings,
                                      didResult: @escaping (Bool) -> ()) {
-        didResult(validator.checkReservationTime(time: time, workingTimes:workingTimes))
+        didResult(validator.checkReservationTime(time: time, settings:settings))
     }
     
      
@@ -85,6 +85,11 @@ final class MainViewModel: NSObject {
                                                        returnTime: returnTime))
     }
     
+    ///Check if reservation more then 90 days
+    func  isReservetionMore90Days(search: SearchModel) -> Bool {
+       return validator.checkReservation90Days(search: search)
+    }
+    
     ///Chack if car is active now
     func isCarActiveNow(start:Date, end:Date) -> Bool {
         let now = Date()
@@ -93,6 +98,8 @@ final class MainViewModel: NSObject {
         return !result
     }
    
+    
+    
     
     /// Get Tail lift info
     func getTailLiftList(carModel: CarsModel) -> [TailLiftModel] {
@@ -194,6 +201,7 @@ final class MainViewModel: NSObject {
         for i in 0 ..< carTypes.count{
             guard let image = carTypes[i].image, let imageURL = image.getURL() else { return }
             dispatchGroup.enter()
+            
             UIImage.loadFrom(url: imageURL) { (image) in
                 guard let _ = image else {return}
                 imagesArr.append(image!)
@@ -203,9 +211,7 @@ final class MainViewModel: NSObject {
         dispatchGroup.notify(queue: DispatchQueue.main, execute: {
             completion(imagesArr)
                print("Finished all requests.")
-           })
-        
-       
+           }) 
     }
     
     
@@ -227,10 +233,16 @@ final class MainViewModel: NSObject {
             }
         }
     }
+
     
-    
-//    func getSearchResultCars(cars: [CarsModel]) -> [CarsModel] {
-//        
+//    func minDateToPickerDate(pickUpDate: Date?, returnDate: Date?) ->  Date {
+//        if let _ = pickUpDate {
+//            return  pickUpDate!
+//        }
+//        if let _ = returnDate {
+//            return  returnDate!
+//        }
+//        return Date()
 //    }
     
 }

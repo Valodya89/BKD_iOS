@@ -26,6 +26,7 @@ class CarPhotosView: UIView {
     
     //MARK: Variables
     var currentCarPhotoItem: Int = 0
+    var carImagesList: [UIImage] = []
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,6 +37,7 @@ class CarPhotosView: UIView {
         mCarImagesBckgV.setShadow(color: color_shadow!)
         mCarImagesBckgV.setBorder(color: color_shadow!, width: 0.25)
         mCarImagesBckgV.layer.cornerRadius = 3
+        mScrollRightBtn.isHidden = carImagesList.count > 1 ? false : true
         configureDelegates()
         configureCollectionViews()
         
@@ -54,7 +56,7 @@ class CarPhotosView: UIView {
         mImagesBottomCollectionV.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     }
     
-    private func setImageCellInfo (cell: UICollectionViewCell, item: CarModel) {
+    private func setImageCellInfo (cell: UICollectionViewCell, img: UIImage) {
         removeOldImageFromCell(cell: cell)
         var imgV = UIImageView()
         imgV = UIImageView(frame: CGRect(x: mImagePagingCollectionV.bounds.width * 0.166,
@@ -62,7 +64,7 @@ class CarPhotosView: UIView {
                                          width: mImagePagingCollectionV.bounds.width * 0.55/*0.4951*/,
                                          height: mImagePagingCollectionV.bounds.height - 15))
         imgV.contentMode = .scaleAspectFit
-        imgV.image = item.carImage
+        imgV.image = img
         cell.contentView.addSubview(imgV)
     }
     
@@ -76,15 +78,22 @@ class CarPhotosView: UIView {
     private func scrollToIndex(index:Int) {
         let rect = mImagePagingCollectionV.layoutAttributesForItem(at:IndexPath(row: index, section: 0))?.frame
         mImagePagingCollectionV.scrollRectToVisible(rect!, animated: true)
-        delegate?.didChangeCarImage(CarsData.carModel[index].carImage)
+        delegate?.didChangeCarImage(carImagesList[index])
     }
     
     ///Will show or hide previous and next arrow buttons
     private func showOrHideScrollButtons () {
         if currentCarPhotoItem == 0 {
             mScrollLeftBtn.isHidden = true
-        } else if currentCarPhotoItem == CarsData.carModel.count - 1 {
+            if carImagesList.count > 1  {
+                mScrollRightBtn.isHidden = false
+            }
+        } else if currentCarPhotoItem == carImagesList.count - 1 {
             mScrollRightBtn.isHidden = true
+            if currentCarPhotoItem == 1 {
+                mScrollLeftBtn.isHidden = false
+            }
+                
         } else {
             mScrollLeftBtn.isHidden = false
             mScrollRightBtn.isHidden = false
@@ -96,7 +105,7 @@ class CarPhotosView: UIView {
     private func movetoPositionBottomCollectionView() {
         mImagesBottomCollectionV.reloadData()
         mImagesBottomCollectionV.scrollToItem(at:NSIndexPath(item: currentCarPhotoItem, section: 0) as IndexPath , at: .centeredHorizontally, animated: true)
-        delegate?.didChangeCarImage(CarsData.carModel[currentCarPhotoItem].carImage)
+        delegate?.didChangeCarImage(carImagesList[currentCarPhotoItem])//CarsData.carModel[currentCarPhotoItem].carImage)
     }
     //MARK: ACTIONS
     //MARK: -----------------
@@ -113,7 +122,7 @@ class CarPhotosView: UIView {
     
     @IBAction func scrollRight(_ sender: UIButton) {
         print ("currentCarPhotoItem =  \(currentCarPhotoItem)")
-        if currentCarPhotoItem <= CarsData.carModel.count - 1 {
+        if currentCarPhotoItem <= carImagesList.count - 1 {
             scrollToIndex(index: currentCarPhotoItem + 1)
             currentCarPhotoItem += 1
         }
@@ -124,7 +133,7 @@ class CarPhotosView: UIView {
 
 extension CarPhotosView: UICollectionViewDelegate,  UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return CarsData.carModel.count
+        return carImagesList.count//CarsData.carModel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -132,12 +141,12 @@ extension CarPhotosView: UICollectionViewDelegate,  UICollectionViewDataSource, 
         
         if collectionView == mImagePagingCollectionV {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-            setImageCellInfo(cell: cell, item: CarsData.carModel[indexPath.row])
+            setImageCellInfo(cell: cell, img: carImagesList[indexPath.row])
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImagesBottomCollectionViewCell.identifier, for: indexPath) as! ImagesBottomCollectionViewCell
 
-            cell.setCellInfo(item: CarsData.carModel[indexPath.row], currentImageIndex: currentCarPhotoItem, index: indexPath.row)
+            cell.setCellInfo(img: carImagesList[indexPath.row], currentImageIndex: currentCarPhotoItem, index: indexPath.row)
                         
             return cell
         }

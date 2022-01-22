@@ -12,7 +12,7 @@ import SwiftMaskTextfield
 
 protocol PhoneNumberTableViewCellDelegate: AnyObject {
     func didPressCountryCode()
-    func didReturnTxtField(text: String, code:String)
+    func didReturnTxtField(text: String, code: String, index: Int)
 }
 
 class PhoneNumberTableViewCell: UITableViewCell {
@@ -35,7 +35,7 @@ class PhoneNumberTableViewCell: UITableViewCell {
     var validFormPattern: Int = 0
     var phoneNumber: String? {
         get {
-            return "\(selectedCountry?.code ?? "NULL") \(mPhoneNumberTxtFl.text ?? "NULL")".replacingOccurrences(of: "-", with: "").replacingOccurrences(of: " ", with: "")
+            return "\(selectedCountry?.code ?? "NULL") \(mPhoneNumberTxtFl.text ?? "NULL")".replacingOccurrences(of: "_", with: "").replacingOccurrences(of: " ", with: "")
         } set {
             guard let newValue = newValue else {
                 return
@@ -47,14 +47,9 @@ class PhoneNumberTableViewCell: UITableViewCell {
             
             if (newValue.isNumber() == false)  {
                 mPhoneNumberTxtFl.text = String(newValue.dropLast())
-                
             }
-            
-            
 
-            guard let phoneNumber = try? phoneNumberKit.parse(newValue, ignoreType: true) else { return }
-//            mCodeLb.text = "+" + String(phoneNumber.countryCode)
-//            mPhoneNumberTxtFl.text = String(phoneNumber.nationalNumber)
+            guard let phoneNum = try? phoneNumberKit.parse(newValue, ignoreType: true) else { return }
         }
     }
     
@@ -75,13 +70,14 @@ class PhoneNumberTableViewCell: UITableViewCell {
             
         }
     func setUpView(){
-        mPhoneNumberBckgV.roundCornersWithBorder(corners: [.bottomRight, .topLeft, .topRight], radius: 8.0, borderColor: color_dark_register!, borderWidth: 1)
+        mPhoneNumberBckgV.roundCornersWithBorder(corners: [.bottomRight, .topLeft, .topRight], radius: 8.0, borderColor: color_navigationBar!, borderWidth: 1)
     }
  
 
 /// Set Cell Info
-    func setCellInfo(item: RegistrationBotModel) {
-        let placehoder  = RegistrationViewModel().getPhonePlaceholder(format: (selectedCountry?.mask!)!)
+    func setCellInfo(item: RegistrationBotModel, index: Int) {
+        mPhoneNumberTxtFl.tag = index
+        let placehoder  = RegistrationViewModel().getPhonePlaceholder(format: selectedCountry?.mask)
         
         mCodeLb.text = selectedCountry?.code
         mFlagImgV.image = selectedCountry?.imageFlag
@@ -96,12 +92,12 @@ class PhoneNumberTableViewCell: UITableViewCell {
     
     
     private func textFiledFilled(txt: String) {
-        mPhoneNumberBckgV.setBackgroundColorToCAShapeLayer(color: color_dark_register!)
+        mPhoneNumberBckgV.setBorderColorToCAShapeLayer(color: .clear)
+        mPhoneNumberBckgV.setBackgroundColorToCAShapeLayer(color: color_navigationBar!)
         mPhoneNumberTxtFl.text = txt
         mPhoneNumberTxtFl.textColor = .white
         mCodeLb.textColor = .white
         mDropDownImgV.setTintColor(color: .white)
-        mPhoneNumberBckgV.isUserInteractionEnabled = false
         mPhoneNumberBckgV.bringSubviewToFront(mCodeLb)
         mPhoneNumberBckgV.bringSubviewToFront(mPhoneNumberTxtFl)
         mPhoneNumberBckgV.bringSubviewToFront(mFlagImgV)
@@ -129,15 +125,12 @@ extension PhoneNumberTableViewCell: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        textField.endEditing(true)
-//        return true
-        textField.resignFirstResponder()
+
         if textField.text?.count == validFormPattern {
-            
-            delegate?.didReturnTxtField(text: textField.text!, code: mCodeLb.text!)
+            textField.resignFirstResponder()
+            delegate?.didReturnTxtField(text: textField.text!, code: mCodeLb.text!, index: textField.tag)
             textFiledFilled(txt: textField.text!)
         } else {
-            
             mCodeLb.textColor = color_email!
             mCodeLb.font = font_chat_placeholder!
         }
@@ -151,6 +144,5 @@ extension PhoneNumberTableViewCell: UITextFieldDelegate {
         let fullText = textField.text! + string
         phoneNumber = fullText
         return fullText.count <= validFormPattern
-
     }
 }

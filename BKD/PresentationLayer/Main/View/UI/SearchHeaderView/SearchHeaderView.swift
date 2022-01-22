@@ -17,8 +17,9 @@ enum DatePicker {
 
 protocol SearchHeaderViewDelegate: AnyObject {
     func willOpenPicker (textFl: UITextField, pickerState: DatePicker)
-    func didSelectLocation (_ locationStr: String, _ btnTag: Int)
+    func didSelectLocation (_ parking: Parking, _ btnTag: Int)
     func didSelectCustomLocation(_ btn:UIButton)
+    func didDeselectCustomLocation(tag: Int)
     func didSelectSearch()
     func hideEditView()
 }
@@ -95,8 +96,10 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     }
     var returnDate: Date? {
         didSet {
-            if !(returnDate?.isSameDates(date: oldValue))! {
-                enableSearch()
+            if returnDate != nil {
+                if !(returnDate?.isSameDates(date: oldValue))! {
+                    enableSearch()
+                }
             }
         }
     }
@@ -155,6 +158,13 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         commonInit()
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        mPickUpLocationBtn.addBorder(color: color_navigationBar!, width: 1.0)
+        mReturnLocationBtn.addBorder(color: color_navigationBar!, width: 1.0)
+        mSearchBtn.addBorder(color:color_navigationBar!, width: 1.0)
+    }
+    
     private func commonInit() {
         
         Bundle.main.loadNibNamed(Constant.NibNames.SearchHeaderView, owner: self, options: nil)
@@ -171,6 +181,10 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         mReturnDateTxtFl.delegate = self
         mPickUpTimeTxtFl.delegate = self
         mReturnTimeTxtFl.delegate = self
+        
+        mPickUpTimeTxtFl.setPlaceholder(string: Constant.Texts.selectTime, font: font_placeholder!, color: color_choose_date!)
+        mReturnTimeTxtFl.setPlaceholder(string: Constant.Texts.selectTime, font: font_placeholder!, color: color_choose_date!)
+       
         mPickUpDataTxtFl.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
         
         mDayPickUpBtn.isHidden = true
@@ -179,8 +193,6 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         mDayReturnDateBtn.isHidden = true
         mMonthReturnDateBtn.isHidden = true
         mReturnDateTxtFl.text =  Constant.Texts.returnDate
-        mReturnTimeTxtFl.textColor = color_choose_date
-        mPickUpTimeTxtFl.textColor = color_choose_date
         mPickUpLocationBtn.tintColor = color_choose_date
         mReturnLocationBtn.tintColor = color_choose_date
 
@@ -199,6 +211,7 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         // textField border
         setTextFieldBorder(leftTextField: mPickUpDataTxtFl, rightTextField: mReturnDateTxtFl, color: color_navigationBar!)
         setTextFieldBorder(leftTextField: mPickUpTimeTxtFl, rightTextField: mReturnTimeTxtFl, color: color_navigationBar!)
+        
         //botton border
         mPickUpLocationBtn.addBorder(color: color_navigationBar!, width: 1.0)
         mReturnLocationBtn.addBorder(color: color_navigationBar!, width: 1.0)
@@ -235,6 +248,59 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         }
     }
 
+    //Update pick up data field
+    func updatePickUpDate(datePicker: UIDatePicker) {
+        mDayPickUpBtn.isHidden = false
+        mMonthPickUpBtn.isHidden = false
+        //mPickUpDataTxtFl.text = ""
+        mPickUpDataTxtFl.textColor = .clear
+        mDayPickUpBtn.setTitle(datePicker.date.getDay(), for: .normal)
+
+        mMonthPickUpBtn?.setTitle(datePicker.date.getMonthAndWeek(lng: "en"), for: .normal)
+        mDateLb.textColor = color_search_placeholder
+    }
+    
+    
+    //Update pick up data field
+    func updateReturnDate(datePicker: UIDatePicker) {
+        mDayReturnDateBtn.isHidden = false
+        mMonthReturnDateBtn.isHidden = false
+       // mReturnDateTxtFl.text = ""
+        mReturnDateTxtFl.textColor = .clear
+        mDayReturnDateBtn.setTitle(datePicker.date.getDay(), for: .normal)
+
+        mMonthReturnDateBtn?.setTitle(datePicker.date.getMonthAndWeek(lng: "en"), for: .normal)
+        mDateLb.textColor = color_search_placeholder
+    }
+    
+    //Update time field
+    func updateTime(responderTxtFl: UITextField, text: String) {
+        DispatchQueue.main.async {
+            responderTxtFl.text = text
+            responderTxtFl.textColor = color_entered_date
+            responderTxtFl.font = font_search_title
+            self.mTimeLb.textColor = color_search_placeholder
+        }
+       
+
+    }
+    
+//    //Will put new values from pickerDate
+//    func showSelectedDate(dayBtn : UIButton?,
+//                          monthBtn: UIButton?) {
+//        if datePicker == .pickUpTime ||  datePicker == .returnTime{
+//
+//
+//            responderTxtFl.text = pickerList![ pickerV.selectedRow(inComponent: 0)]
+//            responderTxtFl.textColor = color_entered_date
+//            mTimeLb.textColor = color_search_placeholder
+//
+//        } else {
+//            dayBtn?.setTitle(datePicker.date.getDay(), for: .normal)
+//            monthBtn?.setTitle(datePicker.date.getMonthAndWeek(lng: "en"), for: .normal)
+//            mDateLb.textColor = color_search_placeholder
+//        }
+//    }
     
     ///update Location Fields
     func updateCustomLocationFields(place: String, didResult: @escaping (Bool) -> ()) {
@@ -248,8 +314,8 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
             setPickUpLocationInfo(searchModel: searchModel)
         } else if locationReturn == LocationReturn.returnCustomLocation {
             searchModel.returnLocation = place
-                        searchModel.isRetuCustomLocation = true
-                        setReturnLocationInfo(searchModel: searchModel)
+            searchModel.isRetuCustomLocation = true
+            setReturnLocationInfo(searchModel: searchModel)
             isPickUpLocation = false
         }
         didResult(isPickUpLocation)
@@ -280,6 +346,15 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         mReturnTimeTxtFl.textColor = color_choose_date
         returnTime = nil
     }
+    
+    func resetReturnDate() {
+        mReturnDateTxtFl.text = Constant.Texts.returnDate
+        mReturnDateTxtFl.font = font_placeholder
+        mReturnDateTxtFl.textColor = color_choose_date
+        mDayReturnDateBtn.setTitle("", for: .normal)
+        mMonthReturnDateBtn?.setTitle("", for: .normal)
+        returnDate = nil
+    }
 
     
     func showLocationList() {
@@ -300,9 +375,9 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     }
     
     private func didSelectLocationFromList () {
-        mLocationDropDownView.didSelectLocation = { [weak self] txt in
-            self?.delegate?.didSelectLocation(txt, (self?.currLocationBtn.tag)!)
-            self?.currLocationBtn.setTitle(txt, for: .normal)
+        mLocationDropDownView.didSelectLocation = { [weak self] parking in
+            self?.delegate?.didSelectLocation(parking, (self?.currLocationBtn.tag)!)
+            self?.currLocationBtn.setTitle(parking.name, for: .normal)
             self?.currLocationBtn.titleLabel!.font = font_selected_filter
             self?.currLocationBtn.setTitleColor(color_entered_date, for: .normal)
             self!.currLocationDropImgV.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
@@ -381,8 +456,7 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     }
     
    
-    //MARK: - Actions
-    //MARK: ------------------
+    //MARK: -- Actions
 
       @IBAction func search(_ sender: UIButton) {
         searchClicked()
@@ -439,6 +513,8 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
             mPickUpLocationBtn.setTitleColor(color_choose_date!, for: .normal)
             mPickUpLocationBtn.titleLabel?.font = font_placeholder
             locationPickUp = .none
+            delegate?.didDeselectCustomLocation(tag: sender.tag)
+
         } else {
            // sender.setImage(img_check_box, for: .normal)
             locationPickUp = .pickUpCustomLocation
@@ -457,8 +533,10 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
             mReturnLocationBtn.titleLabel?.font = font_placeholder
             sender.setImage(img_uncheck_box, for: .normal)
             locationReturn = .none
+            delegate?.didDeselectCustomLocation(tag: sender.tag)
         } else {
            // sender.setImage(img_check_box, for: .normal)
+            locationPickUp = .none
             locationReturn = .returnCustomLocation
             delegate?.didSelectCustomLocation(mCheckBoxReturnCustomLocBtn)
         }

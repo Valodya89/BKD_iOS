@@ -8,7 +8,7 @@
 import UIKit
 
 
-final class SignInViewController: UIViewController, StoryboardInitializable {
+final class SignInViewController: BaseViewController {
     
     //MARK: Outlets
     @IBOutlet weak var mEmailAddressTextFl: TextField!
@@ -26,7 +26,9 @@ final class SignInViewController: UIViewController, StoryboardInitializable {
     
     //MARK: Variables
     private var keychainManager = KeychainManager()
-    lazy var signInViewModel = SignInViewModel()
+    lazy var signInVM = SignInViewModel()
+    
+    var didSignIn:(()->Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,12 +39,15 @@ final class SignInViewController: UIViewController, StoryboardInitializable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
-        
+        MyBKDViewModel().logout()
         mPasswordTxtFl.text = ""
         mEmailAddressTextFl.text = ""
         mSignInLeading.constant = 0
         mSignInBckgV.isUserInteractionEnabled = false
         self.mSignInBckgV.alpha =  0.8
+        mErrorLb.isHidden = true
+        mPasswordTxtFl.layer.borderColor = color_navigationBar!.cgColor
+        mEmailAddressTextFl.layer.borderColor = color_navigationBar!.cgColor
     }
     
     override func viewDidLayoutSubviews() {
@@ -50,7 +55,16 @@ final class SignInViewController: UIViewController, StoryboardInitializable {
         mRegisterBtn.setGradientWithCornerRadius(cornerRadius: 8.0, startColor: color_gradient_register_start!, endColor: color_gradient_register_end!)
     }
     
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        mPasswordTxtFl.setBorder(color: color_navigationBar!, width: 1)
+        mEmailAddressTextFl.setBorder(color: color_navigationBar!, width: 1)
+        mSignInBtn.addBorder(color:color_navigationBar!, width: 1.0)
+    }
+    
     private func setUpView() {
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         mRightBarBtn.image = img_bkd
         mVisibilityPasswortBtn.setImage(#imageLiteral(resourceName: "invisible"), for: .normal)
         
@@ -65,14 +79,16 @@ final class SignInViewController: UIViewController, StoryboardInitializable {
                                       font: font_register_placeholder!,
                                       color: color_email!)
     }
-    
+   
+    ///Sign in
     private func signIn()  {
-        signInViewModel.signIn(username: mEmailAddressTextFl.text!, password: mPasswordTxtFl.text!) { [weak self] (status) in
+        signInVM.signIn(username: mEmailAddressTextFl.text!, password: mPasswordTxtFl.text!) { [weak self] (status) in
             guard let self = self else { return }
             switch status {
             case .success:
                 self.keychainManager.saveUsername(username: self.mEmailAddressTextFl.text!)
                 self.keychainManager.savePassword(passw: self.mPasswordTxtFl.text!)
+                
                 self.signInClicked()
             default:
                 self.incorrectPasswordOrUsername()
@@ -80,6 +96,7 @@ final class SignInViewController: UIViewController, StoryboardInitializable {
             }
         }
     }
+
     
     ///Incorrect username or password
     private func incorrectPasswordOrUsername() {
@@ -88,7 +105,9 @@ final class SignInViewController: UIViewController, StoryboardInitializable {
         mEmailAddressTextFl.layer.borderColor = color_error!.cgColor
         mErrorLb.text = Constant.Texts.errUserOrPass
     }
-        
+    
+    
+    ///If valid email addres will call signIn function else will shoa error message
     private func checkEmailAddress() {
         ChatViewModel().isValidEmail(email: mEmailAddressTextFl.text!) { [self] (isValid) in
             if isValid {
@@ -109,7 +128,8 @@ final class SignInViewController: UIViewController, StoryboardInitializable {
             self.mSignInBckgV.layoutIfNeeded()
         } completion: { _ in
             UserDefaults.standard.setValue(true, forKey: key_isLogin)
-            self.tabBarController?.selectedIndex = 0
+            self.didSignIn?()
+            self.navigationController?.popToViewController(ofClass: MyBKDViewController.self)
         }
     }
     
@@ -137,9 +157,7 @@ final class SignInViewController: UIViewController, StoryboardInitializable {
     
     @IBAction func forgotPassword(_ sender: UIButton) {
         dissmisKeyboar()
-        let emailAddressVC = EmailAddressViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
-        self.navigationController?.pushViewController(emailAddressVC, animated: true)
-        
+        self.goToEmailAddress()
     }
     
     @IBAction func signIn(_ sender: UIButton) {
@@ -171,8 +189,7 @@ final class SignInViewController: UIViewController, StoryboardInitializable {
 }
 
 
-//MARK: UITextFieldDelegate
-// -----------------------------
+//MARK: -- UITextFieldDelegate
 extension SignInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == mEmailAddressTextFl {
@@ -202,7 +219,7 @@ extension SignInViewController: UITextFieldDelegate {
             nextTxt = mEmailAddressTextFl.text
         }
         textField.text = fullString
-        signInViewModel.areFieldsFilled(firtStr: fullString,
+        signInVM.areFieldsFilled(firtStr: fullString,
                                         secondStr: nextTxt) { (isActive) in
             self.mSignInBckgV.alpha = isActive ? 1 : 0.8
             self.mSignInBckgV.isUserInteractionEnabled = isActive

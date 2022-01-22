@@ -34,12 +34,12 @@ class SearchWithValueView: UIStackView {
     func setupView() {
         self.setShadow(color: color_shadow!)
         if let _ = searchModel.pickUpDate{
-            mPickupDayBtn.setTitle(String((searchModel.pickUpDate!.get(.day))), for: .normal)
+            mPickupDayBtn.setTitle(searchModel.pickUpDate!.getDay(), for: .normal)
             mPickupDateBtn.setTitle(searchModel.pickUpDate!.getMonthAndWeek(lng: "en"), for: .normal)
         }
         
         if let _ = searchModel.returnDate{
-            mReturnDayBtn.setTitle(String(searchModel.returnDate!.get(.day)), for: .normal)
+            mReturnDayBtn.setTitle(searchModel.returnDate!.getDay(), for: .normal)
             mReturnDateBtn.setTitle(searchModel.returnDate!.getMonthAndWeek(lng: "en"), for: .normal)
         }
         

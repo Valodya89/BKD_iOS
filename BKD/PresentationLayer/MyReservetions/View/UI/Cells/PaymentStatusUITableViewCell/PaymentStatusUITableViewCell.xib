@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19158" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19141"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Light.ttf">
+            <string>SFProDisplay-Light</string>
+        </array>
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+        <array key="SFProDisplay-Semibold.ttf">
+            <string>SFProDisplay-Semibold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PaymentStatusUITableViewCell" rowHeight="90" id="KGk-i7-Jjw" customClass="PaymentStatusUITableViewCell" customModule="BKD" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="115"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="115"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="7dg-Zy-4mx">
+                        <rect key="frame" x="18.5" y="15" width="377" height="45"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gtA-gD-cWN">
+                                <rect key="frame" x="0.0" y="0.0" width="377" height="25"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnD-6I-Bc3">
+                                        <rect key="frame" x="2" y="-2.5" width="45" height="17"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                                        <color key="textColor" name="email"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay later" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lwe-wd-pGI">
+                                        <rect key="frame" x="59.5" y="-2.5" width="50" height="17"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                                        <color key="textColor" name="navigationBar"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Lwe-wd-pGI" firstAttribute="height" secondItem="bnD-6I-Bc3" secondAttribute="height" id="219-bP-QSV"/>
+                                    <constraint firstItem="Lwe-wd-pGI" firstAttribute="leading" secondItem="gtA-gD-cWN" secondAttribute="centerX" multiplier="0.315" id="8q8-1l-l5M"/>
+                                    <constraint firstAttribute="height" constant="25" id="C0T-vM-8LI"/>
+                                    <constraint firstItem="bnD-6I-Bc3" firstAttribute="centerY" secondItem="gtA-gD-cWN" secondAttribute="centerY" multiplier="0.5" id="P35-oO-kRU"/>
+                                    <constraint firstItem="bnD-6I-Bc3" firstAttribute="width" relation="greaterThanOrEqual" secondItem="gtA-gD-cWN" secondAttribute="width" multiplier="0.11911" id="Zqr-st-0P3"/>
+                                    <constraint firstItem="bnD-6I-Bc3" firstAttribute="leading" secondItem="gtA-gD-cWN" secondAttribute="centerX" multiplier="0.01" id="nHz-pK-4s1"/>
+                                    <constraint firstItem="bnD-6I-Bc3" firstAttribute="height" relation="greaterThanOrEqual" secondItem="gtA-gD-cWN" secondAttribute="height" multiplier="0.4" id="qtB-1l-2G1"/>
+                                    <constraint firstItem="Lwe-wd-pGI" firstAttribute="centerY" secondItem="bnD-6I-Bc3" secondAttribute="centerY" id="ynr-Eo-Ett"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HsS-mB-LAq">
+                                <rect key="frame" x="0.0" y="20" width="377" height="25"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="via Credit card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0eD-KI-ryi">
+                                        <rect key="frame" x="2" y="-1" width="72" height="14.5"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
+                                        <color key="textColor" name="chat_placeholder"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="0eD-KI-ryi" firstAttribute="centerY" secondItem="HsS-mB-LAq" secondAttribute="centerY" multiplier="0.5" id="2J2-rC-ASC"/>
+                                    <constraint firstItem="0eD-KI-ryi" firstAttribute="leading" secondItem="HsS-mB-LAq" secondAttribute="centerX" multiplier="0.01" id="afC-K1-YSn"/>
+                                    <constraint firstAttribute="height" constant="25" id="iLk-KG-jZj"/>
+                                    <constraint firstItem="0eD-KI-ryi" firstAttribute="height" relation="greaterThanOrEqual" secondItem="HsS-mB-LAq" secondAttribute="height" multiplier="0.4" id="tjd-hz-Fsm"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="45" id="Nzx-Ht-f6x"/>
+                            <constraint firstItem="gtA-gD-cWN" firstAttribute="width" secondItem="7dg-Zy-4mx" secondAttribute="width" id="Uwa-K8-GXw"/>
+                        </constraints>
+                    </stackView>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JS8-6w-FWu">
+                        <rect key="frame" x="16" y="57.5" width="382" height="58"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5yg-vz-e03">
+                                <rect key="frame" x="0.0" y="7.5" width="166" height="42"/>
+                                <color key="backgroundColor" name="see_map"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Make Payment">
+                                    <fontDescription key="titleFontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
+                                    <color key="baseForegroundColor" name="selected_filter_field"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="pay:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="de1-Ss-eAV"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EP8-NQ-US0">
+                                <rect key="frame" x="323" y="18.5" width="59" height="19.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tkt-MG-jPv">
+                                        <rect key="frame" x="7.5" y="0.0" width="11" height="19.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="11" id="0Gv-co-0h1"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
+                                        <color key="textColor" name="offert_red"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZ5-rN-HnF">
+                                        <rect key="frame" x="31.5" y="-1" width="27.5" height="21.5"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
+                                        <color key="textColor" name="offert_red"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="EZ5-rN-HnF" firstAttribute="height" relation="greaterThanOrEqual" secondItem="EP8-NQ-US0" secondAttribute="height" id="2lG-e0-GNT"/>
+                                    <constraint firstItem="tkt-MG-jPv" firstAttribute="height" secondItem="EP8-NQ-US0" secondAttribute="height" id="2yB-Et-xQk"/>
+                                    <constraint firstItem="tkt-MG-jPv" firstAttribute="leading" secondItem="EP8-NQ-US0" secondAttribute="leading" constant="7.5" id="5tR-4e-Tnx"/>
+                                    <constraint firstItem="tkt-MG-jPv" firstAttribute="centerY" secondItem="EP8-NQ-US0" secondAttribute="centerY" id="94Q-1D-YUU"/>
+                                    <constraint firstItem="EZ5-rN-HnF" firstAttribute="centerY" secondItem="EP8-NQ-US0" secondAttribute="centerY" id="HrY-3x-B4C"/>
+                                    <constraint firstItem="tkt-MG-jPv" firstAttribute="trailing" secondItem="EZ5-rN-HnF" secondAttribute="leading" multiplier="0.59" id="Wjq-3F-B15"/>
+                                    <constraint firstAttribute="trailing" secondItem="EZ5-rN-HnF" secondAttribute="trailing" id="nbF-ON-Ibr"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="5yg-vz-e03" firstAttribute="leading" secondItem="JS8-6w-FWu" secondAttribute="leading" id="2Yc-Um-dBQ"/>
+                            <constraint firstItem="5yg-vz-e03" firstAttribute="centerY" secondItem="JS8-6w-FWu" secondAttribute="centerY" multiplier="0.99" id="9Z3-rd-tUK"/>
+                            <constraint firstItem="EP8-NQ-US0" firstAttribute="height" secondItem="JS8-6w-FWu" secondAttribute="height" multiplier="0.336207" id="OEh-WR-Bwg"/>
+                            <constraint firstItem="5yg-vz-e03" firstAttribute="height" secondItem="JS8-6w-FWu" secondAttribute="height" multiplier="0.724138" id="ffR-iS-yAv"/>
+                            <constraint firstItem="EP8-NQ-US0" firstAttribute="centerY" secondItem="5yg-vz-e03" secondAttribute="centerY" id="ieJ-Sv-MQa"/>
+                            <constraint firstItem="5yg-vz-e03" firstAttribute="width" relation="greaterThanOrEqual" secondItem="JS8-6w-FWu" secondAttribute="width" multiplier="0.434555" id="lmm-pi-5Ra"/>
+                            <constraint firstAttribute="trailing" secondItem="EP8-NQ-US0" secondAttribute="trailing" id="sk4-mQ-evv"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" name="background"/>
+                <constraints>
+                    <constraint firstItem="JS8-6w-FWu" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.922705" id="FiK-ny-OZQ"/>
+                    <constraint firstItem="JS8-6w-FWu" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="G8I-Vs-ufB"/>
+                    <constraint firstItem="JS8-6w-FWu" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.504348" id="GtE-fN-fIY"/>
+                    <constraint firstItem="7dg-Zy-4mx" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.910628" id="e65-VS-wjd"/>
+                    <constraint firstItem="7dg-Zy-4mx" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="gvV-nz-Rgu"/>
+                    <constraint firstItem="JS8-6w-FWu" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" multiplier="1.5" id="pRs-vq-6LM"/>
+                    <constraint firstItem="7dg-Zy-4mx" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" multiplier="0.65" id="wTQ-St-s1a"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="mPayBtn" destination="5yg-vz-e03" id="pe0-MX-29p"/>
+                <outlet property="mPayContantV" destination="JS8-6w-FWu" id="MK2-uG-agm"/>
+                <outlet property="mPaymentTypeContentV" destination="HsS-mB-LAq" id="G4c-Bh-X69"/>
+                <outlet property="mPaymentTypeLb" destination="0eD-KI-ryi" id="iP8-pi-2qe"/>
+                <outlet property="mPriceLb" destination="EZ5-rN-HnF" id="fhR-fH-XYc"/>
+                <outlet property="mStatusLb" destination="bnD-6I-Bc3" id="csa-Y5-GR6"/>
+                <outlet property="mStatusNameLb" destination="Lwe-wd-pGI" id="Bbn-Qd-mtJ"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="98.772321428571431"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="chat_placeholder">
+            <color red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="email">
+            <color red="0.53725490196078429" green="0.59607843137254901" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="navigationBar">
+            <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="offert_red">
+            <color red="1" green="0.29411764705882354" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="see_map">
+            <color red="0.9137254901960784" green="0.78823529411764703" blue="0.41960784313725491" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="selected_filter_field">
+            <color red="0.10980392156862745" green="0.20000000000000001" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

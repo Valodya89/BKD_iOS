@@ -13,6 +13,14 @@ enum PaymentAPI: APIProtocol {
     case attachCard
     case payWithAttachedCard
     case deleteCard
+    case getPaymentTypes
+    case molliePayment(amount: String,
+                       paymentMethod: String,
+                       rentId: String,
+                       parts: [String])
+    case payPalPayment(amount: String,
+                       rentId: String,
+                       parts: [String])
     
     var base: String {
         return BKDBaseURLs.payment.rawValue
@@ -28,6 +36,12 @@ enum PaymentAPI: APIProtocol {
             return "api/cards/attached/deposit"
         case .deleteCard:
             return "api/cards/"
+        case .getPaymentTypes:
+            return "api/mollie/payment-type"
+        case .molliePayment:
+            return "api/mollie/payment"
+        case .payPalPayment:
+            return "api/paypal/payment"
         }
     }
     
@@ -36,7 +50,10 @@ enum PaymentAPI: APIProtocol {
         case .getWallet,
              .attachCard,
              .payWithAttachedCard,
-             .deleteCard:
+             .deleteCard,
+             .getPaymentTypes,
+             .molliePayment,
+             .payPalPayment:
             return ["Content-Type": "application/json"]
         }
     }
@@ -51,6 +68,12 @@ enum PaymentAPI: APIProtocol {
             return [:]
         case .deleteCard:
             return [:]
+        case .getPaymentTypes:
+            return [:]
+        case .molliePayment:
+            return [:]
+        case .payPalPayment:
+            return [:]
         }
     }
     
@@ -64,6 +87,22 @@ enum PaymentAPI: APIProtocol {
             return nil
         case .deleteCard:
             return nil
+        case .getPaymentTypes:
+            return nil
+        case let .molliePayment(amount, paymentMethod, rentId, parts):
+            return [
+                "amount" : amount,
+                "paymentMethod" : paymentMethod,
+                "rentId" : rentId,
+                "parts" : parts
+            ]
+        case let .payPalPayment(amount, rentId, parts):
+            return [
+                "amount" : amount,
+                "rentId" : rentId,
+                "parts" : parts
+            ]
+            
         }
     }
     
@@ -77,14 +116,23 @@ enum PaymentAPI: APIProtocol {
             return nil
         case .deleteCard:
             return nil
+        case .getPaymentTypes:
+            return nil
+        case .molliePayment:
+            return nil
+        case .payPalPayment:
+            return nil
         }
     }
     
     var method: RequestMethod {
         switch self {
-        case .getWallet:
+        case .getWallet,
+             .getPaymentTypes:
             return .get
-        case .attachCard:
+        case .attachCard,
+             .molliePayment,
+             .payPalPayment:
             return .post
         case .payWithAttachedCard:
             return .post

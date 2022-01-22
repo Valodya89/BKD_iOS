@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PersonalInfoTableCell" rowHeight="63" id="KGk-i7-Jjw" customClass="PersonalInfoTableCell" customModule="BKD" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="63"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="63"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Qm-AL-re1">
+                        <rect key="frame" x="16" y="5" width="382" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Jnb-i8-WaJ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                        <color key="textColor" name="email"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="odfpo" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cgA-4L-7kr" customClass="TextField" customModule="BKD" customModuleProvider="target">
+                        <rect key="frame" x="14" y="26" width="386" height="32"/>
+                        <color key="tintColor" name="navigationBar"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="32" id="2vD-X5-h9J"/>
+                        </constraints>
+                        <color key="textColor" name="navigationBar"/>
+                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
+                        <textInputTraits key="textInputTraits"/>
+                        <connections>
+                            <outlet property="delegate" destination="KGk-i7-Jjw" id="J9U-FV-CMR"/>
+                        </connections>
+                    </textField>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7q-2d-9Ff">
+                        <rect key="frame" x="14" y="57" width="386" height="1"/>
+                        <color key="backgroundColor" name="driving_license"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="JNC-mI-SIV"/>
+                        </constraints>
+                    </view>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gSs-SI-jer">
+                        <rect key="frame" x="375" y="18" width="40" height="40"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="delete" title=" "/>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" name="background"/>
+                <constraints>
+                    <constraint firstItem="cgA-4L-7kr" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.932" id="33P-FE-iIb"/>
+                    <constraint firstItem="3Qm-AL-re1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="3Ng-KQ-yYP"/>
+                    <constraint firstItem="l7q-2d-9Ff" firstAttribute="leading" secondItem="cgA-4L-7kr" secondAttribute="leading" id="9SI-sC-B5A"/>
+                    <constraint firstItem="gSs-SI-jer" firstAttribute="width" secondItem="cgA-4L-7kr" secondAttribute="width" multiplier="0.103627" id="B4U-Gd-LaN"/>
+                    <constraint firstItem="gSs-SI-jer" firstAttribute="trailing" secondItem="cgA-4L-7kr" secondAttribute="trailing" constant="15" id="CvK-JA-Iv6"/>
+                    <constraint firstItem="l7q-2d-9Ff" firstAttribute="bottom" secondItem="cgA-4L-7kr" secondAttribute="bottom" id="FLc-2N-AaM"/>
+                    <constraint firstItem="cgA-4L-7kr" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Rb8-ox-nxz"/>
+                    <constraint firstAttribute="bottom" secondItem="cgA-4L-7kr" secondAttribute="bottom" constant="5" id="ZBx-bF-SYv"/>
+                    <constraint firstItem="gSs-SI-jer" firstAttribute="bottom" secondItem="cgA-4L-7kr" secondAttribute="bottom" id="ZDX-A6-GQ5"/>
+                    <constraint firstItem="3Qm-AL-re1" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.923" id="bbJ-My-pdj"/>
+                    <constraint firstItem="cgA-4L-7kr" firstAttribute="top" secondItem="3Qm-AL-re1" secondAttribute="bottom" id="g9T-x1-ejg"/>
+                    <constraint firstItem="gSs-SI-jer" firstAttribute="height" secondItem="cgA-4L-7kr" secondAttribute="height" multiplier="1.25" id="kK9-Zj-d3Y"/>
+                    <constraint firstItem="l7q-2d-9Ff" firstAttribute="trailing" secondItem="cgA-4L-7kr" secondAttribute="trailing" id="lcZ-fJ-jBv"/>
+                    <constraint firstItem="3Qm-AL-re1" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="zTA-7T-bn8"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" name="background"/>
+            <connections>
+                <outlet property="mDeleteBtn" destination="gSs-SI-jer" id="NVQ-f1-OiZ"/>
+                <outlet property="mEditLineV" destination="l7q-2d-9Ff" id="Amb-Sr-PQE"/>
+                <outlet property="mFieldNameLb" destination="3Qm-AL-re1" id="dKn-XC-guI"/>
+                <outlet property="mTxtFl" destination="cgA-4L-7kr" id="3YL-Bk-WpG"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="77"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="delete" width="10" height="10"/>
+        <namedColor name="background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="driving_license">
+            <color red="0.7686274509803922" green="0.7686274509803922" blue="0.7686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="email">
+            <color red="0.53725490196078429" green="0.59607843137254901" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="navigationBar">
+            <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

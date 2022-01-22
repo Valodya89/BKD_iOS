@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Light.ttf">
+            <string>SFProDisplay-Light</string>
+        </array>
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--My account-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="MyAccountViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="MyAccountViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="user@mail.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gF7-Qv-H3Z" customClass="TextField" customModule="BKD" customModuleProvider="target">
+                                <rect key="frame" x="16" y="40.5" width="316.5" height="54.5"/>
+                                <color key="textColor" name="navigation_bar"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NMi-2z-403">
+                                <rect key="frame" x="347.5" y="42.5" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="2DP-tI-b2d"/>
+                                    <constraint firstAttribute="height" constant="50" id="Ek2-J5-30N"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="edit_transparent" title=" "/>
+                                <connections>
+                                    <action selector="edit:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="hBa-qk-9OJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zzv-NJ-BMs">
+                                <rect key="frame" x="16" y="117.5" width="142" height="37"/>
+                                <color key="backgroundColor" name="menu"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Change password">
+                                    <fontDescription key="titleFontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="14"/>
+                                    <color key="baseForegroundColor" name="navigationBar"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="changePassword:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="MiJ-W6-z5Q"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" name="background"/>
+                        <constraints>
+                            <constraint firstItem="gF7-Qv-H3Z" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="0i1-Og-C5f"/>
+                            <constraint firstItem="gF7-Qv-H3Z" firstAttribute="trailing" secondItem="NMi-2z-403" secondAttribute="leading" constant="-15" id="FqN-iw-hHB"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="NMi-2z-403" secondAttribute="trailing" multiplier="1.042" id="QRt-Jq-A33"/>
+                            <constraint firstItem="Zzv-NJ-BMs" firstAttribute="leading" secondItem="gF7-Qv-H3Z" secondAttribute="leading" id="YJl-pD-5mV"/>
+                            <constraint firstItem="Zzv-NJ-BMs" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.0457921" id="az4-dt-I2R"/>
+                            <constraint firstItem="gF7-Qv-H3Z" firstAttribute="centerY" secondItem="NMi-2z-403" secondAttribute="centerY" id="gQT-yw-gNq"/>
+                            <constraint firstItem="Zzv-NJ-BMs" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" multiplier="0.352" id="lcR-pe-QjJ"/>
+                            <constraint firstItem="gF7-Qv-H3Z" firstAttribute="height" secondItem="NMi-2z-403" secondAttribute="height" multiplier="1.09677" id="s0Q-yw-cub"/>
+                            <constraint firstItem="Zzv-NJ-BMs" firstAttribute="width" relation="greaterThanOrEqual" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.342995" id="vhC-W9-oTX"/>
+                            <constraint firstItem="NMi-2z-403" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" multiplier="0.175" id="zrY-46-TlO"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="My account" id="Xu5-Bm-tfk">
+                        <barButtonItem key="leftBarButtonItem" image="back" id="fir-9T-hgV">
+                            <connections>
+                                <action selector="back:" destination="Y6W-OH-hqX" id="az1-ue-Ycc"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="bkd" id="Zgd-Hm-knR"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mChangePasswordBtn" destination="Zzv-NJ-BMs" id="bnM-rx-mle"/>
+                        <outlet property="mEditBtn" destination="NMi-2z-403" id="88v-3D-tKW"/>
+                        <outlet property="mEmailTextFl" destination="gF7-Qv-H3Z" id="uTK-yQ-oU8"/>
+                        <outlet property="mRightBarBtn" destination="Zgd-Hm-knR" id="Ev1-xO-Efn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="910.14492753623199" y="61.607142857142854"/>
+        </scene>
+        <!--Edit View Controller-->
+        <scene sceneID="b0X-hK-Gkr">
+            <objects>
+                <viewController storyboardIdentifier="EditViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="B8r-2a-Tc0" customClass="EditViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5DS-lo-C8X">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="AAx-xb-UgW">
+                                <rect key="frame" x="16" y="25.5" width="382" height="108.5"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hTG-hN-TbW" customClass="TextField" customModule="BKD" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="42"/>
+                                        <color key="textColor" name="navigationBar"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="B8r-2a-Tc0" id="Q4t-PP-ch2"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZAN-7e-UQY" customClass="TextField" customModule="BKD" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="66" width="382" height="42.5"/>
+                                        <color key="textColor" name="navigationBar"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="B8r-2a-Tc0" id="BAM-Tz-HjZ"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="ZAN-7e-UQY" firstAttribute="height" secondItem="hTG-hN-TbW" secondAttribute="height" id="adZ-B8-hGa"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="7DA-EQ-icN">
+                                <rect key="frame" x="32" y="271.5" width="350" height="42"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YpG-PY-9xd">
+                                        <rect key="frame" x="0.0" y="0.0" width="166" height="42"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Cancel">
+                                            <fontDescription key="titleFontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
+                                            <color key="baseForegroundColor" name="navigationBar"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="cancel:" destination="B8r-2a-Tc0" eventType="touchUpInside" id="hw5-7D-MDc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HMG-Fr-VRz">
+                                        <rect key="frame" x="184" y="0.0" width="166" height="42"/>
+                                        <color key="backgroundColor" name="menu"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Confirm">
+                                            <fontDescription key="titleFontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
+                                            <color key="baseForegroundColor" name="navigationBar"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="confirm:" destination="B8r-2a-Tc0" eventType="touchUpInside" id="eyn-iU-9sc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="HMG-Fr-VRz" firstAttribute="height" secondItem="YpG-PY-9xd" secondAttribute="height" id="9Of-ka-YpA"/>
+                                    <constraint firstItem="YpG-PY-9xd" firstAttribute="height" secondItem="7DA-EQ-icN" secondAttribute="height" id="jc0-2x-7fz"/>
+                                </constraints>
+                            </stackView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please, check your Email. We’ve sent a verification link for your BKD account." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6kx-rf-QeP">
+                                <rect key="frame" x="16" y="27" width="382" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="HTg-Tz-2sb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
+                                <color key="textColor" name="navigationBar"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="SFH-rE-d86"/>
+                        <color key="backgroundColor" name="background"/>
+                        <constraints>
+                            <constraint firstItem="6kx-rf-QeP" firstAttribute="width" secondItem="5DS-lo-C8X" secondAttribute="width" multiplier="0.923" id="1x3-UA-bbu"/>
+                            <constraint firstItem="7DA-EQ-icN" firstAttribute="centerX" secondItem="SFH-rE-d86" secondAttribute="centerX" id="CQu-7P-3Nb"/>
+                            <constraint firstItem="7DA-EQ-icN" firstAttribute="width" secondItem="5DS-lo-C8X" secondAttribute="width" multiplier="0.845" id="ICC-hd-ZZl"/>
+                            <constraint firstItem="AAx-xb-UgW" firstAttribute="height" secondItem="5DS-lo-C8X" secondAttribute="height" multiplier="0.134" id="Okr-kS-IlY"/>
+                            <constraint firstItem="6kx-rf-QeP" firstAttribute="centerY" secondItem="SFH-rE-d86" secondAttribute="centerY" multiplier="0.125" id="Tcs-W6-XBr"/>
+                            <constraint firstItem="7DA-EQ-icN" firstAttribute="height" secondItem="5DS-lo-C8X" secondAttribute="height" multiplier="0.052" id="U8T-J9-oKF"/>
+                            <constraint firstItem="AAx-xb-UgW" firstAttribute="top" secondItem="SFH-rE-d86" secondAttribute="top" constant="25.5" id="WNx-gC-PgO"/>
+                            <constraint firstItem="AAx-xb-UgW" firstAttribute="width" secondItem="5DS-lo-C8X" secondAttribute="width" multiplier="0.923" id="Zvv-Zw-vJG"/>
+                            <constraint firstItem="7DA-EQ-icN" firstAttribute="centerY" secondItem="SFH-rE-d86" secondAttribute="centerY" multiplier="0.756" id="eJD-mN-NRC"/>
+                            <constraint firstItem="6kx-rf-QeP" firstAttribute="centerX" secondItem="SFH-rE-d86" secondAttribute="centerX" id="p4e-LQ-l2Q"/>
+                            <constraint firstItem="AAx-xb-UgW" firstAttribute="centerX" secondItem="SFH-rE-d86" secondAttribute="centerX" id="szg-fY-u07"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="1ZE-kd-B9G">
+                        <barButtonItem key="leftBarButtonItem" image="back" id="5dZ-nW-vbU">
+                            <connections>
+                                <action selector="back:" destination="B8r-2a-Tc0" id="Xgu-K1-zyf"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="bkd" id="VOR-Gr-AmI"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mButtonsStackV" destination="7DA-EQ-icN" id="6Oe-kv-14s"/>
+                        <outlet property="mCancelBtn" destination="YpG-PY-9xd" id="A8W-EE-LIj"/>
+                        <outlet property="mChangePassTxtFl" destination="ZAN-7e-UQY" id="WuX-Fg-FQJ"/>
+                        <outlet property="mCheckEmailLb" destination="6kx-rf-QeP" id="0Tu-cn-oB5"/>
+                        <outlet property="mConfirmBtn" destination="HMG-Fr-VRz" id="gUB-qH-qvo"/>
+                        <outlet property="mNewEmailTxtFl" destination="hTG-hN-TbW" id="OmP-Er-A0j"/>
+                        <outlet property="mRightBarBtn" destination="VOR-Gr-AmI" id="VqU-CN-uxO"/>
+                        <outlet property="mTextFiledStackV" destination="AAx-xb-UgW" id="GGp-uP-HFf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kNH-h4-VLg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="910" y="798"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VUB-mG-atm">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KCj-NJ-zZi" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="dlH-3s-5zz">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" name="navigation_bar"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="Xyi-FQ-OQW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9K7-zq-Bt6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="0.0" y="61.607142857142854"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="uPV-Pp-3BQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pFh-sU-xMB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="wLf-9B-wTr">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" name="navigation_bar"/>
+                        <color key="barTintColor" name="navigation_bar"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="B8r-2a-Tc0" kind="relationship" relationship="rootViewController" id="7uh-YS-haw"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WUc-ag-Zo4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="0.0" y="798"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="back" width="12" height="21"/>
+        <image name="bkd" width="76" height="23.5"/>
+        <image name="edit_transparent" width="20" height="20"/>
+        <namedColor name="background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="menu">
+            <color red="0.91399997472763062" green="0.78799998760223389" blue="0.41999998688697815" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="navigationBar">
+            <color red="0.10999999195337296" green="0.20000001788139343" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="navigation_bar">
+            <color red="0.10999999940395355" green="0.20000000298023224" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

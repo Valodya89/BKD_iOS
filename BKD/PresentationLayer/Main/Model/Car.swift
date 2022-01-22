@@ -6,8 +6,7 @@
 //
 
 import UIKit
-//result.first?.reservations?.innerArray.first?.value.start
-//result.first?.reservations?.innerArray.first?.value.end
+
 struct CarsModel: Codable {
     
     
@@ -17,16 +16,28 @@ struct CarsModel: Codable {
     let model: String
     let volume: Double
     let loadCapacity: Double
-    
+    let type: String
     let driverLicenseType: String
-    let price: Double
-    let hasSpecialPrice: Bool
-    let specialPrice: Double?
+    
+    
+    //Prices
+    let priceForFlexible: Double
+    let priceHour: Double?
+    let priceDay: Double?
+    let priceWeek: Double?
+    let priceMonth: Double?
+    let hasDiscount: Bool
+    let discountPercents: Double
+    let freeKiloMeters: Double
+    
+    let depositPrice: Double
+    let priceForKm: Double
+
     
     //Detail
     let seats: Double
-    let fuel: String? //from base come null
-    let transmission: String? ////from base come null
+    let fuel: String?
+    let transmission: String?
     let motor: Double
     let euroNorm: Double
     let withBetweenWheels: Double
@@ -48,7 +59,7 @@ struct CarsModel: Codable {
     let images: [CarImageResponse]?
     let logo: Logo?
     let reservations: Reservation?
-    
+    let supportedAccessories: [String]?
 }
 
 struct CarImageResponse: Codable {
@@ -83,6 +94,14 @@ struct CarExterior: Codable {
     }
 }
 
+
+//struct Price: Codable {
+//
+//    let price: Double
+//    let hasSpecialPrice: Bool
+//    let specialPrice: Double
+//
+//}
 
 struct Reservation: Codable {
         public var innerArray: [String: Inner]

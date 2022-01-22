@@ -36,7 +36,6 @@ class CustomLocationViewModel: NSObject {
                     print("error")
                     return
                 }
-                print(restrictedZones.content)
 
                 completion(restrictedZones.content)
             case .failure(let error):

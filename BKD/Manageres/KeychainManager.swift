@@ -21,6 +21,9 @@ final class KeychainManager {
     let expiresInKey = "RefreshToken"
     let userName = "UserName"
     let password = "Password"
+    let phoneCodeId = "PhoneCodeId"
+    let phoneNumber = "PhoneNumber"
+    let userFullName = "UserFullName"
 
     
     // MARK: - Functions
@@ -38,6 +41,15 @@ final class KeychainManager {
     func savePassword(passw: String) {
         do {
             try keychain.set(passw, key: password)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    /// Save full name of user in keychain
+    func saveUserFullName(fullName: String) {
+        do {
+            try keychain.set(fullName, key: userFullName)
         } catch let error {
             print(error)
         }
@@ -66,6 +78,24 @@ final class KeychainManager {
         do {
             let willExpireIn = Date().timeIntervalSince1970 + (expiresIn * 1000)
             try keychain.set(String(format: "%.0f", willExpireIn), key: expiresInKey)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    /// Save phone code in keychain
+    func savePhoneCodeId(id: String) {
+        do {
+            try keychain.set(id, key: phoneCodeId)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    /// Save phone number in keychain
+    func savePhoneNumber(number: String) {
+        do {
+            try keychain.set(number, key: phoneNumber)
         } catch let error {
             print(error)
         }
@@ -106,6 +136,24 @@ final class KeychainManager {
     func getPasswor() -> String? {
         let passw = try? keychain.getString(password)
         return passw
+    }
+    
+    /// Get full name of user from keychain
+    func getUserFullName() -> String? {
+        let fullName = try? keychain.getString(userFullName)
+        return fullName
+    }
+    
+    /// Get phone code id from keychain
+    func getPhoneCodeId() -> String? {
+        let phoneId = try? keychain.getString(phoneCodeId)
+        return phoneId
+    }
+    
+    /// Get phone number from keychain
+    func getPhoneNumber() -> String? {
+        let number = try? keychain.getString(phoneNumber)
+        return number
     }
     
     /// Delete token from keychain

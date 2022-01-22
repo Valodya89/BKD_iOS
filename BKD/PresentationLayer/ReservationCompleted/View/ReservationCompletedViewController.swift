@@ -14,7 +14,7 @@ enum PaymentOption {
 
 import UIKit
 
-class ReservationCompletedViewController: UIViewController, StoryboardInitializable {
+class ReservationCompletedViewController: BaseViewController {
     
     //MARK: - Outlets
 
@@ -38,7 +38,9 @@ class ReservationCompletedViewController: UIViewController, StoryboardInitializa
     @IBOutlet weak var mVisualEffectV: UIVisualEffectView!
     
     //MARK: - Variables
-    var paymentOption:PaymentOption = .none
+    lazy var reservationCompletedViewModel =  ReservationCompletedViewModel()
+    var paymentOption: PaymentOption = .none
+    public var vehicleModel: VehicleModel?
     
     
     //MARK: - Life cycle
@@ -56,10 +58,11 @@ class ReservationCompletedViewController: UIViewController, StoryboardInitializa
         super.viewWillAppear(animated)
         mConfirmLeading.constant = 0.0
         mVisualEffectV.isHidden = true
+        resetChecks()
     }
     
     func setUpView()  {
-        mRightBarBtn.image = img_bkd
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         configUI()
     }
     
@@ -73,7 +76,23 @@ class ReservationCompletedViewController: UIViewController, StoryboardInitializa
         mPreReservetionTitleLb.textAlignment = .center
         mConfirmBtn.layer.cornerRadius = 8
         mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
-        
+        mDepositPriceLb.text = Constant.Texts.euro + " " + String(vehicleModel?.depositPrice ?? 0.0)
+        mDepositRentalPriceLb.text = Constant.Texts.euro + " " + String(vehicleModel?.depositPrice ?? 0.0) + " + " + String(format: "%.2f",PriceManager.shared.totalPrice ?? 0.0)
+        vehicleModel?.totalPrice = PriceManager.shared.totalPrice ?? 0.0
+    }
+    
+    
+    ///Pay later
+    private func payLater() {
+        reservationCompletedViewModel.payLater { [weak self] (status, result) in
+            if status == .countLimited {
+                self?.goToFreeReservationOverScreen()
+            } else if result != nil {
+                self?.showAlertOfPayLater(message: self?.reservationCompletedViewModel.getFreeReservationMessage(payLaterCount: result?.payLaterCount ?? 0))
+            }
+       // print (result)
+
+        }
     }
     
     //Animate confirm
@@ -82,10 +101,17 @@ class ReservationCompletedViewController: UIViewController, StoryboardInitializa
             self.mConfirmLeading.constant = self.mConfirmContentV.bounds.width - self.mConfirmBtn.frame.size.width
             self.mConfirmContentV.layoutIfNeeded()
         } completion: { _ in
-            self.goToSelectPayment()
+            self.goToSelectPayment(vehicleModel: self.vehicleModel ?? VehicleModel(),
+                                   paymentOption: self.paymentOption)
         }
     }
     
+    //Open freeReservationOver  screen
+     func goToFreeReservationOverScreen() {
+        let freeReservationCompletedVC = FreeReservationOverViewController.initFromStoryboard(name: Constant.Storyboards.reservationCompleted)
+         freeReservationCompletedVC.vehicleModel = vehicleModel
+        self.navigationController?.pushViewController(freeReservationCompletedVC, animated: true)
+    }
     
     //Uncheck all buttons
     private func resetChecks() {
@@ -101,22 +127,18 @@ class ReservationCompletedViewController: UIViewController, StoryboardInitializa
         mConfirmContentV.alpha = enable ? 1 : 0.8
     }
     
-    private func showAlertOfPayLater() {
+    private func showAlertOfPayLater(message: String?) {
         self.mVisualEffectV.isHidden = false
         let bkdAlert = BKDAlert()
         bkdAlert.backgroundView.isHidden = true
-        bkdAlert.showAlert(on: self, title: nil, message: Constant.Texts.payAlert, messageSecond: nil, cancelTitle: Constant.Texts.gotIt, okTitle: Constant.Texts.payNow) {
+        bkdAlert.showAlert(on: self, title: nil, message: message, messageSecond: nil, cancelTitle: Constant.Texts.gotIt, okTitle: Constant.Texts.payNow) {
             self.mVisualEffectV.isHidden = true
         } okAction: {
-            self.goToSelectPayment()
+            self.goToSelectPayment(vehicleModel: self.vehicleModel ?? VehicleModel(),
+                                   paymentOption: self.paymentOption)
         }
     }
     
-    //Open SelectPayment screen
-     func goToSelectPayment() {
-        let selectPaymentVC = SelectPaymentViewController.initFromStoryboard(name: Constant.Storyboards.payment)
-        self.navigationController?.pushViewController(selectPaymentVC, animated: true)
-    }
     
    //MARK: - Actions
     //MARK: ---------------
@@ -168,7 +190,7 @@ class ReservationCompletedViewController: UIViewController, StoryboardInitializa
             isEnableConfirm(enable: true)
             sender.setImage(#imageLiteral(resourceName: "check"), for: .normal)
             paymentOption = .payLater
-            showAlertOfPayLater()
+            payLater()
         }
         
     }

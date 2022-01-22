@@ -6,11 +6,18 @@
 //
 
 import UIKit
+
 protocol AccessoriesCollectionViewCellDelegate: AnyObject {
     func increaseOrDecreaseAccessory(accessoryPrice:Double,
                      isIncrease: Bool)
-    func didPressAdd(isAdd: Bool, cellIndex: Int)
-    func didChangeCount(cellIndex: Int, count: Int)
+    func didPressAdd(isAdd: Bool,
+                     cellIndex: Int,
+                     id: String?,
+                     name: String?,
+                     image: UIImage?)
+    func didChangeCount(isAdd: Bool,
+                        cellIndex: Int,
+                        count: Int)
 }
 class AccessoriesCollectionViewCell: UICollectionViewCell {
     static let identifier = "AccessoriesCollectionViewCell"
@@ -28,8 +35,11 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mPriceLb: UILabel!
     @IBOutlet weak var mAddImgV: UIImageView!
     
-    let accessoriesViewModel = AccessoriesViewModel()
+    //MARK: -- Variables
     weak var delegate: AccessoriesCollectionViewCellDelegate?
+    //let accessoriesViewModel = AccessoriesViewModel()
+    var accessoryId: String?
+    var maxCount: Double?
     
     
     override func awakeFromNib() {
@@ -43,25 +53,29 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
       //  mAccessoriesBackgImgV.setShadow(color: color_shadow!)
     }
     
-    func setCellInfo(item: AccessoriesModel, index: Int) {
-        mAccessorieImgV.image = item.accessoryImg
-        mTitleLb.text = item.accessoryName
-        mPriceLb.text = String(item.accessoryPrice!)
-        mAccessorieCountLb.text = String(item.accessoryCount!)
+    func setCellInfo(editItem: AccessoriesEditModel, index: Int) {
+        accessoryId = editItem.id
+        maxCount = editItem.maxCount
         mAddBtn.tag = index
         mIncreaseBtn.tag = index
         mDecreaseBtn.tag = index
-        if item.isAdded {
-            mAddImgV.image = img_add_selecte
-            mAddBtn.setTitleColor(color_menu, for: .normal)
-        } else {
-            mAddImgV.image = img_add_unselece
-            mAddBtn.setTitleColor(color_alert_txt!, for: .normal)
-        }
         mAddBtn.addTarget(self, action: #selector(add), for: .touchUpInside)
         mIncreaseBtn.addTarget(self, action: #selector(increase(sender:)), for: .touchUpInside)
         mDecreaseBtn.addTarget(self, action: #selector(decrease(sender:)), for: .touchUpInside)
         
+        self.mAccessorieImgV.sd_setImage(with:  editItem.imageUrl ?? URL(string: ""), placeholderImage: nil)
+        mTitleLb.text = editItem.name
+        mPriceLb.text = String(editItem.price ?? 0.0)
+        mAccessorieCountLb.text = String(1)
+
+        if editItem.isAdded {
+            mAddImgV.image = img_add_selecte
+            mAddBtn.setTitleColor(color_menu, for: .normal)
+            mAccessorieCountLb.text = String(editItem.count ?? 1)
+        } else {
+            mAddImgV.image = img_add_unselece
+            mAddBtn.setTitleColor(color_alert_txt!, for: .normal)
+        }
     }
     
     
@@ -74,48 +88,62 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
             mAddImgV.image = img_add_selecte
             sender.setTitleColor(color_menu, for: .normal)
             
+            
         } else {// unselect
             isIncrease = false
             mAddImgV.image = img_add_unselece
             sender.setTitleColor(color_alert_txt!, for: .normal)
-
+            
         }
-        
         increaseOrDecreaseAccessory(accessoryPrice:Double(count!) * price!,
-                    accessoryCount: count!,
-                    isIncrease: isIncrease)
-        delegate?.didPressAdd(isAdd: isIncrease, cellIndex: sender.tag)
+                                    accessoryCount: count!,
+                                    isIncrease: isIncrease)
+        delegate?.didPressAdd(isAdd: isIncrease,
+                              cellIndex: sender.tag,
+                              id: accessoryId,
+                              name: mTitleLb.text,
+                              image: mAccessorieImgV.image)
     }
     
     
     @objc func increase(sender: UIButton) {
-       
-        sender.setButtonClickImage(image: #imageLiteral(resourceName: "selected_plus"))
-        let count = Int(mAccessorieCountLb.text ?? "0" )
-        let price = Double(mPriceLb.text ?? "0" )
-    
-        mAccessorieCountLb.text = String(count! + 1)
-        if mAddBtn.titleColor(for: .normal) == color_menu!  {
-            increaseOrDecreaseAccessory(accessoryPrice:price!,
-                        accessoryCount:count! + 1,
-                        isIncrease: true)
+        let count = Int(mAccessorieCountLb.text ?? "0")
 
+        if Double(count!) < maxCount ?? 0 {
+            sender.setButtonClickImage(image: #imageLiteral(resourceName: "selected_plus"))
+            let count = Int(mAccessorieCountLb.text ?? "0" )
+            let price = Double(mPriceLb.text ?? "0" )
+            
+            mAccessorieCountLb.text = String(count! + 1)
+            let isAdd = mAddBtn.titleColor(for: .normal) == color_menu!
+            if isAdd  {
+                increaseOrDecreaseAccessory(accessoryPrice:price!,
+                                            accessoryCount:count! + 1,
+                                            isIncrease: true)
+                
+            }
+            delegate?.didChangeCount(isAdd: isAdd,
+                                     cellIndex: sender.tag,
+                                     count: count! + 1)
         }
-        delegate?.didChangeCount(cellIndex: sender.tag, count: count! + 1)
     }
+    
+    
     @objc func decrease(sender: UIButton) {
         let count = Int(mAccessorieCountLb.text ?? "0" )
         let price = Double(mPriceLb.text ?? "0" )
         
         if count! > 1  {
             mAccessorieCountLb.text = String(count! - 1)
-            if mAddBtn.titleColor(for: .normal) == color_menu! {
+            let isAdd = mAddBtn.titleColor(for: .normal) == color_menu!
+            if isAdd  {
                 increaseOrDecreaseAccessory(accessoryPrice:price!,
                             accessoryCount:count! - 1,
                             isIncrease: false)
-                
             }
-            delegate?.didChangeCount(cellIndex: sender.tag, count: count! - 1)
+            delegate?.didChangeCount(isAdd: isAdd,
+                                     cellIndex: sender.tag,
+                                     count: count! - 1)
         }
        
     }

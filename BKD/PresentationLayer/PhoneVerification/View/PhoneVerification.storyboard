@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,11 +25,11 @@
             <objects>
                 <viewController storyboardIdentifier="PhoneVerificationViewController" id="6Dt-jj-DFZ" customClass="PhoneVerificationViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="D9y-8T-jdg">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6kQ-tC-ulE">
-                                <rect key="frame" x="16" y="10" width="382" height="75"/>
+                                <rect key="frame" x="16" y="10" width="382" height="57.5"/>
                                 <string key="text">First step to make the reservation is to verify your phone number. We will send a verification code to XXXXXXXXXX number, indicated during the Reservation.</string>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
                                 <color key="textColor" name="navigationBar"/>
@@ -73,7 +73,7 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1re-Z0-t2e">
-                                <rect key="frame" x="16" y="117" width="382" height="57.5"/>
+                                <rect key="frame" x="16" y="93" width="382" height="57.5"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ChT-3h-E0J" customClass="OneTimeCodeTextField" customModule="BKD" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="57.5"/>
@@ -94,16 +94,16 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VS7-E2-5iw">
-                                <rect key="frame" x="84.5" y="227" width="245.5" height="22"/>
+                                <rect key="frame" x="94.5" y="195.5" width="225.5" height="22"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" You will receive the SMS in" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcZ-2V-k31">
-                                        <rect key="frame" x="0.0" y="0.0" width="197" height="21"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="175" height="21"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
                                         <color key="textColor" name="email"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0: 59" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZU-EA-3rd">
-                                        <rect key="frame" x="205" y="0.0" width="40.5" height="21"/>
+                                        <rect key="frame" x="183" y="0.0" width="42.5" height="21"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                         <color key="textColor" name="navigationBar"/>
                                         <nil key="highlightedColor"/>
@@ -173,6 +173,7 @@
                         <outlet property="mButtonsStackV" destination="1NJ-go-QEl" id="xnK-Kf-vsL"/>
                         <outlet property="mCodeTxtFl" destination="ChT-3h-E0J" id="hXP-YO-drW"/>
                         <outlet property="mErrorLb" destination="eo2-0f-MjY" id="ht6-21-bLz"/>
+                        <outlet property="mInfoLb" destination="6kQ-tC-ulE" id="ju4-RG-Ic1"/>
                         <outlet property="mLeftBarBtn" destination="A2r-eR-lKX" id="moh-gS-lMp"/>
                         <outlet property="mResendCodeBtn" destination="4P3-4A-PcI" id="aFn-7u-1Zz"/>
                         <outlet property="mRightBarBtn" destination="d2p-hZ-a4H" id="Ao7-sG-iQb"/>
@@ -214,7 +215,7 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="email">
-            <color red="0.53700000047683716" green="0.59600001573562622" blue="0.66699999570846558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.53725490196078429" green="0.59607843137254901" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="menu">
             <color red="0.91399997472763062" green="0.78799998760223389" blue="0.41999998688697815" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

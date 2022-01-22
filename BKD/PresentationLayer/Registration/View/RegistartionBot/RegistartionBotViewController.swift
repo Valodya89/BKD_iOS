@@ -6,27 +6,18 @@
 //
 
 import UIKit
+import GooglePlaces
 
 enum PickerType {
     case date
     case country
-    case city
     case nationalCountry
 }
 
-enum RegistrationState: String {
-    case PERSONAL_DATA
-    case IDENTITY_FRONT
-    case IDENTITY_BACK
-    case IDENTITY_EXPIRATION
-    case DRIVING_LICENSE_FRONT
-    case DRIVING_LICENSE_BACK
-    case DRIVING_LICENSE_DATES
-    case DRIVING_LICENSE_SELFIE
-    case AGREEMENT_ACCEPTED
+protocol RegistartionBotViewControllerDelegate: AnyObject {
+    func backToMyBKD()
 }
-
-final class RegistartionBotViewController: UIViewController, StoryboardInitializable {
+final class RegistartionBotViewController: BaseViewController {
     
     //MARK: Outlets
     @IBOutlet weak var mTableV: UITableView!
@@ -34,41 +25,72 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
     @IBOutlet weak var mConfirmBtn: UIButton!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mConfirmLeading: NSLayoutConstraint!
-    
     @IBOutlet weak var mThankYouBckgV: UIView!
     @IBOutlet weak var mThankYouBtn: UIButton!
     
     
     
-    //MARK: Variables
-    let registrationBotViewModel = RegistrationBotViewModel()
-    var tableData:[RegistrationBotModel] = []
+    //MARK: -- Variables
+    weak var delegate: RegistartionBotViewControllerDelegate?
+    lazy var registrationBotViewModel = RegistrationBotViewModel()
+    var tableData: [RegistrationBotModel] = []
+    var registrationBotModel: [RegistrationBotModel] = []
     private let applicationSettings: ApplicationSettings = .shared
     var currentPhoneCode: PhoneCode?
     var currentCountry: Country?
 
     var countryList: [Country]?
-    var cityList: [City]? = [City(id: "test", city: "Test"),
-                             City(id: "test1", city: "Test1")]
     var personalData: PersonalData = PersonalData()
+    var driverLicenseDateData: DriverLiceseDateData = DriverLiceseDateData()
     
-    var pickerType:PickerType = .date
-    var registrationState: RegistrationState = .PERSONAL_DATA
-    
+    var pickerType: PickerType = .date
     var timer: Timer?
     var datePicker = UIDatePicker()
     var pickerV = UIPickerView()
     var isTakePhoto:Bool = false
     var isDriverRegister: Bool = false
+    var isMyAccountDriver: Bool = false
+    var isEdit: Bool = false
+    private var takePhotoCurrentIndex:Int  = 0
     private var currentIndex = 0
     private var activeTextField: UITextField?
-    
+    public var mainDriver: MainDriver?
 
-    //MARK: - Life cycles
+
+    //MARK: -- Life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBarController?.tabBar.isHidden = true
+        registrationBotModel = isDriverRegister ? RegistrationBotData.registrationDriverModel : RegistrationBotData.registrationBotModel
+        countryList = ApplicationSettings.shared.countryList
+        if countryList == nil {
+            getCountryList()
+        }
         setUpView()
-        getCountryList()
+        setUpConfirmView()
+        configureTableView()
+        
+        if mainDriver == nil {
+            creatDriver(driverType: isDriverRegister ? Constant.Texts.creat_additional_driver
+                : Constant.Texts.creat_main_driver)
+            startTimer()
+        } else {
+           // if !isDriverRegister {
+                registrationBotViewModel.setRegisterBotInfo(mainDriver: mainDriver!, countryList: countryList) { registrationBotResult in
+                    
+                    self.tableData = registrationBotResult
+                    if self.mainDriver?.state  != Constant.Texts.state_created {
+                        self.personalData = self.registrationBotViewModel.getPersonalData(driver: self.mainDriver) ?? PersonalData()
+                        self.driverLicenseDateData = self.registrationBotViewModel.getDriverLicenseDateData(driver: self.mainDriver) ?? DriverLiceseDateData()
+                    }
+                    self.mTableV.reloadData()
+                    self.tableScrollToBottom()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
+                        self.insertTableCell()
+                    }
+                }
+           // }
+        }
     }
         
     override func viewWillAppear(_ animated: Bool) {
@@ -82,12 +104,12 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
     }
     
     func setUpView() {
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
         currentPhoneCode = applicationSettings.phoneCodes?.first
         currentCountry = countryList?.first
         mRightBarBtn.image = img_bkd
-        mThankYouBtn.roundCornersWithBorder(corners: [.allCorners], radius: 36.0, borderColor: color_dark_register!, borderWidth: 1)
-        setUpConfirmView()
-        configureTableView()
+        mThankYouBtn.roundCornersWithBorder(corners: [.allCorners], radius: mThankYouBtn.frame.height/2, borderColor: color_navigationBar!, borderWidth: 1)
+        
     }
     
     
@@ -97,6 +119,7 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
         mConfirmBckgV.roundCorners(corners: [.topRight, .topLeft], radius: 20)
     }
     
+    ///Add Keyboard notifications
     func registerForKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
@@ -106,6 +129,7 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
                                                object: nil)
     }
     
+    ///Configure table view
     func configureTableView() {
         mTableV.register(InfoMessageTableViewCell.nib(), forCellReuseIdentifier: InfoMessageTableViewCell.identifier)
         mTableV.register(ExamplePhotoTableViewCell.nib(), forCellReuseIdentifier: ExamplePhotoTableViewCell.identifier)
@@ -117,9 +141,10 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
         mTableV.register(TakePhotoTableViewCell.nib(), forCellReuseIdentifier: TakePhotoTableViewCell.identifier)
         mTableV.estimatedRowHeight = UITableView.automaticDimension
 
-        startTimer()
     }
     
+    
+    ///Get country list
     func getCountryList() {
         registrationBotViewModel.getCountryList { [weak self] (response) in
             guard let self = self else { return }
@@ -129,34 +154,50 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
         }
     }
     
+    ///Sent requesst for creat user account
+    func creatDriver(driverType: String) {
+        registrationBotViewModel.creatDriver(type: driverType) { request in
+            print (request)
+            guard let _ = request else {return}
+            self.mainDriver = request!
+        }
+    }
     
-    ///Sigin user for get token
-    func signIn()  {
-        let keychainManager = KeychainManager()
-        SignInViewModel().signIn(username: keychainManager.getUsername() ?? "", password: keychainManager.getPasswor() ?? "") { [weak self] (status) in
-            guard let self = self else { return }
-            switch status {
-            case .success:
-                self.tableData[self.currentIndex].userRegisterInfo?.isFilled =  true
-                self.insertTableCell()
-                break
-            default:
-                self.showAlertMessage(Constant.Texts.errToken)
-                break
+    //Send personal data
+    func sendPersonalData(personalData: PersonalData, index: Int, isEditData: Bool) {
+        registrationBotViewModel.addPersonlaData(id: mainDriver?.id ?? "", personlaData: personalData) { [self] (result, err) in
+            guard let result = result else {
+                if err == "401" {
+                    self.showAlertSignIn()
+                } else {
+                    self.showAlertMessage(Constant.Texts.errPersonalData) }
+                return }
+            mainDriver = result
+            if !isEditData {
+                fillInTableCell(txt: personalData.nationalRegisterNumber!, index: index)
+                insertTableCell()
+            } else {
+                self.sendAgreement()
             }
         }
     }
     
-    
-    func sendPersonalData(personalData: PersonalData) {
-        registrationBotViewModel.addPersonlaData(personlaData: personalData) { (result) in
-            print(result)
-            guard let result = result else { return }
+   
+    /// Send request accept agreement
+    private func sendAgreement() {
+        registrationBotViewModel.acceptAgreement(id: mainDriver?.id ?? "") { (result, err) in
+            if result != nil {
+                self.tableData = self.isDriverRegister ? RegistrationBotData.completedDriverAccountModel : RegistrationBotData.completedAccountModel
+                self.animationConfirm()
+            } else if err == "401" {
+                    self.showAlertSignIn()
+                } else {
+                self.showAlertMessage(Constant.Texts.errAcceptAgreement)
+            }
         }
     }
 
-    //MARK: TIMER
-    //MARK -------------------
+    //MARK: -- TIMER
     
     /// Start timer for update table cell
     func startTimer() {
@@ -177,22 +218,32 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
     
     /// Update table cell
     @objc func updateTableCell () {
-        if RegistrationBotData.registrationBotModel[currentIndex].viewDescription == nil && mThankYouBckgV.isHidden{
+        if registrationBotModel[currentIndex].viewDescription == nil && mThankYouBckgV.isHidden{
             insertTableCell()
         } else {
             stopTimer()
         }
-        
+    }
+    
+    ///Fill in table cell
+    func fillInTableCell(txt:String, index: Int?) {
+        if  tableData[index ?? currentIndex].userRegisterInfo == nil {
+            tableData[index ?? currentIndex].userRegisterInfo? = UserRegisterInfo(string: txt, isFilled: true)
+        } else {
+            tableData[index ?? currentIndex].userRegisterInfo?.string = txt
+            tableData[index ?? currentIndex].userRegisterInfo?.isFilled = true
+        }
+        isEdit = (index ?? 0 < currentIndex)
     }
     
     /// Insert table cell
     func insertTableCell() {
-        if tableData.count < RegistrationBotData.registrationBotModel.count  {
+        if tableData.count < registrationBotModel.count && !isEdit  {
             
             if !mConfirmBckgV.isHidden &&  tableData.count == RegistrationBotData.completedAccountModel.count {
                 stopTimer()
             } else {
-            tableData.append(RegistrationBotData.registrationBotModel[currentIndex + 1])
+                tableData.append(registrationBotModel[currentIndex + 1])
                 mTableV.performBatchUpdates {
                     mTableV.insertRows(at: [IndexPath.init(row: tableData.count-1, section: 0)], with: .automatic)
                 } completion: { [weak self]_ in
@@ -200,9 +251,6 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
                     self.tableScrollToBottom()
                     self.startTimer()
                 }
-
-            
-           
             }
         }
     }
@@ -238,7 +286,7 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
         self.present(alert, animated: true)
     }
     
-    ///Will present Picker controller
+    ///Will present image Picker controller
     private func presentPicker (sourceType: UIImagePickerController.SourceType) {
         isTakePhoto = true
         let picker = UIImagePickerController()
@@ -248,28 +296,25 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
     }
     
      ///creat tool bar
-    private func creatToolBar() -> UIToolbar {
+    private func creatToolBar(index: Int) -> UIToolbar {
         //toolBAr
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
         //bar Button
-        let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(self.donePressed))
+        let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(self.donePressed(sender:)))
+        done.tag = index
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolBar.setItems([flexibleSpace, done], animated: false)
         return toolBar
     }
     
-    //MARK: Keyboard NSNotification
-    //MARK: ---------------------------
-    
+    //MARK: -- Keyboard NSNotification
     @objc func keyboardWillShow (notification: NSNotification) {
         
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         let keyboardInfo = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
         let keyboardSize = keyboardInfo.cgRectValue.size
-        
         let bottomInset = keyboardSize.height
-        
         mTableV.contentInset.bottom = bottomInset
     }
 
@@ -292,60 +337,64 @@ final class RegistartionBotViewController: UIViewController, StoryboardInitializ
     }
     
     
-    //MARK: ACTIONS
-    //MARK: -----------------
+    //MARK: -- ACTIONS
     @IBAction func confirm(_ sender: UIButton) {
-        tableData = isDriverRegister ? RegistrationBotData.completedDriverAccountModel : RegistrationBotData.completedAccountModel
-        animationConfirm()
+        sendPersonalData(personalData: personalData,
+                         index: 0,
+                         isEditData: true)
     }
     
     @IBAction func thankYou(_ sender: UIButton) {
+        
+        registrationBotViewModel.saveUserPhoneNumber(phoneCodeId: currentPhoneCode?.id, number: personalData.phoneNumber)
+        
         UserDefaults.standard.set(true, forKey: key_isLogin)
         sender.setTitleColor(color_menu!, for: .normal)
-        sender.layer.cornerRadius = 10
-        sender.backgroundColor = color_dark_register
+        sender.setBorderColorToCAShapeLayer(color: .clear)
+        sender.backgroundColor = color_navigationBar!//color_dark_register
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
-           
-        self.tabBarController?.selectedIndex = 0
-            self.navigationController?.popToRootViewController(animated: false)
-            
+            self.tabBarController?.selectedIndex = 0
+            if self.isDriverRegister {
+                self.navigationController?.popToViewController(ofClass: self.isMyAccountDriver ? MyAccountsDriversViewController.self : MyDriversViewController.self, animated: true)
+            } else {
+                self.navigationController?.popToViewController(ofClass: MyBKDViewController.self, animated: true)
+            }
         }
     }
     
     @IBAction func beck(_ sender: UIBarButtonItem) {
+        delegate?.backToMyBKD()
         navigationController?.popViewController(animated: true)
     }
     
-    @objc func donePressed() {
+    @objc func donePressed(sender: UIBarButtonItem) {
+        isEdit = (sender.tag < currentIndex)
         switch pickerType {
         case .date:
-            tableData[currentIndex].userRegisterInfo = UserRegisterInfo(date: datePicker.date, isFilled: true)
+            tableData[sender.tag].userRegisterInfo = UserRegisterInfo(date: datePicker.date, isFilled: true)
         case .nationalCountry:
             // change nationality  textfiled
             guard let _ = countryList else { return }
-            tableData[currentIndex].userRegisterInfo?.nationalString = countryList?[ pickerV.selectedRow(inComponent: 0)].country
+            currentCountry = countryList?[ pickerV.selectedRow(inComponent: 0)]
+            tableData[sender.tag].userRegisterInfo?.nationalString = countryList?[ pickerV.selectedRow(inComponent: 0)].country
         break
         case .country:
             guard let _ = countryList else { return }
-            tableData[currentIndex].userRegisterInfo?.string = countryList![ pickerV.selectedRow(inComponent: 0)].country
-            tableData[currentIndex].userRegisterInfo?.isFilled = true
+            fillInTableCell(txt: countryList![ pickerV.selectedRow(inComponent: 0)].country ?? "", index: sender.tag)
             personalData.countryId = countryList![ pickerV.selectedRow(inComponent: 0)].id
-        case .city:
-            tableData[currentIndex].userRegisterInfo?.string = cityList![ pickerV.selectedRow(inComponent: 0)].city
-            tableData[currentIndex].userRegisterInfo?.isFilled = true
-            personalData.city = cityList![ pickerV.selectedRow(inComponent: 0)].city
+            mTableV.reloadData()
             
         }
 
-        mTableV.reloadRows(at: [IndexPath(row: currentIndex, section: 0)], with: .automatic)
+        mTableV.reloadRows(at: [IndexPath(row: sender.tag, section: 0)], with: .automatic)
         if pickerType != .nationalCountry {
             insertTableCell()
         }
     }
 }
 
-//MARK: UITableViewDataSource
-//MARK: ---------------------------
+//MARK: -- UITableViewDataSource
 extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSource {
     
     
@@ -363,17 +412,20 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
 
         } else if let _ = model.viewDescription {
             switch model.viewDescription {
-            case "button", "txtFl":
+            case Constant.Texts.button,
+                 Constant.Texts.txtFl:
                 return userFillFieldCell(indexPath: indexPath, model: model)
-            case  "phone" :
+            case Constant.Texts.phone:
                 return phoneNumberCell(indexPath: indexPath,model: model)
-            case  "calendar" :
-                return calendarCell(indexPath: indexPath,model: model, isExpireDate: false)
-            case "calendar_expire":
-                return calendarCell(indexPath: indexPath,model: model, isExpireDate: true)
-            case  "mailbox" :
+            case Constant.Texts.calendar,
+                 Constant.Texts.issueDateDrivingLicense:
+                return calendarCell(indexPath: indexPath,model: model, isExpiryDate: false)
+            case Constant.Texts.expiryDate,
+                 Constant.Texts.expiryDateDrivingLicense:
+                return calendarCell(indexPath: indexPath,model: model, isExpiryDate: true)
+            case Constant.Texts.mailbox:
                 return mailBoxCell(indexPath: indexPath, model: model)
-            case  "national register" :
+            case  Constant.Texts.nationalRegister:
                return nationalRegisterCell(indexPath: indexPath, model: model)
             default:
                 return takePhotoCell(indexPath: indexPath,model: model)
@@ -388,8 +440,7 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     
-    //MARK: TABLE CELLS
-    //MARK: ---------------------
+    //MARK: -- Table cells
     private func infoMessageCell(indexPath: IndexPath, model: RegistrationBotModel) -> InfoMessageTableViewCell{
         let cell = mTableV.dequeueReusableCell(withIdentifier: InfoMessageTableViewCell.identifier, for: indexPath) as! InfoMessageTableViewCell
         cell.setCellInfo(items: tableData, index: indexPath.row)
@@ -401,8 +452,8 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
     private func userFillFieldCell(indexPath: IndexPath, model: RegistrationBotModel) -> UserFillFieldTableViewCell {
         
     let cell = mTableV.dequeueReusableCell(withIdentifier: UserFillFieldTableViewCell.identifier, for: indexPath) as! UserFillFieldTableViewCell
-      cell.setCellInfo(item: model)
-      cell.delegate = self
+        cell.delegate = self
+        cell.setCellInfo(item: model, index: indexPath.row)
       return cell
     }
     
@@ -414,25 +465,25 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
             cell.mPhoneNumberTxtFl.formatPattern = currentPhoneCode?.mask ?? ""
             cell.validFormPattern = (currentPhoneCode?.mask!.count)!
         }
-        cell.setCellInfo(item: model)
         cell.delegate = self
+        cell.setCellInfo(item: model, index: indexPath.row)
           return cell
     }
     
-    private func calendarCell(indexPath: IndexPath, model: RegistrationBotModel, isExpireDate: Bool) -> CalendarTableViewCell {
+    private func calendarCell(indexPath: IndexPath, model: RegistrationBotModel, isExpiryDate: Bool) -> CalendarTableViewCell {
         
         let cell = mTableV.dequeueReusableCell(withIdentifier: CalendarTableViewCell.identifier, for: indexPath) as! CalendarTableViewCell
-        cell.setCellInfo(item: model)
-        cell.isExpireDate = isExpireDate
         cell.delegate = self
+        cell.setCellInfo(item: model, index: indexPath.row)
+        cell.isExpiryDate = isExpiryDate
         return cell
     }
     
     private func mailBoxCell(indexPath: IndexPath, model: RegistrationBotModel) -> MailBoxNumberTableViewCell{
         
         let cell = mTableV.dequeueReusableCell(withIdentifier: MailBoxNumberTableViewCell.identifier, for: indexPath) as! MailBoxNumberTableViewCell
-        cell.setCellInfo(item: model)
         cell.delegate = self
+        cell.setCellInfo(item: model, index: indexPath.row)
         return cell
     }
     
@@ -442,16 +493,16 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
         cell.selectedCountry = currentCountry
 //        cell.mTextFl.formatPattern = currentCountry?.nationalDocumentMask ?? ""
 //        cell.validFormPattern = (currentCountry?.nationalDocumentMask!.count)!
-        cell.setCellInfo(item: model)
         cell.delegate = self
+        cell.setCellInfo(item: model, index: indexPath.row)
         return cell
     }
     
     private func takePhotoCell(indexPath: IndexPath, model: RegistrationBotModel) -> TakePhotoTableViewCell{
         
         let cell = mTableV.dequeueReusableCell(withIdentifier: TakePhotoTableViewCell.identifier, for: indexPath) as! TakePhotoTableViewCell
-        cell.setCellInfo(item: model)
         cell.delegate = self
+        cell.setCellInfo(item: model, index: indexPath.row)
         return cell
     }
     
@@ -466,8 +517,7 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
 
 
 
-//MARK: - UserFillFieldTableViewCellDelegate
-//MARK: --------------------------------
+//MARK: -- UserFillFieldTableViewCellDelegate
 extension RegistartionBotViewController: UserFillFieldTableViewCellDelegate {
     
     func didBeginEdithingTxtField(txtFl: UITextField) {
@@ -475,20 +525,19 @@ extension RegistartionBotViewController: UserFillFieldTableViewCellDelegate {
     }
     
     func didPressStart() {
-        signIn()
+        self.tableData[self.currentIndex].userRegisterInfo?.isFilled =  true
+        self.insertTableCell()
     }
 
-    func didReturnTxtField(txt: String?) {
-        tableData[currentIndex].userRegisterInfo?.string = txt
-        tableData[currentIndex].userRegisterInfo?.isFilled = true
+    func didReturnTxtField(txt: String?, index: Int) {
+        fillInTableCell(txt: txt ?? "", index: index)
         insertTableCell()
     }
     
     func willOpenPicker(textFl: UITextField, viewType: ViewType) {
        // countryList
         textFl.inputView = pickerV
-        textFl.inputAccessoryView = creatToolBar()
-        textFl.isHidden = true
+        textFl.inputAccessoryView = creatToolBar(index: textFl.tag)
         
         if #available(iOS 14.0, *) {
             datePicker.preferredDatePickerStyle = .wheels
@@ -497,11 +546,13 @@ extension RegistartionBotViewController: UserFillFieldTableViewCellDelegate {
         }
         if viewType == .country {
             pickerType = .country
-        } else if viewType == .city {
-            pickerType = .city
         }
         pickerV.delegate = self
         pickerV.dataSource = self
+    }
+    
+    func willOpenAutocompleteViewControlle() {
+        self.showAutocompleteViewController(viewController: self)
     }
     
     func updateUserData(dataType: ViewType, data: String) {
@@ -524,37 +575,42 @@ extension RegistartionBotViewController: UserFillFieldTableViewCellDelegate {
             personalData.city = data
         case .nationalRegister:
             personalData.nationalRegisterNumber = data
+        case .drivingLicenseNumber:
+            driverLicenseDateData.drivingLicenseNumber = data
+            if driverLicenseDateData.expirationDate != nil &&  driverLicenseDateData.issueDate != nil  {
+                addDriverLicenseDate()
+            }
         default: break
         }
     }
 }
  
 
-//MARK: - PhoneNumberTableViewCellDelegate
-//MARK: --------------------------------
+//MARK: -- PhoneNumberTableViewCellDelegate
 extension RegistartionBotViewController: PhoneNumberTableViewCellDelegate {
     
     func didPressCountryCode() {
-        let searchPhoneCodeVC = SearchPhoneCodeViewController.initFromStoryboard(name: Constant.Storyboards.searchPhoneCode)
-        searchPhoneCodeVC.delegate = self
-        self.present(searchPhoneCodeVC, animated: true, completion: nil)
+        self.goToSearchPhoneCode(viewCont: self)
+//        let searchPhoneCodeVC = SearchPhoneCodeViewController.initFromStoryboard(name: Constant.Storyboards.searchPhoneCode)
+//        searchPhoneCodeVC.delegate = self
+//        self.present(searchPhoneCodeVC, animated: true, completion: nil)
     }
     
-    func didReturnTxtField(text: String, code: String) {
-        tableData[currentIndex].userRegisterInfo = UserRegisterInfo( string: text, isFilled: true)
+    func didReturnTxtField(text: String, code: String, index: Int) {
+        fillInTableCell(txt: text, index: index)
         insertTableCell()
         personalData.phoneNumber = code + text
     }
 }
 
 
-//MARK: - CalendarTableViewCellDelegate
-//MARK: --------------------------------
+//MARK: -- CalendarTableViewCellDelegate
 extension RegistartionBotViewController: CalendarTableViewCellDelegate {
-    func willOpenPicker(textFl: UITextField, isExpireDate: Bool) {
+    
+    func willOpenPicker(textFl: UITextField, isExpiryDate: Bool) {
         
         textFl.inputView = datePicker
-        textFl.inputAccessoryView = creatToolBar()
+        textFl.inputAccessoryView = creatToolBar(index: textFl.tag)
         textFl.isHidden = true
         pickerType = .date
         if #available(iOS 14.0, *) {
@@ -562,69 +618,99 @@ extension RegistartionBotViewController: CalendarTableViewCellDelegate {
         } else {
             // Fallback on earlier versions
         }
-        if isExpireDate {
-            datePicker.datePickerMode = .date
+        
+        datePicker.datePickerMode = .date
+        datePicker.locale = Locale(identifier: "en")
+        if isExpiryDate {
             datePicker.minimumDate = Date()
             datePicker.maximumDate = nil
-            datePicker.locale = Locale(identifier: "en")
         } else {
-            datePicker.datePickerMode = .date
             datePicker.minimumDate = nil
             datePicker.maximumDate = Date()
-            datePicker.locale = Locale(identifier: "en")
         }
     }
     
     func updateData(viewType: ViewType, calendarData: String) {
         switch viewType {
-        case .dateOfBirth:
+         case .dateOfBirth:
             personalData.dateOfBirth = calendarData
+        case .expiryDate:
+                addIdentityExpirationDate(expiryDate: calendarData)
+        case .issueDateDrivingLicense:
+            driverLicenseDateData.issueDate = calendarData
+            if driverLicenseDateData.expirationDate != nil {
+                addDriverLicenseDate()
+            }
+        case .expiryDateDrivingLicense:
+                driverLicenseDateData.expirationDate = calendarData
+                addDriverLicenseDate()
         default:
             break
+        }
+    }
+    
+    ///add Identity Expiration Date to database
+    private func addIdentityExpirationDate(expiryDate: String) {
+        registrationBotViewModel.addIdentityExpiration(id:  mainDriver?.id ?? "", experationDate: expiryDate) { (result) in
+            if result != nil {
+                self.mainDriver = result!
+            } else {
+                self.showAlertMessage(Constant.Texts.errIDExpirationDate)
+            }
+        }
+    }
+    
+    ///add Driver License Date to database
+    private func addDriverLicenseDate() {
+        registrationBotViewModel.addDriverLicenseDates(id:  mainDriver?.id ?? "",
+                                                       driverLicenseDateData: driverLicenseDateData) { (result) in
+            if result != nil {
+                self.mainDriver = result!
+            } else {
+                self.showAlertMessage(Constant.Texts.errDrivLicenseDate)
+            }
         }
     }
 }
 
 
 
-//MARK: - MailBoxNumberTableViewCellDelegate
-//MARK: --------------------------------
+//MARK: -- MailBoxNumberTableViewCellDelegate
 extension RegistartionBotViewController: MailBoxNumberTableViewCellDelegate {
     
-    func didReturn(text: String?, noMailBox: Bool) {
+    func didReturn(text: String?, noMailBox: Bool, index: Int) {
         
         if text?.count ?? 0 > 0 && !noMailBox {
-            tableData[currentIndex].userRegisterInfo?.string = text
+            tableData[index].userRegisterInfo?.string = text
         }
-        tableData[currentIndex].userRegisterInfo?.isFilled = true
+        tableData[index].userRegisterInfo?.isFilled = true
         personalData.mailBox = text ?? ""
+        isEdit = (index < currentIndex)
         self.insertTableCell()
     }
 }
 
 
 
-//MARK: - NationalRegisterNumberTableViewCellDelegate
-//MARK: -------------------------------------------
+//MARK: -- NationalRegisterNumberTableViewCellDelegate
 extension RegistartionBotViewController: NationalRegisterNumberTableViewCellDelegate {
-    func didPressOtherCountryNational(isClicked: Bool) {
-        tableData[currentIndex].userRegisterInfo = UserRegisterInfo(isOtherNational: isClicked)
-        mTableV.reloadRows(at: [IndexPath(row: currentIndex, section: 0)], with: .automatic)
+    
+    func didPressOtherCountryNational(isClicked: Bool, index: Int) {
+        tableData[index].userRegisterInfo = UserRegisterInfo(isOtherNational: isClicked)
+        mTableV.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
         tableScrollToBottom()
     }
     
-    func didReturnTxt(txt: String?) {
-        tableData[currentIndex].userRegisterInfo?.string = txt
-        tableData[currentIndex].userRegisterInfo?.isFilled = true
-        insertTableCell()
+    func didReturnTxt(txt: String?, index: Int) {
+        
         personalData.nationalRegisterNumber = txt
-        sendPersonalData(personalData: personalData)
+        sendPersonalData(personalData: personalData, index: index, isEditData: false)
     }
     
     func willOpenPicker(textFl: UITextField) {
        // countryList
         textFl.inputView = pickerV
-        textFl.inputAccessoryView = creatToolBar()
+        textFl.inputAccessoryView = creatToolBar(index: textFl.tag)
         textFl.isHidden = true
         pickerType = .nationalCountry
         pickerV.delegate = self
@@ -634,45 +720,47 @@ extension RegistartionBotViewController: NationalRegisterNumberTableViewCellDele
 
 
 
-//MARK: - TakePhotoTableViewCellDelegate
-//MARK: --------------------------------
+//MARK: -- TakePhotoTableViewCellDelegate
 extension RegistartionBotViewController: TakePhotoTableViewCellDelegate {
     
-    func didPressTackePhoto(isOpenDoc: Bool) {
+    func didPressTackePhoto(isOpenDoc: Bool, index: Int) {
+        takePhotoCurrentIndex = index
         if isOpenDoc {
-            let bkdAgreementVC = UIStoryboard(name: Constant.Storyboards.registrationBot, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.bkdAgreement) as! BkdAgreementViewController
-            bkdAgreementVC.delegate = self
-            self.navigationController?.pushViewController(bkdAgreementVC, animated: true)
+            
+            self.goToAgreement(on: self,
+                               agreementType: .none,
+                               vehicleModel: nil,
+                               urlString: ApplicationSettings.shared.settings?.registrationAgreementUrl)
         } else {
             takePhotoPressed()
         }
     }
 }
 
-//MARK: - BkdAgreementViewControllerDelegate
-//MARK: ----------------------------
+//MARK: -- BkdAgreementViewControllerDelegate
 extension RegistartionBotViewController: BkdAgreementViewControllerDelegate {
+    
     func agreeTermsAndConditions() {
-        mConfirmBckgV.isHidden = false
-        tableData[currentIndex].userRegisterInfo  = UserRegisterInfo(isFilled: true)
-        mTableV.reloadRows(at: [IndexPath(row: currentIndex, section: 0)], with: .automatic)
-        insertTableCell()
+        self.mConfirmBckgV.isHidden = false
+        self.tableData[self.currentIndex].userRegisterInfo  = UserRegisterInfo(isFilled: true)
+        self.mTableV.reloadRows(at: [IndexPath(row: self.currentIndex, section: 0)], with: .automatic)
+        isEdit = false
+        self.insertTableCell()
     }
+    
 }
 
 
-//MARK: - SearchPhoneCodeViewControllerDelegate
-//MARK: --------------------------------------
+//MARK: -- SearchPhoneCodeViewControllerDelegate
 extension RegistartionBotViewController: SearchPhoneCodeViewControllerDelegate {
     
     func didSelectCountry(_ country: PhoneCode) {
         currentPhoneCode = country
-        mTableV.reloadRows(at: [IndexPath(row: currentIndex, section: 0)], with: .automatic)
+        mTableV.reloadRows(at: [IndexPath(row: 9, section: 0)], with: .automatic)
     }
 }
 
-//MARK: - UIImagePickerControllerDelegate
-//MARK: --------------------------------
+//MARK: -- UIImagePickerControllerDelegate
 extension RegistartionBotViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     
@@ -687,62 +775,99 @@ extension RegistartionBotViewController: UIImagePickerControllerDelegate, UINavi
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
              return  }
         if isTakePhoto {
-            tableData[currentIndex].userRegisterInfo = UserRegisterInfo(photo: image, isFilled: true)
-            mTableV.reloadRows(at: [IndexPath(row: currentIndex, section: 0)], with: .automatic)
-            insertTableCell()
-            isTakePhoto = false
-            var newImage = resizeImage(image: image, targetSize: CGSize(width: 50, height: 50)) ?? UIImage()
-            registrationBotViewModel.imageUpload(image: newImage, state: "DLS") { (str) in
-            }
+            uploadImage(image: image)
             
         }
     }
-    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
-        let size = image.size
-        
-        let widthRatio  = targetSize.width  / size.width
-        let heightRatio = targetSize.height / size.height
-        
-        // Figure out what our orientation is, and use that to form the rectangle
-        var newSize: CGSize
-        if(widthRatio > heightRatio) {
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-        } else {
-            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
+    
+    //Upload image to database
+    private func uploadImage(image: UIImage) {
+        let uploadState = registrationBotViewModel.getImageUploadState( index: takePhotoCurrentIndex)
+       
+        registrationBotViewModel.imageUpload(image: image,
+                                             id: mainDriver?.id ?? "",
+                                             state: uploadState.rawValue) { [self] (result, err) in
+            if result != nil {
+                mainDriver = result!
+                DispatchQueue.main.async { [self] in
+                    tableData[self.takePhotoCurrentIndex].userRegisterInfo = UserRegisterInfo(photo: image, isFilled: true)
+                    mTableV.reloadRows(at: [IndexPath(row: self.takePhotoCurrentIndex, section: 0)], with: .automatic)
+                  //  mTableV.reloadData()
+                    isEdit = (self.takePhotoCurrentIndex < currentIndex)
+                    self.insertTableCell()
+                }
+                self.isTakePhoto = false
+
+            } else  if err == "401" {
+                self.showAlertSignIn()
+            } else {
+                self.showAlertMessage(Constant.Texts.errImageUpload)
+            }
         }
-        
-        // This is the rect that we've calculated out and this is what is actually used below
-        let rect = CGRect(origin: .zero, size: newSize)
-        
-        // Actually do the resizing to the rect using the ImageContext stuff
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage
     }
 }
 
-//MARK: UIPickerViewDelegate
-//MARK: --------------------------------
+//MARK: -- UIPickerViewDelegate
 extension RegistartionBotViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerType == .country || pickerType == .nationalCountry {
             return countryList?.count ?? 0
-        }
-        return cityList?.count ?? 0
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerType == .country || pickerType == .nationalCountry {
             currentCountry = countryList![row]
             return countryList![row].country
-        }
-        return cityList![row].city
     }
 }
+
+
+//MARK: -- GMSAutocompleteViewControllerDelegate
+extension RegistartionBotViewController: GMSAutocompleteViewControllerDelegate {
+
+  // Handle the user's selection.
+  func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+
+      self.resolveLocation(place: place) { result  in
+          switch result {
+          case .success(let coordinate):
+              
+              let geoCoder = CLGeocoder()
+              let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+              geoCoder.reverseGeocodeLocation(location, completionHandler:
+                                                {
+                  placemarks, error -> Void in
+                  // Place details
+                  guard let placeMark = placemarks?.first else { return }
+                  // City
+                  var cityname = ""
+                  if let city = placeMark.subAdministrativeArea {
+                      cityname = city
+                  } else {
+                      cityname = place.name ?? ""
+                  }
+                  self.personalData.city = cityname
+                  self.fillInTableCell(txt: cityname, index: 24)
+                  self.mTableV.reloadData()
+                  self.insertTableCell()
+              })
+          case .failure( _ ):
+              self.showAlertMessage(Constant.Texts.errLocation)
+          }
+      }
+      dismiss(animated: true, completion: nil)
+  }
+
+  func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+    // TODO: handle the error.
+    print("Error: ", error.localizedDescription)
+  }
+
+  // User canceled the operation.
+  func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+    dismiss(animated: true, completion: nil)
+  }
+}
+

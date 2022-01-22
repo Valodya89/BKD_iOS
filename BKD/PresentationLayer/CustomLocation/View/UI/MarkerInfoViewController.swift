@@ -9,7 +9,7 @@ import UIKit
 protocol MarkerInfoViewControllerDelegate: AnyObject {
     func didPressUserLocation()
     func didPressDeleteLocation()
-    func didPressContinue(place: String)
+    func didPressContinue(place: String, price: Double?)
 
 }
 class MarkerInfoViewController: UIViewController, StoryboardInitializable {
@@ -45,8 +45,6 @@ class MarkerInfoViewController: UIViewController, StoryboardInitializable {
         mBackgroundV.layer.cornerRadius = 20
         mContinueBtn.layer.cornerRadius = 7
         mContinueBtn.setBorder(color: color_navigationBar!, width: 1)
-    
-//        mValueBackgV.setGradient(startColor:color_gradient_end!, endColor: color_gradient_start!)
         
     }
     private func clickContinue() {
@@ -54,7 +52,7 @@ class MarkerInfoViewController: UIViewController, StoryboardInitializable {
             self.mContinueLeading.constant = self.mContinueBackgV.bounds.width - self.mContinueBtn.frame.size.width
             self.view.layoutIfNeeded()
         } completion: { [self] _ in
-            self.delegate?.didPressContinue(place: mUserAddressLb.text ?? "")
+            self.delegate?.didPressContinue(place: mUserAddressLb.text ?? "", price: Double(mPriceLb.text ?? "0.0"))
         }
     }
   

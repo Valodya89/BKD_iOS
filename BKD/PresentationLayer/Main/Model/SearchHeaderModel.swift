@@ -14,6 +14,14 @@ struct SearchModel {
     public var returnTime: Date?
     public var pickUpLocation: String?
     public var returnLocation: String?
+    public var pickUpLocationId: String?
+    public var returnLocationId: String?
+    
+    public var pickUpLocationLongitude: Double?
+    public var pickUpLocationLatitude: Double?
+    public var returnLocationLongitude: Double?
+    public var returnLocationLatitude: Double?
+
     public var isPickUpCustomLocation: Bool = false
     public var isRetuCustomLocation: Bool = false
     public var category: Int?

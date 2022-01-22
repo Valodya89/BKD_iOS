@@ -1,0 +1,82 @@
+//
+//  PaymentStatusUITableViewCell.swift
+//  PaymentStatusUITableViewCell
+//
+//  Created by Karine Karapetyan on 14-09-21.
+//
+
+import UIKit
+
+
+class AdvancedWithOnRideCell: UITableViewCell  {
+    
+    static let identifier = "AdvancedWithOnRideCell"
+    static func nib() -> UINib {
+            return UINib(nibName: identifier, bundle: nil)
+        }
+
+    
+    //MARK: Outlets
+    @IBOutlet weak var mStatusLb: UILabel!
+    @IBOutlet weak var mStatusNameLb: UILabel!
+    @IBOutlet weak var mLocationContentV: UIView!
+    
+    @IBOutlet weak var mReturnLocationLb: UILabel!
+    
+    @IBOutlet weak var mLocationNameLb: UILabel!
+    @IBOutlet weak var mLocationBtn: UIButton!
+    
+    @IBOutlet weak var mAddDamageBtn: UIButton!
+    @IBOutlet weak var mSwitchDriverBtn: UIButton!
+    
+    
+    //MARK: --Varible
+    var didPressAddDamage:(()-> Void)?
+    var didPressSwitchDriver:(()-> Void)?
+    var didPressMap:((Int)-> Void)?
+
+    
+    //MARK: Lifecycle
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        mAddDamageBtn.layer.cornerRadius = 8
+        mSwitchDriverBtn.layer.cornerRadius = 8
+        mAddDamageBtn.addBorder(color: color_menu!, width: 1.0)
+        mSwitchDriverBtn.addBorder(color: color_menu!, width: 1.0)
+        mLocationBtn.setTitle("", for: .normal)
+
+    }
+
+     override func prepareForReuse() {
+        
+    }
+    
+    
+    /// Set cell information
+    func setCellInfo(item: OnRideModel, rent: Rent) {
+        
+        mStatusNameLb.text = item.status
+        mSwitchDriverBtn.isHidden = !item.isActiveSwitchDriverBtn
+   
+        //Return location
+        if rent.returnLocation.type == Constant.Keys.custom,
+           let returnLocation = rent.returnLocation.customLocation {
+            mLocationNameLb.text = returnLocation.name
+        } else if let returnParkin = rent.returnLocation.parking {
+            mLocationNameLb.text = returnParkin.name
+        }
+    }
+    
+  //MARK: -- Actions
+    
+    @IBAction func switchDriver(_ sender: UIButton) {
+        didPressSwitchDriver?()
+    }
+    
+    @IBAction func addDamage(_ sender: UIButton) {
+        didPressAddDamage?()
+    }
+    @IBAction func map(_ sender: UIButton) {
+        didPressMap?(sender.tag)
+    }
+}

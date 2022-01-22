@@ -23,5 +23,20 @@ extension UINavigationController: UIGestureRecognizerDelegate {
           popToViewController(vc, animated: animated)
         }
       }
+    
+    
+    func setNavigationBarBackground(color: UIColor) {
+        
+        if #available(iOS 15.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = color
+            appearance.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
+            self.navigationBar.standardAppearance = appearance
+            self.navigationBar.scrollEdgeAppearance = self.navigationBar.standardAppearance
+        } else {
+            self.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
+        }
+    }
 }
 

@@ -10,13 +10,20 @@ import UIKit
 class LeftViewController: UITableViewController {
     
     //MARK: Variables
-        var currentCelIndexPathRow : Int?
-        var isLanguageListOpen:Bool = false
+    private var languageList: [Language]?
+    private lazy var menuVM = MenuViewModel()
+    var currentCelIndexPathRow : Int?
+    var userName: String?
+    let userLb = UILabel()
     
     //MARK: Life cycles
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        
+        userLb.text = KeychainManager().getUserFullName()
+        getLanguagesList()
         configureTableView()
         addPrivacyPolice()
   
@@ -27,6 +34,23 @@ class LeftViewController: UITableViewController {
         tableView.backgroundColor = UIColor(named: "background_menu")
         tableView.separatorStyle = .none
     }
+    
+    ///Get language list
+    func getLanguagesList() {
+        menuVM.getLanguages { result in
+            guard let languages = result else {return}
+            self.languageList = languages
+        }
+    }
+    
+    ///Update language
+    func updateLanguage(id: String?) {
+        guard let id = id else {return}
+        menuVM.updateLanguages(id: id) { result in
+            guard let language = result else {return}
+        }
+    }
+    
   
     private func addPrivacyPolice () {
         //Add Privacy Policy
@@ -34,32 +58,18 @@ class LeftViewController: UITableViewController {
         self.addChild(privacyV)
         self.view.addSubview(privacyV.view)
         privacyV.didMove(toParent: self)
-
         
         let window = UIApplication.shared.windows[0]
         let bottomPadding = window.safeAreaInsets.bottom
         privacyV.view.frame = CGRect(x: 17, y: self.view.bounds.height - 90 - bottomPadding , width: 200, height: 60)
     }
-
-    
-    func hiddeDropDown(subCell: UIView) {
-        isLanguageListOpen = false
-        let seconds = 0.20
-        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-            subCell.isHidden = true
-        }
-    }
   
-
-    //MARK: UITableViewDataSource
-    //MARK: ------------------------------
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
+    
+    
+    
+    //MARK: -- UITableViewDataSource
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return MenuData.menuModel.count + 1
     }
     
@@ -72,12 +82,13 @@ class LeftViewController: UITableViewController {
             cell.dropDownBtn.setImage(#imageLiteral(resourceName: "dropDown"), for: .normal)
             cell.backgroundColor = UIColor(named: "background_menu")
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
-            if indexPath.row == 2  {
+            
+            if indexPath.row == 2 || indexPath.row == 5 { //Language || Contact us
                 cell.dropDownBtn.isHidden = false
-            } else if indexPath.row == 3 {
+                
+            } else if indexPath.row == 3 { //Notification
                 cell.mNotificationSwictch.isHidden = false
             }
-            
         }
         return cell
     }
@@ -89,8 +100,7 @@ class LeftViewController: UITableViewController {
         let profileImg = UIImageView(image:#imageLiteral(resourceName: "profile"))
         profileImg.frame =  CGRect(x: tableView.frame.size.width/2 - profileImg.frame.size.width/2 , y: 20, width: profileImg.frame.size.width, height: profileImg.frame.size.height)
         
-        let userLb = UILabel()
-        userLb.text = "Name Surname"
+        
         userLb.textColor = .white
         userLb.frame =  CGRect(x: 5 , y: profileImg.frame.size.height + 13, width: tableView.frame.size.width - 10, height: profileImg.frame.size.height)
         userLb.textAlignment = .center
@@ -115,53 +125,61 @@ class LeftViewController: UITableViewController {
         
         if currentCelIndexPathRow == indexPath.row &&  indexPath.row == 2 {
             currentCelIndexPathRow = nil
-            return 186
+            return CGFloat(50 * (languageList?.count ?? 1))
+        } else if currentCelIndexPathRow == indexPath.row &&  indexPath.row == 5 {
+            currentCelIndexPathRow = nil
+            return 120
         }
         return 50
 
     }
     
-    //MARK: UITableViewDelegate
-    //MARK: ------------------------------
-    
+    //MARK: -- UITableViewDelegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let viewController:UIViewController?
-        let dropDownCell:LeftTableViewCell = tableView.cellForRow(at: indexPath) as! LeftTableViewCell
+        let cell: LeftTableViewCell = tableView.cellForRow(at: indexPath) as! LeftTableViewCell
+        
         switch indexPath.row {
         case 1:
-            viewController = UIStoryboard(name: Constant.Storyboards.main, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.aboutUs) as! AboutUsViewController
-            navigationController?.pushViewController(viewController!, animated: true)
-            
+//            viewController = UIStoryboard(name: Constant.Storyboards.main, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.aboutUs) as! AboutUsViewController
+//            navigationController?.pushViewController(viewController!, animated: true)
+           
+            let aboutUs = AboutUsViewController.initFromStoryboard(name: Constant.Storyboards.aboutUs)
+            navigationController?.pushViewController(aboutUs, animated: true)
             break
         case 2:
-            let cell:LeftTableViewCell = tableView.cellForRow(at: indexPath) as! LeftTableViewCell
-            
-            if isLanguageListOpen {
-                currentCelIndexPathRow = nil
-                cell.dropDownBtn.imageView!.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
-                hiddeDropDown(subCell: cell.mSettingsV)
-            } else {
-                currentCelIndexPathRow = indexPath.row
-                cell.dropDownBtn.imageView!.rotateImage(rotationAngle: CGFloat(Double.pi))
-                cell.mSettingsV.isHidden = false
-                isLanguageListOpen = true
+            cell.mSubmenuTbV.changeLanguage = { id in
+                self.updateLanguage(id: id)
             }
-            
+            closeSubmenu(cell: tableView.cellForRow(at: IndexPath(row:5, section:0)) as! LeftTableViewCell)
+            openDropDown(cell: cell, index: indexPath.row, isLanguage: true)
             tableView .beginUpdates()
             tableView.endUpdates()
-            
             break
         case 3:
             //Notifications
             break
-        case 4:
-            // faq
+        case 4: // faq
+            let faq = FAQViewController.initFromStoryboard(name: Constant.Storyboards.faq)
+            navigationController?.pushViewController(faq, animated: true)
             break
-        case 5:
-            // Contact us
+        case 5: // Contact us
+            cell.mSubmenuTbV.openChat = {
+                self.closeSubmenu(cell: cell)
+                tableView .beginUpdates()
+                tableView.endUpdates()
+                BaseViewController().openChatPage(viewCont: self)
+            }
+            closeSubmenu(cell: tableView.cellForRow(at: IndexPath(row:2, section:0)) as! LeftTableViewCell)
+            openDropDown(cell: cell,
+                         index: indexPath.row,
+                         isLanguage: false)
+            tableView .beginUpdates()
+            tableView.endUpdates()
             break
-        case 6:
-            // Log out
+        case 6: // Log out
+            MyBKDViewModel().logout()
             break
         default:
             viewController = UIStoryboard(name: Constant.Storyboards.main, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.main) as! MainViewController
@@ -169,6 +187,37 @@ class LeftViewController: UITableViewController {
         }
     }
     
+   
+    ///Will open submenu
+    func openDropDown(cell: LeftTableViewCell,
+                      index: Int,
+                      isLanguage: Bool) {
+        
+        cell.mSubmenuTbV.languageList = languageList
+        cell.mSubmenuTbV.isLanguage = isLanguage
+        cell.mSubmenuTbV.isContactUs = !isLanguage
+        cell.mSubmenuTbV.reloadData()
+        
+        if !cell.mSubmenuTbV.isHidden {
+            closeSubmenu(cell: cell)
+        } else {
+            cell.mSubmenuTbV.isHidden = false
+            currentCelIndexPathRow = index
+            cell.dropDownBtn.imageView!.rotateImage(rotationAngle: CGFloat(Double.pi))
+        }
+    }
     
+    ///Will close submenu
+    func closeSubmenu(cell: LeftTableViewCell) {
+        if !cell.mSubmenuTbV.isHidden {
+            currentCelIndexPathRow = nil
+            cell.dropDownBtn.imageView!.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35 ) {
+                cell.mSubmenuTbV.isHidden = true
+             }
+        }
+        
+    }
+   
         
 }

@@ -9,7 +9,7 @@ import Foundation
 
 struct PersonalDriver: Codable {
     
-    let username: String
+    let username: String?
     let status: String
     let driver: Driver
     
