@@ -36,6 +36,10 @@ struct MainDriver: Codable {
     let agreementApplied: Bool
     let agreementAppliedAt: Double
 
+    ///get drier full name
+    func getFullname() -> String {
+        return (name ?? "") + " " + (surname ?? "")
+    }
 }
 
 

@@ -31,24 +31,29 @@ class EditReservationViewController: BaseViewController {
     @IBOutlet weak var mDamageCheckBoxBtn: UIButton!
     
     ///Continue
-  
     @IBOutlet weak var mConfirmV: ConfirmView!
    
-    
+    lazy var mainVM: MainViewModel = MainViewModel()
+    public var currRent: Rent?
+    public var accessories: [AccessoriesEditModel]?
+    public var isExtendReservation: Bool = false
+
     
     
     //MARK: -- Viriables
     weak var delegate: EditReservationDelegate?
-    public var isExtendReservation: Bool = false
-    
+    lazy var editReservVM = EditReservationViewModel()
     var settings: Settings?
     var searchModel:SearchModel = SearchModel()
+    var oldSearchModel:SearchModel = SearchModel()
     var pickerState: DatePicker?
     var datePicker = UIDatePicker()
     let pickerV = UIPickerView()
     let backgroundV =  UIView()
     var responderTxtFl = UITextField()
     private var pickerList: [String]?
+    private var editReservationModel: EditReservationModel = EditReservationModel()
+    
 
 
 
@@ -56,6 +61,11 @@ class EditReservationViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        mCheckPriceBtn.setGradientWithCornerRadius(cornerRadius: 8.0, startColor: color_gradient_register_start!, endColor: color_gradient_register_end!)
     }
     
     func setupView() {
@@ -66,17 +76,25 @@ class EditReservationViewController: BaseViewController {
         mAdditionalDriverBtn.layer.cornerRadius = 8
         mEditBySearchV.delegate = self
         showLocation()
-        configureExtendReservation()
+        configureExtendReservationUI()
        handlerCinfirm()
-    }
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        mCheckPriceBtn.setGradientWithCornerRadius(cornerRadius: 8.0, startColor: color_gradient_register_start!, endColor: color_gradient_register_end!)
+        configureUI()
     }
     
+    
+    ///Configure UI
+    func configureUI() {
+        guard let rent = self.currRent else {return}
+        oldSearchModel = editReservVM.getSearch(rent: rent)
+        searchModel = oldSearchModel
+        editReservationModel = editReservVM.getNewReservetion(carId: rent.carDetails.id,
+                                       startDate: rent.startDate,
+                                       search: searchModel)
+        mEditBySearchV.updateSearchFields(searchModel: searchModel)
+    }
     
     ///Configure Extend reservation view
-    func configureExtendReservation() {
+    func configureExtendReservationUI() {
         
        // mChangePriceContentV.isHidden = !isExtendReservation
         mAdditionalServicestackV.isHidden = isExtendReservation
@@ -114,51 +132,70 @@ class EditReservationViewController: BaseViewController {
         switch pickerState {
    
         case .returnDate:
-            mEditBySearchV.showDateInfoViews(dayBtn: mEditBySearchV!.mDayReturnDateBtn,
-                         monthBtn: mEditBySearchV!.mMonthReturnDateBtn,
-                         txtFl: responderTxtFl)
-            showSelectedDate(dayBtn: mEditBySearchV!.mDayReturnDateBtn,
-                             monthBtn: mEditBySearchV!.mMonthReturnDateBtn, timeStr: nil)
             searchModel.returnDate = datePicker.date
             mEditBySearchV.returnDate = datePicker.date
+            if  !checkIfReservationMoreThan90Days() {
+                checkMonthReservation()
+
+                mEditBySearchV?.setReturnDateInfo(searchModel: searchModel)
+                editReservationModel =  editReservVM.getNewReservetion(carId: currRent?.carDetails.id ?? "", startDate: currRent?.startDate ?? 0.0 , search: searchModel)
+//                self.checkReservetionHalfHour()
+            }
+        
+           // mEditBySearchV.setReturnDateInfo(searchModel: searchModel)
         case .returnTime :
             let timeStr = pickerList![ pickerV.selectedRow(inComponent: 0)]
-            chanckReservationTime(timeStr: timeStr)
-            searchModel.returnTime = timeStr.stringToDate()
-            mEditBySearchV.returnTime = timeStr.stringToDate()
-
+            checkReservationTime(timeStr: timeStr)
         default: break
-            
-            
         }
-        
     }
     
     
-    ///check is reservation time during working time
-    private func chanckReservationTime(timeStr: String?) {
-        DetailsViewModel().isReservetionInWorkingHours(time: timeStr?.stringToDate()) { [self] (result) in
-            if !result {
-                self.showAlertWorkingHours()
+    //MARK: -- Checks
+    
+    ///check if reservation date more than a month
+    func checkMonthReservation() {
+        mainVM.isReservetionMoreThanMonth(pickUpDate: searchModel.pickUpDate, returnDate: searchModel.returnDate) { [self] (result) in
+            if result {
+                self.showAlertMoreThanMonth()
             } else {
-                showSelectedDate(dayBtn: nil, monthBtn: nil, timeStr: timeStr)
+                checkEditReservationIsLater()
             }
         }
-        
     }
     
-    ///Will put new values from pickerDate
-    func showSelectedDate(dayBtn : UIButton?, monthBtn: UIButton?, timeStr: String?) {
-        if  pickerState == .returnTime { //Time
-            
-            responderTxtFl.font =  UIFont.init(name: (responderTxtFl.font?.fontName)!, size: 18.0)
-            responderTxtFl.text = timeStr
-            responderTxtFl.textColor = color_entered_date
-            
-        } else { // date
-        dayBtn?.setTitle(String(datePicker.date.getDay()), for: .normal)
-            monthBtn?.setTitle(datePicker.date.getMonthAndWeek(lng: "en"), for: .normal)
+    ///Check if reservation date more than 90 days
+    func checkIfReservationMoreThan90Days() -> Bool {
+       // setSearchModel()
+        if  mainVM.isReservetionMore90Days(search: searchModel) {
+                BKDAlert().showAlertOk(on: self, message: Constant.Texts.max90Days, okTitle: Constant.Texts.ok) {
+                    self.mEditBySearchV?.resetReturnDate()
+                    self.mEditBySearchV?.resetReturnTime()
+            }
+            return true
         }
+        return false
+    }
+    
+    ///Check is reservation time during working time
+    private func checkReservationTime(timeStr: String) {
+        DetailsViewModel().isReservetionInWorkingHours(time: timeStr.stringToDate()) { [self] (result) in
+            if !result {
+                self.showAlertWorkingHours(timeStr: timeStr)
+            } else {
+                searchModel.returnTime = timeStr.stringToDate()
+                mEditBySearchV.setReturnTimeInfo(searchModel: searchModel)
+                editReservationModel = editReservVM.getNewReservetion(carId: currRent?.carDetails.id ?? "", startDate: currRent?.startDate ?? 0.0, search: searchModel)
+            }
+        }
+    }
+    
+    ///Is edit date later than before
+    private func checkEditReservationIsLater() {
+       if !editReservVM.isEditeDateLater(editSearch: searchModel,
+                                        oldSearch: oldSearchModel) {
+           self.showAlertExtendDate()
+       }
     }
     
     
@@ -171,10 +208,11 @@ class EditReservationViewController: BaseViewController {
     
     
    //MARK: -- Alerts
-    
+    ///Will show alert when checked custom location
     func showAlertCustomLocation(checkedBtn: UIButton) {
+        let locationPrice = CGFloat(ApplicationSettings.shared.settings?.customLocationMinimalValue ?? 0)
         BKDAlert().showAlert(on: self,
-                             title: String(format: Constant.Texts.titleCustomLocation, customLocationPrice),
+                             title: String(format: Constant.Texts.titleCustomLocation, locationPrice),
                              message: Constant.Texts.messageCustomLocation,
                              messageSecond: Constant.Texts.messageCustomLocation2,
                              cancelTitle: Constant.Texts.cancel,
@@ -185,7 +223,8 @@ class EditReservationViewController: BaseViewController {
                              })
     }
     
-    func showAlertWorkingHours() {
+    ///Will show alert when selection time is out of working times
+    func showAlertWorkingHours(timeStr: String) {
         BKDAlert().showAlert(on: self,
                              title:String(format: Constant.Texts.titleWorkingTime, timePrice),
                              message: Constant.Texts.messageWorkingTime + "(\(settings?.workStart ?? "") -  \(settings?.workEnd ?? "")).",
@@ -194,26 +233,34 @@ class EditReservationViewController: BaseViewController {
                              okTitle: Constant.Texts.agree,cancelAction:nil,
                              
                              okAction: { [self] in
-                                showSelectedDate(dayBtn: nil, monthBtn: nil, timeStr: pickerList![ pickerV.selectedRow(inComponent: 0)])
-
+            searchModel.returnTime = timeStr.stringToDate()
+            mEditBySearchV.setReturnTimeInfo(searchModel: searchModel)
+            editReservationModel = editReservVM.getNewReservetion(carId: currRent?.carDetails.id ?? "", startDate: currRent?.startDate ?? 0.0, search: searchModel)
                              })
     }
     
-    func showAlertMoreThanMonth(optionIndex: Int) {
+    ///Will show alert when selection date more then a month
+    func showAlertMoreThanMonth() {
         BKDAlert().showAlert(on: self,
                              title: nil,
                              message: Constant.Texts.messageMoreThanMonth,
                              messageSecond: nil,
                              cancelTitle: Constant.Texts.cancel,
                              okTitle: Constant.Texts.agree,
-                             cancelAction: { [self] in
-                    
+                             cancelAction:{
+            self.mEditBySearchV.resetReturnDate()
 
-                             }, okAction: { [self] in
-                                
-                               // self.confirmPressed(optionIndex: optionIndex)
-                             })
-        
+        }, okAction: { [self] in
+            checkEditReservationIsLater()
+        })
+    }
+    
+    ///Will show alert when selection date is smaller
+    func showAlertExtendDate() {
+        BKDAlert().showAlertOk(on: self, message: Constant.Texts.extendDateAlert, okTitle: Constant.Texts.ok) {
+            self.mEditBySearchV.resetReturnTime()
+            self.searchModel.returnTime = self.oldSearchModel.returnTime
+        }
     }
     
     //MARK: -- Actions
@@ -224,18 +271,21 @@ class EditReservationViewController: BaseViewController {
         
     @IBAction func additionalDriver(_ sender: UIButton) {
         
-        self.goToAdditionalDriver(on: nil,
-                                  isEditReservation: true,
-                                  additionalDrivers: nil)
+        let driverVC = MyDriversViewController.initFromStoryboard(name: Constant.Storyboards.myDrivers)
+        driverVC.rent = currRent
+        driverVC.accessories = accessories
+        driverVC.isEditReservation = true
+        driverVC.editReservationModel = editReservationModel
+        self.navigationController?.pushViewController(driverVC, animated: true)
     }
     
     
     @IBAction func accessories(_ sender: UIButton) {
-        
-        goToAccessories(on: nil,
-                        vehicleModel: nil,
-                        isEditReservation: true,
-                        accessoriesEditList: nil)
+        let accessoriesVC = AccessoriesUIViewController.initFromStoryboard(name: Constant.Storyboards.accessories)
+        accessoriesVC.currRent = currRent
+        accessoriesVC.isEditReservation = true
+        accessoriesVC.editReservationModel = editReservationModel
+        self.navigationController?.pushViewController(accessoriesVC, animated: true)
     }
     
     
@@ -243,7 +293,8 @@ class EditReservationViewController: BaseViewController {
         sender.setClickTitleColor(color_menu!)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3 ) {
             self.delegate?.didPressCheckPrice(isEdit: true)
-            self.goToEditReservationAdvanced()
+            self.goToEditReservationAdvanced(rent: self.currRent, accessories: self.accessories,
+                                             editReservationModel: self.editReservationModel)
            
          }
     }
@@ -260,7 +311,8 @@ class EditReservationViewController: BaseViewController {
     
     func handlerCinfirm() {
         mConfirmV.didPressConfirm = {
-            self.goToEditReservationAdvanced()
+            self.goToEditReservationAdvanced(rent: self.currRent, accessories: self.accessories,
+                                             editReservationModel: self.editReservationModel)
         }
     }
     
@@ -268,8 +320,9 @@ class EditReservationViewController: BaseViewController {
 
 
 
-
+//MARK: -- EditBySearchViewDelegate
 extension EditReservationViewController: EditBySearchViewDelegate {
+    
     func willOpenPicker(textFl: UITextField, pickerState: DatePicker) {
         self.pickerState = pickerState
         self.view.addSubview(self.backgroundV)
@@ -281,7 +334,6 @@ extension EditReservationViewController: EditBySearchViewDelegate {
             pickerList = ApplicationSettings.shared.pickerList
             textFl.inputView = pickerV
             textFl.inputAccessoryView = creatToolBar()
-
             pickerV.delegate = self
             pickerV.dataSource = self
         } else {
@@ -294,7 +346,8 @@ extension EditReservationViewController: EditBySearchViewDelegate {
                        // Fallback on earlier versions
             }
             self.datePicker.datePickerMode = .date
-            self.datePicker.minimumDate =  Date()
+            self.datePicker.minimumDate = oldSearchModel.returnDate
+            self.datePicker.timeZone = TimeZone(secondsFromGMT: 0)
             self.datePicker.locale = Locale(identifier: "en")
         }
     }
@@ -305,6 +358,7 @@ extension EditReservationViewController: EditBySearchViewDelegate {
             searchModel.pickUpLocationId = parking.id
             searchModel.isPickUpCustomLocation = false
             PriceManager.shared.pickUpCustomLocationPrice = nil
+        
         } else {// return location
             searchModel.returnLocation = parking.name
             searchModel.returnLocationId = parking.id
@@ -312,6 +366,8 @@ extension EditReservationViewController: EditBySearchViewDelegate {
             searchModel.isRetuCustomLocation = false
             PriceManager.shared.returnCustomLocationPrice = nil
         }
+        editReservationModel = editReservVM.getNewReservetion(carId: currRent?.carDetails.id ?? "",
+                                       startDate: editReservationModel.startDate ?? 0.0, search: searchModel)
         //isActiveReserve()
         
     }
@@ -347,8 +403,7 @@ extension EditReservationViewController: EditBySearchViewDelegate {
 }
 
 
-//MARK: CustomLocationUIViewControllerDelegate
-//MARK: ----------------------------
+//MARK: -- CustomLocationUIViewControllerDelegate
 extension EditReservationViewController: CustomLocationViewControllerDelegate {
     
     func getCustomLocation(_ locationPlace: String, coordinate: CLLocationCoordinate2D, price: Double?) {
@@ -359,14 +414,12 @@ extension EditReservationViewController: CustomLocationViewControllerDelegate {
                 self?.searchModel.pickUpLocationLongitude = coordinate.longitude
                 self?.searchModel.pickUpLocationLatitude = coordinate.latitude
                 self?.mEditBySearchV.pickUpLocation = locationPlace
-                //PriceManager.shared.pickUpCustomLocationPrice = price
             } else {
                 self?.searchModel.isRetuCustomLocation = true
                 self?.searchModel.returnLocation = locationPlace
                 self?.searchModel.returnLocationLongitude = coordinate.longitude
                 self?.searchModel.returnLocationLatitude = coordinate.latitude
                 self?.mEditBySearchV.returnLocation = locationPlace
-               // PriceManager.shared.returnCustomLocationPrice = price
             }
 
         })
@@ -374,8 +427,7 @@ extension EditReservationViewController: CustomLocationViewControllerDelegate {
 }
 
 
-//MARK: UIPickerViewDelegate
-//MARK: --------------------------------
+//MARK: -- UIPickerViewDelegate
 extension EditReservationViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -394,3 +446,15 @@ extension EditReservationViewController: UIPickerViewDelegate, UIPickerViewDataS
         
     }
 }
+
+
+////MARK: -- AccessoriesUIViewControllerDelegate
+//extension EditReservationViewController: AccessoriesUIViewControllerDelegate {
+//
+//    func addedAccessories(_ isAdd: Bool,
+//                          totalPrice: Double,
+//                          accessoriesEditList: [AccessoriesEditModel]?) {
+//
+//        self.accessoriesEditList = accessoriesEditList
+//    }
+//}

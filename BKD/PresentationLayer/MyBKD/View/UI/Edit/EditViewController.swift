@@ -17,13 +17,16 @@ class EditViewController: BaseViewController {
     @IBOutlet weak var mCancelBtn: UIButton!
     @IBOutlet weak var mConfirmBtn: UIButton!
     @IBOutlet weak var mCheckEmailLb: UILabel!
-        @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
+    @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
+    
+    public var email = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationControll(navControll: navigationController, barBtn: mRightBarBtn)
         configureUI()
     }
+    
     
     ///Configutre UI
     func configureUI() {
@@ -41,12 +44,45 @@ class EditViewController: BaseViewController {
     private func checkEmailAddress() {
         ChatViewModel().isValidEmail(email: mNewEmailTxtFl.text!) { [self] (isValid) in
             if isValid {
-                //signIn()
+                checkPassword()
             } else {
                 mNewEmailTxtFl.layer.borderColor = color_error!.cgColor
             }
         }
     }
+    
+    ///Check password field
+    private func checkPassword() {
+       let pass = MyBKDViewModel().password
+        if pass != mChangePassTxtFl.text {
+            mChangePassTxtFl.layer.borderColor = color_error!.cgColor
+        } else {
+            sendNewEmailCode(email: mNewEmailTxtFl.text!)
+        }
+    }
+    
+    ///Send new email code
+    func sendNewEmailCode(email: String) {
+        MyBKDViewModel().updateEmail(email: email) { [self] response in
+            guard let _ = response else {return}
+            goToVerification()
+        }
+        
+    }
+   
+    ///Open Verification screen
+    func goToVerification() {
+        
+        let verificationCode = VerificationCodeViewController.initFromStoryboard(name: Constant.Storyboards.verificationCode)
+        verificationCode.email = email
+        self.navigationController?.pushViewController(verificationCode, animated: true)
+    }
+    
+//    func showEmailVerificationMessage() {
+//        mButtonsStackV.isHidden = true
+//        mTextFiledStackV.isHidden = true
+//        mCheckEmailLb.isHidden = false
+//    }
     
     // MARK: -- Actions
     @IBAction func back(_ sender: UIBarButtonItem) {
@@ -54,9 +90,7 @@ class EditViewController: BaseViewController {
     }
     
     @IBAction func confirm(_ sender: UIButton) {
-        mButtonsStackV.isHidden = true
-        mTextFiledStackV.isHidden = true
-        mCheckEmailLb.isHidden = false
+        checkEmailAddress()
     }
     
     @IBAction func cancel(_ sender: UIButton) {
@@ -80,12 +114,17 @@ extension EditViewController: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        mNewEmailTxtFl.layer.borderColor = color_navigationBar!.cgColor
-        mChangePassTxtFl.layer.borderColor = color_navigationBar!.cgColor
+       
         textField.becomeFirstResponder()
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField == mNewEmailTxtFl {
+            mNewEmailTxtFl.layer.borderColor = color_navigationBar!.cgColor
+        } else {
+            mChangePassTxtFl.layer.borderColor = color_navigationBar!.cgColor
+        }
         
         guard let text = textField.text else { return false }
         let fullString = NSString(string: text).replacingCharacters(in: range, with: string)

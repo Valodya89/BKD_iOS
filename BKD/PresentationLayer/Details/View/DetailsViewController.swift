@@ -63,7 +63,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
 
     private lazy  var tariffSlideVC = TariffSlideViewController.initFromStoryboard(name: Constant.Storyboards.details)
     
-    let detailsViewModel:DetailsViewModel = DetailsViewModel()
+    let detailsVM:DetailsViewModel = DetailsViewModel()
     var settings: Settings?
     var startFlexibleTimeList: [String]?
     var endFlexibleTimeList: [String]?
@@ -228,7 +228,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     ///Set  values to vehicle model
      func setVehicleModel(){
-        let tariffIndex = detailsViewModel.getTariffIndex(tariff: currentTariff)
+        let tariffIndex = detailsVM.getTariffIndex(tariff: currentTariff)
         vehicleModel?.vehicleName = mCarNameLb.text
         vehicleModel?.additionalAccessories = accessoriesEditList
         vehicleModel?.searchModel = searchModel
@@ -238,7 +238,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
 //MARK: -- Get
     ///get car´s images List
     private func getCarImagesList() {
-        detailsViewModel.getCarImageList(item: vehicleModel ?? VehicleModel()) { (imagesRetsult) in
+        detailsVM.getCarImageList(item: vehicleModel ?? VehicleModel()) { (imagesRetsult) in
             self.carPhotosView.carImagesList = imagesRetsult ?? []
             self.carPhotosView.mScrollRightBtn.isHidden =  self.carPhotosView.carImagesList.count > 1 ? false : true
             self.carPhotosView.mImagePagingCollectionV.reloadData()
@@ -248,18 +248,18 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     ///Get tariff list
     private func getTariffList() {
-        detailsViewModel.getTariff { [self] result in
+        detailsVM.getTariff { [self] result in
             guard let _ = result else {
                 BKDAlert().showAlertOk(on: self,
                                        message: Constant.Texts.errorRequest,
                                        okTitle: Constant.Texts.ok, okAction: nil)
                 return
             }
-            self.tariffSlideList = self.detailsViewModel.changeTariffListForUse(tariffs: result!, vehicleModel: self.vehicleModel ?? VehicleModel())
+            self.tariffSlideList = self.detailsVM.changeTariffListForUse(tariffs: result!, vehicleModel: self.vehicleModel ?? VehicleModel())
             self.tariffSlideVC.tariffSlideList = self.tariffSlideList
             self.tariffSlideVC.mTariffSlideCollectionV.reloadData()
             if isSearchEdit {
-                  self.detailsViewModel.getCurrentTariff(search: searchModel,
+                  self.detailsVM.getCurrentTariff(search: searchModel,
                                                          vehicleModel: vehicleModel!,
                                                          tariffSlideList: self.tariffSlideList,
                                                          completion: { slideList, tariffState in
@@ -296,8 +296,8 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         mAdditionalDriverBtn.layer.cornerRadius = 8
         mReserveBckgV.isHidden = isClickMore
         
-        startFlexibleTimeList = detailsViewModel.getStartFlexibleTimes(flexibleTimes: ApplicationSettings.shared.flexibleTimes)
-        endFlexibleTimeList = detailsViewModel.getEndFlexibleTimes(flexibleTimes: ApplicationSettings.shared.flexibleTimes)
+        startFlexibleTimeList = detailsVM.getStartFlexibleTimes(flexibleTimes: ApplicationSettings.shared.flexibleTimes)
+        endFlexibleTimeList = detailsVM.getEndFlexibleTimes(flexibleTimes: ApplicationSettings.shared.flexibleTimes)
         if !isClickMore {
             configureReserveView(isActive: isSearchEdit)
         }
@@ -409,14 +409,14 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             if currentTariff != .flexible {
                 search = .date
                 searchModel.pickUpDate = datePicker.date
-                newSearchModel = detailsViewModel.updateSearchInfo(tariffSlideList: tariffSlideList!,
+                newSearchModel = detailsVM.updateSearchInfo(tariffSlideList: tariffSlideList!,
                                                                        tariff:
                                                                         currentTariff,
                                                                        search: search,
                                                                        optionIndex: currentTariffOptionIndex, currSearchModel: searchModel)
                 mSearchV.updateSearchDate(tariff: currentTariff, searchModel:newSearchModel)
             } else {
-                newSearchModel = detailsViewModel.updateSearchInfoForFlexible(search: search,
+                newSearchModel = detailsVM.updateSearchInfoForFlexible(search: search,
                                                                               currSearchModel: searchModel)
                 mSearchV.updateSearchDate(tariff: currentTariff,
                                           searchModel: newSearchModel)
@@ -435,7 +435,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             searchModel.pickUpTime = timeStr.stringToDate()
             mSearchV.mReturnTimeTxtFl.font =  UIFont.init(name: (responderTxtFl.font?.fontName)!, size: 18.0)
             
-            newSearchModel = detailsViewModel.updateSearchInfo(tariffSlideList: tariffSlideList!,
+            newSearchModel = detailsVM.updateSearchInfo(tariffSlideList: tariffSlideList!,
                                                                tariff:
                                                                 currentTariff,
                                                                search: search,
@@ -444,7 +444,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
                                        tariff: currentTariff)
             
         } else {
-            newSearchModel = detailsViewModel.updateSearchInfoForFlexible(search: search,
+            newSearchModel = detailsVM.updateSearchInfoForFlexible(search: search,
                                                                           currSearchModel: searchModel)
             mSearchV.updateSearchDate(tariff: currentTariff,
                                       searchModel: newSearchModel)
@@ -460,7 +460,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             search.returnTime != nil &&
             currentTariff == .flexible &&
             currentTariffOption != nil  {
-            flexibleTariffOption = detailsViewModel.getFlexiblePrice(search: search, option: currentTariffOption!, vehicle: vehicleModel!, isSelected: isFlexibleSelected)
+            flexibleTariffOption = detailsVM.getFlexiblePrice(search: search, option: currentTariffOption!, vehicle: vehicleModel!, isSelected: isFlexibleSelected)
             
             guard let tariffSlideList = mTariffCarouselV.tariffSlideList else {return}
             
@@ -488,7 +488,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     
     private func isActiveReserve() {
-        detailsViewModel.isReserveActive(searchModel: searchModel) { [self] (isActive) in
+        detailsVM.isReserveActive(searchModel: searchModel) { [self] (isActive) in
             //remove CAGradientLayer
             self.mReserveBckgV.layer.sublayers?.filter{ $0 is CAGradientLayer }.forEach{ $0.removeFromSuperlayer() }
             configureReserveView(isActive: isActive)
@@ -602,8 +602,9 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     //MARK: -- Alerts
     ///Alert for custom location
     func showAlertCustomLocation(checkedBtn: UIButton) {
+        let locationPrice = CGFloat(ApplicationSettings.shared.settings?.customLocationMinimalValue ?? 0)
         BKDAlert().showAlert(on: self,
-                             title: String(format: Constant.Texts.titleCustomLocation, customLocationPrice),
+                             title: String(format: Constant.Texts.titleCustomLocation, locationPrice),
                              message: Constant.Texts.messageCustomLocation,
                              messageSecond: Constant.Texts.messageCustomLocation2,
                              cancelTitle: Constant.Texts.cancel,
@@ -675,7 +676,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     //MARK: -- Checked
     ///check is reservation time during working time
     private func chanckReservationTime(timeStr: String?) {
-        detailsViewModel.isReservetionInWorkingHours(time: timeStr?.stringToDate()) { [self] (result) in
+        detailsVM.isReservetionInWorkingHours(time: timeStr?.stringToDate()) { [self] (result) in
             if !result {
                 self.showAlertWorkingHours()
             } else {
@@ -709,11 +710,11 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         currentTariffOption = options?[optionIndex]
         isFlexibleSelected = (currentTariff == .flexible) ? true : false
         if currentTariff != .flexible &&  flexibleTariffOption != nil {
-            flexibleTariffOption = detailsViewModel.getFlexiblePrice(search: searchModel, option: flexibleTariffOption!, vehicle: vehicleModel!, isSelected: false)
+            flexibleTariffOption = detailsVM.getFlexiblePrice(search: searchModel, option: flexibleTariffOption!, vehicle: vehicleModel!, isSelected: false)
             mTariffCarouselV.tariffSlideList![tariffSlideList!.count - 1] = flexibleTariffOption!
         }
 
-        tariffSlideList = detailsViewModel.updateTariffSlideList(tariffSlideList: tariffSlideList,
+        tariffSlideList = detailsVM.updateTariffSlideList(tariffSlideList: tariffSlideList,
                                                                  optionIndex: optionIndex,
                                                                  options: options,
                                                                  tariff: currentTariff)
@@ -775,7 +776,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
                 timeStr = pickerList![ pickerV.selectedRow(inComponent: 0)]
                 chanckReservationTime(timeStr: timeStr)
            } else {
-               timeStr = detailsViewModel.getTimeOfFlexible(time: pickerList![ pickerV.selectedRow(inComponent: 0)])
+               timeStr = detailsVM.getTimeOfFlexible(time: pickerList![ pickerV.selectedRow(inComponent: 0)])
            }
 
             
@@ -806,6 +807,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     @IBAction func accessories(_ sender: UIButton) {
         self.goToAccessories(on: self,
                              vehicleModel: vehicleModel,
+                             rent: nil,
                              isEditReservation: false,
                              accessoriesEditList: accessoriesEditList)
     }
@@ -819,7 +821,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     @IBAction func reserve(_ sender: UIButton) {
         animationReserve()
-        detailsViewModel.setNoWorkingHoursPrice(search: searchModel, price: timePrice)
+        detailsVM.setNoWorkingHoursPrice(search: searchModel, price: timePrice)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [self] in
                 self.goToReserveController()
@@ -944,7 +946,7 @@ extension DetailsViewController: TariffCarouselViewDelegate {
     ///update search fields
     private func updateSearchFields(optionIndex: Int) {
         if !isSearchEdit {
-        searchModel = detailsViewModel.updateSearchInfo(tariffSlideList:tariffSlideList!,
+        searchModel = detailsVM.updateSearchInfo(tariffSlideList:tariffSlideList!,
                                                         tariff: currentTariff,
                                           search: search,
                                           optionIndex: optionIndex,

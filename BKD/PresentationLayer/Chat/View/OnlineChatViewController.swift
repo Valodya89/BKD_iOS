@@ -31,14 +31,19 @@ final class OnlineChatViewController: MessagesViewController, StoryboardInitiali
         setupView()
     }
     
-    // MARK: - IBActions
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        tabBarController?.tabBar.isHidden = true
+//    }
+    
+    // MARK: -- IBActions
     
     @IBAction func dismiss(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
     }
     
     
-    // MARK: - Functions
+    // MARK: -- Functions
     
     private func setupView() {
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
@@ -136,7 +141,7 @@ extension OnlineChatViewController: MessagesLayoutDelegate, MessagesDataSource, 
     }
     
     
-    //MARK: MessagesDisplayDelegate
+    //MARK: -- MessagesDisplayDelegate
     func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
         
         let closure = { [self] (view: MessageContainerView) in
@@ -167,14 +172,14 @@ extension OnlineChatViewController: MessagesLayoutDelegate, MessagesDataSource, 
     }
     
     
-    //MARK: MessagesLayoutDelegate
+    //MARK: -- MessagesLayoutDelegate
     
     func cellTopLabelHeight(for message: MessageKit.MessageType, at indexPath: IndexPath, in messagesCollectionView: MessageKit.MessagesCollectionView) -> CGFloat {
         return 40
     }
 }
 
-//MARK: - MessageInputBarDelegate
+//MARK: -- MessageInputBarDelegate
 
 extension OnlineChatViewController: InputBarAccessoryViewDelegate {
     func inputBar(_ inputBar: InputBarAccessoryView, textViewTextDidChangeTo text: String) {

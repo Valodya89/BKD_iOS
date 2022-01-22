@@ -26,8 +26,7 @@ class DetailsTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
     }
     
     
-    //MARK: UITableViewDataSource
-    //MARK: ----------------------------------
+    //MARK: -- UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return detailList.count
     }

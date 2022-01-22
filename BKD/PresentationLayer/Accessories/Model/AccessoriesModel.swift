@@ -38,6 +38,21 @@ struct AccessoriesEditModel {
     public var isAdded: Bool = false
     public var price: Double?    
     public var totalPrice: Double?
+    
+    
+    ///Get edited  accessiries
+    func getEditedAccessories(editAccessories: [EditAccessory]) -> [AccessoriesEditModel]? {
+        
+        var newEditAccessories: [AccessoriesEditModel]? = []
+        if editAccessories.count > 0 {
+            editAccessories.forEach {editAccessory in
+                
+                let accessory = AccessoriesEditModel(id: editAccessory.id, imageUrl: editAccessory.accessory.imageUrl, name: editAccessory.accessory.name, count: Int(editAccessory.count), maxCount: editAccessory.accessory.maxCount, isAdded: true, price: editAccessory.accessory.price)
+                newEditAccessories?.append(accessory)
+            }
+        }
+        return newEditAccessories
+    }
 
 }
 

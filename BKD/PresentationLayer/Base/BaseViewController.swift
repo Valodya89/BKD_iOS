@@ -191,8 +191,11 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     }
     
     /// Go to Sign in screen
-    func goToEditReservationAdvanced() {
-          let editReservetionAdvancedVC = EditReservetionAdvancedViewController.initFromStoryboard(name: Constant.Storyboards.editReservetionAdvanced)
+    func goToEditReservationAdvanced(rent: Rent?, accessories: [AccessoriesEditModel]?, editReservationModel: EditReservationModel?) {
+        let editReservetionAdvancedVC = EditReservetionAdvancedViewController.initFromStoryboard(name: Constant.Storyboards.editReservetionAdvanced)
+        editReservetionAdvancedVC.currRent = rent
+        editReservetionAdvancedVC.accessories = accessories
+        editReservetionAdvancedVC.editReservationModel = editReservationModel ?? EditReservationModel()
         self.navigationController?.pushViewController(editReservetionAdvancedVC, animated: true)
         self.tabBarController?.tabBar.isHidden = false
     }
@@ -212,12 +215,14 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     ///Go to accessories  screen
     func goToAccessories(on viewController: UIViewController?,
                          vehicleModel:VehicleModel?,
+                         rent: Rent?,
                          isEditReservation: Bool,
                          accessoriesEditList: [AccessoriesEditModel]?) {
         
         let accessoriesVC = UIStoryboard(name: Constant.Storyboards.accessories, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.accessories) as! AccessoriesUIViewController
         accessoriesVC.delegate = viewController as? AccessoriesUIViewControllerDelegate
         accessoriesVC.vehicleModel = vehicleModel
+        accessoriesVC.currRent = rent
         accessoriesVC.isEditReservation = isEditReservation
         accessoriesVC.accessoriesEditList = accessoriesEditList
         self.navigationController?.pushViewController(accessoriesVC, animated: true)
@@ -282,13 +287,13 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     ///Open upload images actionshit
     func openActionshitOfImages(viewContr: MyPersonalInformationViewController) {
         let alert = UIAlertController(title: Constant.Texts.selecteImg, message: "", preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction (title: Constant.Texts.camera, style: .default) { [self] (action) in
+        let cameraAction = UIAlertAction (title: Constant.Texts.camera, style: .default) { (action) in
             if UIImagePickerController.isSourceTypeAvailable(.camera) {
                 viewContr.presentPicker(sourceType: .camera)
             }
         }
         
-        let photoLibraryAction = UIAlertAction (title: Constant.Texts.photoLibrary, style: .default) { [self] (action) in
+        let photoLibraryAction = UIAlertAction (title: Constant.Texts.photoLibrary, style: .default) { (action) in
             if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
                 viewContr.presentPicker(sourceType: .photoLibrary)
             }
@@ -301,4 +306,15 @@ class BaseViewController: UIViewController, StoryboardInitializable {
         viewContr.present(alert, animated: true)
     }
     
+    
+    /// Will open Chat View Controller
+     func openChatPage (viewCont: UIViewController) {
+        if MainViewModel().isOnline {
+            let onlineChat = OnlineChatViewController.initFromStoryboard(name: Constant.Storyboards.chat)
+            viewCont.navigationController?.pushViewController(onlineChat, animated: true)
+        } else {
+            let offlineChat = OfflineViewController.initFromStoryboard(name: Constant.Storyboards.chat)
+            viewCont.navigationController?.pushViewController(offlineChat, animated: true)
+        }
+    }
 }

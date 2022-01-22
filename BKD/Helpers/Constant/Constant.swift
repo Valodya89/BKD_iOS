@@ -49,6 +49,9 @@ struct Constant {
         static let myPersonalInfo = "MyPersonalInformation"
         static let myAccountsDrivers = "MyAccountsDrivers"
         static let myAccount = "MyAccount"
+        static let aboutUs = "AboutUs"
+        static let faq = "FAQ"
+
 
     }
     struct NibNames {
@@ -103,6 +106,7 @@ struct Constant {
         static let odometerCheckStopRide = "OdometerCheckStopRideUIViewController"
         static let stopRide = "StopRideViewController"
         static let myPersonalInfo = "MyPersonalInformationViewController"
+        static let faq = "FAQViewController"
     }
     
     struct DeepLinks {
@@ -118,6 +122,11 @@ struct Constant {
     }
     
     struct Texts {
+        
+        //MARK: -- Menu
+        static let privacyPolic = "Privacy Policy"
+        static let termsOfUse = "Terms of Use"
+        
         //MARK: -- Main
         static let euro = "€"
         static let inclVat = "(incl, VAT)"
@@ -317,7 +326,10 @@ struct Constant {
         static let finishRide = "Finish ride"
         
         //MARK: -- Additional driver
-        static let addDriverAlert = "Additional driver servide is %.2f euro per driver. You need to wait for Admin approval to have an additional drier for your account. No payment will be needed unless the Admin approves the driver addition."
+        
+        
+        
+        static let addDriverAlert = "Additional driver service is %.2f euro per driver. You need to wait for Admin approval to have an additional driver for your account. No payment will be needed unless the Admin approves the driver addition"
         static let addDriverService = "Additional driver service is %.2f euro per driver. Please, confirm that you want to turn on the service."
         static let licenseNumber =  "Driving license number"
 
@@ -334,6 +346,9 @@ struct Constant {
         static let confirmAccidentDetails = "Do you confirm the accident details and all the provided information assurance?"
         static let cancelAccident = "Are you sure you want to back? The accident and all information provided will be deleted."
         static let yes = "Yes"
+        
+        //MARK: -- Edit reservation
+        static let extendDateAlert = "The reservation date can only be extended, not reduced"
         
         //MARK: -- Compare
         static let vehicle2 = "Vehicle 2"
@@ -401,6 +416,7 @@ struct Constant {
         static let manual = "MANUAL"
         static let resetPassword = "PASSWORD_RESET"
         static let verification = "VERIFICATION"
+        static let changeEmail = "CHANGE_EMAIL"
         static let creat_main_driver = "MAIN"
         static let creat_additional_driver = "ADDITIONAl"
         static let state_created = "CREATED"
@@ -432,6 +448,7 @@ struct Constant {
         static let take_photo = "takePhoto"
         static let open_doc = "openDoc"
         static let custom = "CUSTOM"
+        static let parking = "PARKING"
 
         
     }
@@ -440,6 +457,7 @@ struct Constant {
         static let LanguageUpdate = NSNotification.Name(rawValue: "BKD.Notification.Language")
         static let signUpEmailVerify =  NSNotification.Name(rawValue: "BKD.Notification.EmailVerify")
         static let resetPassEmailVerify =  NSNotification.Name(rawValue: "BKD.Notification.ResetPassEmailVerify")
+        static let changeEmailVerify =  NSNotification.Name(rawValue: "BKD.Notification.ChangeEmailVerify")
     }
 }
 
@@ -451,7 +469,7 @@ let sidesList = [Constant.Texts.frontSide,
                  Constant.Texts.rightSide,
                  Constant.Texts.leftSide
                 ]
-let cityList = ["City1", "City2", "City3", "City4", "City5", "City6", "City7"]
+
 let paymentSupportedCountriesCode: Set<String>? = ["AM", "FR", "NL", "GB"]
 let emailAppNames = [ "Googleg Mail", "Yahoo Mail", "Message"]
 let bancontactList = [UIImage(named: "ing"),
@@ -462,16 +480,14 @@ let equipmentForSearch = [ "0": "towbar",
                   "2": "tailgate",
                   "3": "GPSNavigator",
                   "4": "airConditioning" ]
+let contactUsList = ["Call BKD", "Chat"]
 
 let documentStateArr = ["IF",
                         "IB",
                         "DLF",
                         "DLB",
                         "DLS"]
-let testParking = Parking(id: "73483478",
-                          name: "Testing address",
-                          longitude: 44.495332,
-                          latitude: 40.194582)
+ 
 
 
 
@@ -505,6 +521,7 @@ let height550 = UIScreen.main.bounds.height * 0.680
 let height115 = UIScreen.main.bounds.height * 0.142
 let height274 = UIScreen.main.bounds.height * 0.339
 let height130 = UIScreen.main.bounds.height * 0.160
+let height257 = UIScreen.main.bounds.height * 0.318
 let height273 = UIScreen.main.bounds.height * 0.337
 let height68 = UIScreen.main.bounds.height * 0.084
 let height170 = UIScreen.main.bounds.height * 0.21
@@ -538,6 +555,7 @@ let key_height = "height"
 
 //Colors
 let color_main = UIColor(named: "main")
+let color_submenu = UIColor(named: "submenu")
 let color_background = UIColor(named: "background")
 let color_subbackground = UIColor(named: "subview_background")
 let color_search_placeholder = UIColor(named: "date_lb")

@@ -132,8 +132,6 @@ class MyReservetionAdvancedViewController: BaseViewController {
        
         mAdditionalDriverTableHeight.constant = mAdditionalDriverTableV.contentSize.height
         
-        
-        
         mRegisterNumberTableHeight.constant = mRegisterNumberTableV.contentSize.height
         
         mOnRideTableHeight.constant = mOnRideTableV.contentSize.height
@@ -367,10 +365,12 @@ class MyReservetionAdvancedViewController: BaseViewController {
     }
     
     ///Open edit reservation screen
-    private func goToEditReservation(isExtendReservation: Bool) {
+    private func goToEditReservation(isExtendReservation: Bool, accessories: [AccessoriesEditModel]?) {
         
         let editReservationVC = EditReservationViewController.initFromStoryboard(name: Constant.Storyboards.editReservation)
         editReservationVC.isExtendReservation = isExtendReservation
+        editReservationVC.currRent = currRent
+        editReservationVC.accessories = accessories
         self.navigationController?.pushViewController(editReservationVC, animated: true)
     }
     
@@ -466,7 +466,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
     @IBAction func edit(_ sender: UIButton) {
         sender.backgroundColor = color_menu!
         mCancelBtn.backgroundColor = .clear
-        goToEditReservation(isExtendReservation: false)
+        goToEditReservation(isExtendReservation: false, accessories: mReserveInfoTableV.accessories)
     }
     
     @IBAction func cancel(_ sender: UIButton) {
@@ -479,7 +479,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
         sender.setClickColor(color_menu!, titleColor: sender.titleColor(for: .normal)!)
         sender.backgroundColor = color_menu!
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
-            goToEditReservation(isExtendReservation: true)
+            goToEditReservation(isExtendReservation: true, accessories: nil)
         }
     }
     

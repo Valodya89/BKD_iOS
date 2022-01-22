@@ -58,4 +58,32 @@ class VerificationCodeViewModel: NSObject {
     }
     
    
+    
+    ///send email verification code
+    func emailVerification(email: String,
+                           code: String,
+                           completion: @escaping (SignUpStatus) -> Void) {
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.verifyEmail(email: email, code: code))) { (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let verification = BkdConverter<BaseResponseModel<EmptyModel>>.parseJson(data: data as Any) else {
+                    print("error")
+                    completion(SignUpStatus(rawValue: "error")!)
+                    return
+                }
+                if verification.message != "SUCCESS" {
+                    completion(SignUpStatus(rawValue: "error")!)
+                } else {
+                    print(verification.message as Any)
+                    completion(SignUpStatus(rawValue: verification.message)!)
+                }
+               
+            case .failure(let error):
+                print(error.description)
+                completion(SignUpStatus(rawValue: "error")!)
+                break
+            }
+        }
+    }
 }

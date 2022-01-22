@@ -109,6 +109,7 @@ class EditBySearchView: UIView, UITextFieldDelegate {
     }
     
     
+    
     //MARK: --Life ciclñe
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -180,10 +181,17 @@ class EditBySearchView: UIView, UITextFieldDelegate {
     /// Set pick up timr info
     func setPickUpTimeInfo(searchModel: SearchModel) {
         mPickUpTimeTxtFl.font =  UIFont.init(name: (mPickUpTimeTxtFl.font?.fontName)!, size: 18.0)
-        mPickUpTimeTxtFl.textColor = color_entered_date
+        mPickUpTimeTxtFl.textColor = color_search_passive!
         mPickUpTimeTxtFl.text = searchModel.pickUpTime!.getHour()
     }
     
+    /// Set return up timr info
+    func setReturnTimeInfo(searchModel: SearchModel) {
+        returnTime = searchModel.returnTime
+        mReturnTimeTxtFl.font =  UIFont.init(name: (mReturnTimeTxtFl.font?.fontName)!, size: 18.0)
+        mReturnTimeTxtFl.textColor = color_entered_date
+        mReturnTimeTxtFl.text = searchModel.returnTime!.getHour()
+    }
     
     /// Set pick up location info
     func setPickUpLocationInfo(searchModel: SearchModel) {
@@ -313,6 +321,7 @@ class EditBySearchView: UIView, UITextFieldDelegate {
         setPickUpDateInfo(searchModel: searchModel)
         setReturnDateInfo(searchModel: searchModel)
         setPickUpTimeInfo(searchModel: searchModel)
+        setReturnTimeInfo(searchModel: searchModel)
         setPickUpLocationInfo(searchModel: searchModel)
         setReturnLocationInfo(searchModel: searchModel)
     }
@@ -346,6 +355,21 @@ class EditBySearchView: UIView, UITextFieldDelegate {
         didResult(isPickUpLocation)
     }
     
+    ///Delete return time
+    func resetReturnTime() {
+        mReturnTimeTxtFl.text = Constant.Texts.returnTime
+        mReturnTimeTxtFl.font = font_placeholder
+        mReturnTimeTxtFl.textColor = color_choose_date
+    }
+    
+    ///Delete return date
+    func resetReturnDate() {
+        mReturnDateTxtFl.text = Constant.Texts.returnDate
+        mReturnDateTxtFl.font = font_placeholder
+        mReturnDateTxtFl.textColor = color_choose_date
+        mDayReturnDateBtn.setTitle("", for: .normal)
+        mMonthReturnDateBtn?.setTitle("", for: .normal)
+    }
     
     //MARK: ACTIONS
     //MARK: ---------------

@@ -11,7 +11,6 @@ import CoreLocation
 
 
 let timePrice: Double = 59.99
-let customLocationPrice: Double = 42.99
 
 
 class MainViewController: BaseViewController {
@@ -27,7 +26,7 @@ class MainViewController: BaseViewController {
     
     //MARK: -- Variables
     private lazy  var carouselVC = CarouselViewController.initFromStoryboard(name: Constant.Storyboards.carousel)
-    private let mainViewModel: MainViewModel = MainViewModel()
+    private let mainVM: MainViewModel = MainViewModel()
     lazy var searchModel: SearchModel = SearchModel()
     var menu: SideMenuNavigationController?
     var searchHeaderV: SearchHeaderView?
@@ -318,7 +317,7 @@ class MainViewController: BaseViewController {
     ///check if reservation date more than 90 days
     func checkIfReservationMoreThan90Days() -> Bool {
         setSearchModel()
-        if  mainViewModel.isReservetionMore90Days(search: searchModel) {
+        if  mainVM.isReservetionMore90Days(search: searchModel) {
                 BKDAlert().showAlertOk(on: self, message: Constant.Texts.max90Days, okTitle: Constant.Texts.ok) {
                     self.searchHeaderV?.resetReturnDate()
                     self.searchHeaderV?.resetReturnTime()
@@ -337,7 +336,7 @@ class MainViewController: BaseViewController {
         } else if pickerState == .returnDate {
             returnDate = datePicker.date
         }
-        mainViewModel.isReservetionMoreThanMonth(pickUpDate: pickUpDate, returnDate: returnDate) { (result) in
+        mainVM.isReservetionMoreThanMonth(pickUpDate: pickUpDate, returnDate: returnDate) { (result) in
             if result {
                 self.showAlertMoreThanMonth()
             }
@@ -345,10 +344,10 @@ class MainViewController: BaseViewController {
     }
    
     /// check if reservetion time in range
-    func checkReservetionTime() {
+    func checkReservetionTime(currTime: Date?) {
         settings = ApplicationSettings.shared.settings
         guard let _ = settings else { return }
-        mainViewModel.isReservetionInWorkingHours(time: searchHeaderV?.pickUpTime, settings: settings! ) { [self] (result) in
+        mainVM.isReservetionInWorkingHours(time: currTime, settings: settings! ) { [self] (result) in
             if !result {
                 self.showAlertWorkingHours()
             } else {
@@ -372,7 +371,7 @@ class MainViewController: BaseViewController {
             return
             
         }
-            mainViewModel.isReservetionMoreHalfHour(pickUpDate: pickUpDate, returnDate: returnDate, pickUpTime: pickUpTime, returnTime: returnTime) { (result) in
+        mainVM.isReservetionMoreHalfHour(pickUpDate: pickUpDate, returnDate: returnDate, pickUpTime: pickUpTime, returnTime: returnTime) { (result) in
 
                 if !result {
                     BKDAlert().showAlertOk(on: self, message: Constant.Texts.lessThan30Minutes, okTitle: "ok", okAction: {
@@ -395,6 +394,21 @@ class MainViewController: BaseViewController {
         }
     
     //MARK: -- Alert Methods
+    ///Alert for custom location
+    func showAlertCustomLocation(checkedBtn: UIButton) {
+        let locationPrice = CGFloat(ApplicationSettings.shared.settings?.customLocationMinimalValue ?? 0)
+        BKDAlert().showAlert(on: self,
+                             title: String(format: Constant.Texts.titleCustomLocation, locationPrice),
+                             message: Constant.Texts.messageCustomLocation,
+                             messageSecond: Constant.Texts.messageCustomLocation2,
+                             cancelTitle: Constant.Texts.cancel,
+                             okTitle: Constant.Texts.agree,cancelAction: {
+                                checkedBtn.setImage(img_uncheck_box, for: .normal)
+                             }, okAction: { [self] in
+                                self.goToCustomLocationMapController(on: self, isAddDamageAddress: false)
+                             })
+    }
+    
     func showAlertMoreThanMonth() {
         BKDAlert().showAlert(on: self,
                              title: nil,
@@ -402,11 +416,8 @@ class MainViewController: BaseViewController {
                              messageSecond: nil,
                              cancelTitle: Constant.Texts.cancel,
                              okTitle: Constant.Texts.agree,cancelAction: { [self] in
-                                self.searchHeaderV?.mDayReturnDateBtn.isHidden = true
-                                self.searchHeaderV?.mMonthReturnDateBtn.isHidden = true
-                                self.searchHeaderV?.mReturnDateTxtFl.isHidden = false
-                                self.searchHeaderV?.mReturnDateTxtFl.text = Constant.Texts.returnDate
-                             }, okAction: nil)
+            self.searchHeaderV?.resetReturnDate()
+        }, okAction: nil)
         
     }
     
@@ -417,22 +428,9 @@ class MainViewController: BaseViewController {
                              messageSecond: nil,
                              cancelTitle: Constant.Texts.cancel,
                              okTitle: Constant.Texts.agree,cancelAction: { [self] in
-                                self.searchHeaderV?.configureTimeTextField(txtFl: responderTxtFl)
-                             }, okAction: {
-                                self.checkReservetionHalfHour()
-                             })
-    }
-    
-    func showAlertCustomLocation(checkedBtn: UIButton) {
-        BKDAlert().showAlert(on: self,
-                             title:String(format: Constant.Texts.titleCustomLocation, customLocationPrice),
-                             message: Constant.Texts.messageCustomLocation,
-                             messageSecond: Constant.Texts.messageCustomLocation2,
-                             cancelTitle: Constant.Texts.cancel,
-                             okTitle: Constant.Texts.agree,cancelAction: {
-                                checkedBtn.setImage(img_uncheck_box, for: .normal)
-                             }, okAction: { [self] in
-                                 self.goToCustomLocationMapController(on: self, isAddDamageAddress: false)
+            self.searchHeaderV?.configureTimeTextField(txtFl: responderTxtFl)
+        }, okAction: {
+            self.checkReservetionHalfHour()
                              })
     }
     
@@ -521,16 +519,16 @@ class MainViewController: BaseViewController {
         }
     }
     
-    /// Will open Chat View Controller
-    private func openChatPage () {
-        if mainViewModel.isOnline {
-            let onlineChat = OnlineChatViewController.initFromStoryboard(name: Constant.Storyboards.chat)
-            self.navigationController?.pushViewController(onlineChat, animated: true)
-        } else {
-            let offlineChat = OfflineViewController.initFromStoryboard(name: Constant.Storyboards.chat)
-            self.navigationController?.pushViewController(offlineChat, animated: true)
-        }
-    }
+//    /// Will open Chat View Controller
+//    private func openChatPage () {
+//        if mainVM.isOnline {
+//            let onlineChat = OnlineChatViewController.initFromStoryboard(name: Constant.Storyboards.chat)
+//            self.navigationController?.pushViewController(onlineChat, animated: true)
+//        } else {
+//            let offlineChat = OfflineViewController.initFromStoryboard(name: Constant.Storyboards.chat)
+//            self.navigationController?.pushViewController(offlineChat, animated: true)
+//        }
+//    }
     
     
     //MARK: -- Actions
@@ -545,12 +543,12 @@ class MainViewController: BaseViewController {
     
     @IBAction func rightBar(_ sender: UIBarButtonItem) {
         if isSearchResultPage {
-            openChatPage ()
+            openChatPage(viewCont: self)
         }
     }
     
     @IBAction func chatWithUs(_ sender: UIButton) {
-        openChatPage ()
+        openChatPage(viewCont: self)
     }
     
     
@@ -588,7 +586,7 @@ class MainViewController: BaseViewController {
                 searchHeaderV?.returnTime = timeStr.stringToDate()
             }
             if  !checkIfReservationMoreThan90Days() {
-                self.checkReservetionTime()
+                self.checkReservetionTime(currTime:timeStr.stringToDate())
             }
         }
         
@@ -825,7 +823,8 @@ extension MainViewController: SearchHeaderViewDelegate {
     
     
     func didSelectCustomLocation(_ btn: UIButton) {
-        self.goToCustomLocationMapController(on: self, isAddDamageAddress: false)
+        showAlertCustomLocation(checkedBtn: btn)
+        //self.goToCustomLocationMapController(on: self, isAddDamageAddress: false)
     }
     
     

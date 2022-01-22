@@ -116,9 +116,10 @@ func checkReservationMonth(pickupDate: Date?, returnDate: Date?) -> Bool {
 /// if the booking time during working hours
 func checkReservationTime(time: Date?, settings: Settings) -> Bool {
     guard let _ = time else { return false}
+    
     let startTimeDate = settings.workStart.stringToDate()
     let endTimeDate = settings.workEnd.stringToDate()
-    
+
     print(startTimeDate.getString())
     print(endTimeDate.getString())
 
@@ -163,8 +164,7 @@ func checkReservationReturnTime(pickUpDate: Date,
         return days > 90
     }
 
-//MARK: CUSTOM LOCATION PAGE  CHECKING
-    //MARK: ------------------------
+//MARK: -- Custom location checking
     
     ///if new marker position in Inactive Coordinate
     func checkMarkerInInactiveCoordinate(fromCoordinate: CLLocationCoordinate2D,

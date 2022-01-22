@@ -26,7 +26,7 @@ final class SignInViewController: BaseViewController {
     
     //MARK: Variables
     private var keychainManager = KeychainManager()
-    lazy var signInViewModel = SignInViewModel()
+    lazy var signInVM = SignInViewModel()
     
     var didSignIn:(()->Void)?
     
@@ -82,7 +82,7 @@ final class SignInViewController: BaseViewController {
    
     ///Sign in
     private func signIn()  {
-        signInViewModel.signIn(username: mEmailAddressTextFl.text!, password: mPasswordTxtFl.text!) { [weak self] (status) in
+        signInVM.signIn(username: mEmailAddressTextFl.text!, password: mPasswordTxtFl.text!) { [weak self] (status) in
             guard let self = self else { return }
             switch status {
             case .success:
@@ -219,7 +219,7 @@ extension SignInViewController: UITextFieldDelegate {
             nextTxt = mEmailAddressTextFl.text
         }
         textField.text = fullString
-        signInViewModel.areFieldsFilled(firtStr: fullString,
+        signInVM.areFieldsFilled(firtStr: fullString,
                                         secondStr: nextTxt) { (isActive) in
             self.mSignInBckgV.alpha = isActive ? 1 : 0.8
             self.mSignInBckgV.isUserInteractionEnabled = isActive

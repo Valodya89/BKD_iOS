@@ -14,17 +14,22 @@ class MyAccountViewController: BaseViewController {
     @IBOutlet weak var mEditBtn: UIButton!
     @IBOutlet weak var mEmailTextFl: TextField!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
-    
         
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationControll(navControll: navigationController, barBtn: mRightBarBtn)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
         configureUI()
     }
     
     ///Configutre UI
     func configureUI() {
         mChangePasswordBtn.layer.cornerRadius = 8
+        mEmailTextFl.text = MyBKDViewModel().userName
     }
 
     // MARK: -- Actions
@@ -39,6 +44,7 @@ class MyAccountViewController: BaseViewController {
     
     @IBAction func edit(_ sender: UIButton) {
         let editVC = EditViewController.initFromStoryboard(name: Constant.Storyboards.myAccount)
+        editVC.email = mEmailTextFl.text!
         self.navigationController?.pushViewController(editVC, animated: true)
     }
 }

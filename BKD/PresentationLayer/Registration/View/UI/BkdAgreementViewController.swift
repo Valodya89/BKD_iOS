@@ -35,13 +35,7 @@ class BkdAgreementViewController: BaseViewController {
     //MARK: -- Variables
     weak var delegate: BkdAgreementViewControllerDelegate?
     
-    //var isMyReservationCell:Bool = false
-   // var isPayLater:Bool = false
-   // private var urlString = ""
     private var htmlString = ""
-    
-   // public var isAdvanced:Bool = false
-   // public var isEditAdvanced:Bool = false
     public var urlString: String? = nil
     public var agreementType: AgreementType?
     public var vehicleModel: VehicleModel?

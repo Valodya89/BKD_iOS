@@ -23,6 +23,7 @@ final class KeychainManager {
     let password = "Password"
     let phoneCodeId = "PhoneCodeId"
     let phoneNumber = "PhoneNumber"
+    let userFullName = "UserFullName"
 
     
     // MARK: - Functions
@@ -40,6 +41,15 @@ final class KeychainManager {
     func savePassword(passw: String) {
         do {
             try keychain.set(passw, key: password)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    /// Save full name of user in keychain
+    func saveUserFullName(fullName: String) {
+        do {
+            try keychain.set(fullName, key: userFullName)
         } catch let error {
             print(error)
         }
@@ -126,6 +136,12 @@ final class KeychainManager {
     func getPasswor() -> String? {
         let passw = try? keychain.getString(password)
         return passw
+    }
+    
+    /// Get full name of user from keychain
+    func getUserFullName() -> String? {
+        let fullName = try? keychain.getString(userFullName)
+        return fullName
     }
     
     /// Get phone code id from keychain

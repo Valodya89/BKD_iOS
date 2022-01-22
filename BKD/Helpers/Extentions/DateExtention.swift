@@ -308,18 +308,5 @@ extension Date {
         }
         return days
     }
-    //        var months = Double(search.returnDate!.distance(from: search.pickUpDate!, only: .month))
-    //        months = 12 + months
-    //
-    //        //Count days
-    //        var days = differenceInTimes / 24
-    //        if differenceInTimes <= 24 {
-    //            differenceInDays = 1
-    //        } else {
-    //            differenceInDays = ceil(differenceInTimes / 24)
-    //        }
-    //        days = differenceInDays
-    //        if months >= 1 && months < 12 {
-    //            days = differenceInDays + 300
-    //        }
+    
 }

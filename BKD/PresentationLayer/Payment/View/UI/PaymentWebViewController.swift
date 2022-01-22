@@ -93,8 +93,6 @@ final class PaymentWebViewController: UIViewController, StoryboardInitializable,
 
 
 // MARK: - WKNavigation Delegate
-
-
 extension PaymentWebViewController: WKNavigationDelegate {
     
 //    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {

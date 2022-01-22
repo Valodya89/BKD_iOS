@@ -36,6 +36,7 @@ final class MyBKDViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
         configureUI()
         if !isBackFromRegistrationBot {
             if viewModel.isUserSignIn {
@@ -107,6 +108,7 @@ final class MyBKDViewController: BaseViewController {
                                          mainDriver: nil)
             } else {
                 self.mainDriver = response
+                self.viewModel.saveFullName(mainDriver: response!)
                 if self.mainDriver?.state != Constant.Texts.state_agree && self.mainDriver?.state != Constant.Texts.state_accepted  {
                     self.goToRegistrationBot(isDriverRegister: false,
                                              tableData: [RegistrationBotData.registrationBotModel[0]],

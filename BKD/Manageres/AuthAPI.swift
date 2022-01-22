@@ -22,6 +22,8 @@ enum AuthAPI: APIProtocol {
     case getCarsByType(criteria: [String : Any])
     case getCarsByFilter(criteria: [[String : Any]])
     case getSettings
+    case getLanguage
+    case updateLanguage(id: String)
     case getFlexibleTimes
     case getPhoneCodes
     case getCountries
@@ -29,6 +31,7 @@ enum AuthAPI: APIProtocol {
     case getAccessories(carID: String)
     case getMainDriver
     case getAdditionalDrivers
+    case deleteDriver(id: String)
     case signUp(username: String,
                 password: String)
     case verifyAccounts(username: String,
@@ -39,6 +42,9 @@ enum AuthAPI: APIProtocol {
     case verifyPhoneCode(phoneCode: String,
                          phoneNumber: String,
                          code: String)
+    case sendCodeEmail(email: String)
+    case verifyEmail(email: String,
+                     code: String)
     case getAuthRefreshToken(refreshToken: String)
     case getToken(username: String,
                   password: String)
@@ -115,11 +121,14 @@ enum AuthAPI: APIProtocol {
              .resendCode,
              .sendCodeSms,
              .verifyPhoneCode,
+             .sendCodeEmail,
+             .verifyEmail,
              .addPersonalData,
              .forgotPassword,
              .recoverPassword,
              .getChatID,
              .createDriver,
+             .deleteDriver,
              .addIdentityExpiration,
              .addDriverLicenseDates,
              .acceptAgreement,
@@ -130,6 +139,9 @@ enum AuthAPI: APIProtocol {
         case .getAuthRefreshToken,
              .getToken:
             return BKDBaseURLs.auth.rawValue
+        case .getLanguage,
+             .updateLanguage:
+            return BKDBaseURLs.locale.rawValue
         default:
             return BKDBaseURLs.rent.rawValue
         }
@@ -155,6 +167,10 @@ enum AuthAPI: APIProtocol {
             return "car/search"
         case .getSettings:
             return "settings/default"
+        case .getLanguage:
+            return "api/language/list"
+        case .updateLanguage:
+            return "api/language"
         case .getFlexibleTimes:
             return "flexible-times/list"
         case .getPhoneCodes:
@@ -169,6 +185,8 @@ enum AuthAPI: APIProtocol {
             return "api/driver"
         case .getAdditionalDrivers:
             return "api/driver/additional"
+        case .deleteDriver(let id):
+            return "api/driver/\(id)"
         case .signUp:
             return "accounts/create"
         case .verifyAccounts:
@@ -179,6 +197,10 @@ enum AuthAPI: APIProtocol {
             return "api/user/phone/send-code"
         case .verifyPhoneCode:
             return "api/user/phone/verify"
+        case .sendCodeEmail:
+            return "api/user/email/send-code"
+        case .verifyEmail:
+            return "api/user/email/verify"
         case .getAuthRefreshToken:
             fallthrough
         case .getToken:
@@ -240,12 +262,15 @@ enum AuthAPI: APIProtocol {
              .getCarList,
              .getCarsByFilter,
              .getMainDriver,
+             .deleteDriver,
              .getAdditionalDrivers,
              .signUp,
              .verifyAccounts,
              .resendCode,
              .sendCodeSms,
              .verifyPhoneCode,
+             .sendCodeEmail,
+             .verifyEmail,
              .forgotPassword,
              .recoverPassword,
              .getExteriorSize,
@@ -271,7 +296,9 @@ enum AuthAPI: APIProtocol {
              .changeDriver,
              .addAccident,
              .approveAccident,
-             .cancelAccident:
+             .cancelAccident,
+             .getLanguage,
+             .updateLanguage:
             return ["Content-Type": "application/json"]
         case .getAuthRefreshToken:
             fallthrough
@@ -311,7 +338,12 @@ enum AuthAPI: APIProtocol {
     
     var body: [String : Any]? {
         switch self {
-
+        case .getLanguage:
+            return [:]
+        case let .updateLanguage(id):
+            return [
+                "id": id
+            ]
         case let .getCarsByType(criteria):
             return [
                 "criteria" : [criteria]
@@ -345,6 +377,15 @@ enum AuthAPI: APIProtocol {
             return [
                 "phoneCode": phoneCode,
                 "phoneNumber": phoneNumber,
+                "code": code
+            ]
+        case .sendCodeEmail(let email):
+            return [
+                "email" : email
+            ]
+        case let .verifyEmail(email, code):
+            return [
+                "email": email,
                 "code": code
             ]
         case .getAuthRefreshToken(let refreshToken):
@@ -451,7 +492,9 @@ enum AuthAPI: APIProtocol {
     var method: RequestMethod {
         switch self {
 
-        case .getCarsByType,
+        case .getLanguage,
+             .updateLanguage,
+             .getCarsByType,
              .getCarsByFilter,
              .signUp,
              .getToken,
@@ -459,6 +502,7 @@ enum AuthAPI: APIProtocol {
              .getChatID,
              .sendMessage,
              .sendCodeSms,
+             .sendCodeEmail,
              .createDriver,
              .addIdentityExpiration,
              .addDriverLicenseDates,
@@ -473,6 +517,7 @@ enum AuthAPI: APIProtocol {
             return .put
         case .resendCode,
              .verifyPhoneCode,
+             .verifyEmail,
              .forgotPassword,
              .checkDefect,
              .checkOdometer,
@@ -483,6 +528,8 @@ enum AuthAPI: APIProtocol {
              .changeDriver,
              .addAccident:
             return .patch
+        case .deleteDriver:
+            return .delete
         default:
             return .get
         }

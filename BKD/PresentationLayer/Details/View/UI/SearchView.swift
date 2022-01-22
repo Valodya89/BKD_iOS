@@ -297,12 +297,15 @@ class SearchView: UIView, UITextFieldDelegate {
         txtFl.text = ""
     }
     
+    
+    ///Delete return time
     func resetReturnTime() {
         mReturnTimeTxtFl.text = Constant.Texts.returnTime
         mReturnTimeTxtFl.font = font_placeholder
         mReturnTimeTxtFl.textColor = color_choose_date
     }
     
+    ///Delete return date
     func resetReturnDate() {
         mReturnDateTxtFl.text = Constant.Texts.returnDate
         mReturnDateTxtFl.font = font_placeholder

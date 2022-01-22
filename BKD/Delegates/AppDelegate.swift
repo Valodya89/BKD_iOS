@@ -49,7 +49,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if view == Constant.Texts.verification {
             notification = Notification(name: Constant.Notifications.signUpEmailVerify, object: code)
             
-        } else {///Reset password
+        } else if view == Constant.Texts.changeEmail { //Change email
+            notification = Notification(name: Constant.Notifications.changeEmailVerify, object: code)
+            
+        }else {///Reset password
             notification = Notification(name: Constant.Notifications.resetPassEmailVerify, object: code)
         }
 

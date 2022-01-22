@@ -75,17 +75,21 @@ class EditReservetionAdvancedViewController: BaseViewController {
 
 
     //MARK: - Variables
-    public var vehicleModel: VehicleModel?
+    lazy var editReservAdvancedVM = EditReservetionAdvancedViewModel()
+    public var currRent: Rent?
+    public var accessories: [AccessoriesEditModel]?
+  //  public var vehicleModel: VehicleModel?
     public var myReservationState: MyReservationState?
     public var paymentStatusArr: [PaymentStatusModel]?
-    public var onRideArr: [OnRideModel]?
-    public var driversArr:[MyDriversModel]?
-    public var registerNumberArr:[String]?
+    //public var onRideArr: [OnRideModel]?
+    //public var driversArr:[MyDriversModel]?
+   // public var registerNumberArr:[String]?
+    public var editReservationModel = EditReservationModel()
     
     var reserveViewModel = ReserveViewModel()
-    var currentTariff: TariffState = .hourly
-    var lastContentOffset:CGFloat = 0.0
-    var totalPrice: Double = 0.0
+   // var currentTariff: TariffState = .hourly
+    //var lastContentOffset:CGFloat = 0.0
+    //var totalPrice: Double = 0.0
     
     
     //MARK: - Life cycle
@@ -137,6 +141,7 @@ class EditReservetionAdvancedViewController: BaseViewController {
         configureView()
         handlerTotalPrice()
         handlerConfirm()
+        configureUI()
     }
     
     
@@ -163,10 +168,10 @@ class EditReservetionAdvancedViewController: BaseViewController {
 //        }
 //
         //Reservation informations
-        if registerNumberArr != nil {
-            mRegisterNumberTableV.registerNumberArr =  registerNumberArr
-            mRegisterNumberTableV.reloadData()
-        }
+//        if registerNumberArr != nil {
+//            mRegisterNumberTableV.registerNumberArr =  registerNumberArr
+//            mRegisterNumberTableV.reloadData()
+//        }
 
         if paymentStatusArr != nil {
             mPaymentStatusTableV.statusArr = paymentStatusArr
@@ -175,12 +180,12 @@ class EditReservetionAdvancedViewController: BaseViewController {
         }
         
 
-        guard let vehicleModel = vehicleModel else {
-            return
-        }
-
-        self.mReserveInfoTableV.accessories = reserveViewModel.getAdditionalAccessories(vehicleModel: vehicleModel) as? [AccessoriesEditModel]
-        mReserveInfoTableV.reloadData()
+//        guard let vehicleModel = vehicleModel else {
+//            return
+//        }
+//
+//        self.mReserveInfoTableV.accessories = reserveViewModel.getAdditionalAccessories(vehicleModel: vehicleModel) as? [AccessoriesEditModel]
+//        mReserveInfoTableV.reloadData()
                 
 //        //Additional drivers list
 //        if (currRent?.additionalDrivers?.count ?? 0) > 0 {
@@ -193,7 +198,82 @@ class EditReservetionAdvancedViewController: BaseViewController {
         
     }
     
-    
+    ///Configure UI
+      func configureUI() {
+          //Car info
+          let currCar: CarsModel? = ApplicationSettings.shared.allCars?.filter( {$0.id == (currRent?.carDetails.id ?? "")}).first
+          if currCar != nil {
+              mCarImgV.sd_setImage(with:  currCar!.image.getURL() ?? URL(string: ""), placeholderImage: nil)
+              mTowBarBckgV.isHidden = !currCar!.towbar
+              mFiatImgV.sd_setImage(with:  currCar!.logo?.getURL() ?? URL(string: ""), placeholderImage: nil)
+              
+              mCarMarkLb.text = currCar!.name
+              mCarDescriptionlb.text = (ApplicationSettings.shared.carTypes?.filter( {$0.id == currCar!.type} ).first)?.name
+          }
+          
+          //Pick up location
+          let pickUpLocation = editReservationModel.pickupLocation
+          if pickUpLocation?.type == Constant.Keys.custom,
+             let pickupCustomLocation = pickUpLocation?.customLocation {
+              mPickUpParkingLb.text = pickupCustomLocation.name
+          } else if let pickupParkin = pickUpLocation?.parking {
+              mPickUpParkingLb.text = pickupParkin.name
+          }
+          //Return location
+          let returnLocation = editReservationModel.returnLocation
+          if returnLocation?.type == Constant.Keys.custom,
+             let returnCustomLocation = returnLocation?.customLocation {
+              mReturnParkingLb.text = returnCustomLocation.name
+          } else if let returnParking = returnLocation?.parking {
+              mReturnParkingLb.text = returnParking.name
+          }
+          
+          //Date
+          let startDate = Date().doubleToDate(doubleDate: editReservationModel.startDate ?? 0.0)
+          let endDate = Date().doubleToDate(doubleDate: editReservationModel.endDate ?? 0.0)
+          mPickUpDateLb.text = startDate.getDay()
+          mPickUpMonthLb.text =  startDate.getMonth(lng: "en")
+          mPickUpTimeLb.text = startDate.getHour()
+          mReturnDateLb.text = endDate.getDay()
+          mReturnMonthLb.text = endDate.getMonth(lng: "en")
+          mReturnTimeLb.text = endDate.getHour()
+         
+          //Register number
+         // mRegisterNumberTableV.registerNumberArr = registerNumberArr
+          //Reservation informations
+//          if registerNumberArr != nil {
+//              mRegisterNumberTableV.registerNumberArr =  registerNumberArr
+//              mRegisterNumberTableV.reloadData()
+//          }
+          if paymentStatusArr != nil {
+              mPaymentStatusTableV.statusArr = paymentStatusArr
+              mPaymentStatusTableV.reloadData()
+              handlerPayment()
+          }
+          
+          //Accessories
+          if accessories == nil {
+              if (editReservationModel.accessories?.count ?? 0) > 0 {
+                   accessories = editReservAdvancedVM.getEditedAccessories(editAccessories: editReservationModel.accessories ?? [])
+          }
+      }
+          if accessories != nil {
+          self.mReserveInfoTableV.accessories = accessories
+          self.mReserveInfoTableV.reloadData()
+          self.mReserveTableHeight.constant = self.mReserveInfoTableV.contentSize.height
+          }
+
+          //Additional drivers list
+          if editReservationModel.additionalDrivers == nil {
+              if (currRent?.additionalDrivers?.count ?? 0) > 0 {
+                  mAdditionalDriverTableV.drivers =  currRent?.additionalDrivers
+              }
+          } else {
+              mAdditionalDriverTableV.drivers =  editReservationModel.additionalDrivers
+          }
+          mAdditionalDriverTableV.reloadData()
+          mAdditionalDriverTableHeight.constant = mAdditionalDriverTableV.contentSize.height
+      }
    
     
     func configureReservationStatus() {
@@ -266,8 +346,7 @@ class EditReservetionAdvancedViewController: BaseViewController {
         
     }
     
-//MARK: - Actions
-//MARK: -------------------
+//MARK: -- Actions
     
     @IBAction func back(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)

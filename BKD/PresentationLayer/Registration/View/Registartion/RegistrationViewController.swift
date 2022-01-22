@@ -71,7 +71,7 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
         mErrorLb.isHidden = true
     }
     
-    /// set Atributte to lable
+    /// Set Atributte to lable
     private func setAttribute() {
         let text = Constant.Texts.agreeTerms
         let attriString = NSMutableAttributedString(string: text)
@@ -231,8 +231,7 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
 }
 
 
-//MARK: UITextFieldDelegate
-// -----------------------------
+//MARK: -- UITextFieldDelegate
 extension RegistrationViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

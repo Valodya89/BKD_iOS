@@ -15,25 +15,28 @@ protocol AccessoriesUIViewControllerDelegate: AnyObject {
 }
 class AccessoriesUIViewController: BaseViewController {
     
-    //MARK: Outlets
+    //MARK: -- Outlets
     @IBOutlet weak var mAccessoriesCollectionV: UICollectionView!
     @IBOutlet weak var mTotalPriceBckgV: UIView!
     @IBOutlet weak var mTotalPriceLb: UILabel!
     @IBOutlet weak var mPriceLb: UILabel!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
-    
     @IBOutlet weak var mConfirmV: ConfirmView!
     @IBOutlet weak var mTotalPriceBottom: NSLayoutConstraint!
     
     //MARK: -- Variables
-    public var isEditReservation: Bool = false
-    let accessoriesViewModel = AccessoriesViewModel()
-    var totalPrice: Double = 0
     weak var delegate: AccessoriesUIViewControllerDelegate?
+    lazy var accessoriesVM = AccessoriesViewModel()
+    var totalPrice: Double = 0
+    var carId: String = ""
     
+    public var isEditReservation: Bool = false
     public var accessoriesEditList: [AccessoriesEditModel]?
     public var vehicleModel: VehicleModel?
+    public var currRent: Rent?
+    public var editReservationModel: EditReservationModel?
+
 
     
     //MARK: life cycle
@@ -43,10 +46,17 @@ class AccessoriesUIViewController: BaseViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        mConfirmV.initConfirm()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        PriceManager.shared.additionalDriversPrice = totalPrice
-        self.delegate?.addedAccessories(self.mPriceLb.text == "0.0" ? false : true , totalPrice: totalPrice, accessoriesEditList: accessoriesEditList)
+        if !isEditReservation {
+            PriceManager.shared.accessoriesPrice = totalPrice
+            self.delegate?.addedAccessories(self.mPriceLb.text == "0.0" ? false : true , totalPrice: totalPrice, accessoriesEditList: accessoriesEditList)
+        }
     }
     
     func setupView() {
@@ -54,7 +64,8 @@ class AccessoriesUIViewController: BaseViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_selected_filter!, NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = img_bkd
         mTotalPriceBckgV.setShadow(color: color_shadow!)
-        
+        carId = isEditReservation ? (currRent?.carDetails.id ?? "") : (vehicleModel?.vehicleId ?? "")
+
         getAccessories()
         configureDelegates()
         configureViewForEdit()
@@ -62,25 +73,32 @@ class AccessoriesUIViewController: BaseViewController {
 
     }
     
-    ///Get accessories list
-    func getAccessories() {
-        accessoriesViewModel.getAccessories(carID: vehicleModel?.vehicleId ?? "") { result, error in
-            guard let _ = result else {
-                if let _ = error {
-                    self.showAlertSignIn()
-                }
-                return
-            }
-           
-            if self.accessoriesEditList == nil {
-                self.accessoriesEditList = self.accessoriesViewModel.getActiveAccessoryList(accessories: result!)
-            } else {
-                self.mPriceLb.text = String(format: "%.2f", Float(PriceManager.shared.accessoriesPrice ?? 0.0))
-            }
-            self.mAccessoriesCollectionV.reloadData()        }
+    ///Set edited accessories
+    func setEditAccessories() {
+        editReservationModel?.accessories = accessoriesVM.getEditAccessories(accessories: accessoriesEditList)
     }
     
-    ///Configure view wehn it open for edit
+    ///Get accessories list
+    func getAccessories() {
+        accessoriesVM.getAccessories(carID: carId) { [self] result, error in
+            guard let _ = result else { return }
+            if accessoriesEditList == nil {
+                if !isEditReservation {
+                    accessoriesEditList = accessoriesVM.getActiveAccessoryList(accessories: result!)
+                } else {
+                    let accessoriesEditInfo = accessoriesVM.getAccessoriesEditList(rent: currRent, accessories:  result!)
+                    accessoriesEditList = accessoriesEditInfo.accessories
+                    totalPrice = accessoriesEditInfo.totalPrice
+                    setEditAccessories()
+                }
+            } else {
+                totalPrice = PriceManager.shared.accessoriesPrice ?? 0.0
+            }
+            mPriceLb.text = String(format: "%.2f", Float(totalPrice))
+            mAccessoriesCollectionV.reloadData()        }
+    }
+    
+    ///Configure view when it open for edit
     func configureViewForEdit() {
         if isEditReservation {
             mConfirmV.isHidden = !isEditReservation
@@ -93,38 +111,32 @@ class AccessoriesUIViewController: BaseViewController {
         mAccessoriesCollectionV.delegate = self
         mAccessoriesCollectionV.dataSource = self
     }
+  
     
-//    ///Show alert for sign in account
-//    private func showAlertSignIn() {
-//        BKDAlert().showAlert(on: self,
-//                             title: nil,
-//                             message: Constant.Texts.loginAccessories,
-//                             messageSecond: nil,
-//                             cancelTitle: Constant.Texts.cancel,
-//                             okTitle: Constant.Texts.signIn,
-//                             cancelAction: nil) {
-//            self.goToSignInPage()
-//        }
-//    }
+    ///Edite reserv accessory list
+    func eritReserveAccessoryList(isAdd: Bool, accessory: AccessoriesEditModel) {
+        accessoriesVM.editReservationAccessories(isAdd: isAdd,
+                                                                                      editAccessiries: accessory,
+                                                 editReservationAccessories: editReservationModel?.accessories) { result in
+            self.editReservationModel?.accessories = result
+        }
+    }
     
     //MARK: -- ACTION
     @IBAction func back(_ sender: Any) {
-        
-//        self.delegate?.addedAccessories(self.mPriceLb.text == "0.0" ? false : true , totalPrice: totalPrice, accessoriesEditList: accessoriesEditList)
         self.navigationController?.popViewController(animated: true)
     }
     
     func handlerConfirm() {
         mConfirmV.didPressConfirm = {
-            self.goToEditReservationAdvanced()
+            self.goToEditReservationAdvanced(rent: self.currRent, accessories: nil,
+                                             editReservationModel: self.editReservationModel)
         }
     }
-
 }
 
 
-// MARK: UICollectionViewDelegate, UICollectionViewDataSource
-//MARK: -----------------
+// MARK: -- UICollectionViewDelegate, UICollectionViewDataSource
 extension AccessoriesUIViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return accessoriesEditList?.count ?? 0
@@ -135,54 +147,46 @@ extension AccessoriesUIViewController: UICollectionViewDelegate, UICollectionVie
 
         let editItem = accessoriesEditList![indexPath.row]
         cell.setCellInfo(editItem: editItem,  index: indexPath.row)
-        
-        if editItem.isAdded {
-            totalPrice += Double(editItem.count ?? 0) * editItem.price!
-            self.mPriceLb.text = String(totalPrice)
-
-        }
         cell.delegate = self
         return cell
     }
     
-//    //MARK: UICollectionViewDelegateFlowLayout
-//    //MARK: -------------------------------------
+    //MARK: -- UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.view.frame.width,
                       height: self.view.bounds.height * 0.153465)
     }
 }
 
-//MARK: AccessoriesCollectionViewCellDelegate
-//MARK: ------------------------
+//MARK: -- AccessoriesCollectionViewCellDelegate
 extension AccessoriesUIViewController: AccessoriesCollectionViewCellDelegate {
     
     func didPressAdd(isAdd: Bool, cellIndex: Int,
                      id: String?, name: String?,
                      image: UIImage?) {
-        if KeychainManager().isUserLoggedIn() {
-            accessoriesEditList![cellIndex].isAdded = isAdd
-            accessoriesEditList![cellIndex].id = id
-            accessoriesEditList![cellIndex].count =  accessoriesEditList![cellIndex].count ?? 1
-        } else {
-            self.showAlertSignIn()
+        accessoriesEditList![cellIndex].isAdded = isAdd
+        accessoriesEditList![cellIndex].id = id
+        accessoriesEditList![cellIndex].count =  accessoriesEditList![cellIndex].count ?? 1
+        
+        if isEditReservation {
+            eritReserveAccessoryList(isAdd: isAdd, accessory: accessoriesEditList![cellIndex])
+             }
+    }
+    
+    func didChangeCount(isAdd: Bool, cellIndex: Int, count: Int) {
+        accessoriesEditList![cellIndex].count = count
+        if isEditReservation && isAdd {
+            eritReserveAccessoryList(isAdd: isAdd, accessory: accessoriesEditList![cellIndex])
         }
     }
     
     
-    
-    func didChangeCount(cellIndex: Int, count: Int) {
-            accessoriesEditList![cellIndex].count = count
-        
-    }
-
-    
     ///increase or decrease Accessory
     func increaseOrDecreaseAccessory(accessoryPrice: Double,
-                     isIncrease: Bool) {
+                                     isIncrease: Bool) {
         totalPrice = (mPriceLb.text! as NSString).doubleValue
         
-        accessoriesViewModel.getTotalAccesories(accessoryPrice: accessoryPrice, totalPrice: totalPrice, isIncrease: isIncrease) { [self] (totalValue) in
+        accessoriesVM.getTotalAccesories(accessoryPrice: accessoryPrice, totalPrice: totalPrice, isIncrease: isIncrease) { [self] (totalValue) in
             self.mPriceLb.text = totalValue
             self.totalPrice = (totalValue as NSString).doubleValue
             

@@ -25,7 +25,6 @@ final class RegistartionBotViewController: BaseViewController {
     @IBOutlet weak var mConfirmBtn: UIButton!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mConfirmLeading: NSLayoutConstraint!
-    
     @IBOutlet weak var mThankYouBckgV: UIView!
     @IBOutlet weak var mThankYouBtn: UIButton!
     
@@ -50,6 +49,7 @@ final class RegistartionBotViewController: BaseViewController {
     var pickerV = UIPickerView()
     var isTakePhoto:Bool = false
     var isDriverRegister: Bool = false
+    var isMyAccountDriver: Bool = false
     var isEdit: Bool = false
     private var takePhotoCurrentIndex:Int  = 0
     private var currentIndex = 0
@@ -60,7 +60,7 @@ final class RegistartionBotViewController: BaseViewController {
     //MARK: -- Life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tabBarController?.tabBar.isHidden = true
         registrationBotModel = isDriverRegister ? RegistrationBotData.registrationDriverModel : RegistrationBotData.registrationBotModel
         countryList = ApplicationSettings.shared.countryList
         if countryList == nil {
@@ -251,7 +251,6 @@ final class RegistartionBotViewController: BaseViewController {
                     self.tableScrollToBottom()
                     self.startTimer()
                 }
-                
             }
         }
     }
@@ -310,15 +309,12 @@ final class RegistartionBotViewController: BaseViewController {
     }
     
     //MARK: -- Keyboard NSNotification
-    
     @objc func keyboardWillShow (notification: NSNotification) {
         
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         let keyboardInfo = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
         let keyboardSize = keyboardInfo.cgRectValue.size
-        
         let bottomInset = keyboardSize.height
-        
         mTableV.contentInset.bottom = bottomInset
     }
 
@@ -358,8 +354,12 @@ final class RegistartionBotViewController: BaseViewController {
         sender.backgroundColor = color_navigationBar!//color_dark_register
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
-        self.tabBarController?.selectedIndex = 0
-        self.navigationController?.popToViewController(ofClass: self.isDriverRegister ? MyDriversViewController.self : MyBKDViewController.self, animated: true)
+            self.tabBarController?.selectedIndex = 0
+            if self.isDriverRegister {
+                self.navigationController?.popToViewController(ofClass: self.isMyAccountDriver ? MyAccountsDriversViewController.self : MyDriversViewController.self, animated: true)
+            } else {
+                self.navigationController?.popToViewController(ofClass: MyBKDViewController.self, animated: true)
+            }
         }
     }
     

@@ -26,6 +26,12 @@ final class MyBKDViewModel: NSObject {
         keychainManager.removeData()
     }
     
+    func saveFullName(mainDriver: MainDriver) {
+        keychainManager.saveUserFullName(fullName: (mainDriver.name ?? "" ) + " " + (mainDriver.surname ?? ""))
+    }
+    
+    
+    
     ///Get main driver
     func getMainDriver(completion: @escaping (MainDriver?) -> Void) {
         network.request(with: URLBuilder(from: AuthAPI.getMainDriver)) { (result) in
@@ -39,10 +45,36 @@ final class MyBKDViewModel: NSObject {
                 }
                 completion(mainDriver.content!)
             case .failure(let error):
+                completion(nil)
                 print(error.description)
                 break
             }
         }
     }
+    
+    
+    ///Update email
+    func updateEmail(email: String,
+                     completion: @escaping (PhoneVerify?) -> Void) {
+        network.request(with: URLBuilder(from: AuthAPI.sendCodeEmail(email: email))) { (result) in
+
+            switch result {
+            case .success(let data):
+                guard let phoneCode = BkdConverter<BaseResponseModel<PhoneVerify>>.parseJson(data: data as Any) else {
+                    print("error")
+                    completion(nil)
+                    return
+                }
+                if let content = phoneCode.content {
+                    completion(content)
+                }
+            case .failure(let error):
+                completion(nil)
+                print(error.description)
+                break
+            }
+        }
+    }
+    
     
 }

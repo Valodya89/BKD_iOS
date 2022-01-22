@@ -41,3 +41,37 @@ final class MyReservetionAdvancedViewModel {
 //        return additionalDrivers ?? []
 //    }
 }
+
+
+/*
+ 
+ 
+ {
+     "carId": "61815f3296b3233b4995c625",
+     "startDate": 1636395213876,
+     "endDate": 1636395213876,
+     "accessories": [
+         {
+             "id": "61506ec81464ab42a0e2f31e",
+             "count": 1
+         }
+     ],
+     "additionalDrivers": [],
+     "pickupLocation": {
+         "type": "CUSTOM",
+         "customLocation": {
+             "name": "Masivi city",
+             "longitude": 45.5,
+             "latitude": 47.8
+         }
+     },
+     "returnLocation": {
+         "type": "CUSTOM",
+         "customLocation": {
+             "name": "Masivi city",
+             "longitude": 45.5,
+             "latitude": 47.8
+         }
+     }
+ }
+ */

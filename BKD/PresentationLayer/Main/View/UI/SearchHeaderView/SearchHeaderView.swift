@@ -456,8 +456,7 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     }
     
    
-    //MARK: - Actions
-    //MARK: ------------------
+    //MARK: -- Actions
 
       @IBAction func search(_ sender: UIButton) {
         searchClicked()

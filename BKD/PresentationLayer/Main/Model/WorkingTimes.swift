@@ -13,6 +13,7 @@ struct  Settings: Codable {
     let reservationAgreementUrl: String
     let workStart: String
     let workEnd: String
+    let customLocationMinimalValue: Double
     let metadata: [String : String]
 }
 

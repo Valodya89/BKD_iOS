@@ -91,6 +91,13 @@
 		564ED63D270052F900FA9714 /* EditReservetionAdvancedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564ED63B270052F900FA9714 /* EditReservetionAdvancedViewController.swift */; };
 		564ED63E270052F900FA9714 /* EditReservetionAdvanced.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 564ED63C270052F900FA9714 /* EditReservetionAdvanced.storyboard */; };
 		564ED6402700652300FA9714 /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564ED63F2700652300FA9714 /* ConfirmView.swift */; };
+		56518A4A278F93C80000AC78 /* SubMenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56518A49278F93C80000AC78 /* SubMenuTableView.swift */; };
+		56518A4C278FA35F0000AC78 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56518A4B278FA35F0000AC78 /* MenuViewModel.swift */; };
+		56518A4E278FA3D10000AC78 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56518A4D278FA3D10000AC78 /* Language.swift */; };
+		56518A522790A42A0000AC78 /* SubmenuTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56518A502790A4290000AC78 /* SubmenuTableCell.swift */; };
+		56518A532790A42A0000AC78 /* SubmenuTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56518A512790A4290000AC78 /* SubmenuTableCell.xib */; };
+		56518A5927910EA10000AC78 /* FAQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56518A5827910EA00000AC78 /* FAQViewController.swift */; };
+		56518A5B27910EBF0000AC78 /* FAQ.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56518A5A27910EBF0000AC78 /* FAQ.storyboard */; };
 		56533ECF2678B94D0012BF4A /* MoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56533ECE2678B94D0012BF4A /* MoreModel.swift */; };
 		56533ED62678BF3A0012BF4A /* BkdAdvantagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56533ED42678BF3A0012BF4A /* BkdAdvantagesTableViewCell.swift */; };
 		56533ED72678BF3A0012BF4A /* BkdAdvantagesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56533ED52678BF3A0012BF4A /* BkdAdvantagesTableViewCell.xib */; };
@@ -191,6 +198,9 @@
 		565BFDFF26A0D3960044D081 /* RestrictedZones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565BFDFE26A0D3960044D081 /* RestrictedZones.swift */; };
 		565BFE0326A12CA10044D081 /* Parking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565BFE0226A12CA10044D081 /* Parking.swift */; };
 		565C099B273B4F5B00183878 /* PriceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565C099A273B4F5B00183878 /* PriceManager.swift */; };
+		565CF79927974EB600817723 /* EditReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565CF79827974EB600817723 /* EditReservationViewModel.swift */; };
+		565CF79B2798584C00817723 /* EditReservationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565CF79A2798584B00817723 /* EditReservationModel.swift */; };
+		565CF79D279BA1C800817723 /* EditReservetionAdvancedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565CF79C279BA1C600817723 /* EditReservetionAdvancedViewModel.swift */; };
 		565D142827296AD0000760AE /* MainDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D142727296AD0000760AE /* MainDriver.swift */; };
 		565D4E412778DC7D00A14951 /* MyPersonalInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D4E402778DC7D00A14951 /* MyPersonalInformationViewController.swift */; };
 		565D4E432778DC9200A14951 /* MyPersonalInformation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 565D4E422778DC9100A14951 /* MyPersonalInformation.storyboard */; };
@@ -499,6 +509,13 @@
 		564ED63B270052F900FA9714 /* EditReservetionAdvancedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditReservetionAdvancedViewController.swift; sourceTree = "<group>"; };
 		564ED63C270052F900FA9714 /* EditReservetionAdvanced.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EditReservetionAdvanced.storyboard; sourceTree = "<group>"; };
 		564ED63F2700652300FA9714 /* ConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
+		56518A49278F93C80000AC78 /* SubMenuTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubMenuTableView.swift; sourceTree = "<group>"; };
+		56518A4B278FA35F0000AC78 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		56518A4D278FA3D10000AC78 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		56518A502790A4290000AC78 /* SubmenuTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmenuTableCell.swift; sourceTree = "<group>"; };
+		56518A512790A4290000AC78 /* SubmenuTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubmenuTableCell.xib; sourceTree = "<group>"; };
+		56518A5827910EA00000AC78 /* FAQViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQViewController.swift; sourceTree = "<group>"; };
+		56518A5A27910EBF0000AC78 /* FAQ.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FAQ.storyboard; sourceTree = "<group>"; };
 		56533ECE2678B94D0012BF4A /* MoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreModel.swift; sourceTree = "<group>"; };
 		56533ED42678BF3A0012BF4A /* BkdAdvantagesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BkdAdvantagesTableViewCell.swift; sourceTree = "<group>"; };
 		56533ED52678BF3A0012BF4A /* BkdAdvantagesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BkdAdvantagesTableViewCell.xib; sourceTree = "<group>"; };
@@ -599,6 +616,9 @@
 		565BFDFE26A0D3960044D081 /* RestrictedZones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrictedZones.swift; sourceTree = "<group>"; };
 		565BFE0226A12CA10044D081 /* Parking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parking.swift; sourceTree = "<group>"; };
 		565C099A273B4F5B00183878 /* PriceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceManager.swift; sourceTree = "<group>"; };
+		565CF79827974EB600817723 /* EditReservationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReservationViewModel.swift; sourceTree = "<group>"; };
+		565CF79A2798584B00817723 /* EditReservationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReservationModel.swift; sourceTree = "<group>"; };
+		565CF79C279BA1C600817723 /* EditReservetionAdvancedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReservetionAdvancedViewModel.swift; sourceTree = "<group>"; };
 		565D142727296AD0000760AE /* MainDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDriver.swift; sourceTree = "<group>"; };
 		565D4E402778DC7D00A14951 /* MyPersonalInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPersonalInformationViewController.swift; sourceTree = "<group>"; };
 		565D4E422778DC9100A14951 /* MyPersonalInformation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPersonalInformation.storyboard; sourceTree = "<group>"; };
@@ -1290,6 +1310,40 @@
 				564ED63C270052F900FA9714 /* EditReservetionAdvanced.storyboard */,
 			);
 			path = EditReservetionAdvancedViewController;
+			sourceTree = "<group>";
+		};
+		56518A46278F93330000AC78 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				56518A49278F93C80000AC78 /* SubMenuTableView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		56518A4F2790A4020000AC78 /* SubmenuTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				56518A502790A4290000AC78 /* SubmenuTableCell.swift */,
+				56518A512790A4290000AC78 /* SubmenuTableCell.xib */,
+			);
+			path = SubmenuTableCell;
+			sourceTree = "<group>";
+		};
+		56518A5627910E710000AC78 /* FAQ */ = {
+			isa = PBXGroup;
+			children = (
+				56518A5727910E820000AC78 /* View */,
+			);
+			path = FAQ;
+			sourceTree = "<group>";
+		};
+		56518A5727910E820000AC78 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				56518A5827910EA00000AC78 /* FAQViewController.swift */,
+				56518A5A27910EBF0000AC78 /* FAQ.storyboard */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		56533ED32678BEF20012BF4A /* BkdAdvantagesTableViewCell */ = {
@@ -2405,6 +2459,7 @@
 		568E70942644BD2D000CB6A9 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				56518A5627910E710000AC78 /* FAQ */,
 				56683770270CF6C600C8D8FF /* Compare */,
 				564BE8682701F4D30037DF39 /* AddAccidentDetails */,
 				5658BDF426FBEC6900A5B122 /* OnRide */,
@@ -2426,13 +2481,13 @@
 				560252DF266535AB00FB204C /* Base */,
 				5691A605265C50390008081D /* CustomLocation */,
 				564E12C4264C9F22008CE884 /* SeeMap */,
-				568E70B32644BFC1000CB6A9 /* MyBKD */,
-				568E70AF2644BF96000CB6A9 /* MyReservetions */,
-				568E70A82644BF66000CB6A9 /* Notifications */,
 				568E70A42644BF21000CB6A9 /* AboutUs */,
+				568E70B32644BFC1000CB6A9 /* MyBKD */,
+				568E70A82644BF66000CB6A9 /* Notifications */,
 				568E70A02644BED5000CB6A9 /* Category */,
-				568E709B2644BE35000CB6A9 /* LeftMenu */,
+				568E70AF2644BF96000CB6A9 /* MyReservetions */,
 				568E70972644BDD0000CB6A9 /* Main */,
+				568E709B2644BE35000CB6A9 /* LeftMenu */,
 			);
 			path = PresentationLayer;
 			sourceTree = "<group>";
@@ -2518,6 +2573,7 @@
 		568E709C2644BE52000CB6A9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				56518A46278F93330000AC78 /* UI */,
 				568E709F2644BE9A000CB6A9 /* Cell */,
 				568E70162643919B000CB6A9 /* LeftViewController.swift */,
 			);
@@ -2528,6 +2584,7 @@
 			isa = PBXGroup;
 			children = (
 				564E12E0264D787A008CE884 /* MenuModel.swift */,
+				56518A4D278FA3D10000AC78 /* Language.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2535,6 +2592,7 @@
 		568E709E2644BE5F000CB6A9 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				56518A4B278FA35F0000AC78 /* MenuViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2542,6 +2600,7 @@
 		568E709F2644BE9A000CB6A9 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				56518A4F2790A4020000AC78 /* SubmenuTableCell */,
 				568E706C264481B0000CB6A9 /* LeftTableViewCell.swift */,
 				568E706D264481B0000CB6A9 /* LeftTableViewCell.xib */,
 				564E13672652F0CF008CE884 /* PrivacyPoliceView.swift */,
@@ -2679,6 +2738,7 @@
 				5640395026EFA2590064256C /* ReservationWithReservedPaidModel.swift */,
 				562585D726F1040200EC9284 /* PaymentStausModel.swift */,
 				5660E61D26FE0DB4009BB73F /* OnRideModel.swift */,
+				565CF79A2798584B00817723 /* EditReservationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2688,6 +2748,8 @@
 			children = (
 				565A665C273A3527008C7EF9 /* MyReservationViewModel.swift */,
 				565D4E58277AA26100A14951 /* MyReservetionAdvancedViewModel.swift */,
+				565CF79827974EB600817723 /* EditReservationViewModel.swift */,
+				565CF79C279BA1C600817723 /* EditReservetionAdvancedViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -3301,7 +3363,7 @@
 				568E6F4C2642FC4B000CB6A9 /* Resources */,
 				565F8C65268D390600E21C71 /* Embed Frameworks */,
 				995B321BDC49670283C49A78 /* [CP] Embed Pods Frameworks */,
-				E7501204FDB3B143C4CA669F /* [CP] Copy Pods Resources */,
+				C3B0E356A3606013D6612B50 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3407,6 +3469,7 @@
 				56CFDE7226938EFC00D731CD /* InfoMessageTableViewCell.xib in Resources */,
 				56A2AFE02693F221001BA7C5 /* ExamplePhotoTableViewCell.xib in Resources */,
 				564E136A2652F0CF008CE884 /* PrivacyPoliceView.xib in Resources */,
+				56518A5B27910EBF0000AC78 /* FAQ.storyboard in Resources */,
 				5665400D2673A0A5008ACD31 /* TariffSlideCollectionViewCell.xib in Resources */,
 				56B41E632785EC9300F10A41 /* PhonbeNumberTableCell.xib in Resources */,
 				566B3768269545540021BCAA /* MailBoxNumberTableViewCell.xib in Resources */,
@@ -3454,6 +3517,7 @@
 				565F8C4A268D17C200E21C71 /* Carousel.storyboard in Resources */,
 				56B41E53277E373A00F10A41 /* NavigationTableCell.xib in Resources */,
 				568E6F592642FC4B000CB6A9 /* Main.storyboard in Resources */,
+				56518A532790A42A0000AC78 /* SubmenuTableCell.xib in Resources */,
 				56A2AFE72694C827001BA7C5 /* PhoneNumberTableViewCell.xib in Resources */,
 				5659E6522775F7080084BCAF /* VehiclePhotoTableViewCell.xib in Resources */,
 				564BE8712701F55B0037DF39 /* AddAccidentDetails.storyboard in Resources */,
@@ -3502,7 +3566,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BKD/Pods-BKD-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E7501204FDB3B143C4CA669F /* [CP] Copy Pods Resources */ = {
+		C3B0E356A3606013D6612B50 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3578,8 +3642,10 @@
 				568E704826446E2D000CB6A9 /* MyReservationsViewController.swift in Sources */,
 				56AD192626934D7E006A53C1 /* EmailVerificationViewController.swift in Sources */,
 				56AD18EC2691622C006A53C1 /* SignInViewController.swift in Sources */,
+				56518A522790A42A0000AC78 /* SubmenuTableCell.swift in Sources */,
 				56683795271640DD00C8D8FF /* UILocalizedNavigationItem.swift in Sources */,
 				56B9F34226826DE1003449AD /* DetailsViewModel.swift in Sources */,
+				565CF79D279BA1C800817723 /* EditReservetionAdvancedViewModel.swift in Sources */,
 				565FD8432731C2A700E2B33A /* MyDriversViewModel.swift in Sources */,
 				56AD19222693421C006A53C1 /* TermsConditionsViewController.swift in Sources */,
 				5656083926785E2C009578FA /* RentalConditionsTableViewCell.swift in Sources */,
@@ -3599,6 +3665,7 @@
 				5658BDFB26FBECC000A5B122 /* AddDamageViewController.swift in Sources */,
 				565FD8452731C3C400E2B33A /* MyDriver.swift in Sources */,
 				5640952D264AE529001DC92D /* DropDownModel.swift in Sources */,
+				56518A4A278F93C80000AC78 /* SubMenuTableView.swift in Sources */,
 				562585DB26F175CB00EC9284 /* RegisterNumberUITableView.swift in Sources */,
 				566B37BD2697A6D40021BCAA /* TakePhotoTableViewCell.swift in Sources */,
 				564ED63D270052F900FA9714 /* EditReservetionAdvancedViewController.swift in Sources */,
@@ -3643,6 +3710,7 @@
 				565BFD86269F55550044D081 /* SessionProtocol.swift in Sources */,
 				565EECAC2747D2F4001DB53B /* UILabelExtention.swift in Sources */,
 				566B7E8A269DC036007C9241 /* VerificationCodeViewController.swift in Sources */,
+				565CF79927974EB600817723 /* EditReservationViewModel.swift in Sources */,
 				56AD18EA2691622C006A53C1 /* NewPasswordViewController.swift in Sources */,
 				56B41E45277C9C9C00F10A41 /* MyPersonalInformationViewModel.swift in Sources */,
 				565F810526A7D08600ADB9FE /* PaymenTypeTableViewCell.swift in Sources */,
@@ -3680,6 +3748,7 @@
 				5640394E26EF854B0064256C /* ReservationWithStartRideCollectionViewCell.swift in Sources */,
 				56CF781B26F3BD1C0092F555 /* AdditionalDriverWaithingApplovalCell.swift in Sources */,
 				5691A60B265C508C0008081D /* CustomLocationViewController.swift in Sources */,
+				56518A4C278FA35F0000AC78 /* MenuViewModel.swift in Sources */,
 				565BFDDF269F9D140044D081 /* Time.swift in Sources */,
 				565BFD85269F55550044D081 /* APIProtocol.swift in Sources */,
 				5665403B26759E06008ACD31 /* TariffCarouselCell.swift in Sources */,
@@ -3696,6 +3765,7 @@
 				565A7AD62654C49B006C63D0 /* CategoryCollectionViewCell.swift in Sources */,
 				56B41E622785EC9300F10A41 /* PhonbeNumberTableCell.swift in Sources */,
 				56AD18F226928861006A53C1 /* RegistrationViewModel.swift in Sources */,
+				565CF79B2798584C00817723 /* EditReservationModel.swift in Sources */,
 				56AD19072692B9F6006A53C1 /* MyBkdTableViewCell.swift in Sources */,
 				565BFDB1269F5AD80044D081 /* AuthAPI.swift in Sources */,
 				5691A64E265DB6300008081D /* SearchHeaderViewModel.swift in Sources */,
@@ -3706,6 +3776,7 @@
 				564E12D9264D7617008CE884 /* Constant.swift in Sources */,
 				560252F42665950700FB204C /* CustomLocationViewModel.swift in Sources */,
 				565EECAA2747D2AC001DB53B /* UITextFieldExtention.swift in Sources */,
+				56518A5927910EA10000AC78 /* FAQViewController.swift in Sources */,
 				5656323B265841BE00B78562 /* FilterSearchResultCell.swift in Sources */,
 				565BFD8B269F555F0044D081 /* URLBuilder.swift in Sources */,
 				565BFDDB269F973F0044D081 /* BaseResponseModel.swift in Sources */,
@@ -3761,6 +3832,7 @@
 				565731F32673188F0012ADD0 /* TailLiftTableView.swift in Sources */,
 				5665400C2673A0A5008ACD31 /* TariffSlideCollectionViewCell.swift in Sources */,
 				5656A9D626D8303E00A71375 /* PersonalDriver.swift in Sources */,
+				56518A4E278FA3D10000AC78 /* Language.swift in Sources */,
 				5602529C2664465200FB204C /* MarkerInfoViewController.swift in Sources */,
 				562585CD26F0E2C400EC9284 /* MyReservetionAdvancedViewController.swift in Sources */,
 				56B9F2E326805021003449AD /* SearchWithValueView.swift in Sources */,

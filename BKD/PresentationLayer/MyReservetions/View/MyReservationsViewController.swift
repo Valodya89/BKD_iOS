@@ -27,7 +27,7 @@ class MyReservationsViewController: BaseViewController {
     
     
     //MARK -- Variables
-    lazy var myReservationViewModel: MyReservationViewModel = MyReservationViewModel()
+    lazy var myReservationVM: MyReservationViewModel = MyReservationViewModel()
     var menu: SideMenuNavigationController?
     var isReservationHistory: Bool = false
     var drivers:[MyDriversModel]? = MyDriversData.myDriversModel
@@ -68,6 +68,7 @@ class MyReservationsViewController: BaseViewController {
         registerCollectionCells()
     }
     
+    ///Register cells
     func registerCollectionCells() {
         self.mReservCollectionV.register(ReservationWithStartRideCollectionViewCell.nib(), forCellWithReuseIdentifier: ReservationWithStartRideCollectionViewCell.identifier)
         self.mReservCollectionV.register(ReservationWithRegisterNumberCollectionViewCell.nib(), forCellWithReuseIdentifier: ReservationWithRegisterNumberCollectionViewCell.identifier)
@@ -76,13 +77,15 @@ class MyReservationsViewController: BaseViewController {
         self.mReservCollectionV.register(ReservetionMakePaymentCell.nib(), forCellWithReuseIdentifier: ReservetionMakePaymentCell.identifier)
         self.mReservCollectionV.register(OnRideCollectionViewCell.nib(), forCellWithReuseIdentifier: OnRideCollectionViewCell.identifier)
         self.mReservCollectionV.register(AdditionalDriverWaithingApplovalCell.nib(), forCellWithReuseIdentifier: AdditionalDriverWaithingApplovalCell.identifier)
+        self.mReservCollectionV.register(WaithingAdminApplovalCell.nib(), forCellWithReuseIdentifier: WaithingAdminApplovalCell.identifier)
+        
         
         self.mReservCollectionV.register(ReservationHistoryCell.nib(), forCellWithReuseIdentifier: ReservationHistoryCell.identifier)
     }
     
     ///Get reservations
     private func getRent() {
-        myReservationViewModel.getReservations { result in
+        myReservationVM.getReservations { result in
             guard let result = result else {return}
             self.myReservations = result
             self.mReservCollectionV.reloadData()
@@ -92,7 +95,7 @@ class MyReservationsViewController: BaseViewController {
     ///Switch driver
     func changeDriver(index: Int, driverId: String ) {
         let currRent = self.myReservations![index]
-        self.myReservationViewModel.changeDriver(rentId: currRent.id, driverId: driverId) { result in
+        myReservationVM.changeDriver(rentId: currRent.id, driverId: driverId) { result in
             guard let rent =  result else {return}
             self.hideSwitchTable()
             self.myReservations?[index] = rent
@@ -192,8 +195,7 @@ class MyReservationsViewController: BaseViewController {
 }
 
 
-// MARK: UICollectionViewDelegate, UICollectionViewDataSource
-//MARK: -----------------
+// MARK: -- UICollectionViewDelegate, UICollectionViewDataSource
 extension MyReservationsViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -232,14 +234,13 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
                 return stopRideCell(item: item, indexPath: indexPath)
 //            case .driverWaithingApproval:
 //                return driverWaithingApprovalCell(indexPath: indexPath)
-            default:
-                return stopRideCell(item: item, indexPath: indexPath)
+            default://Draft
+                return waithingAdminApprovalCell(item: item, indexPath: indexPath)
             }
         }
     }
     
-    //MARK: UICollectionViewDelegate
-    //MARK: -------------------------------------
+    //MARK: -- UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if !isReservationHistory {
             
@@ -286,7 +287,8 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
 //            case .driverWaithingApproval:
      //           myResrevationState = .driverWaithingApproval
 //                break
-            default:
+            default://Draft
+                myResrevationState = .waithingAdminApproval
                 break
             }
             
@@ -304,8 +306,7 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         }
     }
     
-    //MARK: UICollectionViewDelegateFlowLayout
-    //MARK: -------------------------------------
+    //MARK: --UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let item = myReservations![indexPath.item]
@@ -349,9 +350,9 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
 //            }
 //            return CGSize(width: collectionView.bounds.width,
 //                          height: 230.0 + CGFloat(driversCellHight))
-        default:
+        default: //Draft
             return CGSize(width: collectionView.bounds.width,
-                                 height: height405)
+                                 height: height245)
         }
     }
     
@@ -390,7 +391,7 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         //Handler switch driver button
         cell.pressedSwitchDriver = { index in
             
-            let additionalDrivers = self.myReservationViewModel.getAdditionalDrives(rent: self.myReservations![index])
+            let additionalDrivers = self.myReservationVM.getAdditionalDrives(rent: self.myReservations![index])
             self.mSwitchDriversTbV.index = index
             if additionalDrivers.count == 1 {
                 self.showAlertForSwitchDriver(index: index,
@@ -471,6 +472,15 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         let cell = mReservCollectionV.dequeueReusableCell(withReuseIdentifier: AdditionalDriverWaithingApplovalCell.identifier, for: indexPath) as!  AdditionalDriverWaithingApplovalCell
         cell.drivers = drivers
         cell.setCellInfo()
+        return cell
+    }
+    
+    ///Waithing admin Approval  UICollectionViewCell (Draft)
+    private func waithingAdminApprovalCell(item: Rent, indexPath: IndexPath) -> WaithingAdminApplovalCell {
+        
+        let cell = mReservCollectionV.dequeueReusableCell(withReuseIdentifier: WaithingAdminApplovalCell.identifier, for: indexPath) as!  WaithingAdminApplovalCell
+        cell.drivers = drivers
+        cell.setCellInfo(item: item)
         return cell
     }
 }

@@ -14,6 +14,8 @@ enum MyReservationState: String {
     case maykePayment
     case payRentalPrice
     case driverWaithingApproval
+    case waithingAdminApproval
+
 }
 
 struct ReservationWithReservedPaidModel {

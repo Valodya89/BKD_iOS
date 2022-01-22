@@ -15,7 +15,8 @@ protocol AccessoriesCollectionViewCellDelegate: AnyObject {
                      id: String?,
                      name: String?,
                      image: UIImage?)
-    func didChangeCount(cellIndex: Int,
+    func didChangeCount(isAdd: Bool,
+                        cellIndex: Int,
                         count: Int)
 }
 class AccessoriesCollectionViewCell: UICollectionViewCell {
@@ -114,13 +115,16 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
             let price = Double(mPriceLb.text ?? "0" )
             
             mAccessorieCountLb.text = String(count! + 1)
-            if mAddBtn.titleColor(for: .normal) == color_menu!  {
+            let isAdd = mAddBtn.titleColor(for: .normal) == color_menu!
+            if isAdd  {
                 increaseOrDecreaseAccessory(accessoryPrice:price!,
                                             accessoryCount:count! + 1,
                                             isIncrease: true)
                 
             }
-            delegate?.didChangeCount(cellIndex: sender.tag, count: count! + 1)
+            delegate?.didChangeCount(isAdd: isAdd,
+                                     cellIndex: sender.tag,
+                                     count: count! + 1)
         }
     }
     
@@ -131,13 +135,15 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
         
         if count! > 1  {
             mAccessorieCountLb.text = String(count! - 1)
-            if mAddBtn.titleColor(for: .normal) == color_menu! {
+            let isAdd = mAddBtn.titleColor(for: .normal) == color_menu!
+            if isAdd  {
                 increaseOrDecreaseAccessory(accessoryPrice:price!,
                             accessoryCount:count! - 1,
                             isIncrease: false)
-                
             }
-            delegate?.didChangeCount(cellIndex: sender.tag, count: count! - 1)
+            delegate?.didChangeCount(isAdd: isAdd,
+                                     cellIndex: sender.tag,
+                                     count: count! - 1)
         }
        
     }

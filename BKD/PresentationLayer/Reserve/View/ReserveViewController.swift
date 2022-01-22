@@ -161,7 +161,6 @@ class ReserveViewController: BaseViewController {
                                agreementType: .reserve,
                                vehicleModel: self.vehicleModel,
                                urlString: ApplicationSettings.shared.settings?.reservationAgreementUrl)
-//            self.isAgree ? self.goToPhoneVerification() :         self.addReservation()
         }
     }
     

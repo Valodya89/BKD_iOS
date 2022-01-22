@@ -209,17 +209,7 @@ class DetailsViewModel: NSObject {
         didResult(validator.checkReserve(searchModel: searchModel))
     }
     
-    ///Total price of custom location
-    func getCustomLocationTotalPrice(searchV: SearchView) -> Double {
-        var total: Double = 0.0
-        if LocationPickUp.pickUpCustomLocation == searchV.locationPickUp {
-            total += customLocationPrice
-        }
-        if LocationReturn.returnCustomLocation == searchV.locationReturn {
-            total += customLocationPrice
-        }
-        return total
-    }
+
     
     ///Total cost of reservations outside working hours
     func getNoWorkingTimeTotalPrice(searchModel: SearchModel, timePrice:Double) -> Double {
