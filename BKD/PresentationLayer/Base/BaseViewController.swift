@@ -111,11 +111,9 @@ class BaseViewController: UIViewController, StoryboardInitializable {
                        vehicleModel: VehicleModel?,
                        urlString: String?) {
         
-        let bkdAgreementVC = UIStoryboard(name: Constant.Storyboards.registrationBot, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.bkdAgreement) as! BkdAgreementViewController
+        let bkdAgreementVC = BkdAgreementViewController.initFromStoryboard(name: Constant.Storyboards.registrationBot)
         bkdAgreementVC.delegate = viewController as? BkdAgreementViewControllerDelegate
         bkdAgreementVC.agreementType = agreementType
-//        bkdAgreementVC.isAdvanced = isAdvanced
-//        bkdAgreementVC.isEditAdvanced = isEditAdvanced
         bkdAgreementVC.urlString = urlString
         bkdAgreementVC.vehicleModel = vehicleModel
         self.navigationController?.pushViewController(bkdAgreementVC, animated: true)
@@ -123,7 +121,8 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     
     ///Open SeeMap Screen
     func goToSeeMap(parking: Parking?, customLocation: CustomLocationToRent?) {
-        let seeMapContr = UIStoryboard(name: Constant.Storyboards.seeMap, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.seeMap) as! SeeMapViewController
+        
+        let seeMapContr = SeeMapViewController.initFromStoryboard(name: Constant.Storyboards.seeMap)
         seeMapContr.parking = parking
         seeMapContr.customLocationToRent = customLocation
         self.navigationController?.pushViewController(seeMapContr, animated: true)
@@ -132,7 +131,8 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     
     ///Open custom location map screen
     func goToCustomLocationMapController (on viewController: UIViewController, isAddDamageAddress: Bool) {
-        let customLocationContr = UIStoryboard(name: Constant.Storyboards.customLocation, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.customLocation) as! CustomLocationViewController
+        
+        let customLocationContr = CustomLocationViewController.initFromStoryboard(name: Constant.Storyboards.customLocation)
         customLocationContr.delegate = viewController as? CustomLocationViewControllerDelegate
         customLocationContr.isAddDamageAddress = isAddDamageAddress
         self.navigationController?.pushViewController(customLocationContr, animated: true)
@@ -191,10 +191,14 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     }
     
     /// Go to Sign in screen
-    func goToEditReservationAdvanced(rent: Rent?, accessories: [AccessoriesEditModel]?, editReservationModel: EditReservationModel?) {
+    func goToEditReservationAdvanced(rent: Rent?,
+                                     accessories: [AccessoriesEditModel]?,
+                                     searchModel: SearchModel,
+                                     editReservationModel: EditReservationModel?) {
         let editReservetionAdvancedVC = EditReservetionAdvancedViewController.initFromStoryboard(name: Constant.Storyboards.editReservetionAdvanced)
         editReservetionAdvancedVC.currRent = rent
         editReservetionAdvancedVC.accessories = accessories
+        editReservetionAdvancedVC.searchModel = searchModel
         editReservetionAdvancedVC.editReservationModel = editReservationModel ?? EditReservationModel()
         self.navigationController?.pushViewController(editReservetionAdvancedVC, animated: true)
         self.tabBarController?.tabBar.isHidden = false

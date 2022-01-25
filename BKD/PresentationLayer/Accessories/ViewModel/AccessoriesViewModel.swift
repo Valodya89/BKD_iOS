@@ -63,34 +63,28 @@ class AccessoriesViewModel: NSObject {
     
     
     ///Get edit accessories edit list
-    func getAccessoriesEditList(rent: Rent?, accessories:[Accessories]) -> (accessories: [AccessoriesEditModel]?, totalPrice: Double) {
+    func getAccessoriesEditList(rent: Rent?, accessoriesList:[AccessoriesEditModel]) -> (accessories: [AccessoriesEditModel]?, totalPrice: Double) {
         
         guard let rentAccessories = rent?.accessories else {return (nil, 0.0)}
         var activeAccessories:[AccessoriesEditModel] = []
         var totalPrice = 0.0
         
-        rentAccessories.forEach { rentAccessory in
-            accessories.forEach { accessory in
-                
-                if accessory.active {
-                    if accessory.id == rentAccessory.id {
-                        totalPrice += (accessory.price * rentAccessory.count)
-                        let accesoryEdit = AccessoriesEditModel(id: accessory.id,
-                                                                imageUrl: accessory.image.getURL(),
-                                                                name: accessory.name,
-                                                                count: Int(rentAccessory.count),
-                                                                maxCount: accessory.maxCount,
-                                                                isAdded: true,
-                                                                price: accessory.price)
-                        activeAccessories.append(accesoryEdit)
-                    } else {
-                        let accesoryEdit = AccessoriesEditModel(id: accessory.id,
-                                                                imageUrl: accessory.image.getURL(),
-                                                                name: accessory.name,
-                                                                maxCount: accessory.maxCount, price: accessory.price)
-                        activeAccessories.append(accesoryEdit)
-                    }
-                }
+        accessoriesList.forEach { accessory in
+            
+            let rentAccessory = rentAccessories.filter{$0.id == accessory.id}.first
+            if rentAccessory != nil {
+                totalPrice += (accessory.price! * rentAccessory!.count)
+                let accesoryEdit = AccessoriesEditModel(id: rentAccessory!.id as String,
+                                                        imageUrl: accessory.imageUrl,
+                                                        name: accessory.name,
+                                                        count: Int(rentAccessory!.count),
+                                                        maxCount: accessory.maxCount,
+                                                        isAdded: true,
+                                                        price: accessory.price,
+                                                        totalPrice: totalPrice)
+                activeAccessories.append(accesoryEdit)
+            } else {
+                activeAccessories.append(accessory)
             }
         }
         return (activeAccessories, totalPrice)
@@ -143,11 +137,43 @@ class AccessoriesViewModel: NSObject {
                 if editList[i].id == editAccessiries.id {
                     editList.remove(at: i)
                     completion(editList)
+                    return
                 }
             }
-            
-            
         }
         completion(editList)
+    }
+    
+    
+    ///Is add button enabled
+    func isAddEnabled(editedAccessories: [EditAccessory]?, currItem: AccessoriesEditModel) -> Bool {
+        let item = editedAccessories?.filter({$0.id == currItem.id}).first
+        guard item != nil else {return true}
+        
+        return false
+    }
+    
+   ///Is decrease enambled
+    func isDecreaseEnabled(editedAccessories: [EditAccessory]?, currItem: AccessoriesEditModel) -> Bool {
+        let oldItem = editedAccessories?.filter({$0.id == currItem.id}).first
+        guard oldItem != nil else {return true}
+        return oldItem!.count < Double(currItem.count ?? 0)
+    }
+    
+    ///Is edited accessory list
+    func isEditedAccessoryList(oldAccessories: [EditAccessory],
+                               editedAccessories: [EditAccessory]) -> Bool {
+        if oldAccessories.count < editedAccessories.count {
+            return true
+        } else if oldAccessories.count == editedAccessories.count {
+            
+            for i in 0 ..< oldAccessories.count {
+                if (oldAccessories[i].id == editedAccessories[i].id) &&
+                    (oldAccessories[i].count < editedAccessories[i].count) {
+                    return true
+                }
+            }
+        }
+        return false
     }
 }

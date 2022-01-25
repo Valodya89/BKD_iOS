@@ -69,14 +69,136 @@ final class EditReservationViewModel {
     ///Get new value of reservation
     func getNewReservetion(carId:String,
                            startDate: Double,
-                           search: SearchModel) -> EditReservationModel {
+                           search: SearchModel,
+                           editReservationModel: EditReservationModel?) -> EditReservationModel {
+        
         let editReservation = EditReservationModel()
        return editReservation.getNewReservetionSearchInfo(carId: carId,
                                           startDate: startDate,
-                                          search: search)
+                                                          search: search, editReservation: editReservationModel)
+    }
+    
+    ///Checke if location fields are filled
+    func ifLocationsAreFilled(oldSearch: SearchModel,
+                              newSearch: SearchModel) -> Bool {
+        if (!newSearch.isPickUpCustomLocation && (newSearch.pickUpLocation == nil)) ||
+            (!newSearch.isRetuCustomLocation &&  newSearch.returnLocation == nil) {
+            return false
+        }
+        return true
+    }
+    
+    ///check if reservation has been edited
+    func ifReservetionEdited(oldSearch: SearchModel,
+                        newSearch: SearchModel,
+                        oldDrivers: [DriverToRent],
+                        oldAccessories: [EditAccessory],
+                        editReservationModel: EditReservationModel?) -> Bool {
+        if !ifLocationsAreFilled(oldSearch: oldSearch,
+                                newSearch: newSearch) {
+            return false
+        }
+        
+        if (oldSearch.returnDate != newSearch.returnDate) ||
+            (oldSearch.returnTime != newSearch.returnTime) {
+            return true
+        } else if ifEditedDriversOrAccessories(oldDrivers: oldDrivers,
+                                               oldAccessories: oldAccessories,
+                                               editReservationModel: editReservationModel) {
+            return true
+        }
+        
+        return ifLocationEdited(oldSearch: oldSearch,
+                                newSearch: newSearch)
+    }
+    
+    ///check if the location has been edited
+    func ifLocationEdited(oldSearch: SearchModel,
+                          newSearch: SearchModel) -> Bool {
+        
+        if !ifLocationsAreFilled(oldSearch: oldSearch,
+                                newSearch: newSearch) {
+            return false
+        }
+        
+        //Pick up location
+        if oldSearch.isPickUpCustomLocation && (oldSearch.isPickUpCustomLocation == newSearch.isPickUpCustomLocation) {
+            if (oldSearch.pickUpLocationLatitude != newSearch.pickUpLocationLatitude) ||
+                (oldSearch.pickUpLocationLongitude != newSearch.pickUpLocationLongitude) {
+                return true
+            }
+        } else if !oldSearch.isPickUpCustomLocation && (oldSearch.isPickUpCustomLocation == newSearch.isPickUpCustomLocation) {
+            if oldSearch.pickUpLocationId != newSearch.pickUpLocationId {
+                return true
+            }
+        }
+        else if oldSearch.isPickUpCustomLocation != newSearch.isPickUpCustomLocation {
+            return true
+        }
+        
+        //Return location
+        if oldSearch.isRetuCustomLocation && (oldSearch.isRetuCustomLocation == newSearch.isRetuCustomLocation) {
+            if (oldSearch.returnLocationLatitude != newSearch.returnLocationLatitude) ||
+                (oldSearch.returnLocationLongitude != newSearch.returnLocationLongitude) {
+                return true
+            }
+        } else if !oldSearch.isRetuCustomLocation && (oldSearch.isRetuCustomLocation == newSearch.isRetuCustomLocation) {
+            if oldSearch.returnLocationId != newSearch.returnLocationId {
+                return true
+            }
+        }
+        else if oldSearch.isRetuCustomLocation != newSearch.isRetuCustomLocation {
+            return true
+        }
+        return false
+    }
+    
+    
+    ///check if the search has been edited
+    func ifEditedDriversOrAccessories(oldDrivers: [DriverToRent],
+                                      oldAccessories: [EditAccessory],
+                                      editReservationModel: EditReservationModel?) -> Bool {
+        
+        if  MyDriversViewModel().isEdietedDriverList(oldDrivers: oldDrivers, editedDrivers: editReservationModel?.additionalDrivers ?? []) {
+            return true
+        } else if AccessoriesViewModel().isEditedAccessoryList(oldAccessories: oldAccessories, editedAccessories: editReservationModel?.accessories ?? []) {
+            return true
+        }
+        return false
+    }
+    
+    
+    ///If custom loaction deselected
+    func ifCustomLoactionDeselected(tag: Int,
+                                    oldSearch: SearchModel,
+                                    newSearch: SearchModel) -> Bool {
+        
+        if tag == 4 && oldSearch.isPickUpCustomLocation && !newSearch.isPickUpCustomLocation {
+            return true
+        }
+        if tag == 5 && oldSearch.isRetuCustomLocation &&
+            !newSearch.isRetuCustomLocation {
+            return true
+        }
+        return false
+    }
+    
+    ///If custom loaction edited
+    func ifCustomLoactionEdited(tag: Int,
+                                oldSearch: SearchModel,
+                                newSearch: SearchModel) -> Bool {
+        
+        if tag == 6 && oldSearch.isPickUpCustomLocation {
+            return true
+        }
+        if tag == 7 && oldSearch.isRetuCustomLocation {
+            return true
+        }
+        return false
     }
     
 }
+
 
 //"pickupLocation": {
 //              "type": "PARKING",

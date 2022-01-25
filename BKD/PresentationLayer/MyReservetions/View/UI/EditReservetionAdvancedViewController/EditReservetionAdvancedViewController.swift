@@ -78,9 +78,9 @@ class EditReservetionAdvancedViewController: BaseViewController {
     lazy var editReservAdvancedVM = EditReservetionAdvancedViewModel()
     public var currRent: Rent?
     public var accessories: [AccessoriesEditModel]?
-  //  public var vehicleModel: VehicleModel?
     public var myReservationState: MyReservationState?
     public var paymentStatusArr: [PaymentStatusModel]?
+    public var searchModel: SearchModel?
     //public var onRideArr: [OnRideModel]?
     //public var driversArr:[MyDriversModel]?
    // public var registerNumberArr:[String]?
@@ -252,15 +252,13 @@ class EditReservetionAdvancedViewController: BaseViewController {
           }
           
           //Accessories
-          if accessories == nil {
-              if (editReservationModel.accessories?.count ?? 0) > 0 {
-                   accessories = editReservAdvancedVM.getEditedAccessories(editAccessories: editReservationModel.accessories ?? [])
+          if editReservationModel.accessories != nil {
+                  accessories = editReservAdvancedVM.getEditedAccessories(editAccessories: editReservationModel.accessories ?? [])
           }
-      }
           if accessories != nil {
-          self.mReserveInfoTableV.accessories = accessories
-          self.mReserveInfoTableV.reloadData()
-          self.mReserveTableHeight.constant = self.mReserveInfoTableV.contentSize.height
+              self.mReserveInfoTableV.accessories = accessories
+              self.mReserveInfoTableV.reloadData()
+              self.mReserveTableHeight.constant = self.mReserveInfoTableV.contentSize.height
           }
 
           //Additional drivers list
@@ -275,18 +273,26 @@ class EditReservetionAdvancedViewController: BaseViewController {
           mAdditionalDriverTableHeight.constant = mAdditionalDriverTableV.contentSize.height
       }
    
+   
+//    ///Configure reservation status
+//    func configureReservationStatus() {
+//        switch myReservationState {
+//        case .startRide: break
+//        case .payRentalPrice:break
+//        case .payDistancePrice:break
+//        case .maykePayment:break
+//        case .stopRide: break
+//        default : break
+//        }
+//    }
     
-    func configureReservationStatus() {
-        switch myReservationState {
-        case .startRide: break
-        case .payRentalPrice:break
-        case .payDistancePrice:break
-        case .maykePayment:break
-        case .stopRide: break
-        default : break
-        }
-    }
-    
+    ///Update reservation
+//    func updateReservation() {
+//        editReservAdvancedVM.updateRent(rentId: currRent?.id ?? "", editReservationModel: editReservationModel, searchModel: searchModel ?? SearchModel()) { result in
+//            guard let rent = result else {return}
+//            
+//        }
+//    }
     
     ///Handel Total price View
     func handlerTotalPrice() {
@@ -323,6 +329,9 @@ class EditReservetionAdvancedViewController: BaseViewController {
         }
     }
     
+    
+    
+    //MARK: -- Alerts
     private func showAlert(message: String) {
         BKDAlert().showAlert(on: self,
                              message: message,
@@ -354,10 +363,14 @@ class EditReservetionAdvancedViewController: BaseViewController {
     
     
     func handlerConfirm() {
-        mConfirmV.didPressConfirm = {
-            self.goToAgreement(on: self,
-                               agreementType: .editAdvanced,
-                               vehicleModel: nil, urlString: nil)
+        mConfirmV.didPressConfirm = { [self] in
+         
+            let bkdAgreementVC = BkdAgreementViewController.initFromStoryboard(name: Constant.Storyboards.registrationBot)
+            bkdAgreementVC.agreementType = .editAdvanced
+            bkdAgreementVC.currRent = currRent
+            bkdAgreementVC.searchModel = searchModel
+            bkdAgreementVC.editReservationModel = editReservationModel
+            self.navigationController?.pushViewController(bkdAgreementVC, animated: true)
         }
     }
     
@@ -378,6 +391,7 @@ class EditReservetionAdvancedViewController: BaseViewController {
     
 
 }
+
 
  
 ////MARK: - EditReservationDelegate0

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19158" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19141"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -33,7 +33,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="arr-tv-9MH">
-                                <rect key="frame" x="0.0" y="17" width="414" height="757"/>
+                                <rect key="frame" x="0.0" y="17" width="414" height="648"/>
                                 <color key="backgroundColor" name="background"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4he-Dp-h4b">
                                     <size key="itemSize" width="414" height="130"/>
@@ -238,7 +238,7 @@
                                     <constraint firstItem="JH7-Mf-mxR" firstAttribute="height" secondItem="8h7-jc-10V" secondAttribute="height" multiplier="0.45" id="vCG-bF-XBk"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CHH-oy-JK1" customClass="ConfirmView" customModule="BKD" customModuleProvider="target">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CHH-oy-JK1" customClass="ConfirmView" customModule="BKD" customModuleProvider="target">
                                 <rect key="frame" x="73.5" y="695" width="267" height="42"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_gradient" translatesAutoresizingMaskIntoConstraints="NO" id="ePp-Lg-rGh">
@@ -342,7 +342,7 @@
                             <constraint firstItem="8h7-jc-10V" firstAttribute="width" secondItem="VMB-Ht-MkV" secondAttribute="width" multiplier="0.917874" id="eef-GU-bWs"/>
                             <constraint firstItem="8h7-jc-10V" firstAttribute="centerX" secondItem="GDw-wF-LID" secondAttribute="centerX" id="hZD-Oi-wG9"/>
                             <constraint firstItem="CHH-oy-JK1" firstAttribute="height" secondItem="VMB-Ht-MkV" secondAttribute="height" multiplier="0.0519802" id="ixf-Um-b7G"/>
-                            <constraint firstItem="GDw-wF-LID" firstAttribute="bottom" secondItem="arr-tv-9MH" secondAttribute="bottom" id="nJd-EJ-v4m"/>
+                            <constraint firstItem="8h7-jc-10V" firstAttribute="top" secondItem="arr-tv-9MH" secondAttribute="bottom" constant="20" id="nJd-EJ-v4m"/>
                             <constraint firstItem="8h7-jc-10V" firstAttribute="bottom" secondItem="CHH-oy-JK1" secondAttribute="bottom" id="oIK-dt-Vdd"/>
                             <constraint firstItem="GDw-wF-LID" firstAttribute="bottom" secondItem="CHH-oy-JK1" secondAttribute="bottom" multiplier="1.05" id="xCA-Qb-r18"/>
                         </constraints>

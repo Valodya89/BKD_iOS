@@ -371,8 +371,7 @@ class EditBySearchView: UIView, UITextFieldDelegate {
         mMonthReturnDateBtn?.setTitle("", for: .normal)
     }
     
-    //MARK: ACTIONS
-    //MARK: ---------------
+    //MARK: -- Actions
     @IBAction func pickupDate(_ sender: UIButton) {
         datePicker = .pickUpDate
         mPickUpDataTxtFl.becomeFirstResponder()

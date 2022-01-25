@@ -80,8 +80,16 @@ enum AuthAPI: APIProtocol {
                  additionalDrivers: [String?],
                  pickupLocation: [String : Any],
                  returnLocation: [String : Any])
-    case payLater
     case getRents
+    case updateRent(rentId: String,
+                    carId: String,
+                    startDate: Double,
+                    endDate: Double,
+                    accessories: [[String : Any]?],
+                    additionalDrivers: [String?],
+                    pickupLocation: [String : Any],
+                    returnLocation: [String : Any])
+    case payLater
     case getChatID(name: String,
                    type: String,
                    identifier: String)
@@ -214,8 +222,6 @@ enum AuthAPI: APIProtocol {
             return "api/driver/\(id)/personal"
         case .recoverPassword:
             return "accounts/recover-password"
-        case .getRents:
-            return "api/rents"
         case .getChatID:
             return "/chat/start"
         case .getMessages(let chatID):
@@ -228,8 +234,12 @@ enum AuthAPI: APIProtocol {
             return "api/driver/\(id)/driving-license-dates"
         case let .acceptAgreement(id):
             return "api/driver/\(id)/agreement/accept"
+        case .getRents:
+            return "api/rents"
         case .addRent:
             return "api/rents"
+        case let .updateRent(rentId, _, _, _, _, _, _, _):
+            return "api/rents/\(rentId)"
         case .payLater:
             return "api/driver/pay-later"
         case .checkDefect(let id):
@@ -286,6 +296,7 @@ enum AuthAPI: APIProtocol {
              .acceptAgreement,
              .addRent,
              .getRents,
+             .updateRent,
              .payLater,
              .checkDefect,
              .checkOdometer,
@@ -457,6 +468,23 @@ enum AuthAPI: APIProtocol {
                 "pickupLocation": pickupLocation,
                 "returnLocation": returnLocation
             ]
+        case let .updateRent(_,
+                             carId,
+                             startDate,
+                             endDate,
+                             accessories,
+                             additionalDrivers,
+                             pickupLocation,
+                             returnLocation):
+            return [
+                "carId": carId,
+                "startDate": startDate,
+                "endDate": endDate,
+                "accessories": accessories,
+                "additionalDrivers": additionalDrivers,
+                "pickupLocation": pickupLocation,
+                "returnLocation": returnLocation
+            ]
         case let .addAccident(_, statDate,
                               address,
                               longitude,
@@ -513,7 +541,8 @@ enum AuthAPI: APIProtocol {
         case .verifyAccounts,
              .recoverPassword,
              .approveAccident,
-             .cancelAccident:
+             .cancelAccident,
+             .updateRent:
             return .put
         case .resendCode,
              .verifyPhoneCode,

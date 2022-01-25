@@ -11,7 +11,9 @@ import UIKit
 protocol AccessoriesUIViewControllerDelegate: AnyObject {
     func addedAccessories(_ isAdd: Bool,
                           totalPrice: Double,
-                          accessoriesEditList: [AccessoriesEditModel]?)
+                          accessoriesEditList: [AccessoriesEditModel]?,
+                          oldReservAccessories: [EditAccessory]?,
+                          editReservationModel: EditReservationModel?)
 }
 class AccessoriesUIViewController: BaseViewController {
     
@@ -36,6 +38,8 @@ class AccessoriesUIViewController: BaseViewController {
     public var vehicleModel: VehicleModel?
     public var currRent: Rent?
     public var editReservationModel: EditReservationModel?
+    public var oldReservAccessories: [EditAccessory]?
+
 
 
     
@@ -48,14 +52,18 @@ class AccessoriesUIViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        mConfirmV.initConfirm()
+        if isEditReservation {
+            mConfirmV.initConfirm()
+        }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if !isEditReservation {
+            self.delegate?.addedAccessories(self.mPriceLb.text == "0.0" ? false : true , totalPrice: totalPrice, accessoriesEditList: accessoriesEditList, oldReservAccessories: nil, editReservationModel: nil)
             PriceManager.shared.accessoriesPrice = totalPrice
-            self.delegate?.addedAccessories(self.mPriceLb.text == "0.0" ? false : true , totalPrice: totalPrice, accessoriesEditList: accessoriesEditList)
+
         }
     }
     
@@ -75,7 +83,11 @@ class AccessoriesUIViewController: BaseViewController {
     
     ///Set edited accessories
     func setEditAccessories() {
-        editReservationModel?.accessories = accessoriesVM.getEditAccessories(accessories: accessoriesEditList)
+        
+        oldReservAccessories = accessoriesVM.getEditAccessories(accessories: accessoriesEditList)
+        if editReservationModel?.accessories == nil {
+            editReservationModel?.accessories = oldReservAccessories
+        }
     }
     
     ///Get accessories list
@@ -83,10 +95,9 @@ class AccessoriesUIViewController: BaseViewController {
         accessoriesVM.getAccessories(carID: carId) { [self] result, error in
             guard let _ = result else { return }
             if accessoriesEditList == nil {
-                if !isEditReservation {
-                    accessoriesEditList = accessoriesVM.getActiveAccessoryList(accessories: result!)
-                } else {
-                    let accessoriesEditInfo = accessoriesVM.getAccessoriesEditList(rent: currRent, accessories:  result!)
+                accessoriesEditList = accessoriesVM.getActiveAccessoryList(accessories: result!)
+                if isEditReservation  {
+                    let accessoriesEditInfo = accessoriesVM.getAccessoriesEditList(rent: currRent, accessoriesList:  accessoriesEditList!)
                     accessoriesEditList = accessoriesEditInfo.accessories
                     totalPrice = accessoriesEditInfo.totalPrice
                     setEditAccessories()
@@ -101,6 +112,7 @@ class AccessoriesUIViewController: BaseViewController {
     ///Configure view when it open for edit
     func configureViewForEdit() {
         if isEditReservation {
+           // updateConfirmView()
             mConfirmV.isHidden = !isEditReservation
             mTotalPriceBottom.constant = -76
         }
@@ -119,8 +131,18 @@ class AccessoriesUIViewController: BaseViewController {
                                                                                       editAccessiries: accessory,
                                                  editReservationAccessories: editReservationModel?.accessories) { result in
             self.editReservationModel?.accessories = result
+           // self.updateConfirmView()
         }
     }
+    
+    ///Enable or disable confirm button
+//    func updateConfirmView () {
+//        if  accessoriesVM.isEditedAccessoryList(oldAccessories: oldReservAccessories ?? [], editedAccessories: editReservationModel?.accessories ?? []) {
+//            mConfirmV.enableView()
+//        } else {
+//            mConfirmV.disableView()
+//        }
+//    }
     
     //MARK: -- ACTION
     @IBAction func back(_ sender: Any) {
@@ -128,9 +150,12 @@ class AccessoriesUIViewController: BaseViewController {
     }
     
     func handlerConfirm() {
-        mConfirmV.didPressConfirm = {
-            self.goToEditReservationAdvanced(rent: self.currRent, accessories: nil,
-                                             editReservationModel: self.editReservationModel)
+        mConfirmV.didPressConfirm = { [self] in
+            PriceManager.shared.accessoriesPrice = totalPrice
+            delegate?.addedAccessories(true, totalPrice: totalPrice,
+                                       accessoriesEditList: accessoriesEditList,
+                                       oldReservAccessories: oldReservAccessories, editReservationModel: editReservationModel)
+            self.navigationController?.popViewController(animated: true)
         }
     }
 }
@@ -146,8 +171,13 @@ extension AccessoriesUIViewController: UICollectionViewDelegate, UICollectionVie
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AccessoriesCollectionViewCell.identifier, for: indexPath) as!  AccessoriesCollectionViewCell
 
         let editItem = accessoriesEditList![indexPath.row]
+        cell.accessory = editItem
+        cell.oldReservAccessories = oldReservAccessories
         cell.setCellInfo(editItem: editItem,  index: indexPath.row)
         cell.delegate = self
+        if isEditReservation {            
+            cell.disableCellDetails(editedAccessories: oldReservAccessories, currItem: editItem)
+        }
         return cell
     }
     
@@ -167,7 +197,6 @@ extension AccessoriesUIViewController: AccessoriesCollectionViewCellDelegate {
         accessoriesEditList![cellIndex].isAdded = isAdd
         accessoriesEditList![cellIndex].id = id
         accessoriesEditList![cellIndex].count =  accessoriesEditList![cellIndex].count ?? 1
-        
         if isEditReservation {
             eritReserveAccessoryList(isAdd: isAdd, accessory: accessoriesEditList![cellIndex])
              }
@@ -177,7 +206,9 @@ extension AccessoriesUIViewController: AccessoriesCollectionViewCellDelegate {
         accessoriesEditList![cellIndex].count = count
         if isEditReservation && isAdd {
             eritReserveAccessoryList(isAdd: isAdd, accessory: accessoriesEditList![cellIndex])
+            mAccessoriesCollectionV.reloadItems(at: [IndexPath(item: cellIndex, section: 0)])
         }
+        
     }
     
     
@@ -190,9 +221,9 @@ extension AccessoriesUIViewController: AccessoriesCollectionViewCellDelegate {
             self.mPriceLb.text = totalValue
             self.totalPrice = (totalValue as NSString).doubleValue
             
-            if self.isEditReservation {
-                self.mConfirmV.enableView()
-            }
+//            if self.isEditReservation {
+//                updateConfirmView()
+//            }
         }
     }
     

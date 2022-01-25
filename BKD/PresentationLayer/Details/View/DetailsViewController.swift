@@ -1093,19 +1093,17 @@ extension DetailsViewController: SearchWithValueViewDelegate {
 //MARK: -- AccessoriesUIViewControllerDelegate
 extension DetailsViewController: MyDriversViewControllerDelegate {
     
-    func selectedDrivers(_ isSelecte: Bool, additionalDrivers: [MyDriversModel]?) {
+    func selectedDrivers(_ isSelecte: Bool, additionalDrivers: [MyDriversModel]?, oldReservDrivers: [DriverToRent]?, editReservationModel: EditReservationModel?) {
         mAdditionalDriverBtn.alpha = isSelecte ? 1.0 : 0.67
         vehicleModel?.ifHasAditionalDriver = isSelecte
         vehicleModel?.additionalDrivers = additionalDrivers
     }
+
 }
 
 //MARK: -- AccessoriesUIViewControllerDelegate
 extension DetailsViewController: AccessoriesUIViewControllerDelegate {
-    
-    func addedAccessories(_ isAdd: Bool,
-                          totalPrice: Double,
-                          accessoriesEditList: [AccessoriesEditModel]?) {
+    func addedAccessories(_ isAdd: Bool, totalPrice: Double, accessoriesEditList: [AccessoriesEditModel]?, oldReservAccessories: [EditAccessory]?, editReservationModel: EditReservationModel?) {
         
         mAccessoriesBtn.alpha = isAdd ? 1.0 : 0.67
         vehicleModel?.ifHasAccessories = isAdd

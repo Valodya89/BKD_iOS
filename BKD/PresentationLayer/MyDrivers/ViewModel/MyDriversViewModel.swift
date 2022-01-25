@@ -84,7 +84,7 @@ class MyDriversViewModel: NSObject {
     }
     
     ///Get edit rent drivers  list
-    func getDriversEditList(rent: Rent?, drivers: [MainDriver]) -> (additionalDrivers: [MyDriversModel]?, totalPrice: Double) {
+    func getDriversEditList(rent: Rent?, drivers: [MyDriversModel]) -> (additionalDrivers: [MyDriversModel]?, totalPrice: Double) {
         
         guard let rentDrivers = rent?.additionalDrivers else {return (nil, 0.0)}
         var additionalDrivers:[MyDriversModel] = []
@@ -92,89 +92,69 @@ class MyDriversViewModel: NSObject {
         
         drivers.forEach { driver in
             if rentDrivers.count > 0 {
-            rentDrivers.forEach { rentDrivers in
                 
-                if driver.id == rentDrivers.id {
-                        totalPrice += driverPrice
-                    let driverEdit = MyDriversModel(fullname: driver.getFullname(),
-                                                    licenciNumber: driver.drivingLicenseNumber ?? "",
+                let rentDriver = rentDrivers.filter { $0.id == driver.driver?.id ?? ""}.first
+                
+                if rentDriver == nil {
+                    additionalDrivers.append(driver)
+                } else {
+                    totalPrice += driverPrice
+                    let driverEdit = MyDriversModel(fullname: driver.fullname,
+                                                    licenciNumber: driver.licenciNumber,
                                                     price: driverPrice, isSelected: true,
                                                     isWaitingForAdmin: false,
                                                     totalPrice: 0.0,
-                                                    driver: driver)
+                                                    driver: driver.driver)
                     additionalDrivers.append(driverEdit)
-                } else {
-                    
-                    if driver.state == Constant.Texts.state_agree {
-                        let myDriverModel = MyDriversModel(fullname: driver.getFullname(),
-                                            licenciNumber: driver.drivingLicenseNumber ?? "",
-                                            price: 0.0,
-                                            isWaitingForAdmin: true,
-                                            driver: driver)
-                        additionalDrivers.append(myDriverModel)
-                    } else if driver.state == Constant.Texts.state_accepted {
-                        let myDriverModel = MyDriversModel(fullname: driver.getFullname(),
-                                          licenciNumber: driver.drivingLicenseNumber ?? "",
-                                           price: 0.0,
-                                           isWaitingForAdmin: false,
-                                           driver: driver)
-                        additionalDrivers.append(myDriverModel)
-                    }
-                    
                 }
-            }
+                
         } else {
             
-            additionalDrivers = setActiveDriverList(allDrivers: drivers)
-            
+            additionalDrivers = drivers
         }
-        }
+    }
         return (additionalDrivers, totalPrice)
     }
+    
+    
+    
     
     
     ///Edit reservation driver
     func editReservationDrivers(isSelected: Bool,
                                 editDriver: MyDriversModel,
-                                editReservationDrivers: [DriverToRent]) -> [DriverToRent] {
+                                editReservationDrivers: [DriverToRent], completion: @escaping (([DriverToRent]) -> Void)) {
         var editList = editReservationDrivers
         if isSelected {
             editList.append(DriverToRent(id: editDriver.driver?.id ?? "",
                                        name: editDriver.driver?.name,
                                        surname: editDriver.driver?.surname,
                                        drivingLicenseNumber: editDriver.licenciNumber))
-            return editList
+            completion(editList)
         } else {
             for i in 0 ..< editList.count  {
                 if (editDriver.driver?.id ?? "") == editList[i].id {
                     editList.remove(at: i)
-                    return editList
+                    completion(editList)
+                    return
                 }
             }
         }
-        return editList
+        completion(editList)
     }
     
+    ///Is enabled cell
+    func isEnabledCell(editedDrivers: [DriverToRent]?, currItem: MyDriversModel) -> Bool {
+        let item = editedDrivers?.filter({$0.id == currItem.driver?.id}).first
+        guard item != nil else {return true}
+        return false
+    }
     
     ///Is edited additional driversn to reservation
-    func isEdietedDriverList(isSelected: Bool,
-                             oldDrivers: [DriverToRent],
-                             editedDriver: MyDriversModel,
+    func isEdietedDriverList(oldDrivers: [DriverToRent],
                              editedDrivers: [DriverToRent]) -> Bool {
-        if isSelected {
-            guard let _ = oldDrivers.filter({$0.id == (editedDriver.driver?.id ?? "")}).first else {
-                return true
-            }
-            return false
-        } else {
-            if editedDrivers.count != oldDrivers.count {
-                return true
-            } else {
-                
-            }
-            
-            return false
-        }
+        
+        return editedDrivers.count != oldDrivers.count
     }
     
 }

@@ -309,7 +309,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhF-NO-8yC">
                                         <rect key="frame" x="17.5" y="137.5" width="340" height="15.5"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qWr-Yi-mhH">
+                                            <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qWr-Yi-mhH">
                                                 <rect key="frame" x="0.0" y="0.0" width="27.5" height="15.5"/>
                                                 <state key="normal" image="uncheck_box">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
@@ -328,7 +328,7 @@
                                                     <action selector="pickupCustomLocation:" destination="THL-zN-RQ2" eventType="touchUpInside" id="Tm3-q4-u0Q"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C0l-xW-Qlm">
+                                            <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C0l-xW-Qlm">
                                                 <rect key="frame" x="170" y="0.0" width="26" height="15.5"/>
                                                 <state key="normal" image="uncheck_box"/>
                                                 <connections>

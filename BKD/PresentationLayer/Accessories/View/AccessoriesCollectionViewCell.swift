@@ -40,6 +40,8 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
     //let accessoriesViewModel = AccessoriesViewModel()
     var accessoryId: String?
     var maxCount: Double?
+    var accessory: AccessoriesEditModel?
+    var oldReservAccessories: [EditAccessory]?
     
     
     override func awakeFromNib() {
@@ -49,8 +51,15 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
     }
     
     func setupView() {
-
-      //  mAccessoriesBackgImgV.setShadow(color: color_shadow!)
+    }
+    
+    override func prepareForReuse() {
+        mAddBtn.isUserInteractionEnabled = true
+        mDecreaseBtn.isUserInteractionEnabled = true
+        mTitleLb.text = nil
+        mPriceLb.text = nil
+        mAccessorieCountLb.text = nil
+        mAccessorieImgV.image = nil
     }
     
     func setCellInfo(editItem: AccessoriesEditModel, index: Int) {
@@ -76,6 +85,13 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
             mAddImgV.image = img_add_unselece
             mAddBtn.setTitleColor(color_alert_txt!, for: .normal)
         }
+    }
+    
+    ///Disable add and decrease buttons
+    func disableCellDetails(editedAccessories: [EditAccessory]?, currItem: AccessoriesEditModel) {
+        
+        let accessoriesVM = AccessoriesViewModel()
+        mAddBtn.isUserInteractionEnabled = accessoriesVM.isAddEnabled(editedAccessories: editedAccessories, currItem: currItem)
     }
     
     
@@ -130,6 +146,7 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
     
     
     @objc func decrease(sender: UIButton) {
+        if AccessoriesViewModel().isDecreaseEnabled(editedAccessories: oldReservAccessories, currItem: accessory ?? AccessoriesEditModel())  {
         let count = Int(mAccessorieCountLb.text ?? "0" )
         let price = Double(mPriceLb.text ?? "0" )
         
@@ -144,6 +161,7 @@ class AccessoriesCollectionViewCell: UICollectionViewCell {
             delegate?.didChangeCount(isAdd: isAdd,
                                      cellIndex: sender.tag,
                                      count: count! - 1)
+        }
         }
        
     }

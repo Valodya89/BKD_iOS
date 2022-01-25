@@ -18,39 +18,44 @@ struct EditReservationModel {
     
     
     ///Get new value of reservation
-    func getNewReservetionSearchInfo(carId:String, startDate: Double, search: SearchModel) -> EditReservationModel {
-        var editReservation = EditReservationModel()
-        editReservation.carId = carId
+    func getNewReservetionSearchInfo(carId:String, startDate: Double, search: SearchModel, editReservation: EditReservationModel?) -> EditReservationModel {
+        
+        var newEditReservation: EditReservationModel? = editReservation
+        if newEditReservation == nil {
+            newEditReservation = EditReservationModel()
+        }
+        
+        newEditReservation?.carId = carId
         //Search fields
-        editReservation.startDate = startDate
+        newEditReservation?.startDate = startDate
         if let date = search.returnDate,
            let time = search.returnTime {
-            editReservation.endDate = Date().combineDate(date: date, withTime: time)?.timeIntervalSince1970 ?? 0.0
+            newEditReservation?.endDate = Date().combineDate(date: date, withTime: time)?.timeIntervalSince1970 ?? 0.0
         }
         //Pick up location
-        editReservation.pickupLocation = EditLocation(type: search.isPickUpCustomLocation ? Constant.Keys.custom : Constant.Keys.parking)
+        newEditReservation?.pickupLocation = EditLocation(type: search.isPickUpCustomLocation ? Constant.Keys.custom : Constant.Keys.parking)
         
         if search.isPickUpCustomLocation {
-            editReservation.pickupLocation?.customLocation = EditCustomLocation(name: search.pickUpLocation ?? "", longitude: search.pickUpLocationLongitude!, latitude: search.pickUpLocationLatitude!)
+            newEditReservation?.pickupLocation?.customLocation = EditCustomLocation(name: search.pickUpLocation ?? "", longitude: search.pickUpLocationLongitude!, latitude: search.pickUpLocationLatitude!)
             
         } else {
-            editReservation.pickupLocation?.parking = EditParking(id: search.pickUpLocationId ?? "",
+            newEditReservation?.pickupLocation?.parking = EditParking(id: search.pickUpLocationId ?? "",
                                                                   name: search.pickUpLocation ?? "",
                                                                   longitude: search.pickUpLocationLongitude!,
                                                                   latitude: search.pickUpLocationLatitude!)
         }
         
         //Return up location
-        editReservation.returnLocation = EditLocation(type:search.isRetuCustomLocation ? Constant.Keys.custom : Constant.Keys.parking)
+        newEditReservation?.returnLocation = EditLocation(type:search.isRetuCustomLocation ? Constant.Keys.custom : Constant.Keys.parking)
         
         if search.isRetuCustomLocation {
-            editReservation.returnLocation?.customLocation = EditCustomLocation(name: search.returnLocation ?? "", longitude: search.returnLocationLongitude!, latitude: search.returnLocationLatitude!)
+            newEditReservation?.returnLocation?.customLocation = EditCustomLocation(name: search.returnLocation ?? "", longitude: search.returnLocationLongitude!, latitude: search.returnLocationLatitude!)
             
         } else {
-            editReservation.returnLocation?.parking = EditParking(id: search.returnLocationId ?? "", name: search.returnLocation ?? "", longitude: search.returnLocationLongitude!, latitude: search.returnLocationLatitude!)
+            newEditReservation?.returnLocation?.parking = EditParking(id: search.returnLocationId ?? "", name: search.returnLocation ?? "", longitude: search.returnLocationLongitude!, latitude: search.returnLocationLatitude!)
         }
         
-        return editReservation
+        return newEditReservation!
     }
     
 }

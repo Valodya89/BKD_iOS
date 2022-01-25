@@ -10,7 +10,10 @@ import UIKit
 let driverPrice = 9.99
 
 protocol MyDriversViewControllerDelegate: AnyObject {
-    func selectedDrivers(_ isSelecte: Bool, additionalDrivers: [MyDriversModel]?)
+    func selectedDrivers(_ isSelecte: Bool,
+                         additionalDrivers: [MyDriversModel]?,
+                         oldReservDrivers: [DriverToRent]?,
+                         editReservationModel: EditReservationModel?)
 }
 
 class MyDriversViewController: BaseViewController {
@@ -33,12 +36,12 @@ class MyDriversViewController: BaseViewController {
     lazy var myDriversVM: MyDriversViewModel = MyDriversViewModel()
     var totalPrice:Double = PriceManager.shared.additionalDriversPrice ?? 0.0
     var driver: MainDriver?
-    var oldReservDrivers: [DriverToRent]?
     
     public var isEditReservation:Bool = false
-    public var accessories: [AccessoriesEditModel]?
+   // public var accessories: [AccessoriesEditModel]?
     public var additionalDrivers: [MyDriversModel]?
-    public var editReservationModel = EditReservationModel()
+    public var oldReservDrivers: [DriverToRent]?
+    public var editReservationModel:EditReservationModel?
     public var rent: Rent?
 
 
@@ -64,9 +67,10 @@ class MyDriversViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if !isEditReservation {
+            self.delegate?.selectedDrivers(totalPrice > 0.0 ? true : false , additionalDrivers: additionalDrivers, oldReservDrivers: nil, editReservationModel: nil)
             PriceManager.shared.additionalDriversPrice = totalPrice
         }
-        self.delegate?.selectedDrivers(totalPrice > 0.0 ? true : false , additionalDrivers: additionalDrivers)
+        
     }
     
     func setupView() {
@@ -82,7 +86,9 @@ class MyDriversViewController: BaseViewController {
     ///Set edit additional drivers
     func setEditDrivers() {
         oldReservDrivers = myDriversVM.getEditDrivers(drivers: additionalDrivers)
-        editReservationModel.additionalDrivers = oldReservDrivers
+        if editReservationModel?.additionalDrivers == nil {
+            editReservationModel?.additionalDrivers = oldReservDrivers
+        }
     }
     ///Set total price
     func setTotalPrice() {
@@ -97,7 +103,7 @@ class MyDriversViewController: BaseViewController {
     ///Configure view wehn it open for edit
     func configureViewForEdit() {
         if isEditReservation {
-            mConfirmV.disableView()
+            //checkisEditedDrivers()
             mConfirmV.isHidden = !isEditReservation
             mTotalPriceContentbottom.constant = 76
         }
@@ -114,18 +120,18 @@ class MyDriversViewController: BaseViewController {
             }
 
             if additionalDrivers == nil {
-                if !isEditReservation {
-                    additionalDrivers = myDriversVM.setActiveDriverList(allDrivers: result)
-                    totalPrice = PriceManager.shared.additionalDriversPrice ?? 0.0
-                } else {
-                    let driversInfo = myDriversVM.getDriversEditList(rent: rent, drivers: result)
+                additionalDrivers = myDriversVM.setActiveDriverList(allDrivers: result)
+                if isEditReservation {
+                    let driversInfo = myDriversVM.getDriversEditList(rent: rent, drivers: additionalDrivers!)
                     additionalDrivers = driversInfo.additionalDrivers
                     totalPrice = driversInfo.totalPrice
                     setEditDrivers()
                 }
                 mMyDriverCollectionV.reloadData()
                 getDriverToContinue(driverList: result)
+            } else {
                 
+                totalPrice = PriceManager.shared.additionalDriversPrice ?? 0.0
             }
             setTotalPrice()
 
@@ -170,25 +176,28 @@ class MyDriversViewController: BaseViewController {
     
     ///Update driver list
     private func updateDriverList(index: Int, isSelected: Bool) {
-        mPriceLb.text = String(totalPrice)
+        setTotalPrice()
         additionalDrivers?[index].isSelected = isSelected
         additionalDrivers?[index].totalPrice = totalPrice
         mMyDriverCollectionV.reloadData()
-        editReservationModel.additionalDrivers = myDriversVM.editReservationDrivers(isSelected: isSelected,
-                                                                                    editDriver: (additionalDrivers?[index])!,
-                                                editReservationDrivers: editReservationModel.additionalDrivers ?? [])
         if isEditReservation {
-            mConfirmV.enableView()
-//            checkisEditedDrivers(isSelected: isSelected,
-//                                 editDriver: (additionalDrivers?[index])!)
+            eritReservedriverList(isSelected: isSelected, editDriver: (additionalDrivers?[index])!)
         }
     }
+    
+    ///Edite reserved additional driver list
+    func eritReservedriverList(isSelected: Bool, editDriver: MyDriversModel) {
+         myDriversVM.editReservationDrivers(isSelected: isSelected,                                     editDriver: editDriver,
+                                                                                     editReservationDrivers: editReservationModel?.additionalDrivers ?? [], completion:{ reseult in
+             self.editReservationModel?.additionalDrivers = reseult
+             //self.checkisEditedDrivers()
 
+        })
+    }
     
 //    ///Check is edited additional driver list
-//    func checkisEditedDrivers(isSelected: Bool, editDriver: MyDriversModel) {
-//        if myDriversVM.isEdietedDriverList(isSelected: isSelected,
-//                                           oldDrivers: oldReservDrivers ?? [], editedDriver: editDriver, editedDrivers: editReservationModel.additionalDrivers!) {
+//    func checkisEditedDrivers() {
+//        if myDriversVM.isEdietedDriverList(oldDrivers: oldEditedReservDrivers ?? [], editedDrivers: editReservationModel?.additionalDrivers ?? []) {
 //            mConfirmV.enableView()
 //        } else {
 //            mConfirmV.disableView()
@@ -215,8 +224,11 @@ class MyDriversViewController: BaseViewController {
     
     func handlerConfirm() {
         mConfirmV.didPressConfirm = { [self] in
-            self.goToEditReservationAdvanced(rent: self.rent, accessories: self.accessories,
-                                             editReservationModel: self.editReservationModel)
+            PriceManager.shared.additionalDriversPrice = totalPrice
+            delegate?.selectedDrivers(true, additionalDrivers: additionalDrivers,
+                                      oldReservDrivers: oldReservDrivers,
+                                      editReservationModel: editReservationModel)
+            self.navigationController?.popViewController(animated: true)
         }
     }
 }
@@ -234,10 +246,9 @@ extension MyDriversViewController: UICollectionViewDelegate, UICollectionViewDat
         let item = additionalDrivers?[indexPath.item]
         cell.delegate = self
         cell.setCellInfo(item:item!, index: indexPath.item)
-//        if item!.isSelected {
-//            totalPrice += item!.price
-//            self.mPriceLb.text = String(totalPrice)
-//        }
+        if isEditReservation {
+            cell.isUserInteractionEnabled = myDriversVM.isEnabledCell(editedDrivers: oldReservDrivers, currItem: item!)
+        }
         return cell
     }
     

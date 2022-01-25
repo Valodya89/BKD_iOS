@@ -65,7 +65,7 @@ class ReserveViewModel: NSObject {
         return accessoryArr
     }
     
-    ///Get accessories for add rent request
+    ///Get additional drivers to add rent request
     func getAdditionalDriversToRequest(additionalDrivers: [MyDriversModel]?) -> [String?] {
         var driversArr: [String?] = []
         additionalDrivers?.forEach({ driver in

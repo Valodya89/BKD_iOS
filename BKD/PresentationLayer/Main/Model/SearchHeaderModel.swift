@@ -25,7 +25,25 @@ struct SearchModel {
     public var isPickUpCustomLocation: Bool = false
     public var isRetuCustomLocation: Bool = false
     public var category: Int?
+    
+    
+    mutating func resetPickupCustomLocation(oldSearch: SearchModel) {
+        self.pickUpLocation = oldSearch.pickUpLocation
+        self.isPickUpCustomLocation =  oldSearch.isPickUpCustomLocation
+        self.pickUpLocationId = oldSearch.pickUpLocationId
+        self.pickUpLocationLatitude = oldSearch.pickUpLocationLatitude
+        self.pickUpLocationLongitude = oldSearch.pickUpLocationLongitude
+    }
 
+    mutating func resetReturnCustomLocation(oldSearch: SearchModel) {
+        self.returnLocation = oldSearch.returnLocation
+        self.isRetuCustomLocation =  oldSearch.isRetuCustomLocation
+        self.returnLocationId = oldSearch.returnLocationId
+        self.returnLocationLatitude = oldSearch.returnLocationLatitude
+        self.returnLocationLongitude = oldSearch.returnLocationLongitude
+    }
+
+    
 }
 
 struct SearchDateModel {

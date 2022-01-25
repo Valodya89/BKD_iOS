@@ -39,6 +39,9 @@ class BkdAgreementViewController: BaseViewController {
     public var urlString: String? = nil
     public var agreementType: AgreementType?
     public var vehicleModel: VehicleModel?
+    public var currRent: Rent?
+    public var searchModel: SearchModel?
+    public var editReservationModel: EditReservationModel?
     
     //MARK: --Lifecycle
     override func viewDidLoad() {
@@ -98,10 +101,10 @@ class BkdAgreementViewController: BaseViewController {
                 
             case .advanced,
                     .myReservationCell,
-                    .payLater,
-                    .editAdvanced:
+                    .payLater:
                 break
-                //self.goToSelectPayment(vehicleModel: <#VehicleModel#>, paymentOption: <#PaymentOption#>)
+            case .editAdvanced:
+                self.updateReservation()
             case .reserve:
                 self.addReservation()
             default:
@@ -125,6 +128,13 @@ class BkdAgreementViewController: BaseViewController {
                     self.goToPhoneVerification(vehicleModel: self.vehicleModel, phoneNumber: nil)
                    // self.clickConfirm()
                 }
+        }
+    }
+    
+    func updateReservation() {
+        EditReservetionAdvancedViewModel().updateRent(rentId: currRent?.id ?? "", editReservationModel: editReservationModel!, searchModel: searchModel ?? SearchModel()) { result in
+            guard let rent = result else {return}
+            
         }
     }
     

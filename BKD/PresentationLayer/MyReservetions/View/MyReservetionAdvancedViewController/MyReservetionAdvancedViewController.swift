@@ -466,7 +466,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
     @IBAction func edit(_ sender: UIButton) {
         sender.backgroundColor = color_menu!
         mCancelBtn.backgroundColor = .clear
-        goToEditReservation(isExtendReservation: false, accessories: mReserveInfoTableV.accessories)
+        goToEditReservation(isExtendReservation: false, accessories: self.mReserveInfoTableV.accessories)
     }
     
     @IBAction func cancel(_ sender: UIButton) {
@@ -479,7 +479,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
         sender.setClickColor(color_menu!, titleColor: sender.titleColor(for: .normal)!)
         sender.backgroundColor = color_menu!
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
-            goToEditReservation(isExtendReservation: true, accessories: nil)
+            goToEditReservation(isExtendReservation: true, accessories: self.mReserveInfoTableV.accessories)
         }
     }
     
