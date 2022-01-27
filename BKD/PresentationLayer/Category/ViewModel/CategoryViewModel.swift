@@ -46,8 +46,14 @@ class CategoryViewModel: NSObject {
             completion(self.carsListByTipe)
                print("Finished all requests.")
            })
-                
-        
+    }
+    
+    ///Get vehicle model
+    func getVehicleModel(car: CarsModel, carType: String) -> VehicleModel {
+        var vehicle = VehicleModel()
+        vehicle.setVehicle(car: car)
+        vehicle.vehicleType = carType
+        return vehicle
     }
 
 }

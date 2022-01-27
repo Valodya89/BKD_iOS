@@ -24,13 +24,17 @@ class MyPersonalInformationViewController: BaseViewController {
     var isTakePhoto:Bool = false
     var currIndex = 0
     public var mainDriver: MainDriver?
+    public var navigationTitle: String?
     
 
     //MARK: -- Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         mActivityInd.startAnimating()
         self.configureNavigationControll(navControll: navigationController, barBtn: mRightBarBtn)
+       self.title = navigationTitle ?? ""
+        
         getMainDriverList()
         handlerChangePhoto()
         handlerCancel()

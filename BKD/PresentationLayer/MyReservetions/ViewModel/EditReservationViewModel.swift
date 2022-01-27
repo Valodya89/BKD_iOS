@@ -8,6 +8,8 @@
 import Foundation
 
 final class EditReservationViewModel {
+    lazy var detailsVM = DetailsViewModel()
+
     
     ///Get search model
     func getSearch(rent: Rent) -> SearchModel {
@@ -94,6 +96,28 @@ final class EditReservationViewModel {
                         oldDrivers: [DriverToRent],
                         oldAccessories: [EditAccessory],
                         editReservationModel: EditReservationModel?) -> Bool {
+        
+        if ifDateOfRentEdited(oldSearch: oldSearch,
+                              newSearch: newSearch){
+            return true
+            
+        } else if ifEditedAdditionalDriver(editReservationModel: editReservationModel,
+                                           oldDrivers: oldDrivers) {
+            return true
+        } else if ifEditedAccessories(editReservationModel: editReservationModel,
+                                      oldAccessories: oldAccessories) {
+            return true
+        }
+        
+        return ifLocationEdited(oldSearch: oldSearch,
+                                newSearch: newSearch)
+    }
+    
+    
+    //Check if the date of the rent has been edited
+    func ifDateOfRentEdited(oldSearch: SearchModel,
+                            newSearch: SearchModel) -> Bool {
+        
         if !ifLocationsAreFilled(oldSearch: oldSearch,
                                 newSearch: newSearch) {
             return false
@@ -102,14 +126,8 @@ final class EditReservationViewModel {
         if (oldSearch.returnDate != newSearch.returnDate) ||
             (oldSearch.returnTime != newSearch.returnTime) {
             return true
-        } else if ifEditedDriversOrAccessories(oldDrivers: oldDrivers,
-                                               oldAccessories: oldAccessories,
-                                               editReservationModel: editReservationModel) {
-            return true
         }
-        
-        return ifLocationEdited(oldSearch: oldSearch,
-                                newSearch: newSearch)
+        return false
     }
     
     ///check if the location has been edited
@@ -154,14 +172,20 @@ final class EditReservationViewModel {
     }
     
     
-    ///check if the search has been edited
-    func ifEditedDriversOrAccessories(oldDrivers: [DriverToRent],
-                                      oldAccessories: [EditAccessory],
-                                      editReservationModel: EditReservationModel?) -> Bool {
-        
+    ///Check if the additional drivers has been edited
+    func ifEditedAdditionalDriver(editReservationModel: EditReservationModel?,
+                                  oldDrivers: [DriverToRent]) -> Bool {
         if  MyDriversViewModel().isEdietedDriverList(oldDrivers: oldDrivers, editedDrivers: editReservationModel?.additionalDrivers ?? []) {
             return true
-        } else if AccessoriesViewModel().isEditedAccessoryList(oldAccessories: oldAccessories, editedAccessories: editReservationModel?.accessories ?? []) {
+        }
+        return false
+    }
+    
+    
+    ///Check if the accessories has been edited
+    func ifEditedAccessories(editReservationModel: EditReservationModel?,
+                                  oldAccessories: [EditAccessory]) -> Bool {
+        if AccessoriesViewModel().isEditedAccessoryList(oldAccessories: oldAccessories, editedAccessories: editReservationModel?.accessories ?? []) {
             return true
         }
         return false
@@ -196,6 +220,91 @@ final class EditReservationViewModel {
         }
         return false
     }
+    
+    
+    ///Get vehicle model
+    func getVehicleModel(currRent: Rent?) -> VehicleModel? {
+        let allCars = ApplicationSettings.shared.allCars
+        guard let currCar = allCars?.filter({ $0.id == currRent?.carDetails.id}).first else {
+            return nil
+        }
+        let vehicleModel = CategoryViewModel().getVehicleModel(car: currCar, carType: currRent?.carDetails.type ?? "")
+        return vehicleModel
+    }
+    
+    
+    ///Set value to edit price manager
+    func setEditRentPrice(currRent: Rent?,
+                          searchModel: SearchModel) {
+        
+        detailsVM.getTariff { [self] result in
+            guard let _ = result else {return}
+        
+            guard let vehicleModel = getVehicleModel(currRent: currRent) else {return}
+            var tariffSlideList = self.detailsVM.changeTariffListForUse(tariffs: result!, vehicleModel: vehicleModel)
+            var currentTariff: TariffState = .hourly
+
+            self.detailsVM.getCurrentTariff(search: searchModel,
+                                            vehicleModel: vehicleModel,
+                                            tariffSlideList: tariffSlideList,
+                                            completion: { slideList, tariffState in
+                tariffSlideList = slideList
+                currentTariff = tariffState
+                let currTariffIndex = TariffSlideViewModel().getTariffStateIndex(tariffState: currentTariff)
+                let currTariffModel = tariffSlideList?[currTariffIndex]
+
+                let optionIndex = currTariffModel?.segmentIndex
+                if optionIndex != nil {
+                    let currTariff = currTariffModel?.options?[optionIndex!]
+                    let price = currTariff?.value
+                    let specialOffert = currTariff?.specialValue
+                    let discountPercent = currTariff?.discountPercent
+                    EditedPriceManager.shared.carPrice = Double(price ?? "0.0")
+                    EditedPriceManager.shared.carOffertPrice = Double(specialOffert ?? "0.0")
+                    EditedPriceManager.shared.carDiscountPrecent = discountPercent ?? 0.0
+                }
+            })
+        }
+    }
+    
+    
+    ///Set value to edit price manager
+    func setEditPriceManager(currRent: Rent?,
+                             searchModel: SearchModel,
+                             oldSearchModel: SearchModel,
+                             oldDrivers: [DriverToRent],
+                             oldAccessories: [EditAccessory],
+                             editReservationModel: EditReservationModel?) {
+        
+        if ifDateOfRentEdited(oldSearch: oldSearchModel,
+                              newSearch: searchModel) {
+            setEditRentPrice(currRent: currRent,
+                             searchModel: searchModel)
+        }
+        
+        if ifEditedAdditionalDriver(editReservationModel: editReservationModel,
+                                    oldDrivers: oldDrivers) {
+            
+        }
+        if ifEditedAccessories(editReservationModel: editReservationModel,
+                               oldAccessories: oldAccessories) {
+            
+        }
+       
+//        if ifLocationEdited(oldSearch: oldSearchModel,
+//                            newSearch: searchModel) {
+//
+//        }
+    }
+    
+    //WARNING: -- need to cahnge
+    ///Set value of edited location
+    func setEditedLocationPrice(oldPrice: Double,
+                             newPrice: Double) {
+        EditedPriceManager.shared.pickUpCustomLocationPrice = 0.0
+        EditedPriceManager.shared.returnCustomLocationPrice = 0.0
+    }
+    
     
 }
 

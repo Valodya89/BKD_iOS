@@ -16,7 +16,9 @@ class CategoryTableViewCell: UITableViewCell {
     
     @IBOutlet weak var mCategoryNameLb: UILabel!
     @IBOutlet weak var mCategoryCollectionV: UICollectionView!
+    var type: String?
     var collectionData: [CarsModel]?
+    var openCarDetail:((CarsModel, String)->Void)?
     
 
     override func awakeFromNib() {
@@ -40,8 +42,11 @@ class CategoryTableViewCell: UITableViewCell {
         let item:[CarsModel] = carsList![carType.id]! ?? []
         mCategoryNameLb.text = carType.name
         collectionData =  item
+        type = carType.name
     }
+    
 }
+
 
 
 extension CategoryTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -58,6 +63,11 @@ extension CategoryTableViewCell: UICollectionViewDataSource, UICollectionViewDel
         let item: CarsModel = collectionData![indexPath.row]
         cell.setCellInfo(item: item)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item: CarsModel = collectionData![indexPath.row]
+        openCarDetail?(item, type ?? "")
     }
     
 //    //MARK: UICollectionViewDelegateFlowLayout

@@ -16,7 +16,7 @@ class SwitchDriversTableView: UITableView, UITableViewDelegate, UITableViewDataS
     //MARK: -- Variables
     public var index: Int = 0
     weak var switchDriversDelegate: SwitchDriversTableViewDelegate?
-    var switchDriversList:[DriverToRent]? //MyDriversData.myDriversModel
+    var switchDriversList:[DriverToRent]? 
     
     
     //MARK: -- Lifecycle

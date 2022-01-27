@@ -295,6 +295,10 @@
 		567915FB27569B81008C8F84 /* ReservationCompletedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567915FA27569B80008C8F84 /* ReservationCompletedViewModel.swift */; };
 		567915FD27569ED0008C8F84 /* FreeReservationOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567915FC27569ED0008C8F84 /* FreeReservationOverViewController.swift */; };
 		567915FF275A9500008C8F84 /* UserWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567915FE275A9500008C8F84 /* UserWallet.swift */; };
+		5682F79227A086B900818C9D /* EditMyDriversViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5682F79127A086B900818C9D /* EditMyDriversViewController.swift */; };
+		5682F79427A086CB00818C9D /* EditMyDrivers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5682F79327A086CB00818C9D /* EditMyDrivers.storyboard */; };
+		5682F79627A0903100818C9D /* EditMyDriversViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5682F79527A0903100818C9D /* EditMyDriversViewModel.swift */; };
+		5682F79827A2306700818C9D /* EditedPriceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5682F79727A2306600818C9D /* EditedPriceManager.swift */; };
 		568E6F592642FC4B000CB6A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568E6F572642FC4B000CB6A9 /* Main.storyboard */; };
 		568E6F5E2642FC50000CB6A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 568E6F5C2642FC50000CB6A9 /* LaunchScreen.storyboard */; };
 		568E701226438C08000CB6A9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E701126438C08000CB6A9 /* MainViewController.swift */; };
@@ -713,6 +717,10 @@
 		567915FA27569B80008C8F84 /* ReservationCompletedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationCompletedViewModel.swift; sourceTree = "<group>"; };
 		567915FC27569ED0008C8F84 /* FreeReservationOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeReservationOverViewController.swift; sourceTree = "<group>"; };
 		567915FE275A9500008C8F84 /* UserWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWallet.swift; sourceTree = "<group>"; };
+		5682F79127A086B900818C9D /* EditMyDriversViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMyDriversViewController.swift; sourceTree = "<group>"; };
+		5682F79327A086CB00818C9D /* EditMyDrivers.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditMyDrivers.storyboard; sourceTree = "<group>"; };
+		5682F79527A0903100818C9D /* EditMyDriversViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMyDriversViewModel.swift; sourceTree = "<group>"; };
+		5682F79727A2306600818C9D /* EditedPriceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditedPriceManager.swift; sourceTree = "<group>"; };
 		568E6F4E2642FC4B000CB6A9 /* BKD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BKD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		568E6F582642FC4B000CB6A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		568E6F5D2642FC50000CB6A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -1876,6 +1884,7 @@
 			isa = PBXGroup;
 			children = (
 				565C099A273B4F5B00183878 /* PriceManager.swift */,
+				5682F79727A2306600818C9D /* EditedPriceManager.swift */,
 			);
 			path = PriceManager;
 			sourceTree = "<group>";
@@ -2190,6 +2199,7 @@
 		565F9B0126C8ADC100064AD4 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				5682F79027A0869000818C9D /* EditMyDrivers */,
 				565A9F652703D31200C3C36B /* SwitchDriversTableView */,
 				564ED63A270052F900FA9714 /* EditReservetionAdvancedViewController */,
 				5660E61A26FE0BC4009BB73F /* OnRideTableView */,
@@ -2422,6 +2432,15 @@
 				566B37BC2697A6D30021BCAA /* TakePhotoTableViewCell.xib */,
 			);
 			path = TakePhoto;
+			sourceTree = "<group>";
+		};
+		5682F79027A0869000818C9D /* EditMyDrivers */ = {
+			isa = PBXGroup;
+			children = (
+				5682F79127A086B900818C9D /* EditMyDriversViewController.swift */,
+				5682F79327A086CB00818C9D /* EditMyDrivers.storyboard */,
+			);
+			path = EditMyDrivers;
 			sourceTree = "<group>";
 		};
 		568E6F452642FC4B000CB6A9 = {
@@ -2750,6 +2769,7 @@
 				565D4E58277AA26100A14951 /* MyReservetionAdvancedViewModel.swift */,
 				565CF79827974EB600817723 /* EditReservationViewModel.swift */,
 				565CF79C279BA1C600817723 /* EditReservetionAdvancedViewModel.swift */,
+				5682F79527A0903100818C9D /* EditMyDriversViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -3448,6 +3468,7 @@
 				565D4E66277BFE9700A14951 /* MyAccount.storyboard in Resources */,
 				568E70CB26455286000CB6A9 /* MainCollectionViewCell.xib in Resources */,
 				564ED63E270052F900FA9714 /* EditReservetionAdvanced.storyboard in Resources */,
+				5682F79427A086CB00818C9D /* EditMyDrivers.storyboard in Resources */,
 				56573202267339B50012ADD0 /* FontsFree-Net-SFProDisplay-Medium.ttf in Resources */,
 				56ADD81326F2CED400C0ECC3 /* ReservationHistoryCell.xib in Resources */,
 				5656324726585FFF00B78562 /* CarEquipmentCollectionViewCell.xib in Resources */,
@@ -3694,6 +3715,7 @@
 				56CC7D7326A87A9F006DB7B8 /* PaymentWebViewController.swift in Sources */,
 				569C8C9626F2603C001D65EF /* TotalPriceStackView.swift in Sources */,
 				564E944826AF8BFA00291164 /* ApplicationSttings.swift in Sources */,
+				5682F79227A086B900818C9D /* EditMyDriversViewController.swift in Sources */,
 				9393BAF726D78BF9003878BF /* Sender.swift in Sources */,
 				565F80B426A6391000ADB9FE /* ChangePhoneNumberViewController.swift in Sources */,
 				560251E02661089C00FB204C /* CarouselCellView.swift in Sources */,
@@ -3825,6 +3847,7 @@
 				56CC7D7926A91309006DB7B8 /* BancontactTypeViewController.swift in Sources */,
 				565BFD9F269F590A0044D081 /* KeychainManager.swift in Sources */,
 				56CF783C26F578620092F555 /* StartRideModel.swift in Sources */,
+				5682F79627A0903100818C9D /* EditMyDriversViewModel.swift in Sources */,
 				5648C5B6268803F7000B4E2A /* AccessoriesModel.swift in Sources */,
 				56B41E4D277D04A300F10A41 /* PersonalInfoTableCell.swift in Sources */,
 				5659E6452773E4A70084BCAF /* OdometerCheckStopRideUIViewController.swift in Sources */,
@@ -3836,6 +3859,7 @@
 				5602529C2664465200FB204C /* MarkerInfoViewController.swift in Sources */,
 				562585CD26F0E2C400EC9284 /* MyReservetionAdvancedViewController.swift in Sources */,
 				56B9F2E326805021003449AD /* SearchWithValueView.swift in Sources */,
+				5682F79827A2306700818C9D /* EditedPriceManager.swift in Sources */,
 				568E704026446136000CB6A9 /* AboutUsViewController.swift in Sources */,
 				565731FD267332B10012ADD0 /* TariffSlideModel.swift in Sources */,
 				561887472645EE2A00BDDB33 /* UIButton+Border.swift in Sources */,

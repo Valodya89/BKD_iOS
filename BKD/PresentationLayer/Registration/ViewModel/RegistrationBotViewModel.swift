@@ -110,7 +110,7 @@ class RegistrationBotViewModel: NSObject {
                     return
                 }
             }
-            else if tableData[i].viewDescription ==  Constant.Texts.expiryDate {
+            else if tableData[i].viewDescription ==  Constant.Texts.expiry_date {
                 let components = mainDriver.identityExpirationDate!.components(separatedBy: "T")
                 tableData[i].userRegisterInfo = UserRegisterInfo(date:components[0].stringToDateWithoutTime(), isFilled: true)
                 if mainDriver.state == Constant.Texts.state_IEX {

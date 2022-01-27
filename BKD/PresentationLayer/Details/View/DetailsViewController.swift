@@ -209,7 +209,12 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
 
         mCarNameLb.text = vehicleModel?.vehicleName
         mCarDetailLb.text = vehicleModel?.vehicleType
-        mCarLogoImgV.image = vehicleModel?.vehicleLogo
+        if vehicleModel?.vehicleLogo != nil {
+            mCarLogoImgV.image = vehicleModel?.vehicleLogo
+        } else {
+            mCarLogoImgV.sd_setImage( with:vehicleModel?.vehicleLogoURL ?? URL(string: ""),
+                               placeholderImage: nil)
+        }
         carPhotosView.mTowBarBckgV.isHidden = vehicleModel?.ifHasTowBar != nil ? !vehicleModel!.ifHasTowBar : true
         mCarInfoV.mCardLb.text = vehicleModel?.drivingLicense
         mCarInfoV.mKgLb.text = vehicleModel?.vehicleWeight
@@ -815,7 +820,6 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     @IBAction func additionalDriver(_ sender: UIButton) {
         self.goToAdditionalDriver(on: self,
-                                  isEditReservation: false,
                                   additionalDrivers: vehicleModel?.additionalDrivers)
     }
     

@@ -545,35 +545,11 @@ class DetailsViewModel: NSObject {
                           tariffSlideList: [TariffSlideModel]?,
                           completion: @escaping ([TariffSlideModel]?, TariffState) -> Void) {
         
-        
         let newResult = updateTariffList(search: search,
                              vehicleModel: vehicleModel,
                              tariffSlideList: tariffSlideList)
         completion(newResult, currTariffState ?? .hourly)
-        
-        
-//        let hourPickup = search.pickUpTime!.getTimeByCompanent(compatent: .hour)
-//        let minutPickup = search.pickUpTime!.getTimeByCompanent(compatent: .minute)
-//        let hourReturn = search.returnTime!.getTimeByCompanent(compatent: .hour)
-//        let minutReturn = search.returnTime!.getTimeByCompanent(compatent: .minute)
-//        let time = (hourPickup: hourPickup, hourReturn: hourReturn, minutPickup: minutPickup, minutReturn: minutReturn)
-//
-//        let hourlyTariffList = getHourlyTariffList(search: search,
-//                                                   tariffSlideList: tariffSlideList,
-//                                                   time: time)
-//        if hourlyTariffList == nil {
-//            let dailyTariffList = getDailyTariffList(search: search,
-//                                                     vehicleModel: vehicleModel,
-//                                                     tariffSlideList: tariffSlideList,
-//                                                     time: time)
-//            return completion(dailyTariffList, currTariffState ?? .hourly)
-//        }
-//        return completion(hourlyTariffList, .hourly)
     }
-    
-    
-    
-    
     
     
     ///Update tariff list depend on search params

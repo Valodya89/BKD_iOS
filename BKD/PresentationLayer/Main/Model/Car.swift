@@ -95,14 +95,6 @@ struct CarExterior: Codable {
 }
 
 
-//struct Price: Codable {
-//
-//    let price: Double
-//    let hasSpecialPrice: Bool
-//    let specialPrice: Double
-//
-//}
-
 struct Reservation: Codable {
         public var innerArray: [String: Inner]
         

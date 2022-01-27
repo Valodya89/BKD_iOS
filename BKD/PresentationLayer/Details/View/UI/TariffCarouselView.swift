@@ -27,7 +27,7 @@ class TariffCarouselView: UIView {
    public var vehicleModel: VehicleModel?
 
     private var tariffCarouselCellV: TariffCarouselCell?
-    private let tariffSlideViewModel = TariffSlideViewModel()
+    private let tariffSlideVM = TariffSlideViewModel()
     weak var delegate: TariffCarouselViewDelegate?
     var selectedSegmentIndex: Int?
    // public var currentItemIndex: Int?
@@ -110,12 +110,11 @@ extension TariffCarouselView: iCarouselDataSource, iCarouselDelegate {
 }
 
 
-//MARK: TariffCarouselCellDelegate
-//MARK: ----------------------------
+//MARK: -- TariffCarouselCellDelegate
 extension TariffCarouselView: TariffCarouselCellDelegate {
     
     func willChangeOption(optionIndex: Int, options: [TariffSlideModel]?) {
-        let optionstr = tariffSlideViewModel.getOptionString(tariff: TariffState.allCases[tariffCarousel.currentItemIndex],
+        let optionstr = tariffSlideVM.getOptionString(tariff: TariffState.allCases[tariffCarousel.currentItemIndex],
                                                              tariffSlideList:tariffSlideList ?? [],
                                                              index: optionIndex)
         delegate?.willChangeTariffOption(tariff: TariffState.allCases[tariffCarousel.currentItemIndex],
@@ -125,7 +124,7 @@ extension TariffCarouselView: TariffCarouselCellDelegate {
     }
     
     func showSearchView(optionIndex: Int, options: [TariffSlideModel]?) {
-        let optionstr = tariffSlideViewModel.getOptionString(tariff: TariffState.allCases[tariffCarousel.currentItemIndex],
+        let optionstr = tariffSlideVM.getOptionString(tariff: TariffState.allCases[tariffCarousel.currentItemIndex],
                                                              tariffSlideList:tariffSlideList ?? [],
                                                              index: optionIndex)
         delegate?.didPressConfirm(tariff: TariffState.allCases[tariffCarousel.currentItemIndex],

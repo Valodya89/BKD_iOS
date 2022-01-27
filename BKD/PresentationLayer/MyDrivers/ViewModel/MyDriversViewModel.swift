@@ -59,14 +59,14 @@ class MyDriversViewModel: NSObject {
     
     ///Get driver which will continue to fill
     func getDriverToContinueToFill(allDrivers: [MainDriver], completion: @escaping (MainDriver?) -> Void){
-        allDrivers.forEach { currDriver in
-            if currDriver.state != Constant.Texts.state_agree && currDriver.state != Constant.Texts.state_accepted && currDriver.state != Constant.Texts.state_created  {
+        for currDriver in allDrivers {
+            if currDriver.state != Constant.Texts.state_agree && currDriver.state != Constant.Texts.state_accepted {
                 
                 completion(currDriver)
+                break
             }
         }
         completion(nil)
-
     }
    
     ///Get edit driver list
@@ -83,78 +83,27 @@ class MyDriversViewModel: NSObject {
         return editList
     }
     
-    ///Get edit rent drivers  list
-    func getDriversEditList(rent: Rent?, drivers: [MyDriversModel]) -> (additionalDrivers: [MyDriversModel]?, totalPrice: Double) {
-        
-        guard let rentDrivers = rent?.additionalDrivers else {return (nil, 0.0)}
-        var additionalDrivers:[MyDriversModel] = []
-        var totalPrice = 0.0
-        
-        drivers.forEach { driver in
-            if rentDrivers.count > 0 {
-                
-                let rentDriver = rentDrivers.filter { $0.id == driver.driver?.id ?? ""}.first
-                
-                if rentDriver == nil {
-                    additionalDrivers.append(driver)
-                } else {
-                    totalPrice += driverPrice
-                    let driverEdit = MyDriversModel(fullname: driver.fullname,
-                                                    licenciNumber: driver.licenciNumber,
-                                                    price: driverPrice, isSelected: true,
-                                                    isWaitingForAdmin: false,
-                                                    totalPrice: 0.0,
-                                                    driver: driver.driver)
-                    additionalDrivers.append(driverEdit)
-                }
-                
-        } else {
-            
-            additionalDrivers = drivers
-        }
-    }
-        return (additionalDrivers, totalPrice)
-    }
+
+   
     
-    
-    
-    
-    
-    ///Edit reservation driver
-    func editReservationDrivers(isSelected: Bool,
-                                editDriver: MyDriversModel,
-                                editReservationDrivers: [DriverToRent], completion: @escaping (([DriverToRent]) -> Void)) {
-        var editList = editReservationDrivers
-        if isSelected {
-            editList.append(DriverToRent(id: editDriver.driver?.id ?? "",
-                                       name: editDriver.driver?.name,
-                                       surname: editDriver.driver?.surname,
-                                       drivingLicenseNumber: editDriver.licenciNumber))
-            completion(editList)
-        } else {
-            for i in 0 ..< editList.count  {
-                if (editDriver.driver?.id ?? "") == editList[i].id {
-                    editList.remove(at: i)
-                    completion(editList)
-                    return
-                }
-            }
-        }
-        completion(editList)
-    }
-    
-    ///Is enabled cell
-    func isEnabledCell(editedDrivers: [DriverToRent]?, currItem: MyDriversModel) -> Bool {
-        let item = editedDrivers?.filter({$0.id == currItem.driver?.id}).first
-        guard item != nil else {return true}
-        return false
-    }
     
     ///Is edited additional driversn to reservation
     func isEdietedDriverList(oldDrivers: [DriverToRent],
                              editedDrivers: [DriverToRent]) -> Bool {
         
         return editedDrivers.count != oldDrivers.count
+    }
+    
+    ///Count total price of selected drivers
+    func countTotalPrice(additionalDrivers: [MyDriversModel]?, price: Double) -> Double {
+        
+        var total = 0.0
+        additionalDrivers?.forEach({ driver in
+            if driver.isSelected {
+                total += price
+            }
+        })
+        return total
     }
     
 }

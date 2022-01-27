@@ -194,7 +194,7 @@ extension MyBKDViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            self.goToMyPersonalInfo(mainDriver: mainDriver)
+            self.goToMyPersonalInfo(mainDriver: mainDriver, navigationTitle: Constant.Texts.myPersonalInfo)
         case 1:
             self.goToMyAccountDrivers()
         default:
@@ -203,9 +203,12 @@ extension MyBKDViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-//MARK: RegistartionBotViewControllerDelegate
-//MARK: ------------------------------------------
+//MARK: -- RegistartionBotViewControllerDelegate
 extension MyBKDViewController: RegistartionBotViewControllerDelegate {
+    func backToMyDrivers(mainDriver: MainDriver?) {
+        
+    }
+    
     func backToMyBKD() {
         isBackFromRegistrationBot = true
     }

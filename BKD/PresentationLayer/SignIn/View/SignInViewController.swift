@@ -28,6 +28,7 @@ final class SignInViewController: BaseViewController {
     private var keychainManager = KeychainManager()
     lazy var signInVM = SignInViewModel()
     
+    public var isFromMyBKD = false
     var didSignIn:(()->Void)?
     
     override func viewDidLoad() {
@@ -89,7 +90,10 @@ final class SignInViewController: BaseViewController {
                 self.keychainManager.saveUsername(username: self.mEmailAddressTextFl.text!)
                 self.keychainManager.savePassword(passw: self.mPasswordTxtFl.text!)
                 
-                self.signInClicked()
+                UserDefaults.standard.setValue(true, forKey: key_isLogin)
+                self.didSignIn?()
+                self.navigationController?.popViewController(animated: true)
+
             default:
                 self.incorrectPasswordOrUsername()
                 break
@@ -100,6 +104,8 @@ final class SignInViewController: BaseViewController {
     
     ///Incorrect username or password
     private func incorrectPasswordOrUsername() {
+        self.mSignInLeading.constant = 0
+        self.mSignInBckgV.layoutIfNeeded()
         mErrorLb.isHidden = false
         mPasswordTxtFl.layer.borderColor = color_error!.cgColor
         mEmailAddressTextFl.layer.borderColor = color_error!.cgColor
@@ -111,7 +117,8 @@ final class SignInViewController: BaseViewController {
     private func checkEmailAddress() {
         ChatViewModel().isValidEmail(email: mEmailAddressTextFl.text!) { [self] (isValid) in
             if isValid {
-                signIn()
+                //signIn()
+                signInClicked()
             } else {
                 mErrorLb.isHidden = false
                 mEmailAddressTextFl.layer.borderColor = color_error!.cgColor
@@ -127,9 +134,7 @@ final class SignInViewController: BaseViewController {
             self.mSignInLeading.constant = self.mSignInBckgV.bounds.width - self.mSignInBtn.frame.size.width
             self.mSignInBckgV.layoutIfNeeded()
         } completion: { _ in
-            UserDefaults.standard.setValue(true, forKey: key_isLogin)
-            self.didSignIn?()
-            self.navigationController?.popToViewController(ofClass: MyBKDViewController.self)
+            self.signIn()
         }
     }
     

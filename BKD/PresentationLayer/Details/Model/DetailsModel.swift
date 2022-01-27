@@ -18,6 +18,8 @@ struct VehicleModel {
     public var vehicleType: String?
     public var vehicleImg: UIImage?
     public var vehicleLogo: UIImage?
+    public var vehicleImgUrl: URL?
+    public var vehicleLogoURL: URL?
     public var ifHasTowBar: Bool = false
     public var vehicleOffertValue: Double = 0.0
     public var vehicleDiscountValue: Double = 0.0
@@ -58,5 +60,48 @@ struct VehicleModel {
     public var carImagesList:[UIImage]?
     
     public var rent: Rent?
+    
+    
+    mutating func setVehicle(car: CarsModel)  {
+        self.vehicleId = car.id
+        self.vehicleName = car.name
+        self.vehicleType = car.type
+        self.vehicleImgUrl = car.image.getURL()
+        self.vehicleLogoURL = car.logo?.getURL()
+        
+        let data = try? Data(contentsOf: ((car.image.getURL() ?? URL(string: ""))!)) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+        
+        self.vehicleImg = UIImage(data: data!)
+        self.ifHasTowBar = car.towbar
+       // self.vehicleOffertValue =
+       // self.vehicleDiscountValue =
+        
+        //Prices
+        self.priceForFlexible = car.priceForFlexible
+        self.priceHour = car.priceHour
+        self.priceDay = car.priceDay
+        self.priceWeek = car.priceWeek
+        self.priceMonth = car.priceMonth
+        self.hasDiscount = car.hasDiscount
+        self.discountPercents = car.discountPercents
+        self.freeKiloMeters = car.freeKiloMeters
+        self.depositPrice = car.depositPrice
+        //self.totalPrice =
+        self.priceForKm = car.priceForKm
+        
+        //Vehicle general short info
+        self.drivingLicense = car.driverLicenseType
+        self.vehicleCube = String(car.volume) + Constant.Texts.mCuadrad
+        self.vehicleWeight = String(car.loadCapacity) + Constant.Texts.kg
+        self.vehicleSize = car.exterior?.getExterior()
+        
+        self.ifTailLift = car.tailgate
+        let mainVM = MainViewModel()
+        if self.ifTailLift  {
+            self.tailLiftList = mainVM.getTailLiftList(carModel: car)
+        }
+        self.detailList = mainVM.getDetail(carModel: car)
+        self.images = car.images
+    }
 }
 

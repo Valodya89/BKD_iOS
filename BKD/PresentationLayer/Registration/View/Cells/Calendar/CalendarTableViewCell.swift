@@ -37,7 +37,7 @@ class CalendarTableViewCell: UITableViewCell, UITextFieldDelegate {
         didSet {
             if viewDescription == Constant.Texts.dateOfBirth {
                 viewType = .dateOfBirth
-            } else if viewDescription == Constant.Texts.expiryDate {
+            } else if viewDescription == Constant.Texts.expiry_date {
                 viewType = .expiryDate
             } else if  viewDescription == Constant.Texts.issueDateDrivingLicense {
                 viewType = .issueDateDrivingLicense

@@ -51,6 +51,7 @@ struct Constant {
         static let myAccount = "MyAccount"
         static let aboutUs = "AboutUs"
         static let faq = "FAQ"
+        static let editMyDrivers = "EditMyDrivers"
 
 
     }
@@ -107,6 +108,7 @@ struct Constant {
         static let stopRide = "StopRideViewController"
         static let myPersonalInfo = "MyPersonalInformationViewController"
         static let faq = "FAQViewController"
+        static let editMyDrivers = "EditMyDriversViewController"
     }
     
     struct DeepLinks {
@@ -248,7 +250,7 @@ struct Constant {
         static let name = "First Name"
         static let surname = "Last Name"
         static let phoneNumber = "Phone number"
-        static let streetName = "Street Name"
+        static let streetName = "Street name"
         static let houseNumber = "House number"
         static let country = "Country"
         static let city = "City"
@@ -258,6 +260,8 @@ struct Constant {
         static let drivingLicenseNumber = "Driving license number"
         static let nationalRegisterNum = "National register number"
         static let otherCountryRegisterNum = "Other Country National Register Number"
+       static let expiryDate = "Expiry date"
+       
 
         //MARK: -- Personal date types
         static let button = "button"
@@ -266,7 +270,7 @@ struct Constant {
         static let mailbox = "mailbox"
         static let nationalRegister = "national register" 
         static let calendar = "calendar"
-        static let expiryDate = "calendar_expire"
+        static let expiry_date = "calendar_expire"
         static let expiryDateDrivingLicense = "calendar_expire_driving_license"
         static let issueDateDrivingLicense = "calendar_issue_driving_license"
         
@@ -325,9 +329,8 @@ struct Constant {
         static let finishRide_alert = "By clicking ´Finish Ride´ button, you confirm that you have parked the vehicle in the Return location and returned the keys to a BKD officer. Within 24 hours we will check the vehicle and Odometer details, and notify you on the amount of the Pending payment."
         static let finishRide = "Finish ride"
         
+        
         //MARK: -- Additional driver
-        
-        
         
         static let addDriverAlert = "Additional driver service is %.2f euro per driver. You need to wait for Admin approval to have an additional driver for your account. No payment will be needed unless the Admin approves the driver addition"
         static let addDriverService = "Additional driver service is %.2f euro per driver. Please, confirm that you want to turn on the service."
@@ -349,6 +352,7 @@ struct Constant {
         
         //MARK: -- Edit reservation
         static let extendDateAlert = "The reservation date can only be extended, not reduced"
+        static let needsAdminApproval = "You need to wait for Admin approval to have the reservation location edited."
         
         //MARK: -- Compare
         static let vehicle2 = "Vehicle 2"
@@ -360,17 +364,29 @@ struct Constant {
         static let  yahooMail = "Yahoo Mail"
     
         //MARK: -- Registration Bot
+        static let firstName = "First name"
+        static let lastName = "Last name"
         static let start = "Start"
+        static let bkdAgree = "BKD Agreement"
         static let IF_text = "front side photo of your Identity card"
         static let IB_text = "back side photo of your Identity card"
         static let DLF_text = "front side photo of your valid Driving license"
         static let DLB_text = "back side photo of your valid Driving license"
         static let license_issue_text = "Issue date of the Driving license"
+        static let selfi_driving_lic = "selfie photo with your valid Driving license"
+        static let fron_addDriving_id = "front side photo of your additional driver’s Identity card"
+        static let back_addDriving_Id = "back side photo of your additional driver’s Identity card"
+        static let fron_addDriving_lic = "front side photo of your additional driver’s valid Driving license"
+        static let back_addDriving_lic = "back side photo of your additional driver’s valid Driving license"
+        
+        
         
         
         //MARK: -- My Account
         static let newEmail = "New email address"
         static let currPassword = "Current password"
+        static let myDrivers = "My Drivers"
+        static let myPersonalInfo = "My personal information"
         
         //MARK: -- My personal information
         static let confitmEdit = "You need to wait for Admin approval to have your Personal Information edited. Are you sure you want to continue?"

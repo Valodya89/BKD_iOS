@@ -1,14 +1,14 @@
 //
-//  PriceManager.swift
+//  EditedPriceManager.swift
 //  BKD
 //
-//  Created by Karine Karapetyan on 09-11-21.
+//  Created by Karine Karapetyan on 26-01-22.
 //
 
 import UIKit
 
-final class PriceManager {
-    static let shared = PriceManager()
+final class EditedPriceManager {
+    static let shared = EditedPriceManager()
     
     var pickUpCustomLocationPrice: Double?
     var returnCustomLocationPrice: Double?
@@ -86,3 +86,4 @@ final class PriceManager {
     
     
 }
+

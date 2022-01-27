@@ -131,9 +131,11 @@ class BkdAgreementViewController: BaseViewController {
         }
     }
     
+    ///Update car reservation
     func updateReservation() {
         EditReservetionAdvancedViewModel().updateRent(rentId: currRent?.id ?? "", editReservationModel: editReservationModel!, searchModel: searchModel ?? SearchModel()) { result in
-            guard let rent = result else {return}
+            guard let _ = result else {return}
+            self.navigationController?.popToViewController(ofClass: MyReservationsViewController.self)
             
         }
     }

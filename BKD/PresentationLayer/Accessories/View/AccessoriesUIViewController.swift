@@ -152,6 +152,7 @@ class AccessoriesUIViewController: BaseViewController {
     func handlerConfirm() {
         mConfirmV.didPressConfirm = { [self] in
             PriceManager.shared.accessoriesPrice = totalPrice
+            EditedPriceManager.shared.accessoriesPrice = totalPrice
             delegate?.addedAccessories(true, totalPrice: totalPrice,
                                        accessoriesEditList: accessoriesEditList,
                                        oldReservAccessories: oldReservAccessories, editReservationModel: editReservationModel)

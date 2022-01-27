@@ -74,6 +74,7 @@ class CategoryViewController: UIViewController {
 
     }
     
+    ///Animate
     private func animateSearchResult(){
         DispatchQueue.main.async {
             UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseOut], animations: { [self] in
@@ -83,8 +84,16 @@ class CategoryViewController: UIViewController {
         }
     }
     
-    //MARK: ACTIONS
-    //MARK: ------------------------
+    ///will open detail controller
+    private func goToDetailPage(carModel: CarsModel,
+                                carType: String) {
+        
+        let detailsVC = DetailsViewController.initFromStoryboard(name: Constant.Storyboards.details)
+        detailsVC.vehicleModel = CategoryViewModel().getVehicleModel(car: carModel, carType: carType)
+        self.navigationController?.pushViewController(detailsVC, animated: true)
+    }
+    
+    //MARK: -- ACTIONS
     @IBAction func back(_ sender: UIBarButtonItem) {
         self.tabBarController?.selectedIndex = 0
     }
@@ -96,8 +105,7 @@ class CategoryViewController: UIViewController {
 }
 
 
-//MARK: UITableViewDataSource
-//MARK: ------------------------
+//MARK: -- UITableViewDataSource
 extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return carTypes?.count ?? 0
@@ -109,6 +117,9 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
        guard let _ = carsList else { return cell }
         cell.setCellInfo(carsList: carsList, carType: carTypes![indexPath.row])
         cell.mCategoryCollectionV.reloadData()
+        cell.openCarDetail = {car, carType in
+            self.goToDetailPage(carModel: car, carType: carType)
+         }
         return cell
     }
     

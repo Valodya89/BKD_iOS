@@ -78,9 +78,10 @@ class EditReservationViewController: BaseViewController {
         mEditBySearchV.delegate = self
         showLocation()
         configureExtendReservationUI()
-       handlerCinfirm()
+        handlerCinfirm()
         configureUI()
         mCheckPriceBtn.disable()
+        
     }
     
     
@@ -235,9 +236,10 @@ class EditReservationViewController: BaseViewController {
         BKDAlert().showAlert(on: self,
                              title: String(format: Constant.Texts.titleCustomLocation, locationPrice),
                              message: Constant.Texts.messageCustomLocation,
-                             messageSecond: Constant.Texts.messageCustomLocation2,
+                             messageSecond: Constant.Texts.messageCustomLocation2 + " " + Constant.Texts.needsAdminApproval,
                              cancelTitle: Constant.Texts.cancel,
-                             okTitle: Constant.Texts.agree,cancelAction: {
+                             okTitle: Constant.Texts.gotIt,
+                             cancelAction: {
                                 checkedBtn.setImage(img_uncheck_box, for: .normal)
                              }, okAction: { [self] in
                                  self.goToCustomLocationMapController(on: self, isAddDamageAddress: false)
@@ -306,11 +308,10 @@ class EditReservationViewController: BaseViewController {
         
     @IBAction func additionalDriver(_ sender: UIButton) {
         
-        let driverVC = MyDriversViewController.initFromStoryboard(name: Constant.Storyboards.myDrivers)
+        let driverVC = EditMyDriversViewController.initFromStoryboard(name: Constant.Storyboards.editMyDrivers)
         driverVC.delegate = self
         driverVC.rent = currRent
         driverVC.additionalDrivers = additionalDrivers
-        driverVC.isEditReservation = true
         driverVC.editReservationModel = editReservationModel ?? EditReservationModel()
         driverVC.oldReservDrivers = oldReservDrivers
         self.navigationController?.pushViewController(driverVC, animated: true)
@@ -330,6 +331,13 @@ class EditReservationViewController: BaseViewController {
     
     
     @IBAction func checkPrice(_ sender: UIButton) {
+       
+        editReservVM.setEditPriceManager(currRent: currRent,
+                                         searchModel: searchModel,
+                                         oldSearchModel: oldSearchModel,
+                                         oldDrivers: oldReservDrivers ?? [],
+                                         oldAccessories: oldReservAccessories ?? [],
+                                         editReservationModel: editReservationModel)
         sender.setClickTitleColor(color_menu!)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3 ) {
             self.delegate?.didPressCheckPrice(isEdit: true)
@@ -521,7 +529,7 @@ extension EditReservationViewController: AccessoriesUIViewControllerDelegate {
 }
 
 //MARK: -- MyDriversViewController
-extension EditReservationViewController: MyDriversViewControllerDelegate {
+extension EditReservationViewController: EditMyDriversViewControllerDelegate {
     func selectedDrivers(_ isSelecte: Bool,
                          additionalDrivers: [MyDriversModel]?,
                          oldReservDrivers: [DriverToRent]?,

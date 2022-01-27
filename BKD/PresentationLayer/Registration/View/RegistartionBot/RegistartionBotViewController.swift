@@ -16,6 +16,7 @@ enum PickerType {
 
 protocol RegistartionBotViewControllerDelegate: AnyObject {
     func backToMyBKD()
+    func backToMyDrivers(mainDriver: MainDriver?)
 }
 final class RegistartionBotViewController: BaseViewController {
     
@@ -32,7 +33,7 @@ final class RegistartionBotViewController: BaseViewController {
     
     //MARK: -- Variables
     weak var delegate: RegistartionBotViewControllerDelegate?
-    lazy var registrationBotViewModel = RegistrationBotViewModel()
+    lazy var registrationBotVM = RegistrationBotViewModel()
     var tableData: [RegistrationBotModel] = []
     var registrationBotModel: [RegistrationBotModel] = []
     private let applicationSettings: ApplicationSettings = .shared
@@ -48,13 +49,13 @@ final class RegistartionBotViewController: BaseViewController {
     var datePicker = UIDatePicker()
     var pickerV = UIPickerView()
     var isTakePhoto:Bool = false
-    var isDriverRegister: Bool = false
     var isMyAccountDriver: Bool = false
     var isEdit: Bool = false
     private var takePhotoCurrentIndex:Int  = 0
     private var currentIndex = 0
     private var activeTextField: UITextField?
     public var mainDriver: MainDriver?
+    public var isDriverRegister: Bool = false
 
 
     //MARK: -- Life cycles
@@ -76,19 +77,25 @@ final class RegistartionBotViewController: BaseViewController {
             startTimer()
         } else {
            // if !isDriverRegister {
-                registrationBotViewModel.setRegisterBotInfo(mainDriver: mainDriver!, countryList: countryList) { registrationBotResult in
+            if self.mainDriver?.state  != Constant.Texts.state_created {
+                registrationBotVM.setRegisterBotInfo(mainDriver: mainDriver!, countryList: countryList) { registrationBotResult in
                     
                     self.tableData = registrationBotResult
-                    if self.mainDriver?.state  != Constant.Texts.state_created {
-                        self.personalData = self.registrationBotViewModel.getPersonalData(driver: self.mainDriver) ?? PersonalData()
-                        self.driverLicenseDateData = self.registrationBotViewModel.getDriverLicenseDateData(driver: self.mainDriver) ?? DriverLiceseDateData()
-                    }
+                   // if self.mainDriver?.state  != Constant.Texts.state_created {
+                        self.personalData = self.registrationBotVM.getPersonalData(driver: self.mainDriver) ?? PersonalData()
+                        self.driverLicenseDateData = self.registrationBotVM.getDriverLicenseDateData(driver: self.mainDriver) ?? DriverLiceseDateData()
+                   // }
                     self.mTableV.reloadData()
                     self.tableScrollToBottom()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
                         self.insertTableCell()
                     }
                 }
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
+                    self.insertTableCell()
+                }
+            }
            // }
         }
     }
@@ -101,6 +108,11 @@ final class RegistartionBotViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
+        if isDriverRegister  {
+            delegate?.backToMyDrivers(mainDriver: mainDriver)
+        } else {
+            delegate?.backToMyBKD()
+        }
     }
     
     func setUpView() {
@@ -146,7 +158,7 @@ final class RegistartionBotViewController: BaseViewController {
     
     ///Get country list
     func getCountryList() {
-        registrationBotViewModel.getCountryList { [weak self] (response) in
+        registrationBotVM.getCountryList { [weak self] (response) in
             guard let self = self else { return }
             self.countryList = response
             self.currentCountry = self.countryList?.first
@@ -156,7 +168,7 @@ final class RegistartionBotViewController: BaseViewController {
     
     ///Sent requesst for creat user account
     func creatDriver(driverType: String) {
-        registrationBotViewModel.creatDriver(type: driverType) { request in
+        registrationBotVM.creatDriver(type: driverType) { request in
             print (request)
             guard let _ = request else {return}
             self.mainDriver = request!
@@ -165,7 +177,7 @@ final class RegistartionBotViewController: BaseViewController {
     
     //Send personal data
     func sendPersonalData(personalData: PersonalData, index: Int, isEditData: Bool) {
-        registrationBotViewModel.addPersonlaData(id: mainDriver?.id ?? "", personlaData: personalData) { [self] (result, err) in
+        registrationBotVM.addPersonlaData(id: mainDriver?.id ?? "", personlaData: personalData) { [self] (result, err) in
             guard let result = result else {
                 if err == "401" {
                     self.showAlertSignIn()
@@ -185,13 +197,14 @@ final class RegistartionBotViewController: BaseViewController {
    
     /// Send request accept agreement
     private func sendAgreement() {
-        registrationBotViewModel.acceptAgreement(id: mainDriver?.id ?? "") { (result, err) in
+        registrationBotVM.acceptAgreement(id: mainDriver?.id ?? "") { (result, err) in
             if result != nil {
+                self.mainDriver = result!
                 self.tableData = self.isDriverRegister ? RegistrationBotData.completedDriverAccountModel : RegistrationBotData.completedAccountModel
                 self.animationConfirm()
             } else if err == "401" {
-                    self.showAlertSignIn()
-                } else {
+                self.showAlertSignIn()
+            } else {
                 self.showAlertMessage(Constant.Texts.errAcceptAgreement)
             }
         }
@@ -346,7 +359,7 @@ final class RegistartionBotViewController: BaseViewController {
     
     @IBAction func thankYou(_ sender: UIButton) {
         
-        registrationBotViewModel.saveUserPhoneNumber(phoneCodeId: currentPhoneCode?.id, number: personalData.phoneNumber)
+        registrationBotVM.saveUserPhoneNumber(phoneCodeId: currentPhoneCode?.id, number: personalData.phoneNumber)
         
         UserDefaults.standard.set(true, forKey: key_isLogin)
         sender.setTitleColor(color_menu!, for: .normal)
@@ -356,7 +369,9 @@ final class RegistartionBotViewController: BaseViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
             self.tabBarController?.selectedIndex = 0
             if self.isDriverRegister {
-                self.navigationController?.popToViewController(ofClass: self.isMyAccountDriver ? MyAccountsDriversViewController.self : MyDriversViewController.self, animated: true)
+                self.delegate?.backToMyDrivers(mainDriver: self.mainDriver)
+                self.navigationController?.popViewController(animated: true)
+//                self.navigationController?.popToViewController(ofClass: self.isMyAccountDriver ? MyAccountsDriversViewController.self : MyDriversViewController.self, animated: true)
             } else {
                 self.navigationController?.popToViewController(ofClass: MyBKDViewController.self, animated: true)
             }
@@ -364,7 +379,6 @@ final class RegistartionBotViewController: BaseViewController {
     }
     
     @IBAction func beck(_ sender: UIBarButtonItem) {
-        delegate?.backToMyBKD()
         navigationController?.popViewController(animated: true)
     }
     
@@ -420,7 +434,7 @@ extension RegistartionBotViewController: UITableViewDelegate, UITableViewDataSou
             case Constant.Texts.calendar,
                  Constant.Texts.issueDateDrivingLicense:
                 return calendarCell(indexPath: indexPath,model: model, isExpiryDate: false)
-            case Constant.Texts.expiryDate,
+            case Constant.Texts.expiry_date,
                  Constant.Texts.expiryDateDrivingLicense:
                 return calendarCell(indexPath: indexPath,model: model, isExpiryDate: true)
             case Constant.Texts.mailbox:
@@ -651,7 +665,7 @@ extension RegistartionBotViewController: CalendarTableViewCellDelegate {
     
     ///add Identity Expiration Date to database
     private func addIdentityExpirationDate(expiryDate: String) {
-        registrationBotViewModel.addIdentityExpiration(id:  mainDriver?.id ?? "", experationDate: expiryDate) { (result) in
+        registrationBotVM.addIdentityExpiration(id:  mainDriver?.id ?? "", experationDate: expiryDate) { (result) in
             if result != nil {
                 self.mainDriver = result!
             } else {
@@ -662,7 +676,7 @@ extension RegistartionBotViewController: CalendarTableViewCellDelegate {
     
     ///add Driver License Date to database
     private func addDriverLicenseDate() {
-        registrationBotViewModel.addDriverLicenseDates(id:  mainDriver?.id ?? "",
+        registrationBotVM.addDriverLicenseDates(id:  mainDriver?.id ?? "",
                                                        driverLicenseDateData: driverLicenseDateData) { (result) in
             if result != nil {
                 self.mainDriver = result!
@@ -782,9 +796,9 @@ extension RegistartionBotViewController: UIImagePickerControllerDelegate, UINavi
     
     //Upload image to database
     private func uploadImage(image: UIImage) {
-        let uploadState = registrationBotViewModel.getImageUploadState( index: takePhotoCurrentIndex)
+        let uploadState = registrationBotVM.getImageUploadState( index: takePhotoCurrentIndex)
        
-        registrationBotViewModel.imageUpload(image: image,
+        registrationBotVM.imageUpload(image: image,
                                              id: mainDriver?.id ?? "",
                                              state: uploadState.rawValue) { [self] (result, err) in
             if result != nil {

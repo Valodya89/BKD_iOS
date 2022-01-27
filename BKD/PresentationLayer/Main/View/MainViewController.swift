@@ -201,7 +201,8 @@ class MainViewController: BaseViewController {
                                 isSearchEdit: Bool,
                                 isClickMore: Bool) {
         
-        let detailsVC = UIStoryboard(name: Constant.Storyboards.details, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.details) as! DetailsViewController
+        let detailsVC = DetailsViewController.initFromStoryboard(name: Constant.Storyboards.details)
+
         if isSearchEdit {
             setSearchModel()
             detailsVC.searchModel = searchModel

@@ -136,6 +136,6 @@ extension MyAccountsDriversViewController: UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        goToMyPersonalInfo(mainDriver: myDrivers![indexPath.row])
+        goToMyPersonalInfo(mainDriver: myDrivers![indexPath.row], navigationTitle: Constant.Texts.myDrivers)
     }
 }
