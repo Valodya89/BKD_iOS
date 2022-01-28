@@ -344,9 +344,10 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
                                 <action selector="back:" destination="K9y-XE-Xk3" id="tfF-0w-aTO"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="bkd" id="So3-BG-zbH">
+                        <barButtonItem key="rightBarButtonItem" title="Close" id="So3-BG-zbH">
+                            <color key="tintColor" name="see_map"/>
                             <connections>
-                                <action selector="toggleUnderline:" destination="Jc2-Rk-Q1v" id="GgR-36-jo1"/>
+                                <action selector="close:" destination="K9y-XE-Xk3" id="chw-vP-Jvm"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -418,6 +419,9 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
         </namedColor>
         <namedColor name="navigation_bar">
             <color red="0.10999999940395355" green="0.20000000298023224" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="see_map">
+            <color red="0.9137254901960784" green="0.78823529411764703" blue="0.41960784313725491" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="subview_background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -85,7 +85,7 @@ class ReservationWithRegisterNumberCollectionViewCell: UICollectionViewCell {
         mRegistrationNumberLb.text = item.carDetails.registrationNumber ?? "XX-XX-XX"
         //Get difference between now and start ride date
         let duration = Date().getDistanceByComponent(.minute, toDate: Date(timeIntervalSince1970: item.startDate)).minute
-        if duration! <= 15 {
+        if duration ?? 0 <= 15 {
             mStartRideBtn.setTitleColor(color_selected_filter_fields, for: .normal)
         }
         

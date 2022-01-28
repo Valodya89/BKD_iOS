@@ -342,6 +342,10 @@ enum AuthAPI: APIProtocol {
                 "size": "10",
                 "sort": "sentAt,DESC"
             ]
+        case .getRents:
+            return [
+                "size":"1000"
+            ]
         default:
             return [:]
         }

@@ -36,12 +36,19 @@ final class PaymentWebViewController: UIViewController, StoryboardInitializable,
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        mActivityV.startAnimating()
+       // mActivityV.startAnimating()
         loadWebView()
     }
     
     
     // MARK: - IBActions
+    
+    @IBAction func close(_ sender: UIBarButtonItem) {
+        
+        navigationController?.popToViewController(ofClass: MainViewController.self)
+        self.tabBarController?.selectedIndex = 1
+        
+    }
     
     @IBAction private func back(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
@@ -52,7 +59,7 @@ final class PaymentWebViewController: UIViewController, StoryboardInitializable,
     
     /// Configure webView
     private func configWebView() {
-        //n
+        
         let config = WKWebViewConfiguration()
         let source = "document.addEventListener('click', function(){ window.webkit.messageHandlers.iosListener.postMessage('click clack!'); })"
         let script = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
@@ -67,7 +74,7 @@ final class PaymentWebViewController: UIViewController, StoryboardInitializable,
     
     /// Configure screen UI
     private func configUI() {
-        mRightBarBtn.image = img_bkd
+      //  mRightBarBtn.image = img_bkd
     }
     
     /// Load webView with url or htmlString
@@ -111,7 +118,7 @@ extension PaymentWebViewController: WKNavigationDelegate {
     
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        mActivityV.stopAnimating()
+       // mActivityV.stopAnimating()
 //        webView.evaluateJavaScript("document.getElementById(\"my-id\").innerHTML", completionHandler: { (jsonRaw: Any?, error: Error?) in
 //            guard let jsonString = jsonRaw as? String else { return }
 //            //let json = JSON(parseJSON: jsonString)

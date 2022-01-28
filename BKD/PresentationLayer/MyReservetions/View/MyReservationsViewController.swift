@@ -173,7 +173,7 @@ class MyReservationsViewController: BaseViewController {
     ///Check is active start ride(Is less then 15 minute before start)
     private func isActiveStartRide(start: Double) -> Bool {
         let duration = Date().getDistanceByComponent(.minute, toDate: Date(timeIntervalSince1970: start)).minute
-        return duration! <= 15
+        return duration ?? 0 <= 15
     }
     
     

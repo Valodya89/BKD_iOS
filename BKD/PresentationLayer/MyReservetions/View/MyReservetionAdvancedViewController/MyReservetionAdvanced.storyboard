@@ -532,7 +532,7 @@
                                                             <constraint firstItem="dxP-7V-37c" firstAttribute="width" secondItem="sdH-bU-ycy" secondAttribute="width" multiplier="0.07" id="uDz-Lp-v4z"/>
                                                         </constraints>
                                                     </view>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="10L-7O-rt5">
+                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="10L-7O-rt5">
                                                         <rect key="frame" x="31" y="97.5" width="165.5" height="42"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Edit">
@@ -543,7 +543,7 @@
                                                             <action selector="edit:" destination="ImY-qT-Pts" eventType="touchUpInside" id="0vD-8c-3kn"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZk-Gf-I53">
+                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZk-Gf-I53">
                                                         <rect key="frame" x="216.5" y="97.5" width="166" height="42"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Cancel">

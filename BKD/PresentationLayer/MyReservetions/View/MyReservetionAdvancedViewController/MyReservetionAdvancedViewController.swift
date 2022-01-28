@@ -266,7 +266,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
             mTotalPriceStackV.mNewTotalPriceContentV.isHidden = true
             mEditBtn.isHidden = true
             mCancelBtn.isHidden = true
-            mExtendReservationBtn.isHidden = false
+           // mExtendReservationBtn.isHidden = false
             mStartRideBtn.setTitle(Constant.Texts.stopRide, for: .normal)
         }
     }

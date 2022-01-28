@@ -661,6 +661,7 @@
                                     <segment title="Active Reservations"/>
                                     <segment title="Reservations History"/>
                                 </segments>
+                                <color key="tintColor" name="navigationBar"/>
                                 <color key="selectedSegmentTintColor" name="myReservation_select_segment"/>
                                 <connections>
                                     <action selector="reservation:" destination="4kt-qQ-nUS" eventType="valueChanged" id="ady-71-PHo"/>

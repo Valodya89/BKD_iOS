@@ -39,10 +39,12 @@ struct MenuData {
 }
 
 //MARK: -- EquipmentData
+
+//EquipmentModel(equipmentImg: UIImage(named: "double_cabin")!, equipmentName: "Double cabin", didSelect: false),
 struct EquipmentData {
    static let equipmentModel: [EquipmentModel] = [ EquipmentModel(equipmentImg: UIImage(named: "selected_tow_bar")!, equipmentName: "Tow Bar", didSelect: false),
                                                     EquipmentModel(equipmentImg: UIImage(named: "tail_lift")!, equipmentName: "Tail Lift", didSelect: false),
-                                                    EquipmentModel(equipmentImg: UIImage(named: "gps_navigator")!, equipmentName: "GPS navigation", didSelect: false),
+                                            EquipmentModel(equipmentImg: UIImage(named: "gps_navigator")!, equipmentName: "GPS navigation", didSelect: false),
                                                     EquipmentModel(equipmentImg: UIImage(named: "air_conditioning")!, equipmentName: "Air conditioning", didSelect: false)]
 }
 
@@ -296,7 +298,7 @@ struct StartRideData {
 
 //MARK: -- PriceModel
 struct PriceData {
-    static let priceModel:[PriceModel] = [PriceModel(priceTitle: "Price", price: 5.00),
+    static let priceModel:[PriceModel] = [PriceModel(priceTitle: "Price", price: 0.00),
           PriceModel(priceTitle: "Accsessories", price: 0.00),
            PriceModel(priceTitle: "Additional driver", price: 0.00)]
 }
