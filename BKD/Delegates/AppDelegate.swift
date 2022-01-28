@@ -8,6 +8,7 @@
 import UIKit
 import GooglePlaces
 import GoogleMaps
+import Firebase
 
 let googleApiKey = "AIzaSyC6MtPGDDn75eV2rMXG-8176Vasir7yF20"
 //let testGoogleApiKey = "AIzaSyAldVNjRA7oi5Vo9mUiCFvJ70SnVnOqglA"
@@ -31,7 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let pageControl = UIPageControl.appearance()
         pageControl.currentPageIndicatorTintColor = UIColor.init(patternImage: UIImage(named: "selecte_page")!)
         pageControl.pageIndicatorTintColor = UIColor.init(patternImage: UIImage(named: "unselecte_page")!)
-//        
+//
+        FirebaseApp.configure()
         return true
     }
     
