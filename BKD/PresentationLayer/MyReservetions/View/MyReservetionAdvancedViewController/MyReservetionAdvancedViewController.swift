@@ -434,8 +434,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
     }
     
     
-//MARK: - Actions
-//MARK: -------------------
+//MARK: -- Actions
     
     @IBAction func back(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
@@ -504,7 +503,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
     ///Handler on ride tableCell´s buttons
     func handlerOnRide() {
         mOnRideTableV.didPressAddDamage = {
-            self.goToAddDamage(rent: nil)
+            self.goToAddDamage(rent: self.currRent)
         }
          
         mOnRideTableV.didPressSwitchDriver = {

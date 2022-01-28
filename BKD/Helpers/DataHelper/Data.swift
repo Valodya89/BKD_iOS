@@ -260,7 +260,7 @@ struct PaymentTypeData {
         PaymentTypes(title: nil, image: UIImage(named: "bancontact")),
         PaymentTypes(title: nil, image: UIImage(named: "apple_pay")),
         PaymentTypes(title: nil, image: UIImage(named: "paypal")),
-        PaymentTypes(title: "Kaartlazer", image: nil)
+        PaymentTypes(title: "Kartlizer", image: nil)
        
     ]
 }

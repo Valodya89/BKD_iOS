@@ -129,6 +129,7 @@ final class MyBKDViewController: BaseViewController {
             showWaithingForAdminView()
         } else {
             mVerifiedV.isHidden = false
+            mVerificationPendingLb.isHidden = true
         }
     }
     
