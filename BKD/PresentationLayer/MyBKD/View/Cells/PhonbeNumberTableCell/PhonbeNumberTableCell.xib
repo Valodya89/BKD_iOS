@@ -115,7 +115,7 @@
                         </connections>
                     </button>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CKv-pc-cTj">
-                        <rect key="frame" x="332.5" y="28" width="67" height="24"/>
+                        <rect key="frame" x="332.5" y="23" width="67" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="ltV-JD-AA7"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="67" id="sSo-Hl-D4v"/>
@@ -131,7 +131,7 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="CKv-pc-cTj" firstAttribute="bottom" secondItem="Eed-z2-PXf" secondAttribute="bottom" constant="-5" id="8us-7V-yJ7"/>
+                    <constraint firstItem="CKv-pc-cTj" firstAttribute="bottom" secondItem="Eed-z2-PXf" secondAttribute="bottom" constant="-10" id="8us-7V-yJ7"/>
                     <constraint firstItem="UO1-Qp-ERF" firstAttribute="bottom" secondItem="Eed-z2-PXf" secondAttribute="bottom" id="9bU-Ed-fEL"/>
                     <constraint firstAttribute="trailingMargin" secondItem="cVQ-u3-yEd" secondAttribute="trailing" constant="-5.5" id="D9n-U0-AnL"/>
                     <constraint firstItem="X5K-S0-Hl2" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.6" id="Omc-ES-Xf5"/>
