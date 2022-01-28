@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 struct PreactivateStatusModel: Decodable {
     let status: PreactivateStatus
@@ -74,8 +75,10 @@ final class SessionNetwork: SessionProtocol {
                 completion(.failure(.resultsError(error: NetworkError.validatorError("Invalide request"))))
                 return
             }
+            SVProgressHUD.show()
             let session = URLSession(configuration: .default)
                 session.dataTask(with: request) { data, response, error in
+                    SVProgressHUD.dismiss()
                 DispatchQueue.main.async {
                     guard error == nil else {
                         completion(.failure(.invalidRequest(request: request)))

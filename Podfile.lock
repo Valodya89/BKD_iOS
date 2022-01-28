@@ -25,6 +25,7 @@ PODS:
   - SDWebImage/Core (5.11.1)
   - SideMenu (6.5.0)
   - Starscream (4.0.4)
+  - SVProgressHUD (2.2.5)
   - SwiftMaskTextfield (1.1.0)
   - SwiftStomp (1.0.5):
     - ReachabilitySwift (~> 5.0.0)
@@ -39,6 +40,7 @@ DEPENDENCIES:
   - PhoneNumberKit (~> 3.3)
   - SDWebImage
   - SideMenu
+  - SVProgressHUD
   - SwiftMaskTextfield
   - SwiftStomp
 
@@ -55,6 +57,7 @@ SPEC REPOS:
     - SDWebImage
     - SideMenu
     - Starscream
+    - SVProgressHUD
     - SwiftMaskTextfield
     - SwiftStomp
 
@@ -70,9 +73,10 @@ SPEC CHECKSUMS:
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftMaskTextfield: 8c792e56f25779939d1fd5cf6153ba439b1be761
   SwiftStomp: bb16e710ad6be09a1980196d4e00540432b24305
 
-PODFILE CHECKSUM: 8f0927cff0f5cf9c6c840378d7691ff2d5bdef12
+PODFILE CHECKSUM: f9f03e1dc2c147a2d9f464f7ba8024c4dcb2ac99
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

@@ -17,4 +17,5 @@ target 'BKD' do
  	pod 'KeychainAccess'
 	pod 'SwiftStomp'
 	pod 'SDWebImage'
+  pod 'SVProgressHUD'
 end
