@@ -20,6 +20,7 @@ final class MyBKDViewController: BaseViewController {
     @IBOutlet weak var mVerificationPendingLb: UILabel!
     @IBOutlet weak var mLogOutBtn: UIButton!
     
+    @IBOutlet weak var mVerifiedV: UIView!
     //MARK: Variables
     var mainDriver: MainDriver?
     private lazy var signInVC = SignInViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
@@ -126,12 +127,15 @@ final class MyBKDViewController: BaseViewController {
         if self.mainDriver?.state == Constant.Texts.state_agree {
             mVerificationPendingLb.textColor = color_error!
             showWaithingForAdminView()
+        } else {
+            mVerifiedV.isHidden = false
         }
     }
     
     ///Pop up Waithing For Admin view
     func showWaithingForAdminView() {
         mVerificationPendingLb.isHidden = false
+        mVerifiedV.isHidden = true
         mWaithinfForAdminV.isHidden = false
         mWaithinfForAdminV.popupAnimation()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1 ) {
@@ -170,8 +174,7 @@ final class MyBKDViewController: BaseViewController {
     }
 }
 
-//MARK: UITableViewDelegate, UITableViewDataSource
-//MARK: ------------------------------------------
+//MARK: -- UITableViewDelegate, UITableViewDataSource
 extension MyBKDViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

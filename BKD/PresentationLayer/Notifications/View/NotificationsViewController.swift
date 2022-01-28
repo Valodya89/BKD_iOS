@@ -9,7 +9,7 @@ import UIKit
 import SideMenu
 
 
-class NotificationsViewController: UIViewController {
+class NotificationsViewController: BaseViewController {
 
     //MARK: -- Outlets
     @IBOutlet weak var mSelectBtn: UIButton!
@@ -21,7 +21,8 @@ class NotificationsViewController: UIViewController {
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     
     @IBOutlet weak var mTableBottom: NSLayoutConstraint!
-    private var menu: SideMenuNavigationController?
+    
+    var menu: SideMenuNavigationController?
     lazy var notificationsViewModel = NotificationsViewModel()
     var  notifications: [NotificationModel]? =  NotificationData.notificationModel
     var selected: Bool = false
@@ -49,15 +50,18 @@ class NotificationsViewController: UIViewController {
        
     }
     
-    ///Set menu
-    func setmenu(menu: SideMenuNavigationController?) {
-        menu?.leftSide = true
-        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: view)
-        SideMenuManager.default.leftMenuNavigationController = menu
-        menu?.setNavigationBarHidden(true, animated: true)
-        menu?.menuWidth = 310
-        menu?.presentDuration = 0.8
-    }
+//    ///Set menu
+//    func setmenu(menu: SideMenuNavigationController?) {
+//        menu?.leftSide = true
+//        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: view)
+//        SideMenuManager.default.leftMenuNavigationController = menu
+//        menu?.setNavigationBarHidden(true, animated: true)
+//        menu?.menuWidth = 310
+//        menu?.presentDuration = 0.8
+//        // menu
+//        self.menu = SideMenuNavigationController(rootViewController: LeftViewController())
+//        self.setmenu(menu: menu)
+//    }
     
     ///Configure UI
     func configureUI() {
@@ -117,6 +121,11 @@ class NotificationsViewController: UIViewController {
     }
 
 //MARK: -- Actions
+    @IBAction func menu(_ sender: UIBarButtonItem) {
+        present(menu!, animated: true, completion: nil)
+
+    }
+    
     @IBAction func selectNotif(_ sender: UIButton) {
         sender.setClickTitleColor(color_menu!)
         sender.backgroundColor = color_navigationBar!

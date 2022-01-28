@@ -6,14 +6,18 @@
 //
 
 import UIKit
+import SideMenu
 
-class CategoryViewController: UIViewController {
+
+class CategoryViewController: BaseViewController {
    
      //MARK: Outlet
     @IBOutlet weak var mCategoryTableV: UITableView!
     private var searchResultHeight: CGFloat = 0.0
 
     //MARK: Variables
+    var menu: SideMenuNavigationController?
+
     let categoryViewModel: CategoryViewModel = CategoryViewModel()
     var searchResultV: SearchResultView?
     var carTypes:[CarTypes]?
@@ -24,6 +28,9 @@ class CategoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         carTypes = ApplicationSettings.shared.carTypes
+        // menu
+        menu = SideMenuNavigationController(rootViewController: LeftViewController())
+        self.setmenu(menu: menu)
         guard let _ = carTypes else { return }
         getCarsByType()
         setUpView()
@@ -94,8 +101,9 @@ class CategoryViewController: UIViewController {
     }
     
     //MARK: -- ACTIONS
-    @IBAction func back(_ sender: UIBarButtonItem) {
-        self.tabBarController?.selectedIndex = 0
+   
+    @IBAction func menu(_ sender: UIBarButtonItem) {
+        present(menu!, animated: true, completion: nil)
     }
     
     @IBAction func chat(_ sender: UIBarButtonItem) {
