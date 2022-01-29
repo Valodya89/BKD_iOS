@@ -7,6 +7,7 @@
 
 import UIKit
 import WebKit
+import SafariServices
 
 final class PaymentWebViewController: UIViewController, StoryboardInitializable, WKUIDelegate {
     
@@ -29,9 +30,13 @@ final class PaymentWebViewController: UIViewController, StoryboardInitializable,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configUI()
-        configWebView()
+        if paymentType == .applePay {
+            let safariVC = SFSafariViewController(url: URL(string:urlString)!)
+            self.present(safariVC, animated: false, completion: nil)
+        } else {
+            configWebView()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

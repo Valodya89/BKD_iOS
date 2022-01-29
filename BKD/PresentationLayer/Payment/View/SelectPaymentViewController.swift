@@ -167,10 +167,11 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
     }
     
     ///Open Payment Web Screen
-    private func goToWebScreen(urlString: String) {
+    private func goToWebScreen(urlString: String, paymentType: PaymentType?) {
         
         let paymentWebVC = PaymentWebViewController.initFromStoryboard(name: Constant.Storyboards.payment)
         paymentWebVC.setData(urlString: urlString)
+        paymentWebVC.paymentType = paymentType
         navigationController?.pushViewController(paymentWebVC, animated: true)
     }
     
@@ -212,7 +213,7 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
             guard let self = self else { return }
             switch result {
             case .success(let attachedCardURL):
-                self.goToWebScreen(urlString: attachedCardURL)
+                self.goToWebScreen(urlString: attachedCardURL, paymentType: otherPaymentType)
             case .failure(let error):
                 print("ERROR: \(error.message)")
             }
@@ -228,7 +229,7 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
             guard let self = self else { return }
             switch result {
             case .success(let attachedCardURL):
-                self.goToWebScreen(urlString: attachedCardURL)
+                self.goToWebScreen(urlString: attachedCardURL, paymentType: nil)
             case .failure(let error):
                 print("ERROR: \(error.message)")
             }

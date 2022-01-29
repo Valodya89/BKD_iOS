@@ -90,18 +90,22 @@ enum PaymentAPI: APIProtocol {
         case .getPaymentTypes:
             return nil
         case let .molliePayment(amount, paymentMethod, rentId, parts):
-            return [
+            let params: [String : Any] = [
                 "amount" : amount,
                 "paymentMethod" : paymentMethod,
                 "rentId" : rentId,
                 "parts" : parts
             ]
+            print("molliePayment parts = \(params)")
+            return params
         case let .payPalPayment(amount, rentId, parts):
-            return [
+            let params: [String : Any] = [
                 "amount" : amount,
                 "rentId" : rentId,
                 "parts" : parts
             ]
+            print("payPalPayment params = \(params)")
+            return params
             
         }
     }
