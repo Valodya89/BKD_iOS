@@ -21,7 +21,7 @@
         <!--Main View Controller-->
         <scene sceneID="bom-8k-rqX">
             <objects>
-                <viewController id="YSm-xS-VSB" customClass="MainViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YSm-xS-VSB" customClass="MainViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VrM-PG-bE9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

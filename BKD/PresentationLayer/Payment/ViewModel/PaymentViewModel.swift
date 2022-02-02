@@ -103,14 +103,14 @@ final class PaymentViewModel {
                            vehicleModel: VehicleModel) -> String {
         switch paymentOption {
         case .deposit:
-            let value = vehicleModel.depositPrice
-            let roundedValue = round(value * 100) / 100.0
+           
+            let roundedValue = round(vehicleModel.depositPrice * 100) / 100.0
             return String(roundedValue)
         case .depositRental:
-            let value1 = vehicleModel.depositPrice
-            let roundedValue = round(value1 * 100) / 100.0
-            let value2 = vehicleModel.totalPrice
-            let roundedValue2 = round(value2 * 100) / 100.0
+            //let value1 = vehicleModel.depositPrice
+            let roundedValue = round(vehicleModel.depositPrice * 100) / 100.0
+           // let value2 = vehicleModel.totalPrice
+            let roundedValue2 = round(vehicleModel.totalPrice * 100) / 100.0
             return String(roundedValue + roundedValue2)
         case .payLater:
             return ""

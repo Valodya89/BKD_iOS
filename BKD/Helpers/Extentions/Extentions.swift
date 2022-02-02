@@ -7,6 +7,13 @@
 
 import UIKit
 
+////MARK: Double
+//extension Double {
+//    mutating func rounded(_ value: Double) -> Double {
+//        let value = Double(round( Double(value) * 100.0 )) / 100.0
+//        return value
+//    }
+//}
 
 //MARK: UITextView extension
 extension UITextView {

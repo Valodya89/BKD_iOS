@@ -7,6 +7,8 @@
 
 import UIKit
 import SwiftUI
+import CoreLocation
+
 
 class DetailsViewModel: NSObject {
     
@@ -73,6 +75,32 @@ class DetailsViewModel: NSObject {
         return searchModel
     }
     
+    
+    ///Update search models locations fields
+    func updateLocation(tag: Int, parking:Parking, search: SearchModel) -> SearchModel {
+        var searchModel = search
+        searchModel.updateLocation(tag: tag,
+                                     parking: parking)
+        return searchModel
+    }
+    
+    ///Deselect custom location
+    func deselectCustomLocation(tag:Int, search: SearchModel) -> SearchModel {
+        var searchModel = search
+        searchModel.deselectCustomLocation(tag: tag)
+        return searchModel
+    }
+    
+    ///Set custom location
+    func setCustomLocation(isPickUpLocation: Bool,
+                           locationPlace: String,
+                           coordinate: CLLocationCoordinate2D,
+                           price: Double?,
+                           search: SearchModel)-> SearchModel {
+        var searchModel = search
+        searchModel.setCustomLocation(isPickUpLocation: isPickUpLocation, locationPlace: locationPlace, coordinate: coordinate, price: price)
+        return searchModel
+    }
     
     ///Check if need to add a day depend on time
     func checkIfNeedToAddADay(searchModel: SearchModel) -> Bool {

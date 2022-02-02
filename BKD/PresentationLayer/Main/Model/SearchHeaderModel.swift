@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import CoreLocation
+
 
 struct SearchModel {
     public var pickUpDate: Date?
@@ -43,6 +45,57 @@ struct SearchModel {
         self.returnLocationLongitude = oldSearch.returnLocationLongitude
     }
 
+    ///Update location
+    mutating func updateLocation(tag: Int, parking: Parking) {
+        if tag == 4 { //pick up location
+            self.pickUpLocation = parking.name
+            self.pickUpLocationId = parking.id
+            self.isPickUpCustomLocation = false
+            PriceManager.shared.pickUpCustomLocationPrice = nil
+        } else {// return location
+            self.returnLocation = parking.name
+            self.returnLocationId = parking.id
+            self.isRetuCustomLocation = false
+            PriceManager.shared.returnCustomLocationPrice = nil
+        }
+    }
+    
+    ///Deselect custom location
+    mutating func deselectCustomLocation(tag: Int) {
+        if tag == 6 { //pick up custom location
+            self.isPickUpCustomLocation = false
+            self.pickUpLocation = nil
+            self.pickUpLocationId = nil
+            PriceManager.shared.pickUpCustomLocationPrice = nil
+
+        } else {//return custom location
+            self.isRetuCustomLocation = false
+            self.returnLocation = nil
+            self.returnLocationId = nil
+            PriceManager.shared.returnCustomLocationPrice = nil
+        }
+    }
+    
+    
+    ///Set custom location
+    mutating func setCustomLocation(isPickUpLocation: Bool,
+                        locationPlace: String,
+                        coordinate: CLLocationCoordinate2D,
+                        price: Double?) {
+        if isPickUpLocation {
+            self.isPickUpCustomLocation = true
+            self.pickUpLocation = locationPlace
+            self.pickUpLocationLongitude = coordinate.longitude
+            self.pickUpLocationLatitude = coordinate.latitude
+            PriceManager.shared.pickUpCustomLocationPrice = price
+        } else {
+            self.isRetuCustomLocation = true
+            self.returnLocation = locationPlace
+            self.returnLocationLongitude = coordinate.longitude
+            self.returnLocationLatitude = coordinate.latitude
+            PriceManager.shared.returnCustomLocationPrice = price
+        }
+    }
     
 }
 

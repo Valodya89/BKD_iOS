@@ -6,7 +6,9 @@
 //
 
 import UIKit
-import PassKit
+import SafariServices
+
+//import PassKit
 
 let kCustomURLScheme = "kitefasterCustomUrlScheme://"
 
@@ -34,18 +36,18 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
     public var paymentOption: PaymentOption?
     public var isDeposit:Bool = false
     
-    //MARK: - Local properties
-    private var paymentRequest: PKPaymentRequest = {
-        let request = PKPaymentRequest()
-        request.merchantIdentifier = "merchant.com.BKD.bkdrental"
-        request.supportedNetworks = [.masterCard, .visa, .quicPay]
-        request.supportedCountries = paymentSupportedCountriesCode
-        request.merchantCapabilities = .capability3DS
-        request.countryCode = "AM"
-        request.currencyCode = "ARM"
-        request.paymentSummaryItems = [PKPaymentSummaryItem(label: "Car rent", amount: 150)]
-        return request
-    }()
+//    //MARK: - Local properties
+//    private var paymentRequest: PKPaymentRequest = {
+//        let request = PKPaymentRequest()
+//        request.merchantIdentifier = "merchant.com.BKD.bkdrental"
+//        request.supportedNetworks = [.masterCard, .visa, .quicPay]
+//        request.supportedCountries = paymentSupportedCountriesCode
+//        request.merchantCapabilities = .capability3DS
+//        request.countryCode = "AM"
+//        request.currencyCode = "ARM"
+//        request.paymentSummaryItems = [PKPaymentSummaryItem(label: "Car rent", amount: 150)]
+//        return request
+//    }()
 
     //MARK: - Life cycle
     override func viewDidLoad() {
@@ -175,6 +177,13 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
         navigationController?.pushViewController(paymentWebVC, animated: true)
     }
     
+    ///Open safari
+    private func openSafari(urlString: String) {
+        let safariVC = SFSafariViewController(url: URL(string:urlString)!)
+        self.present(safariVC, animated: false, completion: nil)
+        
+    }
+    
 
     ///Get payment type list
     func getPaymentTypes() {
@@ -213,9 +222,15 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
             guard let self = self else { return }
             switch result {
             case .success(let attachedCardURL):
-                self.goToWebScreen(urlString: attachedCardURL, paymentType: otherPaymentType)
+                print (attachedCardURL)
+                if otherPaymentType == .applePay {
+                    self.openSafari(urlString: attachedCardURL)
+                } else {
+                    self.goToWebScreen(urlString: attachedCardURL, paymentType: otherPaymentType)
+                }
             case .failure(let error):
                 print("ERROR: \(error.message)")
+//                self.goToWebScreen(urlString: "https://www.mollie.com/checkout/wallets/apple-pay/reference/N6FJKAQcG3", paymentType: otherPaymentType)
             }
         }
     }
@@ -317,24 +332,24 @@ extension SelectPaymentViewController: UITableViewDelegate, UITableViewDataSourc
 }
 
 
-extension SelectPaymentViewController: PKPaymentAuthorizationViewControllerDelegate {
-    func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
-        controller.dismiss(animated: true, completion: nil)
-        self.paymentTypes = PaymentTypeData.paymentTypeModel
-        self.mPaymentTbV.reloadData()
-    }
-    
-    func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
-        let paymentTocken = payment.token
-        sendBackendServiceToProcessPayment(tocken: paymentTocken) { (success) in
-            completion(PKPaymentAuthorizationResult(status: success ? .success : .failure, errors: nil))
-            //[NSError(domain: "com.ali", code: 12, userInfo: nil)]
-        }
-       // completion(PKPaymentAuthorizationResult(status: .success, errors: nil))
-    }
-    
-    func sendBackendServiceToProcessPayment(tocken: PKPaymentToken, complition: (Bool) -> Void ) {
-        complition(true)
-    }
-    
-}
+//extension SelectPaymentViewController: PKPaymentAuthorizationViewControllerDelegate {
+//    func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
+//        controller.dismiss(animated: true, completion: nil)
+//        self.paymentTypes = PaymentTypeData.paymentTypeModel
+//        self.mPaymentTbV.reloadData()
+//    }
+//    
+//    func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
+//        let paymentTocken = payment.token
+//        sendBackendServiceToProcessPayment(tocken: paymentTocken) { (success) in
+//            completion(PKPaymentAuthorizationResult(status: success ? .success : .failure, errors: nil))
+//            //[NSError(domain: "com.ali", code: 12, userInfo: nil)]
+//        }
+//       // completion(PKPaymentAuthorizationResult(status: .success, errors: nil))
+//    }
+//    
+//    func sendBackendServiceToProcessPayment(tocken: PKPaymentToken, complition: (Bool) -> Void ) {
+//        complition(true)
+//    }
+//    
+//}

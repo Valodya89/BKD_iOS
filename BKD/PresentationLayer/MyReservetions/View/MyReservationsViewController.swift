@@ -48,6 +48,11 @@ class MyReservationsViewController: BaseViewController {
 
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if mSwitchDriversTbV.contentSize.height > 260 {
@@ -59,6 +64,7 @@ class MyReservationsViewController: BaseViewController {
     
     
     func setupView() {
+        NotificationCenter.default.addObserver(self, selector: #selector(MyReservationsViewController.handleMenuToggle), name: Constant.Notifications.dismissMenu, object: nil)
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
         menu = SideMenuNavigationController(rootViewController: LeftViewController())
         self.setmenu(menu: menu)
@@ -190,6 +196,12 @@ class MyReservationsViewController: BaseViewController {
     
     @IBAction func swipeSwitchTable(_ sender: UISwipeGestureRecognizer) {
         hideSwitchTable()
+    }
+    
+    ///Dismiss left menu and open chant screen
+    @objc private func handleMenuToggle(notification: Notification) {
+        menu?.dismiss(animated: true, completion: nil)
+        openChatPage(viewCont: self)
     }
     
 }

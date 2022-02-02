@@ -36,12 +36,14 @@ class CategoryViewController: BaseViewController {
         setUpView()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
     
     
     func setUpView() {
+        NotificationCenter.default.addObserver(self, selector: #selector(CategoryViewController.handleMenuToggle), name: Constant.Notifications.dismissMenu, object: nil)
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
         //CollectionView
         mCategoryTableV.register(CategoryTableViewCell.nib(),
@@ -109,6 +111,12 @@ class CategoryViewController: BaseViewController {
     @IBAction func chat(_ sender: UIBarButtonItem) {
         let onlineChat = UIStoryboard(name: Constant.Storyboards.chat, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.onlineChat) as! OnlineChatViewController
         self.navigationController?.pushViewController(onlineChat, animated: true) 
+    }
+    
+    ///Dismiss left menu and open chant screen
+    @objc private func handleMenuToggle(notification: Notification) {
+        menu?.dismiss(animated: true, completion: nil)
+        openChatPage(viewCont: self)
     }
 }
 

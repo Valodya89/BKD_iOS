@@ -305,7 +305,7 @@ class TariffCarouselCell: UIView {
     ///Confirm tariff
     private  func confirmTariff() {
 
-        if item?.options?[selectedSegmentIndex].isSelected == true {
+        if (item?.options?[selectedSegmentIndex].isSelected == true) || (item?.type == Constant.Texts.flexible && item?.isSelected == true) {
             isConfirm = true
             mPriceLb.text = item?.options?[selectedSegmentIndex].value
             

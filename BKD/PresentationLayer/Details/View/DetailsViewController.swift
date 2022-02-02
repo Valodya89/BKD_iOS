@@ -113,8 +113,6 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        
-        print ("viewDidLayoutSubviews")
         print ("self.tariffSlideVC.view.frame.origin.y = \(self.tariffSlideVC.view.frame.origin.y)")
         setTableViewsHeight()
         setTariffSlideViewFrame()
@@ -189,7 +187,6 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         if UIScreen.main.nativeBounds.height <= 1334 {
             bottomPadding = 22
         }
-       // if !isSetScrollFrame {
         isSetScrollFrame = true
         tariffSlideY = (self.view.bounds.height * 0.742574) - bottomPadding
         tariffSlideVC.view.frame = CGRect(x: 0,
@@ -197,12 +194,10 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
                                           width: self.view.bounds.width,
                                           height: height170 )
         containerViewForFariffSlide.frame = CGRect(x: 0,
-                                                   y: tariffSlideY,
-                                                   width: self.view.bounds.width,
-                                                   height: height170 )
-        
-       // }
-    }
+                   y: tariffSlideY,
+                   width: self.view.bounds.width,
+                   height: height170 )
+            }
     
     ///Set full Detail datas
     func setDetailDatas()  {
@@ -240,6 +235,21 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         vehicleModel?.depositPrice = (tariffSlideList?[tariffIndex].tariff?[currentTariffOptionIndex].deposit) ?? 0.0
      }
     
+    ///Set current tariff
+    func setCurrentTariff() {
+        self.detailsVM.getCurrentTariff(search: searchModel,
+                                               vehicleModel: vehicleModel!,
+                                               tariffSlideList: tariffSlideList,
+                                        completion: { [self] slideList, tariffState in
+            self.tariffSlideList = slideList
+            self.currentTariff = tariffState
+            self.reloadTariffCarusel(tariffSlideList: self.tariffSlideList)
+            self.mTariffCarouselV.tariffCarousel.currentItemIndex = TariffSlideViewModel().getTariffStateIndex(tariffState: currentTariff)
+            self.currentTariffOption = self.tariffSlideList?[self.mTariffCarouselV.tariffCarousel.currentItemIndex]
+            print(self.tariffSlideList?[self.mTariffCarouselV.tariffCarousel.currentItemIndex].options)
+      })
+    }
+    
 //MARK: -- Get
     ///get car´s images List
     private func getCarImagesList() {
@@ -263,25 +273,15 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             self.tariffSlideList = self.detailsVM.changeTariffListForUse(tariffs: result!, vehicleModel: self.vehicleModel ?? VehicleModel())
             self.tariffSlideVC.tariffSlideList = self.tariffSlideList
             self.tariffSlideVC.mTariffSlideCollectionV.reloadData()
+            
             if isSearchEdit {
-                  self.detailsVM.getCurrentTariff(search: searchModel,
-                                                         vehicleModel: vehicleModel!,
-                                                         tariffSlideList: self.tariffSlideList,
-                                                         completion: { slideList, tariffState in
-                      tariffSlideList = slideList
-                      currentTariff = tariffState
-                      self.reloadTariffCarusel(tariffSlideList: self.tariffSlideList)
-                      self.mTariffCarouselV.tariffCarousel.currentItemIndex = TariffSlideViewModel().getTariffStateIndex(tariffState: currentTariff)
-                      
-                })
+                self.setCurrentTariff()
             } else {
                 self.reloadTariffCarusel(tariffSlideList: self.tariffSlideList)
-
             }
-                self.mTariffCarouselV.vehicleModel = self.vehicleModel
+            self.mTariffCarouselV.vehicleModel = self.vehicleModel
         }
     }
-  
     
     //MARK: -- Configure
     private func configureTransparentView()  {
@@ -339,21 +339,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         self.containerViewForFariffSlide.addSubview(tariffSlideVC.view)
         tariffSlideVC.didMove(toParent: self)
         self.view.bringSubviewToFront(mReserveBckgV)
-
     }
-    
-//    ///Reset view
-//    func resetView() {
-//
-//        if isSearchEdit {
-//            mCompareTop.constant = 70
-//            animateSearchEdit(isShow: true)
-//        }
-//        mCompareContentV.alpha = 1
-//        mCompareContentV.isHidden = false
-//        mSearchV.isHidden = true
-//        mScrollV.contentSize = CGSize(width: mScrollV.contentSize.width, height: staringScrollContentHeight)
-//    }
     
     ///creat tool bar
     func creatToolBar() -> UIToolbar {
@@ -370,7 +356,6 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     /// ScrollView will scroll to bottom
     private func scrollToBottom() {
         mScrollV.contentSize.height = mSearchV.isHidden ? staringScrollContentHeight + 30 :  staringScrollContentHeight + height50
-        //(mScrollV.contentSize.height + mSearchV.bounds.height)
         scrollToBottom(y: mScrollV.contentSize.height - mScrollV.bounds.size.height + mScrollV.contentInset.bottom)
     }
     
@@ -468,9 +453,9 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             flexibleTariffOption = detailsVM.getFlexiblePrice(search: search, option: currentTariffOption!, vehicle: vehicleModel!, isSelected: isFlexibleSelected)
             
             guard let tariffSlideList = mTariffCarouselV.tariffSlideList else {return}
-            
+            flexibleTariffOption?.isSelected = mTariffCarouselV.tariffSlideList![tariffSlideList.count - 1].isSelected
             mTariffCarouselV.tariffSlideList![tariffSlideList.count - 1] = flexibleTariffOption!
-            mTariffCarouselV.tariffCarousel.reloadData()
+            reloadTariffCarusel(tariffSlideList: mTariffCarouselV.tariffSlideList!)
         }
     }
     ///Will open  location controller
@@ -551,29 +536,6 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             }
         view.layoutIfNeeded()
     }
-    
-    
-//    private func updateCompareView(isShow: Bool) {
-//        if !isShow {
-//            UIView.animate(withDuration: 0.5) {
-//                if isShow {
-//                    self.mCompareContentV.isHidden = !isShow
-//                    self.mCompareContentV.alpha = 1.0
-//                    self.mSearchV.alpha = 0.0
-//                } else {
-//                    self.mCompareContentV.alpha = 0.0
-//                    self.mSearchV.isHidden = isShow
-//                    self.mSearchV.alpha = 1.0
-//                }
-//            } completion: { _ in
-//                if !isShow {
-//                    self.mCompareContentV.isHidden = !isShow
-//                } else {
-//                    self.mSearchV.isHidden = isShow
-//                }
-//            }
-//        }
-//    }
     
     ///Show Tarif lift or Detail tableView
     private func showTableView(view: UIView, imgRotate: UIImageView?) {
@@ -950,20 +912,14 @@ extension DetailsViewController: TariffCarouselViewDelegate {
     ///update search fields
     private func updateSearchFields(optionIndex: Int) {
         if !isSearchEdit {
-        searchModel = detailsVM.updateSearchInfo(tariffSlideList:tariffSlideList!,
-                                                        tariff: currentTariff,
-                                          search: search,
-                                          optionIndex: optionIndex,
-                                          currSearchModel: searchModel)
+            searchModel = detailsVM.updateSearchInfo(tariffSlideList:tariffSlideList!,
+                                                     tariff: currentTariff,
+                                                     search: search,
+                                                     optionIndex: optionIndex,
+                                                     currSearchModel: searchModel)
         }
-       // if isSearchEdit  {
-            mSearchV.updateSearchFields(searchModel: searchModel,
-                                        tariff: currentTariff)
-//        } else {
-//            mSearchV.updateSearchFilledFields(tariff: currentTariff,
-//                                              searchModel: searchModel,
-//                                              isEdit: isSearchEdit)
-//        }
+        mSearchV.updateSearchFields(searchModel: searchModel,
+                                    tariff: currentTariff)
     }
     
 }
@@ -992,38 +948,16 @@ extension DetailsViewController: SearchViewDelegate {
         } else {
             self.datePicker = UIDatePicker()
             textFl.inputView = self.datePicker
-
-            if #available(iOS 14.0, *) {
-            self.datePicker.preferredDatePickerStyle = .wheels
-            } else {
-                       // Fallback on earlier versions
-            }
-            self.datePicker.datePickerMode = .date
-            self.datePicker.minimumDate =  Date()
-            self.datePicker.maximumDate =  Date().addMonths(12)
-
+            self.datePicker.configDatePicker()
             if let pickUpDate =  searchModel.pickUpDate {
                 self.datePicker.minimumDate =  pickUpDate
             }
-            
-            self.datePicker.timeZone = TimeZone(secondsFromGMT: 0)
-            self.datePicker.locale = Locale(identifier: "en")
         }
     }
     
     
     func didSelectLocation(_ parking: Parking, _ tag: Int) {
-        if tag == 4 { //pick up location
-            searchModel.pickUpLocation = parking.name
-            searchModel.pickUpLocationId = parking.id
-            searchModel.isPickUpCustomLocation = false
-            PriceManager.shared.pickUpCustomLocationPrice = nil
-        } else {// return location
-            searchModel.returnLocation = parking.name
-            searchModel.returnLocationId = parking.id
-            searchModel.isRetuCustomLocation = false
-            PriceManager.shared.returnCustomLocationPrice = nil
-        }
+       searchModel =  detailsVM.updateLocation(tag: tag, parking: parking, search: searchModel)
         isActiveReserve()
     }
     
@@ -1032,18 +966,7 @@ extension DetailsViewController: SearchViewDelegate {
     }
     
     func didDeselectCustomLocation(tag: Int) {
-        if tag == 6 { //pick up custom location
-            searchModel.isPickUpCustomLocation = false
-            searchModel.pickUpLocation = nil
-            searchModel.pickUpLocationId = nil
-            PriceManager.shared.pickUpCustomLocationPrice = nil
-
-        } else {//return custom location
-            searchModel.isRetuCustomLocation = false
-            searchModel.returnLocation = nil
-            searchModel.returnLocationId = nil
-            PriceManager.shared.returnCustomLocationPrice = nil
-        }
+        searchModel = detailsVM.deselectCustomLocation(tag: tag, search: searchModel)
         isActiveReserve()
     }
 }
@@ -1053,19 +976,7 @@ extension DetailsViewController: SearchViewDelegate {
 extension DetailsViewController: CustomLocationViewControllerDelegate {
     func getCustomLocation(_ locationPlace: String, coordinate: CLLocationCoordinate2D, price: Double?) {
          mSearchV.updateCustomLocationFields(place: locationPlace, didResult: { [weak self] (isPickUpLocation) in
-            if isPickUpLocation {
-                self?.searchModel.isPickUpCustomLocation = true
-                self?.searchModel.pickUpLocation = locationPlace
-                self?.searchModel.pickUpLocationLongitude = coordinate.longitude
-                self?.searchModel.pickUpLocationLatitude = coordinate.latitude
-                PriceManager.shared.pickUpCustomLocationPrice = price
-            } else {
-                self?.searchModel.isRetuCustomLocation = true
-                self?.searchModel.returnLocation = locationPlace
-                self?.searchModel.returnLocationLongitude = coordinate.longitude
-                self?.searchModel.returnLocationLatitude = coordinate.latitude
-                PriceManager.shared.returnCustomLocationPrice = price
-            }
+             self?.searchModel = (self?.detailsVM.setCustomLocation(isPickUpLocation: isPickUpLocation, locationPlace: locationPlace, coordinate: coordinate, price: price, search: self?.searchModel ?? SearchModel())) ?? SearchModel()
             self?.isActiveReserve()
 
         })
@@ -1077,13 +988,11 @@ extension DetailsViewController: SearchWithValueViewDelegate {
     
     func didPressEdit() {
         
-       // self.currentTariff = .flexible
         self.mSearchV.searchModel = self.searchModel
         self.mSearchV.setUpView()
         self.mSearchV.configureSearchPassiveFields(tariff: self.currentTariff)
         self.mSearchV.updateSearchFields(searchModel: self.searchModel, tariff: self.currentTariff)
         
-        //self.updateCompareView(isShow: false)
         animateSearchView(isShow: true)
         updateCompareView()
         self.animateSearchEdit(isShow: false)
@@ -1146,25 +1055,17 @@ extension DetailsViewController: UIScrollViewDelegate {
                     isFlexibleSelected = false
                     updateFlexiblePrice(search: searchModel)
                 }
-//                if !isSearchEdit {
-//                    tariffSlideList = detailsViewModel.updateTariffSlideList(tariffSlideList: tariffSlideList, optionIndex: 0, options: nil, tariff: currentTariff)
-//                }
-//                reloadTariffCarusel(tariffSlideList: tariffSlideList)
-                
             }
             isTariffSlide = true
-//            if isSearchEdit {
-//                self.animateSearchEdit(isShow: true)
-//            }
             isScrolled = false
-           // self.resetView()
+            
         } else if scrollView.contentOffset.y > 0 && scrollView.contentOffset.y <= height170 {
             containerViewForFariffSlide.frame.origin.y = tariffSlideY + scrollView.contentOffset.y
             self.containerViewForFariffSlide.alpha = 1 - (scrollView.contentOffset.y / height170)
             self.mTariffCarouselV.alpha = (scrollView.contentOffset.y / height170)
+            
         } else {
             // TariffSlide is hided
-            
             self.tariffSlideVC.tariffSlideList = self.tariffSlideList
             self.tariffSlideVC.mTariffSlideCollectionV.reloadData()
             
@@ -1172,8 +1073,6 @@ extension DetailsViewController: UIScrollViewDelegate {
             self.containerViewForFariffSlide.alpha = 0.0
             isScrolled = !isScrolled
             isTariffSlide = true
-            //updateCompareView(isShow: true)
-           // updateCompareView()
             self.mTariffCarouselV.alpha = 1.0
         }
         print("tariffSlideVC.view.frame.origin.y = \(containerViewForFariffSlide.frame.origin.y)")
@@ -1201,6 +1100,5 @@ extension DetailsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print(pickerView.selectedRow(inComponent: component))
-        
     }
 }

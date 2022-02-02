@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+
 class LeftViewController: UITableViewController {
     
     //MARK: Variables
@@ -15,6 +17,7 @@ class LeftViewController: UITableViewController {
     var currentCelIndexPathRow : Int?
     var userName: String?
     let userLb = UILabel()
+    
     
     //MARK: Life cycles
 
@@ -125,7 +128,7 @@ class LeftViewController: UITableViewController {
         
         if currentCelIndexPathRow == indexPath.row &&  indexPath.row == 2 {
             currentCelIndexPathRow = nil
-            return CGFloat(50 * (languageList?.count ?? 1))
+            return 53.5 * CGFloat(languageList?.count ?? 1)
         } else if currentCelIndexPathRow == indexPath.row &&  indexPath.row == 5 {
             currentCelIndexPathRow = nil
             return 120
@@ -137,13 +140,11 @@ class LeftViewController: UITableViewController {
     //MARK: -- UITableViewDelegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let viewController:UIViewController?
+        var viewController:UIViewController?
         let cell: LeftTableViewCell = tableView.cellForRow(at: indexPath) as! LeftTableViewCell
         
         switch indexPath.row {
         case 1:
-//            viewController = UIStoryboard(name: Constant.Storyboards.main, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.aboutUs) as! AboutUsViewController
-//            navigationController?.pushViewController(viewController!, animated: true)
            
             let aboutUs = AboutUsViewController.initFromStoryboard(name: Constant.Storyboards.aboutUs)
             navigationController?.pushViewController(aboutUs, animated: true)
@@ -169,7 +170,10 @@ class LeftViewController: UITableViewController {
                 self.closeSubmenu(cell: cell)
                 tableView .beginUpdates()
                 tableView.endUpdates()
-                BaseViewController().openChatPage(viewCont: self)
+                let notification = Notification(name: Constant.Notifications.dismissMenu, object: nil)
+                NotificationCenter.default
+                    .post(notification)
+               
             }
             closeSubmenu(cell: tableView.cellForRow(at: IndexPath(row:2, section:0)) as! LeftTableViewCell)
             openDropDown(cell: cell,

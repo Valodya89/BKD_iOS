@@ -36,6 +36,12 @@ class NotificationsViewController: BaseViewController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         mDeleteBtn.setGradientWithCornerRadius(cornerRadius: 8.0, startColor: color_gradient_register_start!, endColor: color_gradient_register_end!)
@@ -47,6 +53,7 @@ class NotificationsViewController: BaseViewController {
     }
     
     private func setUpView() {
+        NotificationCenter.default.addObserver(self, selector: #selector(NotificationsViewController.handleMenuToggle), name: Constant.Notifications.dismissMenu, object: nil)
        
     }
     
@@ -167,6 +174,12 @@ class NotificationsViewController: BaseViewController {
         mNotificationTbV.reloadData()
         self.checkIsDeleteAll()
 
+    }
+    
+    ///Dismiss left menu and open chant screen
+    @objc private func handleMenuToggle(notification: Notification) {
+        menu?.dismiss(animated: true, completion: nil)
+        openChatPage(viewCont: self)
     }
 }
 

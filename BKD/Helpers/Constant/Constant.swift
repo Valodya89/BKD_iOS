@@ -474,6 +474,7 @@ struct Constant {
         static let signUpEmailVerify =  NSNotification.Name(rawValue: "BKD.Notification.EmailVerify")
         static let resetPassEmailVerify =  NSNotification.Name(rawValue: "BKD.Notification.ResetPassEmailVerify")
         static let changeEmailVerify =  NSNotification.Name(rawValue: "BKD.Notification.ChangeEmailVerify")
+        static let dismissMenu =  NSNotification.Name(rawValue: "BKD.Notification.DismissMenu")
     }
 }
 

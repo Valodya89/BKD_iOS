@@ -52,10 +52,12 @@ final class MyBKDViewController: BaseViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
         isBackFromRegistrationBot = false
     }
     
     private func setUpView() {
+        NotificationCenter.default.addObserver(self, selector: #selector(MyBKDViewController.handleMenuToggle), name: Constant.Notifications.dismissMenu, object: nil)
         menu = SideMenuNavigationController(rootViewController: LeftViewController())
         mWaithinfForAdminV.layer.cornerRadius = 8
         self.setmenu(menu: menu)
@@ -172,6 +174,12 @@ final class MyBKDViewController: BaseViewController {
             self.removeChild(vc: self.signInVC)
             self.getMainDriver()
         }
+    }
+    
+    ///Dismiss left menu and open chant screen
+    @objc private func handleMenuToggle(notification: Notification) {
+        menu?.dismiss(animated: true, completion: nil)
+        openChatPage(viewCont: self)
     }
 }
 

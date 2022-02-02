@@ -140,8 +140,7 @@ class ReservationCompletedViewController: BaseViewController {
     }
     
     
-   //MARK: - Actions
-    //MARK: ---------------
+   //MARK: -- Actions
     
     @IBAction func back(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)

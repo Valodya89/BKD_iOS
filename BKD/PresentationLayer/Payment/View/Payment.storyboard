@@ -41,13 +41,13 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make XX,XX  Payment via" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsT-wT-iVq">
-                                <rect key="frame" x="17" y="25" width="331" height="22"/>
+                                <rect key="frame" x="17" y="24.5" width="331" height="28.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
                                 <color key="textColor" name="navigationBar"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kQW-qx-kY2">
-                                <rect key="frame" x="0.0" y="136.5" width="414" height="637.5"/>
+                                <rect key="frame" x="0.0" y="153.5" width="414" height="620.5"/>
                                 <color key="backgroundColor" name="background"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PaymenTypeTableViewCell" rowHeight="100" id="ZNR-Kv-EjC" customClass="PaymenTypeTableViewCell" customModule="BKD" customModuleProvider="target">
@@ -248,14 +248,14 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
                             <constraint firstItem="ZHl-N1-8F0" firstAttribute="leading" secondItem="BSU-vw-Mw1" secondAttribute="leading" id="F7l-3W-mXT"/>
                             <constraint firstItem="acs-Ri-7at" firstAttribute="top" secondItem="BSU-vw-Mw1" secondAttribute="centerY" multiplier="0.053" id="Ldy-ZJ-r5u"/>
                             <constraint firstItem="BSU-vw-Mw1" firstAttribute="bottom" secondItem="kQW-qx-kY2" secondAttribute="bottom" id="LkY-EY-Vip"/>
-                            <constraint firstItem="tsT-wT-iVq" firstAttribute="height" secondItem="rfv-c2-eiK" secondAttribute="height" multiplier="0.0272277" id="NvV-Dq-BdY"/>
+                            <constraint firstItem="tsT-wT-iVq" firstAttribute="height" secondItem="rfv-c2-eiK" secondAttribute="height" multiplier="0.035" id="NvV-Dq-BdY"/>
                             <constraint firstItem="kmU-TZ-oUJ" firstAttribute="height" secondItem="rfv-c2-eiK" secondAttribute="height" multiplier="0.22" id="OmO-EL-WzE"/>
                             <constraint firstItem="kmU-TZ-oUJ" firstAttribute="centerX" secondItem="BSU-vw-Mw1" secondAttribute="centerX" id="PSY-EF-rGC"/>
                             <constraint firstItem="BSU-vw-Mw1" firstAttribute="trailing" secondItem="kQW-qx-kY2" secondAttribute="trailing" id="PdK-ik-hcI"/>
                             <constraint firstItem="U57-rJ-Vs9" firstAttribute="centerX" secondItem="BSU-vw-Mw1" secondAttribute="centerX" id="SZs-6U-4H4"/>
                             <constraint firstItem="BSU-vw-Mw1" firstAttribute="trailing" secondItem="ZHl-N1-8F0" secondAttribute="trailing" id="WrR-TI-UfT"/>
                             <constraint firstItem="tsT-wT-iVq" firstAttribute="width" secondItem="rfv-c2-eiK" secondAttribute="width" multiplier="0.8" id="gJK-Vl-w8B"/>
-                            <constraint firstItem="tsT-wT-iVq" firstAttribute="top" secondItem="acs-Ri-7at" secondAttribute="bottom" multiplier="1.22" id="gmf-lM-dQB"/>
+                            <constraint firstItem="tsT-wT-iVq" firstAttribute="top" secondItem="acs-Ri-7at" secondAttribute="bottom" multiplier="1.2" id="gmf-lM-dQB"/>
                             <constraint firstItem="acs-Ri-7at" firstAttribute="width" secondItem="rfv-c2-eiK" secondAttribute="width" multiplier="0.92" id="iNF-pc-9Q1"/>
                             <constraint firstItem="ZHl-N1-8F0" firstAttribute="top" secondItem="BSU-vw-Mw1" secondAttribute="top" id="oo0-fP-f8h"/>
                             <constraint firstItem="acs-Ri-7at" firstAttribute="centerX" secondItem="BSU-vw-Mw1" secondAttribute="centerX" id="pFb-2V-ceb"/>
@@ -380,7 +380,7 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TdF-GG-cNm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="189.85507246376812" y="212.94642857142856"/>
+            <point key="canvasLocation" x="23" y="213"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3jl-hr-tJ0">

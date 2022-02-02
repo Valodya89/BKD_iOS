@@ -55,7 +55,7 @@ class MainViewController: BaseViewController {
     private var isPressedEdit: Bool = false
     private var isNoSearchResult: Bool = false
     private var needsUpdateFilterCell: Bool = false
-
+    public var isFromMenu = false
 
     //MARK: -- Life cycles
     override func viewDidLoad() {
@@ -73,11 +73,17 @@ class MainViewController: BaseViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.tabBarController?.tabBar.isHidden = false
-        
    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
     
 //MARK: -- Set
     func setupView() {
+        NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.handleMenuToggle), name: Constant.Notifications.dismissMenu, object: nil)
+        
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_search_title!, NSAttributedString.Key.foregroundColor: UIColor.white]
         backgroundV.frame = self.view.bounds
@@ -90,16 +96,21 @@ class MainViewController: BaseViewController {
         menu = SideMenuNavigationController(rootViewController: LeftViewController())
         self.setmenu(menu: menu)
         mRightBarBtn.image = UIImage(named:"bkd")?.withRenderingMode(.alwaysOriginal)
-
-        configureHeaderViews()
-        addCarousel()
-        configureCarsCollectionView()
-        configureAvalableCategoriesTableView()
-        configureDelegates()
-        self.selectedEdit()
-        self.showLocation()
-        self.showFilter()
-        self.updateCategory()
+        
+        
+        
+            
+            configureHeaderViews()
+            addCarousel()
+            configureCarsCollectionView()
+            configureAvalableCategoriesTableView()
+            configureDelegates()
+            self.selectedEdit()
+            self.showLocation()
+            self.showFilter()
+            self.updateCategory()
+        
+    
         
     }
     
@@ -520,18 +531,6 @@ class MainViewController: BaseViewController {
         }
     }
     
-//    /// Will open Chat View Controller
-//    private func openChatPage () {
-//        if mainVM.isOnline {
-//            let onlineChat = OnlineChatViewController.initFromStoryboard(name: Constant.Storyboards.chat)
-//            self.navigationController?.pushViewController(onlineChat, animated: true)
-//        } else {
-//            let offlineChat = OfflineViewController.initFromStoryboard(name: Constant.Storyboards.chat)
-//            self.navigationController?.pushViewController(offlineChat, animated: true)
-//        }
-//    }
-    
-    
     //MARK: -- Actions
     @IBAction func menu(_ sender: UIBarButtonItem) {
         if isSearchResultPage || isNoSearchResult  {
@@ -551,7 +550,12 @@ class MainViewController: BaseViewController {
     @IBAction func chatWithUs(_ sender: UIButton) {
         openChatPage(viewCont: self)
     }
-    
+
+    ///Dismiss left menu and open chant screen
+    @objc private func handleMenuToggle(notification: Notification) {
+        menu?.dismiss(animated: true, completion: nil)
+        openChatPage(viewCont: self)
+    }
     
     ///Handler done of tool bar
     @objc func donePressed() {
@@ -809,27 +813,16 @@ extension MainViewController: SearchHeaderViewDelegate {
         } else {
             self.datePicker = UIDatePicker()
             textFl.inputView = self.datePicker
-
-            if #available(iOS 14.0, *) {
-            self.datePicker.preferredDatePickerStyle = .wheels
-            } else {
-                       // Fallback on earlier versions
-            }
-            self.datePicker.datePickerMode = .date
-            self.datePicker.minimumDate =  Date()
-            self.datePicker.maximumDate =  Date().addMonths(12)
-            self.datePicker.locale = Locale(identifier: "en")
+            self.datePicker.configDatePicker()
         }
     }
-    
-    
+
     func didSelectCustomLocation(_ btn: UIButton) {
         showAlertCustomLocation(checkedBtn: btn)
-        //self.goToCustomLocationMapController(on: self, isAddDamageAddress: false)
     }
     
-    
 }
+
 //MARK: -- CustomLocationUIViewControllerDelegate
 extension MainViewController: CustomLocationViewControllerDelegate {
     
@@ -876,21 +869,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
        return self.view.frame.size.height * 0.222772;
    }
-   
-}
-
-
-// MARK: -- UIScrollView Delegate
-extension MainViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        /// Change top view position and alpha
-        //n1
-//        if (searchHeaderV?.frame.origin.y)! <= 12 {
-//            searchHeaderV!.frame.origin.y = -abs(collactionViewTop + scrollView.contentOffset.y) + 12
-//
-//        }
-        
-    }
    
 }
 
