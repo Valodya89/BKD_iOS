@@ -59,9 +59,10 @@ class ReservationWithStartRideCollectionViewCell: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
-        mPriceLb.text = "XX,X"
+        mPriceLb.text = "0.0"
        // mRegistrationNumberLb.text = ""
         mStartRideBtn.setTitleColor(color_email!, for: .normal)
+        mLogoImgV.image = UIImage()
         
     }
     
@@ -110,6 +111,9 @@ class ReservationWithStartRideCollectionViewCell: UICollectionViewCell {
         mReturnDayLb.text = endDate.getDay()
         mReturnMonthLb.text = endDate.getMonth(lng: "en")
         mReturnTimeLb.text = endDate.getHour()
+        
+        //Price
+        mPriceLb.text = String(format: "%.2f", MyReservationViewModel().getPaidPrice(rent: item))
 
     }
     

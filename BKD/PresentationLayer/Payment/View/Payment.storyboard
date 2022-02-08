@@ -47,7 +47,7 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kQW-qx-kY2">
-                                <rect key="frame" x="0.0" y="153.5" width="414" height="620.5"/>
+                                <rect key="frame" x="0.0" y="138" width="414" height="636"/>
                                 <color key="backgroundColor" name="background"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PaymenTypeTableViewCell" rowHeight="100" id="ZNR-Kv-EjC" customClass="PaymenTypeTableViewCell" customModule="BKD" customModuleProvider="target">
@@ -260,7 +260,7 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
                             <constraint firstItem="ZHl-N1-8F0" firstAttribute="top" secondItem="BSU-vw-Mw1" secondAttribute="top" id="oo0-fP-f8h"/>
                             <constraint firstItem="acs-Ri-7at" firstAttribute="centerX" secondItem="BSU-vw-Mw1" secondAttribute="centerX" id="pFb-2V-ceb"/>
                             <constraint firstItem="tsT-wT-iVq" firstAttribute="centerX" secondItem="BSU-vw-Mw1" secondAttribute="centerX" multiplier="0.882" id="pVd-yA-r0s"/>
-                            <constraint firstItem="kQW-qx-kY2" firstAttribute="top" secondItem="tsT-wT-iVq" secondAttribute="bottom" multiplier="2.9" id="qvO-OH-vi4"/>
+                            <constraint firstItem="kQW-qx-kY2" firstAttribute="top" secondItem="tsT-wT-iVq" secondAttribute="bottom" constant="85" id="qvO-OH-vi4"/>
                             <constraint firstItem="BSU-vw-Mw1" firstAttribute="bottom" secondItem="U57-rJ-Vs9" secondAttribute="bottom" constant="-400" id="vnd-AB-1eS"/>
                             <constraint firstItem="U57-rJ-Vs9" firstAttribute="height" secondItem="rfv-c2-eiK" secondAttribute="height" multiplier="0.278465" id="ycX-DI-XjF"/>
                         </constraints>

@@ -39,26 +39,26 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="gCY-pl-jgw">
-                                <rect key="frame" x="0.0" y="377" width="320" height="55"/>
+                                <rect key="frame" x="0.0" y="384" width="320" height="55"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s2o-fI-PNk">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="16"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="15.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMe-C8-DGp">
-                                                <rect key="frame" x="6.5" y="0.0" width="24" height="16"/>
+                                                <rect key="frame" x="6.5" y="0.0" width="24" height="15.5"/>
                                                 <state key="normal" image="uncheck_box"/>
                                                 <connections>
                                                     <action selector="deposit:" destination="Xbn-ca-vvG" eventType="touchUpInside" id="3r9-5D-f9h"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hcd-ro-lFG">
-                                                <rect key="frame" x="37" y="-1.5" width="55.5" height="19"/>
+                                                <rect key="frame" x="37" y="-2" width="55" height="19.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" name="navigationBar"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€   350" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smn-va-Dsc">
-                                                <rect key="frame" x="258.5" y="1.5" width="49" height="13"/>
+                                                <rect key="frame" x="260" y="1" width="47.5" height="13"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" name="email"/>
                                                 <nil key="highlightedColor"/>
@@ -81,7 +81,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ca-bT-1ad">
-                                        <rect key="frame" x="0.0" y="20" width="320" height="15.5"/>
+                                        <rect key="frame" x="0.0" y="19.5" width="320" height="15.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BDY-o0-6yw">
                                                 <rect key="frame" x="6.5" y="0.0" width="24" height="15.5"/>
@@ -91,13 +91,13 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit + Rental price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yo-Q1-lH8">
-                                                <rect key="frame" x="37" y="-2" width="159.5" height="19"/>
+                                                <rect key="frame" x="37" y="-2" width="155" height="19.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" name="navigationBar"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€   350 + 105.7" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyM-BE-4eX">
-                                                <rect key="frame" x="200" y="1" width="107.5" height="13"/>
+                                                <rect key="frame" x="206.5" y="1.5" width="101" height="13"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" name="email"/>
                                                 <nil key="highlightedColor"/>
@@ -120,23 +120,23 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8qv-bA-s9R">
-                                        <rect key="frame" x="0.0" y="39.5" width="320" height="15.5"/>
+                                        <rect key="frame" x="0.0" y="39" width="320" height="16"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kYF-Ll-hqA">
-                                                <rect key="frame" x="6.5" y="0.0" width="24" height="15.5"/>
+                                                <rect key="frame" x="6.5" y="0.0" width="24" height="16"/>
                                                 <state key="normal" image="uncheck_box"/>
                                                 <connections>
                                                     <action selector="payLater:" destination="Xbn-ca-vvG" eventType="touchUpInside" id="o67-r2-Vvx"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay later" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icA-LG-d92">
-                                                <rect key="frame" x="37" y="-1.5" width="63" height="19"/>
+                                                <rect key="frame" x="37" y="-1.5" width="61" height="19.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" name="navigationBar"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€   350" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCh-KM-Hn7">
-                                                <rect key="frame" x="258.5" y="1.5" width="49" height="12.5"/>
+                                                <rect key="frame" x="260" y="1.5" width="47.5" height="13"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" name="email"/>
                                                 <nil key="highlightedColor"/>
@@ -162,14 +162,14 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="31" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xeS-aD-3GN">
-                                <rect key="frame" x="12.5" y="186.5" width="247" height="130.5"/>
+                                <rect key="frame" x="12.5" y="188.5" width="247" height="134"/>
                                 <string key="text">You can opt for “Pay later” option, however if no payment is made before 24 hours of the Reservation start date, the Pre-Reservation will be automatically cancelled. There are only 3 free cancellations of the Pre-Reservation in a month.</string>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
                                 <color key="textColor" name="navigationBar"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a Payment option (Deposit or Deposit + Rental price) to fully complete the reservation." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYF-Sn-Cpt">
-                                <rect key="frame" x="12.5" y="87" width="247" height="84"/>
+                                <rect key="frame" x="12.5" y="87" width="247" height="86"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
                                 <color key="textColor" name="navigationBar"/>
                                 <nil key="highlightedColor"/>
@@ -206,6 +206,7 @@
                                                 <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstItem="GlB-ZY-zwn" firstAttribute="height" secondItem="iBJ-Xh-QF0" secondAttribute="height" id="DBZ-Zr-UuO"/>
+                                                    <constraint firstAttribute="bottom" secondItem="GlB-ZY-zwn" secondAttribute="bottom" id="DyV-T7-Rcq"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GlB-ZY-zwn" secondAttribute="trailing" id="GaS-Yq-nWy"/>
                                                     <constraint firstItem="GlB-ZY-zwn" firstAttribute="leading" secondItem="iBJ-Xh-QF0" secondAttribute="leading" id="L8v-fm-NUx"/>
                                                     <constraint firstItem="IrD-SN-ceg" firstAttribute="width" secondItem="iBJ-Xh-QF0" secondAttribute="width" multiplier="0.201258" id="NHU-Jd-Rvd"/>
@@ -213,6 +214,7 @@
                                                     <constraint firstItem="IrD-SN-ceg" firstAttribute="centerX" secondItem="iBJ-Xh-QF0" secondAttribute="centerX" id="aqb-gC-yD9"/>
                                                     <constraint firstItem="GlB-ZY-zwn" firstAttribute="centerY" secondItem="iBJ-Xh-QF0" secondAttribute="centerY" id="lU5-YW-8ab"/>
                                                     <constraint firstItem="IrD-SN-ceg" firstAttribute="height" secondItem="iBJ-Xh-QF0" secondAttribute="height" multiplier="0.282353" id="mRn-MX-Hnd"/>
+                                                    <constraint firstItem="GlB-ZY-zwn" firstAttribute="top" secondItem="iBJ-Xh-QF0" secondAttribute="top" id="rOt-P9-ZjM"/>
                                                     <constraint firstItem="IrD-SN-ceg" firstAttribute="centerY" secondItem="iBJ-Xh-QF0" secondAttribute="centerY" id="riF-Lu-IeN"/>
                                                 </constraints>
                                             </view>

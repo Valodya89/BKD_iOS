@@ -247,7 +247,7 @@
             </objects>
             <point key="canvasLocation" x="1399" y="638"/>
         </scene>
-        <!--Notification-->
+        <!--Notifications-->
         <scene sceneID="WGX-km-U7w">
             <objects>
                 <viewController id="ceI-lw-dx8" customClass="NotificationsViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
@@ -339,7 +339,7 @@
                             <constraint firstItem="LR5-F5-Y5C" firstAttribute="width" secondItem="A1I-cU-SsK" secondAttribute="width" multiplier="0.23" id="z4z-9h-b1I"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Notification" id="3IS-eZ-wTf">
+                    <navigationItem key="navigationItem" title="Notifications" id="3IS-eZ-wTf">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="menu" id="Z62-eQ-Ljg">
                             <connections>
                                 <action selector="menu:" destination="ceI-lw-dx8" id="vSU-o7-5ao"/>

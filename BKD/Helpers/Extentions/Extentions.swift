@@ -7,13 +7,16 @@
 
 import UIKit
 
-////MARK: Double
-//extension Double {
+//MARK: Double
+extension Double {
 //    mutating func rounded(_ value: Double) -> Double {
 //        let value = Double(round( Double(value) * 100.0 )) / 100.0
 //        return value
 //    }
-//}
+    func discountPercentage(_ percentage: Double) -> Double {
+        return self - ( (self * percentage) / 100 )
+    }
+}
 
 //MARK: UITextView extension
 extension UITextView {

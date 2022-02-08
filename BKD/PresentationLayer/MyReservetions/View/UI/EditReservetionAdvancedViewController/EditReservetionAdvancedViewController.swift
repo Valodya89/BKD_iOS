@@ -379,11 +379,12 @@ class EditReservetionAdvancedViewController: BaseViewController {
     func handlerPayment() {
         mPaymentStatusTableV.didPressPayment = { isPayLater in
             if isPayLater {
-                self.goToPayLater()
+                self.goToPayLater(rent: self.currRent )
             } else {
                 self.goToAgreement(on: self,
                                    agreementType: .editAdvanced,
                                    vehicleModel: nil,
+                                   rent: self.currRent,
                                    urlString: nil)
             }
         }

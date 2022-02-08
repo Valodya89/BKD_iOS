@@ -44,7 +44,7 @@ class MyReservationsViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
-        getRent()
+        getRents()
 
     }
     
@@ -90,7 +90,7 @@ class MyReservationsViewController: BaseViewController {
     }
     
     ///Get reservations
-    private func getRent() {
+    private func getRents() {
         myReservationVM.getReservations { result in
             guard let result = result else {return}
             self.myReservations = result
@@ -218,22 +218,32 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let item = myReservations![indexPath.item] //ReservationWithReservedPaidData.reservationWithReservedPaidModel[indexPath.item]
+        let item = myReservations![indexPath.item]
+        let paymentType = myReservationVM.getReservationState(rent: item)
         let rentState = RentState.init(rawValue: item.state ?? "FINISHED")
         if isReservationHistory {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReservationHistoryCell.identifier, for: indexPath) as!  ReservationHistoryCell
             return cell
             
         } else {
+            
             switch rentState {
             case .COMPLETED,
                  .START_DEFECT_CHECK,
                  .START_ODOMETER_CHECK:/*.startRide:*/
                 
-                if isActiveStartRide(start: item.startDate) || item.carDetails.registrationNumber != nil /*item.isRegisterNumber*/ {
-                  return startRideWithRegisterNumberCell(item: item, indexPath: indexPath)
+                if paymentType != .startRide { //cell with pay button
+                    return maykePaymentCell(item: item,
+                                            indexPath: indexPath,
+                                            paymentType: paymentType)
+                } else { //start ride
+                    if isActiveStartRide(start: item.startDate) || item.carDetails.registrationNumber != nil /*item.isRegisterNumber*/ {
+                      return startRideWithRegisterNumberCell(item: item, indexPath: indexPath)
+                    }
+                    return startRideCell(item: item, indexPath: indexPath)
                 }
-                return startRideCell(item: item, indexPath: indexPath)
+                
+                
 //            case .maykePayment:
 //                return maykePaymentCell(item: item, indexPath: indexPath)
             case .FINISHED:/*.payDistancePrice:*/
@@ -256,7 +266,9 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if !isReservationHistory {
             
-            let item = myReservations![indexPath.item] //ReservationWithReservedPaidData.reservationWithReservedPaidModel[indexPath.item]
+            let item = myReservations![indexPath.item]
+            let paymentType = myReservationVM.getReservationState(rent: item)
+
             var paymentStatusModel: PaymentStatusModel?
             var registerNumberArr:[String]?
             var onRideArr:[OnRideModel]?
@@ -267,16 +279,24 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
             case .COMPLETED,
                  .START_DEFECT_CHECK,
                  .START_ODOMETER_CHECK /*.startRide*/:
-                myResrevationState = .startRide
                 
-                if isActiveStartRide(start: item.startDate) || item.carDetails.registrationNumber != nil /*item.isRegisterNumber*/ {
-                    let cell: ReservationWithRegisterNumberCollectionViewCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservationWithRegisterNumberCollectionViewCell
-                    paymentStatusModel = cell.getPaymentStatusModel()
-                    registerNumberArr = [cell.mRegistrationNumberLb.text!]
+                
+                if paymentType != .startRide { //cell with pay button
+                      myResrevationState = .maykePayment
+                      let cell: ReservetionMakePaymentCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservetionMakePaymentCell
+                      paymentStatusModel = cell.getPaymentStatusModel()
                 } else {
-                    let cell: ReservationWithStartRideCollectionViewCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservationWithStartRideCollectionViewCell
-                    paymentStatusModel = cell.getPaymentStatusModel()
+                    myResrevationState = .startRide
+                    if isActiveStartRide(start: item.startDate) || item.carDetails.registrationNumber != nil /*item.isRegisterNumber*/ {
+                        let cell: ReservationWithRegisterNumberCollectionViewCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservationWithRegisterNumberCollectionViewCell
+                        paymentStatusModel = cell.getPaymentStatusModel()
+                        registerNumberArr = [cell.mRegistrationNumberLb.text!]
+                    } else {
+                        let cell: ReservationWithStartRideCollectionViewCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservationWithStartRideCollectionViewCell
+                        paymentStatusModel = cell.getPaymentStatusModel()
+                    }
                 }
+                
 //            case .payRentalPrice:
   //              myResrevationState = .payRentalPrice
 //                let cell: ReservetionWithPayRentalPriceCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservetionWithPayRentalPriceCell
@@ -300,7 +320,7 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
      //           myResrevationState = .driverWaithingApproval
 //                break
             default://Draft
-                myResrevationState = .waithingAdminApproval
+                //myResrevationState = .driverWaithingApproval
                 break
             }
             
@@ -435,47 +455,60 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
     }
     
     ///Mayke Payment UICollectionViewCell
-    private func maykePaymentCell(item: ReservationWithReservedPaidModel, indexPath: IndexPath) -> ReservetionMakePaymentCell {
+    private func maykePaymentCell(item: Rent,
+                                  indexPath: IndexPath,
+                                  paymentType: MyReservationState) -> ReservetionMakePaymentCell {
         
         let cell = mReservCollectionV.dequeueReusableCell(withReuseIdentifier: ReservetionMakePaymentCell.identifier, for: indexPath) as!  ReservetionMakePaymentCell
         
-        cell.setCellInfo(item: item, index: indexPath.item)
+        cell.setCellInfo(item: item, index: indexPath.item, reservatiopnState:  paymentType)
         cell.makePayment = {
-            self.goToPayLater()
+            if paymentType == .payRentalPrice {
+                self.goToAgreement(on: self,
+                                   agreementType: .advanced
+                                   ,
+                                   vehicleModel: nil,
+                                   rent: item,
+                                   urlString: nil)
+            } else {
+                self.goToPayLater(rent: item)
+            }
         }
         return cell
     }
     
     ///Pay Distance Price UICollectionViewCell
     private func payDistancePriceCell(item: Rent, indexPath: IndexPath) -> ReservetionWithDistancePriceCell {
-        
+
         let cell = mReservCollectionV.dequeueReusableCell(withReuseIdentifier: ReservetionWithDistancePriceCell.identifier, for: indexPath) as!  ReservetionWithDistancePriceCell
-        
+
         cell.setCellInfo(item: item, index: indexPath.item)
-        
+
         cell.payDistancePrice = {
             self.goToAgreement(on: self,
                                agreementType: .editAdvanced,
                                vehicleModel: nil,
+                               rent: item,
                                urlString: nil)
         }
         return cell
     }
     
-    ///Pay Rental Price UICollectionViewCell
-    private func payRentalPriceCell(item: ReservationWithReservedPaidModel, indexPath: IndexPath) -> ReservetionWithPayRentalPriceCell {
-        
-        let cell = mReservCollectionV.dequeueReusableCell(withReuseIdentifier: ReservetionWithPayRentalPriceCell.identifier, for: indexPath) as!  ReservetionWithPayRentalPriceCell
-        
-        cell.setInfoCell(item: item, index: indexPath.item)
-        cell.payRentalPrice = {
-            self.goToAgreement(on: self,
-                               agreementType: .editAdvanced,
-                               vehicleModel: nil,
-                               urlString: nil)
-        }
-        return cell
-    }
+//    ///Pay Rental Price UICollectionViewCell
+//    private func payRentalPriceCell(item: ReservationWithReservedPaidModel, indexPath: IndexPath) -> ReservetionWithPayRentalPriceCell {
+//
+//        let cell = mReservCollectionV.dequeueReusableCell(withReuseIdentifier: ReservetionWithPayRentalPriceCell.identifier, for: indexPath) as!  ReservetionWithPayRentalPriceCell
+//
+//        cell.setInfoCell(item: item, index: indexPath.item)
+//        cell.payRentalPrice = {
+//            self.goToAgreement(on: self,
+//                               agreementType: .editAdvanced,
+//                               vehicleModel: nil,
+//                               rent: item,
+//                               urlString: nil)
+//        }
+//        return cell
+//    }
     
     
     ///Driver Waithing Approval  UICollectionViewCell

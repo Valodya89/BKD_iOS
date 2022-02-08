@@ -9,7 +9,7 @@ import UIKit
 
 class PriceTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
-    var pricesArr: [PriceModel] = PriceData.priceModel
+    var pricesArr: [PriceModel] = [] // PriceData.priceModel
 
     
     override func awakeFromNib() {
@@ -24,8 +24,7 @@ class PriceTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
         self.dataSource = self
     }
 
-    //MARK: UITableViewDataSource
-    //MARK: ----------------------------------
+    //MARK: -- UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         return pricesArr.count

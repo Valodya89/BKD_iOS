@@ -42,13 +42,15 @@ final class ReservationCompletedViewModel {
 
     ///get free  reservatuon massage
     func getFreeReservationMessage(payLaterCount: Double) -> String {
-        if payLaterCount == 1 {
-            return String(format: Constant.Texts.payAlert, "is", payLaterCount, Constant.Texts.cancellation )
-        } else if payLaterCount > 1 {
-            return String(format: Constant.Texts.payAlert, "are", payLaterCount, Constant.Texts.cancellations )
-        }
+//        if payLaterCount == 1 {
+//            return String(format: Constant.Texts.payAlert, "is", payLaterCount, Constant.Texts.cancellation )
+//        } else if payLaterCount > 1 {
+//            return String(format: Constant.Texts.payAlert, "are", payLaterCount, Constant.Texts.cancellations )
+//        }
+        return String(format: Constant.Texts.payAlert, payLaterCount )
         return ""
     }
+    
     
 }
 

@@ -98,8 +98,8 @@ class MyReservetionAdvancedViewController: BaseViewController {
     public var registerNumberArr:[String]?
     public var currRent: Rent?
     
-    lazy var myReservAdvancedViewModel = MyReservetionAdvancedViewModel()
-    lazy var myReservationViewModel = MyReservationViewModel()
+    lazy var myReservAdvancedVM = MyReservetionAdvancedViewModel()
+    lazy var myReservationVM = MyReservationViewModel()
     var reserveViewModel = ReserveViewModel()
     var currentTariff: TariffState = .hourly
     var lastContentOffset:CGFloat = 0.0
@@ -230,7 +230,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
         
         //Accessories
         if (currRent?.accessories?.count ?? 0) > 0 {
-            myReservAdvancedViewModel.getRentAccessories(rent: currRent!, complition: { result in
+            myReservAdvancedVM.getRentAccessories(rent: currRent!, complition: { result in
                 
                 guard let result = result else {return}
                 self.mReserveInfoTableV.accessories = result
@@ -245,13 +245,6 @@ class MyReservetionAdvancedViewController: BaseViewController {
             mAdditionalDriverTableV.reloadData()
             mAdditionalDriverTableHeight.constant = mAdditionalDriverTableV.contentSize.height
         }
-        
-        
-        
-            
-//        //New price
-//        mNewPriceTableV.pricesArr = PriceManager.shared.getPrices()
-//        mNewPriceTableV.reloadData()
         
     }
     
@@ -293,8 +286,10 @@ class MyReservetionAdvancedViewController: BaseViewController {
     }
     
     func configureTotalPriceSteckView() {
-        //Total price
-        totalPrice = PriceManager.shared.getTotalPrice(totalPrices: mNewPriceTableV.pricesArr)
+        let price = myReservAdvancedVM.getPriceList(rent: currRent)
+        totalPrice = price.totalPrice
+        mNewPriceTableV.pricesArr = price.price
+        mNewPriceTableV.reloadData()
         mTotalPriceStackV.mNewTotalPriceLb.text = String(format: "%.2f",totalPrice)
         if isEdited {
             mTotalPriceStackV.showOldAndNewTotalPrices(oldPrice: totalPrice, newPrice: 00.0)
@@ -315,7 +310,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
     
     ///Switch driver
     func changeDriver(driverId: String ) {
-        myReservationViewModel.changeDriver(rentId: currRent?.id ?? "", driverId: driverId) { result in
+        myReservationVM.changeDriver(rentId: currRent?.id ?? "", driverId: driverId) { result in
             guard let rent =  result else {return}
             self.hideSwitchTable()
             self.currRent = rent
@@ -459,6 +454,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
         self.goToAgreement(on: self,
                            agreementType: .none,
                            vehicleModel: nil,
+                           rent: currRent,
                            urlString: nil)
     }
     
@@ -490,11 +486,12 @@ class MyReservetionAdvancedViewController: BaseViewController {
     func handlerPayment() {
         mPaymentStatusTableV.didPressPayment = { isPayLater in
             if isPayLater {
-                self.goToPayLater()
+                self.goToPayLater(rent: self.currRent)
             } else {
                 self.goToAgreement(on: self,
                                    agreementType: .advanced,
                                    vehicleModel: nil,
+                                   rent: self.currRent,
                                    urlString: nil)
             }
         }
@@ -507,7 +504,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
         }
          
         mOnRideTableV.didPressSwitchDriver = {
-            let driversList =  self.myReservationViewModel.getAdditionalDrives(rent: self.currRent!)
+            let driversList =  self.myReservationVM.getAdditionalDrives(rent: self.currRent!)
             if driversList.count == 1 {
                 self.showAlertForSwitchDriver(driver: driversList[0])
             } else {

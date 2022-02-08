@@ -99,9 +99,13 @@ class BkdAgreementViewController: BaseViewController {
         mAgreeV.didPressConfirm  = {
             switch self.agreementType {
                 
-            case .advanced,
-                    .myReservationCell,
-                    .payLater:
+            case .advanced:
+               // if phone verified
+                self.goToSelectPayment(vehicleModel: nil,
+                                  rent: self.currRent,
+                                  paymentOption: .rental)
+            case .myReservationCell,
+                 .payLater:
                 break
             case .editAdvanced:
                 self.updateReservation()

@@ -79,7 +79,8 @@ enum AuthAPI: APIProtocol {
                  accessories: [[String : Any]?] ,
                  additionalDrivers: [String?],
                  pickupLocation: [String : Any],
-                 returnLocation: [String : Any])
+                 returnLocation: [String : Any],
+                 rentPrice: [String : Any])
     case getRents
     case updateRent(rentId: String,
                     carId: String,
@@ -462,7 +463,8 @@ enum AuthAPI: APIProtocol {
                           accessories,
                           additionalDrivers,
                           pickupLocation,
-                          returnLocation):
+                          returnLocation,
+                          rentPrice):
             return [
                 "carId": carId,
                 "startDate": startDate,
@@ -470,7 +472,8 @@ enum AuthAPI: APIProtocol {
                 "accessories": accessories,
                 "additionalDrivers": additionalDrivers,
                 "pickupLocation": pickupLocation,
-                "returnLocation": returnLocation
+                "returnLocation": returnLocation,
+                "rentPrice": rentPrice
             ]
         case let .updateRent(_,
                              carId,

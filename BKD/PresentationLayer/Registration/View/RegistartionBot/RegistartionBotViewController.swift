@@ -744,6 +744,7 @@ extension RegistartionBotViewController: TakePhotoTableViewCellDelegate {
             self.goToAgreement(on: self,
                                agreementType: .none,
                                vehicleModel: nil,
+                               rent: nil,
                                urlString: ApplicationSettings.shared.settings?.registrationAgreementUrl)
         } else {
             takePhotoPressed()

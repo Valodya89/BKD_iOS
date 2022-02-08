@@ -7,16 +7,16 @@
 
 import Foundation
 
-enum MyReservationState: String {
-    case startRide
-    case stopRide
-    case payDistancePrice
-    case maykePayment
-    case payRentalPrice
-    case driverWaithingApproval
-    case waithingAdminApproval
-
-}
+//enum MyReservationState: String {
+//    case startRide
+//    case stopRide
+//    case payDistancePrice
+//    case maykePayment
+//    case payRentalPrice
+//    case driverWaithingApproval
+//    case waithingAdminApproval
+//
+//}
 
 struct ReservationWithReservedPaidModel {
     public var isActiveStartRide: Bool = false

@@ -30,16 +30,35 @@ struct Rent: Codable {
      let startOdometer: Odometer?
      let endOdometer: Odometer?
      let hasAccident: Bool
-             
-
-//        "totalCount": 3,
-//        "totalPages": 1,
-//        "pageNumber": 0,
-//        "pageSize": 10
-//    }
+    
+    //Prices
+    let depositPayment: Payment
+    let rentPayment: Payment
+    let distancePayment: Payment
+    let price: Price
 
 }
 
+
+
+struct Payment: Codable {
+    let amount : Double
+    let payed : Bool
+    let payedAt : Double
+    let transactionId : String?
+}
+
+struct Price: Codable {
+    let specialOfferPercentage: Double
+    let depositPrice: Double
+    let nonWorkingHourPrice: Double
+    let rentDurationPrice: Double
+    let additionalDriverPrice: Double
+    let accessoriesPrice: Double
+    let locationPrice: Double
+    let distancePrice: Double
+    let payLater: Bool
+}
 
 struct AccessoriesToRent: Codable {
     let id: String

@@ -70,19 +70,36 @@ final class PriceManager {
     
     
     ///Get Total price
-    func getTotalPrice(totalPrices:[PriceModel]) -> Double {
+    func getTotalPrice(totalPrices:[PriceModel]?) -> Double {
+        
         var total: Double = 0
-        for item  in totalPrices {
-            let item = item as PriceModel
-            total += item.price!
-        }
-        if carOffertPrice ?? 0 > 0 && carDiscountPrecent ?? 0 > 0 {
-            total -= carPrice ?? 0
+        if totalPrices != nil {
+            for item  in totalPrices! {
+                let item = item as PriceModel
+                total += item.price!
+            }
+            if carOffertPrice ?? 0 > 0 && carDiscountPrecent ?? 0 > 0 {
+                total -= carPrice ?? 0
+            }
         }
         self.totalPrice = total
-        
-     return total
+        return total
     }
     
+   
+    ///Get price dictionary to add rent
+    func getPriceToRent(vehicle: VehicleModel) -> Dictionary<String, Double> {
+        let priceDic: Dictionary<String, Double> = [
+            "specialOfferPercentage" : carDiscountPrecent ?? 0.0,
+            "depositPrice" : vehicle.depositPrice,
+            "nonWorkingHourPrice" : (pickUpNoWorkingTimePrice ?? 0.0) + (returnNoWorkingTimePrice ?? 0.0),
+            "rentDurationPrice" :  carPrice ?? 0.0,
+            "additionalDriverPrice" : additionalDriversPrice ?? 0.0,
+            "accessoriesPrice" : accessoriesPrice ?? 0.0,
+            "locationPrice" : (pickUpCustomLocationPrice ?? 0.0) + (returnCustomLocationPrice ?? 0.0),
+            "distancePrice" : 0.0]
+        
+        return priceDic
+    }
     
 }

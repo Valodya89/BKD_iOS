@@ -135,9 +135,9 @@ class ReserveViewController: BaseViewController {
             mPickUpDateLb.text = String((vehicleModel?.searchModel?.pickUpDate?.getDay())!)
             mReturnDateLb.text = String((vehicleModel?.searchModel?.returnDate?.getDay())!)
         }
-            
+        //accessories
         self.mReserveInfoTableV.accessories = reserveViewModel.getAdditionalAccessories(vehicleModel: vehicleModel!) as? [AccessoriesEditModel]
-        
+        //drivers
         self.mReserveInfoTableV.drivers = reserveViewModel.getAdditionalDrivers(vehicleModel: vehicleModel!)
         mReserveInfoTableV.reloadData()
         
@@ -160,6 +160,7 @@ class ReserveViewController: BaseViewController {
             self.goToAgreement(on: self,
                                agreementType: .reserve,
                                vehicleModel: self.vehicleModel,
+                               rent: nil,
                                urlString: ApplicationSettings.shared.settings?.reservationAgreementUrl)
         }
     }

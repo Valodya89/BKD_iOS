@@ -33,45 +33,66 @@ final class MyReservetionAdvancedViewModel {
     }
     
     
-//    ///Get  all additional driver current list
-//    func getAllAdditionalDrives(rent: Rent) -> [DriverToRent] {
-//        var additionalDrivers = rent.additionalDrivers
-//        additionalDrivers?.insert(rent.driver, at: 0)
-//        //additionalDrivers?.removeAll(where: { $0.id == (rent.currentDriver!.id) })
-//        return additionalDrivers ?? []
-//    }
+///Get rents price list
+    func getPriceList(rent: Rent?) -> (price: [PriceModel], totalPrice: Double) {
+        
+       var prices:[PriceModel] = []
+       var total = 0.0
+       
+       let price = rent?.price.rentDurationPrice ?? 0.0
+       prices.append(PriceModel(priceTitle: Constant.Texts.price, price: price))
+        total = price
+        
+       if (rent?.price.specialOfferPercentage ?? 0) > 0
+       {
+           let offertPercentage = rent?.price.specialOfferPercentage ?? 0.0
+           let carOffertPrice = price.discountPercentage(offertPercentage)
+           prices.append(PriceModel(priceTitle: Constant.Texts.specialOffer, price: carOffertPrice, discountPrecent: offertPercentage))
+           total = carOffertPrice
+       }
+       
+       let totalLocation = rent?.price.locationPrice ?? 0.0
+       if totalLocation > 0.0 {
+           prices.append(PriceModel(priceTitle: Constant.Texts.customLocation, price: totalLocation))
+           total += totalLocation
+       }
+       
+       let totalNoWorkingTotal = rent?.price.nonWorkingHourPrice ?? 0.0
+       if totalNoWorkingTotal > 0.0 {
+           prices.append(PriceModel(priceTitle: Constant.Texts.additionalService, price: totalNoWorkingTotal))
+           total += totalNoWorkingTotal
+       }
+    
+       let totalAccessoriesPrice = rent?.price.accessoriesPrice ?? 0.0
+       if totalAccessoriesPrice > 0.0 {
+           prices.append(PriceModel(priceTitle: Constant.Texts.accessories, price: totalAccessoriesPrice))
+           total += totalAccessoriesPrice
+       }
+       
+        let totalAdditionalDriversPrice = rent?.price.additionalDriverPrice ?? 0.0
+       if totalAdditionalDriversPrice > 0.0 {
+           prices.append(PriceModel(priceTitle: Constant.Texts.additionalDriver, price: totalAdditionalDriversPrice))
+           total += totalAdditionalDriversPrice
+       }
+       
+//        let depositPrice = rent?.price.depositPrice ?? 0.0
+//       if depositPrice > 0 {
+//           prices.append(PriceModel(priceTitle: Constant.Texts.deposit, price: depositPrice))
+//           total += depositPrice
+//       }
+       
+       return (prices, total)
+       
+    }
 }
 
 
-/*
- 
- 
- {
-     "carId": "61815f3296b3233b4995c625",
-     "startDate": 1636395213876,
-     "endDate": 1636395213876,
-     "accessories": [
-         {
-             "id": "61506ec81464ab42a0e2f31e",
-             "count": 1
-         }
-     ],
-     "additionalDrivers": [],
-     "pickupLocation": {
-         "type": "CUSTOM",
-         "customLocation": {
-             "name": "Masivi city",
-             "longitude": 45.5,
-             "latitude": 47.8
-         }
-     },
-     "returnLocation": {
-         "type": "CUSTOM",
-         "customLocation": {
-             "name": "Masivi city",
-             "longitude": 45.5,
-             "latitude": 47.8
-         }
-     }
- }
- */
+//"specialOfferPercentage": 2.0,
+//               "depositPrice": 150.0,
+//               "nonWorkingHourPrice": 30.0,
+//               "rentDurationPrice": 200.0,
+//               "additionalDriverPrice": 12.0,
+//               "accessoriesPrice": 5.0,
+//               "locationPrice": 110.0,
+//               "distancePrice": 0.0,
+//               "payLater": false

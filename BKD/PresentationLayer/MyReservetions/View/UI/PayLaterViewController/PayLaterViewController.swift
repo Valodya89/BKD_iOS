@@ -29,7 +29,7 @@ class PayLaterViewController: BaseViewController {
     
     //MARK: - Variables
     var paymentOption:PaymentOption = .none
-    
+    public var currRent: Rent?
     
     //MARK: - Life cycle
     override func viewDidLoad() {
@@ -49,6 +49,9 @@ class PayLaterViewController: BaseViewController {
         mContinueBtn.layer.borderWidth = 1.0
         mDepositRentalCheckBtn.setTitle("", for: .normal)
         mDepositCheckBtn.setTitle("", for: .normal)
+        mDepositPriceLb.text = String(currRent?.depositPayment.amount ?? 0.0)
+        mDepositRentalPriceLb.text = String(currRent?.depositPayment.amount ?? 0.0) + " + " +  String(currRent?.rentPayment.amount ?? 0.0)
+        
     }
     
     //Animate continue
@@ -59,7 +62,10 @@ class PayLaterViewController: BaseViewController {
         } completion: { _ in
             
             self.goToAgreement(on: self,
-                               agreementType: .payLater, vehicleModel: nil, urlString: nil)
+                               agreementType: .payLater,
+                               vehicleModel: nil,
+                               rent: self.currRent,
+                               urlString: nil)
         }
     }
     

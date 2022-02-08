@@ -8,15 +8,24 @@
 import UIKit
 
 
-//enum MyReservationState: String {
-//    case startRide
-//    case stopRide
+enum MyReservationState: String {
+    case startRide
+    case stopRide
+    case payDistancePrice
+    case maykePayment
+    case payRentalPrice
+    case driverWaithingApproval
+}
+
+//enum ReservationViewType: String {
+//
+//
 //    case payDistancePrice
 //    case maykePayment
 //    case payRentalPrice
-//    case driverWaithingApproval
+//    case waithingForApproval
+//    case reservedPaid
 //}
-
 
 
 enum RentState: String {
@@ -88,5 +97,52 @@ class MyReservationViewModel: NSObject {
             }
         }
     }
+    
+    ///Get reservation view type
+    func getReservationState(rent: Rent) -> MyReservationState {
+        if (rent.depositPayment.payed &&
+            rent.depositPayment.transactionId != nil) && (rent.rentPayment.payed && rent.rentPayment.transactionId != nil) {
+            return MyReservationState.startRide
+            
+        } else if (rent.depositPayment.payed &&
+                   rent.depositPayment.transactionId != nil) && !rent.rentPayment.payed {
+            
+            return MyReservationState.payRentalPrice
+            
+        }  else if (!rent.depositPayment.payed && !rent.rentPayment.payed) || rent.price.payLater  {
+                   return MyReservationState.maykePayment
+                   
+               }
+        return MyReservationState.maykePayment
+    }
    
+    
+    ///Get price which user will pay
+    func getPriceToPay(rent: Rent) -> Double {
+        if (rent.depositPayment.payed &&
+                   rent.depositPayment.transactionId != nil) && !rent.rentPayment.payed {
+            
+            return rent.rentPayment.amount
+            
+        }  else if (!rent.depositPayment.payed && !rent.rentPayment.payed) || rent.price.payLater  {
+            return rent.rentPayment.amount +  rent.depositPayment.amount
+                   
+            }
+        return rent.distancePayment.amount
+    }
+    
+    ///Get price which user will pay
+    func getPaidPrice(rent: Rent) -> Double {
+        if (rent.depositPayment.payed &&
+            rent.depositPayment.transactionId != nil) && (rent.rentPayment.payed && rent.rentPayment.transactionId != nil) && !rent.distancePayment.payed  {
+            return rent.rentPayment.amount +  rent.depositPayment.amount
+            
+        } else if (rent.depositPayment.payed &&
+                   rent.depositPayment.transactionId != nil) && !rent.rentPayment.payed {
+            
+            return rent.rentPayment.amount +  rent.depositPayment.amount + rent.distancePayment.amount
+            
+        }
+        return 0.0
+    }
 }

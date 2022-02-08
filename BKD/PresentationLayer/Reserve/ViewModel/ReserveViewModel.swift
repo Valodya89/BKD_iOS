@@ -130,13 +130,16 @@ class ReserveViewModel: NSObject {
         let endDate = (Date().combineDate(date: vehicleModel.searchModel?.returnDate ?? Date(), withTime: vehicleModel.searchModel?.returnTime ?? Date())
         )!.timeIntervalSince1970
         
+        let rentPrice = PriceManager.shared.getPriceToRent(vehicle: vehicleModel)
+        
         SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addRent(carId: vehicleModel.vehicleId ?? "",
                             startDate: startDate,
                             endDate: endDate,
                             accessories: accessoriesArr,
                             additionalDrivers: additionalDriversArr,
                             pickupLocation: pickupLocation,
-                            returnLocation: returnLocation))) { (result) in
+                            returnLocation: returnLocation,
+                            rentPrice: rentPrice))) { (result) in
             
             switch result {
             case .success(let data):

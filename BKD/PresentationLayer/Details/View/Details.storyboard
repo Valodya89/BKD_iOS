@@ -1053,7 +1053,7 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WET-EA-XSn">
                                                         <rect key="frame" x="0.0" y="0.0" width="166" height="42"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="    Compare">
+                                                        <buttonConfiguration key="configuration" style="plain" title="Compare">
                                                             <fontDescription key="titleFontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="18"/>
                                                             <color key="baseForegroundColor" name="selected_filter_field"/>
                                                         </buttonConfiguration>

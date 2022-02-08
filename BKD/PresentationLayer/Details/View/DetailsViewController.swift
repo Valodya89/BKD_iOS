@@ -623,7 +623,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         let retrunDate = searchModel.returnDate!.getDay() + searchModel.returnDate!.getMonthAndWeek(lng: "en") + "/" + searchModel.returnTime!.getHour()
         BKDAlert().showAlert(on: self,
                              title: pickup + "   " + retrunDate,
-                             message: Constant.Texts.messageChangeTariff + option + " ? " + Constant.Texts.messageChangeTariffSeconst,
+                             message: String(format: Constant.Texts.messageChangeTariff, option, "X date/ X time", "y date/ y time"),
                              messageSecond: nil,
                              cancelTitle: Constant.Texts.cancel,
                              okTitle: Constant.Texts.change,

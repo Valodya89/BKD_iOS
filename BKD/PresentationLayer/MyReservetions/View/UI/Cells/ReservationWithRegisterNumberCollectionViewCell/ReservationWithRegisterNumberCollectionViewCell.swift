@@ -119,6 +119,9 @@ class ReservationWithRegisterNumberCollectionViewCell: UICollectionViewCell {
         mReturnDayLb.text = endDate.getDay()
         mReturnMonthLb.text = endDate.getMonth(lng: "en")
         mReturnTimeLb.text = endDate.getHour()
+        
+        //Price
+        mPriceLb.text = String(format: "%.2f", MyReservationViewModel().getPaidPrice(rent: item))
     }
     
     @objc func startRide(sender: UIButton) {

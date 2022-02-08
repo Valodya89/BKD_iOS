@@ -109,6 +109,7 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     func goToAgreement(on viewController: UIViewController,
                        agreementType: AgreementType,
                        vehicleModel: VehicleModel?,
+                       rent: Rent?,
                        urlString: String?) {
         
         let bkdAgreementVC = BkdAgreementViewController.initFromStoryboard(name: Constant.Storyboards.registrationBot)
@@ -116,6 +117,7 @@ class BaseViewController: UIViewController, StoryboardInitializable {
         bkdAgreementVC.agreementType = agreementType
         bkdAgreementVC.urlString = urlString
         bkdAgreementVC.vehicleModel = vehicleModel
+        bkdAgreementVC.currRent = rent
         self.navigationController?.pushViewController(bkdAgreementVC, animated: true)
     }
     
@@ -139,8 +141,9 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     }
     
     ///Go to PayLater ViewController
-    func goToPayLater() {
+    func goToPayLater(rent: Rent?) {
         let payLaterVC = PayLaterViewController.initFromStoryboard(name: Constant.Storyboards.payLater)
+        payLaterVC.currRent = rent
         self.navigationController?.pushViewController(payLaterVC, animated: true)
     }
     
@@ -174,11 +177,13 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     }
     
     //Open SelectPayment screen
-    func goToSelectPayment(vehicleModel:VehicleModel,
+    func goToSelectPayment(vehicleModel: VehicleModel?,
+                           rent: Rent?,
                            paymentOption: PaymentOption) {
         
         let selectPaymentVC = SelectPaymentViewController.initFromStoryboard(name: Constant.Storyboards.payment)
         selectPaymentVC.vehicleModel = vehicleModel
+        selectPaymentVC.currRent = rent
         selectPaymentVC.paymentOption = paymentOption
         self.navigationController?.pushViewController(selectPaymentVC, animated: true)
     }
