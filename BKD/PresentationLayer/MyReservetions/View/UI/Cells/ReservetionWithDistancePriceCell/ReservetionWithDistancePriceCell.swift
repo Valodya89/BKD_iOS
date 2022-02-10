@@ -62,7 +62,7 @@ class ReservetionWithDistancePriceCell: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
-        mPriceLb.text = "XX,X"
+        mPriceLb.text = "0.0"
        // mRegistrationNumberLb.text = ""
       //  mPayDistancePriceBtn.setTitleColor(color_email!, for: .normal)
         mPayDistancePriceBtn.isEnabled = true
@@ -109,6 +109,9 @@ class ReservetionWithDistancePriceCell: UICollectionViewCell {
         mReturnDayLb.text = endDate.getDay()
         mReturnMonthLb.text = endDate.getMonth(lng: "en")
         mReturnTimelb.text = endDate.getHour()
+        
+        //Rental price
+        mPaidPriceLb.text = String(format: "%.2f", item.depositPayment.amount + item.rentPayment.amount)
     }
 
     @objc func payDistancePrice(sender: UIButton) {

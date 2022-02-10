@@ -62,7 +62,7 @@ class PayLaterViewController: BaseViewController {
         } completion: { _ in
             
             self.goToAgreement(on: self,
-                               agreementType: .payLater,
+                               agreementType: .payLater, paymentOption: self.paymentOption,
                                vehicleModel: nil,
                                rent: self.currRent,
                                urlString: nil)

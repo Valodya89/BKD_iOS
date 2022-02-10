@@ -29,6 +29,7 @@ class WaithingAdminApplovalCell: UICollectionViewCell {
     @IBOutlet weak var mReturnMonthLb: UILabel!
     @IBOutlet weak var mReturnTimelb: UILabel!
     
+    @IBOutlet weak var mPriceContentV: UIView!
     @IBOutlet weak var mPriceLb: UILabel!
     
     @IBOutlet weak var mStatusLb: UILabel!
@@ -54,14 +55,22 @@ class WaithingAdminApplovalCell: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
-        mPriceLb.text = "XX,X"
-       // mRegistrationNumberLb.text = ""
-    
-        
+        mPriceLb.text = "0.0"
+        mWaithingApprovalLb.text = Constant.Texts.watinfForAdmin
     }
     
-    func  setCellInfo(item: Rent) {
+    
+    func getPaymentStatusModel() -> PaymentStatusModel {
+        let paymentModel = PaymentStatusModel(status: mDepositPaidLb.text ?? "",  isActivePaymentBtn: false,  price: Double(mPriceLb.text ?? "0.0") ?? 0.00 , paymentButtonType: "", waitingStatus: mWaithingApprovalLb.text)
+        return paymentModel
+    }
+    
+    
+    ///Set cel information
+    func  setCellInfo(item: Rent, reservatiopnState: MyReservationState) {
         
+        setPaymentType(state: reservatiopnState)
+
         //Car info
         mCarIconImgV.sd_setImage(with:  item.carDetails.logo.getURL() ?? URL(string: ""), placeholderImage: nil)
         let currCar: CarsModel? = ApplicationSettings.shared.allCars?.filter( {$0.id == item.carDetails.id}).first
@@ -91,7 +100,35 @@ class WaithingAdminApplovalCell: UICollectionViewCell {
         mReturnDayLb.text = endDate.getDay()
         mReturnMonthLb.text = endDate.getMonth(lng: "en")
         mReturnTimelb.text = endDate.getHour()
+                
+        //Price
+        let price = MyReservationViewModel().getPriceToPay(rent: item)
+        mPriceContentV.isHidden = !(price > 0)
+        mPriceLb.text =  String(format: "%.2f", price)
+        
+        if reservatiopnState == .payDistancePrice {
+            mWaithingApprovalLb.text = Constant.Texts.watinfForDistance
+            mPriceContentV.isHidden = true
+        }
+        
     }
 
+    ///Set payment button
+    func setPaymentType(state: MyReservationState) {
+        
+        switch state {
+  
+        case .maykePayment:
+            mDepositPaidLb.text = Constant.Texts.payLater
+        case .payRentalPrice:
+            mDepositPaidLb.text = Constant.Texts.depositPaid
+        case .payDistancePrice:
+            mDepositPaidLb.text = Constant.Texts.paymentPending
+        case .startRide, .stopRide:
+            mDepositPaidLb.text = Constant.Texts.reservedPaid
+        case .waithingApproval:
+            break
+        }
+    }
  
 }

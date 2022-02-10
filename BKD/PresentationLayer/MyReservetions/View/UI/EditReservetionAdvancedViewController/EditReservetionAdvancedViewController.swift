@@ -382,7 +382,7 @@ class EditReservetionAdvancedViewController: BaseViewController {
                 self.goToPayLater(rent: self.currRent )
             } else {
                 self.goToAgreement(on: self,
-                                   agreementType: .editAdvanced,
+                                   agreementType: .editAdvanced, paymentOption: nil,
                                    vehicleModel: nil,
                                    rent: self.currRent,
                                    urlString: nil)

@@ -22,6 +22,8 @@ class PaymentStatusUITableViewCell: UITableViewCell  {
     @IBOutlet weak var mPaymentTypeContentV: UIView!
     @IBOutlet weak var mPaymentTypeLb: UILabel!
     
+    @IBOutlet weak var mWaitingForAdminLb: UILabel!
+    @IBOutlet weak var mWaitingStatusContentV: UIView!
     @IBOutlet weak var mPayContantV: UIView!
     @IBOutlet weak var mPriceLb: UILabel!
     @IBOutlet weak var mPayBtn: UIButton!
@@ -41,6 +43,8 @@ class PaymentStatusUITableViewCell: UITableViewCell  {
          mPaymentTypeContentV.isHidden = false
          mPayContantV.isHidden = true
          mPaymentTypeLb.text = ""
+         mWaitingStatusContentV.isHidden = true
+
     }
     
     
@@ -63,6 +67,12 @@ class PaymentStatusUITableViewCell: UITableViewCell  {
         if item.status == Constant.Texts.payLater {
             mPaymentTypeContentV.isHidden = true
             isPayLater = true
+        }
+        if item.waitingStatus != nil {
+            mWaitingStatusContentV.isHidden = false
+            mWaitingForAdminLb.text = item.waitingStatus
+        } else {
+            mWaitingStatusContentV.isHidden = true
         }
   
     }

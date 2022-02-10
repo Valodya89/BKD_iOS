@@ -108,6 +108,7 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     ///Open agree Screen
     func goToAgreement(on viewController: UIViewController,
                        agreementType: AgreementType,
+                       paymentOption:PaymentOption?,
                        vehicleModel: VehicleModel?,
                        rent: Rent?,
                        urlString: String?) {
@@ -118,7 +119,16 @@ class BaseViewController: UIViewController, StoryboardInitializable {
         bkdAgreementVC.urlString = urlString
         bkdAgreementVC.vehicleModel = vehicleModel
         bkdAgreementVC.currRent = rent
+        bkdAgreementVC.paymentOption = paymentOption
         self.navigationController?.pushViewController(bkdAgreementVC, animated: true)
+    }
+    
+    ///Open Reservation completed screen
+    func goToReservationCompleted(vehicleModel: VehicleModel?) {
+        
+        let reservationCompletedVC = ReservationCompletedViewController.initFromStoryboard(name: Constant.Storyboards.reservationCompleted)
+        reservationCompletedVC.vehicleModel = vehicleModel
+        self.navigationController?.pushViewController(reservationCompletedVC, animated: true)
     }
     
     ///Open SeeMap Screen
@@ -158,7 +168,7 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     ///Go to VehicleCheck ViewController
     func goToVehicleCheck(rent: Rent?) {
         let vehicleCheckVC = VehicleCheckViewController.initFromStoryboard(name: Constant.Storyboards.vehicleCheck)
-        vehicleCheckVC.currRentModel = rent
+        vehicleCheckVC.currRent = rent
         self.navigationController?.pushViewController(vehicleCheckVC, animated: true)
     }
     
@@ -178,12 +188,10 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     
     //Open SelectPayment screen
     func goToSelectPayment(vehicleModel: VehicleModel?,
-                           rent: Rent?,
                            paymentOption: PaymentOption) {
         
         let selectPaymentVC = SelectPaymentViewController.initFromStoryboard(name: Constant.Storyboards.payment)
         selectPaymentVC.vehicleModel = vehicleModel
-        selectPaymentVC.currRent = rent
         selectPaymentVC.paymentOption = paymentOption
         self.navigationController?.pushViewController(selectPaymentVC, animated: true)
     }
@@ -256,7 +264,7 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     ///Open OdometerCheck controller
     func goToOdometerCheck(rent: Rent?) {
         let odometerCheckVC = OdometerCheckViewController.initFromStoryboard(name: Constant.Storyboards.odometerCheck)
-        odometerCheckVC.currRentModel = rent
+        odometerCheckVC.currRent = rent
         self.navigationController?.pushViewController(odometerCheckVC, animated: true)
     }
     

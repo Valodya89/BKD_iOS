@@ -30,19 +30,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="7dg-Zy-4mx">
-                        <rect key="frame" x="18.5" y="15" width="377" height="45"/>
+                        <rect key="frame" x="18.5" y="16.5" width="377" height="45"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gtA-gD-cWN">
                                 <rect key="frame" x="0.0" y="0.0" width="377" height="25"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnD-6I-Bc3">
-                                        <rect key="frame" x="2" y="-2.5" width="45" height="17"/>
+                                        <rect key="frame" x="2" y="-2" width="45" height="17"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                         <color key="textColor" name="email"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay later" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lwe-wd-pGI">
-                                        <rect key="frame" x="59.5" y="-2.5" width="50" height="17"/>
+                                        <rect key="frame" x="59.5" y="-2" width="50" height="17"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                         <color key="textColor" name="navigationBar"/>
                                         <nil key="highlightedColor"/>
@@ -61,7 +61,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HsS-mB-LAq">
-                                <rect key="frame" x="0.0" y="20" width="377" height="25"/>
+                                <rect key="frame" x="0.0" y="25" width="377" height="25"/>
                                 <subviews>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="via Credit card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0eD-KI-ryi">
                                         <rect key="frame" x="2" y="-1" width="72" height="14.5"/>
@@ -76,6 +76,34 @@
                                     <constraint firstItem="0eD-KI-ryi" firstAttribute="leading" secondItem="HsS-mB-LAq" secondAttribute="centerX" multiplier="0.01" id="afC-K1-YSn"/>
                                     <constraint firstAttribute="height" constant="25" id="iLk-KG-jZj"/>
                                     <constraint firstItem="0eD-KI-ryi" firstAttribute="height" relation="greaterThanOrEqual" secondItem="HsS-mB-LAq" secondAttribute="height" multiplier="0.4" id="tjd-hz-Fsm"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eLN-zr-Gss">
+                                <rect key="frame" x="0.0" y="20" width="377" height="25"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XPm-5r-Ekb">
+                                        <rect key="frame" x="2" y="-2" width="45" height="17"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                                        <color key="textColor" name="email"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Admin approval - waiting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I7q-b2-qfI">
+                                        <rect key="frame" x="59.5" y="-2" width="145" height="17"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                                        <color key="textColor" name="navigationBar"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="XPm-5r-Ekb" firstAttribute="leading" secondItem="eLN-zr-Gss" secondAttribute="centerX" multiplier="0.01" id="1w7-NM-Xid"/>
+                                    <constraint firstItem="I7q-b2-qfI" firstAttribute="centerY" secondItem="XPm-5r-Ekb" secondAttribute="centerY" id="8tl-5z-9ti"/>
+                                    <constraint firstItem="XPm-5r-Ekb" firstAttribute="width" relation="greaterThanOrEqual" secondItem="eLN-zr-Gss" secondAttribute="width" multiplier="0.11911" id="BOM-GO-2mu"/>
+                                    <constraint firstItem="I7q-b2-qfI" firstAttribute="height" secondItem="XPm-5r-Ekb" secondAttribute="height" id="a7g-GN-8qa"/>
+                                    <constraint firstItem="I7q-b2-qfI" firstAttribute="leading" secondItem="eLN-zr-Gss" secondAttribute="centerX" multiplier="0.315" id="dDv-d8-9pM"/>
+                                    <constraint firstItem="XPm-5r-Ekb" firstAttribute="centerY" secondItem="eLN-zr-Gss" secondAttribute="centerY" multiplier="0.5" id="fAL-Cp-u1d"/>
+                                    <constraint firstAttribute="height" constant="25" id="ipY-yX-3Jc"/>
+                                    <constraint firstItem="XPm-5r-Ekb" firstAttribute="height" relation="greaterThanOrEqual" secondItem="eLN-zr-Gss" secondAttribute="height" multiplier="0.4" id="vrg-mR-dmH"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -151,7 +179,7 @@
                     <constraint firstItem="7dg-Zy-4mx" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.910628" id="e65-VS-wjd"/>
                     <constraint firstItem="7dg-Zy-4mx" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="gvV-nz-Rgu"/>
                     <constraint firstItem="JS8-6w-FWu" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" multiplier="1.5" id="pRs-vq-6LM"/>
-                    <constraint firstItem="7dg-Zy-4mx" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" multiplier="0.65" id="wTQ-St-s1a"/>
+                    <constraint firstItem="7dg-Zy-4mx" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" multiplier="0.68" id="wTQ-St-s1a"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -163,6 +191,8 @@
                 <outlet property="mPriceLb" destination="EZ5-rN-HnF" id="fhR-fH-XYc"/>
                 <outlet property="mStatusLb" destination="bnD-6I-Bc3" id="csa-Y5-GR6"/>
                 <outlet property="mStatusNameLb" destination="Lwe-wd-pGI" id="Bbn-Qd-mtJ"/>
+                <outlet property="mWaitingForAdminLb" destination="I7q-b2-qfI" id="5AY-Q3-YSk"/>
+                <outlet property="mWaitingStatusContentV" destination="eLN-zr-Gss" id="BVc-no-s6Z"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="98.772321428571431"/>
         </tableViewCell>

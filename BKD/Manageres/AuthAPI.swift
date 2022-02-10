@@ -32,6 +32,7 @@ enum AuthAPI: APIProtocol {
     case getMainDriver
     case getAdditionalDrivers
     case deleteDriver(id: String)
+    case getAccount
     case signUp(username: String,
                 password: String)
     case verifyAccounts(username: String,
@@ -125,6 +126,7 @@ enum AuthAPI: APIProtocol {
              .getCountries,
              .getMainDriver,
              .getAdditionalDrivers,
+             .getAccount,
              .signUp,
              .verifyAccounts,
              .resendCode,
@@ -194,6 +196,8 @@ enum AuthAPI: APIProtocol {
             return "api/driver"
         case .getAdditionalDrivers:
             return "api/driver/additional"
+        case .getAccount:
+            return "api/user/account"
         case .deleteDriver(let id):
             return "api/driver/\(id)"
         case .signUp:
@@ -275,6 +279,7 @@ enum AuthAPI: APIProtocol {
              .getMainDriver,
              .deleteDriver,
              .getAdditionalDrivers,
+             .getAccount,
              .signUp,
              .verifyAccounts,
              .resendCode,

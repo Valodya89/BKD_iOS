@@ -100,25 +100,32 @@ final class PaymentViewModel {
     
     ///Get amount for payment
     private func getAmount(paymentOption:  PaymentOption,
-                           vehicleModel: VehicleModel, rent: Rent?) -> String {
+                           vehicleModel: VehicleModel) -> String {
         switch paymentOption {
         case .deposit:
-           
-            let roundedValue = round(vehicleModel.depositPrice * 100) / 100.0
-            return String(roundedValue)
+            if vehicleModel.depositPrice != 0.0 {
+                let roundedValue = round(vehicleModel.depositPrice * 100) / 100.0
+                return String(roundedValue)
+            }
+return String(vehicleModel.rent?.depositPayment.amount ?? 0.0)
         case .depositRental:
-            //let value1 = vehicleModel.depositPrice
-            let roundedValue = round(vehicleModel.depositPrice * 100) / 100.0
-           // let value2 = vehicleModel.totalPrice
-            let roundedValue2 = round(vehicleModel.totalPrice * 100) / 100.0
-            return String(roundedValue + roundedValue2)
+            if vehicleModel.depositPrice != 0.0 && vehicleModel.totalPrice != 0.0 {
+                let roundedValue = round(vehicleModel.depositPrice * 100) / 100.0
+                let roundedValue2 = round(vehicleModel.totalPrice * 100) / 100.0
+                return String(roundedValue + roundedValue2)
+            }
+         return String((vehicleModel.rent?.depositPayment.amount ?? 0.0) + (vehicleModel.rent?.rentPayment.amount ?? 0.0))
+       
+        case .rental:
+            let value = vehicleModel.rent?.rentPayment.amount ?? 0.0
+            return String(value)
+        case .distance:
+            let value = vehicleModel.rent?.depositPayment.amount ?? 0.0
+            return  String(format: "%.2f", value)
         case .payLater:
             return ""
         case .none:
             return ""
-        case .rental:
-            let value = rent?.rentPayment.amount ?? 0.0
-            return String(value)
         }
     }
     
@@ -135,6 +142,9 @@ final class PaymentViewModel {
             return [""]
         case .rental:
             return ["RENT"]
+        case .distance:
+            return ["DISTANCE"]
+            
         }
     }
     
@@ -144,20 +154,18 @@ final class PaymentViewModel {
                        otherPaymentType: PaymentType?,
                        paymentOption:  PaymentOption,
                        vehicleModel: VehicleModel,
-                       rent: Rent?,
                        completion: @escaping (Result<String, BkdError>) -> Void) {
         
         let paymentName: String = getPaymentName(isBancontact: isBancontact,
                                                  bancontactType: bancontactType,
                                                  otherPaymentType: otherPaymentType)
         let amount: String = getAmount(paymentOption: paymentOption,
-                                       vehicleModel: vehicleModel, rent: rent)
+                                       vehicleModel: vehicleModel)
         let parts: [String] = getParts(paymentOption: paymentOption)
-        let id = vehicleModel.rent?.id ?? (rent?.id ?? "")
         
         network.request(with: URLBuilder(from: PaymentAPI.molliePayment(amount: amount,
                               paymentMethod: paymentName,
-                                     rentId: id,
+                                     rentId: vehicleModel.rent?.id ?? "",
                                       parts:parts ))) { (result) in
             switch result {
             case .success(let data):
@@ -183,16 +191,14 @@ final class PaymentViewModel {
     ///Get pay pal url
     func getPayPalUrl(paymentOption:  PaymentOption,
                       vehicleModel: VehicleModel,
-                      rent: Rent?,
                        completion: @escaping (Result<String, BkdError>) -> Void) {
         
         let amount: String = getAmount(paymentOption: paymentOption,
-                                       vehicleModel: vehicleModel, rent: rent)
+                                       vehicleModel: vehicleModel)
         let parts: [String] = getParts(paymentOption: paymentOption)
-        let id = vehicleModel.rent?.id ?? (rent?.id ?? "")
 
         network.request(with: URLBuilder(from: PaymentAPI.payPalPayment(amount: amount,
-                                     rentId: id,
+                                     rentId: vehicleModel.rent?.id ?? "",
                                       parts:parts ))) { (result) in
             switch result {
             case .success(let data):
@@ -240,21 +246,44 @@ final class PaymentViewModel {
     }
     
     ///Get payment rental information string
-    func getRentalInfo(rent: Rent) -> String {
-        let depositAmount = rent.depositPayment.amount
-        let rentAmount = rent.rentPayment.amount
-        let rentalInfo = String(format: Constant.Texts.paidDepositInfo, depositAmount) + "\n" + String(format: Constant.Texts.payRentalInfo, rentAmount)
-        return rentalInfo
+    func getRentalInfo(rent: Rent?, paymentOption: PaymentOption) -> String {
+        guard let rent = rent else {
+            return ""
+        }
+        if paymentOption == .rental {
+            let depositAmount = rent.depositPayment.amount
+            let rentAmount = rent.rentPayment.amount
+            let rentalInfo = String(format: Constant.Texts.paidDepositInfo, depositAmount) + "\n" + String(format: Constant.Texts.payRentalInfo, rentAmount)
+            return rentalInfo
+            
+        } else if paymentOption == .distance {
+            let distanceAmount = rent.distancePayment.amount
+            let distanceKm = "XX"
+            let payInfo = String(format: Constant.Texts.payDistanceMessage, distanceKm, distanceAmount, rent.distance ?? 0.0)
+            return payInfo
+        }
+        return ""
+        
     }
     
     ///Get rent payment info
-    func getPaymentInfo(rent: Rent?,
-                        vehicle: VehicleModel?,
+    func getPaymentInfo(vehicle: VehicleModel?,
                         paymentOption: PaymentOption) -> String {
         if paymentOption == .rental {
-            return String(format: Constant.Texts.payPrice, rent?.rentPayment.amount ?? 0.0)
+            return String(format: Constant.Texts.payPrice, vehicle?.rent?.rentPayment.amount ?? 0.0)
+        } else if paymentOption == .depositRental {
+            if vehicle?.depositPrice != 0.0 && vehicle?.totalPrice != 0.0 {
+                return String(format: Constant.Texts.payPrice,  ((vehicle?.depositPrice ?? 0.0) + (vehicle?.totalPrice ?? 0.0)) )
+            }
+            return String(format: Constant.Texts.payPrice, (vehicle?.rent?.rentPayment.amount ?? 0.0) + (vehicle?.rent?.depositPayment.amount ?? 0.0))
+            
+        } else if paymentOption == .deposit {
+            if vehicle?.depositPrice != 0.0 {
+                return String(format: Constant.Texts.payPrice,  vehicle?.depositPrice ?? 0.0 )
+            }
+            return String(format: Constant.Texts.payPrice, (vehicle?.rent?.depositPayment.amount ?? 0.0))
         }
-       return String(format: Constant.Texts.payPrice, paymentOption == .depositRental ? ((vehicle?.depositPrice ?? 0.0) + (vehicle?.totalPrice ?? 0.0) ) : vehicle?.depositPrice ?? 0.0 )
+        return ""
     }
     
 }

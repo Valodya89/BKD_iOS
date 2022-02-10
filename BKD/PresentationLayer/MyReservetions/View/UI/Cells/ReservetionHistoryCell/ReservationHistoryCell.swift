@@ -56,7 +56,7 @@ class ReservationHistoryCell: UICollectionViewCell {
         
     }
     
-    func  setCellInfo() {
+    func  setCellInfo(rent: Rent, index: Int) {
         
     }
 

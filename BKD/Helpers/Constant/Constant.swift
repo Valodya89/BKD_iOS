@@ -300,6 +300,7 @@ struct Constant {
         static let payPrice = "Make %.2f  Payment via"//MOBILE_payment_means
         static let paidDepositInfo = "You have paid the Deposit in the amount of € %.2f  upon Pre-reservation. Rental price in the amount"//MOBILE_payment_amount_deposit
         static let payRentalInfo = "€ %.2f is still to be paid in order to fully complete the reservation."// MOBILE_payment_pay_rental_to_complete
+        static let paymentPending = "Payment Pending"//MOBILE_global_payment_pending
         
         //MARK: -- My Reservation
         static let price = "Price"//MOBILE_reserve_price
@@ -316,7 +317,10 @@ struct Constant {
         static let back = "Back"//MOBILE_myReservation_back
         static let confirm = "Confirm"//MOBILE_global_confirm
         static let payLater = "Pay later"//MOBILE_global_pay_later
-        static let makePayment = "Make Payment"//
+        static let makePayment = "Make Payment"//MOBILE_global_make_payment
+        static let payDistanceMessage = "For %.2f km ride you should make € %.2f payment (1km = € %.2f)."//MOBILE_myReservation_pay_distance_price_message
+        static let watinfForDistance = "Admin approval - waiting for distance price"//MOBILE_myReservation_waiting_for_distance
+        static let watinfForAdmin = "Admin approval - waiting"//MOBILE_global_admin_approval
 
         
         
@@ -484,6 +488,8 @@ struct Constant {
         static let errAcceptAgreement = "Failed to accept agreement."//MOBILE_err_accept_agreement
         static let errReservation = "Failed to reservation."//MOBILE_err_reservation
         static let errRegistrationBot = "Please, complete user registration"//MOBILE_err_complete_user_register_alert
+        static let somethingWrong = "Something went wrong."//MOBILE_err_something_wrong
+        
         
         
 
@@ -528,6 +534,9 @@ struct Constant {
         static let open_doc = "openDoc"
         static let custom = "CUSTOM"
         static let parking = "PARKING"
+        static let draft = "DRAFT"
+        static let closed = "CLOSED"
+
 
         
     }

@@ -23,6 +23,7 @@ final class ApplicationSettings {
     var carsList: [String : [CarsModel]?]?
     var carTypes: [CarTypes]?
     var allCars: [CarsModel]?
+    var account: Account?
     
     private init() {
         NotificationCenter.default.addObserver(self, selector: #selector(fetchPhoneCodes), name: Constant.Notifications.LanguageUpdate, object: nil)
@@ -111,6 +112,26 @@ extension ApplicationSettings {
             }
         }
     }
+    
+    ///get account
+    func getAccount(completion: @escaping (Account?) -> Void) {
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getAccount)) { [self] (result) in
+            
+            switch result {
+            case .success(let data):
+                guard let account = BkdConverter<BaseResponseModel<Account>>.parseJson(data: data as Any) else {
+                    print("error")
+                    completion(nil)
+                    return
+                }
+                self.account =  account.content
+                completion(self.account)
+            case .failure(let error):
+                print(error.description)
+                completion(nil)
+                break
+            }
+        }    }
     
     
     /// get avalable time list

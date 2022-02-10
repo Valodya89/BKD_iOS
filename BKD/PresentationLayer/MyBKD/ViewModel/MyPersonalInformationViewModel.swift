@@ -47,27 +47,55 @@ final class MyPersonalInformationViewModel {
         let myGroup = DispatchGroup()
         myGroup.enter()
         
+        
+       
+            
+//            mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.identityCard, imageURL: mainDriver.identityFront?.getURL(), imageSide: Constant.Texts.frontSideIdCard, isPhoto: true))
+//
+//
+//                mainDriverList.append(MainDriverModel(imageURL: mainDriver.identityBack?.getURL(), imageSide: Constant.Texts.backSideIdCard, isPhoto: true))
+//
+//                mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.expiryDateIdCard, fieldValue: mainDriver.identityExpirationDate, isPersonalinfo: true, isDate: true))
+//
+//
+//                    mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.drivingLicense, imageURL: mainDriver.drivingLicenseFront?.getURL(), imageSide: Constant.Texts.frontDrivingLic, isPhoto: true))
+//
+//
+//        mainDriverList.append(MainDriverModel(imageURL: mainDriver.identityBack?.getURL(), imageSide: Constant.Texts.backDrivingLic, isPhoto: true))
+//
+//                        mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.issueDrivingLic, fieldValue: mainDriver.drivingLicenseIssueDate, isPersonalinfo: true, isDate: true))
+//
+//                        mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.expiryDrivingLic, fieldValue: mainDriver.drivingLicenseExpirationDate, isPersonalinfo: true, isDate: true))
+//
+//                        mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.drivingLicenseNumber, fieldValue: mainDriver.drivingLicenseNumber, isPersonalinfo: true, isDate: true))
+//
+//
+//                            mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.selfieDrivingLic, imageURL: mainDriver.drivingLicenseSelfie?.getURL(), isPhoto: true))
+//
+//        completion(mainDriverList)
+        
+        
         UIImage.loadFrom(url: (mainDriver.identityFront?.getURL())!) { img in
-            
+
             mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.identityCard, image:img, imageSide: Constant.Texts.frontSideIdCard, isPhoto: true))
-            
+
             UIImage.loadFrom(url: (mainDriver.identityBack?.getURL())!) { img in
                 mainDriverList.append(MainDriverModel(image:img, imageSide: Constant.Texts.backSideIdCard, isPhoto: true))
-                
+
                 mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.expiryDateIdCard, fieldValue: mainDriver.identityExpirationDate, isPersonalinfo: true, isDate: true))
-                
+
                 UIImage.loadFrom(url: (mainDriver.drivingLicenseFront?.getURL())!) { img in
                     mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.drivingLicense, image:img, imageSide: Constant.Texts.frontDrivingLic, isPhoto: true))
-                    
+
                     UIImage.loadFrom(url: (mainDriver.identityBack?.getURL())!) { img in
                         mainDriverList.append(MainDriverModel(image:img, imageSide: Constant.Texts.backDrivingLic, isPhoto: true))
-                        
+
                         mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.issueDrivingLic, fieldValue: mainDriver.drivingLicenseIssueDate, isPersonalinfo: true, isDate: true))
-                        
+
                         mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.expiryDrivingLic, fieldValue: mainDriver.drivingLicenseExpirationDate, isPersonalinfo: true, isDate: true))
-                        
+
                         mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.drivingLicenseNumber, fieldValue: mainDriver.drivingLicenseNumber, isPersonalinfo: true, isDate: true))
-                        
+
                         UIImage.loadFrom(url: (mainDriver.drivingLicenseSelfie?.getURL())!) { img in
                             mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.selfieDrivingLic, image:img, isPhoto: true))
                             myGroup.leave()

@@ -251,7 +251,7 @@
                                             <constraint firstItem="zWo-gV-dIf" firstAttribute="leading" secondItem="hzh-tU-dVM" secondAttribute="trailing" multiplier="1.2" id="zJw-S0-lU5"/>
                                         </constraints>
                                     </view>
-                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rsh-rQ-egW">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rsh-rQ-egW">
                                         <rect key="frame" x="0.0" y="223" width="382" height="22.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jSs-CL-ssK">
@@ -343,6 +343,7 @@
                 <outlet property="mPickupLocationLb" destination="wPp-dv-vev" id="7Kr-8j-zH4"/>
                 <outlet property="mPickupMonthLb" destination="Kgc-ER-T1K" id="TKU-Qc-ch6"/>
                 <outlet property="mPickupTimeLb" destination="awv-QF-HxD" id="bGK-en-GzO"/>
+                <outlet property="mPriceContentV" destination="Rsh-rQ-egW" id="qhz-EI-D7O"/>
                 <outlet property="mPriceLb" destination="3sw-Zx-fhJ" id="Ubn-f2-Dha"/>
                 <outlet property="mReturnCarImgV" destination="DL3-MK-V3v" id="sjt-WW-rts"/>
                 <outlet property="mReturnDayLb" destination="w7r-d7-jRN" id="6Ba-Gt-cWa"/>

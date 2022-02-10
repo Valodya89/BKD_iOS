@@ -85,7 +85,8 @@ class OnRideCollectionViewCell: UICollectionViewCell {
         return onRideModel
     }
     
-    func setInfoCell(item: Rent, index: Int) {
+    func setInfoCell(item: Rent, index: Int, stopRideTime: (day: Int?, hour: Int, minute: Int)) {
+        
         mStopRideBtn.tag = index
         mStopRideBtn.addTarget(self, action: #selector(pressedStopRide(sender:)), for: .touchUpInside)
         mAddDamagesBtn.tag = index
@@ -116,15 +117,17 @@ class OnRideCollectionViewCell: UICollectionViewCell {
         } else if let returnParkin = item.returnLocation.parking {
             mBkdOfficeLb.text = returnParkin.name
         }
-//        //Date
-//        let startDate = Date().doubleToDate(doubleDate: item.startDate)
-//        let endDate = Date().doubleToDate(doubleDate: item.endDate)
-//        mPickupDayLb.text = startDate.getDay()
-//        mPickupMonthLb.text =  startDate.getMonth(lng: "en")
-//        mPickupTimeLb.text = startDate.getHour()
-//        mReturnDayLb.text = endDate.getDay()
-//        mReturnMonthLb.text = endDate.getMonth(lng: "en")
-//        mReturnTimeLb.text = endDate.getHour()
+        //Date
+        let day = String(stopRideTime.day ?? 0)
+        mDayLb.text = ((day.count == 1) ? ("0" + day) : day) + " \(Constant.Texts.d) /"
+        
+        let hour = String(stopRideTime.hour)
+        mHourLb.text = ((hour.count == 1) ? ("0" + hour) : hour) + " \(Constant.Texts.h) /"
+        let minute = String(stopRideTime.minute)
+        mMinuteLb.text = ((minute.count == 1) ? ("0" + minute) : minute) + " \(Constant.Texts.m)"
+        
+        //Price
+        mPriceLb.text = String(format: "%.2f", MyReservationViewModel().getPaidPrice(rent: item))
     }
     
     @objc func pressedStopRide(sender: UIButton) {

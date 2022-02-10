@@ -17,7 +17,7 @@ final class BkdError: Error {
         case .responseError(let error):
             self.message = error
         case .serverError:
-            self.message = "Something went wrong."
+            self.message = Constant.Texts.somethingWrong
         case .invalidParse(let error):
             self.message = error
         }

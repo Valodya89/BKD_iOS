@@ -14,7 +14,7 @@ struct Rent: Codable {
      let state: String?
      let deposit: String?
      let rent: String?
-     let distance: String?
+     let distance: Double?
      let userId: String
      let startDate: Double
      let endDate: Double

@@ -70,17 +70,17 @@
                         </constraints>
                     </stackView>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cVQ-u3-yEd">
-                        <rect key="frame" x="315.5" y="0.0" width="84" height="63"/>
+                        <rect key="frame" x="315.5" y="16" width="84" height="44"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="verified" translatesAutoresizingMaskIntoConstraints="NO" id="e3l-XC-uWe">
-                                <rect key="frame" x="0.0" y="23" width="17" height="17"/>
+                                <rect key="frame" x="0.0" y="13.5" width="17" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="T4w-ZI-dgm"/>
                                     <constraint firstAttribute="width" constant="17" id="tfm-Be-EdB"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verified" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISS-52-vZa">
-                                <rect key="frame" x="27" y="16.5" width="57" height="30"/>
+                                <rect key="frame" x="27" y="7" width="57" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="57" id="04c-Wo-JgW"/>
                                     <constraint firstAttribute="height" constant="30" id="sfH-7e-WnO"/>
@@ -137,7 +137,7 @@
                     <constraint firstItem="X5K-S0-Hl2" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.6" id="Omc-ES-Xf5"/>
                     <constraint firstItem="X5K-S0-Hl2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="PH3-Mp-rnR"/>
                     <constraint firstItem="54j-3v-0Gh" firstAttribute="trailing" secondItem="X5K-S0-Hl2" secondAttribute="trailing" id="QQv-iX-ylx"/>
-                    <constraint firstItem="cVQ-u3-yEd" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="U1a-aT-Jxs"/>
+                    <constraint firstItem="cVQ-u3-yEd" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" multiplier="1.2" id="U1a-aT-Jxs"/>
                     <constraint firstItem="cVQ-u3-yEd" firstAttribute="leading" secondItem="DOw-SK-qhD" secondAttribute="trailing" constant="15" id="ajJ-rZ-zab"/>
                     <constraint firstItem="UO1-Qp-ERF" firstAttribute="leading" secondItem="X5K-S0-Hl2" secondAttribute="leading" id="am7-tv-ZVD"/>
                     <constraint firstItem="CKv-pc-cTj" firstAttribute="trailing" secondItem="cVQ-u3-yEd" secondAttribute="trailing" id="dKn-ns-UkW"/>
@@ -151,7 +151,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <constraints>
-                <constraint firstItem="cVQ-u3-yEd" firstAttribute="height" secondItem="KGk-i7-Jjw" secondAttribute="height" id="pUP-KB-Nnr"/>
+                <constraint firstItem="cVQ-u3-yEd" firstAttribute="height" secondItem="KGk-i7-Jjw" secondAttribute="height" multiplier="0.7" id="pUP-KB-Nnr"/>
             </constraints>
             <connections>
                 <outlet property="mCodeBtn" destination="kWQ-OL-4rm" id="YNt-Y3-WKW"/>

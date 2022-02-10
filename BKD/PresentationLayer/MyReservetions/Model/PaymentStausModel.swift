@@ -13,6 +13,8 @@ struct   PaymentStatusModel {
     public var isActivePaymentBtn: Bool = false
     public var price: Double?
     public var paymentButtonType: String?
+    public var waitingStatus: String?
+
 
 }
 

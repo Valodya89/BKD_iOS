@@ -14,7 +14,7 @@ enum MyReservationState: String {
     case payDistancePrice
     case maykePayment
     case payRentalPrice
-    case driverWaithingApproval
+    case waithingApproval
 }
 
 //enum ReservationViewType: String {
@@ -38,6 +38,8 @@ enum RentState: String {
     case END_DEFECT_CHECK
     case END_ODOMETER_CHECK
     case FINISHED
+    case ADMIN_FINISHED
+    case CLOSED
 }
 
 class MyReservationViewModel: NSObject {
@@ -72,6 +74,21 @@ class MyReservationViewModel: NSObject {
             }
         }
     }
+    
+    ///Get reservation´s history list
+    func filterReservations(rents: [Rent]) ->(rent: [Rent], historys: [Rent])  {
+        
+        var rentsHistory: [Rent] = []
+        var rentedCars: [Rent] = []
+        for item in rents {
+            if item.state == Constant.Keys.closed && item.distancePayment.payed {
+                rentsHistory.append(item)
+            } else {
+                rentedCars.append(item)
+            }
+        }
+        return (rentedCars, rentsHistory)
+    }
    
     ///Get car´s reservations
     func changeDriver(rentId: String,
@@ -96,6 +113,12 @@ class MyReservationViewModel: NSObject {
                 break
             }
         }
+    }
+    
+    ///Check is active start ride(Is less then 15 minute before start)
+     func isActiveStartRide(start: Double) -> Bool {
+        let duration = Date().getDistanceByComponent(.minute, toDate: Date(timeIntervalSince1970: start)).minute
+        return duration ?? 0 <= 15
     }
     
     ///Get reservation view type
@@ -126,11 +149,11 @@ class MyReservationViewModel: NSObject {
             
         }  else if (!rent.depositPayment.payed && !rent.rentPayment.payed) || rent.price.payLater  {
             return rent.rentPayment.amount +  rent.depositPayment.amount
-                   
             }
         return rent.distancePayment.amount
     }
-    
+
+
     ///Get price which user will pay
     func getPaidPrice(rent: Rent) -> Double {
         if (rent.depositPayment.payed &&
@@ -141,8 +164,31 @@ class MyReservationViewModel: NSObject {
                    rent.depositPayment.transactionId != nil) && !rent.rentPayment.payed {
             
             return rent.rentPayment.amount +  rent.depositPayment.amount + rent.distancePayment.amount
-            
         }
         return 0.0
     }
+    
+    
+    ///Get stop ride time
+    func getStopRideTime(endDate: Double ) -> (day: Int?, hour: Int, minute: Int) {
+        
+        let stopTime = endDate - Date().timeIntervalSince1970
+        if stopTime > 0 {
+           let m = stopTime  / 60
+            let h = m / 60
+            var hours = Int(h)
+            var day = 0
+            if h > 24 {
+                day = Int(h / 24)
+                hours -= day * 24
+                let minute = m - Double(((day * 24) + hours) * 60)
+                return (Int(day), Int(hours) + 3, Int(minute))
+            }
+            return (0, Int(h) + 3, Int(m))
+        } else {
+            return (nil, 0, 0)
+        }
+    }
+
+   
 }

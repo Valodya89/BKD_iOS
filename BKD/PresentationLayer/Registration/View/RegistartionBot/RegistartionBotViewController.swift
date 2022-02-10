@@ -742,7 +742,7 @@ extension RegistartionBotViewController: TakePhotoTableViewCellDelegate {
         if isOpenDoc {
             
             self.goToAgreement(on: self,
-                               agreementType: .none,
+                               agreementType: .none, paymentOption: nil,
                                vehicleModel: nil,
                                rent: nil,
                                urlString: ApplicationSettings.shared.settings?.registrationAgreementUrl)

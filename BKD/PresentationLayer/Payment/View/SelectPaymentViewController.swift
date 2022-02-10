@@ -33,7 +33,6 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
     var paymentType: PaymentTypesResponse?
     var userWallet: UserWallet?
     public var vehicleModel: VehicleModel?
-    public var currRent: Rent?
     public var paymentOption: PaymentOption?
   //  public var isDeposit:Bool = false
     
@@ -72,7 +71,6 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
         if mBlurV.isHidden {
             mBancontactV.mContentVBottom.constant = -400
             mBancontactTypeV.mContentVBottom.constant = -400
-            
         }
     }
     
@@ -89,9 +87,8 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
         mRightBarBtn.image = img_bkd
         mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
-        mMaskePaymentLb.text = viewModel.getPaymentInfo(rent: currRent, vehicle: vehicleModel, paymentOption: paymentOption ?? .none)
-        guard let rent = currRent else {return}
-        mDepositInfoLb.text = viewModel.getRentalInfo(rent: rent)
+        mMaskePaymentLb.text = viewModel.getPaymentInfo(vehicle: vehicleModel, paymentOption: paymentOption ?? .none)
+        mDepositInfoLb.text = viewModel.getRentalInfo(rent: vehicleModel?.rent, paymentOption: paymentOption ?? .none)
     }
     
     ///configure delegate
@@ -221,7 +218,7 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
                                 bancontactType: bancontactType,
                                 otherPaymentType: otherPaymentType,
                                 paymentOption: paymentOption ?? .none,
-                                vehicleModel: vehicleModel ?? VehicleModel(), rent: currRent) { [weak self] result in
+                                vehicleModel: vehicleModel ?? VehicleModel()) { [weak self] result in
             
             guard let self = self else { return }
             switch result {
@@ -243,7 +240,7 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
     ///Gret pay pal url
     func getPayPalUrl() {
         viewModel.getPayPalUrl(paymentOption: paymentOption ?? .none,
-                               vehicleModel: vehicleModel ?? VehicleModel(), rent: currRent) {  [weak self] result in
+                               vehicleModel: vehicleModel ?? VehicleModel()) {  [weak self] result in
             
             guard let self = self else { return }
             switch result {

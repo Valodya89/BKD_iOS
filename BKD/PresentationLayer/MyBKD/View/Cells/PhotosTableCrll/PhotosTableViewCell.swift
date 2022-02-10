@@ -32,8 +32,9 @@ class PhotosTableViewCell: UITableViewCell {
     }
 
     override func prepareForReuse() {
-        mPhotoImgV.image = nil
+        mPhotoImgV.image = UIImage()
         mPhotoSideLb.isHidden = false
+        
     }
     //Set cell information
     func setCellInfo(item: MainDriverModel, index: Int) {
@@ -52,9 +53,14 @@ class PhotosTableViewCell: UITableViewCell {
         
         if let img = item.editImg {
             mPhotoImgV.image = img
-        } else if let image = item.image {
+        }
+        else if let image = item.image {
             mPhotoImgV.image = image
         }
+//        else {
+//            mPhotoImgV.image = UIImage()
+//            mPhotoImgV.sd_setImage(with:item.imageURL ?? URL(string: ""), placeholderImage: nil)
+//        }
     }
     
     ///Handler change photo button

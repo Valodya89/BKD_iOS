@@ -53,7 +53,7 @@ class ReservetionMakePaymentCell: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
-        mPriceLb.text = "XX,X"
+        mPriceLb.text = "0.0"
        // mRegistrationNumberLb.text = ""
        // mMakePaymentBtn.setTitleColor(color_email!, for: .normal)
         mMakePaymentBtn.isEnabled = true
@@ -131,7 +131,7 @@ class ReservetionMakePaymentCell: UICollectionViewCell {
             mMakePaymentBtn.setTitle(Constant.Texts.payDistance, for: .normal)
         case .startRide, .stopRide:
             mStatusTypeLb.text = Constant.Texts.reservedPaid
-        case .driverWaithingApproval:
+        case .waithingApproval:
             break
         }
     }

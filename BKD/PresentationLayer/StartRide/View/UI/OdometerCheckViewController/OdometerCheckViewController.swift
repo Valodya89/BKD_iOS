@@ -50,11 +50,11 @@ class OdometerCheckViewController: UIViewController, StoryboardInitializable {
     
     
     //MARK: -- Variables
-    public var currRentModel: Rent?
+    public var currRent: Rent?
     
     private var rentCar: CarsModel?
     var odometerState: OdometerState = .none
-    lazy var odometerCheckViewModel = OdomoeterCheckViewModel()
+    lazy var odometerCheckVM = OdomoeterCheckViewModel()
     
     
     //MARK: -- Lifecycle
@@ -86,11 +86,11 @@ class OdometerCheckViewController: UIViewController, StoryboardInitializable {
 
     ///Configure UI
     func configureUI() {
-        rentCar = ApplicationSettings.shared.allCars?.filter( {$0.id == currRentModel?.carDetails.id}).first
+        rentCar = ApplicationSettings.shared.allCars?.filter( {$0.id == currRent?.carDetails.id}).first
         mKmPriceLb.text = String(format: "%.2f", rentCar?.priceForKm ?? 0.0) 
-        guard let odometer = currRentModel?.startOdometer else {return}
+        guard let odometer = currRent?.startOdometer else {return}
         mLastOdometeNumberLb.text = odometer.value
-        if RentState.init(rawValue: currRentModel?.state ?? "") == .START_ODOMETER_CHECK {
+        if RentState.init(rawValue: currRent?.state ?? "") == .START_ODOMETER_CHECK {
             self.startRideAlert()
         }
     }
@@ -98,8 +98,8 @@ class OdometerCheckViewController: UIViewController, StoryboardInitializable {
     
     ///Add Odometer
     func addOdometer() {
-        odometerCheckViewModel.addOdometer(image: mOdomateImgV.image ?? UIImage(),
-                                           id: currRentModel?.id ?? "",
+        odometerCheckVM.addOdometer(image: mOdomateImgV.image ?? UIImage(),
+                                           id: currRent?.id ?? "",
                                            value: mOdomateNumberTxtFl.text!) { result, err in
             guard let rent = result else {return}
             self.checkOdometer()
@@ -109,18 +109,17 @@ class OdometerCheckViewController: UIViewController, StoryboardInitializable {
     
     ///Check odometer
     func checkOdometer() {
-        odometerCheckViewModel.checkOdometer(id: currRentModel?.id ?? "") { result, err in
+        odometerCheckVM.checkOdometer(id: currRent?.id ?? "") { result, err in
             guard let rent = result else {return}
             if RentState.init(rawValue: rent.state ?? "") == .START_ODOMETER_CHECK {
                 self.startRideAlert()
-                
             }
         }
     }
     
     ///Start ride
     func startRide() {
-        odometerCheckViewModel.startRide(id: currRentModel?.id ?? "") { result, err in
+        odometerCheckVM.startRide(id: currRent?.id ?? "") { result, err in
             guard let rent = result else {return}
             if RentState.init(rawValue: rent.state ?? "") == .STARTED {
                 self.navigationController?.popToViewController(ofClass: MyReservationsViewController.self)

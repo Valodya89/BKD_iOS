@@ -158,7 +158,7 @@ class ReserveViewController: BaseViewController {
 
         } completion: { _ in
             self.goToAgreement(on: self,
-                               agreementType: .reserve,
+                               agreementType: .reserve, paymentOption: nil,
                                vehicleModel: self.vehicleModel,
                                rent: nil,
                                urlString: ApplicationSettings.shared.settings?.reservationAgreementUrl)

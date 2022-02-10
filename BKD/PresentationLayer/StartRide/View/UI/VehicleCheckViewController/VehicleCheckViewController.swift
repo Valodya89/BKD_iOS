@@ -27,7 +27,7 @@ class VehicleCheckViewController: BaseViewController {
     @IBOutlet weak var mAddDamageCenterY: NSLayoutConstraint!
     
     //MARK: --Variables
-    public var currRentModel: Rent?
+    public var currRent: Rent?
     private lazy  var addDamageVC = NewDamageViewController.initFromStoryboard(name: Constant.Storyboards.newDamage)
     private lazy var vehicleCheckViewModel = VehicleCheckViewModel()
     var pageDataSours:[Defect?]?
@@ -72,7 +72,7 @@ class VehicleCheckViewController: BaseViewController {
     
     ///Configure UI
     func configureUI() {
-        guard let defects = currRentModel?.startDefects else {return}
+        guard let defects = currRent?.startDefects else {return}
 
         pageDataSours = defects
         let defect = Defect(comment: "", image: nil)
@@ -114,7 +114,7 @@ class VehicleCheckViewController: BaseViewController {
     ///Add defect
     func addDefect() {
         vehicleCheckViewModel.addDefect(image: addDamageVC.mDamageImgV.image ?? UIImage(),
-                                        id: currRentModel?.id ?? "",
+                                        id: currRent?.id ?? "",
                                         state: "defects",
                                         description: addDamageVC.mDemageTxtFl.text ?? "") { result, err in
             guard let startDefects = result?.startDefects else {return}
@@ -129,7 +129,7 @@ class VehicleCheckViewController: BaseViewController {
     
     ///Check defect
     func checkDefecte() {
-        vehicleCheckViewModel.defectCheck(id: currRentModel?.id ?? "") { result, err in
+        vehicleCheckViewModel.defectCheck(id: currRent?.id ?? "") { result, err in
             guard let rent = result else {return}
             if RentState.init(rawValue: rent.state ?? "") == .START_DEFECT_CHECK {
                 self.goToOdometerCheck(rent: rent)
@@ -148,8 +148,7 @@ class VehicleCheckViewController: BaseViewController {
                                                object: nil)
     }
     
-    //MARK: Keyboard NSNotification
-    //MARK: ---------------------------
+    //MARK: -- Keyboard NSNotification
     
     @objc func keyboardWillShow (notification: NSNotification) {
         
@@ -275,8 +274,7 @@ extension VehicleCheckViewController: UICollectionViewDelegateFlowLayout, UIColl
 
 
 
-//MARK: - UIImagePickerControllerDelegate
-//MARK: --------------------------------
+//MARK: -- UIImagePickerControllerDelegate
 extension VehicleCheckViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     

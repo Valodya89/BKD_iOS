@@ -27,7 +27,7 @@ class MyPersonalInfoTableView: UITableView, UITableViewDelegate, UITableViewData
     var responderTxtFl = UITextField()
     var countryList: [Country]?
     var currentCountry: Country?
-
+    var account: Account?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,7 +38,7 @@ class MyPersonalInfoTableView: UITableView, UITableViewDelegate, UITableViewData
         configuredelegates()
         registerTableCells()
         getCountryList()
-        
+        getAccount()
     }
     
     ///Get country list
@@ -46,6 +46,14 @@ class MyPersonalInfoTableView: UITableView, UITableViewDelegate, UITableViewData
         countryList = ApplicationSettings.shared.countryList
         if countryList == nil {
             getCountryList()
+        }
+    }
+    
+    ///Get user account
+    public func getAccount() {
+        ApplicationSettings.shared.getAccount { account in
+            self.account = account
+            self.reloadData()
         }
     }
     
@@ -143,7 +151,12 @@ class MyPersonalInfoTableView: UITableView, UITableViewDelegate, UITableViewData
         let cell =
         self.dequeueReusableCell(withIdentifier: PhonbeNumberTableCell
                                         .identifier, for: indexPath) as! PhonbeNumberTableCell
-        
+        if account != nil && ((account?.phoneVerified) == true) {
+            cell.mVerifiedV.isHidden = false
+        } else {
+            cell.mVerifiedV.isHidden = true
+            cell.mVerifyBtn.isHidden = false
+        }
         cell.delegate = self
         let currentPhoneCode = MyPersonalInformationViewModel().getCurrnetPhoneCode(number: item.fieldValue ?? "")
         if let _ = currentPhoneCode {

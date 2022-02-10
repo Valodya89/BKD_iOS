@@ -95,12 +95,13 @@ class PhonbeNumberTableCell: UITableViewCell {
         mTxtFl.isEnabled = isEdit
         mDropDownImgV.isHidden = !isEdit
         mFieldNameLb.text = item.fieldName
-        if isEditedPhone {
-            mVerifiedV.isHidden = true
-            mVerifyBtn.isHidden = false
-        } else {
-            mVerifiedV.isHidden = isEdit
-        }
+        
+//        if isEditedPhone {
+//            mVerifiedV.isHidden = true
+//            mVerifyBtn.isHidden = false
+//        } else {
+//            mVerifiedV.isHidden = isEdit
+//        }
         
         mCodeBtn.setTitle(selectedCountry?.code, for: .normal) 
         self.layoutIfNeeded()
@@ -109,6 +110,8 @@ class PhonbeNumberTableCell: UITableViewCell {
             mTxtFl.becomeFirstResponder()
         }
 
+        //Phone verify
+        
     }
     
     

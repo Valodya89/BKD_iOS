@@ -48,10 +48,13 @@ final class PaymentWebViewController: UIViewController, StoryboardInitializable,
     // MARK: - IBActions
     
     @IBAction func close(_ sender: UIBarButtonItem) {
-        
-        navigationController?.popToViewController(ofClass: MainViewController.self)
+        if self.tabBarController?.selectedIndex == 0 {
+            navigationController?.popToViewController(ofClass: MainViewController.self)
+        } else {
+        navigationController?.popToViewController(ofClass: MyReservationsViewController.self)
+        }
         self.tabBarController?.selectedIndex = 1
-        
+
     }
     
     @IBAction private func back(_ sender: UIBarButtonItem) {

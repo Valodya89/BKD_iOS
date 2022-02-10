@@ -9,6 +9,7 @@ enum PaymentOption {
     case deposit
     case rental
     case depositRental
+    case distance
     case payLater
     case none
 }
@@ -50,11 +51,6 @@ class ReservationCompletedViewController: BaseViewController {
         setUpView()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        mConfirmBtn.roundCornersWithBorder(corners: .allCorners, radius: 8, borderColor: color_navigationBar!, borderWidth: 1)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         mConfirmLeading.constant = 0.0
@@ -76,6 +72,7 @@ class ReservationCompletedViewController: BaseViewController {
         mPreReservetionTitleLb.setPadding(8)
         mPreReservetionTitleLb.textAlignment = .center
         mConfirmBtn.layer.cornerRadius = 8
+        mConfirmBtn.setBorder(color: color_navigationBar!, width: 1)
         mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
         mDepositPriceLb.text = Constant.Texts.euro + " " + String(vehicleModel?.depositPrice ?? 0.0)
         mDepositRentalPriceLb.text = Constant.Texts.euro + " " + String(vehicleModel?.depositPrice ?? 0.0) + " + " + String(format: "%.2f",PriceManager.shared.totalPrice ?? 0.0)
@@ -102,7 +99,7 @@ class ReservationCompletedViewController: BaseViewController {
             self.mConfirmLeading.constant = self.mConfirmContentV.bounds.width - self.mConfirmBtn.frame.size.width
             self.mConfirmContentV.layoutIfNeeded()
         } completion: { _ in
-            self.goToSelectPayment(vehicleModel: self.vehicleModel ?? VehicleModel(), rent: nil,
+            self.goToSelectPayment(vehicleModel: self.vehicleModel ?? VehicleModel(),
                                    paymentOption: self.paymentOption)
         }
     }
@@ -135,7 +132,7 @@ class ReservationCompletedViewController: BaseViewController {
         bkdAlert.showAlert(on: self, title: nil, message: message, messageSecond: nil, cancelTitle: Constant.Texts.gotIt, okTitle: Constant.Texts.payNow) {
             self.mVisualEffectV.isHidden = true
         } okAction: {
-            self.goToSelectPayment(vehicleModel: self.vehicleModel ?? VehicleModel(), rent: nil,
+            self.goToSelectPayment(vehicleModel: self.vehicleModel ?? VehicleModel(),
                                    paymentOption: self.paymentOption)
         }
     }

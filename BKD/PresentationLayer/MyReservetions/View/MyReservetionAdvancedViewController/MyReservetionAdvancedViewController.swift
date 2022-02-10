@@ -121,7 +121,6 @@ class MyReservetionAdvancedViewController: BaseViewController {
         mStartRideVLeading.constant = -50.0
         mExtendReservationBtn.layer.cornerRadius = 8
         mExtendReservationBtn.setBorder(color: color_menu!, width: 1.0)
-       // mStartRideContentV.roundCorners(corners: [.topRight, .topLeft], radius: 20)
     }
     
     
@@ -170,6 +169,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
         mSwitchDriverTbV.switchDriversDelegate = self
         
         configureUI()
+        configureContinueBtnUI()
         configureOnRide()
         configureTotalPriceSteckView()
         handlerTotalPrice()
@@ -248,6 +248,20 @@ class MyReservetionAdvancedViewController: BaseViewController {
         
     }
     
+    ///Configure bottom continue button UI
+    func configureContinueBtnUI(){
+        if myReservationState == .stopRide || myReservationState == .startRide {
+            mStartRideContentV.isHidden = false
+           // mEditContentV.isHidden = true
+            
+            if myReservationVM.isActiveStartRide(start: currRent?.startDate ?? 0.0) || currRent?.carDetails.registrationNumber != nil  {
+                mStartRideContentV.enableView()
+            } else {
+                mStartRideContentV.disableView()
+            }
+        }
+    }
+    
     ///Configure on ride case
     func configureOnRide() {
         if myReservationState == .stopRide {
@@ -265,25 +279,16 @@ class MyReservetionAdvancedViewController: BaseViewController {
     }
     
     
-    ///Configure pay dstance price
-    func configurePayDistancePrice() {
-        
-        if myReservationState == .payDistancePrice {
-            mStartRideContentV.isHidden = true
-            mEditContentV.isHidden = true
-        }
-    }
-    
-    func configureReservationStatus() {
-        switch myReservationState {
-        case .startRide: break
-        case .payRentalPrice:break
-        case .payDistancePrice:break
-        case .maykePayment:break
-        case .stopRide: break
-        default : break
-        }
-    }
+//    func configureReservationStatus() {
+//        switch myReservationState {
+//        case .startRide: break
+//        case .payRentalPrice:break
+//        case .payDistancePrice:break
+//        case .maykePayment:break
+//        case .stopRide: break
+//        default : break
+//        }
+//    }
     
     func configureTotalPriceSteckView() {
         let price = myReservAdvancedVM.getPriceList(rent: currRent)
@@ -291,19 +296,14 @@ class MyReservetionAdvancedViewController: BaseViewController {
         mNewPriceTableV.pricesArr = price.price
         mNewPriceTableV.reloadData()
         mTotalPriceStackV.mNewTotalPriceLb.text = String(format: "%.2f",totalPrice)
-        if isEdited {
-            mTotalPriceStackV.showOldAndNewTotalPrices(oldPrice: totalPrice, newPrice: 00.0)
-        }
+//        if isEdited {
+//            mTotalPriceStackV.showOldAndNewTotalPrices(oldPrice: totalPrice, newPrice: 00.0)
+//        }
     }
     
     ///configure reserve view
     private func configureStartRideView(isActive: Bool) {
-//        mStartRideContentV.setGradientWithCornerRadius(cornerRadius: 0.0, startColor:isActive ? color_reserve_start! : color_reserve_inactive_start!,
-//                                                  endColor:isActive ? color_reserve_end!: color_reserve_inactive_end! )
-//        mStartRideContentV.roundCorners(corners: [.topRight, .topLeft], radius: 20)
-//        mStartRideContentV.isUserInteractionEnabled = isActive
-        
-        
+
         mStartRideContentV.setGradientWithCornerRadius(cornerRadius: 0.0, startColor: color_dark_register!,endColor: color_dark_register!.withAlphaComponent(0.85) )
         mStartRideContentV.roundCorners(corners: [.topRight, .topLeft], radius: 20)
     }
@@ -370,17 +370,6 @@ class MyReservetionAdvancedViewController: BaseViewController {
     }
     
     
-    
-    ///Update start ride button
-    private func updateStartRide(isActive: Bool) {
-        
-        if isActive && registerNumberArr?.count ?? 0 > 0 {
-            mStartRideContentV.isUserInteractionEnabled = isActive
-            mStartRideContentV.alpha = isActive ? 1 : 0.75
-            
-        }
-    }
-    
     //MARK: -- Switch driver methods
     ///Show switch drivers table view
     private func animateSwitchDriversTable(additionalDrivers: [DriverToRent] ) {
@@ -428,6 +417,24 @@ class MyReservetionAdvancedViewController: BaseViewController {
             }
     }
     
+    ///Handler Start ride button
+    private func handlerContinue() {
+        if myReservationState == .startRide {
+            if RentState.init(rawValue: currRent?.state ?? "") == .START_DEFECT_CHECK || RentState.init(rawValue: currRent?.state ?? "") == .START_ODOMETER_CHECK {
+                self.goToOdometerCheck(rent: currRent)
+            } else {
+                self.goToVehicleCheck(rent: currRent)
+            }
+        } else if myReservationState == .stopRide {
+            if RentState.init(rawValue: currRent?.state ?? "") == .END_DEFECT_CHECK || RentState.init(rawValue: currRent?.state ?? "") == .END_ODOMETER_CHECK {
+                self.goToStopRideOdometereCheck(rent: currRent)
+            } else if RentState.init(rawValue: currRent?.state ?? "") == .STARTED {
+                self.goToStopRide(rent: currRent)
+            }
+        }
+        
+    }
+    
     
 //MARK: -- Actions
     
@@ -439,20 +446,20 @@ class MyReservetionAdvancedViewController: BaseViewController {
     @IBAction func startRideSwipe(_ sender: UISwipeGestureRecognizer) {
         animationStartRide()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [self] in
-            self.goToVehicleCheck(rent: nil)
+            self.handlerContinue()
         }
     }
     
     @IBAction func startRide(_ sender: UIButton) {
         animationStartRide()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [self] in
-            self.goToVehicleCheck(rent: nil)
+            self.handlerContinue()
         }
     }
     
     @IBAction func agreement(_ sender: UIButton) {
         self.goToAgreement(on: self,
-                           agreementType: .none,
+                           agreementType: .none, paymentOption: nil,
                            vehicleModel: nil,
                            rent: currRent,
                            urlString: nil)
@@ -489,7 +496,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
                 self.goToPayLater(rent: self.currRent)
             } else {
                 self.goToAgreement(on: self,
-                                   agreementType: .advanced,
+                                   agreementType: .advanced, paymentOption: nil,
                                    vehicleModel: nil,
                                    rent: self.currRent,
                                    urlString: nil)
@@ -525,7 +532,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
 extension MyReservetionAdvancedViewController: BkdAgreementViewControllerDelegate {
     func agreeTermsAndConditions() {
         if registerNumberArr?.count ?? 0 > 0 {
-            updateStartRide(isActive: true)
+            mStartRideContentV.enableView()
         }
     }
 }

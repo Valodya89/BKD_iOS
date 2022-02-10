@@ -32,7 +32,10 @@ class MyReservationsViewController: BaseViewController {
     var isReservationHistory: Bool = false
     var drivers:[MyDriversModel]? = MyDriversData.myDriversModel
     var myReservations: [Rent]?
+    var myHistoryReservations: [Rent]?
 
+    var cellRowToTimerMapping: [Int: Timer] = [:]
+    var cellRowToPauseFlagMapping: [Int: Bool] = [:]
 
     //MARK: -- Lifecycle
     override func viewDidLoad() {
@@ -93,7 +96,9 @@ class MyReservationsViewController: BaseViewController {
     private func getRents() {
         myReservationVM.getReservations { result in
             guard let result = result else {return}
-            self.myReservations = result
+            let reservations = self.myReservationVM.filterReservations(rents: result)
+            self.myReservations = reservations.rent
+            self.myHistoryReservations = reservations.historys
             self.mReservCollectionV.reloadData()
         }
     }
@@ -110,7 +115,7 @@ class MyReservationsViewController: BaseViewController {
         }
     }
     
-    ///Go to my reservation ViewController
+    ///Go to my reservation advanced ViewController
     func goToMyReservation(myReservationState: MyReservationState,
                            paymentStatusArr: [PaymentStatusModel]?,
                            registerNumberArr:[String]?,
@@ -175,15 +180,6 @@ class MyReservationsViewController: BaseViewController {
             }
     }
     
-    
-    ///Check is active start ride(Is less then 15 minute before start)
-    private func isActiveStartRide(start: Double) -> Bool {
-        let duration = Date().getDistanceByComponent(.minute, toDate: Date(timeIntervalSince1970: start)).minute
-        return duration ?? 0 <= 15
-    }
-    
-    
-    
     //MARK: -- Actions
     @IBAction func menu(_ sender: Any) {
         present(menu!, animated: true, completion: nil)
@@ -191,7 +187,7 @@ class MyReservationsViewController: BaseViewController {
     
     @IBAction func reservation(_ sender: UISegmentedControl) {
         isReservationHistory = sender.selectedSegmentIndex == 1
-        mReservCollectionV.reloadData()
+        getRents()
     }
     
     @IBAction func swipeSwitchTable(_ sender: UISwipeGestureRecognizer) {
@@ -212,22 +208,28 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if isReservationHistory {
-            return 0
+            return myHistoryReservations?.count ?? 0
         }
-        return myReservations?.count ?? 0 //ReservationWithReservedPaidData.reservationWithReservedPaidModel.count
+        return myReservations?.count ?? 0
     }
 
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = myReservations![indexPath.item]
-        let paymentType = myReservationVM.getReservationState(rent: item)
-        let rentState = RentState.init(rawValue: item.state ?? "FINISHED")
+        var paymentType = myReservationVM.getReservationState(rent: item)
+        let rentState = RentState.init(rawValue: item.state ?? Constant.Keys.draft)
+        
         if isReservationHistory {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReservationHistoryCell.identifier, for: indexPath) as!  ReservationHistoryCell
+            guard let item = myHistoryReservations?[indexPath.item] else {return cell}
+            cell.setCellInfo(rent: item, index: indexPath.item)
             return cell
             
         } else {
             
             switch rentState {
+            case .DRAFT:
+                return waithingAdminApprovalCell(item: item, indexPath: indexPath, paymentType: paymentType)
             case .COMPLETED,
                  .START_DEFECT_CHECK,
                  .START_ODOMETER_CHECK:/*.startRide:*/
@@ -237,7 +239,7 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
                                             indexPath: indexPath,
                                             paymentType: paymentType)
                 } else { //start ride
-                    if isActiveStartRide(start: item.startDate) || item.carDetails.registrationNumber != nil /*item.isRegisterNumber*/ {
+                    if myReservationVM.isActiveStartRide(start: item.startDate) || item.carDetails.registrationNumber != nil /*item.isRegisterNumber*/ {
                       return startRideWithRegisterNumberCell(item: item, indexPath: indexPath)
                     }
                     return startRideCell(item: item, indexPath: indexPath)
@@ -247,17 +249,25 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
 //            case .maykePayment:
 //                return maykePaymentCell(item: item, indexPath: indexPath)
             case .FINISHED:/*.payDistancePrice:*/
-                return payDistancePriceCell(item: item, indexPath: indexPath)
+                if item.distancePayment.amount == 0 {
+                    paymentType = .payDistancePrice
+                    return waithingAdminApprovalCell(item: item, indexPath: indexPath, paymentType: paymentType)
+                }
+                return payDistancePriceCell(item: item, indexPath: indexPath, paymentType: paymentType)
 //            case .payRentalPrice:
 //                return payRentalPriceCell(item: item, indexPath: indexPath)
             case .STARTED,
                  .END_DEFECT_CHECK,
                  .END_ODOMETER_CHECK:/*.stopRide:*/
                 return stopRideCell(item: item, indexPath: indexPath)
+            case .ADMIN_FINISHED:/*waithing for distance price*/
+                return waithingAdminApprovalCell(item: item, indexPath: indexPath, paymentType: paymentType)
+            case .CLOSED://Distance price
+                return payDistancePriceCell(item: item, indexPath: indexPath, paymentType: paymentType)
 //            case .driverWaithingApproval:
 //                return driverWaithingApprovalCell(indexPath: indexPath)
             default://Draft
-                return waithingAdminApprovalCell(item: item, indexPath: indexPath)
+                return waithingAdminApprovalCell(item: item, indexPath: indexPath, paymentType: paymentType)
             }
         }
     }
@@ -276,6 +286,10 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
             var myResrevationState: MyReservationState = .stopRide
             
             switch rentState {
+            case .DRAFT:
+                myResrevationState = .waithingApproval
+                let cell: WaithingAdminApplovalCell = mReservCollectionV.cellForItem(at: indexPath) as! WaithingAdminApplovalCell
+                paymentStatusModel = cell.getPaymentStatusModel()
             case .COMPLETED,
                  .START_DEFECT_CHECK,
                  .START_ODOMETER_CHECK /*.startRide*/:
@@ -287,7 +301,7 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
                       paymentStatusModel = cell.getPaymentStatusModel()
                 } else {
                     myResrevationState = .startRide
-                    if isActiveStartRide(start: item.startDate) || item.carDetails.registrationNumber != nil /*item.isRegisterNumber*/ {
+                    if myReservationVM.isActiveStartRide(start: item.startDate) || item.carDetails.registrationNumber != nil {
                         let cell: ReservationWithRegisterNumberCollectionViewCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservationWithRegisterNumberCollectionViewCell
                         paymentStatusModel = cell.getPaymentStatusModel()
                         registerNumberArr = [cell.mRegistrationNumberLb.text!]
@@ -302,9 +316,16 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
 //                let cell: ReservetionWithPayRentalPriceCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservetionWithPayRentalPriceCell
 //                paymentStatusModel = cell.getPaymentStatusModel()
             case .FINISHED:/*.payDistancePrice:*/
-                myResrevationState = .payDistancePrice
-                let cell: ReservetionWithDistancePriceCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservetionWithDistancePriceCell
-                paymentStatusModel = cell.getPaymentStatusModel()
+                if item.distancePayment.amount == 0  {
+                    myResrevationState = .waithingApproval
+                    let cell: WaithingAdminApplovalCell = mReservCollectionV.cellForItem(at: indexPath) as! WaithingAdminApplovalCell
+                    paymentStatusModel = cell.getPaymentStatusModel()
+                } else {
+                    myResrevationState = .payDistancePrice
+                    let cell: ReservetionWithDistancePriceCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservetionWithDistancePriceCell
+                    paymentStatusModel = cell.getPaymentStatusModel()
+                }
+               
 //            case .maykePayment:
               //  myResrevationState = .maykePayment
 //                let cell: ReservetionMakePaymentCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservetionMakePaymentCell
@@ -400,44 +421,6 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         return cell
     }
     
-    ///Start ride UICollectionViewCell
-    private func stopRideCell(item: Rent, indexPath: IndexPath) -> OnRideCollectionViewCell {
-        
-        let cell = mReservCollectionV.dequeueReusableCell(withReuseIdentifier: OnRideCollectionViewCell.identifier, for: indexPath) as!  OnRideCollectionViewCell
-        
-        cell.setInfoCell(item: item, index: indexPath.item)
-        
-        ///Handler stop ride button
-        cell.pressedStopRide = { index in
-            let currItem = self.myReservations![index]
-            if RentState.init(rawValue: currItem.state ?? "") == .END_DEFECT_CHECK || RentState.init(rawValue: currItem.state ?? "") == .END_ODOMETER_CHECK {
-                self.goToStopRideOdometereCheck(rent: currItem)
-            } else if RentState.init(rawValue: currItem.state ?? "") == .STARTED {
-                self.goToStopRide(rent: currItem)
-            }
-        }
-        
-        cell.pressedAddDamages = { index in
-            self.goToAddDamage(rent: self.myReservations![index])
-        }
-        //Handler switch driver button
-        cell.pressedSwitchDriver = { index in
-            
-            let additionalDrivers = self.myReservationVM.getAdditionalDrives(rent: self.myReservations![index])
-            self.mSwitchDriversTbV.index = index
-            if additionalDrivers.count == 1 {
-                self.showAlertForSwitchDriver(index: index,
-                                              driver: additionalDrivers[0])
-            } else {
-                self.animateSwitchDriversTable(additionalDrivers: additionalDrivers)
-            }
-        }
-        cell.pressedSeeMap = { index in
-            self.goToSeeMap(parking: item.returnLocation.parking, customLocation: item.returnLocation.customLocation)
-        }
-        return cell
-    }
-    
     ///Start Ride with registretion number UICollectionViewCell
     private func startRideWithRegisterNumberCell(item: Rent, indexPath: IndexPath) -> ReservationWithRegisterNumberCollectionViewCell {
         
@@ -465,20 +448,24 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         cell.makePayment = {
             if paymentType == .payRentalPrice {
                 self.goToAgreement(on: self,
-                                   agreementType: .advanced
-                                   ,
+                                   agreementType: .myReservationCell, paymentOption: .rental,
                                    vehicleModel: nil,
                                    rent: item,
                                    urlString: nil)
             } else {
                 self.goToPayLater(rent: item)
+//                self.goToAgreement(on: self,
+//                                   agreementType: .payLater, paymentOption: .depositRental,
+//                                   vehicleModel: nil,
+//                                   rent: item,
+//                                   urlString: nil)
             }
         }
         return cell
     }
     
     ///Pay Distance Price UICollectionViewCell
-    private func payDistancePriceCell(item: Rent, indexPath: IndexPath) -> ReservetionWithDistancePriceCell {
+    private func payDistancePriceCell(item: Rent, indexPath: IndexPath, paymentType: MyReservationState) -> ReservetionWithDistancePriceCell {
 
         let cell = mReservCollectionV.dequeueReusableCell(withReuseIdentifier: ReservetionWithDistancePriceCell.identifier, for: indexPath) as!  ReservetionWithDistancePriceCell
 
@@ -486,7 +473,7 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
 
         cell.payDistancePrice = {
             self.goToAgreement(on: self,
-                               agreementType: .editAdvanced,
+                               agreementType: .editAdvanced, paymentOption: .distance,
                                vehicleModel: nil,
                                rent: item,
                                urlString: nil)
@@ -494,6 +481,7 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         return cell
     }
     
+ 
 //    ///Pay Rental Price UICollectionViewCell
 //    private func payRentalPriceCell(item: ReservationWithReservedPaidModel, indexPath: IndexPath) -> ReservetionWithPayRentalPriceCell {
 //
@@ -521,13 +509,102 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
     }
     
     ///Waithing admin Approval  UICollectionViewCell (Draft)
-    private func waithingAdminApprovalCell(item: Rent, indexPath: IndexPath) -> WaithingAdminApplovalCell {
+    private func waithingAdminApprovalCell(item: Rent, indexPath: IndexPath,  paymentType: MyReservationState) -> WaithingAdminApplovalCell {
         
         let cell = mReservCollectionV.dequeueReusableCell(withReuseIdentifier: WaithingAdminApplovalCell.identifier, for: indexPath) as!  WaithingAdminApplovalCell
         cell.drivers = drivers
-        cell.setCellInfo(item: item)
+        cell.setCellInfo(item: item, reservatiopnState: paymentType)
         return cell
     }
+    
+    ///Start ride UICollectionViewCell
+    private func stopRideCell(item: Rent, indexPath: IndexPath) -> OnRideCollectionViewCell {
+        
+        let cell = mReservCollectionV.dequeueReusableCell(withReuseIdentifier: OnRideCollectionViewCell.identifier, for: indexPath) as!  OnRideCollectionViewCell
+        
+        let stopRideTime = myReservationVM.getStopRideTime(endDate: item.endDate)
+        
+        cell.setInfoCell(item: item, index: indexPath.item, stopRideTime: stopRideTime)
+        if stopRideTime.day != nil {
+            setupTimer(for: cell, indexPath: indexPath, stopRideTime: stopRideTime)
+        }
+
+        ///Handler stop ride button
+        cell.pressedStopRide = { index in
+            let currItem = self.myReservations![index]
+            if RentState.init(rawValue: currItem.state ?? "") == .END_DEFECT_CHECK || RentState.init(rawValue: currItem.state ?? "") == .END_ODOMETER_CHECK {
+                self.goToStopRideOdometereCheck(rent: currItem)
+            } else if RentState.init(rawValue: currItem.state ?? "") == .STARTED {
+                self.goToStopRide(rent: currItem)
+            }
+        }
+        //Handler add damage button
+        cell.pressedAddDamages = { index in
+            self.goToAddDamage(rent: self.myReservations![index])
+        }
+        //Handler switch driver button
+        cell.pressedSwitchDriver = { index in
+            
+            let additionalDrivers = self.myReservationVM.getAdditionalDrives(rent: self.myReservations![index])
+            self.mSwitchDriversTbV.index = index
+            if additionalDrivers.count == 1 {
+                self.showAlertForSwitchDriver(index: index,
+                                              driver: additionalDrivers[0])
+            } else {
+                self.animateSwitchDriversTable(additionalDrivers: additionalDrivers)
+            }
+        }
+        //Handler map button
+        cell.pressedSeeMap = { index in
+            self.goToSeeMap(parking: item.returnLocation.parking, customLocation: item.returnLocation.customLocation)
+        }
+        return cell
+    }
+    
+    ///Set up timer for stop ride
+    private func setupTimer(for cell: OnRideCollectionViewCell, indexPath: IndexPath, stopRideTime: (day: Int?, hour: Int, minute: Int)) {
+        let row = indexPath.row
+        if cellRowToTimerMapping[row] == nil {
+            var numberOfMinutssPassed = stopRideTime.minute
+            let timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { capturedTimer in
+                
+                if self.cellRowToPauseFlagMapping[row] != nil && self.cellRowToPauseFlagMapping[row] == true {
+                    return
+                }
+                
+                numberOfMinutssPassed -= 1
+                
+                let visibleCell = self.mReservCollectionV.cellForItem(at: indexPath) as? OnRideCollectionViewCell
+                
+                if let visibleCell = visibleCell,  numberOfMinutssPassed >= 0{
+                    let minutes = String(numberOfMinutssPassed)
+                    visibleCell.mMinuteLb.text = ((minutes.count == 1) ? ("0" + minutes) : minutes) + " \(Constant.Texts.m)"
+                }
+                
+                if numberOfMinutssPassed == 0 {
+                    self.mReservCollectionV.reloadItems(at: [indexPath])
+                    numberOfMinutssPassed = 60
+                    self.cellRowToPauseFlagMapping[row] = true
+                    
+                    self.makeNetworkCall {
+                        self.cellRowToPauseFlagMapping[row] = false
+                    }
+                }
+            }
+            cellRowToTimerMapping[row] = timer
+            RunLoop.current.add(timer, forMode: .common)
+        }
+    }
+    
+    
+    private func makeNetworkCall(completion: @escaping () -> Void) {
+        let seconds = 2.0
+        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+            completion()
+        }
+    }
+    
+    
 }
 
 //MARK: -- SwitchDriversTableViewDelegate

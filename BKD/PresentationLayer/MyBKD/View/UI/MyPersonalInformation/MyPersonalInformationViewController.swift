@@ -8,6 +8,7 @@
 import UIKit
 import GooglePlaces
 import simd
+import SVProgressHUD
 
 class MyPersonalInformationViewController: BaseViewController {
 //MARK: -- Outlets
@@ -31,7 +32,6 @@ class MyPersonalInformationViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mActivityInd.startAnimating()
         self.configureNavigationControll(navControll: navigationController, barBtn: mRightBarBtn)
        self.title = navigationTitle ?? ""
         
@@ -44,6 +44,7 @@ class MyPersonalInformationViewController: BaseViewController {
         handlerPhoneNumber()
         handlerVerify()
         editingCompleted()
+
     }
     
     ///Configure UI
@@ -59,14 +60,19 @@ class MyPersonalInformationViewController: BaseViewController {
     func getMainDriverList() {
         guard let mainDriver = self.mainDriver else {return}
         self.configureUI()
-        
+        SVProgressHUD.show()
+
         self.myPersonalInfoVM.getMainDriverList(mainDriver: mainDriver) { list in
             self.mPersonalInfoTbV.editMainDriverList = list
             self.mPersonalInfoTbV.mainDriverList = self.mPersonalInfoTbV.editMainDriverList
             self.mPersonalInfoTbV.reloadData()
-            self.mActivityInd.stopAnimating()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10 ) {
+                SVProgressHUD.dismiss()
+             }
+
         }
     }
+    
     
     ///Will present image Picker controller
      func presentPicker (sourceType: UIImagePickerController.SourceType) {
@@ -88,7 +94,7 @@ class MyPersonalInformationViewController: BaseViewController {
     
     ///Send request to confirm editing
     func confirmEditing() {
-        mActivityInd.startAnimating()
+        SVProgressHUD.show()
         self.mEdifBtn.setImage(img_edit, for: .normal)
         self.mPersonalInfoTbV.isEdit = false
         mPersonalInfoTbV.isPhoneEdited = myPersonalInfoVM.isPhoneNumberEdited(newMainDrivers: mPersonalInfoTbV.editMainDriverList!, oldMainDrivers: mPersonalInfoTbV.mainDriverList!)
@@ -100,9 +106,9 @@ class MyPersonalInformationViewController: BaseViewController {
     ///Editing completed
     func editingCompleted() {
         myPersonalInfoVM.didConfirmEditing = {
+            self.mPersonalInfoTbV.getAccount()
             self.mPersonalInfoTbV.reloadData()
-            self.mActivityInd.stopAnimating()
-
+            SVProgressHUD.dismiss()
         }
     }
    

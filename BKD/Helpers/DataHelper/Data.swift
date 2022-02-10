@@ -275,7 +275,7 @@ struct ReservationWithReservedPaidData {
         ReservationWithReservedPaidModel(isActiveStartRide: false, isRegisterNumber: false, myReservationState: MyReservationState.maykePayment),
         ReservationWithReservedPaidModel(isActiveStartRide: false, isRegisterNumber: false, myReservationState: MyReservationState.payRentalPrice),
          ReservationWithReservedPaidModel(isActiveStartRide: false, isRegisterNumber: false, myReservationState: MyReservationState.stopRide),
-       ReservationWithReservedPaidModel(isActiveStartRide: false, isRegisterNumber: false, myReservationState: MyReservationState.driverWaithingApproval)
+       ReservationWithReservedPaidModel(isActiveStartRide: false, isRegisterNumber: false, myReservationState: MyReservationState.waithingApproval)
     ]
 }
 

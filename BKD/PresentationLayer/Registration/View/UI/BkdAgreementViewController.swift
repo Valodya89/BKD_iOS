@@ -7,6 +7,7 @@
 
 import UIKit
 import WebKit
+import SVProgressHUD
 
 
 enum AgreementType {
@@ -29,12 +30,12 @@ class BkdAgreementViewController: BaseViewController {
     @IBOutlet weak var mAgreeV: ConfirmView!
     @IBOutlet weak private var mWebV: WKWebView!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
-    @IBOutlet weak var mActivityIndicator: UIActivityIndicatorView!
     
     
     //MARK: -- Variables
     weak var delegate: BkdAgreementViewControllerDelegate?
     
+    private var account: Account?
     private var htmlString = ""
     public var urlString: String? = nil
     public var agreementType: AgreementType?
@@ -42,6 +43,7 @@ class BkdAgreementViewController: BaseViewController {
     public var currRent: Rent?
     public var searchModel: SearchModel?
     public var editReservationModel: EditReservationModel?
+    public var paymentOption:PaymentOption?
     
     //MARK: --Lifecycle
     override func viewDidLoad() {
@@ -90,6 +92,43 @@ class BkdAgreementViewController: BaseViewController {
         }
     }
     
+    ///Get user account
+    private func getAccount(isPayment: Bool,
+                            paymentOption: PaymentOption) {
+        if let account = ApplicationSettings.shared.account {
+            self.account = account
+            checkPhoneVerification(isPayment: isPayment, paymentOption: paymentOption)
+        } else {
+            ApplicationSettings.shared.getAccount { account in
+                self.account = account
+                self.checkPhoneVerification(isPayment: isPayment, paymentOption: paymentOption)
+            }
+        }
+    }
+   
+    ///Check phone verification to reservation completed
+    func checkPhoneVerification(isPayment: Bool, paymentOption: PaymentOption) {
+        if self.account?.phoneVerified == true {
+            
+            if isPayment {
+                var vehicleModel = VehicleModel()
+                vehicleModel.rent = self.currRent
+//                if self.agreementType == .payLater {
+//                    self.goToPayLater(rent: self.currRent)
+//                } else {
+                    self.goToSelectPayment(vehicleModel: vehicleModel,
+                                           paymentOption: paymentOption)
+                //}
+                
+            } else {
+                self.goToReservationCompleted(vehicleModel: self.vehicleModel)
+            }
+                        
+        } else {
+            self.goToPhoneVerification(vehicleModel: self.vehicleModel, phoneNumber: nil)
+        }
+    }
+    
   //MARK: -- Actions
     @IBAction func back(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
@@ -97,16 +136,20 @@ class BkdAgreementViewController: BaseViewController {
     
     func handlerAgree() {
         mAgreeV.didPressConfirm  = {
+           
             switch self.agreementType {
                 
             case .advanced:
-               // if phone verified
-                self.goToSelectPayment(vehicleModel: nil,
-                                  rent: self.currRent,
-                                  paymentOption: .rental)
-            case .myReservationCell,
-                 .payLater:
+                self.getAccount(isPayment: true, paymentOption: .rental)
+            case .myReservationCell:
+                self.getAccount(isPayment: true, paymentOption: self.paymentOption ?? .none)
+            case .payLater:
+                self.getAccount(isPayment: true, paymentOption: self.paymentOption ?? .none)
+                // if phone verified
+//                 self.goToSelectPayment(vehicleModel: vehicleModel,
+//                                        paymentOption: self.paymentOption ?? .none)
                 break
+                
             case .editAdvanced:
                 self.updateReservation()
             case .reserve:
@@ -124,13 +167,14 @@ class BkdAgreementViewController: BaseViewController {
         ReserveViewModel().addRent(vehicleModel: vehicleModel ?? VehicleModel()) { result, error in
                 if let _ = error {
                     self.showAlertSignIn()
+                    
                 } else if result == nil {
                     self.showAlert()
+                    
                 } else {
-                    //self.rent = result
                     self.vehicleModel?.rent = result!
-                    self.goToPhoneVerification(vehicleModel: self.vehicleModel, phoneNumber: nil)
-                   // self.clickConfirm()
+                    self.getAccount(isPayment: false, paymentOption: .none)
+                   
                 }
         }
     }
@@ -169,11 +213,11 @@ class BkdAgreementViewController: BaseViewController {
 // MARK: -- WKNavigation Delegate
 extension BkdAgreementViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        mActivityIndicator.startAnimating()
+        SVProgressHUD.show()
         
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        mActivityIndicator.stopAnimating()
+        SVProgressHUD.dismiss()
     }
 }

@@ -133,17 +133,20 @@
                                                 <color key="textColor" name="email"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BKD office" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJW-Af-D5i">
-                                                <rect key="frame" x="117.5" y="78.5" width="62.5" height="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJW-Af-D5i">
+                                                <rect key="frame" x="117.5" y="78.5" width="46.5" height="17"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="170" id="b4t-Ya-NYg"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                                 <color key="textColor" name="navigationBar"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4sj-09-47m">
-                                                <rect key="frame" x="181.5" y="67" width="40" height="40"/>
+                                                <rect key="frame" x="165.5" y="67" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="gjt-7b-EAW"/>
-                                                    <constraint firstAttribute="width" constant="40" id="hTl-uN-hpT"/>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="40" id="hTl-uN-hpT"/>
                                                 </constraints>
                                                 <color key="tintColor" name="navigationBar"/>
                                                 <state key="normal" title="Button"/>

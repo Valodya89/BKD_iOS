@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PhoneVerificationViewController: UIViewController, StoryboardInitializable {
+class PhoneVerificationViewController: BaseViewController {
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
     @IBOutlet weak var mCodeTxtFl: OneTimeCodeTextField!
@@ -66,7 +66,7 @@ class PhoneVerificationViewController: UIViewController, StoryboardInitializable
     func sendVerification(){
         phoneVerificationViewModel.verifyPhoneNumber(phoneCode: phoneCode ?? "", number: phoneNumber ?? "", code: mCodeTxtFl.text ?? "") { [weak self] (result, err) in
             if result != nil {
-                self?.goToReservationCompleted()
+                self?.goToReservationCompleted(vehicleModel: self?.vehicleModel)
             } else {
                 self?.showError()
             } 
@@ -126,13 +126,7 @@ class PhoneVerificationViewController: UIViewController, StoryboardInitializable
         
     }
     
-    ///Open Reservation completed screen
-    private func goToReservationCompleted() {
-        let reservationCompletedVC = ReservationCompletedViewController.initFromStoryboard(name: Constant.Storyboards.reservationCompleted)
-        reservationCompletedVC.vehicleModel = vehicleModel
-        self.navigationController?.pushViewController(reservationCompletedVC, animated: true)
-        
-    }
+   
 
     /// timer selector function
     @objc private func updateCounter() {

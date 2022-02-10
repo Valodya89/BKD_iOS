@@ -5,6 +5,12 @@
       location = "group:BKD.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:BKD/PresentationLayer/MyReservetions/View/UI/Cells/ReservetionMakePaymentCell/../../../../../../../Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:BKD/PresentationLayer/MyReservetions/View/../../../../Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

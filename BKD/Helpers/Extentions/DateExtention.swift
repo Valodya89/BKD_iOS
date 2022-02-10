@@ -8,8 +8,8 @@
 import UIKit
 
 extension Date {
-    var millisecondsSince1970:Int64 {
-            return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
+    var millisecondsSince1970: Double {
+            return (self.timeIntervalSince1970 * 1000.0)
         }
 
     init(milliseconds:Int64) {
@@ -20,6 +20,9 @@ extension Date {
         let date = Date(timeIntervalSince1970: doubleDate)
         return date
     }
+    
+    
+    
     
     func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
         return calendar.dateComponents(Set(components), from: self)
