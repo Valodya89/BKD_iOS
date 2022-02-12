@@ -76,7 +76,7 @@ final class KeychainManager {
     /// Save expires In in keychain
     func saveExpireIn(expiresIn: Double) {
         do {
-            let willExpireIn = Date().timeIntervalSince1970 + (expiresIn * 1000)
+            let willExpireIn = Date().timeIntervalSince1970 + expiresIn /*(expiresIn * 1000)*/
             try keychain.set(String(format: "%.0f", willExpireIn), key: expiresInKey)
         } catch let error {
             print(error)

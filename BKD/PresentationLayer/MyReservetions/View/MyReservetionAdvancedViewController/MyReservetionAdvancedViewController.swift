@@ -92,6 +92,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
     //MARK: - Variables
     public var vehicleModel: VehicleModel?
     public var myReservationState: MyReservationState?
+    public var paymentOption: PaymentOption?
     public var paymentStatusArr: [PaymentStatusModel]?
     public var onRideArr: [OnRideModel]?
     public var driversArr:[MyDriversModel]?
@@ -269,8 +270,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
             mOnRideTableV.onRideArr = onRideArr
             mOnRideTableV.reloadData()
             handlerOnRide()
-            
-            mTotalPriceStackV.mNewTotalPriceContentV.isHidden = true
+
             mEditBtn.isHidden = true
             mCancelBtn.isHidden = true
            // mExtendReservationBtn.isHidden = false
@@ -496,7 +496,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
                 self.goToPayLater(rent: self.currRent)
             } else {
                 self.goToAgreement(on: self,
-                                   agreementType: .advanced, paymentOption: nil,
+                                   agreementType: .myReservationCell, paymentOption: self.paymentOption,
                                    vehicleModel: nil,
                                    rent: self.currRent,
                                    urlString: nil)

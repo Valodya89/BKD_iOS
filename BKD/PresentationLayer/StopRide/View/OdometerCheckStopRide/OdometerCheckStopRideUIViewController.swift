@@ -28,7 +28,7 @@ class OdometerCheckStopRideUIViewController: BaseViewController {
     @IBOutlet weak var mFinishRideBtn: UIButton!
     @IBOutlet weak var mRightBarbtn: UIBarButtonItem!
     
-    public var currRentModel: Rent?
+    public var currRent: Rent?
     
     lazy var stopRideViewModel = StopRideViewModel()
     
@@ -65,19 +65,19 @@ class OdometerCheckStopRideUIViewController: BaseViewController {
     }
     
     func configureOdometerInfo() {
-       let rentCar = ApplicationSettings.shared.allCars?.filter( {$0.id == currRentModel?.carDetails.id}).first
-        mKmPriceLb.text = String(format: "%.2f", rentCar?.priceForKm ?? 0.0)
+       
+        mKmPriceLb.text = OdomoeterCheckViewModel().getPriceForKm(currRent: currRent)
         
-        if (RentState.init(rawValue: currRentModel?.state ?? "") == .END_DEFECT_CHECK || RentState.init(rawValue: currRentModel?.state ?? "") == .END_ODOMETER_CHECK) && currRentModel?.endOdometer != nil {
-            mOdometerTxtFl.text = currRentModel?.endOdometer?.value
+        if (RentState.init(rawValue: currRent?.state ?? "") == .END_DEFECT_CHECK || RentState.init(rawValue: currRent?.state ?? "") == .END_ODOMETER_CHECK) && currRent?.endOdometer != nil {
+            mOdometerTxtFl.text = currRent?.endOdometer?.value
             mOdometerImgV.isHidden = false
             mTakePhotoCotentV.isHidden = true
             mFinishRideBtn.enable()
-            if let img =  currRentModel?.endOdometer?.image {
+            if let img =  currRent?.endOdometer?.image {
                 mOdometerImgV.sd_setImage(with:  img.getURL() ?? URL(string: ""), placeholderImage: nil)
             }
             
-            if RentState.init(rawValue: currRentModel?.state ?? "") == .END_ODOMETER_CHECK {
+            if RentState.init(rawValue: currRent?.state ?? "") == .END_ODOMETER_CHECK {
                 finishRideAlert()
             }
         }
@@ -86,7 +86,7 @@ class OdometerCheckStopRideUIViewController: BaseViewController {
     ///Add Odometer
     func addOdometer(image: UIImage) {
         stopRideViewModel.addOdometerToFinish(image: image,
-                                           id: currRentModel?.id ?? "",
+                                           id: currRent?.id ?? "",
                                     value: mOdometerTxtFl.text!) { result, err in
             guard let _ = result else {return}
             self.mTakePhotoCotentV.isHidden = true
@@ -98,7 +98,7 @@ class OdometerCheckStopRideUIViewController: BaseViewController {
     
     ///Check odometer
     func checkOdometer() {
-        stopRideViewModel.checkOdometerToFinish(id: currRentModel?.id ?? "") { result, err in
+        stopRideViewModel.checkOdometerToFinish(id: currRent?.id ?? "") { result, err in
             guard let rent = result else {return}
             if RentState.init(rawValue: rent.state ?? "") == .END_ODOMETER_CHECK {
                 self.finishRideAlert()
@@ -109,7 +109,7 @@ class OdometerCheckStopRideUIViewController: BaseViewController {
     
     ///Finish ride
     func finishRide() {
-        stopRideViewModel.finishRide(id: currRentModel?.id ?? "") { result, err in
+        stopRideViewModel.finishRide(id: currRent?.id ?? "") { result, err in
             guard let rent = result else {return}
             if RentState.init(rawValue: rent.state ?? "") == .FINISHED {
                 self.navigationController?.popToViewController(ofClass: MyReservationsViewController.self)

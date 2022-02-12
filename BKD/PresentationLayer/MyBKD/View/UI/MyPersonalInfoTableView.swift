@@ -158,7 +158,7 @@ class MyPersonalInfoTableView: UITableView, UITableViewDelegate, UITableViewData
             cell.mVerifyBtn.isHidden = false
         }
         cell.delegate = self
-        let currentPhoneCode = MyPersonalInformationViewModel().getCurrnetPhoneCode(number: item.fieldValue ?? "")
+        let currentPhoneCode = MyPersonalInformationViewModel().getCurrnetPhoneCode(code: item.phoneCode ?? "")
         if let _ = currentPhoneCode {
             cell.selectedCountry = currentPhoneCode
             cell.mTxtFl.formatPattern = currentPhoneCode?.mask ?? ""
@@ -223,6 +223,8 @@ extension MyPersonalInfoTableView: PersonalInfoTableCellDelegate {
     
     func editFiled(index: Int, value: String) {
         editMainDriverList?[index].fieldValue = value
+        
+        
     }
     
     func didPressVerify(phone: String) {
@@ -275,7 +277,8 @@ extension MyPersonalInfoTableView: PhonbeNumberTableCellDelegate {
     func editPhoneNumber(index: Int,
                          code: String,
                          phone: String) {
-        editMainDriverList?[index].fieldValue = code + phone
+        editMainDriverList?[index].fieldValue = phone
+        editMainDriverList?[index].phoneCode = code
     }
 }
 

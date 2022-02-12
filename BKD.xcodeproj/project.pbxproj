@@ -58,6 +58,8 @@
 		5640952D264AE529001DC92D /* DropDownModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5640952C264AE529001DC92D /* DropDownModel.swift */; };
 		56409533264AE5A8001DC92D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56409532264AE5A8001DC92D /* Data.swift */; };
 		56409539264B24D8001DC92D /* BKDAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56409538264B24D8001DC92D /* BKDAlert.swift */; };
+		56443A5927B7072A006B1167 /* WaitingForDistancePriceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56443A5727B7072A006B1167 /* WaitingForDistancePriceTableViewCell.swift */; };
+		56443A5A27B7072A006B1167 /* WaitingForDistancePriceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56443A5827B7072A006B1167 /* WaitingForDistancePriceTableViewCell.xib */; };
 		5648C5B6268803F7000B4E2A /* AccessoriesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648C5B5268803F6000B4E2A /* AccessoriesModel.swift */; };
 		5648C5C8268842D9000B4E2A /* AccessoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648C5C7268842D9000B4E2A /* AccessoriesViewModel.swift */; };
 		564BE86F2701F54B0037DF39 /* AddAccidentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564BE86E2701F54B0037DF39 /* AddAccidentDetailsViewController.swift */; };
@@ -675,6 +677,8 @@
 		5640952C264AE529001DC92D /* DropDownModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownModel.swift; sourceTree = "<group>"; };
 		56409532264AE5A8001DC92D /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		56409538264B24D8001DC92D /* BKDAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BKDAlert.swift; sourceTree = "<group>"; };
+		56443A5727B7072A006B1167 /* WaitingForDistancePriceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingForDistancePriceTableViewCell.swift; sourceTree = "<group>"; };
+		56443A5827B7072A006B1167 /* WaitingForDistancePriceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WaitingForDistancePriceTableViewCell.xib; sourceTree = "<group>"; };
 		5648C5B5268803F6000B4E2A /* AccessoriesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoriesModel.swift; sourceTree = "<group>"; };
 		5648C5C7268842D9000B4E2A /* AccessoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoriesViewModel.swift; sourceTree = "<group>"; };
 		56499CB627B4A02B008D9FFA /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
@@ -1341,6 +1345,15 @@
 				565BFD79269F535D0044D081 /* Network */,
 			);
 			path = Manageres;
+			sourceTree = "<group>";
+		};
+		56443A3827B706D5006B1167 /* WaitingForDistancePrice */ = {
+			isa = PBXGroup;
+			children = (
+				56443A5727B7072A006B1167 /* WaitingForDistancePriceTableViewCell.swift */,
+				56443A5827B7072A006B1167 /* WaitingForDistancePriceTableViewCell.xib */,
+			);
+			path = WaitingForDistancePrice;
 			sourceTree = "<group>";
 		};
 		564940E827B4A53600C1F882 /* Products */ = {
@@ -2466,6 +2479,7 @@
 		565F9B0226C8ADD500064AD4 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				56443A3827B706D5006B1167 /* WaitingForDistancePrice */,
 				5660E61526FE02BA009BB73F /* AdvancedWithOnRideCell */,
 				5658BDEF26FBB7A100A5B122 /* OnRideCell */,
 				56CF781D26F3C6FE0092F555 /* AdditionalDriverForWaithingApprovalCell */,
@@ -3914,6 +3928,7 @@
 				564E137A26531F8F008CE884 /* Mulish-SemiBold.ttf in Resources */,
 				5640395F26F01D530064256C /* ReservetionWithPayRentalPriceCell.xib in Resources */,
 				565F80B826A6392600ADB9FE /* ChangePhoneNumber.storyboard in Resources */,
+				56443A5A27B7072A006B1167 /* WaitingForDistancePriceTableViewCell.xib in Resources */,
 				5640394F26EF854B0064256C /* ReservationWithStartRideCollectionViewCell.xib in Resources */,
 				56CF782126F3C72C0092F555 /* AdditionalDriverForWaithingApprovalCell.xib in Resources */,
 				5660F7F2266C21980082F038 /* Mulish-Bold.ttf in Resources */,
@@ -4174,6 +4189,7 @@
 				56B9F33D26825FF0003449AD /* TariffSlideViewModel.swift in Sources */,
 				56AD191D2693251C006A53C1 /* CheckEmailViewModel.swift in Sources */,
 				5658BDFB26FBECC000A5B122 /* AddDamageViewController.swift in Sources */,
+				56443A5927B7072A006B1167 /* WaitingForDistancePriceTableViewCell.swift in Sources */,
 				565FD8452731C3C400E2B33A /* MyDriver.swift in Sources */,
 				5640952D264AE529001DC92D /* DropDownModel.swift in Sources */,
 				565C4DA727A98E68002B48B1 /* UIDatePicker.swift in Sources */,

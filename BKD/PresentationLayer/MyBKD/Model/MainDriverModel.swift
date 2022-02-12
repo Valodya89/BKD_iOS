@@ -11,6 +11,7 @@ struct MainDriverModel {
  
     var fieldName: String?
     var fieldValue: String?
+    var phoneCode: String?
     var image: UIImage?
 
     var imageURL: URL?

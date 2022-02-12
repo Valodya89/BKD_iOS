@@ -134,17 +134,19 @@ final class MyPersonalInformationViewModel {
     
     
     ///Get current phone code
-    func getCurrnetPhoneCode(number: String) -> PhoneCode? {
+    func getCurrnetPhoneCode(code: String) -> PhoneCode? {
         
         guard let phoneCodeList = ApplicationSettings.shared.phoneCodes else {
             return nil
         }
-        for phone in phoneCodeList {
-            if number.hasPrefix(phone.code) {
-                return phone
-            }
-        }
-        return nil
+        let phone = phoneCodeList.filter({$0.code == code}).first
+        
+//        for phone in phoneCodeList {
+//            if phone.code ==  {
+//                return phone
+//            }
+//        }
+        return phone
     }
     
     ///Check if all filed are filled
@@ -340,6 +342,7 @@ final class MyPersonalInformationViewModel {
         let dateOfBirt = changeDateFormateIfNeeded(dateStr: driver[3].fieldValue!)
         let personalData:PersonalData? = PersonalData(name: driver[0].fieldValue,
                                                       surname: driver[1].fieldValue,
+                                                      phoneCode: driver[2].phoneCode,
                                                       phoneNumber: driver[2].fieldValue,
                                                       dateOfBirth: dateOfBirt,
                                                       street: driver[4].fieldValue,

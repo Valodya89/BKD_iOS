@@ -71,6 +71,7 @@ class OdometerCheckViewController: UIViewController, StoryboardInitializable {
     }
     
     func setupView() {
+        tabBarController?.tabBar.isHidden = true
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
         mRightBarBtn.image = img_bkd
         mOpenCameraBtn.layer.cornerRadius = view.bounds.height * 0.0235149
@@ -86,8 +87,8 @@ class OdometerCheckViewController: UIViewController, StoryboardInitializable {
 
     ///Configure UI
     func configureUI() {
-        rentCar = ApplicationSettings.shared.allCars?.filter( {$0.id == currRent?.carDetails.id}).first
-        mKmPriceLb.text = String(format: "%.2f", rentCar?.priceForKm ?? 0.0) 
+        
+        mKmPriceLb.text = odometerCheckVM.getPriceForKm(currRent: currRent)
         guard let odometer = currRent?.startOdometer else {return}
         mLastOdometeNumberLb.text = odometer.value
         if RentState.init(rawValue: currRent?.state ?? "") == .START_ODOMETER_CHECK {

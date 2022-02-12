@@ -49,7 +49,7 @@ class PhoneNumberTableViewCell: UITableViewCell {
                 mPhoneNumberTxtFl.text = String(newValue.dropLast())
             }
 
-            guard let phoneNum = try? phoneNumberKit.parse(newValue, ignoreType: true) else { return }
+            guard let _ = try? phoneNumberKit.parse(newValue, ignoreType: true) else { return }
         }
     }
     
@@ -113,8 +113,7 @@ class PhoneNumberTableViewCell: UITableViewCell {
 }
 
 
-//MARK: UITextFieldDelegate
-//MARK: ---------------------------
+//MARK: -- UITextFieldDelegate
 extension PhoneNumberTableViewCell: UITextFieldDelegate {
     
     

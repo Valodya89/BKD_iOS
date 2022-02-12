@@ -71,7 +71,7 @@ class ReservetionWithDistancePriceCell: UICollectionViewCell {
     
     //
     func getPaymentStatusModel() -> PaymentStatusModel {
-        let paymentModel = PaymentStatusModel(status: mStatusTypeLb.text ?? "", paymentType:  mRentalPriceLb.text! + mPaidLb.text! + " €" + mPaidPriceLb.text!, isActivePaymentBtn: true,  price: Double(mPriceLb.text ?? "0.0") ?? 0.00 , paymentButtonType: mPayDistancePriceBtn.title(for: .normal))
+        let paymentModel = PaymentStatusModel(status: mStatusTypeLb.text ?? "", paymentType:  mRentalPriceLb.text! + mPaidLb.text! + " €" + mPaidPriceLb.text!, isActivePaymentBtn: true,  price: Double(mPriceLb.text ?? "0.0") ?? 0.00 , paymentButtonType: mPayDistancePriceBtn.title(for: .normal), waitingStatus: mRentalPriceLb.text! + mPaidLb.text! + " € " + mPaidPriceLb.text!)
         return paymentModel
     }
 
@@ -112,6 +112,7 @@ class ReservetionWithDistancePriceCell: UICollectionViewCell {
         
         //Rental price
         mPaidPriceLb.text = String(format: "%.2f", item.depositPayment.amount + item.rentPayment.amount)
+        mPriceLb.text = String(format: "%.2f", item.distancePayment.amount)
     }
 
     @objc func payDistancePrice(sender: UIButton) {

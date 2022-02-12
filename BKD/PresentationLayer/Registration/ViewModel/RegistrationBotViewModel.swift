@@ -186,7 +186,7 @@ class RegistrationBotViewModel: NSObject {
     func getPersonalData(driver: MainDriver?) -> PersonalData? {
         
         let personalData:PersonalData? = PersonalData(name: driver?.name,
-                                                      surname: driver?.surname,
+                                                      surname: driver?.surname, phoneCode: driver?.phoneCode,
                                                       phoneNumber: driver?.phoneNumber,
                                                       dateOfBirth: driver?.dateOfBirth,
                                                       street: driver?.street,
@@ -270,7 +270,7 @@ class RegistrationBotViewModel: NSObject {
                          completion: @escaping (MainDriver?, String?) -> Void) {
         
 
-        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addPersonalData(id: id, name: personlaData.name!, surname: personlaData.surname!, phoneNumber: personlaData.phoneNumber!, dateOfBirth: personlaData.dateOfBirth!, street: personlaData.street!, house: personlaData.house!, mailBox: personlaData.mailBox ?? "", countryId: personlaData.countryId!, zip: personlaData.zip!, city: personlaData.city!, nationalRegisterNumber: personlaData.nationalRegisterNumber!))) { (result) in
+        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addPersonalData(id: id, name: personlaData.name!, surname: personlaData.surname!, phoneCode: personlaData.phoneCode!, phoneNumber: personlaData.phoneNumber!, dateOfBirth: personlaData.dateOfBirth!, street: personlaData.street!, house: personlaData.house!, mailBox: personlaData.mailBox ?? "", countryId: personlaData.countryId!, zip: personlaData.zip!, city: personlaData.city!, nationalRegisterNumber: personlaData.nationalRegisterNumber!))) { (result) in
             
             switch result {
             case .success(let data):

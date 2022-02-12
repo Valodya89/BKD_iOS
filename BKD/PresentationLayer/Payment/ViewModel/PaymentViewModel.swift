@@ -120,7 +120,7 @@ return String(vehicleModel.rent?.depositPayment.amount ?? 0.0)
             let value = vehicleModel.rent?.rentPayment.amount ?? 0.0
             return String(value)
         case .distance:
-            let value = vehicleModel.rent?.depositPayment.amount ?? 0.0
+            let value = vehicleModel.rent?.distancePayment.amount ?? 0.0
             return  String(format: "%.2f", value)
         case .payLater:
             return ""
@@ -258,12 +258,11 @@ return String(vehicleModel.rent?.depositPayment.amount ?? 0.0)
             
         } else if paymentOption == .distance {
             let distanceAmount = rent.distancePayment.amount
-            let distanceKm = "XX"
-            let payInfo = String(format: Constant.Texts.payDistanceMessage, distanceKm, distanceAmount, rent.distance ?? 0.0)
+            let distanceKm = OdomoeterCheckViewModel().getPriceForKm(currRent: rent)
+            let payInfo = String(format: Constant.Texts.payDistanceMessage, rent.distance ?? 0.0, distanceAmount, distanceKm)
             return payInfo
         }
         return ""
-        
     }
     
     ///Get rent payment info
@@ -282,6 +281,9 @@ return String(vehicleModel.rent?.depositPayment.amount ?? 0.0)
                 return String(format: Constant.Texts.payPrice,  vehicle?.depositPrice ?? 0.0 )
             }
             return String(format: Constant.Texts.payPrice, (vehicle?.rent?.depositPayment.amount ?? 0.0))
+            
+        } else if  paymentOption == .distance {
+            return String(format: Constant.Texts.payPrice, (vehicle?.rent?.distancePayment.amount ?? 0.0))
         }
         return ""
     }

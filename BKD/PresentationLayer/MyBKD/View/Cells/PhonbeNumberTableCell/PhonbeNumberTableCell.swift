@@ -93,6 +93,7 @@ class PhonbeNumberTableCell: UITableViewCell {
 
         mTxtFl.tintColor = color_navigationBar!
         mTxtFl.isEnabled = isEdit
+        mCodeBtn.isEnabled = isEdit
         mDropDownImgV.isHidden = !isEdit
         mFieldNameLb.text = item.fieldName
         
@@ -103,9 +104,10 @@ class PhonbeNumberTableCell: UITableViewCell {
 //            mVerifiedV.isHidden = isEdit
 //        }
         
-        mCodeBtn.setTitle(selectedCountry?.code, for: .normal) 
+        mCodeBtn.setTitle(item.phoneCode ?? "", for: .normal)
         self.layoutIfNeeded()
-        mTxtFl.text = item.fieldValue?.replacingOccurrences(of: selectedCountry?.code ?? "", with: "")
+        mTxtFl.text = item.fieldValue ?? ""
+//        mTxtFl.text = item.fieldValue?.replacingOccurrences(of: selectedCountry?.code ?? "", with: "")
         if mTxtFl.text?.count == 0 {
             mTxtFl.becomeFirstResponder()
         }

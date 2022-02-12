@@ -61,13 +61,13 @@ final class SelectPaymentViewController: UIViewController, StoryboardInitializab
         paymentTypes = PaymentTypeData.paymentTypeModel
         mPaymentTbV.reloadData()
         self.view.setNeedsLayout()
-        mDepositInfoLb.isHidden = (paymentOption != .rental)
+        mDepositInfoLb.isHidden = ((paymentOption != .rental) && (paymentOption != .distance))
        
         
     }
     
     override func viewDidLayoutSubviews() {
-        mDepositLbHeight.constant = (paymentOption == .rental) ? 100 : 0
+        mDepositLbHeight.constant = (paymentOption == .rental || paymentOption == .distance) ? 100 : 0
         if mBlurV.isHidden {
             mBancontactV.mContentVBottom.constant = -400
             mBancontactTypeV.mContentVBottom.constant = -400

@@ -15,6 +15,7 @@ struct MainDriver: Codable {
     let userId: String
     let name: String?
     let surname: String?
+    let phoneCode: String?
     let phoneNumber: String?
     let dateOfBirth: String?
     let street: String?

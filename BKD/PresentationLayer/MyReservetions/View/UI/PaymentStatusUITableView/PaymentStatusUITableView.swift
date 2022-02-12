@@ -24,8 +24,7 @@ class PaymentStatusUITableView: UITableView, UITableViewDelegate, UITableViewDat
     
     
 
-    //MARK: UITableViewDataSource
-    //MARK: ----------------------------------
+    //MARK: -- UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        
         return  statusArr?.count ?? 0
@@ -42,7 +41,7 @@ class PaymentStatusUITableView: UITableView, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let item = statusArr![indexPath.row]
-        if !item.isActivePaymentBtn {
+        if !item.isActivePaymentBtn && !item.waitingForDistanc {
             return  CGFloat(height75)
         }
         return height115

@@ -9,6 +9,12 @@ import UIKit
 
 final class OdomoeterCheckViewModel {
     
+    /// Get price for 1km
+    func getPriceForKm(currRent: Rent?) -> String {
+       let rentCar = ApplicationSettings.shared.allCars?.filter( {$0.id == currRent?.carDetails.id}).first
+        return String(format: "%.2f", rentCar?.priceForKm ?? 0.0)
+    }
+    
     ///Add odometer
     func addOdometer(image: UIImage,
                       id: String,

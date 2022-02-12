@@ -81,10 +81,9 @@ final class RegistartionBotViewController: BaseViewController {
                 registrationBotVM.setRegisterBotInfo(mainDriver: mainDriver!, countryList: countryList) { registrationBotResult in
                     
                     self.tableData = registrationBotResult
-                   // if self.mainDriver?.state  != Constant.Texts.state_created {
-                        self.personalData = self.registrationBotVM.getPersonalData(driver: self.mainDriver) ?? PersonalData()
-                        self.driverLicenseDateData = self.registrationBotVM.getDriverLicenseDateData(driver: self.mainDriver) ?? DriverLiceseDateData()
-                   // }
+                    
+                    self.personalData = self.registrationBotVM.getPersonalData(driver: self.mainDriver) ?? PersonalData()
+                    self.driverLicenseDateData = self.registrationBotVM.getDriverLicenseDateData(driver: self.mainDriver) ?? DriverLiceseDateData()
                     self.mTableV.reloadData()
                     self.tableScrollToBottom()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
@@ -96,7 +95,6 @@ final class RegistartionBotViewController: BaseViewController {
                     self.insertTableCell()
                 }
             }
-           // }
         }
     }
         
@@ -169,7 +167,7 @@ final class RegistartionBotViewController: BaseViewController {
     ///Sent requesst for creat user account
     func creatDriver(driverType: String) {
         registrationBotVM.creatDriver(type: driverType) { request in
-            print (request)
+
             guard let _ = request else {return}
             self.mainDriver = request!
         }
@@ -605,15 +603,13 @@ extension RegistartionBotViewController: PhoneNumberTableViewCellDelegate {
     
     func didPressCountryCode() {
         self.goToSearchPhoneCode(viewCont: self)
-//        let searchPhoneCodeVC = SearchPhoneCodeViewController.initFromStoryboard(name: Constant.Storyboards.searchPhoneCode)
-//        searchPhoneCodeVC.delegate = self
-//        self.present(searchPhoneCodeVC, animated: true, completion: nil)
     }
     
     func didReturnTxtField(text: String, code: String, index: Int) {
         fillInTableCell(txt: text, index: index)
         insertTableCell()
-        personalData.phoneNumber = code + text
+        personalData.phoneNumber = text
+        personalData.phoneCode = code
     }
 }
 

@@ -11,6 +11,7 @@ struct PersonalData {
 
     public var name: String?
     public var surname: String?
+    public var phoneCode: String?
     public var phoneNumber: String?
     public var dateOfBirth: String?
     public var street: String?

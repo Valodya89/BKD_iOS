@@ -134,9 +134,26 @@ class MyReservationViewModel: NSObject {
             
         }  else if (!rent.depositPayment.payed && !rent.rentPayment.payed) || rent.price.payLater  {
                    return MyReservationState.maykePayment
-                   
-               }
+        }
         return MyReservationState.maykePayment
+    }
+   
+    ///Get payment option
+    func getPaymentOption(reservationState: MyReservationState) -> PaymentOption {
+        switch reservationState {
+        case .startRide:
+            return .none
+        case .stopRide:
+            return .none
+        case .payDistancePrice:
+            return .distance
+        case .maykePayment:
+            return .depositRental
+        case .payRentalPrice:
+            return .rental
+        case .waithingApproval:
+            return .none
+        }
     }
    
     

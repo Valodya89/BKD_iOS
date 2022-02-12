@@ -318,7 +318,7 @@ struct Constant {
         static let confirm = "Confirm"//MOBILE_global_confirm
         static let payLater = "Pay later"//MOBILE_global_pay_later
         static let makePayment = "Make Payment"//MOBILE_global_make_payment
-        static let payDistanceMessage = "For %.2f km ride you should make € %.2f payment (1km = € %.2f)."//MOBILE_myReservation_pay_distance_price_message
+        static let payDistanceMessage = "For %.2f km ride you should make € %.2f payment (1km = € %@)."//MOBILE_myReservation_pay_distance_price_message
         static let watinfForDistance = "Admin approval - waiting for distance price"//MOBILE_myReservation_waiting_for_distance
         static let watinfForAdmin = "Admin approval - waiting"//MOBILE_global_admin_approval
 
@@ -347,6 +347,16 @@ struct Constant {
         static let payDistance = "Pay Distance Price"//MOBILE_global_pay_distance_price
         static let depositPaid = "Deposit paid"//MOBILE_global_deposit_paid
         static let reservedPaid = "Reserved & Paid"//MOBILE_global_reserv_paid
+        static let distancePrice = "Distance price:"//MOBILE_stopRide_distance_price
+        static let priceCalculation = "Waiting for Price calculation by BKD"//MOBILE_stopRide_witing_price_calculation
+        static let pending = "Pending"//MOBILE_stopRide_pending
+        static let finished = "Finished"//MOBILE_stopRide_finished
+        static let rentalPrice = "Rental price:"//MOBILE_stopRide_rental_price
+        static let paidPrice = "Paid  € %.2f" //MOBILE_stopRide_paid_price
+        
+        
+        
+        
         
         //MARK: -- Additional driver
         

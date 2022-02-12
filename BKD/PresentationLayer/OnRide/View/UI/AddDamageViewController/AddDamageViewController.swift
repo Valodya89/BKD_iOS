@@ -33,6 +33,7 @@ class AddDamageViewController: BaseViewController {
     }
     
     func setupView() {
+        tabBarController?.tabBar.isHidden = true
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         mRightBarBtn.image = img_bkd

@@ -58,6 +58,7 @@ enum AuthAPI: APIProtocol {
     case addPersonalData(id: String,
                          name: String,
                          surname: String,
+                         phoneCode: String,
                          phoneNumber: String,
                          dateOfBirth: String,
                          street: String,
@@ -222,7 +223,7 @@ enum AuthAPI: APIProtocol {
             return "accounts/send-code"
         case .createDriver(let driverType):
             return "api/driver/\(driverType)"
-        case let .addPersonalData(id, _,_,_,_,_,_,
+        case let .addPersonalData(id, _,_,_,_,_,_,_,
                                   _,_,_,_,_):
             return "api/driver/\(id)/personal"
         case .recoverPassword:
@@ -436,10 +437,11 @@ enum AuthAPI: APIProtocol {
                 "message": message,
                 "userIdentifier": userIdentifier
             ]
-        case let .addPersonalData( _, name, surname, phoneNumber, dateOfBirth, street, house, mailBox, countryId, zip, city, nationalRegisterNumber):
+        case let .addPersonalData( _, name, surname, phoneCode, phoneNumber, dateOfBirth, street, house, mailBox, countryId, zip, city, nationalRegisterNumber):
             return [
                 "name": name,
                 "surname": surname,
+                "phoneCode": phoneCode,
                 "phoneNumber": phoneNumber,
                 "dateOfBirth": dateOfBirth,
                 "street": street,

@@ -82,12 +82,12 @@ class MyReservationsViewController: BaseViewController {
         self.mReservCollectionV.register(ReservationWithStartRideCollectionViewCell.nib(), forCellWithReuseIdentifier: ReservationWithStartRideCollectionViewCell.identifier)
         self.mReservCollectionV.register(ReservationWithRegisterNumberCollectionViewCell.nib(), forCellWithReuseIdentifier: ReservationWithRegisterNumberCollectionViewCell.identifier)
         self.mReservCollectionV.register(ReservetionWithDistancePriceCell.nib(), forCellWithReuseIdentifier: ReservetionWithDistancePriceCell.identifier)
-        self.mReservCollectionV.register(ReservetionWithPayRentalPriceCell.nib(), forCellWithReuseIdentifier: ReservetionWithPayRentalPriceCell.identifier)
+//        self.mReservCollectionV.register(ReservetionWithPayRentalPriceCell.nib(), forCellWithReuseIdentifier: ReservetionWithPayRentalPriceCell.identifier)
         self.mReservCollectionV.register(ReservetionMakePaymentCell.nib(), forCellWithReuseIdentifier: ReservetionMakePaymentCell.identifier)
         self.mReservCollectionV.register(OnRideCollectionViewCell.nib(), forCellWithReuseIdentifier: OnRideCollectionViewCell.identifier)
-        self.mReservCollectionV.register(AdditionalDriverWaithingApplovalCell.nib(), forCellWithReuseIdentifier: AdditionalDriverWaithingApplovalCell.identifier)
+//        self.mReservCollectionV.register(AdditionalDriverWaithingApplovalCell.nib(), forCellWithReuseIdentifier: AdditionalDriverWaithingApplovalCell.identifier)
         self.mReservCollectionV.register(WaithingAdminApplovalCell.nib(), forCellWithReuseIdentifier: WaithingAdminApplovalCell.identifier)
-        
+        self.mReservCollectionV.register(WaitingForDistancePriceTableViewCell.nib(), forCellWithReuseIdentifier: WaitingForDistancePriceTableViewCell.identifier)
         
         self.mReservCollectionV.register(ReservationHistoryCell.nib(), forCellWithReuseIdentifier: ReservationHistoryCell.identifier)
     }
@@ -117,6 +117,7 @@ class MyReservationsViewController: BaseViewController {
     
     ///Go to my reservation advanced ViewController
     func goToMyReservation(myReservationState: MyReservationState,
+                           paymentOption: PaymentOption,
                            paymentStatusArr: [PaymentStatusModel]?,
                            registerNumberArr:[String]?,
                            onRideArr:[OnRideModel]?, rent: Rent) {
@@ -127,6 +128,7 @@ class MyReservationsViewController: BaseViewController {
         myReservetionAdvancedVC.registerNumberArr = registerNumberArr
         myReservetionAdvancedVC.onRideArr = onRideArr
         myReservetionAdvancedVC.currRent = rent
+        myReservetionAdvancedVC.paymentOption = paymentOption
         self.navigationController?.pushViewController(myReservetionAdvancedVC, animated: true)
     }
     
@@ -232,7 +234,7 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
                 return waithingAdminApprovalCell(item: item, indexPath: indexPath, paymentType: paymentType)
             case .COMPLETED,
                  .START_DEFECT_CHECK,
-                 .START_ODOMETER_CHECK:/*.startRide:*/
+                 .START_ODOMETER_CHECK://start ride
                 
                 if paymentType != .startRide { //cell with pay button
                     return maykePaymentCell(item: item,
@@ -248,22 +250,24 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
                 
 //            case .maykePayment:
 //                return maykePaymentCell(item: item, indexPath: indexPath)
-            case .FINISHED:/*.payDistancePrice:*/
-                if item.distancePayment.amount == 0 {
-                    paymentType = .payDistancePrice
-                    return waithingAdminApprovalCell(item: item, indexPath: indexPath, paymentType: paymentType)
-                }
-                return payDistancePriceCell(item: item, indexPath: indexPath, paymentType: paymentType)
+           
+//                }
+//                return payDistancePriceCell(item: item, indexPath: indexPath, paymentType: paymentType)
 //            case .payRentalPrice:
 //                return payRentalPriceCell(item: item, indexPath: indexPath)
             case .STARTED,
                  .END_DEFECT_CHECK,
                  .END_ODOMETER_CHECK:/*.stopRide:*/
                 return stopRideCell(item: item, indexPath: indexPath)
-            case .ADMIN_FINISHED:/*waithing for distance price*/
-                return waithingAdminApprovalCell(item: item, indexPath: indexPath, paymentType: paymentType)
-            case .CLOSED://Distance price
-                return payDistancePriceCell(item: item, indexPath: indexPath, paymentType: paymentType)
+                
+            case .FINISHED://waiting for distance price calculation
+                
+                paymentType = .payDistancePrice
+                return  waitingForDistancePriceCell(item: item, indexPath: indexPath, paymentType: paymentType)
+                
+            case .ADMIN_FINISHED://waithing for distance price
+                return  payDistancePriceCell(item: item, indexPath: indexPath, paymentType: paymentType)
+              
 //            case .driverWaithingApproval:
 //                return driverWaithingApprovalCell(indexPath: indexPath)
             default://Draft
@@ -290,13 +294,15 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
                 myResrevationState = .waithingApproval
                 let cell: WaithingAdminApplovalCell = mReservCollectionV.cellForItem(at: indexPath) as! WaithingAdminApplovalCell
                 paymentStatusModel = cell.getPaymentStatusModel()
+                
             case .COMPLETED,
                  .START_DEFECT_CHECK,
                  .START_ODOMETER_CHECK /*.startRide*/:
                 
                 
                 if paymentType != .startRide { //cell with pay button
-                      myResrevationState = .maykePayment
+                    myResrevationState = myReservationVM.getReservationState(rent: item)
+                     // myResrevationState = .maykePayment
                       let cell: ReservetionMakePaymentCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservetionMakePaymentCell
                       paymentStatusModel = cell.getPaymentStatusModel()
                 } else {
@@ -315,17 +321,7 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
   //              myResrevationState = .payRentalPrice
 //                let cell: ReservetionWithPayRentalPriceCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservetionWithPayRentalPriceCell
 //                paymentStatusModel = cell.getPaymentStatusModel()
-            case .FINISHED:/*.payDistancePrice:*/
-                if item.distancePayment.amount == 0  {
-                    myResrevationState = .waithingApproval
-                    let cell: WaithingAdminApplovalCell = mReservCollectionV.cellForItem(at: indexPath) as! WaithingAdminApplovalCell
-                    paymentStatusModel = cell.getPaymentStatusModel()
-                } else {
-                    myResrevationState = .payDistancePrice
-                    let cell: ReservetionWithDistancePriceCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservetionWithDistancePriceCell
-                    paymentStatusModel = cell.getPaymentStatusModel()
-                }
-               
+           
 //            case .maykePayment:
               //  myResrevationState = .maykePayment
 //                let cell: ReservetionMakePaymentCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservetionMakePaymentCell
@@ -333,10 +329,24 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
             case .STARTED,
                  .END_DEFECT_CHECK,
                  .END_ODOMETER_CHECK:/*.stopRide:*/
+                
                 myResrevationState = .stopRide
                 let cell: OnRideCollectionViewCell = mReservCollectionV.cellForItem(at: indexPath) as! OnRideCollectionViewCell
                let onRideModel = cell.getOnRideModel()
                 onRideArr = [onRideModel]
+                
+            case .FINISHED:// waiting for admin approval distance price
+                
+                    myResrevationState = .waithingApproval
+                    let cell: WaitingForDistancePriceTableViewCell = mReservCollectionV.cellForItem(at: indexPath) as! WaitingForDistancePriceTableViewCell
+                    paymentStatusModel = cell.getPaymentStatusModel()
+                
+            case .ADMIN_FINISHED:// waiting for distance price
+                myResrevationState = .payDistancePrice
+                let cell: ReservetionWithDistancePriceCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservetionWithDistancePriceCell
+                paymentStatusModel = cell.getPaymentStatusModel()
+
+               
 //            case .driverWaithingApproval:
      //           myResrevationState = .driverWaithingApproval
 //                break
@@ -350,8 +360,9 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
                 paymentArr = []
                 paymentArr!.append(payment)
             }
-            
+            let paymentOption = myReservationVM.getPaymentOption(reservationState: myResrevationState)
             goToMyReservation(myReservationState: myResrevationState,
+                              paymentOption: paymentOption,
                               paymentStatusArr: paymentArr,
                               registerNumberArr: registerNumberArr,
                               onRideArr: onRideArr, rent: item )
@@ -376,18 +387,16 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         case .COMPLETED,
              .START_DEFECT_CHECK,
              .START_ODOMETER_CHECK /*.startRide*/:
-          //  if item.carDetails.registrationNumber != nil /*item.isRegisterNumber*/ {
+            if item.carDetails.registrationNumber != nil /*item.isRegisterNumber*/ {
                 return CGSize(width: collectionView.bounds.width,
                               height: height307)
-//            }
-//            return CGSize(width: collectionView.bounds.width,
-//                          height: height245)
+            }
+            return CGSize(width: collectionView.bounds.width,
+                          height: height245)
 //        case .maykePayment:
 //            return CGSize(width: collectionView.bounds.width,
 //                          height: height240)
-        case .FINISHED:/*.payDistancePrice:*/
-            return CGSize(width: collectionView.bounds.width,
-                          height: height285)
+      
 //        case .payRentalPrice:
 //            return CGSize(width: collectionView.bounds.width,
 //                          height: height285)
@@ -396,6 +405,10 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
              .END_ODOMETER_CHECK:/*.stopRide:*/
             return CGSize(width: collectionView.bounds.width,
                           height: height405)
+        case .FINISHED:// waithinf bkd calculation
+            return CGSize(width: collectionView.bounds.width,
+                          height: height285)
+     
 //        case .driverWaithingApproval:
 //            var driversCellHight = height48
 //            if drivers?.count ?? 0 > 1 {
@@ -473,7 +486,7 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
 
         cell.payDistancePrice = {
             self.goToAgreement(on: self,
-                               agreementType: .editAdvanced, paymentOption: .distance,
+                               agreementType: .myReservationCell, paymentOption: .distance,
                                vehicleModel: nil,
                                rent: item,
                                urlString: nil)
@@ -516,6 +529,17 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         cell.setCellInfo(item: item, reservatiopnState: paymentType)
         return cell
     }
+    
+    ///Waiting for BKD distance price calculation
+    private func waitingForDistancePriceCell(item: Rent, indexPath: IndexPath,  paymentType: MyReservationState) -> WaitingForDistancePriceTableViewCell {
+        
+//        let cell = mReservCollectionV.dequeueReusableCell(withReuseIdentifier: WaitingForDistancePriceTableViewCell.identifier, for: indexPath) as?  WaitingForDistancePriceTableViewCell
+        let cell = mReservCollectionV.dequeueReusableCell(withReuseIdentifier: WaitingForDistancePriceTableViewCell.identifier, for: indexPath) as! WaitingForDistancePriceTableViewCell
+        
+        cell.setCellInfo(item: item, reservatiopnState: paymentType)
+        return cell
+    }
+    
     
     ///Start ride UICollectionViewCell
     private func stopRideCell(item: Rent, indexPath: IndexPath) -> OnRideCollectionViewCell {

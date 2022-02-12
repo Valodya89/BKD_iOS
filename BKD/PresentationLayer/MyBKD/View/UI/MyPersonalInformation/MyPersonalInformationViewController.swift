@@ -194,7 +194,7 @@ extension MyPersonalInformationViewController: SearchPhoneCodeViewControllerDele
 //        let phoneNumber = mPersonalInfoTbV.editMainDriverList?[2].fieldValue
 //        let phoneObj = MyPersonalInformationViewModel().getCurrnetPhoneCode(number: phoneNumber ?? "")
 //        let newNumber = phoneNumber?.replacingOccurrences(of: phoneObj?.code ?? "", with: country.code)
-        mPersonalInfoTbV.editMainDriverList?[2].fieldValue = country.code
+        mPersonalInfoTbV.editMainDriverList?[2].phoneCode = country.code
         mPersonalInfoTbV.reloadData()
     }
 }

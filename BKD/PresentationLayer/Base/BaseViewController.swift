@@ -182,7 +182,7 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     ///Go to Stop ride odometer check ViewController
     func goToStopRideOdometereCheck(rent: Rent?) {
         let stopRideOdometerVC = OdometerCheckStopRideUIViewController.initFromStoryboard(name: Constant.Storyboards.odometerCheckStopRide)
-        stopRideOdometerVC.currRentModel = rent
+        stopRideOdometerVC.currRent = rent
         self.navigationController?.pushViewController(stopRideOdometerVC, animated: true)
     }
     
