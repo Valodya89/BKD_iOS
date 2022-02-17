@@ -71,7 +71,7 @@ struct VehicleModel {
         
         let data = try? Data(contentsOf: ((car.image.getURL() ?? URL(string: ""))!)) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
         
-        self.vehicleImg = UIImage(data: data!)
+        self.vehicleImg = UIImage(data: data ?? Data())
         self.ifHasTowBar = car.towbar
        // self.vehicleOffertValue =
        // self.vehicleDiscountValue =

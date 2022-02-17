@@ -254,10 +254,15 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     }
     
     ///Go to verification screen
-    func goToPhoneVerification(vehicleModel: VehicleModel?, phoneNumber: String?) {
+    func goToPhoneVerification(vehicleModel: VehicleModel?,
+                               phoneNumber: String?,
+                               phoneCode: String?,
+                               paymentOption: PaymentOption) {
         let changePhoneNumberVC = ChangePhoneNumberViewController.initFromStoryboard(name: Constant.Storyboards.changePhoneNumber)
         changePhoneNumberVC.vehicleModel = vehicleModel
         changePhoneNumberVC.newPhoneNumber = phoneNumber
+        changePhoneNumberVC.newPhoneCode = phoneCode
+        changePhoneNumberVC.paymentOption = paymentOption
       self.navigationController?.pushViewController(changePhoneNumberVC, animated: true)
     }
     

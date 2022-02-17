@@ -62,6 +62,7 @@ class BkdAgreementViewController: BaseViewController {
     //MARK: -- Set
     func setUpView() {
         mRightBarBtn.image = img_bkd
+        self.tabBarController?.tabBar.isHidden = true
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
         mAgreeV.mConfirmLb.text = Constant.Texts.agree
         handlerAgree()
@@ -95,37 +96,31 @@ class BkdAgreementViewController: BaseViewController {
     ///Get user account
     private func getAccount(isPayment: Bool,
                             paymentOption: PaymentOption) {
-        if let account = ApplicationSettings.shared.account {
+        
+        ApplicationSettings.shared.getAccount { account in
             self.account = account
-            checkPhoneVerification(isPayment: isPayment, paymentOption: paymentOption)
-        } else {
-            ApplicationSettings.shared.getAccount { account in
-                self.account = account
-                self.checkPhoneVerification(isPayment: isPayment, paymentOption: paymentOption)
-            }
+            self.checkPhoneVerification(isPayment: isPayment, paymentOption: paymentOption)
         }
     }
    
     ///Check phone verification to reservation completed
     func checkPhoneVerification(isPayment: Bool, paymentOption: PaymentOption) {
+        
+        if paymentOption != .none {
+            vehicleModel = VehicleModel()
+            vehicleModel?.rent = self.currRent
+        }
+        
         if self.account?.phoneVerified == true {
-            
             if isPayment {
-                var vehicleModel = VehicleModel()
-                vehicleModel.rent = self.currRent
-//                if self.agreementType == .payLater {
-//                    self.goToPayLater(rent: self.currRent)
-//                } else {
-                    self.goToSelectPayment(vehicleModel: vehicleModel,
+                self.goToSelectPayment(vehicleModel: vehicleModel,
                                            paymentOption: paymentOption)
-                //}
-                
             } else {
                 self.goToReservationCompleted(vehicleModel: self.vehicleModel)
             }
                         
         } else {
-            self.goToPhoneVerification(vehicleModel: self.vehicleModel, phoneNumber: nil)
+            self.goToPhoneVerification(vehicleModel: vehicleModel, phoneNumber: account?.phoneNumber, phoneCode: account?.phoneCode, paymentOption: paymentOption)
         }
     }
     
@@ -174,7 +169,6 @@ class BkdAgreementViewController: BaseViewController {
                 } else {
                     self.vehicleModel?.rent = result!
                     self.getAccount(isPayment: false, paymentOption: .none)
-                   
                 }
         }
     }

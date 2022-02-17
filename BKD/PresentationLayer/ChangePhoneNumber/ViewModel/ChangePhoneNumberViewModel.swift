@@ -12,23 +12,31 @@ final class ChangePhoneNumberViewModel {
     
     private var keychainManager = KeychainManager()
 
-    ///Get phone number
-    func getPhoneNumber() -> String? {
-       return keychainManager.getPhoneNumber()
-    }
+//    ///Get phone number
+//    func getPhoneNumber() -> String? {
+//       return keychainManager.getPhoneNumber()
+//    }
     
     ///Get phone code
-    func getPhoneCode() -> PhoneCode? {
-        let phoneCodeId = keychainManager.getPhoneCodeId()
+    func getPhoneCode(code: String?) -> PhoneCode? {
         let phoneCodesList = ApplicationSettings.shared.phoneCodes
-        var phoneCode: PhoneCode?
-        phoneCodesList?.forEach({ element in
-            if element.id == phoneCodeId {
-                phoneCode = element
-                
-            }
-        })
-       return phoneCode
+        guard let code = code else {
+            return phoneCodesList?[0]
+        }
+        let currPhone = phoneCodesList?.filter({$0.code == code}).first
+              return currPhone
+        
+        
+//        let phoneCodeId = keychainManager.getPhoneCodeId()
+//        let phoneCodesList = ApplicationSettings.shared.phoneCodes
+//        var phoneCode: PhoneCode?
+//        phoneCodesList?.forEach({ element in
+//            if element.id == phoneCodeId {
+//                phoneCode = element
+//
+//            }
+//        })
+//       return phoneCode
     }
     
     

@@ -47,6 +47,12 @@ class MyPersonalInformationViewController: BaseViewController {
 
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        getAccount()
+    }
+    
+    
     ///Configure UI
     func configureUI() {
         tabBarController?.tabBar.isHidden = true
@@ -73,6 +79,12 @@ class MyPersonalInformationViewController: BaseViewController {
         }
     }
     
+    ///Call get account
+    func getAccount() {
+        self.mPersonalInfoTbV.getAccount()
+        self.mPersonalInfoTbV.reloadData()
+        SVProgressHUD.dismiss()
+    }
     
     ///Will present image Picker controller
      func presentPicker (sourceType: UIImagePickerController.SourceType) {
@@ -106,9 +118,8 @@ class MyPersonalInformationViewController: BaseViewController {
     ///Editing completed
     func editingCompleted() {
         myPersonalInfoVM.didConfirmEditing = {
-            self.mPersonalInfoTbV.getAccount()
-            self.mPersonalInfoTbV.reloadData()
-            SVProgressHUD.dismiss()
+            self.mPersonalInfoTbV.mainDriverList = self.mPersonalInfoTbV.editMainDriverList
+            self.getAccount()
         }
     }
    
@@ -174,8 +185,8 @@ class MyPersonalInformationViewController: BaseViewController {
     
     ///Handler phone verify button
     func handlerVerify() {
-        mPersonalInfoTbV.willOpenPhoneVerify = { phoneNumber in
-            self.goToPhoneVerification(vehicleModel: nil, phoneNumber: phoneNumber)
+        mPersonalInfoTbV.willOpenPhoneVerify = { phoneNumber, code in
+            self.goToPhoneVerification(vehicleModel: nil, phoneNumber: phoneNumber, phoneCode: code, paymentOption: .none)
         }
     }
     

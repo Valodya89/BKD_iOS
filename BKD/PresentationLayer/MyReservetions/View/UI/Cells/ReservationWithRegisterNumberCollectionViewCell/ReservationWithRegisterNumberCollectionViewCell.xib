@@ -304,8 +304,11 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDA-jt-RoP">
-                                        <rect key="frame" x="0.0" y="260" width="382" height="47.5"/>
+                                        <rect key="frame" x="0.0" y="258" width="382" height="48"/>
                                         <color key="backgroundColor" name="menu"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="e9S-4R-Oe3"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                                         <state key="normal" title="Start Ride">
                                             <color key="titleColor" name="email"/>
@@ -315,7 +318,7 @@
                                 <color key="backgroundColor" name="subview_background"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="029-ll-tb3" secondAttribute="trailing" id="2WF-OR-ilm"/>
-                                    <constraint firstItem="JDA-jt-RoP" firstAttribute="centerY" secondItem="U04-dB-EvS" secondAttribute="centerY" multiplier="1.85" id="2u4-t9-WNF"/>
+                                    <constraint firstItem="JDA-jt-RoP" firstAttribute="bottom" secondItem="U04-dB-EvS" secondAttribute="bottom" constant="-1" id="2u4-t9-WNF"/>
                                     <constraint firstItem="TSf-Sf-Hq9" firstAttribute="leading" secondItem="U04-dB-EvS" secondAttribute="leading" id="BhD-Et-aE9"/>
                                     <constraint firstItem="rQI-X9-Vj7" firstAttribute="width" secondItem="U04-dB-EvS" secondAttribute="width" id="I0e-9P-g9p"/>
                                     <constraint firstItem="TSf-Sf-Hq9" firstAttribute="centerY" secondItem="U04-dB-EvS" secondAttribute="centerY" multiplier="1.385" id="MC0-m4-dA2"/>
@@ -332,7 +335,6 @@
                                     <constraint firstItem="rQI-X9-Vj7" firstAttribute="leading" secondItem="U04-dB-EvS" secondAttribute="leading" id="pVD-S4-S4f"/>
                                     <constraint firstItem="rQI-X9-Vj7" firstAttribute="centerY" secondItem="U04-dB-EvS" secondAttribute="centerY" multiplier="0.195" id="prH-al-H8q"/>
                                     <constraint firstItem="zma-w1-P2m" firstAttribute="height" secondItem="U04-dB-EvS" secondAttribute="height" multiplier="0.21" id="vfU-fG-CYJ"/>
-                                    <constraint firstItem="JDA-jt-RoP" firstAttribute="height" secondItem="U04-dB-EvS" secondAttribute="height" multiplier="0.155" id="yEk-Xt-X2e"/>
                                 </constraints>
                             </view>
                         </subviews>

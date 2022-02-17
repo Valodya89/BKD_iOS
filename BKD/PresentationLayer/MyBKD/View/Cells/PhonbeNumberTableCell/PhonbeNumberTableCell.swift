@@ -15,7 +15,7 @@ protocol PhonbeNumberTableCellDelegate: AnyObject {
                          code: String,
                          phone: String)
     func willOpenPhoneCodesView()
-    func didPressVerify(phone: String)
+    func didPressVerify(phone: String, code: String)
 }
 class PhonbeNumberTableCell: UITableViewCell {
     static let identifier = "PhonbeNumberTableCell"
@@ -90,29 +90,20 @@ class PhonbeNumberTableCell: UITableViewCell {
         mDeleteBtn.tag = index
         mVerifyBtn.tag = index
         mTxtFl.tag = index
-
+       // mVerifiedV.isHidden = isEditedPhone
         mTxtFl.tintColor = color_navigationBar!
         mTxtFl.isEnabled = isEdit
-        mCodeBtn.isEnabled = isEdit
+        mCodeBtn.isUserInteractionEnabled = isEdit
         mDropDownImgV.isHidden = !isEdit
         mFieldNameLb.text = item.fieldName
-        
-//        if isEditedPhone {
-//            mVerifiedV.isHidden = true
-//            mVerifyBtn.isHidden = false
-//        } else {
-//            mVerifiedV.isHidden = isEdit
-//        }
         
         mCodeBtn.setTitle(item.phoneCode ?? "", for: .normal)
         self.layoutIfNeeded()
         mTxtFl.text = item.fieldValue ?? ""
-//        mTxtFl.text = item.fieldValue?.replacingOccurrences(of: selectedCountry?.code ?? "", with: "")
+
         if mTxtFl.text?.count == 0 {
             mTxtFl.becomeFirstResponder()
         }
-
-        //Phone verify
         
     }
     
@@ -129,7 +120,7 @@ class PhonbeNumberTableCell: UITableViewCell {
     }
     
     @IBAction func verify(_ sender: UIButton) {
-        delegate?.didPressVerify(phone: mTxtFl.text ?? "")
+        delegate?.didPressVerify(phone: mTxtFl.text ?? "", code: mCodeBtn.title(for: .normal) ?? "")
     }
     
 }
@@ -148,12 +139,7 @@ extension PhonbeNumberTableCell: UITextFieldDelegate {
         mDeleteBtn.isHidden = isEdit
         mEditLineV.isHidden = isEdit
         
-//        if item?.fieldValue != textField.text {
-//            mVerifyBtn.isHidden = false
-//        } else {
-//            mVerifiedV.isHidden = !isEdit
-//        }
-        return false
+        return true
     }
 
     

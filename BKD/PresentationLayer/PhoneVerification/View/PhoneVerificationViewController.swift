@@ -31,7 +31,7 @@ class PhoneVerificationViewController: BaseViewController {
     public var phoneNumber: String?
     public var phoneCode: String?
     public var vehicleModel: VehicleModel?
-
+    public var paymentOption: PaymentOption = .none
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -65,8 +65,19 @@ class PhoneVerificationViewController: BaseViewController {
     /// Send verification code
     func sendVerification(){
         phoneVerificationViewModel.verifyPhoneNumber(phoneCode: phoneCode ?? "", number: phoneNumber ?? "", code: mCodeTxtFl.text ?? "") { [weak self] (result, err) in
+            
             if result != nil {
-                self?.goToReservationCompleted(vehicleModel: self?.vehicleModel)
+                if self?.vehicleModel != nil {
+                    if (self?.paymentOption ?? .none) != .none {
+                        self?.goToSelectPayment(vehicleModel:  self?.vehicleModel, paymentOption: self?.paymentOption ?? .none)
+                    } else {
+                        self?.goToReservationCompleted(vehicleModel: self?.vehicleModel)
+                    }
+                    
+                } else {
+                    self?.navigationController?.popToViewController(ofClass: MyPersonalInformationViewController.self)
+                }
+               
             } else {
                 self?.showError()
             } 

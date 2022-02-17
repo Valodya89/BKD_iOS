@@ -20,7 +20,7 @@ class MyPersonalInfoTableView: UITableView, UITableViewDelegate, UITableViewData
     var willOpenCountry:(()-> Void)?
     var willOpenCity:(()-> Void)?
     var willOpenPhoneCodes:(()-> Void)?
-    var willOpenPhoneVerify:((String)-> Void)?
+    var willOpenPhoneVerify:((String, String)-> Void)?
 
     var datePicker = UIDatePicker()
     var pickerV = UIPickerView()
@@ -223,13 +223,9 @@ extension MyPersonalInfoTableView: PersonalInfoTableCellDelegate {
     
     func editFiled(index: Int, value: String) {
         editMainDriverList?[index].fieldValue = value
-        
-        
     }
     
-    func didPressVerify(phone: String) {
-        willOpenPhoneVerify?(phone)
-    }
+   
     
     func willOpenPhoneCodesView() {
         willOpenPhoneCodes?()
@@ -280,6 +276,10 @@ extension MyPersonalInfoTableView: PhonbeNumberTableCellDelegate {
         editMainDriverList?[index].fieldValue = phone
         editMainDriverList?[index].phoneCode = code
     }
+    
+    func didPressVerify(phone: String, code: String) {
+        willOpenPhoneVerify?(phone, code)
+    }
 }
 
 //MARK: -- UIPickerViewDelegate, UIPickerViewDataSource
@@ -293,8 +293,8 @@ extension MyPersonalInfoTableView: UIPickerViewDelegate, UIPickerViewDataSource 
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        currentCountry = countryList![row]
-        return countryList![row].country
+        currentCountry = countryList?[row]
+        return countryList?[row].country ?? ""
     }
 }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
@@ -52,7 +52,7 @@
                                     <constraint firstAttribute="width" constant="15" id="2ZO-fB-lHu"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="54j-3v-0Gh" customClass="SwiftMaskTextfield" customModule="SwiftMaskTextfield">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="783457" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="54j-3v-0Gh" customClass="SwiftMaskTextfield" customModule="SwiftMaskTextfield">
                                 <rect key="frame" x="58" y="0.0" width="201.5" height="31"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" name="navigationBar"/>
@@ -130,6 +130,7 @@
                         </connections>
                     </button>
                 </subviews>
+                <color key="backgroundColor" name="background"/>
                 <constraints>
                     <constraint firstItem="CKv-pc-cTj" firstAttribute="bottom" secondItem="Eed-z2-PXf" secondAttribute="bottom" constant="-10" id="8us-7V-yJ7"/>
                     <constraint firstItem="UO1-Qp-ERF" firstAttribute="bottom" secondItem="Eed-z2-PXf" secondAttribute="bottom" id="9bU-Ed-fEL"/>
@@ -170,6 +171,9 @@
         <image name="delete" width="10" height="10"/>
         <image name="dropDown_blue" width="17" height="9"/>
         <image name="verified" width="17" height="17"/>
+        <namedColor name="background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="driving_license">
             <color red="0.7686274509803922" green="0.7686274509803922" blue="0.7686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

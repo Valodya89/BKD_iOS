@@ -42,6 +42,7 @@ class PayLaterViewController: BaseViewController {
     }
     
     func setUpView()  {
+        tabBarController?.tabBar.isHidden = true
         mRightBarBtn.image = img_bkd
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         mContinueBtn.layer.cornerRadius = 8

@@ -40,7 +40,6 @@ class InfoMessageTableViewCell: UITableViewCell {
             mMessageLb.layer.frame = mMessageLb.bounds
 
             mMessageLb.layer.masksToBounds = true
-
             mMessageLb.layer.cornerRadius = 8
 
            // mMessageLb.roundCorners(corners: [.allCorners], radius: 8.0)

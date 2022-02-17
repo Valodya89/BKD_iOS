@@ -92,7 +92,7 @@ class PaymentStatusUITableViewCell: UITableViewCell  {
         } else {
             
             mWaitingBkdCalculationContentV.isHidden = false
-            mPaidLb.text = String(format: "%.2f", item.price ?? 0.0)
+            mPaidLb.text = String(format: Constant.Texts.paidPrice, item.paid ?? 0.0)
         }
         
         

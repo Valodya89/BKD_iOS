@@ -97,7 +97,12 @@ final class SessionNetwork: SessionProtocol {
                     guard (200 ..< 299) ~= response.statusCode else {
                         if response.statusCode == 401 {
                            // SessionExpiredAlert.showAlert()
-                            completion(.failure(.invalidStatusCode(code: response.statusCode)))
+//                            completion(.failure(.invalidStatusCode(code: response.statusCode)))
+                            
+                            self.refreshTocken(with: builderProtocol) { result in
+                                print(result)
+                                
+                            }
                             return
                         }
                         completion(.failure(.invalidStatusCode(code: response.statusCode)))
@@ -108,5 +113,28 @@ final class SessionNetwork: SessionProtocol {
             }.resume()
         }
         queue.async(execute: self.dispatchWorkItem!)
+    }
+    
+    
+    
+    func refreshTocken(with builderProtocol: URLBuilderProtocol, _ completion: @escaping (Result<Data,NetworkSessionErrors>) -> ()) {
+        
+        needAccessTokenUpdate = false
+        let refreshToken = keychainManager.getRefreshToken() ?? ""
+//        let deviceID = UIDevice.current.identifierForVendor?.uuidString ?? ""
+        request(with: URLBuilder(from: AuthAPI.getAuthRefreshToken(refreshToken: refreshToken))) { result in
+            switch result {
+            case .success(let data):
+                guard let tokenResponse = BkdConverter<TokenResponse>.parseJson(data: data as Any) else { return }
+                self.keychainManager.parse(from: tokenResponse)
+            case .failure(let error):
+                completion(.failure(error))
+            print(error)
+            }
+            builderProtocol.rebuild()
+           // queue.async(execute: self.dispatchWorkItem!)
+            self.needAccessTokenUpdate = true
+            return
+        }
     }
 }

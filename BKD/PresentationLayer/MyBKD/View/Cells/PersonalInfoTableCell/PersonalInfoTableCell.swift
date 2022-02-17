@@ -17,7 +17,7 @@ protocol PersonalInfoTableCellDelegate: AnyObject {
     func willOpenCountryPicker(textFl: TextField)
     func willOpenCityView()
     func willOpenPhoneCodesView()
-    func didPressVerify(phone: String)
+   // func didPressVerify(phone: String, code: String)
 }
 
 
@@ -84,6 +84,8 @@ class PersonalInfoTableCell: UITableViewCell {
         mTxtFl.text = nil
         delegate?.editFiled(index: mTxtFl.tag, value: "")
     }
+    
+   
     
     ///Open picker date
     func openPickerView(textFl: TextField) {

@@ -829,8 +829,8 @@ extension RegistartionBotViewController: UIPickerViewDelegate, UIPickerViewDataS
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-            currentCountry = countryList![row]
-            return countryList![row].country
+            currentCountry = countryList?[row]
+            return countryList?[row].country ?? ""
     }
 }
 

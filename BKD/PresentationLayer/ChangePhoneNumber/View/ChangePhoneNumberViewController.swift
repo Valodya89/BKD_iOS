@@ -34,6 +34,9 @@ final class ChangePhoneNumberViewController: BaseViewController {
     lazy var changePhoneNumberViewModel = ChangePhoneNumberViewModel()
     public var vehicleModel: VehicleModel?
     public var newPhoneNumber: String?
+    public var newPhoneCode: String?
+    public var paymentOption:PaymentOption = .none
+
     private var selectedCountry: PhoneCode?
     private var validFormPattern: Int = 0
     private let phoneNumberKit = PhoneNumberKit()
@@ -97,14 +100,13 @@ final class ChangePhoneNumberViewController: BaseViewController {
     
     ///Configure UI
     func configureUI() {
-        selectedCountry = changePhoneNumberViewModel.getPhoneCode()
+        selectedCountry = changePhoneNumberViewModel.getPhoneCode(code: newPhoneCode)
+        
         if let _ = selectedCountry {
             setPhoneCode(selectedCountry!)
-        } else if let phoneCode = ApplicationSettings.shared.phoneCodes?.first {
-            setPhoneCode(phoneCode)
         }
         
-        phoneNumber =  changePhoneNumberViewModel.getPhoneNumber()?.replacingOccurrences(of: selectedCountry?.code ?? "", with: "")
+        phoneNumber = newPhoneNumber
         mNumberTxtFl.text = phoneNumber
         mInfoLb.text = String(format: Constant.Texts.phoneVerificationInfo, selectedCountry?.code ?? "", phoneNumber ?? "")
 
@@ -132,6 +134,7 @@ final class ChangePhoneNumberViewController: BaseViewController {
         phoneVerification.phoneCode = selectedCountry?.code
         phoneVerification.phoneNumber = phoneNumber
         phoneVerification.vehicleModel = vehicleModel
+        phoneVerification.paymentOption = paymentOption
         self.navigationController?.pushViewController(phoneVerification, animated: true)
     }
     
@@ -198,8 +201,7 @@ extension ChangePhoneNumberViewController: UITextFieldDelegate {
 }
 
 
-//MARK: - SearchPhoneCodeViewControllerDelegate
-//MARK: --------------------------------------
+//MARK: --  SearchPhoneCodeViewControllerDelegate
 extension ChangePhoneNumberViewController: SearchPhoneCodeViewControllerDelegate {
     
     func didSelectCountry(_ country: PhoneCode) {

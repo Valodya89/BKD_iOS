@@ -28,7 +28,7 @@ final class MyPersonalInformationViewModel {
         
         mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.name, fieldValue: mainDriver.name, isPersonalinfo: true))
         mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.surname, fieldValue: mainDriver.surname, isPersonalinfo: true))
-        mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.phoneNumber, fieldValue: mainDriver.phoneNumber, isPersonalinfo: true, isPhone: true))
+        mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.phoneNumber, fieldValue: mainDriver.phoneNumber, phoneCode: mainDriver.phoneCode, isPersonalinfo: true, isPhone: true))
         mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.dateOfBirth, fieldValue: mainDriver.dateOfBirth, isPersonalinfo: true, isDate: true))
         mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.streetName, fieldValue: mainDriver.street, isPersonalinfo: true))
         mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.houseNumber, fieldValue: mainDriver.house, isPersonalinfo: true))
@@ -167,13 +167,17 @@ final class MyPersonalInformationViewModel {
     func isEditedPersonalInfo(newMainDrivers: [MainDriverModel], oldMainDrivers: [MainDriverModel]) -> Bool {
         
         for i in 0 ..< 10 {
+            
             let newValue = newMainDrivers[i].fieldValue
             let oldValue = oldMainDrivers[i].fieldValue
+             
+           
             if newValue != oldValue {
                 return true
             }
         }
-        return false
+        let changeCode = newMainDrivers[2].phoneCode != oldMainDrivers[2].phoneCode
+        return changeCode
     }
     
     ///Is edited driving license information
@@ -373,6 +377,7 @@ final class MyPersonalInformationViewModel {
     ///Check is phone number edited
     func isPhoneNumberEdited(newMainDrivers: [MainDriverModel],
                              oldMainDrivers: [MainDriverModel]) -> Bool {
-        return newMainDrivers[2].fieldValue !=  oldMainDrivers[2].fieldValue
+        return (newMainDrivers[2].fieldValue !=  oldMainDrivers[2].fieldValue) ||
+        (newMainDrivers[2].phoneCode !=  oldMainDrivers[2].phoneCode)
     }
 }

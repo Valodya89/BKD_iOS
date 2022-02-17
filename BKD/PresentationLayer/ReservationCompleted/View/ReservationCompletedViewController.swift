@@ -74,8 +74,8 @@ class ReservationCompletedViewController: BaseViewController {
         mConfirmBtn.layer.cornerRadius = 8
         mConfirmBtn.setBorder(color: color_navigationBar!, width: 1)
         mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
-        mDepositPriceLb.text = Constant.Texts.euro + " " + String(vehicleModel?.depositPrice ?? 0.0)
-        mDepositRentalPriceLb.text = Constant.Texts.euro + " " + String(vehicleModel?.depositPrice ?? 0.0) + " + " + String(format: "%.2f",PriceManager.shared.totalPrice ?? 0.0)
+        mDepositPriceLb.text = Constant.Texts.euro + " " + String(vehicleModel?.depositPrice ?? (vehicleModel?.rent?.depositPayment.amount ?? 0.0))
+        mDepositRentalPriceLb.text = Constant.Texts.euro + " " + String(vehicleModel?.depositPrice ?? (vehicleModel?.rent?.depositPayment.amount ?? 0.0)) + " + " + String(format: "%.2f",PriceManager.shared.totalPrice ?? (vehicleModel?.rent?.rentPayment.amount ?? 0.0))
         vehicleModel?.totalPrice = PriceManager.shared.totalPrice ?? 0.0
     }
     

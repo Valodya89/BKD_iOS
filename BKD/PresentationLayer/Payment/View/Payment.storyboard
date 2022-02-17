@@ -59,7 +59,7 @@ XX.XX is still to be paid in order to fully complete the reservation.</string>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EzH-dL-bz2">
                                                     <rect key="frame" x="16" y="0.0" width="382" height="79"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" name="subview_background"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                     <state key="normal">
                                                         <color key="titleColor" name="navigationBar"/>

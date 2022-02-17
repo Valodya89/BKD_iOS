@@ -130,9 +130,11 @@
                                     <action selector="verify:" destination="6Dt-jj-DFZ" eventType="touchUpInside" id="5FY-Vv-elF"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Verification code is invalid" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eo2-0f-MjY">
-                                <rect key="frame" x="16" y="158" width="390" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verification code is invalid" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eo2-0f-MjY">
+                                <rect key="frame" x="16" y="165.5" width="390" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="iAj-9o-Kua"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
                                 <color key="textColor" name="offert_red"/>
                                 <nil key="highlightedColor"/>
@@ -141,6 +143,7 @@
                         <viewLayoutGuide key="safeArea" id="NIX-N8-zk0"/>
                         <color key="backgroundColor" name="background"/>
                         <constraints>
+                            <constraint firstItem="eo2-0f-MjY" firstAttribute="width" secondItem="D9y-8T-jdg" secondAttribute="width" multiplier="0.942029" id="28e-hC-cYq"/>
                             <constraint firstItem="1re-Z0-t2e" firstAttribute="centerX" secondItem="6kQ-tC-ulE" secondAttribute="centerX" id="3OL-Rq-y2s"/>
                             <constraint firstItem="kcz-bf-Oaj" firstAttribute="centerY" secondItem="NIX-N8-zk0" secondAttribute="centerY" multiplier="1.055" id="5w1-Dn-t1d"/>
                             <constraint firstItem="6kQ-tC-ulE" firstAttribute="width" secondItem="D9y-8T-jdg" secondAttribute="width" multiplier="0.922705" id="G2h-HG-XGW"/>
@@ -154,6 +157,8 @@
                             <constraint firstItem="VS7-E2-5iw" firstAttribute="height" secondItem="D9y-8T-jdg" secondAttribute="height" multiplier="0.0272277" id="sMw-fl-RMi"/>
                             <constraint firstItem="1re-Z0-t2e" firstAttribute="height" secondItem="D9y-8T-jdg" secondAttribute="height" multiplier="0.0711634" id="sPl-vk-gHp"/>
                             <constraint firstItem="6kQ-tC-ulE" firstAttribute="centerX" secondItem="NIX-N8-zk0" secondAttribute="centerX" id="twU-dh-Dtl"/>
+                            <constraint firstItem="eo2-0f-MjY" firstAttribute="leading" secondItem="1re-Z0-t2e" secondAttribute="leading" id="uNv-Hi-UCv"/>
+                            <constraint firstItem="eo2-0f-MjY" firstAttribute="top" secondItem="1re-Z0-t2e" secondAttribute="bottom" constant="15" id="utn-ux-Cog"/>
                             <constraint firstItem="1NJ-go-QEl" firstAttribute="width" secondItem="D9y-8T-jdg" secondAttribute="width" multiplier="0.846" id="v53-iW-Bua"/>
                             <constraint firstItem="1re-Z0-t2e" firstAttribute="top" secondItem="6kQ-tC-ulE" secondAttribute="bottom" multiplier="1.377" id="xnc-Gg-VhG"/>
                             <constraint firstItem="1NJ-go-QEl" firstAttribute="centerY" secondItem="NIX-N8-zk0" secondAttribute="centerY" multiplier="0.9" id="yMa-uk-UE2"/>

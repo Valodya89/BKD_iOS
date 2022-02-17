@@ -60,7 +60,7 @@ class WaitingForDistancePriceTableViewCell: UICollectionViewCell {
     
     
     func getPaymentStatusModel() -> PaymentStatusModel {
-        let paymentModel = PaymentStatusModel(status: mStatusNameLb.text ?? "",  isActivePaymentBtn: false,  price: Double(mPaidPriceLb.text ?? "0.0") ?? 0.00 , paymentButtonType: "", waitingStatus: mWaithingForBkdLb.text, waitingForDistanc: true)
+        let paymentModel = PaymentStatusModel(status: mStatusNameLb.text ?? "",  isActivePaymentBtn: false,  paid: mPaidPriceLb.text ?? "", paymentButtonType: "", waitingStatus: mWaithingForBkdLb.text, waitingForDistanc: true)
         return paymentModel
     }
     

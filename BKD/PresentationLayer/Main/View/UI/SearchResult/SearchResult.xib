@@ -202,6 +202,7 @@
                 </view>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no available  Vans for the selected criteria. You can have a look at the models below." lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H4B-3c-gEQ">
                     <rect key="frame" x="10.5" y="77" width="393" height="43"/>
+                    <color key="backgroundColor" name="background"/>
                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                     <color key="textColor" name="notice_category"/>
                     <nil key="highlightedColor"/>

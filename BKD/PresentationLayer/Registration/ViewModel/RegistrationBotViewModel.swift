@@ -294,7 +294,7 @@ class RegistrationBotViewModel: NSObject {
     ///add identity experation date
     //Optional("ACCOUNTS_wrong_feeling_state_identity_back_empty")
 
-    func addIdentityExpiration(id:String, experationDate: String,
+    func addIdentityExpiration(id: String, experationDate: String,
                                completion: @escaping (MainDriver?) -> Void) {
         
         SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.addIdentityExpiration(id: id, expirationDate: experationDate))) { (result) in

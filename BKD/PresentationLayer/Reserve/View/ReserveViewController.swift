@@ -79,7 +79,6 @@ class ReserveViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.mConfirmLeading.constant = 0.0
-        self.tabBarController?.tabBar.isHidden = false
     }
     
     
@@ -101,6 +100,7 @@ class ReserveViewController: BaseViewController {
     }
     
     func setupView() {
+        tabBarController?.tabBar.isHidden = true
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
         mRightBarBtn.image = img_bkd
         mConfirmBtn.layer.cornerRadius = 10

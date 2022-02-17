@@ -2489,7 +2489,6 @@
 				562585E426F1862B00EC9284 /* AditionalDriverTableCell */,
 				562585DC26F176AB00EC9284 /* RegisterNumberTableCell */,
 				562585D226F0F5AE00EC9284 /* PaymentStatusUITableViewCell */,
-				5640395C26F01D530064256C /* ReservetionWithPayRentalPriceCell */,
 				5640395726EFEF590064256C /* ReservetionWithDistancePriceCell */,
 				5640395226EFD0680064256C /* ReservationWithRegisterNumberCollectionViewCell */,
 				5640394926EF84CF0064256C /* ReservationWithStartRideCollectionViewCell */,
@@ -3325,6 +3324,7 @@
 		56ADD81026F2CED400C0ECC3 /* ReservetionHistoryCell */ = {
 			isa = PBXGroup;
 			children = (
+				5640395C26F01D530064256C /* ReservetionWithPayRentalPriceCell */,
 				56ADD81126F2CED400C0ECC3 /* ReservationHistoryCell.xib */,
 				56ADD81226F2CED400C0ECC3 /* ReservationHistoryCell.swift */,
 			);

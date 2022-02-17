@@ -18,7 +18,7 @@ final class KeychainManager {
     let keychain = Keychain(service: "com.BKD.bkdrental")
     let accessTokenKey = "AccessToken"
     let refreshTokenKey = "RefreshToken"
-    let expiresInKey = "RefreshToken"
+    let expiresInKey = "ExpiresIn"
     let userName = "UserName"
     let password = "Password"
     let phoneCodeId = "PhoneCodeId"

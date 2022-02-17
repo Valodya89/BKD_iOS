@@ -70,10 +70,11 @@ class OnRideCollectionViewCell: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
-        mPriceLb.text = "XX,X"
+        mPriceLb.text = "0.0"
        // mRegistrationNumberLb.text = ""
        
-        
+        mShadowContentV.layer.cornerRadius = 16
+        mShadowContentV.setShadow(color: color_shadow!)
     }
     
     //
