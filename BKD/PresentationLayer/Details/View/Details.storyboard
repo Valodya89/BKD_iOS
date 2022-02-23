@@ -1149,6 +1149,7 @@
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="zo5-PU-82l" firstAttribute="height" secondItem="BfL-pG-VHs" secondAttribute="height" multiplier="0.26" id="3Xc-rd-jPk"/>
                                     <constraint firstItem="8Kb-cY-NAO" firstAttribute="width" secondItem="BfL-pG-VHs" secondAttribute="width" multiplier="0.79" id="IXk-JT-rm6"/>
@@ -1159,6 +1160,9 @@
                                     <constraint firstItem="zo5-PU-82l" firstAttribute="width" secondItem="BfL-pG-VHs" secondAttribute="width" multiplier="0.0947368" id="nel-Nt-cB7"/>
                                     <constraint firstItem="zo5-PU-82l" firstAttribute="centerY" secondItem="BfL-pG-VHs" secondAttribute="centerY" id="xgb-68-ZxJ"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="RPn-h1-uUz" appends="YES" id="QOB-hz-Qxc"/>
+                                </connections>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="E9x-7g-Xbn"/>
@@ -1223,6 +1227,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DHa-XF-h45" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="RPn-h1-uUz">
+                    <connections>
+                        <action selector="swipeGesture:" destination="DBc-z5-met" id="CrT-dY-xob"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1018.840579710145" y="68.973214285714278"/>
         </scene>

@@ -14,9 +14,24 @@ struct  Settings: Codable {
     let workStart: String
     let workEnd: String
     let customLocationMinimalValue: Double
-    let metadata: [String : String]
+    let metadata: Metadata
 }
 
+
+struct  Metadata: Codable {
+    let defaultLanguage: String
+    let NonWorkingHoursValue: String
+    let AdditionalDriverValue: String
+    let AdditionalDriverAgreementUrl: String
+    let FAQUrl: String
+    let AboutUsUrl: String
+    let CallBKDPhone: String
+    let ContactInsurancePhone: String
+    let ContactBKDForAccidentPhone: String
+    let ContactUsPhone: String
+    let PrivacyPolicyUrl: String
+    let TermsOfUseUrl: String
+}
 
 
 struct  FlexibleTimes: Codable {
@@ -26,3 +41,8 @@ struct  FlexibleTimes: Codable {
     let end: String?
     let active: Bool
 }
+
+
+
+
+            

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SVProgressHUD
 
 class MyPersonalInfoTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
@@ -52,6 +52,7 @@ class MyPersonalInfoTableView: UITableView, UITableViewDelegate, UITableViewData
     ///Get user account
     public func getAccount() {
         ApplicationSettings.shared.getAccount { account in
+            SVProgressHUD.show()
             self.account = account
             self.reloadData()
         }

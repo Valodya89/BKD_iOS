@@ -23,7 +23,6 @@ enum AuthAPI: APIProtocol {
     case getCarsByFilter(criteria: [[String : Any]])
     case getSettings
     case getLanguage
-    case updateLanguage(id: String)
     case getFlexibleTimes
     case getPhoneCodes
     case getCountries
@@ -151,8 +150,7 @@ enum AuthAPI: APIProtocol {
         case .getAuthRefreshToken,
              .getToken:
             return BKDBaseURLs.auth.rawValue
-        case .getLanguage,
-             .updateLanguage:
+        case .getLanguage:
             return BKDBaseURLs.locale.rawValue
         default:
             return BKDBaseURLs.rent.rawValue
@@ -180,9 +178,7 @@ enum AuthAPI: APIProtocol {
         case .getSettings:
             return "settings/default"
         case .getLanguage:
-            return "api/language/list"
-        case .updateLanguage:
-            return "api/language"
+            return "languages"
         case .getFlexibleTimes:
             return "flexible-times/list"
         case .getPhoneCodes:
@@ -315,11 +311,20 @@ enum AuthAPI: APIProtocol {
              .addAccident,
              .approveAccident,
              .cancelAccident,
-             .getLanguage,
-             .updateLanguage:
+             .getLanguage:
             return ["Content-Type": "application/json"]
         case .getAuthRefreshToken:
-            fallthrough
+            let username = "gmail"
+                        let password = "gmail_secret"
+                        
+                        let loginString = String(format: "%@:%@", username, password)
+                        let loginData = loginString.data(using: String.Encoding.utf8)!
+                        let base64LoginString = loginData.base64EncodedString()
+                        
+                        return [
+                            "Authorization": "Basic \(base64LoginString)",
+                            "Content-Type" : "multipart/form-data"
+                        ]
         case .getToken:
             let username = "gmail"
             let password = "gmail_secret"
@@ -360,12 +365,6 @@ enum AuthAPI: APIProtocol {
     
     var body: [String : Any]? {
         switch self {
-        case .getLanguage:
-            return [:]
-        case let .updateLanguage(id):
-            return [
-                "id": id
-            ]
         case let .getCarsByType(criteria):
             return [
                 "criteria" : [criteria]
@@ -410,11 +409,11 @@ enum AuthAPI: APIProtocol {
                 "email": email,
                 "code": code
             ]
-        case .getAuthRefreshToken(let refreshToken):
-            return [
-                "refresh_token": refreshToken,
-                "grant_type": "refresh_token"
-            ]
+//        case .getAuthRefreshToken(let refreshToken):
+//            return [
+//                "refresh_token": refreshToken,
+//                "grant_type": "refresh_token"
+//            ]
         case let .forgotPassword(username, action):
             return [
                 "username": username,
@@ -525,6 +524,13 @@ enum AuthAPI: APIProtocol {
                 "grant_type": "password"
             ]
             return MultipartFormData(parameters: params, blob: nil)
+        case .getAuthRefreshToken(let refreshToken):
+            let params = [
+                "grant_type": "refresh_token",
+                "refresh_token": refreshToken
+            ]
+            return MultipartFormData(parameters: params, blob: nil)
+
         default:
             return nil
         }
@@ -534,8 +540,7 @@ enum AuthAPI: APIProtocol {
     var method: RequestMethod {
         switch self {
 
-        case .getLanguage,
-             .updateLanguage,
+        case .getAuthRefreshToken,
              .getCarsByType,
              .getCarsByFilter,
              .signUp,

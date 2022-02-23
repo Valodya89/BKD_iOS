@@ -8,15 +8,16 @@
 import UIKit
 import  SideMenu
 import WebKit
+import SVProgressHUD
 
 
 class AboutUsViewController: BaseViewController {
     
     
-    @IBOutlet weak var mActivityV: UIActivityIndicatorView!
     @IBOutlet weak var mWebV: WKWebView!
     @IBOutlet weak var mRightbarBtn: UIBarButtonItem!
     var menu: SideMenuNavigationController?
+    public var urlString: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,14 +33,14 @@ class AboutUsViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        mActivityV.startAnimating()
+        SVProgressHUD.show()
     }
     
     ///load web view
     func loadWebView() {
-        let url = URL(string: "https://www.google.am")
+        let url = URL(string: urlString ?? "")
+        guard let _ = url else {return}
         mWebV.load(URLRequest(url: url!))
-        mActivityV.stopAnimating()
     }
     
     
@@ -57,6 +58,6 @@ class AboutUsViewController: BaseViewController {
 extension AboutUsViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        mActivityV.stopAnimating()
+            SVProgressHUD.dismiss()
     }
 }

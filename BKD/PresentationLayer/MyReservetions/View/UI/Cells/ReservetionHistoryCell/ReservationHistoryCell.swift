@@ -51,13 +51,50 @@ class ReservationHistoryCell: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
-        mPriceLb.text = "XX,X"
+        mPriceLb.text = "0.0"
        // mRegistrationNumberLb.text = ""
         
     }
     
-    func  setCellInfo(rent: Rent, index: Int) {
+    func getPaymentStatusModel() -> PaymentStatusModel {
+        let paymentModel = PaymentStatusModel(status: mCompletedLb.text ?? "", isActivePaymentBtn: false,  price: Double(mPriceLb.text ?? "0.0"))
+        return paymentModel
+    }
+    
+    func  setCellInfo(item: Rent, index: Int) {
         
+        //Car info
+        mCarIconImgV.sd_setImage(with:  item.carDetails.logo.getURL() ?? URL(string: ""), placeholderImage: nil)
+        let currCar: CarsModel? = ApplicationSettings.shared.allCars?.filter( {$0.id == item.carDetails.id}).first
+        mCarNameLb.text = currCar?.name
+        mCarDescriptionLb.text = (ApplicationSettings.shared.carTypes?.filter( {$0.id == currCar?.type} ).first)?.name
+        
+        //Pickup location
+        if item.pickupLocation.type == Constant.Keys.custom,
+           let returnLocation = item.returnLocation.customLocation {
+            mPickupLocationLb.text = returnLocation.name
+        } else if let pickupLocation = item.pickupLocation.parking {
+            mPickupLocationLb.text = pickupLocation.name
+        }
+        //Return location
+        if item.returnLocation.type == Constant.Keys.custom,
+           let returnLocation = item.returnLocation.customLocation {
+            mReturnLocationLb.text = returnLocation.name
+        } else if let returnParkin = item.returnLocation.parking {
+            mReturnLocationLb.text = returnParkin.name
+        }
+        //Date
+        let startDate = Date().doubleToDate(doubleDate: item.startDate)
+        let endDate = Date().doubleToDate(doubleDate: item.endDate)
+        mPickupDay.text = startDate.getDay()
+        mPickupMonthLb.text =  startDate.getMonth(lng: "en")
+        mPickupTimeLb.text = startDate.getHour()
+        mReturnDayLb.text = endDate.getDay()
+        mReturnMonthLb.text = endDate.getMonth(lng: "en")
+        mReturnTimelb.text = endDate.getHour()
+         
+        //Price
+        mPriceLb.text = String(format: "%.2f", item.depositPayment.amount + item.rentPayment.amount + item.distancePayment.amount)
     }
 
  

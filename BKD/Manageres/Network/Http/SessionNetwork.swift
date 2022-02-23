@@ -49,23 +49,27 @@ final class SessionNetwork: SessionProtocol {
         
     func request(with builderProtocol: URLBuilderProtocol, _ completion: @escaping (Result<Data,NetworkSessionErrors>) -> (), _ queue: DispatchQueue = .global()) {
         
+        let isTokenExpired = keychainManager.isTokenExpired()
+        
         if keychainManager.isTokenExpired() && needAccessTokenUpdate {
             dispatchWorkItem?.cancel()
             needAccessTokenUpdate = false
             let refreshToken = keychainManager.getRefreshToken() ?? ""
-            let deviceID = UIDevice.current.identifierForVendor?.uuidString ?? ""
+          //  let deviceID = UIDevice.current.identifierForVendor?.uuidString ?? ""
             request(with: URLBuilder(from: AuthAPI.getAuthRefreshToken(refreshToken: refreshToken))) { result in
                 switch result {
                 case .success(let data):
                     guard let tokenResponse = BkdConverter<TokenResponse>.parseJson(data: data as Any) else { return }
                     self.keychainManager.parse(from: tokenResponse)
+                   
+                    print( "refreshToken  ------- \(tokenResponse)")
+
                 case .failure(let error):
                     completion(.failure(error))
-                print(error)
+                print( "refreshToken error ------- \(error)")
                 }
                 builderProtocol.rebuild()
                 queue.async(execute: self.dispatchWorkItem!)
-                self.needAccessTokenUpdate = true
                 return
             }
         }
@@ -79,36 +83,49 @@ final class SessionNetwork: SessionProtocol {
             let session = URLSession(configuration: .default)
                 session.dataTask(with: request) { data, response, error in
                     SVProgressHUD.dismiss()
+
                 DispatchQueue.main.async {
                     guard error == nil else {
                         completion(.failure(.invalidRequest(request: request)))
+
                         return
                     }
                     guard let data = data else {
                         completion(.failure(.invalidRequest(request: request)))
+
                         return
                     }
                     
                      guard let response = response as? HTTPURLResponse else {
                         completion(.failure(.invalidRequest(request: request)))
+
                         return
                     }
                     
                     guard (200 ..< 299) ~= response.statusCode else {
                         if response.statusCode == 401 {
+                            print ("Status code 401")
                            // SessionExpiredAlert.showAlert()
-//                            completion(.failure(.invalidStatusCode(code: response.statusCode)))
+                          //  completion(.failure(.invalidStatusCode(code: response.statusCode)))
                             
-                            self.refreshTocken(with: builderProtocol) { result in
-                                print(result)
-                                
-                            }
+//                            self.refreshTocken(with: builderProtocol) { result in
+//                                print(result)
+//                            }
+//                                self.request(with: builderProtocol) { result in
+////                                    completion(result)
+////                                }
+//
+//                            }
+                           // self.needAccessTokenUpdate = true
+                            
                             return
                         }
                         completion(.failure(.invalidStatusCode(code: response.statusCode)))
+
                         return
                     }
                     completion(.success(data))
+
                 }
             }.resume()
         }
@@ -129,11 +146,13 @@ final class SessionNetwork: SessionProtocol {
                 self.keychainManager.parse(from: tokenResponse)
             case .failure(let error):
                 completion(.failure(error))
+                  //self.needAccessTokenUpdate = true
+
             print(error)
             }
-            builderProtocol.rebuild()
+           // builderProtocol.rebuild()
            // queue.async(execute: self.dispatchWorkItem!)
-            self.needAccessTokenUpdate = true
+          //  self.needAccessTokenUpdate = true
             return
         }
     }

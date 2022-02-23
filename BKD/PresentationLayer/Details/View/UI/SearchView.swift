@@ -325,7 +325,6 @@ class SearchView: UIView, UITextFieldDelegate {
         }
         if let _ = searchModel.returnLocation {
             setReturnLocationInfo(searchModel: searchModel)
-
         }
     }
     

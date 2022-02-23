@@ -7,8 +7,7 @@
 
 import UIKit
 
-let phoneInsuance = "+32 (0) 3 255 63 45"
-let phoneBkd = "+32 (0) 3 282 63 33"
+
 
 class AddDamageViewController: BaseViewController {
 
@@ -21,10 +20,10 @@ class AddDamageViewController: BaseViewController {
     @IBOutlet weak var mContactBkdBtn: UIButton!
     @IBOutlet weak var mAddAccidentDetailsBtn: UIButton!
     @IBOutlet weak var mInfoLb: UILabel!
-    
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     
     public var currRentModel: Rent?
+    private var settings: Settings?
     
     //MARK: -- Lidecycle
     override func viewDidLoad() {
@@ -43,6 +42,7 @@ class AddDamageViewController: BaseViewController {
         mContactBkdBtn.setBorder(color: color_menu!, width: 1.0)
         mContactInsuranceBtn.setBorder(color: color_menu!, width: 1.0)
         mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
+        settings = ApplicationSettings.shared.settings
         
     }
     
@@ -81,13 +81,13 @@ class AddDamageViewController: BaseViewController {
    //MARK: -- Actions
     @IBAction func contactInsuance(_ sender: UIButton) {
         sender.setClickColor(color_menu!, titleColor: sender.titleColor(for: .normal)!)
-        phoneClick(phone: "+(56)975270693")
+        phoneClick(phone: settings?.metadata.ContactInsurancePhone ?? "+00 (0)0 000 00 00")
        // showContactActionSheet(phone: phoneInsuance)
     }
     
     @IBAction func contactBKD(_ sender: UIButton) {
         sender.setClickColor(color_menu!, titleColor: sender.titleColor(for: .normal)!)
-        phoneClick(phone: "+(56)975277792")
+        phoneClick(phone: settings?.metadata.ContactBKDForAccidentPhone ?? "+00 (0)0 000 00 00")
        // showContactActionSheet(phone: phoneBkd)
     }
     

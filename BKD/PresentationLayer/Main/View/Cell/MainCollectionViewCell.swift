@@ -90,6 +90,7 @@ static let identifier = "MainCollectionViewCell"
                                   NSAttributedString.Key.foregroundColor: UIColor(named: "value") as Any],
                                      range: NSMakeRange(0, 1))
         mValueLb.attributedText = amountText
+        
     }
 
     ///Set  values to vehicle model
@@ -97,7 +98,7 @@ static let identifier = "MainCollectionViewCell"
         var vehicleModel = VehicleModel()
         vehicleModel.vehicleId = carModel.id
         vehicleModel.vehicleName = mCarNameLb.text
-        vehicleModel.ifHasTowBar = true
+         vehicleModel.ifHasTowBar = carModel.towbar
         vehicleModel.vehicleImg = mCarImgV.image
         vehicleModel.drivingLicense = mCardLb.text
         vehicleModel.vehicleCube = mCubeLb.text
@@ -109,7 +110,8 @@ static let identifier = "MainCollectionViewCell"
         vehicleModel.vehicleLogo = mFiatImgV.image
         vehicleModel.vehicleImg = mCarImgV.image
         vehicleModel.images = carModel.images
-
+        vehicleModel.reservations = carModel.reservations
+         
         let carType = ApplicationSettings.shared.carTypes?.filter{
               $0.id == carModel.type
       }
@@ -179,10 +181,9 @@ static let identifier = "MainCollectionViewCell"
             mFiatImgV.sd_setImage(with:item.logo!.getURL()!, placeholderImage: nil)
         }
                 
-        guard let start = item.reservations?.getStart(), let end = item.reservations?.getEnd()  else { return }
-        let isActiveCar: Bool = mainViewModel.isCarActiveNow(start: start, end: end)
+        let isActiveCar: Bool = mainViewModel.isCarActiveNow(reservation: item.reservations)
         mBlurV.isHidden = isActiveCar
-        mInactiveCarNameLb.isHidden = isActiveCar
+        mInactiveCarNameLb.isHidden = isActiveCar  
     }
     
     

@@ -81,18 +81,25 @@ class PaymentStatusUITableViewCell: UITableViewCell  {
             if item.status == Constant.Texts.payLater {
                 mPaymentTypeContentV.isHidden = true
                 isPayLater = true
+                
+            } else if item.status == Constant.Texts.completed {
+                mPaymentTypeContentV.isHidden = false
+                mWaitingStatusContentV.isHidden = false
+                mWaitingForAdminLb.text = String(format: Constant.Texts.paidPrice,  item.price ?? 0.0)  
+                mPayBtn.isHidden = true
             }
+            
             if item.waitingStatus != nil {
                 mWaitingStatusContentV.isHidden = false
                 mWaitingForAdminLb.text = item.waitingStatus
-            } else {
+            } else if item.status != Constant.Texts.completed   {
                 mWaitingStatusContentV.isHidden = true
             }
             
         } else {
             
             mWaitingBkdCalculationContentV.isHidden = false
-            mPaidLb.text = String(format: Constant.Texts.paidPrice, item.paid ?? 0.0)
+            mPaidLb.text = item.paid ?? ""
         }
         
         

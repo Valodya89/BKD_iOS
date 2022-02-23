@@ -10,7 +10,6 @@ import SideMenu
 import CoreLocation
 
 
-let timePrice: Double = 59.99
 
 
 class MainViewController: BaseViewController {
@@ -63,16 +62,13 @@ class MainViewController: BaseViewController {
         self.tabBarController?.setTabBarBackgroundColor(color: color_background!)
         setupView()
         
-        
-        
-//        self.goToSelectPayment(vehicleModel:  VehicleModel(),
-//                               paymentOption: .deposit)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.tabBarController?.tabBar.isHidden = false
+        //mainVM.isRefreshToken()
    }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -97,9 +93,6 @@ class MainViewController: BaseViewController {
         self.setmenu(menu: menu)
         mRightBarBtn.image = UIImage(named:"bkd")?.withRenderingMode(.alwaysOriginal)
         
-        
-        
-            
             configureHeaderViews()
             addCarousel()
             configureCarsCollectionView()
@@ -110,9 +103,8 @@ class MainViewController: BaseViewController {
             self.showFilter()
             self.updateCategory()
         
-    
-        
     }
+    
     
     ///set CollationView Posittion
     private func setCollationViewPosittion(top: CGFloat) {
@@ -126,15 +118,6 @@ class MainViewController: BaseViewController {
         self.mAvalableCategoriesTbV.setContentOffset(.init(x: 0, y: -top), animated: false)
     }
     
-    // set info to search model
-    private func setSearchModel(){
-        searchModel.pickUpDate = searchHeaderV?.pickUpDate
-        searchModel.returnDate = searchHeaderV?.returnDate
-        searchModel.pickUpTime = searchHeaderV?.pickUpTime
-        searchModel.returnTime = searchHeaderV?.returnTime
-        searchModel.pickUpLocation = searchResultV?.mPickUpLocationLb.text
-        searchModel.returnLocation = searchResultV?.mReturnLocationLb.text
-    }
     
    //MARK: -- Configure UI
     private func configureDelegates() {
@@ -215,8 +198,7 @@ class MainViewController: BaseViewController {
         let detailsVC = DetailsViewController.initFromStoryboard(name: Constant.Storyboards.details)
 
         if isSearchEdit {
-            setSearchModel()
-            detailsVC.searchModel = searchModel
+            detailsVC.searchModel = mainVM.getSearchModel(search: searchModel, searchHeaderV: searchHeaderV)
         }
         detailsVC.isSearchEdit = isSearchEdit
         detailsVC.isClickMore = isClickMore
@@ -328,8 +310,7 @@ class MainViewController: BaseViewController {
     
     ///check if reservation date more than 90 days
     func checkIfReservationMoreThan90Days() -> Bool {
-        setSearchModel()
-        if  mainVM.isReservetionMore90Days(search: searchModel) {
+        if  mainVM.isReservetionMore90Days(search: mainVM.getSearchModel(search: searchModel, searchHeaderV: searchHeaderV)) {
                 BKDAlert().showAlertOk(on: self, message: Constant.Texts.max90Days, okTitle: Constant.Texts.ok) {
                     self.searchHeaderV?.resetReturnDate()
                     self.searchHeaderV?.resetReturnTime()
@@ -423,19 +404,18 @@ class MainViewController: BaseViewController {
     
     func showAlertMoreThanMonth() {
         BKDAlert().showAlert(on: self,
-                             title: nil,
                              message: Constant.Texts.messageMoreThanMonth,
-                             messageSecond: nil,
                              cancelTitle: Constant.Texts.cancel,
-                             okTitle: Constant.Texts.agree,cancelAction: { [self] in
+                             okTitle: Constant.Texts.agree) {
             self.searchHeaderV?.resetReturnDate()
-        }, okAction: nil)
-        
+        } okAction:{}
+       
     }
     
     func showAlertWorkingHours() {
+        let timePrice = Double( settings?.metadata.NonWorkingHoursValue ?? "0.0")
         BKDAlert().showAlert(on: self,
-                             title:String(format: Constant.Texts.titleWorkingTime, timePrice),
+                             title: String(format: Constant.Texts.titleWorkingTime, timePrice ?? 0.0),
                              message: Constant.Texts.messageWorkingTime + "(\(settings?.workStart ?? "") -  \(settings?.workEnd ?? "")).",
                              messageSecond: nil,
                              cancelTitle: Constant.Texts.cancel,
@@ -662,8 +642,8 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         } else { //search result
             if !isPressedFilter {
             let cell = collectionView.cellForItem(at: indexPath) as! SearchResultCollectionViewCell
-            var vehicleModel =
-                cell.setVehicleModel(carModel: cars[indexPath.row])
+            let vehicleModel =
+                cell.setVehicleModel(carModel: cars[indexPath.row], search: searchModel)
             goToDetailPage(vehicleModel: vehicleModel,
                            isSearchEdit: true, isClickMore: false)
             }
@@ -681,20 +661,12 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         return CGSize(width: collectionView.bounds.width, height: view.frame.height * 0.441832)
     }
     
-    //n
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if isSearchResultPage && !isPressedEdit{
             return  CGSize(width: collectionView.bounds.width, height: searchHeaderEditHeight)
         }
-        
             return (searchHeaderV?.frame.size)!
-
-//        if ((searchHeaderV?.isHidden) == true) {
-//            return (searchHeaderV?.frame.size)!
-//        } else {
-           // return  CGSize(width: collectionView.bounds.width, height: searchHeaderEditHeight)
-
-        //}
     }
 
     ///Search resul cell
@@ -702,8 +674,8 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         
         let cellSearch = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: IndexPath(row: index, section: 0) ) as! SearchResultCollectionViewCell
         
-        cellSearch.startRendDate = searchHeaderV?.pickUpTime
-        cellSearch.endRendtDate = searchHeaderV?.returnTime
+        cellSearch.startRendDate = mainVM.getRentDate(date: searchHeaderV?.pickUpDate, withTime: searchHeaderV?.pickUpTime)
+        cellSearch.endRendtDate = mainVM.getRentDate(date: searchHeaderV?.returnDate, withTime: searchHeaderV?.returnTime)
         cellSearch.setSearchResultCellInfo( item: cars[index] , index: index)
         cellSearch.delegate = self
         return cellSearch
@@ -724,7 +696,7 @@ extension MainViewController: SearchResultCellDelegate {
     
     private func openDetails(tag: Int, isMore: Bool) {
             let cell = mCarCollectionV.cellForItem(at: IndexPath(item: isPressedFilter ? (tag + 1) : tag, section: 0)) as! SearchResultCollectionViewCell
-        let vehicleModel =  cell.setVehicleModel(carModel: cars[tag])
+        let vehicleModel =  cell.setVehicleModel(carModel: cars[tag], search: searchModel)
         
         goToDetailPage(vehicleModel: vehicleModel,
                        isSearchEdit: true, isClickMore: isMore)
@@ -793,7 +765,6 @@ extension MainViewController: SearchHeaderViewDelegate {
             searchModel.returnLocation = nil
             PriceManager.shared.returnCustomLocationPrice = nil
         }
-        //isActiveReserve()
     }
    
     func willOpenPicker(textFl: UITextField, pickerState: DatePicker) {
@@ -807,13 +778,13 @@ extension MainViewController: SearchHeaderViewDelegate {
             pickerList = ApplicationSettings.shared.pickerList
             textFl.inputView = pickerV
             textFl.inputAccessoryView = creatToolBar()
-
             pickerV.delegate = self
             pickerV.dataSource = self
+            
         } else {
             self.datePicker = UIDatePicker()
             textFl.inputView = self.datePicker
-            self.datePicker.configDatePicker()
+            self.datePicker.configDatePicker(search: mainVM.getSearchModel(search: searchModel, searchHeaderV: searchHeaderV), pickerState: pickerState)
         }
     }
 

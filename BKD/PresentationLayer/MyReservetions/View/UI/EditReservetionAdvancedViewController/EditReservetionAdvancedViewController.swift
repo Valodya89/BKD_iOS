@@ -245,6 +245,7 @@ class EditReservetionAdvancedViewController: BaseViewController {
 //              mRegisterNumberTableV.registerNumberArr =  registerNumberArr
 //              mRegisterNumberTableV.reloadData()
 //          }
+          //Reservation Status
           if paymentStatusArr != nil {
               mPaymentStatusTableV.statusArr = paymentStatusArr
               mPaymentStatusTableV.reloadData()

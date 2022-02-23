@@ -131,7 +131,7 @@ class ReservetionMakePaymentCell: UICollectionViewCell {
             mMakePaymentBtn.setTitle(Constant.Texts.payDistance, for: .normal)
         case .startRide, .stopRide:
             mStatusTypeLb.text = Constant.Texts.reservedPaid
-        case .waithingApproval:
+        case .waithingApproval, .closed:
             break
         }
     }

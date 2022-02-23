@@ -65,7 +65,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var mInactiveCarNameLb: UILabel!
     @IBOutlet weak var mVisualEffectV: UIVisualEffectView!
-    
+    @IBOutlet weak var mVidualGradientV: UIView!
     @IBOutlet weak var mCarImageViewCenterY: NSLayoutConstraint!
     
   lazy var mainViewModel = MainViewModel()
@@ -78,6 +78,11 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         setupView()
         
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        mVidualGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
     }
     
     func setupView() {
@@ -93,10 +98,22 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         initButtons(btn: mReserveBtn)
         initButtons(btn: mFlipMoreInfoBtn)
         initButtons(btn: mFlipReserveBtn)
+        
+        mVisualEffectV.clipsToBounds = true
+        mVisualEffectV.layer.cornerRadius = 10
+        
+        //gradient
+       // mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
                 
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
+    }
+    
     override func prepareForReuse() {
+        
         mCarNameLb.text = ""
         mFlipCarNameLb.text = ""
         mCarLogoImgV.image = UIImage()
@@ -107,9 +124,6 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         initButtons(btn: mReserveBtn)
         initButtons(btn: mFlipMoreInfoBtn)
         initButtons(btn: mFlipReserveBtn)
-//        mInfoV.isHidden = false
-//        mFlipInfoV.isHidden = true
-        
     }
     
     func initButtons(btn:UIButton) {
@@ -118,9 +132,10 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     }
     
     ///Set  values to vehicle model
-     func setVehicleModel(carModel: CarsModel) -> VehicleModel {
+    func setVehicleModel(carModel: CarsModel, search: SearchModel?) -> VehicleModel {
         
          var vehicleModel = VehicleModel()
+        vehicleModel.searchModel = search
          vehicleModel.vehicleId = carModel.id
         vehicleModel.vehicleName = carModel.name
         vehicleModel.ifHasTowBar = true
@@ -195,12 +210,17 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         self.mCardLb.text = item.driverLicenseType
         self.mCubeLb.text = String(item.volume) + Constant.Texts.mCuadrad
         self.mKgLb.text = String(item.loadCapacity) + Constant.Texts.kg
-        self.mMetrLb.text = item.exterior?.getExterior()
         
-        guard let start = item.reservations?.getStart(), let end = item.reservations?.getEnd() else { return }
-        let isActiveCar: Bool = SearchResultModelView().isCarAvailable(start:start, end:end, rentStart: startRendDate!, rendEnd: endRendtDate)
+        self.mMetrLb.text = item.exterior?.getExterior()
+        mInactiveCarNameLb.text = item.name
+        
+        let isActiveCar: Bool = SearchResultModelView().isCarAvailable(reservation: item.reservations,  currRentStart:  startRendDate!,
+                              currRentEnd:  endRendtDate)
         self.mVisualEffectV.isHidden = isActiveCar
         self.mInactiveCarNameLb.isHidden = isActiveCar
+        self.isUserInteractionEnabled = isActiveCar
+        
+
     }
     
     

@@ -72,18 +72,15 @@ class MyPersonalInformationViewController: BaseViewController {
             self.mPersonalInfoTbV.editMainDriverList = list
             self.mPersonalInfoTbV.mainDriverList = self.mPersonalInfoTbV.editMainDriverList
             self.mPersonalInfoTbV.reloadData()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 10 ) {
-                SVProgressHUD.dismiss()
-             }
-
+            SVProgressHUD.dismiss()
         }
     }
     
     ///Call get account
     func getAccount() {
         self.mPersonalInfoTbV.getAccount()
-        self.mPersonalInfoTbV.reloadData()
-        SVProgressHUD.dismiss()
+       // self.mPersonalInfoTbV.reloadData()
+       // SVProgressHUD.dismiss()
     }
     
     ///Will present image Picker controller
@@ -120,6 +117,9 @@ class MyPersonalInformationViewController: BaseViewController {
         myPersonalInfoVM.didConfirmEditing = {
             self.mPersonalInfoTbV.mainDriverList = self.mPersonalInfoTbV.editMainDriverList
             self.getAccount()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1 ) {
+                SVProgressHUD.dismiss()
+            }
         }
     }
    

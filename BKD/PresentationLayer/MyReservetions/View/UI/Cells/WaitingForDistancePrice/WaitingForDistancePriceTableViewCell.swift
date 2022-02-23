@@ -68,8 +68,6 @@ class WaitingForDistancePriceTableViewCell: UICollectionViewCell {
     ///Set cel information
     func  setCellInfo(item: Rent, reservatiopnState: MyReservationState) {
         
-       // setPaymentType(state: reservatiopnState)
-
         //Car info
         mLogoImgV.sd_setImage(with:  item.carDetails.logo.getURL() ?? URL(string: ""), placeholderImage: nil)
         let currCar: CarsModel? = ApplicationSettings.shared.allCars?.filter( {$0.id == item.carDetails.id}).first

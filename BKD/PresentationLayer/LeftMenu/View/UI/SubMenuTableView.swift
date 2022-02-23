@@ -51,7 +51,8 @@ class SubMenuTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
         if isContactUs {
             switch indexPath.row {
             case 0:
-                phoneClick(phone: "+(56)975277792")
+                let settings = ApplicationSettings.shared.settings
+                phoneClick(phone: settings?.metadata.CallBKDPhone ?? "+00 (0)0 000 00 00")
                 break
             case 1:
                 openChat?()

@@ -7,7 +7,7 @@
 
 import UIKit
 
-let driverPrice = 9.99
+//let driverPrice = 9.99
 
 protocol MyDriversViewControllerDelegate: AnyObject {
     func selectedDrivers(_ isSelecte: Bool,
@@ -36,6 +36,8 @@ class MyDriversViewController: BaseViewController {
     lazy var myDriversVM: MyDriversViewModel = MyDriversViewModel()
     var totalPrice: Double = 0.0
     var driver: MainDriver?
+    private var settings: Settings?
+
     
    // public var accessories: [AccessoriesEditModel]?
     public var additionalDrivers: [MyDriversModel]?
@@ -54,6 +56,7 @@ class MyDriversViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        settings = ApplicationSettings.shared.settings
         getMyDriverList()
 
     }
@@ -95,6 +98,13 @@ class MyDriversViewController: BaseViewController {
      }
 
     
+//    /// check if reservetion time in range
+//    func getSettings() {
+//        settings = ApplicationSettings.shared.settings
+//        guard let _ = settings else { return }
+//
+//    }
+    
     ///Get my driver list
     private func getMyDriverList () {
         myDriversVM.getMyDrivers { [self] (result, error) in
@@ -109,7 +119,8 @@ class MyDriversViewController: BaseViewController {
                 mMyDriverCollectionV.reloadData()
             }
             getDriverToContinue(driverList: result)
-            totalPrice =  myDriversVM.countTotalPrice(additionalDrivers: additionalDrivers, price: driverPrice)
+            
+            totalPrice =  myDriversVM.countTotalPrice(additionalDrivers: additionalDrivers, price: Double(settings?.metadata.AdditionalDriverValue ?? "0.0") ?? 0.0)
             setTotalPrice()
 
         }
@@ -140,11 +151,11 @@ class MyDriversViewController: BaseViewController {
     private func showAlertSelecteDriver(index: Int) {
 
         BKDAlert().showAlert(on: self,
-                             message: String(format: Constant.Texts.addDriverService, driverPrice), cancelTitle: Constant.Texts.cancel,
+                             message: String(format: Constant.Texts.addDriverService, Double(settings?.metadata.AdditionalDriverValue ?? "0.0") ?? 0.0), cancelTitle: Constant.Texts.cancel,
                              okTitle: Constant.Texts.confirm) {
             
         } okAction: {
-            self.totalPrice += driverPrice
+            self.totalPrice += Double(self.settings?.metadata.AdditionalDriverValue ?? "0.0") ?? 0.0
             self.updateDriverList(index: index,
                              isSelected: true)
         }
@@ -214,7 +225,7 @@ extension MyDriversViewController: MyDriverCollectionViewCellDelegate {
         if isSelected {
             showAlertSelecteDriver(index: cellIndex)
         } else {
-            totalPrice -= driverPrice
+            totalPrice -= Double(settings?.metadata.AdditionalDriverValue ?? "0.0") ?? 0.0
             updateDriverList(index: cellIndex, isSelected: isSelected)
         }
         

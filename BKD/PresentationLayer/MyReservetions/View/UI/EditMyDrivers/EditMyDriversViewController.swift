@@ -37,6 +37,9 @@ class EditMyDriversViewController: BaseViewController {
     lazy var editMyDriversVM = EditMyDriversViewModel()
     var totalPrice: Double = 0.0
     var driver: MainDriver?
+    var settings: Settings?
+    var driverPrice: Double?
+
     
     public var additionalDrivers: [MyDriversModel]?
     public var oldReservDrivers: [DriverToRent]?
@@ -54,6 +57,7 @@ class EditMyDriversViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        settings = ApplicationSettings.shared.settings
         getMyDriverList()
         
     }
@@ -69,6 +73,7 @@ class EditMyDriversViewController: BaseViewController {
     }
     
     func setupView() {
+        driverPrice = Double(settings?.metadata.AdditionalDriverValue ?? "0.0")
         mTotalPriceBckgV.setShadow(color: color_shadow!)
         mAddDriverBckgV.layer.cornerRadius = mAddDriverBckgV.frame.height/2
         mAddBtn.layer.cornerRadius = mAddBtn.frame.size.width/2
@@ -120,7 +125,7 @@ class EditMyDriversViewController: BaseViewController {
                 setEditDrivers()
                 mMyDriverCollectionV.reloadData()
             } else {
-                totalPrice =  myDriversVM.countTotalPrice(additionalDrivers: additionalDrivers, price: driverPrice)
+                totalPrice =  myDriversVM.countTotalPrice(additionalDrivers: additionalDrivers, price: driverPrice ?? 0.0)
             }
             getDriverToContinue(driverList: result)
             setTotalPrice()
@@ -153,12 +158,12 @@ class EditMyDriversViewController: BaseViewController {
     private func showAlertSelecteDriver(index: Int) {
 
         BKDAlert().showAlert(on: self,
-                             message: String(format: Constant.Texts.addDriverAlert, driverPrice), cancelTitle: Constant.Texts.cancel,
+                             message: String(format: Constant.Texts.addDriverAlert, driverPrice ?? 0.0 ), cancelTitle: Constant.Texts.cancel,
                              okTitle: Constant.Texts.confirm) {
             
         } okAction: {
             self.mConfirmV.enableView()
-            self.totalPrice += driverPrice
+            self.totalPrice += self.driverPrice ?? 0.0
             self.updateDriverList(index: index,
                                   isSelected: true)
         }
@@ -256,7 +261,7 @@ extension EditMyDriversViewController: MyDriverCollectionViewCellDelegate {
         if isSelected {
             showAlertSelecteDriver(index: cellIndex)
         } else {
-            totalPrice -= driverPrice
+            totalPrice -= driverPrice ?? 0.0
             updateDriverList(index: cellIndex, isSelected: isSelected)
         }
         

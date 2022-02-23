@@ -91,11 +91,20 @@ final class MainViewModel: NSObject {
     }
     
     ///Chack if car is active now
-    func isCarActiveNow(start:Date, end:Date) -> Bool {
-        let now = Date()
-        let result = now.isBetween(start: start, end: end)
+    func isCarActiveNow(reservation: Reservation?) -> Bool {
+
+        guard let _ = reservation else {return true}
         
-        return !result
+        let now = Double(Date().timeIntervalSince1970)
+        for (_, value) in reservation!.innerArray {
+            let start = value.start
+            let end = value.end
+            let isActive = !(now >= start &&  now <= end)
+            if !isActive {
+                return isActive
+            }
+        }
+        return true
     }
    
     
@@ -233,17 +242,57 @@ final class MainViewModel: NSObject {
             }
         }
     }
-
     
-//    func minDateToPickerDate(pickUpDate: Date?, returnDate: Date?) ->  Date {
-//        if let _ = pickUpDate {
-//            return  pickUpDate!
-//        }
-//        if let _ = returnDate {
-//            return  returnDate!
-//        }
-//        return Date()
-//    }
+    ///Get current reservation date
+    func getRentDate(date: Date?, withTime: Date?) -> Date? {
+        guard let date = date, let time = withTime else {
+            return nil
+        }
+       return Date().combineDate(date: date, withTime: time)
+    }
+    
+    
+    ///Get search model
+    func getSearchModel(search: SearchModel,
+                        searchHeaderV: SearchHeaderView?) -> SearchModel {
+        
+        var searchModel = SearchModel()
+        searchModel = search
+        searchModel.pickUpDate = searchHeaderV?.pickUpDate
+        searchModel.returnDate = searchHeaderV?.returnDate
+        searchModel.pickUpTime = searchHeaderV?.pickUpTime
+        searchModel.returnTime = searchHeaderV?.returnTime
+        searchModel.pickUpLocationId = searchHeaderV?.pickUpLocationId
+        searchModel.returnLocationId = searchHeaderV?.returnLocationId
+        searchModel.pickUpLocation = searchHeaderV?.pickUpLocation
+        searchModel.returnLocation = searchHeaderV?.returnLocation
+        
+        return searchModel
+    }
+    
+    
+    func isRefreshToken() {
+        let keychainManager = KeychainManager()
+        if keychainManager.isTokenExpired() {
+            
+            let refreshToken = keychainManager.getRefreshToken() ?? ""
+            SessionNetwork.init().request(with: URLBuilder(from: AuthAPI.getAuthRefreshToken(refreshToken: refreshToken))) { result in
+                switch result {
+                case .success(let data):
+                    guard let tokenResponse = BkdConverter<TokenResponse>.parseJson(data: data as Any) else {
+                        print("tokenResponse return  -----")
+                        return }
+                    keychainManager.parse(from: tokenResponse)
+                    print("tokenResponse -----", tokenResponse)
+
+                case .failure(let error):
+                    //completion(.failure(error))
+
+                print("tokenResponse error  -----", error) 
+                }
+            }
+        }
+    }
     
 }
 

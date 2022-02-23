@@ -248,8 +248,9 @@ class EditReservationViewController: BaseViewController {
     
     ///Will show alert when selection time is out of working times
     func showAlertWorkingHours(timeStr: String) {
+        let timePrice = Double( settings?.metadata.NonWorkingHoursValue ?? "0.0")
         BKDAlert().showAlert(on: self,
-                             title:String(format: Constant.Texts.titleWorkingTime, timePrice),
+                             title:String(format: Constant.Texts.titleWorkingTime, timePrice ?? 0.0),
                              message: Constant.Texts.messageWorkingTime + "(\(settings?.workStart ?? "") -  \(settings?.workEnd ?? "")).",
                              messageSecond: nil,
                              cancelTitle: Constant.Texts.cancel,

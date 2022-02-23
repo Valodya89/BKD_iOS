@@ -126,7 +126,7 @@ class WaithingAdminApplovalCell: UICollectionViewCell {
             mDepositPaidLb.text = Constant.Texts.paymentPending
         case .startRide, .stopRide:
             mDepositPaidLb.text = Constant.Texts.reservedPaid
-        case .waithingApproval:
+        case .waithingApproval, .closed:
             break
         }
     }

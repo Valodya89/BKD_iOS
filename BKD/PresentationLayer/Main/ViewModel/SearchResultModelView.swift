@@ -32,17 +32,29 @@ class SearchResultModelView: NSObject {
         }
     
     ///Chack if car is available for rent
-    func isCarAvailable(start:Date?,
-                        end:Date?,
-                        rentStart:Date?,
-                        rendEnd:Date?) -> Bool {
-        guard let _ = start, let _ = end, let _ = rentStart,let _ = rendEnd   else {
-            return true
+    func isCarAvailable(reservation: Reservation?,
+                        currRentStart: Date?,
+                        currRentEnd: Date?) -> Bool {
+        
+        guard let _ = reservation else {return true}
+        for (_, value) in reservation!.innerArray {
+            
+            guard let _ = currRentStart, let _ = currRentEnd else {
+                return true
+            }
+            let start = value.start
+            let end = value.end
+            let rentStart = Double(currRentStart!.timeIntervalSince1970)
+            let rentEnd = Double(currRentEnd!.timeIntervalSince1970)
+            
+            if  (rentStart <= start && rentEnd >= end) ||
+            (rentStart <= start && rentEnd <= end && rentEnd >= start) ||
+            (rentStart >= start && rentStart <= end && rentEnd >= end) ||
+            (rentStart >= start && rentEnd <= end){
+                return false
+            }
         }
-        let startResult = rentStart!.isBetween(start: start!, end: end!)
-        let endResult = rendEnd!.isBetween(start: start!, end: end!)
-        let result = startResult || endResult
-        return !result
+        return true
     }
     
     
@@ -79,9 +91,17 @@ class SearchResultModelView: NSObject {
         var criteriaParam: [[String : Any]]? = criteriaParams
         var exteriorArr:[[String: Double]] = []
         for item in exteriors {
-            let exterior = [key_length: item.length,
-                            key_width: item.width,
-                            key_height: item.height]
+           // let lenght = String(format: "%.2f", item.length)
+//            let width = String(format: "%.2f", item.width)
+//            let height = String(format: "%.2f", item.height)
+            let lenght = Double(round(10 * item.length) / 10)
+            let width = round(10 * item.width) / 10
+            let height = Double(round(10 * item.height) / 10)
+
+
+            let exterior = [key_length: lenght,
+                             key_width: width,
+                            key_height: height]
             exteriorArr.append(exterior)
         }
         if criteriaParams != nil {

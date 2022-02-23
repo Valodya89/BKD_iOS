@@ -12,6 +12,7 @@ final class ApplicationSettings {
     private(set) static var shared: ApplicationSettings = .init()
     private var storageManager: StorageManager = .init()
     private var network: SessionNetwork = .init()
+    private let keychainManager = KeychainManager()
     
     private(set) var phoneCodes: [PhoneCode]?
     private(set) var pickerList: [String]?
@@ -26,17 +27,19 @@ final class ApplicationSettings {
     var account: Account?
     
     private init() {
-        NotificationCenter.default.addObserver(self, selector: #selector(fetchPhoneCodes), name: Constant.Notifications.LanguageUpdate, object: nil)
-        if carTypes == nil {
-            getCarTypes()
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchPhoneCodes),
+                                               name: Constant.Notifications.LanguageUpdate,
+                                               object: nil)
+        if self.carTypes == nil {
+            self.getCarTypes()
         }
-        fetchPhoneCodes()
-        getAvalableTimeList()
-        getSettings()
-        getRestrictedZones()
-        getFlexibleTimes()
-        getCountryList()
-        getAllCars()
+        self.fetchPhoneCodes()
+        self.getAvalableTimeList()
+        self.getSettings()
+        self.getRestrictedZones()
+        self.getFlexibleTimes()
+        self.getCountryList()
+        self.getAllCars()
     }
 }
 
@@ -147,7 +150,6 @@ extension ApplicationSettings {
                 self.pickerList = self.getTimeList(model: timesList.content!)
             case .failure(let error):
                 print(error.description)
-            
                 break
             }
         }
@@ -215,6 +217,8 @@ extension ApplicationSettings {
             self.countryList = response
         }
     }
+    
+    
 }
 
 extension ApplicationSettings {

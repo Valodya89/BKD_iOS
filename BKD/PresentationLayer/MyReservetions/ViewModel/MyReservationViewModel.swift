@@ -15,6 +15,8 @@ enum MyReservationState: String {
     case maykePayment
     case payRentalPrice
     case waithingApproval
+    case closed
+
 }
 
 //enum ReservationViewType: String {
@@ -153,6 +155,9 @@ class MyReservationViewModel: NSObject {
             return .rental
         case .waithingApproval:
             return .none
+        case .closed:
+            return .none
+
         }
     }
    

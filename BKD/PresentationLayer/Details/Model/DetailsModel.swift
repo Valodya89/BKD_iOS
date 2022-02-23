@@ -23,7 +23,7 @@ struct VehicleModel {
     public var ifHasTowBar: Bool = false
     public var vehicleOffertValue: Double = 0.0
     public var vehicleDiscountValue: Double = 0.0
-    
+    public var reservations: Reservation?
     //Prices
     public var priceForFlexible: Double = 0.0
     public var priceHour: Double?

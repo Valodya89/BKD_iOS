@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -49,7 +49,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZf-dm-rbK">
-                                                <rect key="frame" x="26.5" y="0.0" width="49" height="32"/>
+                                                <rect key="frame" x="28" y="0.0" width="46" height="32"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                                 <state key="normal" title="Details">
                                                     <color key="titleColor" name="navigationBar"/>
@@ -59,7 +59,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pxd-QZ-t9e">
-                                                <rect key="frame" x="25.5" y="27" width="51" height="1"/>
+                                                <rect key="frame" x="27" y="27" width="48" height="1"/>
                                                 <color key="backgroundColor" name="gradient_end"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="Drq-Hb-Ead"/>
@@ -308,7 +308,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MKo-fG-9MW">
-                                                <rect key="frame" x="21.5" y="0.0" width="49" height="33.5"/>
+                                                <rect key="frame" x="23" y="0.0" width="46" height="33.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                                 <state key="normal" title="Details">
                                                     <color key="titleColor" name="navigationBar"/>
@@ -318,7 +318,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cnf-Zj-bUP">
-                                                <rect key="frame" x="20.5" y="28.5" width="51" height="1"/>
+                                                <rect key="frame" x="22" y="28.5" width="48" height="1"/>
                                                 <color key="backgroundColor" name="gradient_end"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="f9f-3C-hpW"/>
@@ -558,9 +558,9 @@
                                 <rect key="frame" x="48.5" y="14.5" width="158" height="136"/>
                             </imageView>
                             <visualEffectView hidden="YES" opaque="NO" alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQL-v0-7tn">
-                                <rect key="frame" x="16" y="7" width="382" height="316"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000001192092896" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="iL8-jH-xla">
-                                    <rect key="frame" x="0.0" y="0.0" width="382" height="316"/>
+                                <rect key="frame" x="16" y="14.5" width="382" height="288"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000000000000004" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="iL8-jH-xla">
+                                    <rect key="frame" x="0.0" y="0.0" width="382" height="288"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
@@ -568,7 +568,7 @@
                                 <blurEffect style="regular"/>
                             </visualEffectView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="68O-Fq-7wZ">
-                                <rect key="frame" x="54" y="157" width="306" height="16"/>
+                                <rect key="frame" x="54" y="151.5" width="306" height="14.5"/>
                                 <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -578,20 +578,20 @@
                         <constraints>
                             <constraint firstItem="7Sl-Bb-XkN" firstAttribute="height" secondItem="r5f-Qf-yre" secondAttribute="height" multiplier="0.757" id="3hF-w2-AhK"/>
                             <constraint firstItem="68O-Fq-7wZ" firstAttribute="centerX" secondItem="aQL-v0-7tn" secondAttribute="centerX" id="E3R-HD-diU"/>
+                            <constraint firstItem="aQL-v0-7tn" firstAttribute="leading" secondItem="l8r-WE-WOv" secondAttribute="leading" id="GxN-uT-BiQ"/>
                             <constraint firstItem="l8r-WE-WOv" firstAttribute="centerX" secondItem="r5f-Qf-yre" secondAttribute="centerX" id="Juc-8N-1s0"/>
-                            <constraint firstAttribute="trailing" secondItem="aQL-v0-7tn" secondAttribute="trailing" constant="16" id="KXI-6U-SRB"/>
                             <constraint firstItem="l8r-WE-WOv" firstAttribute="centerY" secondItem="r5f-Qf-yre" secondAttribute="centerY" multiplier="1.19" id="MEo-nx-RRj"/>
-                            <constraint firstItem="aQL-v0-7tn" firstAttribute="leading" secondItem="r5f-Qf-yre" secondAttribute="leading" constant="16" id="MeL-6r-peb"/>
                             <constraint firstItem="68O-Fq-7wZ" firstAttribute="height" secondItem="aQL-v0-7tn" secondAttribute="height" multiplier="0.0506329" id="Mqw-Ta-i6Y"/>
                             <constraint firstItem="68O-Fq-7wZ" firstAttribute="centerY" secondItem="aQL-v0-7tn" secondAttribute="centerY" id="Nyo-cz-cfb"/>
                             <constraint firstItem="lpz-oR-cie" firstAttribute="centerX" secondItem="r5f-Qf-yre" secondAttribute="centerX" multiplier="0.615" id="PaU-Yz-Z7d"/>
                             <constraint firstItem="7Sl-Bb-XkN" firstAttribute="centerX" secondItem="r5f-Qf-yre" secondAttribute="centerX" id="QVZ-BD-JrU"/>
-                            <constraint firstAttribute="bottom" secondItem="aQL-v0-7tn" secondAttribute="bottom" constant="7" id="aJL-0m-daI"/>
-                            <constraint firstItem="aQL-v0-7tn" firstAttribute="top" secondItem="r5f-Qf-yre" secondAttribute="top" constant="7" id="afU-rf-kGu"/>
                             <constraint firstItem="lpz-oR-cie" firstAttribute="width" secondItem="r5f-Qf-yre" secondAttribute="width" multiplier="0.381643" id="fso-aQ-mBw"/>
+                            <constraint firstItem="aQL-v0-7tn" firstAttribute="trailing" secondItem="l8r-WE-WOv" secondAttribute="trailing" id="goB-Ru-HNz"/>
                             <constraint firstItem="68O-Fq-7wZ" firstAttribute="width" secondItem="aQL-v0-7tn" secondAttribute="width" multiplier="0.801047" id="i85-Fp-e3X"/>
                             <constraint firstItem="l8r-WE-WOv" firstAttribute="height" secondItem="r5f-Qf-yre" secondAttribute="height" multiplier="0.643" id="iS9-6k-Z9J"/>
+                            <constraint firstItem="aQL-v0-7tn" firstAttribute="top" secondItem="lpz-oR-cie" secondAttribute="top" id="kKw-fR-8RK"/>
                             <constraint firstItem="lpz-oR-cie" firstAttribute="height" secondItem="r5f-Qf-yre" secondAttribute="height" multiplier="0.410959" id="p8W-3c-VM6"/>
+                            <constraint firstItem="aQL-v0-7tn" firstAttribute="bottom" secondItem="l8r-WE-WOv" secondAttribute="bottom" id="piy-DB-Qma"/>
                             <constraint firstItem="7Sl-Bb-XkN" firstAttribute="centerY" secondItem="r5f-Qf-yre" secondAttribute="centerY" multiplier="1.2" id="qJO-fN-oTU"/>
                             <constraint firstItem="lpz-oR-cie" firstAttribute="centerY" secondItem="r5f-Qf-yre" secondAttribute="centerY" multiplier="0.5" id="tj1-PS-44J"/>
                             <constraint firstItem="l8r-WE-WOv" firstAttribute="width" secondItem="r5f-Qf-yre" secondAttribute="width" multiplier="0.922705" id="vLd-9i-1bt"/>
@@ -644,6 +644,7 @@
                 <outlet property="mReserveBtn" destination="cXa-qj-XS9" id="TG3-4V-oEw"/>
                 <outlet property="mValueDeleteV" destination="2iD-Tt-10v" id="qGY-ID-Kar"/>
                 <outlet property="mValueLb" destination="dTf-80-SKD" id="7Fq-EN-CuJ"/>
+                <outlet property="mVidualGradientV" destination="iL8-jH-xla" id="69u-mG-AJY"/>
                 <outlet property="mVisualEffectV" destination="aQL-v0-7tn" id="nmo-Ec-4ak"/>
                 <outlet property="mflipBtn" destination="hw9-Gh-9cQ" id="Phq-ZD-vvt"/>
             </connections>

@@ -441,10 +441,19 @@ class DetailsViewModel: NSObject {
     //Get time string of flexible tariff
     func getTimeOfFlexible(time: String) -> String {
         
-        let timeArr = time.split(separator: "-")
+        var timeArr = time.split(separator: "-")
+        if timeArr.count > 1 {
         var newTime:String = String(timeArr[timeArr.count - 1])
         newTime = newTime.replacingOccurrences(of: " ", with: "", options: NSString.CompareOptions.literal, range: nil)
-        return newTime
+            return newTime
+
+        } else {
+            timeArr = time.split(separator: " ")
+            if timeArr.count > 1 {
+                return String(timeArr[1])
+            }
+            return ""
+        }
     }
     
     //Get Start flexible time list
@@ -454,7 +463,7 @@ class DetailsViewModel: NSObject {
         flexibleTimes?.forEach({ flexibleTime in
             if flexibleTime.active {
                 if flexibleTime.type == Constant.Keys.start && flexibleTime.start != nil  {
-                    flexibleStartTimes?.append(flexibleTime.start!)
+                    flexibleStartTimes?.append(Constant.Texts.from + flexibleTime.start!)
                     
                 } else if flexibleTime.type == Constant.Keys.start_interval &&
                             flexibleTime.start != nil &&
@@ -473,7 +482,7 @@ class DetailsViewModel: NSObject {
         flexibleTimes?.forEach({ flexibleTime in
             if flexibleTime.active {
                 if flexibleTime.type == Constant.Keys.end && flexibleTime.end != nil  {
-                    flexibleStartTimes?.append(flexibleTime.end!)
+                    flexibleStartTimes?.append(Constant.Texts.to + flexibleTime.end!)
                     
                 } else if flexibleTime.type == Constant.Keys.end_interval &&
                             flexibleTime.start != nil &&
@@ -494,17 +503,20 @@ class DetailsViewModel: NSObject {
         
         if search.pickUpDate != nil && search.returnDate != nil {
             
-            let pickupDay = Double(search.pickUpDate!.getDay())!
-            let returnDay = Double(search.returnDate!.getDay())!
-            var daysCount = ((returnDay - pickupDay) <= 0 ) ? 1 : (returnDay - pickupDay)
+            let days = Double(Date().getDaysBetween(start: search.pickUpDate!, end: search.returnDate!))
+            var daysCount = (days <= 0 ) ? 1 : days
+            
+//            let pickupDay = Double(search.pickUpDate!.getDay())!
+//            let returnDay = Double(search.returnDate!.getDay())!
+//            var daysCount = ((returnDay - pickupDay) <= 0 ) ? 1 : (returnDay - pickupDay)
             
             
-            if returnDay - pickupDay > 0 {
+           // if returnDay - pickupDay > 0 {
                 
                 if  search.pickUpTime!.millisecondsSince1970 < search.returnTime!.millisecondsSince1970  && (search.returnTime!.millisecondsSince1970 - search.pickUpTime!.millisecondsSince1970) > 250000  {
                     daysCount += 1
                 }
-            }
+           // }
             
             let price = daysCount * vehicle.priceForFlexible
             var specialPrice:Double?
@@ -645,20 +657,6 @@ class DetailsViewModel: NSObject {
         differenceInDays = Date().getDaysFromDates(start: search.pickUpDate!,
                                            end: search.returnDate!,
                                            hours: differenceInTimes)
-//        var months = Double(search.returnDate!.distance(from: search.pickUpDate!, only: .month))
-//        months = 12 + months
-//
-//        //Count days
-//        var days = differenceInTimes / 24
-//        if differenceInTimes <= 24 {
-//            differenceInDays = 1
-//        } else {
-//            differenceInDays = ceil(differenceInTimes / 24)
-//        }
-//        days = differenceInDays
-//        if months >= 1 && months < 12 {
-//            days = differenceInDays + 300
-//        }
         
         for j in 0 ..< tariffSlideList!.count {
             if tariffSlideList![j].type == Constant.Texts.daily {
@@ -689,137 +687,6 @@ class DetailsViewModel: NSObject {
     }
     
     
-//    ///Count custom tariff for hourly
-//    func getHourlyTariffList(search: SearchModel,
-//                             tariffSlideList: [TariffSlideModel]?,
-//                             time: (hourPickup: Int,
-//                                    hourReturn: Int,
-//                                    minutPickup: Int,
-//                                    minutReturn: Int)) -> [TariffSlideModel]? {
-//
-//        var newSlideList = tariffSlideList
-//        let nextDay = search.pickUpDate?.addDays(1)
-//        if ((search.returnDate?.isSameDates(date: search.pickUpDate)) == true ||
-//            (search.returnDate?.isSameDates(date: nextDay)) == true) {
-//
-//            var hours = Double(time.hourReturn - time.hourPickup)
-//            let minuts = Double(time.minutReturn - time.minutPickup)
-//            //If days are diferent but tariff is hourly
-//            if (search.returnDate?.isSameDates(date: nextDay)) == true {
-//                let hour = 24 + hours
-//
-//                if hour < 24 && minuts <= 0 {
-//                    hours = hour
-//                } else if hour < 24 && minuts > 0 {
-//                    hours = hour + 1
-//                } else {
-//                    differenceInTimes = hours
-//                    differenceInMinutes = minuts
-//                    return nil
-//                }
-//            }
-//            differenceInTimes = hours
-//            differenceInMinutes = minuts
-//
-//            for j in 0 ..< tariffSlideList!.count {
-//                if tariffSlideList![j].type == Constant.Texts.hourly {
-//                    let hourlyTariff = tariffSlideList![j]
-//
-//                    for i in 0 ..< hourlyTariff.tariff!.count {
-//
-//                        let tariff = hourlyTariff.tariff![i]
-//
-//                        if (hours <= tariff.duration &&
-//                            minuts <= 0) ||
-//                            (hours < tariff.duration &&
-//                             minuts > 0) ||
-//                            ((search.returnDate?.isSameDates(date: nextDay)) == true && hours == tariff.duration && minuts > 0) {
-//
-//                            newSlideList?[j].options![i].isSelected = true
-//                            newSlideList?[j].segmentIndex = i
-//                            return newSlideList
-//
-//                        } else if hours <= tariff.duration && minuts > 0 {
-//
-//                            if i + 1 < hourlyTariff.tariff!.count {
-//                                newSlideList?[j].options![i + 1].isSelected = true
-//                                newSlideList?[j].segmentIndex = i + 1
-//                                return newSlideList
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        return nil
-//    }
-    
-//    ///Count custom tariff for daily
-//    func getDailyTariffList(search: SearchModel,
-//                            vehicleModel: VehicleModel,
-//                            tariffSlideList: [TariffSlideModel]?,
-//                            time: (hourPickup: Int,
-//                                   hourReturn: Int,
-//                                   minutPickup: Int,
-//                                   minutReturn: Int)) -> [TariffSlideModel]? {
-//
-//        var newSlideList = tariffSlideList
-//        var days = Double(search.returnDate!.distance(from: search.pickUpDate!, only: .day))
-//        var months = Double(search.returnDate!.distance(from: search.pickUpDate!, only: .month))
-//        var years = Double(search.returnDate!.distance(from: search.pickUpDate!, only: .year))
-//        // let currentMonthDays = Double(search.pickUpDate?.daysInMonth() ?? 0)
-//
-//        /// when return date is in nex month
-//        if months < 0 {
-//            months = 12 + months
-//        }
-//        if months >= 1 {
-//            days = (monthDays * months)  + days
-//        }
-//        ///When return date is on next year
-//        if years > 0 && months == 0 {
-//            days = ((12 * years) * monthDays) + days
-//        }
-//
-//        if differenceInTimes == 0 {
-//            differenceInTimes = Double(time.hourReturn - time.hourPickup)
-//            differenceInMinutes = Double(time.minutReturn - time.minutPickup)
-//        }
-//        //When days are same
-//        if ((search.returnDate?.isSameDates(date: search.pickUpDate)) == true)  {
-//            days = 1
-//        } else if  ( differenceInTimes > 0 || differenceInMinutes > 0)  { //When on the day added time
-//            days += 1
-//        }
-//        differenceInDays = days
-//        for j in 0 ..< tariffSlideList!.count {
-//            if tariffSlideList![j].type == Constant.Texts.daily {
-//                let dailyTariff = tariffSlideList![j]
-//
-//                for i in 0 ..< dailyTariff.tariff!.count {
-//
-//                    let tariff = dailyTariff.tariff![i]
-//                    if days == tariff.duration {
-//
-//                        newSlideList?[j].options![i].isSelected = true
-//                        newSlideList?[j].segmentIndex = i
-//                        currTariffState = .daily
-//                        return newSlideList
-//
-//                    }
-//                }
-//            }
-//        }
-//        if days < 7 { //count flexible tariff
-//            return getFlexibleTariffList(search: search,
-//                                         vehicleModel: vehicleModel,
-//                                         tariffSlideList: tariffSlideList)
-//        } else {//count weekly tariff
-//            return getWeeklyTariffList(search: search,
-//                                       vehicleModel: vehicleModel,
-//                                       tariffSlideList: tariffSlideList)
-//        }
-//    }
     
     ///Count custom tariff for weekly
     func getWeeklyTariffList(search: SearchModel,
@@ -926,55 +793,20 @@ class DetailsViewModel: NSObject {
     }
     
     
+    ///Chack if car is available for rent
+    func isCarAvailable(reservation: Reservation?,
+                        search: SearchModel) -> Bool {
+        
+        
+        let mainVM = MainViewModel()
+        let currRentStart = mainVM.getRentDate(date: search.pickUpDate , withTime: search.pickUpTime)
+        let currRentEnd = mainVM.getRentDate(date: search.returnDate, withTime: search.returnTime)
+        return SearchResultModelView().isCarAvailable(reservation: reservation,
+                            currRentStart: currRentStart,
+                            currRentEnd: currRentEnd)
+    }
+    
+    
 }
 
 
-//"content": {
-//        "id": "6189d8bc3a0352528762d090",
-//        "userId": "60febc56266f574fec954af2",
-//        "startDate": 1636395213876,
-//        "endDate": 1636395213876,
-//        "accessories": [
-//            {
-//                "id": "61506ec81464ab42a0e2f31e",
-//                "count": 1
-//            }
-//        ],
-//        "pickupLocation": {
-//            "type": "CUSTOM",
-//            "customLocation": {
-//                "name": "Masivi city",
-//                "longitude": 45.5,
-//                "latitude": 47.8
-//            },
-//            "parking": null
-//        },
-//        "returnLocation": {
-//            "type": "CUSTOM",
-//            "customLocation": {
-//                "name": "Masivi city",
-//                "longitude": 45.5,
-//                "latitude": 47.8
-//            },
-//            "parking": null
-//        },
-//        "carDetails": {
-//            "id": "61815f3296b3233b4995c625",
-//            "registrationNumber": null,
-//            "logo": {
-//                "id": "14122AFE1F760709174A3F2B166B05AB51B1D7286ECAC4678C5B2F485A99F02605F320DD234F89BAAFC16476569668ED",
-//                "node": "dev-node1"
-//            },
-//            "model": "M3",
-//            "type": null
-//        },
-//        "driver": {
-//            "id": "60febc56266f574fec954af2",
-//            "name": "Valodya",
-//            "surname": "Galstyan",
-//            "drivingLicenseNumber": null
-//        },
-//        "additionalDrivers": []
-//    }
-//}
-//

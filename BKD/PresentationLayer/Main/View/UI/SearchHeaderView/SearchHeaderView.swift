@@ -82,6 +82,8 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
     var locationPickUp:LocationPickUp?
     var locationReturn:LocationReturn?
     var datePicker: DatePicker = .none
+    var pickUpLocationId: String?
+    var returnLocationId: String?
 
     let searchHeaderViewModel: SearchHeaderViewModel = SearchHeaderViewModel()
 
@@ -383,11 +385,13 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
             self!.currLocationDropImgV.rotateImage(rotationAngle: CGFloat(Double.pi * -2))
             
             if self?.currLocationBtn.tag == 4 { //pick up location
+                self?.pickUpLocationId = parking.id
                 self?.locationPickUp = .pickUpLocation
                 self?.pickUpLocation = self?.currLocationBtn.title(for: .normal)
                 self?.mCheckBoxPickUpCustomLocBtn.setImage(#imageLiteral(resourceName: "uncheck_box"), for: .normal)
 
             } else { // return location
+                self?.returnLocationId = parking.id
                 self?.locationReturn = .returnLocation
                 self?.returnLocation = self?.currLocationBtn.title(for: .normal)
                 self?.mCheckBoxReturnCustomLocBtn.setImage(#imageLiteral(resourceName: "uncheck_box"), for: .normal)
@@ -424,8 +428,7 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
         }
     }
     
-//MARK: - Validations
-//MARK: ------------------
+//MARK: -- Validations
     
 //check if all fields are filled
   func checkFieldsFilled()-> Bool{

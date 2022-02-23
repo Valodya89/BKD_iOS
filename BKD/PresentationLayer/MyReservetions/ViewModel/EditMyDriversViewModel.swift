@@ -15,7 +15,8 @@ final class EditMyDriversViewModel {
         guard let rentDrivers = rent?.additionalDrivers else {return (nil, 0.0)}
         var additionalDrivers:[MyDriversModel] = []
         var totalPrice = 0.0
-        
+        let settings: Settings? = ApplicationSettings.shared.settings
+
         drivers.forEach { driver in
             if rentDrivers.count > 0 {
                 
@@ -24,6 +25,7 @@ final class EditMyDriversViewModel {
                 if rentDriver == nil {
                     additionalDrivers.append(driver)
                 } else {
+                    let driverPrice = Double(settings?.metadata.AdditionalDriverValue ?? "0.0") ?? 0.0
                     totalPrice += driverPrice
                     let driverEdit = MyDriversModel(fullname: driver.fullname,
                                                     licenciNumber: driver.licenciNumber,

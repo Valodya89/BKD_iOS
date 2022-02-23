@@ -175,7 +175,7 @@ struct Constant {
         static let h = "h"//MOBILE_details_hour
         static let d = "d"//MOBILE_global_day
         static let w = "w"//MOBILE_details_week
-        static let m = "m"//MOBILE_details_month
+        static let m = "m"//MOBILE_details_m
         static let conditioning = "Conditioning"//MOBILE_details_conditioning
         static let gps = "GPS"//MOBILE_details_gps
         static let towBar = "Tow Bar"//MOBILE_global_tow_bar
@@ -205,7 +205,11 @@ struct Constant {
         static let depositApplies = "Deposit applies"//MOBILE_details_deposit_applies
         static let deposit = "Deposit" // MOBILE_payment_deposit
         static let freeKm = "km free for each day"//MOBILE_details_km_free
-//        static let editReserveAlert = "Are you sure you want to change your reservation?"
+        static let carReservedAlert = "The car is already booked for this date. Please , choose another date"//MOBILE_err_car_reserved
+        static let from = "from " //MOBILE_global_from
+        static let to = "to " //MOBILE_global_from
+
+    
 
         //MARK: -- Accessories
        static let loginAccessories = "To add accessories, you need to sign in" //MOBILE_accessories_signin_alert
@@ -353,6 +357,7 @@ struct Constant {
         static let finished = "Finished"//MOBILE_stopRide_finished
         static let rentalPrice = "Rental price:"//MOBILE_stopRide_rental_price
         static let paidPrice = "Paid  € %.2f" //MOBILE_stopRide_paid_price
+        static let completed = "Completed"//MOBILE_global_completed
         
         
         
@@ -575,10 +580,10 @@ let bancontactList = [UIImage(named: "ing"),
                       UIImage(named: "bnp"),
                       UIImage(named: "kbc")]
 let equipmentForSearch = [ "0": "towbar",
-                  "1": "Duble cabin" /*it needs to check*/,
-                  "2": "tailgate",
-                  "3": "GPSNavigator",
-                  "4": "airConditioning" ]
+                           /*"1": "Duble cabin", it needs to check*/
+                  "1": "tailgate",
+                  "2": "GPSNavigator",
+                  "3": "airConditioning" ]
 let contactUsList = ["Call BKD", "Chat"]//MOBILE_dashboard_call_bkd, MOBILE_dashboard_chat
 
 let documentStateArr = ["IF",

@@ -17,6 +17,7 @@ class LeftViewController: UITableViewController {
     var currentCelIndexPathRow : Int?
     var userName: String?
     let userLb = UILabel()
+    var settings: Settings?
     
     
     //MARK: Life cycles
@@ -24,7 +25,7 @@ class LeftViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        
+        settings = ApplicationSettings.shared.settings
         userLb.text = KeychainManager().getUserFullName()
         getLanguagesList()
         configureTableView()
@@ -46,13 +47,13 @@ class LeftViewController: UITableViewController {
         }
     }
     
-    ///Update language
-    func updateLanguage(id: String?) {
-        guard let id = id else {return}
-        menuVM.updateLanguages(id: id) { result in
-            guard let language = result else {return}
-        }
-    }
+//    ///Update language
+//    func updateLanguage(id: String?) {
+//        guard let id = id else {return}
+//        menuVM.updateLanguages(id: id) { result in
+//            guard let language = result else {return}
+//        }
+//    }
     
   
     private func addPrivacyPolice () {
@@ -147,11 +148,12 @@ class LeftViewController: UITableViewController {
         case 1:
            
             let aboutUs = AboutUsViewController.initFromStoryboard(name: Constant.Storyboards.aboutUs)
+            aboutUs.urlString = settings?.metadata.AboutUsUrl
             navigationController?.pushViewController(aboutUs, animated: true)
             break
         case 2:
             cell.mSubmenuTbV.changeLanguage = { id in
-                self.updateLanguage(id: id)
+                //self.updateLanguage(id: id)
             }
             closeSubmenu(cell: tableView.cellForRow(at: IndexPath(row:5, section:0)) as! LeftTableViewCell)
             openDropDown(cell: cell, index: indexPath.row, isLanguage: true)
@@ -163,6 +165,7 @@ class LeftViewController: UITableViewController {
             break
         case 4: // faq
             let faq = FAQViewController.initFromStoryboard(name: Constant.Storyboards.faq)
+            faq.urlString = settings?.metadata.FAQUrl
             navigationController?.pushViewController(faq, animated: true)
             break
         case 5: // Contact us

@@ -253,7 +253,6 @@ class MyReservetionAdvancedViewController: BaseViewController {
     func configureContinueBtnUI(){
         if myReservationState == .stopRide || myReservationState == .startRide {
             mStartRideContentV.isHidden = false
-           // mEditContentV.isHidden = true
             
             if myReservationVM.isActiveStartRide(start: currRent?.startDate ?? 0.0) || currRent?.carDetails.registrationNumber != nil  {
                 mStartRideContentV.enableView()

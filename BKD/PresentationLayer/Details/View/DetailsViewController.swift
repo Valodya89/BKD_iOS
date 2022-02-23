@@ -62,6 +62,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     //MARK: -- Varables
 
     private lazy  var tariffSlideVC = TariffSlideViewController.initFromStoryboard(name: Constant.Storyboards.details)
+    private lazy var mainVM = MainViewModel()
     
     let detailsVM:DetailsViewModel = DetailsViewModel()
     var settings: Settings?
@@ -584,8 +585,9 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     ///Alert for no working hours
     func showAlertWorkingHours() {
+        let timePrice = Double( settings?.metadata.NonWorkingHoursValue ?? "0.0")
         BKDAlert().showAlert(on: self,
-                             title:String(format: Constant.Texts.titleWorkingTime, timePrice),
+                             title:String(format: Constant.Texts.titleWorkingTime, timePrice ?? 0.0),
                              message: Constant.Texts.messageWorkingTime + "(\(settings?.workStart ?? "") -  \(settings?.workEnd ?? "")).",
                              messageSecond: nil,
                              cancelTitle: Constant.Texts.cancel,
@@ -655,7 +657,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     ///check if reservation date more than 90 days
   private  func checkIfReservationMoreThan90Days() -> Bool {
-        if  MainViewModel().isReservetionMore90Days(search: searchModel) && currentTariff == .flexible {
+        if  mainVM.isReservetionMore90Days(search: searchModel) && currentTariff == .flexible {
                 BKDAlert().showAlertOk(on: self, message: Constant.Texts.max90Days, okTitle: Constant.Texts.ok) {
                     self.mSearchV.resetReturnDate()
                     self.mSearchV.resetReturnTime()
@@ -676,10 +678,14 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         currentTariffOptionIndex = optionIndex
         currentTariffOption = options?[optionIndex]
         isFlexibleSelected = (currentTariff == .flexible) ? true : false
-        if currentTariff != .flexible &&  flexibleTariffOption != nil {
+        if currentTariff == .flexible &&  flexibleTariffOption != nil {
             flexibleTariffOption = detailsVM.getFlexiblePrice(search: searchModel, option: flexibleTariffOption!, vehicle: vehicleModel!, isSelected: false)
             mTariffCarouselV.tariffSlideList![tariffSlideList!.count - 1] = flexibleTariffOption!
         }
+//        else {
+//            searchModel = SearchModel()
+//            mSearchV.updateSearchDate(tariff: .flexible, searchModel: searchModel)
+//        }
 
         tariffSlideList = detailsVM.updateTariffSlideList(tariffSlideList: tariffSlideList,
                                                                  optionIndex: optionIndex,
@@ -763,6 +769,22 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         
     }
     
+    ///Reserv car
+    func reserv() {
+        if detailsVM.isCarAvailable(reservation: vehicleModel?.reservations,
+                                    search: searchModel) {
+            animationReserve()
+            let timePrice = Double( settings?.metadata.NonWorkingHoursValue ?? "0.0") ?? 0.0
+            detailsVM.setNoWorkingHoursPrice(search: searchModel, price: timePrice)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [self] in
+                self.goToReserveController()
+            }
+        } else {
+            BKDAlert().showAlertOk(on: self, message: Constant.Texts.carReservedAlert, okTitle: Constant.Texts.ok, okAction: nil)
+        }
+    }
+    
     
     //MARK: -- Actions
     
@@ -786,12 +808,11 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func reserve(_ sender: UIButton) {
-        animationReserve()
-        detailsVM.setNoWorkingHoursPrice(search: searchModel, price: timePrice)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [self] in
-                self.goToReserveController()
-            }
+        reserv()
+    }
+    
+    @IBAction func swipeGesture(_ sender: UISwipeGestureRecognizer) {
+        reserv()
     }
     
     @IBAction func compare(_ sender: UIButton) {
@@ -882,6 +903,10 @@ extension DetailsViewController: TariffCarouselViewDelegate {
                 showAlertMoreThanMonth(optionIndex: optionIndex,
                                        options: options)
             } else {
+                if tariff == .flexible {
+                    searchModel = SearchModel()
+                    mSearchV.setDefaultValue()
+                }
                 confirmPressed(optionIndex: optionIndex,
                                options: options)
             }
@@ -948,10 +973,7 @@ extension DetailsViewController: SearchViewDelegate {
         } else {
             self.datePicker = UIDatePicker()
             textFl.inputView = self.datePicker
-            self.datePicker.configDatePicker()
-            if let pickUpDate =  searchModel.pickUpDate {
-                self.datePicker.minimumDate =  pickUpDate
-            }
+            self.datePicker.configDatePicker(search: searchModel, pickerState: pickerState)
         }
     }
     

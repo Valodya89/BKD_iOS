@@ -124,21 +124,23 @@ struct Reservation: Codable {
             }
         }
     
-    func  getStart() -> Date {
+    func  getStart() -> Double/*Date*/ {
            
-            let start = (innerArray.first?.value.start)!
-            let epocTime = TimeInterval(start / 1000)
-            let date = NSDate(timeIntervalSince1970: epocTime)
-            print("Converted Time \(date)")
-            return date as Date
+            let start = (innerArray.first?.value.start)
+        return start ?? 0.0
+//            let epocTime = TimeInterval(start / 1000)
+//            let date = NSDate(timeIntervalSince1970: epocTime)
+//            print("Converted Time \(date)")
+//            return date as Date
         }
     
-    func  getEnd() -> Date {
+    func  getEnd() -> Double/*Date*/ {
         let end = innerArray.first?.value.end
-        let epocTime = TimeInterval(end! / 1000)
-        let date = NSDate(timeIntervalSince1970: epocTime)
-        print("Converted Time \(date)")
-        return date as Date
+        return end ?? 0.0
+//        let epocTime = TimeInterval(end! / 1000)
+//        let date = NSDate(timeIntervalSince1970: epocTime)
+//        print("Converted Time \(date)")
+//        return date as Date
     }
 }
 

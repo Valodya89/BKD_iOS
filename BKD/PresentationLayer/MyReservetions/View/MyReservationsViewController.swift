@@ -224,7 +224,7 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         if isReservationHistory {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReservationHistoryCell.identifier, for: indexPath) as!  ReservationHistoryCell
             guard let item = myHistoryReservations?[indexPath.item] else {return cell}
-            cell.setCellInfo(rent: item, index: indexPath.item)
+            cell.setCellInfo(item: item, index: indexPath.item)
             return cell
             
         } else {
@@ -278,9 +278,13 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
     
     //MARK: -- UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if !isReservationHistory {
+        
+        let item = !isReservationHistory ? myReservations![indexPath.item] : myHistoryReservations![indexPath.item]
+
+        
+       // if !isReservationHistory {
             
-            let item = myReservations![indexPath.item]
+           // let item = myReservations![indexPath.item]
             let paymentType = myReservationVM.getReservationState(rent: item)
 
             var paymentStatusModel: PaymentStatusModel?
@@ -302,7 +306,6 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
                 
                 if paymentType != .startRide { //cell with pay button
                     myResrevationState = myReservationVM.getReservationState(rent: item)
-                     // myResrevationState = .maykePayment
                       let cell: ReservetionMakePaymentCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservetionMakePaymentCell
                       paymentStatusModel = cell.getPaymentStatusModel()
                 } else {
@@ -345,7 +348,11 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
                 myResrevationState = .payDistancePrice
                 let cell: ReservetionWithDistancePriceCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservetionWithDistancePriceCell
                 paymentStatusModel = cell.getPaymentStatusModel()
-
+                
+            case .CLOSED:
+                myResrevationState = .closed
+                let cell: ReservationHistoryCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservationHistoryCell
+                paymentStatusModel = cell.getPaymentStatusModel()
                
 //            case .driverWaithingApproval:
      //           myResrevationState = .driverWaithingApproval
@@ -367,7 +374,7 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
                               registerNumberArr: registerNumberArr,
                               onRideArr: onRideArr, rent: item )
             
-        }
+      //  }
     }
     
     //MARK: --UICollectionViewDelegateFlowLayout

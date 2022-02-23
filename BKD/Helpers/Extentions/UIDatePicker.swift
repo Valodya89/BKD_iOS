@@ -10,15 +10,20 @@ import UIKit
 
 extension UIDatePicker {
     
-    func configDatePicker() {
+    func configDatePicker(search: SearchModel, pickerState: DatePicker) {
 
         if #available(iOS 14.0, *) {
         self.preferredDatePickerStyle = .wheels
         }
         self.datePickerMode = .date
-        self.minimumDate =  Date()
-        self.maximumDate =  Date().addMonths(12)
         self.timeZone = TimeZone(secondsFromGMT: 0)
         self.locale = Locale(identifier: "en")
+        self.maximumDate =  Date().addMonths(12)
+       if pickerState == .returnDate && search.pickUpDate != nil {
+            self.minimumDate = search.pickUpDate
+        } else {
+            self.minimumDate =  Date()
+        }
+
     }
 }
