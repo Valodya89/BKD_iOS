@@ -92,16 +92,45 @@ class MyReservationsViewController: BaseViewController {
         self.mReservCollectionV.register(ReservationHistoryCell.nib(), forCellWithReuseIdentifier: ReservationHistoryCell.identifier)
     }
     
+//    ///Get reservations
+//    private func getRents() {
+//        myReservationVM.getReservations { result, err in
+//            guard let result = result else {
+//                if err ==  "401" {
+//                    self.showAlertSignIn()
+//                }
+//                return
+//
+//            }
+//            let reservations = self.myReservationVM.filterReservations(rents: result)
+//            self.myReservations = reservations.rent
+//            self.myHistoryReservations = reservations.historys
+//            self.mReservCollectionV.reloadData()
+//        }
+//    }
+    
     ///Get reservations
     private func getRents() {
-        myReservationVM.getReservations { result in
-            guard let result = result else {return}
-            let reservations = self.myReservationVM.filterReservations(rents: result)
-            self.myReservations = reservations.rent
-            self.myHistoryReservations = reservations.historys
-            self.mReservCollectionV.reloadData()
+        myReservationVM.getReservations {[weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let rents):
+                guard let _ = rents else {return}
+                let reservations = self.myReservationVM.filterReservations(rents: rents!)
+                self.myReservations = reservations.rent
+                self.myHistoryReservations = reservations.historys
+                self.mReservCollectionV.reloadData()
+            case .failure(let error):
+                if error.message.contains("401") {
+                self.showAlertSignIn()
+                }
+                print("ERROR: \(error.message)")
+            }
+           
         }
     }
+    
+   
     
     ///Switch driver
     func changeDriver(index: Int, driverId: String ) {
@@ -241,7 +270,7 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
                                             indexPath: indexPath,
                                             paymentType: paymentType)
                 } else { //start ride
-                    if myReservationVM.isActiveStartRide(start: item.startDate) || item.carDetails.registrationNumber != nil /*item.isRegisterNumber*/ {
+                    if myReservationVM.isActiveStartRide(start: item.startDate, end: item.endDate) /*item.isRegisterNumber*/ {
                       return startRideWithRegisterNumberCell(item: item, indexPath: indexPath)
                     }
                     return startRideCell(item: item, indexPath: indexPath)
@@ -310,7 +339,7 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
                       paymentStatusModel = cell.getPaymentStatusModel()
                 } else {
                     myResrevationState = .startRide
-                    if myReservationVM.isActiveStartRide(start: item.startDate) || item.carDetails.registrationNumber != nil {
+                    if myReservationVM.isActiveStartRide(start: item.startDate, end: item.endDate) {
                         let cell: ReservationWithRegisterNumberCollectionViewCell = mReservCollectionV.cellForItem(at: indexPath) as! ReservationWithRegisterNumberCollectionViewCell
                         paymentStatusModel = cell.getPaymentStatusModel()
                         registerNumberArr = [cell.mRegistrationNumberLb.text!]
@@ -394,7 +423,8 @@ extension MyReservationsViewController: UICollectionViewDataSource, UICollection
         case .COMPLETED,
              .START_DEFECT_CHECK,
              .START_ODOMETER_CHECK /*.startRide*/:
-            if item.carDetails.registrationNumber != nil /*item.isRegisterNumber*/ {
+            
+            if myReservationVM.isActiveStartRide(start: item.startDate, end: item.endDate) /*item.isRegisterNumber*/ {
                 return CGSize(width: collectionView.bounds.width,
                               height: height307)
             }

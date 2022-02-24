@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20019"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -231,7 +231,7 @@
                                         </buttonConfiguration>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a7V-r3-g3l">
-                                        <rect key="frame" x="0.0" y="348" width="382" height="48"/>
+                                        <rect key="frame" x="0.0" y="349" width="382" height="48"/>
                                         <color key="backgroundColor" name="menu"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="rXq-8M-s13"/>
@@ -250,7 +250,7 @@
                                     <constraint firstItem="PUP-UM-se9" firstAttribute="top" secondItem="9wF-Wx-TKD" secondAttribute="top" id="95r-3a-NyN"/>
                                     <constraint firstItem="vAX-tB-eGa" firstAttribute="height" secondItem="4OQ-v2-ih8" secondAttribute="height" multiplier="0.09" id="AU0-gw-Ajc"/>
                                     <constraint firstItem="nIF-if-IKQ" firstAttribute="leading" secondItem="4OQ-v2-ih8" secondAttribute="leading" id="BDE-Nr-VHa"/>
-                                    <constraint firstItem="a7V-r3-g3l" firstAttribute="bottom" secondItem="4OQ-v2-ih8" secondAttribute="bottom" constant="-1" id="GRX-Wv-Ovt"/>
+                                    <constraint firstItem="a7V-r3-g3l" firstAttribute="bottom" secondItem="4OQ-v2-ih8" secondAttribute="bottom" id="GRX-Wv-Ovt"/>
                                     <constraint firstItem="vAX-tB-eGa" firstAttribute="centerY" secondItem="4OQ-v2-ih8" secondAttribute="centerY" multiplier="1.385" id="KXQ-bt-qdG"/>
                                     <constraint firstItem="a7V-r3-g3l" firstAttribute="width" secondItem="4OQ-v2-ih8" secondAttribute="width" id="KjV-wz-x5m"/>
                                     <constraint firstItem="9wF-Wx-TKD" firstAttribute="height" secondItem="4OQ-v2-ih8" secondAttribute="height" multiplier="0.105" id="RDS-pp-I9b"/>

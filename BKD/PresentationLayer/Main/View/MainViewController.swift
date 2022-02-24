@@ -68,6 +68,7 @@ class MainViewController: BaseViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.tabBarController?.tabBar.isHidden = false
+        NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.handleMenuToggle), name: Constant.Notifications.dismissMenu, object: nil)
         //mainVM.isRefreshToken()
    }
     
@@ -78,8 +79,7 @@ class MainViewController: BaseViewController {
     
 //MARK: -- Set
     func setupView() {
-        NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.handleMenuToggle), name: Constant.Notifications.dismissMenu, object: nil)
-        
+       
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font_search_title!, NSAttributedString.Key.foregroundColor: UIColor.white]
         backgroundV.frame = self.view.bounds

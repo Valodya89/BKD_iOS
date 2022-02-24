@@ -254,7 +254,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
         if myReservationState == .stopRide || myReservationState == .startRide {
             mStartRideContentV.isHidden = false
             
-            if myReservationVM.isActiveStartRide(start: currRent?.startDate ?? 0.0) || currRent?.carDetails.registrationNumber != nil  {
+            if myReservationVM.isActiveStartRide(start: currRent?.startDate ?? 0.0, end: currRent?.endDate ?? 0.0)  {
                 mStartRideContentV.enableView()
             } else {
                 mStartRideContentV.disableView()

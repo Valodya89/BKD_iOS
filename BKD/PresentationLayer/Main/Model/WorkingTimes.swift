@@ -31,6 +31,7 @@ struct  Metadata: Codable {
     let ContactUsPhone: String
     let PrivacyPolicyUrl: String
     let TermsOfUseUrl: String
+    let termsAndConditions: String
 }
 
 

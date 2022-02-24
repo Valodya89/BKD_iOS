@@ -8,33 +8,33 @@
 import UIKit
 
 //MARK: -- DropDownData
-struct DropDownData {
-    static let dropDownModel: [DropDownModel] = [
-        DropDownModel(locationName: "BKD Office", seeMap: "See Map"),
-        DropDownModel(locationName: "Parkin 1", seeMap: "See Map"),
-        DropDownModel(locationName: "Parking 2", seeMap: "See Map")
-    ]
-    
-    
-    static let menuModel: [MenuModel] = [
-        MenuModel(title: "About Us", imageName: "aboutUs"),
-        MenuModel(title: "My Reservetions", imageName:"reservetions" ),
-        MenuModel(title: "Costumer Service", imageName: "customer_service"),
-        MenuModel(title: "Settings", imageName: "settings"),
-        MenuModel(title: "Log Out", imageName: "logout")
-    ]
-}
+//struct DropDownData {
+//    static let dropDownModel: [DropDownModel] = [
+//        DropDownModel(locationName: "BKD Office", seeMap: "See Map"),
+//        DropDownModel(locationName: "Parkin 1", seeMap: "See Map"),
+//        DropDownModel(locationName: "Parking 2", seeMap: "See Map")
+//    ]
+//
+//
+//    static let menuModel: [MenuModel] = [
+//        MenuModel(title: "About Us", imageName: "aboutUs"),
+//        MenuModel(title: "My Reservetions", imageName:"reservetions" ),
+//        MenuModel(title: "Costumer Service", imageName: "customer_service"),
+//        MenuModel(title: "Settings", imageName: "settings"),
+//        MenuModel(title: "Log Out", imageName: "logout")
+//    ]
+//}
 
 //MARK: -- MenuData
 struct MenuData {
     
     static let menuModel: [MenuModel] = [
-        MenuModel(title: "About Us", imageName: "aboutUs"),
-        MenuModel(title: "Language", imageName:"dutch" ),
-        MenuModel(title: "Notifications", imageName:"notifications_menu" ),
-        MenuModel(title: "FAQ", imageName:"faq" ),
-        MenuModel(title: "Contact us", imageName: "customer_service"),
-        MenuModel(title: "Log Out", imageName: "logout")
+        MenuModel(title: Constant.Texts.aboutUs, imageName: "aboutUs"),
+       /* MenuModel(title: Constant.Texts.language, imageName:"dutch" ),*/
+        MenuModel(title: Constant.Texts.notifications, imageName:"notifications_menu" ),
+        MenuModel(title: Constant.Texts.faq, imageName:"faq" ),
+        MenuModel(title: Constant.Texts.contactUs, imageName: "customer_service"),
+        MenuModel(title: Constant.Texts.logout, imageName: "logout")
     ]
 }
 
@@ -42,10 +42,10 @@ struct MenuData {
 
 //EquipmentModel(equipmentImg: UIImage(named: "double_cabin")!, equipmentName: "Double cabin", didSelect: false),
 struct EquipmentData {
-   static let equipmentModel: [EquipmentModel] = [ EquipmentModel(equipmentImg: UIImage(named: "selected_tow_bar")!, equipmentName: "Tow Bar", didSelect: false),
-                                                    EquipmentModel(equipmentImg: UIImage(named: "tail_lift")!, equipmentName: "Tail Lift", didSelect: false),
-                                            EquipmentModel(equipmentImg: UIImage(named: "gps_navigator")!, equipmentName: "GPS navigation", didSelect: false),
-                                                    EquipmentModel(equipmentImg: UIImage(named: "air_conditioning")!, equipmentName: "Air conditioning", didSelect: false)]
+    static let equipmentModel: [EquipmentModel] = [ EquipmentModel(equipmentImg: UIImage(named: "selected_tow_bar")!, equipmentName: Constant.Texts.towBar, didSelect: false),
+                                                    EquipmentModel(equipmentImg: UIImage(named: "tail_lift")!, equipmentName: Constant.Texts.tailLift, didSelect: false),
+                                                    EquipmentModel(equipmentImg: UIImage(named: "gps_navigator")!, equipmentName: Constant.Texts.gpsNavi, didSelect: false),
+                                                    EquipmentModel(equipmentImg: UIImage(named: "air_conditioning")!, equipmentName: Constant.Texts.airCond, didSelect: false)]
 }
 
 

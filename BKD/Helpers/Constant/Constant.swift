@@ -126,6 +126,12 @@ struct Constant {
     struct Texts {
         
         //MARK: -- Menu
+        static let aboutUs = "About Us"//MOBILE_dashboard_about_us
+        static let language = "Language"//MOBILE_dashboard_language
+        static let notifications = "Notifications"// MOBILE_notifivations_notifications
+        static let faq = "FAQ"//MOBILE_dashboard_faq
+        static let logout = "Log Out"//MOBILE_global_logout
+        static let contactUs = "Contact Us"//MOBILE_dashboard_contact_us
         static let privacyPolic = "Privacy Policy" //MOBILE_dashboard_policy
         static let termsOfUse = "Terms of Use" //MOBILE_dashboard_terms_use
         
@@ -159,6 +165,12 @@ struct Constant {
         static let change = "Yes, Change"//MOBILE_home_yes_change
         static let errorEmail = "Write your email address, so that we answer the message once it's reviewed"//MOBILE_offChat_required_email_message
         static let errorIncorrectEmail = "Incorrect E-mail address"//MOBILE_global_incorrect_email
+        
+        //MARK: -- Search
+        static let gpsNavi = "GPS navigation"//MOBILE_global_gps_nav
+        static let tailLift = "Tail Lift"//MOBILE_searched_tail_lift
+        static let airCond = "Air conditioning"//MOBILE_searched_air_condition
+        
         
         //MARK: -- Chat
         static let messagePlaceholder = "Type your message"//MOBILE_global_placeholder

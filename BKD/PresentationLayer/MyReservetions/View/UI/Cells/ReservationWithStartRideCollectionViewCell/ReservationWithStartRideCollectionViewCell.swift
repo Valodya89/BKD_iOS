@@ -75,9 +75,10 @@ class ReservationWithStartRideCollectionViewCell: UICollectionViewCell {
         mStartRideBtn.tag = index
         mStartRideBtn.addTarget(self, action: #selector(pressedStartRide(sender:)), for: .touchUpInside)
         
-        //Get difference between now and start ride date
-        let duration = Date().getDistanceByComponent(.minute, toDate: Date(timeIntervalSince1970: item.startDate)).minute
-        if duration! <= 15 {
+//        //Get difference between now and start ride date
+//        let duration = Date().getDistanceByComponent(.minute, toDate: Date(timeIntervalSince1970: item.startDate)).minute
+//        if duration! <= 15 {
+        if MyReservationViewModel().isActiveStartRide(start: item.startDate, end: item.endDate) {
             mStartRideBtn.setTitleColor(color_selected_filter_fields!, for: .normal)
         }
         

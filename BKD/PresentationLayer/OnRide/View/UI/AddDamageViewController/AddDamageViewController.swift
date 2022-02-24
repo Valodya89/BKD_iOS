@@ -71,10 +71,20 @@ class AddDamageViewController: BaseViewController {
 //    }
     
     //Call by phone number
-    func phoneClick(phone: String) {
-        
-        if let callUrl = URL(string: "tel://\(phone)"), UIApplication.shared.canOpenURL(callUrl) {
-                    UIApplication.shared.open(callUrl)
+//    func phoneClick(phone: String) {
+//
+//        if let callUrl = URL(string: "tel://\(phone)"), UIApplication.shared.canOpenURL(callUrl) {
+//                    UIApplication.shared.open(callUrl)
+//        }
+//    }
+    
+    private func phoneClick(phone: String) {
+        let num = phone.replacingOccurrences(of: " ", with: "")
+        if let phoneCallURL = URL(string: "tel://\(num)") {
+         let application:UIApplication = UIApplication.shared
+         if (application.canOpenURL(phoneCallURL)) {
+           application.open(phoneCallURL, options: [:], completionHandler: nil)
+            }
         }
     }
 

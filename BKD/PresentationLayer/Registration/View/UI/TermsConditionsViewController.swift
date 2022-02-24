@@ -7,27 +7,52 @@
 
 import UIKit
 import WebKit
+import SVProgressHUD
 
 class TermsConditionsViewController: UIViewController, StoryboardInitializable {
 
     //MARK: Outlets
     @IBOutlet weak var mWebV: WKWebView!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
+    
+    public var urlString: String?
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpView()
+        navigationController?.setNavigationBarBackground(color: color_dark_register!)
+        tabBarController?.tabBar.isHidden = true
+        mRightBarBtn.image = img_bkd!
+        mWebV.navigationDelegate = self
+        loadWebView()
+        
     }
- 
-    func setUpView() {
-        mRightBarBtn.image = img_bkd
-           let url = URL(string: "https://www.google.am")
-           mWebV.load(URLRequest(url: url!))
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        SVProgressHUD.show()
     }
+    
+    ///load web view
+    func loadWebView() {
+        let url = URL(string: urlString ?? "")
+        guard let _ = url else {return}
+        mWebV.load(URLRequest(url: url!))
+    }
+    
     
 // MARK: ACTION
  @IBAction func back(_ sender: UIBarButtonItem) {
      self.navigationController?.popViewController(animated: true)
  }
 
+}
+
+
+// MARK: - WKNavigation Delegate
+extension TermsConditionsViewController: WKNavigationDelegate {
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        SVProgressHUD.dismiss()
+    }
 }

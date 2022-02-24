@@ -41,10 +41,10 @@ extension UIViewController {
         }
     }
     
-    func showErrorAlertMessage(_ message: String = "Something went wrong") {
+    func showErrorAlertMessage(_ message: String = Constant.Texts.somethingWrong) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: message, message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: Constant.Texts.ok, style: .default, handler: nil))
             UINotificationFeedbackGenerator().notificationOccurred(.error)
             self.present(alert, animated: true, completion: nil)
         }

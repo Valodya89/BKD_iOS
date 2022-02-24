@@ -223,8 +223,10 @@ class RegistrationViewController: UIViewController, StoryboardInitializable {
         let termsRange = (Constant.Texts.agreeTerms as NSString).range(of: Constant.Texts.termsConditions)
         if gesture.didTapAttributedTextInLabel(label: mAgreeLb, inRange: termsRange) {
             
-                let termsConditionsVC = TermsConditionsViewController.initFromStoryboard(name: Constant.Storyboards.registration)
-                self.navigationController?.pushViewController(termsConditionsVC, animated: true)
+            let settings = ApplicationSettings.shared.settings
+            let termsConditionsVC = TermsConditionsViewController.initFromStoryboard(name: Constant.Storyboards.registration)
+            termsConditionsVC.urlString = settings?.metadata.termsAndConditions ?? ""
+            self.navigationController?.pushViewController(termsConditionsVC, animated: true)
         }
     }
     

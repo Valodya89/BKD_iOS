@@ -59,6 +59,7 @@ class LeftViewController: UITableViewController {
     private func addPrivacyPolice () {
         //Add Privacy Policy
         let privacyV = PrivacyPoliceView()
+        privacyV.settings = settings
         self.addChild(privacyV)
         self.view.addSubview(privacyV.view)
         privacyV.didMove(toParent: self)
@@ -87,10 +88,10 @@ class LeftViewController: UITableViewController {
             cell.backgroundColor = UIColor(named: "background_menu")
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
-            if indexPath.row == 2 || indexPath.row == 5 { //Language || Contact us
+            if /*indexPath.row == 2 ||*/ indexPath.row == 4 { //Language || Contact us
                 cell.dropDownBtn.isHidden = false
                 
-            } else if indexPath.row == 3 { //Notification
+            } else if indexPath.row == 2 { //Notification
                 cell.mNotificationSwictch.isHidden = false
             }
         }
@@ -127,16 +128,72 @@ class LeftViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if currentCelIndexPathRow == indexPath.row &&  indexPath.row == 2 {
+        if currentCelIndexPathRow == indexPath.row &&  indexPath.row == 1 {
             currentCelIndexPathRow = nil
             return 53.5 * CGFloat(languageList?.count ?? 1)
-        } else if currentCelIndexPathRow == indexPath.row &&  indexPath.row == 5 {
+        } else if currentCelIndexPathRow == indexPath.row &&  indexPath.row == 4 {
             currentCelIndexPathRow = nil
             return 120
         }
         return 50
 
     }
+    
+//    //MARK: -- UITableViewDelegate
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//        var viewController:UIViewController?
+//        let cell: LeftTableViewCell = tableView.cellForRow(at: indexPath) as! LeftTableViewCell
+//
+//        switch indexPath.row {
+//        case 1:
+//
+//            let aboutUs = AboutUsViewController.initFromStoryboard(name: Constant.Storyboards.aboutUs)
+//            aboutUs.urlString = settings?.metadata.AboutUsUrl
+//            navigationController?.pushViewController(aboutUs, animated: true)
+//            break
+//        case 2:
+//            cell.mSubmenuTbV.changeLanguage = { id in
+//                //self.updateLanguage(id: id)
+//            }
+//            closeSubmenu(cell: tableView.cellForRow(at: IndexPath(row:5, section:0)) as! LeftTableViewCell)
+//            openDropDown(cell: cell, index: indexPath.row, isLanguage: true)
+//            tableView .beginUpdates()
+//            tableView.endUpdates()
+//            break
+//        case 3:
+//            //Notifications
+//            break
+//        case 4: // faq
+//            let faq = FAQViewController.initFromStoryboard(name: Constant.Storyboards.faq)
+//            faq.urlString = settings?.metadata.FAQUrl
+//            navigationController?.pushViewController(faq, animated: true)
+//            break
+//        case 5: // Contact us
+//            cell.mSubmenuTbV.openChat = {
+//                self.closeSubmenu(cell: cell)
+//                tableView .beginUpdates()
+//                tableView.endUpdates()
+//                let notification = Notification(name: Constant.Notifications.dismissMenu, object: nil)
+//                NotificationCenter.default
+//                    .post(notification)
+//
+//            }
+//            closeSubmenu(cell: tableView.cellForRow(at: IndexPath(row:2, section:0)) as! LeftTableViewCell)
+//            openDropDown(cell: cell,
+//                         index: indexPath.row,
+//                         isLanguage: false)
+//            tableView .beginUpdates()
+//            tableView.endUpdates()
+//            break
+//        case 6: // Log out
+//            MyBKDViewModel().logout()
+//            break
+//        default:
+//            viewController = UIStoryboard(name: Constant.Storyboards.main, bundle: nil).instantiateViewController(withIdentifier: Constant.Identifiers.main) as! MainViewController
+//            break
+//        }
+//    }
     
     //MARK: -- UITableViewDelegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -152,23 +209,14 @@ class LeftViewController: UITableViewController {
             navigationController?.pushViewController(aboutUs, animated: true)
             break
         case 2:
-            cell.mSubmenuTbV.changeLanguage = { id in
-                //self.updateLanguage(id: id)
-            }
-            closeSubmenu(cell: tableView.cellForRow(at: IndexPath(row:5, section:0)) as! LeftTableViewCell)
-            openDropDown(cell: cell, index: indexPath.row, isLanguage: true)
-            tableView .beginUpdates()
-            tableView.endUpdates()
-            break
-        case 3:
             //Notifications
             break
-        case 4: // faq
+        case 3: // faq
             let faq = FAQViewController.initFromStoryboard(name: Constant.Storyboards.faq)
             faq.urlString = settings?.metadata.FAQUrl
             navigationController?.pushViewController(faq, animated: true)
             break
-        case 5: // Contact us
+        case 4: // Contact us
             cell.mSubmenuTbV.openChat = {
                 self.closeSubmenu(cell: cell)
                 tableView .beginUpdates()
@@ -176,7 +224,7 @@ class LeftViewController: UITableViewController {
                 let notification = Notification(name: Constant.Notifications.dismissMenu, object: nil)
                 NotificationCenter.default
                     .post(notification)
-               
+              //  BaseViewController().openChatPage(viewCont: self)               
             }
             closeSubmenu(cell: tableView.cellForRow(at: IndexPath(row:2, section:0)) as! LeftTableViewCell)
             openDropDown(cell: cell,
@@ -185,7 +233,7 @@ class LeftViewController: UITableViewController {
             tableView .beginUpdates()
             tableView.endUpdates()
             break
-        case 6: // Log out
+        case 5: // Log out
             MyBKDViewModel().logout()
             break
         default:

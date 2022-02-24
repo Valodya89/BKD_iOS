@@ -66,8 +66,8 @@ class SubMenuTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
     
     //Call by phone number
     func phoneClick(phone: String) {
-        
-        if let callUrl = URL(string: "tel://\(phone)"), UIApplication.shared.canOpenURL(callUrl) {
+        let num = phone.replacingOccurrences(of: " ", with: "")
+        if let callUrl = URL(string: "tel://\(num)"), UIApplication.shared.canOpenURL(callUrl) {
                     UIApplication.shared.open(callUrl)
         }
     }

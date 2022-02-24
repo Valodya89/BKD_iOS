@@ -54,28 +54,57 @@ class MyReservationViewModel: NSObject {
         return additionalDrivers ?? []
     }
     
-    ///Get car´s reservations
-    func getReservations( completion: @escaping ([Rent]?) -> Void) {
-
-        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getRents)) { (result) in
-            
-            switch result {
-            case .success(let data):
-                guard let result = BkdConverter<BaseResponseModel<[Rent]>>.parseJson(data: data as Any) else {
-                    print("error")
-                    completion(nil)
-                    return
+//    ///Get car´s reservations
+//    func getReservations( completion: @escaping ([Rent]?, String? ) -> Void) {
+//
+//        SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getRents)) { (result) in
+//
+//            switch result {
+//            case .success(let data):
+//                guard let result = BkdConverter<BaseResponseModel<[Rent]>>.parseJson(data: data as Any) else {
+//                    print("error")
+//                    completion(nil, nil)
+//                    return
+//                }
+//                print(result.content as Any)
+//                completion(result.content, nil)
+//
+//            case .failure(let error):
+//                print(error.description)
+//                completion(nil, error.description)
+//                break
+//            }
+//        }
+//    }
+    
+        ///Get car´s reservations
+        func getReservations( completion: @escaping (Result<[Rent]?, BkdError> ) -> Void) {
+    
+            SessionNetwork.init().request(with: URLBuilder.init(from: AuthAPI.getRents)) { (result) in
+    
+                switch result {
+                case .success(let data):
+                    guard let result = BkdConverter<BaseResponseModel<[Rent]>>.parseJson(data: data as Any) else {
+                        print("error")
+                        completion(.failure(BkdError(error: .serverError)))
+                        return
+                    }
+                    print(result.content as Any)
+                    guard let result = result.content else {
+                        completion(.failure(BkdError(error: .serverError)))
+                        return
+                    }
+                    completion(.success(result))
+    
+                case .failure(let error):
+                    print(error.description)
+                    completion(.failure(BkdError(error: .responseError(error.description))))
+                    break
                 }
-                print(result.content as Any)
-                completion(result.content)
-
-            case .failure(let error):
-                print(error.description)
-                completion(nil)
-                break
             }
         }
-    }
+    
+   // Result<UserWallet, BkdError>
     
     ///Get reservation´s history list
     func filterReservations(rents: [Rent]) ->(rent: [Rent], historys: [Rent])  {
@@ -118,9 +147,16 @@ class MyReservationViewModel: NSObject {
     }
     
     ///Check is active start ride(Is less then 15 minute before start)
-     func isActiveStartRide(start: Double) -> Bool {
+    func isActiveStartRide(start: Double, end: Double) -> Bool {
         let duration = Date().getDistanceByComponent(.minute, toDate: Date(timeIntervalSince1970: start)).minute
-        return duration ?? 0 <= 15
+        let isFinishRentTime = Date().timeIntervalSince1970 > end
+        
+        guard let duration = duration else {return false}
+        if duration <= 15 && !isFinishRentTime {
+            return true
+        }
+        return false
+       // return duration ?? 0 <= 15
     }
     
     ///Get reservation view type

@@ -24,7 +24,7 @@ class NotificationsViewController: BaseViewController {
     
     var menu: SideMenuNavigationController?
     lazy var notificationsViewModel = NotificationsViewModel()
-    var  notifications: [NotificationModel]? =  NotificationData.notificationModel
+    var  notifications: [NotificationModel]? //=  NotificationData.notificationModel
     var selected: Bool = false
 
     //MARK: -- Life cycle
@@ -80,6 +80,7 @@ class NotificationsViewController: BaseViewController {
         mSelectBtn.setBorder(color: color_navigationBar!, width: 2)
         mCancelBtn.layer.cornerRadius = mSelectBtn.frame.height/2
         mCancelBtn.setBorder(color: color_navigationBar!, width: 2)
+        mSelectBtn.isHidden = (notifications?.count == 0 || notifications == nil)
         
     }
     

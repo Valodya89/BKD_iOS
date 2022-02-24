@@ -106,7 +106,7 @@ final class SessionNetwork: SessionProtocol {
                         if response.statusCode == 401 {
                             print ("Status code 401")
                            // SessionExpiredAlert.showAlert()
-                          //  completion(.failure(.invalidStatusCode(code: response.statusCode)))
+                            completion(.failure(.invalidStatusCode(code: response.statusCode)))
                             
 //                            self.refreshTocken(with: builderProtocol) { result in
 //                                print(result)

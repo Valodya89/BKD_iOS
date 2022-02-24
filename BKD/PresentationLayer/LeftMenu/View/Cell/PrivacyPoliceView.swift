@@ -13,6 +13,8 @@ class PrivacyPoliceView: UIViewController {
     @IBOutlet weak var mPrivacyPolicyLb: UILabel!
     @IBOutlet weak var mRightsReservedLb: UILabel!
     
+    var settings: Settings?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         contentUI()
@@ -48,6 +50,7 @@ class PrivacyPoliceView: UIViewController {
         if gesture.didTapAttributedTextInLabel(label: mPrivacyPolicyLb, inRange: range) {
             
                 let termsConditionsVC = TermsConditionsViewController.initFromStoryboard(name: Constant.Storyboards.registration)
+            termsConditionsVC.urlString =  settings?.metadata.PrivacyPolicyUrl ?? ""
                 self.navigationController?.pushViewController(termsConditionsVC, animated: true)
         }
     }
@@ -56,8 +59,9 @@ class PrivacyPoliceView: UIViewController {
         let range = (Constant.Texts.termsOfUse as NSString).range(of: Constant.Texts.termsOfUse)
         if gesture.didTapAttributedTextInLabel(label: mTermsOfUseLb, inRange: range) {
             
-                let termsConditionsVC = TermsConditionsViewController.initFromStoryboard(name: Constant.Storyboards.registration)
-                self.navigationController?.pushViewController(termsConditionsVC, animated: true)
+            let termsConditionsVC = TermsConditionsViewController.initFromStoryboard(name: Constant.Storyboards.registration)
+            termsConditionsVC.urlString =  settings?.metadata.PrivacyPolicyUrl ?? ""
+            self.navigationController?.pushViewController(termsConditionsVC, animated: true)
         }
     }
 }

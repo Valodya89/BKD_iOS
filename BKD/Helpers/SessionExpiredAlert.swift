@@ -12,6 +12,7 @@ final class SessionExpiredAlert {
     static func showAlert() {
     
         UIApplication.topController()?.showAlertMessage("Session Expired", meassage: "Your current session expired, please login again.", actionText: [Constant.Texts.signIn], action: { _ in
+            MyBKDViewModel().logout()
            // AccountViewModel().logout()
 //            let splashVC = SplashViewController.initFromStoryboard(name: Constant.Storyboards.splash)
 //            UIApplication.topController()?.setRootViewController(splashVC)
