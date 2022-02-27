@@ -44,8 +44,7 @@ class SearchPhoneCodeViewController: UIViewController, StoryboardInitializable {
 
 }
 
-//MARK: - UITableViewDelegate, UITableViewDataSource
-//MARK: --------------------------------
+//MARK: -- UITableViewDelegate, UITableViewDataSource
 extension SearchPhoneCodeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -233,7 +233,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
         vehicleModel?.vehicleName = mCarNameLb.text
         vehicleModel?.additionalAccessories = accessoriesEditList
         vehicleModel?.searchModel = searchModel
-        vehicleModel?.depositPrice = (tariffSlideList?[tariffIndex].tariff?[currentTariffOptionIndex].deposit) ?? 0.0
+        vehicleModel?.depositPrice = (tariffSlideList?[tariffIndex].tariff?[currentTariffOptionIndex].deposit) ?? tariffSlideList?[tariffIndex].flexibleDeposite ?? 0.0
      }
     
     ///Set current tariff
@@ -247,7 +247,7 @@ class DetailsViewController: BaseViewController, UIGestureRecognizerDelegate {
             self.reloadTariffCarusel(tariffSlideList: self.tariffSlideList)
             self.mTariffCarouselV.tariffCarousel.currentItemIndex = TariffSlideViewModel().getTariffStateIndex(tariffState: currentTariff)
             self.currentTariffOption = self.tariffSlideList?[self.mTariffCarouselV.tariffCarousel.currentItemIndex]
-            print(self.tariffSlideList?[self.mTariffCarouselV.tariffCarousel.currentItemIndex].options)
+            
       })
     }
     
@@ -930,8 +930,8 @@ extension DetailsViewController: TariffCarouselViewDelegate {
     }
 
     func didPressMore(tariffIndex:Int, optionIndex: Int) {
-        vehicleModel?.depositPrice = (tariffSlideList?[tariffIndex].tariff?[optionIndex].deposit) ?? 0.0
-        self.goToMore(vehicleModel: vehicleModel, carModel: nil)
+        vehicleModel?.depositPrice = (tariffSlideList?[tariffIndex].tariff?[optionIndex].deposit) ?? tariffSlideList?[tariffIndex].flexibleDeposite ?? 0.0
+        self.goToMore(vehicleModel: vehicleModel, carModel: nil, tariff: currentTariff)
     }
     
     ///update search fields

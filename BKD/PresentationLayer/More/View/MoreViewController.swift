@@ -16,6 +16,7 @@ class MoreViewController: BaseViewController {
     //MARK: -- Variables
     public var vehicleModel: VehicleModel?
     public var carModel: CarsModel?
+    public var currTariff: TariffState?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,16 +43,14 @@ class MoreViewController: BaseViewController {
     
     
     
-//MARK: ACTIONS
-//MARK: ---------------------
+//MARK: -- ACTIONS
     @IBAction func back(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
     }
     
 }
 
-//MARK: UITableViewDelegate, UITableViewDataSource
-//MARK: ---------------------
+//MARK: -- UITableViewDelegate, UITableViewDataSource
 extension MoreViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
        
@@ -70,10 +69,10 @@ extension MoreViewController: UITableViewDelegate, UITableViewDataSource {
             let model = RentalConditionsData.rentalConditionsModel[indexPath.row]
             
             if vehicleModel != nil {
-                cell.setCellInfo(item:model, vehicleModel: vehicleModel, index: indexPath.row)
+                cell.setCellInfo(item:model, vehicleModel: vehicleModel, index: indexPath.row, currTariff: currTariff)
                 
             } else if carModel != nil {
-                cell.setCarsCellInfo(item:model, carModel: carModel, index: indexPath.row)
+                cell.setCarsCellInfo(item:model, carModel: carModel, index: indexPath.row, currTariff: currTariff)
             }
             return cell
             

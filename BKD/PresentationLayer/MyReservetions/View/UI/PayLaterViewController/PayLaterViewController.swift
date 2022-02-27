@@ -66,7 +66,7 @@ class PayLaterViewController: BaseViewController {
                                agreementType: .payLater, paymentOption: self.paymentOption,
                                vehicleModel: nil,
                                rent: self.currRent,
-                               urlString: nil)
+                               urlString: ApplicationSettings.shared.settings?.metadata.PrivacyPolicyUrl ?? "")
         }
     }
     

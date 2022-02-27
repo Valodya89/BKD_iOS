@@ -75,8 +75,7 @@ struct CategoryCarouselData  {
 
 
 
-//MARK: RentalConditionsData
-//MARK: --------------------
+//MARK: -- RentalConditionsData
 struct RentalConditionsData {
     static let rentalConditionsModel: [RentalConditionsModel] = [
         RentalConditionsModel(img: #imageLiteral(resourceName: "deposit"), title: "Deposit amount from", value: "350"),

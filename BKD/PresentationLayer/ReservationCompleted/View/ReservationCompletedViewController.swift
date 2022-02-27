@@ -88,8 +88,6 @@ class ReservationCompletedViewController: BaseViewController {
             } else if result != nil {
                 self?.showAlertOfPayLater(message: self?.reservationCompletedViewModel.getFreeReservationMessage(payLaterCount: result?.payLaterCount ?? 0))
             }
-       // print (result)
-
         }
     }
     
@@ -99,6 +97,7 @@ class ReservationCompletedViewController: BaseViewController {
             self.mConfirmLeading.constant = self.mConfirmContentV.bounds.width - self.mConfirmBtn.frame.size.width
             self.mConfirmContentV.layoutIfNeeded()
         } completion: { _ in
+            
             self.goToSelectPayment(vehicleModel: self.vehicleModel ?? VehicleModel(),
                                    paymentOption: self.paymentOption)
         }

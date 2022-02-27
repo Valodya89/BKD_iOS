@@ -358,9 +358,10 @@ class DetailsViewModel: NSObject {
         }
         
         ///Flexible
-        if let _ = tariffs.first(where: { $0.type == Constant.Keys.flexible }) {
+        if let flexTariff = tariffs.first(where: { $0.type == Constant.Keys.flexible }) {
             
             var flexibleModel = TariffSlideModel (type: Constant.Texts.flexible, bckgColor: color_flexible, typeColor: .white)
+            flexibleModel.flexibleDeposite = flexTariff.deposit
             flexibleModel.options = nil
             var price = vehicleModel.priceForFlexible
             flexibleModel.value = String(price)

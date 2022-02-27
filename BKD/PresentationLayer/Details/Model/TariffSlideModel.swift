@@ -18,7 +18,7 @@ struct TariffSlideModel {
     public var specialValue: String?
     public var discountPercent: Double?
     public var flexibleStaringPrice: Double?
-
+    public var flexibleDeposite: Double?
 
     public var fuelConsumption: Bool = false
     public var isOpenOptions: Bool = false

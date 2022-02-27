@@ -246,10 +246,11 @@ class BaseViewController: UIViewController, StoryboardInitializable {
     
     
     /// Go to more screen
-    func goToMore(vehicleModel: VehicleModel?, carModel: CarsModel?) {
+    func goToMore(vehicleModel: VehicleModel?, carModel: CarsModel?, tariff: TariffState?) {
         let moreVC = MoreViewController.initFromStoryboard(name: Constant.Storyboards.more)
         moreVC.vehicleModel = vehicleModel
         moreVC.carModel = carModel
+        moreVC.currTariff = tariff
         self.navigationController?.pushViewController(moreVC, animated: true)
     }
     

@@ -232,9 +232,8 @@ class CompareViewController: BaseViewController {
 }
 
 //MARK: -- CompareVehicleInfoViewDelegate
-//MARK: ----------------------------------
 extension CompareViewController: CompareVehicleInfoViewDelegate {
     func didSelectMore(carModel: CarsModel) {
-        self.goToMore(vehicleModel:nil, carModel:carModel)
+        self.goToMore(vehicleModel:nil, carModel:carModel, tariff: nil)
     }
 }
