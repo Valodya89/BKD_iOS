@@ -25,7 +25,7 @@ final class SocketService: SocketServiceProtocol {
     
     
     private init() {
-        self.socketManager = SwiftStomp(host: URL(string: "ws://167.86.112.213:8843/ws")!)
+        self.socketManager = SwiftStomp(host: URL(string: "ws://88.99.217.123:8843/ws")!)//SwiftStomp(host: URL(string: "ws://167.86.112.213:8843/ws")!)
         self.socketManager.autoReconnect = true
         self.socketManager.delegate = self
     }

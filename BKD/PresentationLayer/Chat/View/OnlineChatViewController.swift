@@ -98,7 +98,11 @@ final class OnlineChatViewController: MessagesViewController, StoryboardInitiali
             case .success:
                 self.messagesCollectionView.reloadData()
             case .failure(let error):
-                self.showErrorAlertMessage(error.localizedDescription)
+                if error.localizedDescription.contains("401") {
+                    BaseViewController().showAlertSignIn()
+                } else {
+                    self.showErrorAlertMessage(error.localizedDescription)
+                }
             }
         }
     }
