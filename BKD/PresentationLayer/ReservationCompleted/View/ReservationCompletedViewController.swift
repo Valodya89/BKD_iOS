@@ -34,9 +34,7 @@ class ReservationCompletedViewController: BaseViewController {
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
     @IBOutlet weak var mRightBarBtn: UIBarButtonItem!
     @IBOutlet weak var mPreReservetionTitleLb: UILabel!
-    @IBOutlet weak var mConfirmContentV: UIView!
-    @IBOutlet weak var mConfirmBtn: UIButton!
-    @IBOutlet weak var mConfirmLeading: NSLayoutConstraint!
+    @IBOutlet weak var mConfirmV: ConfirmView!
     @IBOutlet weak var mVisualEffectV: UIVisualEffectView!
     
     //MARK: - Variables
@@ -53,7 +51,7 @@ class ReservationCompletedViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        mConfirmLeading.constant = 0.0
+        mConfirmV.mConfirmBtnLeading.constant = 0.0
         mVisualEffectV.isHidden = true
         resetChecks()
     }
@@ -61,6 +59,7 @@ class ReservationCompletedViewController: BaseViewController {
     func setUpView()  {
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
         configUI()
+        handlerConfirm()
     }
     
     
@@ -71,8 +70,7 @@ class ReservationCompletedViewController: BaseViewController {
         mPreReservetionTitleLb.layer.cornerRadius = 8
         mPreReservetionTitleLb.setPadding(8)
         mPreReservetionTitleLb.textAlignment = .center
-        mConfirmBtn.layer.cornerRadius = 8
-        mConfirmBtn.setBorder(color: color_navigationBar!, width: 1)
+       
         mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
         mDepositPriceLb.text = Constant.Texts.euro + " " + String(vehicleModel?.depositPrice ?? (vehicleModel?.rent?.depositPayment.amount ?? 0.0))
         mDepositRentalPriceLb.text = Constant.Texts.euro + " " + String(vehicleModel?.depositPrice ?? (vehicleModel?.rent?.depositPayment.amount ?? 0.0)) + " + " + String(format: "%.2f",PriceManager.shared.totalPrice ?? (vehicleModel?.rent?.rentPayment.amount ?? 0.0))
@@ -91,17 +89,17 @@ class ReservationCompletedViewController: BaseViewController {
         }
     }
     
-    //Animate confirm
-    private func clickConfirm() {
-        UIView.animate(withDuration: 0.5) { [self] in
-            self.mConfirmLeading.constant = self.mConfirmContentV.bounds.width - self.mConfirmBtn.frame.size.width
-            self.mConfirmContentV.layoutIfNeeded()
-        } completion: { _ in
-            
-            self.goToSelectPayment(vehicleModel: self.vehicleModel ?? VehicleModel(),
-                                   paymentOption: self.paymentOption)
-        }
-    }
+//    //Animate confirm
+//    private func clickConfirm() {
+//        UIView.animate(withDuration: 0.5) { [self] in
+//            self.mConfirmLeading.constant = self.mConfirmContentV.bounds.width - self.mConfirmBtn.frame.size.width
+//            self.mConfirmContentV.layoutIfNeeded()
+//        } completion: { _ in
+//
+//            self.goToSelectPayment(vehicleModel: self.vehicleModel ?? VehicleModel(),
+//                                  paymentOption: self.paymentOption)
+//        }
+//    }
     
     //Open freeReservationOver  screen
      func goToFreeReservationOverScreen() {
@@ -120,19 +118,24 @@ class ReservationCompletedViewController: BaseViewController {
 
     //Set enable or disable to confirm button
     private func isEnableConfirm(enable: Bool) {
-        mConfirmContentV.isUserInteractionEnabled = enable
-        mConfirmContentV.alpha = enable ? 1 : 0.8
+        mConfirmV.isUserInteractionEnabled = enable
+        mConfirmV.alpha = enable ? 1 : 0.8
     }
     
     private func showAlertOfPayLater(message: String?) {
         self.mVisualEffectV.isHidden = false
         let bkdAlert = BKDAlert()
         bkdAlert.backgroundView.isHidden = true
-        bkdAlert.showAlert(on: self, title: nil, message: message, messageSecond: nil, cancelTitle: Constant.Texts.gotIt, okTitle: Constant.Texts.payNow) {
+        bkdAlert.showAlert(on: self, title: nil, message: message, messageSecond: nil, cancelTitle: Constant.Texts.gotIt, okTitle: Constant.Texts.payNow)  {
             self.mVisualEffectV.isHidden = true
+            self.navigationController?.popToViewController(ofClass: MainViewController.self)
+            self.tabBarController?.selectedIndex = 1
         } okAction: {
-            self.goToSelectPayment(vehicleModel: self.vehicleModel ?? VehicleModel(),
-                                   paymentOption: self.paymentOption)
+            self.mVisualEffectV.isHidden = true
+            self.mPayLaterBtn.setImage(#imageLiteral(resourceName: "uncheck_box"), for: .normal)
+            self.paymentOption = .none
+            self.isEnableConfirm(enable: false)
+          // self.goToFreeReservationOverScreen()
         }
     }
     
@@ -143,13 +146,6 @@ class ReservationCompletedViewController: BaseViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func confirm(_ sender: UIButton) {
-        clickConfirm()
-    }
-    
-    @IBAction func confirmSwipeGesture(_ sender: UISwipeGestureRecognizer) {
-        clickConfirm()
-    }
     
     @IBAction func deposit(_ sender: UIButton) {
         resetChecks()
@@ -189,5 +185,14 @@ class ReservationCompletedViewController: BaseViewController {
             payLater()
         }
         
+    }
+    
+    
+    ///Handel confirm button
+    func handlerConfirm() {
+        mConfirmV.didPressConfirm = {
+            self.goToSelectPayment(vehicleModel: self.vehicleModel ?? VehicleModel(),
+                                  paymentOption: self.paymentOption)
+        }
     }
 }

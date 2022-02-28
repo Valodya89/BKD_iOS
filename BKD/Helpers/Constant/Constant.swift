@@ -303,7 +303,7 @@ struct Constant {
         
         //MARK: -- Payment
         static let invalidCode = "Verification code is invalid"//MOBILE_verifysignIn_code_invalid
-        static let payAlert = "You should pay 24 hours before the reservation. If not, the Pre-Reservation will be automatically cancelled. There %@ only %f free %@ of the Pre-Reservation in a month."//MOBILE_payment_24_hour_message
+        static let payAlert = "You should pay 24 hours before reservation. If not the Pre-Reservation will be canceled automatically. There is(are) %.f free cancelation(s) of Pre-Reservations in a month"//MOBILE_payment_24_hour_message
 //        static let cancellations = "cancellations"
 //        static let cancellation = "cancellation"
 

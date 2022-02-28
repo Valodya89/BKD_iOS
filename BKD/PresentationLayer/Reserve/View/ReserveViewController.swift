@@ -43,11 +43,7 @@ class ReserveViewController: BaseViewController {
     @IBOutlet weak var mTotalPriceValueLb: UILabel!
     
    //Confirm
-    @IBOutlet weak var mConfirmBckgV: UIView!
-    @IBOutlet weak var mConfirmBtn: UIButton!
-    @IBOutlet var mConfirmSwipeGesture: UISwipeGestureRecognizer!
-    @IBOutlet weak var mConfirmLeading: NSLayoutConstraint!
-    
+    @IBOutlet weak var mConfirmV: ConfirmView!
     //Navigation
     @IBOutlet weak var mLeftBarBtn: UIBarButtonItem!
     @IBOutlet weak var mNavigationItem: UINavigationItem!
@@ -74,11 +70,12 @@ class ReserveViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.mConfirmLeading.constant = 0.0
+        mConfirmV.mConfirmBtnLeading.constant = 0.0
     }
     
     
@@ -96,19 +93,20 @@ class ReserveViewController: BaseViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        mConfirmBtn.addBorder(color: color_navigationBar!, width: 1)
+    
     }
     
     func setupView() {
         tabBarController?.tabBar.isHidden = true
         navigationController?.setNavigationBarBackground(color: color_dark_register!)
         mRightBarBtn.image = img_bkd
-        mConfirmBtn.layer.cornerRadius = 10
-        mConfirmBtn.addBorder(color: color_navigationBar!, width: 1)
         mTotalPriceBackgV.layer.cornerRadius = 3
         mTotalPriceBackgV.setShadow(color: color_shadow!)
         mRentInfoBckgV.setShadow(color: color_shadow!)
+        mConfirmV.needsCheck = true
         configureView()
+        handlerConfirm()
+
     }
     
     
@@ -150,21 +148,6 @@ class ReserveViewController: BaseViewController {
         
     }
     
-    /// Animate Confirm click
-    private func clickConfirm() {
-        UIView.animate(withDuration: 0.5) { [self] in
-            self.mConfirmLeading.constant = self.mConfirmBckgV.bounds.width - self.mConfirmBtn.frame.size.width
-            self.mConfirmBckgV.layoutIfNeeded()
-
-        } completion: { _ in
-            self.goToAgreement(on: self,
-                               agreementType: .reserve, paymentOption: nil,
-                               vehicleModel: self.vehicleModel,
-                               rent: nil,
-                               urlString: ApplicationSettings.shared.settings?.reservationAgreementUrl)
-        }
-    }
-    
     
   /// Check user is loged in or not, and get languages if loged in
     private func checkIsUserSignIn() {
@@ -174,7 +157,8 @@ class ReserveViewController: BaseViewController {
             if !isUserSignIn {
                 self.goToSignInPage()
             } else {
-                self.clickConfirm()
+                self.mConfirmV.needsCheck = false
+                self.mConfirmV.clickConfirm()
             }
         }
     }
@@ -189,15 +173,22 @@ class ReserveViewController: BaseViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func confirm(_ sender: UIButton) {
-        checkIsUserSignIn()
-        
+    ///Handel confirm button
+    func handlerConfirm() {
+        mConfirmV.willCheckConfirm = {
+            self.checkIsUserSignIn()
+        }
+
+        mConfirmV.didPressConfirm = {
+            self.goToAgreement(on: self,
+                               agreementType: .reserve, paymentOption: nil,
+                               vehicleModel: self.vehicleModel,
+                               rent: nil,
+                               urlString: ApplicationSettings.shared.settings?.reservationAgreementUrl)
+        }
     }
     
-    @IBAction func confirmSwipe(_ sender: UISwipeGestureRecognizer) {
-        checkIsUserSignIn()
-        
-    }
+   
 
 }
 

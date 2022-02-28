@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20019"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -349,7 +349,7 @@
                                                     <constraint firstItem="t8P-Af-75M" firstAttribute="width" secondItem="kWy-xA-q1m" secondAttribute="width" multiplier="0.5" id="uAM-Xo-lwC"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Rv-bm-yBv">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Rv-bm-yBv" customClass="ConfirmView" customModule="BKD" customModuleProvider="target">
                                                 <rect key="frame" x="73.5" y="704" width="267" height="50"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_gradient" translatesAutoresizingMaskIntoConstraints="NO" id="irt-9Z-kl9">
@@ -364,31 +364,41 @@
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_left" translatesAutoresizingMaskIntoConstraints="NO" id="QK6-s5-Bf1">
                                                                         <rect key="frame" x="50" y="18" width="25.5" height="14"/>
                                                                     </imageView>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MtZ-ZN-rV1">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvW-gb-2vA">
                                                                         <rect key="frame" x="0.0" y="0.0" width="111.5" height="50"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="12"/>
+                                                                        <color key="textColor" name="navigationBar"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MtZ-ZN-rV1">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="111.5" height="50"/>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <gestureRecognizers/>
                                                                         <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="12"/>
-                                                                        <state key="normal" title="Confirm">
+                                                                        <state key="normal">
                                                                             <color key="titleColor" name="navigationBar"/>
                                                                         </state>
                                                                         <connections>
-                                                                            <action selector="confirm:" destination="ImY-qT-Pts" eventType="touchUpInside" id="JK8-JM-QuS"/>
-                                                                            <outletCollection property="gestureRecognizers" destination="qfv-eg-jVh" appends="YES" id="QHV-KB-FlP"/>
+                                                                            <action selector="confirm:" destination="2Rv-bm-yBv" eventType="touchUpInside" id="B25-im-bJK"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <gestureRecognizers/>
                                                                 <constraints>
+                                                                    <constraint firstItem="cvW-gb-2vA" firstAttribute="centerX" secondItem="MtZ-ZN-rV1" secondAttribute="centerX" id="3gd-e7-993"/>
                                                                     <constraint firstItem="QK6-s5-Bf1" firstAttribute="centerX" secondItem="GLm-2V-xFU" secondAttribute="centerX" id="BWr-xT-ukb"/>
                                                                     <constraint firstItem="QK6-s5-Bf1" firstAttribute="height" secondItem="GLm-2V-xFU" secondAttribute="height" multiplier="0.282353" id="EoY-MQ-Dmi"/>
                                                                     <constraint firstItem="MtZ-ZN-rV1" firstAttribute="centerY" secondItem="GLm-2V-xFU" secondAttribute="centerY" id="b7c-ty-1Yx"/>
                                                                     <constraint firstItem="QK6-s5-Bf1" firstAttribute="width" secondItem="GLm-2V-xFU" secondAttribute="width" multiplier="0.201258" id="cTM-oF-K5N"/>
+                                                                    <constraint firstItem="cvW-gb-2vA" firstAttribute="height" secondItem="MtZ-ZN-rV1" secondAttribute="height" id="dYh-o3-POg"/>
                                                                     <constraint firstItem="MtZ-ZN-rV1" firstAttribute="leading" secondItem="GLm-2V-xFU" secondAttribute="leading" id="duz-6y-jNc"/>
+                                                                    <constraint firstItem="cvW-gb-2vA" firstAttribute="centerY" secondItem="MtZ-ZN-rV1" secondAttribute="centerY" id="kAw-q3-8Wc"/>
                                                                     <constraint firstItem="MtZ-ZN-rV1" firstAttribute="width" secondItem="GLm-2V-xFU" secondAttribute="width" multiplier="0.89" id="p2w-LT-o6b"/>
                                                                     <constraint firstItem="MtZ-ZN-rV1" firstAttribute="height" secondItem="GLm-2V-xFU" secondAttribute="height" id="wLi-eL-rDt"/>
                                                                     <constraint firstItem="QK6-s5-Bf1" firstAttribute="centerY" secondItem="GLm-2V-xFU" secondAttribute="centerY" id="ypM-tW-GTE"/>
+                                                                    <constraint firstItem="cvW-gb-2vA" firstAttribute="width" secondItem="MtZ-ZN-rV1" secondAttribute="width" id="zaL-l9-Tsk"/>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sju-OO-CGq">
@@ -421,6 +431,12 @@
                                                     <constraint firstItem="7zS-uy-cvz" firstAttribute="centerX" secondItem="2Rv-bm-yBv" secondAttribute="centerX" id="v9P-OL-0M3"/>
                                                     <constraint firstItem="7zS-uy-cvz" firstAttribute="width" secondItem="2Rv-bm-yBv" secondAttribute="width" id="wza-6e-qFC"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outlet property="mConfirmBtn" destination="MtZ-ZN-rV1" id="ylx-Dv-kDa"/>
+                                                    <outlet property="mConfirmBtnLeading" destination="duz-6y-jNc" id="qzK-Yp-tFG"/>
+                                                    <outlet property="mConfirmLb" destination="cvW-gb-2vA" id="dpZ-Lw-zfT"/>
+                                                    <outlet property="mGradientImgV" destination="irt-9Z-kl9" id="Ui3-36-Oki"/>
+                                                </connections>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" name="background"/>
@@ -467,6 +483,7 @@
                         <constraints>
                             <constraint firstItem="Yi7-vT-6Ig" firstAttribute="height" secondItem="Y5i-7p-TRf" secondAttribute="height" multiplier="0.043" id="4sO-hz-ITT"/>
                             <constraint firstItem="gXZ-e4-8gD" firstAttribute="leading" secondItem="YKV-84-ekL" secondAttribute="leading" id="Ng2-xU-v0I"/>
+                            <constraint firstItem="2Rv-bm-yBv" firstAttribute="height" secondItem="Y5i-7p-TRf" secondAttribute="height" multiplier="0.0619" id="QpD-aV-2gJ"/>
                             <constraint firstItem="YKV-84-ekL" firstAttribute="trailing" secondItem="gXZ-e4-8gD" secondAttribute="trailing" id="YMD-ym-clY"/>
                             <constraint firstAttribute="bottom" secondItem="gXZ-e4-8gD" secondAttribute="bottom" id="c1r-KL-ueN"/>
                             <constraint firstItem="Yi7-vT-6Ig" firstAttribute="width" secondItem="Y5i-7p-TRf" secondAttribute="width" multiplier="0.096" id="mQV-At-7XA"/>
@@ -489,10 +506,7 @@
                         <outlet property="mCarImgV" destination="sGk-ks-2al" id="h9q-At-Y4h"/>
                         <outlet property="mCarMarkBckgV" destination="K0X-93-Au1" id="dUY-Qu-qan"/>
                         <outlet property="mCarMarkLb" destination="bKI-gf-14e" id="hHh-Lf-x5u"/>
-                        <outlet property="mConfirmBckgV" destination="2Rv-bm-yBv" id="sHc-TH-Sr2"/>
-                        <outlet property="mConfirmBtn" destination="MtZ-ZN-rV1" id="PzN-Jv-kX4"/>
-                        <outlet property="mConfirmLeading" destination="duz-6y-jNc" id="aSm-P6-038"/>
-                        <outlet property="mConfirmSwipeGesture" destination="qfv-eg-jVh" id="KFS-5j-4X7"/>
+                        <outlet property="mConfirmV" destination="2Rv-bm-yBv" id="XGj-WD-dfT"/>
                         <outlet property="mFiatImgV" destination="Yi7-vT-6Ig" id="a1I-jd-80H"/>
                         <outlet property="mLeftBarBtn" destination="T3t-CD-5UZ" id="xPP-z0-GZj"/>
                         <outlet property="mNavigationItem" destination="ShH-fF-1Mi" id="lkW-Xl-FI9"/>
@@ -524,7 +538,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M2B-GG-3V4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="right" id="qfv-eg-jVh">
                     <connections>
-                        <action selector="confirmSwipe:" destination="ImY-qT-Pts" id="WzE-p4-D84"/>
+                        <action selector="swipe:" destination="2Rv-bm-yBv" id="F9w-hU-nl8"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>

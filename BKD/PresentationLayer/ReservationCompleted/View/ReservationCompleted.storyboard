@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait" appearance="dark"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20019"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -28,37 +28,37 @@
             <objects>
                 <viewController storyboardIdentifier="ReservationCompletedViewController" id="Xbn-ca-vvG" customClass="ReservationCompletedViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5WC-bV-Yju">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Pre-reservation is completed successfully." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="11" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Cd-US-4rU">
-                                <rect key="frame" x="83" y="13" width="154" height="63.5"/>
+                                <rect key="frame" x="97.5" y="15" width="180" height="75.5"/>
                                 <color key="backgroundColor" name="navigation_bar"/>
                                 <fontDescription key="fontDescription" name="Mulish-Light" family="Mulish" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="gCY-pl-jgw">
-                                <rect key="frame" x="0.0" y="384" width="320" height="55"/>
+                                <rect key="frame" x="0.0" y="354.5" width="375" height="65.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s2o-fI-PNk">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="15.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="19.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMe-C8-DGp">
-                                                <rect key="frame" x="6.5" y="0.0" width="24" height="15.5"/>
+                                                <rect key="frame" x="8" y="0.0" width="28" height="19.5"/>
                                                 <state key="normal" image="uncheck_box"/>
                                                 <connections>
                                                     <action selector="deposit:" destination="Xbn-ca-vvG" eventType="touchUpInside" id="3r9-5D-f9h"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hcd-ro-lFG">
-                                                <rect key="frame" x="37" y="-2" width="55" height="19.5"/>
+                                                <rect key="frame" x="43" y="0.0" width="56.5" height="19.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" name="navigationBar"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€   350" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smn-va-Dsc">
-                                                <rect key="frame" x="260" y="1" width="47.5" height="13"/>
+                                                <rect key="frame" x="313" y="2" width="47.5" height="15.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" name="email"/>
                                                 <nil key="highlightedColor"/>
@@ -81,23 +81,23 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ca-bT-1ad">
-                                        <rect key="frame" x="0.0" y="19.5" width="320" height="15.5"/>
+                                        <rect key="frame" x="0.0" y="23.5" width="375" height="19"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BDY-o0-6yw">
-                                                <rect key="frame" x="6.5" y="0.0" width="24" height="15.5"/>
+                                                <rect key="frame" x="8" y="0.0" width="28" height="19"/>
                                                 <state key="normal" image="uncheck_box"/>
                                                 <connections>
                                                     <action selector="depositRental:" destination="Xbn-ca-vvG" eventType="touchUpInside" id="gJL-uv-BNW"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit + Rental price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yo-Q1-lH8">
-                                                <rect key="frame" x="37" y="-2" width="155" height="19.5"/>
+                                                <rect key="frame" x="43" y="-0.5" width="155" height="19.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" name="navigationBar"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€   350 + 105.7" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyM-BE-4eX">
-                                                <rect key="frame" x="206.5" y="1.5" width="101" height="13"/>
+                                                <rect key="frame" x="259.5" y="1.5" width="101" height="16"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" name="email"/>
                                                 <nil key="highlightedColor"/>
@@ -120,23 +120,23 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8qv-bA-s9R">
-                                        <rect key="frame" x="0.0" y="39" width="320" height="16"/>
+                                        <rect key="frame" x="0.0" y="46.5" width="375" height="19"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kYF-Ll-hqA">
-                                                <rect key="frame" x="6.5" y="0.0" width="24" height="16"/>
+                                                <rect key="frame" x="8" y="0.0" width="28" height="19"/>
                                                 <state key="normal" image="uncheck_box"/>
                                                 <connections>
                                                     <action selector="payLater:" destination="Xbn-ca-vvG" eventType="touchUpInside" id="o67-r2-Vvx"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay later" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icA-LG-d92">
-                                                <rect key="frame" x="37" y="-1.5" width="61" height="19.5"/>
+                                                <rect key="frame" x="43" y="0.0" width="61" height="19.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" name="navigationBar"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€   350" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCh-KM-Hn7">
-                                                <rect key="frame" x="260" y="1.5" width="47.5" height="13"/>
+                                                <rect key="frame" x="313" y="1.5" width="47.5" height="16"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" name="email"/>
                                                 <nil key="highlightedColor"/>
@@ -162,56 +162,67 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="31" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xeS-aD-3GN">
-                                <rect key="frame" x="12.5" y="188.5" width="247" height="134"/>
+                                <rect key="frame" x="14.5" y="183" width="290" height="115"/>
                                 <string key="text">You can opt for “Pay later” option, however if no payment is made before 24 hours of the Reservation start date, the Pre-Reservation will be automatically cancelled. There are only 3 free cancellations of the Pre-Reservation in a month.</string>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
                                 <color key="textColor" name="navigationBar"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a Payment option (Deposit or Deposit + Rental price) to fully complete the reservation." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYF-Sn-Cpt">
-                                <rect key="frame" x="12.5" y="87" width="247" height="86"/>
+                                <rect key="frame" x="14.5" y="103.5" width="290" height="64.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
                                 <color key="textColor" name="navigationBar"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view userInteractionEnabled="NO" alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gr5-dN-n17">
-                                <rect key="frame" x="56.5" y="446.5" width="207" height="27.5"/>
+                            <view userInteractionEnabled="NO" alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gr5-dN-n17" customClass="ConfirmView" customModule="BKD" customModuleProvider="target">
+                                <rect key="frame" x="66.5" y="531" width="242" height="32.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_gradient" translatesAutoresizingMaskIntoConstraints="NO" id="lJB-I4-xZt">
-                                        <rect key="frame" x="0.0" y="0.0" width="207" height="27.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="242" height="32.5"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="p47-7k-vz5">
-                                        <rect key="frame" x="0.0" y="0.0" width="207" height="27.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="242" height="32.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iBJ-Xh-QF0">
-                                                <rect key="frame" x="0.0" y="0.0" width="95.5" height="27.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="113" height="32.5"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_left" translatesAutoresizingMaskIntoConstraints="NO" id="IrD-SN-ceg">
-                                                        <rect key="frame" x="38" y="10" width="19.5" height="7.5"/>
+                                                        <rect key="frame" x="45" y="11.5" width="23" height="9"/>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GlB-ZY-zwn">
-                                                        <rect key="frame" x="0.0" y="0.0" width="95.5" height="27.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IPW-O5-Q1c">
+                                                        <rect key="frame" x="0.0" y="0.0" width="113" height="32.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="12"/>
+                                                        <color key="textColor" name="navigationBar"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GlB-ZY-zwn">
+                                                        <rect key="frame" x="0.0" y="0.0" width="113" height="32.5"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <gestureRecognizers/>
                                                         <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="12"/>
-                                                        <state key="normal" title="Continue">
+                                                        <state key="normal">
                                                             <color key="titleColor" name="navigationBar"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="confirm:" destination="Xbn-ca-vvG" eventType="touchUpInside" id="X7v-ch-c5y"/>
+                                                            <action selector="confirm:" destination="gr5-dN-n17" eventType="touchUpInside" id="21a-9W-ylb"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <gestureRecognizers/>
                                                 <constraints>
+                                                    <constraint firstItem="IPW-O5-Q1c" firstAttribute="centerY" secondItem="GlB-ZY-zwn" secondAttribute="centerY" id="9Wi-Fe-JxB"/>
                                                     <constraint firstItem="GlB-ZY-zwn" firstAttribute="height" secondItem="iBJ-Xh-QF0" secondAttribute="height" id="DBZ-Zr-UuO"/>
                                                     <constraint firstAttribute="bottom" secondItem="GlB-ZY-zwn" secondAttribute="bottom" id="DyV-T7-Rcq"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GlB-ZY-zwn" secondAttribute="trailing" id="GaS-Yq-nWy"/>
                                                     <constraint firstItem="GlB-ZY-zwn" firstAttribute="leading" secondItem="iBJ-Xh-QF0" secondAttribute="leading" id="L8v-fm-NUx"/>
                                                     <constraint firstItem="IrD-SN-ceg" firstAttribute="width" secondItem="iBJ-Xh-QF0" secondAttribute="width" multiplier="0.201258" id="NHU-Jd-Rvd"/>
                                                     <constraint firstItem="GlB-ZY-zwn" firstAttribute="width" secondItem="iBJ-Xh-QF0" secondAttribute="width" id="UhC-Nq-OxM"/>
+                                                    <constraint firstItem="IPW-O5-Q1c" firstAttribute="width" secondItem="GlB-ZY-zwn" secondAttribute="width" id="W5C-7O-rFb"/>
                                                     <constraint firstItem="IrD-SN-ceg" firstAttribute="centerX" secondItem="iBJ-Xh-QF0" secondAttribute="centerX" id="aqb-gC-yD9"/>
+                                                    <constraint firstItem="IPW-O5-Q1c" firstAttribute="height" secondItem="GlB-ZY-zwn" secondAttribute="height" id="eBA-tF-1ce"/>
+                                                    <constraint firstItem="IPW-O5-Q1c" firstAttribute="centerX" secondItem="GlB-ZY-zwn" secondAttribute="centerX" id="iQR-Ih-VD1"/>
                                                     <constraint firstItem="GlB-ZY-zwn" firstAttribute="centerY" secondItem="iBJ-Xh-QF0" secondAttribute="centerY" id="lU5-YW-8ab"/>
                                                     <constraint firstItem="IrD-SN-ceg" firstAttribute="height" secondItem="iBJ-Xh-QF0" secondAttribute="height" multiplier="0.282353" id="mRn-MX-Hnd"/>
                                                     <constraint firstItem="GlB-ZY-zwn" firstAttribute="top" secondItem="iBJ-Xh-QF0" secondAttribute="top" id="rOt-P9-ZjM"/>
@@ -219,10 +230,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kG2-hF-x4B">
-                                                <rect key="frame" x="111.5" y="0.0" width="95.5" height="27.5"/>
+                                                <rect key="frame" x="129" y="0.0" width="113" height="32.5"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_right" translatesAutoresizingMaskIntoConstraints="NO" id="AZq-pU-t3k">
-                                                        <rect key="frame" x="38" y="9.5" width="19.5" height="8"/>
+                                                        <rect key="frame" x="45" y="11.5" width="23.5" height="9.5"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -251,13 +262,17 @@
                                     <constraint firstItem="p47-7k-vz5" firstAttribute="height" secondItem="gr5-dN-n17" secondAttribute="height" id="zVC-Hn-a8j"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="mConfirmBtn" destination="GlB-ZY-zwn" id="9pY-kh-FFS"/>
+                                    <outlet property="mConfirmBtnLeading" destination="L8v-fm-NUx" id="f0H-pf-TMa"/>
+                                    <outlet property="mConfirmLb" destination="IPW-O5-Q1c" id="auw-O5-ZJg"/>
+                                    <outlet property="mGradientImgV" destination="lJB-I4-xZt" id="0yd-Ox-fQw"/>
                                     <outletCollection property="gestureRecognizers" destination="e0x-RX-cEd" appends="YES" id="ziC-Gg-Mrb"/>
                                 </connections>
                             </view>
                             <visualEffectView hidden="YES" opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iTd-kx-Ggq">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000001192092896" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vYa-8c-pOA">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                                 <blurEffect style="regular"/>
@@ -266,22 +281,25 @@
                         <viewLayoutGuide key="safeArea" id="m2K-Ma-LBk"/>
                         <color key="backgroundColor" name="background"/>
                         <constraints>
+                            <constraint firstItem="iTd-kx-Ggq" firstAttribute="width" secondItem="5WC-bV-Yju" secondAttribute="width" id="0oE-BC-0ER"/>
                             <constraint firstItem="xeS-aD-3GN" firstAttribute="leading" secondItem="YYF-Sn-Cpt" secondAttribute="leading" id="1jG-1y-rAC"/>
                             <constraint firstItem="xeS-aD-3GN" firstAttribute="height" relation="greaterThanOrEqual" secondItem="5WC-bV-Yju" secondAttribute="height" multiplier="0.117574" id="2eH-3q-cmc"/>
                             <constraint firstItem="1Cd-US-4rU" firstAttribute="height" secondItem="5WC-bV-Yju" secondAttribute="height" multiplier="0.121287" id="3FS-wS-rbz"/>
-                            <constraint firstItem="iTd-kx-Ggq" firstAttribute="top" secondItem="m2K-Ma-LBk" secondAttribute="top" id="7ci-mB-UOB"/>
                             <constraint firstItem="iTd-kx-Ggq" firstAttribute="leading" secondItem="m2K-Ma-LBk" secondAttribute="leading" id="7fK-uf-Ji8"/>
                             <constraint firstItem="1Cd-US-4rU" firstAttribute="centerY" secondItem="m2K-Ma-LBk" secondAttribute="centerY" multiplier="0.17" id="CeL-Ua-ZrN"/>
-                            <constraint firstItem="iTd-kx-Ggq" firstAttribute="bottom" secondItem="m2K-Ma-LBk" secondAttribute="bottom" id="FIn-g9-McC"/>
                             <constraint firstItem="gCY-pl-jgw" firstAttribute="width" secondItem="5WC-bV-Yju" secondAttribute="width" id="IdW-dJ-R1d"/>
                             <constraint firstItem="m2K-Ma-LBk" firstAttribute="bottom" secondItem="gr5-dN-n17" secondAttribute="bottom" multiplier="1.106" id="KMk-gE-BHw"/>
                             <constraint firstItem="xeS-aD-3GN" firstAttribute="top" secondItem="YYF-Sn-Cpt" secondAttribute="bottom" multiplier="1.09" id="LPb-6h-oRY"/>
                             <constraint firstItem="1Cd-US-4rU" firstAttribute="width" secondItem="5WC-bV-Yju" secondAttribute="width" multiplier="0.480676" id="PLV-Xp-XBp"/>
+                            <constraint firstItem="iTd-kx-Ggq" firstAttribute="top" secondItem="m2K-Ma-LBk" secondAttribute="top" id="RYO-cd-j4a"/>
                             <constraint firstItem="gr5-dN-n17" firstAttribute="width" secondItem="5WC-bV-Yju" secondAttribute="width" multiplier="0.646" id="Tkq-JA-gei"/>
                             <constraint firstItem="gCY-pl-jgw" firstAttribute="top" secondItem="xeS-aD-3GN" secondAttribute="bottom" multiplier="1.19" id="Up7-1c-LSw"/>
+                            <constraint firstItem="iTd-kx-Ggq" firstAttribute="centerX" secondItem="m2K-Ma-LBk" secondAttribute="centerX" id="X2z-U7-XqW"/>
                             <constraint firstItem="m2K-Ma-LBk" firstAttribute="trailing" secondItem="iTd-kx-Ggq" secondAttribute="trailing" id="Zve-Ae-kN2"/>
                             <constraint firstItem="YYF-Sn-Cpt" firstAttribute="centerX" secondItem="m2K-Ma-LBk" secondAttribute="centerX" multiplier="0.85" id="egb-aJ-6zb"/>
                             <constraint firstItem="gr5-dN-n17" firstAttribute="centerX" secondItem="m2K-Ma-LBk" secondAttribute="centerX" id="eiO-Ha-mi5"/>
+                            <constraint firstItem="iTd-kx-Ggq" firstAttribute="centerY" secondItem="m2K-Ma-LBk" secondAttribute="centerY" id="gG9-hS-1dt"/>
+                            <constraint firstItem="iTd-kx-Ggq" firstAttribute="bottom" secondItem="m2K-Ma-LBk" secondAttribute="bottom" id="lG1-wE-MAy"/>
                             <constraint firstItem="gr5-dN-n17" firstAttribute="height" secondItem="5WC-bV-Yju" secondAttribute="height" multiplier="0.0519802" id="lwm-ow-lfD"/>
                             <constraint firstItem="YYF-Sn-Cpt" firstAttribute="width" secondItem="5WC-bV-Yju" secondAttribute="width" multiplier="0.772947" id="mBs-rg-xtM"/>
                             <constraint firstItem="1Cd-US-4rU" firstAttribute="centerX" secondItem="m2K-Ma-LBk" secondAttribute="centerX" id="pc0-Nk-ms4"/>
@@ -301,9 +319,7 @@
                         <barButtonItem key="rightBarButtonItem" image="bkd" id="MHV-CG-jhK"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="mConfirmBtn" destination="GlB-ZY-zwn" id="6of-wW-CSc"/>
-                        <outlet property="mConfirmContentV" destination="gr5-dN-n17" id="c1h-lZ-b9H"/>
-                        <outlet property="mConfirmLeading" destination="L8v-fm-NUx" id="67I-fV-1Cj"/>
+                        <outlet property="mConfirmV" destination="gr5-dN-n17" id="6gR-7E-mPR"/>
                         <outlet property="mDepositCheckBtn" destination="uMe-C8-DGp" id="ro5-hU-2jq"/>
                         <outlet property="mDepositLb" destination="Hcd-ro-lFG" id="14w-GP-2my"/>
                         <outlet property="mDepositPriceLb" destination="smn-va-Dsc" id="AXB-w0-K5K"/>
@@ -324,7 +340,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GqJ-Qf-zOC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="right" id="e0x-RX-cEd">
                     <connections>
-                        <action selector="confirmSwipeGesture:" destination="Xbn-ca-vvG" id="ODy-77-JbE"/>
+                        <action selector="swipe:" destination="gr5-dN-n17" id="HDG-Cc-8ua"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
@@ -336,7 +352,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qan-8j-Cvd" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="6EM-Jk-KQM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" name="navigation_bar"/>
                     </navigationBar>
@@ -354,37 +370,37 @@
             <objects>
                 <viewController storyboardIdentifier="FreeReservationOverViewController" id="dOz-5e-dB8" customClass="FreeReservationOverViewController" customModule="BKD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WFw-yy-bFT">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyH-1f-46P">
-                                <rect key="frame" x="12.5" y="20" width="247" height="129"/>
+                                <rect key="frame" x="14.5" y="20" width="290" height="107.5"/>
                                 <string key="text">Your free reservations are expired for this month. To make a reservation you need to pay either the Deposit or Rental price, which will not be refunded in case of cancellation.</string>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="18"/>
                                 <color key="textColor" name="navigationBar"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Qk5-d0-wzJ">
-                                <rect key="frame" x="0.0" y="207" width="320" height="42"/>
+                                <rect key="frame" x="0.0" y="177" width="375" height="50"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qda-o9-mzF">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="19"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="23"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDJ-KA-jql">
-                                                <rect key="frame" x="6.5" y="0.0" width="24" height="19"/>
+                                                <rect key="frame" x="8" y="0.0" width="28" height="23"/>
                                                 <state key="normal" image="uncheck_box"/>
                                                 <connections>
                                                     <action selector="deposit:" destination="dOz-5e-dB8" eventType="touchUpInside" id="m2G-Zv-Kd8"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDL-nY-wwx">
-                                                <rect key="frame" x="37" y="-1" width="62" height="21.5"/>
+                                                <rect key="frame" x="43" y="0.0" width="62" height="23"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                 <color key="textColor" name="navigationBar"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€  350" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8U-vg-tcy">
-                                                <rect key="frame" x="263" y="2" width="44.5" height="15.5"/>
+                                                <rect key="frame" x="316" y="2" width="44.5" height="19"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" name="email"/>
                                                 <nil key="highlightedColor"/>
@@ -407,23 +423,23 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3dE-v5-E4a">
-                                        <rect key="frame" x="0.0" y="23" width="320" height="19"/>
+                                        <rect key="frame" x="0.0" y="27" width="375" height="23"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1U2-18-E9v">
-                                                <rect key="frame" x="6.5" y="0.0" width="24" height="19"/>
+                                                <rect key="frame" x="8" y="0.0" width="28" height="23"/>
                                                 <state key="normal" image="uncheck_box"/>
                                                 <connections>
                                                     <action selector="depositRentalPrice:" destination="dOz-5e-dB8" eventType="touchUpInside" id="xpc-hY-x41"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit + Rental price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2oJ-3J-VGE">
-                                                <rect key="frame" x="37" y="-1" width="174.5" height="21.5"/>
+                                                <rect key="frame" x="43" y="0.0" width="174.5" height="23"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                 <color key="textColor" name="navigationBar"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€ 350 + 105.7" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H8P-0y-0hC">
-                                                <rect key="frame" x="213" y="1.5" width="94.5" height="16"/>
+                                                <rect key="frame" x="266" y="2" width="94.5" height="19"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" name="email"/>
                                                 <nil key="highlightedColor"/>
@@ -446,20 +462,20 @@
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xik-AU-JTR">
-                                        <rect key="frame" x="0.0" y="42" width="320" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="50" width="375" height="0.0"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhS-3S-uuS">
-                                                <rect key="frame" x="13.5" y="0.0" width="10.5" height="0.0"/>
+                                                <rect key="frame" x="15.5" y="0.0" width="13" height="0.0"/>
                                                 <state key="normal" image="uncheck_box"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay later" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IU9-gO-fwK">
-                                                <rect key="frame" x="36" y="0.0" width="68.5" height="0.0"/>
+                                                <rect key="frame" x="42.5" y="0.0" width="68.5" height="0.0"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="18"/>
                                                 <color key="textColor" name="navigationBar"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Є 350" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZT-x0-ZiL">
-                                                <rect key="frame" x="265" y="0.0" width="42.5" height="0.0"/>
+                                                <rect key="frame" x="318" y="0.0" width="42.5" height="0.0"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" name="email"/>
                                                 <nil key="highlightedColor"/>
@@ -485,29 +501,29 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                             <view userInteractionEnabled="NO" alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KaY-Mh-Tk2" customClass="ConfirmView" customModule="BKD" customModuleProvider="target">
-                                <rect key="frame" x="56.5" y="446.5" width="207" height="27.5"/>
+                                <rect key="frame" x="66.5" y="531" width="242" height="32.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_gradient" translatesAutoresizingMaskIntoConstraints="NO" id="FS9-Qq-sGg">
-                                        <rect key="frame" x="0.0" y="0.0" width="207" height="27.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="242" height="32.5"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="7uy-Rx-uPM">
-                                        <rect key="frame" x="0.0" y="0.0" width="207" height="27.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="242" height="32.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YgI-PZ-DbW">
-                                                <rect key="frame" x="0.0" y="0.0" width="95.5" height="27.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="113" height="32.5"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_left" translatesAutoresizingMaskIntoConstraints="NO" id="JB4-R4-fpV">
-                                                        <rect key="frame" x="38" y="10" width="19.5" height="7.5"/>
+                                                        <rect key="frame" x="45" y="11.5" width="23" height="9"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y6h-cz-0uR">
-                                                        <rect key="frame" x="0.0" y="0.0" width="95.5" height="27.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="113" height="32.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="12"/>
                                                         <color key="textColor" name="navigationBar"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jI8-FN-5uv">
-                                                        <rect key="frame" x="0.0" y="0.0" width="95.5" height="27.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="113" height="32.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <gestureRecognizers/>
                                                         <fontDescription key="fontDescription" name="SongMyung-Regular" family="Song Myung" pointSize="12"/>
@@ -538,10 +554,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2k9-Mp-rIu">
-                                                <rect key="frame" x="111.5" y="0.0" width="95.5" height="27.5"/>
+                                                <rect key="frame" x="129" y="0.0" width="113" height="32.5"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_right" translatesAutoresizingMaskIntoConstraints="NO" id="msn-L7-kO9">
-                                                        <rect key="frame" x="38" y="9.5" width="19.5" height="8"/>
+                                                        <rect key="frame" x="45" y="11.5" width="23.5" height="9.5"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -630,7 +646,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zYI-vn-Vt7" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="1Xr-1K-lj3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" name="navigation_bar"/>
                     </navigationBar>
