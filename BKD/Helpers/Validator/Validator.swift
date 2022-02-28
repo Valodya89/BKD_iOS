@@ -23,7 +23,7 @@ enum Valid {
 enum ValidationType {
     //Search
     case date
-    case time
+    case times
     case pickUplocation
     case returnlocation
     case success
@@ -78,8 +78,8 @@ class Validator: NSObject {
         if searchDateModel.pickUpDay == nil  || searchDateModel.returnDay == nil {
             result.append(.date)
         }
-        if searchDateModel.pickUpTime == Constant.Texts.pickUpTime ||  searchDateModel.returnTime == Constant.Texts.returnTime {
-            result.append(.time)
+        if searchDateModel.pickUpTime == "" ||  searchDateModel.returnTime == "" {
+            result.append(.times)
         }
         if searchDateModel.pickUpLocation == Constant.Texts.pickUpLocation  {
             result.append(.pickUplocation)

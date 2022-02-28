@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20019"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -24,7 +24,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vans" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o92-Yo-5Kp">
-                        <rect key="frame" x="16" y="4" width="39" height="22.5"/>
+                        <rect key="frame" x="16" y="4.5" width="37" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="vet-mY-I8Y"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                         <color key="textColor" name="navigationBar"/>
                         <nil key="highlightedColor"/>
@@ -42,7 +45,6 @@
                 </subviews>
                 <color key="backgroundColor" name="background"/>
                 <constraints>
-                    <constraint firstItem="o92-Yo-5Kp" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.125" id="0Am-3h-ebi"/>
                     <constraint firstItem="Qmy-kL-ERa" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" multiplier="1.2" id="Cjg-cf-nUY"/>
                     <constraint firstItem="Qmy-kL-ERa" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.820809" id="Dc5-Uq-6dR"/>
                     <constraint firstItem="o92-Yo-5Kp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="centerX" multiplier="0.077" id="Et7-om-XcD"/>

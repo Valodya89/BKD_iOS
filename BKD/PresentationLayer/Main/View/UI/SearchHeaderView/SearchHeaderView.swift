@@ -282,6 +282,7 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
             responderTxtFl.textColor = color_entered_date
             responderTxtFl.font = font_search_title
             self.mTimeLb.textColor = color_search_placeholder
+            self.setTextFieldBorder(leftTextField: self.mPickUpTimeTxtFl, rightTextField: self.mReturnTimeTxtFl, color: color_navigationBar!)
         }
        
 
@@ -444,7 +445,7 @@ class SearchHeaderView: UIView, UITextFieldDelegate {
                 switch validateResult {
                     case .date:
                         setTextFieldBorder(leftTextField: mPickUpDataTxtFl, rightTextField: mReturnDateTxtFl, color: color_error!)
-                    case .time:
+                    case .times:
                         setTextFieldBorder(leftTextField: mPickUpTimeTxtFl, rightTextField: mReturnTimeTxtFl, color: color_error!)
                     case .pickUplocation:
                         mPickUpLocationBtn.addBorder(color: color_error!, width: 1.0)

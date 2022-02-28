@@ -14,8 +14,7 @@ class SearchHeaderViewModel: NSObject {
     
     override init() {}
     
-    //MARK: VALIDATIONS
-    //MARK: -----------------------
+    //MARK: -- VALIDATIONS
     func  isFieldsFilled(pickUpDay: String?,
                          returnDay: String?,
                          pickUpTime: String?,
