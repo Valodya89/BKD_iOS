@@ -30,17 +30,11 @@ final class PaymentWebViewController: UIViewController, StoryboardInitializable,
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
-//        if paymentType == .applePay {
-////            let safariVC = SFSafariViewController(url: URL(string:urlString)!)
-////            self.present(safariVC, animated: false, completion: nil)
-//        } else {
-            configWebView()
-       // }
+        configWebView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       // mActivityV.startAnimating()
         loadWebView()
     }
     
@@ -81,7 +75,6 @@ final class PaymentWebViewController: UIViewController, StoryboardInitializable,
     
     /// Configure screen UI
     private func configUI() {
-      //  mRightBarBtn.image = img_bkd
     }
     
     /// Load webView with url or htmlString
@@ -137,7 +130,6 @@ extension PaymentWebViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         print("navv === ",navigation.description)
         print("web ==== ", webView.url)
-//        showLTActivityIndicator()
     }
     
 }
