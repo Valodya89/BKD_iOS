@@ -390,7 +390,6 @@
 		56CF782F26F3E1490092F555 /* OdometerCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF782E26F3E1490092F555 /* OdometerCheckViewController.swift */; };
 		56CF783226F4F55F0092F555 /* VehicleCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF783126F4F55F0092F555 /* VehicleCheckViewController.swift */; };
 		56CF783426F4F56E0092F555 /* VehicleCheck.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56CF783326F4F56E0092F555 /* VehicleCheck.storyboard */; };
-		56CF783C26F578620092F555 /* StartRideModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF783B26F578620092F555 /* StartRideModel.swift */; };
 		56CF784126F8AD7B0092F555 /* VehicleDimageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF783F26F8AD7B0092F555 /* VehicleDimageCollectionCell.swift */; };
 		56CF784226F8AD7B0092F555 /* VehicleDimageCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56CF784026F8AD7B0092F555 /* VehicleDimageCollectionCell.xib */; };
 		56CF784526F8F7D10092F555 /* NewDamageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CF784426F8F7D10092F555 /* NewDamageViewController.swift */; };
@@ -824,7 +823,6 @@
 		56CF782E26F3E1490092F555 /* OdometerCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OdometerCheckViewController.swift; sourceTree = "<group>"; };
 		56CF783126F4F55F0092F555 /* VehicleCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCheckViewController.swift; sourceTree = "<group>"; };
 		56CF783326F4F56E0092F555 /* VehicleCheck.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = VehicleCheck.storyboard; sourceTree = "<group>"; };
-		56CF783B26F578620092F555 /* StartRideModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartRideModel.swift; sourceTree = "<group>"; };
 		56CF783F26F8AD7B0092F555 /* VehicleDimageCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleDimageCollectionCell.swift; sourceTree = "<group>"; };
 		56CF784026F8AD7B0092F555 /* VehicleDimageCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VehicleDimageCollectionCell.xib; sourceTree = "<group>"; };
 		56CF784426F8F7D10092F555 /* NewDamageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDamageViewController.swift; sourceTree = "<group>"; };
@@ -3223,7 +3221,6 @@
 		56CF782426F3DF660092F555 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				56CF783B26F578620092F555 /* StartRideModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3904,7 +3901,6 @@
 				5691A641265D97550008081D /* MainViewModel.swift in Sources */,
 				56CC7D7926A91309006DB7B8 /* BancontactTypeViewController.swift in Sources */,
 				565BFD9F269F590A0044D081 /* KeychainManager.swift in Sources */,
-				56CF783C26F578620092F555 /* StartRideModel.swift in Sources */,
 				5682F79627A0903100818C9D /* EditMyDriversViewModel.swift in Sources */,
 				5648C5B6268803F7000B4E2A /* AccessoriesModel.swift in Sources */,
 				56B41E4D277D04A300F10A41 /* PersonalInfoTableCell.swift in Sources */,

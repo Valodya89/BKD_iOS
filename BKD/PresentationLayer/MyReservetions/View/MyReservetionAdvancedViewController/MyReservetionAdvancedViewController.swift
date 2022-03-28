@@ -278,17 +278,7 @@ class MyReservetionAdvancedViewController: BaseViewController {
     }
     
     
-//    func configureReservationStatus() {
-//        switch myReservationState {
-//        case .startRide: break
-//        case .payRentalPrice:break
-//        case .payDistancePrice:break
-//        case .maykePayment:break
-//        case .stopRide: break
-//        default : break
-//        }
-//    }
-    
+    ///Configure total price UI
     func configureTotalPriceSteckView() {
         let price = myReservAdvancedVM.getPriceList(rent: currRent)
         totalPrice = price.totalPrice

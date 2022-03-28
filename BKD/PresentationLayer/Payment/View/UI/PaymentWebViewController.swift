@@ -7,7 +7,7 @@
 
 import UIKit
 import WebKit
-
+import SVProgressHUD
 final class PaymentWebViewController: UIViewController, StoryboardInitializable, WKUIDelegate {
     
     
@@ -79,6 +79,7 @@ final class PaymentWebViewController: UIViewController, StoryboardInitializable,
     
     /// Load webView with url or htmlString
     private func loadWebView() {
+        SVProgressHUD.show()
         if let validURL = URL(string: urlString) {
             let request = URLRequest(url: validURL)
             mWebV.load(request)
@@ -118,6 +119,7 @@ extension PaymentWebViewController: WKNavigationDelegate {
     
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        SVProgressHUD.dismiss()
        // mActivityV.stopAnimating()
 //        webView.evaluateJavaScript("document.getElementById(\"my-id\").innerHTML", completionHandler: { (jsonRaw: Any?, error: Error?) in
 //            guard let jsonString = jsonRaw as? String else { return }

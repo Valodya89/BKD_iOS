@@ -109,10 +109,6 @@ struct SearchDateModel {
 
 }
 
-struct CategoryCarouselModel {
-    public var categoryName: String?
-    public var CategoryImg: UIImage?
 
-}
 
 

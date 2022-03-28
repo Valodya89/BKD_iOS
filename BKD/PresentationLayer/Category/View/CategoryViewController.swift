@@ -7,6 +7,7 @@
 
 import UIKit
 import SideMenu
+import SVProgressHUD
 
 
 class CategoryViewController: BaseViewController {
@@ -65,11 +66,16 @@ class CategoryViewController: BaseViewController {
     /// Get all cars by type
     private func getCarsByType() {
         guard let carsList = ApplicationSettings.shared.carsList else {
+            SVProgressHUD.show()
             categoryViewModel.getCarsByTypes(carTypes:  carTypes!) { [self] (cars) in
-                guard let _ = cars else {return}
+                guard let _ = cars else {
+                    SVProgressHUD.dismiss()
+                    return
+                }
                 ApplicationSettings.shared.carsList = cars!
                 self.carsList = cars!
                 self.mCategoryTableV.reloadData()
+                SVProgressHUD.dismiss()
             }
             return
         }

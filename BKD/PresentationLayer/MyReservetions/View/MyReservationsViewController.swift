@@ -30,7 +30,7 @@ class MyReservationsViewController: BaseViewController {
     lazy var myReservationVM: MyReservationViewModel = MyReservationViewModel()
     var menu: SideMenuNavigationController?
     var isReservationHistory: Bool = false
-    var drivers:[MyDriversModel]? = MyDriversData.myDriversModel
+    var drivers:[MyDriversModel]? 
     var myReservations: [Rent]?
     var myHistoryReservations: [Rent]?
 

@@ -7,23 +7,7 @@
 
 import UIKit
 
-//MARK: -- DropDownData
-//struct DropDownData {
-//    static let dropDownModel: [DropDownModel] = [
-//        DropDownModel(locationName: "BKD Office", seeMap: "See Map"),
-//        DropDownModel(locationName: "Parkin 1", seeMap: "See Map"),
-//        DropDownModel(locationName: "Parking 2", seeMap: "See Map")
-//    ]
-//
-//
-//    static let menuModel: [MenuModel] = [
-//        MenuModel(title: "About Us", imageName: "aboutUs"),
-//        MenuModel(title: "My Reservetions", imageName:"reservetions" ),
-//        MenuModel(title: "Costumer Service", imageName: "customer_service"),
-//        MenuModel(title: "Settings", imageName: "settings"),
-//        MenuModel(title: "Log Out", imageName: "logout")
-//    ]
-//}
+
 
 //MARK: -- MenuData
 struct MenuData {
@@ -60,13 +44,24 @@ struct CarsData {
 }
 
 
-//MARK: -- CategoryCarouselData
-struct CategoryCarouselData  {
-    static let categoryCarouselModel: [CategoryCarouselModel] = [ CategoryCarouselModel(categoryName: "Trucks", CategoryImg: UIImage(named: "trucks_category")),
-                                                                  CategoryCarouselModel(categoryName: "Frigo Vans", CategoryImg: UIImage(named: "frigo_vans_category")),
-                                                                  CategoryCarouselModel(categoryName: "Vans", CategoryImg: UIImage(named: "vans_category")),
-                                                                  CategoryCarouselModel(categoryName: "Double Cabs", CategoryImg: UIImage(named: "double_cabs_category")),
-                                                                  CategoryCarouselModel(categoryName: "Box Trucks", CategoryImg: UIImage(named: "box_trucks_category"))]
+
+//MARK: -- RentalConditionsData
+struct RentalConditionsData {
+    static let rentalConditionsModel: [RentalConditionsModel] = [
+        RentalConditionsModel(img: #imageLiteral(resourceName: "deposit"), title: Constant.Texts.depositAmount, value: "0.0"),
+        RentalConditionsModel(img: #imageLiteral(resourceName: "2"), title: Constant.Texts.moreFuelConsumption),
+        RentalConditionsModel(img: #imageLiteral(resourceName: "min_age"), title: Constant.Texts.minAges, value: Constant.Texts.years23),
+        RentalConditionsModel(img: #imageLiteral(resourceName: "max_age"), title: Constant.Texts.maxAges, value: Constant.Texts.years70),
+        RentalConditionsModel(img: #imageLiteral(resourceName: "card"), title: Constant.Texts.minBelgianPeriod, value: Constant.Texts.years2)]
+    
+}
+
+//MARK: -- BkdAdvantagesData
+struct BkdAdvantagesData {
+    static let bkdAdvantagesModel: [BkdAdvantagesModel] = [BkdAdvantagesModel(title1: Constant.Texts.available,
+                                                                              title2: Constant.Texts.personalizedApproach,
+                                                                              title3: Constant.Texts.ourChallange,
+                                                                              title4: Constant.Texts.fastSafe ) ]
     
 }
 
@@ -74,59 +69,11 @@ struct CategoryCarouselData  {
 
 
 
-
-//MARK: -- RentalConditionsData
-struct RentalConditionsData {
-    static let rentalConditionsModel: [RentalConditionsModel] = [
-        RentalConditionsModel(img: #imageLiteral(resourceName: "deposit"), title: "Deposit amount from", value: "350"),
-        RentalConditionsModel(img: #imageLiteral(resourceName: "2"), title: "Fuel consumption is included in the rental price"),
-        RentalConditionsModel(img: #imageLiteral(resourceName: "min_age"), title: "Minimum driver age ", value: "23 years"),
-        RentalConditionsModel(img: #imageLiteral(resourceName: "max_age"), title: "Maximum driver age", value: "70 years"),
-        RentalConditionsModel(img: #imageLiteral(resourceName: "card"), title: "Minimum Belgian driving license active period:", value: "2 years")]
-}
-
-//MARK: -- BkdAdvantagesData
-struct BkdAdvantagesData {
-    static let bkdAdvantagesModel: [BkdAdvantagesModel] = [BkdAdvantagesModel(title1: "Available 24/7",
-                                                                              title2: "Personalized approach",
-                                                                              title3: "Your case our challenge",
-                                                                              title4: "Fast & safe" ) ]
-}
-
-
-struct ReserveData {
-    static let reserveModel: [ReserveModel] = [ReserveModel(headerTitle: "Additional driver",
-                                                            fullName: "Name Surname"),
-                                               ReserveModel(headerTitle: "Accessories",
-                                                            accessorieTitle: "Tape dispenser for sale",
-                                                            accessorieImg: #imageLiteral(resourceName: "tape_dispenser")),
-                                               ReserveModel( accessorieTitle: "tension straps for rent",
-                                                             accessorieCount: "x2",
-                                                             accessorieImg: #imageLiteral(resourceName: "straps"))
-    ]
-}
-
-
-
-struct MyDriversData {
-    static let myDriversModel : [MyDriversModel] = [ MyDriversModel(fullname: "Jon Smit",
-                  licenciNumber: "Driving license number 5345",
-                          price: 30.5),
-        MyDriversModel(fullname: "Anjel Cavieres",
-                  licenciNumber: "Driving license number 5346",
-                          price: 25.75),
-        MyDriversModel(fullname: "Marcel Aliaga",
-                  licenciNumber: "Driving license number 5335",
-                       price: 50.25),
-    ]
-}
-
-
 struct MyBkdData {
     static let myBkdModel: [MyBkdModel] = [
-        MyBkdModel(img: #imageLiteral(resourceName: "personal_info"), title: "My personal information"),
-        MyBkdModel(img: #imageLiteral(resourceName: "my_drivers"), title: "My Drivers"),
-        MyBkdModel(img: #imageLiteral(resourceName: "account"), title: "My account")
+        MyBkdModel(img: #imageLiteral(resourceName: "personal_info"), title: Constant.Texts.myPersonalInfo),
+        MyBkdModel(img: #imageLiteral(resourceName: "my_drivers"), title: Constant.Texts.myDrivers),
+        MyBkdModel(img: #imageLiteral(resourceName: "account"), title: Constant.Texts.myAccount)
     ]
 }
 
@@ -278,30 +225,7 @@ struct ReservationWithReservedPaidData {
     ]
 }
 
-//MARK: -- PaymentStatusModel
-struct PaymentStatusData {
-    static let paymentStatusModel:[PaymentStatusModel] = [PaymentStatusModel(status: "Reserved & Paid", paymentType: "via Office Terminal - Confirmed"),
-            PaymentStatusModel(status: "Rental price paid", paymentType: "via Apple pay"),
-                                                          PaymentStatusModel(status: "Pay later", isActivePaymentBtn: true, price: 57.79, paymentButtonType: "Make payment"),
-                                                          PaymentStatusModel(status: "Deposit paid", paymentType: "via Credit Card", isActivePaymentBtn: true, price: 77.42, paymentButtonType: "Pay rental price")]
-}
 
-
-//MARK: -- StartRideData
-struct StartRideData {
-    static let startRideModel:[StartRideModel] = [
-        StartRideModel (damageImg: UIImage(named: "camera") ?? UIImage(), damageName: "Damage Name"),
-        StartRideModel (damageImg: nil, damageName: nil)]
-    
-}
-
-
-////MARK: -- PriceModel
-//struct PriceData {
-//    static let priceModel:[PriceModel] = [PriceModel(priceTitle: "Price", price: 0.00),
-//          PriceModel(priceTitle: "Accsessories", price: 0.00),
-//           PriceModel(priceTitle: "Additional driver", price: 0.00)]
-//}
 
 
 //MARK: -- Notification

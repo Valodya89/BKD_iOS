@@ -111,7 +111,8 @@ class ReserveViewController: BaseViewController {
     
     
     func configureView() {
-        
+        PriceManager.shared.depositPrice = vehicleModel?.depositPrice
+
         mCarImgV.image = vehicleModel?.vehicleImg?.resizeImage(targetSize: CGSize(width:self.view.bounds.width * 0.729, height:self.view.bounds.height * 0.173))
 
         mCarDescriptionlb.text = vehicleModel?.vehicleType

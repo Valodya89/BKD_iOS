@@ -26,7 +26,8 @@ final class MyBKDViewController: BaseViewController {
     private lazy var signInVC = SignInViewController.initFromStoryboard(name: Constant.Storyboards.signIn)
     private lazy var viewModel = MyBKDViewModel()
     private var menu: SideMenuNavigationController?
-    var isBackFromRegistrationBot = false
+    private var isBackFromRegistrationBot = false
+    private var needsToGoRegistrationBot = false
     
     //MARK: - Life cycle
     override func viewDidLoad() {
@@ -43,7 +44,6 @@ final class MyBKDViewController: BaseViewController {
             if viewModel.isUserSignIn {
                 removeChild(vc: signInVC)
                 self.getMainDriver()
-                //signIn()
             } else {
                 addSignInChild()
             }
@@ -83,19 +83,6 @@ final class MyBKDViewController: BaseViewController {
         vc.removeFromParent()
     }
    
-//    ///SignIn user
-//    private func signIn() {
-//        SignInViewModel().signIn(username: viewModel.userName,
-//                                 password: viewModel.password) {[weak self] status in
-//            guard let self = self else { return }
-//            if status == .success {
-//                self.getMainDriver()
-//            } else {
-//                self.addSignInChild()
-//            }
-//        }
-//    }
-    
     ///Log out account
     private func logOut() {
         viewModel.logout()
@@ -104,21 +91,24 @@ final class MyBKDViewController: BaseViewController {
     
     ///Get main driver
     func getMainDriver() {
+        needsToGoRegistrationBot = false
         viewModel.getMainDriver { response in
             if response == nil || (response?.id ?? "").count <= 0 || (response?.state ?? "") == Constant.Texts.state_created  {
+                self.needsToGoRegistrationBot = true
                 self.goToRegistrationBot(isDriverRegister: false,
                                          tableData: [RegistrationBotData.registrationBotModel[0]],
                                          mainDriver: nil)
             } else {
+                
                 self.mainDriver = response
                 self.viewModel.saveFullName(mainDriver: response!)
                 if self.mainDriver?.state != Constant.Texts.state_agree && self.mainDriver?.state != Constant.Texts.state_accepted  {
+                    self.needsToGoRegistrationBot = true
                     self.goToRegistrationBot(isDriverRegister: false,
                                              tableData: [RegistrationBotData.registrationBotModel[0]],
                                              mainDriver: self.mainDriver)
                 }
                 self.checkVerificationPending()
-                
             }
             
         }
@@ -126,10 +116,10 @@ final class MyBKDViewController: BaseViewController {
     
     //Check if verification is pending
     func checkVerificationPending() {
-        if self.mainDriver?.state == Constant.Texts.state_agree {
+        if mainDriver?.state == Constant.Texts.state_agree {
             mVerificationPendingLb.textColor = color_error!
             showWaithingForAdminView()
-        } else {
+        } else if mainDriver?.state == Constant.Texts.state_accepted {
             mVerifiedV.isHidden = false
             mVerificationPendingLb.isHidden = true
         }
@@ -206,7 +196,14 @@ extension MyBKDViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            self.goToMyPersonalInfo(mainDriver: mainDriver, navigationTitle: Constant.Texts.myPersonalInfo)
+            if needsToGoRegistrationBot {
+                self.goToRegistrationBot(isDriverRegister: false,
+                                         tableData: [RegistrationBotData.registrationBotModel[0]],
+                                         mainDriver: mainDriver)
+            } else {
+                self.goToMyPersonalInfo(mainDriver: mainDriver,
+                                        navigationTitle: Constant.Texts.myPersonalInfo)
+            }
         case 1:
             self.goToMyAccountDrivers()
         default:

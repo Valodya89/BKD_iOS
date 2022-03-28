@@ -20,8 +20,7 @@ class AdditionalDriverTableView: UITableView, UITableViewDelegate, UITableViewDa
         self.dataSource = self
     }
 
-    //MARK: UITableViewDataSource
-    //MARK: ----------------------------------
+    //MARK: -- UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        
         return  drivers?.count ?? 0
@@ -33,8 +32,6 @@ class AdditionalDriverTableView: UITableView, UITableViewDelegate, UITableViewDa
         if indexPath.row != drivers!.count - 1 {
        
             cell.separatorInset = UIEdgeInsets(top: 0, left: UIScreen.main.bounds.size.width, bottom: 0, right: 0);
-
-            //tableView.separatorStyle = .none
         }
         
         return cell

@@ -75,11 +75,11 @@ final class MyReservetionAdvancedViewModel {
            total += totalAdditionalDriversPrice
        }
        
-//        let depositPrice = rent?.price.depositPrice ?? 0.0
-//       if depositPrice > 0 {
-//           prices.append(PriceModel(priceTitle: Constant.Texts.deposit, price: depositPrice))
-//           total += depositPrice
-//       }
+        let depositPrice = rent?.price.depositPrice ?? 0.0
+       if depositPrice > 0 {
+           prices.append(PriceModel(priceTitle: Constant.Texts.deposit, price: depositPrice))
+           total += depositPrice
+       }
        
        return (prices, total)
        

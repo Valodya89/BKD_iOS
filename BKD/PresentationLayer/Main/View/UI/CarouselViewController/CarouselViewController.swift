@@ -15,7 +15,6 @@ class CarouselViewController: UIViewController, UICollectionViewDelegate, UIColl
     var updateCarList: (([CarsModel]) -> Void)?
     
     @IBOutlet weak var collectionView: UICollectionView!
-    fileprivate var items = CategoryCarouselData.categoryCarouselModel
     lazy var mainViewModel = MainViewModel()
     var carTypes:[CarTypes]?
     var carTypeImages:[UIImage]?

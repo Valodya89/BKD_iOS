@@ -73,37 +73,58 @@ final class MyPersonalInformationViewModel {
 //                            mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.selfieDrivingLic, imageURL: mainDriver.drivingLicenseSelfie?.getURL(), isPhoto: true))
 //
 //        completion(mainDriverList)
-        
-        
-        UIImage.loadFrom(url: (mainDriver.identityFront?.getURL())!) { img in
+        if let identityFront = mainDriver.identityFront?.getURL() {
+            
+            UIImage.loadFrom(url:identityFront) { img in
 
-            mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.identityCard, image:img, imageSide: Constant.Texts.frontSideIdCard, isPhoto: true))
+                mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.identityCard, image:img, imageSide: Constant.Texts.frontSideIdCard, isPhoto: true))
 
-            UIImage.loadFrom(url: (mainDriver.identityBack?.getURL())!) { img in
-                mainDriverList.append(MainDriverModel(image:img, imageSide: Constant.Texts.backSideIdCard, isPhoto: true))
+                if let identityBack = mainDriver.identityBack?.getURL() {
+                    
+                    UIImage.loadFrom(url: identityBack) { img in
+                        mainDriverList.append(MainDriverModel(image:img, imageSide: Constant.Texts.backSideIdCard, isPhoto: true))
 
-                mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.expiryDateIdCard, fieldValue: mainDriver.identityExpirationDate, isPersonalinfo: true, isDate: true))
+                        mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.expiryDateIdCard, fieldValue: mainDriver.identityExpirationDate, isPersonalinfo: true, isDate: true))
 
-                UIImage.loadFrom(url: (mainDriver.drivingLicenseFront?.getURL())!) { img in
-                    mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.drivingLicense, image:img, imageSide: Constant.Texts.frontDrivingLic, isPhoto: true))
+                        if let drivingLicenseFront = mainDriver.drivingLicenseFront?.getURL() {
+                            
+                            UIImage.loadFrom(url: drivingLicenseFront) { img in
+                                mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.drivingLicense, image:img, imageSide: Constant.Texts.frontDrivingLic, isPhoto: true))
+                                
+                                if let drivingLicenseBack = mainDriver.drivingLicenseBack?.getURL() {
+                                    
+                                    UIImage.loadFrom(url: drivingLicenseBack) { img in
+                                        mainDriverList.append(MainDriverModel(image:img, imageSide: Constant.Texts.backDrivingLic, isPhoto: true))
 
-                    UIImage.loadFrom(url: (mainDriver.identityBack?.getURL())!) { img in
-                        mainDriverList.append(MainDriverModel(image:img, imageSide: Constant.Texts.backDrivingLic, isPhoto: true))
+                                        mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.issueDrivingLic, fieldValue: mainDriver.drivingLicenseIssueDate, isPersonalinfo: true, isDate: true))
 
-                        mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.issueDrivingLic, fieldValue: mainDriver.drivingLicenseIssueDate, isPersonalinfo: true, isDate: true))
+                                        mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.expiryDrivingLic, fieldValue: mainDriver.drivingLicenseExpirationDate, isPersonalinfo: true, isDate: true))
 
-                        mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.expiryDrivingLic, fieldValue: mainDriver.drivingLicenseExpirationDate, isPersonalinfo: true, isDate: true))
+                                        mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.drivingLicenseNumber, fieldValue: mainDriver.drivingLicenseNumber, isPersonalinfo: true, isDate: true))
 
-                        mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.drivingLicenseNumber, fieldValue: mainDriver.drivingLicenseNumber, isPersonalinfo: true, isDate: true))
+                                        if let drivingLicenseSelfie = mainDriver.drivingLicenseSelfie?.getURL() {
+                                            UIImage.loadFrom(url: drivingLicenseSelfie) { img in
+                                                mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.selfieDrivingLic, image:img, isPhoto: true))
+                                                myGroup.leave()
+                                            }
+                                        }
+                                       
+                                    }
 
-                        UIImage.loadFrom(url: (mainDriver.drivingLicenseSelfie?.getURL())!) { img in
-                            mainDriverList.append(MainDriverModel(fieldName: Constant.Texts.selfieDrivingLic, image:img, isPhoto: true))
-                            myGroup.leave()
+                                    
+                                }
+                                
+                            }
+
                         }
                     }
                 }
+         
             }
+            
         }
+        
+       
         
         myGroup.notify(queue: DispatchQueue.main) {
             completion(mainDriverList)

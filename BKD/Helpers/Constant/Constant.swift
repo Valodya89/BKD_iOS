@@ -179,8 +179,20 @@ struct Constant {
         static let rentalConditions = "Rental conditions"//MOBILE_more_rental_conditions
         static let bkdAdvantages = "BKD Advantages"//MOBILE_more_cons
         static let select = "Select"//MOBILE_global_select
+        static let available = "Available 24/7"  //MOBILE_more_available
+        static let personalizedApproach = "Personalized approach"//MOBILE_more_personalized_approach
+        static let ourChallange = "Your case our challenge"//MOBILE_more_our_challange
+        static let  fastSafe = "Fast & safe"//MOBILE_more_fast_safe
+        static let  depositAmount = "Deposit amount from"//MOBILE_more_deposit
+        static let  moreFuelConsumption = "Fuel consumption is included in the rental price"//MOBILE_more_fuel_consumption
+        static let  minAges = "Minimum driver age"//MOBILE_more_min_ages
+        static let  years23 = "23 years"//MOBILE_more_23_years
+        static let  maxAges = "Maximum driver age"//MOBILE_more_max_ages
+        static let  years70 = "70 years"//MOBILE_more_70_years
+        static let  minBelgianPeriod = "Minimum Belgian driving license active period:"//MOBILE_more_min_belgian_period
+        static let  years2 = "2 years"//MOBILE_more_2_years
         
-      
+
         
         
         //MARK: -- Detail
@@ -480,6 +492,7 @@ struct Constant {
         static let currPassword = "Current password"//MOBILE_myaccount_curr_password
         static let myDrivers = "My Drivers"//MOBILE_mydrivers_my_drivers
         static let myPersonalInfo = "My personal information"//MOBILE_myaccount_my_personal_info
+        static let myAccount = "My Account"//MOBILE_myaccount_my_account
         
         //MARK: -- My personal information
         static let confitmEdit = "You need to wait for Admin approval to have your Personal Information edited. Are you sure you want to continue?"//MOBILE_mybkd_wait_approval_to_edit

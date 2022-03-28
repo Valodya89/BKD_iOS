@@ -7,13 +7,6 @@
 
 import UIKit
 
-struct ReserveModel {
-    public var headerTitle: String?
-    public var fullName: String?
-    public var accessorieTitle: String?
-    public var accessorieCount: String?
-    public var accessorieImg: UIImage?
-}
 
 struct PriceModel {
     public var priceTitle: String

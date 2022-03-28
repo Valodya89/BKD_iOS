@@ -70,7 +70,7 @@ class ReservationCompletedViewController: BaseViewController {
         mPreReservetionTitleLb.layer.cornerRadius = 8
         mPreReservetionTitleLb.setPadding(8)
         mPreReservetionTitleLb.textAlignment = .center
-       
+        
         mGradientV.setGradient(startColor: .white, endColor: color_navigationBar!)
         mDepositPriceLb.text = Constant.Texts.euro + " " + String(vehicleModel?.depositPrice ?? (vehicleModel?.rent?.depositPayment.amount ?? 0.0))
         mDepositRentalPriceLb.text = Constant.Texts.euro + " " + String(vehicleModel?.depositPrice ?? (vehicleModel?.rent?.depositPayment.amount ?? 0.0)) + " + " + String(format: "%.2f",PriceManager.shared.totalPrice ?? (vehicleModel?.rent?.rentPayment.amount ?? 0.0))

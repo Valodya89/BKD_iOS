@@ -79,8 +79,6 @@ class MyPersonalInformationViewController: BaseViewController {
     ///Call get account
     func getAccount() {
         self.mPersonalInfoTbV.getAccount()
-       // self.mPersonalInfoTbV.reloadData()
-       // SVProgressHUD.dismiss()
     }
     
     ///Will present image Picker controller

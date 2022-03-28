@@ -19,6 +19,7 @@ final class PriceManager {
     var carDiscountPrecent: Double?
     var accessoriesPrice: Double?
     var additionalDriversPrice: Double?
+    var depositPrice: Double?
     var totalPrice: Double?
 
     ///Calculate custom location total price
@@ -65,6 +66,12 @@ final class PriceManager {
         if additionalDriversPrice ?? 0.0 > 0.0 {
             prices.append(PriceModel(priceTitle: Constant.Texts.additionalDriver, price: additionalDriversPrice))
         }
+        
+        if depositPrice ?? 0.0 > 0.0 {
+            prices.append(PriceModel(priceTitle: Constant.Texts.deposit, price: depositPrice))
+        }
+
+        
         return prices
     }
     
